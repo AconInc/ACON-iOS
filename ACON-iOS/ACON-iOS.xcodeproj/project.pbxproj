@@ -30,6 +30,10 @@
 		748D6F952D2BD4DB007690B4 /* UICollectionViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F942D2BD4D6007690B4 /* UICollectionViewCell+.swift */; };
 		748D6F972D2BD544007690B4 /* DummyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F962D2BD53F007690B4 /* DummyType.swift */; };
 		748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F982D2BD549007690B4 /* DummyProtocol.swift */; };
+		748D6F9B2D2BD638007690B4 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 748D6F9A2D2BD638007690B4 /* Pretendard-Bold.otf */; };
+		748D6F9D2D2BD641007690B4 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 748D6F9C2D2BD641007690B4 /* Pretendard-SemiBold.otf */; };
+		748D6F9F2D2BD655007690B4 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 748D6F9E2D2BD655007690B4 /* Pretendard-Medium.otf */; };
+		748D6FA12D2BD65D007690B4 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 748D6FA02D2BD65D007690B4 /* Pretendard-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +55,10 @@
 		748D6F942D2BD4D6007690B4 /* UICollectionViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+.swift"; sourceTree = "<group>"; };
 		748D6F962D2BD53F007690B4 /* DummyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyType.swift; sourceTree = "<group>"; };
 		748D6F982D2BD549007690B4 /* DummyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyProtocol.swift; sourceTree = "<group>"; };
+		748D6F9A2D2BD638007690B4 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		748D6F9C2D2BD641007690B4 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		748D6F9E2D2BD655007690B4 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		748D6FA02D2BD65D007690B4 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		74AB6EB02D2796D30094F873 /* ACON-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ACON-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -147,6 +155,10 @@
 		748D6F772D2BCB90007690B4 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				748D6FA02D2BD65D007690B4 /* Pretendard-Regular.otf */,
+				748D6F9E2D2BD655007690B4 /* Pretendard-Medium.otf */,
+				748D6F9A2D2BD638007690B4 /* Pretendard-Bold.otf */,
+				748D6F9C2D2BD641007690B4 /* Pretendard-SemiBold.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -291,7 +303,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				748D6F6C2D2BCA1C007690B4 /* Assets.xcassets in Resources */,
+				748D6FA12D2BD65D007690B4 /* Pretendard-Regular.otf in Resources */,
+				748D6F9F2D2BD655007690B4 /* Pretendard-Medium.otf in Resources */,
+				748D6F9B2D2BD638007690B4 /* Pretendard-Bold.otf in Resources */,
 				748D6F6E2D2BCA1C007690B4 /* LaunchScreen.storyboard in Resources */,
+				748D6F9D2D2BD641007690B4 /* Pretendard-SemiBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
