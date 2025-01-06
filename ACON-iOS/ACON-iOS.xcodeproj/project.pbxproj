@@ -6,6 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		748D6F412D2BC482007690B4 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F402D2BC482007690B4 /* Moya */; };
+		748D6F442D2BC509007690B4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F432D2BC509007690B4 /* SnapKit */; };
+		748D6F472D2BC519007690B4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F462D2BC519007690B4 /* Then */; };
+		748D6F4A2D2BC52B007690B4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F492D2BC52B007690B4 /* Kingfisher */; };
+		748D6F4D2D2BC76C007690B4 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F4C2D2BC76C007690B4 /* GoogleSignIn */; };
+		748D6F4F2D2BC76C007690B4 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F4E2D2BC76C007690B4 /* GoogleSignInSwift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		74AB6EB02D2796D30094F873 /* ACON-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ACON-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +45,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				748D6F4D2D2BC76C007690B4 /* GoogleSignIn in Frameworks */,
+				748D6F4A2D2BC52B007690B4 /* Kingfisher in Frameworks */,
+				748D6F412D2BC482007690B4 /* Moya in Frameworks */,
+				748D6F4F2D2BC76C007690B4 /* GoogleSignInSwift in Frameworks */,
+				748D6F472D2BC519007690B4 /* Then in Frameworks */,
+				748D6F442D2BC509007690B4 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +93,12 @@
 			);
 			name = "ACON-iOS";
 			packageProductDependencies = (
+				748D6F402D2BC482007690B4 /* Moya */,
+				748D6F432D2BC509007690B4 /* SnapKit */,
+				748D6F462D2BC519007690B4 /* Then */,
+				748D6F492D2BC52B007690B4 /* Kingfisher */,
+				748D6F4C2D2BC76C007690B4 /* GoogleSignIn */,
+				748D6F4E2D2BC76C007690B4 /* GoogleSignInSwift */,
 			);
 			productName = "ACON-iOS";
 			productReference = 74AB6EB02D2796D30094F873 /* ACON-iOS.app */;
@@ -107,6 +128,13 @@
 			);
 			mainGroup = 74AB6EA72D2796D30094F873;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				748D6F3F2D2BC482007690B4 /* XCRemoteSwiftPackageReference "moya" */,
+				748D6F422D2BC509007690B4 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				748D6F452D2BC519007690B4 /* XCRemoteSwiftPackageReference "Then" */,
+				748D6F482D2BC52B007690B4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				748D6F4B2D2BC76C007690B4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 74AB6EB12D2796D30094F873 /* Products */;
 			projectDirPath = "";
@@ -347,6 +375,82 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		748D6F3F2D2BC482007690B4 /* XCRemoteSwiftPackageReference "moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/moya/moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+		748D6F422D2BC509007690B4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		748D6F452D2BC519007690B4 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		748D6F482D2BC52B007690B4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.3;
+			};
+		};
+		748D6F4B2D2BC76C007690B4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		748D6F402D2BC482007690B4 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 748D6F3F2D2BC482007690B4 /* XCRemoteSwiftPackageReference "moya" */;
+			productName = Moya;
+		};
+		748D6F432D2BC509007690B4 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 748D6F422D2BC509007690B4 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		748D6F462D2BC519007690B4 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 748D6F452D2BC519007690B4 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+		748D6F492D2BC52B007690B4 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 748D6F482D2BC52B007690B4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		748D6F4C2D2BC76C007690B4 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 748D6F4B2D2BC76C007690B4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		748D6F4E2D2BC76C007690B4 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 748D6F4B2D2BC76C007690B4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 74AB6EA82D2796D30094F873 /* Project object */;
 }
