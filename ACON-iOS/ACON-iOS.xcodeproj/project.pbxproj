@@ -21,6 +21,15 @@
 		748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F7D2D2BCD6E007690B4 /* StringLiterals.swift */; };
 		748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F7F2D2BCD8F007690B4 /* ObservablePattern.swift */; };
 		748D6F822D2BCDB3007690B4 /* ScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F812D2BCDB0007690B4 /* ScreenUtils.swift */; };
+		748D6F852D2BD230007690B4 /* DummyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F842D2BD222007690B4 /* DummyService.swift */; };
+		748D6F872D2BD247007690B4 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F862D2BD244007690B4 /* UIView+.swift */; };
+		748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F882D2BD28E007690B4 /* UIViewController+.swift */; };
+		748D6F8B2D2BD31B007690B4 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F8A2D2BD316007690B4 /* UIStackView+.swift */; };
+		748D6F8F2D2BD340007690B4 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F8E2D2BD33D007690B4 /* UIButton+.swift */; };
+		748D6F912D2BD450007690B4 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F902D2BD44C007690B4 /* UILabel+.swift */; };
+		748D6F952D2BD4DB007690B4 /* UICollectionViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F942D2BD4D6007690B4 /* UICollectionViewCell+.swift */; };
+		748D6F972D2BD544007690B4 /* DummyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F962D2BD53F007690B4 /* DummyType.swift */; };
+		748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F982D2BD549007690B4 /* DummyProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +42,15 @@
 		748D6F7D2D2BCD6E007690B4 /* StringLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLiterals.swift; sourceTree = "<group>"; };
 		748D6F7F2D2BCD8F007690B4 /* ObservablePattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservablePattern.swift; sourceTree = "<group>"; };
 		748D6F812D2BCDB0007690B4 /* ScreenUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenUtils.swift; sourceTree = "<group>"; };
+		748D6F842D2BD222007690B4 /* DummyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyService.swift; sourceTree = "<group>"; };
+		748D6F862D2BD244007690B4 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		748D6F882D2BD28E007690B4 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		748D6F8A2D2BD316007690B4 /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
+		748D6F8E2D2BD33D007690B4 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		748D6F902D2BD44C007690B4 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		748D6F942D2BD4D6007690B4 /* UICollectionViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+.swift"; sourceTree = "<group>"; };
+		748D6F962D2BD53F007690B4 /* DummyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyType.swift; sourceTree = "<group>"; };
+		748D6F982D2BD549007690B4 /* DummyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyProtocol.swift; sourceTree = "<group>"; };
 		74AB6EB02D2796D30094F873 /* ACON-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ACON-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -85,6 +103,7 @@
 		748D6F712D2BCA7E007690B4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				748D6F842D2BD222007690B4 /* DummyService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -106,6 +125,12 @@
 		748D6F752D2BCAA8007690B4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				748D6F942D2BD4D6007690B4 /* UICollectionViewCell+.swift */,
+				748D6F902D2BD44C007690B4 /* UILabel+.swift */,
+				748D6F8E2D2BD33D007690B4 /* UIButton+.swift */,
+				748D6F8A2D2BD316007690B4 /* UIStackView+.swift */,
+				748D6F882D2BD28E007690B4 /* UIViewController+.swift */,
+				748D6F862D2BD244007690B4 /* UIView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -154,6 +179,7 @@
 		748D6F7B2D2BCCFF007690B4 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				748D6F962D2BD53F007690B4 /* DummyType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -169,6 +195,7 @@
 		748D6F832D2BCDE8007690B4 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				748D6F982D2BD549007690B4 /* DummyProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -275,11 +302,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				748D6F952D2BD4DB007690B4 /* UICollectionViewCell+.swift in Sources */,
 				748D6F822D2BCDB3007690B4 /* ScreenUtils.swift in Sources */,
 				748D6F692D2BCA1C007690B4 /* AppDelegate.swift in Sources */,
+				748D6F852D2BD230007690B4 /* DummyService.swift in Sources */,
 				748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */,
+				748D6F872D2BD247007690B4 /* UIView+.swift in Sources */,
+				748D6F8B2D2BD31B007690B4 /* UIStackView+.swift in Sources */,
+				748D6F912D2BD450007690B4 /* UILabel+.swift in Sources */,
+				748D6F972D2BD544007690B4 /* DummyType.swift in Sources */,
+				748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */,
+				748D6F8F2D2BD340007690B4 /* UIButton+.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
 				748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */,
+				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
 				748D6F6B2D2BCA1C007690B4 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
