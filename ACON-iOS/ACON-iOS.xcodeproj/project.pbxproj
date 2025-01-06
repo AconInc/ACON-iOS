@@ -34,6 +34,10 @@
 		748D6F9D2D2BD641007690B4 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 748D6F9C2D2BD641007690B4 /* Pretendard-SemiBold.otf */; };
 		748D6F9F2D2BD655007690B4 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 748D6F9E2D2BD655007690B4 /* Pretendard-Medium.otf */; };
 		748D6FA12D2BD65D007690B4 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 748D6FA02D2BD65D007690B4 /* Pretendard-Regular.otf */; };
+		748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6FA32D2C3C44007690B4 /* BaseNavViewController.swift */; };
+		748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6FA52D2C3F40007690B4 /* BaseView.swift */; };
+		748D6FA82D2C3F93007690B4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6FA72D2C3F8F007690B4 /* BaseViewController.swift */; };
+		748D6FAA2D2C3FF1007690B4 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6FA92D2C3FEC007690B4 /* BaseCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +63,10 @@
 		748D6F9C2D2BD641007690B4 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		748D6F9E2D2BD655007690B4 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		748D6FA02D2BD65D007690B4 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		748D6FA32D2C3C44007690B4 /* BaseNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavViewController.swift; sourceTree = "<group>"; };
+		748D6FA52D2C3F40007690B4 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		748D6FA72D2C3F8F007690B4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		748D6FA92D2C3FEC007690B4 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		74AB6EB02D2796D30094F873 /* ACON-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ACON-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -103,6 +111,7 @@
 		748D6F702D2BCA46007690B4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				748D6FA22D2C3C3D007690B4 /* Base */,
 				748D6F672D2BCA1C007690B4 /* ViewController.swift */,
 			);
 			path = Presentation;
@@ -210,6 +219,17 @@
 				748D6F982D2BD549007690B4 /* DummyProtocol.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		748D6FA22D2C3C3D007690B4 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				748D6FA92D2C3FEC007690B4 /* BaseCollectionViewCell.swift */,
+				748D6FA72D2C3F8F007690B4 /* BaseViewController.swift */,
+				748D6FA52D2C3F40007690B4 /* BaseView.swift */,
+				748D6FA32D2C3C44007690B4 /* BaseNavViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		74AB6EA72D2796D30094F873 = {
@@ -321,16 +341,20 @@
 				748D6F952D2BD4DB007690B4 /* UICollectionViewCell+.swift in Sources */,
 				748D6F822D2BCDB3007690B4 /* ScreenUtils.swift in Sources */,
 				748D6F692D2BCA1C007690B4 /* AppDelegate.swift in Sources */,
+				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
 				748D6F852D2BD230007690B4 /* DummyService.swift in Sources */,
+				748D6FA82D2C3F93007690B4 /* BaseViewController.swift in Sources */,
 				748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */,
 				748D6F872D2BD247007690B4 /* UIView+.swift in Sources */,
 				748D6F8B2D2BD31B007690B4 /* UIStackView+.swift in Sources */,
 				748D6F912D2BD450007690B4 /* UILabel+.swift in Sources */,
+				748D6FAA2D2C3FF1007690B4 /* BaseCollectionViewCell.swift in Sources */,
 				748D6F972D2BD544007690B4 /* DummyType.swift in Sources */,
 				748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */,
 				748D6F8F2D2BD340007690B4 /* UIButton+.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
 				748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */,
+				748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */,
 				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
 				748D6F6B2D2BCA1C007690B4 /* ViewController.swift in Sources */,
 			);
