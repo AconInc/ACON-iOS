@@ -14,8 +14,8 @@ enum Config {
         enum Plist {
             
             static let baseURL = "BASE_URL"
-            
-            static let googleClientID = "GOOGLE_CLIENT_ID"
+
+            static let googleClientID = "GIDClientID"
             
             static let googleWebClientID = "GOOGLE_WEB_CLIENT_ID"
             
