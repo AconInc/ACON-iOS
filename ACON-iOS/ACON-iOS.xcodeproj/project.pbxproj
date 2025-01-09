@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
 		7437963F2D2FD1F5007B0488 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7437963E2D2FD1F0007B0488 /* UIFont+.swift */; };
+		744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BAF162D300AB100F95B4A /* DummyComponent.swift */; };
 		748D6F412D2BC482007690B4 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F402D2BC482007690B4 /* Moya */; };
 		748D6F442D2BC509007690B4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F432D2BC509007690B4 /* SnapKit */; };
 		748D6F472D2BC519007690B4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F462D2BC519007690B4 /* Then */; };
@@ -51,6 +52,7 @@
 /* Begin PBXFileReference section */
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		7437963E2D2FD1F0007B0488 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
+		744BAF162D300AB100F95B4A /* DummyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyComponent.swift; sourceTree = "<group>"; };
 		748D6F612D2BCA1C007690B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		748D6F622D2BCA1C007690B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		748D6F632D2BCA1C007690B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -122,6 +124,17 @@
 				50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		744BAF182D300BC900F95B4A /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				74B25C2D2D2FEFD3008BDCB7 /* Debug.xcconfig */,
+				74B25C2F2D2FEFE1008BDCB7 /* Release.xcconfig */,
+				74B25C312D2FF022008BDCB7 /* Shared.xcconfig */,
+				74B25C2B2D2FEE8C008BDCB7 /* Config.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		748D6F682D2BCA1C007690B4 /* ACON-iOS */ = {
@@ -215,11 +228,8 @@
 		748D6F782D2BCCCD007690B4 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				74B25C2B2D2FEE8C008BDCB7 /* Config.swift */,
+				744BAF182D300BC900F95B4A /* Config */,
 				748D6F632D2BCA1C007690B4 /* Info.plist */,
-				74B25C2D2D2FEFD3008BDCB7 /* Debug.xcconfig */,
-				74B25C2F2D2FEFE1008BDCB7 /* Release.xcconfig */,
-				74B25C312D2FF022008BDCB7 /* Shared.xcconfig */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -237,6 +247,7 @@
 		748D6F7A2D2BCCF4007690B4 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				744BAF162D300AB100F95B4A /* DummyComponent.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -453,6 +464,7 @@
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
 				748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */,
 				748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */,
+				744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */,
 				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
 				748D6F6B2D2BCA1C007690B4 /* ViewController.swift in Sources */,
 			);
@@ -536,7 +548,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ACON.ACON-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Acon_dev;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Acon_release;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
