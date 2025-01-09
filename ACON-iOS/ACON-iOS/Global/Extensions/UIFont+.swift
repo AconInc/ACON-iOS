@@ -5,6 +5,8 @@
 //  Created by 이수민 on 1/9/25.
 //
 
+import UIKit
+
 extension UIFont {
     
     static var h1: UIFont { ACFont.h1 }
