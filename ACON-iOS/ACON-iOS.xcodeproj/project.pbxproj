@@ -41,6 +41,10 @@
 		748D6FAA2D2C3FF1007690B4 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6FA92D2C3FEC007690B4 /* BaseCollectionViewCell.swift */; };
 		748D6FAE2D2EBB9C007690B4 /* ACFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6FAD2D2EBB8D007690B4 /* ACFont.swift */; };
 		74B25C252D2FD30A008BDCB7 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 74B25C242D2FD30A008BDCB7 /* Lottie */; };
+		74B25C2C2D2FEE8E008BDCB7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B25C2B2D2FEE8C008BDCB7 /* Config.swift */; };
+		74B25C2E2D2FEFD3008BDCB7 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C2D2D2FEFD3008BDCB7 /* Debug.xcconfig */; };
+		74B25C302D2FEFE1008BDCB7 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C2F2D2FEFE1008BDCB7 /* Release.xcconfig */; };
+		74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C312D2FF022008BDCB7 /* Shared.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +77,11 @@
 		748D6FA92D2C3FEC007690B4 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		748D6FAD2D2EBB8D007690B4 /* ACFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACFont.swift; sourceTree = "<group>"; };
 		74AB6EB02D2796D30094F873 /* ACON-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ACON-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74B25C2A2D2FEE3E008BDCB7 /* ACON-iOSDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ACON-iOSDebug.entitlements"; sourceTree = "<group>"; };
+		74B25C2B2D2FEE8C008BDCB7 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		74B25C2D2D2FEFD3008BDCB7 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		74B25C2F2D2FEFE1008BDCB7 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		74B25C312D2FF022008BDCB7 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +105,7 @@
 		748D6F682D2BCA1C007690B4 /* ACON-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				74B25C2A2D2FEE3E008BDCB7 /* ACON-iOSDebug.entitlements */,
 				748D6F722D2BCA93007690B4 /* Global */,
 				748D6F712D2BCA7E007690B4 /* Network */,
 				748D6F702D2BCA46007690B4 /* Presentation */,
@@ -183,7 +193,11 @@
 		748D6F782D2BCCCD007690B4 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				74B25C2B2D2FEE8C008BDCB7 /* Config.swift */,
 				748D6F632D2BCA1C007690B4 /* Info.plist */,
+				74B25C2D2D2FEFD3008BDCB7 /* Debug.xcconfig */,
+				74B25C2F2D2FEFE1008BDCB7 /* Release.xcconfig */,
+				74B25C312D2FF022008BDCB7 /* Shared.xcconfig */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -333,8 +347,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				748D6F6C2D2BCA1C007690B4 /* Assets.xcassets in Resources */,
+				74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */,
+				74B25C302D2FEFE1008BDCB7 /* Release.xcconfig in Resources */,
 				748D6FA12D2BD65D007690B4 /* Pretendard-Regular.otf in Resources */,
 				748D6F9F2D2BD655007690B4 /* Pretendard-Medium.otf in Resources */,
+				74B25C2E2D2FEFD3008BDCB7 /* Debug.xcconfig in Resources */,
 				748D6F9B2D2BD638007690B4 /* Pretendard-Bold.otf in Resources */,
 				748D6F6E2D2BCA1C007690B4 /* LaunchScreen.storyboard in Resources */,
 				748D6F9D2D2BD641007690B4 /* Pretendard-SemiBold.otf in Resources */,
@@ -363,6 +380,7 @@
 				748D6FAA2D2C3FF1007690B4 /* BaseCollectionViewCell.swift in Sources */,
 				748D6F972D2BD544007690B4 /* DummyType.swift in Sources */,
 				748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */,
+				74B25C2C2D2FEE8E008BDCB7 /* Config.swift in Sources */,
 				748D6F8F2D2BD340007690B4 /* UIButton+.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
 				748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */,
@@ -391,6 +409,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "ACON-iOS/ACON-iOSDebug.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -456,6 +475,7 @@
 		};
 		74AB6EC62D2796D50094F873 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74B25C2D2D2FEFD3008BDCB7 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -519,6 +539,7 @@
 		};
 		74AB6EC72D2796D50094F873 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74B25C2F2D2FEFE1008BDCB7 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
