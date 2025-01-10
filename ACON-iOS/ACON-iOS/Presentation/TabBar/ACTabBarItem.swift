@@ -12,6 +12,7 @@ enum ACTabBarItem: CaseIterable {
     case place, upload, profile
     
     var viewController: UIViewController {
+        // TODO: ViewController 인스턴스 수정
         switch self {
         case .place: return PlaceViewController()
         case .upload: return ViewController()
