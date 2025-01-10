@@ -16,7 +16,7 @@ enum ACTabBarItem: CaseIterable {
         switch self {
         case .place: return PlaceViewController()
         case .upload: return ViewController()
-        case .profile: return ViewController()
+        case .profile: return ProfileViewController()
         }
     }
     
