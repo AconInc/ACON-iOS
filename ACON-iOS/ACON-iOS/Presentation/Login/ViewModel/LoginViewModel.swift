@@ -9,8 +9,11 @@ import UIKit
 
 import GoogleSignIn
 import GoogleSignInSwift
+import AuthenticationServices
 
 class LoginViewModel {
+    
+    var onLoginSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
     
     func googleSignIn(presentingViewController: UIViewController) {
         let clientID = Config.googleClientID
@@ -31,8 +34,14 @@ class LoginViewModel {
                 
                 // TODO: - Send this IDToken to Backend
                 print(idToken)
+                self.onLoginSuccess.value = true
             }
         }
+    }
+    
+    func appleSignIn(userInfo: ASAuthorizationAppleIDCredential) {
+        print(userInfo)
+        self.onLoginSuccess.value = true
     }
      
 }
