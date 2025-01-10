@@ -9,12 +9,12 @@ import UIKit
 
 enum ACTabBarItem: CaseIterable {
     
-    case place, upload, profile
+    case spotList, upload, profile
     
     var viewController: UIViewController {
         // TODO: ViewController 인스턴스 수정
         switch self {
-        case .place: return PlaceViewController()
+        case .spotList: return SpotListViewController()
         case .upload: return ViewController()
         case .profile: return ProfileViewController()
         }
@@ -22,7 +22,7 @@ enum ACTabBarItem: CaseIterable {
     
     var itemTitle: String {
         switch self {
-        case .place: return "장소"
+        case .spotList: return "장소"
         case .upload: return "업로드"
         case .profile: return "프로필"
         }
@@ -30,7 +30,7 @@ enum ACTabBarItem: CaseIterable {
     
     var normalItemImage: UIImage {
         switch self {
-        case .place:
+        case .spotList:
             return .icSpotGla24
         case .upload:
             return .icUploadGla24
@@ -41,7 +41,7 @@ enum ACTabBarItem: CaseIterable {
     
     var selectedItemImage: UIImage {
         switch self {
-        case .place:
+        case .spotList:
             return .icSpotW24
         case .upload:
             return .icUploadW24
