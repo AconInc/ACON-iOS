@@ -30,12 +30,12 @@ class LoginViewController: BaseNavViewController {
         
         addTarget()
         bindViewModel()
+        self.setSkipButton()
     }
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.setSkipButton()
         self.contentView.addSubview(loginView)
     }
     
