@@ -23,7 +23,7 @@ extension UIButton {
     func setAttributedTitle(
         text: String,
         style: ACFontStyleType,
-        color: UIColor = .white,
+        color: UIColor = .acWhite,
         for state: UIControl.State = .normal
     ) {
         let attributedString = text.ACStyle(style, color)

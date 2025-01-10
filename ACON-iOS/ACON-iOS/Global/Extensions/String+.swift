@@ -9,7 +9,7 @@ import UIKit
 
 extension String {
     
-    func ACStyle(_ style: ACFontStyleType, _ color: UIColor = .white) -> NSAttributedString {
+    func ACStyle(_ style: ACFontStyleType, _ color: UIColor = .acWhite) -> NSAttributedString {
         let attributes: [NSAttributedString.Key: Any] = [
             .font: style.font,
             .kern: style.kerning,

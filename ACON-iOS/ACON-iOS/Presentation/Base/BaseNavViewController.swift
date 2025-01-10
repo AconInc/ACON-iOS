@@ -97,7 +97,7 @@ class BaseNavViewController: UIViewController {
     }
     
     func setStyle() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .gray9
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
@@ -140,7 +140,7 @@ extension BaseNavViewController {
             $0.isHidden = false
             $0.text = title
             $0.font = .systemFont(ofSize: 10, weight: .medium)
-            $0.textColor = .black
+            $0.textColor = .acWhite
             $0.textAlignment = alignment
         }
     }

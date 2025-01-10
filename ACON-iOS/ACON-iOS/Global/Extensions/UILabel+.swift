@@ -11,7 +11,7 @@ extension UILabel {
     
     // MARK: - UILabel Text 설정
     
-    func setText(_ style: ACFontStyleType, _ color: UIColor = .white) {
+    func setText(_ style: ACFontStyleType, _ color: UIColor = .acWhite) {
         self.attributedText = text?.ACStyle(style, color)
     }
     
@@ -20,7 +20,7 @@ extension UILabel {
     func setLabel(
         text: String,
         style: ACFontStyleType,
-        color: UIColor = .black,
+        color: UIColor = .acWhite,
         alignment: NSTextAlignment = .left,
         numberOfLines: Int = 0
     ) {
