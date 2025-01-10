@@ -161,6 +161,7 @@ extension BaseNavViewController {
     
     func setSkipButton() {
         rightButton.do {
+            $0.isHidden = false
             $0.setAttributedTitle(text: "건너뛰기", style: .b2)
             setButtonAction(button: rightButton, target: self, action: #selector(skipButtonTapped))
         }

@@ -25,6 +25,7 @@ extension UILabel {
         alignment: NSTextAlignment = .left,
         numberOfLines: Int = 0
     ) {
+        self.text = text
         setText(style, color)
         self.textAlignment = alignment
         self.numberOfLines = numberOfLines
@@ -63,5 +64,4 @@ extension UILabel {
         self.attributedText = attributedString
     }
 
-    
 }
