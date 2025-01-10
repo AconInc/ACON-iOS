@@ -43,7 +43,7 @@ playground.xcworkspace
 Packages/
 Package.pins
 Package.resolved
-*.xcodeproj
+# *.xcodeproj
 # Xcode automatically generates this directory with a .xcworkspacedata file and xcuserdata
 # hence it is not needed unless you have added a package configuration file to your project
 .swiftpm
@@ -56,7 +56,7 @@ Package.resolved
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 Pods/
 # Add this line if you want to avoid checking in source code from the Xcode workspace
-*.xcworkspace
+# *.xcworkspace
 
 # Carthage
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
@@ -88,7 +88,7 @@ iOSInjectionProject/
 ### SwiftPackageManager ###
 Packages
 xcuserdata
-*.xcodeproj
+# *.xcodeproj
 
 
 ### Xcode ###
