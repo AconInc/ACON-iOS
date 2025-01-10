@@ -14,21 +14,19 @@ class BaseNavViewController: UIViewController {
     
     // MARK: - UI Properties
     
-    let topInsetView = UIView()
+    let topInsetView: UIView = UIView()
     
-    var navigationBarView = UIView()
+    var navigationBarView: UIView = UIView()
     
-    var contentView = UIView()
+    var contentView: UIView = UIView()
     
-    private var leftButton = UIButton()
+    private var leftButton: UIButton = UIButton()
     
-    private var secondLeftButton = UIButton()
-    
-    private var rightButton = UIButton()
-    
-    private var secondRightButton = UIButton()
+    private var rightButton: UIButton = UIButton()
     
     var titleLabel = UILabel()
+    
+    var secondTitleLabel: UILabel = UILabel()
     
     
     // MARK: - Life Cycle
@@ -47,10 +45,9 @@ class BaseNavViewController: UIViewController {
                               contentView)
         
         self.navigationBarView.addSubviews(leftButton,
-                                           secondLeftButton,
                                            rightButton,
-                                           secondRightButton,
-                                           titleLabel)
+                                           titleLabel,
+                                           secondTitleLabel)
     }
     
     func setLayout() {
@@ -62,7 +59,7 @@ class BaseNavViewController: UIViewController {
         navigationBarView.snp.makeConstraints {
             $0.top.equalTo(topInsetView.snp.bottom)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.height*48/724)
+            $0.height.equalTo(ScreenUtils.height*56/780)
         }
         
         contentView.snp.makeConstraints {
@@ -72,28 +69,24 @@ class BaseNavViewController: UIViewController {
         
         leftButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(ScreenUtils.width*5/375)
-        }
-        
-        secondLeftButton.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(ScreenUtils.width*45/375)
+            $0.leading.equalToSuperview().offset(ScreenUtils.width*20/380)
         }
         
         rightButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(ScreenUtils.width*6/375)
-        }
-        
-        secondRightButton.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(ScreenUtils.width*40/375)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.width*20/380)
         }
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
         }
+        
+        secondTitleLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(ScreenUtils.width*52/360)
+        }
+        
     }
     
     func setStyle() {
@@ -102,10 +95,9 @@ class BaseNavViewController: UIViewController {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
         [leftButton,
-         secondLeftButton,
          rightButton,
-         secondRightButton,
-         titleLabel].forEach { $0.isHidden = true }
+         titleLabel,
+         secondTitleLabel].forEach { $0.isHidden = true }
     }
     
 }
@@ -147,12 +139,15 @@ extension BaseNavViewController {
     
 }
 
-// MARK: - NavigationBar Button Custom Methods -> 추후 변경 및 수정 에정
+
+// MARK: - NavigationBar Button Custom Methods
 
 extension BaseNavViewController {
     
+    // MARK: - 뒤로가기 버튼
+    
     func setBackButton() {
-        setButtonStyle(button: leftButton, image: .strokedCheckmark)
+        setButtonStyle(button: leftButton, image: .leftArrow)
         setButtonAction(button: leftButton, target: self, action: #selector(backButtonTapped))
     }
     
@@ -161,4 +156,21 @@ extension BaseNavViewController {
         navigationController?.popViewController(animated: false)
     }
     
+    
+    // MARK: - 건너뛰기 버튼
+    
+    func setSkipButton() {
+        rightButton.do {
+            $0.setAttributedTitle(text: "건너뛰기", style: .b2)
+            setButtonAction(button: rightButton, target: self, action: #selector(skipButtonTapped))
+        }
+    }
+    
+    @objc
+    func skipButtonTapped() {
+        //TODO: - 추후 mainVC 메인 장소탐색 뷰컨으로 변경
+        let mainVC = ViewController()
+        navigationController?.pushViewController(mainVC, animated: false)
+    }
+
 }
