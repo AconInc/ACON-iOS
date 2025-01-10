@@ -26,10 +26,10 @@ extension ACTabBarController {
     private func configureTabBarAppearance() {
         let appearance = UITabBarAppearance()
         appearance.backgroundColor = .glaB30
-        appearance.stackedLayoutAppearance.normal.iconColor = .acBlack
-        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.acBlack]
-        appearance.stackedLayoutAppearance.selected.iconColor = .acBlack
-        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.acBlack]
+        appearance.stackedLayoutAppearance.normal.iconColor = .acWhite
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.acWhite]
+        appearance.stackedLayoutAppearance.selected.iconColor = .acWhite
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.acWhite]
         
         tabBar.scrollEdgeAppearance = appearance
     }
