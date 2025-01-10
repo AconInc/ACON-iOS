@@ -9,45 +9,57 @@ import UIKit
 
 extension UILabel {
     
-    // MARK: - UILabel 기본 설정
+    // MARK: - UILabel Text 설정
     
-    func setLabel(text: String? = "",
-                  alignment: NSTextAlignment = .center,
-                  numberOfLines: Int = 0,
-                  textColor: UIColor,
-                  font: UIFont) {
-        self.text = text
+    func setText(_ style: ACFontStyleType, _ color: UIColor = .white) {
+        self.attributedText = text?.ACStyle(style, color)
+    }
+    
+    // MARK: - UILabel 설정
+    
+    func setLabel(
+        text: String,
+        style: ACFontStyleType,
+        color: UIColor = .black,
+        alignment: NSTextAlignment = .left,
+        numberOfLines: Int = 0
+    ) {
+        setText(style, color)
         self.textAlignment = alignment
         self.numberOfLines = numberOfLines
-        self.textColor = textColor
-        self.font = font
     }
-
-    // MARK: - UILabel attributed text
     
-    func setAttributedText(
+    // MARK: - UILabel 내에서 스타일 다를 때
+    
+    func setPartialText(
         fullText: String,
-        styles: [(text: String, font: UIFont, color: UIColor)]
+        textStyles: [(text: String, style: ACFontStyleType, color: UIColor)]
     ) {
         let attributedString = NSMutableAttributedString(string: fullText)
-
-        styles.forEach { style in
-            if let range = fullText.range(of: style.text) {
+        
+        textStyles.forEach { textStyle in
+            if let range = fullText.range(of: textStyle.text) {
                 let nsRange = NSRange(range, in: fullText)
-                attributedString.addAttribute(
-                    .font,
-                    value: style.font,
-                    range: nsRange
-                )
-
-                attributedString.addAttribute(
-                    .foregroundColor,
-                    value: style.color,
-                    range: nsRange
-                )
+                let attributes: [NSAttributedString.Key: Any] = [
+                    .font: textStyle.style.font,
+                    .kern: textStyle.style.kerning,
+                    .paragraphStyle: {
+                        let paragraphStyle = NSMutableParagraphStyle()
+                        paragraphStyle.minimumLineHeight = textStyle.style.lineHeight
+                        paragraphStyle.maximumLineHeight = textStyle.style.lineHeight
+                        return paragraphStyle
+                    }(),
+                    .foregroundColor: textStyle.color
+                ]
+                
+                attributes.forEach { key, value in
+                    attributedString.addAttribute(key, value: value, range: nsRange)
+                }
             }
         }
+        
         self.attributedText = attributedString
     }
 
+    
 }
