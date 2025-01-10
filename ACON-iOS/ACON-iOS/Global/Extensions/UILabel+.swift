@@ -15,6 +15,7 @@ extension UILabel {
         self.attributedText = text?.ACStyle(style, color)
     }
     
+    
     // MARK: - UILabel 설정
     
     func setLabel(
@@ -28,6 +29,7 @@ extension UILabel {
         self.textAlignment = alignment
         self.numberOfLines = numberOfLines
     }
+    
     
     // MARK: - UILabel 내에서 스타일 다를 때
     

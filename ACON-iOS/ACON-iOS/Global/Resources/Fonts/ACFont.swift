@@ -22,6 +22,7 @@ enum ACFont {
         return UIFont(name: name, size: size) ?? .systemFont(ofSize: size, weight: weight)
     }
     
+    
     // MARK: - Heading
     
     static let h1 = ACFontStyleType(
@@ -72,6 +73,7 @@ enum ACFont {
         lineHeight: 24
     )
     
+    
     // MARK: - Title
     
     static let t1 = ACFontStyleType(
@@ -92,6 +94,7 @@ enum ACFont {
         lineHeight: 26
     )
     
+    
     // MARK: - Subtitle
     
     static let s1 = ACFontStyleType(
@@ -106,7 +109,9 @@ enum ACFont {
         lineHeight: 20
     )
     
+    
     // MARK: - Body
+    
     static let b1 = ACFontStyleType(
         font: font(name: FontName.regular, size: 15, weight: .regular),
         kerning: 15 * -0.023,
@@ -130,6 +135,7 @@ enum ACFont {
         kerning: 12 * -0.023,
         lineHeight: 18
     )
+    
     
     // MARK: - Caption
     
