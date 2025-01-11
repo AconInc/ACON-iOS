@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum ACTabBarItem: CaseIterable {
+enum ACTabBarItemType: CaseIterable {
     
     case spotList, upload, profile
     

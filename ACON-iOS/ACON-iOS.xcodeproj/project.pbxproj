@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */; };
-		1558BADB2D31AAF900ECDEF8 /* ACTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADA2D31AAF900ECDEF8 /* ACTabBarItem.swift */; };
+		1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */; };
 		1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */; };
 		1558BAE12D31D41F00ECDEF8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BAE02D31D41F00ECDEF8 /* ProfileViewController.swift */; };
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
@@ -56,7 +56,7 @@
 
 /* Begin PBXFileReference section */
 		1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarController.swift; sourceTree = "<group>"; };
-		1558BADA2D31AAF900ECDEF8 /* ACTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarItem.swift; sourceTree = "<group>"; };
+		1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarItemType.swift; sourceTree = "<group>"; };
 		1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
 		1558BAE02D31D41F00ECDEF8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */,
-				1558BADA2D31AAF900ECDEF8 /* ACTabBarItem.swift */,
+				1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -507,7 +507,7 @@
 				748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */,
 				1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */,
 				748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */,
-				1558BADB2D31AAF900ECDEF8 /* ACTabBarItem.swift in Sources */,
+				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,
 				744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */,
 				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
 				748D6F6B2D2BCA1C007690B4 /* ViewController.swift in Sources */,

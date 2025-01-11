@@ -42,7 +42,7 @@ extension ACTabBarController {
     }
     
     private func setNavViewControllers() {
-        let navVCs = ACTabBarItem.allCases.map {
+        let navVCs = ACTabBarItemType.allCases.map {
             return setUpTabBarItem(title: $0.itemTitle,
                                    normalItemImage: $0.normalItemImage,
                                    selectedItemImage: $0.selectedItemImage,
