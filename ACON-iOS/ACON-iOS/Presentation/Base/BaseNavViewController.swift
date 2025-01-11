@@ -168,7 +168,7 @@ extension BaseNavViewController {
     
     @objc
     func skipButtonTapped() {
-        //TODO: - 추후 mainVC 메인 장소탐색 뷰컨으로 변경
+        //TODO: - 추후 TabBarVC로 푸시 (selectedItem = 0)
         let mainVC = ViewController()
         navigationController?.pushViewController(mainVC, animated: false)
     }
