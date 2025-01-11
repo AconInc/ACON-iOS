@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
 		74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */; };
+		74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */; };
 		744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BAF162D300AB100F95B4A /* DummyComponent.swift */; };
 		748D6F412D2BC482007690B4 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F402D2BC482007690B4 /* Moya */; };
 		748D6F442D2BC509007690B4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F432D2BC509007690B4 /* SnapKit */; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultitaskDelegate.swift; sourceTree = "<group>"; };
+		74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLocationManager.swift; sourceTree = "<group>"; };
 		744BAF162D300AB100F95B4A /* DummyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyComponent.swift; sourceTree = "<group>"; };
 		748D6F612D2BCA1C007690B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		748D6F622D2BCA1C007690B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 		748D6F792D2BCCEF007690B4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */,
 				74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */,
 				748D6F812D2BCDB0007690B4 /* ScreenUtils.swift */,
 				748D6F7F2D2BCD8F007690B4 /* ObservablePattern.swift */,
@@ -454,6 +457,7 @@
 				748D6F822D2BCDB3007690B4 /* ScreenUtils.swift in Sources */,
 				748D6FAE2D2EBB9C007690B4 /* ACFont.swift in Sources */,
 				748D6F692D2BCA1C007690B4 /* AppDelegate.swift in Sources */,
+				74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */,
 				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
 				748D6F852D2BD230007690B4 /* DummyService.swift in Sources */,
 				748D6FA82D2C3F93007690B4 /* BaseViewController.swift in Sources */,
