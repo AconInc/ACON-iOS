@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_spot_gla_24.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
