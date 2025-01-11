@@ -119,11 +119,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1547A6E92D326EDB00E96616 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
 		1558BA182D318FDB00ECDEF8 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				1547A6E92D326EDB00E96616 /* Type */,
 				1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */,
-				1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
