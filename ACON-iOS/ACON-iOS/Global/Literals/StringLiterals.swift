@@ -22,5 +22,15 @@ enum StringLiterals {
         static let privacyPolicy = "개인정보처리방침"
         
     }
+
+    enum TabBar {
+        
+        static let spotList = "장소"
+        
+        static let upload = "업로드"
+        
+        static let profile = "프로필"
+        
+    }
     
 }
