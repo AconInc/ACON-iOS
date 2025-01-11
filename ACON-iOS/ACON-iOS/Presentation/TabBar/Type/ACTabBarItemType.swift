@@ -22,9 +22,9 @@ enum ACTabBarItemType: CaseIterable {
     
     var itemTitle: String {
         switch self {
-        case .spotList: return "장소"
-        case .upload: return "업로드"
-        case .profile: return "프로필"
+        case .spotList: return StringLiterals.TabBar.spotList
+        case .upload: return StringLiterals.TabBar.upload
+        case .profile: return StringLiterals.TabBar.profile
         }
     }
     
