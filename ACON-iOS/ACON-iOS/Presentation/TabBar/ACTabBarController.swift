@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Then
+
 class ACTabBarController: UITabBarController {
     
     // MARK: - LifeCycle
@@ -26,12 +28,13 @@ class ACTabBarController: UITabBarController {
 extension ACTabBarController {
     
     private func configureTabBarAppearance() {
-        let appearance = UITabBarAppearance()
-        appearance.backgroundColor = .glaB30
-        appearance.stackedLayoutAppearance.normal.iconColor = .acWhite
-        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.acWhite]
-        appearance.stackedLayoutAppearance.selected.iconColor = .acWhite
-        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.acWhite]
+        let appearance = UITabBarAppearance().then {
+            $0.backgroundColor = .glaB30
+            $0.stackedLayoutAppearance.normal.iconColor = .acWhite
+            $0.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.acWhite]
+            $0.stackedLayoutAppearance.selected.iconColor = .acWhite
+            $0.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.acWhite]
+        }
         
         tabBar.scrollEdgeAppearance = appearance
     }
