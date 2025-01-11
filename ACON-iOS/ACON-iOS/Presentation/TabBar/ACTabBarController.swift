@@ -13,11 +13,13 @@ class ACTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureTabBarAppearance()
         setNavViewControllers()
     }
     
 }
+
 
 // MARK: - TabBar Setting Methods
 
