@@ -15,7 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         self.window = UIWindow(windowScene: windowScene)
-        self.window?.rootViewController = ACTabBarController()
+        let navigationController = UINavigationController(rootViewController: LoginViewController())
+        navigationController.navigationBar.isHidden = true
+        self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
     }
 
