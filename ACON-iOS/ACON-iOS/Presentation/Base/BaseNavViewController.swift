@@ -161,6 +161,7 @@ extension BaseNavViewController {
     
     func setSkipButton() {
         rightButton.do {
+            $0.isHidden = false
             $0.setAttributedTitle(text: "건너뛰기", style: .b2)
             setButtonAction(button: rightButton, target: self, action: #selector(skipButtonTapped))
         }
@@ -168,9 +169,8 @@ extension BaseNavViewController {
     
     @objc
     func skipButtonTapped() {
-        //TODO: - 추후 TabBarVC로 푸시 (selectedItem = 0)
-        let mainVC = ViewController()
-        navigationController?.pushViewController(mainVC, animated: false)
+        let vc = ACTabBarController()
+        navigationController?.pushViewController(vc, animated: false)
     }
 
 }

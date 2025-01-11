@@ -25,6 +25,7 @@ extension UILabel {
         alignment: NSTextAlignment = .left,
         numberOfLines: Int = 0
     ) {
+        self.text = text
         setText(style, color)
         self.textAlignment = alignment
         self.numberOfLines = numberOfLines
@@ -60,6 +61,19 @@ extension UILabel {
             }
         }
         
+        self.attributedText = attributedString
+    }
+
+    
+    // MARK: - UILabel 밑줄
+    
+    func setUnderline(range: NSRange) {
+        let attributedString: NSMutableAttributedString
+        if let existingAttributedText = self.attributedText {
+            attributedString = NSMutableAttributedString(attributedString: existingAttributedText)
+        } else { return }
+        
+        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
         self.attributedText = attributedString
     }
 
