@@ -26,7 +26,10 @@ final class SpotUploadView: BaseView {
         configuration.imagePadding = 12
         configuration.titleAlignment = .leading
         configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 24)
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 40, bottom: 16, trailing: 193)
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 14,
+                                                              leading: ScreenUtils.width*12/360,
+                                                              bottom: 14,
+                                                              trailing: ScreenUtils.width*194/360)
         return configuration
     }()
     
@@ -47,12 +50,13 @@ final class SpotUploadView: BaseView {
         spotUploadLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*32/780)
             $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
-            $0.height.equalTo(58)
-            $0.width.equalTo(24)
+            $0.height.equalTo(24)
+            $0.width.equalTo(58)
         }
         
         spotSearchButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*64/780)
+            $0.centerX.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.height.equalTo(ScreenUtils.height*52/780)
         }
@@ -80,9 +84,9 @@ final class SpotUploadView: BaseView {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor(resource: .gray7).cgColor
             $0.setImage(.icLocation, for: .normal)
-            $0.setAttributedTitle(text: StringLiterals.Upload.spotUpload,
+            $0.setAttributedTitle(text: StringLiterals.Upload.uploadSpotName,
                                   style: .s2,
-                                  color: .acWhite)
+                                  color: .gray5)
             
         }
         
