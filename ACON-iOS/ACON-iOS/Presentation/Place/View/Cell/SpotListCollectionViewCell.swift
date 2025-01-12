@@ -57,15 +57,20 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         
         matchingRateView.snp.makeConstraints {
             $0.leading.top.equalToSuperview().offset(16)
+            $0.width.equalTo(96)
+            $0.height.equalTo(22)
         }
         
         matchingRateLabel.snp.makeConstraints {
-            $0.horizontalEdges.equalTo(matchingRateView).inset(7.5)
-            $0.verticalEdges.equalTo(matchingRateView).inset(2)
+            $0.center.equalToSuperview()
         }
         
         stackView.snp.makeConstraints {
             $0.leading.bottom.equalToSuperview().inset(16)
+        }
+        
+        walkingIcon.snp.makeConstraints {
+            $0.size.equalTo(16)
         }
     }
     
@@ -115,8 +120,10 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
 extension SpotListCollectionViewCell {
     
-    func bind(spot: SpotModel) {
+    func bind(spot: Spot, isFirst: Bool) {
         bgImage.image = spot.image
+        
+        changeMatchingRateBgColor(isFirst: isFirst)
         
         matchingRateLabel.setLabel(text: "취향 일치율 \(String(spot.matchingRate))%",
                                    style: .b4)
@@ -132,4 +139,14 @@ extension SpotListCollectionViewCell {
                                   color: .gray3)
     }
     
+}
+
+
+// MARK: - UI Change Methods
+
+extension SpotListCollectionViewCell {
+    
+    private func changeMatchingRateBgColor(isFirst: Bool) {
+        matchingRateView.backgroundColor = isFirst ? .gray9 : .glaB30
+    }
 }
