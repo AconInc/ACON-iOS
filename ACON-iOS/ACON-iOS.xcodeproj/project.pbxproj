@@ -12,6 +12,7 @@
 		1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */; };
 		1558BAE12D31D41F00ECDEF8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BAE02D31D41F00ECDEF8 /* ProfileViewController.swift */; };
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
+		74220DD42D34363B000684BF /* SpotReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74220DD32D343633000684BF /* SpotReviewViewController.swift */; };
 		744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BAF162D300AB100F95B4A /* DummyComponent.swift */; };
 		748D6F412D2BC482007690B4 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F402D2BC482007690B4 /* Moya */; };
 		748D6F442D2BC509007690B4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F432D2BC509007690B4 /* SnapKit */; };
@@ -63,6 +64,7 @@
 		1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
 		1558BAE02D31D41F00ECDEF8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		74220DD32D343633000684BF /* SpotReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotReviewViewController.swift; sourceTree = "<group>"; };
 		744BAF162D300AB100F95B4A /* DummyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyComponent.swift; sourceTree = "<group>"; };
 		748D6F612D2BCA1C007690B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		748D6F622D2BCA1C007690B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -175,6 +177,22 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		74220DD12D34361E000684BF /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+				74220DD22D34362C000684BF /* View */,
+			);
+			path = Upload;
+			sourceTree = "<group>";
+		};
+		74220DD22D34362C000684BF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				74220DD32D343633000684BF /* SpotReviewViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		744BAF182D300BC900F95B4A /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,6 +229,7 @@
 		748D6F702D2BCA46007690B4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				74220DD12D34361E000684BF /* Upload */,
 				1558BADF2D31D41400ECDEF8 /* Profile */,
 				1558BADC2D31AB5100ECDEF8 /* Place */,
 				1558BA182D318FDB00ECDEF8 /* TabBar */,
@@ -540,6 +559,7 @@
 				748D6FAA2D2C3FF1007690B4 /* BaseCollectionViewCell.swift in Sources */,
 				748ECA6B2D31918D00BBC981 /* LoginView.swift in Sources */,
 				748D6F972D2BD544007690B4 /* DummyType.swift in Sources */,
+				74220DD42D34363B000684BF /* SpotReviewViewController.swift in Sources */,
 				748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */,
 				74B25C2C2D2FEE8E008BDCB7 /* Config.swift in Sources */,
 				748D6F8F2D2BD340007690B4 /* UIButton+.swift in Sources */,
