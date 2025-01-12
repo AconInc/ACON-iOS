@@ -29,7 +29,7 @@ extension UIViewController {
         
         if let sheet = self.sheetPresentationController {
             let sheetUtils = SheetUtils()
-            sheet.detents = [sheetUtils.acShortDetent, sheetUtils.acLongDetent]
+            sheet.detents = [sheetUtils.acShortDetent]
             sheet.prefersScrollingExpandsWhenScrolledToEdge = false
             sheet.prefersGrabberVisible = false
             
@@ -42,7 +42,7 @@ extension UIViewController {
         
         if let sheet = self.sheetPresentationController {
             let sheetUtils = SheetUtils()
-            sheet.detents = [sheetUtils.acShortDetent, sheetUtils.acLongDetent]
+            sheet.detents = [sheetUtils.acLongDetent]
             sheet.prefersScrollingExpandsWhenScrolledToEdge = false
             sheet.prefersGrabberVisible = false
             
