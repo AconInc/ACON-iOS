@@ -33,4 +33,11 @@ enum StringLiterals {
         
     }
     
+    enum SheetUtils {
+        
+        static let shortDetent = "acShortDetent"
+        
+        static let longDetent = "acLongDetent"
+        
+    }
 }
