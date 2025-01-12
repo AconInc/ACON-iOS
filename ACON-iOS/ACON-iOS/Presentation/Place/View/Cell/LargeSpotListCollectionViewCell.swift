@@ -7,6 +7,6 @@
 
 import UIKit
 
-class LargeSpotListCollectionViewCell: UICollectionViewCell {
+class LargeSpotListCollectionViewCell: BaseCollectionViewCell {
     
 }
