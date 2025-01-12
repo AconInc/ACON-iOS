@@ -7,12 +7,13 @@
 
 import UIKit
 
-class SpotListViewController: UIViewController {
+class SpotListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .acBlack
     }
+    
     
 }
