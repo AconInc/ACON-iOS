@@ -12,7 +12,6 @@ import Then
 
 final class SpotUploadView: BaseView {
 
-    
     // MARK: - UI Properties
     
     private let spotUploadLabel: UILabel = UILabel()
@@ -88,20 +87,16 @@ final class SpotUploadView: BaseView {
         }
         
         dropAcornButton.do {
-            $0.configurationUpdateHandler = { button in
-                switch button.state {
-                case .disabled:
-                    button.setAttributedTitle(text: StringLiterals.Upload.dropAcornsHere,
-                                          style: .h8,
-                                          color: .gray6)
-                    button.backgroundColor = .gray8
-                default:
-                    button.setAttributedTitle(text: StringLiterals.Upload.dropAcornsHere,
-                                          style: .h8,
-                                          color: .acWhite)
-                    button.backgroundColor = .gray5
-                }
-            }
+            $0.setAttributedTitle(text: StringLiterals.Upload.dropAcornsHere,
+                                   style: .h8,
+                                  color: .gray6,
+                                  for: .disabled)
+            $0.setAttributedTitle(text: StringLiterals.Upload.dropAcornsHere,
+                                   style: .h8,
+                                  color: .acWhite,
+                                  for: .normal)
+            // TODO: - enable 시 backgroundcolor gray5
+            $0.backgroundColor = .gray8
             $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
         }
     }
