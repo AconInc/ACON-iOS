@@ -33,4 +33,14 @@ enum StringLiterals {
         
     }
     
+    enum Upload {
+        
+        static let spotUpload = "장소 등록"
+        
+        static let uploadSpotName = "가게명 등록하기"
+        
+        static let dropAcornsHere = "이곳에 도토리 남기기"
+        
+    }
+    
 }
