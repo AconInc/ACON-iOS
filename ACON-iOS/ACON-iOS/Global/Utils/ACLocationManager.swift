@@ -62,7 +62,10 @@ class ACLocationManager: NSObject {
         DispatchQueue.global().async { [weak self] in
             guard CLLocationManager.locationServicesEnabled() else {
                 DispatchQueue.main.async {
-                    UIApplication.shared.windows.first?.rootViewController?.showDefaultAlert(title: "위치 안됨", message: "시스템 설정에서 디바이스 위치 활성화해주세요")
+                    let scenes = UIApplication.shared.connectedScenes
+                    let windowScene = scenes.first as? UIWindowScene
+                    let window = windowScene?.windows.first
+                    window?.rootViewController?.showDefaultAlert(title: StringLiterals.Alert.gpsDeprecatedTitle, message: StringLiterals.Alert.gpsDeprecatedMessage)
                 }
                 return
             }
@@ -82,10 +85,11 @@ class ACLocationManager: NSObject {
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestWhenInUseAuthorization()
         case .denied, .restricted:
-            // TODO: 설정 이동 Alert 띄우기
-            if let topVC = UIApplication.shared.windows.first?.rootViewController {
-                topVC.showDefaultAlert(title: "이미 허용 안 함 누름", message: "설정으로 redirect")
-            }
+            // TODO: 설정 이동 Alert 커스텀 Alert으로 변경
+            let scenes = UIApplication.shared.connectedScenes
+            let windowScene = scenes.first as? UIWindowScene
+            let window = windowScene?.windows.first
+            window?.rootViewController?.showDefaultAlert(title: StringLiterals.Alert.gpsDeniedTitle, message: StringLiterals.Alert.gpsDeniedMessage)
         case .authorizedWhenInUse, .authorizedAlways:
             locationManager.requestLocation()
         default:
