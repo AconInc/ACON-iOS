@@ -9,4 +9,19 @@ import UIKit
 
 class LargeSpotListCollectionViewCell: BaseCollectionViewCell {
     
+    // MARK: - UI Properties
+    
+    
+    
+    
+    // MARK: - Life Cycle
+    
+    override func setHierarchy() {}
+    
+    override func setLayout() {}
+    
+    override func setStyle() {
+        self.backgroundColor = .red
+    }
+    
 }
