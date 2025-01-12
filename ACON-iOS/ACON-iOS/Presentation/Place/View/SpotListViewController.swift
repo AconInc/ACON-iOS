@@ -60,8 +60,8 @@ extension SpotListViewController {
     
     private func registerCells() {
         spotListView.collectionView.register(
-            LargeSpotListCollectionViewCell.self,
-            forCellWithReuseIdentifier: LargeSpotListCollectionViewCell.cellIdentifier
+            SpotListCollectionViewCell.self,
+            forCellWithReuseIdentifier: SpotListCollectionViewCell.cellIdentifier
         )
     }
     
@@ -73,7 +73,7 @@ extension SpotListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: LargeSpotListCollectionViewCell.cellIdentifier, for: indexPath) as? LargeSpotListCollectionViewCell
+        guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: SpotListCollectionViewCell.cellIdentifier, for: indexPath) as? SpotListCollectionViewCell
         else { return UICollectionViewCell() }
         
         return item
