@@ -83,7 +83,7 @@ class BaseNavViewController: UIViewController {
         }
         
         secondTitleLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.top.equalToSuperview().inset(ScreenUtils.height*12/780)
             $0.leading.equalToSuperview().inset(ScreenUtils.width*52/360)
         }
         
@@ -127,12 +127,28 @@ extension BaseNavViewController {
         button.addTarget(target, action: action, for: .touchUpInside)
     }
     
-    func setTitleLabelStyle(title: String?, alignment: NSTextAlignment) {
+    func setTitleLabelStyle(title: String,
+                            fontStyle: ACFontStyleType = .t2,
+                            color: UIColor = .acWhite,
+                            alignment: NSTextAlignment = .left) {
         titleLabel.do {
             $0.isHidden = false
-            $0.text = title
-            $0.font = .systemFont(ofSize: 10, weight: .medium)
-            $0.textColor = .acWhite
+            $0.setLabel(text: title,
+                        style: fontStyle,
+                        color: color)
+            $0.textAlignment = alignment
+        }
+    }
+    
+    func setSecondTitleLabelStyle(title: String,
+                            fontStyle: ACFontStyleType = .t2,
+                            color: UIColor = .acWhite,
+                            alignment: NSTextAlignment = .left) {
+        secondTitleLabel.do {
+            $0.isHidden = false
+            $0.setLabel(text: title,
+                        style: fontStyle,
+                        color: color)
             $0.textAlignment = alignment
         }
     }
@@ -172,5 +188,12 @@ extension BaseNavViewController {
         let vc = ACTabBarController()
         navigationController?.pushViewController(vc, animated: false)
     }
-
+    
+    
+    // MARK: - X 버튼
+    
+    func setXButton() {
+        setButtonStyle(button: leftButton, image: .icX)
+    }
+    
 }
