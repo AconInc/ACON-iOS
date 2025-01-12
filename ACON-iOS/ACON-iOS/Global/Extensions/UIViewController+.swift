@@ -21,4 +21,33 @@ extension UIViewController {
         view.endEditing(true)
     }
     
+    
+    // MARK: - 바텀시트 내려가게
+    
+    func setShortSheetLayout() {
+        self.modalPresentationStyle = .pageSheet
+        
+        if let sheet = self.sheetPresentationController {
+            let sheetUtils = SheetUtils()
+            sheet.detents = [sheetUtils.acShortDetent, sheetUtils.acLongDetent]
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+            sheet.prefersGrabberVisible = false
+            
+            sheet.selectedDetentIdentifier = sheetUtils.shortDetentIdentifier
+        }
+    }
+    
+    func setLongSheetLayout() {
+        self.modalPresentationStyle = .pageSheet
+        
+        if let sheet = self.sheetPresentationController {
+            let sheetUtils = SheetUtils()
+            sheet.detents = [sheetUtils.acShortDetent, sheetUtils.acLongDetent]
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+            sheet.prefersGrabberVisible = false
+            
+            sheet.selectedDetentIdentifier = sheetUtils.longDetentIdentifier
+        }
+    }
+    
 }

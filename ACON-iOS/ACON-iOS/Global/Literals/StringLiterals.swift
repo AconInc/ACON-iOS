@@ -40,4 +40,5 @@ enum StringLiterals {
         static let longDetent = "acLongDetent"
         
     }
+    
 }
