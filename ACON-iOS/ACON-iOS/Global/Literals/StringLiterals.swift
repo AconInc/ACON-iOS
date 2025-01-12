@@ -33,4 +33,14 @@ enum StringLiterals {
         
     }
     
+    enum Alert {
+        
+        static let ok = "확인"
+        
+        static let notLocatedTitle = "위치 인식 실패"
+        
+        static let notLocatedMessage = "문제가 발생했습니다.\n나중에 다시 시도해주세요."
+        
+    }
+    
 }

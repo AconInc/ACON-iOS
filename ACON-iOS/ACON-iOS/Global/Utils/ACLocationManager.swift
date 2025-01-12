@@ -19,8 +19,8 @@ extension ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager, didFailWithError error: Error, vc: UIViewController?) {
         print(error)
-        //TODO: - 추후 StringLiterals에 추가
-        vc?.showDefaultAlert(title: "위치 인식 실패", message: "문제가 발생했습니다.\n나중에 다시 시도해주세요.")
+        vc?.showDefaultAlert(title: StringLiterals.Alert.notLocatedTitle,
+                             message: StringLiterals.Alert.notLocatedMessage)
     }
     
 }
