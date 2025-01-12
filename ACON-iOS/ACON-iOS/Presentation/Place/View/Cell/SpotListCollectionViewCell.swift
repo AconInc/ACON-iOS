@@ -11,7 +11,17 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - UI Properties
     
+    private let bgImage = UIImageView()
     
+    private let matchPercentageLabel = UILabel()
+    private let matchPercentageView = UIView()
+    
+    private let stackView = UIStackView()
+    private let categoryLabel = UILabel()
+    private let spotNameLabel = UILabel()
+    private let timeInfoStackView = UIStackView()
+    private let personImageView = UIImageView()
+    private let timeLabel = UILabel()
     
     
     // MARK: - Life Cycle
