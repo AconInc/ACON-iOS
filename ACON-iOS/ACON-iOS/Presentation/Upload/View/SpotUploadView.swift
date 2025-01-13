@@ -27,13 +27,13 @@ final class SpotUploadView: BaseView {
         configuration.titleAlignment = .leading
         configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 24)
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 14,
-                                                              leading: ScreenUtils.width*12/360,
+                                                              leading: 12,
                                                               bottom: 14,
-                                                              trailing: ScreenUtils.width*194/360)
+                                                              trailing: 194)
         return configuration
     }()
     
-    
+
     // MARK: - Lifecycle
     
     override func setHierarchy() {

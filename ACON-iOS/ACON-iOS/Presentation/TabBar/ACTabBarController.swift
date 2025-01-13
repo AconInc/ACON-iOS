@@ -38,6 +38,7 @@ extension ACTabBarController {
             $0.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.acWhite]
         }
         
+        tabBar.frame.size.height = ScreenUtils.height * 76/780
         tabBar.scrollEdgeAppearance = appearance
     }
     
@@ -49,7 +50,7 @@ extension ACTabBarController {
                                    viewController: $0.viewController)
         }
         
-        setViewControllers(navVCs, animated: true)
+        setViewControllers(navVCs, animated: false)
     }
     
     private func setUpTabBarItem(title: String,
