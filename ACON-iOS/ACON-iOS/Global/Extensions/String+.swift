@@ -19,8 +19,10 @@ extension String {
                 paragraphStyle.maximumLineHeight = style.lineHeight
                 return paragraphStyle
             }(),
-            .foregroundColor: color
+            .foregroundColor: color,
+            .baselineOffset: (style.lineHeight - style.font.lineHeight) / 2
         ]
+        
         return NSAttributedString(string: self, attributes: attributes)
     }
     
