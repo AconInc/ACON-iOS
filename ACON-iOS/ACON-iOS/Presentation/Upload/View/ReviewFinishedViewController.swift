@@ -32,6 +32,14 @@ class ReviewFinishedViewController: BaseNavViewController {
         self.tabBarController?.tabBar.isHidden = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.closeView()
+        }
+    }
+    
     override func setHierarchy() {
         super.setHierarchy()
         
@@ -61,6 +69,18 @@ extension ReviewFinishedViewController {
     
     @objc
     func okButtonTapped() {
+        closeView()
+    }
+    
+}
+
+
+// MARK: - Close View
+
+extension ReviewFinishedViewController {
+    
+    @objc
+    func closeView() {
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
             sceneDelegate.window?.rootViewController = ACTabBarController()
         }

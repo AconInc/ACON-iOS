@@ -20,7 +20,7 @@ class BaseNavViewController: UIViewController {
     
     var contentView: UIView = UIView()
     
-    private var leftButton: UIButton = UIButton()
+    var leftButton: UIButton = UIButton()
     
     private var rightButton: UIButton = UIButton()
     
