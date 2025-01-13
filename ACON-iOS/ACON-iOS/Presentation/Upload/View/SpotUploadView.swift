@@ -91,14 +91,15 @@ final class SpotUploadView: BaseView {
         }
         
         dropAcornButton.do {
-            $0.setAttributedTitle(text: StringLiterals.Upload.dropAcornsHere,
-                                   style: .h8,
-                                  color: .gray6,
-                                  for: .disabled)
+            $0.isEnabled = false
             $0.setAttributedTitle(text: StringLiterals.Upload.dropAcornsHere,
                                    style: .h8,
                                   color: .acWhite,
                                   for: .normal)
+            $0.setAttributedTitle(text: StringLiterals.Upload.dropAcornsHere,
+                                   style: .h8,
+                                  color: .gray6,
+                                  for: .disabled)
             // TODO: - enable 시 backgroundcolor gray5
             $0.backgroundColor = .gray8
             $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])

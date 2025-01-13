@@ -19,7 +19,7 @@ class SpotUploadViewController: BaseNavViewController {
     
     // MARK: - Properties
     
-    var selectedSpotID: Int = 0
+    var selectedSpotID: Int = -1
     
 //    var selectedSpotName: String = ""
     
@@ -83,14 +83,29 @@ extension SpotUploadViewController {
         let vc = SpotSearchViewController()
         // TODO: - 이 부분 로직 및 플로우 다시 짜기 !!
         vc.completionHandler = { [weak self] selectedSpotID, selectedSpotName in
-            self?.selectedSpotID = selectedSpotID
+            guard let self = self else { return }
+            self.selectedSpotID = selectedSpotID
 //            self?.selectedSpotName = selectedSpotName
-            self?.spotUploadView.spotSearchButton.do {
+            self.spotUploadView.spotSearchButton.do {
                 $0.setAttributedTitle(text: selectedSpotName,
                                       style: .s2,
                                       color: .acWhite)
             }
+            print(selectedSpotID, selectedSpotName)
+            if selectedSpotID > 0 {
+                self.spotUploadView.dropAcornButton.isEnabled = true
+                self.spotUploadView.dropAcornButton.backgroundColor = .gray5
+            } else {
+                self.spotUploadView.dropAcornButton.isEnabled = false
+                self.spotUploadView.dropAcornButton.backgroundColor = .gray8
+                self.spotUploadView.spotSearchButton.setAttributedTitle(text: StringLiterals.Upload.uploadSpotName,
+                                                                        style: .s2,
+                                                                        color: .gray5)
+
+            }
+            
         }
+        
         // TODO: - set spotsearchvc to modal
         self.present(vc, animated: true)
     }
