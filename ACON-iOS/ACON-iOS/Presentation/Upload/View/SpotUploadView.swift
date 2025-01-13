@@ -91,7 +91,6 @@ final class SpotUploadView: BaseView {
         }
         
         dropAcornButton.do {
-            $0.isEnabled = false
             $0.setAttributedTitle(text: StringLiterals.Upload.dropAcornsHere,
                                    style: .h8,
                                   color: .acWhite,

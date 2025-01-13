@@ -56,7 +56,7 @@ class SpotUploadViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
-        self.spotUploadView.dropAcornButton.isEnabled = true
+        self.spotUploadView.dropAcornButton.isEnabled = false
     }
     
     func addTarget() {
@@ -80,6 +80,7 @@ extension SpotUploadViewController {
 
     @objc
     func spotSearchButtonTapped() {
+        // TODO: - 위치 접근 권한 체크하기
         let vc = SpotSearchViewController()
         // TODO: - 이 부분 로직 및 플로우 다시 짜기 !!
         vc.completionHandler = { [weak self] selectedSpotID, selectedSpotName in
@@ -104,7 +105,6 @@ extension SpotUploadViewController {
             }
             
         }
-        
         // TODO: - set spotsearchvc to modal
         self.present(vc, animated: true)
     }
