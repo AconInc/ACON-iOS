@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Spot {
+struct Spot: Equatable {
     let image: UIImage?
     let matchingRate: Int
     let type: String
@@ -19,48 +19,51 @@ struct Spots {
     let array: [Spot]
 }
 
-//extension SpotModel {
-//    func splitData(spots: [SpotModel]) {
-//        guard !spots.isEmpty else { return [] }
-//
-//            // 첫 번째 그룹은 첫 두 개의 아이템
-//            let firstGroup = Array(spots.prefix(2))
-//            // 나머지는 두 번째 그룹
-//            let secondGroup = Array(spots.dropFirst(2))
-//            
-//            return [firstGroup, secondGroup]
-//        }
-//    }
-//}
 
-extension Spot {
+// MARK: - Dummy data - 삭제 예정
+
+extension Spots {
     static let dummy: [Spot] = [
         Spot(
             image: .imgEx1,
             matchingRate: 98,
             type: "CAFE",
-            name: "OO카페",
+            name: "카페1",
             walkingTime: 5
         ),
         Spot(
             image: .imgEx2,
             matchingRate: 88,
             type: "CAFE",
-            name: "ㅁㅁ카페",
+            name: "카페2",
             walkingTime: 5
         ),
         Spot(
             image: .imgEx3,
             matchingRate: 80,
             type: "RESTAURANT",
-            name: "햄버거 가게",
+            name: "햄버거 가게3",
             walkingTime: 5
         ),
         Spot(
             image: .imgEx4,
             matchingRate: 50,
             type: "CAFE",
-            name: "OO카페",
+            name: "OO카페4",
+            walkingTime: 5
+        ),
+        Spot(
+            image: .imgEx1,
+            matchingRate: 98,
+            type: "CAFE",
+            name: "카페5",
+            walkingTime: 5
+        ),
+        Spot(
+            image: .imgEx2,
+            matchingRate: 88,
+            type: "CAFE",
+            name: "카페6",
             walkingTime: 5
         )
     ]
