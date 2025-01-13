@@ -29,7 +29,7 @@ class SpotListView: BaseView {
         super.setLayout()
         
         collectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.equalTo(self.safeAreaLayoutGuide)
         }
     }
     
@@ -46,15 +46,13 @@ class SpotListView: BaseView {
 extension SpotListView {
     func setCollectionView() {
         let flowLayout = UICollectionViewFlowLayout()
-        let width: CGFloat = ScreenUtils.width - 40
-        let height: CGFloat = 408
-        
-        flowLayout.itemSize = CGSize(width: width, height: height)
+        // 참고: itemSize는 Controller에서 설정합니다. (collectionView의 height이 필요하기 때문)
         flowLayout.minimumLineSpacing = 12
         flowLayout.scrollDirection = .vertical
         
         collectionView.do {
             $0.setCollectionViewLayout(flowLayout, animated: true)
+//            $0.isScrollEnabled = false
         }
     }
     
