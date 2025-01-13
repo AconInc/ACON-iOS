@@ -58,6 +58,9 @@ class DropAcornViewController: BaseNavViewController {
     }
     
     func addTarget() {
+        self.leftButton.addTarget(self,
+                                  action: #selector(xButtonTapped),
+                                  for: .touchUpInside)
         dropAcornView.leaveReviewButton.addTarget(self,
                                                   action: #selector(leaveReviewButtonTapped),
                                                   for: .touchUpInside)
@@ -92,6 +95,11 @@ extension DropAcornViewController {
         dropAcornView.acornReviewLabel.text = "\(selectedIndex+1)/5"
         reviewAcornCount = selectedIndex + 1
         enableLeaveReviewButton()
+    }
+    
+    @objc
+    func xButtonTapped() {
+        // TODO: 작성을 그만두시겠습니까 Alert 띄우기
     }
     
 }

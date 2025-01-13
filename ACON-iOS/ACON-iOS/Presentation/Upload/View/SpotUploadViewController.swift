@@ -54,8 +54,15 @@ class SpotUploadViewController: BaseNavViewController {
     }
     
     func addTarget() {
-        spotUploadView.spotSearchButton.addTarget(self, action: #selector(spotSearchButtonTapped), for: .touchUpInside)
-        spotUploadView.dropAcornButton.addTarget(self, action: #selector(dropAcornButtonTapped), for: .touchUpInside)
+        self.leftButton.addTarget(self,
+                                  action: #selector(xButtonTapped),
+                                  for: .touchUpInside)
+        spotUploadView.spotSearchButton.addTarget(self,
+                                                  action: #selector(spotSearchButtonTapped),
+                                                  for: .touchUpInside)
+        spotUploadView.dropAcornButton.addTarget(self,
+                                                 action: #selector(dropAcornButtonTapped),
+                                                 for: .touchUpInside)
     }
 
 }
@@ -74,6 +81,11 @@ extension SpotUploadViewController {
     func dropAcornButtonTapped() {
         let vc = DropAcornViewController()
         navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    @objc
+    func xButtonTapped() {
+        // TODO: 작성을 그만두시겠습니까 Alert 띄우기
     }
     
 }
