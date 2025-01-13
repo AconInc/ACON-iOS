@@ -34,7 +34,7 @@ class SpotListView: BaseView {
     }
     
     override func setStyle() {
-        self.backgroundColor = .gray9
+        super.setStyle()
         
         setCollectionView()
     }
@@ -51,8 +51,8 @@ extension SpotListView {
         flowLayout.scrollDirection = .vertical
         
         collectionView.do {
+            $0.backgroundColor = .gray9
             $0.setCollectionViewLayout(flowLayout, animated: true)
-//            $0.isScrollEnabled = false
         }
     }
     
