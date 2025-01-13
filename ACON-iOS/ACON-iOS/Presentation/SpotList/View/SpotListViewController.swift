@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SpotListViewController: BaseViewController {
+class SpotListViewController: BaseNavViewController {
     
     // MARK: - Properties
     
