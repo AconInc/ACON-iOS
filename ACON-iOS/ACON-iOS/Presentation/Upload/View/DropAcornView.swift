@@ -97,12 +97,6 @@ final class DropAcornView: BaseView {
                         color: .gray3)
         }
         
-        acornNumberLabel.do {
-            $0.setLabel(text: StringLiterals.Upload.acornsIHave,
-                        style: .b4,
-                        color: .gray5)
-        }
-        
         acornStackView.do {
             for _ in 0...4 {
                 let acornImageView = makeAcornImageButton()

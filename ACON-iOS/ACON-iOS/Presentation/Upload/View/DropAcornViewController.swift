@@ -21,6 +21,8 @@ class DropAcornViewController: BaseNavViewController {
     
     var reviewAcornCount: Int = 0
     
+    var posessAcornCount: Int = 5
+    
     
     // MARK: - LifeCycle
     
@@ -55,6 +57,14 @@ class DropAcornViewController: BaseNavViewController {
         super.setStyle()
         
         self.dropAcornView.leaveReviewButton.isEnabled = false
+        self.dropAcornView.acornNumberLabel.do {
+            $0.setLabel(text: StringLiterals.Upload.acornsIHave,
+                        style: .b4,
+                        color: .gray5)
+            $0.setPartialText(fullText: StringLiterals.Upload.acornsIHave + " \(posessAcornCount)/25",
+                              textStyles: [(StringLiterals.Upload.acornsIHave, .b4, .gray5),
+                                           (" \(posessAcornCount)/25", .b4, .org1)])
+        }
     }
     
     func addTarget() {
