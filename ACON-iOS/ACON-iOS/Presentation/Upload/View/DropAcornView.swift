@@ -51,7 +51,6 @@ final class DropAcornView: BaseView {
         
         useAcornToReviewLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*96/780)
-            $0.centerX.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.height.equalTo(18)
         }
