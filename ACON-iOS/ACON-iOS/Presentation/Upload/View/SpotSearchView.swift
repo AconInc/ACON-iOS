@@ -103,6 +103,13 @@ final class SpotSearchView: BaseView {
             $0.centerX.equalToSuperview()
         }
         
+        emptyView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(ScreenUtils.height*200/780)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.width*146/360)
+            $0.height.equalTo(ScreenUtils.height*116/780)
+        }
+        
         searchImageView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(ScreenUtils.width*16/360)
             $0.centerY.equalToSuperview()
@@ -120,6 +127,17 @@ final class SpotSearchView: BaseView {
             $0.trailing.equalToSuperview().inset(ScreenUtils.width*6/360)
             $0.centerY.equalToSuperview()
             $0.width.height.equalTo(24)
+        }
+        
+        emptyImageView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(80)
+        }
+        
+        emptyLabel.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.centerX.equalToSuperview()
         }
     }
     
@@ -159,6 +177,10 @@ final class SpotSearchView: BaseView {
             $0.showsVerticalScrollIndicator = false
         }
         
+        emptyView.do {
+            $0.isHidden = true
+        }
+        
         searchImageView.do {
             $0.image = .icSearch24
             $0.contentMode = .scaleAspectFit
@@ -183,6 +205,18 @@ final class SpotSearchView: BaseView {
         searchXButton.do {
             $0.setImage(.icDissmissCircleGray, for: .normal)
             $0.imageView?.contentMode = .scaleAspectFit
+        }
+        
+        emptyImageView.do {
+            $0.image = .imgEmptySearch
+            $0.contentMode = .scaleAspectFit
+        }
+        
+        emptyLabel.do {
+            $0.setLabel(text: StringLiterals.Upload.noMatchingSpots,
+                        style: .b2,
+                        color: .gray4,
+                        alignment: .center)
         }
     }
     

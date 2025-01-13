@@ -65,6 +65,8 @@ enum StringLiterals {
         
         static let searchSpot = "가게명을 검색해주세요"
         
+        static let noMatchingSpots = "앗! 일치하는 장소가 없어요."
+        
     }
     
 }
