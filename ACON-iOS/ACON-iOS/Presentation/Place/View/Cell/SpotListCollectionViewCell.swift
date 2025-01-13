@@ -9,6 +9,8 @@ import UIKit
 
 class SpotListCollectionViewCell: BaseCollectionViewCell {
     
+    // TODO: bgImage dim 처리
+    
     // MARK: - UI Properties
     
     private let bgImage = UIImageView()
