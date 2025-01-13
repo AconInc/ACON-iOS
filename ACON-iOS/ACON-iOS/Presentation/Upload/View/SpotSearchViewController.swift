@@ -44,7 +44,7 @@ class SpotSearchViewController: BaseNavViewController {
 
         spotSearchView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.height*126/700)
+            $0.height.equalTo(ScreenUtils.height*126/780)
         }
     }
     

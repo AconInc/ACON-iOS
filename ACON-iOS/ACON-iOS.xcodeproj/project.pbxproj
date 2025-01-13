@@ -21,6 +21,8 @@
 		744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BAF162D300AB100F95B4A /* DummyComponent.swift */; };
 		745C7E022D358E900074DBDB /* SpotSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E012D358E870074DBDB /* SpotSearchView.swift */; };
 		745C7E042D3599DF0074DBDB /* SpotSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E032D3599D80074DBDB /* SpotSearchViewController.swift */; };
+		745C7E062D359FE90074DBDB /* RecommendSearchCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E052D359FDB0074DBDB /* RecommendSearchCollectionView.swift */; };
+		745C7E0D2D35A04A0074DBDB /* RecommendSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E0C2D35A03F0074DBDB /* RecommendSearchCollectionViewCell.swift */; };
 		748D6F412D2BC482007690B4 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F402D2BC482007690B4 /* Moya */; };
 		748D6F442D2BC509007690B4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F432D2BC509007690B4 /* SnapKit */; };
 		748D6F472D2BC519007690B4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F462D2BC519007690B4 /* Then */; };
@@ -80,6 +82,8 @@
 		744BAF162D300AB100F95B4A /* DummyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyComponent.swift; sourceTree = "<group>"; };
 		745C7E012D358E870074DBDB /* SpotSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotSearchView.swift; sourceTree = "<group>"; };
 		745C7E032D3599D80074DBDB /* SpotSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotSearchViewController.swift; sourceTree = "<group>"; };
+		745C7E052D359FDB0074DBDB /* RecommendSearchCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendSearchCollectionView.swift; sourceTree = "<group>"; };
+		745C7E0C2D35A03F0074DBDB /* RecommendSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		748D6F612D2BCA1C007690B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		748D6F622D2BCA1C007690B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		748D6F632D2BCA1C007690B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -202,6 +206,8 @@
 		74220DD22D34362C000684BF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				745C7E072D35A0130074DBDB /* Cell */,
+				745C7E052D359FDB0074DBDB /* RecommendSearchCollectionView.swift */,
 				745C7E032D3599D80074DBDB /* SpotSearchViewController.swift */,
 				745C7E012D358E870074DBDB /* SpotSearchView.swift */,
 				741A07582D355F0100778219 /* ReviewFinishedViewController.swift */,
@@ -223,6 +229,14 @@
 				74B25C2B2D2FEE8C008BDCB7 /* Config.swift */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		745C7E072D35A0130074DBDB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				745C7E0C2D35A03F0074DBDB /* RecommendSearchCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		748D6F682D2BCA1C007690B4 /* ACON-iOS */ = {
@@ -568,6 +582,7 @@
 				748D6F822D2BCDB3007690B4 /* ScreenUtils.swift in Sources */,
 				748D6FAE2D2EBB9C007690B4 /* ACFont.swift in Sources */,
 				748D6F692D2BCA1C007690B4 /* AppDelegate.swift in Sources */,
+				745C7E0D2D35A04A0074DBDB /* RecommendSearchCollectionViewCell.swift in Sources */,
 				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
 				748D6F852D2BD230007690B4 /* DummyService.swift in Sources */,
 				74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */,
@@ -585,6 +600,7 @@
 				74220DD42D34363B000684BF /* SpotUploadViewController.swift in Sources */,
 				741A07592D355F1400778219 /* ReviewFinishedViewController.swift in Sources */,
 				748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */,
+				745C7E062D359FE90074DBDB /* RecommendSearchCollectionView.swift in Sources */,
 				745C7E042D3599DF0074DBDB /* SpotSearchViewController.swift in Sources */,
 				74B25C2C2D2FEE8E008BDCB7 /* Config.swift in Sources */,
 				748D6F8F2D2BD340007690B4 /* UIButton+.swift in Sources */,
