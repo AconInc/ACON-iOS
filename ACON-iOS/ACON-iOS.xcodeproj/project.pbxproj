@@ -12,6 +12,8 @@
 		1547A8852D3595B600E96616 /* SpotListFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A8842D3595B600E96616 /* SpotListFilterModel.swift */; };
 		1547A8882D3595E000E96616 /* SpotListFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A8872D3595E000E96616 /* SpotListFilterViewModel.swift */; };
 		1547A88B2D3596B600E96616 /* SpotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A88A2D3596B600E96616 /* SpotType.swift */; };
+		1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A88D2D35B13700E96616 /* FilterTagButton.swift */; };
+		1547A8902D35B30C00E96616 /* FilterTagButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A88F2D35B30C00E96616 /* FilterTagButtonType.swift */; };
 		1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */; };
 		1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */; };
 		1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */; };
@@ -68,6 +70,8 @@
 		1547A8842D3595B600E96616 /* SpotListFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListFilterModel.swift; sourceTree = "<group>"; };
 		1547A8872D3595E000E96616 /* SpotListFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListFilterViewModel.swift; sourceTree = "<group>"; };
 		1547A88A2D3596B600E96616 /* SpotType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotType.swift; sourceTree = "<group>"; };
+		1547A88D2D35B13700E96616 /* FilterTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagButton.swift; sourceTree = "<group>"; };
+		1547A88F2D35B30C00E96616 /* FilterTagButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagButtonType.swift; sourceTree = "<group>"; };
 		1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarController.swift; sourceTree = "<group>"; };
 		1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarItemType.swift; sourceTree = "<group>"; };
 		1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 		1547A87C2D358E0700E96616 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1547A88C2D35AE5C00E96616 /* Component */,
 				1547A87F2D358E2700E96616 /* SpotListFilterView.swift */,
 				1547A8812D358E3000E96616 /* SpotListFilterViewController.swift */,
 			);
@@ -183,8 +188,17 @@
 			isa = PBXGroup;
 			children = (
 				1547A88A2D3596B600E96616 /* SpotType.swift */,
+				1547A88F2D35B30C00E96616 /* FilterTagButtonType.swift */,
 			);
 			path = Type;
+			sourceTree = "<group>";
+		};
+		1547A88C2D35AE5C00E96616 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				1547A88D2D35B13700E96616 /* FilterTagButton.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		1558BA182D318FDB00ECDEF8 /* TabBar */ = {
@@ -587,6 +601,7 @@
 				748D6F852D2BD230007690B4 /* DummyService.swift in Sources */,
 				748D6FA82D2C3F93007690B4 /* BaseViewController.swift in Sources */,
 				748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */,
+				1547A8902D35B30C00E96616 /* FilterTagButtonType.swift in Sources */,
 				748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */,
 				748D6F872D2BD247007690B4 /* UIView+.swift in Sources */,
 				74CDCE562D310B1600E3A21A /* String+.swift in Sources */,
@@ -600,6 +615,7 @@
 				748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */,
 				74B25C2C2D2FEE8E008BDCB7 /* Config.swift in Sources */,
 				748D6F8F2D2BD340007690B4 /* UIButton+.swift in Sources */,
+				1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
 				1558BAE12D31D41F00ECDEF8 /* ProfileViewController.swift in Sources */,
 				1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */,
