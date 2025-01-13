@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1547A8802D358E2700E96616 /* SpotListFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A87F2D358E2700E96616 /* SpotListFilterView.swift */; };
 		1547A8822D358E3000E96616 /* SpotListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A8812D358E3000E96616 /* SpotListFilterViewController.swift */; };
+		1547A8852D3595B600E96616 /* SpotListFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A8842D3595B600E96616 /* SpotListFilterModel.swift */; };
+		1547A8882D3595E000E96616 /* SpotListFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A8872D3595E000E96616 /* SpotListFilterViewModel.swift */; };
 		1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */; };
 		1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */; };
 		1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */; };
@@ -62,6 +64,8 @@
 /* Begin PBXFileReference section */
 		1547A87F2D358E2700E96616 /* SpotListFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListFilterView.swift; sourceTree = "<group>"; };
 		1547A8812D358E3000E96616 /* SpotListFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListFilterViewController.swift; sourceTree = "<group>"; };
+		1547A8842D3595B600E96616 /* SpotListFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListFilterModel.swift; sourceTree = "<group>"; };
+		1547A8872D3595E000E96616 /* SpotListFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListFilterViewModel.swift; sourceTree = "<group>"; };
 		1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarController.swift; sourceTree = "<group>"; };
 		1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarItemType.swift; sourceTree = "<group>"; };
 		1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
@@ -140,7 +144,9 @@
 		1547A87B2D358DBE00E96616 /* SpotListFilter */ = {
 			isa = PBXGroup;
 			children = (
+				1547A8832D3595AB00E96616 /* Model */,
 				1547A87C2D358E0700E96616 /* View */,
+				1547A8862D3595C800E96616 /* ViewModel */,
 			);
 			path = SpotListFilter;
 			sourceTree = "<group>";
@@ -152,6 +158,22 @@
 				1547A8812D358E3000E96616 /* SpotListFilterViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1547A8832D3595AB00E96616 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1547A8842D3595B600E96616 /* SpotListFilterModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1547A8862D3595C800E96616 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1547A8872D3595E000E96616 /* SpotListFilterViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		1558BA182D318FDB00ECDEF8 /* TabBar */ = {
@@ -557,6 +579,7 @@
 				748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */,
 				748D6F872D2BD247007690B4 /* UIView+.swift in Sources */,
 				74CDCE562D310B1600E3A21A /* String+.swift in Sources */,
+				1547A8852D3595B600E96616 /* SpotListFilterModel.swift in Sources */,
 				748D6F8B2D2BD31B007690B4 /* UIStackView+.swift in Sources */,
 				748D6F912D2BD450007690B4 /* UILabel+.swift in Sources */,
 				1547A8822D358E3000E96616 /* SpotListFilterViewController.swift in Sources */,
@@ -577,6 +600,7 @@
 				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,
 				744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */,
 				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
+				1547A8882D3595E000E96616 /* SpotListFilterViewModel.swift in Sources */,
 				748ECA6E2D3196F100BBC981 /* LoginViewController.swift in Sources */,
 				748D6F6B2D2BCA1C007690B4 /* ViewController.swift in Sources */,
 			);
