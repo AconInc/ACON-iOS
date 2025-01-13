@@ -63,6 +63,11 @@ class SpotSearchViewController: BaseNavViewController {
         spotSearchView.doneButton.addTarget(self,
                                               action: #selector(doneButtonTapped),
                                               for: .touchUpInside)
+        
+        spotSearchView.searchXButton.addTarget(self,
+                                              action: #selector(searchXButtonTapped),
+                                              for: .touchUpInside)
+        
         spotSearchView.searchTextField.addTarget(self,
                            action: #selector(searchTextFieldDidChange),
                            for: .editingChanged)
@@ -79,6 +84,13 @@ private extension SpotSearchViewController {
     func doneButtonTapped() {
         completionHandler?(selectedSpotId, selectedSpotName)
         self.dismiss(animated: true)
+    }
+    
+    @objc
+    func searchXButtonTapped() {
+        spotSearchView.searchTextField.text = ""
+        spotSearchView.recommendedSpotStackView.isHidden = false
+        spotSearchView.relatedSearchCollectionView.isHidden = true
     }
     
     @objc
