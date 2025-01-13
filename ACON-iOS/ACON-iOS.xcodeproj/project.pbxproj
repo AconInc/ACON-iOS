@@ -12,6 +12,8 @@
 		1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */; };
 		1558BAE12D31D41F00ECDEF8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BAE02D31D41F00ECDEF8 /* ProfileViewController.swift */; };
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
+		741A06C82D3532E500778219 /* DropAcornView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741A06C72D3532E000778219 /* DropAcornView.swift */; };
+		741A06CA2D35415800778219 /* DropAcornViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741A06C92D35415200778219 /* DropAcornViewController.swift */; };
 		74220DD42D34363B000684BF /* SpotUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74220DD32D343633000684BF /* SpotUploadViewController.swift */; };
 		74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74220DD52D3436BE000684BF /* SpotUploadView.swift */; };
 		744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BAF162D300AB100F95B4A /* DummyComponent.swift */; };
@@ -65,6 +67,8 @@
 		1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
 		1558BAE02D31D41F00ECDEF8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		741A06C72D3532E000778219 /* DropAcornView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropAcornView.swift; sourceTree = "<group>"; };
+		741A06C92D35415200778219 /* DropAcornViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropAcornViewController.swift; sourceTree = "<group>"; };
 		74220DD32D343633000684BF /* SpotUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadViewController.swift; sourceTree = "<group>"; };
 		74220DD52D3436BE000684BF /* SpotUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadView.swift; sourceTree = "<group>"; };
 		744BAF162D300AB100F95B4A /* DummyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyComponent.swift; sourceTree = "<group>"; };
@@ -190,6 +194,8 @@
 		74220DD22D34362C000684BF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				741A06C92D35415200778219 /* DropAcornViewController.swift */,
+				741A06C72D3532E000778219 /* DropAcornView.swift */,
 				74220DD52D3436BE000684BF /* SpotUploadView.swift */,
 				74220DD32D343633000684BF /* SpotUploadViewController.swift */,
 			);
@@ -553,6 +559,7 @@
 				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
 				748D6F852D2BD230007690B4 /* DummyService.swift in Sources */,
 				74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */,
+				741A06C82D3532E500778219 /* DropAcornView.swift in Sources */,
 				748D6FA82D2C3F93007690B4 /* BaseViewController.swift in Sources */,
 				748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */,
 				748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */,
@@ -576,6 +583,7 @@
 				748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */,
 				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,
 				744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */,
+				741A06CA2D35415800778219 /* DropAcornViewController.swift in Sources */,
 				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
 				748ECA6E2D3196F100BBC981 /* LoginViewController.swift in Sources */,
 				748D6F6B2D2BCA1C007690B4 /* ViewController.swift in Sources */,
