@@ -9,14 +9,10 @@ import UIKit
 
 class SpotListViewController: BaseViewController {
     
-    // MARK: - UI Properties
-    
-    private let spotListView = SpotListView()
-    
-    
     // MARK: - Properties
     
-//    private let spotiewModel =
+    private let spotListView = SpotListView()
+    private let spotListViewModel = SpotListViewModel()
     
     
     // MARK: - LifeCycle
@@ -31,14 +27,24 @@ class SpotListViewController: BaseViewController {
         setCollectionView()
     }
     
-    override func setHierarchy() {}
+}
+
+
+// MARK: - @objc functions
+
+extension SpotListViewController {
     
-    override func setLayout() {}
-    
-    override func setStyle() {
-        self.view.backgroundColor = .gray9
-        self.navigationController?.navigationBar.isHidden = true
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    @objc private func collectionViewRefreshed() {
+        print("refresh control 실행됨")
+        
+        if !spotListViewModel.secondSpotList.isEmpty {
+            spotListViewModel.isFirstPage.value?.toggle()
+        } else {
+            // TODO: 네트워크 요청
+        }
+        
+        spotListView.collectionView.reloadData()
+        spotListView.collectionView.refreshControl?.endRefreshing()
     }
     
 }
@@ -51,6 +57,7 @@ extension SpotListViewController {
     private func setCollectionView() {
         setDelegate()
         registerCells()
+        setRefreshControl()
     }
     
     private func setDelegate() {
@@ -65,22 +72,72 @@ extension SpotListViewController {
         )
     }
     
+    private func setRefreshControl() {
+        // TODO: Refresh control 디자인 변경
+        
+        let control = UIRefreshControl()
+        
+        control.addTarget(self,
+                       action: #selector(collectionViewRefreshed),
+                       for: .valueChanged
+            )
+        
+        spotListView.collectionView.refreshControl = control
+    }
+    
 }
 
 extension SpotListViewController: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        guard let isFirstPage = spotListViewModel.isFirstPage.value else { return 0 }
+        
+        return isFirstPage ? spotListViewModel.firstSpotList.count : spotListViewModel.secondSpotList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: SpotListCollectionViewCell.cellIdentifier, for: indexPath) as? SpotListCollectionViewCell
+        guard let isFirstPage = spotListViewModel.isFirstPage.value,
+              let item = collectionView.dequeueReusableCell(
+                withReuseIdentifier: SpotListCollectionViewCell.cellIdentifier,
+                for: indexPath
+              ) as? SpotListCollectionViewCell
         else { return UICollectionViewCell() }
+        
+        let spot = isFirstPage ? spotListViewModel.firstSpotList[indexPath.row] : spotListViewModel.secondSpotList[indexPath.row]
+        
+        // 1번페이지 1번째 셀만 취향 일치율 배경색 어둡게
+        if isFirstPage,
+           indexPath.item == 0 {
+            item.bind(spot: spot, matchingRateBgColor: .dark)
+        } else {
+            item.bind(spot: spot, matchingRateBgColor: .light)
+        }
         
         return item
     }
     
 }
 
-extension SpotListViewController: UICollectionViewDelegate {
+extension SpotListViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // 1번페이지 1번째 셀만 크게
+        guard let isFirstPage = spotListViewModel.isFirstPage.value
+        else { return .zero }
+        
+        let width: CGFloat = SpotListCollectionViewType.itemWidth
+        let collectionViewHeight: CGFloat = collectionView.frame.height
+        let shortHeight: CGFloat = SpotListCollectionViewType.shortItemHeight(collectionViewHeight)
+        let longHeight: CGFloat = SpotListCollectionViewType.longItemHeight(collectionViewHeight)
+        
+        if isFirstPage,
+           indexPath.item == 0 {
+            return CGSize(width: width, height: longHeight)
+        } else {
+            return CGSize(width: width, height: shortHeight)
+        }
+    }
     
 }
