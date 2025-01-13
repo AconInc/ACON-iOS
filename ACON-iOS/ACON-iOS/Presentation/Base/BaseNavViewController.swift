@@ -83,7 +83,7 @@ class BaseNavViewController: UIViewController {
         }
         
         secondTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*12/780)
+            $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(ScreenUtils.width*52/360)
         }
         

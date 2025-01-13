@@ -23,7 +23,8 @@ class SpotUploadViewController: BaseNavViewController {
         super.viewDidLoad()
         
         self.setXButton()
-        self.setSecondTitleLabelStyle(title: StringLiterals.Upload.spotUpload)
+        self.setSecondTitleLabelStyle(title: StringLiterals.Upload.upload)
+        addTarget()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,7 +48,9 @@ class SpotUploadViewController: BaseNavViewController {
     }
     
     override func setStyle() {
-        self.spotUploadView.dropAcornButton.isEnabled = false
+        super.setStyle()
+        
+        self.spotUploadView.dropAcornButton.isEnabled = true
     }
     
     func addTarget() {
@@ -69,7 +72,9 @@ extension SpotUploadViewController {
     
     @objc
     func dropAcornButtonTapped() {
-        // TODO: - push to dropAcornvc
+        print("pushted")
+        let vc = DropAcornViewController()
+        navigationController?.pushViewController(vc, animated: false)
     }
     
 }
