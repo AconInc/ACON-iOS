@@ -49,7 +49,7 @@ final class RelatedSearchCollectionViewCell: BaseCollectionViewCell {
         }
         
         spotTypeLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.height.equalTo(14)
         }
@@ -65,8 +65,17 @@ final class RelatedSearchCollectionViewCell: BaseCollectionViewCell {
 
 extension RelatedSearchCollectionViewCell {
     
-    func bindData() {
-
+    func dataBind(_ relatedSearchData: RelatedSearchModel, _ indexRow: Int) {
+        spotNameLabel.setLabel(text: relatedSearchData.spotName,
+                               style: .s2,
+                               color: .acWhite)
+        spotAddressLabel.setLabel(text: relatedSearchData.spotAddress,
+                               style: .c1,
+                               color: .gray4)
+        spotTypeLabel.setLabel(text: relatedSearchData.spotType,
+                               style: .c1,
+                               color: .gray4,
+                               alignment: .right)
     }
     
 }

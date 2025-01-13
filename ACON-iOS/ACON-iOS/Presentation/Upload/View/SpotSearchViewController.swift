@@ -15,22 +15,21 @@ class SpotSearchViewController: BaseNavViewController {
     // MARK: - UI Properties
     
     private let spotSearchView = SpotSearchView()
+
+
+    // MARK: - Properties
     
-    var recentSpotStackView: UIStackView = UIStackView()
-
-//    var recommendedSpotCollectionView: UICollectionView = UICollectionView()
-
-    let emptyImageView: UIImageView = UIImageView()
-
-    let emptyLabel: UILabel = UILabel()
-
+    private let spotSearchViewModel = SpotSearchViewModel()
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addTarget()
         self.hideKeyboard()
+        addTarget()
+        registerCell()
+        setDelegate()
     }
     
     override func setHierarchy() {
@@ -43,8 +42,7 @@ class SpotSearchViewController: BaseNavViewController {
         super.setLayout()
 
         spotSearchView.snp.makeConstraints {
-            $0.top.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.height*126/780)
+            $0.edges.equalToSuperview()
         }
     }
     
@@ -64,6 +62,56 @@ extension SpotSearchViewController {
     @objc
     func doneButtonTapped() {
         self.dismiss(animated: true)
+    }
+    
+}
+
+
+// MARK: - CollectionView Setting Methods
+
+private extension SpotSearchViewController {
+    
+    func registerCell() {
+        spotSearchView.relatedSearchCollectionView.register(RelatedSearchCollectionViewCell.self, forCellWithReuseIdentifier: RelatedSearchCollectionViewCell.cellIdentifier)
+    }
+    
+    func setDelegate() {
+        spotSearchView.relatedSearchCollectionView.delegate = self
+        spotSearchView.relatedSearchCollectionView.dataSource = self
+    }
+    
+}
+
+
+// MARK: - CollectionView Delegate
+
+extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return SpotSearchView.relatedSearchCollectionViewFlowLayout.itemSize
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: ScreenUtils.width * 0.112, bottom: 0, right: ScreenUtils.width * 0.112)
+    }
+    
+}
+
+
+// MARK: - CollectionView DataSource
+
+extension SpotSearchViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let data = spotSearchViewModel.relatedSearchDummyData[indexPath.item]
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RelatedSearchCollectionViewCell.cellIdentifier, for: indexPath) as? RelatedSearchCollectionViewCell else {
+            return UICollectionViewCell() }
+        cell.dataBind(data, indexPath.item)
+        return cell
     }
     
 }

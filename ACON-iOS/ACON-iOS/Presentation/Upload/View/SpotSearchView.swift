@@ -27,7 +27,27 @@ final class SpotSearchView: BaseView {
     let searchXButton: UIButton = UIButton()
     
     var doneButton: UIButton = UIButton()
+    
+    var recentSpotStackView: UIStackView = UIStackView()
 
+    var relatedSearchCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: relatedSearchCollectionViewFlowLayout)
+    
+    let emptyView: UIView = UIView()
+
+    let emptyImageView: UIImageView = UIImageView()
+
+    let emptyLabel: UILabel = UILabel()
+
+    
+    // MARK: - Properties
+    
+    static var relatedSearchCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .vertical
+        $0.minimumLineSpacing = 0
+        $0.itemSize = CGSize(width: ScreenUtils.width*320/360, height: ScreenUtils.height*52/780)
+    }
+    
+    
     // MARK: - Lifecycle
     
     override func setHierarchy() {
@@ -36,10 +56,14 @@ final class SpotSearchView: BaseView {
         self.addSubviews(handlerImageView,
                          spotUploadLabel,
                          searchView,
-                         doneButton)
+                         doneButton,
+                         recentSpotStackView,
+                         relatedSearchCollectionView,
+                         emptyView)
         searchView.addSubviews(searchImageView,
                                searchTextField,
                                searchXButton)
+        emptyView.addSubviews(emptyImageView, emptyLabel)
     }
     
     override func setLayout() {
@@ -70,6 +94,13 @@ final class SpotSearchView: BaseView {
             $0.trailing.equalToSuperview().inset(20)
             $0.width.equalTo(40)
             $0.height.equalTo(24)
+        }
+        
+        relatedSearchCollectionView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(ScreenUtils.height*150/780)
+            $0.bottom.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.width*320/360)
+            $0.centerX.equalToSuperview()
         }
         
         searchImageView.snp.makeConstraints {
@@ -119,6 +150,13 @@ final class SpotSearchView: BaseView {
                                   style: .b2,
                                   color: .gray5,
                                   for: .normal)
+        }
+        
+        relatedSearchCollectionView.do {
+            $0.backgroundColor = .gray9
+            $0.isScrollEnabled = true
+            // TODO: - 기획 측에 이거 질문
+            $0.showsVerticalScrollIndicator = false
         }
         
         searchImageView.do {
