@@ -1,5 +1,5 @@
 //
-//  RecommendSearchCollectionViewCell.swift
+//  RelatedSearchCollectionViewCell.swift
 //  ACON-iOS
 //
 //  Created by 이수민 on 1/14/25.
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class RecommendSearchCollectionViewCell: BaseCollectionViewCell {
+final class RelatedSearchCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - UI Properties
     
@@ -63,7 +63,7 @@ final class RecommendSearchCollectionViewCell: BaseCollectionViewCell {
     
 }
 
-extension RecommendSearchCollectionViewCell() {
+extension RelatedSearchCollectionViewCell {
     
     func bindData() {
 
