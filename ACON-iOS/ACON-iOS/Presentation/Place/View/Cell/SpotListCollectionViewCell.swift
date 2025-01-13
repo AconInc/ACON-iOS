@@ -122,7 +122,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
 extension SpotListCollectionViewCell {
     
-    func bind(spot: Spot, matchingRateBgColor: MatchingRateBgColor) {
+    func bind(spot: Spot, matchingRateBgColor: MatchingRateBgColorType) {
         bgImage.image = spot.image
         
         changeMatchingRateBgColor(matchingRateBgColor)
@@ -148,7 +148,7 @@ extension SpotListCollectionViewCell {
 
 extension SpotListCollectionViewCell {
     
-    private func changeMatchingRateBgColor(_ matchingRateBgColor: MatchingRateBgColor) {
+    private func changeMatchingRateBgColor(_ matchingRateBgColor: MatchingRateBgColorType) {
         matchingRateView.backgroundColor = matchingRateBgColor.color
     }
     
