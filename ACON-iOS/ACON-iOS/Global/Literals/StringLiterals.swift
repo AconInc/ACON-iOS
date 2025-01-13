@@ -39,6 +39,8 @@ enum StringLiterals {
         
         static let spotUpload = "장소 등록"
         
+        static let spotUpload2 = "장소등록"
+        
         static let uploadSpotName = "가게명 등록하기"
         
         static let dropAcornsHere = "이곳에 도토리 남기기"
@@ -58,6 +60,10 @@ enum StringLiterals {
         static let closeAfterFiveSeconds = "5초 후 탭이 자동으로 닫힙니다."
         
         static let ok = "확인"
+        
+        static let done = "완료"
+        
+        static let searchSpot = "가게명을 검색해주세요"
         
     }
     

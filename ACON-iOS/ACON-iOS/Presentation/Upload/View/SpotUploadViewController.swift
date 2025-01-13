@@ -74,7 +74,9 @@ extension SpotUploadViewController {
 
     @objc
     func spotSearchButtonTapped() {
-        // TODO: - push to spotsearchvc
+        let vc = SpotSearchViewController()
+        // TODO: - set spotsearchvc to modal
+        self.present(vc, animated: true)
     }
     
     @objc
