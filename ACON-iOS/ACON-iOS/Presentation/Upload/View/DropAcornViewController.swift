@@ -28,7 +28,6 @@ class DropAcornViewController: BaseNavViewController {
         super.viewDidLoad()
         
         self.setXButton()
-        self.setSecondTitleLabelStyle(title: StringLiterals.Upload.upload)
         addTarget()
     }
     
@@ -78,8 +77,9 @@ extension DropAcornViewController {
     
     @objc
     func leaveReviewButtonTapped() {
-        // TODO: - push to reviewFinishVC
         // TODO: - reviewAcornCount 서버 POST
+        let vc = ReviewFinishedViewController()
+        navigationController?.pushViewController(vc, animated: false)
     }
     
     @objc

@@ -55,7 +55,7 @@ final class ReviewFinishedView: BaseView {
         finishedReviewImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(ScreenUtils.height*162/780)
-            $0.height.equalTo(246)
+            $0.width.equalTo(246)
             $0.height.equalTo(320)
         }
         
@@ -100,8 +100,8 @@ final class ReviewFinishedView: BaseView {
         }
         
         okButton.do {
-            $0.setAttributedTitle(text: StringLiterals.Upload.dropAcornsHere,
-                                   style: .h8,
+            $0.setAttributedTitle(text: StringLiterals.Upload.ok,
+                                  style: .h8,
                                   color: .acWhite,
                                   for: .normal)
             $0.backgroundColor = .gray5
