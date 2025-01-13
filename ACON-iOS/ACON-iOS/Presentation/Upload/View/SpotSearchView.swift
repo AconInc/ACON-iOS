@@ -88,8 +88,9 @@ final class SpotSearchView: BaseView {
         
         searchView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*86/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.height.equalTo(54)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.width*320/360)
         }
         
         doneButton.snp.makeConstraints {
@@ -102,13 +103,13 @@ final class SpotSearchView: BaseView {
         recommendedSpotScrollView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*150/780)
             $0.height.equalTo(ScreenUtils.height*28/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.trailing.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.width*340/360)
         }
         
         relatedSearchCollectionView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*150/780)
-            $0.bottom.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.height*630/780 - safeAreaInsets.bottom)
             $0.width.equalTo(ScreenUtils.width*320/360)
             $0.centerX.equalToSuperview()
         }

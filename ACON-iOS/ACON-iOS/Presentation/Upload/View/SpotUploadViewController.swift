@@ -91,7 +91,6 @@ extension SpotUploadViewController {
                                       style: .s2,
                                       color: .acWhite)
             }
-            print(selectedSpotID, selectedSpotName)
             if selectedSpotID > 0 {
                 self.spotUploadView.dropAcornButton.isEnabled = true
                 self.spotUploadView.dropAcornButton.backgroundColor = .gray5
