@@ -26,6 +26,7 @@ class SpotSearchViewController: BaseNavViewController {
     var selectedSpotId: Int = 0
     
     var selectedSpotName: String = ""
+      
     
     // MARK: - LifeCycle
     
@@ -62,6 +63,9 @@ class SpotSearchViewController: BaseNavViewController {
         spotSearchView.doneButton.addTarget(self,
                                               action: #selector(doneButtonTapped),
                                               for: .touchUpInside)
+        spotSearchView.searchTextField.addTarget(self,
+                           action: #selector(searchTextFieldDidChange),
+                           for: .editingChanged)
     }
 
 }
@@ -69,12 +73,24 @@ class SpotSearchViewController: BaseNavViewController {
     
 // MARK: - @objc functions
 
-extension SpotSearchViewController {
+private extension SpotSearchViewController {
     
     @objc
     func doneButtonTapped() {
         completionHandler?(selectedSpotId, selectedSpotName)
         self.dismiss(animated: true)
+    }
+    
+    @objc
+    func searchTextFieldDidChange(_ textField: UITextField) {
+        if let text = textField.text {
+            spotSearchView.recommendedSpotStackView.isHidden = text != ""
+            spotSearchView.relatedSearchCollectionView.isHidden = text == ""
+            
+            if text != "" {
+                // TODO: - 여기서 디바운스 로직? + reloadData()?
+            }
+        }
     }
     
 }
