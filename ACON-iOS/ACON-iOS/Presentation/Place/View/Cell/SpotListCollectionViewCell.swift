@@ -120,10 +120,10 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
 extension SpotListCollectionViewCell {
     
-    func bind(spot: Spot, isFirst: Bool) {
+    func bind(spot: Spot, matchingRateBgColor: MatchingRateBgColor) {
         bgImage.image = spot.image
         
-        changeMatchingRateBgColor(isFirst: isFirst)
+        changeMatchingRateBgColor(matchingRateBgColor)
         
         matchingRateLabel.setLabel(text: "취향 일치율 \(String(spot.matchingRate))%",
                                    style: .b4)
@@ -146,7 +146,8 @@ extension SpotListCollectionViewCell {
 
 extension SpotListCollectionViewCell {
     
-    private func changeMatchingRateBgColor(isFirst: Bool) {
-        matchingRateView.backgroundColor = isFirst ? .gray9 : .glaB30
+    private func changeMatchingRateBgColor(_ matchingRateBgColor: MatchingRateBgColor) {
+        matchingRateView.backgroundColor = matchingRateBgColor.color
     }
+    
 }
