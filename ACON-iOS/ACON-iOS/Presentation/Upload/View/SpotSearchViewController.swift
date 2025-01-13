@@ -21,6 +21,12 @@ class SpotSearchViewController: BaseNavViewController {
     
     private let spotSearchViewModel = SpotSearchViewModel()
     
+    var completionHandler: ((Int, String) -> Void)?
+    
+    var selectedSpotId: Int = 0
+    
+    var selectedSpotName: String = ""
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -67,6 +73,7 @@ extension SpotSearchViewController {
     
     @objc
     func doneButtonTapped() {
+        completionHandler?(selectedSpotId, selectedSpotName)
         self.dismiss(animated: true)
     }
     
@@ -113,6 +120,13 @@ extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: ScreenUtils.width * 0.112, bottom: 0, right: ScreenUtils.width * 0.112)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedSpotId = spotSearchViewModel.relatedSearchDummyData[indexPath.item].spotID
+        selectedSpotName = spotSearchViewModel.relatedSearchDummyData[indexPath.item].spotName
+        spotSearchView.searchTextField.text = selectedSpotName
+        self.dismissKeyboard()
     }
     
 }

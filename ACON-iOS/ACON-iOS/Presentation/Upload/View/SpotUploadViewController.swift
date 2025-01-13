@@ -17,6 +17,12 @@ class SpotUploadViewController: BaseNavViewController {
     private let spotUploadView = SpotUploadView()
     
     
+    // MARK: - Properties
+    
+    var selectedSpotID: Int = 0
+    
+//    var selectedSpotName: String = ""
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -75,6 +81,16 @@ extension SpotUploadViewController {
     @objc
     func spotSearchButtonTapped() {
         let vc = SpotSearchViewController()
+        // TODO: - 이 부분 로직 및 플로우 다시 짜기 !!
+        vc.completionHandler = { [weak self] selectedSpotID, selectedSpotName in
+            self?.selectedSpotID = selectedSpotID
+//            self?.selectedSpotName = selectedSpotName
+            self?.spotUploadView.spotSearchButton.do {
+                $0.setAttributedTitle(text: selectedSpotName,
+                                      style: .s2,
+                                      color: .acWhite)
+            }
+        }
         // TODO: - set spotsearchvc to modal
         self.present(vc, animated: true)
     }

@@ -9,6 +9,8 @@ import Foundation
 
 class SpotSearchViewModel {
     
+    // TODO: - relatedSearch 엠티뷰와 분기처리 (data.count == 0 ? )
+    
     let relatedSearchDummyData: [RelatedSearchModel] = [
         RelatedSearchModel(spotID: 1, spotName: "1가게명가게명", spotAddress: "서울시 서울구 서울동 123", spotType: "음식점"),
         RelatedSearchModel(spotID: 2, spotName: "2가게명가게명", spotAddress: "서울시 서울구 서울동 123", spotType: "카페"),
