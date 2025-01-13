@@ -17,6 +17,11 @@ class DropAcornViewController: BaseNavViewController {
     private let dropAcornView = DropAcornView()
     
     
+    // MARK: - Properties
+    
+    var reviewAcornCount: Int = 0
+    
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -24,6 +29,7 @@ class DropAcornViewController: BaseNavViewController {
         
         self.setXButton()
         self.setSecondTitleLabelStyle(title: StringLiterals.Upload.upload)
+        addTarget()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +62,11 @@ class DropAcornViewController: BaseNavViewController {
         dropAcornView.leaveReviewButton.addTarget(self,
                                                   action: #selector(leaveReviewButtonTapped),
                                                   for: .touchUpInside)
+        for i in 0...4 {
+            let btn = dropAcornView.acornStackView.arrangedSubviews[i] as? UIButton
+            btn?.tag = i
+            btn?.addTarget(self, action: #selector(reviewAcornButtonTapped(_:)), for: .touchUpInside)
+        }
     }
 
 }
@@ -68,6 +79,30 @@ extension DropAcornViewController {
     @objc
     func leaveReviewButtonTapped() {
         // TODO: - push to reviewFinishVC
+        // TODO: - reviewAcornCount 서버 POST
+    }
+    
+    @objc
+    func reviewAcornButtonTapped(_ sender: UIButton) {
+        let selectedIndex = sender.tag
+        for i in 0...4 {
+            let btn = dropAcornView.acornStackView.arrangedSubviews[i] as? UIButton
+            btn?.isSelected = i <= selectedIndex ? true : false
+        }
+        dropAcornView.acornReviewLabel.text = "\(selectedIndex+1)/5"
+        reviewAcornCount = selectedIndex + 1
+        enableLeaveReviewButton()
+    }
+    
+}
+
+extension DropAcornViewController {
+    
+    func enableLeaveReviewButton() {
+        dropAcornView.leaveReviewButton.do {
+            $0.isEnabled = true
+            $0.backgroundColor = .org0
+        }
     }
     
 }

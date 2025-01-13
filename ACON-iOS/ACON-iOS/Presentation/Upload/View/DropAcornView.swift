@@ -20,9 +20,9 @@ final class DropAcornView: BaseView {
     
     var acornNumberLabel: UILabel = UILabel()
     
-    var acornStackView: UIView = UIView()
+    var acornStackView: UIStackView = UIStackView()
     
-    private let acornReviewLabel: UILabel = UILabel()
+    var acornReviewLabel: UILabel = UILabel()
     
     var leaveReviewButton: UIButton = UIButton()
     
@@ -64,8 +64,9 @@ final class DropAcornView: BaseView {
         
         acornStackView.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(ScreenUtils.height*172/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*76/360)
-            $0.height.equalTo(ScreenUtils.height*40/780)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(208)
+            $0.height.equalTo(40)
         }
         
         acornReviewLabel.snp.makeConstraints {
@@ -103,13 +104,17 @@ final class DropAcornView: BaseView {
                         color: .gray5)
         }
         
-//        acornStackView.do {
-//            $0.addSubview(<#T##view: UIView##UIView#>)
-//            
-//        }
+        acornStackView.do {
+            for _ in 0...4 {
+                let acornImageView = makeAcornImageButton()
+                $0.addArrangedSubview(acornImageView)
+            }
+            $0.spacing = 2
+            $0.axis = .horizontal
+        }
         
         acornReviewLabel.do {
-            $0.setLabel(text: "1/5",
+            $0.setLabel(text: "0/5",
                         style: .b4,
                         color: .gray3)
         }
@@ -123,12 +128,26 @@ final class DropAcornView: BaseView {
                                    style: .h8,
                                   color: .acWhite,
                                   for: .normal)
-            // TODO: - enable 시 backgroundcolor main_org1
             $0.backgroundColor = .gray8
             $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
         }
     }
     
-    
 }
 
+extension DropAcornView {
+    
+    func makeAcornImageButton() -> UIButton {
+        let button = UIButton()
+        button.snp.makeConstraints {
+            $0.width.height.equalTo(40)
+        }
+        button.do {
+            $0.setImage(.icGReview, for: .normal)
+            $0.setImage(.icWReview, for: .selected)
+            $0.contentMode = .scaleAspectFit
+        }
+        return button
+    }
+    
+}

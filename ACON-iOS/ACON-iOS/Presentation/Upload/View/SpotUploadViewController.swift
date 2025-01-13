@@ -72,7 +72,6 @@ extension SpotUploadViewController {
     
     @objc
     func dropAcornButtonTapped() {
-        print("pushted")
         let vc = DropAcornViewController()
         navigationController?.pushViewController(vc, animated: false)
     }
