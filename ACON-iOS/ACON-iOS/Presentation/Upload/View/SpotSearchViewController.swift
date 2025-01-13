@@ -46,6 +46,12 @@ class SpotSearchViewController: BaseNavViewController {
         }
     }
     
+    override func setStyle() {
+        super.setStyle()
+        
+        setRecommendedSpotStackView(data: spotSearchViewModel.recommendedSearchDummyData)
+    }
+    
     func addTarget() {
         spotSearchView.doneButton.addTarget(self,
                                               action: #selector(doneButtonTapped),
@@ -62,6 +68,20 @@ extension SpotSearchViewController {
     @objc
     func doneButtonTapped() {
         self.dismiss(animated: true)
+    }
+    
+}
+
+
+// MARK: - Set UI
+
+private extension SpotSearchViewController {
+    
+    func setRecommendedSpotStackView(data: RecommendedSearchModel) {
+        for i in 0...4 {
+            let button = spotSearchView.makeRecommendedSpotButton(data.spotList[i])
+            spotSearchView.recommendedSpotStackView.addArrangedSubview(button)
+        }
     }
     
 }

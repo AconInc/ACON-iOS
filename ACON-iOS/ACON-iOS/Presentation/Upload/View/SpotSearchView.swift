@@ -28,7 +28,9 @@ final class SpotSearchView: BaseView {
     
     var doneButton: UIButton = UIButton()
     
-    var recentSpotStackView: UIStackView = UIStackView()
+    var recommendedSpotScrollView: UIScrollView = UIScrollView()
+    
+    var recommendedSpotStackView: UIStackView = UIStackView()
 
     var relatedSearchCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: relatedSearchCollectionViewFlowLayout)
     
@@ -57,12 +59,13 @@ final class SpotSearchView: BaseView {
                          spotUploadLabel,
                          searchView,
                          doneButton,
-                         recentSpotStackView,
+                         recommendedSpotScrollView,
                          relatedSearchCollectionView,
                          emptyView)
         searchView.addSubviews(searchImageView,
                                searchTextField,
                                searchXButton)
+        recommendedSpotScrollView.addSubview(recommendedSpotStackView)
         emptyView.addSubviews(emptyImageView, emptyLabel)
     }
     
@@ -96,6 +99,13 @@ final class SpotSearchView: BaseView {
             $0.height.equalTo(24)
         }
         
+        recommendedSpotScrollView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(ScreenUtils.height*150/780)
+            $0.height.equalTo(ScreenUtils.height*28/780)
+            $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.trailing.equalToSuperview()
+        }
+        
         relatedSearchCollectionView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*150/780)
             $0.bottom.equalToSuperview()
@@ -127,6 +137,11 @@ final class SpotSearchView: BaseView {
             $0.trailing.equalToSuperview().inset(ScreenUtils.width*6/360)
             $0.centerY.equalToSuperview()
             $0.width.height.equalTo(24)
+        }
+        
+        recommendedSpotStackView.snp.makeConstraints {
+            $0.edges.equalTo(recommendedSpotScrollView.contentLayoutGuide)
+            $0.height.equalTo(recommendedSpotScrollView.frameLayoutGuide.snp.height)
         }
         
         emptyImageView.snp.makeConstraints {
@@ -170,9 +185,22 @@ final class SpotSearchView: BaseView {
                                   for: .normal)
         }
         
+        recommendedSpotScrollView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.showsHorizontalScrollIndicator = false
+        }
+        
+        recommendedSpotStackView.do {
+            $0.spacing = 8
+            $0.axis = .horizontal
+            $0.distribution = .fill
+            $0.alignment = .center
+        }
+        
         relatedSearchCollectionView.do {
             $0.backgroundColor = .gray9
             $0.isScrollEnabled = true
+            $0.isHidden = true
             // TODO: - 기획 측에 이거 질문
             $0.showsVerticalScrollIndicator = false
         }
@@ -218,6 +246,41 @@ final class SpotSearchView: BaseView {
                         color: .gray4,
                         alignment: .center)
         }
+    }
+    
+}
+
+
+// MARK: - Make RecommendedSpotButton
+
+extension SpotSearchView {
+    
+    func makeRecommendedSpotButton(_ title: String) -> UIButton {
+        let button = UIButton()
+        let recommendedSpotButtonConfiguration: UIButton.Configuration = {
+            var configuration = UIButton.Configuration.plain()
+            configuration.titleAlignment = .center
+            configuration.contentInsets = NSDirectionalEdgeInsets(top: 4,
+                                                                  leading: 12,
+                                                                  bottom: 4,
+                                                                  trailing: 12)
+            return configuration
+        }()
+        button.snp.makeConstraints {
+            $0.height.equalTo(28)
+        }
+        button.do {
+            $0.backgroundColor = .gray8
+            $0.layer.cornerRadius = 14
+            $0.configuration = recommendedSpotButtonConfiguration
+            $0.setAttributedTitle(text: title,
+                                  style: .b2,
+                                  color: .acWhite)
+            $0.titleLabel?.numberOfLines = 1
+            $0.setContentHuggingPriority(.required, for: .horizontal)
+            $0.setContentCompressionResistancePriority(.required, for: .horizontal)
+        }
+        return button
     }
     
 }

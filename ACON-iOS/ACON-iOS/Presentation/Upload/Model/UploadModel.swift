@@ -28,3 +28,13 @@ struct RelatedSearchModel: Equatable {
     }
     
 }
+
+struct RecommendedSearchModel: Equatable {
+    
+    let spotList: [String]
+    
+    init(spotList: [String]) {
+        self.spotList = spotList
+    }
+    
+}

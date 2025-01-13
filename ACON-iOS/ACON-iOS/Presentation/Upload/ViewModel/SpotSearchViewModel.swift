@@ -21,4 +21,7 @@ class SpotSearchViewModel {
         RelatedSearchModel(spotID: 3, spotName: "3가게명가게명", spotAddress: "서울시 서울구 서울동 123", spotType: "음식점"),
         RelatedSearchModel(spotID: 1, spotName: "1가게명가게명", spotAddress: "서울시 서울구 서울동 123", spotType: "음식점"),
     ]
+    
+    let recommendedSearchDummyData: RecommendedSearchModel = RecommendedSearchModel(spotList: ["하이디라오", "신의주찹쌀순대", "뭐시기저시기", "카이센동우니도", "하잉"])
+    
 }
