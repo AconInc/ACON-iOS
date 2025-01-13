@@ -194,7 +194,7 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		1558BADC2D31AB5100ECDEF8 /* Place */ = {
+		1558BADC2D31AB5100ECDEF8 /* SpotList */ = {
 			isa = PBXGroup;
 			children = (
 				1547A8742D354E2900E96616 /* Type */,
@@ -202,7 +202,7 @@
 				1547A6EC2D337FD000E96616 /* View */,
 				1547A8712D34156B00E96616 /* ViewModel */,
 			);
-			path = Place;
+			path = SpotList;
 			sourceTree = "<group>";
 		};
 		1558BADF2D31D41400ECDEF8 /* Profile */ = {
@@ -267,7 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				1558BADF2D31D41400ECDEF8 /* Profile */,
-				1558BADC2D31AB5100ECDEF8 /* Place */,
+				1558BADC2D31AB5100ECDEF8 /* SpotList */,
 				1558BA182D318FDB00ECDEF8 /* TabBar */,
 				748ECA692D31917A00BBC981 /* Login */,
 				748D6FA22D2C3C3D007690B4 /* Base */,
