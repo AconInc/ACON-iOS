@@ -34,7 +34,8 @@ class SpotListViewController: BaseViewController {
 
 extension SpotListViewController {
     
-    @objc private func collectionViewRefreshed() {
+    @objc
+    private func handleRefreshControl() {
         print("refresh control 실행됨")
         
         if !spotListViewModel.secondSpotList.isEmpty {
@@ -43,8 +44,25 @@ extension SpotListViewController {
             // TODO: 네트워크 요청
         }
         
-        spotListView.collectionView.reloadData()
-        spotListView.collectionView.refreshControl?.endRefreshing()
+        DispatchQueue.main.async {
+            // 데이터 리로드 전 애니메이션
+            UIView.animate(withDuration: 0.25, animations: {
+                self.spotListView.collectionView.alpha = 0.5 // 투명도 낮춤
+            }) { _ in
+                // 데이터 리로드
+                self.spotListView.collectionView.reloadData()
+                
+                // 데이터 리로드 후 애니메이션 (천천히 올라오는 애니메이션)
+                UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseOut) {
+                    // Set content offset with slow animation
+                    self.spotListView.collectionView.setContentOffset(.zero, animated: true)
+                    self.spotListView.collectionView.alpha = 1.0 // 투명도 복원
+                } completion: { _ in
+                    // 리프레시 종료
+                    self.spotListView.collectionView.refreshControl?.endRefreshing()
+                }
+            }
+        }
     }
     
 }
@@ -78,7 +96,7 @@ extension SpotListViewController {
         let control = UIRefreshControl()
         
         control.addTarget(self,
-                       action: #selector(collectionViewRefreshed),
+                       action: #selector(handleRefreshControl),
                        for: .valueChanged
             )
         
