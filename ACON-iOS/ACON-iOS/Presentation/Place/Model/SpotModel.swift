@@ -7,22 +7,52 @@
 
 import UIKit
 
+// MARK: - Spot
+
 struct Spot: Equatable {
+    
     let image: UIImage?
     let matchingRate: Int
     let type: String
     let name: String
     let walkingTime: Int
+    
 }
+
+
+// MARK: - Spots
 
 struct Spots {
+    
     let array: [Spot]
+    
 }
 
 
-// MARK: - Dummy data - 삭제 예정
+// MARK: - CollectionView Layout
+
+struct SpotListItemSize {
+    
+    static let minimumLineHeight: CGFloat = 12
+    
+    static let itemWidth: CGFloat = ScreenUtils.width - 40
+    
+    static func longItemHeight(_ collectionViewHeight: CGFloat) -> CGFloat {
+        let shortHeight = shortItemHeight(collectionViewHeight)
+        return collectionViewHeight - shortHeight - 12
+    }
+    
+    static func shortItemHeight(_ collectionViewHeight: CGFloat) -> CGFloat {
+        return (collectionViewHeight - 12 * 3) / 4
+    }
+    
+}
+
+
+// MARK: - Dummy data (삭제 예정)
 
 extension Spots {
+    
     static let dummy: [Spot] = [
         Spot(
             image: .imgEx1,
@@ -67,4 +97,5 @@ extension Spots {
             walkingTime: 5
         )
     ]
+    
 }
