@@ -10,13 +10,8 @@ import UIKit
 class SpotListFilterView: BaseView {
     
     // MARK: - UI Properties
-    // 제목
-    private let titleLabel = UILabel()
     
-    // 방문 장소
-    private let spotStackView = UIStackView()
-    
-    private let spotTitleLabel = UILabel()
+    let spotTypeSegmentControl = UISegmentedControl()
     
     let spotFeatureStackView = SpotFilterTagButtonStackView()
     
@@ -26,35 +21,21 @@ class SpotListFilterView: BaseView {
     // MARK: - Lifecycle
     
     override func setHierarchy() {
-        // 방문 장소
-        self.addSubviews(titleLabel,
-                         spotStackView)
         
-        spotStackView.addArrangedSubviews(spotTitleLabel,
-                                          spotFeatureStackView)
-        
-        // 함께 하는 사람
+        self.addSubviews(spotTypeSegmentControl,
+                         spotFeatureStackView)
         
     }
     
     override func setLayout() {
-        titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(12)
-            $0.centerX.equalToSuperview()
-        }
         
-        spotStackView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(17)
+        spotFeatureStackView.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide).offset(17)
             $0.horizontalEdges.equalToSuperview().inset(20)
         }
     }
     
     override func setStyle() {
-        // 방문 장소
-        spotStackView.do {
-            $0.axis = .vertical
-            $0.spacing = 12
-        }
         
     }
     
