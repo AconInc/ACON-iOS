@@ -36,9 +36,9 @@ final class SpotSearchView: BaseView {
     
     let emptyView: UIView = UIView()
 
-    let emptyImageView: UIImageView = UIImageView()
+    private let emptyImageView: UIImageView = UIImageView()
 
-    let emptyLabel: UILabel = UILabel()
+    private let emptyLabel: UILabel = UILabel()
 
     
     // MARK: - Properties
@@ -193,7 +193,6 @@ final class SpotSearchView: BaseView {
         
         recommendedSpotStackView.do {
             $0.spacing = 8
-            $0.axis = .horizontal
             $0.distribution = .fill
             $0.alignment = .center
         }

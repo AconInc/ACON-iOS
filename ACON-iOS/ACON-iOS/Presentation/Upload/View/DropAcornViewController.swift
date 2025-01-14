@@ -86,7 +86,7 @@ class DropAcornViewController: BaseNavViewController {
     
 // MARK: - @objc functions
 
-extension DropAcornViewController {
+private extension DropAcornViewController {
     
     @objc
     func leaveReviewButtonTapped() {
@@ -114,7 +114,10 @@ extension DropAcornViewController {
     
 }
 
-extension DropAcornViewController {
+
+// MARK: - 버튼
+
+private extension DropAcornViewController {
     
     func enableLeaveReviewButton() {
         dropAcornView.leaveReviewButton.do {

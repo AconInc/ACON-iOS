@@ -65,7 +65,7 @@ class ReviewFinishedViewController: BaseNavViewController {
     
 // MARK: - @objc functions
 
-extension ReviewFinishedViewController {
+private extension ReviewFinishedViewController {
     
     @objc
     func okButtonTapped() {
@@ -77,7 +77,7 @@ extension ReviewFinishedViewController {
 
 // MARK: - Close View
 
-extension ReviewFinishedViewController {
+private extension ReviewFinishedViewController {
     
     @objc
     func closeView() {

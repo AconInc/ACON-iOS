@@ -23,9 +23,9 @@ class SpotSearchViewController: BaseNavViewController {
     
     var completionHandler: ((Int, String) -> Void)?
     
-    var selectedSpotId: Int = 0
+    private var selectedSpotId: Int = 0
     
-    var selectedSpotName: String = ""
+    private var selectedSpotName: String = ""
       
     
     // MARK: - LifeCycle

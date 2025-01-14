@@ -76,7 +76,7 @@ class SpotUploadViewController: BaseNavViewController {
     
 // MARK: - @objc functions
 
-extension SpotUploadViewController {
+private extension SpotUploadViewController {
 
     @objc
     func spotSearchButtonTapped() {
