@@ -34,6 +34,7 @@ class FilterTagButton: UIButton {
     
 }
 
+
 // MARK: - UI Settings
 
 private extension FilterTagButton {
