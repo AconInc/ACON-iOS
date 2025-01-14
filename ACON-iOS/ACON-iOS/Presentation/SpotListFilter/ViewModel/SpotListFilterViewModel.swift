@@ -9,4 +9,10 @@ import Foundation
 
 class SpotListFilterViewModel {
     
+    // MARK: - Properties
+    
+    var spotType: ObservablePattern<SpotType> = ObservablePattern(.restaurant)
+    
+    
+    
 }
