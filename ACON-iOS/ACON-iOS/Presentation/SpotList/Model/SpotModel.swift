@@ -31,7 +31,7 @@ struct Spots {
 
 // MARK: - CollectionView Layout
 
-struct SpotListItemSize {
+struct SpotListItemHeight {
     
     static func longItemHeight(_ collectionViewHeight: CGFloat) -> CGFloat {
         let shortHeight = shortItemHeight(collectionViewHeight)
