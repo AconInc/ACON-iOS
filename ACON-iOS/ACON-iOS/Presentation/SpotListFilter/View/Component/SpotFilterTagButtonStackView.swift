@@ -7,12 +7,6 @@
 
 import UIKit
 
-enum SpotTagButtonStackLine {
-    
-    case first, second
-    
-}
-
 class SpotFilterTagButtonStackView: UIStackView {
     
     // MARK: - UI Properties
@@ -58,7 +52,7 @@ class SpotFilterTagButtonStackView: UIStackView {
 
 extension SpotFilterTagButtonStackView {
     
-    func addTagButton(to line: SpotTagButtonStackLine, button: UIButton) {
+    func addTagButton(to line: FilterTagButtonStackLineType, button: UIButton) {
         switch line {
         case .first:
             firstLineStackView.addArrangedSubview(button)
