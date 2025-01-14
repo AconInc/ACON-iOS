@@ -17,14 +17,24 @@ class SpotListFilterViewController: BaseNavViewController {
     
     // MARK: - LifeCycles
     
-    override func loadView() {
-        view = spotListFilterView
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         bindViewModel()
+    }
+    
+    override func setHierarchy() {
+        super.setHierarchy()
+        
+        contentView.addSubview(spotListFilterView)
+    }
+    
+    override func setLayout() {
+        super.setLayout()
+        
+        spotListFilterView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
 }
@@ -84,7 +94,7 @@ private extension SpotListFilterViewController {
             let btn = FilterTagButton()
             btn.setAttributedTitle(text: feature.text, style: .b3)
             btn.addTarget(self,
-                          action: #selector(didTapFilterTagButton),
+                          action: #selector(didTapFilterTagButton(_:)),
                           for: .touchUpInside)
             
             featureStack.addTagButton(to: .second,
@@ -92,16 +102,17 @@ private extension SpotListFilterViewController {
         }
     }
     
+    
 }
 
 
 // MARK: - @objc functions
 
-private extension SpotListFilterViewController {
+extension SpotListFilterViewController {
     
     @objc
-    func didTapFilterTagButton(button: UIButton) {
-        button.isSelected.toggle()
+    func didTapFilterTagButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
     }
     
 }
