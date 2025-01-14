@@ -67,6 +67,8 @@
 		74B25C2E2D2FEFD3008BDCB7 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C2D2D2FEFD3008BDCB7 /* Debug.xcconfig */; };
 		74B25C302D2FEFE1008BDCB7 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C2F2D2FEFE1008BDCB7 /* Release.xcconfig */; };
 		74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C312D2FF022008BDCB7 /* Shared.xcconfig */; };
+		74CCB0802D36AAA000B254B7 /* LocalVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CCB07F2D36AA8400B254B7 /* LocalVerificationView.swift */; };
+		74CCB0822D36B3B200B254B7 /* LocalVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CCB0812D36B3AA00B254B7 /* LocalVerificationViewController.swift */; };
 		74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */; };
 		74CDCE562D310B1600E3A21A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE552D310B1300E3A21A /* String+.swift */; };
 /* End PBXBuildFile section */
@@ -128,6 +130,8 @@
 		74B25C2D2D2FEFD3008BDCB7 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		74B25C2F2D2FEFE1008BDCB7 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		74B25C312D2FF022008BDCB7 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
+		74CCB07F2D36AA8400B254B7 /* LocalVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationView.swift; sourceTree = "<group>"; };
+		74CCB0812D36B3AA00B254B7 /* LocalVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationViewController.swift; sourceTree = "<group>"; };
 		74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACFontStyleType.swift; sourceTree = "<group>"; };
 		74CDCE552D310B1300E3A21A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,6 +293,7 @@
 		748D6F702D2BCA46007690B4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				74CCB07D2D36AA5000B254B7 /* LocalVerification */,
 				74220DD12D34361E000684BF /* Upload */,
 				1558BADF2D31D41400ECDEF8 /* Profile */,
 				1558BADC2D31AB5100ECDEF8 /* Place */,
@@ -467,6 +472,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		74CCB07D2D36AA5000B254B7 /* LocalVerification */ = {
+			isa = PBXGroup;
+			children = (
+				74CCB07E2D36AA8000B254B7 /* View */,
+			);
+			path = LocalVerification;
+			sourceTree = "<group>";
+		};
+		74CCB07E2D36AA8000B254B7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				74CCB0812D36B3AA00B254B7 /* LocalVerificationViewController.swift */,
+				74CCB07F2D36AA8400B254B7 /* LocalVerificationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -627,6 +649,7 @@
 				748D6FAA2D2C3FF1007690B4 /* BaseCollectionViewCell.swift in Sources */,
 				748ECA6B2D31918D00BBC981 /* LoginView.swift in Sources */,
 				748D6F972D2BD544007690B4 /* DummyType.swift in Sources */,
+				74CCB0822D36B3B200B254B7 /* LocalVerificationViewController.swift in Sources */,
 				74220DD42D34363B000684BF /* SpotUploadViewController.swift in Sources */,
 				741A07592D355F1400778219 /* ReviewFinishedViewController.swift in Sources */,
 				748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */,
@@ -645,6 +668,7 @@
 				748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */,
 				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,
 				744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */,
+				74CCB0802D36AAA000B254B7 /* LocalVerificationView.swift in Sources */,
 				741A06CA2D35415800778219 /* DropAcornViewController.swift in Sources */,
 				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
 				748ECA6E2D3196F100BBC981 /* LoginViewController.swift in Sources */,
