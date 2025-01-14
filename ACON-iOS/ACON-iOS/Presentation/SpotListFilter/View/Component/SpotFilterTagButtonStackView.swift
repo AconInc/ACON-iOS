@@ -33,12 +33,12 @@ class SpotFilterTagButtonStackView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setHierarchy() {
+    private func setHierarchy() {
         self.addArrangedSubviews(firstLineStackView,
                                  secondLineStackView)
     }
     
-    func setStyle() {
+    private func setStyle() {
         self.alignment = .leading
         self.axis = .vertical
         self.spacing = 5
@@ -69,6 +69,13 @@ extension SpotFilterTagButtonStackView {
     func clearStackView() {
         clearStackView(from: firstLineStackView)
         clearStackView(from: secondLineStackView)
+    }
+    
+    func addEmptyView() {
+        let emptyView = UIView()
+        emptyView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        firstLineStackView.addArrangedSubview(emptyView)
+        secondLineStackView.addArrangedSubview(emptyView)
     }
     
     private func clearStackView(from stackView: UIStackView) {
