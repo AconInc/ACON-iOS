@@ -18,7 +18,7 @@ final class DislikeCollectionView: UICollectionView {
         ("곱창/대창/막창", UIImage(named: "IntestinesCombo") ?? UIImage(systemName: "photo")),
         ("순대/선지", UIImage(named: "BloodSausageSoup") ?? UIImage(systemName: "photo")),
         ("양고기", UIImage(named: "Lamb") ?? UIImage(systemName: "photo")),
-        ("없음", UIImage(named: "None") ?? UIImage(systemName: "photo"))
+        ("없음", UIImage(named: "Onboarding/none") ?? UIImage(systemName: "photo"))
     ]
     
     var selectedIndices: [String] = [] {

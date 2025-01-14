@@ -277,7 +277,20 @@ final class OnboardingViewController: UIViewController {
     
     
     @objc private func nextButtonTapped() {
-        guard currentStep < progressNumberList.count - 1 else { return }
+        if currentStep >= progressNumberList.count - 1 {
+            
+            // 확인용
+              print("Disliked Foods: \(String(describing: viewModel.dislike.value))")
+              print("Favorite Cuisines: \(String(describing: viewModel.favoriteCuisne.value))")
+              print("Favorite Spot Type: \(viewModel.favoriteSpotType.value ?? "None")")
+              print("Favorite Spot Style: \(viewModel.favoriteSpotStyle.value ?? "None")")
+              print("Favorite Spot Rank: \(String(describing: viewModel.favoriteSpotRank.value))")
+              
+              let analyzingVC = AnalyzingViewController()
+              analyzingVC.modalPresentationStyle = .fullScreen
+              present(analyzingVC, animated: true, completion: nil)
+              return
+          }
         
         if isOverlayVisible {
             hideOverlay()
