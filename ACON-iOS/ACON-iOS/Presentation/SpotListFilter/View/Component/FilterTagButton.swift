@@ -13,6 +13,7 @@ class FilterTagButton: UIButton {
     
     override var isSelected: Bool {
         didSet {
+            print("button isSelected")
             configuration?.baseBackgroundColor = isSelected ? .subOrg35 : .gray8
             configuration?.background.strokeColor = isSelected ? .org1 : .gray6
         }
@@ -31,10 +32,13 @@ class FilterTagButton: UIButton {
         super.init(coder: coder)
     }
     
+}
+
+// MARK: - UI Settings
+
+private extension FilterTagButton {
     
-    // MARK: - UI Settings
-    
-    private func configureButton() {
+    func configureButton() {
         var config = UIButton.Configuration.filled()
         config.baseBackgroundColor = .gray8
         config.baseForegroundColor = .acWhite
