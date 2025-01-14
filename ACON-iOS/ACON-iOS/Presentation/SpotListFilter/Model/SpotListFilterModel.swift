@@ -9,6 +9,7 @@ import Foundation
 
 struct SpotListFilterModel {
     
+    // TODO: Type에 포함시키는 방향으로 수정
     struct RestaurantFeature {
         
         static let firstLine: [SpotType.RestaurantFeatureType] = [
