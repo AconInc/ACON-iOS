@@ -53,7 +53,6 @@ private extension FilterTagButton {
                                                        trailing: 16)
         
         self.configuration = config
-        
     }
     
 }
