@@ -29,23 +29,6 @@ struct Spots {
 }
 
 
-// MARK: - CollectionView Layout
-
-struct SpotListItemHeight {
-    
-    static func longItemHeight(_ collectionViewHeight: CGFloat) -> CGFloat {
-        let shortHeight = shortItemHeight(collectionViewHeight)
-        return collectionViewHeight - shortHeight - 12
-    }
-    
-    static func shortItemHeight(_ collectionViewHeight: CGFloat) -> CGFloat {
-        let lineSpacing = SpotListItemSizeType.minimumLineSpacing.value
-        return (collectionViewHeight - lineSpacing * 3) / 4
-    }
-    
-}
-
-
 // MARK: - Dummy data (삭제 예정)
 
 extension Spots {

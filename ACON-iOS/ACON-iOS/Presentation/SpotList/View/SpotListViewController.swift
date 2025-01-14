@@ -121,6 +121,9 @@ extension SpotListViewController {
     
 }
 
+
+// MARK: - CollectionViewDataSource
+
 extension SpotListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -152,6 +155,9 @@ extension SpotListViewController: UICollectionViewDataSource {
     
 }
 
+
+// MARK: - CollectionViewDelegate
+
 extension SpotListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView,
@@ -163,8 +169,8 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
         
         let width: CGFloat = SpotListItemSizeType.itemWidth.value
         let collectionViewHeight: CGFloat = collectionView.frame.height
-        let shortHeight: CGFloat = SpotListItemHeight.shortItemHeight(collectionViewHeight)
-        let longHeight: CGFloat = SpotListItemHeight.longItemHeight(collectionViewHeight)
+        let shortHeight: CGFloat = shortItemHeight(collectionViewHeight)
+        let longHeight: CGFloat = longItemHeight(collectionViewHeight)
         
         if isFirstPage,
            indexPath.item == 0 {
@@ -172,6 +178,23 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
         } else {
             return CGSize(width: width, height: shortHeight)
         }
+    }
+    
+}
+
+
+// MARK: - CollectionView ItemSize Method
+
+extension SpotListViewController {
+    
+    func longItemHeight(_ collectionViewHeight: CGFloat) -> CGFloat {
+        let shortHeight = shortItemHeight(collectionViewHeight)
+        return collectionViewHeight - shortHeight - 12
+    }
+    
+    func shortItemHeight(_ collectionViewHeight: CGFloat) -> CGFloat {
+        let lineSpacing = SpotListItemSizeType.minimumLineSpacing.value
+        return (collectionViewHeight - lineSpacing * 3) / 4
     }
     
 }
