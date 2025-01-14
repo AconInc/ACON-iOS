@@ -20,6 +20,7 @@ class SpotFilterTagButtonStackView: UIStackView {
     private let firstLineStackView = UIStackView()
     private let secondLineStackView = UIStackView()
     
+    
     // MARK: - LifeCycle
     
     override init(frame: CGRect) {

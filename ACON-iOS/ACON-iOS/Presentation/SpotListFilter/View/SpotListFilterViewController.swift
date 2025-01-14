@@ -104,13 +104,12 @@ private extension SpotListFilterViewController {
         featureStack.addEmptyView()
     }
     
-    
 }
 
 
 // MARK: - @objc functions
 
-extension SpotListFilterViewController {
+private extension SpotListFilterViewController {
     
     @objc
     func didTapFilterTagButton(_ sender: UIButton) {
