@@ -100,6 +100,8 @@ private extension SpotListFilterViewController {
             featureStack.addTagButton(to: .second,
                                       button: btn)
         }
+        
+        featureStack.addEmptyView()
     }
     
     
