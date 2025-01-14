@@ -15,19 +15,20 @@ class SpotListFilterView: BaseView {
     
     let spotFeatureStackView = SpotFilterTagButtonStackView()
     
-    // 함께 하는 사람
+    // TODO: 함께 하는 사람, 방문 목적, 도보 가능 거리, 가격대
     
     
     // MARK: - Lifecycle
     
     override func setHierarchy() {
+        super.setHierarchy()
         
         self.addSubviews(spotTypeSegmentControl,
                          spotFeatureStackView)
-        
     }
     
     override func setLayout() {
+        super.setLayout()
         
         spotFeatureStackView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(17)
@@ -36,7 +37,9 @@ class SpotListFilterView: BaseView {
     }
     
     override func setStyle() {
+        super.setStyle()
         
+        // TODO: 추후 추가 예정
     }
     
 }
