@@ -97,7 +97,7 @@ enum StringLiterals {
     
     enum LocalVerification {
         
-        static let needLocalVerification = "로컬 맛집 추천을 위해\n지역 인증이 필요해요"
+        static let needLocalVerification = "로컬 맛집 추천을 위해\n지역 인증이 필요해요."
         
         static let doLocalVerification = "자주 가는 동네로 지역 인증을 해보세요"
         
@@ -107,6 +107,9 @@ enum StringLiterals {
         
         static let next = "다음"
         
+        static let finishVerification = "인증완료"
+        
+        static let letsStart = "시작하기"
     }
     
 }

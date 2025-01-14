@@ -69,6 +69,8 @@
 		74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C312D2FF022008BDCB7 /* Shared.xcconfig */; };
 		74CCB0802D36AAA000B254B7 /* LocalVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CCB07F2D36AA8400B254B7 /* LocalVerificationView.swift */; };
 		74CCB0822D36B3B200B254B7 /* LocalVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CCB0812D36B3AA00B254B7 /* LocalVerificationViewController.swift */; };
+		74CCB0842D36C43C00B254B7 /* LocalMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CCB0832D36C43400B254B7 /* LocalMapView.swift */; };
+		74CCB0862D36D4AA00B254B7 /* LocalMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CCB0852D36D4A400B254B7 /* LocalMapViewController.swift */; };
 		74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */; };
 		74CDCE562D310B1600E3A21A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE552D310B1300E3A21A /* String+.swift */; };
 /* End PBXBuildFile section */
@@ -132,6 +134,8 @@
 		74B25C312D2FF022008BDCB7 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
 		74CCB07F2D36AA8400B254B7 /* LocalVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationView.swift; sourceTree = "<group>"; };
 		74CCB0812D36B3AA00B254B7 /* LocalVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationViewController.swift; sourceTree = "<group>"; };
+		74CCB0832D36C43400B254B7 /* LocalMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMapView.swift; sourceTree = "<group>"; };
+		74CCB0852D36D4A400B254B7 /* LocalMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMapViewController.swift; sourceTree = "<group>"; };
 		74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACFontStyleType.swift; sourceTree = "<group>"; };
 		74CDCE552D310B1300E3A21A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -483,6 +487,8 @@
 		74CCB07E2D36AA8000B254B7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				74CCB0852D36D4A400B254B7 /* LocalMapViewController.swift */,
+				74CCB0832D36C43400B254B7 /* LocalMapView.swift */,
 				74CCB0812D36B3AA00B254B7 /* LocalVerificationViewController.swift */,
 				74CCB07F2D36AA8400B254B7 /* LocalVerificationView.swift */,
 			);
@@ -642,9 +648,11 @@
 				748D6FA82D2C3F93007690B4 /* BaseViewController.swift in Sources */,
 				748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */,
 				748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */,
+				74CCB0862D36D4AA00B254B7 /* LocalMapViewController.swift in Sources */,
 				748D6F872D2BD247007690B4 /* UIView+.swift in Sources */,
 				74CDCE562D310B1600E3A21A /* String+.swift in Sources */,
 				748D6F8B2D2BD31B007690B4 /* UIStackView+.swift in Sources */,
+				74CCB0842D36C43C00B254B7 /* LocalMapView.swift in Sources */,
 				748D6F912D2BD450007690B4 /* UILabel+.swift in Sources */,
 				748D6FAA2D2C3FF1007690B4 /* BaseCollectionViewCell.swift in Sources */,
 				748ECA6B2D31918D00BBC981 /* LoginView.swift in Sources */,

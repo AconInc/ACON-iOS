@@ -70,14 +70,15 @@ private extension LocalVerificationViewController {
     @objc
     func verifyLocationButtonTapped() {
         localVerificationView.verifyNewLocalButton.isSelected.toggle()
-        localVerificationView.nextButton.isEnabled = localVerificationView.verifyNewLocalButton.isSelected
-        localVerificationView.nextButton.backgroundColor = localVerificationView.verifyNewLocalButton.isSelected ? .gray5 : .gray8
+        let isSelected = localVerificationView.verifyNewLocalButton.isSelected
+        localVerificationView.verifyNewLocalButton.configuration?.baseBackgroundColor = isSelected ? .gray7 : .gray9
+        localVerificationView.nextButton.isEnabled = isSelected
+        localVerificationView.nextButton.backgroundColor = isSelected ? .gray5 : .gray8
     }
     
     @objc
     func nextButtonTapped() {
-        // TODO: - push to map
-        let vc = ViewController()
+        let vc = LocalMapViewController()
         navigationController?.pushViewController(vc, animated: false)
     }
     
