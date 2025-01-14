@@ -12,6 +12,7 @@ protocol ACLocationManagerDelegate: AnyObject {
     
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D)
     func locationManager(_ manager: ACLocationManager, didFailWithError error: Error, vc: UIViewController?)
+    func locationManagerDidChangeAuthorization(_ manager: ACLocationManager)
     
 }
 
@@ -23,13 +24,19 @@ extension ACLocationManagerDelegate {
                              message: StringLiterals.Alert.notLocatedMessage)
     }
     
+    func locationManagerDidChangeAuthorization(_ manager: ACLocationManager) {
+        if manager.locationManager.authorizationStatus == .authorizedWhenInUse || manager.locationManager.authorizationStatus == .authorizedAlways {
+            manager.locationManager.requestLocation()
+        }
+    }
+    
 }
 
 class ACLocationManager: NSObject {
     
     static let shared = ACLocationManager()
     
-    private let locationManager = CLLocationManager()
+    let locationManager = CLLocationManager()
     private let multicastDelegate = MulticastDelegate<ACLocationManagerDelegate>()
     
     private override init() {
@@ -97,10 +104,6 @@ class ACLocationManager: NSObject {
         }
     }
     
-    func locationManagerDidChangeAuthorization(_ manager: ACLocationManager) {
-        checkUserDeviceLocationServiceAuthorization()
-    }
-    
 }
 
 extension ACLocationManager: CLLocationManagerDelegate {
@@ -120,8 +123,10 @@ extension ACLocationManager: CLLocationManagerDelegate {
         }
     }
     
-    func locationManagerDidChangeAuthorization(_ manager: ACLocationManager, vc: UIViewController) {
-        checkUserDeviceLocationServiceAuthorization()
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        multicastDelegate.invoke { delegate in
+            delegate.locationManagerDidChangeAuthorization(self)
+        }
     }
     
 }

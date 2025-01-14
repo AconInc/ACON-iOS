@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 import SnapKit
 import Then
@@ -32,7 +33,12 @@ class SpotUploadViewController: BaseNavViewController {
         self.setXButton()
         self.setSecondTitleLabelStyle(title: StringLiterals.Upload.upload)
         addTarget()
+        ACLocationManager.shared.addDelegate(self)
     }
+    
+    deinit {
+       ACLocationManager.shared.removeDelegate(self)
+   }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
@@ -82,6 +88,36 @@ private extension SpotUploadViewController {
     @objc
     func spotSearchButtonTapped() {
         // TODO: - 위치 접근 권한 체크하기
+        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
+    }
+    
+    @objc
+    func dropAcornButtonTapped() {
+        let vc = DropAcornViewController()
+        navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    @objc
+    func xButtonTapped() {
+        // TODO: 작성을 그만두시겠습니까 Alert 띄우기
+    }
+    
+}
+
+extension SpotUploadViewController: ACLocationManagerDelegate {
+    
+    func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
+        // TODO: - 연관검색어 네트워크 요청
+        print("성공 - 위도: \(coordinate.latitude), 경도: \(coordinate.longitude)")
+        setSpotSearchModal()
+    }
+    
+}
+
+
+extension SpotUploadViewController {
+    
+    func setSpotSearchModal() {
         let vc = SpotSearchViewController()
         
         vc.dismissCompletion = { [weak self] in
@@ -116,21 +152,4 @@ private extension SpotUploadViewController {
         self.present(vc, animated: true)
     }
     
-    @objc
-    func dropAcornButtonTapped() {
-        let vc = DropAcornViewController()
-        navigationController?.pushViewController(vc, animated: false)
-    }
-    
-    @objc
-    func xButtonTapped() {
-        // TODO: 작성을 그만두시겠습니까 Alert 띄우기
-    }
-    
-}
-
-extension SpotUploadViewController: UIAdaptivePresentationControllerDelegate {
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        self.removeBlurView()
-    }
 }

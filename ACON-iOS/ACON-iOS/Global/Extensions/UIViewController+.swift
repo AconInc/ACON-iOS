@@ -77,7 +77,6 @@ extension UIViewController {
     }
     
     func removeBlurView() {
-        print("blurrr")
         UIView.animate(withDuration: 1.0) {
             if let blurView = self.view.viewWithTag(200) {
                 blurView.removeFromSuperview()
