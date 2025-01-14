@@ -289,6 +289,7 @@
 		748D6F702D2BCA46007690B4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				D6D0F4FC2D36B8D300326F17 /* OnBoarding */,
 				74220DD12D34361E000684BF /* Upload */,
 				1558BADF2D31D41400ECDEF8 /* Profile */,
 				1558BADC2D31AB5100ECDEF8 /* Place */,
@@ -465,6 +466,45 @@
 				74AB6EB02D2796D30094F873 /* ACON-iOS.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D6D0F4FC2D36B8D300326F17 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				D6D0F5002D36B95400326F17 /* Model */,
+				D6D0F4FE2D36B94800326F17 /* ViewModel */,
+				D6D0F4FD2D36B91100326F17 /* View */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		D6D0F4FD2D36B91100326F17 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D6D0F5012D36B95B00326F17 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D6D0F4FE2D36B94800326F17 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D6D0F5002D36B95400326F17 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D6D0F5012D36B95B00326F17 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
