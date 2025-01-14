@@ -38,8 +38,8 @@ final class FavoriteCuisineCollectionViewCell: BaseCollectionViewCell {
         }
         
         titleLabel.do {
-            $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-            $0.textColor = .black
+            $0.font = ACFont.s2.font
+            $0.textColor = .acWhite
             $0.textAlignment = .center
         }
         

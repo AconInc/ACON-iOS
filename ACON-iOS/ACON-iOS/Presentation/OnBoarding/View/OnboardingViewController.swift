@@ -7,18 +7,14 @@
 
 import SwiftUI
 import UIKit
+
 import SnapKit
 import Then
-
-let customBlueColor = UIColor(red: 172/255.0, green: 203/255.0, blue: 255/255.0, alpha: 1.0)
-let customBackgroundColor = UIColor(red: 247/255.0, green: 247/255.0, blue: 251/255.0, alpha: 1.0)
-let BgColor = UIColor(red: 26/255.0, green: 27/255.0, blue: 29/255.0, alpha: 1.0)
 
 final class OnboardingViewController: UIViewController {
     
     let viewModel = OnboardingViewModel()
     
-    private let navigationBar = UIView()
     private let backButton = UIButton()
     private let skipButton = UIButton()
     private let progressView = UIView()
@@ -26,6 +22,10 @@ final class OnboardingViewController: UIViewController {
     private let nextButton = UIButton()
     private let progressNumber = UILabel()
     private let progressTitle = UILabel()
+    private let overlayView: UIView = UIView()
+    private var isOverlayVisible = false
+    var currentStep = 0
+
     
     private let progressNumberList = ["01", "02", "03", "04", "05"]
     private let progressTitleList = [
@@ -42,12 +42,10 @@ final class OnboardingViewController: UIViewController {
     private let favoriteSpotTypeCollectionView = FavoriteSpotTypeCollectionView()
     private let favoriteSpotStyleCollectionView = FavoriteSpotStyleCollectionView()
     private let favoriteSpotRankCollectionView = FavoriteSpotRankCollectionView()
-    
-    var currentStep = 0
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = BgColor
+        view.backgroundColor = .gray9
         setStyle()
         setHierarchy()
         setLayout()
@@ -56,20 +54,24 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func setStyle() {
-        navigationBar.do {
-            $0.backgroundColor = .white
+        
+        overlayView.do {
+            $0.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+            $0.isHidden = true
         }
         
         backButton.do {
             $0.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-            $0.tintColor = .black
+            $0.tintColor = .acWhite
             $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         }
         
         skipButton.do {
             $0.setTitle("건너뛰기", for: .normal)
-            $0.setTitleColor(.black, for: .normal)
-            $0.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+            $0.setTitleColor(.acWhite, for: .normal)
+            $0.titleLabel?.font = ACFont.b2.font
+            $0.addTarget(self, action: #selector(nextStack), for: .touchUpInside)
+
         }
         
         progressView.do {
@@ -81,21 +83,22 @@ final class OnboardingViewController: UIViewController {
         }
         
         progressNumber.do {
-            $0.font = UIFont.systemFont(ofSize: 30, weight: .bold)
-            $0.textColor = .gray
+            $0.font = ACFont.h4.font
+            $0.textColor = .gray5
         }
         
         progressTitle.do {
-            $0.font = UIFont.systemFont(ofSize: 30, weight: .bold)
-            $0.textColor = .black
+            $0.font = ACFont.h6.font
+            $0.textColor = .acWhite
             $0.numberOfLines = 0
             $0.lineBreakMode = .byWordWrapping
         }
         
         nextButton.do {
+            $0.backgroundColor = .gray8
             $0.setTitle("다음", for: .normal)
-            $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-            $0.backgroundColor = .lightGray
+            $0.setTitleColor(.gray6, for: .normal)
+            $0.titleLabel?.font = ACFont.h8.font
             $0.layer.cornerRadius = 8
             $0.isEnabled = false
             $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
@@ -103,35 +106,30 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func setHierarchy() {
-        view.addSubview(navigationBar)
-        navigationBar.addSubview(backButton)
-        navigationBar.addSubview(skipButton)
-        view.addSubview(progressView)
+        view.addSubviews(backButton,skipButton,progressView,progressNumber,progressTitle,overlayView,nextButton)
+
         progressView.addSubview(progressIndicator)
-        view.addSubview(progressNumber)
-        view.addSubview(progressTitle)
-        view.addSubview(nextButton)
     }
     
     private func setLayout() {
-        navigationBar.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(56)
+        
+        overlayView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
         backButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(16)
-            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             $0.size.equalTo(CGSize(width: 24, height: 24))
         }
         
         skipButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().offset(-16)
-            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
         }
         
         progressView.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.bottom).offset(9)
+            $0.top.equalTo(backButton.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(2)
         }
@@ -160,7 +158,9 @@ final class OnboardingViewController: UIViewController {
     
     private func updateNextButtonState(isEnabled: Bool) {
         nextButton.isEnabled = isEnabled
-        nextButton.backgroundColor = isEnabled ? .orange : .lightGray
+        nextButton.backgroundColor = isEnabled ? .gray5 : .gray8
+        nextButton.setTitleColor(isEnabled ? .acWhite : .gray6, for: .normal)
+        
     }
     
     private func setBinding() {
@@ -169,28 +169,28 @@ final class OnboardingViewController: UIViewController {
             print("Disliked Foods: \(dislikedFoods ?? [])")
             self?.updateNextButtonState(isEnabled: !(dislikedFoods?.isEmpty ?? true))
         }
-
+        
         viewModel.favoriteCuisne.bind { [weak self] cuisines in
             print("Favorite Cuisines: \(cuisines ?? [])")
             self?.updateNextButtonState(isEnabled: cuisines?.count == 3)
         }
-
+        
         viewModel.favoriteSpotType.bind { [weak self] spotType in
             print("Favorite Spot Type: \(spotType ?? "None")")
             self?.updateNextButtonState(isEnabled: spotType != nil)
         }
-
+        
         viewModel.favoriteSpotStyle.bind { [weak self] spotStyle in
             print("Favorite Spot Style: \(spotStyle ?? "None")")
             self?.updateNextButtonState(isEnabled: spotStyle != nil)
         }
-
+        
         viewModel.favoriteSpotRank.bind { [weak self] ranks in
             print("Favorite Spot Rank: \(ranks ?? [])")
             self?.updateNextButtonState(isEnabled: ranks?.count == 4)
         }
     }
-
+    
     
     private func updateContentView(for step: Int) {
         contentView?.removeFromSuperview()
@@ -199,13 +199,13 @@ final class OnboardingViewController: UIViewController {
         case 0:
             setupDislikeCollectionView()
         case 1:
-            setupFavoriteCuisineCollectionView()
+            setFavoriteCuisineCollectionView()
         case 2:
-            setupFavoriteSpotTypeCollectionView()
+            setFavoriteSpotTypeCollectionView()
         case 3:
-            setupFavoriteSpotStyleCollectionView()
+            setFavoriteSpotStyleCollectionView()
         case 4:
-            setupFavoriteSpotRankCollectionView()
+            setFavoriteSpotRankCollectionView()
         default:
             contentView = nil
         }
@@ -226,45 +226,64 @@ final class OnboardingViewController: UIViewController {
     private func setupDislikeCollectionView() {
         contentView = dislikeCollectionView
         dislikeCollectionView.onSelectionChanged = { [weak self] selectedIndices in
-            self?.viewModel.dislike.value = selectedIndices
+            guard let self = self else { return }
+                        
+            if selectedIndices.map({ $0.uppercased() }) == ["NONE"] {
+                self.isOverlayVisible.toggle()
+                if self.isOverlayVisible {
+                    self.showOverlay()
+                } else {
+                    self.hideOverlay()
+                }
+            } else {
+                self.hideOverlay()
+                self.isOverlayVisible = false
+            }
+            
+            self.viewModel.dislike.value = selectedIndices
         }
     }
-
     
-    private func setupFavoriteCuisineCollectionView() {
+    private func setFavoriteCuisineCollectionView() {
         contentView = favoriteCuisineCollectionView
         favoriteCuisineCollectionView.onSelectionChanged = { [weak self] selectedIndices in
             self?.viewModel.favoriteCuisne.value = selectedIndices
         }
     }
-
     
-    private func setupFavoriteSpotTypeCollectionView() {
+    
+    private func setFavoriteSpotTypeCollectionView() {
         contentView = favoriteSpotTypeCollectionView
         favoriteSpotTypeCollectionView.onSelectionChanged = { [weak self] selectedType in
             self?.viewModel.favoriteSpotType.value = selectedType
         }
     }
-
     
-    private func setupFavoriteSpotStyleCollectionView() {
+    
+    private func setFavoriteSpotStyleCollectionView() {
         contentView = favoriteSpotStyleCollectionView
         favoriteSpotStyleCollectionView.onSelectionChanged = { [weak self] selectedStyle in
             self?.viewModel.favoriteSpotStyle.value = selectedStyle
         }
     }
-
     
-    private func setupFavoriteSpotRankCollectionView() {
+    
+    private func setFavoriteSpotRankCollectionView() {
         contentView = favoriteSpotRankCollectionView
         favoriteSpotRankCollectionView.onSelectionChanged = { [weak self] selectedIndices in
             self?.viewModel.favoriteSpotRank.value = selectedIndices
         }
     }
-
+    
     
     @objc private func nextButtonTapped() {
         guard currentStep < progressNumberList.count - 1 else { return }
+        
+        if isOverlayVisible {
+            hideOverlay()
+            isOverlayVisible = false
+        }
+        
         currentStep += 1
         updateContentView(for: currentStep)
         updateNextButtonState(isEnabled: false)
@@ -277,6 +296,26 @@ final class OnboardingViewController: UIViewController {
         updateContentView(for: currentStep)
         updateNextButtonState(isEnabled: true)
         updateProgressIndicator()
+    }
+    
+    @objc private func nextStack(){
+        // MARK : TODO -> Popup alert
+        print("alert")
+    }
+    
+    private func showOverlay() {
+        overlayView.isHidden = false
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.overlayView.alpha = 1.0
+        }
+    }
+    
+    private func hideOverlay() {
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            self?.overlayView.alpha = 0.0
+        }) { [weak self] _ in
+            self?.overlayView.isHidden = true
+        }
     }
     
     private func updateProgressIndicator() {
