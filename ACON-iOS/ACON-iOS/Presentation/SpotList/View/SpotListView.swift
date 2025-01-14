@@ -29,7 +29,7 @@ class SpotListView: BaseView {
         super.setLayout()
         
         collectionView.snp.makeConstraints {
-            $0.edges.equalTo(self.safeAreaLayoutGuide)
+            $0.edges.equalToSuperview()
         }
     }
     
