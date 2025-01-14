@@ -40,6 +40,10 @@ enum SpotType {
             }
         }
         
+        var firstLineCount: Int {
+            return 5
+        }
+        
     }
     
     enum CafeFeatureType {
@@ -54,6 +58,10 @@ enum SpotType {
             case .terace: return "테라스"
             case .excludeFranchise: return "프랜차이즈 제외"
             }
+        }
+        
+        var firstLineCount: Int {
+            return 4
         }
         
     }
