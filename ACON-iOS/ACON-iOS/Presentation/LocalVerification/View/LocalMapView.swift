@@ -7,6 +7,7 @@
 
 import UIKit
 
+import NMapsMap
 import SnapKit
 import Then
 
@@ -14,7 +15,7 @@ final class LocalMapView: BaseView {
 
     // MARK: - UI Properties
     
-    let localMapImageView: UIImageView = UIImageView()
+    let nMapView: NMFNaverMapView = NMFNaverMapView()
     
     var finishVerificationButton: UIButton = UIButton()
 
@@ -23,14 +24,14 @@ final class LocalMapView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(localMapImageView,
+        self.addSubviews(nMapView,
                          finishVerificationButton)
     }
     
     override func setLayout() {
         super.setLayout()
         
-        localMapImageView.snp.makeConstraints {
+        nMapView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
             $0.height.equalTo(ScreenUtils.height*564/780)
         }
@@ -46,8 +47,15 @@ final class LocalMapView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        localMapImageView.do {
-            $0.backgroundColor = .gray
+        nMapView.do {
+            $0.showLocationButton = true
+            $0.showZoomControls = false
+            $0.showScaleBar = false
+            $0.showCompass = false
+            $0.mapView.positionMode = .normal
+            $0.mapView.zoomLevel = 17
+            $0.mapView.minZoomLevel = 14
+            $0.mapView.maxZoomLevel = 18
         }
         
         finishVerificationButton.do {
