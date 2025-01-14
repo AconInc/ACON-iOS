@@ -105,7 +105,6 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         }
         
         timeInfoStackView.do {
-            $0.axis = .horizontal
             $0.spacing = 0
         }
         
@@ -127,7 +126,10 @@ extension SpotListCollectionViewCell {
         
         changeMatchingRateBgColor(matchingRateBgColor)
         
-        matchingRateLabel.setLabel(text: "취향 일치율 \(String(spot.matchingRate))%",
+        
+        let matchingRateHead = StringLiterals.SpotList.matchingRate
+        let matchingRateStringSet = matchingRateHead + " " + String(spot.matchingRate) + "%"
+        matchingRateLabel.setLabel(text: matchingRateStringSet,
                                    style: .b4)
         
         typeLabel.setLabel(text: spot.type,
