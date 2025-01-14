@@ -59,4 +59,40 @@ enum StringLiterals {
         
     }
     
+    enum Upload {
+        
+        static let upload = "업로드"
+        
+        static let spotUpload = "장소 등록"
+        
+        static let spotUpload2 = "장소등록"
+        
+        static let uploadSpotName = "가게명 등록하기"
+        
+        static let dropAcornsHere = "이곳에 도토리 남기기"
+        
+        static let shallWeDropAcorns = "이제 도토리를\n떨어트려볼까요?"
+
+        static let useAcornToReview = "도토리를 사용해 리뷰를 남겨주세요."
+        
+        static let acornsIHave = "보유한 도토리 수"
+        
+        static let reviewWithAcornsHere = "도토리로 리뷰남기기"
+        
+        static let finishedReview = "가게명에 대한\n리뷰 작성을 완료했어요!"
+        
+        static let wishYouPreference = "당신의 취향이 가득 담긴 장소였길 바라요."
+        
+        static let closeAfterFiveSeconds = "5초 후 탭이 자동으로 닫힙니다."
+        
+        static let ok = "확인"
+        
+        static let done = "완료"
+        
+        static let searchSpot = "가게명을 검색해주세요"
+        
+        static let noMatchingSpots = "앗! 일치하는 장소가 없어요."
+        
+    }
+    
 }
