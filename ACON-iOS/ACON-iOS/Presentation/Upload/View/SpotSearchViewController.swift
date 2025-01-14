@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-class SpotSearchViewController: BaseNavViewController {
+class SpotSearchViewController: BaseViewController {
     
     // MARK: - UI Properties
     
@@ -39,10 +39,19 @@ class SpotSearchViewController: BaseNavViewController {
         setDelegate()
     }
     
+    var dismissCompletion: (() -> Void)?
+        
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isBeingDismissed {
+            dismissCompletion?()
+        }
+    }
+    
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.contentView.addSubview(spotSearchView)
+        self.view.addSubview(spotSearchView)
     }
     
     override func setLayout() {
@@ -56,6 +65,8 @@ class SpotSearchViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
+        self.view.backgroundColor = .glaW10
+        self.view.backgroundColor?.withAlphaComponent(0.95)
         setRecommendedSpotStackView(data: spotSearchViewModel.recommendedSearchDummyData)
     }
     

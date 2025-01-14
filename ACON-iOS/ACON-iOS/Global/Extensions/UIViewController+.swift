@@ -62,4 +62,27 @@ extension UIViewController {
         }
     }
     
+    
+    //MARK: - Blur View Add & Remove
+    
+    func addBlurView(){
+        UIView.animate(withDuration: 1.0, animations: {
+            let viewBlurEffect = UIVisualEffectView()
+            viewBlurEffect.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+            
+            self.view.addSubview(viewBlurEffect)
+            viewBlurEffect.frame = self.view.bounds
+            viewBlurEffect.tag = 200
+        })
+    }
+    
+    func removeBlurView() {
+        print("blurrr")
+        UIView.animate(withDuration: 1.0) {
+            if let blurView = self.view.viewWithTag(200) {
+                blurView.removeFromSuperview()
+            }
+        }
+    }
+    
 }

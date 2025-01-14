@@ -160,6 +160,9 @@ final class SpotSearchView: BaseView {
     override func setStyle() {
         super.setStyle()
         
+        self.backgroundColor = .glaW10
+        self.backgroundColor?.withAlphaComponent(0.95)
+        
         handlerImageView.do {
             $0.image = .btnBottomsheetBar
             $0.contentMode = .scaleAspectFit
@@ -198,7 +201,7 @@ final class SpotSearchView: BaseView {
         }
         
         relatedSearchCollectionView.do {
-            $0.backgroundColor = .gray9
+            $0.backgroundColor = .clear
             $0.isScrollEnabled = true
             $0.isHidden = true
             // TODO: - 기획 측에 이거 질문

@@ -58,7 +58,7 @@ final class RelatedSearchCollectionViewCell: BaseCollectionViewCell {
     override func setStyle() {
         super.setStyle()
         
-        self.backgroundColor = .gray9
+        self.backgroundColor = .clear
     }
     
 }

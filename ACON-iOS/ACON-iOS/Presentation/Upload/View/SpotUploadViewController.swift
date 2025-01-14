@@ -16,6 +16,7 @@ class SpotUploadViewController: BaseNavViewController {
     
     private let spotUploadView = SpotUploadView()
     
+    private var viewBlurEffect: UIVisualEffectView = UIVisualEffectView()
     
     // MARK: - Properties
     
@@ -82,6 +83,11 @@ private extension SpotUploadViewController {
     func spotSearchButtonTapped() {
         // TODO: - 위치 접근 권한 체크하기
         let vc = SpotSearchViewController()
+        
+        vc.dismissCompletion = { [weak self] in
+            self?.removeBlurView()
+        }
+        
         // TODO: - 이 부분 로직 및 플로우 다시 짜기 !!
         vc.completionHandler = { [weak self] selectedSpotID, selectedSpotName in
             guard let self = self else { return }
@@ -103,9 +109,10 @@ private extension SpotUploadViewController {
                                                                         color: .gray5)
 
             }
-            
         }
-        // TODO: - set spotsearchvc to modal
+        
+        vc.setLongSheetLayout()
+        self.addBlurView()
         self.present(vc, animated: true)
     }
     
@@ -120,4 +127,10 @@ private extension SpotUploadViewController {
         // TODO: 작성을 그만두시겠습니까 Alert 띄우기
     }
     
+}
+
+extension SpotUploadViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        self.removeBlurView()
+    }
 }
