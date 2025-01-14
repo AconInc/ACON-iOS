@@ -161,7 +161,7 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
         guard let isFirstPage = spotListViewModel.isFirstPage.value
         else { return .zero }
         
-        let width: CGFloat = SpotListItemSize.itemWidth
+        let width: CGFloat = SpotListItemSizeType.itemWidth.value
         let collectionViewHeight: CGFloat = collectionView.frame.height
         let shortHeight: CGFloat = SpotListItemSize.shortItemHeight(collectionViewHeight)
         let longHeight: CGFloat = SpotListItemSize.longItemHeight(collectionViewHeight)
