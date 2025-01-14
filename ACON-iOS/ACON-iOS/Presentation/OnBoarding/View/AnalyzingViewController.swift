@@ -68,6 +68,7 @@ final class AnalyzingViewController: BaseViewController {
     private func updateLabelTextAfterDelay() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
             self?.analyzingLabel.text = "분석이 완료되었어요\n추천 맛집을 보여드릴게요!"
+//            navigaton push -> main
         }
     }
 }

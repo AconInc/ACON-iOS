@@ -41,6 +41,7 @@ final class FavoriteCuisineCollectionViewCell: BaseCollectionViewCell {
             $0.font = ACFont.s2.font
             $0.textColor = .acWhite
             $0.textAlignment = .center
+            $0.numberOfLines = 0
         }
         
         overlayContainer.do {
@@ -57,9 +58,7 @@ final class FavoriteCuisineCollectionViewCell: BaseCollectionViewCell {
     
     internal override func setHierarchy() {
         
-        contentView.addSubview(imageView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(overlayContainer)
+        contentView.addSubviews(imageView,titleLabel,overlayContainer)
         overlayContainer.addSubview(overlayImageView)
     }
     

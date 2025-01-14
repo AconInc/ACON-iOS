@@ -13,12 +13,12 @@ import Then
 final class DislikeCollectionView: UICollectionView {
     
     private let options: [(name: String, image: UIImage?)] = [
-        ("닭발", UIImage(named: "ChickenFeet") ?? UIImage(systemName: "photo")),
-        ("회/육회", UIImage(named: "SashimiAndTartare") ?? UIImage(systemName: "photo")),
-        ("곱창/대창/막창", UIImage(named: "IntestinesCombo") ?? UIImage(systemName: "photo")),
-        ("순대/선지", UIImage(named: "BloodSausageSoup") ?? UIImage(systemName: "photo")),
-        ("양고기", UIImage(named: "Lamb") ?? UIImage(systemName: "photo")),
-        ("없음", UIImage(named: "Onboarding/none") ?? UIImage(systemName: "photo"))
+        ("닭발", UIImage(named: "chickenFeet") ?? UIImage(systemName: "photo")),
+        ("회/육회", UIImage(named: "sashimi") ?? UIImage(systemName: "photo")),
+        ("곱창/대창/막창", UIImage(named: "intestines") ?? UIImage(systemName: "photo")),
+        ("순대/선지", UIImage(named: "soonde") ?? UIImage(systemName: "photo")),
+        ("양고기", UIImage(named: "lamb") ?? UIImage(systemName: "photo")),
+        ("없음", UIImage(named: "none") ?? UIImage(systemName: "photo"))
     ]
     
     var selectedIndices: [String] = [] {

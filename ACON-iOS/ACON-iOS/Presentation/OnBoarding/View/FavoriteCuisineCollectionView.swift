@@ -23,13 +23,13 @@ final class FavoriteCuisineCollectionView: UICollectionView {
     
     var selectedIndices: [String] = [] {
         didSet {
-            reloadData() // 선택 상태 변경 시 UI 업데이트
+            reloadData()
             print(selectedIndices)
-            onSelectionChanged?(selectedIndices) // 변경 사항 전달
+            onSelectionChanged?(selectedIndices)
         }
     }
     
-    var onSelectionChanged: (([String]) -> Void)? // 선택 변경을 알리는 클로저
+    var onSelectionChanged: (([String]) -> Void)? 
     
     init() {
         super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())

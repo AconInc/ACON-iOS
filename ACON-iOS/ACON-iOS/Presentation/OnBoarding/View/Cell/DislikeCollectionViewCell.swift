@@ -57,9 +57,8 @@ final class DislikeCollectionViewCell: BaseCollectionViewCell {
     }
     
     internal override func setHierarchy() {
-        contentView.addSubview(imageView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(overlayContainer)
+        
+        contentView.addSubviews(imageView,overlayContainer,titleLabel)
         overlayContainer.addSubview(overlayImageView)
     }
     
@@ -91,7 +90,7 @@ final class DislikeCollectionViewCell: BaseCollectionViewCell {
         
         if isSelected {
             overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-            overlayImageView.image = UIImage(named: "Check")
+            overlayImageView.image = UIImage(named: "check")
             overlayImageView.alpha = 1
         } else {
             overlayContainer.backgroundColor = .clear
