@@ -95,4 +95,10 @@ enum StringLiterals {
         
     }
     
+    enum SpotList {
+        
+        static let matchingRate = "취향 일치율"
+        
+    }
+    
 }
