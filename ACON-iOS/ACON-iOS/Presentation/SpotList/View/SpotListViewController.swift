@@ -48,10 +48,10 @@ class SpotListViewController: BaseNavViewController {
 
 // MARK: - @objc functions
 
-extension SpotListViewController {
+private extension SpotListViewController {
     
     @objc
-    private func handleRefreshControl() {
+    func handleRefreshControl() {
         print("refresh control 실행됨")
         
         if !spotListViewModel.secondSpotList.isEmpty {
@@ -86,35 +86,35 @@ extension SpotListViewController {
 
 // MARK: - CollectionView Settings
 
-extension SpotListViewController {
+private extension SpotListViewController {
     
-    private func setCollectionView() {
+    func setCollectionView() {
         setDelegate()
         registerCells()
         setRefreshControl()
     }
     
-    private func setDelegate() {
+    func setDelegate() {
         spotListView.collectionView.dataSource = self
         spotListView.collectionView.delegate = self
     }
     
-    private func registerCells() {
+    func registerCells() {
         spotListView.collectionView.register(
             SpotListCollectionViewCell.self,
             forCellWithReuseIdentifier: SpotListCollectionViewCell.cellIdentifier
         )
     }
     
-    private func setRefreshControl() {
+    func setRefreshControl() {
         // TODO: Refresh control 디자인 변경
         
         let control = UIRefreshControl()
         
         control.addTarget(self,
-                       action: #selector(handleRefreshControl),
-                       for: .valueChanged
-            )
+                          action: #selector(handleRefreshControl),
+                          for: .valueChanged
+        )
         
         spotListView.collectionView.refreshControl = control
     }
