@@ -33,17 +33,14 @@ struct Spots {
 
 struct SpotListItemSize {
     
-    static let minimumLineHeight: CGFloat = 12
-    
-    static let itemWidth: CGFloat = ScreenUtils.width - 40
-    
     static func longItemHeight(_ collectionViewHeight: CGFloat) -> CGFloat {
         let shortHeight = shortItemHeight(collectionViewHeight)
         return collectionViewHeight - shortHeight - 12
     }
     
     static func shortItemHeight(_ collectionViewHeight: CGFloat) -> CGFloat {
-        return (collectionViewHeight - 12 * 3) / 4
+        let lineSpacing = SpotListItemSizeType.minimumLineSpacing.value
+        return (collectionViewHeight - lineSpacing * 3) / 4
     }
     
 }

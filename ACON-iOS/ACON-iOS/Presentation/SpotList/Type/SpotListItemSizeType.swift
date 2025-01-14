@@ -6,3 +6,16 @@
 //
 
 import Foundation
+
+enum SpotListItemSizeType {
+    
+    case minimumLineSpacing, itemWidth
+    
+    var value: CGFloat {
+        switch self {
+        case .minimumLineSpacing: return 12
+        case .itemWidth: return ScreenUtils.width - 40
+        }
+    }
+    
+}
