@@ -10,6 +10,7 @@ import Foundation
 struct SpotListFilterModel {
     
     struct RestaurantFeature {
+        
         static let firstLine: [SpotType.RestaurantFeatureType] = [
             .korean, .western, .chinese, .japanese, .snack
         ]
@@ -17,41 +18,38 @@ struct SpotListFilterModel {
         static let secondLine: [SpotType.RestaurantFeatureType] = [
             .asian, .bar, .excludeFranchise
         ]
+        
     }
     
     struct CafeFeature {
         
-        var firstLine: [SpotType.CafeFeatureType] {
-            return [.large, .goodView, .dessert, .terace]
-        }
+        static let firstLine: [SpotType.CafeFeatureType] = [
+            .large, .goodView, .dessert, .terace
+        ]
         
-        var secondLine: [SpotType.CafeFeatureType] {
-            return [.excludeFranchise]
-        }
+        static let secondLine: [SpotType.CafeFeatureType] = [
+            .excludeFranchise
+        ]
         
     }
     
     struct Companion {
         
-        var firstLine: [SpotType.CompanionType] {
-            return [.family, .date, .friend, .alone, .group]
-        }
+        static let firstLine: [SpotType.CompanionType] = [
+            .family, .date, .friend, .alone, .group
+        ]
         
-        var secondLine: [SpotType.CompanionType] {
-            return []
-        }
+        static let secondLine: [SpotType.CompanionType] = []
         
     }
     
     struct VisitPurpose {
         
-        var firstLine: [SpotType.VisitPurposeType] {
-            return [.meeting, .study]
-        }
+        static let firstLine: [SpotType.VisitPurposeType] = [
+            .meeting, .study
+        ]
         
-        var secondLine: [SpotType.VisitPurposeType] {
-            return []
-        }
+        static let secondLine: [SpotType.VisitPurposeType] = []
         
     }
     
