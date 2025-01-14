@@ -17,8 +17,24 @@ class SpotListViewController: BaseNavViewController {
     
     // MARK: - LifeCycle
     
-    override func loadView() {
-        view = spotListView
+    override func setHierarchy() {
+        super.setHierarchy()
+        
+        contentView.addSubview(spotListView)
+    }
+    
+    override func setLayout() {
+        super.setLayout()
+        
+        spotListView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    override func setStyle() {
+        super.setStyle()
+        
+        self.setTitleLabelStyle(title: "동네 인증")
     }
     
     override func viewDidLoad() {
