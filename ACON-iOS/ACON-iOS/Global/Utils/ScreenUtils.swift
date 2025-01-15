@@ -23,7 +23,7 @@ struct ScreenUtils {
     }
     
     
-    // MARK: - width 비율
+    // MARK: - 비율 프로퍼티
     
     static var widthRatio: CGFloat {
         let figmaWidth: CGFloat = 360
