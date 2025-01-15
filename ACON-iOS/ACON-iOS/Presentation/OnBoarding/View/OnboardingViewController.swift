@@ -26,10 +26,6 @@ final class OnboardingViewController: UIViewController {
     private var isOverlayVisible = false
     var currentStep = 0
     
-    
-    //하드코드
-    
-    
     private var contentView: UIView?
     private let dislikeCollectionView = DislikeCollectionView()
     private let favoriteCuisineCollectionView = FavoriteCuisineCollectionView()
@@ -99,6 +95,7 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func setHierarchy() {
+        
         view.addSubviews(backButton, skipButton, progressView, progressNumber, progressTitle, overlayView, nextButton)
         progressView.addSubview(progressIndicator)
     }
@@ -210,8 +207,8 @@ final class OnboardingViewController: UIViewController {
                 $0.bottom.equalTo(nextButton.snp.top).offset(-16)
             }
         }
-        progressNumber.text = StringLiterals.Onboarding.progressNumberList[step]
-        progressTitle.text = StringLiterals.Onboarding.progressTitleList[step]
+        progressNumber.text = OnboardingType.progressNumberList[step]
+        progressTitle.text = OnboardingType.progressTitleList[step]
     }
     
     private func setupDislikeCollectionView() {
@@ -267,7 +264,7 @@ final class OnboardingViewController: UIViewController {
     
     
     @objc private func nextButtonTapped() {
-        if currentStep >= StringLiterals.Onboarding.progressNumberList.count - 1 {
+        if currentStep >= OnboardingType.progressNumberList.count - 1 {
             
             // 확인용
             print("Disliked Foods: \(String(describing: viewModel.dislike.value))")
@@ -302,7 +299,7 @@ final class OnboardingViewController: UIViewController {
     }
     
     @objc private func nextStack(){
-        // MARK : TODO -> Popup alert
+        // MARK: TODO -> Popup alert
         print("alert")
     }
     
@@ -335,7 +332,7 @@ final class OnboardingViewController: UIViewController {
     
     // 게이지 차는 로직
     private func updateProgressIndicator() {
-        let totalSteps: Float = Float(progressNumberList.count)
+        let totalSteps: Float = Float(OnboardingType.progressNumberList.count)
         let progressViewWidth = Float(progressView.frame.width) / totalSteps
         let progressWidth = progressViewWidth * Float(currentStep + 1)
         
@@ -379,21 +376,4 @@ struct FoodSelectionViewControllerPreview_Previews: PreviewProvider {
 }
 
 
-//
-//
-//enum Onboarding {
-//
-//    static let onboardingTitle = "당신의 취향을 알려주세요."
-//    
-//    static let progressNumberList = ["01", "02", "03", "04", "05"]
-//    
-//    static let progressTitleList = [
-//        "싫어하는 음식을 선택해 주세요",
-//        "선호하는 음식을 Top3까지 순위를 매겨주세요",
-//        "어디를 더 자주 가나요?",
-//        "내가 좋아하는 맛집 스타일은?",
-//        "내가 선호하는 공간의 순위는?"
-//    ]
-//    
-//
-//}
+

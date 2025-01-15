@@ -61,8 +61,8 @@ extension FavoriteCuisineCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UIEdgeInsets) -> UIEdgeInsets {
-        let horizontalInset = UIScreen.main.bounds.width * 0.02
-        let verticalInset = UIScreen.main.bounds.width * 0.1
+        let horizontalInset = ScreenUtils.width * 0.02
+        let verticalInset = ScreenUtils.width * 0.1
         return UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
     }
 }

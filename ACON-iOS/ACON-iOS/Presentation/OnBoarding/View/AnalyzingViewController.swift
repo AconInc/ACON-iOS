@@ -33,7 +33,7 @@ final class AnalyzingViewController: BaseViewController {
         }
         
         analyzingLabel.do {
-            $0.text = "회원님의 취향을 \n빠르게 분석하고 있어요"
+            $0.text = StringLiterals.Analyzing.analyzing
             $0.textColor = .acWhite
             $0.font = ACFont.h6.font
             $0.numberOfLines = 0
@@ -68,7 +68,7 @@ final class AnalyzingViewController: BaseViewController {
             guard let self = self else { return }
             
             // 텍스트 업데이트
-            self.analyzingLabel.text = "분석이 완료되었어요\n추천 맛집을 보여드릴게요!"
+            self.analyzingLabel.text = StringLiterals.Analyzing.analyzingAfter
             
             // 장소추천뷰로 이동
             let mainViewController = SpotListViewController()

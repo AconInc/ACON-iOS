@@ -95,4 +95,12 @@ enum StringLiterals {
         
     }
     
+    enum Analyzing {
+        
+        static let analyzing = "회원님의 취향을 \n빠르게 분석하고 있어요"
+        
+        static let analyzingAfter = "분석이 완료되었어요\n추천 맛집을 보여드릴게요!"
+        
+    }
+    
 }
