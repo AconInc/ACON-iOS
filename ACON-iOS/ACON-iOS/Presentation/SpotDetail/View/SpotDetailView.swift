@@ -28,13 +28,13 @@ final class SpotDetailView: BaseView {
     
     private let addressLabel: UILabel = UILabel()
     
-    private let stickHeaderView: UIView = UIView()
+    private let stickyHeaderView: UIView = UIView()
     
     private let menuLabel: UILabel = UILabel()
     
     private let menuUnderLineView: UIView = UIView()
     
-    private let menuCollectionView: UICollectionView = UICollectionView(
+    var menuCollectionView: UICollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
@@ -49,7 +49,7 @@ final class SpotDetailView: BaseView {
     
     private let plainAcornCountLabel: UILabel = UILabel()
     
-    private let findCourseButton: UIButton = UIButton()
+    var findCourseButton: UIButton = UIButton()
     
     
     // MARK: - Lifecycle
@@ -58,7 +58,8 @@ final class SpotDetailView: BaseView {
         super.setHierarchy()
         
         self.addSubviews(scrollView, footerView)
-        scrollView.addSubviews(scrollContentView, menuLabel)
+        scrollView.addSubviews(scrollContentView, stickyHeaderView)
+        stickyHeaderView.addSubviews(menuLabel, menuUnderLineView)
         scrollContentView.addSubviews(spotDetailImageView,
                                       isOpenButton,
                                       isNotOpenButton,
@@ -78,13 +79,15 @@ final class SpotDetailView: BaseView {
         scrollView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview().inset(84)
-            $0.height.equalTo(ScreenUtils.height*546/780)
+            $0.width.equalToSuperview()
+            $0.height.equalTo(1000)
         }
         
         scrollContentView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview().inset(ScreenUtils.height*84/780)
-            $0.height.equalTo(ScreenUtils.height*546/780)
+            $0.width.equalToSuperview()
+            $0.height.equalTo(1000)
         }
         
         footerView.snp.makeConstraints {
@@ -123,16 +126,20 @@ final class SpotDetailView: BaseView {
             $0.height.equalTo(18)
         }
         
-        menuLabel.snp.makeConstraints {
+        stickyHeaderView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*300/780)
             $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.width.equalTo(63)
             $0.height.equalTo(36)
         }
         
+        menuLabel.snp.makeConstraints {
+            $0.top.horizontalEdges.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(2)
+        }
+        
         menuUnderLineView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*334/780)
-            $0.width.equalTo(2)
+            $0.bottom.horizontalEdges.equalToSuperview()
             $0.height.equalTo(2)
         }
         
@@ -169,7 +176,7 @@ final class SpotDetailView: BaseView {
         
         findCourseButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*8/780)
-            $0.trailing.equalToSuperview().inset(ScreenUtils.width*108/360)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.width.equalTo(ScreenUtils.width*180/360)
             $0.height.equalTo(ScreenUtils.height*44/780)
         }
@@ -177,7 +184,7 @@ final class SpotDetailView: BaseView {
     
     override func setStyle() {
         super.setStyle()
-        
+          
         spotDetailImageView.do {
             $0.backgroundColor = .gray7
         }
@@ -194,13 +201,21 @@ final class SpotDetailView: BaseView {
             $0.setAttributedTitle(text: StringLiterals.SpotDetail.isNotOpen, style: .b4)
         }
         
+        addressLabel.do {
+            $0.setLabel(text: StringLiterals.SpotDetail.menu,
+                        style: .b4,
+                        color: .gray4)
+        }
+        
         addressImageView.do {
             $0.image = .icLocation
             $0.contentMode = .scaleAspectFill
         }
         
         menuLabel.do {
-            $0.setLabel(text: StringLiterals.SpotDetail.menu, style: .s2)
+            $0.setLabel(text: StringLiterals.SpotDetail.menu,
+                        style: .s2,
+                        alignment: .center)
         }
         
         menuUnderLineView.do {
@@ -237,6 +252,7 @@ final class SpotDetailView: BaseView {
         
         findCourseButton.do {
             $0.backgroundColor = .org1
+            $0.roundedButton(cornerRadius: 10, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner])
             $0.setAttributedTitle(text: StringLiterals.SpotDetail.findCourse, style: .h8)
         }
         

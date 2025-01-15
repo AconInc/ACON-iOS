@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController(rootViewController: LoginViewController())
         navigationController.navigationBar.isHidden = true
 //        self.window?.rootViewController = navigationController
-        self.window?.rootViewController = SpotListFilterViewController()
+        self.window?.rootViewController = SpotDetailViewController()
         self.window?.makeKeyAndVisible()
     }
 
