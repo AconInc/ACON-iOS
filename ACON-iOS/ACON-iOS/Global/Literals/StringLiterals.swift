@@ -55,6 +55,8 @@ enum StringLiterals {
         
         static let shortDetent = "acShortDetent"
         
+        static let middleDetent = "acMiddleDetent"
+        
         static let longDetent = "acLongDetent"
         
     }
