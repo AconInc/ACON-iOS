@@ -55,6 +55,9 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     override func setLayout() {
         super.setLayout()
         
+        let horizontalSpace = ScreenUtils.width * 16 / 360
+        let verticalSpace = ScreenUtils.height * 16 / 780
+        
         bgImage.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -64,7 +67,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         }
         
         matchingRateView.snp.makeConstraints {
-            $0.leading.top.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(horizontalSpace)
+            $0.top.equalToSuperview().offset(verticalSpace)
             $0.width.equalTo(96)
             $0.height.equalTo(22)
         }
@@ -74,7 +78,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         }
         
         stackView.snp.makeConstraints {
-            $0.leading.bottom.equalToSuperview().inset(16)
+            $0.leading.equalToSuperview().inset(horizontalSpace)
+            $0.bottom.equalToSuperview().inset(verticalSpace)
         }
         
         walkingIcon.snp.makeConstraints {
