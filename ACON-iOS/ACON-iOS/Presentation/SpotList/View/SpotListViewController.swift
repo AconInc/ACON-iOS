@@ -103,6 +103,11 @@ private extension SpotListViewController {
             SpotListCollectionViewCell.self,
             forCellWithReuseIdentifier: SpotListCollectionViewCell.cellIdentifier
         )
+        
+        spotListView.collectionView.register(
+            SpotListCollectionViewHeader.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: SpotListCollectionViewHeader.identifier)
     }
     
     func setRefreshControl() {
@@ -125,13 +130,15 @@ private extension SpotListViewController {
 
 extension SpotListViewController: UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         guard let isFirstPage = spotListViewModel.isFirstPage.value else { return 0 }
         
         return isFirstPage ? spotListViewModel.firstSpotList.count : spotListViewModel.secondSpotList.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let isFirstPage = spotListViewModel.isFirstPage.value,
               let item = collectionView.dequeueReusableCell(
                 withReuseIdentifier: SpotListCollectionViewCell.cellIdentifier,
@@ -149,10 +156,23 @@ extension SpotListViewController: UICollectionViewDataSource {
         return item
     }
     
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        guard kind == UICollectionView.elementKindSectionHeader,
+              let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionView.elementKindSectionHeader,
+                withReuseIdentifier: SpotListCollectionViewHeader.identifier,
+                for: indexPath) as? SpotListCollectionViewHeader else {
+            return SpotListCollectionViewHeader()
+        }
+        return header
+    }
+    
 }
 
 
-// MARK: - CollectionViewDelegate
+// MARK: - CollectionViewDelegateFlowLayout
 
 extension SpotListViewController: UICollectionViewDelegateFlowLayout {
     
@@ -172,6 +192,14 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let itemWidth: CGFloat = SpotListItemSizeType.itemWidth.value
+        let itemHeight: CGFloat = SpotListItemSizeType.headerHeight.value
+        return CGSize(width: itemWidth, height: itemHeight)
+    }
+    
 }
 
 
@@ -180,13 +208,16 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
 extension SpotListViewController {
     
     func longItemHeight(_ collectionViewHeight: CGFloat) -> CGFloat {
+        let lineSpacing = SpotListItemSizeType.minimumLineSpacing.value
+        let headerHeight = SpotListItemSizeType.headerHeight.value
         let shortHeight = shortItemHeight(collectionViewHeight)
-        return collectionViewHeight - shortHeight - 12
+        return collectionViewHeight - shortHeight - lineSpacing - headerHeight
     }
     
     func shortItemHeight(_ collectionViewHeight: CGFloat) -> CGFloat {
         let lineSpacing = SpotListItemSizeType.minimumLineSpacing.value
-        return (collectionViewHeight - lineSpacing * 3) / 4
+        let headerHeight = SpotListItemSizeType.headerHeight.value
+        return (collectionViewHeight - lineSpacing * 3 - headerHeight) / 4
     }
     
 }
