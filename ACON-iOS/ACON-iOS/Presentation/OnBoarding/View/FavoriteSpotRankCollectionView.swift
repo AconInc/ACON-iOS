@@ -13,10 +13,10 @@ import Then
 final class FavoriteSpotRankCollectionView: UICollectionView {
     
     private let options: [(name: String, image: UIImage?)] = [
-        ("분위기와 인테리어가\n감각적인 곳", UIImage(named: "koreanFood") ?? UIImage(systemName: "photo")),
-        ("새로운 음식을\n 경험할 수 있는 곳", UIImage(named: "westFood") ?? UIImage(systemName: "photo")),
-        ("가격과 양이\n 합리적인 곳", UIImage(named: "chineseFood") ?? UIImage(systemName: "photo")),
-        ("특별한 날을 위한\n 고급스러운 장소", UIImage(named: "japaneseFood") ?? UIImage(systemName: "photo"))
+        ("분위기와 인테리어가\n감각적인 곳", UIImage(named: "moodPlace") ?? UIImage(systemName: "photo")),
+        ("새로운 음식을\n 경험할 수 있는 곳", UIImage(named: "newPlace") ?? UIImage(systemName: "photo")),
+        ("가격과 양이 합리적인 곳", UIImage(named: "qualityPlace") ?? UIImage(systemName: "photo")),
+        ("특별한 날을 위한 고급스러운 장소", UIImage(named: "specialPlace") ?? UIImage(systemName: "photo"))
     ]
     
     var selectedIndices: [String] = [] {

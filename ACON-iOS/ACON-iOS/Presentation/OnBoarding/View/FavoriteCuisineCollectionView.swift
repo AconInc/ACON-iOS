@@ -13,11 +13,11 @@ import Then
 final class FavoriteCuisineCollectionView: UICollectionView {
     
     private let options: [(name: String, image: UIImage?)] = [
-        ("한식", UIImage(named: "koreanFood") ?? UIImage(systemName: "photo")),
+        ("한식", UIImage(named: "koreaFood") ?? UIImage(systemName: "photo")),
         ("양식", UIImage(named: "westFood") ?? UIImage(systemName: "photo")),
         ("중식", UIImage(named: "chineseFood") ?? UIImage(systemName: "photo")),
         ("일식", UIImage(named: "japaneseFood") ?? UIImage(systemName: "photo")),
-        ("분식", UIImage(named: "bunsic") ?? UIImage(systemName: "photo")),
+        ("분식", UIImage(named: "koreaStreetFood") ?? UIImage(systemName: "photo")),
         ("아시안", UIImage(named: "asianFood") ?? UIImage(systemName: "photo"))
     ]
     
@@ -51,8 +51,9 @@ final class FavoriteCuisineCollectionView: UICollectionView {
         dataSource = self
         register(FavoriteCuisineCollectionViewCell.self, forCellWithReuseIdentifier: "FavoriteCuisineCollectionViewCell")
     }
+    
 }
-
+    
 extension FavoriteCuisineCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -75,6 +76,7 @@ extension FavoriteCuisineCollectionView: UICollectionViewDelegateFlowLayout {
         let verticalInset = UIScreen.main.bounds.width * 0.1
         return UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
     }
+    
 }
 
 extension FavoriteCuisineCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -96,7 +98,7 @@ extension FavoriteCuisineCollectionView: UICollectionViewDelegate, UICollectionV
         cell.configure(name: option.name, image: option.image, isSelected: isSelected)
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedValue = Mappings.favoriteCuisines[indexPath.row]
 

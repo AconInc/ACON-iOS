@@ -17,6 +17,7 @@ final class DislikeCollectionViewCell: BaseCollectionViewCell {
     private let overlayImageView = UIImageView()
     private let overlayContainer = UIView()
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setStyle()

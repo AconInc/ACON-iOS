@@ -14,7 +14,7 @@ final class FavoriteSpotStyleCollectionView: UICollectionView {
     
     private let options: [(name: String, image: UIImage?)] = [
         ("노포", UIImage(named: "nopo") ?? UIImage(systemName: "photo")),
-        ("모던", UIImage(named: "modern") ?? UIImage(systemName: "photo"))
+        ("모던", UIImage(named: "mordern") ?? UIImage(systemName: "photo"))
     ]
     
     var selectedStyle: String? {
