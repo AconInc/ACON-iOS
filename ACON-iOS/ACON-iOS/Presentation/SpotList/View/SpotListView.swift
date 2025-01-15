@@ -29,7 +29,8 @@ class SpotListView: BaseView {
         super.setLayout()
         
         collectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(self.safeAreaLayoutGuide).offset(18)
+            $0.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide)
         }
     }
     
