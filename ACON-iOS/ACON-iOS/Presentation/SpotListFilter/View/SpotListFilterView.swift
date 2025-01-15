@@ -11,7 +11,12 @@ class SpotListFilterView: BaseView {
     
     // MARK: - UI Properties
     
-    let spotTypeSegmentControl = UISegmentedControl()
+    private let segmentItems = [StringLiterals.SpotListFilter.restaurant,
+                                StringLiterals.SpotListFilter.cafe]
+    
+    private lazy var segmentedControl = UISegmentedControl(items: segmentItems)
+    
+    private let segmentedControlBgView = UIView()
     
     let spotFeatureStackView = SpotFilterTagButtonStackView()
     
@@ -23,23 +28,60 @@ class SpotListFilterView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(spotTypeSegmentControl,
+        self.addSubviews(segmentedControlBgView,
                          spotFeatureStackView)
+        
+        segmentedControlBgView.addSubview(segmentedControl)
     }
     
     override func setLayout() {
         super.setLayout()
         
+        segmentedControlBgView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(ScreenUtils.heightRatio * 17)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.heightRatio * 20)
+            $0.height.equalTo(ScreenUtils.heightRatio * 37)
+        }
+        
+        segmentedControl.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(ScreenUtils.heightRatio * 3)
+        }
+        
         spotFeatureStackView.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide).offset(17)
-            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.top.equalTo(segmentedControl.snp.bottom).offset(ScreenUtils.heightRatio * 12)
+            $0.horizontalEdges.equalTo(segmentedControl)
         }
     }
     
     override func setStyle() {
         super.setStyle()
         
+        setSegmentControl()
+        
+        
         // TODO: 추후 추가 예정
+    }
+    
+}
+
+
+// MARK: - UI Settings
+
+private extension SpotListFilterView {
+    
+    func setSegmentControl() {
+        segmentedControlBgView.do {
+            $0.backgroundColor = .gray8
+            $0.layer.cornerRadius = ScreenUtils.heightRatio * 6
+        }
+        
+        segmentedControl.do {
+            $0.selectedSegmentIndex = 0
+            $0.selectedSegmentTintColor = .acWhite
+            $0.backgroundColor = .gray8
+            $0.setTitleTextAttributes(String.ACStyle(.s2, .gray5), for: .normal)
+            $0.setTitleTextAttributes(String.ACStyle(.s2, .gray9), for: .selected)
+        }
     }
     
 }
