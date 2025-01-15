@@ -43,7 +43,7 @@ final class OnboardingViewController: UIViewController {
     private let favoriteSpotTypeCollectionView = FavoriteSpotTypeCollectionView()
     private let favoriteSpotStyleCollectionView = FavoriteSpotStyleCollectionView()
     private let favoriteSpotRankCollectionView = FavoriteSpotRankCollectionView()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gray9
@@ -72,7 +72,7 @@ final class OnboardingViewController: UIViewController {
             $0.setTitleColor(.acWhite, for: .normal)
             $0.titleLabel?.font = ACFont.b2.font
             $0.addTarget(self, action: #selector(nextStack), for: .touchUpInside)
-
+            
         }
         
         progressView.do {
@@ -110,7 +110,7 @@ final class OnboardingViewController: UIViewController {
         view.addSubviews(backButton, skipButton, progressView, progressNumber, progressTitle, overlayView, nextButton)
         progressView.addSubview(progressIndicator)
     }
-
+    
     
     private func setLayout() {
         
@@ -192,7 +192,6 @@ final class OnboardingViewController: UIViewController {
         }
     }
     
-    
     private func updateContentView(for step: Int) {
         contentView?.removeFromSuperview()
         
@@ -218,8 +217,7 @@ final class OnboardingViewController: UIViewController {
                 $0.leading.trailing.equalToSuperview()
                 $0.bottom.equalTo(nextButton.snp.top).offset(-16)
             }
-        
-         }
+        }
         progressNumber.text = progressNumberList[step]
         progressTitle.text = progressTitleList[step]
     }
@@ -228,30 +226,22 @@ final class OnboardingViewController: UIViewController {
         contentView = dislikeCollectionView
         dislikeCollectionView.onSelectionChanged = { [weak self] selectedIndices in
             guard let self = self else { return }
-                        
+            
             if selectedIndices.map({ $0.uppercased() }) == ["NONE"] {
                 self.isOverlayVisible.toggle()
                 if self.isOverlayVisible {
                     self.showOverlay()
-
-
                 } else {
                     self.hideOverlay()
-
                 }
             } else {
                 self.hideOverlay()
                 self.isOverlayVisible = false
-
             }
-            
             self.viewModel.dislike.value = selectedIndices
         }
     }
-    
-    
 
-    
     private func setFavoriteCuisineCollectionView() {
         contentView = favoriteCuisineCollectionView
         favoriteCuisineCollectionView.onSelectionChanged = { [weak self] selectedIndices in
@@ -288,17 +278,17 @@ final class OnboardingViewController: UIViewController {
         if currentStep >= progressNumberList.count - 1 {
             
             // 확인용
-              print("Disliked Foods: \(String(describing: viewModel.dislike.value))")
-              print("Favorite Cuisines: \(String(describing: viewModel.favoriteCuisne.value))")
-              print("Favorite Spot Type: \(viewModel.favoriteSpotType.value ?? "None")")
-              print("Favorite Spot Style: \(viewModel.favoriteSpotStyle.value ?? "None")")
-              print("Favorite Spot Rank: \(String(describing: viewModel.favoriteSpotRank.value))")
-              
-              let analyzingVC = AnalyzingViewController()
-              analyzingVC.modalPresentationStyle = .fullScreen
-              present(analyzingVC, animated: true, completion: nil)
-              return
-          }
+            print("Disliked Foods: \(String(describing: viewModel.dislike.value))")
+            print("Favorite Cuisines: \(String(describing: viewModel.favoriteCuisne.value))")
+            print("Favorite Spot Type: \(viewModel.favoriteSpotType.value ?? "None")")
+            print("Favorite Spot Style: \(viewModel.favoriteSpotStyle.value ?? "None")")
+            print("Favorite Spot Rank: \(String(describing: viewModel.favoriteSpotRank.value))")
+            
+            let analyzingVC = AnalyzingViewController()
+            analyzingVC.modalPresentationStyle = .fullScreen
+            present(analyzingVC, animated: true, completion: nil)
+            return
+        }
         
         if isOverlayVisible {
             hideOverlay()
@@ -324,35 +314,34 @@ final class OnboardingViewController: UIViewController {
         print("alert")
     }
     
-        // 배경 어두워지는 로직 on
+    // 배경 어두워지는 로직 on
     private func showOverlay() {
         overlayView.isHidden = false
         overlayView.alpha = 0.0
-
+        
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self = self else { return }
             self.overlayView.alpha = 1.0
             self.contentView?.alpha = 0.5
-
+            
             self.view.bringSubviewToFront(self.progressNumber)
             self.view.bringSubviewToFront(self.progressTitle)
         }
     }
-
-        // 배경 어두워지는 로직 off
+    
+    // 배경 어두워지는 로직 off
     private func hideOverlay() {
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             self?.overlayView.alpha = 0.0
             self?.contentView?.alpha = 1.0
-
+            
         }) { [weak self] _ in
             self?.overlayView.isHidden = true
-
+            
         }
     }
-
-
-        // 게이지 차는 로직
+    
+    // 게이지 차는 로직
     private func updateProgressIndicator() {
         let totalSteps: Float = Float(progressNumberList.count)
         let progressViewWidth = Float(progressView.frame.width) / totalSteps
@@ -366,6 +355,19 @@ final class OnboardingViewController: UIViewController {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 struct FoodSelectionViewControllerPreview: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> OnboardingViewController {

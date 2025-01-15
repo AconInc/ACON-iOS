@@ -77,7 +77,6 @@ final class AnalyzingViewController: BaseViewController {
             self.navigationController?.pushViewController(mainViewController, animated: true)
         }
     }
-    
 }
 
 import SwiftUI

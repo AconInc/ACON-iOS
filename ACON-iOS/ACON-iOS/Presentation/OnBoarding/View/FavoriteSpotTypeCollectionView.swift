@@ -46,7 +46,7 @@ final class FavoriteSpotTypeCollectionView: UICollectionView {
     private func setDelegate() {
         delegate = self
         dataSource = self
-        register(DislikeCollectionViewCell.self, forCellWithReuseIdentifier: "DislikeCollectionViewCell")
+        register(DislikeCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
     }
 }
 
@@ -79,18 +79,18 @@ extension FavoriteSpotTypeCollectionView: UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = dequeueReusableCell(withReuseIdentifier: "DislikeCollectionViewCell", for: indexPath) as? DislikeCollectionViewCell else {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.cellIdentifier, for: indexPath) as? DislikeCollectionViewCell else {
             return UICollectionViewCell()
         }
         
         let option = options[indexPath.row]
-        let isSelected = selectedSpotType == Mappings.favoriteSpotTypes[indexPath.row]
+        let isSelected = selectedSpotType == OnboardingMapping.favoriteSpotTypes[indexPath.row]
         cell.configure(name: option.name, image: option.image, isSelected: isSelected)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedValue = Mappings.favoriteSpotTypes[indexPath.row]
+        let selectedValue = OnboardingMapping.favoriteSpotTypes[indexPath.row]
         
         if selectedSpotType == selectedValue {
             selectedSpotType = nil

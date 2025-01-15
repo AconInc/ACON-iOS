@@ -47,7 +47,7 @@ final class FavoriteSpotRankCollectionView: UICollectionView {
     private func setDelegate() {
         delegate = self
         dataSource = self
-        register(FavoriteCuisineCollectionViewCell.self, forCellWithReuseIdentifier: "FavoriteCuisineCollectionViewCell")
+        register(FavoriteCuisineCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
     }
 }
 
@@ -61,7 +61,7 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return UIScreen.main.bounds.width * 0.04
+        return UIScreen.main.bounds.width * 0.12
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -83,21 +83,21 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = dequeueReusableCell(
-            withReuseIdentifier: "FavoriteCuisineCollectionViewCell",
+            withReuseIdentifier: BaseCollectionViewCell.cellIdentifier,
             for: indexPath
         ) as? FavoriteCuisineCollectionViewCell else {
             return UICollectionViewCell()
         }
         
         let option = options[indexPath.row]
-        let isSelected = selectedIndices.firstIndex(of: Mappings.favoriteSpotRanks[indexPath.row]).map { $0 + 1 } ?? 0
+        let isSelected = selectedIndices.firstIndex(of: OnboardingMapping.favoriteSpotRanks[indexPath.row]).map { $0 + 1 } ?? 0
         cell.configure(name: option.name, image: option.image, isSelected: isSelected)
         return cell
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedValue = Mappings.favoriteSpotRanks[indexPath.row]
+        let selectedValue = OnboardingMapping.favoriteSpotRanks[indexPath.row]
         
         if let index = selectedIndices.firstIndex(of: selectedValue) {
             selectedIndices.remove(at: index)
@@ -110,3 +110,4 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegate, UICollection
     
     
 }
+

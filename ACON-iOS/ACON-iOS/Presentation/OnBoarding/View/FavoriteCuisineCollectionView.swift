@@ -49,7 +49,7 @@ final class FavoriteCuisineCollectionView: UICollectionView {
     private func setDelegate() {
         delegate = self
         dataSource = self
-        register(FavoriteCuisineCollectionViewCell.self, forCellWithReuseIdentifier: "FavoriteCuisineCollectionViewCell")
+        register(FavoriteCuisineCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
     }
     
 }
@@ -86,21 +86,21 @@ extension FavoriteCuisineCollectionView: UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = dequeueReusableCell(withReuseIdentifier: "FavoriteCuisineCollectionViewCell", for: indexPath) as? FavoriteCuisineCollectionViewCell else {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.cellIdentifier, for: indexPath) as? FavoriteCuisineCollectionViewCell else {
             return UICollectionViewCell()
         }
         
         let option = options[indexPath.row]
         
         // 터치한 순서를 기반으로 index를 설정
-        let isSelected = selectedIndices.firstIndex(of: Mappings.favoriteCuisines[indexPath.row]).map { $0 + 1 } ?? 0
+        let isSelected = selectedIndices.firstIndex(of: OnboardingMapping.favoriteCuisines[indexPath.row]).map { $0 + 1 } ?? 0
         
         cell.configure(name: option.name, image: option.image, isSelected: isSelected)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedValue = Mappings.favoriteCuisines[indexPath.row]
+        let selectedValue = OnboardingMapping.favoriteCuisines[indexPath.row]
 
         if selectedIndices.contains(selectedValue) {
             // 이미 선택된 항목이면 배열에서 제거

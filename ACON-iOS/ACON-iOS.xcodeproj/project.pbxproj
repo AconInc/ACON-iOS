@@ -70,6 +70,8 @@
 		74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */; };
 		74CDCE562D310B1600E3A21A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE552D310B1300E3A21A /* String+.swift */; };
 		D6978F502D36E3C800523A25 /* AnalyzingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F4F2D36E3C800523A25 /* AnalyzingViewController.swift */; };
+		D6978F522D37B23E00523A25 /* OnboardingRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F512D37B23E00523A25 /* OnboardingRequestDTO.swift */; };
+		D6978F542D37B29100523A25 /* OnboardingMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F532D37B29100523A25 /* OnboardingMapping.swift */; };
 		D6D0F50F2D36B99F00326F17 /* DislikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D0F50E2D36B99E00326F17 /* DislikeCollectionViewCell.swift */; };
 		D6D0F5112D36B9F200326F17 /* FavoriteCuisineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D0F5102D36B9F200326F17 /* FavoriteCuisineCollectionViewCell.swift */; };
 		D6D0F5132D36BA2900326F17 /* FavoriteCuisineCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D0F5122D36BA2900326F17 /* FavoriteCuisineCollectionView.swift */; };
@@ -143,6 +145,8 @@
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB785B4E26FA7C11BB85A55D /* Pods-ACON-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D6978F4F2D36E3C800523A25 /* AnalyzingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzingViewController.swift; sourceTree = "<group>"; };
+		D6978F512D37B23E00523A25 /* OnboardingRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRequestDTO.swift; sourceTree = "<group>"; };
+		D6978F532D37B29100523A25 /* OnboardingMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMapping.swift; sourceTree = "<group>"; };
 		D6D0F50E2D36B99E00326F17 /* DislikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeCollectionViewCell.swift; sourceTree = "<group>"; };
 		D6D0F5102D36B9F200326F17 /* FavoriteCuisineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCuisineCollectionViewCell.swift; sourceTree = "<group>"; };
 		D6D0F5122D36BA2900326F17 /* FavoriteCuisineCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCuisineCollectionView.swift; sourceTree = "<group>"; };
@@ -524,6 +528,8 @@
 		D6D0F5002D36B95400326F17 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D6978F512D37B23E00523A25 /* OnboardingRequestDTO.swift */,
+				D6978F532D37B29100523A25 /* OnboardingMapping.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -708,6 +714,7 @@
 				74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */,
 				748D6F8F2D2BD340007690B4 /* UIButton+.swift in Sources */,
 				741A07572D3558FE00778219 /* ReviewFinishedView.swift in Sources */,
+				D6978F522D37B23E00523A25 /* OnboardingRequestDTO.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
 				D6D0F51B2D36BABB00326F17 /* FavoriteSpotRankCollectionView.swift in Sources */,
 				D6D0F50F2D36B99F00326F17 /* DislikeCollectionViewCell.swift in Sources */,
@@ -720,6 +727,7 @@
 				1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */,
 				748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */,
 				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,
+				D6978F542D37B29100523A25 /* OnboardingMapping.swift in Sources */,
 				D6D0F51F2D36BAFE00326F17 /* OnboardingViewController.swift in Sources */,
 				744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */,
 				741A06CA2D35415800778219 /* DropAcornViewController.swift in Sources */,
