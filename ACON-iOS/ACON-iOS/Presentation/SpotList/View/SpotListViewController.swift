@@ -40,9 +40,24 @@ class SpotListViewController: BaseNavViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bindViewModel()
         setCollectionView()
     }
     
+}
+
+
+// MARK: - Bind ViewModel
+
+extension SpotListViewController {
+    
+    func bindViewModel() {
+        spotListViewModel.isFirstPage.bind { [weak self] isFirstPage in
+            guard let self = self,
+                  let isFirstPage = isFirstPage else { return }
+            spotListView.hideFooterLabel(isHidden: isFirstPage)
+        }
+    }
 }
 
 
@@ -164,7 +179,7 @@ extension SpotListViewController: UICollectionViewDataSource {
                 ofKind: UICollectionView.elementKindSectionHeader,
                 withReuseIdentifier: SpotListCollectionViewHeader.identifier,
                 for: indexPath) as? SpotListCollectionViewHeader else {
-            return SpotListCollectionViewHeader()
+            return UICollectionReusableView()
         }
         return header
     }
