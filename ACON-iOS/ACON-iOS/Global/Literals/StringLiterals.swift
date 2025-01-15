@@ -99,6 +99,8 @@ enum StringLiterals {
         
         static let matchingRate = "취향 일치율"
         
+        static let headerTitle = "지금, 나에게 딱 맞는 맛집이에요"
+        
     }
     
 }
