@@ -101,4 +101,10 @@ enum StringLiterals {
         
     }
     
+    enum SpotListFilter {
+        
+        static let restaurant = "음식점"
+        static let cafe = "카페"
+    }
+    
 }
