@@ -40,7 +40,7 @@ final class DislikeCollectionView: UICollectionView {
     private func setDelegate() {
         delegate = self
         dataSource = self
-        register(DislikeCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
+        register(SmallBoxViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
     }
 }
 
@@ -48,21 +48,21 @@ extension DislikeCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemWidth = ScreenUtils.width * 101 / 360
-        let itemHeight = ScreenUtils.width * 129 / 780
+        let itemHeight = itemWidth * 1.277
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return ScreenUtils.width * 0.08
+        return ScreenUtils.height * 12 / 780
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return ScreenUtils.width * 0.02
+        return ScreenUtils.width * 8 / 360
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let horizontalInset = ScreenUtils.width * 0.02
-        let verticalInset = ScreenUtils.width * 0.1
+        let horizontalInset = ScreenUtils.width * 10 / 360
+        let verticalInset = ScreenUtils.height * 0.1
         return UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
     }
 }
@@ -74,12 +74,12 @@ extension DislikeCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.cellIdentifier, for: indexPath) as? DislikeCollectionViewCell else {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.cellIdentifier, for: indexPath) as? SmallBoxViewCell else {
             return UICollectionViewCell()
         }
         let option = DislikeType.allCases[indexPath.row]
         let isSelected = selectedIndices.contains(option.mappedValue)
-        cell.checkConfigure(name: option.name, image: option.image, isSelected: isSelected)
+        cell.checkConfigure(name: option.name, image: option.image, isSelected: isSelected )
         return cell
     }
     
@@ -101,5 +101,34 @@ extension DislikeCollectionView: UICollectionViewDelegate, UICollectionViewDataS
                 print("최대 5개까지만 선택 가능합니다.")
             }
         }
+    }
+}
+
+import SwiftUI
+
+struct DislikeCollectionViewPreview: UIViewRepresentable {
+    
+    func makeUIView(context: Context) -> UIView {
+        // DislikeCollectionView 초기화
+        let collectionView = DislikeCollectionView()
+        
+        // 뷰 크기 설정
+        collectionView.frame = CGRect(
+            origin: .zero,
+            size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.9)
+        )
+        return collectionView
+    }
+    
+    func updateUIView(_ uiView: UIView, context: Context) {
+        // 필요 시 업데이트 로직 추가
+    }
+}
+
+struct DislikeCollectionViewPreview_Previews: PreviewProvider {
+    static var previews: some View {
+        DislikeCollectionViewPreview()
+            .edgesIgnoringSafeArea(.all)
+            .previewLayout(.sizeThatFits)
     }
 }

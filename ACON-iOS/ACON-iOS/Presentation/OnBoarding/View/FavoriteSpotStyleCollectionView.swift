@@ -41,29 +41,34 @@ final class FavoriteSpotStyleCollectionView: UICollectionView {
     private func setDelegate() {
         delegate = self
         dataSource = self
-        register(DislikeCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
+        register(LongBoxViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
     }
 }
 
 extension FavoriteSpotStyleCollectionView: UICollectionViewDelegateFlowLayout {
     
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let screenWidth = UIScreen.main.bounds.width
-        let screenHeight = UIScreen.main.bounds.height
-        let itemWidth = screenWidth * 0.42
-        let itemHeight = screenHeight * 0.41
+
+        let itemWidth = ScreenUtils.width * 154 / 360
+        let itemHeight = itemWidth * 1.311
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return ScreenUtils.height * 12 / 780
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return UIScreen.main.bounds.width * 0.01
+        return ScreenUtils.width * 8 / 360
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let horizontalInset = UIScreen.main.bounds.width * 0.06
-        let verticalInset = UIScreen.main.bounds.width * 0.1
+        let horizontalInset = ScreenUtils.width * 10 / 360
+        let verticalInset = ScreenUtils.height * 0.1
         return UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
     }
+
 }
 
 extension FavoriteSpotStyleCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -73,7 +78,7 @@ extension FavoriteSpotStyleCollectionView: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.cellIdentifier, for: indexPath) as? DislikeCollectionViewCell else {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.cellIdentifier, for: indexPath) as? LongBoxViewCell else {
             return UICollectionViewCell()
         }
         

@@ -1,8 +1,8 @@
 //
-//  DislikeCollectionViewCell.swift
+//  test.swift
 //  ACON-iOS
 //
-//  Created by Jaehyun Ahn on 1/15/25.
+//  Created by Jaehyun Ahn on 1/16/25.
 //
 
 import UIKit
@@ -10,15 +10,19 @@ import UIKit
 import SnapKit
 import Then
 
-final class DislikeCollectionViewCell: BaseCollectionViewCell {
+final class SmallBoxViewCell: BaseCollectionViewCell {
     
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
     private let overlayImageView = UIImageView()
     private let overlayContainer = UIView()
+    private let container = UIView()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        contentView.backgroundColor = .clear
+        backgroundColor = .clear
         setStyle()
         setHierarchy()
         setLayout()
@@ -29,7 +33,14 @@ final class DislikeCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func setStyle() {
-        super.setStyle()
+        
+        self.backgroundColor = .clear
+        
+        
+        container.do {
+            $0.backgroundColor = .clear
+        }
+        
         
         imageView.do {
             $0.layer.cornerRadius = 8
@@ -43,10 +54,14 @@ final class DislikeCollectionViewCell: BaseCollectionViewCell {
             $0.textColor = .acWhite
             $0.textAlignment = .center
             $0.numberOfLines = 0
+            $0.backgroundColor = .clear
+            
         }
         
         overlayContainer.do {
             $0.layer.cornerRadius = 8
+            $0.backgroundColor = .clear
+
         }
         
         overlayImageView.do {
@@ -59,23 +74,33 @@ final class DislikeCollectionViewCell: BaseCollectionViewCell {
     
     override func setHierarchy() {
         super.setHierarchy()
-        
-        contentView.addSubviews(imageView,titleLabel,overlayContainer)
+        contentView.addSubview(container)
+        container.addSubviews(imageView,titleLabel,overlayContainer)
         overlayContainer.addSubview(overlayImageView)
     }
     
-    internal override func setLayout() {
+    override func setLayout() {
+        super.setLayout()
+        
+        container.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalTo(101)
+            $0.height.equalTo(129)
+            
+
+        }
         
         imageView.snp.makeConstraints {
-//            $0.edges.equalToSuperview()
-            $0.top.centerX.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.height*154/780)
-            $0.width.equalTo(ScreenUtils.height*154/780)
+            $0.top.horizontalEdges.equalTo(container)
+//            $0.width.height.equalTo(101)
+            $0.height.equalTo(container.snp.width).multipliedBy(1.0) // 정사각형 비율 유지
+
         }
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(imageView.snp.bottom).offset(8)
-            $0.leading.trailing.equalToSuperview()
+            $0.centerX.equalTo(container)
+            $0.height.equalTo(20)
         }
         
         overlayContainer.snp.makeConstraints {
@@ -93,6 +118,8 @@ final class DislikeCollectionViewCell: BaseCollectionViewCell {
         titleLabel.text = name
         imageView.image = image ?? UIImage(systemName: "photo")
         
+        
+        
         if isSelected {
             overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             overlayImageView.image = UIImage(named: "check")
@@ -102,31 +129,32 @@ final class DislikeCollectionViewCell: BaseCollectionViewCell {
             overlayImageView.image = nil
             overlayImageView.alpha = 0
         }
-        
     }
     
-    
-    func configure(name: String, image: UIImage?, isSelected: Int) {
+    func configure(name: String, image: UIImage?, isSelected: Int ) {
         
         titleLabel.text = name
         imageView.image = image ?? UIImage(systemName: "photo")
+        overlayContainer.backgroundColor = .clear
+        
         
         switch isSelected {
+            
         case 1:
-            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             overlayImageView.image = UIImage(named: "1")
+            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             overlayImageView.alpha = 1
         case 2:
-            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             overlayImageView.image = UIImage(named: "2")
+            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             overlayImageView.alpha = 1
         case 3:
-            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             overlayImageView.image = UIImage(named: "3")
+            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             overlayImageView.alpha = 1
         case 4:
-            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             overlayImageView.image = UIImage(named: "4")
+            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             overlayImageView.alpha = 1
         default:
             overlayContainer.backgroundColor = .clear
@@ -134,6 +162,46 @@ final class DislikeCollectionViewCell: BaseCollectionViewCell {
             overlayImageView.alpha = 0
         }
     }
+    
+    
 }
 
 
+
+
+import SwiftUI
+
+struct SmallBoxViewCellPreview: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        // SmallBoxViewCell 초기화
+        let cell = SmallBoxViewCell(frame: .zero)
+        
+        // 테스트 데이터를 설정
+        cell.checkConfigure(
+            name: "테스트",
+            image: UIImage(named: "koreaFood"),
+            isSelected: true
+        )
+        
+        // 셀 크기 설정
+        cell.frame = CGRect(
+            origin: .zero,
+            size: CGSize(width: 101, height: 129)
+        )
+        
+        return cell
+    }
+    
+    func updateUIView(_ uiView: UIView, context: Context) {
+        // 필요 시 업데이트 로직 추가
+    }
+}
+
+struct SmallBoxViewCellPreview_Previews: PreviewProvider {
+    static var previews: some View {
+        SmallBoxViewCellPreview()
+            .edgesIgnoringSafeArea(.all)
+            .previewLayout(.sizeThatFits)
+            .frame(width: 101, height: 129) // 셀 크기
+    }
+}

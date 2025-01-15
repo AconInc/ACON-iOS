@@ -154,7 +154,6 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func setBinding() {
-        
         viewModel.dislike.bind { [weak self] dislikedFoods in
             print("Disliked Foods: \(dislikedFoods ?? [])")
             self?.updateNextButtonState(isEnabled: !(dislikedFoods?.isEmpty ?? true))

@@ -40,7 +40,7 @@ final class FavoriteSpotRankCollectionView: UICollectionView {
     private func setDelegate() {
         delegate = self
         dataSource = self
-        register(DislikeCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
+        register(OnboardingCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
     }
 }
 
@@ -48,23 +48,23 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemWidth = ScreenUtils.width * 154 / 360
-        let itemHeight = ScreenUtils.height * 202 / 780
+        let itemHeight = itemWidth * 1.2
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return ScreenUtils.height * 12 / 780
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return ScreenUtils.width * 12 / 360
+        return ScreenUtils.width * 3 / 360
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let horizontalInset = ScreenUtils.width * 20 / 360
-        let verticalInset = ScreenUtils.height * 28 / 780
-        return UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
+        return UIEdgeInsets(top: 0, left: horizontalInset, bottom: 0, right: horizontalInset)
     }
+
 }
 
 extension FavoriteSpotRankCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -77,13 +77,17 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegate, UICollection
         guard let cell = dequeueReusableCell(
             withReuseIdentifier: BaseCollectionViewCell.cellIdentifier,
             for: indexPath
-        ) as? DislikeCollectionViewCell else {
+        ) as? OnboardingCell else {
             return UICollectionViewCell()
         }
         
         let option = FavoriteSpotRankType.allCases[indexPath.row]
-        let isSelected = selectedIndices.contains(option.mappedValue)
-        cell.checkConfigure(name: option.name, image: option.image, isSelected: isSelected)
+        
+        // 선택된 순서 계산 (0 = 선택되지 않음)
+        let isSelected = selectedIndices.firstIndex(of: option.mappedValue).map { $0 + 1 } ?? 0
+        
+        // `isSelected`를 Int로 전달
+        cell.configure(name: option.name, image: option.image, isSelected: isSelected)
         return cell
     }
     
@@ -97,5 +101,41 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegate, UICollection
         } else {
             print("최대 4개까지만 선택 가능")
         }
+    }
+}
+
+import SwiftUI
+
+struct FavoriteSpotRankCollectionViewPreview: UIViewRepresentable {
+    
+    func makeUIView(context: Context) -> FavoriteSpotRankCollectionView {
+        // FavoriteSpotRankCollectionView 초기화
+        let collectionView = FavoriteSpotRankCollectionView()
+        
+        // 뷰 크기 설정
+        collectionView.frame = CGRect(
+            origin: .zero,
+            size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
+        )
+        
+        // 샘플 데이터 설정
+        collectionView.selectedIndices = ["SENSE", "NEW_FOOD"] // 초기 선택 상태
+        collectionView.onSelectionChanged = { selectedIndices in
+            print("선택된 항목: \(selectedIndices)")
+        }
+        
+        return collectionView
+    }
+    
+    func updateUIView(_ uiView: FavoriteSpotRankCollectionView, context: Context) {
+        // 필요 시 업데이트 로직 추가
+    }
+}
+
+struct FavoriteSpotRankCollectionViewPreview_Previews: PreviewProvider {
+    static var previews: some View {
+        FavoriteSpotRankCollectionViewPreview()
+            .edgesIgnoringSafeArea(.all)
+            .previewLayout(.sizeThatFits)
     }
 }

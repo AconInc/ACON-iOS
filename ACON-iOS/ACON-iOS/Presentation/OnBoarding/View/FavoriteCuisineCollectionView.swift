@@ -40,29 +40,29 @@ final class FavoriteCuisineCollectionView: UICollectionView {
     private func setDelegate() {
         delegate = self
         dataSource = self
-        register(DislikeCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
+        register(SmallBoxViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
     }
 }
 
 extension FavoriteCuisineCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth = ScreenUtils.width * 0.28
-        let itemHeight = itemWidth
+        let itemWidth = ScreenUtils.width * 101 / 360
+        let itemHeight = itemWidth * 1.277
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return ScreenUtils.width * 0.08
+        return ScreenUtils.height * 12 / 780
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return ScreenUtils.width * 0.02
+        return ScreenUtils.width * 8 / 360
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UIEdgeInsets) -> UIEdgeInsets {
-        let horizontalInset = ScreenUtils.width * 0.02
-        let verticalInset = ScreenUtils.width * 0.1
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let horizontalInset = ScreenUtils.width * 10 / 360
+        let verticalInset = ScreenUtils.height * 0.1
         return UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
     }
 }
@@ -74,7 +74,7 @@ extension FavoriteCuisineCollectionView: UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.cellIdentifier, for: indexPath) as? DislikeCollectionViewCell else {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.cellIdentifier, for: indexPath) as? SmallBoxViewCell else {
             return UICollectionViewCell()
         }
         
