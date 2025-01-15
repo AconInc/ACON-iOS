@@ -83,6 +83,7 @@
 		74B25C302D2FEFE1008BDCB7 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C2F2D2FEFE1008BDCB7 /* Release.xcconfig */; };
 		74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C312D2FF022008BDCB7 /* Shared.xcconfig */; };
 		74BF91FA2D38164400B923E3 /* SpotDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF91F92D38163F00B923E3 /* SpotDetailView.swift */; };
+		74BF91FD2D381FF800B923E3 /* SpotDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF91FC2D381FF400B923E3 /* SpotDetailModel.swift */; };
 		74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */; };
 		74CDCE562D310B1600E3A21A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE552D310B1300E3A21A /* String+.swift */; };
 /* End PBXBuildFile section */
@@ -160,6 +161,7 @@
 		74B25C2F2D2FEFE1008BDCB7 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		74B25C312D2FF022008BDCB7 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
 		74BF91F92D38163F00B923E3 /* SpotDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailView.swift; sourceTree = "<group>"; };
+		74BF91FC2D381FF400B923E3 /* SpotDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailModel.swift; sourceTree = "<group>"; };
 		74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACFontStyleType.swift; sourceTree = "<group>"; };
 		74CDCE552D310B1300E3A21A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -606,6 +608,7 @@
 		74BF91F72D38138200B923E3 /* SpotDetail */ = {
 			isa = PBXGroup;
 			children = (
+				74BF91FB2D381EF100B923E3 /* Model */,
 				74BF91F82D38162900B923E3 /* View */,
 			);
 			path = SpotDetail;
@@ -617,6 +620,14 @@
 				74BF91F92D38163F00B923E3 /* SpotDetailView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		74BF91FB2D381EF100B923E3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				74BF91FC2D381FF400B923E3 /* SpotDetailModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -778,6 +789,7 @@
 				1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */,
 				1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */,
 				74CDCE562D310B1600E3A21A /* String+.swift in Sources */,
+				74BF91FD2D381FF800B923E3 /* SpotDetailModel.swift in Sources */,
 				1547A8852D3595B600E96616 /* SpotListFilterModel.swift in Sources */,
 				748D6F8B2D2BD31B007690B4 /* UIStackView+.swift in Sources */,
 				748D6F912D2BD450007690B4 /* UILabel+.swift in Sources */,
