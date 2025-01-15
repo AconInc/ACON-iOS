@@ -71,6 +71,8 @@
 		74CCB0822D36B3B200B254B7 /* LocalVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CCB0812D36B3AA00B254B7 /* LocalVerificationViewController.swift */; };
 		74CCB0842D36C43C00B254B7 /* LocalMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CCB0832D36C43400B254B7 /* LocalMapView.swift */; };
 		74CCB0862D36D4AA00B254B7 /* LocalMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CCB0852D36D4A400B254B7 /* LocalMapViewController.swift */; };
+		74CCB0882D370B9100B254B7 /* LocalVerificationFinishedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CCB0872D370B6F00B254B7 /* LocalVerificationFinishedViewController.swift */; };
+		74CCB08A2D370BB100B254B7 /* LocalVerificationFinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CCB0892D370BAC00B254B7 /* LocalVerificationFinishedView.swift */; };
 		74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */; };
 		74CDCE562D310B1600E3A21A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE552D310B1300E3A21A /* String+.swift */; };
 /* End PBXBuildFile section */
@@ -136,6 +138,8 @@
 		74CCB0812D36B3AA00B254B7 /* LocalVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationViewController.swift; sourceTree = "<group>"; };
 		74CCB0832D36C43400B254B7 /* LocalMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMapView.swift; sourceTree = "<group>"; };
 		74CCB0852D36D4A400B254B7 /* LocalMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMapViewController.swift; sourceTree = "<group>"; };
+		74CCB0872D370B6F00B254B7 /* LocalVerificationFinishedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFinishedViewController.swift; sourceTree = "<group>"; };
+		74CCB0892D370BAC00B254B7 /* LocalVerificationFinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFinishedView.swift; sourceTree = "<group>"; };
 		74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACFontStyleType.swift; sourceTree = "<group>"; };
 		74CDCE552D310B1300E3A21A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -487,6 +491,8 @@
 		74CCB07E2D36AA8000B254B7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				74CCB0892D370BAC00B254B7 /* LocalVerificationFinishedView.swift */,
+				74CCB0872D370B6F00B254B7 /* LocalVerificationFinishedViewController.swift */,
 				74CCB0852D36D4A400B254B7 /* LocalMapViewController.swift */,
 				74CCB0832D36C43400B254B7 /* LocalMapView.swift */,
 				74CCB0812D36B3AA00B254B7 /* LocalVerificationViewController.swift */,
@@ -640,6 +646,7 @@
 				748D6FAE2D2EBB9C007690B4 /* ACFont.swift in Sources */,
 				748D6F692D2BCA1C007690B4 /* AppDelegate.swift in Sources */,
 				74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */,
+				74CCB08A2D370BB100B254B7 /* LocalVerificationFinishedView.swift in Sources */,
 				745C7E0D2D35A04A0074DBDB /* RelatedSearchCollectionViewCell.swift in Sources */,
 				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
 				748D6F852D2BD230007690B4 /* DummyService.swift in Sources */,
@@ -672,6 +679,7 @@
 				1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */,
 				74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */,
 				748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */,
+				74CCB0882D370B9100B254B7 /* LocalVerificationFinishedViewController.swift in Sources */,
 				1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */,
 				748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */,
 				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,

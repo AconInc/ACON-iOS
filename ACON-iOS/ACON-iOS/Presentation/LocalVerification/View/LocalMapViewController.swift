@@ -78,7 +78,9 @@ private extension LocalMapViewController {
 
     @objc
     func finishVerificationButtonTapped() {
-        // TODO: - 인증완료모달
+        let vc = LocalVerificationFinishedViewController()
+        vc.setMiddleSheetLayout()
+        self.present(vc, animated: true)
     }
     
 }
