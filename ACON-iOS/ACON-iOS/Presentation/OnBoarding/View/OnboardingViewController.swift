@@ -146,6 +146,11 @@ final class OnboardingViewController: UIViewController {
         }
     }
     
+    
+}
+    
+extension OnboardingViewController {
+    
     private func updateNextButtonState(isEnabled: Bool) {
         nextButton.isEnabled = isEnabled
         nextButton.backgroundColor = isEnabled ? .gray5 : .gray8
@@ -154,6 +159,7 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func setBinding() {
+        
         viewModel.dislike.bind { [weak self] dislikedFoods in
             print("Disliked Foods: \(dislikedFoods ?? [])")
             self?.updateNextButtonState(isEnabled: !(dislikedFoods?.isEmpty ?? true))
@@ -298,7 +304,7 @@ final class OnboardingViewController: UIViewController {
     }
     
     @objc private func nextStack(){
-        // MARK: TODO -> Popup alert
+        // MARK : TODO -> Popup alert
         print("alert")
     }
     
@@ -345,18 +351,6 @@ final class OnboardingViewController: UIViewController {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 struct FoodSelectionViewControllerPreview: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> OnboardingViewController {
         OnboardingViewController()
@@ -375,4 +369,20 @@ struct FoodSelectionViewControllerPreview_Previews: PreviewProvider {
 }
 
 
-
+//
+//
+//enum Onboarding {
+//
+//
+//    static let progressNumberList = ["01", "02", "03", "04", "05"]
+//    
+//    static let progressTitleList = [
+//        "싫어하는 음식을 선택해 주세요",
+//        "선호하는 음식을 Top3까지 순위를 매겨주세요",
+//        "어디를 더 자주 가나요?",
+//        "내가 좋아하는 맛집 스타일은?",
+//        "내가 선호하는 공간의 순위는?"
+//    ]
+//    
+//
+//}

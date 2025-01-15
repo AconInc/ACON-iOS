@@ -5,7 +5,7 @@
 //  Created by Jaehyun Ahn on 1/16/25.
 //
 
-import Foundation
+import UIKit
 
 enum OnboardingType {
 
@@ -19,4 +19,5 @@ enum OnboardingType {
         "내가 선호하는 공간의 순위는?"
     ]
     
+   
 }

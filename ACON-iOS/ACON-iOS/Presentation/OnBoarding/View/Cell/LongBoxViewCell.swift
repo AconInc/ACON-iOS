@@ -30,8 +30,8 @@ final class LongBoxViewCell: BaseCollectionViewCell {
     }
     
     override func setStyle() {
-        super.setStyle()
         
+
         imageView.do {
             $0.layer.cornerRadius = 8
             $0.backgroundColor = .clear
