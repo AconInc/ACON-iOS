@@ -14,6 +14,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     // MARK: - UI Properties
     
     private let bgImage = UIImageView()
+    private let dimImage = UIImageView()
     
     private let matchingRateView = UIView()
     private let matchingRateLabel = UILabel()
@@ -35,6 +36,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         super.setHierarchy()
         
         self.addSubviews(bgImage,
+                         dimImage,
                          matchingRateView,
                          stackView)
         
@@ -55,6 +57,10 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         
         bgImage.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+        
+        dimImage.snp.makeConstraints {
+            $0.edges.equalTo(bgImage)
         }
         
         matchingRateView.snp.makeConstraints {
@@ -80,9 +86,15 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         backgroundColor = .clear
         
         bgImage.do {
+            $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
             $0.layer.cornerRadius = 6
+        }
+        
+        dimImage.do {
             $0.clipsToBounds = true
+            $0.image = .dimGra2
+            $0.layer.cornerRadius = 6
         }
         
         matchingRateView.do {
