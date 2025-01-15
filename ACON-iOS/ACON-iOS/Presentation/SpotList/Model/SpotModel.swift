@@ -36,7 +36,7 @@ extension Spots {
     static let dummy: [Spot] = [
         Spot(
             image: .imgEx1,
-            matchingRate: 98,
+            matchingRate: 100,
             type: "CAFE",
             name: "카페1",
             walkingTime: 5
@@ -50,7 +50,7 @@ extension Spots {
         ),
         Spot(
             image: .imgEx3,
-            matchingRate: 80,
+            matchingRate: 5,
             type: "RESTAURANT",
             name: "햄버거 가게3",
             walkingTime: 5
