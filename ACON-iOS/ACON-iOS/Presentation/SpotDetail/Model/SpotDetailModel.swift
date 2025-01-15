@@ -31,7 +31,7 @@ struct SpotDetail: Equatable {
 }
 
 
-struct SpotMenuInfo {
+struct SpotMenuInfo: Equatable {
     
     let menuID: Int
     
