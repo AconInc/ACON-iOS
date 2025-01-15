@@ -12,15 +12,6 @@ import Then
 
 final class FavoriteCuisineCollectionView: UICollectionView {
     
-    private let options: [(name: String, image: UIImage?)] = [
-        ("한식", UIImage(named: "koreaFood") ?? UIImage(systemName: "photo")),
-        ("양식", UIImage(named: "westFood") ?? UIImage(systemName: "photo")),
-        ("중식", UIImage(named: "chineseFood") ?? UIImage(systemName: "photo")),
-        ("일식", UIImage(named: "japaneseFood") ?? UIImage(systemName: "photo")),
-        ("분식", UIImage(named: "koreaStreetFood") ?? UIImage(systemName: "photo")),
-        ("아시안", UIImage(named: "asianFood") ?? UIImage(systemName: "photo"))
-    ]
-    
     var selectedIndices: [String] = [] {
         didSet {
             reloadData()
@@ -29,7 +20,7 @@ final class FavoriteCuisineCollectionView: UICollectionView {
         }
     }
     
-    var onSelectionChanged: (([String]) -> Void)? 
+    var onSelectionChanged: (([String]) -> Void)?
     
     init() {
         super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -51,38 +42,35 @@ final class FavoriteCuisineCollectionView: UICollectionView {
         dataSource = self
         register(DislikeCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
     }
-    
 }
-    
+
 extension FavoriteCuisineCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let screenWidth = UIScreen.main.bounds.width
-        let itemWidth = screenWidth * 0.28
+        let itemWidth = ScreenUtils.width * 0.28
         let itemHeight = itemWidth
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return UIScreen.main.bounds.width * 0.08
+        return ScreenUtils.width * 0.08
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return UIScreen.main.bounds.width * 0.02
+        return ScreenUtils.width * 0.02
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UIEdgeInsets) -> UIEdgeInsets {
         let horizontalInset = UIScreen.main.bounds.width * 0.02
         let verticalInset = UIScreen.main.bounds.width * 0.1
         return UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
     }
-    
 }
 
 extension FavoriteCuisineCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return options.count
+        return FavoriteCuisineType.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -90,31 +78,26 @@ extension FavoriteCuisineCollectionView: UICollectionViewDelegate, UICollectionV
             return UICollectionViewCell()
         }
         
-        let option = options[indexPath.row]
+        let option = FavoriteCuisineType.allCases[indexPath.row]
         
-        // 터치한 순서를 기반으로 index를 설정
-        let isSelected = selectedIndices.firstIndex(of: OnboardingMapping.favoriteCuisines[indexPath.row]).map { $0 + 1 } ?? 0
+        // NOTE: 터치한 순서를 기반으로 index를 설정
+        let isSelected = selectedIndices.firstIndex(of: option.mappedValue).map { $0 + 1 } ?? 0
         
         cell.configure(name: option.name, image: option.image, isSelected: isSelected)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedValue = OnboardingMapping.favoriteCuisines[indexPath.row]
+        let selectedOption = FavoriteCuisineType.allCases[indexPath.row]
 
-        if selectedIndices.contains(selectedValue) {
-            // 이미 선택된 항목이면 배열에서 제거
-            selectedIndices.removeAll { $0 == selectedValue }
+        if selectedIndices.contains(selectedOption.mappedValue) {
+            selectedIndices.removeAll { $0 == selectedOption.mappedValue }
         } else if selectedIndices.count < 3 {
-            // 최대 3개까지만 선택 가능: 새로운 값을 추가
-            selectedIndices.append(selectedValue)
+            selectedIndices.append(selectedOption.mappedValue)
         } else {
             print("최대 3개까지만 선택 가능합니다.")
         }
         
-        // 선택된 값을 터치 순서대로 유지
         print("현재 선택된 값: \(selectedIndices)")
     }
-
-
 }

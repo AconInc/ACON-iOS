@@ -18,9 +18,7 @@ final class AnalyzingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setSytle()
-        setLayout()
-        setHierarchy()
+       
         updateLabelTextAfterDelay()
         
     }

@@ -28,14 +28,7 @@ final class OnboardingViewController: UIViewController {
     
     
     //하드코드
-    private let progressNumberList = ["01", "02", "03", "04", "05"]
-    private let progressTitleList = [
-        "싫어하는 음식을 선택해 주세요",
-        "선호하는 음식을 Top3까지 순위를 매겨주세요",
-        "어디를 더 자주 가나요?",
-        "내가 좋아하는 맛집 스타일은?",
-        "내가 선호하는 공간의 순위는?"
-    ]
+    
     
     private var contentView: UIView?
     private let dislikeCollectionView = DislikeCollectionView()
@@ -217,8 +210,8 @@ final class OnboardingViewController: UIViewController {
                 $0.bottom.equalTo(nextButton.snp.top).offset(-16)
             }
         }
-        progressNumber.text = progressNumberList[step]
-        progressTitle.text = progressTitleList[step]
+        progressNumber.text = StringLiterals.Onboarding.progressNumberList[step]
+        progressTitle.text = StringLiterals.Onboarding.progressTitleList[step]
     }
     
     private func setupDislikeCollectionView() {
@@ -274,7 +267,7 @@ final class OnboardingViewController: UIViewController {
     
     
     @objc private func nextButtonTapped() {
-        if currentStep >= progressNumberList.count - 1 {
+        if currentStep >= StringLiterals.Onboarding.progressNumberList.count - 1 {
             
             // 확인용
             print("Disliked Foods: \(String(describing: viewModel.dislike.value))")
@@ -384,3 +377,23 @@ struct FoodSelectionViewControllerPreview_Previews: PreviewProvider {
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     }
 }
+
+
+//
+//
+//enum Onboarding {
+//
+//    static let onboardingTitle = "당신의 취향을 알려주세요."
+//    
+//    static let progressNumberList = ["01", "02", "03", "04", "05"]
+//    
+//    static let progressTitleList = [
+//        "싫어하는 음식을 선택해 주세요",
+//        "선호하는 음식을 Top3까지 순위를 매겨주세요",
+//        "어디를 더 자주 가나요?",
+//        "내가 좋아하는 맛집 스타일은?",
+//        "내가 선호하는 공간의 순위는?"
+//    ]
+//    
+//
+//}

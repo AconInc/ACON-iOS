@@ -9,15 +9,7 @@ import UIKit
 
 import SnapKit
 import Then
-
 final class FavoriteSpotRankCollectionView: UICollectionView {
-    
-    private let options: [(name: String, image: UIImage?)] = [
-        ("분위기와 인테리어가\n감각적인 곳", UIImage(named: "moodPlace") ?? UIImage(systemName: "photo")),
-        ("새로운 음식을\n 경험할 수 있는 곳", UIImage(named: "newPlace") ?? UIImage(systemName: "photo")),
-        ("가격과 양이 합리적인 곳", UIImage(named: "qualityPlace") ?? UIImage(systemName: "photo")),
-        ("특별한 날을 위한 고급스러운 장소", UIImage(named: "specialPlace") ?? UIImage(systemName: "photo"))
-    ]
     
     var selectedIndices: [String] = [] {
         didSet {
@@ -78,7 +70,7 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegateFlowLayout {
 extension FavoriteSpotRankCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return options.count
+        return FavoriteSpotRankType.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -89,25 +81,21 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegate, UICollection
             return UICollectionViewCell()
         }
         
-        let option = options[indexPath.row]
-        let isSelected = selectedIndices.firstIndex(of: OnboardingMapping.favoriteSpotRanks[indexPath.row]).map { $0 + 1 } ?? 0
-        cell.configure(name: option.name, image: option.image, isSelected: isSelected)
+        let option = FavoriteSpotRankType.allCases[indexPath.row]
+        let isSelected = selectedIndices.contains(option.mappedValue)
+        cell.checkConfigure(name: option.name, image: option.image, isSelected: isSelected)
         return cell
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedValue = OnboardingMapping.favoriteSpotRanks[indexPath.row]
+        let selectedOption = FavoriteSpotRankType.allCases[indexPath.row]
         
-        if let index = selectedIndices.firstIndex(of: selectedValue) {
+        if let index = selectedIndices.firstIndex(of: selectedOption.mappedValue) {
             selectedIndices.remove(at: index)
         } else if selectedIndices.count < 4 {
-            selectedIndices.append(selectedValue)
+            selectedIndices.append(selectedOption.mappedValue)
         } else {
             print("최대 4개까지만 선택 가능")
         }
     }
-    
-    
 }
-

@@ -12,11 +12,6 @@ import Then
 
 final class FavoriteSpotTypeCollectionView: UICollectionView {
     
-    private let options: [(name: String, image: UIImage?)] = [
-        ("음식점", UIImage(named: "restaurant") ?? UIImage(systemName: "photo")),
-        ("카페", UIImage(named: "cafe") ?? UIImage(systemName: "photo"))
-    ]
-    
     var selectedSpotType: String? {
         didSet {
             reloadData()
@@ -75,7 +70,7 @@ extension FavoriteSpotTypeCollectionView: UICollectionViewDelegateFlowLayout {
 extension FavoriteSpotTypeCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return options.count
+        return FavoriteSpotType.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -83,19 +78,19 @@ extension FavoriteSpotTypeCollectionView: UICollectionViewDelegate, UICollection
             return UICollectionViewCell()
         }
         
-        let option = options[indexPath.row]
-        let isSelected = selectedSpotType == OnboardingMapping.favoriteSpotTypes[indexPath.row]
+        let option = FavoriteSpotType.allCases[indexPath.row]
+        let isSelected = selectedSpotType == option.mappedValue
         cell.checkConfigure(name: option.name, image: option.image, isSelected: isSelected)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedValue = OnboardingMapping.favoriteSpotTypes[indexPath.row]
+        let selectedOption = FavoriteSpotType.allCases[indexPath.row]
         
-        if selectedSpotType == selectedValue {
+        if selectedSpotType == selectedOption.mappedValue {
             selectedSpotType = nil
         } else {
-            selectedSpotType = selectedValue
+            selectedSpotType = selectedOption.mappedValue
         }
     }
 }

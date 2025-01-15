@@ -70,7 +70,6 @@
 		74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */; };
 		74CDCE562D310B1600E3A21A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE552D310B1300E3A21A /* String+.swift */; };
 		D6978F502D36E3C800523A25 /* AnalyzingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F4F2D36E3C800523A25 /* AnalyzingViewController.swift */; };
-		D6978F522D37B23E00523A25 /* OnboardingRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F512D37B23E00523A25 /* OnboardingRequestDTO.swift */; };
 		D6978F542D37B29100523A25 /* OnboardingMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F532D37B29100523A25 /* OnboardingMapping.swift */; };
 		D6978F562D3802E400523A25 /* dislike.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F552D3802E400523A25 /* dislike.swift */; };
 		D6D0F50F2D36B99F00326F17 /* DislikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D0F50E2D36B99E00326F17 /* DislikeCollectionViewCell.swift */; };
@@ -81,6 +80,11 @@
 		D6D0F51B2D36BABB00326F17 /* FavoriteSpotRankCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D0F51A2D36BABB00326F17 /* FavoriteSpotRankCollectionView.swift */; };
 		D6D0F51D2D36BAD900326F17 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D0F51C2D36BAD900326F17 /* OnboardingViewModel.swift */; };
 		D6D0F51F2D36BAFE00326F17 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D0F51E2D36BAFE00326F17 /* OnboardingViewController.swift */; };
+		D6FF82E92D3805F000090233 /* DislikeCollectionViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82E82D3805F000090233 /* DislikeCollectionViewType.swift */; };
+		D6FF82EB2D380AAF00090233 /* FavoriteSpotRankType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82EA2D380AAF00090233 /* FavoriteSpotRankType.swift */; };
+		D6FF82ED2D380B6100090233 /* FavoriteSpotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82EC2D380B6100090233 /* FavoriteSpotType.swift */; };
+		D6FF82EF2D380BE800090233 /* FavoriteSpotStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82EE2D380BE800090233 /* FavoriteSpotStyle.swift */; };
+		D6FF82F12D380C4D00090233 /* FavoriteCuisineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82F02D380C4D00090233 /* FavoriteCuisineType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -145,7 +149,6 @@
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB785B4E26FA7C11BB85A55D /* Pods-ACON-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D6978F4F2D36E3C800523A25 /* AnalyzingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzingViewController.swift; sourceTree = "<group>"; };
-		D6978F512D37B23E00523A25 /* OnboardingRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRequestDTO.swift; sourceTree = "<group>"; };
 		D6978F532D37B29100523A25 /* OnboardingMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMapping.swift; sourceTree = "<group>"; };
 		D6978F552D3802E400523A25 /* dislike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dislike.swift; sourceTree = "<group>"; };
 		D6D0F50E2D36B99E00326F17 /* DislikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -156,6 +159,11 @@
 		D6D0F51A2D36BABB00326F17 /* FavoriteSpotRankCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSpotRankCollectionView.swift; sourceTree = "<group>"; };
 		D6D0F51C2D36BAD900326F17 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		D6D0F51E2D36BAFE00326F17 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		D6FF82E82D3805F000090233 /* DislikeCollectionViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeCollectionViewType.swift; sourceTree = "<group>"; };
+		D6FF82EA2D380AAF00090233 /* FavoriteSpotRankType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSpotRankType.swift; sourceTree = "<group>"; };
+		D6FF82EC2D380B6100090233 /* FavoriteSpotType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSpotType.swift; sourceTree = "<group>"; };
+		D6FF82EE2D380BE800090233 /* FavoriteSpotStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSpotStyle.swift; sourceTree = "<group>"; };
+		D6FF82F02D380C4D00090233 /* FavoriteCuisineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCuisineType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -505,6 +513,7 @@
 		D6D0F4FD2D36B91100326F17 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D6FF82E72D3805D500090233 /* Type */,
 				D6D0F5012D36B95B00326F17 /* Cell */,
 				D6D0F5122D36BA2900326F17 /* FavoriteCuisineCollectionView.swift */,
 				D6D0F5142D36BA6500326F17 /* DislikeCollectionView.swift */,
@@ -528,7 +537,6 @@
 		D6D0F5002D36B95400326F17 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D6978F512D37B23E00523A25 /* OnboardingRequestDTO.swift */,
 				D6978F532D37B29100523A25 /* OnboardingMapping.swift */,
 			);
 			path = Model;
@@ -541,6 +549,18 @@
 				D6978F552D3802E400523A25 /* dislike.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		D6FF82E72D3805D500090233 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				D6FF82E82D3805F000090233 /* DislikeCollectionViewType.swift */,
+				D6FF82EA2D380AAF00090233 /* FavoriteSpotRankType.swift */,
+				D6FF82EC2D380B6100090233 /* FavoriteSpotType.swift */,
+				D6FF82EE2D380BE800090233 /* FavoriteSpotStyle.swift */,
+				D6FF82F02D380C4D00090233 /* FavoriteCuisineType.swift */,
+			);
+			path = Type;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -683,6 +703,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				748D6F952D2BD4DB007690B4 /* UICollectionViewCell+.swift in Sources */,
+				D6FF82ED2D380B6100090233 /* FavoriteSpotType.swift in Sources */,
 				748D6F822D2BCDB3007690B4 /* ScreenUtils.swift in Sources */,
 				745C7E122D35A62B0074DBDB /* UploadModel.swift in Sources */,
 				748D6FAE2D2EBB9C007690B4 /* ACFont.swift in Sources */,
@@ -706,6 +727,8 @@
 				748ECA6B2D31918D00BBC981 /* LoginView.swift in Sources */,
 				748D6F972D2BD544007690B4 /* DummyType.swift in Sources */,
 				74220DD42D34363B000684BF /* SpotUploadViewController.swift in Sources */,
+				D6FF82F12D380C4D00090233 /* FavoriteCuisineType.swift in Sources */,
+				D6FF82EF2D380BE800090233 /* FavoriteSpotStyle.swift in Sources */,
 				741A07592D355F1400778219 /* ReviewFinishedViewController.swift in Sources */,
 				748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */,
 				745C7E042D3599DF0074DBDB /* SpotSearchViewController.swift in Sources */,
@@ -714,7 +737,6 @@
 				748D6F8F2D2BD340007690B4 /* UIButton+.swift in Sources */,
 				741A07572D3558FE00778219 /* ReviewFinishedView.swift in Sources */,
 				D6978F562D3802E400523A25 /* dislike.swift in Sources */,
-				D6978F522D37B23E00523A25 /* OnboardingRequestDTO.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
 				D6D0F51B2D36BABB00326F17 /* FavoriteSpotRankCollectionView.swift in Sources */,
 				D6D0F50F2D36B99F00326F17 /* DislikeCollectionViewCell.swift in Sources */,
@@ -726,6 +748,7 @@
 				748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */,
 				1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */,
 				748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */,
+				D6FF82E92D3805F000090233 /* DislikeCollectionViewType.swift in Sources */,
 				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,
 				D6978F542D37B29100523A25 /* OnboardingMapping.swift in Sources */,
 				D6D0F51F2D36BAFE00326F17 /* OnboardingViewController.swift in Sources */,
@@ -736,6 +759,7 @@
 				745C7E022D358E900074DBDB /* SpotSearchView.swift in Sources */,
 				D6D0F5132D36BA2900326F17 /* FavoriteCuisineCollectionView.swift in Sources */,
 				D6D0F5172D36BA9A00326F17 /* FavoriteSpotTypeCollectionView.swift in Sources */,
+				D6FF82EB2D380AAF00090233 /* FavoriteSpotRankType.swift in Sources */,
 				D6D0F5152D36BA6500326F17 /* DislikeCollectionView.swift in Sources */,
 				745C7E152D35AEC10074DBDB /* SpotSearchViewModel.swift in Sources */,
 				748D6F6B2D2BCA1C007690B4 /* ViewController.swift in Sources */,

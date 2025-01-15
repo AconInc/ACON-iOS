@@ -12,11 +12,6 @@ import Then
 
 final class FavoriteSpotStyleCollectionView: UICollectionView {
     
-    private let options: [(name: String, image: UIImage?)] = [
-        ("노포", UIImage(named: "nopo") ?? UIImage(systemName: "photo")),
-        ("모던", UIImage(named: "mordern") ?? UIImage(systemName: "photo"))
-    ]
-    
     var selectedStyle: String? {
         didSet {
             reloadData()
@@ -74,7 +69,7 @@ extension FavoriteSpotStyleCollectionView: UICollectionViewDelegateFlowLayout {
 extension FavoriteSpotStyleCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return options.count
+        return FavoriteSpotStyle.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -82,19 +77,19 @@ extension FavoriteSpotStyleCollectionView: UICollectionViewDelegate, UICollectio
             return UICollectionViewCell()
         }
         
-        let option = options[indexPath.row]
-        let isSelected = selectedStyle == OnboardingMapping.favoriteSpotStyles[indexPath.row]
+        let option = FavoriteSpotStyle.allCases[indexPath.row]
+        let isSelected = selectedStyle == option.mappedValue
         cell.checkConfigure(name: option.name, image: option.image, isSelected: isSelected)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedValue = OnboardingMapping.favoriteSpotStyles[indexPath.row]
+        let selectedOption = FavoriteSpotStyle.allCases[indexPath.row]
         
-        if selectedStyle == selectedValue {
+        if selectedStyle == selectedOption.mappedValue {
             selectedStyle = nil
         } else {
-            selectedStyle = selectedValue
+            selectedStyle = selectedOption.mappedValue
         }
     }
 }

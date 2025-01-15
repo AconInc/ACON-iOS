@@ -12,15 +12,6 @@ import Then
 
 final class DislikeCollectionView: UICollectionView {
     
-    private let options: [(name: String, image: UIImage?)] = [
-        ("닭발", UIImage(named: "chickenFeet") ?? UIImage(systemName: "photo")),
-        ("회/육회", UIImage(named: "sashimi") ?? UIImage(systemName: "photo")),
-        ("곱창/대창/막창", UIImage(named: "intestines") ?? UIImage(systemName: "photo")),
-        ("순대/선지", UIImage(named: "soonde") ?? UIImage(systemName: "photo")),
-        ("양고기", UIImage(named: "lamb") ?? UIImage(systemName: "photo")),
-        ("없음", UIImage(named: "none") ?? UIImage(systemName: "photo"))
-    ]
-    
     var selectedIndices: [String] = [] {
         didSet {
             reloadData()
@@ -62,16 +53,16 @@ extension DislikeCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return UIScreen.main.bounds.width * 0.08
+        return ScreenUtils.width * 0.08
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return UIScreen.main.bounds.width * 0.02
+        return ScreenUtils.width * 0.02
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let horizontalInset = UIScreen.main.bounds.width * 0.02
-        let verticalInset = UIScreen.main.bounds.width * 0.1
+        let horizontalInset = ScreenUtils.width * 0.02
+        let verticalInset = ScreenUtils.width * 0.1
         return UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
     }
 }
@@ -79,33 +70,33 @@ extension DislikeCollectionView: UICollectionViewDelegateFlowLayout {
 extension DislikeCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return options.count
+        return DislikeType.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.cellIdentifier, for: indexPath) as? DislikeCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let option = options[indexPath.row]
-        let isSelected = selectedIndices.contains(OnboardingMapping.dislikeOptions[indexPath.row])
+        let option = DislikeType.allCases[indexPath.row]
+        let isSelected = selectedIndices.contains(option.mappedValue)
         cell.checkConfigure(name: option.name, image: option.image, isSelected: isSelected)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedValue = OnboardingMapping.dislikeOptions[indexPath.row]
+        let selectedOption = DislikeType.allCases[indexPath.row]
         
-        if selectedValue == "NONE" {
-            selectedIndices = selectedIndices == ["NONE"] ? [] : ["NONE"]
+        if selectedOption == .none {
+            selectedIndices = selectedIndices == [selectedOption.mappedValue] ? [] : [selectedOption.mappedValue]
         } else {
-            if selectedIndices.contains("NONE") {
+            if selectedIndices.contains(DislikeType.none.mappedValue) {
                 selectedIndices.removeAll()
             }
             
-            if selectedIndices.contains(selectedValue) {
-                selectedIndices.removeAll { $0 == selectedValue }
+            if selectedIndices.contains(selectedOption.mappedValue) {
+                selectedIndices.removeAll { $0 == selectedOption.mappedValue }
             } else if selectedIndices.count < 5 {
-                selectedIndices.append(selectedValue)
+                selectedIndices.append(selectedOption.mappedValue)
             } else {
                 print("최대 5개까지만 선택 가능합니다.")
             }
