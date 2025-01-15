@@ -26,6 +26,15 @@ class LocalVerificationFinishedViewController: BaseViewController {
         addTarget()
     }
     
+    var dismissCompletion: (() -> Void)?
+        
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isBeingDismissed {
+            dismissCompletion?()
+        }
+    }
+    
     override func setHierarchy() {
         super.setHierarchy()
         

@@ -94,6 +94,8 @@ final class LocalVerificationFinishedView: BaseView {
         super.setStyle()
         
         self.setHandlerImageView()
+        self.backgroundColor = .dimB60
+        self.backgroundColor?.withAlphaComponent(0.8)
         
         explainationLabel.do {
             $0.setLabel(text:  StringLiterals.LocalVerification.localAcornExplaination,

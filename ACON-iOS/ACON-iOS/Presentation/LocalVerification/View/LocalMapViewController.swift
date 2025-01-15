@@ -17,6 +17,8 @@ class LocalMapViewController: BaseNavViewController {
     
     private let localMapView = LocalMapView()
     
+    private var viewBlurEffect: UIVisualEffectView = UIVisualEffectView()
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -79,7 +81,12 @@ private extension LocalMapViewController {
     @objc
     func finishVerificationButtonTapped() {
         let vc = LocalVerificationFinishedViewController()
+        vc.dismissCompletion = { [weak self] in
+            self?.removeBlurView()
+        }
+        
         vc.setMiddleSheetLayout()
+        self.addBlurView()
         self.present(vc, animated: true)
     }
     
@@ -97,7 +104,7 @@ extension LocalMapViewController {
         // NOTE: 최초 1회만 받고 중지
         ACLocationManager.shared.stopUpdatingLocation()
     }
-    
+      
 }
 
 
