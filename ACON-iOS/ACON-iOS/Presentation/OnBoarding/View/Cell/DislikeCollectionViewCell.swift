@@ -17,7 +17,6 @@ final class DislikeCollectionViewCell: BaseCollectionViewCell {
     private let overlayImageView = UIImageView()
     private let overlayContainer = UIView()
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setStyle()
@@ -29,7 +28,8 @@ final class DislikeCollectionViewCell: BaseCollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    internal override func setStyle() {
+    override func setStyle() {
+        super.setStyle()
         
         imageView.do {
             $0.layer.cornerRadius = 8
@@ -42,6 +42,7 @@ final class DislikeCollectionViewCell: BaseCollectionViewCell {
             $0.font = ACFont.s2.font
             $0.textColor = .acWhite
             $0.textAlignment = .center
+            $0.numberOfLines = 0
         }
         
         overlayContainer.do {
@@ -54,19 +55,22 @@ final class DislikeCollectionViewCell: BaseCollectionViewCell {
             $0.contentMode = .scaleAspectFill
             $0.alpha = 0
         }
-        
     }
     
-    internal override func setHierarchy() {
+    override func setHierarchy() {
+        super.setHierarchy()
         
-        contentView.addSubviews(imageView,overlayContainer,titleLabel)
+        contentView.addSubviews(imageView,titleLabel,overlayContainer)
         overlayContainer.addSubview(overlayImageView)
     }
     
     internal override func setLayout() {
         
         imageView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+//            $0.edges.equalToSuperview()
+            $0.top.centerX.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.height*154/780)
+            $0.width.equalTo(ScreenUtils.height*154/780)
         }
         
         titleLabel.snp.makeConstraints {
@@ -80,11 +84,11 @@ final class DislikeCollectionViewCell: BaseCollectionViewCell {
         
         overlayImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            
         }
+        
     }
     
-    func configure(name: String, image: UIImage?, isSelected: Bool) {
+    func checkConfigure(name: String, image: UIImage?, isSelected: Bool) {
         
         titleLabel.text = name
         imageView.image = image ?? UIImage(systemName: "photo")
@@ -99,6 +103,36 @@ final class DislikeCollectionViewCell: BaseCollectionViewCell {
             overlayImageView.alpha = 0
         }
         
+    }
+    
+    
+    func configure(name: String, image: UIImage?, isSelected: Int) {
+        
+        titleLabel.text = name
+        imageView.image = image ?? UIImage(systemName: "photo")
+        
+        switch isSelected {
+        case 1:
+            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            overlayImageView.image = UIImage(named: "1")
+            overlayImageView.alpha = 1
+        case 2:
+            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            overlayImageView.image = UIImage(named: "2")
+            overlayImageView.alpha = 1
+        case 3:
+            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            overlayImageView.image = UIImage(named: "3")
+            overlayImageView.alpha = 1
+        case 4:
+            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            overlayImageView.image = UIImage(named: "4")
+            overlayImageView.alpha = 1
+        default:
+            overlayContainer.backgroundColor = .clear
+            overlayImageView.image = nil
+            overlayImageView.alpha = 0
+        }
     }
 }
 

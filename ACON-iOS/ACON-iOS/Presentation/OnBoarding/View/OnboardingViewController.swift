@@ -72,7 +72,6 @@ final class OnboardingViewController: UIViewController {
             $0.setTitleColor(.acWhite, for: .normal)
             $0.titleLabel?.font = ACFont.b2.font
             $0.addTarget(self, action: #selector(nextStack), for: .touchUpInside)
-            
         }
         
         progressView.do {

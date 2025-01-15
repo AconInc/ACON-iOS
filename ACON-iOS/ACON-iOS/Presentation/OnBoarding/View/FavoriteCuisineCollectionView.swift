@@ -49,7 +49,7 @@ final class FavoriteCuisineCollectionView: UICollectionView {
     private func setDelegate() {
         delegate = self
         dataSource = self
-        register(FavoriteCuisineCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
+        register(DislikeCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
     }
     
 }
@@ -86,7 +86,7 @@ extension FavoriteCuisineCollectionView: UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.cellIdentifier, for: indexPath) as? FavoriteCuisineCollectionViewCell else {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.cellIdentifier, for: indexPath) as? DislikeCollectionViewCell else {
             return UICollectionViewCell()
         }
         

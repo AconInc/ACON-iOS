@@ -42,35 +42,35 @@ final class FavoriteSpotRankCollectionView: UICollectionView {
     private func setStyle() {
         backgroundColor = .clear
         showsVerticalScrollIndicator = false
+        isScrollEnabled = false
     }
     
     private func setDelegate() {
         delegate = self
         dataSource = self
-        register(FavoriteCuisineCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
+        register(DislikeCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
     }
 }
 
 extension FavoriteSpotRankCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let screenWidth = UIScreen.main.bounds.width
-        let itemWidth = screenWidth * 0.427
-        let itemHeight = itemWidth
+        let itemWidth = ScreenUtils.width * 154 / 360
+        let itemHeight = ScreenUtils.height * 202 / 780
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return UIScreen.main.bounds.width * 0.12
+        return ScreenUtils.height * 12 / 780
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return UIScreen.main.bounds.width * 0.02
+        return ScreenUtils.width * 12 / 360
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let horizontalInset = UIScreen.main.bounds.width * 0.04
-        let verticalInset = UIScreen.main.bounds.width * 0.1
+        let horizontalInset = ScreenUtils.width * 20 / 360
+        let verticalInset = ScreenUtils.height * 28 / 780
         return UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
     }
 }
@@ -85,7 +85,7 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegate, UICollection
         guard let cell = dequeueReusableCell(
             withReuseIdentifier: BaseCollectionViewCell.cellIdentifier,
             for: indexPath
-        ) as? FavoriteCuisineCollectionViewCell else {
+        ) as? DislikeCollectionViewCell else {
             return UICollectionViewCell()
         }
         

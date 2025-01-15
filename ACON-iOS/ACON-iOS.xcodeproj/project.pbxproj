@@ -72,8 +72,8 @@
 		D6978F502D36E3C800523A25 /* AnalyzingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F4F2D36E3C800523A25 /* AnalyzingViewController.swift */; };
 		D6978F522D37B23E00523A25 /* OnboardingRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F512D37B23E00523A25 /* OnboardingRequestDTO.swift */; };
 		D6978F542D37B29100523A25 /* OnboardingMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F532D37B29100523A25 /* OnboardingMapping.swift */; };
+		D6978F562D3802E400523A25 /* dislike.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F552D3802E400523A25 /* dislike.swift */; };
 		D6D0F50F2D36B99F00326F17 /* DislikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D0F50E2D36B99E00326F17 /* DislikeCollectionViewCell.swift */; };
-		D6D0F5112D36B9F200326F17 /* FavoriteCuisineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D0F5102D36B9F200326F17 /* FavoriteCuisineCollectionViewCell.swift */; };
 		D6D0F5132D36BA2900326F17 /* FavoriteCuisineCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D0F5122D36BA2900326F17 /* FavoriteCuisineCollectionView.swift */; };
 		D6D0F5152D36BA6500326F17 /* DislikeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D0F5142D36BA6500326F17 /* DislikeCollectionView.swift */; };
 		D6D0F5172D36BA9A00326F17 /* FavoriteSpotTypeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D0F5162D36BA9A00326F17 /* FavoriteSpotTypeCollectionView.swift */; };
@@ -147,8 +147,8 @@
 		D6978F4F2D36E3C800523A25 /* AnalyzingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzingViewController.swift; sourceTree = "<group>"; };
 		D6978F512D37B23E00523A25 /* OnboardingRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRequestDTO.swift; sourceTree = "<group>"; };
 		D6978F532D37B29100523A25 /* OnboardingMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMapping.swift; sourceTree = "<group>"; };
+		D6978F552D3802E400523A25 /* dislike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dislike.swift; sourceTree = "<group>"; };
 		D6D0F50E2D36B99E00326F17 /* DislikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeCollectionViewCell.swift; sourceTree = "<group>"; };
-		D6D0F5102D36B9F200326F17 /* FavoriteCuisineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCuisineCollectionViewCell.swift; sourceTree = "<group>"; };
 		D6D0F5122D36BA2900326F17 /* FavoriteCuisineCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCuisineCollectionView.swift; sourceTree = "<group>"; };
 		D6D0F5142D36BA6500326F17 /* DislikeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeCollectionView.swift; sourceTree = "<group>"; };
 		D6D0F5162D36BA9A00326F17 /* FavoriteSpotTypeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSpotTypeCollectionView.swift; sourceTree = "<group>"; };
@@ -508,9 +508,9 @@
 				D6D0F5012D36B95B00326F17 /* Cell */,
 				D6D0F5122D36BA2900326F17 /* FavoriteCuisineCollectionView.swift */,
 				D6D0F5142D36BA6500326F17 /* DislikeCollectionView.swift */,
+				D6D0F51A2D36BABB00326F17 /* FavoriteSpotRankCollectionView.swift */,
 				D6D0F5162D36BA9A00326F17 /* FavoriteSpotTypeCollectionView.swift */,
 				D6D0F5182D36BAAB00326F17 /* FavoriteSpotStyleCollectionView.swift */,
-				D6D0F51A2D36BABB00326F17 /* FavoriteSpotRankCollectionView.swift */,
 				D6D0F51E2D36BAFE00326F17 /* OnboardingViewController.swift */,
 				D6978F4F2D36E3C800523A25 /* AnalyzingViewController.swift */,
 			);
@@ -538,7 +538,7 @@
 			isa = PBXGroup;
 			children = (
 				D6D0F50E2D36B99E00326F17 /* DislikeCollectionViewCell.swift */,
-				D6D0F5102D36B9F200326F17 /* FavoriteCuisineCollectionViewCell.swift */,
+				D6978F552D3802E400523A25 /* dislike.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -689,7 +689,6 @@
 				748D6F692D2BCA1C007690B4 /* AppDelegate.swift in Sources */,
 				74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */,
 				745C7E0D2D35A04A0074DBDB /* RelatedSearchCollectionViewCell.swift in Sources */,
-				D6D0F5112D36B9F200326F17 /* FavoriteCuisineCollectionViewCell.swift in Sources */,
 				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
 				748D6F852D2BD230007690B4 /* DummyService.swift in Sources */,
 				74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */,
@@ -714,6 +713,7 @@
 				74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */,
 				748D6F8F2D2BD340007690B4 /* UIButton+.swift in Sources */,
 				741A07572D3558FE00778219 /* ReviewFinishedView.swift in Sources */,
+				D6978F562D3802E400523A25 /* dislike.swift in Sources */,
 				D6978F522D37B23E00523A25 /* OnboardingRequestDTO.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
 				D6D0F51B2D36BABB00326F17 /* FavoriteSpotRankCollectionView.swift in Sources */,

@@ -84,7 +84,7 @@ extension FavoriteSpotStyleCollectionView: UICollectionViewDelegate, UICollectio
         
         let option = options[indexPath.row]
         let isSelected = selectedStyle == OnboardingMapping.favoriteSpotStyles[indexPath.row]
-        cell.configure(name: option.name, image: option.image, isSelected: isSelected)
+        cell.checkConfigure(name: option.name, image: option.image, isSelected: isSelected)
         return cell
     }
     

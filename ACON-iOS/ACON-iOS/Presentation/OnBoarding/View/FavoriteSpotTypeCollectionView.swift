@@ -21,7 +21,7 @@ final class FavoriteSpotTypeCollectionView: UICollectionView {
         didSet {
             reloadData()
             if let selectedSpotType = selectedSpotType {
-                onSelectionChanged?(selectedSpotType) // 선택된 타입 전달
+                onSelectionChanged?(selectedSpotType)
             }
         }
     }
@@ -85,7 +85,7 @@ extension FavoriteSpotTypeCollectionView: UICollectionViewDelegate, UICollection
         
         let option = options[indexPath.row]
         let isSelected = selectedSpotType == OnboardingMapping.favoriteSpotTypes[indexPath.row]
-        cell.configure(name: option.name, image: option.image, isSelected: isSelected)
+        cell.checkConfigure(name: option.name, image: option.image, isSelected: isSelected)
         return cell
     }
     

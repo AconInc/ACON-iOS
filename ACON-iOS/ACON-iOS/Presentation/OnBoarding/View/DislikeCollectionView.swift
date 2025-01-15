@@ -56,9 +56,8 @@ final class DislikeCollectionView: UICollectionView {
 extension DislikeCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let screenWidth = UIScreen.main.bounds.width
-        let itemWidth = screenWidth * 0.28
-        let itemHeight = itemWidth
+        let itemWidth = ScreenUtils.width * 101 / 360
+        let itemHeight = ScreenUtils.width * 129 / 780
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
@@ -89,7 +88,7 @@ extension DislikeCollectionView: UICollectionViewDelegate, UICollectionViewDataS
         }
         let option = options[indexPath.row]
         let isSelected = selectedIndices.contains(OnboardingMapping.dislikeOptions[indexPath.row])
-        cell.configure(name: option.name, image: option.image, isSelected: isSelected)
+        cell.checkConfigure(name: option.name, image: option.image, isSelected: isSelected)
         return cell
     }
     
