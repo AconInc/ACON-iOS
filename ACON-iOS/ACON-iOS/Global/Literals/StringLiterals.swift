@@ -101,6 +101,8 @@ enum StringLiterals {
         
         static let headerTitle = "지금, 나에게 딱 맞는 맛집이에요"
         
+        static let footerText = "장소는 최대 6순위까지만 제공됩니다."
+        
     }
     
 }
