@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 import SnapKit
 import Then
@@ -16,6 +17,8 @@ class LocalVerificationViewController: BaseNavViewController {
     
     private let localVerificationView = LocalVerificationView()
     
+    private var userCoordinate: CLLocationCoordinate2D?
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -23,6 +26,11 @@ class LocalVerificationViewController: BaseNavViewController {
         
         self.setXButton()
         addTarget()
+        ACLocationManager.shared.addDelegate(self)
+    }
+    
+    deinit {
+       ACLocationManager.shared.removeDelegate(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,7 +86,26 @@ private extension LocalVerificationViewController {
     
     @objc
     func nextButtonTapped() {
-        let vc = LocalMapViewController()
+        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
+    }
+    
+}
+
+extension LocalVerificationViewController: ACLocationManagerDelegate {
+    
+    func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
+        print("성공 - 위도: \(coordinate.latitude), 경도: \(coordinate.longitude)")
+        self.userCoordinate = coordinate
+        pushToLocalMapVC()
+    }
+    
+}
+
+extension LocalVerificationViewController {
+
+    func pushToLocalMapVC() {
+        guard let coordinate = userCoordinate else { return }
+        let vc = LocalMapViewController(coordinate: coordinate)
         navigationController?.pushViewController(vc, animated: false)
     }
     

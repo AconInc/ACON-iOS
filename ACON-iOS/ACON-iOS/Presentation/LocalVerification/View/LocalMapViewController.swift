@@ -19,6 +19,8 @@ class LocalMapViewController: BaseNavViewController {
     
     private var viewBlurEffect: UIVisualEffectView = UIVisualEffectView()
     
+    private let coordinate: CLLocationCoordinate2D
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -26,22 +28,22 @@ class LocalMapViewController: BaseNavViewController {
         
         self.setXButton()
         addTarget()
-        ACLocationManager.shared.addDelegate(self)
+    }
+    
+    init(coordinate: CLLocationCoordinate2D) {
+        self.coordinate = coordinate
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = true
-        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
-        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-           CLLocationManager.authorizationStatus() == .authorizedAlways {
-            ACLocationManager.shared.startUpdatingLocation()
-        }
-    }
-    
-    deinit {
-        ACLocationManager.shared.removeDelegate(self)
+        moveCameraToLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
     }
     
     override func setHierarchy() {
@@ -101,19 +103,6 @@ extension LocalMapViewController {
         let position = NMGLatLng(lat: latitude, lng: longitude)
         let cameraUpdate = NMFCameraUpdate(scrollTo: position, zoomTo: 17)
         localMapView.nMapView.mapView.moveCamera(cameraUpdate)
-        // NOTE: 최초 1회만 받고 중지
-        ACLocationManager.shared.stopUpdatingLocation()
     }
       
-}
-
-
-// MARK: - LocationManagerDelegate
-
-extension LocalMapViewController: ACLocationManagerDelegate {
-    
-    func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
-        moveCameraToLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-    }
-    
 }
