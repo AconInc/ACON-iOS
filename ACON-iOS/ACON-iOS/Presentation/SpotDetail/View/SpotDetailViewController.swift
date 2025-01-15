@@ -1,0 +1,122 @@
+//
+//  SpotDetailViewController.swift
+//  ACON-iOS
+//
+//  Created by 이수민 on 1/16/25.
+//
+
+import UIKit
+
+import SnapKit
+import Then
+
+class SpotDetailViewController: BaseNavViewController {
+    
+    // MARK: - UI Properties
+    
+    private let spotDetailView = SpotDetailView()
+
+
+    // MARK: - Properties
+    
+    private let spotDetailViewModel = SpotDetailViewModel()
+    
+    
+    // MARK: - LifeCycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addTarget()
+        registerCell()
+        setDelegate()
+    }
+    
+    override func setHierarchy() {
+        super.setHierarchy()
+        
+        self.contentView.addSubview(spotDetailView)
+    }
+    
+    override func setLayout() {
+        super.setLayout()
+
+        spotDetailView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    override func setStyle() {
+        super.setStyle()
+        
+    }
+    
+    func addTarget() {
+        spotDetailView.findCourseButton.addTarget(self,
+                                              action: #selector(findCourseButtonTapped),
+                                              for: .touchUpInside)
+    }
+
+}
+
+
+// MARK: - @objc methods
+
+private extension SpotDetailViewController {
+    
+    @objc
+    func findCourseButtonTapped() {
+        // TODO: - 네이버지도 redirect
+    }
+    
+}
+
+
+// MARK: - CollectionView Setting Methods
+
+private extension SpotDetailViewController {
+    
+    func registerCell() {
+        spotDetailView.menuCollectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.cellIdentifier)
+    }
+    
+    func setDelegate() {
+        spotDetailView.menuCollectionView.delegate = self
+        spotDetailView.menuCollectionView.dataSource = self
+    }
+    
+}
+
+
+// MARK: - CollectionView Delegate
+
+extension SpotDetailViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return SpotSearchView.relatedSearchCollectionViewFlowLayout.itemSize
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .zero
+    }
+    
+}
+
+
+// MARK: - CollectionView DataSource
+
+extension SpotDetailViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return spotDetailViewModel.menuDummyData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let data = spotDetailViewModel.menuDummyData[indexPath.item]
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.cellIdentifier, for: indexPath) as? MenuCollectionViewCell else {
+            return UICollectionViewCell() }
+        cell.dataBind(data, indexPath.item)
+        return cell
+    }
+    
+}
