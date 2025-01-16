@@ -16,17 +16,17 @@ final class SpotDetailView: BaseView {
     
     private let scrollView: UIScrollView = UIScrollView()
     
-    private let scrollContentView: UIView = UIView()
+    var scrollContentView: UIView = UIView()
     
     private let spotDetailImageView: UIImageView = UIImageView()
     
-    private let isOpenButton: FilterTagButton = FilterTagButton()
+    var isOpenButton: FilterTagButton = FilterTagButton()
     
-    private let isNotOpenButton: FilterTagButton = FilterTagButton()
+    var isNotOpenButton: FilterTagButton = FilterTagButton()
     
-    private let addressImageView: UIImageView = UIImageView()
+    var addressImageView: UIImageView = UIImageView()
     
-    private let addressLabel: UILabel = UILabel()
+    var addressLabel: UILabel = UILabel()
     
     private let stickyHeaderView: UIView = UIView()
     
@@ -43,11 +43,11 @@ final class SpotDetailView: BaseView {
     
     private let localAcornImageView: UIImageView = UIImageView()
     
-    private let localAcornCountLabel: UILabel = UILabel()
+    var localAcornCountLabel: UILabel = UILabel()
     
     private let plainAcornImageView: UIImageView = UIImageView()
     
-    private let plainAcornCountLabel: UILabel = UILabel()
+    var plainAcornCountLabel: UILabel = UILabel()
     
     var findCourseButton: UIButton = UIButton()
     
@@ -88,8 +88,8 @@ final class SpotDetailView: BaseView {
         scrollContentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.height.equalTo(1500)
-//            $0.height.greaterThanOrEqualTo(ScreenUtils.height)
+//            $0.height.equalTo(1500)
+////            $0.height.greaterThanOrEqualTo(ScreenUtils.height)
         }
         
         footerView.snp.makeConstraints {
@@ -147,8 +147,9 @@ final class SpotDetailView: BaseView {
         
         menuCollectionView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*353/780)
-            $0.bottom.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.height.equalTo(0)
+            $0.bottom.lessThanOrEqualToSuperview()
         }
         
         localAcornImageView.snp.makeConstraints {
@@ -160,7 +161,7 @@ final class SpotDetailView: BaseView {
         localAcornCountLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*21/780)
             $0.leading.equalToSuperview().inset(ScreenUtils.width*46/360)
-            $0.width.equalTo(24)
+            $0.width.equalTo(28)
             $0.height.equalTo(18)
         }
         
@@ -173,7 +174,7 @@ final class SpotDetailView: BaseView {
         plainAcornCountLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*21/780)
             $0.leading.equalToSuperview().inset(ScreenUtils.width*108/360)
-            $0.width.equalTo(24)
+            $0.width.equalTo(28)
             $0.height.equalTo(18)
         }
         
@@ -193,21 +194,24 @@ final class SpotDetailView: BaseView {
         }
         
         isOpenButton.do {
+            $0.isHidden = true
             $0.isSelected = true
-            $0.isEnabled = false
+            // TODO: - 이거 나중에 버튼 컴포로 아예 뽑기
+            $0.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 2,
+                                                                      leading: 10,
+                                                                      bottom: 2,
+                                                                      trailing: 10)
             $0.setAttributedTitle(text: StringLiterals.SpotDetail.isOpen, style: .b4)
         }
         
-        isOpenButton.do {
-            $0.isSelected = true
-            $0.isEnabled = false
+        isNotOpenButton.do {
+            $0.isHidden = true
+            $0.isSelected = false
+            $0.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 2,
+                                                                      leading: 10,
+                                                                      bottom: 2,
+                                                                      trailing: 10)
             $0.setAttributedTitle(text: StringLiterals.SpotDetail.isNotOpen, style: .b4)
-        }
-        
-        addressLabel.do {
-            $0.setLabel(text: "어쩌구저쩌구 주소어쩌구",
-                        style: .b4,
-                        color: .gray4)
         }
         
         addressImageView.do {
@@ -226,19 +230,18 @@ final class SpotDetailView: BaseView {
         }
         
         menuCollectionView.do {
+            $0.backgroundColor = .clear
             $0.isScrollEnabled = false
             $0.showsVerticalScrollIndicator = false
+        }
+        
+        footerView.do {
+            $0.backgroundColor = .gray9
         }
         
         localAcornImageView.do {
             $0.image = .icLocal
             $0.contentMode = .scaleAspectFit
-        }
-        
-        localAcornCountLabel.do {
-            $0.setLabel(text: "0000",
-                        style: .b4,
-                        alignment: .right)
         }
         
         plainAcornImageView.do {

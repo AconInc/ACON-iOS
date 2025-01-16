@@ -49,6 +49,7 @@ class SpotDetailViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
+        updateCollectionViewHeight()
     }
     
     func addTarget() {
@@ -83,6 +84,18 @@ private extension SpotDetailViewController {
     func setDelegate() {
         spotDetailView.menuCollectionView.delegate = self
         spotDetailView.menuCollectionView.dataSource = self
+    }
+    
+    func updateCollectionViewHeight() {
+        let numberOfItems = spotDetailViewModel.menuDummyData.count
+        let itemHeight = SpotDetailView.menuCollectionViewFlowLayout.itemSize.height
+        let totalHeight = itemHeight * CGFloat(numberOfItems)
+        
+        spotDetailView.menuCollectionView.snp.updateConstraints {
+            $0.height.equalTo(totalHeight)
+        }
+        
+        spotDetailView.scrollContentView.layoutIfNeeded()
     }
     
 }
