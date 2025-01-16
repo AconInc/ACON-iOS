@@ -9,6 +9,6 @@ import Foundation
 
 struct SpotListFilterModel {
     
-    // TODO: 서버 통신 관련 모델 구현
+    // TODO: 데이터 모델 구현
     
 }
