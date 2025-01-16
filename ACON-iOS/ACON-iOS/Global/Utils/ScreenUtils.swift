@@ -22,17 +22,4 @@ struct ScreenUtils {
         return UIScreen.main.bounds.height
     }
     
-    
-    // MARK: - 비율 프로퍼티
-    
-    static var widthRatio: CGFloat {
-        let figmaWidth: CGFloat = 360
-        return width / figmaWidth
-    }
-    
-    static var heightRatio: CGFloat {
-        let figmaHeight: CGFloat = 780
-        return height / figmaHeight
-    }
-    
 }
