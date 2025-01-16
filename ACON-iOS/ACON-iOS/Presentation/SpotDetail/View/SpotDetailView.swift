@@ -191,6 +191,7 @@ final class SpotDetailView: BaseView {
                                                                     bottom: 2,
                                                                     trailing: 10)
             $0.setAttributedTitle(text: StringLiterals.SpotDetail.isOpen, style: .b4)
+            $0.configuration?.background.strokeWidth = 0
         }
         
         addressImageView.do {
