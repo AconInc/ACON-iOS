@@ -23,7 +23,7 @@ enum SpotType {
     
     // MARK: - 장소 상세 조건
     
-    enum RestaurantFeatureType {
+    enum RestaurantFeatureType: CaseIterable {
         
         case korean, western, chinese, japanese, snack, asian, bar, excludeFranchise
         
@@ -42,7 +42,7 @@ enum SpotType {
         
     }
     
-    enum CafeFeatureType {
+    enum CafeFeatureType: CaseIterable {
         
         case large, goodView, dessert, terace, excludeFranchise
         
