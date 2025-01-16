@@ -18,6 +18,7 @@ class LocalVerificationFinishedViewController: BaseViewController {
     
     let localName = "동교동"
     
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -74,7 +75,7 @@ private extension LocalVerificationFinishedViewController {
     
     @objc
     func startButtonTapped() {
-        closeView()
+        goToTabView()
     }
     
 }
@@ -85,7 +86,7 @@ private extension LocalVerificationFinishedViewController {
 private extension LocalVerificationFinishedViewController {
     
     @objc
-    func closeView() {
+    func goToTabView() {
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
             sceneDelegate.window?.rootViewController = ACTabBarController()
         }
