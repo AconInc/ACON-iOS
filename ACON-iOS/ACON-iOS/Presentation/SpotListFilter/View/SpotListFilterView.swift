@@ -14,7 +14,7 @@ class SpotListFilterView: BaseView {
     private let segmentItems = [StringLiterals.SpotListFilter.restaurant,
                                 StringLiterals.SpotListFilter.cafe]
     
-    private lazy var segmentedControl = UISegmentedControl(items: segmentItems)
+    lazy var segmentedControl = UISegmentedControl(items: segmentItems)
     
     private let segmentedControlBgView = UIView()
     
@@ -71,10 +71,11 @@ private extension SpotListFilterView {
     
     func setSegmentControl() {
         segmentedControlBgView.do {
-            $0.backgroundColor = .gray8
+//            $0.backgroundColor = .gray8
             $0.layer.cornerRadius = ScreenUtils.heightRatio * 6
         }
         
+        // TODO: 배경 없애기 커스텀
         segmentedControl.do {
             $0.selectedSegmentIndex = 0
             $0.selectedSegmentTintColor = .acWhite
