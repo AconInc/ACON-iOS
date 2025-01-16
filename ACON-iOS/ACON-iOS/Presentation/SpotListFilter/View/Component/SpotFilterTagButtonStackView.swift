@@ -68,10 +68,13 @@ extension SpotFilterTagButtonStackView {
     
     func addEmptyView() {
         // TODO: [Fix] priority low로 자동으로 작게 설정되지 않는 듯. [프랜차이즈 제외]가 2줄로 됨
-        let emptyView = UIView()
-        emptyView.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        firstLineStackView.addArrangedSubview(emptyView)
-        secondLineStackView.addArrangedSubview(emptyView)
+        let emptyView1 = UIView()
+        let emptyView2 = UIView()
+        [emptyView1, emptyView2].forEach {
+            $0.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        }
+        firstLineStackView.addArrangedSubview(emptyView1)
+        secondLineStackView.addArrangedSubview(emptyView2)
     }
     
     private func clearStackView(from stackView: UIStackView) {
