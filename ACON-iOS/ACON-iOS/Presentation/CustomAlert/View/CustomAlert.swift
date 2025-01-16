@@ -38,19 +38,26 @@ final class CustomAlertView: BaseViewController {
             $0.clipsToBounds = true
         }
         
+//        titleLabel.do {
+//            $0.setLabel(
+//                text: "",
+//                style: ACFont.h8,
+//                color: .acWhite,
+//                alignment: .center,
+//                numberOfLines: 2
+//            )
+//        }
         titleLabel.do {
-            $0.setLabel(
-                text: "취향분석을 그만둘까요?",
-                style: ACFont.h8,
-                color: .acWhite,
-                alignment: .center,
-                numberOfLines: 2
-            )
+            $0.text = ""
+            $0.font = ACFont.h8.font
+            $0.textColor = .acWhite
+            $0.textAlignment = .center
+            $0.numberOfLines = 2
         }
-        
+
         messageLabel.do {
             $0.setLabel(
-                text: "위치를 확인할 수 없습니다.\n설정에서 위치접근 권한을 허용해주세요.",
+                text: "",
                 style: ACFont.b2,
                 color: .gray3,
                 alignment: .center,
@@ -61,7 +68,7 @@ final class CustomAlertView: BaseViewController {
         // UIButton 스타일 적용
         closeButton.do {
             $0.setAttributedTitle(
-                text: "그만두기",
+                text: "",
                 style: ACFont.s2,
                 color: .gray3,
                 for: .normal
@@ -74,14 +81,14 @@ final class CustomAlertView: BaseViewController {
         
         settingsButton.do {
             $0.setAttributedTitle(
-                text: "설정으로 가기",
+                text: "",
                 style: ACFont.s2,
                 color: .acWhite,
                 for: .normal
             )
             $0.layer.cornerRadius = 8 // 네 꼭짓점 모두 둥글게
             $0.backgroundColor = .gray5
-            $0.addTarget(self, action: #selector(settingsTapped), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(actionTapped), for: .touchUpInside)
         }
     }
     
@@ -96,7 +103,7 @@ final class CustomAlertView: BaseViewController {
             $0.center.equalToSuperview()
             $0.width.equalTo(ScreenUtils.width * 279 / 360)
             $0.height.greaterThanOrEqualTo(ScreenUtils.width * 279 / 360 * 0.5)
-
+            
         }
         
         titleLabel.snp.makeConstraints {
@@ -128,6 +135,46 @@ final class CustomAlertView: BaseViewController {
         }
     }
     
+}
+    
+extension CustomAlertView {
+    
+    func configure(with alertType: AlertType) {
+        print("AlertType: \(alertType)") // 디버깅용 출력
+        print("Title: \(alertType.title)")
+        print("Content: \(alertType.content)")
+        
+        titleLabel.text = alertType.title
+        messageLabel.text = alertType.content
+        
+        let buttonTitles = alertType.buttons
+        closeButton.setAttributedTitle(
+            NSAttributedString(
+                string: buttonTitles[0],
+                attributes: [
+                    .font: ACFont.s2,
+                    .foregroundColor: UIColor.gray3
+                ]
+            ),
+            for: .normal
+        )
+        
+        settingsButton.setAttributedTitle(
+            NSAttributedString(
+                string: buttonTitles[1],
+                attributes: [
+                    .font: ACFont.s2,
+                    .foregroundColor: UIColor.acWhite
+                ]
+            ),
+            for: .normal
+        )
+        self.view.layoutIfNeeded()
+
+    }
+
+
+    
     // MARK: - Actions
     @objc private func closeTapped() {
         dismiss(animated: true) {
@@ -135,11 +182,14 @@ final class CustomAlertView: BaseViewController {
         }
     }
     
-    @objc private func settingsTapped() {
-        if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    @objc private func actionTapped() {
+        dismiss(animated: true) {
+            //            self.onAction?()
+        print("hi")
         }
+        
     }
+    
 }
 
 #if DEBUG
@@ -172,4 +222,7 @@ struct CustomAlertView_Previews: PreviewProvider {
 #endif
 
 
-
+//
+//
+//let customAlertView = CustomAlertView()
+//customAlertView.configure(with: .stoppedPreferenceAnalysis)
