@@ -12,24 +12,32 @@ import SnapKit
 
 final class AnalyzingViewController: BaseViewController {
     
-    private let animationView = LottieAnimationView(name: "OnboardingLottie")
+    private let lodingLottie = LottieAnimationView(name: "lodingLottie")
+    private let checkLottie = LottieAnimationView(name: "checkLottie")
     private let analyzingLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateLabelTextAfterDelay()
+        startLodingLottie()
     }
     
     override func setStyle() {
         super.setStyle()
         
-        animationView.do {
+        lodingLottie.do {
             $0.contentMode = .scaleAspectFit
-            $0.loopMode = .loop
+            $0.loopMode = .playOnce
             $0.animationSpeed = 1.0
             $0.backgroundBehavior = .pauseAndRestore
-            $0.play()
+        }
+        
+        checkLottie.do {
+            $0.contentMode = .scaleAspectFit
+            $0.loopMode = .playOnce
+            $0.animationSpeed = 1.0
+            $0.backgroundBehavior = .pauseAndRestore
+            $0.isHidden = true
         }
         
         analyzingLabel.do {
@@ -46,13 +54,22 @@ final class AnalyzingViewController: BaseViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        view.addSubviews(animationView, analyzingLabel)
+        view.addSubviews(lodingLottie,
+                         analyzingLabel,
+                         checkLottie)
     }
     
     override func setLayout() {
         super.setLayout()
         
-        animationView.snp.makeConstraints {
+        lodingLottie.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(500)
+        }
+        
+        checkLottie.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
@@ -60,28 +77,39 @@ final class AnalyzingViewController: BaseViewController {
         }
         
         analyzingLabel.snp.makeConstraints {
-            $0.bottom.equalTo(animationView.snp.top)
+            $0.bottom.equalTo(lodingLottie.snp.top)
             $0.centerX.equalToSuperview()
         }
     }
-    
 }
 
 extension AnalyzingViewController {
     
-    private func updateLabelTextAfterDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
-            guard let self = self else { return }
-            
-            self.analyzingLabel.text = StringLiterals.Analyzing.analyzingAfter
-            
-            // NOTE: 장소추천뷰로 - 우선 모달
-            let mainViewController = ACTabBarController()
-            mainViewController.modalPresentationStyle = .fullScreen
-            self.present(mainViewController, animated: true)
+    private func startLodingLottie() {
+        lodingLottie.play { [weak self] finished in
+            guard let self = self, finished else { return }
+            self.showCheckLottie()
         }
     }
     
+    private func showCheckLottie() {
+        lodingLottie.isHidden = true
+        checkLottie.isHidden = false
+        
+        analyzingLabel.text = StringLiterals.Analyzing.analyzingAfter
+        
+        checkLottie.play { [weak self] finished in
+            guard let self = self, finished else { return }
+            self.navigateToNextScreen()
+        }
+    }
+    
+    private func navigateToNextScreen() {
+        // NOTE: 장소추천뷰로 이동 - 모달 방식
+        let mainViewController = ACTabBarController()
+        mainViewController.modalPresentationStyle = .fullScreen
+        present(mainViewController, animated: true)
+    }
 }
 
 // MARK: i will delete this
