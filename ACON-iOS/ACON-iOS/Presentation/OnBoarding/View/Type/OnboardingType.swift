@@ -19,5 +19,4 @@ enum OnboardingType {
         "내가 선호하는 공간의 순위는?"
     ]
     
-   
 }

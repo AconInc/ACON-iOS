@@ -36,17 +36,17 @@ enum DislikeType: CaseIterable {
     var image: UIImage {
         switch self {
         case .dakbal:
-            return UIImage(named: "chickenFeet") ?? UIImage(systemName: "photo")!
+            return .chickenFeet
         case .hoeYukhoe:
-            return UIImage(named: "sashimi") ?? UIImage(systemName: "photo")!
+            return .sashimi
         case .gopchang:
-            return UIImage(named: "intestines") ?? UIImage(systemName: "photo")!
+            return .intestines
         case .soondae:
-            return UIImage(named: "soonde") ?? UIImage(systemName: "photo")!
+            return .soonde
         case .yanggogi:
-            return UIImage(named: "lamb") ?? UIImage(systemName: "photo")!
+            return .lamb
         case .none:
-            return UIImage(named: "none") ?? UIImage(systemName: "photo")!
+            return .none
         }
     }
 
@@ -66,4 +66,5 @@ enum DislikeType: CaseIterable {
             return "NONE"
         }
     }
+    
 }

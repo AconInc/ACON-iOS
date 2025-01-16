@@ -45,6 +45,7 @@ final class FavoriteCuisineCollectionView: UICollectionView {
             forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier
         )
     }
+    
 }
 
 extension FavoriteCuisineCollectionView: UICollectionViewDelegateFlowLayout {
@@ -88,6 +89,7 @@ extension FavoriteCuisineCollectionView: UICollectionViewDelegateFlowLayout {
             right: horizontalInset
         )
     }
+    
 }
 
 extension FavoriteCuisineCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -133,4 +135,5 @@ extension FavoriteCuisineCollectionView: UICollectionViewDelegate, UICollectionV
             print("최대 3개까지만 선택 가능합니다.")
         }
     }
+    
 }

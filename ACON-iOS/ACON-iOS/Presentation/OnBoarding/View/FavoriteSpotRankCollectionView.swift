@@ -45,6 +45,7 @@ final class FavoriteSpotRankCollectionView: UICollectionView {
             forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier
         )
     }
+    
 }
 
 extension FavoriteSpotRankCollectionView: UICollectionViewDelegateFlowLayout {
@@ -133,4 +134,5 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegate, UICollection
             print("최대 4개까지만 선택 가능")
         }
     }
+    
 }

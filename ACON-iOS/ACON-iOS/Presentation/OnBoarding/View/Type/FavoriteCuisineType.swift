@@ -29,12 +29,12 @@ enum FavoriteCuisineType: CaseIterable {
     
     var image: UIImage {
         switch self {
-        case .korean: return UIImage(named: "koreaFood") ?? UIImage(systemName: "photo")!
-        case .western: return UIImage(named: "westFood") ?? UIImage(systemName: "photo")!
-        case .chinese: return UIImage(named: "chineseFood") ?? UIImage(systemName: "photo")!
-        case .japanese: return UIImage(named: "japaneseFood") ?? UIImage(systemName: "photo")!
-        case .koreanStreet: return UIImage(named: "koreaStreetFood") ?? UIImage(systemName: "photo")!
-        case .asian: return UIImage(named: "asianFood") ?? UIImage(systemName: "photo")!
+        case .korean: return .koreaFood
+        case .western: return .westFood
+        case .chinese: return .chineseFood
+        case .japanese: return .japaneseFood
+        case .koreanStreet: return .koreaStreetFood
+        case .asian: return .asianFood
         }
     }
     
@@ -48,4 +48,5 @@ enum FavoriteCuisineType: CaseIterable {
         case .asian: return "ASIAN"
         }
     }
+    
 }

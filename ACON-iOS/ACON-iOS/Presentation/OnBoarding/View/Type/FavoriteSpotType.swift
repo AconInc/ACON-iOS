@@ -32,4 +32,5 @@ enum FavoriteSpotType: CaseIterable {
         case .cafe: return "CAFE"
         }
     }
+    
 }

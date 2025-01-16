@@ -46,6 +46,7 @@ final class FavoriteSpotTypeCollectionView: UICollectionView {
             forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier
         )
     }
+    
 }
 
 extension FavoriteSpotTypeCollectionView: UICollectionViewDelegateFlowLayout {
@@ -89,6 +90,7 @@ extension FavoriteSpotTypeCollectionView: UICollectionViewDelegateFlowLayout {
             right: horizontalInset
         )
     }
+    
 }
 
 extension FavoriteSpotTypeCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -129,4 +131,5 @@ extension FavoriteSpotTypeCollectionView: UICollectionViewDelegate, UICollection
             selectedSpotType = selectedOption.mappedValue
         }
     }
+    
 }

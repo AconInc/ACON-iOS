@@ -45,6 +45,7 @@ final class DislikeCollectionView: UICollectionView {
             forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier
         )
     }
+    
 }
 
 extension DislikeCollectionView: UICollectionViewDelegateFlowLayout {
@@ -88,6 +89,7 @@ extension DislikeCollectionView: UICollectionViewDelegateFlowLayout {
             right: horizontalInset
         )
     }
+    
 }
 
 extension DislikeCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -143,4 +145,5 @@ extension DislikeCollectionView: UICollectionViewDelegate, UICollectionViewDataS
             }
         }
     }
+    
 }

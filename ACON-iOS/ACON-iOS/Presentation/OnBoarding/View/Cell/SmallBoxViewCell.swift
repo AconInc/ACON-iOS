@@ -146,4 +146,5 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
             overlayImageView.alpha = 0
         }
     }
+    
 }

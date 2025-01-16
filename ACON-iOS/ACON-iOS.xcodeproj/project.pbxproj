@@ -88,9 +88,6 @@
 		D6FF82F72D381C2000090233 /* LongBoxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82F62D381C1F00090233 /* LongBoxViewCell.swift */; };
 		D6FF82F92D381D6100090233 /* SmallBoxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82F82D381D6100090233 /* SmallBoxViewCell.swift */; };
 		D6FF82FB2D386DCA00090233 /* CollectionViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82FA2D386DCA00090233 /* CollectionViewType.swift */; };
-		D6FF82FD2D387E2400090233 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82FC2D387E2400090233 /* CustomAlert.swift */; };
-		D6FF83002D3880AC00090233 /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82FF2D3880AC00090233 /* testView.swift */; };
-		D6FF83022D3885BB00090233 /* CustomLocationAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF83012D3885BB00090233 /* CustomLocationAlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -173,9 +170,6 @@
 		D6FF82F62D381C1F00090233 /* LongBoxViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongBoxViewCell.swift; sourceTree = "<group>"; };
 		D6FF82F82D381D6100090233 /* SmallBoxViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallBoxViewCell.swift; sourceTree = "<group>"; };
 		D6FF82FA2D386DCA00090233 /* CollectionViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewType.swift; sourceTree = "<group>"; };
-		D6FF82FC2D387E2400090233 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
-		D6FF82FF2D3880AC00090233 /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
-		D6FF83012D3885BB00090233 /* CustomLocationAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLocationAlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -515,7 +509,6 @@
 		D6D0F4FC2D36B8D300326F17 /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
-				D6FF82FE2D38809400090233 /* test */,
 				D6D0F5002D36B95400326F17 /* Model */,
 				D6D0F4FE2D36B94800326F17 /* ViewModel */,
 				D6D0F4FD2D36B91100326F17 /* View */,
@@ -577,16 +570,6 @@
 				D6FF82FA2D386DCA00090233 /* CollectionViewType.swift */,
 			);
 			path = Type;
-			sourceTree = "<group>";
-		};
-		D6FF82FE2D38809400090233 /* test */ = {
-			isa = PBXGroup;
-			children = (
-				D6FF82FC2D387E2400090233 /* CustomAlert.swift */,
-				D6FF82FF2D3880AC00090233 /* testView.swift */,
-				D6FF83012D3885BB00090233 /* CustomLocationAlertView.swift */,
-			);
-			path = test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -744,7 +727,6 @@
 				D6FF82F92D381D6100090233 /* SmallBoxViewCell.swift in Sources */,
 				D6D0F5192D36BAAB00326F17 /* FavoriteSpotStyleCollectionView.swift in Sources */,
 				748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */,
-				D6FF83022D3885BB00090233 /* CustomLocationAlertView.swift in Sources */,
 				748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */,
 				748D6F872D2BD247007690B4 /* UIView+.swift in Sources */,
 				D6978F502D36E3C800523A25 /* AnalyzingViewController.swift in Sources */,
@@ -772,14 +754,12 @@
 				746F39822D342523003F8498 /* SheetUtils.swift in Sources */,
 				1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */,
 				D6D0F51D2D36BAD900326F17 /* OnboardingViewModel.swift in Sources */,
-				D6FF83002D3880AC00090233 /* testView.swift in Sources */,
 				74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */,
 				748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */,
 				1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */,
 				748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */,
 				D6FF82E92D3805F000090233 /* DislikeCollectionViewType.swift in Sources */,
 				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,
-				D6FF82FD2D387E2400090233 /* CustomAlert.swift in Sources */,
 				D6FF82F72D381C2000090233 /* LongBoxViewCell.swift in Sources */,
 				D6978F542D37B29100523A25 /* OnboardingMapping.swift in Sources */,
 				D6D0F51F2D36BAFE00326F17 /* OnboardingViewController.swift in Sources */,

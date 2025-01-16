@@ -54,10 +54,12 @@ final class OnboardingViewController: BaseViewController {
         }
         
         skipButton.do {
-            $0.setTitle("건너뛰기", for: .normal)
-            $0.setTitleColor(.acWhite, for: .normal)
-            $0.titleLabel?.font = ACFont.b2.font
             $0.addTarget(self, action: #selector(nextStack), for: .touchUpInside)
+            $0.setAttributedTitle(text: "건너뛰기",
+            style: ACFont.b2,
+            color: .acWhite,
+            for: .normal)
+            
         }
         
         progressView.do {
@@ -78,16 +80,18 @@ final class OnboardingViewController: BaseViewController {
             $0.textColor = .acWhite
             $0.numberOfLines = 0
             $0.lineBreakMode = .byWordWrapping
+            
         }
         
         nextButton.do {
             $0.backgroundColor = .gray8
-            $0.setTitle("다음", for: .normal)
-            $0.setTitleColor(.gray6, for: .normal)
-            $0.titleLabel?.font = ACFont.h8.font
             $0.layer.cornerRadius = 8
             $0.isEnabled = false
             $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+            $0.setAttributedTitle(text: "다음",
+            style: ACFont.h8,
+            color: .gray6,
+            for: .normal)
         }
     }
     
@@ -294,6 +298,7 @@ extension OnboardingViewController {
             self?.view.layoutIfNeeded()
         }
     }
+    
 }
 
 
@@ -328,11 +333,13 @@ extension OnboardingViewController {
     }
     
     @objc private func nextStack(){
-        // MARK : TODO -> Popup alert
+        // MARK: TODO -> Popup alert
         print("alert")
     }
+    
 }
 
+// MARK: 삭제 예정
 struct FoodSelectionViewControllerPreview: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> OnboardingViewController {

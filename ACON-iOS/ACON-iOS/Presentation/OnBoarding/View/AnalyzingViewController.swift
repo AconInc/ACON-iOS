@@ -33,11 +33,13 @@ final class AnalyzingViewController: BaseViewController {
         }
         
         analyzingLabel.do {
-            $0.text = StringLiterals.Analyzing.analyzing
-            $0.textColor = .acWhite
-            $0.font = ACFont.h6.font
-            $0.numberOfLines = 0
-            $0.textAlignment = .center
+            $0.setLabel(
+                text: StringLiterals.Analyzing.analyzing,
+                style: ACFontStyleType.h6,
+                color: .acWhite,
+                alignment: .center,
+                numberOfLines: 0
+            )
         }
     }
     
@@ -62,6 +64,7 @@ final class AnalyzingViewController: BaseViewController {
             $0.centerX.equalToSuperview()
         }
     }
+    
 }
 
 extension AnalyzingViewController {
@@ -73,13 +76,15 @@ extension AnalyzingViewController {
             self.analyzingLabel.text = StringLiterals.Analyzing.analyzingAfter
             
             // NOTE: 장소추천뷰로 - 우선 모달
-            let mainViewController = SpotListViewController()
+            let mainViewController = ACTabBarController()
             mainViewController.modalPresentationStyle = .fullScreen
             self.present(mainViewController, animated: true)
         }
     }
+    
 }
 
+// MARK: i will delete this
 import SwiftUI
 
 struct AnalyzingViewControllerPreview: UIViewControllerRepresentable {

@@ -78,7 +78,7 @@ final class BigBoxViewCell: BaseCollectionViewCell {
         
         imageView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(container.snp.width).multipliedBy(1.0) 
+            $0.height.equalTo(container.snp.width).multipliedBy(1.0)
         }
         
         titleLabel.snp.makeConstraints {
@@ -100,27 +100,24 @@ final class BigBoxViewCell: BaseCollectionViewCell {
         titleLabel.text = name
         imageView.image = image ?? UIImage(systemName: "photo")
         
-        switch isSelected {
-        case 1:
-            overlayImageView.image = UIImage(named: "1")
-            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-            overlayImageView.alpha = 1
-        case 2:
-            overlayImageView.image = UIImage(named: "2")
-            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-            overlayImageView.alpha = 1
-        case 3:
-            overlayImageView.image = UIImage(named: "3")
-            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-            overlayImageView.alpha = 1
-        case 4:
-            overlayImageView.image = UIImage(named: "4")
-            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-            overlayImageView.alpha = 1
-        default:
+        applyOverlaySettings(isSelected: isSelected)
+    }
+    
+}
+
+extension BigBoxViewCell {
+    
+    private func applyOverlaySettings(isSelected: Int) {
+        guard (1...4).contains(isSelected) else {
             overlayContainer.backgroundColor = .clear
             overlayImageView.image = nil
             overlayImageView.alpha = 0
+            return
         }
+        
+        overlayImageView.image = UIImage(named: "\(isSelected)")
+        overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        overlayImageView.alpha = 1
     }
+    
 }
