@@ -166,7 +166,7 @@ private extension SpotListFilterView {
             text: StringLiterals.SpotListFilter.companionSection,
             style: .s2)
         
-        let tags: [String] = SpotListFilterModel.Companion.firstLine.map { return $0.text }
+        let tags: [String] = SpotListFilterModel.Companion.tags.map { return $0.text }
         companionTagStackView.addTagButtons(titles: tags)
     }
     
@@ -183,7 +183,7 @@ private extension SpotListFilterView {
             text: StringLiterals.SpotListFilter.visitPurposeSection,
             style: .s2)
         
-        let tags: [String] = SpotListFilterModel.VisitPurpose.firstLine.map { return $0.text }
+        let tags: [String] = SpotListFilterModel.VisitPurpose.tags.map { return $0.text }
         visitPurposeTagStackView.addTagButtons(titles: tags)
     }
     

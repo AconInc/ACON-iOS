@@ -35,21 +35,17 @@ struct SpotListFilterModel {
     
     struct Companion {
         
-        static let firstLine: [SpotType.CompanionType] = [
+        static let tags: [SpotType.CompanionType] = [
             .family, .date, .friend, .alone, .group
         ]
-        
-        static let secondLine: [SpotType.CompanionType] = []
         
     }
     
     struct VisitPurpose {
         
-        static let firstLine: [SpotType.VisitPurposeType] = [
+        static let tags: [SpotType.VisitPurposeType] = [
             .meeting, .study
         ]
-        
-        static let secondLine: [SpotType.VisitPurposeType] = []
         
     }
     
