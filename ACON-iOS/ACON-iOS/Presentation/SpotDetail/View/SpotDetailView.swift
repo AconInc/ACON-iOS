@@ -85,8 +85,6 @@ final class SpotDetailView: BaseView {
         scrollContentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-//            $0.height.equalTo(1500)
-////            $0.height.greaterThanOrEqualTo(ScreenUtils.height)
         }
         
         footerView.snp.makeConstraints {
