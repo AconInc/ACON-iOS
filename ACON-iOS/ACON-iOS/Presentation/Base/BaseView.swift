@@ -60,3 +60,32 @@ extension BaseView {
     }
 
 }
+
+extension BaseView {
+    
+    // TODO: - 수정예정
+    func addGlassCard(style: UIBlurEffect.Style = .systemUltraThinMaterialDark) {
+        let glassCard = UIView()
+        
+        let blurEffect = UIBlurEffect(style: style)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = glassCard.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+        let vibrancyView = UIVisualEffectView(effect: vibrancyEffect)
+        vibrancyView.frame = glassCard.bounds
+        vibrancyView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        glassCard.addSubview(blurView)
+        blurView.contentView.addSubview(vibrancyView)
+        
+        glassCard.layer.cornerRadius = 20
+        glassCard.layer.masksToBounds = true
+        glassCard.layer.borderWidth = 0.5
+        glassCard.layer.borderColor = UIColor.white.withAlphaComponent(0.3).cgColor
+        
+        self.addSubview(glassCard)
+    }
+    
+}
