@@ -91,8 +91,13 @@ private extension SpotDetailViewController {
         spotDetailView.addressLabel.setLabel(text: spotDetailViewModel.spotDetailDummyData.address,
                                              style: .b4,
                                              color: .gray4)
-        spotDetailView.isOpenButton.isHidden = spotDetailViewModel.spotDetailDummyData.isOpen
-        spotDetailView.isOpenButton.isHidden = !spotDetailViewModel.spotDetailDummyData.isOpen
+        
+        let isOpen = spotDetailViewModel.spotDetailDummyData.isOpen
+        spotDetailView.openStatusButton.isSelected = isOpen
+        spotDetailView.openStatusButton.setAttributedTitle(
+            text: isOpen ? StringLiterals.SpotDetail.isOpen : StringLiterals.SpotDetail.isNotOpen,
+            style: .b4
+        )
         
         spotDetailView.localAcornCountLabel.setLabel(text: String(spotDetailViewModel.spotDetailDummyData.localAcornCount),
                                                      style: .b4,

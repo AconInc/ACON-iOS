@@ -20,9 +20,7 @@ final class SpotDetailView: BaseView {
     
     private let spotDetailImageView: UIImageView = UIImageView()
     
-    var isOpenButton: FilterTagButton = FilterTagButton()
-    
-    var isNotOpenButton: FilterTagButton = FilterTagButton()
+    var openStatusButton: FilterTagButton = FilterTagButton()
     
     var addressImageView: UIImageView = UIImageView()
     
@@ -65,8 +63,7 @@ final class SpotDetailView: BaseView {
         scrollView.addSubviews(scrollContentView, stickyHeaderView)
         stickyHeaderView.addSubviews(menuLabel, menuUnderLineView)
         scrollContentView.addSubviews(spotDetailImageView,
-                                      isOpenButton,
-                                      isNotOpenButton,
+                                      openStatusButton,
                                       addressImageView,
                                       addressLabel,
                                       menuCollectionView)
@@ -102,14 +99,7 @@ final class SpotDetailView: BaseView {
             $0.height.equalTo(ScreenUtils.height*196/780)
         }
         
-        isOpenButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*212/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
-            $0.width.equalTo(ScreenUtils.width*51/360)
-            $0.height.equalTo(ScreenUtils.height*22/780)
-        }
-        
-        isNotOpenButton.snp.makeConstraints {
+        openStatusButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*212/780)
             $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.width.equalTo(ScreenUtils.width*51/360)
@@ -161,7 +151,7 @@ final class SpotDetailView: BaseView {
         localAcornCountLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*21/780)
             $0.leading.equalToSuperview().inset(ScreenUtils.width*46/360)
-            $0.width.equalTo(28)
+            $0.width.equalTo(30)
             $0.height.equalTo(18)
         }
         
@@ -174,7 +164,7 @@ final class SpotDetailView: BaseView {
         plainAcornCountLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*21/780)
             $0.leading.equalToSuperview().inset(ScreenUtils.width*108/360)
-            $0.width.equalTo(28)
+            $0.width.equalTo(30)
             $0.height.equalTo(18)
         }
         
@@ -188,30 +178,21 @@ final class SpotDetailView: BaseView {
     
     override func setStyle() {
         super.setStyle()
-          
+        
+        scrollView.do {
+            $0.showsVerticalScrollIndicator = false
+        }
+        
         spotDetailImageView.do {
             $0.backgroundColor = .gray7
         }
         
-        isOpenButton.do {
-            $0.isHidden = true
-            $0.isSelected = true
-            // TODO: - 이거 나중에 버튼 컴포로 아예 뽑기
+        openStatusButton.do {
             $0.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 2,
-                                                                      leading: 10,
-                                                                      bottom: 2,
-                                                                      trailing: 10)
+                                                                    leading: 10,
+                                                                    bottom: 2,
+                                                                    trailing: 10)
             $0.setAttributedTitle(text: StringLiterals.SpotDetail.isOpen, style: .b4)
-        }
-        
-        isNotOpenButton.do {
-            $0.isHidden = true
-            $0.isSelected = false
-            $0.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 2,
-                                                                      leading: 10,
-                                                                      bottom: 2,
-                                                                      trailing: 10)
-            $0.setAttributedTitle(text: StringLiterals.SpotDetail.isNotOpen, style: .b4)
         }
         
         addressImageView.do {
@@ -247,12 +228,6 @@ final class SpotDetailView: BaseView {
         plainAcornImageView.do {
             $0.image = .icVisitor
             $0.contentMode = .scaleAspectFit
-        }
-        
-        plainAcornCountLabel.do {
-            $0.setLabel(text: "0000",
-                        style: .b4,
-                        alignment: .right)
         }
         
         findCourseButton.do {
