@@ -21,6 +21,9 @@ class SpotDetailViewController: BaseNavViewController {
     
     private let spotDetailViewModel = SpotDetailViewModel()
     
+    private let spotDetailName: String = "가게명가게명"
+    
+    private let spotDetailType: String = "음식점"
     
     // MARK: - LifeCycle
     
@@ -49,6 +52,13 @@ class SpotDetailViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
+        self.setBackButton()
+        // TODO: 넘어올 때 가게명 & 가게 타입 넘겨주기
+        self.setSecondTitleLabelStyle(title: "가게명가게명")
+        self.secondTitleLabel.do {
+            $0.isHidden = false
+            $0.setPartialText(fullText: spotDetailName+" "+spotDetailType, textStyles: [(spotDetailName+" ", .t2, .acWhite), (spotDetailType, .b2, .gray4)])
+        }
         updateCollectionViewHeight()
         setUI()
     }
