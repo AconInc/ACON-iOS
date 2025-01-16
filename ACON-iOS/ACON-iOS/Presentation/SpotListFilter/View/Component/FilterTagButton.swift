@@ -49,6 +49,7 @@ private extension FilterTagButton {
         config.background.strokeWidth = 1
         config.cornerStyle = .capsule
         config.titleAlignment = .center
+        config.titleLineBreakMode = .byTruncatingTail
         config.contentInsets = NSDirectionalEdgeInsets(top: 7,
                                                        leading: 16,
                                                        bottom: 7,
