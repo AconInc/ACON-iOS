@@ -150,13 +150,8 @@ final class OnboardingViewController: BaseViewController {
     }
 }
     
+
 extension OnboardingViewController {
-    
-    private func updateNextButtonState(isEnabled: Bool) {
-        nextButton.isEnabled = isEnabled
-        nextButton.backgroundColor = isEnabled ? .gray5 : .gray8
-        nextButton.setTitleColor(isEnabled ? .acWhite : .gray6, for: .normal)
-    }
     
     private func setBinding() {
         viewModel.dislike.bind { [weak self] dislikedFoods in
@@ -185,7 +180,7 @@ extension OnboardingViewController {
         
         switch step {
         case 0:
-            setupDislikeCollectionView()
+            setDislikeCollectionView()
         case 1:
             setFavoriteCuisineCollectionView()
         case 2:
@@ -210,7 +205,7 @@ extension OnboardingViewController {
         progressTitle.text = OnboardingType.progressTitleList[step]
     }
     
-    private func setupDislikeCollectionView() {
+    private func setDislikeCollectionView() {
         contentView = dislikeCollectionView
         dislikeCollectionView.onSelectionChanged = { [weak self] selectedIndices in
             guard let self = self else { return }
@@ -229,7 +224,7 @@ extension OnboardingViewController {
             self.viewModel.dislike.value = selectedIndices
         }
     }
-
+    
     private func setFavoriteCuisineCollectionView() {
         contentView = favoriteCuisineCollectionView
         favoriteCuisineCollectionView.onSelectionChanged = { [weak self] selectedIndices in
@@ -256,6 +251,17 @@ extension OnboardingViewController {
         favoriteSpotRankCollectionView.onSelectionChanged = { [weak self] selectedIndices in
             self?.viewModel.favoriteSpotRank.value = selectedIndices
         }
+    }
+    
+}
+
+
+extension OnboardingViewController {
+    
+    private func updateNextButtonState(isEnabled: Bool) {
+        nextButton.isEnabled = isEnabled
+        nextButton.backgroundColor = isEnabled ? .gray5 : .gray8
+        nextButton.setTitleColor(isEnabled ? .acWhite : .gray6, for: .normal)
     }
     
     private func showOverlay() {
