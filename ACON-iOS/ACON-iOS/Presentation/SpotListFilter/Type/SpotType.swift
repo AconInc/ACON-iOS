@@ -20,6 +20,13 @@ enum SpotType {
         }
     }
     
+    var featureFirstLineCount: Int {
+        switch self {
+        case .restaurant: return 5
+        case .cafe: return 4
+        }
+    }
+    
     
     // MARK: - 장소 상세 조건
     
@@ -40,10 +47,6 @@ enum SpotType {
             }
         }
         
-        var firstLineCount: Int {
-            return 5
-        }
-        
     }
     
     enum CafeFeatureType {
@@ -60,13 +63,9 @@ enum SpotType {
             }
         }
         
-        var firstLineCount: Int {
-            return 4
-        }
-        
     }
     
-    enum CompanionType {
+    enum CompanionType: CaseIterable {
         
         case family, date, friend, alone, group
         
@@ -82,7 +81,7 @@ enum SpotType {
         
     }
     
-    enum VisitPurposeType {
+    enum VisitPurposeType: CaseIterable {
         
         case meeting, study
         
