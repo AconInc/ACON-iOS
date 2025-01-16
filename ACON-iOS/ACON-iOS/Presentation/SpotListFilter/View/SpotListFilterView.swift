@@ -166,7 +166,7 @@ private extension SpotListFilterView {
             text: StringLiterals.SpotListFilter.companionSection,
             style: .s2)
         
-        let tags: [String] = SpotListFilterModel.Companion.tags.map { return $0.text }
+        let tags: [String] = SpotType.CompanionType.allCases.map { return $0.text }
         companionTagStackView.addTagButtons(titles: tags)
     }
     
@@ -183,7 +183,7 @@ private extension SpotListFilterView {
             text: StringLiterals.SpotListFilter.visitPurposeSection,
             style: .s2)
         
-        let tags: [String] = SpotListFilterModel.VisitPurpose.tags.map { return $0.text }
+        let tags: [String] = SpotType.VisitPurposeType.allCases.map { return $0.text }
         visitPurposeTagStackView.addTagButtons(titles: tags)
     }
     
@@ -200,15 +200,17 @@ extension SpotListFilterView {
         
         switch spotType {
         case .restaurant:
-            let firstLine: [String] = SpotListFilterModel.RestaurantFeature.firstLine.map { return $0.text }
-            let secondLine: [String] = SpotListFilterModel.RestaurantFeature.secondLine.map { return $0.text }
+            let tagTexts: [String] = SpotType.RestaurantFeatureType.allCases.map { return $0.text }
+            let firstLine: [String] = Array(tagTexts[0..<5])
+            let secondLine: [String] = Array(tagTexts[5..<7])
             
             firstLineSpotTagStackView.switchTagButtons(titles: firstLine)
             secondLineSpotTagStackView.switchTagButtons(titles: secondLine)
             
         case .cafe:
-            let firstLine: [String] = SpotListFilterModel.CafeFeature.firstLine.map { return $0.text }
-            let secondLine: [String] = SpotListFilterModel.CafeFeature.secondLine.map { return $0.text }
+            let tagTexts: [String] = SpotType.CafeFeatureType.allCases.map { return $0.text }
+            let firstLine: [String] = Array(tagTexts[0..<4])
+            let secondLine: [String] = [tagTexts[4]]
             
             firstLineSpotTagStackView.switchTagButtons(titles: firstLine)
             secondLineSpotTagStackView.switchTagButtons(titles: secondLine)
