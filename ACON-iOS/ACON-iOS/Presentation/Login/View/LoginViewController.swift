@@ -90,7 +90,7 @@ extension LoginViewController {
     
     // TODO: - 나중에 서버 로그인 Success 시 이동하는 것으로 변경 (ObservablePattern)
     func navigateToLocalVerificationVC() {
-        let vc = ViewController()
+        let vc = LocalVerificationViewController()
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
