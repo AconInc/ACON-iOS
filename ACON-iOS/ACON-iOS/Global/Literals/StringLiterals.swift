@@ -97,6 +97,12 @@ enum StringLiterals {
         
     }
     
+    enum SpotList {
+        
+        static let matchingRate = "취향 일치율"
+        
+    }
+    
     enum LocalVerification {
         
         static let needLocalVerification = "로컬 맛집 추천을 위해\n지역 인증이 필요해요."
