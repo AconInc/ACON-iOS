@@ -7,6 +7,10 @@
 
 import UIKit
 
+// TODO: 커스텀 세그먼트컨트롤 만들기...
+/// - 배경 insets
+/// - attributed string
+
 class CustomSegmentedControl: UISegmentedControl {
     
     override init(frame: CGRect) {
