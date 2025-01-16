@@ -627,8 +627,8 @@
 		74BF91F82D38162900B923E3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				74BF92032D38619E00B923E3 /* SpotDetailViewController.swift */,
 				74BF92002D385D7C00B923E3 /* Cell */,
+				74BF92032D38619E00B923E3 /* SpotDetailViewController.swift */,
 				74BF91F92D38163F00B923E3 /* SpotDetailView.swift */,
 			);
 			path = View;
