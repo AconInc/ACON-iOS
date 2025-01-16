@@ -38,7 +38,7 @@ final class BigBoxViewCell: BaseCollectionViewCell {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
         }
-        // NOTE: setLabel 적용시 레이아웃 오류
+        // TODO: setLabel 적용시 레이아웃 오류
         titleLabel.do {
             $0.font = ACFont.s2.font
             $0.textColor = .acWhite

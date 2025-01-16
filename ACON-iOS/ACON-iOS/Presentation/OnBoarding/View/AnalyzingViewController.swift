@@ -111,27 +111,3 @@ extension AnalyzingViewController {
         present(mainViewController, animated: true)
     }
 }
-
-// MARK: i will delete this
-import SwiftUI
-
-struct AnalyzingViewControllerPreview: UIViewControllerRepresentable {
-    
-    func makeUIViewController(context: Context) -> AnalyzingViewController {
-        return AnalyzingViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: AnalyzingViewController, context: Context) {}
-}
-
-struct AnalyzingViewControllerPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        AnalyzingViewControllerPreview()
-            .edgesIgnoringSafeArea(.all)
-            .previewLayout(.sizeThatFits)
-            .frame(
-                width: UIScreen.main.bounds.width,
-                height: UIScreen.main.bounds.height
-            )
-    }
-}

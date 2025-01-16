@@ -5,7 +5,6 @@
 //  Created by Jaehyun Ahn on 1/15/25.
 //
 
-import SwiftUI
 import UIKit
 
 import SnapKit
@@ -320,24 +319,4 @@ extension OnboardingViewController {
         print("alert")
     }
     
-}
-
-// MARK: 삭제 예정
-struct FoodSelectionViewControllerPreview: UIViewControllerRepresentable {
-    
-    func makeUIViewController(context: Context) -> OnboardingViewController {
-        OnboardingViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: OnboardingViewController, context: Context) {}
-}
-
-struct FoodSelectionViewControllerPreview_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        FoodSelectionViewControllerPreview()
-            .edgesIgnoringSafeArea(.all)
-            .previewLayout(.sizeThatFits)
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-    }
 }
