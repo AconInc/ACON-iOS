@@ -72,7 +72,7 @@ extension MenuCollectionViewCell {
         menuNameLabel.setLabel(text: menuInfoData.name,
                                style: .b2)
         // TODO: 가격 쉼표 넣기
-        menuPriceLabel.setLabel(text: String(menuInfoData.price) + "원",
+        menuPriceLabel.setLabel(text: menuInfoData.price.formattedWithSeparator + "원",
                                style: .s1)
     }
     
