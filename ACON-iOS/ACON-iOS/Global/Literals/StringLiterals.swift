@@ -55,6 +55,8 @@ enum StringLiterals {
         
         static let shortDetent = "acShortDetent"
         
+        static let middleDetent = "acMiddleDetent"
+        
         static let longDetent = "acLongDetent"
         
     }
@@ -100,6 +102,35 @@ enum StringLiterals {
         static let matchingRate = "취향 일치율"
         
     }
+    
+    enum LocalVerification {
+
+         static let needLocalVerification = "로컬 맛집 추천을 위해\n지역 인증이 필요해요."
+
+         static let doLocalVerification = "자주 가는 동네로 지역 인증을 해보세요"
+
+         static let new = "새로운"
+
+         static let verifyLocal = " 나의 동네 인증하기"
+
+         static let next = "다음"
+
+         static let finishVerification = "인증완료"
+
+         static let letsStart = "시작하기"
+
+         static let locateOnMap = "지도에서 위치 확인하기"
+
+         static let now = "이제 "
+
+         static let localAcornTitle = "에\n로컬 도토리를 떨어트릴 수 있어요!"
+
+         static let localAcornExplaination = "로컬 도토리는 로컬 맛집을 보증하는 도토리에요.\n만족스러운 식사 후 리뷰에 사용해보세요!"
+
+         static let localAcorn = "로컬 도토리"
+
+         static let plainAcorn = "일반 도토리"
+     }
     
     enum SpotListFilter {
         
