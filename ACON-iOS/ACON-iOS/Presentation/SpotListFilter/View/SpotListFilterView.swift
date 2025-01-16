@@ -30,9 +30,9 @@ class SpotListFilterView: BaseView {
     
     private let spotTagStackView = UIStackView()
     
-    private let firstLineSpotTagStackView = SpotFilterTagStackView()
+    let firstLineSpotTagStackView = SpotFilterTagStackView()
     
-    private let secondLineSpotTagStackView = SpotFilterTagStackView()
+    let secondLineSpotTagStackView = SpotFilterTagStackView()
     
     
     // [Companion section]: 함께 하는 사람 (restaurant)
@@ -42,6 +42,9 @@ class SpotListFilterView: BaseView {
     private let companionSectionTitleLabel = UILabel()
     
     let companionTagStackView = SpotFilterTagStackView()
+    
+    
+    // [
     
     
     
@@ -154,8 +157,6 @@ private extension SpotListFilterView {
         companionTagStackView.addTagButtons(titles: tags)
     }
     
-    
-    
 }
 
 
@@ -163,11 +164,10 @@ private extension SpotListFilterView {
 
 extension SpotListFilterView {
     
-    func updateSpotTagStack(_ spotType: SpotType) {
+    func switchSpotTagStack(_ spotType: SpotType) {
         
         // TODO: Model 대신 Type으로 바꾸기
         
-        // NOTE: add buttons
         switch spotType {
         case .restaurant:
             let firstLine: [String] = SpotListFilterModel.RestaurantFeature.firstLine.map { return $0.text }
@@ -184,5 +184,11 @@ extension SpotListFilterView {
             secondLineSpotTagStackView.switchTagButtons(titles: secondLine)
         }
     }
+    
+    func hideCompanionSection(isHidden: Bool) {
+        companionSectionStackView.isHidden = isHidden
+    }
+    
+    
     
 }

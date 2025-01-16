@@ -81,13 +81,15 @@ private extension SpotListFilterViewController {
     // TODO: restaurant
     
     func updateView(_ spotType: SpotType) {
-//        updateSpotTagStack(spotType)
-        spotListFilterView.updateSpotTagStack(spotType)
+        // NOTE: spot tag 바꾸기
+        spotListFilterView.switchSpotTagStack(spotType)
+        
+        // NOTE: companion tag는 restaurant일 때만 보임
+        spotListFilterView.hideCompanionSection(isHidden: spotType == .cafe)
         
     }
-    
-
 }
+
 
 
 // MARK: - @objc functions
