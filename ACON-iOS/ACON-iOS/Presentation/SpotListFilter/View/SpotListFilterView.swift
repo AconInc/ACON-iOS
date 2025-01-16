@@ -17,6 +17,9 @@ class SpotListFilterView: BaseView {
     
     // MARK: - UI Properties
     
+    private let stackView = UIStackView()
+    
+    
     // [Spot section]: 방문 장소 (restaurant + cafe)
     
     private let spotSectionStackView = UIStackView()
@@ -27,12 +30,19 @@ class SpotListFilterView: BaseView {
     
     private let segmentedControlBgView = UIView()
     
-    let spotFeatureStackView = SpotFilterTagButtonStackView()
+    let spotTagStackView = SpotFilterTagButtonStackView()
     
     
     // [Companion section]: 함께 하는 사람 (restaurant)
     
-    let companionTypeStackView = SpotFilterTagButtonStackView()
+    private let companionSectionStackView = SpotFilterTagButtonStackView()
+    
+    private let companionSectionTitleLabel = UILabel()
+    
+    let companionTagStackView = SpotFilterTagButtonStackView()
+    
+    
+    
     
     // TODO: 방문 목적, 도보 가능 거리, 가격대
     
@@ -42,16 +52,24 @@ class SpotListFilterView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(spotSectionStackView)
+        self.addSubviews(stackView)
+        
+        stackView.addArrangedSubviews(spotSectionStackView,
+                                       companionSectionStackView)
         
         // [Spot section]
         
         spotSectionStackView.addArrangedSubviews(spotSectionTitleLabel,
                                                  segmentedControlBgView,
-                                                 spotFeatureStackView)
+                                                 spotTagStackView)
         
         segmentedControlBgView.addSubview(segmentedControl)
         
+        
+        // [Companion section]
+        
+        companionSectionStackView.addArrangedSubviews(companionSectionTitleLabel,
+                                                      companionTagStackView)
         
         
     }
@@ -59,9 +77,7 @@ class SpotListFilterView: BaseView {
     override func setLayout() {
         super.setLayout()
         
-        // [Spot section]
-        
-        spotSectionStackView.snp.makeConstraints {
+        stackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(ScreenUtils.heightRatio * 41)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
         }
@@ -75,12 +91,18 @@ class SpotListFilterView: BaseView {
         }
         
         
+        // [Companion section
         
         
     }
     
     override func setStyle() {
         super.setStyle()
+        
+        stackView.do {
+            $0.axis = .vertical
+            $0.spacing = 32
+        }
         
         // [Spot section]
         
