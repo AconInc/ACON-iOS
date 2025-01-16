@@ -104,7 +104,13 @@ enum StringLiterals {
     enum SpotListFilter {
         
         static let restaurant = "음식점"
+        
         static let cafe = "카페"
+        
+        static let spotSection = "방문 장소"
+        
+        static let companionSection = "함께 하는 사람"
+        
     }
     
 }
