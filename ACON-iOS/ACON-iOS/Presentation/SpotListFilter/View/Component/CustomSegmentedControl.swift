@@ -49,8 +49,26 @@ class CustomSegmentedControl: UISegmentedControl {
             $0.selectedSegmentIndex = 0
             $0.selectedSegmentTintColor = .acWhite
             $0.backgroundColor = .gray8
-            $0.setTitleTextAttributes(String.ACStyle(.s2, .gray5), for: .normal)
-            $0.setTitleTextAttributes(String.ACStyle(.s2, .gray9), for: .selected)
+            $0.setTitleTextAttributes(ACStyle(.s2, .gray5), for: .normal)
+            $0.setTitleTextAttributes(ACStyle(.s2, .gray9), for: .selected)
         }
     }
+    
+    func ACStyle(_ style: ACFontStyleType, _ color: UIColor = .acWhite) -> [NSAttributedString.Key: Any] {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: style.font,
+            .kern: style.kerning,
+            .paragraphStyle: {
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.minimumLineHeight = style.lineHeight
+                paragraphStyle.maximumLineHeight = style.lineHeight
+                return paragraphStyle
+            }(),
+            .foregroundColor: color,
+            .baselineOffset: (style.lineHeight - style.font.lineHeight) / 2
+        ]
+        
+        return attributes
+    }
+    
 }
