@@ -36,13 +36,6 @@ final class LongBoxViewCell: BaseCollectionViewCell {
             $0.contentMode = .scaleAspectFill
         }
         
-        titleLabel.do {
-            $0.font = ACFont.s2.font
-            $0.textColor = .acWhite
-            $0.textAlignment = .center
-            $0.numberOfLines = 0
-        }
-        
         overlayContainer.do {
             $0.layer.cornerRadius = 8
         }
@@ -96,7 +89,13 @@ final class LongBoxViewCell: BaseCollectionViewCell {
     }
     
     func checkConfigure(name: String, image: UIImage?, isSelected: Bool) {
-        titleLabel.text = name
+        titleLabel.setLabel(
+                text: name,
+                style: ACFont.s2,
+                color: .acWhite,
+                alignment: .center,
+                numberOfLines: 0
+        )
         imageView.image = image ?? UIImage(systemName: "photo")
         
         if isSelected {

@@ -53,7 +53,6 @@ final class OnboardingViewController: BaseViewController {
             style: ACFont.b2,
             color: .acWhite,
             for: .normal)
-            
         }
         
         progressView.do {
@@ -74,7 +73,6 @@ final class OnboardingViewController: BaseViewController {
             $0.textColor = .acWhite
             $0.numberOfLines = 0
             $0.lineBreakMode = .byWordWrapping
-            
         }
         
         nextButton.do {

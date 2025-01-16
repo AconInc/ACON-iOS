@@ -40,15 +40,7 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
         }
-        
-        titleLabel.do {
-            $0.font = ACFont.s2.font
-            $0.textColor = .acWhite
-            $0.textAlignment = .center
-            $0.numberOfLines = 0
-            $0.backgroundColor = .clear
-        }
-        
+
         overlayContainer.do {
             $0.layer.cornerRadius = 8
             $0.backgroundColor = .clear
@@ -104,7 +96,13 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
     }
     
     func checkConfigure(name: String, image: UIImage?, isSelected: Bool) {
-        titleLabel.text = name
+        titleLabel.setLabel(
+                text: name,
+                style: ACFont.s2,
+                color: .acWhite,
+                alignment: .center,
+                numberOfLines: 0
+        )
         imageView.image = image ?? UIImage(systemName: "photo")
         
         if isSelected {
@@ -119,32 +117,33 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
     }
     
     func configure(name: String, image: UIImage?, isSelected: Int) {
-        titleLabel.text = name
+        titleLabel.setLabel(
+                text: name,
+                style: ACFont.s2,
+                color: .acWhite,
+                alignment: .center,
+                numberOfLines: 0
+        )
         imageView.image = image ?? UIImage(systemName: "photo")
-        overlayContainer.backgroundColor = .clear
         
-        switch isSelected {
-        case 1:
-            overlayImageView.image = UIImage(named: "1")
-            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-            overlayImageView.alpha = 1
-        case 2:
-            overlayImageView.image = UIImage(named: "2")
-            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-            overlayImageView.alpha = 1
-        case 3:
-            overlayImageView.image = UIImage(named: "3")
-            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-            overlayImageView.alpha = 1
-        case 4:
-            overlayImageView.image = UIImage(named: "4")
-            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-            overlayImageView.alpha = 1
-        default:
+        applyOverlaySettings(isSelected: isSelected)
+    }
+    
+}
+
+extension SmallBoxViewCell {
+    
+    private func applyOverlaySettings(isSelected: Int) {
+        guard (1...4).contains(isSelected) else {
             overlayContainer.backgroundColor = .clear
             overlayImageView.image = nil
             overlayImageView.alpha = 0
+            return
         }
+        
+        overlayImageView.image = UIImage(named: "\(isSelected)")
+        overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        overlayImageView.alpha = 1
     }
     
 }
