@@ -35,7 +35,8 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         super.setLayout()
         
         menuImageView.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview().inset(ScreenUtils.height*16/780)
+            $0.centerY.equalToSuperview()
+            $0.width.height.equalTo(ScreenUtils.height*78/780)
             $0.leading.equalToSuperview()
         }
         
