@@ -20,13 +20,6 @@ enum SpotType {
         }
     }
     
-    var featureFirstLineCount: Int {
-        switch self {
-        case .restaurant: return 5
-        case .cafe: return 4
-        }
-    }
-    
     
     // MARK: - 장소 상세 조건
     
