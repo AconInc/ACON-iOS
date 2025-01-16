@@ -20,7 +20,7 @@ class SpotListFilterView: BaseView {
     private let emptyView = PriorityLowEmptyView()
     
     
-    // [Spot section]: 방문 장소 (restaurant + cafe)
+    // [Spot section]: 방문 장소 (restaurant, cafe)
     
     private let spotSectionStackView = UIStackView()
     
@@ -44,7 +44,13 @@ class SpotListFilterView: BaseView {
     let companionTagStackView = SpotFilterTagStackView()
     
     
-    // [
+    // [Visit purpose]: 방문 목적 (cafe)
+    
+    private let visitPurposeSectionStackView = UIStackView()
+    
+    private let visitPurposeSectionTitleLabel = UILabel()
+    
+    let visitPurposeTagStackView = SpotFilterTagStackView()
     
     
     
@@ -61,6 +67,7 @@ class SpotListFilterView: BaseView {
         
         stackView.addArrangedSubviews(spotSectionStackView,
                                       companionSectionStackView,
+                                      visitPurposeSectionStackView,
                                       emptyView)
         
         // [Spot section]
@@ -79,6 +86,10 @@ class SpotListFilterView: BaseView {
                                                       companionTagStackView)
         
         
+        // [Visit purpose section]
+        
+        visitPurposeSectionStackView.addArrangedSubviews(visitPurposeSectionTitleLabel,
+                                                         visitPurposeTagStackView)
     }
     
     override func setLayout() {
@@ -109,6 +120,7 @@ class SpotListFilterView: BaseView {
         
         setCompanionSectionUI()
         
+        setVisitPurposeSectionUI()
         
         // TODO: 추후 추가 예정
     }
@@ -157,6 +169,23 @@ private extension SpotListFilterView {
         companionTagStackView.addTagButtons(titles: tags)
     }
     
+    
+    // MARK: - (Visit purpose section)
+    
+    func setVisitPurposeSectionUI() {
+        visitPurposeSectionStackView.do {
+            $0.axis = .vertical
+            $0.spacing = 12
+        }
+        
+        visitPurposeSectionTitleLabel.setLabel(
+            text: StringLiterals.SpotListFilter.visitPurposeSection,
+            style: .s2)
+        
+        let tags: [String] = SpotListFilterModel.VisitPurpose.firstLine.map { return $0.text }
+        visitPurposeTagStackView.addTagButtons(titles: tags)
+    }
+    
 }
 
 
@@ -189,6 +218,8 @@ extension SpotListFilterView {
         companionSectionStackView.isHidden = isHidden
     }
     
-    
+    func hideVisitPurposeSection(isHidden: Bool) {
+        visitPurposeSectionStackView.isHidden = isHidden
+    }
     
 }

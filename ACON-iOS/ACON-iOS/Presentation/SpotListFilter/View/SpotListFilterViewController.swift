@@ -81,12 +81,17 @@ private extension SpotListFilterViewController {
     // TODO: restaurant
     
     func updateView(_ spotType: SpotType) {
-        // NOTE: spot tag 바꾸기
-        spotListFilterView.switchSpotTagStack(spotType)
         
-        // NOTE: companion tag는 restaurant일 때만 보임
-        spotListFilterView.hideCompanionSection(isHidden: spotType == .cafe)
-        
+        spotListFilterView.do {
+            // NOTE: spot tag 바꾸기
+            $0.switchSpotTagStack(spotType)
+            
+            // NOTE: companion tag는 restaurant일 때만 보임
+            $0.hideCompanionSection(isHidden: spotType == .cafe)
+            
+            // NOTE: visit purpose tag는 cafe일 때만 보임
+            $0.hideVisitPurposeSection(isHidden: spotType == .restaurant)
+        }
     }
 }
 
@@ -97,7 +102,6 @@ private extension SpotListFilterViewController {
 private extension SpotListFilterViewController {
     
     @objc func didChangeSpot(segment: UISegmentedControl) {
-        print("didChangeSpot")
         let index = segment.selectedSegmentIndex
         viewModel.spotType.value = index == 0 ? .restaurant : .cafe
       }

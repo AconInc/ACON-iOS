@@ -111,6 +111,8 @@ enum StringLiterals {
         
         static let companionSection = "함께 하는 사람"
         
+        static let visitPurposeSection = "방문 목적"
+        
     }
     
 }
