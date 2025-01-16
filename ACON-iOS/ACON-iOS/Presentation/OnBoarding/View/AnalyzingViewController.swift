@@ -28,6 +28,7 @@ final class AnalyzingViewController: BaseViewController {
             $0.contentMode = .scaleAspectFit
             $0.loopMode = .loop
             $0.animationSpeed = 1.0
+            $0.backgroundBehavior = .pauseAndRestore
             $0.play()
         }
         
@@ -71,9 +72,10 @@ extension AnalyzingViewController {
             
             self.analyzingLabel.text = StringLiterals.Analyzing.analyzingAfter
             
-            // NOTE: 장소추천뷰로 이동
+            // NOTE: 장소추천뷰로 - 우선 모달
             let mainViewController = SpotListViewController()
-            self.navigationController?.pushViewController(mainViewController, animated: true)
+            mainViewController.modalPresentationStyle = .fullScreen
+            self.present(mainViewController, animated: true)
         }
     }
 }
