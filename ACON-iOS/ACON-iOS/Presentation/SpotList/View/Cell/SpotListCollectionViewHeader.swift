@@ -42,7 +42,6 @@ class SpotListCollectionViewHeader: UICollectionReusableView {
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-12)
-            
         }
     }
     
