@@ -19,7 +19,7 @@ enum Config {
             
             static let googleWebClientID = "GOOGLE_WEB_CLIENT_ID"
             
-            static let nMapClientKey = "NMFClientId"
+            static let nmapAPIKey = "NMAP_API_KEY"
             
         }
         
@@ -58,9 +58,9 @@ extension Config {
         return key
     }()
     
-    static let nMapClientKey: String = {
-        guard let key = Config.infoDictionary[Keys.Plist.nMapClientKey] as? String else {
-            fatalError("nMapClientKey is not set in plist for this configuration")
+    static let nmapAPIKey: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.nmapAPIKey] as? String else {
+            fatalError("nmapAPIKey is not set in plist for this configuration")
         }
         return key
     }()

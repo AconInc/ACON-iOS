@@ -23,8 +23,8 @@
 	<string>${GOOGLE_CLIENT_ID}</string>
 	<key>GOOGLE_WEB_CLIENT_ID</key>
 	<string>${GOOGLE_WEB_CLIENT_ID}</string>
-	<key>NMFClientId</key>
-	<string>${NMAP_CLIENT_KEY}</string>
+	<key>NMAP_API_KEY</key>
+	<string>${NMAP_API_KEY}</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

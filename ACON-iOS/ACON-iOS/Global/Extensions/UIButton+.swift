@@ -30,34 +30,4 @@ extension UIButton {
         self.setAttributedTitle(attributedString, for: state)
     }
     
-    func setPartialTitle(
-        fullText: String,
-        textStyles: [(text: String, style: ACFontStyleType, color: UIColor)]
-    ) {
-        let attributedString = NSMutableAttributedString(string: fullText)
-        
-        textStyles.forEach { textStyle in
-            if let range = fullText.range(of: textStyle.text) {
-                let nsRange = NSRange(range, in: fullText)
-                let attributes: [NSAttributedString.Key: Any] = [
-                    .font: textStyle.style.font,
-                    .kern: textStyle.style.kerning,
-                    .paragraphStyle: {
-                        let paragraphStyle = NSMutableParagraphStyle()
-                        paragraphStyle.minimumLineHeight = textStyle.style.lineHeight
-                        paragraphStyle.maximumLineHeight = textStyle.style.lineHeight
-                        return paragraphStyle
-                    }(),
-                    .foregroundColor: textStyle.color
-                ]
-                
-                attributes.forEach { key, value in
-                    attributedString.addAttribute(key, value: value, range: nsRange)
-                }
-            }
-        }
-        
-        self.setAttributedTitle(attributedString, for: state)
-    }
-    
 }
