@@ -36,7 +36,7 @@ final class SpotDetailView: BaseView {
     
     var menuCollectionView: UICollectionView = UICollectionView(
         frame: .zero,
-        collectionViewLayout: UICollectionViewFlowLayout()
+        collectionViewLayout: menuCollectionViewFlowLayout
     )
     
     private let footerView: UIView = UIView()
@@ -51,6 +51,10 @@ final class SpotDetailView: BaseView {
     
     var findCourseButton: UIButton = UIButton()
     
+    static var menuCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().then {
+        $0.minimumLineSpacing = 0
+        $0.itemSize = CGSize(width: ScreenUtils.width*320/360, height: ScreenUtils.height*110/780)
+    }
     
     // MARK: - Lifecycle
     
@@ -79,15 +83,13 @@ final class SpotDetailView: BaseView {
         scrollView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview().inset(84)
-            $0.width.equalToSuperview()
-            $0.height.equalTo(1000)
         }
         
         scrollContentView.snp.makeConstraints {
-            $0.top.horizontalEdges.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*84/780)
-            $0.width.equalToSuperview()
-            $0.height.equalTo(1000)
+            $0.edges.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
+            $0.height.equalTo(1500)
+//            $0.height.greaterThanOrEqualTo(ScreenUtils.height)
         }
         
         footerView.snp.makeConstraints {
@@ -144,6 +146,7 @@ final class SpotDetailView: BaseView {
         }
         
         menuCollectionView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(ScreenUtils.height*353/780)
             $0.bottom.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
         }
@@ -202,7 +205,7 @@ final class SpotDetailView: BaseView {
         }
         
         addressLabel.do {
-            $0.setLabel(text: StringLiterals.SpotDetail.menu,
+            $0.setLabel(text: "어쩌구저쩌구 주소어쩌구",
                         style: .b4,
                         color: .gray4)
         }
@@ -223,7 +226,6 @@ final class SpotDetailView: BaseView {
         }
         
         menuCollectionView.do {
-            $0.backgroundColor = .clear
             $0.isScrollEnabled = false
             $0.showsVerticalScrollIndicator = false
         }

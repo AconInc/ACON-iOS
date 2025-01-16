@@ -93,7 +93,7 @@ private extension SpotDetailViewController {
 extension SpotDetailViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return SpotSearchView.relatedSearchCollectionViewFlowLayout.itemSize
+        return SpotDetailView.menuCollectionViewFlowLayout.itemSize
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
