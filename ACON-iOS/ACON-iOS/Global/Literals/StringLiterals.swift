@@ -71,9 +71,9 @@ enum StringLiterals {
         
         static let uploadSpotName = "가게명 등록하기"
         
-        static let dropAcornsHere = "이곳에 도토리 남기기"
+        static let dropAcornsHere = "도토리로 리뷰남기기"
         
-        static let shallWeDropAcorns = "이제 도토리를\n떨어트려볼까요?"
+        static let shallWeDropAcorns = "도토리를 떨어트려\n리뷰를 남겨 볼까요?"
 
         static let useAcornToReview = "도토리를 사용해 리뷰를 남겨주세요."
         
@@ -94,6 +94,8 @@ enum StringLiterals {
         static let searchSpot = "가게명을 검색해주세요"
         
         static let noMatchingSpots = "앗! 일치하는 장소가 없어요."
+        
+        static let clickAcorn = "도토리를 클릭해보세요"
         
     }
     
@@ -134,6 +136,7 @@ enum StringLiterals {
          static let localAcorn = "로컬 도토리"
 
          static let plainAcorn = "일반 도토리"
+        
      }
     
     enum SpotListFilter {
