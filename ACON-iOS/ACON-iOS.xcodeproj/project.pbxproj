@@ -19,13 +19,15 @@
 		1547A88B2D3596B600E96616 /* SpotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A88A2D3596B600E96616 /* SpotType.swift */; };
 		1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A88D2D35B13700E96616 /* FilterTagButton.swift */; };
 		1547A8902D35B30C00E96616 /* FilterTagButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A88F2D35B30C00E96616 /* FilterTagButtonType.swift */; };
-		1547A8922D363E0000E96616 /* SpotFilterTagButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A8912D363E0000E96616 /* SpotFilterTagButtonStackView.swift */; };
 		1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */; };
 		1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */; };
 		1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */; };
 		1558BAE12D31D41F00ECDEF8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BAE02D31D41F00ECDEF8 /* ProfileViewController.swift */; };
 		15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */; };
 		15A3F6A82D36D5B900577E16 /* FilterTagButtonStackLineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6A72D36D5B900577E16 /* FilterTagButtonStackLineType.swift */; };
+		15A3F6E02D38724A00577E16 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */; };
+		15A3F7A12D38C71900577E16 /* PriorityLowEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */; };
+		15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */; };
 		15A3F6AC2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */; };
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
 		74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */; };
@@ -83,6 +85,12 @@
 		74B25C2E2D2FEFD3008BDCB7 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C2D2D2FEFD3008BDCB7 /* Debug.xcconfig */; };
 		74B25C302D2FEFE1008BDCB7 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C2F2D2FEFE1008BDCB7 /* Release.xcconfig */; };
 		74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C312D2FF022008BDCB7 /* Shared.xcconfig */; };
+		74BF92102D391FFE00B923E3 /* LocalVerificationFinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920A2D391FFE00B923E3 /* LocalVerificationFinishedView.swift */; };
+		74BF92112D391FFE00B923E3 /* LocalVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920D2D391FFE00B923E3 /* LocalVerificationViewController.swift */; };
+		74BF92122D391FFE00B923E3 /* LocalMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92092D391FFE00B923E3 /* LocalMapViewController.swift */; };
+		74BF92132D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920B2D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift */; };
+		74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92082D391FFE00B923E3 /* LocalMapView.swift */; };
+		74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920C2D391FFE00B923E3 /* LocalVerificationView.swift */; };
 		74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */; };
 		74CDCE562D310B1600E3A21A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE552D310B1300E3A21A /* String+.swift */; };
 /* End PBXBuildFile section */
@@ -100,13 +108,15 @@
 		1547A88A2D3596B600E96616 /* SpotType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotType.swift; sourceTree = "<group>"; };
 		1547A88D2D35B13700E96616 /* FilterTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagButton.swift; sourceTree = "<group>"; };
 		1547A88F2D35B30C00E96616 /* FilterTagButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagButtonType.swift; sourceTree = "<group>"; };
-		1547A8912D363E0000E96616 /* SpotFilterTagButtonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotFilterTagButtonStackView.swift; sourceTree = "<group>"; };
 		1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarController.swift; sourceTree = "<group>"; };
 		1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarItemType.swift; sourceTree = "<group>"; };
 		1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
 		1558BAE02D31D41F00ECDEF8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListItemSizeType.swift; sourceTree = "<group>"; };
 		15A3F6A72D36D5B900577E16 /* FilterTagButtonStackLineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagButtonStackLineType.swift; sourceTree = "<group>"; };
+		15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityLowEmptyView.swift; sourceTree = "<group>"; };
+		15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotFilterTagStackView.swift; sourceTree = "<group>"; };
 		15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewHeader.swift; sourceTree = "<group>"; };
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultitaskDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +170,12 @@
 		74B25C2D2D2FEFD3008BDCB7 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		74B25C2F2D2FEFE1008BDCB7 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		74B25C312D2FF022008BDCB7 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
+		74BF92082D391FFE00B923E3 /* LocalMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMapView.swift; sourceTree = "<group>"; };
+		74BF92092D391FFE00B923E3 /* LocalMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMapViewController.swift; sourceTree = "<group>"; };
+		74BF920A2D391FFE00B923E3 /* LocalVerificationFinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFinishedView.swift; sourceTree = "<group>"; };
+		74BF920B2D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFinishedViewController.swift; sourceTree = "<group>"; };
+		74BF920C2D391FFE00B923E3 /* LocalVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationView.swift; sourceTree = "<group>"; };
+		74BF920D2D391FFE00B923E3 /* LocalVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationViewController.swift; sourceTree = "<group>"; };
 		74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACFontStyleType.swift; sourceTree = "<group>"; };
 		74CDCE552D310B1300E3A21A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -287,8 +303,10 @@
 		1547A88C2D35AE5C00E96616 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */,
 				1547A88D2D35B13700E96616 /* FilterTagButton.swift */,
-				1547A8912D363E0000E96616 /* SpotFilterTagButtonStackView.swift */,
+				15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */,
+				15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -424,6 +442,7 @@
 		748D6F702D2BCA46007690B4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				74BF920F2D391FFE00B923E3 /* LocalVerification */,
 				74220DD12D34361E000684BF /* Upload */,
 				1558BADC2D31AB5100ECDEF8 /* SpotList */,
 				1547A87B2D358DBE00E96616 /* SpotListFilter */,
@@ -603,6 +622,27 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		74BF920E2D391FFE00B923E3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				74BF92082D391FFE00B923E3 /* LocalMapView.swift */,
+				74BF92092D391FFE00B923E3 /* LocalMapViewController.swift */,
+				74BF920A2D391FFE00B923E3 /* LocalVerificationFinishedView.swift */,
+				74BF920B2D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift */,
+				74BF920C2D391FFE00B923E3 /* LocalVerificationView.swift */,
+				74BF920D2D391FFE00B923E3 /* LocalVerificationViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		74BF920F2D391FFE00B923E3 /* LocalVerification */ = {
+			isa = PBXGroup;
+			children = (
+				74BF920E2D391FFE00B923E3 /* View */,
+			);
+			path = LocalVerification;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -746,6 +786,7 @@
 				748D6F822D2BCDB3007690B4 /* ScreenUtils.swift in Sources */,
 				745C7E122D35A62B0074DBDB /* UploadModel.swift in Sources */,
 				748D6FAE2D2EBB9C007690B4 /* ACFont.swift in Sources */,
+				15A3F6E02D38724A00577E16 /* CustomSegmentedControl.swift in Sources */,
 				748D6F692D2BCA1C007690B4 /* AppDelegate.swift in Sources */,
 				74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */,
 				745C7E0D2D35A04A0074DBDB /* RelatedSearchCollectionViewCell.swift in Sources */,
@@ -758,6 +799,7 @@
 				1547A8902D35B30C00E96616 /* FilterTagButtonType.swift in Sources */,
 				748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */,
 				748D6F872D2BD247007690B4 /* UIView+.swift in Sources */,
+				15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */,
 				1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */,
 				1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */,
 				74CDCE562D310B1600E3A21A /* String+.swift in Sources */,
@@ -774,7 +816,6 @@
 				15A3F6AC2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift in Sources */,
 				748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */,
 				745C7E042D3599DF0074DBDB /* SpotSearchViewController.swift in Sources */,
-				1547A8922D363E0000E96616 /* SpotFilterTagButtonStackView.swift in Sources */,
 				74B25C2C2D2FEE8E008BDCB7 /* Config.swift in Sources */,
 				74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */,
 				748D6F8F2D2BD340007690B4 /* UIButton+.swift in Sources */,
@@ -787,8 +828,15 @@
 				1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */,
 				1547A8802D358E2700E96616 /* SpotListFilterView.swift in Sources */,
 				74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */,
+				15A3F7A12D38C71900577E16 /* PriorityLowEmptyView.swift in Sources */,
 				748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */,
 				1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */,
+				74BF92102D391FFE00B923E3 /* LocalVerificationFinishedView.swift in Sources */,
+				74BF92112D391FFE00B923E3 /* LocalVerificationViewController.swift in Sources */,
+				74BF92122D391FFE00B923E3 /* LocalMapViewController.swift in Sources */,
+				74BF92132D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift in Sources */,
+				74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */,
+				74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */,
 				1547A8732D34157700E96616 /* SpotListViewModel.swift in Sources */,
 				748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */,
 				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,

@@ -23,7 +23,7 @@ enum SpotType {
     
     // MARK: - 장소 상세 조건
     
-    enum RestaurantFeatureType {
+    enum RestaurantFeatureType: CaseIterable {
         
         case korean, western, chinese, japanese, snack, asian, bar, excludeFranchise
         
@@ -40,13 +40,9 @@ enum SpotType {
             }
         }
         
-        var firstLineCount: Int {
-            return 5
-        }
-        
     }
     
-    enum CafeFeatureType {
+    enum CafeFeatureType: CaseIterable {
         
         case large, goodView, dessert, terace, excludeFranchise
         
@@ -60,13 +56,9 @@ enum SpotType {
             }
         }
         
-        var firstLineCount: Int {
-            return 4
-        }
-        
     }
     
-    enum CompanionType {
+    enum CompanionType: CaseIterable {
         
         case family, date, friend, alone, group
         
@@ -82,7 +74,7 @@ enum SpotType {
         
     }
     
-    enum VisitPurposeType {
+    enum VisitPurposeType: CaseIterable {
         
         case meeting, study
         

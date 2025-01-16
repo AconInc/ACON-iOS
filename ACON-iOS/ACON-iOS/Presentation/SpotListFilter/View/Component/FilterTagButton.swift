@@ -13,7 +13,6 @@ class FilterTagButton: UIButton {
     
     override var isSelected: Bool {
         didSet {
-            print("button isSelected")
             configuration?.baseBackgroundColor = isSelected ? .subOrg35 : .gray8
             configuration?.background.strokeColor = isSelected ? .org1 : .gray6
         }
@@ -26,6 +25,9 @@ class FilterTagButton: UIButton {
         super.init(frame: frame)
         
         configureButton()
+        setLayout()
+        addTarget()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -47,12 +49,34 @@ private extension FilterTagButton {
         config.background.strokeWidth = 1
         config.cornerStyle = .capsule
         config.titleAlignment = .center
+        config.titleLineBreakMode = .byTruncatingTail
         config.contentInsets = NSDirectionalEdgeInsets(top: 7,
                                                        leading: 16,
                                                        bottom: 7,
                                                        trailing: 16)
-        
         self.configuration = config
+    }
+    
+    func setLayout() {
+        self.snp.makeConstraints {
+            $0.height.equalTo(32)
+        }
+    }
+    
+    func addTarget() {
+        self.addTarget(self, action: #selector(toggleSelf), for: .touchUpInside)
+    }
+    
+}
+
+
+// MARK: - @objc functions
+
+private extension FilterTagButton {
+    
+    @objc
+    func toggleSelf(_ sender: UIButton) {
+        isSelected.toggle()
     }
     
 }
