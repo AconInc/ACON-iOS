@@ -25,7 +25,9 @@ class FilterTagButton: UIButton {
         super.init(frame: frame)
         
         configureButton()
+        setLayout()
         addTarget()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -51,16 +53,29 @@ private extension FilterTagButton {
                                                        leading: 16,
                                                        bottom: 7,
                                                        trailing: 16)
-        
         self.configuration = config
+    }
+    
+    func setLayout() {
+        self.snp.makeConstraints {
+            $0.height.equalTo(32)
+        }
     }
     
     func addTarget() {
         self.addTarget(self, action: #selector(toggleSelf), for: .touchUpInside)
     }
     
+}
+
+
+// MARK: - @objc functions
+
+private extension FilterTagButton {
+    
     @objc
     func toggleSelf(_ sender: UIButton) {
         isSelected.toggle()
     }
+    
 }
