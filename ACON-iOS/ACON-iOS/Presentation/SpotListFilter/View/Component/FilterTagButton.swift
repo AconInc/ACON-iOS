@@ -13,7 +13,6 @@ class FilterTagButton: UIButton {
     
     override var isSelected: Bool {
         didSet {
-            print("button isSelected")
             configuration?.baseBackgroundColor = isSelected ? .subOrg35 : .gray8
             configuration?.background.strokeColor = isSelected ? .org1 : .gray6
         }
@@ -26,6 +25,7 @@ class FilterTagButton: UIButton {
         super.init(frame: frame)
         
         configureButton()
+        addTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -55,4 +55,12 @@ private extension FilterTagButton {
         self.configuration = config
     }
     
+    func addTarget() {
+        self.addTarget(self, action: #selector(toggleSelf), for: .touchUpInside)
+    }
+    
+    @objc
+    func toggleSelf(_ sender: UIButton) {
+        isSelected.toggle()
+    }
 }

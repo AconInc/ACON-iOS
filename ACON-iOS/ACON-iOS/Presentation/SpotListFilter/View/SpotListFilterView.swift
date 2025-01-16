@@ -11,13 +11,13 @@ class SpotListFilterView: BaseView {
     
     // MARK: - Properties
     
-    private let segmentItems = [StringLiterals.SpotListFilter.restaurant,
-                                StringLiterals.SpotListFilter.cafe]
     
     
     // MARK: - UI Properties
     
     private let stackView = UIStackView()
+    
+    private let emptyView = PriorityLowEmptyView()
     
     
     // [Spot section]: 방문 장소 (restaurant + cafe)
@@ -26,20 +26,22 @@ class SpotListFilterView: BaseView {
     
     private let spotSectionTitleLabel = UILabel()
 
-    lazy var segmentedControl = UISegmentedControl(items: segmentItems)
+    lazy var segmentedControl = CustomSegmentedControl()
     
-    private let segmentedControlBgView = UIView()
+    private let spotTagStackView = UIStackView()
     
-    let spotTagStackView = SpotFilterTagButtonStackView()
+    private let firstLineSpotTagStackView = SpotFilterTagStackView()
+    
+    private let secondLineSpotTagStackView = SpotFilterTagStackView()
     
     
     // [Companion section]: 함께 하는 사람 (restaurant)
     
-    private let companionSectionStackView = SpotFilterTagButtonStackView()
+    private let companionSectionStackView = UIStackView()
     
     private let companionSectionTitleLabel = UILabel()
     
-    let companionTagStackView = SpotFilterTagButtonStackView()
+    let companionTagStackView = SpotFilterTagStackView()
     
     
     
@@ -55,15 +57,17 @@ class SpotListFilterView: BaseView {
         self.addSubviews(stackView)
         
         stackView.addArrangedSubviews(spotSectionStackView,
-                                       companionSectionStackView)
+                                      companionSectionStackView,
+                                      emptyView)
         
         // [Spot section]
         
         spotSectionStackView.addArrangedSubviews(spotSectionTitleLabel,
-                                                 segmentedControlBgView,
+                                                 segmentedControl,
                                                  spotTagStackView)
         
-        segmentedControlBgView.addSubview(segmentedControl)
+        spotTagStackView.addArrangedSubviews(firstLineSpotTagStackView,
+                                             secondLineSpotTagStackView)
         
         
         // [Companion section]
@@ -82,18 +86,9 @@ class SpotListFilterView: BaseView {
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
         }
         
-        segmentedControlBgView.snp.makeConstraints {
+        segmentedControl.snp.makeConstraints {
             $0.height.equalTo(ScreenUtils.heightRatio * 37)
         }
-        
-        segmentedControl.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(ScreenUtils.heightRatio * 3)
-        }
-        
-        
-        // [Companion section
-        
-        
     }
     
     override func setStyle() {
@@ -104,11 +99,12 @@ class SpotListFilterView: BaseView {
             $0.spacing = 32
         }
         
+        
         // [Spot section]
         
         setSpotSectionUI()
         
-        
+        setCompanionSectionUI()
         
         
         // TODO: 추후 추가 예정
@@ -132,30 +128,61 @@ private extension SpotListFilterView {
         spotSectionTitleLabel.do {
             $0.setLabel(text: StringLiterals.SpotListFilter.spotSection,
                         style: .s2)
-            
-        setSegmentControl()
+        }
         
+        spotTagStackView.do {
+            $0.alignment = .leading
+            $0.axis = .vertical
+            $0.spacing = 5
         }
     }
     
-    func setSegmentControl() {
-        segmentedControlBgView.do {
-//            $0.backgroundColor = .gray8
-            $0.layer.cornerRadius = ScreenUtils.heightRatio * 6
+    
+    // MARK: - (Companion section)
+    
+    func setCompanionSectionUI() {
+        companionSectionStackView.do {
+            $0.axis = .vertical
+            $0.spacing = 12
         }
         
-        // TODO: 배경 없애기 커스텀
-        segmentedControl.do {
-            $0.selectedSegmentIndex = 0
-            $0.selectedSegmentTintColor = .acWhite
-            $0.backgroundColor = .gray8
-            $0.setTitleTextAttributes(String.ACStyle(.s2, .gray5), for: .normal)
-            $0.setTitleTextAttributes(String.ACStyle(.s2, .gray9), for: .selected)
-        }
+        companionSectionTitleLabel.setLabel(
+            text: StringLiterals.SpotListFilter.companionSection,
+            style: .s2)
+        
+        let tags: [String] = SpotListFilterModel.Companion.firstLine.map { return $0.text }
+        companionTagStackView.addTagButtons(titles: tags)
     }
+    
+    
     
 }
 
 
+// MARK: - Internal Methods (Update UI)
 
-// MARK: - UI Settings (Companion section)
+extension SpotListFilterView {
+    
+    func updateSpotTagStack(_ spotType: SpotType) {
+        
+        // TODO: Model 대신 Type으로 바꾸기
+        
+        // NOTE: add buttons
+        switch spotType {
+        case .restaurant:
+            let firstLine: [String] = SpotListFilterModel.RestaurantFeature.firstLine.map { return $0.text }
+            let secondLine: [String] = SpotListFilterModel.RestaurantFeature.secondLine.map { return $0.text }
+            
+            firstLineSpotTagStackView.switchTagButtons(titles: firstLine)
+            secondLineSpotTagStackView.switchTagButtons(titles: secondLine)
+            
+        case .cafe:
+            let firstLine: [String] = SpotListFilterModel.CafeFeature.firstLine.map { return $0.text }
+            let secondLine: [String] = SpotListFilterModel.CafeFeature.secondLine.map { return $0.text }
+            
+            firstLineSpotTagStackView.switchTagButtons(titles: firstLine)
+            secondLineSpotTagStackView.switchTagButtons(titles: secondLine)
+        }
+    }
+    
+}
