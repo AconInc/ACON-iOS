@@ -82,6 +82,12 @@
 		74B25C2E2D2FEFD3008BDCB7 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C2D2D2FEFD3008BDCB7 /* Debug.xcconfig */; };
 		74B25C302D2FEFE1008BDCB7 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C2F2D2FEFE1008BDCB7 /* Release.xcconfig */; };
 		74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C312D2FF022008BDCB7 /* Shared.xcconfig */; };
+		74BF92102D391FFE00B923E3 /* LocalVerificationFinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920A2D391FFE00B923E3 /* LocalVerificationFinishedView.swift */; };
+		74BF92112D391FFE00B923E3 /* LocalVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920D2D391FFE00B923E3 /* LocalVerificationViewController.swift */; };
+		74BF92122D391FFE00B923E3 /* LocalMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92092D391FFE00B923E3 /* LocalMapViewController.swift */; };
+		74BF92132D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920B2D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift */; };
+		74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92082D391FFE00B923E3 /* LocalMapView.swift */; };
+		74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920C2D391FFE00B923E3 /* LocalVerificationView.swift */; };
 		74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */; };
 		74CDCE562D310B1600E3A21A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE552D310B1300E3A21A /* String+.swift */; };
 /* End PBXBuildFile section */
@@ -158,6 +164,12 @@
 		74B25C2D2D2FEFD3008BDCB7 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		74B25C2F2D2FEFE1008BDCB7 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		74B25C312D2FF022008BDCB7 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
+		74BF92082D391FFE00B923E3 /* LocalMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMapView.swift; sourceTree = "<group>"; };
+		74BF92092D391FFE00B923E3 /* LocalMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMapViewController.swift; sourceTree = "<group>"; };
+		74BF920A2D391FFE00B923E3 /* LocalVerificationFinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFinishedView.swift; sourceTree = "<group>"; };
+		74BF920B2D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFinishedViewController.swift; sourceTree = "<group>"; };
+		74BF920C2D391FFE00B923E3 /* LocalVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationView.swift; sourceTree = "<group>"; };
+		74BF920D2D391FFE00B923E3 /* LocalVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationViewController.swift; sourceTree = "<group>"; };
 		74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACFontStyleType.swift; sourceTree = "<group>"; };
 		74CDCE552D310B1300E3A21A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -421,6 +433,7 @@
 		748D6F702D2BCA46007690B4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				74BF920F2D391FFE00B923E3 /* LocalVerification */,
 				74220DD12D34361E000684BF /* Upload */,
 				1547A87B2D358DBE00E96616 /* SpotListFilter */,
 				1558BADF2D31D41400ECDEF8 /* Profile */,
@@ -598,6 +611,27 @@
 				74AB6EB02D2796D30094F873 /* ACON-iOS.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		74BF920E2D391FFE00B923E3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				74BF92082D391FFE00B923E3 /* LocalMapView.swift */,
+				74BF92092D391FFE00B923E3 /* LocalMapViewController.swift */,
+				74BF920A2D391FFE00B923E3 /* LocalVerificationFinishedView.swift */,
+				74BF920B2D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift */,
+				74BF920C2D391FFE00B923E3 /* LocalVerificationView.swift */,
+				74BF920D2D391FFE00B923E3 /* LocalVerificationViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		74BF920F2D391FFE00B923E3 /* LocalVerification */ = {
+			isa = PBXGroup;
+			children = (
+				74BF920E2D391FFE00B923E3 /* View */,
+			);
+			path = LocalVerification;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -785,6 +819,12 @@
 				74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */,
 				748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */,
 				1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */,
+				74BF92102D391FFE00B923E3 /* LocalVerificationFinishedView.swift in Sources */,
+				74BF92112D391FFE00B923E3 /* LocalVerificationViewController.swift in Sources */,
+				74BF92122D391FFE00B923E3 /* LocalMapViewController.swift in Sources */,
+				74BF92132D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift in Sources */,
+				74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */,
+				74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */,
 				1547A8732D34157700E96616 /* SpotListViewModel.swift in Sources */,
 				748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */,
 				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,
