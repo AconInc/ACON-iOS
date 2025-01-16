@@ -121,6 +121,7 @@ private extension SpotDetailViewController {
     func setDelegate() {
         spotDetailView.menuCollectionView.delegate = self
         spotDetailView.menuCollectionView.dataSource = self
+        spotDetailView.scrollView.delegate = self
     }
     
     func updateCollectionViewHeight() {
@@ -169,4 +170,18 @@ extension SpotDetailViewController: UICollectionViewDataSource {
         return cell
     }
     
+}
+
+
+// MARK: - Enable Sticky Header
+
+extension SpotDetailViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(spotDetailView.scrollView.contentOffset.y, spotDetailView.stickyHeaderView.frame.minY)
+        let shouldShowSticky = spotDetailView.scrollView.contentOffset.y >= spotDetailView.stickyHeaderView.frame.minY
+        spotDetailView.stickyView.isHidden = !shouldShowSticky
+        spotDetailView.stickyHeaderView.isHidden = shouldShowSticky
+    }
+
 }

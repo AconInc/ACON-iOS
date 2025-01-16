@@ -14,7 +14,9 @@ final class SpotDetailView: BaseView {
 
     // MARK: - UI Properties
     
-    private let scrollView: UIScrollView = UIScrollView()
+    var stickyView: StickyHeaderView = StickyHeaderView()
+    
+    let scrollView: UIScrollView = UIScrollView()
     
     var scrollContentView: UIView = UIView()
     
@@ -26,11 +28,7 @@ final class SpotDetailView: BaseView {
     
     var addressLabel: UILabel = UILabel()
     
-    private let stickyHeaderView: UIView = UIView()
-    
-    private let menuLabel: UILabel = UILabel()
-    
-    private let menuUnderLineView: UIView = UIView()
+    let stickyHeaderView: StickyHeaderView = StickyHeaderView()
     
     var menuCollectionView: UICollectionView = UICollectionView(
         frame: .zero,
@@ -59,13 +57,13 @@ final class SpotDetailView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(scrollView, footerView)
-        scrollView.addSubviews(scrollContentView, stickyHeaderView)
-        stickyHeaderView.addSubviews(menuLabel, menuUnderLineView)
+        self.addSubviews(stickyView, scrollView, footerView)
+        scrollView.addSubviews(scrollContentView)
         scrollContentView.addSubviews(spotDetailImageView,
                                       openStatusButton,
                                       addressImageView,
                                       addressLabel,
+                                      stickyHeaderView,
                                       menuCollectionView)
         footerView.addSubviews(localAcornImageView,
                                localAcornCountLabel,
@@ -76,6 +74,12 @@ final class SpotDetailView: BaseView {
     
     override func setLayout() {
         super.setLayout()
+        
+        stickyView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.height.equalTo(36)
+        }
         
         scrollView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
@@ -118,19 +122,8 @@ final class SpotDetailView: BaseView {
         
         stickyHeaderView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*300/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
-            $0.width.equalTo(63)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.height.equalTo(36)
-        }
-        
-        menuLabel.snp.makeConstraints {
-            $0.top.horizontalEdges.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(2)
-        }
-        
-        menuUnderLineView.snp.makeConstraints {
-            $0.bottom.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(2)
         }
         
         menuCollectionView.snp.makeConstraints {
@@ -177,6 +170,10 @@ final class SpotDetailView: BaseView {
     override func setStyle() {
         super.setStyle()
         
+        stickyView.do {
+            $0.isHidden = true
+        }
+        
         scrollView.do {
             $0.showsVerticalScrollIndicator = false
         }
@@ -197,16 +194,6 @@ final class SpotDetailView: BaseView {
         addressImageView.do {
             $0.image = .icLocation
             $0.contentMode = .scaleAspectFill
-        }
-        
-        menuLabel.do {
-            $0.setLabel(text: StringLiterals.SpotDetail.menu,
-                        style: .s2,
-                        alignment: .center)
-        }
-        
-        menuUnderLineView.do {
-            $0.backgroundColor = .acWhite
         }
         
         menuCollectionView.do {
