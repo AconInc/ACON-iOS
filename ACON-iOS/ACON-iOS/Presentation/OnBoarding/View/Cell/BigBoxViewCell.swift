@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class OnboardingCell: BaseCollectionViewCell {
+final class BigBoxViewCell: BaseCollectionViewCell {
     
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
@@ -60,25 +60,25 @@ final class OnboardingCell: BaseCollectionViewCell {
     
     override func setHierarchy() {
         super.setHierarchy()
+        
         contentView.addSubview(container)
-        container.addSubviews(imageView,titleLabel,overlayContainer)
+        container.addSubviews(imageView,
+                              titleLabel,
+                              overlayContainer)
         overlayContainer.addSubview(overlayImageView)
     }
     
-     override func setLayout() {
+    override func setLayout() {
         super.setLayout()
-
         
         container.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalTo(154)
-
         }
-
+        
         imageView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(container.snp.width).multipliedBy(1.0) // 정사각형 비율 유지
-
+            $0.height.equalTo(container.snp.width).multipliedBy(1.0) 
         }
         
         titleLabel.snp.makeConstraints {
@@ -94,16 +94,13 @@ final class OnboardingCell: BaseCollectionViewCell {
         overlayImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
-        
     }
     
     func configure(name: String, image: UIImage?, isSelected: Int) {
-        
         titleLabel.text = name
         imageView.image = image ?? UIImage(systemName: "photo")
-     
+        
         switch isSelected {
-            
         case 1:
             overlayImageView.image = UIImage(named: "1")
             overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
@@ -126,7 +123,4 @@ final class OnboardingCell: BaseCollectionViewCell {
             overlayImageView.alpha = 0
         }
     }
-
 }
-
-

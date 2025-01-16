@@ -18,14 +18,9 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
     private let overlayContainer = UIView()
     private let container = UIView()
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .clear
         backgroundColor = .clear
-        setStyle()
-        setHierarchy()
-        setLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -33,14 +28,11 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
     }
     
     override func setStyle() {
-        
-        self.backgroundColor = .clear
-        
-        
+        super.setStyle()
+                
         container.do {
             $0.backgroundColor = .clear
         }
-        
         
         imageView.do {
             $0.layer.cornerRadius = 8
@@ -55,13 +47,11 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
             $0.textAlignment = .center
             $0.numberOfLines = 0
             $0.backgroundColor = .clear
-            
         }
         
         overlayContainer.do {
             $0.layer.cornerRadius = 8
             $0.backgroundColor = .clear
-
         }
         
         overlayImageView.do {
@@ -74,8 +64,13 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
     
     override func setHierarchy() {
         super.setHierarchy()
+        
         contentView.addSubview(container)
-        container.addSubviews(imageView,titleLabel,overlayContainer)
+        container.addSubviews(
+            imageView,
+            titleLabel,
+            overlayContainer
+        )
         overlayContainer.addSubview(overlayImageView)
     }
     
@@ -86,15 +81,11 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
             $0.edges.equalToSuperview()
             $0.width.equalTo(101)
             $0.height.equalTo(129)
-            
-
         }
         
         imageView.snp.makeConstraints {
             $0.top.horizontalEdges.equalTo(container)
-//            $0.width.height.equalTo(101)
-            $0.height.equalTo(container.snp.width).multipliedBy(1.0) // 정사각형 비율 유지
-
+            $0.height.equalTo(container.snp.width).multipliedBy(1.0)
         }
         
         titleLabel.snp.makeConstraints {
@@ -110,15 +101,11 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
         overlayImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
-        
     }
     
     func checkConfigure(name: String, image: UIImage?, isSelected: Bool) {
-        
         titleLabel.text = name
         imageView.image = image ?? UIImage(systemName: "photo")
-        
-        
         
         if isSelected {
             overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
@@ -131,15 +118,12 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(name: String, image: UIImage?, isSelected: Int ) {
-        
+    func configure(name: String, image: UIImage?, isSelected: Int) {
         titleLabel.text = name
         imageView.image = image ?? UIImage(systemName: "photo")
         overlayContainer.backgroundColor = .clear
         
-        
         switch isSelected {
-            
         case 1:
             overlayImageView.image = UIImage(named: "1")
             overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
@@ -161,47 +145,5 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
             overlayImageView.image = nil
             overlayImageView.alpha = 0
         }
-    }
-    
-    
-}
-
-
-
-
-import SwiftUI
-
-struct SmallBoxViewCellPreview: UIViewRepresentable {
-    func makeUIView(context: Context) -> UIView {
-        // SmallBoxViewCell 초기화
-        let cell = SmallBoxViewCell(frame: .zero)
-        
-        // 테스트 데이터를 설정
-        cell.checkConfigure(
-            name: "테스트",
-            image: UIImage(named: "koreaFood"),
-            isSelected: true
-        )
-        
-        // 셀 크기 설정
-        cell.frame = CGRect(
-            origin: .zero,
-            size: CGSize(width: 101, height: 129)
-        )
-        
-        return cell
-    }
-    
-    func updateUIView(_ uiView: UIView, context: Context) {
-        // 필요 시 업데이트 로직 추가
-    }
-}
-
-struct SmallBoxViewCellPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        SmallBoxViewCellPreview()
-            .edgesIgnoringSafeArea(.all)
-            .previewLayout(.sizeThatFits)
-            .frame(width: 101, height: 129) // 셀 크기
     }
 }

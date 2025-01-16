@@ -11,7 +11,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class OnboardingViewController: UIViewController {
+final class OnboardingViewController: BaseViewController {
     
     let viewModel = OnboardingViewModel()
     
@@ -35,15 +35,12 @@ final class OnboardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray9
-        setStyle()
-        setHierarchy()
-        setLayout()
         setBinding()
         updateContentView(for: currentStep)
     }
     
-    private func setStyle() {
+    override func setStyle() {
+        super.setStyle()
         
         overlayView.do {
             $0.backgroundColor = UIColor.black.withAlphaComponent(0.6)
@@ -51,7 +48,7 @@ final class OnboardingViewController: UIViewController {
         }
         
         backButton.do {
-            $0.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+            $0.setImage(UIImage(named: "chevron.left"), for: .normal)
             $0.tintColor = .acWhite
             $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         }
@@ -94,14 +91,16 @@ final class OnboardingViewController: UIViewController {
         }
     }
     
-    private func setHierarchy() {
-        
+    override func setHierarchy() {
+        super.setHierarchy()
+
         view.addSubviews(backButton, skipButton, progressView, progressNumber, progressTitle, overlayView, nextButton)
         progressView.addSubview(progressIndicator)
     }
     
     
-    private func setLayout() {
+    override func setLayout() {
+        super.setLayout()
         
         overlayView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -109,13 +108,13 @@ final class OnboardingViewController: UIViewController {
         
         backButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(20)
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.size.equalTo(CGSize(width: 24, height: 24))
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.size.equalTo(ScreenUtils.width * 24 / 260)
         }
         
         skipButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-20)
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            $0.centerY.equalTo(backButton.snp.centerY)
         }
         
         progressView.snp.makeConstraints {
@@ -145,8 +144,6 @@ final class OnboardingViewController: UIViewController {
             $0.height.equalTo(44)
         }
     }
-    
-    
 }
     
 extension OnboardingViewController {
@@ -155,33 +152,26 @@ extension OnboardingViewController {
         nextButton.isEnabled = isEnabled
         nextButton.backgroundColor = isEnabled ? .gray5 : .gray8
         nextButton.setTitleColor(isEnabled ? .acWhite : .gray6, for: .normal)
-        
     }
     
     private func setBinding() {
-        
         viewModel.dislike.bind { [weak self] dislikedFoods in
-            print("Disliked Foods: \(dislikedFoods ?? [])")
             self?.updateNextButtonState(isEnabled: !(dislikedFoods?.isEmpty ?? true))
         }
         
         viewModel.favoriteCuisne.bind { [weak self] cuisines in
-            print("Favorite Cuisines: \(cuisines ?? [])")
             self?.updateNextButtonState(isEnabled: cuisines?.count == 3)
         }
         
         viewModel.favoriteSpotType.bind { [weak self] spotType in
-            print("Favorite Spot Type: \(spotType ?? "None")")
             self?.updateNextButtonState(isEnabled: spotType != nil)
         }
         
         viewModel.favoriteSpotStyle.bind { [weak self] spotStyle in
-            print("Favorite Spot Style: \(spotStyle ?? "None")")
             self?.updateNextButtonState(isEnabled: spotStyle != nil)
         }
         
         viewModel.favoriteSpotRank.bind { [weak self] ranks in
-            print("Favorite Spot Rank: \(ranks ?? [])")
             self?.updateNextButtonState(isEnabled: ranks?.count == 4)
         }
     }
@@ -207,9 +197,9 @@ extension OnboardingViewController {
         if let contentView = contentView {
             view.addSubview(contentView)
             contentView.snp.makeConstraints {
-                $0.top.equalTo(progressTitle.snp.bottom).offset(16)
+                $0.top.equalTo(progressTitle.snp.bottom).offset(10)
                 $0.leading.trailing.equalToSuperview()
-                $0.bottom.equalTo(nextButton.snp.top).offset(-16)
+                $0.bottom.equalTo(nextButton.snp.top)
             }
         }
         progressNumber.text = OnboardingType.progressNumberList[step]
@@ -243,14 +233,12 @@ extension OnboardingViewController {
         }
     }
     
-    
     private func setFavoriteSpotTypeCollectionView() {
         contentView = favoriteSpotTypeCollectionView
         favoriteSpotTypeCollectionView.onSelectionChanged = { [weak self] selectedType in
             self?.viewModel.favoriteSpotType.value = selectedType
         }
     }
-    
     
     private func setFavoriteSpotStyleCollectionView() {
         contentView = favoriteSpotStyleCollectionView
@@ -259,7 +247,6 @@ extension OnboardingViewController {
         }
     }
     
-    
     private func setFavoriteSpotRankCollectionView() {
         contentView = favoriteSpotRankCollectionView
         favoriteSpotRankCollectionView.onSelectionChanged = { [weak self] selectedIndices in
@@ -267,16 +254,53 @@ extension OnboardingViewController {
         }
     }
     
+    private func showOverlay() {
+        overlayView.isHidden = false
+        overlayView.alpha = 0.0
+        
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self = self else { return }
+            self.overlayView.alpha = 1.0
+            self.contentView?.alpha = 0.5
+            
+            self.view.bringSubviewToFront(self.progressNumber)
+            self.view.bringSubviewToFront(self.progressTitle)
+            self.view.bringSubviewToFront(self.backButton)
+            self.view.bringSubviewToFront(self.skipButton)
+
+        }
+    }
+    
+    private func hideOverlay() {
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            self?.overlayView.alpha = 0.0
+            self?.contentView?.alpha = 1.0
+            
+        }) { [weak self] _ in
+            self?.overlayView.isHidden = true
+            
+        }
+    }
+    
+    private func updateProgressIndicator() {
+        let totalSteps: Float = Float(OnboardingType.progressNumberList.count)
+        let progressViewWidth = Float(progressView.frame.width) / totalSteps
+        let progressWidth = progressViewWidth * Float(currentStep + 1)
+        
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.progressIndicator.snp.updateConstraints {
+                $0.width.equalTo(progressWidth)
+            }
+            self?.view.layoutIfNeeded()
+        }
+    }
+}
+
+
+extension OnboardingViewController {
     
     @objc private func nextButtonTapped() {
         if currentStep >= OnboardingType.progressNumberList.count - 1 {
-            
-            // 확인용
-            print("Disliked Foods: \(String(describing: viewModel.dislike.value))")
-            print("Favorite Cuisines: \(String(describing: viewModel.favoriteCuisne.value))")
-            print("Favorite Spot Type: \(viewModel.favoriteSpotType.value ?? "None")")
-            print("Favorite Spot Style: \(viewModel.favoriteSpotStyle.value ?? "None")")
-            print("Favorite Spot Rank: \(String(describing: viewModel.favoriteSpotRank.value))")
             
             let analyzingVC = AnalyzingViewController()
             analyzingVC.modalPresentationStyle = .fullScreen
@@ -307,51 +331,10 @@ extension OnboardingViewController {
         // MARK : TODO -> Popup alert
         print("alert")
     }
-    
-    // 배경 어두워지는 로직 on
-    private func showOverlay() {
-        overlayView.isHidden = false
-        overlayView.alpha = 0.0
-        
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            guard let self = self else { return }
-            self.overlayView.alpha = 1.0
-            self.contentView?.alpha = 0.5
-            
-            self.view.bringSubviewToFront(self.progressNumber)
-            self.view.bringSubviewToFront(self.progressTitle)
-        }
-    }
-    
-    // 배경 어두워지는 로직 off
-    private func hideOverlay() {
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
-            self?.overlayView.alpha = 0.0
-            self?.contentView?.alpha = 1.0
-            
-        }) { [weak self] _ in
-            self?.overlayView.isHidden = true
-            
-        }
-    }
-    
-    // 게이지 차는 로직
-    private func updateProgressIndicator() {
-        let totalSteps: Float = Float(OnboardingType.progressNumberList.count)
-        let progressViewWidth = Float(progressView.frame.width) / totalSteps
-        let progressWidth = progressViewWidth * Float(currentStep + 1)
-        
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            self?.progressIndicator.snp.updateConstraints {
-                $0.width.equalTo(progressWidth)
-            }
-            self?.view.layoutIfNeeded()
-        }
-    }
 }
 
-
 struct FoodSelectionViewControllerPreview: UIViewControllerRepresentable {
+    
     func makeUIViewController(context: Context) -> OnboardingViewController {
         OnboardingViewController()
     }
@@ -360,6 +343,7 @@ struct FoodSelectionViewControllerPreview: UIViewControllerRepresentable {
 }
 
 struct FoodSelectionViewControllerPreview_Previews: PreviewProvider {
+    
     static var previews: some View {
         FoodSelectionViewControllerPreview()
             .edgesIgnoringSafeArea(.all)
@@ -367,22 +351,3 @@ struct FoodSelectionViewControllerPreview_Previews: PreviewProvider {
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     }
 }
-
-
-//
-//
-//enum Onboarding {
-//
-//
-//    static let progressNumberList = ["01", "02", "03", "04", "05"]
-//    
-//    static let progressTitleList = [
-//        "싫어하는 음식을 선택해 주세요",
-//        "선호하는 음식을 Top3까지 순위를 매겨주세요",
-//        "어디를 더 자주 가나요?",
-//        "내가 좋아하는 맛집 스타일은?",
-//        "내가 선호하는 공간의 순위는?"
-//    ]
-//    
-//
-//}

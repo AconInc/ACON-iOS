@@ -8,6 +8,7 @@
 import UIKit
 
 enum FavoriteSpotType: CaseIterable {
+    
     case restaurant
     case cafe
     

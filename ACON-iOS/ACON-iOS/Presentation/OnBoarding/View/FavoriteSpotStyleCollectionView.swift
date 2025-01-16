@@ -41,54 +41,90 @@ final class FavoriteSpotStyleCollectionView: UICollectionView {
     private func setDelegate() {
         delegate = self
         dataSource = self
-        register(LongBoxViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier)
+        register(
+            LongBoxViewCell.self,
+            forCellWithReuseIdentifier: BaseCollectionViewCell.cellIdentifier
+        )
     }
 }
 
 extension FavoriteSpotStyleCollectionView: UICollectionViewDelegateFlowLayout {
     
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
         let itemWidth = ScreenUtils.width * 154 / 360
         let itemHeight = itemWidth * 1.311
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return ScreenUtils.height * 12 / 780
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int
+    ) -> CGFloat {
+        return ScreenUtils.height * 6 / 780
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumInteritemSpacingForSectionAt section: Int
+    ) -> CGFloat {
         return ScreenUtils.width * 8 / 360
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int
+    ) -> UIEdgeInsets {
         let horizontalInset = ScreenUtils.width * 10 / 360
-        let verticalInset = ScreenUtils.height * 0.1
-        return UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
+        return UIEdgeInsets(
+            top: 0,
+            left: horizontalInset,
+            bottom: 0,
+            right: horizontalInset
+        )
     }
-
 }
 
 extension FavoriteSpotStyleCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         return FavoriteSpotStyle.allCases.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.cellIdentifier, for: indexPath) as? LongBoxViewCell else {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let cell = dequeueReusableCell(
+            withReuseIdentifier: BaseCollectionViewCell.cellIdentifier,
+            for: indexPath
+        ) as? LongBoxViewCell else {
             return UICollectionViewCell()
         }
         
         let option = FavoriteSpotStyle.allCases[indexPath.row]
         let isSelected = selectedStyle == option.mappedValue
-        cell.checkConfigure(name: option.name, image: option.image, isSelected: isSelected)
+        cell.checkConfigure(
+            name: option.name,
+            image: option.image,
+            isSelected: isSelected
+        )
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
         let selectedOption = FavoriteSpotStyle.allCases[indexPath.row]
         
         if selectedStyle == selectedOption.mappedValue {

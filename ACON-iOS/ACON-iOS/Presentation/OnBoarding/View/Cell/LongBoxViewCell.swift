@@ -17,12 +17,9 @@ final class LongBoxViewCell: BaseCollectionViewCell {
     private let overlayImageView = UIImageView()
     private let overlayContainer = UIView()
     private let container = UIView()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setStyle()
-        setHierarchy()
-        setLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -30,8 +27,8 @@ final class LongBoxViewCell: BaseCollectionViewCell {
     }
     
     override func setStyle() {
+        super.setStyle()
         
-
         imageView.do {
             $0.layer.cornerRadius = 8
             $0.backgroundColor = .clear
@@ -60,18 +57,22 @@ final class LongBoxViewCell: BaseCollectionViewCell {
     
     override func setHierarchy() {
         super.setHierarchy()
+        
         contentView.addSubview(container)
-        container.addSubviews(imageView,titleLabel,overlayContainer)
+        container.addSubviews(
+            imageView,
+            titleLabel,
+            overlayContainer
+        )
         overlayContainer.addSubview(overlayImageView)
     }
     
     override func setLayout() {
         super.setLayout()
-
+        
         container.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-      
         
         imageView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
@@ -92,18 +93,11 @@ final class LongBoxViewCell: BaseCollectionViewCell {
         overlayImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
-        
     }
     
-    
-    
-    
     func checkConfigure(name: String, image: UIImage?, isSelected: Bool) {
-        
         titleLabel.text = name
         imageView.image = image ?? UIImage(systemName: "photo")
-        
-
         
         if isSelected {
             overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)

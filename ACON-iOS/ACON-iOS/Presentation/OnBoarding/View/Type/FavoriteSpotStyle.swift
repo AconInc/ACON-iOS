@@ -8,6 +8,7 @@
 import UIKit
 
 enum FavoriteSpotStyle: CaseIterable {
+    
     case nopo
     case modern
     

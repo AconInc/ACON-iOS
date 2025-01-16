@@ -15,14 +15,18 @@ struct OnboardingMapping {
                                  "SUNDAE",
                                  "YANGGOGI",
                                  "NONE"]
+    
     static let favoriteCuisines = ["KOREAN",
                                    "WESTERN",
                                    "CHINESE",
                                    "JAPANESE",
                                    "KOREAN_STREET",
                                    "ASIAN"]
+    
     static let favoriteSpotTypes = ["RESTAURANT", "CAFE"]
+    
     static let favoriteSpotStyles = ["TRADITIONAL", "MODERN"]
+    
     static let favoriteSpotRanks = ["SENSE",
                                     "NEW_FOOD",
                                     "REASONABLE",

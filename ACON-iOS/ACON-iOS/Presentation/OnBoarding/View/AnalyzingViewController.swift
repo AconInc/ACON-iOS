@@ -18,12 +18,11 @@ final class AnalyzingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
         updateLabelTextAfterDelay()
-        
     }
     
-    private func setSytle() {
+    override func setStyle() {
+        super.setStyle()
         
         animationView.do {
             $0.contentMode = .scaleAspectFit
@@ -41,13 +40,14 @@ final class AnalyzingViewController: BaseViewController {
         }
     }
     
-    internal override func setHierarchy(){
+    override func setHierarchy() {
+        super.setHierarchy()
         
         view.addSubviews(animationView, analyzingLabel)
-        
     }
     
-    internal override func setLayout() {
+    override func setLayout() {
+        super.setLayout()
         
         animationView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
@@ -60,17 +60,18 @@ final class AnalyzingViewController: BaseViewController {
             $0.bottom.equalTo(animationView.snp.top)
             $0.centerX.equalToSuperview()
         }
-        
     }
+}
+
+extension AnalyzingViewController {
     
     private func updateLabelTextAfterDelay() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
             guard let self = self else { return }
             
-            // 텍스트 업데이트
             self.analyzingLabel.text = StringLiterals.Analyzing.analyzingAfter
             
-            // 장소추천뷰로 이동
+            // NOTE: 장소추천뷰로 이동
             let mainViewController = SpotListViewController()
             self.navigationController?.pushViewController(mainViewController, animated: true)
         }
@@ -80,6 +81,7 @@ final class AnalyzingViewController: BaseViewController {
 import SwiftUI
 
 struct AnalyzingViewControllerPreview: UIViewControllerRepresentable {
+    
     func makeUIViewController(context: Context) -> AnalyzingViewController {
         return AnalyzingViewController()
     }
@@ -92,6 +94,9 @@ struct AnalyzingViewControllerPreview_Previews: PreviewProvider {
         AnalyzingViewControllerPreview()
             .edgesIgnoringSafeArea(.all)
             .previewLayout(.sizeThatFits)
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            .frame(
+                width: UIScreen.main.bounds.width,
+                height: UIScreen.main.bounds.height
+            )
     }
 }

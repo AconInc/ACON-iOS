@@ -8,6 +8,7 @@
 import UIKit
 
 enum FavoriteCuisineType: CaseIterable {
+    
     case korean
     case western
     case chinese

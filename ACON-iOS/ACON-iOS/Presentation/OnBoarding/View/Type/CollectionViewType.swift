@@ -8,16 +8,17 @@
 import UIKit
 
 enum CollectionViewType {
+    
     case dislike
     case favoriteCuisine
-
+    
     var itemCount: Int {
         switch self {
         case .dislike: return DislikeType.allCases.count
         case .favoriteCuisine: return FavoriteCuisineType.allCases.count
         }
     }
-
+    
     func item(at index: Int) -> (name: String, image: UIImage?, mappedValue: String) {
         switch self {
         case .dislike:
