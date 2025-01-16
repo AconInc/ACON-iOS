@@ -98,6 +98,7 @@ class SpotListFilterView: BaseView {
         stackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(ScreenUtils.heightRatio * 41)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
+            $0.bottom.equalToSuperview()
         }
         
         segmentedControl.snp.makeConstraints {
