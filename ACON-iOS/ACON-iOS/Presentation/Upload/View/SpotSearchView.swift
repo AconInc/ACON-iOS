@@ -14,6 +14,8 @@ final class SpotSearchView: BaseView {
 
     // MARK: - UI Properties
     
+    private let handlerImageView: UIImageView = UIImageView()
+    
     private let spotUploadLabel: UILabel = UILabel()
     
     let searchView: UIView = UIView()
@@ -53,7 +55,8 @@ final class SpotSearchView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(spotUploadLabel,
+        self.addSubviews(handlerImageView,
+                         spotUploadLabel,
                          searchView,
                          doneButton,
                          recommendedSpotScrollView,
@@ -68,6 +71,13 @@ final class SpotSearchView: BaseView {
     
     override func setLayout() {
         super.setLayout()
+        
+        handlerImageView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(ScreenUtils.height*4/780)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.height*64/780)
+            $0.height.equalTo(ScreenUtils.height*3/780)
+        }
         
         spotUploadLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*19/780)
@@ -152,7 +162,11 @@ final class SpotSearchView: BaseView {
         
         self.backgroundColor = .glaW10
         self.backgroundColor?.withAlphaComponent(0.95)
-        self.setHandlerImageView()
+        
+        handlerImageView.do {
+            $0.image = .btnBottomsheetBar
+            $0.contentMode = .scaleAspectFit
+        }
         
         spotUploadLabel.do {
             $0.setLabel(text: StringLiterals.Upload.spotUpload2,

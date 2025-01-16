@@ -12,8 +12,6 @@ import Then
 
 class BaseView: UIView {
 
-    private let handlerImageView: UIImageView = UIImageView()
-    
     // MARK: - Initializer
 
     override init(frame: CGRect) {
@@ -36,24 +34,4 @@ class BaseView: UIView {
         self.backgroundColor = .gray9
     }
 
-}
-
-extension BaseView {
-    
-    func setHandlerImageView() {
-        self.addSubview(handlerImageView)
-        
-        handlerImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*4/780)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.height*36/780)
-            $0.height.equalTo(ScreenUtils.height*3/780)
-        }
-        
-        handlerImageView.do {
-            $0.image = .btnBottomsheetBar
-            $0.contentMode = .scaleAspectFit
-        }
-    }
-    
 }
