@@ -87,7 +87,6 @@
 		D6FF82F32D380ED600090233 /* OnboardingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82F22D380ED600090233 /* OnboardingType.swift */; };
 		D6FF82F72D381C2000090233 /* LongBoxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82F62D381C1F00090233 /* LongBoxViewCell.swift */; };
 		D6FF82F92D381D6100090233 /* SmallBoxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82F82D381D6100090233 /* SmallBoxViewCell.swift */; };
-		D6FF82FB2D386DCA00090233 /* CollectionViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82FA2D386DCA00090233 /* CollectionViewType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -169,7 +168,6 @@
 		D6FF82F22D380ED600090233 /* OnboardingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingType.swift; sourceTree = "<group>"; };
 		D6FF82F62D381C1F00090233 /* LongBoxViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongBoxViewCell.swift; sourceTree = "<group>"; };
 		D6FF82F82D381D6100090233 /* SmallBoxViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallBoxViewCell.swift; sourceTree = "<group>"; };
-		D6FF82FA2D386DCA00090233 /* CollectionViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -567,7 +565,6 @@
 				D6FF82EE2D380BE800090233 /* FavoriteSpotStyle.swift */,
 				D6FF82F02D380C4D00090233 /* FavoriteCuisineType.swift */,
 				D6FF82F22D380ED600090233 /* OnboardingType.swift */,
-				D6FF82FA2D386DCA00090233 /* CollectionViewType.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -771,7 +768,6 @@
 				D6D0F5132D36BA2900326F17 /* FavoriteCuisineCollectionView.swift in Sources */,
 				D6D0F5172D36BA9A00326F17 /* FavoriteSpotTypeCollectionView.swift in Sources */,
 				D6FF82EB2D380AAF00090233 /* FavoriteSpotRankType.swift in Sources */,
-				D6FF82FB2D386DCA00090233 /* CollectionViewType.swift in Sources */,
 				D6D0F5152D36BA6500326F17 /* DislikeCollectionView.swift in Sources */,
 				745C7E152D35AEC10074DBDB /* SpotSearchViewModel.swift in Sources */,
 				748D6F6B2D2BCA1C007690B4 /* ViewController.swift in Sources */,

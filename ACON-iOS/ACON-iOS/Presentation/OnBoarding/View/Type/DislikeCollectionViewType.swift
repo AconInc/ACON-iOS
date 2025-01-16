@@ -29,7 +29,7 @@ enum DislikeType: CaseIterable {
         case .yanggogi:
             return "양고기"
         case .none:
-            return "없음"
+            return " "
         }
     }
 
