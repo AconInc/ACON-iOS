@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Lottie
 import SnapKit
 import Then
 
@@ -26,6 +27,8 @@ final class DropAcornView: BaseView {
     
     private let goAheadDropAcornLabel: UILabel = UILabel()
     
+    var dropAcornLottieView: LottieAnimationView = LottieAnimationView()
+    
     var leaveReviewButton: UIButton = UIButton()
     
     
@@ -40,6 +43,7 @@ final class DropAcornView: BaseView {
                          acornStackView,
                          acornReviewLabel,
                          goAheadDropAcornLabel,
+                         dropAcornLottieView,
                          leaveReviewButton)
     }
     
@@ -82,6 +86,12 @@ final class DropAcornView: BaseView {
             $0.top.equalToSuperview().inset(ScreenUtils.height*274/780)
         }
         
+        dropAcornLottieView.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(104)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.height*266/780)
+        }
+        
         leaveReviewButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(ScreenUtils.height*36/780)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
@@ -110,8 +120,6 @@ final class DropAcornView: BaseView {
                 let acornImageView = makeAcornImageButton()
                 $0.addArrangedSubview(acornImageView)
             }
-            $0.spacing = 2
-            $0.axis = .horizontal
         }
         
         acornReviewLabel.do {

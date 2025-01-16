@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Lottie
 import SnapKit
 import Then
 
@@ -104,6 +105,7 @@ private extension DropAcornViewController {
         }
         dropAcornView.acornReviewLabel.text = "\(selectedIndex+1)/5"
         reviewAcornCount = selectedIndex + 1
+        toggleLottie(dropAcorn: reviewAcornCount)
         enableLeaveReviewButton()
     }
     
@@ -123,6 +125,33 @@ private extension DropAcornViewController {
         dropAcornView.leaveReviewButton.do {
             $0.isEnabled = true
             $0.backgroundColor = .org0
+        }
+    }
+    
+}
+
+
+// MARK: - Lottie
+
+private extension DropAcornViewController {
+    
+    func toggleLottie(dropAcorn: Int) {
+        dropAcornView.dropAcornLottieView.do {
+            switch dropAcorn {
+            case 1:
+                $0.animation = LottieAnimation.named("drop1Acorn")
+            case 2:
+                $0.animation = LottieAnimation.named("drop2Acorn")
+            case 3:
+                $0.animation = LottieAnimation.named("drop3Acorn")
+            case 4:
+                $0.animation = LottieAnimation.named("drop4Acorn")
+            case 5:
+                $0.animation = LottieAnimation.named("drop5Acorn")
+            default:
+                $0.isHidden = true
+            }
+            $0.play()
         }
     }
     
