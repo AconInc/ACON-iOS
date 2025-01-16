@@ -50,6 +50,7 @@ class SpotDetailViewController: BaseNavViewController {
         super.setStyle()
         
         updateCollectionViewHeight()
+        setUI()
     }
     
     func addTarget() {
@@ -72,6 +73,27 @@ private extension SpotDetailViewController {
     
 }
 
+// MARK: - setUI
+
+private extension SpotDetailViewController {
+    
+    func setUI() {
+        spotDetailView.addressLabel.setLabel(text: spotDetailViewModel.spotDetailDummyData.address,
+                                             style: .b4,
+                                             color: .gray4)
+        spotDetailView.isOpenButton.isHidden = spotDetailViewModel.spotDetailDummyData.isOpen
+        spotDetailView.isOpenButton.isHidden = !spotDetailViewModel.spotDetailDummyData.isOpen
+        
+        spotDetailView.localAcornCountLabel.setLabel(text: String(spotDetailViewModel.spotDetailDummyData.localAcornCount),
+                                                     style: .b4,
+                                                     alignment: .right)
+        spotDetailView.plainAcornCountLabel.setLabel(text: String(spotDetailViewModel.spotDetailDummyData.basicAcornCount),
+                                                     style: .b4,
+                                                     alignment: .right)
+        
+    }
+    
+}
 
 // MARK: - CollectionView Setting Methods
 
