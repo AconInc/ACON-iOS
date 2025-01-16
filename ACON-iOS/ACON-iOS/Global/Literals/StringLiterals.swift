@@ -101,6 +101,10 @@ enum StringLiterals {
         
         static let matchingRate = "취향 일치율"
         
+        static let headerTitle = "지금, 나에게 딱 맞는 맛집이에요"
+        
+        static let footerText = "장소는 최대 6순위까지만 제공됩니다."
+        
     }
     
     enum LocalVerification {

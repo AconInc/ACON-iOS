@@ -14,6 +14,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     // MARK: - UI Properties
     
     private let bgImage = UIImageView()
+    private let dimImage = UIImageView()
     
     private let matchingRateView = UIView()
     private let matchingRateLabel = UILabel()
@@ -35,6 +36,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         super.setHierarchy()
         
         self.addSubviews(bgImage,
+                         dimImage,
                          matchingRateView,
                          stackView)
         
@@ -53,12 +55,20 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     override func setLayout() {
         super.setLayout()
         
+        let horizontalSpace = ScreenUtils.width * 16 / 360
+        let verticalSpace = ScreenUtils.height * 16 / 780
+        
         bgImage.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
+        dimImage.snp.makeConstraints {
+            $0.edges.equalTo(bgImage)
+        }
+        
         matchingRateView.snp.makeConstraints {
-            $0.leading.top.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(horizontalSpace)
+            $0.top.equalToSuperview().offset(verticalSpace)
             $0.width.equalTo(96)
             $0.height.equalTo(22)
         }
@@ -68,7 +78,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         }
         
         stackView.snp.makeConstraints {
-            $0.leading.bottom.equalToSuperview().inset(16)
+            $0.leading.equalToSuperview().inset(horizontalSpace)
+            $0.bottom.equalToSuperview().inset(verticalSpace)
         }
         
         walkingIcon.snp.makeConstraints {
@@ -80,9 +91,15 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         backgroundColor = .clear
         
         bgImage.do {
+            $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
             $0.layer.cornerRadius = 6
+        }
+        
+        dimImage.do {
             $0.clipsToBounds = true
+            $0.image = .dimGra2
+            $0.layer.cornerRadius = 6
         }
         
         matchingRateView.do {
