@@ -18,7 +18,6 @@ final class CustomAlertImageView: BaseViewController {
     private let closeButton = UIButton()
     private let imageView = UIImageView()
     var onClose: (() -> Void)?
-    var onSettings: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
