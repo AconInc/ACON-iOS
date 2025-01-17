@@ -121,7 +121,7 @@ final class CustomAlertView: BaseViewController {
         
         closeButton.snp.makeConstraints {
             $0.top.equalTo(messageLabel.snp.bottom).offset(20)
-            $0.leading.equalTo(alertContainer.snp.leading).offset(ScreenUtils.width * 24 / 360)
+
             $0.trailing.equalTo(alertContainer.snp.centerX).offset(-4)
             $0.width.equalTo(ScreenUtils.width * 112 / 360)
             $0.height.equalTo(ScreenUtils.width * 44 / 360)
@@ -129,7 +129,6 @@ final class CustomAlertView: BaseViewController {
         
         settingsButton.snp.makeConstraints {
             $0.top.equalTo(messageLabel.snp.bottom).offset(20)
-            $0.trailing.equalTo(alertContainer.snp.trailing).offset(-ScreenUtils.width * 24 / 360)
             $0.leading.equalTo(alertContainer.snp.centerX).offset(4)
             $0.width.equalTo(ScreenUtils.width * 112 / 360)
             $0.height.equalTo(ScreenUtils.width * 44 / 360)
@@ -170,7 +169,7 @@ extension CustomAlertView {
     
 }
 
-// NOTE: will delete
+// NOTE: I will delete
 #if DEBUG
 import SwiftUI
 
