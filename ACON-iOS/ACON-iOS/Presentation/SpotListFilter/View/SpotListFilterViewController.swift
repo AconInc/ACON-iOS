@@ -93,6 +93,8 @@ private extension SpotListFilterViewController {
             
             // NOTE: visit purpose tag는 cafe일 때만 보임
             $0.hideVisitPurposeSection(isHidden: spotType == .restaurant)
+            
+            $0.switchPriceSlider(spotType: spotType)
         }
     }
 }
