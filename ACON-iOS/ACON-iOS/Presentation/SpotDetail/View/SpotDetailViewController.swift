@@ -53,14 +53,9 @@ class SpotDetailViewController: BaseNavViewController {
         super.setStyle()
         
         self.setBackButton()
-        // TODO: 넘어올 때 가게명 & 가게 타입 넘겨주기
-        self.setSecondTitleLabelStyle(title: "가게명가게명")
-        self.secondTitleLabel.do {
-            $0.isHidden = false
-            $0.setPartialText(fullText: spotDetailName+" "+spotDetailType, textStyles: [(spotDetailName+" ", .t2, .acWhite), (spotDetailType, .b2, .gray4)])
-        }
         updateCollectionViewHeight()
-        setUI()
+        bindNavBar(data: spotDetailViewModel.spotDetailDummyData)
+        spotDetailView.bindData(data: spotDetailViewModel.spotDetailDummyData)
     }
     
     func addTarget() {
@@ -89,25 +84,11 @@ private extension SpotDetailViewController {
 
 private extension SpotDetailViewController {
     
-    func setUI() {
-        spotDetailView.addressLabel.setLabel(text: spotDetailViewModel.spotDetailDummyData.address,
-                                             style: .b4,
-                                             color: .gray4)
-        
-        let isOpen = spotDetailViewModel.spotDetailDummyData.isOpen
-        spotDetailView.openStatusButton.isSelected = isOpen
-        spotDetailView.openStatusButton.setAttributedTitle(
-            text: isOpen ? StringLiterals.SpotDetail.isOpen : StringLiterals.SpotDetail.isNotOpen,
-            style: .b4
-        )
-        
-        spotDetailView.localAcornCountLabel.setLabel(text: String(spotDetailViewModel.spotDetailDummyData.localAcornCount),
-                                                     style: .b4,
-                                                     alignment: .right)
-        spotDetailView.plainAcornCountLabel.setLabel(text: String(spotDetailViewModel.spotDetailDummyData.basicAcornCount),
-                                                     style: .b4,
-                                                     alignment: .right)
-        
+    func bindNavBar(data: SpotDetail) {
+        self.secondTitleLabel.do {
+            $0.isHidden = false
+            $0.setPartialText(fullText: data.name+" "+data.spotType, textStyles: [(data.name+" ", .t2, .acWhite), (data.spotType, .b2, .gray4)])
+        }
     }
     
 }

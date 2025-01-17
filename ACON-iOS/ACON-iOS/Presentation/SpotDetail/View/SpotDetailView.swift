@@ -225,3 +225,28 @@ final class SpotDetailView: BaseView {
     }
     
 }
+
+
+extension SpotDetailView {
+    
+    func bindData(data: SpotDetail) {
+        let openStatus = data.openStatus
+        self.openStatusButton.isSelected = openStatus
+        self.openStatusButton.setAttributedTitle(
+            text: openStatus ? StringLiterals.SpotDetail.isOpen : StringLiterals.SpotDetail.isNotOpen,
+            style: .b4
+        )
+        
+        self.addressLabel.setLabel(text: data.address,
+                                             style: .b4,
+                                             color: .gray4)
+        
+        self.localAcornCountLabel.setLabel(text: String(data.localAcornCount),
+                                                     style: .b4,
+                                                     alignment: .right)
+        self.plainAcornCountLabel.setLabel(text: String(data.basicAcornCount),
+                                                     style: .b4,
+                                                     alignment: .right)
+        
+    }
+}
