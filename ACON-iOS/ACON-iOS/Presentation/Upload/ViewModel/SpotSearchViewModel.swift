@@ -14,6 +14,12 @@ class SpotSearchViewModel {
     
     var searchSuggestionData: ObservablePattern<SearchSuggestionModel> = ObservablePattern(nil)
     
+    let onSuccessGetSearchKeyword: ObservablePattern<Bool> = ObservablePattern(nil)
+    
+    var searchKeywordData: ObservablePattern<[SearchKeywordModel]> = ObservablePattern(nil)
+    
+    let updateSearchKeyword: ObservablePattern<Bool> = ObservablePattern(nil)
+    
     // TODO: - search keyword 엠티뷰와 분기처리 (data.count == 0 ? )
     
     let searchKeywordDummyData: [SearchKeywordModel] = [
@@ -34,6 +40,10 @@ class SpotSearchViewModel {
     init() {
         self.searchSuggestionData.value = searchSuggestionDummyData
         self.onSuccessGetSearchSuggestion.value = true
+        self.searchKeywordData.value = searchKeywordDummyData
+        self.onSuccessGetSearchKeyword.value = true
+        // TODO: - 나중에 뷰모델에서 기존 키워드와 같은지 보고 updateKeyword.value = false
+        self.updateSearchKeyword.value = true
     }
     
 }

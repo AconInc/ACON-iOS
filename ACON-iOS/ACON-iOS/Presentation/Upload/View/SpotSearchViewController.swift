@@ -114,10 +114,6 @@ private extension SpotSearchViewController {
         if let text = textField.text {
             spotSearchView.searchSuggestionStackView.isHidden = text != ""
             spotSearchView.searchKeywordCollectionView.isHidden = text == ""
-            
-            if text != "" {
-                // TODO: - 여기서 디바운스 로직? + reloadData()?
-            }
         }
     }
     
@@ -135,6 +131,23 @@ private extension SpotSearchViewController {
                 self?.spotSearchView.bindData(data)
             }
         }
+        
+        self.spotSearchViewModel.onSuccessGetSearchKeyword.bind { [weak self] onSuccess in
+            guard let onSuccess, let onUpdate = self?.spotSearchViewModel.updateSearchKeyword.value, let data = self?.spotSearchViewModel.searchKeywordData.value else { return }
+            if onSuccess && onUpdate {
+                if data.count == 0 {
+                    DispatchQueue.main.async {
+                        // TODO: - 엠티뷰 처리
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self?.spotSearchView.searchKeywordCollectionView.reloadData()
+                    }
+                }
+                self?.spotSearchViewModel.updateSearchKeyword.value = false
+            }
+        }
+        
     }
 
 }
@@ -151,6 +164,7 @@ private extension SpotSearchViewController {
     func setDelegate() {
         spotSearchView.searchKeywordCollectionView.delegate = self
         spotSearchView.searchKeywordCollectionView.dataSource = self
+        spotSearchView.searchTextField.delegate = self
     }
     
 }
@@ -187,11 +201,36 @@ extension SpotSearchViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let data = spotSearchViewModel.searchKeywordDummyData[indexPath.item]
+        let data = spotSearchViewModel.searchKeywordData.value?[indexPath.item]
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchKeywordCollectionViewCell.cellIdentifier, for: indexPath) as? SearchKeywordCollectionViewCell else {
             return UICollectionViewCell() }
-        cell.dataBind(data, indexPath.item)
+        cell.bindData(data, indexPath.item)
         return cell
+    }
+    
+}
+
+// MARK: - TextField
+
+extension SpotSearchViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        updateSearchKeyword(textField.text ?? "")
+//            acDebouncer.call { [weak self] in
+//                updateSearchKeyword(textField.text)
+//            }
+        return true
+    }
+    
+}
+
+
+// MARK: - Search 메소드
+
+extension SpotSearchViewController{
+    
+    func updateSearchKeyword(_ text: String) {
+        // 뷰모델 서버통신함수 새로 부르기 - spotSearchViewModel.getSpotKeyword()
     }
     
 }
