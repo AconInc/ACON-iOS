@@ -50,6 +50,8 @@ final class CustomSlider: BaseView {
     
     private lazy var slicedPosX: CGFloat = 0 // layoutSubviews 단계에서 값 지정
     
+    private let barHeight: CGFloat = 10
+    
     private let thumbSize: CGFloat = 22
     
     private let labelWidth: CGFloat = 50
@@ -80,7 +82,8 @@ final class CustomSlider: BaseView {
     override func setLayout() {
         trackView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(thumbSize / 2)
-            $0.verticalEdges.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.height.equalTo(barHeight)
         }
         
         fillTrackView.snp.makeConstraints {
@@ -97,17 +100,25 @@ final class CustomSlider: BaseView {
     }
     
     override func setStyle() {
-        trackView.backgroundColor = .gray8
+        self.backgroundColor = .clear
         
-        fillTrackView.backgroundColor = .mainOrg50
+        trackView.do {
+            $0.backgroundColor = .gray8
+            $0.layer.cornerRadius = barHeight / 2
+        }
+        
+        fillTrackView.do {
+            $0.backgroundColor = .mainOrg50
+            $0.layer.cornerRadius = barHeight / 2
+        }
         
         thumbView.do {
-            $0.backgroundColor = .systemBackground
+            $0.backgroundColor = .acWhite
             $0.isUserInteractionEnabled = true
             $0.layer.shadowColor = UIColor.gray.cgColor
-            $0.layer.shadowOffset = .init(width: 3, height: 3)
-            $0.layer.shadowRadius = 8
-            $0.layer.shadowOpacity = 0.8
+            $0.layer.shadowOffset = .init(width: 0, height: 2)
+            $0.layer.shadowRadius = 4
+            $0.layer.shadowOpacity = 0.1
             
             addGestureRegocnizer()
         }
@@ -115,7 +126,7 @@ final class CustomSlider: BaseView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-//        updateLayoutToStartingPoint() // TODO: 이걸 넣으면 터치가 안 되는 문제 있음. 추후 수정 예정
+//        updateLayoutToStartingPoint() // TODO: 이걸 넣으면 터치가 안 되는 문제 있음. 추후 수정
         
         updateStyle()
     }
@@ -143,7 +154,10 @@ private extension CustomSlider {
     func updateStyle() {
         if !didLayoutSubViews {
             setIndicators()
+            
             thumbView.layer.cornerRadius = thumbView.frame.width / 2
+            
+            // TODO: 그림자 수정
             thumbView.layer.shadowPath = UIBezierPath(
                 roundedRect: thumbView.bounds,
                 cornerRadius: thumbView.layer.cornerRadius
@@ -158,7 +172,7 @@ private extension CustomSlider {
 
 private extension CustomSlider {
     
-    private func setIndicators() {
+    func setIndicators() {
         self.slicedPosX = trackView.frame.width / CGFloat(indicators.count - 1)
         
         for (i, text) in indicators.enumerated() {
@@ -167,25 +181,25 @@ private extension CustomSlider {
             
             addSubview(label)
             label.snp.makeConstraints {
-                $0.top.equalTo(trackView).offset(10)
-                $0.centerX.equalTo(trackView).offset(posX)
+                $0.top.equalTo(trackView).offset(20)
+                $0.centerX.equalTo(trackView.snp.left).offset(posX)
                 $0.width.equalTo(labelWidth)
                 $0.bottom.equalToSuperview()
             }
+            print(text, posX)
         }
         
         didLayoutSubViews.toggle()
     }
     
-    private func makeIndicatorLabel(_ text: String) -> UILabel {
+    func makeIndicatorLabel(_ text: String) -> UILabel {
         let label = UILabel().then {
             $0.setLabel(text: text, style: .c1, color: .gray4)
-            indicatorLabels.append($0)
         }
         return label
     }
     
-    private func addGestureRegocnizer() {
+    func addGestureRegocnizer() {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         thumbView.addGestureRecognizer(gesture)
     }
