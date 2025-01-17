@@ -43,14 +43,14 @@ enum AlertType: CaseIterable {
     
     var buttons: [String] {
         switch self {
-        case .stoppedPreferenceAnalysis:
+        case .stoppedPreferenceAnalysis,
+             .uploadExit,
+             .reviewExit:
             return ["그만두기", "계속하기"]
         case .locationAccessFailImage:
             return ["확인"]
         case .locationAccessDenied:
             return ["그만두기", "설정으로 가기"]
-        case .uploadExit, .reviewExit:
-            return ["그만두기", "계속하기"]
         }
     }
 

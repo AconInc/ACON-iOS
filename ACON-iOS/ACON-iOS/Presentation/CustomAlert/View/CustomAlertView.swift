@@ -1,5 +1,5 @@
 //
-//  CustomAlertImageView.swift
+//  CustomAlertView.swift
 //  ACON-iOS
 //
 //  Created by Jaehyun Ahn on 1/17/25.
@@ -10,13 +10,13 @@ import UIKit
 import SnapKit
 import Then
 
-final class CustomAlertImageView: BaseView {
+final class CustomAlertView: BaseView {
     
     private let alertContainer = UIView()
     private let messageLabel = UILabel()
     private let titleLabel = UILabel()
     let closeButton = UIButton()
-    private let imageView = UIImageView()
+    let settingsButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,18 +31,19 @@ final class CustomAlertImageView: BaseView {
         
         self.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         
-        imageView.do {
-            $0.contentMode = .scaleAspectFit
-            $0.image = .dotoriX
-        }
-        
         alertContainer.do {
             $0.backgroundColor = .gray8
             $0.layer.cornerRadius = 8
             $0.clipsToBounds = true
         }
-        
+
         closeButton.do {
+            $0.layer.cornerRadius = 8
+            $0.layer.borderWidth = 1
+            $0.layer.borderColor = UIColor.gray5.cgColor
+        }
+        
+        settingsButton.do {
             $0.layer.cornerRadius = 8
             $0.backgroundColor = .gray5
         }
@@ -53,10 +54,7 @@ final class CustomAlertImageView: BaseView {
         super.setHierarchy()
         
         addSubview(alertContainer)
-        alertContainer.addSubviews(imageView,
-                                   titleLabel,
-                                   messageLabel,
-                                   closeButton)
+        alertContainer.addSubviews(messageLabel, titleLabel, closeButton, settingsButton)
     }
     
     override func setLayout() {
@@ -65,37 +63,42 @@ final class CustomAlertImageView: BaseView {
         alertContainer.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.equalTo(ScreenUtils.width * 279 / 360)
-            $0.height.equalTo(ScreenUtils.width * 279 / 360)
-        }
-        
-        imageView.snp.makeConstraints {
-            $0.top.equalTo(alertContainer.snp.top).inset(ScreenUtils.width * 24 / 360)
-            $0.centerX.equalTo(alertContainer)
-            $0.width.height.equalTo(ScreenUtils.width * 80 / 360)
+            $0.height.greaterThanOrEqualTo(ScreenUtils.width * 279 / 360 * 0.5)
         }
         
         titleLabel.snp.makeConstraints {
             $0.centerX.equalTo(alertContainer)
-            $0.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.width * 24 / 360)
-            $0.top.equalTo(imageView.snp.bottom).offset(ScreenUtils.width * 16 / 360)
+            $0.top.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.width * 24 / 360)
         }
         
         messageLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(ScreenUtils.width * 4 / 360)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
             $0.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.width * 24 / 360)
             $0.centerX.equalTo(alertContainer)
         }
         
         closeButton.snp.makeConstraints {
             $0.top.equalTo(messageLabel.snp.bottom).offset(20)
-            $0.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.width * 24 / 360)
+            $0.trailing.equalTo(alertContainer.snp.centerX).offset(-4)
+            $0.width.equalTo(ScreenUtils.width * 112 / 360)
             $0.height.equalTo(ScreenUtils.width * 44 / 360)
-            $0.bottom.equalTo(alertContainer).inset(ScreenUtils.width * 24 / 360)
+        }
+        
+        settingsButton.snp.makeConstraints {
+            $0.top.equalTo(messageLabel.snp.bottom).offset(20)
+            $0.leading.equalTo(alertContainer.snp.centerX).offset(4)
+            $0.width.equalTo(ScreenUtils.width * 112 / 360)
+            $0.height.equalTo(ScreenUtils.width * 44 / 360)
+            $0.bottom.equalTo(alertContainer.snp.bottom).inset(ScreenUtils.width * 24 / 360)
         }
     }
     
-    func configure(title: String, message: String, buttonText: String) {
+    func configure(title: String, message: String, leftButton: String, rightButton: String) {
         
+        /* NOTE: 여기에 style 적용한 이유 -> 상단에서 적용후 text만 따로 넣으니 컬러 및 폰트 적용 x
+        alertcustomiamgeview도 같은 이유
+         */
+                 
         titleLabel.do {
             $0.setLabel(
                 text: title,
@@ -115,25 +118,20 @@ final class CustomAlertImageView: BaseView {
                 numberOfLines: 2
             )
         }
+
+        closeButton.setAttributedTitle(
+            text: leftButton,
+            style: ACFont.s2,
+            color: .gray3,
+            for: .normal
+        )
         
-        closeButton.do {
-            $0.setAttributedTitle(
-                text: buttonText,
-                style: ACFont.s2,
-                color: .acWhite,
-                for: .normal
-            )
-        }
-        
-        closeButton.do {
-            $0.setAttributedTitle(
-                text: buttonText,
-                style: ACFont.s2,
-                color: .acWhite,
-                for: .normal
-            )
-        }
-        closeButton.layoutIfNeeded()
-        
+        settingsButton.setAttributedTitle(
+            text: rightButton,
+            style: ACFont.s2,
+            color: .acWhite,
+            for: .normal
+        )
     }
+    
 }
