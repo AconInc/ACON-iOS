@@ -13,10 +13,9 @@ import Then
 final class ACToastController {
     static func show(_ message: String,
                      bottomInset: Int = 92,
+                     delayTime: Double = 2.0,
                      buttonTitle: String = "",
                      buttonAction: @escaping () -> Void) {
-        
-        
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = windowScene.windows.first else { return }
         
@@ -32,8 +31,8 @@ final class ACToastController {
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            UIView.animate(withDuration: 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delayTime) {
+            UIView.animate(withDuration: delayTime) {
                 toastView.alpha = 0
             } completion: { _ in
                 toastView.removeFromSuperview()
@@ -64,7 +63,6 @@ final class ACToastView: BaseView {
     }
     
     private func setUI() {
-        
         addSubviews(messageLabel)
         
         messageLabel.snp.makeConstraints {
