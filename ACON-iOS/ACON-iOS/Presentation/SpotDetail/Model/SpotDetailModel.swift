@@ -10,9 +10,13 @@ import UIKit
 
 struct SpotDetail: Equatable {
     
+    let name: String
+    
+    let spotType: String
+    
     let firstImageURL: String
     
-    let isOpen: Bool
+    let openStatus: Bool
     
     let address: String
     
@@ -20,12 +24,20 @@ struct SpotDetail: Equatable {
     
     let basicAcornCount: Int
     
-    init(firstImageURL: String, isOpen: Bool, address: String, localAcornCount: Int, basicAcornCount: Int) {
+    let latitude: Double
+    
+    let longitude: Double
+    
+    init(name: String, spotType: String, firstImageURL: String, openStatus: Bool, address: String, localAcornCount: Int, basicAcornCount: Int, latitude: Double, longitude: Double) {
+        self.name = name
+        self.spotType = spotType
         self.firstImageURL = firstImageURL
-        self.isOpen = isOpen
+        self.openStatus = openStatus
         self.address = address
         self.localAcornCount = localAcornCount
         self.basicAcornCount = basicAcornCount
+        self.latitude = latitude
+        self.longitude = longitude
     }
     
 }
