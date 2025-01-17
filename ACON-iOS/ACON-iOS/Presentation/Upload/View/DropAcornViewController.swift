@@ -99,8 +99,7 @@ private extension DropAcornViewController {
         }
         dropAcornView.acornReviewLabel.text = "\(selectedIndex+1)/5"
         reviewAcornCount = selectedIndex + 1
-        toggleLottie(dropAcorn: reviewAcornCount)
-        enableLeaveReviewButton()
+        checkAcorn(reviewAcornCount)
     }
     
     @objc
@@ -122,6 +121,25 @@ private extension DropAcornViewController {
                 self?.possessAcornCount = data.acornCount
                 self?.dropAcornView.bindData(data)
             }
+        }
+    }
+    
+}
+
+
+// MARK: - drop acorn 로직
+
+private extension DropAcornViewController {
+    
+    func checkAcorn(_ dropAcorn: Int) {
+        if dropAcorn > possessAcornCount {
+            ACToastController.show(StringLiterals.Upload.noAcorn, bottomInset: 112, delayTime: 1)
+            { [weak self] in return }
+            dropAcornView.dropAcornLottieView.isHidden = true
+        } else {
+            dropAcornView.dropAcornLottieView.isHidden = false
+            toggleLottie(dropAcorn: dropAcorn)
+            enableLeaveReviewButton()
         }
     }
     
