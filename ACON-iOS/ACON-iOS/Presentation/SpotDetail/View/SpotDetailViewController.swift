@@ -58,7 +58,7 @@ class SpotDetailViewController: BaseNavViewController {
         spotDetailView.bindData(data: spotDetailViewModel.spotDetailDummyData)
     }
     
-    func addTarget() {
+    private func addTarget() {
         spotDetailView.findCourseButton.addTarget(self,
                                               action: #selector(findCourseButtonTapped),
                                               for: .touchUpInside)
@@ -82,7 +82,7 @@ private extension SpotDetailViewController {
 
 private extension SpotDetailViewController {
     
-    func bindNavBar(data: SpotDetail) {
+    func bindNavBar(data: SpotDetailInfoModel) {
         self.secondTitleLabel.do {
             $0.isHidden = false
             $0.setPartialText(fullText: data.name+" "+data.spotType, textStyles: [(data.name+" ", .t2, .acWhite), (data.spotType, .b2, .gray4)])
@@ -115,21 +115,6 @@ private extension SpotDetailViewController {
         }
         
         spotDetailView.scrollContentView.layoutIfNeeded()
-    }
-    
-}
-
-
-// MARK: - CollectionView Delegate
-
-extension SpotDetailViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return SpotDetailView.menuCollectionViewFlowLayout.itemSize
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .zero
     }
     
 }

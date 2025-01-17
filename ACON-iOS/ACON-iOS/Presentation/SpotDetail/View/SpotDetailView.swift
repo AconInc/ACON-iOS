@@ -229,7 +229,7 @@ final class SpotDetailView: BaseView {
 
 extension SpotDetailView {
     
-    func bindData(data: SpotDetail) {
+    func bindData(data: SpotDetailInfoModel) {
         let openStatus = data.openStatus
         self.openStatusButton.isSelected = openStatus
         self.openStatusButton.setAttributedTitle(
@@ -249,4 +249,5 @@ extension SpotDetailView {
                                                      alignment: .right)
         
     }
+    
 }

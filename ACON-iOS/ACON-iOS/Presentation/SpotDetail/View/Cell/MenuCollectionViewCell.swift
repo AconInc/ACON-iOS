@@ -67,7 +67,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
 
 extension MenuCollectionViewCell {
     
-    func dataBind(_ menuInfoData: SpotMenuInfo, _ indexRow: Int) {
+    func dataBind(_ menuInfoData: SpotMenuModel, _ indexRow: Int) {
         // TODO: imageView kf - 없으면 넣지 말기
         menuNameLabel.setLabel(text: menuInfoData.name,
                                style: .b2)
