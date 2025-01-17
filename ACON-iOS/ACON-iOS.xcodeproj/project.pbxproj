@@ -502,7 +502,6 @@
 				748ECA692D31917A00BBC981 /* Login */,
 				748D6FA22D2C3C3D007690B4 /* Base */,
 				748D6F672D2BCA1C007690B4 /* ViewController.swift */,
-				D6E34C422D398B6000CEFA04 /* CustomAlert */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -591,6 +590,7 @@
 			children = (
 				74BF92182D395FE400B923E3 /* ACToastController.swift */,
 				744BAF162D300AB100F95B4A /* DummyComponent.swift */,
+				D6E34C422D398B6000CEFA04 /* CustomAlert */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -753,6 +753,7 @@
 			children = (
 				D6E34C492D398B9B00CEFA04 /* Type */,
 				D6E34C482D398B9700CEFA04 /* View */,
+				D6232C942D3A294C003FF208 /* AlertHandler.swift */,
 			);
 			path = CustomAlert;
 			sourceTree = "<group>";
@@ -772,7 +773,6 @@
 			isa = PBXGroup;
 			children = (
 				D6E34C3D2D398B6000CEFA04 /* AlertType.swift */,
-				D6232C942D3A294C003FF208 /* AlertHandler.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
