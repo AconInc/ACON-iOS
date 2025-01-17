@@ -148,7 +148,7 @@ enum StringLiterals {
         
         static let visitPurposeSection = "방문 목적"
         
-        static let fiveStepMinutes = ["5분 이내", "10분", "15분", "20분", "20분 이상"]
+        static let walkingTimes = ["5분 이내", "10분", "15분", "20분", "20분 이상"]
         
         static let restaurantPrices = ["5천원 이하", "1만원", "3만원", "5만원", "5만원 이상"]
         
