@@ -68,7 +68,7 @@ class SpotSearchViewController: BaseViewController {
         
         self.view.backgroundColor = .glaW10
         self.view.backgroundColor?.withAlphaComponent(0.95)
-        setRecommendedSpotStackView(data: spotSearchViewModel.recommendedSearchDummyData)
+        setRecommendedSpotStackView(data: spotSearchViewModel.searchSuggestionDummyData)
     }
     
     func addTarget() {
@@ -101,15 +101,15 @@ private extension SpotSearchViewController {
     @objc
     func searchXButtonTapped() {
         spotSearchView.searchTextField.text = ""
-        spotSearchView.recommendedSpotStackView.isHidden = false
-        spotSearchView.relatedSearchCollectionView.isHidden = true
+        spotSearchView.searchSuggestionStackView.isHidden = false
+        spotSearchView.searchKeywordCollectionView.isHidden = true
     }
     
     @objc
     func searchTextFieldDidChange(_ textField: UITextField) {
         if let text = textField.text {
-            spotSearchView.recommendedSpotStackView.isHidden = text != ""
-            spotSearchView.relatedSearchCollectionView.isHidden = text == ""
+            spotSearchView.searchSuggestionStackView.isHidden = text != ""
+            spotSearchView.searchKeywordCollectionView.isHidden = text == ""
             
             if text != "" {
                 // TODO: - 여기서 디바운스 로직? + reloadData()?
@@ -124,10 +124,10 @@ private extension SpotSearchViewController {
 
 private extension SpotSearchViewController {
     
-    func setRecommendedSpotStackView(data: RecommendedSearchModel) {
+    func setRecommendedSpotStackView(data: SearchSuggestionModel) {
         for i in 0...4 {
             let button = spotSearchView.makeRecommendedSpotButton(data.spotList[i])
-            spotSearchView.recommendedSpotStackView.addArrangedSubview(button)
+            spotSearchView.searchSuggestionStackView.addArrangedSubview(button)
         }
     }
     
@@ -139,12 +139,12 @@ private extension SpotSearchViewController {
 private extension SpotSearchViewController {
     
     func registerCell() {
-        spotSearchView.relatedSearchCollectionView.register(RelatedSearchCollectionViewCell.self, forCellWithReuseIdentifier: RelatedSearchCollectionViewCell.cellIdentifier)
+        spotSearchView.searchKeywordCollectionView.register(SearchKeywordCollectionViewCell.self, forCellWithReuseIdentifier: SearchKeywordCollectionViewCell.cellIdentifier)
     }
     
     func setDelegate() {
-        spotSearchView.relatedSearchCollectionView.delegate = self
-        spotSearchView.relatedSearchCollectionView.dataSource = self
+        spotSearchView.searchKeywordCollectionView.delegate = self
+        spotSearchView.searchKeywordCollectionView.dataSource = self
     }
     
 }
@@ -163,8 +163,8 @@ extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedSpotId = spotSearchViewModel.relatedSearchDummyData[indexPath.item].spotID
-        selectedSpotName = spotSearchViewModel.relatedSearchDummyData[indexPath.item].spotName
+        selectedSpotId = spotSearchViewModel.searchKeywordDummyData[indexPath.item].spotID
+        selectedSpotName = spotSearchViewModel.searchKeywordDummyData[indexPath.item].spotName
         spotSearchView.searchTextField.text = selectedSpotName
         self.dismissKeyboard()
     }
@@ -181,8 +181,8 @@ extension SpotSearchViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let data = spotSearchViewModel.relatedSearchDummyData[indexPath.item]
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RelatedSearchCollectionViewCell.cellIdentifier, for: indexPath) as? RelatedSearchCollectionViewCell else {
+        let data = spotSearchViewModel.searchKeywordDummyData[indexPath.item]
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchKeywordCollectionViewCell.cellIdentifier, for: indexPath) as? SearchKeywordCollectionViewCell else {
             return UICollectionViewCell() }
         cell.dataBind(data, indexPath.item)
         return cell
