@@ -57,7 +57,7 @@ final class SpotDetailView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(stickyView, scrollView, footerView)
+        self.addSubviews(scrollView, stickyView, footerView)
         scrollView.addSubviews(scrollContentView)
         scrollContentView.addSubviews(spotDetailImageView,
                                       openStatusButton,
