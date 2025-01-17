@@ -17,12 +17,13 @@ class DropAcornViewController: BaseNavViewController {
     
     private let dropAcornView = DropAcornView()
     
+    var reviewAcornCount: Int = 0
+    
+    var possessAcornCount: Int = 0
     
     // MARK: - Properties
     
-    var reviewAcornCount: Int = 0
-    
-    var posessAcornCount: Int = 5
+    var spotReviewViewModel = SpotReviewViewModel()
     
     
     // MARK: - LifeCycle
@@ -32,6 +33,7 @@ class DropAcornViewController: BaseNavViewController {
         
         self.setXButton()
         addTarget()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,14 +60,6 @@ class DropAcornViewController: BaseNavViewController {
         super.setStyle()
         
         self.dropAcornView.leaveReviewButton.isEnabled = false
-        self.dropAcornView.acornNumberLabel.do {
-            $0.setLabel(text: StringLiterals.Upload.acornsIHave,
-                        style: .b4,
-                        color: .gray5)
-            $0.setPartialText(fullText: StringLiterals.Upload.acornsIHave + " \(posessAcornCount)/25",
-                              textStyles: [(StringLiterals.Upload.acornsIHave, .b4, .gray5),
-                                           (" \(posessAcornCount)/25", .b4, .org1)])
-        }
     }
     
     func addTarget() {
@@ -112,6 +106,23 @@ private extension DropAcornViewController {
     @objc
     func xButtonTapped() {
         // TODO: 작성을 그만두시겠습니까 Alert 띄우기
+    }
+    
+}
+
+
+// MARK: - bind ViewModel
+
+private extension DropAcornViewController {
+    
+    func bindViewModel() {
+        self.spotReviewViewModel.onSuccessGetAcornNum.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.spotReviewViewModel.acornNum.value else { return }
+            if onSuccess {
+                self?.possessAcornCount = data.acornCount
+                self?.dropAcornView.bindData(data)
+            }
+        }
     }
     
 }
