@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RelatedSearchModel: Equatable {
+struct SearchKeywordModel: Equatable {
     
     let spotID: Int
     
@@ -29,12 +29,52 @@ struct RelatedSearchModel: Equatable {
     
 }
 
-struct RecommendedSearchModel: Equatable {
+struct SearchSuggestionModel: Equatable {
     
     let spotList: [String]
     
     init(spotList: [String]) {
         self.spotList = spotList
+    }
+    
+}
+
+struct VerifyReviewModel: Equatable {
+    
+    let spotID: Int
+    
+    let latitude: Double
+    
+    let logitude: Double
+    
+    init(spotID: Int, latitude: Double, logitude: Double) {
+        self.spotID = spotID
+        self.latitude = latitude
+        self.logitude = logitude
+    }
+    
+}
+
+
+struct ReviewPostModel: Equatable {
+    
+    let spotID: Int
+    
+    let acornCount: Int
+    
+    init(spotID: Int, acornCount: Int) {
+        self.spotID = spotID
+        self.acornCount = acornCount
+    }
+    
+}
+
+struct AcornCountModel: Equatable {
+    
+    let acornCount: Int
+    
+    init(acornCount: Int) {
+        self.acornCount = acornCount
     }
     
 }
