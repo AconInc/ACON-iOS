@@ -93,6 +93,13 @@
 		74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92082D391FFE00B923E3 /* LocalMapView.swift */; };
 		74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920C2D391FFE00B923E3 /* LocalVerificationView.swift */; };
 		74BF92192D395FE800B923E3 /* ACToastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92182D395FE400B923E3 /* ACToastController.swift */; };
+		74BF91FA2D38164400B923E3 /* SpotDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF91F92D38163F00B923E3 /* SpotDetailView.swift */; };
+		74BF91FD2D381FF800B923E3 /* SpotDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF91FC2D381FF400B923E3 /* SpotDetailModel.swift */; };
+		74BF92022D385D8700B923E3 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92012D385D8100B923E3 /* MenuCollectionViewCell.swift */; };
+		74BF92042D3861A600B923E3 /* SpotDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92032D38619E00B923E3 /* SpotDetailViewController.swift */; };
+		74BF92072D38622B00B923E3 /* SpotDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92062D38622600B923E3 /* SpotDetailViewModel.swift */; };
+		74BF92172D393B4A00B923E3 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92162D393B4700B923E3 /* Int+.swift */; };
+		74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92262D39956F00B923E3 /* StickyHeaderView.swift */; };
 		74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */; };
 		74CDCE562D310B1600E3A21A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE552D310B1300E3A21A /* String+.swift */; };
 		D6978F502D36E3C800523A25 /* AnalyzingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F4F2D36E3C800523A25 /* AnalyzingViewController.swift */; };
@@ -198,6 +205,13 @@
 		74BF920C2D391FFE00B923E3 /* LocalVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationView.swift; sourceTree = "<group>"; };
 		74BF920D2D391FFE00B923E3 /* LocalVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationViewController.swift; sourceTree = "<group>"; };
 		74BF92182D395FE400B923E3 /* ACToastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACToastController.swift; sourceTree = "<group>"; };
+		74BF91F92D38163F00B923E3 /* SpotDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailView.swift; sourceTree = "<group>"; };
+		74BF91FC2D381FF400B923E3 /* SpotDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailModel.swift; sourceTree = "<group>"; };
+		74BF92012D385D8100B923E3 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
+		74BF92032D38619E00B923E3 /* SpotDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailViewController.swift; sourceTree = "<group>"; };
+		74BF92062D38622600B923E3 /* SpotDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailViewModel.swift; sourceTree = "<group>"; };
+		74BF92162D393B4700B923E3 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
+		74BF92262D39956F00B923E3 /* StickyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyHeaderView.swift; sourceTree = "<group>"; };
 		74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACFontStyleType.swift; sourceTree = "<group>"; };
 		74CDCE552D310B1300E3A21A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -484,6 +498,7 @@
 			children = (
 				74BF920F2D391FFE00B923E3 /* LocalVerification */,
 				D6D0F4FC2D36B8D300326F17 /* OnBoarding */,
+				74BF91F72D38138200B923E3 /* SpotDetail */,
 				74220DD12D34361E000684BF /* Upload */,
 				1558BADC2D31AB5100ECDEF8 /* SpotList */,
 				1547A87B2D358DBE00E96616 /* SpotListFilter */,
@@ -521,6 +536,7 @@
 		748D6F752D2BCAA8007690B4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				74BF92162D393B4700B923E3 /* Int+.swift */,
 				74CDCE552D310B1300E3A21A /* String+.swift */,
 				748D6F942D2BD4D6007690B4 /* UICollectionViewCell+.swift */,
 				748D6F902D2BD44C007690B4 /* UILabel+.swift */,
@@ -751,6 +767,59 @@
 			path = Type;
 			sourceTree = "<group>";
 		};
+		74BF91F72D38138200B923E3 /* SpotDetail */ = {
+			isa = PBXGroup;
+			children = (
+				74BF91FB2D381EF100B923E3 /* Model */,
+				74BF92052D38622100B923E3 /* ViewModel */,
+				74BF91F82D38162900B923E3 /* View */,
+			);
+			path = SpotDetail;
+			sourceTree = "<group>";
+		};
+		74BF91F82D38162900B923E3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				74BF92252D39956400B923E3 /* Component */,
+				74BF92002D385D7C00B923E3 /* Cell */,
+				74BF92032D38619E00B923E3 /* SpotDetailViewController.swift */,
+				74BF91F92D38163F00B923E3 /* SpotDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		74BF91FB2D381EF100B923E3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				74BF91FC2D381FF400B923E3 /* SpotDetailModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		74BF92002D385D7C00B923E3 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				74BF92012D385D8100B923E3 /* MenuCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		74BF92052D38622100B923E3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				74BF92062D38622600B923E3 /* SpotDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		74BF92252D39956400B923E3 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				74BF92262D39956F00B923E3 /* StickyHeaderView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -892,6 +961,7 @@
 			files = (
 				748D6F952D2BD4DB007690B4 /* UICollectionViewCell+.swift in Sources */,
 				D6FF82ED2D380B6100090233 /* FavoriteSpotType.swift in Sources */,
+				74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */,
 				748D6F822D2BCDB3007690B4 /* ScreenUtils.swift in Sources */,
 				745C7E122D35A62B0074DBDB /* UploadModel.swift in Sources */,
 				748D6FAE2D2EBB9C007690B4 /* ACFont.swift in Sources */,
@@ -910,12 +980,14 @@
 				748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */,
 				1547A8902D35B30C00E96616 /* FilterTagButtonType.swift in Sources */,
 				748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */,
+				74BF91FA2D38164400B923E3 /* SpotDetailView.swift in Sources */,
 				748D6F872D2BD247007690B4 /* UIView+.swift in Sources */,
 				15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */,
 				1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */,
 				1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */,
 				D6978F502D36E3C800523A25 /* AnalyzingViewController.swift in Sources */,
 				74CDCE562D310B1600E3A21A /* String+.swift in Sources */,
+				74BF91FD2D381FF800B923E3 /* SpotDetailModel.swift in Sources */,
 				1547A8852D3595B600E96616 /* SpotListFilterModel.swift in Sources */,
 				748D6F8B2D2BD31B007690B4 /* UIStackView+.swift in Sources */,
 				748D6F912D2BD450007690B4 /* UILabel+.swift in Sources */,
@@ -925,6 +997,7 @@
 				1547A6F22D33AD4500E96616 /* SpotModel.swift in Sources */,
 				748D6F972D2BD544007690B4 /* DummyType.swift in Sources */,
 				D6FF82F32D380ED600090233 /* OnboardingType.swift in Sources */,
+				74BF92022D385D8700B923E3 /* MenuCollectionViewCell.swift in Sources */,
 				74220DD42D34363B000684BF /* SpotUploadViewController.swift in Sources */,
 				D6FF82F12D380C4D00090233 /* FavoriteCuisineType.swift in Sources */,
 				D6FF82EF2D380BE800090233 /* FavoriteSpotStyle.swift in Sources */,
@@ -957,6 +1030,7 @@
 				74BF92132D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift in Sources */,
 				74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */,
 				74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */,
+				74BF92042D3861A600B923E3 /* SpotDetailViewController.swift in Sources */,
 				1547A8732D34157700E96616 /* SpotListViewModel.swift in Sources */,
 				748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */,
 				D6FF82E92D3805F000090233 /* DislikeCollectionViewType.swift in Sources */,
@@ -970,12 +1044,14 @@
 				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
 				1547A8882D3595E000E96616 /* SpotListFilterViewModel.swift in Sources */,
 				1547A88B2D3596B600E96616 /* SpotType.swift in Sources */,
+				74BF92172D393B4A00B923E3 /* Int+.swift in Sources */,
 				748ECA6E2D3196F100BBC981 /* LoginViewController.swift in Sources */,
 				745C7E022D358E900074DBDB /* SpotSearchView.swift in Sources */,
 				D6D0F5132D36BA2900326F17 /* FavoriteCuisineCollectionView.swift in Sources */,
 				D6D0F5172D36BA9A00326F17 /* FavoriteSpotTypeCollectionView.swift in Sources */,
 				D6FF82EB2D380AAF00090233 /* FavoriteSpotRankType.swift in Sources */,
 				D6D0F5152D36BA6500326F17 /* DislikeCollectionView.swift in Sources */,
+				74BF92072D38622B00B923E3 /* SpotDetailViewModel.swift in Sources */,
 				745C7E152D35AEC10074DBDB /* SpotSearchViewModel.swift in Sources */,
 				748D6F6B2D2BCA1C007690B4 /* ViewController.swift in Sources */,
 				15A3F6A82D36D5B900577E16 /* FilterTagButtonStackLineType.swift in Sources */,

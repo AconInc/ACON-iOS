@@ -158,4 +158,16 @@ enum StringLiterals {
         
     }
     
+    enum SpotDetail {
+        
+        static let isOpen = "영업중"
+        
+        static let isNotOpen = "영업전"
+        
+        static let menu = "메뉴"
+        
+        static let findCourse = "길 찾기"
+        
+    }
+    
 }
