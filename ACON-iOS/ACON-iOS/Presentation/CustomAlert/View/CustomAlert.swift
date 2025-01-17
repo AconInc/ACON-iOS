@@ -13,20 +13,26 @@ import Then
 
 final class CustomAlertView: BaseViewController {
     
+    // NOTE: 직접 넣는 시도중 오류로 var string 선언후 넣음!
+    private var titleText : String = ""
+    private var messageText : String = ""
+    private var leftButtonText : String = ""
+    private var rightButtonText : String = ""
+    var onClose: (() -> Void)?
+    var onSettings: (() -> Void)?
+    
     private let alertContainer = UIView()
     private let messageLabel = UILabel()
     private let titleLabel = UILabel()
     private let closeButton = UIButton()
     private let settingsButton = UIButton()
     
-    var onClose: (() -> Void)?
-    var onSettings: (() -> Void)?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func setStyle() {
+        super.setStyle()
         
         view.do {
             $0.backgroundColor = UIColor.black.withAlphaComponent(0.6)
@@ -38,26 +44,19 @@ final class CustomAlertView: BaseViewController {
             $0.clipsToBounds = true
         }
         
-//        titleLabel.do {
-//            $0.setLabel(
-//                text: "",
-//                style: ACFont.h8,
-//                color: .acWhite,
-//                alignment: .center,
-//                numberOfLines: 2
-//            )
-//        }
         titleLabel.do {
-            $0.text = ""
-            $0.font = ACFont.h8.font
-            $0.textColor = .acWhite
-            $0.textAlignment = .center
-            $0.numberOfLines = 2
+            $0.setLabel(
+                text: titleText,
+                style: ACFont.h8,
+                color: .acWhite,
+                alignment: .center,
+                numberOfLines: 2
+            )
         }
-
+        
         messageLabel.do {
             $0.setLabel(
-                text: "",
+                text: messageText,
                 style: ACFont.b2,
                 color: .gray3,
                 alignment: .center,
@@ -68,7 +67,7 @@ final class CustomAlertView: BaseViewController {
         // UIButton 스타일 적용
         closeButton.do {
             $0.setAttributedTitle(
-                text: "",
+                text: leftButtonText,
                 style: ACFont.s2,
                 color: .gray3,
                 for: .normal
@@ -81,24 +80,28 @@ final class CustomAlertView: BaseViewController {
         
         settingsButton.do {
             $0.setAttributedTitle(
-                text: "",
+                text: rightButtonText,
                 style: ACFont.s2,
                 color: .acWhite,
                 for: .normal
             )
-            $0.layer.cornerRadius = 8 // 네 꼭짓점 모두 둥글게
+            $0.layer.cornerRadius = 8
             $0.backgroundColor = .gray5
             $0.addTarget(self, action: #selector(actionTapped), for: .touchUpInside)
         }
     }
     
     override func setHierarchy() {
-        view.addSubview(alertContainer) // Alert 컨테이너 추가
+        super.setHierarchy()
+        
+        view.addSubview(alertContainer)
+        
         alertContainer.addSubviews(messageLabel,titleLabel,closeButton, settingsButton)
     }
     
     override func setLayout() {
-        // Alert 컨테이너 중앙 배치
+        super.setLayout()
+
         alertContainer.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.equalTo(ScreenUtils.width * 279 / 360)
@@ -144,31 +147,12 @@ extension CustomAlertView {
         print("Title: \(alertType.title)")
         print("Content: \(alertType.content)")
         
-        titleLabel.text = alertType.title
-        messageLabel.text = alertType.content
+        titleText = alertType.title
+        messageText = alertType.content
+        leftButtonText = alertType.buttons[0]
+        rightButtonText = alertType.buttons[1]
         
-        let buttonTitles = alertType.buttons
-        closeButton.setAttributedTitle(
-            NSAttributedString(
-                string: buttonTitles[0],
-                attributes: [
-                    .font: ACFont.s2,
-                    .foregroundColor: UIColor.gray3
-                ]
-            ),
-            for: .normal
-        )
         
-        settingsButton.setAttributedTitle(
-            NSAttributedString(
-                string: buttonTitles[1],
-                attributes: [
-                    .font: ACFont.s2,
-                    .foregroundColor: UIColor.acWhite
-                ]
-            ),
-            for: .normal
-        )
         self.view.layoutIfNeeded()
 
     }
@@ -184,8 +168,7 @@ extension CustomAlertView {
     
     @objc private func actionTapped() {
         dismiss(animated: true) {
-            //            self.onAction?()
-        print("hi")
+            self.onSettings?()
         }
         
     }
