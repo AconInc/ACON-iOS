@@ -80,6 +80,7 @@
 		748ECA6B2D31918D00BBC981 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748ECA6A2D31918900BBC981 /* LoginView.swift */; };
 		748ECA6E2D3196F100BBC981 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748ECA6D2D3196ED00BBC981 /* LoginViewController.swift */; };
 		748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748ECA702D31A72500BBC981 /* LoginViewModel.swift */; };
+		749A01032D3A6E0100CD7A90 /* ACDebouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */; };
 		74B25C252D2FD30A008BDCB7 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 74B25C242D2FD30A008BDCB7 /* Lottie */; };
 		74B25C2C2D2FEE8E008BDCB7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B25C2B2D2FEE8C008BDCB7 /* Config.swift */; };
 		74B25C2E2D2FEFD3008BDCB7 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C2D2D2FEFD3008BDCB7 /* Debug.xcconfig */; };
@@ -188,6 +189,7 @@
 		748ECA6A2D31918900BBC981 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		748ECA6D2D3196ED00BBC981 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		748ECA702D31A72500BBC981 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACDebouncer.swift; sourceTree = "<group>"; };
 		74AB6EB02D2796D30094F873 /* ACON-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ACON-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74B25C2A2D2FEE3E008BDCB7 /* ACON-iOSDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ACON-iOSDebug.entitlements"; sourceTree = "<group>"; };
 		74B25C2B2D2FEE8C008BDCB7 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -587,6 +589,7 @@
 		748D6F7A2D2BCCF4007690B4 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */,
 				74BF92182D395FE400B923E3 /* ACToastController.swift */,
 				744BAF162D300AB100F95B4A /* DummyComponent.swift */,
 			);
@@ -923,6 +926,7 @@
 				15A3F6E02D38724A00577E16 /* CustomSegmentedControl.swift in Sources */,
 				748D6F692D2BCA1C007690B4 /* AppDelegate.swift in Sources */,
 				74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */,
+				749A01032D3A6E0100CD7A90 /* ACDebouncer.swift in Sources */,
 				745C7E0D2D35A04A0074DBDB /* SearchKeywordCollectionViewCell.swift in Sources */,
 				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
 				748D6F852D2BD230007690B4 /* DummyService.swift in Sources */,
