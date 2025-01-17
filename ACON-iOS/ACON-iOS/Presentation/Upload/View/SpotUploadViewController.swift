@@ -21,6 +21,8 @@ class SpotUploadViewController: BaseNavViewController {
     
     // MARK: - Properties
     
+    var spotReviewViewModel = SpotReviewViewModel()
+    
     var selectedSpotID: Int = -1
     
 //    var selectedSpotName: String = ""
@@ -38,6 +40,7 @@ class SpotUploadViewController: BaseNavViewController {
         self.setSecondTitleLabelStyle(title: StringLiterals.Upload.upload)
         addTarget()
         ACLocationManager.shared.addDelegate(self)
+        bindViewModel()
     }
     
     deinit {
@@ -84,6 +87,30 @@ class SpotUploadViewController: BaseNavViewController {
 
 }
 
+
+private extension SpotUploadViewController {
+
+    func bindViewModel() {
+        self.spotReviewViewModel.onSuccessGetReviewVerification.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.spotReviewViewModel.reviewVerification.value else { return }
+            if onSuccess {
+                if data {
+                    self?.spotUploadView.dropAcornButton.isEnabled = true
+                    self?.spotUploadView.dropAcornButton.backgroundColor = .gray5
+                } else {
+                    // TODO: - show Alert
+                    self?.spotUploadView.dropAcornButton.isEnabled = false
+                    self?.spotUploadView.dropAcornButton.backgroundColor = .gray8
+                    self?.spotUploadView.spotSearchButton.setAttributedTitle(text: StringLiterals.Upload.uploadSpotName,
+                                                                            style: .s2,
+                                                                            color: .gray5)
+                }
+                self?.spotReviewViewModel.reviewVerification.value = false
+            }
+        }
+    }
+    
+}
     
 // MARK: - @objc functions
 
@@ -133,15 +160,14 @@ extension SpotUploadViewController {
         vc.completionHandler = { [weak self] selectedSpotID, selectedSpotName in
             guard let self = self else { return }
             self.selectedSpotID = selectedSpotID
-//            self?.selectedSpotName = selectedSpotName
             self.spotUploadView.spotSearchButton.do {
                 $0.setAttributedTitle(text: selectedSpotName,
                                       style: .s2,
                                       color: .acWhite)
             }
+            
             if selectedSpotID > 0 {
-                self.spotUploadView.dropAcornButton.isEnabled = true
-                self.spotUploadView.dropAcornButton.backgroundColor = .gray5
+                // TODO: - ReviewVerification 서버통신
             } else {
                 self.spotUploadView.dropAcornButton.isEnabled = false
                 self.spotUploadView.dropAcornButton.backgroundColor = .gray8
