@@ -9,6 +9,14 @@ import UIKit
 
 class AlertHandler {
     
+    /// 이미지 alert
+    func showLocationAccessFailImageAlert(from viewController: UIViewController) {
+            let customAlertImageView = CustomAlertImageView()
+            customAlertImageView.onClose = {
+                print("위치 권한 실패: 이미지 알림 닫기")
+            }
+    }
+    
     /// 취향 분석 중단 Alert
     func showStoppedPreferenceAnalysisAlert(from viewController: UIViewController) {
         let customAlertView = CustomAlertView()
