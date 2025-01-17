@@ -15,6 +15,10 @@ class AlertHandler {
             customAlertImageView.onClose = {
                 print("위치 권한 실패: 이미지 알림 닫기")
             }
+        
+        customAlertImageView.modalPresentationStyle = .overFullScreen
+        customAlertImageView.modalTransitionStyle = .crossDissolve
+        viewController.present(customAlertImageView, animated: true, completion: nil)
     }
     
     /// 취향 분석 중단 Alert
