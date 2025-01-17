@@ -12,6 +12,7 @@ import Then
 
 final class ACToastController {
     static func show(_ message: String,
+                     bottomInset: Int = 92,
                      buttonTitle: String = "",
                      buttonAction: @escaping () -> Void) {
         
@@ -27,7 +28,7 @@ final class ACToastController {
         
         toastView.snp.makeConstraints {
             $0.height.equalTo(ScreenUtils.height*42/780)
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*92/780)
+            $0.bottom.equalToSuperview().inset(Int(ScreenUtils.height)*bottomInset/780)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
         }
         
