@@ -114,7 +114,6 @@ extension ACLocationManager: CLLocationManagerDelegate {
                 delegate.locationManager(self, didUpdateLocation: coordinate)
             }
         }
-        stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
