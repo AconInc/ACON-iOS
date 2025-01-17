@@ -25,6 +25,10 @@ class SpotUploadViewController: BaseNavViewController {
     
 //    var selectedSpotName: String = ""
     
+    var latitude: Double = 0
+    
+    var longitude: Double = 0
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -87,13 +91,12 @@ private extension SpotUploadViewController {
 
     @objc
     func spotSearchButtonTapped() {
-        // TODO: - 위치 접근 권한 체크하기
         ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
     }
     
     @objc
     func dropAcornButtonTapped() {
-        let vc = DropAcornViewController()
+        let vc = DropAcornViewController(spotID: selectedSpotID)
         navigationController?.pushViewController(vc, animated: false)
     }
     
@@ -107,8 +110,10 @@ private extension SpotUploadViewController {
 extension SpotUploadViewController: ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
-        // TODO: - 연관검색어 네트워크 요청
+        // TODO: - 연관검색어 네트워크 요청 - 여기 아니면 spotSearch viewWillAppear
         print("성공 - 위도: \(coordinate.latitude), 경도: \(coordinate.longitude)")
+        self.latitude = coordinate.latitude
+        self.longitude = coordinate.longitude
         setSpotSearchModal()
     }
     
@@ -143,7 +148,6 @@ extension SpotUploadViewController {
                 self.spotUploadView.spotSearchButton.setAttributedTitle(text: StringLiterals.Upload.uploadSpotName,
                                                                         style: .s2,
                                                                         color: .gray5)
-
             }
         }
         

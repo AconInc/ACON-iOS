@@ -25,6 +25,16 @@ class DropAcornViewController: BaseNavViewController {
     
     var spotReviewViewModel = SpotReviewViewModel()
     
+    var spotID: Int = 0
+    
+    init(spotID: Int) {
+        self.spotID = spotID
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - LifeCycle
     
@@ -85,9 +95,8 @@ private extension DropAcornViewController {
     
     @objc
     func leaveReviewButtonTapped() {
-        // TODO: - reviewAcornCount 서버 POST
-        let vc = ReviewFinishedViewController()
-        navigationController?.pushViewController(vc, animated: false)
+        // TODO: - reviewAcornCount 서버 POST -> spotReviewViewModel.postReviewData()
+        let data: ReviewPostModel = ReviewPostModel(spotID: spotID, acornCount: reviewAcornCount)
     }
     
     @objc
@@ -120,6 +129,14 @@ private extension DropAcornViewController {
             if onSuccess {
                 self?.possessAcornCount = data.acornCount
                 self?.dropAcornView.bindData(data)
+            }
+        }
+        
+        self.spotReviewViewModel.onSuccessPostReview.bind { [weak self] onSuccess in
+            guard let onSuccess else { return }
+            if onSuccess {
+                let vc = ReviewFinishedViewController()
+                self?.navigationController?.pushViewController(vc, animated: false)
             }
         }
     }
