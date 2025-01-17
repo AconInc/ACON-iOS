@@ -21,6 +21,8 @@ class SpotSearchViewController: BaseViewController {
     
     private let spotSearchViewModel = SpotSearchViewModel()
     
+    private let acDebouncer = ACDebouncer(delay: 0.3)
+    
     var completionHandler: ((Int, String) -> Void)?
     
     private var selectedSpotId: Int = 0
@@ -215,10 +217,10 @@ extension SpotSearchViewController: UICollectionViewDataSource {
 extension SpotSearchViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        updateSearchKeyword(textField.text ?? "")
-//            acDebouncer.call { [weak self] in
-//                updateSearchKeyword(textField.text)
-//            }
+        acDebouncer.call { [weak self] in
+//            print("is debouncing")
+            self?.updateSearchKeyword(textField.text ?? "")
+        }
         return true
     }
     
