@@ -73,9 +73,7 @@ private extension SpotDetailViewController {
     
     @objc
     func findCourseButtonTapped() {
-        spotDetailViewModel.redirectToNaverMap(spotName: spotDetailName,
-                                               latitude: 37.556944,
-                                               longitude: 126.923917)
+        spotDetailViewModel.redirectToNaverMap()
     }
     
 }
