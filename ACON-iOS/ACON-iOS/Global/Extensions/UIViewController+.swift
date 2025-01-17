@@ -49,6 +49,19 @@ extension UIViewController {
         }
     }
     
+    func setMiddleSheetLayout() {
+       self.modalPresentationStyle = .pageSheet
+
+       if let sheet = self.sheetPresentationController {
+           let sheetUtils = SheetUtils()
+           sheet.detents = [sheetUtils.acMiddleDetent]
+           sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+           sheet.prefersGrabberVisible = false
+
+           sheet.selectedDetentIdentifier = sheetUtils.middleDetentIdentifier
+       }
+    }
+    
     func setLongSheetLayout() {
         self.modalPresentationStyle = .pageSheet
         

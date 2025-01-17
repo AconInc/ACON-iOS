@@ -16,26 +16,36 @@ class SpotListView: BaseView {
         collectionViewLayout: UICollectionViewFlowLayout()
     )
     
+    private let footerLabel = UILabel()
+    
     
     // MARK: - LifeCycles
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(collectionView)
+        self.addSubviews(footerLabel,
+                         collectionView)
     }
     
     override func setLayout() {
         super.setLayout()
         
+        footerLabel.snp.makeConstraints {
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-40)
+            $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
+        }
+        
         collectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(self.safeAreaLayoutGuide).offset(18)
+            $0.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide)
         }
     }
     
     override func setStyle() {
         super.setStyle()
         
+        setFooterLabel()
         setCollectionView()
     }
     
@@ -44,7 +54,17 @@ class SpotListView: BaseView {
 
 // MARK: - UI Settings
 
-extension SpotListView {
+private extension SpotListView {
+    
+    func setFooterLabel() {
+        let text = StringLiterals.SpotList.footerText
+        footerLabel.setLabel(
+            text: text,
+            style: .b4,
+            color: .gray5,
+            alignment: .center
+        )
+    }
     
     func setCollectionView() {
         let flowLayout = UICollectionViewFlowLayout()
@@ -53,9 +73,21 @@ extension SpotListView {
         flowLayout.scrollDirection = .vertical
         
         collectionView.do {
-            $0.backgroundColor = .gray9
+            $0.backgroundColor = .clear
             $0.setCollectionViewLayout(flowLayout, animated: true)
         }
+    }
+    
+}
+
+
+// MARK: - Binding
+
+extension SpotListView {
+    
+    func hideFooterLabel(isHidden: Bool) {
+        footerLabel.isHidden = isHidden
+        print("hideFooterLabel called.")
     }
     
 }

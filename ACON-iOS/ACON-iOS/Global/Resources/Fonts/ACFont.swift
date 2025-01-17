@@ -22,7 +22,7 @@ enum ACFont {
         return UIFont(name: name, size: size) ?? .systemFont(ofSize: size, weight: weight)
     }
     
-    
+
     // MARK: - Heading
     
     static let h1 = ACFontStyleType(
