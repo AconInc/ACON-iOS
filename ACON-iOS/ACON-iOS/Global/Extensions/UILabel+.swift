@@ -52,7 +52,8 @@ extension UILabel {
                         paragraphStyle.maximumLineHeight = textStyle.style.lineHeight
                         return paragraphStyle
                     }(),
-                    .foregroundColor: textStyle.color
+                    .foregroundColor: textStyle.color,
+                    .baselineOffset: (textStyle.style.lineHeight - textStyle.style.font.lineHeight) / 2
                 ]
                 
                 attributes.forEach { key, value in

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "nopo.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

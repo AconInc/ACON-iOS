@@ -155,4 +155,24 @@ enum StringLiterals {
         static let cafePrices = ["3천원 이하", "5천원", "1만원 이상"]
     }
     
+    enum Analyzing {
+        
+        static let analyzing = "회원님의 취향을 \n빠르게 분석하고 있어요"
+        
+        static let analyzingAfter = "분석이 완료되었어요\n추천 맛집을 보여드릴게요!"
+        
+    }
+    
+    enum SpotDetail {
+        
+        static let isOpen = "영업중"
+        
+        static let isNotOpen = "영업전"
+        
+        static let menu = "메뉴"
+        
+        static let findCourse = "길 찾기"
+        
+    }
+    
 }

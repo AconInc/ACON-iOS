@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "btn_onboarding_choosing_1_no.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
