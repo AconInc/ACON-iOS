@@ -8,7 +8,9 @@
 import Foundation
 import UIKit
 
-struct SpotDetail: Equatable {
+struct SpotDetailInfoModel: Equatable {
+    
+    let spotID: Int
     
     let name: String
     
@@ -28,7 +30,17 @@ struct SpotDetail: Equatable {
     
     let longitude: Double
     
-    init(name: String, spotType: String, firstImageURL: String, openStatus: Bool, address: String, localAcornCount: Int, basicAcornCount: Int, latitude: Double, longitude: Double) {
+    init(spotID: Int,
+         name: String,
+         spotType: String,
+         firstImageURL: String,
+         openStatus: Bool,
+         address: String,
+         localAcornCount: Int,
+         basicAcornCount: Int,
+         latitude: Double,
+         longitude: Double) {
+        self.spotID = spotID
         self.name = name
         self.spotType = spotType
         self.firstImageURL = firstImageURL
@@ -43,7 +55,7 @@ struct SpotDetail: Equatable {
 }
 
 
-struct SpotMenuInfo: Equatable {
+struct SpotMenuModel: Equatable {
     
     let menuID: Int
     
