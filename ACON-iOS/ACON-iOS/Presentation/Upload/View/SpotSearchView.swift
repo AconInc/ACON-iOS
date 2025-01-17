@@ -273,3 +273,17 @@ extension SpotSearchView {
     }
     
 }
+
+
+// MARK: - Make RecommendedSpotButton
+
+extension SpotSearchView {
+    
+    func bindData(_ data: SearchSuggestionModel) {
+        for i in 0...4 {
+            let button = makeRecommendedSpotButton(data.spotList[i])
+            searchSuggestionStackView.addArrangedSubview(button)
+        }
+    }
+    
+}

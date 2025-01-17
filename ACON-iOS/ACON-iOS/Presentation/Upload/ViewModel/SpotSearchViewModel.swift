@@ -9,6 +9,11 @@ import Foundation
 
 class SpotSearchViewModel {
     
+    // TODO: - 추후 기본값 nil로 변경
+    let onSuccessGetSearchSuggestion: ObservablePattern<Bool> = ObservablePattern(nil)
+    
+    var searchSuggestionData: ObservablePattern<SearchSuggestionModel> = ObservablePattern(nil)
+    
     // TODO: - search keyword 엠티뷰와 분기처리 (data.count == 0 ? )
     
     let searchKeywordDummyData: [SearchKeywordModel] = [
@@ -25,5 +30,10 @@ class SpotSearchViewModel {
     ]
     
     let searchSuggestionDummyData: SearchSuggestionModel = SearchSuggestionModel(spotList: ["하이디라오", "신의주찹쌀순대", "뭐시기저시기", "카이센동우니도", "하잉"])
+    
+    init() {
+        self.searchSuggestionData.value = searchSuggestionDummyData
+        self.onSuccessGetSearchSuggestion.value = true
+    }
     
 }

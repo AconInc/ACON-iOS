@@ -37,10 +37,15 @@ class SpotSearchViewController: BaseViewController {
         addTarget()
         registerCell()
         setDelegate()
+        bindViewModel()
     }
     
     var dismissCompletion: (() -> Void)?
-        
+
+    override func viewWillAppear(_ animated: Bool) {
+        // TODO: - getSearchSuggestion 서버통신
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -68,7 +73,6 @@ class SpotSearchViewController: BaseViewController {
         
         self.view.backgroundColor = .glaW10
         self.view.backgroundColor?.withAlphaComponent(0.95)
-        setRecommendedSpotStackView(data: spotSearchViewModel.searchSuggestionDummyData)
     }
     
     func addTarget() {
@@ -120,17 +124,19 @@ private extension SpotSearchViewController {
 }
 
 
-// MARK: - Set UI
+// MARK: - Bind ViewModel
 
 private extension SpotSearchViewController {
-    
-    func setRecommendedSpotStackView(data: SearchSuggestionModel) {
-        for i in 0...4 {
-            let button = spotSearchView.makeRecommendedSpotButton(data.spotList[i])
-            spotSearchView.searchSuggestionStackView.addArrangedSubview(button)
+
+    func bindViewModel() {
+        self.spotSearchViewModel.onSuccessGetSearchSuggestion.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.spotSearchViewModel.searchSuggestionData.value else { return }
+            if onSuccess {
+                self?.spotSearchView.bindData(data)
+            }
         }
     }
-    
+
 }
 
 
