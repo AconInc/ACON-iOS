@@ -53,9 +53,22 @@ class SpotListFilterView: BaseView {
     let visitPurposeTagStackView = SpotFilterTagStackView()
     
     
+    // [Walking time]: 도보 가능 거리 (restaurant, cafe)
+    
+    let walkingSlider = CustomSlider(
+        indicators: StringLiterals.SpotListFilter.walkingTimes,
+        startIndex: 2)
     
     
-    // TODO: 방문 목적, 도보 가능 거리, 가격대
+    // [Price range]: 가격대 (restaurant, cafe)
+    
+    let restaurantPriceSlider = CustomSlider(
+        indicators: StringLiterals.SpotListFilter.restaurantPrices,
+        startIndex: 1)
+    
+    let cafePriceSlider = CustomSlider(
+        indicators: StringLiterals.SpotListFilter.cafePrices,
+        startIndex: 1)
     
     
     // MARK: - Lifecycle
@@ -68,6 +81,9 @@ class SpotListFilterView: BaseView {
         stackView.addArrangedSubviews(spotSectionStackView,
                                       companionSectionStackView,
                                       visitPurposeSectionStackView,
+                                      walkingSlider,
+                                      restaurantPriceSlider,
+                                      cafePriceSlider,
                                       emptyView)
         
         // [Spot section]
@@ -223,6 +239,18 @@ extension SpotListFilterView {
     
     func hideVisitPurposeSection(isHidden: Bool) {
         visitPurposeSectionStackView.isHidden = isHidden
+    }
+    
+    func switchPriceSlider(spotType: SpotType) {
+        switch spotType {
+        case .restaurant:
+            restaurantPriceSlider.isHidden = false
+            cafePriceSlider.isHidden = true
+            
+        case .cafe:
+            restaurantPriceSlider.isHidden = true
+            cafePriceSlider.isHidden = false
+        }
     }
     
 }
