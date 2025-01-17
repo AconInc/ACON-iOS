@@ -100,7 +100,6 @@ private extension SpotListFilterViewController {
 }
 
 
-
 // MARK: - @objc functions
 
 private extension SpotListFilterViewController {

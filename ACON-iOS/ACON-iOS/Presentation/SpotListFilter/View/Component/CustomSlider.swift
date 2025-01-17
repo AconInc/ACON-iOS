@@ -88,7 +88,7 @@ final class CustomSlider: BaseView {
         fillTrackView.snp.makeConstraints {
             $0.left.equalTo(trackView)
             $0.top.bottom.equalTo(trackView)
-            $0.width.equalTo(0)
+            $0.width.equalTo(0) // TODO: 레이아웃 노란경고 해결
         }
         
         thumbView.snp.makeConstraints {
