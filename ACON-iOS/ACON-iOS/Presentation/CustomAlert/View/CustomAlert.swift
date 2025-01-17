@@ -4,9 +4,7 @@
 //
 //  Created by Jaehyun Ahn on 1/16/25.
 
-
 import UIKit
-import SwiftUI
 
 import SnapKit
 import Then
@@ -95,8 +93,10 @@ final class CustomAlertView: BaseViewController {
         super.setHierarchy()
         
         view.addSubview(alertContainer)
-        
-        alertContainer.addSubviews(messageLabel,titleLabel,closeButton, settingsButton)
+        alertContainer.addSubviews(messageLabel,
+                                   titleLabel,
+                                   closeButton,
+                                   settingsButton)
     }
     
     override func setLayout() {
@@ -106,7 +106,6 @@ final class CustomAlertView: BaseViewController {
             $0.center.equalToSuperview()
             $0.width.equalTo(ScreenUtils.width * 279 / 360)
             $0.height.greaterThanOrEqualTo(ScreenUtils.width * 279 / 360 * 0.5)
-            
         }
         
         titleLabel.snp.makeConstraints {
@@ -140,10 +139,12 @@ final class CustomAlertView: BaseViewController {
     
 }
     
+
 extension CustomAlertView {
     
     func configure(with alertType: AlertType) {
-        print("AlertType: \(alertType)") // 디버깅용 출력
+        // NOTE: iwill delete this print
+        print("AlertType: \(alertType)")
         print("Title: \(alertType.title)")
         print("Content: \(alertType.content)")
         
@@ -152,14 +153,9 @@ extension CustomAlertView {
         leftButtonText = alertType.buttons[0]
         rightButtonText = alertType.buttons[1]
         
-        
         self.view.layoutIfNeeded()
-
     }
 
-
-    
-    // MARK: - Actions
     @objc private func closeTapped() {
         dismiss(animated: true) {
             self.onClose?()
@@ -170,11 +166,11 @@ extension CustomAlertView {
         dismiss(animated: true) {
             self.onSettings?()
         }
-        
     }
     
 }
 
+// NOTE: will delete
 #if DEBUG
 import SwiftUI
 
@@ -203,9 +199,3 @@ struct CustomAlertView_Previews: PreviewProvider {
     }
 }
 #endif
-
-
-//
-//
-//let customAlertView = CustomAlertView()
-//customAlertView.configure(with: .stoppedPreferenceAnalysis)

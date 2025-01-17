@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 import SnapKit
 import Then
@@ -18,7 +17,6 @@ final class CustomAlertImageView: BaseViewController {
     private let titleLabel = UILabel()
     private let closeButton = UIButton()
     private let imageView = UIImageView()
-    
     var onClose: (() -> Void)?
     var onSettings: (() -> Void)?
     
@@ -81,7 +79,10 @@ final class CustomAlertImageView: BaseViewController {
         super.setHierarchy()
         
         view.addSubview(alertContainer)
-        alertContainer.addSubviews(messageLabel,titleLabel,closeButton, imageView)
+        alertContainer.addSubviews(messageLabel,
+                                   titleLabel,
+                                   closeButton,
+                                   imageView)
     }
     
     override func setLayout() {
@@ -132,30 +133,3 @@ extension CustomAlertImageView {
     }
     
 }
-
-
-#if DEBUG
-import SwiftUI
-
-struct CustomAlertImageViewPreview: UIViewControllerRepresentable {
-    
-    func makeUIViewController(context: Context) -> CustomAlertImageView {
-        let alertImageView = CustomAlertImageView()
-        alertImageView.onClose = {
-            print("Close button tapped")
-        }
-        return alertImageView
-    }
-    
-    func updateUIViewController(_ uiViewController: CustomAlertImageView, context: Context) {
-        // 필요 시 업데이트 로직 추가
-    }
-}
-
-struct CustomAlertImageView_Previews: PreviewProvider {
-    static var previews: some View {
-        CustomAlertImageViewPreview()
-            .edgesIgnoringSafeArea(.all) // 화면 전체를 덮도록 설정
-    }
-}
-#endif

@@ -63,7 +63,9 @@ class AlertHandler {
         let customAlertView = CustomAlertView()
         customAlertView.configure(with: .uploadExit)
         customAlertView.onClose = {
-            print("업로드 중단: 그만두기")
+            let mainViewController = ACTabBarController()
+            mainViewController.modalPresentationStyle = .fullScreen
+            viewController.present(mainViewController, animated: true)
         }
         customAlertView.onSettings = {
             print("업로드 중단: 계속하기")
@@ -76,7 +78,9 @@ class AlertHandler {
         let customAlertView = CustomAlertView()
         customAlertView.configure(with: .reviewExit)
         customAlertView.onClose = {
-            print("리뷰 중단: 그만두기")
+            let mainViewController = ACTabBarController()
+            mainViewController.modalPresentationStyle = .fullScreen
+            viewController.present(mainViewController, animated: true)
         }
         customAlertView.onSettings = {
             print("리뷰 중단: 계속하기")
@@ -90,4 +94,5 @@ class AlertHandler {
         alert.modalTransitionStyle = .crossDissolve
         viewController.present(alert, animated: true, completion: nil)
     }
+    
 }
