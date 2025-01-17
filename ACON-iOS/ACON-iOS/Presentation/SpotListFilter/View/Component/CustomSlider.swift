@@ -20,7 +20,7 @@ final class CustomSlider: BaseView {
         return .init(width: .zero, height: thumbSize)
     }
     
-    var value: Int = 1 {
+    lazy var value: Int = startIndex {
         didSet {
             delegate?.sliderView(self, changedValue: value)
         }
@@ -71,12 +71,11 @@ final class CustomSlider: BaseView {
     }
     
     override func setHierarchy() {
-        addSubviews(
+        self.addSubviews(
             trackView,
             fillTrackView,
             thumbView
         )
-        
     }
     
     override func setLayout() {
