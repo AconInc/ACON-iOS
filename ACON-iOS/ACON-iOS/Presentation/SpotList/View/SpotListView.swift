@@ -20,9 +20,9 @@ class SpotListView: BaseView {
     
     private let floatingButtonStack = UIStackView()
     
-    private lazy var floatingFilterButton = makeFloatingButton(image: .icFilterW24)
+    lazy var floatingFilterButton = makeFloatingButton(image: .icFilterW24)
     
-    private lazy var floatingLocationButton = makeFloatingButton(image: .icMyLocationW24)
+    lazy var floatingLocationButton = makeFloatingButton(image: .icMyLocationW24)
     
     
     // MARK: - UI Property Sizes
