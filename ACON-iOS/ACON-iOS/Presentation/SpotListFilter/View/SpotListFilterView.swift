@@ -267,7 +267,6 @@ extension SpotListFilterView {
             
             firstLineSpotTagStackView.switchTagButtons(titles: firstLine)
             secondLineSpotTagStackView.switchTagButtons(titles: secondLine)
-            
         case .cafe:
             let tagTexts: [String] = SpotType.CafeFeatureType.allCases.map { return $0.text }
             let firstLine: [String] = Array(tagTexts[0..<4])
