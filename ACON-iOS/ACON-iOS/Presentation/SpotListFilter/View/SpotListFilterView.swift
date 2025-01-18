@@ -55,12 +55,20 @@ class SpotListFilterView: BaseView {
     
     // [Walking time]: 도보 가능 거리 (restaurant, cafe)
     
+    private let walkingSectionStackView = UIStackView()
+    
+    private let walkingSectionTitleLabel = UILabel()
+    
     let walkingSlider = CustomSlider(
         indicators: StringLiterals.SpotListFilter.walkingTimes,
         startIndex: 2)
     
     
     // [Price range]: 가격대 (restaurant, cafe)
+    
+    private let priceSectionStackView = UIStackView()
+    
+    private let priceSectionTitleLabel = UILabel()
     
     let restaurantPriceSlider = CustomSlider(
         indicators: StringLiterals.SpotListFilter.restaurantPrices,
@@ -81,9 +89,8 @@ class SpotListFilterView: BaseView {
         stackView.addArrangedSubviews(spotSectionStackView,
                                       companionSectionStackView,
                                       visitPurposeSectionStackView,
-                                      walkingSlider,
-                                      restaurantPriceSlider,
-                                      cafePriceSlider,
+                                      walkingSectionStackView,
+                                      priceSectionStackView,
                                       emptyView)
         
         // [Spot section]
@@ -106,6 +113,18 @@ class SpotListFilterView: BaseView {
         
         visitPurposeSectionStackView.addArrangedSubviews(visitPurposeSectionTitleLabel,
                                                          visitPurposeTagStackView)
+        
+        // [Walking time]
+        
+        walkingSectionStackView.addArrangedSubviews(walkingSectionTitleLabel,
+                                                    walkingSlider)
+        
+        
+        // [Price range]
+        
+        priceSectionStackView.addArrangedSubviews(priceSectionTitleLabel,
+                                                  restaurantPriceSlider,
+                                                  cafePriceSlider)
     }
     
     override func setLayout() {
@@ -130,16 +149,15 @@ class SpotListFilterView: BaseView {
             $0.spacing = 32
         }
         
-        
-        // [Spot section]
-        
         setSpotSectionUI()
         
         setCompanionSectionUI()
         
         setVisitPurposeSectionUI()
         
-        // TODO: 추후 추가 예정
+        setWalkingSectionUI()
+        
+        setPriceSectionUI()
     }
     
 }
@@ -203,6 +221,33 @@ private extension SpotListFilterView {
         visitPurposeTagStackView.addTagButtons(titles: tags)
     }
     
+    
+    // MARK: - (Walking section)
+    
+    func setWalkingSectionUI() {
+        walkingSectionStackView.do {
+            $0.axis = .vertical
+            $0.spacing = 12
+        }
+        
+        walkingSectionTitleLabel.setLabel(
+            text: StringLiterals.SpotListFilter.walkingSection,
+            style: .s2)
+    }
+    
+    
+    // MARK: - (Price section)
+    
+    func setPriceSectionUI() {
+        priceSectionStackView.do {
+            $0.axis = .vertical
+            $0.spacing = 12
+        }
+        
+        priceSectionTitleLabel.setLabel(
+            text: StringLiterals.SpotListFilter.priceSection,
+            style: .s2)
+    }
 }
 
 
