@@ -80,11 +80,6 @@ extension BaseView {
         glassCard.addSubview(blurView)
         blurView.contentView.addSubview(vibrancyView)
         
-        glassCard.layer.cornerRadius = 20
-        glassCard.layer.masksToBounds = true
-        glassCard.layer.borderWidth = 0.5
-        glassCard.layer.borderColor = UIColor.white.withAlphaComponent(0.3).cgColor
-        
         self.addSubview(glassCard)
     }
     
