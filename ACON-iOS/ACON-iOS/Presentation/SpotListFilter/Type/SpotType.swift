@@ -21,6 +21,18 @@ enum SpotType {
     }
     
     
+    var walkingTimeDefault: Int {
+        return 50
+    }
+    
+    var priceDefault: Int {
+        switch self {
+        case .restaurant: return 25
+        case .cafe: return 50
+        }
+    }
+    
+    
     // MARK: - 장소 상세 조건
     
     enum RestaurantFeatureType: CaseIterable {

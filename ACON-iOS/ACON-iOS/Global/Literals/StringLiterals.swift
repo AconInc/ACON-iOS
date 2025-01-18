@@ -148,6 +148,15 @@ enum StringLiterals {
         
         static let visitPurposeSection = "방문 목적"
         
+        static let walkingSection = "도보 가능 거리"
+        
+        static let priceSection = "가격대"
+        
+        static let walkingTimes = ["5분 이내", "10분", "15분", "20분", "20분 이상"]
+        
+        static let restaurantPrices = ["5천원 이하", "1만원", "3만원", "5만원", "5만원 이상"]
+        
+        static let cafePrices = ["3천원 이하", "5천원", "1만원 이상"]
     }
     
     enum Analyzing {
