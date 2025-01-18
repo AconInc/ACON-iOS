@@ -7,12 +7,13 @@
 
 import UIKit
 
-class SpotListFilterViewController: BaseNavViewController {
+class SpotListFilterViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let spotListFilterView = SpotListFilterView()
-    let viewModel = SpotListFilterViewModel()
+    private let spotListFilterView = SpotListFilterView()
+    
+    private let viewModel = SpotListFilterViewModel()
     
     
     // MARK: - LifeCycles
@@ -27,7 +28,7 @@ class SpotListFilterViewController: BaseNavViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        contentView.addSubview(spotListFilterView)
+        view.addSubview(spotListFilterView)
     }
     
     override func setLayout() {
@@ -97,6 +98,7 @@ private extension SpotListFilterViewController {
             $0.switchPriceSlider(spotType: spotType)
         }
     }
+    
 }
 
 
