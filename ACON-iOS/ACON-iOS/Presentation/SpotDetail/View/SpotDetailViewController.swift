@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-class SpotDetailViewController: BaseNavViewController {
+class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate {
     
     // MARK: - UI Properties
     
