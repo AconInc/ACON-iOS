@@ -18,14 +18,31 @@ class SpotListView: BaseView {
     
     private let footerLabel = UILabel()
     
+    private let floatingButtonStack = UIStackView()
+    
+    private lazy var floatingFilterButton = makeFloatingButton(image: .icFilterW24)
+    
+    private lazy var floatingLocationButton = makeFloatingButton(image: .icMyLocationW24)
+    
+    
+    // MARK: - UI Property Sizes
+    
+    private let floatingButtonSize: CGFloat = 36
+    
     
     // MARK: - LifeCycles
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(footerLabel,
-                         collectionView)
+        self.addSubviews(
+            footerLabel,
+            collectionView,
+            floatingButtonStack)
+        
+        floatingButtonStack.addArrangedSubviews(
+            floatingFilterButton,
+            floatingLocationButton)
     }
     
     override func setLayout() {
@@ -40,6 +57,11 @@ class SpotListView: BaseView {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(18)
             $0.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide)
         }
+        
+        floatingButtonStack.snp.makeConstraints {
+            $0.trailing.equalTo(self.safeAreaLayoutGuide).offset(-20)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-16)
+        }
     }
     
     override func setStyle() {
@@ -47,6 +69,7 @@ class SpotListView: BaseView {
         
         setFooterLabel()
         setCollectionView()
+        setFloatingButtons()
     }
     
 }
@@ -78,6 +101,25 @@ private extension SpotListView {
         }
     }
     
+    func setFloatingButtons() {
+        floatingButtonStack.do {
+            $0.axis = .vertical
+            $0.spacing = 8
+        }
+    }
+    
+    func makeFloatingButton(image: UIImage?) -> UIButton {
+        let button = UIButton()
+        var config = UIButton.Configuration.filled()
+        config.image = image
+        config.baseBackgroundColor = .glaB30 // TODO: blur로 바꾸기
+        config.background.cornerRadius = floatingButtonSize / 2
+        button.configuration = config
+        button.snp.makeConstraints {
+            $0.size.equalTo(floatingButtonSize)
+        }
+        return button
+    }
 }
 
 
