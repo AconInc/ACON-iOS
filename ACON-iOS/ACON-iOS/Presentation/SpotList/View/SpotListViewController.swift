@@ -17,6 +17,14 @@ class SpotListViewController: BaseNavViewController {
     
     // MARK: - LifeCycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        bindViewModel()
+        setCollectionView()
+        addTarget()
+    }
+    
     override func setHierarchy() {
         super.setHierarchy()
         
@@ -37,13 +45,13 @@ class SpotListViewController: BaseNavViewController {
         self.setTitleLabelStyle(title: "동네 인증")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        bindViewModel()
-        setCollectionView()
+    private func addTarget() {
+        spotListView.floatingFilterButton.addTarget(
+            self,
+            action: #selector(tappedFilterButton),
+            for: .touchUpInside
+        )
     }
-    
 }
 
 
@@ -95,6 +103,14 @@ private extension SpotListViewController {
         }
     }
     
+    
+    @objc
+    func tappedFilterButton() {
+        let vc = SpotListFilterViewController()
+        vc.setLongSheetLayout()
+        
+        present(vc, animated: true)
+    }
 }
 
 
