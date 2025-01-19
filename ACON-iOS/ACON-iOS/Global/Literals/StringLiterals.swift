@@ -187,6 +187,10 @@ enum StringLiterals {
         
         static let cantFindWebPage = "웹페이지를 찾을 수 없습니다."
         
+        static let privacyPolicyLink = "https://bit.ly/acon개인정보처리방침"
+        
+        static let termsOfUseLink = "https://bit.ly/acon서비스이용약관"
+        
     }
     
 }
