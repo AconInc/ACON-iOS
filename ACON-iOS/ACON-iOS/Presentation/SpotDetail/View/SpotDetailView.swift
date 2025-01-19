@@ -47,6 +47,8 @@ final class SpotDetailView: BaseView {
     
     var findCourseButton: UIButton = UIButton()
     
+    var GotoTopButton: UIButton = UIButton()
+    
     static var menuCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().then {
         $0.minimumLineSpacing = 0
         $0.itemSize = CGSize(width: ScreenUtils.width*320/360, height: ScreenUtils.height*110/780)
@@ -57,7 +59,10 @@ final class SpotDetailView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(scrollView, stickyView, footerView)
+        self.addSubviews(scrollView,
+                         stickyView,
+                         footerView,
+                         GotoTopButton)
         scrollView.addSubviews(scrollContentView)
         scrollContentView.addSubviews(spotDetailImageView,
                                       openStatusButton,
@@ -74,6 +79,12 @@ final class SpotDetailView: BaseView {
     
     override func setLayout() {
         super.setLayout()
+        
+        GotoTopButton.snp.makeConstraints{
+            $0.trailing.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.bottom.equalTo(footerView.snp.top).offset(-ScreenUtils.heightRatio * 16)
+            $0.size.equalTo(ScreenUtils.width * 44 / 360)
+        }
         
         stickyView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -169,6 +180,15 @@ final class SpotDetailView: BaseView {
     
     override func setStyle() {
         super.setStyle()
+        
+        GotoTopButton.do {
+            $0.backgroundColor = .gray7
+            $0.layer.borderWidth = 1
+            $0.layer.borderColor = UIColor.gray6.cgColor
+            $0.layer.cornerRadius = ScreenUtils.width * 44 / 360 / 2
+            $0.clipsToBounds = true
+            $0.setImage(UIImage(named:"upVector"), for: .normal)
+        }
         
         stickyView.do {
             $0.isHidden = true
