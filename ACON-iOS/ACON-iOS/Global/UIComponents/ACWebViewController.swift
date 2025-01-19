@@ -41,7 +41,10 @@ final class DRWebViewController: UIViewController {
             let request = URLRequest(url: url)
             webView?.load(request)
         } else {
-            self.showDefaultAlert(title: StringLiterals.WebView.error, message: StringLiterals.WebView.cantFindWebPage)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                self?.showDefaultAlert(title: StringLiterals.WebView.error,
+                                     message: StringLiterals.WebView.cantFindWebPage)
+            }
             print("Invalid URL string.")
         }
     }
@@ -51,12 +54,18 @@ final class DRWebViewController: UIViewController {
 extension DRWebViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        self.showDefaultAlert(title: StringLiterals.WebView.error, message: StringLiterals.WebView.cantFindWebPage)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.showDefaultAlert(title: StringLiterals.WebView.error,
+                                 message: StringLiterals.WebView.cantFindWebPage)
+        }
         print("Failed to load URL: \(error.localizedDescription)")
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        self.showDefaultAlert(title: StringLiterals.WebView.error, message: StringLiterals.WebView.cantFindWebPage)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.showDefaultAlert(title: StringLiterals.WebView.error,
+                                 message: StringLiterals.WebView.cantFindWebPage)
+        }
         print("Navigation error: \(error.localizedDescription)")
     }
     
