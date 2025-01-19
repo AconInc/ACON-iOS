@@ -25,9 +25,9 @@ extension ACLocationManagerDelegate {
     }
     
     func locationManagerDidChangeAuthorization(_ manager: ACLocationManager) {
-        if manager.locationManager.authorizationStatus == .authorizedWhenInUse || manager.locationManager.authorizationStatus == .authorizedAlways {
-            manager.locationManager.requestLocation()
-        }
+//        if manager.locationManager.authorizationStatus == .authorizedWhenInUse || manager.locationManager.authorizationStatus == .authorizedAlways {
+//            manager.checkUserCurrentLocationAuthorization(manager.locationManager.authorizationStatus)
+//        }
     }
     
 }
@@ -38,6 +38,7 @@ class ACLocationManager: NSObject {
     
     let locationManager = CLLocationManager()
     private let multicastDelegate = MulticastDelegate<ACLocationManagerDelegate>()
+    private var isRequestingLocation: Bool = false
     
     private override init() {
         super.init()
@@ -98,7 +99,9 @@ class ACLocationManager: NSObject {
             let window = windowScene?.windows.first
             window?.rootViewController?.showDefaultAlert(title: StringLiterals.Alert.gpsDeniedTitle, message: StringLiterals.Alert.gpsDeniedMessage)
         case .authorizedWhenInUse, .authorizedAlways:
-            locationManager.requestLocation()
+            guard !isRequestingLocation else { return }
+            isRequestingLocation = true
+            locationManager.startUpdatingLocation()
         default:
             print("zz 여기로안빠질듯")
         }
@@ -109,10 +112,14 @@ class ACLocationManager: NSObject {
 extension ACLocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let coordinate = locations.last?.coordinate {
-            multicastDelegate.invoke { delegate in
-                delegate.locationManager(self, didUpdateLocation: coordinate)
-            }
+        guard isRequestingLocation, let coordinate = locations.last?.coordinate else {
+            return
+        }
+        isRequestingLocation = false
+        stopUpdatingLocation()
+        
+        multicastDelegate.invoke { delegate in
+            delegate.locationManager(self, didUpdateLocation: coordinate)
         }
     }
     
