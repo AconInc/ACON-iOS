@@ -18,6 +18,8 @@ final class LoginView: BaseView {
     
     private let logoImage : UIImageView = UIImageView()
     
+    private var logoLabel : UILabel = UILabel()
+    
     var googleLoginButton: UIButton = UIButton()
     
     var appleLoginButton: UIButton = UIButton()
@@ -50,11 +52,23 @@ final class LoginView: BaseView {
                          appleLoginButton,
                          proceedLoginLabel,
                          termsOfUseLabel,
-                         privacyPolicyLabel)
+                         privacyPolicyLabel,
+                         logoLabel)
     }
     
     override func setLayout() {
         super.setLayout()
+        
+        logoImage.snp.makeConstraints {
+            $0.centerY.equalToSuperview().offset(-20)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.widthRatio*224)
+        }
+        
+        logoLabel.snp.makeConstraints {
+            $0.bottom.equalTo(logoImage.snp.top).offset(-10)
+            $0.centerX.equalToSuperview()
+        }
         
         googleLoginButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(ScreenUtils.height*172/780)
@@ -90,6 +104,19 @@ final class LoginView: BaseView {
     override func setStyle() {
         super.setStyle()
         
+        logoImage.do {
+            $0.image = .acon
+            $0.contentMode = .scaleAspectFit
+        }
+        
+        logoLabel.do {
+            $0.setLabel(text: StringLiterals.Login.logoText,
+                        style: .s2,
+                        color: .acWhite,
+                        alignment: .center,
+                        numberOfLines: 2)
+        }
+        
         googleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
             $0.backgroundColor = .gray1
@@ -108,7 +135,7 @@ final class LoginView: BaseView {
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
                                   style: .s2,
                                   color: .acWhite)
-            
+    
         }
         
         proceedLoginLabel.do {
