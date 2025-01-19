@@ -34,8 +34,8 @@ final class FavoriteSpotRankCollectionView: UICollectionView {
     
     private func setStyle() {
         backgroundColor = .clear
-        showsVerticalScrollIndicator = false
-        isScrollEnabled = false
+        showsVerticalScrollIndicator = true
+        isScrollEnabled = true
     }
     
     private func setDelegate() {
@@ -66,7 +66,7 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return 5
+        return ScreenUtils.height * 6 / 780
     }
     
     func collectionView(
@@ -74,7 +74,7 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return ScreenUtils.width * 3 / 360
+        return ScreenUtils.width * 8 / 360
     }
     
     func collectionView(

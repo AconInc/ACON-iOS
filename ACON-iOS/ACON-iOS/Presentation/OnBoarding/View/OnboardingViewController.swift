@@ -235,6 +235,17 @@ extension OnboardingViewController {
     
     private func setFavoriteSpotRankCollectionView() {
         contentView = favoriteSpotRankCollectionView
+        
+        contentView?.addSubview(nextButton)
+        
+        
+        nextButton.snp.makeConstraints {
+               $0.top.equalTo(favoriteSpotRankCollectionView.snp.bottom).offset(20)
+               $0.leading.trailing.equalToSuperview().inset(20)
+               $0.bottom.equalToSuperview().offset(-40)
+               $0.height.equalTo(44)
+           }
+        
         favoriteSpotRankCollectionView.onSelectionChanged = { [weak self] selectedIndices in
             self?.viewModel.favoriteSpotRank.value = selectedIndices
         }
