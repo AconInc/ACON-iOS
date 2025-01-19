@@ -26,7 +26,7 @@ class SpotReviewViewModel {
     init() {
         self.acornNum.value = acornNumDummyData
         self.onSuccessGetAcornNum.value = true
-        self.onSuccessPostReview.value = true
+        self.onSuccessPostReview.value = false
         self.onSuccessGetReviewVerification.value = true
         self.reviewVerification.value = reviewVerificationDummyData
     }
