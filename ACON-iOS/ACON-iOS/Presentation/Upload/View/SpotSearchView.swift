@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class SpotSearchView: BaseView {
+final class SpotSearchView: GlassmorphismView {
 
     // MARK: - UI Properties
     
@@ -53,7 +53,6 @@ final class SpotSearchView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addGlassCard()
         self.addSubviews(spotUploadLabel,
                          searchView,
                          doneButton,
