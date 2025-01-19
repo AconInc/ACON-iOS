@@ -20,9 +20,9 @@ class SpotListView: BaseView {
     
     private let floatingButtonStack = UIStackView()
     
-    lazy var floatingFilterButton = makeFloatingButton(image: .icFilterW24)
+    lazy var floatingFilterButton = FloatingButton(image: .icFilterW24)
     
-    lazy var floatingLocationButton = makeFloatingButton(image: .icMyLocationW24)
+    lazy var floatingLocationButton = FloatingButton(image: .icMyLocationW24)
     
     
     // MARK: - UI Property Sizes
@@ -69,7 +69,7 @@ class SpotListView: BaseView {
         
         setFooterLabel()
         setCollectionView()
-        setFloatingButtons()
+        setFloatingButtonStack()
     }
     
 }
@@ -101,25 +101,13 @@ private extension SpotListView {
         }
     }
     
-    func setFloatingButtons() {
+    func setFloatingButtonStack() {
         floatingButtonStack.do {
             $0.axis = .vertical
             $0.spacing = 8
         }
     }
     
-    func makeFloatingButton(image: UIImage?) -> UIButton {
-        let button = UIButton()
-        var config = UIButton.Configuration.filled()
-        config.image = image
-        config.baseBackgroundColor = .glaB30 // TODO: blur로 바꾸기
-        config.background.cornerRadius = floatingButtonSize / 2
-        button.configuration = config
-        button.snp.makeConstraints {
-            $0.size.equalTo(floatingButtonSize)
-        }
-        return button
-    }
 }
 
 
@@ -129,7 +117,6 @@ extension SpotListView {
     
     func hideFooterLabel(isHidden: Bool) {
         footerLabel.isHidden = isHidden
-        print("hideFooterLabel called.")
     }
     
 }

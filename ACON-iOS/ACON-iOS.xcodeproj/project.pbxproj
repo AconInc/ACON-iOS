@@ -30,6 +30,7 @@
 		15A3F7A12D38C71900577E16 /* PriorityLowEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */; };
 		15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */; };
 		15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256A2D3D61F500320006 /* GlassmorphismView.swift */; };
+		15CD256E2D3D795800320006 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256D2D3D795800320006 /* FloatingButton.swift */; };
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
 		74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */; };
 		74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */; };
@@ -155,6 +156,7 @@
 		15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityLowEmptyView.swift; sourceTree = "<group>"; };
 		15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotFilterTagStackView.swift; sourceTree = "<group>"; };
 		15CD256A2D3D61F500320006 /* GlassmorphismView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismView.swift; sourceTree = "<group>"; };
+		15CD256D2D3D795800320006 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultitaskDelegate.swift; sourceTree = "<group>"; };
 		74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLocationManager.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 		1547A6EC2D337FD000E96616 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				15CD256C2D3D794300320006 /* Component */,
 				1547A6ED2D33850600E96616 /* Cell */,
 				1547A6EA2D337F4100E96616 /* SpotListView.swift */,
 				1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */,
@@ -410,6 +413,14 @@
 				D6E452922D3AA47500CBED02 /* View */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		15CD256C2D3D794300320006 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				15CD256D2D3D795800320006 /* FloatingButton.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		35A4AFEF7860C30E103669B3 /* Frameworks */ = {
@@ -1101,6 +1112,7 @@
 				D6978F542D37B29100523A25 /* OnboardingMapping.swift in Sources */,
 				D6D0F51F2D36BAFE00326F17 /* OnboardingViewController.swift in Sources */,
 				744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */,
+				15CD256E2D3D795800320006 /* FloatingButton.swift in Sources */,
 				D696F1B62D3A83D600CCD5FF /* CustomAlertImageView.swift in Sources */,
 				741A06CA2D35415800778219 /* DropAcornViewController.swift in Sources */,
 				15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */,

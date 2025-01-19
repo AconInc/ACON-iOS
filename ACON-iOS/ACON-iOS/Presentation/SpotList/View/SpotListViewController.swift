@@ -46,12 +46,13 @@ class SpotListViewController: BaseNavViewController {
     }
     
     private func addTarget() {
-        spotListView.floatingFilterButton.addTarget(
+        spotListView.floatingFilterButton.button.addTarget(
             self,
             action: #selector(tappedFilterButton),
             for: .touchUpInside
         )
     }
+    
 }
 
 
