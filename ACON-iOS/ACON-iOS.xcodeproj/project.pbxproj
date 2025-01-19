@@ -59,7 +59,6 @@
 		748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F7D2D2BCD6E007690B4 /* StringLiterals.swift */; };
 		748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F7F2D2BCD8F007690B4 /* ObservablePattern.swift */; };
 		748D6F822D2BCDB3007690B4 /* ScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F812D2BCDB0007690B4 /* ScreenUtils.swift */; };
-		748D6F852D2BD230007690B4 /* DummyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F842D2BD222007690B4 /* DummyService.swift */; };
 		748D6F872D2BD247007690B4 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F862D2BD244007690B4 /* UIView+.swift */; };
 		748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F882D2BD28E007690B4 /* UIViewController+.swift */; };
 		748D6F8B2D2BD31B007690B4 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F8A2D2BD316007690B4 /* UIStackView+.swift */; };
@@ -178,7 +177,6 @@
 		748D6F7D2D2BCD6E007690B4 /* StringLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLiterals.swift; sourceTree = "<group>"; };
 		748D6F7F2D2BCD8F007690B4 /* ObservablePattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservablePattern.swift; sourceTree = "<group>"; };
 		748D6F812D2BCDB0007690B4 /* ScreenUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenUtils.swift; sourceTree = "<group>"; };
-		748D6F842D2BD222007690B4 /* DummyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyService.swift; sourceTree = "<group>"; };
 		748D6F862D2BD244007690B4 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		748D6F882D2BD28E007690B4 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		748D6F8A2D2BD316007690B4 /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
@@ -539,7 +537,6 @@
 			isa = PBXGroup;
 			children = (
 				743069872D3D2EDA0033178C /* Base */,
-				748D6F842D2BD222007690B4 /* DummyService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1037,7 +1034,6 @@
 				745C7E0D2D35A04A0074DBDB /* RelatedSearchCollectionViewCell.swift in Sources */,
 				749A01032D3A6E0100CD7A90 /* ACDebouncer.swift in Sources */,
 				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
-				748D6F852D2BD230007690B4 /* DummyService.swift in Sources */,
 				74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */,
 				741A06C82D3532E500778219 /* DropAcornView.swift in Sources */,
 				748D6FA82D2C3F93007690B4 /* BaseViewController.swift in Sources */,
