@@ -14,6 +14,8 @@ final class OnboardingViewController: BaseViewController {
     
     let viewModel = OnboardingViewModel()
     
+    private let alertHandler = AlertHandler()
+    
     private let backButton: UIButton = UIButton()
     private let skipButton: UIButton = UIButton()
     private let progressView: UIView = UIView()
@@ -49,9 +51,9 @@ final class OnboardingViewController: BaseViewController {
         skipButton.do {
             $0.addTarget(self, action: #selector(nextStack), for: .touchUpInside)
             $0.setAttributedTitle(text: "건너뛰기",
-            style: ACFont.b2,
-            color: .acWhite,
-            for: .normal)
+                                  style: ACFont.b2,
+                                  color: .acWhite,
+                                  for: .normal)
         }
         
         progressView.do {
@@ -80,15 +82,15 @@ final class OnboardingViewController: BaseViewController {
             $0.isEnabled = false
             $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
             $0.setAttributedTitle(text: "다음",
-            style: ACFont.h8,
-            color: .gray6,
-            for: .normal)
+                                  style: ACFont.h8,
+                                  color: .gray6,
+                                  for: .normal)
         }
     }
     
     override func setHierarchy() {
         super.setHierarchy()
-
+        
         view.addSubviews(backButton, skipButton, progressView, progressNumber, progressTitle)
         progressView.addSubview(progressIndicator)
     }
@@ -131,7 +133,7 @@ final class OnboardingViewController: BaseViewController {
         
     }
 }
-    
+
 
 extension OnboardingViewController {
     
@@ -162,7 +164,7 @@ extension OnboardingViewController {
         contentView = getCollectionView(for: step)
         
         guard let contentView = contentView else { return }
-        // MARK: se Device response 
+        // MARK: se Device response
         if step == 4, ScreenUtils.height < 800 {
             configureSmallDeviceLayout(for: contentView as! UICollectionView)
         } else {
@@ -171,7 +173,7 @@ extension OnboardingViewController {
         
         updateProgressText(for: step)
     }
-
+    
     private func getCollectionView(for step: Int) -> UIView? {
         switch step {
         case 0:
@@ -193,7 +195,7 @@ extension OnboardingViewController {
             return nil
         }
     }
-
+    
     private func configureDefaultLayout(for contentView: UIView) {
         view.addSubviews(contentView, nextButton)
         
@@ -209,18 +211,18 @@ extension OnboardingViewController {
             $0.bottom.equalTo(nextButton.snp.top)
         }
     }
-
+    
     private func configureSmallDeviceLayout(for contentView: UICollectionView) {
         nextButton.removeFromSuperview()
         print("Small device detected")
         setScrollViewForSmallDevices(contentView: contentView)
     }
-
+    
     private func updateProgressText(for step: Int) {
         progressNumber.text = OnboardingType.progressNumberList[step]
         progressTitle.text = OnboardingType.progressTitleList[step]
     }
-
+    
     
     private func setDislikeCollectionView() {
         contentView = dislikeCollectionView
@@ -295,7 +297,7 @@ extension OnboardingViewController {
             
         }) { [weak self] _ in
             self?.contentView?.alpha = 1.0
-
+            
         }
     }
     
@@ -313,25 +315,25 @@ extension OnboardingViewController {
     }
     
     private func setScrollViewForSmallDevices(contentView: UICollectionView) {
-
+        
         let scrollView = UIScrollView()
         let containerView = UIView()
-
+        
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
         containerView.addSubview(contentView)
         containerView.addSubview(nextButton)
-
+        
         scrollView.snp.makeConstraints {
             $0.top.equalTo(progressTitle.snp.bottom).offset(10)
             $0.leading.trailing.bottom.equalToSuperview()
         }
-
+        
         containerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalToSuperview()
         }
-
+        
         contentView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(450)
@@ -340,10 +342,10 @@ extension OnboardingViewController {
         nextButton.snp.makeConstraints {
             $0.top.equalTo(contentView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalToSuperview().offset(-20) 
+            $0.bottom.equalToSuperview().offset(-20)
             $0.height.equalTo(44)
         }
-
+        
         self.view.layoutIfNeeded()
     }
     
@@ -382,7 +384,7 @@ extension OnboardingViewController {
     
     @objc private func nextStack(){
         // MARK: TODO -> Popup alert
-        print("alert")
+        alertHandler.showStoppedPreferenceAnalysisAlert(from: self)
     }
     
 }
