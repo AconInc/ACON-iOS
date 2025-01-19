@@ -104,12 +104,7 @@ private extension SpotListFilterViewController {
 
 private extension SpotListFilterViewController {
     
-    // TODO: restaurant
-    
     func updateView(_ spotType: SpotType) {
-        
-        // TODO: 세그먼트 바뀔 때 버튼 선택 전부 해제되는지 기획 확인
-        
         spotListFilterView.do {
             // NOTE: spot tag 바꾸기
             $0.switchSpotTagStack(spotType)
@@ -121,6 +116,10 @@ private extension SpotListFilterViewController {
             $0.hideVisitPurposeSection(isHidden: spotType == .restaurant)
             
             $0.switchPriceSlider(spotType: spotType)
+            
+            $0.resetTagSelection()
+            
+            $0.resetSliderPosition(animated: false)
         }
     }
     
