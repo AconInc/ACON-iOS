@@ -91,7 +91,11 @@ final class OnboardingViewController: BaseViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        view.addSubviews(backButton, skipButton, progressView, progressNumber, progressTitle)
+        view.addSubviews(backButton,
+                         skipButton,
+                         progressView,
+                         progressNumber,
+                         progressTitle)
         progressView.addSubview(progressIndicator)
     }
     
@@ -130,8 +134,8 @@ final class OnboardingViewController: BaseViewController {
             $0.top.equalTo(progressNumber.snp.bottom).offset(4)
             $0.horizontalEdges.equalToSuperview().inset(20)
         }
-        
     }
+    
 }
 
 
@@ -214,7 +218,6 @@ extension OnboardingViewController {
     
     private func configureSmallDeviceLayout(for contentView: UICollectionView) {
         nextButton.removeFromSuperview()
-        print("Small device detected")
         setScrollViewForSmallDevices(contentView: contentView)
     }
     
@@ -246,6 +249,7 @@ extension OnboardingViewController {
     
     private func setFavoriteCuisineCollectionView() {
         contentView = favoriteCuisineCollectionView
+        
         favoriteCuisineCollectionView.onSelectionChanged = { [weak self] selectedIndices in
             self?.viewModel.favoriteCuisne.value = selectedIndices
         }
@@ -253,6 +257,7 @@ extension OnboardingViewController {
     
     private func setFavoriteSpotTypeCollectionView() {
         contentView = favoriteSpotTypeCollectionView
+        
         favoriteSpotTypeCollectionView.onSelectionChanged = { [weak self] selectedType in
             self?.viewModel.favoriteSpotType.value = selectedType
         }
@@ -260,6 +265,7 @@ extension OnboardingViewController {
     
     private func setFavoriteSpotStyleCollectionView() {
         contentView = favoriteSpotStyleCollectionView
+        
         favoriteSpotStyleCollectionView.onSelectionChanged = { [weak self] selectedStyle in
             self?.viewModel.favoriteSpotStyle.value = selectedStyle
         }
@@ -383,7 +389,6 @@ extension OnboardingViewController {
     }
     
     @objc private func nextStack(){
-        // MARK: TODO -> Popup alert
         alertHandler.showStoppedPreferenceAnalysisAlert(from: self)
     }
     
