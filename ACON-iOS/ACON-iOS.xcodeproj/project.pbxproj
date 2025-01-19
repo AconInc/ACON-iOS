@@ -627,8 +627,8 @@
 				749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */,
 				74BF92182D395FE400B923E3 /* ACToastController.swift */,
 				744BAF162D300AB100F95B4A /* DummyComponent.swift */,
-				D6E34C422D398B6000CEFA04 /* CustomAlert */,
 				15CD256A2D3D61F500320006 /* GlassmorphismView.swift */,
+				D6E34C422D398B6000CEFA04 /* CustomAlert */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
