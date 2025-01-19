@@ -81,14 +81,14 @@ final class SpotDetailView: BaseView {
         super.setLayout()
         
         gotoTopButton.snp.makeConstraints{
-            $0.trailing.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
             $0.bottom.equalTo(footerView.snp.top).offset(-ScreenUtils.heightRatio * 16)
-            $0.size.equalTo(ScreenUtils.width * 44 / 360)
+            $0.size.equalTo(ScreenUtils.widthRatio * 44)
         }
         
         stickyView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
             $0.height.equalTo(36)
         }
         
