@@ -15,6 +15,8 @@ class SpotListFilterView: BaseView {
     
     let exitButton = UIButton()
     
+    private let scrollView = UIScrollView()
+    
     private let stackView = UIStackView()
     
     private let footerView = UIView()
@@ -91,9 +93,12 @@ class SpotListFilterView: BaseView {
         self.addSubviews(
             pageTitleLabel,
             exitButton,
-            stackView,
+            scrollView,
+//            stackView,
             footerView
         )
+        
+        scrollView.addSubview(stackView)
         
         stackView.addArrangedSubviews(
             spotSectionStackView,
@@ -171,9 +176,16 @@ class SpotListFilterView: BaseView {
             $0.trailing.equalToSuperview().offset(-20)
         }
         
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(pageTitleLabel.snp.bottom).offset(9)
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalTo(footerView.snp.top)
+        }
+        
         stackView.snp.makeConstraints {
-            $0.top.equalTo(pageTitleLabel.snp.bottom).offset(ScreenUtils.heightRatio * 50)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
+            $0.verticalEdges.equalToSuperview().inset(ScreenUtils.heightRatio * 41)
+            $0.width.equalTo(ScreenUtils.widthRatio * 320)
+            $0.centerX.equalToSuperview()
         }
         
         footerView.snp.makeConstraints {
@@ -195,7 +207,7 @@ class SpotListFilterView: BaseView {
         }
         
         segmentedControl.snp.makeConstraints {
-            $0.height.equalTo(ScreenUtils.heightRatio * 37)
+            $0.height.equalTo(37)
         }
     }
     
