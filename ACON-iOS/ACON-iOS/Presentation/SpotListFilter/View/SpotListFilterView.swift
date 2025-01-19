@@ -17,7 +17,11 @@ class SpotListFilterView: BaseView {
     
     private let stackView = UIStackView()
     
-    private let emptyView = PriorityLowEmptyView()
+    private let footerView = UIView()
+    
+    private let resetButton = UIButton()
+    
+    private let conductButton = UIButton()
     
     
     // [Spot section]: 방문 장소 (restaurant, cafe)
@@ -87,7 +91,8 @@ class SpotListFilterView: BaseView {
         self.addSubviews(
             pageTitleLabel,
             exitButton,
-            stackView
+            stackView,
+            footerView
         )
         
         stackView.addArrangedSubviews(
@@ -95,8 +100,12 @@ class SpotListFilterView: BaseView {
             companionSectionStackView,
             visitPurposeSectionStackView,
             walkingSectionStackView,
-            priceSectionStackView,
-            emptyView
+            priceSectionStackView
+        )
+        
+        footerView.addSubviews(
+            resetButton,
+            conductButton
         )
         
         // [Spot section]
@@ -165,7 +174,24 @@ class SpotListFilterView: BaseView {
         stackView.snp.makeConstraints {
             $0.top.equalTo(pageTitleLabel.snp.bottom).offset(ScreenUtils.heightRatio * 50)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
+        }
+        
+        footerView.snp.makeConstraints {
+            $0.height.equalTo(ScreenUtils.heightRatio * 84)
             $0.bottom.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
+        }
+        
+        resetButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.centerY.equalTo(conductButton)
+        }
+        
+        conductButton.snp.makeConstraints {
+            $0.height.equalTo(44)
+            $0.width.equalTo(ScreenUtils.widthRatio * 232)
+            $0.top.equalToSuperview().offset(8)
+            $0.trailing.equalToSuperview().offset(-20)
         }
         
         segmentedControl.snp.makeConstraints {
@@ -178,7 +204,7 @@ class SpotListFilterView: BaseView {
         
         self.setHandlerImageView()
         
-        // TODO: 배경 글라스모피즘 구현
+        // TODO: 글라스모피즘 (to self, footerView)
         
         pageTitleLabel.setLabel(
             text: StringLiterals.SpotListFilter.pageTitle,
@@ -190,6 +216,8 @@ class SpotListFilterView: BaseView {
             $0.axis = .vertical
             $0.spacing = 32
         }
+        
+        setFooterUI()
         
         setSpotSectionUI()
         
@@ -208,6 +236,29 @@ class SpotListFilterView: BaseView {
 // MARK: - UI Settings
 
 private extension SpotListFilterView {
+    
+    // MARK: - (Footer view)
+    
+    func setFooterUI() {
+        footerView.do {
+            $0.backgroundColor = .glaB30 // 글라스모피즘으로 변경
+        }
+        
+        resetButton.do {
+            var config = UIButton.Configuration.plain()
+            config.image = .icReset
+            config.attributedTitle = AttributedString("재설정".ACStyle(.s2))
+            $0.configuration = config
+        }
+        
+        conductButton.do {
+            var config = UIButton.Configuration.filled()
+            config.attributedTitle = AttributedString("결과 보기".ACStyle(.h8))
+            config.baseBackgroundColor = .gray5
+            $0.configuration = config
+        }
+    }
+    
     
     // MARK: - (Spot section)
     
@@ -290,6 +341,7 @@ private extension SpotListFilterView {
             text: StringLiterals.SpotListFilter.priceSection,
             style: .s2)
     }
+    
 }
 
 
