@@ -117,7 +117,7 @@ private extension SpotListFilterViewController {
             
             $0.switchPriceSlider(spotType: spotType)
             
-            $0.resetTagSelection()
+            $0.resetAllTagSelection()
             
             $0.resetSliderPosition(animated: false)
         }

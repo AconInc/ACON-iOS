@@ -403,7 +403,7 @@ extension SpotListFilterView {
         }
     }
     
-    func resetTagSelection() {
+    func resetAllTagSelection() {
         [firstLineSpotTagStackView,
          secondLineSpotTagStackView,
          companionTagStackView,
