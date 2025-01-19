@@ -48,7 +48,7 @@ final class ACPlugin: PluginType {
         let request = response.request
         let url = request?.url?.absoluteString ?? "nil"
         let statusCode = response.statusCode
-        var log = "------------------- 🔥Reponse가 도착했습니다.🔥 -------------------"
+        var log = "----------------🐿️ Reponse 도착함 ㅋㅋ 🐿️-------------------"
         log.append("\n3️⃣[\(statusCode)] \(url)\n")
         log.append("API: \(target)\n")
         log.append("Status Code: [\(statusCode)]\n")
@@ -66,7 +66,7 @@ final class ACPlugin: PluginType {
             onSucceed(response, target: target)
             return
         }
-        var log = "네트워크 오류"
+        var log = "😤😤😤 네트워크 오류 😤😤😤"
         log.append("<-- \(error.errorCode)\n")
         log.append("\(error.failureReason ?? error.errorDescription ?? "unknown error")\n")
         log.append("<-- END HTTP")
