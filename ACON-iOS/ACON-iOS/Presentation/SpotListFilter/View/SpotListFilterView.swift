@@ -13,7 +13,7 @@ class SpotListFilterView: BaseView {
     
     private let pageTitleLabel = UILabel()
     
-    private let exitButton = UIButton()
+    let exitButton = UIButton()
     
     private let stackView = UIStackView()
     
@@ -163,7 +163,7 @@ class SpotListFilterView: BaseView {
         
         // TODO: top 오프셋 equalTo(view)로 바꾸기
         stackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(ScreenUtils.heightRatio * 41)
+            $0.top.equalTo(pageTitleLabel.snp.bottom).offset(ScreenUtils.heightRatio * 50)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
             $0.bottom.equalToSuperview()
         }
@@ -181,6 +181,8 @@ class SpotListFilterView: BaseView {
         pageTitleLabel.setLabel(
             text: StringLiterals.SpotListFilter.pageTitle,
             style: .h8)
+        
+        exitButton.setImage(.icX, for: .normal)
         
         stackView.do {
             $0.axis = .vertical

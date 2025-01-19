@@ -69,9 +69,34 @@ private extension SpotListFilterViewController {
         spotListFilterView.segmentedControl.addTarget(
             self,
             action: #selector(didChangeSpot),
-            for: .valueChanged)
+            for: .valueChanged
+        )
+        
+        spotListFilterView.exitButton.addTarget(
+            self,
+            action: #selector(didTapExitButton),
+            for: .touchUpInside
+        )
     }
     
+}
+
+
+// MARK: - @objc functions
+
+private extension SpotListFilterViewController {
+    
+    @objc
+    func didChangeSpot(segment: UISegmentedControl) {
+        let index = segment.selectedSegmentIndex
+        viewModel.spotType.value = index == 0 ? .restaurant : .cafe
+      }
+    
+    
+    @objc
+    func didTapExitButton() {
+        self.dismiss(animated: true)
+    }
 }
 
 
@@ -98,18 +123,6 @@ private extension SpotListFilterViewController {
             $0.switchPriceSlider(spotType: spotType)
         }
     }
-    
-}
-
-
-// MARK: - @objc functions
-
-private extension SpotListFilterViewController {
-    
-    @objc func didChangeSpot(segment: UISegmentedControl) {
-        let index = segment.selectedSegmentIndex
-        viewModel.spotType.value = index == 0 ? .restaurant : .cafe
-      }
     
 }
 
