@@ -19,6 +19,8 @@ class SpotSearchViewController: BaseViewController {
 
     // MARK: - Properties
     
+    private var hasCompletedSelection = false
+    
     private let spotSearchViewModel = SpotSearchViewModel()
     
     private let acDebouncer = ACDebouncer(delay: 0.3)
@@ -48,10 +50,23 @@ class SpotSearchViewController: BaseViewController {
         // TODO: - getSearchSuggestion 서버통신
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        spotSearchView.searchTextField.resignFirstResponder()
+        print("===== viewWillDisappear called =====")
+        print("isBeingDismissed: \(isBeingDismissed)")
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
+        print("===== viewDidDisappear called =====")
+        print("hasCompletedSelection: \(hasCompletedSelection)")
         if isBeingDismissed {
+            if hasCompletedSelection {
+                print("===== completionHandler will be called =====")
+                completionHandler?(selectedSpotId, selectedSpotName)
+            }
+            print("===== dismissCompletion will be called =====")
             dismissCompletion?()
         }
     }
@@ -100,8 +115,10 @@ private extension SpotSearchViewController {
     
     @objc
     func doneButtonTapped() {
-        completionHandler?(selectedSpotId, selectedSpotName)
-        self.dismiss(animated: true)
+        print("===== doneButton tapped =====")
+        hasCompletedSelection = true
+        spotSearchView.searchTextField.resignFirstResponder()
+        dismiss(animated: true)
     }
     
     @objc
@@ -217,8 +234,16 @@ extension SpotSearchViewController: UICollectionViewDataSource {
 extension SpotSearchViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        print("=== shouldChangeCharactersIn ===")
+        // TODO: - 여기 dismiss 시점 문제는 아닌 듯. 나중에 해결되면 지우기 🍠
+        // NOTE: - 텍스트필드 / 키보드 문제도 아님. 키보드 전체 isHidden 처리해도 같은 문제 발생 🍠
+//        guard !isBeingDismissed else { return false }
+//        guard presentingViewController != nil else {
+//            print("===== ViewController is being dismissed =====")
+//            return false
+//        }
         acDebouncer.call { [weak self] in
-//            print("is debouncing")
+//            guard let self = self, !self.isBeingDismissed else { return }
             self?.updateSearchKeyword(textField.text ?? "")
         }
         return true
