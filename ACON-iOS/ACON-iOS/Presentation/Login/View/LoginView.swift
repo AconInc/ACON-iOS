@@ -16,7 +16,7 @@ final class LoginView: BaseView {
     
     private let brandingLabel : UILabel = UILabel()
     
-    private let logoImage : UIImageView = UIImageView()
+    private let logoImageView : UIImageView = UIImageView()
     
     private var logoLabel : UILabel = UILabel()
     
@@ -47,7 +47,7 @@ final class LoginView: BaseView {
         super.setHierarchy()
         
         self.addSubviews(brandingLabel,
-                         logoImage,
+                         logoImageView,
                          googleLoginButton,
                          appleLoginButton,
                          proceedLoginLabel,
@@ -59,14 +59,14 @@ final class LoginView: BaseView {
     override func setLayout() {
         super.setLayout()
         
-        logoImage.snp.makeConstraints {
+        logoImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview().offset(-20)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(ScreenUtils.widthRatio*224)
         }
         
         logoLabel.snp.makeConstraints {
-            $0.bottom.equalTo(logoImage.snp.top).offset(-10)
+            $0.bottom.equalTo(logoImageView.snp.top).offset(-10)
             $0.centerX.equalToSuperview()
         }
         
@@ -104,7 +104,7 @@ final class LoginView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        logoImage.do {
+        logoImageView.do {
             $0.image = .acon
             $0.contentMode = .scaleAspectFit
         }
