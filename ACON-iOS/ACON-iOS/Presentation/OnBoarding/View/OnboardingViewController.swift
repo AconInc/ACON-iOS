@@ -89,7 +89,7 @@ final class OnboardingViewController: BaseViewController {
     override func setHierarchy() {
         super.setHierarchy()
 
-        view.addSubviews(backButton, skipButton, progressView, progressNumber, progressTitle, nextButton)
+        view.addSubviews(backButton, skipButton, progressView, progressNumber, progressTitle)
         progressView.addSubview(progressIndicator)
     }
     
@@ -129,11 +129,6 @@ final class OnboardingViewController: BaseViewController {
             $0.horizontalEdges.equalToSuperview().inset(20)
         }
         
-        nextButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
-            $0.height.equalTo(44)
-        }
     }
 }
     
@@ -179,13 +174,49 @@ extension OnboardingViewController {
         default:
             contentView = nil
         }
+        print("current",currentStep)
         
         if let contentView = contentView {
-            view.addSubview(contentView)
-            contentView.snp.makeConstraints {
-                $0.top.equalTo(progressTitle.snp.bottom).offset(10)
-                $0.leading.trailing.equalToSuperview()
-                $0.bottom.equalTo(nextButton.snp.top)
+            if step == 4 {
+                if ScreenUtils.height < 800 {
+                    nextButton.removeFromSuperview()
+
+                    print("small device")
+                    //NOTE: 작은 디바이스를 위한 함수
+                    setScrollViewForSmallDevices(contentView: contentView as! UICollectionView)
+                    
+                }
+                else{
+                    view.addSubviews(contentView,nextButton)
+                    
+                    nextButton.snp.makeConstraints {
+                        $0.leading.trailing.equalToSuperview().inset(20)
+                        $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-ScreenUtils.heightRatio*40)
+                        $0.height.equalTo(44)
+                    }
+                    
+                    contentView.snp.makeConstraints {
+                        $0.top.equalTo(progressTitle.snp.bottom).offset(10)
+                        $0.leading.trailing.equalToSuperview()
+                        $0.bottom.equalTo(nextButton.snp.top)
+                    }
+                }
+            }
+            
+            else{
+                view.addSubviews(contentView,nextButton)
+                
+                nextButton.snp.makeConstraints {
+                    $0.leading.trailing.equalToSuperview().inset(20)
+                    $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
+                    $0.height.equalTo(44)
+                }
+                
+                contentView.snp.makeConstraints {
+                    $0.top.equalTo(progressTitle.snp.bottom).offset(10)
+                    $0.leading.trailing.equalToSuperview()
+                    $0.bottom.equalTo(nextButton.snp.top)
+                }
             }
         }
         progressNumber.text = OnboardingType.progressNumberList[step]
@@ -236,16 +267,6 @@ extension OnboardingViewController {
     private func setFavoriteSpotRankCollectionView() {
         contentView = favoriteSpotRankCollectionView
         
-        contentView?.addSubview(nextButton)
-        
-        
-        nextButton.snp.makeConstraints {
-               $0.top.equalTo(favoriteSpotRankCollectionView.snp.bottom).offset(20)
-               $0.leading.trailing.equalToSuperview().inset(20)
-               $0.bottom.equalToSuperview().offset(-40)
-               $0.height.equalTo(44)
-           }
-        
         favoriteSpotRankCollectionView.onSelectionChanged = { [weak self] selectedIndices in
             self?.viewModel.favoriteSpotRank.value = selectedIndices
         }
@@ -291,6 +312,49 @@ extension OnboardingViewController {
             self?.view.layoutIfNeeded()
         }
     }
+    
+    private func setScrollViewForSmallDevices(contentView: UICollectionView) {
+        // 스크롤뷰 및 컨테이너뷰 생성
+        let scrollView = UIScrollView()
+        let containerView = UIView()
+
+        // 뷰 계층 설정
+        view.addSubview(scrollView)
+        scrollView.addSubview(containerView)
+        containerView.addSubview(contentView)
+        containerView.addSubview(nextButton)
+
+        // 스크롤뷰 레이아웃
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(progressTitle.snp.bottom).offset(10)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+
+        containerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalToSuperview()
+        }
+
+        contentView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(450)
+        }
+        
+        nextButton.snp.makeConstraints {
+            $0.top.equalTo(contentView.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().offset(-20) 
+            $0.height.equalTo(44)
+        }
+
+        // 레이아웃 강제 업데이트
+        self.view.layoutIfNeeded()
+
+        // 디버깅 출력
+        print("ScrollView Content Size: \(scrollView.contentSize)")
+    }
+
+
     
 }
 
