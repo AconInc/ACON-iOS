@@ -178,6 +178,8 @@ class SpotListFilterView: BaseView {
         
         self.setHandlerImageView()
         
+        // TODO: 배경 글라스모피즘 구현
+        
         pageTitleLabel.setLabel(
             text: StringLiterals.SpotListFilter.pageTitle,
             style: .h8)
