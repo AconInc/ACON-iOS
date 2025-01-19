@@ -67,6 +67,7 @@ extension SpotListViewController {
             spotListView.hideFooterLabel(isHidden: isFirstPage)
         }
     }
+    
 }
 
 
@@ -104,7 +105,6 @@ private extension SpotListViewController {
         }
     }
     
-    
     @objc
     func tappedFilterButton() {
         let vc = SpotListFilterViewController()
@@ -112,6 +112,7 @@ private extension SpotListViewController {
         
         present(vc, animated: true)
     }
+    
 }
 
 
