@@ -45,6 +45,8 @@
 		745C7E122D35A62B0074DBDB /* UploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E112D35A6220074DBDB /* UploadModel.swift */; };
 		745C7E152D35AEC10074DBDB /* SpotSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E142D35AEBB0074DBDB /* SpotSearchViewModel.swift */; };
 		746F39822D342523003F8498 /* SheetUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* SheetUtils.swift */; };
+		747F4FBD2D3D9477003DECBF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F4FBC2D3D9470003DECBF /* SplashViewController.swift */; };
+		747F4FBF2D3D9D44003DECBF /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F4FBE2D3D9D40003DECBF /* SplashView.swift */; };
 		748D6F412D2BC482007690B4 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F402D2BC482007690B4 /* Moya */; };
 		748D6F442D2BC509007690B4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F432D2BC509007690B4 /* SnapKit */; };
 		748D6F472D2BC519007690B4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F462D2BC519007690B4 /* Then */; };
@@ -169,6 +171,8 @@
 		745C7E112D35A6220074DBDB /* UploadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadModel.swift; sourceTree = "<group>"; };
 		745C7E142D35AEBB0074DBDB /* SpotSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotSearchViewModel.swift; sourceTree = "<group>"; };
 		746F39812D342520003F8498 /* SheetUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetUtils.swift; sourceTree = "<group>"; };
+		747F4FBC2D3D9470003DECBF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		747F4FBE2D3D9D40003DECBF /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		748D6F612D2BCA1C007690B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		748D6F622D2BCA1C007690B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		748D6F632D2BCA1C007690B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -488,6 +492,23 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		747F4FB82D3D944A003DECBF /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				747F4FBB2D3D9466003DECBF /* View */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		747F4FBB2D3D9466003DECBF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				747F4FBE2D3D9D40003DECBF /* SplashView.swift */,
+				747F4FBC2D3D9470003DECBF /* SplashViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		748D6F682D2BCA1C007690B4 /* ACON-iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -513,6 +534,7 @@
 		748D6F702D2BCA46007690B4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				747F4FB82D3D944A003DECBF /* Splash */,
 				74BF920F2D391FFE00B923E3 /* LocalVerification */,
 				D6D0F4FC2D36B8D300326F17 /* OnBoarding */,
 				74BF91F72D38138200B923E3 /* SpotDetail */,
@@ -1036,6 +1058,7 @@
 				D6FF82F92D381D6100090233 /* SmallBoxViewCell.swift in Sources */,
 				D6D0F5192D36BAAB00326F17 /* FavoriteSpotStyleCollectionView.swift in Sources */,
 				748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */,
+				747F4FBF2D3D9D44003DECBF /* SplashView.swift in Sources */,
 				1547A8902D35B30C00E96616 /* FilterTagButtonType.swift in Sources */,
 				748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */,
 				74BF91FA2D38164400B923E3 /* SpotDetailView.swift in Sources */,
@@ -1069,6 +1092,7 @@
 				741A07572D3558FE00778219 /* ReviewFinishedView.swift in Sources */,
 				1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
+				747F4FBD2D3D9477003DECBF /* SplashViewController.swift in Sources */,
 				D6D0F51B2D36BABB00326F17 /* FavoriteSpotRankCollectionView.swift in Sources */,
 				D6D0F50F2D36B99F00326F17 /* BigBoxViewCell.swift in Sources */,
 				746F39822D342523003F8498 /* SheetUtils.swift in Sources */,
