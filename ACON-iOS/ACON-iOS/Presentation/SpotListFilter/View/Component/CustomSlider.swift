@@ -195,41 +195,45 @@ private extension CustomSlider {
         self.slicedPosX = trackView.frame.width / CGFloat(indicators.count - 1)
         
         for (i, text) in indicators.enumerated() {
+            let alignment: NSTextAlignment = {
+                if i == 0 { return .left }
+                else if i == indicators.count - 1 { return .right }
+                else { return .center }
+            }()
+            
             let posX = slicedPosX * CGFloat(i)
-            let label = makeIndicatorLabel(text)
+            
+            let label = makeIndicatorLabel(text, alignment: alignment)
             
             addSubview(label)
             
             if i == 0 {
                 label.snp.makeConstraints {
-                    $0.top.equalTo(trackView).offset(20)
                     $0.leading.equalTo(trackView).offset(-thumbSize / 2)
-                    $0.width.equalTo(labelWidth)
-                    $0.bottom.equalToSuperview()
                 }
             } else if i == indicators.count - 1 {
                 label.snp.makeConstraints {
-                    $0.top.equalTo(trackView).offset(20)
                     $0.trailing.equalTo(trackView).offset(thumbSize / 2)
-                    $0.width.equalTo(labelWidth)
-                    $0.bottom.equalToSuperview()
                 }
             } else {
                 label.snp.makeConstraints {
-                    $0.top.equalTo(trackView).offset(20)
                     $0.centerX.equalTo(trackView.snp.left).offset(posX)
-                    $0.width.equalTo(labelWidth)
-                    $0.bottom.equalToSuperview()
                 }
+            }
+            
+            label.snp.makeConstraints {
+                $0.top.equalTo(trackView).offset(20)
+                $0.width.equalTo(labelWidth)
+                $0.bottom.equalToSuperview()
             }
         }
         
         didLayoutSubViews.toggle()
     }
     
-    func makeIndicatorLabel(_ text: String) -> UILabel {
+    func makeIndicatorLabel(_ text: String, alignment: NSTextAlignment) -> UILabel {
         let label = UILabel().then {
-            $0.setLabel(text: text, style: .c1, color: .gray4)
+            $0.setLabel(text: text, style: .c1, color: .gray4, alignment: alignment)
         }
         return label
     }
