@@ -40,6 +40,7 @@
 		741E68952D3D38BC00DF99EF /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E68942D3D38B700DF99EF /* BaseService.swift */; };
 		741E68982D3D3D8E00DF99EF /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E68972D3D3D8800DF99EF /* ErrorResponse.swift */; };
 		741E689A2D3D43FF00DF99EF /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E68992D3D43FA00DF99EF /* EmptyResponse.swift */; };
+		741E68A02D3D5BD400DF99EF /* TargetType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E689F2D3D5BCE00DF99EF /* TargetType+.swift */; };
 		74220DD42D34363B000684BF /* SpotUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74220DD32D343633000684BF /* SpotUploadViewController.swift */; };
 		74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74220DD52D3436BE000684BF /* SpotUploadView.swift */; };
 		743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743069882D3D2F540033178C /* NetworkResult.swift */; };
@@ -168,6 +169,7 @@
 		741E68942D3D38B700DF99EF /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		741E68972D3D3D8800DF99EF /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		741E68992D3D43FA00DF99EF /* EmptyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyResponse.swift; sourceTree = "<group>"; };
+		741E689F2D3D5BCE00DF99EF /* TargetType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TargetType+.swift"; sourceTree = "<group>"; };
 		74220DD32D343633000684BF /* SpotUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadViewController.swift; sourceTree = "<group>"; };
 		74220DD52D3436BE000684BF /* SpotUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadView.swift; sourceTree = "<group>"; };
 		743069882D3D2F540033178C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 		743069872D3D2EDA0033178C /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				741E689F2D3D5BCE00DF99EF /* TargetType+.swift */,
 				741E68992D3D43FA00DF99EF /* EmptyResponse.swift */,
 				741E68972D3D3D8800DF99EF /* ErrorResponse.swift */,
 				741E68942D3D38B700DF99EF /* BaseService.swift */,
@@ -1036,6 +1039,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				748D6F952D2BD4DB007690B4 /* UICollectionViewCell+.swift in Sources */,
+				741E68A02D3D5BD400DF99EF /* TargetType+.swift in Sources */,
 				D6FF82ED2D380B6100090233 /* FavoriteSpotType.swift in Sources */,
 				741E68912D3D385A00DF99EF /* ACPlugin.swift in Sources */,
 				74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */,
