@@ -53,9 +53,30 @@ class SpotListFilterView: BaseView {
     let visitPurposeTagStackView = SpotFilterTagStackView()
     
     
+    // [Walking time]: 도보 가능 거리 (restaurant, cafe)
+    
+    private let walkingSectionStackView = UIStackView()
+    
+    private let walkingSectionTitleLabel = UILabel()
+    
+    let walkingSlider = CustomSlider(
+        indicators: StringLiterals.SpotListFilter.walkingTimes,
+        startIndex: 2)
     
     
-    // TODO: 방문 목적, 도보 가능 거리, 가격대
+    // [Price range]: 가격대 (restaurant, cafe)
+    
+    private let priceSectionStackView = UIStackView()
+    
+    private let priceSectionTitleLabel = UILabel()
+    
+    let restaurantPriceSlider = CustomSlider(
+        indicators: StringLiterals.SpotListFilter.restaurantPrices,
+        startIndex: 1)
+    
+    let cafePriceSlider = CustomSlider(
+        indicators: StringLiterals.SpotListFilter.cafePrices,
+        startIndex: 1)
     
     
     // MARK: - Lifecycle
@@ -68,6 +89,8 @@ class SpotListFilterView: BaseView {
         stackView.addArrangedSubviews(spotSectionStackView,
                                       companionSectionStackView,
                                       visitPurposeSectionStackView,
+                                      walkingSectionStackView,
+                                      priceSectionStackView,
                                       emptyView)
         
         // [Spot section]
@@ -90,6 +113,18 @@ class SpotListFilterView: BaseView {
         
         visitPurposeSectionStackView.addArrangedSubviews(visitPurposeSectionTitleLabel,
                                                          visitPurposeTagStackView)
+        
+        // [Walking time]
+        
+        walkingSectionStackView.addArrangedSubviews(walkingSectionTitleLabel,
+                                                    walkingSlider)
+        
+        
+        // [Price range]
+        
+        priceSectionStackView.addArrangedSubviews(priceSectionTitleLabel,
+                                                  restaurantPriceSlider,
+                                                  cafePriceSlider)
     }
     
     override func setLayout() {
@@ -114,16 +149,15 @@ class SpotListFilterView: BaseView {
             $0.spacing = 32
         }
         
-        
-        // [Spot section]
-        
         setSpotSectionUI()
         
         setCompanionSectionUI()
         
         setVisitPurposeSectionUI()
         
-        // TODO: 추후 추가 예정
+        setWalkingSectionUI()
+        
+        setPriceSectionUI()
     }
     
 }
@@ -187,6 +221,33 @@ private extension SpotListFilterView {
         visitPurposeTagStackView.addTagButtons(titles: tags)
     }
     
+    
+    // MARK: - (Walking section)
+    
+    func setWalkingSectionUI() {
+        walkingSectionStackView.do {
+            $0.axis = .vertical
+            $0.spacing = 12
+        }
+        
+        walkingSectionTitleLabel.setLabel(
+            text: StringLiterals.SpotListFilter.walkingSection,
+            style: .s2)
+    }
+    
+    
+    // MARK: - (Price section)
+    
+    func setPriceSectionUI() {
+        priceSectionStackView.do {
+            $0.axis = .vertical
+            $0.spacing = 12
+        }
+        
+        priceSectionTitleLabel.setLabel(
+            text: StringLiterals.SpotListFilter.priceSection,
+            style: .s2)
+    }
 }
 
 
@@ -206,7 +267,6 @@ extension SpotListFilterView {
             
             firstLineSpotTagStackView.switchTagButtons(titles: firstLine)
             secondLineSpotTagStackView.switchTagButtons(titles: secondLine)
-            
         case .cafe:
             let tagTexts: [String] = SpotType.CafeFeatureType.allCases.map { return $0.text }
             let firstLine: [String] = Array(tagTexts[0..<4])
@@ -223,6 +283,18 @@ extension SpotListFilterView {
     
     func hideVisitPurposeSection(isHidden: Bool) {
         visitPurposeSectionStackView.isHidden = isHidden
+    }
+    
+    func switchPriceSlider(spotType: SpotType) {
+        switch spotType {
+        case .restaurant:
+            restaurantPriceSlider.isHidden = false
+            cafePriceSlider.isHidden = true
+            
+        case .cafe:
+            restaurantPriceSlider.isHidden = true
+            cafePriceSlider.isHidden = false
+        }
     }
     
 }
