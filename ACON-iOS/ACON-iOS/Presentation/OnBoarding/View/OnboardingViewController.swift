@@ -14,13 +14,13 @@ final class OnboardingViewController: BaseViewController {
     
     let viewModel = OnboardingViewModel()
     
-    private let backButton = UIButton()
-    private let skipButton = UIButton()
-    private let progressView = UIView()
-    private let progressIndicator = UIView()
-    private let nextButton = UIButton()
-    private let progressNumber = UILabel()
-    private let progressTitle = UILabel()
+    private let backButton: UIButton = UIButton()
+    private let skipButton: UIButton = UIButton()
+    private let progressView: UIView = UIView()
+    private let progressIndicator: UIView = UIView()
+    private let nextButton: UIButton = UIButton()
+    private let progressNumber: UILabel = UILabel()
+    private let progressTitle: UILabel = UILabel()
     private var isOverlayVisible = false
     var currentStep = 0
     
@@ -159,69 +159,68 @@ extension OnboardingViewController {
     
     private func updateContentView(for step: Int) {
         contentView?.removeFromSuperview()
+        contentView = getCollectionView(for: step)
         
+        guard let contentView = contentView else { return }
+        // MARK: se Device response 
+        if step == 4, ScreenUtils.height < 800 {
+            configureSmallDeviceLayout(for: contentView as! UICollectionView)
+        } else {
+            configureDefaultLayout(for: contentView)
+        }
+        
+        updateProgressText(for: step)
+    }
+
+    private func getCollectionView(for step: Int) -> UIView? {
         switch step {
         case 0:
             setDislikeCollectionView()
+            return dislikeCollectionView
         case 1:
             setFavoriteCuisineCollectionView()
+            return favoriteCuisineCollectionView
         case 2:
             setFavoriteSpotTypeCollectionView()
+            return favoriteSpotTypeCollectionView
         case 3:
             setFavoriteSpotStyleCollectionView()
+            return favoriteSpotStyleCollectionView
         case 4:
             setFavoriteSpotRankCollectionView()
+            return favoriteSpotRankCollectionView
         default:
-            contentView = nil
+            return nil
         }
-        print("current",currentStep)
-        
-        if let contentView = contentView {
-            if step == 4 {
-                if ScreenUtils.height < 800 {
-                    nextButton.removeFromSuperview()
+    }
 
-                    print("small device")
-                    //NOTE: 작은 디바이스를 위한 함수
-                    setScrollViewForSmallDevices(contentView: contentView as! UICollectionView)
-                    
-                }
-                else{
-                    view.addSubviews(contentView,nextButton)
-                    
-                    nextButton.snp.makeConstraints {
-                        $0.leading.trailing.equalToSuperview().inset(20)
-                        $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-ScreenUtils.heightRatio*40)
-                        $0.height.equalTo(44)
-                    }
-                    
-                    contentView.snp.makeConstraints {
-                        $0.top.equalTo(progressTitle.snp.bottom).offset(10)
-                        $0.leading.trailing.equalToSuperview()
-                        $0.bottom.equalTo(nextButton.snp.top)
-                    }
-                }
-            }
-            
-            else{
-                view.addSubviews(contentView,nextButton)
-                
-                nextButton.snp.makeConstraints {
-                    $0.leading.trailing.equalToSuperview().inset(20)
-                    $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
-                    $0.height.equalTo(44)
-                }
-                
-                contentView.snp.makeConstraints {
-                    $0.top.equalTo(progressTitle.snp.bottom).offset(10)
-                    $0.leading.trailing.equalToSuperview()
-                    $0.bottom.equalTo(nextButton.snp.top)
-                }
-            }
+    private func configureDefaultLayout(for contentView: UIView) {
+        view.addSubviews(contentView, nextButton)
+        
+        nextButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.height.equalTo(44)
         }
+        
+        contentView.snp.makeConstraints {
+            $0.top.equalTo(progressTitle.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(nextButton.snp.top)
+        }
+    }
+
+    private func configureSmallDeviceLayout(for contentView: UICollectionView) {
+        nextButton.removeFromSuperview()
+        print("Small device detected")
+        setScrollViewForSmallDevices(contentView: contentView)
+    }
+
+    private func updateProgressText(for step: Int) {
         progressNumber.text = OnboardingType.progressNumberList[step]
         progressTitle.text = OnboardingType.progressTitleList[step]
     }
+
     
     private func setDislikeCollectionView() {
         contentView = dislikeCollectionView
@@ -314,17 +313,15 @@ extension OnboardingViewController {
     }
     
     private func setScrollViewForSmallDevices(contentView: UICollectionView) {
-        // 스크롤뷰 및 컨테이너뷰 생성
+
         let scrollView = UIScrollView()
         let containerView = UIView()
 
-        // 뷰 계층 설정
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
         containerView.addSubview(contentView)
         containerView.addSubview(nextButton)
 
-        // 스크롤뷰 레이아웃
         scrollView.snp.makeConstraints {
             $0.top.equalTo(progressTitle.snp.bottom).offset(10)
             $0.leading.trailing.bottom.equalToSuperview()
@@ -347,14 +344,8 @@ extension OnboardingViewController {
             $0.height.equalTo(44)
         }
 
-        // 레이아웃 강제 업데이트
         self.view.layoutIfNeeded()
-
-        // 디버깅 출력
-        print("ScrollView Content Size: \(scrollView.contentSize)")
     }
-
-
     
 }
 
@@ -394,24 +385,4 @@ extension OnboardingViewController {
         print("alert")
     }
     
-}
-
-import SwiftUI
-
-struct OnboardingViewControllerPreview: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> OnboardingViewController {
-        return OnboardingViewController() // 뷰 컨트롤러 인스턴스 생성
-    }
-
-    func updateUIViewController(_ uiViewController: OnboardingViewController, context: Context) {
-        // 필요시 업데이트 로직 추가
-    }
-}
-
-struct OnboardingViewControllerPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        OnboardingViewControllerPreview()
-            .edgesIgnoringSafeArea(.all) // 전체 화면 사용
-            .previewLayout(.sizeThatFits) // 화면 크기 맞추기
-    }
 }
