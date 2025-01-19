@@ -150,8 +150,8 @@ final class SpotSearchView: GlassmorphismView {
     override func setStyle() {
         super.setStyle()
         
-        self.backgroundColor = .glaW10
-        self.backgroundColor?.withAlphaComponent(0.95)
+        self.setGlassColor(.glaW10)
+        
         self.setHandlerImageView()
         
         spotUploadLabel.do {

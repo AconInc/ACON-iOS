@@ -213,6 +213,8 @@ class SpotListFilterView: GlassmorphismView {
     override func setStyle() {
         super.setStyle()
         
+        self.setGlassColor(.dimB60)
+        
         self.setHandlerImageView()
         
         pageTitleLabel.setLabel(
