@@ -138,6 +138,8 @@ enum StringLiterals {
     
     enum SpotListFilter {
         
+        static let pageTitle = "상세 조건"
+        
         static let restaurant = "음식점"
         
         static let cafe = "카페"
