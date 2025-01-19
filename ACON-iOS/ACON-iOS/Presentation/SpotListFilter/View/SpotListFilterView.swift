@@ -9,11 +9,11 @@ import UIKit
 
 class SpotListFilterView: BaseView {
     
-    // MARK: - Properties
-    
-    
-    
     // MARK: - UI Properties
+    
+    private let pageTitleLabel = UILabel()
+    
+    private let exitButton = UIButton()
     
     private let stackView = UIStackView()
     
@@ -84,52 +84,84 @@ class SpotListFilterView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(stackView)
+        self.addSubviews(
+            pageTitleLabel,
+            exitButton,
+            stackView
+        )
         
-        stackView.addArrangedSubviews(spotSectionStackView,
-                                      companionSectionStackView,
-                                      visitPurposeSectionStackView,
-                                      walkingSectionStackView,
-                                      priceSectionStackView,
-                                      emptyView)
+        stackView.addArrangedSubviews(
+            spotSectionStackView,
+            companionSectionStackView,
+            visitPurposeSectionStackView,
+            walkingSectionStackView,
+            priceSectionStackView,
+            emptyView
+        )
         
         // [Spot section]
         
-        spotSectionStackView.addArrangedSubviews(spotSectionTitleLabel,
-                                                 segmentedControl,
-                                                 spotTagStackView)
+        spotSectionStackView.addArrangedSubviews(
+            spotSectionTitleLabel,
+            segmentedControl,
+            spotTagStackView
+        )
         
-        spotTagStackView.addArrangedSubviews(firstLineSpotTagStackView,
-                                             secondLineSpotTagStackView)
+        spotTagStackView.addArrangedSubviews(
+            firstLineSpotTagStackView,
+            secondLineSpotTagStackView
+        )
         
         
         // [Companion section]
         
-        companionSectionStackView.addArrangedSubviews(companionSectionTitleLabel,
-                                                      companionTagStackView)
+        companionSectionStackView.addArrangedSubviews(
+            companionSectionTitleLabel,
+            companionTagStackView
+        )
         
         
         // [Visit purpose section]
         
-        visitPurposeSectionStackView.addArrangedSubviews(visitPurposeSectionTitleLabel,
-                                                         visitPurposeTagStackView)
+        visitPurposeSectionStackView
+            .addArrangedSubviews(
+                visitPurposeSectionTitleLabel,
+                visitPurposeTagStackView
+            )
         
         // [Walking time]
         
-        walkingSectionStackView.addArrangedSubviews(walkingSectionTitleLabel,
-                                                    walkingSlider)
+        walkingSectionStackView
+            .addArrangedSubviews(
+                walkingSectionTitleLabel,
+                walkingSlider
+            )
         
         
         // [Price range]
         
-        priceSectionStackView.addArrangedSubviews(priceSectionTitleLabel,
-                                                  restaurantPriceSlider,
-                                                  cafePriceSlider)
+        priceSectionStackView
+            .addArrangedSubviews(
+                priceSectionTitleLabel,
+                restaurantPriceSlider,
+                cafePriceSlider
+            )
     }
     
     override func setLayout() {
         super.setLayout()
         
+        pageTitleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(33)
+            $0.centerX.equalToSuperview()
+        }
+        
+        exitButton.snp.makeConstraints {
+            $0.centerY.equalTo(pageTitleLabel)
+            $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        // TODO: top 오프셋 equalTo(view)로 바꾸기
         stackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(ScreenUtils.heightRatio * 41)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
@@ -143,6 +175,12 @@ class SpotListFilterView: BaseView {
     
     override func setStyle() {
         super.setStyle()
+        
+        self.setHandlerImageView()
+        
+        pageTitleLabel.setLabel(
+            text: StringLiterals.SpotListFilter.pageTitle,
+            style: .h8)
         
         stackView.do {
             $0.axis = .vertical
