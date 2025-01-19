@@ -179,11 +179,28 @@ private extension CustomSlider {
             let label = makeIndicatorLabel(text)
             
             addSubview(label)
-            label.snp.makeConstraints {
-                $0.top.equalTo(trackView).offset(20)
-                $0.centerX.equalTo(trackView.snp.left).offset(posX)
-                $0.width.equalTo(labelWidth)
-                $0.bottom.equalToSuperview()
+            
+            if i == 0 {
+                label.snp.makeConstraints {
+                    $0.top.equalTo(trackView).offset(20)
+                    $0.leading.equalTo(trackView).offset(-thumbSize / 2)
+                    $0.width.equalTo(labelWidth)
+                    $0.bottom.equalToSuperview()
+                }
+            } else if i == indicators.count - 1 {
+                label.snp.makeConstraints {
+                    $0.top.equalTo(trackView).offset(20)
+                    $0.trailing.equalTo(trackView).offset(thumbSize / 2)
+                    $0.width.equalTo(labelWidth)
+                    $0.bottom.equalToSuperview()
+                }
+            } else {
+                label.snp.makeConstraints {
+                    $0.top.equalTo(trackView).offset(20)
+                    $0.centerX.equalTo(trackView.snp.left).offset(posX)
+                    $0.width.equalTo(labelWidth)
+                    $0.bottom.equalToSuperview()
+                }
             }
             print(text, posX)
         }
