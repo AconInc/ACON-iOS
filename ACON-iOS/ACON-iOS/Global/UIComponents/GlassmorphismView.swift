@@ -49,7 +49,7 @@ class GlassmorphismView: BaseView {
 extension GlassmorphismView {
     
     /// GlassmorphismView에는 기본적으로 glass color = .glaB30이 적용되어 있습니다.
-    func setGlassColor(_ color: UIColor = .glaB30) {
+    func setGlassColor(_ color: UIColor) {
         vibrancyEffectView.backgroundColor = color
     }
     
