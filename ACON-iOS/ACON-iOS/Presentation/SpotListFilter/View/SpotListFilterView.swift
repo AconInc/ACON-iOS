@@ -129,6 +129,7 @@ class SpotListFilterView: BaseView {
                 visitPurposeTagStackView
             )
         
+        
         // [Walking time]
         
         walkingSectionStackView
@@ -161,7 +162,6 @@ class SpotListFilterView: BaseView {
             $0.trailing.equalToSuperview().offset(-20)
         }
         
-        // TODO: top 오프셋 equalTo(view)로 바꾸기
         stackView.snp.makeConstraints {
             $0.top.equalTo(pageTitleLabel.snp.bottom).offset(ScreenUtils.heightRatio * 50)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
@@ -334,6 +334,23 @@ extension SpotListFilterView {
         case .cafe:
             restaurantPriceSlider.isHidden = true
             cafePriceSlider.isHidden = false
+        }
+    }
+    
+    func resetTagSelection() {
+        [firstLineSpotTagStackView,
+         secondLineSpotTagStackView,
+         companionTagStackView,
+         visitPurposeTagStackView].forEach {
+            $0.resetTagSelection()
+        }
+    }
+    
+    func resetSliderPosition(animated: Bool = true) {
+        [walkingSlider,
+         restaurantPriceSlider,
+         cafePriceSlider].forEach {
+            $0.resetThumbPosition(animated: animated)
         }
     }
     
