@@ -15,6 +15,8 @@ final class ACService {
     
     private init() {}
     
+    lazy var testService: TestService = TestService()
+    
 //    lazy var authService: AuthService = AuthService()
     
 }
