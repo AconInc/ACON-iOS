@@ -181,4 +181,12 @@ enum StringLiterals {
         
     }
     
+    enum WebView {
+        
+        static let error = "에러"
+        
+        static let cantFindWebPage = "웹페이지를 찾을 수 없습니다."
+        
+    }
+    
 }
