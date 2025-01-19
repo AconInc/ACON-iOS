@@ -33,7 +33,7 @@ struct SheetUtils {
         return UISheetPresentationController.Detent.custom(identifier: longDetentIdentifier) { _ in
             let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
             let safeAreaBottom = windowScene?.windows.first?.safeAreaInsets.bottom ?? 0
-            return ScreenUtils.height*700/780 - safeAreaBottom
+            return ScreenUtils.height*724/780 - safeAreaBottom
         }
     }
     

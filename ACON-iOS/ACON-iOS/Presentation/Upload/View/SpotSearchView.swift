@@ -53,6 +53,7 @@ final class SpotSearchView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
         
+        self.addGlassCard()
         self.addSubviews(spotUploadLabel,
                          searchView,
                          doneButton,
