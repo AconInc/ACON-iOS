@@ -11,7 +11,11 @@ class GlassmorphismView: BaseView {
     
     // MARK: - Properties
     
-    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+    private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+    
+    private let vibrancyEffectView = UIVisualEffectView(
+        effect: UIVibrancyEffect(blurEffect: UIBlurEffect(style: .regular))
+    )
     
     
     // MARK: - LifeCycles
@@ -19,13 +23,14 @@ class GlassmorphismView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubview(blurView)
+        self.addSubview(blurEffectView)
+        blurEffectView.contentView.addSubview(vibrancyEffectView)
     }
     
     override func setLayout() {
         super.setLayout()
         
-        blurView.snp.makeConstraints {
+        blurEffectView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
@@ -33,7 +38,7 @@ class GlassmorphismView: BaseView {
     
     override func setStyle() {
         self.backgroundColor = .clear
-        blurView.backgroundColor = .glaB30
+        vibrancyEffectView.backgroundColor = .glaB30
     }
     
 }
@@ -45,7 +50,7 @@ extension GlassmorphismView {
     
     /// GlassmorphismView에는 기본적으로 glass color = .glaB30이 적용되어 있습니다.
     func setGlassColor(_ color: UIColor = .glaB30) {
-        blurView.backgroundColor = color
+        vibrancyEffectView.backgroundColor = color
     }
     
 }
