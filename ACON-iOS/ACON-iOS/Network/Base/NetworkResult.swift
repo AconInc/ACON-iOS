@@ -10,7 +10,7 @@ import Foundation
 enum NetworkResult<T> {
     
     case success(T)  // 성공
-    case requestErr(T)  // 요청 에러
+    case requestErr(ErrorResponse)  // 요청 에러
     case decodedErr  // 디코딩 에러
     case pathErr     // 경로 에러
     case serverErr   // 서버 내부 오류
