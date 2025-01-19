@@ -43,6 +43,7 @@ class SpotSearchViewController: BaseViewController {
         
     override func viewDidDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         if isBeingDismissed {
             dismissCompletion?()
         }
