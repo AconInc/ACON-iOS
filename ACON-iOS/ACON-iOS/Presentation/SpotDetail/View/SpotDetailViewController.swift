@@ -63,7 +63,7 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
                                                   action: #selector(findCourseButtonTapped),
                                                   for: .touchUpInside)
         
-        spotDetailView.GotoTopButton.addTarget(self,
+        spotDetailView.gotoTopButton.addTarget(self,
                                                action: #selector(scrollToTopButtonTapped), for: .touchUpInside)
     }
 
