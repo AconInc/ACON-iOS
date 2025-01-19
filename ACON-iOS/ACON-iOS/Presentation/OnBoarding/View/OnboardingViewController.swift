@@ -320,3 +320,23 @@ extension OnboardingViewController {
     }
     
 }
+
+import SwiftUI
+
+struct OnboardingViewControllerPreview: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> OnboardingViewController {
+        return OnboardingViewController() // 뷰 컨트롤러 인스턴스 생성
+    }
+
+    func updateUIViewController(_ uiViewController: OnboardingViewController, context: Context) {
+        // 필요시 업데이트 로직 추가
+    }
+}
+
+struct OnboardingViewControllerPreview_Previews: PreviewProvider {
+    static var previews: some View {
+        OnboardingViewControllerPreview()
+            .edgesIgnoringSafeArea(.all) // 전체 화면 사용
+            .previewLayout(.sizeThatFits) // 화면 크기 맞추기
+    }
+}

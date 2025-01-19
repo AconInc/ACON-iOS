@@ -17,13 +17,13 @@ enum FavoriteSpotRankType: CaseIterable {
     var name: String {
         switch self {
         case .mood:
-            return "분위기와 인테리어가\n 감각적인 곳"
+            return "분위기가 감각적인"
         case .new:
-            return "새로운 음식을\n 경험할 수 있는 곳"
+            return "새로운 음식의 경험"
         case .quality:
-            return "가격과 양이\n 합리적인 곳"
+            return "합리적인 가격과 양"
         case .special:
-            return "특별한 날을 위한\n 고급스러운 장소"
+            return "특별한 날, 고급스러운"
         }
     }
 
