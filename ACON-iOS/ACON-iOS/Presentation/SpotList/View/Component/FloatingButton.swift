@@ -19,7 +19,7 @@ class FloatingButton: GlassmorphismView {
     
     // MARK: - LifeCycles
     
-    init(image: UIImage?, size: CGFloat = 36) {
+    init(image: UIImage?, size: CGFloat = 44) {
         self.image = image
         self.size = size
         
