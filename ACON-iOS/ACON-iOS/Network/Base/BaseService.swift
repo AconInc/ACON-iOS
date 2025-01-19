@@ -9,7 +9,7 @@ import Foundation
 
 import Moya
 
-final class BaseService<T: TargetType> {
+class BaseService<T: TargetType> {
 
     let provider: MoyaProvider<T>
     
@@ -54,7 +54,7 @@ final class BaseService<T: TargetType> {
         completion(networkResult)
     }
     
-    private func judgeStatus<U: Decodable>(
+    func judgeStatus<U: Decodable>(
         statusCode: Int,
         data: Data,
         type: U.Type
