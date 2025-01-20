@@ -60,7 +60,7 @@ final class LoginView: BaseView {
         super.setLayout()
         
         logoImageView.snp.makeConstraints {
-            $0.centerY.equalToSuperview().offset(-20)
+            $0.bottom.equalTo(-ScreenUtils.height/2)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(ScreenUtils.widthRatio*224)
         }
