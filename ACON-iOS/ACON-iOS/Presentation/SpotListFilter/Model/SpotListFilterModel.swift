@@ -7,8 +7,32 @@
 
 import Foundation
 
-struct SpotListFilterModel {
+struct SpotFilterModel: Equatable {
     
-    // TODO: 데이터 모델 구현
+    let latitude: Double
+    
+    let longitude: Double
+    
+    let condition: SpotConditionModel
+    
+}
+
+struct SpotConditionModel: Equatable {
+    
+    let spotType: String
+    
+    let filterList: [SpotFilterListModel]
+    
+    let walkingTime: Int
+    
+    let priceRange: Int
+    
+}
+
+struct SpotFilterListModel: Equatable {
+    
+    let category: String
+    
+    let optionList: [String]
     
 }
