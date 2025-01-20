@@ -12,14 +12,16 @@ class SpotListViewModel {
     
     // MARK: - Properties
     
+    var isNetworkingSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
+    
     var spotList: [SpotModel] = []
     
     var isUpdated: Bool = false
     
-    var isNetworkingSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
-    
     
     // MARK: - Filter
+    
+    // I will fix this on other branch ^^
     var spotType: ObservablePattern<SpotType> = ObservablePattern(.restaurant)
     
     var filter: SpotFilterModel = .init(
@@ -38,7 +40,6 @@ class SpotListViewModel {
     
     init() {
         ACLocationManager.shared.addDelegate(self)
-        
     }
     
     deinit {
@@ -65,6 +66,7 @@ extension SpotListViewModel {
         
         isNetworkingSuccess.value = true
     }
+    
 }
 
 
@@ -79,4 +81,5 @@ extension SpotListViewModel: ACLocationManagerDelegate {
         
         // TODO: 추천 장소 리스트 POST 서버통신 -> spotListModel.Spot POST
     }
+    
 }
