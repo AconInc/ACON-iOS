@@ -32,7 +32,11 @@ extension ACTabBarController {
         let appearance = UITabBarAppearance()
         
         appearance.do {
-            $0.backgroundColor = .glaB30
+            // 배경
+            $0.configureWithOpaqueBackground()
+            $0.backgroundColor = UIColor.clear.withAlphaComponent(0)
+            
+            // 아이템
             $0.stackedLayoutAppearance.normal.iconColor = .acWhite
             $0.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.acWhite]
             $0.stackedLayoutAppearance.selected.iconColor = .acWhite
@@ -41,6 +45,14 @@ extension ACTabBarController {
         
         tabBar.frame.size.height = ScreenUtils.height * 76/780
         tabBar.scrollEdgeAppearance = appearance
+        
+        // NOTE: 글라스모피즘 뷰 얹기
+        let glassView = GlassmorphismView()
+        tabBar.backgroundImage? = UIImage(systemName: "photo") ?? UIImage()
+        tabBar.addSubview(glassView)
+        glassView.snp.makeConstraints {
+            $0.edges.equalTo(tabBar)
+        }
     }
     
     private func setNavViewControllers() {
