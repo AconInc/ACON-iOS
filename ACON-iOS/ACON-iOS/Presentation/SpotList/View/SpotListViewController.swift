@@ -63,7 +63,15 @@ class SpotListViewController: BaseNavViewController {
 extension SpotListViewController {
     
     func bindViewModel() {
-        
+        spotListViewModel.isNetworkingSuccess.bind { [weak self] isSuccess in
+            guard let self = self else { return }
+            
+            if spotListViewModel.isUpdated {
+                spotListView.collectionView.reloadData()
+            }
+            endRefreshingAndTransparancy()
+            
+        }
     }
     
 }
@@ -75,26 +83,20 @@ private extension SpotListViewController {
     
     @objc
     func handleRefreshControl() {
-        print("refresh control 실행됨")
         spotListViewModel.requestLocation()
         
-        // TODO: 네트워크 요청
         
         DispatchQueue.main.async {
             // NOTE: 데이터 리로드 전 애니메이션
             UIView.animate(withDuration: 0.25, animations: {
                 self.spotListView.collectionView.alpha = 0.5 // 투명도 낮춤
             }) { _ in
-                // NOTE: 데이터 리로드
-                self.spotListView.collectionView.reloadData()
                 
-                // NOTE: 데이터 리로드 후 애니메이션 (천천히 올라오는 애니메이션)
-                UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseOut) {
-                    self.spotListView.collectionView.setContentOffset(.zero, animated: true)
-                    self.spotListView.collectionView.alpha = 1.0 // 투명도 복원
-                } completion: { _ in
-                    // NOTE: 리프레시 종료
-                    self.spotListView.collectionView.refreshControl?.endRefreshing()
+                // TODO: 네트워크 요청
+                
+                DispatchQueue.main.asyncAfter(deadline: .now()+1) { // TODO: 네트워킹동안 뷰 작동 테스트를 위한 것. 추후 삭제
+                    self.spotListViewModel.spotList = SpotModel.dummy
+                    self.spotListViewModel.fetchSpotList()
                 }
             }
         }
@@ -107,6 +109,24 @@ private extension SpotListViewController {
         
         present(vc, animated: true)
     }
+    
+}
+
+
+// MARK: - CollectionView Reload animation
+
+private extension SpotListViewController {
+    
+    func endRefreshingAndTransparancy() {
+        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseOut) {
+            self.spotListView.collectionView.setContentOffset(.zero, animated: true)
+            self.spotListView.collectionView.alpha = 1.0 // 투명도 복원
+        } completion: { _ in
+            // NOTE: 리프레시 종료
+            self.spotListView.collectionView.refreshControl?.endRefreshing()
+        }
+    }
+    
     
 }
 
@@ -171,11 +191,10 @@ extension SpotListViewController: UICollectionViewDataSource {
               ) as? SpotListCollectionViewCell
         else { return UICollectionViewCell() }
         
-        let spotList = spotListViewModel.spotList
-        
         let bgColor: MatchingRateBgColorType = indexPath.item == 0 ? .dark : .light
         
-        item.bind(spot: spotList[indexPath.item], matchingRateBgColor: bgColor)
+        item.bind(spot: spotListViewModel.spotList[indexPath.item],
+                  matchingRateBgColor: bgColor)
         
         return item
     }
