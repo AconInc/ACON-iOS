@@ -30,7 +30,8 @@ class LocalVerificationFinishedViewController: BaseViewController {
     var dismissCompletion: (() -> Void)?
         
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        super.viewDidDisappear(animated)
+        
         if isBeingDismissed {
             dismissCompletion?()
         }

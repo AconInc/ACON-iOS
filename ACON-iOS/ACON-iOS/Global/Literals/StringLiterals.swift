@@ -73,9 +73,9 @@ enum StringLiterals {
         
         static let uploadSpotName = "가게명 등록하기"
         
-        static let dropAcornsHere = "이곳에 도토리 남기기"
+        static let dropAcornsHere = "도토리로 리뷰남기기"
         
-        static let shallWeDropAcorns = "이제 도토리를\n떨어트려볼까요?"
+        static let shallWeDropAcorns = "도토리를 떨어트려\n리뷰를 남겨 볼까요?"
 
         static let useAcornToReview = "도토리를 사용해 리뷰를 남겨주세요."
         
@@ -96,6 +96,10 @@ enum StringLiterals {
         static let searchSpot = "가게명을 검색해주세요"
         
         static let noMatchingSpots = "앗! 일치하는 장소가 없어요."
+        
+        static let clickAcorn = "도토리를 터치해보세요"
+        
+        static let noAcorn = "도토리가 부족해요!"
         
     }
     
@@ -136,6 +140,7 @@ enum StringLiterals {
          static let localAcorn = "로컬 도토리"
 
          static let plainAcorn = "일반 도토리"
+        
      }
     
     enum SpotListFilter {
@@ -183,6 +188,7 @@ enum StringLiterals {
         
     }
     
+
     enum WebView {
         
         static let error = "에러"
@@ -202,4 +208,80 @@ enum StringLiterals {
         static let refreshToken = "refreshToken"
         
     }
+
+  
+    enum DislikeTypes {
+        
+        static let dakbal = "닭발"
+        
+        static let hoeYukhoe = "회/육회"
+        
+        static let gopchang = "곱창/대창/막창"
+        
+        static let soondae = "순대/선지"
+        
+        static let yanggogi = "양고기"
+        
+        static let none = " "
+
+    }
+    
+    enum FavoriteSpotRankTypes {
+
+        static let mood = "분위기가 감각적인"
+
+        static let new = "새로운 음식의 경험"
+
+        static let quality = "합리적인 가격과 양"
+
+        static let special = "특별한 날, 고급스러운"
+
+    }
+
+    enum FavoriteSpotTypes {
+
+        static let restaurant = "음식점"
+
+        static let cafe = "카페"
+
+    }
+
+    enum FavoriteSpotStyles {
+
+        static let nopo = "노포"
+
+        static let modern = "모던"
+
+    }
+
+    enum FavoriteCuisineTypes {
+
+        static let korean = "한식"
+
+        static let western = "양식"
+
+        static let chinese = "중식"
+
+        static let japanese = "일식"
+
+        static let koreanStreet = "분식"
+
+        static let asian = "아시안"
+
+    }
+    
+    enum OnboardingType {
+
+        static let progressNumberList = ["01", "02", "03", "04", "05"]
+        
+        static let progressTitleList = [
+            "어떤 음식을 피하고 싶으신가요?",
+            "선호 음식 Top3까지 순위를 매겨주세요.",
+            "지주 가는 곳이 어디인가요?",
+            "어떤 분위기의 공간이 좋으세요?",
+            "선호하는 맛집 스타일의\n 순위를 매겨주세요."
+        ]
+        
+    }
+    
 }

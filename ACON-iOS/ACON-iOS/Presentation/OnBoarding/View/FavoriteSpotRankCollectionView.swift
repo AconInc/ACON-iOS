@@ -66,7 +66,7 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return 5
+        return ScreenUtils.height * 12 / 780
     }
     
     func collectionView(
@@ -74,7 +74,7 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return ScreenUtils.width * 3 / 360
+        return ScreenUtils.width * 12 / 360
     }
     
     func collectionView(
@@ -83,8 +83,9 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegateFlowLayout {
         insetForSectionAt section: Int
     ) -> UIEdgeInsets {
         let horizontalInset = ScreenUtils.width * 20 / 360
+        let verticalInset = ScreenUtils.width * 84 / 780
         return UIEdgeInsets(
-            top: 0,
+            top: verticalInset,
             left: horizontalInset,
             bottom: 0,
             right: horizontalInset
