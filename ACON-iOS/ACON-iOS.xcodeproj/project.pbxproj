@@ -70,6 +70,7 @@
 		746261712D3EA50A00A4E84F /* SpotCategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261702D3EA50700A4E84F /* SpotCategoryType.swift */; };
 		746261732D3EA78700A4E84F /* GetReiviewVerificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261722D3EA78400A4E84F /* GetReiviewVerificationRequest.swift */; };
 		746261752D3EA7FD00A4E84F /* GetReviewVerificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261742D3EA7E500A4E84F /* GetReviewVerificationResponse.swift */; };
+		746261772D3EA88700A4E84F /* GetAcornCountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261762D3EA87B00A4E84F /* GetAcornCountResponse.swift */; };
 		746F39822D342523003F8498 /* SheetUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* SheetUtils.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
 		747F4FC12D3DC80B003DECBF /* finishedUpload.json in Resources */ = {isa = PBXBuildFile; fileRef = 747F4FC02D3DC80B003DECBF /* finishedUpload.json */; };
@@ -221,6 +222,7 @@
 		746261702D3EA50700A4E84F /* SpotCategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotCategoryType.swift; sourceTree = "<group>"; };
 		746261722D3EA78400A4E84F /* GetReiviewVerificationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReiviewVerificationRequest.swift; sourceTree = "<group>"; };
 		746261742D3EA7E500A4E84F /* GetReviewVerificationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReviewVerificationResponse.swift; sourceTree = "<group>"; };
+		746261762D3EA87B00A4E84F /* GetAcornCountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAcornCountResponse.swift; sourceTree = "<group>"; };
 		746F39812D342520003F8498 /* SheetUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetUtils.swift; sourceTree = "<group>"; };
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
 		747F4FC02D3DC80B003DECBF /* finishedUpload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = finishedUpload.json; sourceTree = "<group>"; };
@@ -595,6 +597,7 @@
 		746261612D3EA17800A4E84F /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				746261762D3EA87B00A4E84F /* GetAcornCountResponse.swift */,
 				746261742D3EA7E500A4E84F /* GetReviewVerificationResponse.swift */,
 				746261722D3EA78400A4E84F /* GetReiviewVerificationRequest.swift */,
 				7462616E2D3EA47900A4E84F /* GetSearchKeywordResponse.swift */,
@@ -1200,6 +1203,7 @@
 				748D6F8B2D2BD31B007690B4 /* UIStackView+.swift in Sources */,
 				748D6F912D2BD450007690B4 /* UILabel+.swift in Sources */,
 				741E68AA2D3D625E00DF99EF /* TestResponse.swift in Sources */,
+				746261772D3EA88700A4E84F /* GetAcornCountResponse.swift in Sources */,
 				1547A8822D358E3000E96616 /* SpotListFilterViewController.swift in Sources */,
 				748D6FAA2D2C3FF1007690B4 /* BaseCollectionViewCell.swift in Sources */,
 				748ECA6B2D31918D00BBC981 /* LoginView.swift in Sources */,
