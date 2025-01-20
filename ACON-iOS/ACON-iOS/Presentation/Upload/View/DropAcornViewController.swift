@@ -25,9 +25,9 @@ class DropAcornViewController: BaseNavViewController {
     
     var spotReviewViewModel = SpotReviewViewModel()
     
-    var spotID: Int = 0
+    var spotID: Int64 = 0
     
-    init(spotID: Int) {
+    init(spotID: Int64) {
         self.spotID = spotID
         super.init(nibName: nil, bundle: nil)
     }

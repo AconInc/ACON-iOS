@@ -23,7 +23,7 @@ class SpotUploadViewController: BaseNavViewController {
     
     var spotReviewViewModel = SpotReviewViewModel()
     
-    var selectedSpotID: Int = -1
+    var selectedSpotID: Int64 = -1
     
 //    var selectedSpotName: String = ""
     

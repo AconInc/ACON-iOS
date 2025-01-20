@@ -9,7 +9,7 @@ import Foundation
 
 struct SearchKeywordModel: Equatable {
     
-    let spotID: Int
+    let spotID: Int64
     
     let spotName: String
     
@@ -17,7 +17,7 @@ struct SearchKeywordModel: Equatable {
     
     let spotType: String
     
-    init(spotID: Int,
+    init(spotID: Int64,
          spotName: String,
          spotAddress: String,
          spotType: String) {
@@ -41,13 +41,13 @@ struct SearchSuggestionModel: Equatable {
 
 struct VerifyReviewModel: Equatable {
     
-    let spotID: Int
+    let spotID: Int64
     
     let latitude: Double
     
     let logitude: Double
     
-    init(spotID: Int, latitude: Double, logitude: Double) {
+    init(spotID: Int64, latitude: Double, logitude: Double) {
         self.spotID = spotID
         self.latitude = latitude
         self.logitude = logitude
@@ -58,11 +58,11 @@ struct VerifyReviewModel: Equatable {
 
 struct ReviewPostModel: Equatable {
     
-    let spotID: Int
+    let spotID: Int64
     
     let acornCount: Int
     
-    init(spotID: Int, acornCount: Int) {
+    init(spotID: Int64, acornCount: Int) {
         self.spotID = spotID
         self.acornCount = acornCount
     }

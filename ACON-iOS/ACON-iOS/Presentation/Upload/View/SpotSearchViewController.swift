@@ -25,9 +25,9 @@ class SpotSearchViewController: BaseViewController {
     
     private let acDebouncer = ACDebouncer(delay: 0.3)
     
-    var completionHandler: ((Int, String) -> Void)?
+    var completionHandler: ((Int64, String) -> Void)?
     
-    private var selectedSpotId: Int = 0
+    private var selectedSpotId: Int64 = 0
     
     private var selectedSpotName: String = ""
       
