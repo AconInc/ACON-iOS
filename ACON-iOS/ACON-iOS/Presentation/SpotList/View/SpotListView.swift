@@ -55,7 +55,8 @@ class SpotListView: BaseView {
         
         collectionView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(18)
-            $0.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
+            $0.bottom.equalToSuperview()
         }
         
         floatingButtonStack.snp.makeConstraints {
