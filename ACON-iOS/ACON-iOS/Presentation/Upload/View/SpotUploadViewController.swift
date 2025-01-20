@@ -31,8 +31,6 @@ class SpotUploadViewController: BaseNavViewController {
     
     var longitude: Double = 0
     
-    // NOTE: isModalPresenting, isLocationUpdated으로 플래그 검증 시도해봤으나, 유무 상관없이 튕김 🍠
-    
     
     // MARK: - LifeCycle
     
@@ -129,18 +127,6 @@ private extension SpotUploadViewController {
         let vc = DropAcornViewController(spotID: selectedSpotID)
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: false)
-//        // 현재 화면을 dismiss하고 바로 네비게이션을 present
-//        self.dismiss(animated: true) { [weak self] in
-//            self?.tabBarController?.present(navigationController, animated: false)
-//        }
-//        TODO: - 🍠 딱히 이거의 타이밍 시점도 아닌 것 같음 -> 해결되면 지우기
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-//            guard let self = self else { return }
-//            let vc = DropAcornViewController(spotID: selectedSpotID)
-//            self.navigationController?.pushViewController(vc, animated: false)
-//        }
-//        let vc = DropAcornViewController(spotID: selectedSpotID)
-//        navigationController?.pushViewController(vc, animated: false)
     }
     
     @objc
@@ -174,32 +160,14 @@ extension SpotUploadViewController: ACLocationManagerDelegate {
 extension SpotUploadViewController {
     
     func setSpotSearchModal() {
-        print("===== setSpotSearchModal 시작 =====")
-        // TODO: - 🍠 이미 모달이 표시되어있는 문제도 아닌 듯. 해결되면 지울 것
-//        print("isModalPresenting", isModalPresenting)
-//        if presentedViewController == nil {
-//            isModalPresenting = false  // 실제로 표시된 모달이 없으면 강제로 false로 리셋
-//        }
-//        guard !isModalPresenting else { return }  // 이미 모달이 표시중이면 리턴
-        presentSpotSearchModal()
-    }
-    
-    func presentSpotSearchModal() {
-        print("===== presentSpotSearchModal 시작 =====")
-
         let vc = SpotSearchViewController()
-        // TODO: 🍠 메인 스레드 업데이트도 딱히 의미없어보임. 해결되면 걍 없이 ㄱㄱ할 것
-        // NOTE: - 튕기는 시점도 제각각 🍠
-        // NOTE: - 정상 프로세스와 튕기는 프로세스의 콘솔이 아예 일치할 때도 있음...🍠
         vc.dismissCompletion = { [weak self] in
-            print("===== dismissCompletion 호출 =====")
             DispatchQueue.main.async {
                 self?.removeBlurView()
             }
         }
         
         vc.completionHandler = { [weak self] selectedSpotID, selectedSpotName in
-            print("===== completionHandler 호출 =====")
             guard let self = self else { return }
             self.selectedSpotID = selectedSpotID
             
@@ -227,10 +195,8 @@ extension SpotUploadViewController {
             guard let self = self else { return }
             self.addBlurView()
             vc.setLongSheetLayout()
-            self.present(vc, animated: true) {
-                print("===== present 완료 =====")
-            }
+            self.present(vc, animated: true)
         }
     }
-
+    
 }
