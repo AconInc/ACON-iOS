@@ -1,0 +1,16 @@
+//
+//  SearchSuggestionRequest.swift
+//  ACON-iOS
+//
+//  Created by 이수민 on 1/21/25.
+//
+
+import Foundation
+
+struct SearchSuggestionRequest: Codable {
+    
+    let latitude: Double
+    
+    let longitude: Double
+    
+}
