@@ -55,7 +55,16 @@ class ReviewFinishedViewController: BaseNavViewController {
         }
     }
     
+    override func setStyle() {
+        super.setStyle()
+        
+        self.setXButton()
+    }
+    
     func addTarget() {
+        self.leftButton.addTarget(self,
+                                  action: #selector(xButtonTapped),
+                                  for: .touchUpInside)
         reviewFinishedView.okButton.addTarget(self,
                                               action: #selector(okButtonTapped),
                                               for: .touchUpInside)
@@ -67,6 +76,11 @@ class ReviewFinishedViewController: BaseNavViewController {
 // MARK: - @objc functions
 
 private extension ReviewFinishedViewController {
+    
+    @objc
+    func xButtonTapped() {
+        closeView()
+    }
     
     @objc
     func okButtonTapped() {

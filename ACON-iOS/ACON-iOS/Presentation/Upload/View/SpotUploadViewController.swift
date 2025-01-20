@@ -39,8 +39,6 @@ class SpotUploadViewController: BaseNavViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setXButton()
-        self.setSecondTitleLabelStyle(title: StringLiterals.Upload.upload)
         addTarget()
         ACLocationManager.shared.addDelegate(self)
         bindViewModel()
@@ -73,6 +71,8 @@ class SpotUploadViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
+        self.setXButton()
+        self.setSecondTitleLabelStyle(title: StringLiterals.Upload.upload)
         self.spotUploadView.dropAcornButton.isEnabled = false
     }
     
@@ -138,7 +138,8 @@ private extension SpotUploadViewController {
     
     @objc
     func xButtonTapped() {
-        // TODO: 작성을 그만두시겠습니까 Alert 띄우기
+        let alertHandler = AlertHandler()
+        alertHandler.showReviewExitAlert(from: self)
     }
     
 }

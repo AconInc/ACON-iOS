@@ -116,7 +116,8 @@ private extension DropAcornViewController {
     
     @objc
     func xButtonTapped() {
-        // TODO: 작성을 그만두시겠습니까 Alert 띄우기
+        let alertHandler = AlertHandler()
+        alertHandler.showReviewExitAlert(from: self)
     }
     
 }
