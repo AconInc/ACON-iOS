@@ -63,7 +63,7 @@ class SpotSearchViewModel {
                 }
                 self?.searchKeywordData.value = searchKeywords
             default:
-                print("Failed To Post")
+                print("VM - Fail to getSearchKeyword")
                 self?.onSuccessGetSearchKeyword.value = false
                 return
             }
