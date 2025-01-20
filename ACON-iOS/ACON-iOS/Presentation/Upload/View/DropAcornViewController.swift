@@ -160,6 +160,7 @@ private extension DropAcornViewController {
             ACToastController.show(StringLiterals.Upload.noAcorn, bottomInset: 112, delayTime: 1)
             { [weak self] in return }
             dropAcornView.dropAcornLottieView.isHidden = true
+            disableLeaveReviewButton()
         } else {
             dropAcornView.dropAcornLottieView.isHidden = false
             toggleLottie(dropAcorn: dropAcorn)
@@ -174,10 +175,18 @@ private extension DropAcornViewController {
 
 private extension DropAcornViewController {
     
+    // TODO: - 나중에 전부 buttonConfiguration에 넣고 enable만 toggle
     func enableLeaveReviewButton() {
         dropAcornView.leaveReviewButton.do {
             $0.isEnabled = true
             $0.backgroundColor = .org0
+        }
+    }
+    
+    func disableLeaveReviewButton() {
+        dropAcornView.leaveReviewButton.do {
+            $0.isEnabled = false
+            $0.backgroundColor = .gray5
         }
     }
     
