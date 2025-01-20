@@ -5,6 +5,7 @@
 //  Created by 김유림 on 1/13/25.
 //
 
+import CoreLocation
 import Foundation
 
 class SpotListViewModel {
@@ -17,6 +18,23 @@ class SpotListViewModel {
     
     var firstSpotList: [SpotModel] = []
     var secondSpotList: [SpotModel] = []
+    
+    
+    // MARK: - Filter
+    var spotType: ObservablePattern<SpotType> = ObservablePattern(.restaurant)
+    
+    var userCoordinate: CLLocationCoordinate2D?
+    
+    var filter: SpotFilterModel = .init(
+        latitude: 0,
+        longitude: 0,
+        condition: SpotConditionModel(
+            spotType: SpotType.restaurant.text,
+            filterList: [],
+            walkingTime: -1,
+            priceRange: -1
+        )
+    )
     
     
     // MARK: - Methods
@@ -36,4 +54,19 @@ class SpotListViewModel {
         secondSpotList = Array(spotList.dropFirst(2))
     }
     
+    
+    
+    
+    
+    
+    
+}
+
+extension SpotListViewModel: ACLocationManagerDelegate {
+    
+    func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
+        print("성공 - 위도: \(coordinate.latitude), 경도: \(coordinate.longitude)")
+        self.userCoordinate = coordinate
+        //        pushToLocalMapVC()
+    }
 }

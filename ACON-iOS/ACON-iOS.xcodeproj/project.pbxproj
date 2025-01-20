@@ -16,7 +16,6 @@
 		1547A8802D358E2700E96616 /* SpotListFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A87F2D358E2700E96616 /* SpotListFilterView.swift */; };
 		1547A8822D358E3000E96616 /* SpotListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A8812D358E3000E96616 /* SpotListFilterViewController.swift */; };
 		1547A8852D3595B600E96616 /* SpotListFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A8842D3595B600E96616 /* SpotListFilterModel.swift */; };
-		1547A8882D3595E000E96616 /* SpotListFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A8872D3595E000E96616 /* SpotListFilterViewModel.swift */; };
 		1547A88B2D3596B600E96616 /* SpotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A88A2D3596B600E96616 /* SpotType.swift */; };
 		1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A88D2D35B13700E96616 /* FilterTagButton.swift */; };
 		1547A8902D35B30C00E96616 /* FilterTagButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A88F2D35B30C00E96616 /* FilterTagButtonType.swift */; };
@@ -153,7 +152,6 @@
 		1547A87F2D358E2700E96616 /* SpotListFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListFilterView.swift; sourceTree = "<group>"; };
 		1547A8812D358E3000E96616 /* SpotListFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListFilterViewController.swift; sourceTree = "<group>"; };
 		1547A8842D3595B600E96616 /* SpotListFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListFilterModel.swift; sourceTree = "<group>"; };
-		1547A8872D3595E000E96616 /* SpotListFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListFilterViewModel.swift; sourceTree = "<group>"; };
 		1547A88A2D3596B600E96616 /* SpotType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotType.swift; sourceTree = "<group>"; };
 		1547A88D2D35B13700E96616 /* FilterTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagButton.swift; sourceTree = "<group>"; };
 		1547A88F2D35B30C00E96616 /* FilterTagButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagButtonType.swift; sourceTree = "<group>"; };
@@ -382,7 +380,6 @@
 		1547A8862D3595C800E96616 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				1547A8872D3595E000E96616 /* SpotListFilterViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1183,7 +1180,6 @@
 				741A06CA2D35415800778219 /* DropAcornViewController.swift in Sources */,
 				15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */,
 				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
-				1547A8882D3595E000E96616 /* SpotListFilterViewModel.swift in Sources */,
 				1547A88B2D3596B600E96616 /* SpotType.swift in Sources */,
 				74BF92172D393B4A00B923E3 /* Int+.swift in Sources */,
 				748ECA6E2D3196F100BBC981 /* LoginViewController.swift in Sources */,
