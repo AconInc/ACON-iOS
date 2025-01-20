@@ -11,7 +11,7 @@ import Moya
 
 enum LocalVerificationTargetType {
     
-    case postLocalArea
+    case postLocalArea(requestBody: PostLocalAreaRequest)
     
 }
 
@@ -32,7 +32,10 @@ extension LocalVerificationTargetType: TargetType {
     }
     
     var task: Task {
-        return .requestPlain
+        switch self {
+        case .postLocalArea(let requestBody):
+            return .requestJSONEncodable(requestBody)
+        }
     }
     
     var headers: [String : String]? {
