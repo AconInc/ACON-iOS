@@ -50,6 +50,7 @@ class DropAcornViewController: BaseNavViewController {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = true
+        spotReviewViewModel.getAcornNum()
     }
     
     override func setHierarchy() {
