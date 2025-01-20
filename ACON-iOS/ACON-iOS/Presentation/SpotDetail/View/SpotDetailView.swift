@@ -54,7 +54,7 @@ final class SpotDetailView: BaseView {
         $0.itemSize = CGSize(width: ScreenUtils.width*320/360, height: ScreenUtils.height*110/780)
     }
     
-    private let navViewHeight: CGFloat = ScreenUtils.widthRatio * 56
+    private let navViewHeight: CGFloat = ScreenUtils.heightRatio * 56
     
     // MARK: - Lifecycle
     
