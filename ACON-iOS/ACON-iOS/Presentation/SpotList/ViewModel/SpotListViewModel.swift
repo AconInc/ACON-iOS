@@ -20,10 +20,13 @@ class SpotListViewModel {
     var secondSpotList: [SpotModel] = []
     
     
+    // 위치 정보를 바인딩할 프로퍼티
+    var currentLocation: ObservablePattern<CLLocationCoordinate2D> = ObservablePattern(nil)
+    var locationError: ObservablePattern<String> = ObservablePattern(nil)
+    
+    
     // MARK: - Filter
     var spotType: ObservablePattern<SpotType> = ObservablePattern(.restaurant)
-    
-    var userCoordinate: CLLocationCoordinate2D?
     
     var filter: SpotFilterModel = .init(
         latitude: 0,
@@ -46,7 +49,15 @@ class SpotListViewModel {
             
             splitSpotList(spotList)
         }
+        // 델리게이트 등록
+        ACLocationManager.shared.addDelegate(self)
     }
+    
+    deinit {
+        // 델리게이트 제거
+        ACLocationManager.shared.removeDelegate(self)
+    }
+    
     
     // TODO: 서버와 논의 후 변경 예정
     private func splitSpotList(_ spotList: [SpotModel]) {
@@ -55,18 +66,36 @@ class SpotListViewModel {
     }
     
     
+
+
     
-    
-    
-    
+    func requestLocation() {
+        // 위치 권한 요청 및 업데이트 시작
+        ACLocationManager.shared.requestLocationAuthorization()
+        ACLocationManager.shared.startUpdatingLocation()
+    }
     
 }
 
+
 extension SpotListViewModel: ACLocationManagerDelegate {
     
+    // MARK: - ACLocationManagerDelegate Methods
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
-        print("성공 - 위도: \(coordinate.latitude), 경도: \(coordinate.longitude)")
-        self.userCoordinate = coordinate
-        //        pushToLocalMapVC()
+        // 위치 업데이트 시 호출
+        currentLocation = coordinate
+    }
+    
+//    func locationManager(_ manager: ACLocationManager, didFailWithError error: Error, vc: UIViewController?) {
+//        // 에러 발생 시 호출
+//        locationError = error.localizedDescription
+//    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: ACLocationManager) {
+        // 권한 변경 시 호출
+        if manager.locationManager.authorizationStatus == .authorizedWhenInUse ||
+           manager.locationManager.authorizationStatus == .authorizedAlways {
+            manager.locationManager.requestLocation()
+        }
     }
 }
