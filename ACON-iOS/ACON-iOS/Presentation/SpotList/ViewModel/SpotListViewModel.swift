@@ -12,7 +12,11 @@ class SpotListViewModel {
     
     // MARK: - Properties
     
-    var spotList: [SpotModel] = SpotModel.dummy
+    var spotList: [SpotModel] = []
+    
+    var isUpdated: Bool = false
+    
+    var isNetworkingSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
     
     
     // MARK: - Filter
@@ -34,6 +38,7 @@ class SpotListViewModel {
     
     init() {
         ACLocationManager.shared.addDelegate(self)
+        
     }
     
     deinit {
@@ -48,7 +53,22 @@ class SpotListViewModel {
 }
 
 
-// MARK: - ACLocationManager Delegate
+// MARK: - Networking
+
+extension SpotListViewModel {
+    
+    func fetchSpotList() {
+        
+        // TODO: spotList와 새로 fetch된 데이터 비교하여 isUpdated set
+        
+        isUpdated = true
+        
+        isNetworkingSuccess.value = true
+    }
+}
+
+
+// MARK: - ACLocationManagerDelegate
 
 extension SpotListViewModel: ACLocationManagerDelegate {
     
@@ -56,7 +76,6 @@ extension SpotListViewModel: ACLocationManagerDelegate {
                          didUpdateLocation coordinate: CLLocationCoordinate2D) {
         
         print("🛠️ coordinate: \(coordinate)")
-        
         
         // TODO: 추천 장소 리스트 POST 서버통신 -> spotListModel.Spot POST
     }
