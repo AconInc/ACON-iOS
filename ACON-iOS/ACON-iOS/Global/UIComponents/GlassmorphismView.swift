@@ -11,7 +11,7 @@ class GlassmorphismView: BaseView {
     
     // MARK: - Properties
     
-    private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+    private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
     
     private let vibrancyEffectView = UIVisualEffectView(
         effect: UIVibrancyEffect(blurEffect: UIBlurEffect(style: .regular))
