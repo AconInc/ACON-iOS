@@ -59,6 +59,7 @@
 		745C7E152D35AEC10074DBDB /* SpotSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E142D35AEBB0074DBDB /* SpotSearchViewModel.swift */; };
 		746F15B72D3E2083003EA031 /* LocalVerificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15B62D3E2079003EA031 /* LocalVerificationRequest.swift */; };
 		746F15B92D3E212D003EA031 /* LocalVerificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15B82D3E2125003EA031 /* LocalVerificationResponse.swift */; };
+		746F15BB2D3E2167003EA031 /* LocalVerificationTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15BA2D3E215C003EA031 /* LocalVerificationTargetType.swift */; };
 		746F39822D342523003F8498 /* SheetUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* SheetUtils.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
 		748D6F412D2BC482007690B4 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F402D2BC482007690B4 /* Moya */; };
@@ -198,6 +199,7 @@
 		745C7E142D35AEBB0074DBDB /* SpotSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotSearchViewModel.swift; sourceTree = "<group>"; };
 		746F15B62D3E2079003EA031 /* LocalVerificationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationRequest.swift; sourceTree = "<group>"; };
 		746F15B82D3E2125003EA031 /* LocalVerificationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationResponse.swift; sourceTree = "<group>"; };
+		746F15BA2D3E215C003EA031 /* LocalVerificationTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationTargetType.swift; sourceTree = "<group>"; };
 		746F39812D342520003F8498 /* SheetUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetUtils.swift; sourceTree = "<group>"; };
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
 		748D6F612D2BCA1C007690B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -562,6 +564,7 @@
 		746F15B42D3E2041003EA031 /* LocalVerification */ = {
 			isa = PBXGroup;
 			children = (
+				746F15BA2D3E215C003EA031 /* LocalVerificationTargetType.swift */,
 				746F15B52D3E2073003EA031 /* DTO */,
 			);
 			path = LocalVerification;
@@ -1213,6 +1216,7 @@
 				748ECA6E2D3196F100BBC981 /* LoginViewController.swift in Sources */,
 				D6E34C432D398B6000CEFA04 /* CustomAlertImageViewController.swift in Sources */,
 				741E68952D3D38BC00DF99EF /* BaseService.swift in Sources */,
+				746F15BB2D3E2167003EA031 /* LocalVerificationTargetType.swift in Sources */,
 				D6E34C462D398B6000CEFA04 /* AlertType.swift in Sources */,
 				D6E34C472D398B6000CEFA04 /* CustomAlertViewController.swift in Sources */,
 				745C7E022D358E900074DBDB /* SpotSearchView.swift in Sources */,
