@@ -13,7 +13,7 @@ class SpotListFilterViewController: BaseViewController {
     
     private let spotListFilterView = SpotListFilterView()
     
-    private let viewModel = SpotListFilterViewModel()
+    private let viewModel = SpotListViewModel()
     
     
     // MARK: - LifeCycles
