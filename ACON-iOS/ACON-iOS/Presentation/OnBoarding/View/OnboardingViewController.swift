@@ -363,6 +363,9 @@ extension OnboardingViewController {
     @objc private func nextButtonTapped() {
         if currentStep >= StringLiterals.OnboardingType.progressNumberList.count - 1 {
             
+            // NOTE: POST
+            viewModel.onbaordingNewworking()
+            
             let analyzingVC = AnalyzingViewController()
             analyzingVC.modalPresentationStyle = .fullScreen
             present(analyzingVC, animated: true, completion: nil)
