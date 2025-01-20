@@ -202,8 +202,8 @@ extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedSpotId = spotSearchViewModel.searchKeywordDummyData[indexPath.item].spotID
-        selectedSpotName = spotSearchViewModel.searchKeywordDummyData[indexPath.item].spotName
+        selectedSpotId = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotID ?? 1
+        selectedSpotName = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotName ?? ""
         spotSearchView.searchTextField.text = selectedSpotName
         self.dismissKeyboard()
     }
@@ -248,7 +248,8 @@ extension SpotSearchViewController: UITextFieldDelegate {
 extension SpotSearchViewController{
     
     func updateSearchKeyword(_ text: String) {
-        // 뷰모델 서버통신함수 새로 부르기 - spotSearchViewModel.getSpotKeyword()
+        spotSearchViewModel.getSearchKeyword(keyword: text)
+        // TODO: - 빈 리스트?
     }
     
 }
