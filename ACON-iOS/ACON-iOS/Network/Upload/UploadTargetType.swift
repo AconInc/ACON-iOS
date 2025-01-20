@@ -11,10 +11,10 @@ import Moya
 
 enum UploadTargetType {
     
-    case getSearchSuggestion(parameter: GetSearchSuggestionRequest)
-    case postReviewRequest
-    case getSearchKeyword(parameter: GetSearchKeywordRequest)
-    case getReviewVerification(parameter: GetReviewVerificationRequest)
+    case getSearchSuggestion(_ parameter: GetSearchSuggestionRequest)
+    case postReview
+    case getSearchKeyword(_ parameter: GetSearchKeywordRequest)
+    case getReviewVerification(_ parameter: GetReviewVerificationRequest)
     case getAcornCount
     
 }
@@ -23,7 +23,7 @@ extension UploadTargetType: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .postReviewRequest:
+        case .postReview:
             return .post
         default:
             return .get
@@ -34,7 +34,7 @@ extension UploadTargetType: TargetType {
         switch self {
         case .getSearchSuggestion:
             return utilPath + "/search-suggestions"
-        case .postReviewRequest:
+        case .postReview:
             return utilPath + "/review"
         case .getSearchKeyword:
             return utilPath + "/spots/search"
@@ -75,7 +75,7 @@ extension UploadTargetType: TargetType {
             headers = HeaderType.noHeader
         case .getSearchSuggestion:
             headers = HeaderType.basicHeader
-        case .postReviewRequest, .getAcornCount:
+        case .postReview, .getAcornCount:
             // TODO: - 추후 유저디폴트 토큰으로 변경
             let token = ""
             headers = HeaderType.headerWithToken(token: "Bearer " + token)
