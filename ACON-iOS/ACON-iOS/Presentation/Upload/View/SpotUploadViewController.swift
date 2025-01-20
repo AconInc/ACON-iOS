@@ -142,8 +142,6 @@ extension SpotUploadViewController: ACLocationManagerDelegate {
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
         // TODO: - 연관검색어 네트워크 요청 - 여기 아니면 spotSearch viewWillAppear
 
-        manager.stopUpdatingLocation()
-        manager.removeDelegate(self)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
