@@ -33,15 +33,15 @@ extension UploadTargetType: TargetType {
     var path: String {
         switch self {
         case .getSearchSuggestion:
-            return utilPath + "/search-suggestions"
+            return utilPath + "search-suggestions"
         case .postReview:
-            return utilPath + "/review"
+            return utilPath + "review"
         case .getSearchKeyword:
-            return utilPath + "/spots/search"
+            return utilPath + "spots/search"
         case .getReviewVerification:
-            return utilPath + "/spot/verify"
+            return utilPath + "spot/verify"
         case .getAcornCount:
-            return utilPath + "/member/acorn"
+            return utilPath + "member/acorn"
         }
     }
     
