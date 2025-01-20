@@ -1,5 +1,5 @@
 //
-//  SearchSuggestionResponse.swift
+//  GetSearchSuggestionResponse.swift
 //  ACON-iOS
 //
 //  Created by 이수민 on 1/21/25.
@@ -7,8 +7,7 @@
 
 import Foundation
 
-
-struct SearchSuggestionResponse: Codable {
+struct GetSearchSuggestionResponse: Codable {
     
     let suggestionList: [SearchSuggestionKeyword]
     
