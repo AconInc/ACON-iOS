@@ -132,7 +132,7 @@ private extension DropAcornViewController {
         self.spotReviewViewModel.onSuccessGetAcornNum.bind { [weak self] onSuccess in
             guard let onSuccess, let data = self?.spotReviewViewModel.acornNum.value else { return }
             if onSuccess {
-                self?.possessAcornCount = data.acornCount
+                self?.possessAcornCount = data
                 self?.dropAcornView.bindData(data)
             }
         }

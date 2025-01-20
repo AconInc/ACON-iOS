@@ -68,13 +68,3 @@ struct ReviewPostModel: Equatable {
     }
     
 }
-
-struct AcornCountModel: Equatable {
-    
-    let acornCount: Int
-    
-    init(acornCount: Int) {
-        self.acornCount = acornCount
-    }
-    
-}

@@ -11,7 +11,7 @@ class SpotReviewViewModel {
     
     let onSuccessGetAcornNum: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var acornNum: ObservablePattern<AcornCountModel> = ObservablePattern(nil)
+    var acornNum: ObservablePattern<Int> = ObservablePattern(nil)
     
     let onSuccessPostReview: ObservablePattern<Bool> = ObservablePattern(nil)
     
