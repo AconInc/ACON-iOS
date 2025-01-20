@@ -364,11 +364,18 @@ extension OnboardingViewController {
         if currentStep >= StringLiterals.OnboardingType.progressNumberList.count - 1 {
             
             // NOTE: POST
-            viewModel.onbaordingNewworking()
-            
-            let analyzingVC = AnalyzingViewController()
-            analyzingVC.modalPresentationStyle = .fullScreen
-            present(analyzingVC, animated: true, completion: nil)
+            viewModel.postOnboarding() { [weak self] success in
+                guard let self = self else { return }
+
+                if success {
+                    let analyzingVC = AnalyzingViewController()
+                    analyzingVC.modalPresentationStyle = .fullScreen
+                    self.present(analyzingVC, animated: true, completion: nil)
+                } else {
+                    print("pls retry, it failed")
+
+                }
+            }
             return
         }
         

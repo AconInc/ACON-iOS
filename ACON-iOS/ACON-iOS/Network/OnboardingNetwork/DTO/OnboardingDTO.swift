@@ -7,10 +7,12 @@
 
 import Foundation
 
-struct OnboardingDTO: Codable {
+struct OnboardingRequest: Codable {
+    
     let dislikeFoodList: [String]
     let favoriteCuisineRank: [String]
     let favoriteSpotType: String
     let favoriteSpotStyle: String
     let favoriteSpotRank: [String]
+    
 }

@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum OnboardingAPI {
-    case postOnboarding(data: OnboardingDTO)
+    case postOnboarding(data: OnboardingRequest)
 }
 
 extension OnboardingAPI: TargetType {

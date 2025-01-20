@@ -615,6 +615,7 @@
 		748D6F712D2BCA7E007690B4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				D6AF15612D3E8A3700289683 /* OnboardingNetwork */,
 				741E68A32D3D616200DF99EF /* Test */,
 				743069872D3D2EDA0033178C /* Base */,
 			);
@@ -883,6 +884,16 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
+		D6AF15612D3E8A3700289683 /* OnboardingNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				D61917EA2D3E483E001BF0EE /* DTO */,
+				D6978F532D37B29100523A25 /* OnboardingService.swift */,
+				D61917E82D3E4410001BF0EE /* OnboardingAPI.swift */,
+			);
+			path = OnboardingNetwork;
+			sourceTree = "<group>";
+		};
 		D6D0F4FC2D36B8D300326F17 /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -920,9 +931,6 @@
 		D6D0F5002D36B95400326F17 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D61917EA2D3E483E001BF0EE /* DTO */,
-				D6978F532D37B29100523A25 /* OnboardingService.swift */,
-				D61917E82D3E4410001BF0EE /* OnboardingAPI.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

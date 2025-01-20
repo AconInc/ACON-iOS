@@ -8,8 +8,9 @@
 import UIKit
 
 final class OnboardingService: BaseService<OnboardingAPI> {
+    
     func postOnboarding(
-        onboardingData: OnboardingDTO,
+        onboardingData: OnboardingRequest,
         completion: @escaping (NetworkResult<EmptyResponse>) -> Void
     ) {
         self.request(
@@ -18,4 +19,5 @@ final class OnboardingService: BaseService<OnboardingAPI> {
             completion: completion
         )
     }
+    
 }
