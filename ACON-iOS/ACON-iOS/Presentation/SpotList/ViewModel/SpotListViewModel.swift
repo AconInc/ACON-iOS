@@ -13,10 +13,10 @@ class SpotListViewModel {
     
     var isFirstPage: ObservablePattern<Bool> = ObservablePattern(true)
     
-    private var givenSpotList: ObservablePattern<[Spot]> = ObservablePattern(Spots.dummy)
+    private var givenSpotList: ObservablePattern<[SpotModel]> = ObservablePattern(SpotModel.dummy)
     
-    var firstSpotList: [Spot] = []
-    var secondSpotList: [Spot] = []
+    var firstSpotList: [SpotModel] = []
+    var secondSpotList: [SpotModel] = []
     
     
     // MARK: - Methods
@@ -31,7 +31,7 @@ class SpotListViewModel {
     }
     
     // TODO: 서버와 논의 후 변경 예정
-    private func splitSpotList(_ spotList: [Spot]) {
+    private func splitSpotList(_ spotList: [SpotModel]) {
         firstSpotList = Array(spotList.prefix(2))
         secondSpotList = Array(spotList.dropFirst(2))
     }
