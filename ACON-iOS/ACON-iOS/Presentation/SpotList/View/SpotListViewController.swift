@@ -160,19 +160,18 @@ extension SpotListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        guard let spotList = spotListViewModel.spotList.value else { return 0 }
-        
-        return spotList.count
+        return spotListViewModel.spotList.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let spotList = spotListViewModel.spotList.value,
-              let item = collectionView.dequeueReusableCell(
+        guard let item = collectionView.dequeueReusableCell(
                 withReuseIdentifier: SpotListCollectionViewCell.cellIdentifier,
                 for: indexPath
               ) as? SpotListCollectionViewCell
         else { return UICollectionViewCell() }
+        
+        let spotList = spotListViewModel.spotList
         
         let bgColor: MatchingRateBgColorType = indexPath.item == 0 ? .dark : .light
         

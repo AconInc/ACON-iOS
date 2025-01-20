@@ -12,7 +12,7 @@ class SpotListViewModel {
     
     // MARK: - Properties
     
-    var spotList: ObservablePattern<[SpotModel]> = ObservablePattern(SpotModel.dummy)
+    var spotList: [SpotModel] = SpotModel.dummy
     
     
     // MARK: - Filter
@@ -47,6 +47,8 @@ class SpotListViewModel {
     
 }
 
+
+// MARK: - ACLocationManager Delegate
 
 extension SpotListViewModel: ACLocationManagerDelegate {
     
