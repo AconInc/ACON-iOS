@@ -177,7 +177,9 @@ extension SpotUploadViewController {
                 }
                 
                 if selectedSpotID > 0 {
-                    // TODO: - ReviewVerification 서버통신
+                    self.spotReviewViewModel.getReviewVerification(spotId: selectedSpotID,
+                                                                   latitude: self.latitude,
+                                                                   longitude: self.longitude)
                 } else {
                     self.spotUploadView.dropAcornButton.isEnabled = false
                     self.spotUploadView.dropAcornButton.backgroundColor = .gray8

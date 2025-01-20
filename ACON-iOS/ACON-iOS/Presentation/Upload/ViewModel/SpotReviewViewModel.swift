@@ -21,14 +21,14 @@ class SpotReviewViewModel {
 
 //    let acornNumDummyData: AcornCountModel = AcornCountModel(acornCount: 3)
     
-    let reviewVerificationDummyData: Bool = true
+//    let reviewVerificationDummyData: Bool = true
     
     init() {
 //        self.acornNum.value = acornNumDummyData
 //        self.onSuccessGetAcornNum.value = true
         self.onSuccessPostReview.value = false
-        self.onSuccessGetReviewVerification.value = true
-        self.reviewVerification.value = reviewVerificationDummyData
+//        self.onSuccessGetReviewVerification.value = true
+//        self.reviewVerification.value = reviewVerificationDummyData
     }
     
     func getAcornNum() {
@@ -44,4 +44,24 @@ class SpotReviewViewModel {
             }
         }
     }
+    
+    func getReviewVerification(spotId: Int64,
+                               latitude: Double,
+                               longitude: Double) {
+        let parameter = GetReviewVerificationRequest(spotId: spotId,
+                                                     latitude: latitude,
+                                                     longitude: longitude)
+        ACService.shared.uploadService.getReviewVerification(parameter: parameter) { [weak self] response in
+            switch response {
+            case .success(let data):
+                self?.onSuccessGetReviewVerification.value = true
+                self?.reviewVerification.value = data.success
+            default:
+                print("VM - Fail to get review verification")
+                self?.onSuccessGetReviewVerification.value = false
+                return
+            }
+        }
+    }
 }
+
