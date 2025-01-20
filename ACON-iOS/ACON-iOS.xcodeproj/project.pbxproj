@@ -103,8 +103,6 @@
 		74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */; };
 		74CDCE562D310B1600E3A21A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE552D310B1300E3A21A /* String+.swift */; };
 		D6232C952D3A294C003FF208 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6232C942D3A294C003FF208 /* AlertHandler.swift */; };
-		D665BD002D3D6E8300101D6D /* asdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = D665BCFF2D3D6E8300101D6D /* asdf.swift */; };
-		D665BD022D3D6E8700101D6D /* lkfwkl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D665BD012D3D6E8700101D6D /* lkfwkl.swift */; };
 		D696F1B22D3A7E3400CCD5FF /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696F1B12D3A7E3400CCD5FF /* CustomAlertView.swift */; };
 		D696F1B62D3A83D600CCD5FF /* CustomAlertImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696F1B52D3A83D600CCD5FF /* CustomAlertImageView.swift */; };
 		D6978F502D36E3C800523A25 /* AnalyzingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F4F2D36E3C800523A25 /* AnalyzingViewController.swift */; };
@@ -226,8 +224,6 @@
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB785B4E26FA7C11BB85A55D /* Pods-ACON-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D6232C942D3A294C003FF208 /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
-		D665BCFF2D3D6E8300101D6D /* asdf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = asdf.swift; sourceTree = "<group>"; };
-		D665BD012D3D6E8700101D6D /* lkfwkl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lkfwkl.swift; sourceTree = "<group>"; };
 		D696F1B12D3A7E3400CCD5FF /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		D696F1B52D3A83D600CCD5FF /* CustomAlertImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertImageView.swift; sourceTree = "<group>"; };
 		D6978F4F2D36E3C800523A25 /* AnalyzingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzingViewController.swift; sourceTree = "<group>"; };
@@ -775,15 +771,6 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
-		D665BCFE2D3D6E7B00101D6D /* test */ = {
-			isa = PBXGroup;
-			children = (
-				D665BCFF2D3D6E8300101D6D /* asdf.swift */,
-				D665BD012D3D6E8700101D6D /* lkfwkl.swift */,
-			);
-			path = test;
-			sourceTree = "<group>";
-		};
 		D6D0F4FC2D36B8D300326F17 /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -806,7 +793,6 @@
 				D6D0F51A2D36BABB00326F17 /* FavoriteSpotRankCollectionView.swift */,
 				D6D0F51E2D36BAFE00326F17 /* OnboardingViewController.swift */,
 				D6978F4F2D36E3C800523A25 /* AnalyzingViewController.swift */,
-				D665BCFE2D3D6E7B00101D6D /* test */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1062,7 +1048,6 @@
 				748D6F912D2BD450007690B4 /* UILabel+.swift in Sources */,
 				1547A8822D358E3000E96616 /* SpotListFilterViewController.swift in Sources */,
 				748D6FAA2D2C3FF1007690B4 /* BaseCollectionViewCell.swift in Sources */,
-				D665BD022D3D6E8700101D6D /* lkfwkl.swift in Sources */,
 				748ECA6B2D31918D00BBC981 /* LoginView.swift in Sources */,
 				1547A6F22D33AD4500E96616 /* SpotModel.swift in Sources */,
 				748D6F972D2BD544007690B4 /* DummyType.swift in Sources */,
@@ -1091,7 +1076,6 @@
 				15A3F7A12D38C71900577E16 /* PriorityLowEmptyView.swift in Sources */,
 				748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */,
 				74BF92192D395FE800B923E3 /* ACToastController.swift in Sources */,
-				D665BD002D3D6E8300101D6D /* asdf.swift in Sources */,
 				1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */,
 				74BF92102D391FFE00B923E3 /* LocalVerificationFinishedView.swift in Sources */,
 				74BF92112D391FFE00B923E3 /* LocalVerificationViewController.swift in Sources */,

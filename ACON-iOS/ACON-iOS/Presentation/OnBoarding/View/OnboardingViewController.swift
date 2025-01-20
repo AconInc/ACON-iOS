@@ -359,7 +359,7 @@ extension OnboardingViewController {
 
 
 extension OnboardingViewController {
-    
+    // NOTE: continue
     @objc private func nextButtonTapped() {
         if currentStep >= StringLiterals.OnboardingType.progressNumberList.count - 1 {
             
@@ -392,24 +392,4 @@ extension OnboardingViewController {
         alertHandler.showStoppedPreferenceAnalysisAlert(from: self)
     }
     
-}
-
-import SwiftUI
-
-struct OnboardingViewControllerPreview: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> OnboardingViewController {
-        return OnboardingViewController()
-    }
-
-    func updateUIViewController(_ uiViewController: OnboardingViewController, context: Context) {
-        // 추가 업데이트 설정이 필요한 경우 구현
-    }
-}
-
-struct OnboardingViewControllerPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        OnboardingViewControllerPreview()
-            .ignoresSafeArea()
-            .previewDevice("iPhone 14 Pro") // 원하는 기기명 설정 가능
-    }
 }
