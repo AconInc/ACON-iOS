@@ -13,6 +13,7 @@ enum OnboardingAPI {
 }
 
 extension OnboardingAPI: TargetType {
+    
     var baseURL: URL {
         guard let urlString = Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String,
               let url = URL(string: urlString) else {
@@ -24,7 +25,8 @@ extension OnboardingAPI: TargetType {
     var path: String {
         switch self {
         case .postOnboarding:
-            return "api/v1/하이"
+            // TODO: i will chage
+            return utilPath + "メンバー"
         }
     }
     
@@ -43,9 +45,10 @@ extension OnboardingAPI: TargetType {
     }
     
     var headers: [String: String]? {
-        return [
-            "Content-Type": "application/json",
-            "Authorization": "Bearer <YOUR_TOKEN>"
-        ]
+        //        let token = UserDefaults.standard.string(forKey: StringLiterals.Network.accessToken) ?? ""
+        //        let headers = HeaderType.headerWithToken(token: "Bearer " + token)
+        // TODO:  i will chage this to existHeader ㅇㅇ
+        let headers = HeaderType.noHeader
+        return headers
     }
 }
