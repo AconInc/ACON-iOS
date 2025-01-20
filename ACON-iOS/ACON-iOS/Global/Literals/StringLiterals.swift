@@ -21,6 +21,8 @@ enum StringLiterals {
         
         static let privacyPolicy = "개인정보처리방침"
         
+        static let logoText = "매번 맛집을 찾는라\n고민중인 당신을 위한 지도"
+        
     }
 
     enum TabBar {
@@ -181,4 +183,23 @@ enum StringLiterals {
         
     }
     
+    enum WebView {
+        
+        static let error = "에러"
+        
+        static let cantFindWebPage = "웹페이지를 찾을 수 없습니다."
+        
+        static let privacyPolicyLink = "https://bit.ly/acon개인정보처리방침"
+        
+        static let termsOfUseLink = "https://bit.ly/acon서비스이용약관"
+        
+    }
+    
+    enum Network {
+        
+        static let accessToken = "accessToken"
+        
+        static let refreshToken = "refreshToken"
+        
+    }
 }
