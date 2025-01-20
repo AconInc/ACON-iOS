@@ -56,6 +56,7 @@ final class SpotDetailView: BaseView {
     
     private let navViewHeight: CGFloat = ScreenUtils.heightRatio * 56
     
+    
     // MARK: - Lifecycle
     
     override func setHierarchy() {
