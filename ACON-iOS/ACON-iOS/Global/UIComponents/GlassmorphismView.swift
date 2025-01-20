@@ -53,4 +53,8 @@ extension GlassmorphismView {
         vibrancyEffectView.backgroundColor = color
     }
     
+    func setBlurStyle(_ style: UIBlurEffect.Style) {
+        blurEffectView.effect = UIBlurEffect(style: style)
+    }
+    
 }
