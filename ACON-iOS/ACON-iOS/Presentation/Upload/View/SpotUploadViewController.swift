@@ -126,14 +126,21 @@ private extension SpotUploadViewController {
     
     @objc
     func dropAcornButtonTapped() {
+        let vc = DropAcornViewController(spotID: selectedSpotID)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: false)
+//        // 현재 화면을 dismiss하고 바로 네비게이션을 present
+//        self.dismiss(animated: true) { [weak self] in
+//            self?.tabBarController?.present(navigationController, animated: false)
+//        }
 //        TODO: - 🍠 딱히 이거의 타이밍 시점도 아닌 것 같음 -> 해결되면 지우기
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
 //            guard let self = self else { return }
 //            let vc = DropAcornViewController(spotID: selectedSpotID)
 //            self.navigationController?.pushViewController(vc, animated: false)
 //        }
-        let vc = DropAcornViewController(spotID: selectedSpotID)
-        navigationController?.pushViewController(vc, animated: false)
+//        let vc = DropAcornViewController(spotID: selectedSpotID)
+//        navigationController?.pushViewController(vc, animated: false)
     }
     
     @objc

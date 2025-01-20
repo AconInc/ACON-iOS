@@ -99,7 +99,10 @@ private extension DropAcornViewController {
         let data: ReviewPostModel = ReviewPostModel(spotID: spotID, acornCount: reviewAcornCount)
         // TODO: - 여기서 가는 로직은 임시적용 (VM init에서 true할 수 없음) -> 나중에 지우기
         let vc = ReviewFinishedViewController()
-        self.navigationController?.pushViewController(vc, animated: false)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: false)
+//        let vc = ReviewFinishedViewController()
+//        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     @objc
