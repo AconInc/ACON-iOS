@@ -95,11 +95,11 @@ class ACLocationManager: NSObject {
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestWhenInUseAuthorization()
         case .denied, .restricted:
-            // TODO: 설정 이동 Alert 커스텀 Alert으로 변경
             let scenes = UIApplication.shared.connectedScenes
             let windowScene = scenes.first as? UIWindowScene
             let window = windowScene?.windows.first
-            window?.rootViewController?.showDefaultAlert(title: StringLiterals.Alert.gpsDeniedTitle, message: StringLiterals.Alert.gpsDeniedMessage)
+            let alertHandler = AlertHandler()
+            alertHandler.showLocationAccessFailAlert(from: (window?.rootViewController)!)
         case .authorizedWhenInUse, .authorizedAlways:
             guard !isRequestingLocation else { return }
             isRequestingLocation = true
