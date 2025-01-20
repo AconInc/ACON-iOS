@@ -179,4 +179,79 @@ enum StringLiterals {
         
     }
     
+    
+    enum DislikeTypes {
+        
+        static let dakbal = "닭발"
+        
+        static let hoeYukhoe = "회/육회"
+        
+        static let gopchang = "곱창/대창/막창"
+        
+        static let soondae = "순대/선지"
+        
+        static let yanggogi = "양고기"
+        
+        static let none = " "
+
+    }
+    
+    enum FavoriteSpotRankTypes {
+
+        static let mood = "분위기가 감각적인"
+
+        static let new = "새로운 음식의 경험"
+
+        static let quality = "합리적인 가격과 양"
+
+        static let special = "특별한 날, 고급스러운"
+
+    }
+
+    enum FavoriteSpotTypes {
+
+        static let restaurant = "음식점"
+
+        static let cafe = "카페"
+
+    }
+
+    enum FavoriteSpotStyles {
+
+        static let nopo = "노포"
+
+        static let modern = "모던"
+
+    }
+
+    enum FavoriteCuisineTypes {
+
+        static let korean = "한식"
+
+        static let western = "양식"
+
+        static let chinese = "중식"
+
+        static let japanese = "일식"
+
+        static let koreanStreet = "분식"
+
+        static let asian = "아시안"
+
+    }
+    
+    enum OnboardingType {
+
+        static let progressNumberList = ["01", "02", "03", "04", "05"]
+        
+        static let progressTitleList = [
+            "어떤 음식을 피하고 싶으신가요?",
+            "선호 음식 Top3까지 순위를 매겨주세요.",
+            "지주 가는 곳이 어디인가요?",
+            "어떤 분위기의 공간이 좋으세요?",
+            "선호하는 맛집 스타일의\n 순위를 매겨주세요."
+        ]
+        
+    }
+    
 }

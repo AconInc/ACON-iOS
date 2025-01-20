@@ -222,8 +222,8 @@ extension OnboardingViewController {
     }
     
     private func updateProgressText(for step: Int) {
-        progressNumber.text = OnboardingType.progressNumberList[step]
-        progressTitle.text = OnboardingType.progressTitleList[step]
+        progressNumber.text = StringLiterals.OnboardingType.progressNumberList[step]
+        progressTitle.text = StringLiterals.OnboardingType.progressTitleList[step]
     }
     
     
@@ -308,7 +308,7 @@ extension OnboardingViewController {
     }
     
     private func updateProgressIndicator() {
-        let totalSteps: Float = Float(OnboardingType.progressNumberList.count)
+        let totalSteps: Float = Float(StringLiterals.OnboardingType.progressNumberList.count)
         let progressViewWidth = Float(progressView.frame.width) / totalSteps
         let progressWidth = progressViewWidth * Float(currentStep + 1)
         
@@ -361,7 +361,7 @@ extension OnboardingViewController {
 extension OnboardingViewController {
     
     @objc private func nextButtonTapped() {
-        if currentStep >= OnboardingType.progressNumberList.count - 1 {
+        if currentStep >= StringLiterals.OnboardingType.progressNumberList.count - 1 {
             
             let analyzingVC = AnalyzingViewController()
             analyzingVC.modalPresentationStyle = .fullScreen
@@ -392,4 +392,24 @@ extension OnboardingViewController {
         alertHandler.showStoppedPreferenceAnalysisAlert(from: self)
     }
     
+}
+
+import SwiftUI
+
+struct OnboardingViewControllerPreview: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> OnboardingViewController {
+        return OnboardingViewController()
+    }
+
+    func updateUIViewController(_ uiViewController: OnboardingViewController, context: Context) {
+        // 추가 업데이트 설정이 필요한 경우 구현
+    }
+}
+
+struct OnboardingViewControllerPreview_Previews: PreviewProvider {
+    static var previews: some View {
+        OnboardingViewControllerPreview()
+            .ignoresSafeArea()
+            .previewDevice("iPhone 14 Pro") // 원하는 기기명 설정 가능
+    }
 }

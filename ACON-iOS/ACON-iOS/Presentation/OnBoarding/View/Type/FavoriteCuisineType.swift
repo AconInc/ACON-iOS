@@ -18,12 +18,12 @@ enum FavoriteCuisineType: CaseIterable {
     
     var name: String {
         switch self {
-        case .korean: return "한식"
-        case .western: return "양식"
-        case .chinese: return "중식"
-        case .japanese: return "일식"
-        case .koreanStreet: return "분식"
-        case .asian: return "아시안"
+        case .korean: return StringLiterals.FavoriteCuisineTypes.korean
+        case .western: return StringLiterals.FavoriteCuisineTypes.western
+        case .chinese: return StringLiterals.FavoriteCuisineTypes.chinese
+        case .japanese: return StringLiterals.FavoriteCuisineTypes.japanese
+        case .koreanStreet: return StringLiterals.FavoriteCuisineTypes.koreanStreet
+        case .asian: return StringLiterals.FavoriteCuisineTypes.asian
         }
     }
     

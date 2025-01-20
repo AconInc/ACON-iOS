@@ -14,15 +14,15 @@ enum FavoriteSpotType: CaseIterable {
     
     var name: String {
         switch self {
-        case .restaurant: return "음식점"
-        case .cafe: return "카페"
+        case .restaurant: return StringLiterals.FavoriteSpotTypes.restaurant
+        case .cafe: return StringLiterals.FavoriteSpotTypes.cafe
         }
     }
     
     var image: UIImage {
         switch self {
-        case .restaurant: return UIImage(named: "restaurant") ?? UIImage(systemName: "photo")!
-        case .cafe: return UIImage(named: "cafe") ?? UIImage(systemName: "photo")!
+        case .restaurant: return .restaurant
+        case .cafe: return .cafe
         }
     }
     
