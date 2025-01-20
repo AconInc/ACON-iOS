@@ -16,6 +16,7 @@ class ACTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        delegate = self
         configureTabBarAppearance()
         setNavViewControllers()
     }
@@ -79,6 +80,26 @@ extension ACTabBarController {
         }
         
         return navViewController
+    }
+    
+}
+
+
+// MARK: - UITabBarControllerDelegate
+
+extension ACTabBarController: UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        guard let viewControllers = viewControllers else { return true }
+        guard let index = viewControllers.firstIndex(of: viewController) else { return true }
+        
+        if index == ACTabBarItemType.allCases.firstIndex(of: .upload) {
+            let uploadVC = SpotUploadViewController()
+            uploadVC.modalPresentationStyle = .fullScreen
+            present(uploadVC, animated: true)
+            return false
+        }
+        return true
     }
     
 }
