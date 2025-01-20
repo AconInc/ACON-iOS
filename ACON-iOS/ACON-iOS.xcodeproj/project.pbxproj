@@ -68,7 +68,7 @@
 		7462616D2D3EA40600A4E84F /* GetSearchKeywordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462616C2D3EA3F700A4E84F /* GetSearchKeywordRequest.swift */; };
 		7462616F2D3EA48300A4E84F /* GetSearchKeywordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462616E2D3EA47900A4E84F /* GetSearchKeywordResponse.swift */; };
 		746261712D3EA50A00A4E84F /* SpotCategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261702D3EA50700A4E84F /* SpotCategoryType.swift */; };
-		746261732D3EA78700A4E84F /* GetReiviewVeirificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261722D3EA78400A4E84F /* GetReiviewVeirificationRequest.swift */; };
+		746261732D3EA78700A4E84F /* GetReiviewVerificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261722D3EA78400A4E84F /* GetReiviewVerificationRequest.swift */; };
 		746261752D3EA7FD00A4E84F /* GetReviewVerificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261742D3EA7E500A4E84F /* GetReviewVerificationResponse.swift */; };
 		746F39822D342523003F8498 /* SheetUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* SheetUtils.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
@@ -219,7 +219,7 @@
 		7462616C2D3EA3F700A4E84F /* GetSearchKeywordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSearchKeywordRequest.swift; sourceTree = "<group>"; };
 		7462616E2D3EA47900A4E84F /* GetSearchKeywordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSearchKeywordResponse.swift; sourceTree = "<group>"; };
 		746261702D3EA50700A4E84F /* SpotCategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotCategoryType.swift; sourceTree = "<group>"; };
-		746261722D3EA78400A4E84F /* GetReiviewVeirificationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReiviewVeirificationRequest.swift; sourceTree = "<group>"; };
+		746261722D3EA78400A4E84F /* GetReiviewVerificationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReiviewVerificationRequest.swift; sourceTree = "<group>"; };
 		746261742D3EA7E500A4E84F /* GetReviewVerificationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReviewVerificationResponse.swift; sourceTree = "<group>"; };
 		746F39812D342520003F8498 /* SheetUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetUtils.swift; sourceTree = "<group>"; };
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
@@ -596,7 +596,7 @@
 			isa = PBXGroup;
 			children = (
 				746261742D3EA7E500A4E84F /* GetReviewVerificationResponse.swift */,
-				746261722D3EA78400A4E84F /* GetReiviewVeirificationRequest.swift */,
+				746261722D3EA78400A4E84F /* GetReiviewVerificationRequest.swift */,
 				7462616E2D3EA47900A4E84F /* GetSearchKeywordResponse.swift */,
 				7462616C2D3EA3F700A4E84F /* GetSearchKeywordRequest.swift */,
 				746261682D3EA32C00A4E84F /* PostReviewRequest.swift */,
@@ -1205,7 +1205,7 @@
 				748ECA6B2D31918D00BBC981 /* LoginView.swift in Sources */,
 				1547A6F22D33AD4500E96616 /* SpotModel.swift in Sources */,
 				748D6F972D2BD544007690B4 /* DummyType.swift in Sources */,
-				746261732D3EA78700A4E84F /* GetReiviewVeirificationRequest.swift in Sources */,
+				746261732D3EA78700A4E84F /* GetReiviewVerificationRequest.swift in Sources */,
 				74BF92022D385D8700B923E3 /* MenuCollectionViewCell.swift in Sources */,
 				74220DD42D34363B000684BF /* SpotUploadViewController.swift in Sources */,
 				D6FF82F12D380C4D00090233 /* FavoriteCuisineType.swift in Sources */,
