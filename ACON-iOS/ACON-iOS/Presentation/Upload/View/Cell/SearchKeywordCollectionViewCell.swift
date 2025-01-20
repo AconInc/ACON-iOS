@@ -1,5 +1,5 @@
 //
-//  RelatedSearchCollectionViewCell.swift
+//  SearchKeywordCollectionViewCell.swift
 //  ACON-iOS
 //
 //  Created by 이수민 on 1/14/25.
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class RelatedSearchCollectionViewCell: BaseCollectionViewCell {
+final class SearchKeywordCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - UI Properties
     
@@ -63,16 +63,16 @@ final class RelatedSearchCollectionViewCell: BaseCollectionViewCell {
     
 }
 
-extension RelatedSearchCollectionViewCell {
+extension SearchKeywordCollectionViewCell {
     
-    func dataBind(_ relatedSearchData: RelatedSearchModel, _ indexRow: Int) {
-        spotNameLabel.setLabel(text: relatedSearchData.spotName,
+    func bindData(_ relatedSearchData: SearchKeywordModel?, _ indexRow: Int) {
+        spotNameLabel.setLabel(text: relatedSearchData?.spotName ?? "",
                                style: .s2,
                                color: .acWhite)
-        spotAddressLabel.setLabel(text: relatedSearchData.spotAddress,
+        spotAddressLabel.setLabel(text: relatedSearchData?.spotAddress ?? "",
                                style: .c1,
                                color: .gray4)
-        spotTypeLabel.setLabel(text: relatedSearchData.spotType,
+        spotTypeLabel.setLabel(text: relatedSearchData?.spotType ?? "",
                                style: .c1,
                                color: .gray4,
                                alignment: .right)

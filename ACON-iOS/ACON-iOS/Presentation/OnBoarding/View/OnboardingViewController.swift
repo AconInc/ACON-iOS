@@ -14,13 +14,15 @@ final class OnboardingViewController: BaseViewController {
     
     let viewModel = OnboardingViewModel()
     
-    private let backButton = UIButton()
-    private let skipButton = UIButton()
-    private let progressView = UIView()
-    private let progressIndicator = UIView()
-    private let nextButton = UIButton()
-    private let progressNumber = UILabel()
-    private let progressTitle = UILabel()
+    private let alertHandler = AlertHandler()
+    
+    private let backButton: UIButton = UIButton()
+    private let skipButton: UIButton = UIButton()
+    private let progressView: UIView = UIView()
+    private let progressIndicator: UIView = UIView()
+    private let nextButton: UIButton = UIButton()
+    private let progressNumber: UILabel = UILabel()
+    private let progressTitle: UILabel = UILabel()
     private var isOverlayVisible = false
     var currentStep = 0
     
@@ -49,9 +51,9 @@ final class OnboardingViewController: BaseViewController {
         skipButton.do {
             $0.addTarget(self, action: #selector(nextStack), for: .touchUpInside)
             $0.setAttributedTitle(text: "건너뛰기",
-            style: ACFont.b2,
-            color: .acWhite,
-            for: .normal)
+                                  style: ACFont.b2,
+                                  color: .acWhite,
+                                  for: .normal)
         }
         
         progressView.do {
@@ -80,16 +82,20 @@ final class OnboardingViewController: BaseViewController {
             $0.isEnabled = false
             $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
             $0.setAttributedTitle(text: "다음",
-            style: ACFont.h8,
-            color: .gray6,
-            for: .normal)
+                                  style: ACFont.h8,
+                                  color: .gray6,
+                                  for: .normal)
         }
     }
     
     override func setHierarchy() {
         super.setHierarchy()
-
-        view.addSubviews(backButton, skipButton, progressView, progressNumber, progressTitle, nextButton)
+        
+        view.addSubviews(backButton,
+                         skipButton,
+                         progressView,
+                         progressNumber,
+                         progressTitle)
         progressView.addSubview(progressIndicator)
     }
     
@@ -128,15 +134,10 @@ final class OnboardingViewController: BaseViewController {
             $0.top.equalTo(progressNumber.snp.bottom).offset(4)
             $0.horizontalEdges.equalToSuperview().inset(20)
         }
-        
-        nextButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
-            $0.height.equalTo(44)
-        }
     }
-}
     
+}
+
 
 extension OnboardingViewController {
     
@@ -164,33 +165,67 @@ extension OnboardingViewController {
     
     private func updateContentView(for step: Int) {
         contentView?.removeFromSuperview()
+        contentView = getCollectionView(for: step)
         
+        guard let contentView = contentView else { return }
+        // MARK: se Device response
+        if step == 4, ScreenUtils.height < 800 {
+            configureSmallDeviceLayout(for: contentView as! UICollectionView)
+        } else {
+            configureDefaultLayout(for: contentView)
+        }
+        
+        updateProgressText(for: step)
+    }
+    
+    private func getCollectionView(for step: Int) -> UIView? {
         switch step {
         case 0:
             setDislikeCollectionView()
+            return dislikeCollectionView
         case 1:
             setFavoriteCuisineCollectionView()
+            return favoriteCuisineCollectionView
         case 2:
             setFavoriteSpotTypeCollectionView()
+            return favoriteSpotTypeCollectionView
         case 3:
             setFavoriteSpotStyleCollectionView()
+            return favoriteSpotStyleCollectionView
         case 4:
             setFavoriteSpotRankCollectionView()
+            return favoriteSpotRankCollectionView
         default:
-            contentView = nil
+            return nil
+        }
+    }
+    
+    private func configureDefaultLayout(for contentView: UIView) {
+        view.addSubviews(contentView, nextButton)
+        
+        nextButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.height.equalTo(44)
         }
         
-        if let contentView = contentView {
-            view.addSubview(contentView)
-            contentView.snp.makeConstraints {
-                $0.top.equalTo(progressTitle.snp.bottom).offset(10)
-                $0.leading.trailing.equalToSuperview()
-                $0.bottom.equalTo(nextButton.snp.top)
-            }
+        contentView.snp.makeConstraints {
+            $0.top.equalTo(progressTitle.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(nextButton.snp.top)
         }
-        progressNumber.text = OnboardingType.progressNumberList[step]
-        progressTitle.text = OnboardingType.progressTitleList[step]
     }
+    
+    private func configureSmallDeviceLayout(for contentView: UICollectionView) {
+        nextButton.removeFromSuperview()
+        setScrollViewForSmallDevices(contentView: contentView)
+    }
+    
+    private func updateProgressText(for step: Int) {
+        progressNumber.text = StringLiterals.OnboardingType.progressNumberList[step]
+        progressTitle.text = StringLiterals.OnboardingType.progressTitleList[step]
+    }
+    
     
     private func setDislikeCollectionView() {
         contentView = dislikeCollectionView
@@ -214,6 +249,7 @@ extension OnboardingViewController {
     
     private func setFavoriteCuisineCollectionView() {
         contentView = favoriteCuisineCollectionView
+        
         favoriteCuisineCollectionView.onSelectionChanged = { [weak self] selectedIndices in
             self?.viewModel.favoriteCuisne.value = selectedIndices
         }
@@ -221,6 +257,7 @@ extension OnboardingViewController {
     
     private func setFavoriteSpotTypeCollectionView() {
         contentView = favoriteSpotTypeCollectionView
+        
         favoriteSpotTypeCollectionView.onSelectionChanged = { [weak self] selectedType in
             self?.viewModel.favoriteSpotType.value = selectedType
         }
@@ -228,6 +265,7 @@ extension OnboardingViewController {
     
     private func setFavoriteSpotStyleCollectionView() {
         contentView = favoriteSpotStyleCollectionView
+        
         favoriteSpotStyleCollectionView.onSelectionChanged = { [weak self] selectedStyle in
             self?.viewModel.favoriteSpotStyle.value = selectedStyle
         }
@@ -235,6 +273,7 @@ extension OnboardingViewController {
     
     private func setFavoriteSpotRankCollectionView() {
         contentView = favoriteSpotRankCollectionView
+        
         favoriteSpotRankCollectionView.onSelectionChanged = { [weak self] selectedIndices in
             self?.viewModel.favoriteSpotRank.value = selectedIndices
         }
@@ -264,12 +303,12 @@ extension OnboardingViewController {
             
         }) { [weak self] _ in
             self?.contentView?.alpha = 1.0
-
+            
         }
     }
     
     private func updateProgressIndicator() {
-        let totalSteps: Float = Float(OnboardingType.progressNumberList.count)
+        let totalSteps: Float = Float(StringLiterals.OnboardingType.progressNumberList.count)
         let progressViewWidth = Float(progressView.frame.width) / totalSteps
         let progressWidth = progressViewWidth * Float(currentStep + 1)
         
@@ -281,13 +320,48 @@ extension OnboardingViewController {
         }
     }
     
+    private func setScrollViewForSmallDevices(contentView: UICollectionView) {
+        
+        let scrollView = UIScrollView()
+        let containerView = UIView()
+        
+        view.addSubview(scrollView)
+        scrollView.addSubview(containerView)
+        containerView.addSubview(contentView)
+        containerView.addSubview(nextButton)
+        
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(progressTitle.snp.bottom).offset(10)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        containerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(450)
+        }
+        
+        nextButton.snp.makeConstraints {
+            $0.top.equalTo(contentView.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().offset(-20)
+            $0.height.equalTo(44)
+        }
+        
+        self.view.layoutIfNeeded()
+    }
+    
 }
 
 
 extension OnboardingViewController {
-    
+    // NOTE: continue
     @objc private func nextButtonTapped() {
-        if currentStep >= OnboardingType.progressNumberList.count - 1 {
+        if currentStep >= StringLiterals.OnboardingType.progressNumberList.count - 1 {
             
             let analyzingVC = AnalyzingViewController()
             analyzingVC.modalPresentationStyle = .fullScreen
@@ -315,8 +389,7 @@ extension OnboardingViewController {
     }
     
     @objc private func nextStack(){
-        // MARK: TODO -> Popup alert
-        print("alert")
+        alertHandler.showStoppedPreferenceAnalysisAlert(from: self)
     }
     
 }

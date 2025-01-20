@@ -19,17 +19,17 @@ enum DislikeType: CaseIterable {
     var name: String {
         switch self {
         case .dakbal:
-            return "닭발"
+            return StringLiterals.DislikeTypes.dakbal
         case .hoeYukhoe:
-            return "회/육회"
+            return StringLiterals.DislikeTypes.hoeYukhoe
         case .gopchang:
-            return "곱창/대창/막창"
+            return StringLiterals.DislikeTypes.gopchang
         case .soondae:
-            return "순대/선지"
+            return StringLiterals.DislikeTypes.soondae
         case .yanggogi:
-            return "양고기"
+            return StringLiterals.DislikeTypes.yanggogi
         case .none:
-            return " "
+            return StringLiterals.DislikeTypes.none
         }
     }
 
