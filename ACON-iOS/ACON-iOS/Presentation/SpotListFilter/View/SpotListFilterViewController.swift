@@ -7,12 +7,13 @@
 
 import UIKit
 
-class SpotListFilterViewController: BaseNavViewController {
+class SpotListFilterViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let spotListFilterView = SpotListFilterView()
-    let viewModel = SpotListFilterViewModel()
+    private let spotListFilterView = SpotListFilterView()
+    
+    private let viewModel = SpotListFilterViewModel()
     
     
     // MARK: - LifeCycles
@@ -27,7 +28,7 @@ class SpotListFilterViewController: BaseNavViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        contentView.addSubview(spotListFilterView)
+        view.addSubview(spotListFilterView)
     }
     
     override func setLayout() {
@@ -68,9 +69,34 @@ private extension SpotListFilterViewController {
         spotListFilterView.segmentedControl.addTarget(
             self,
             action: #selector(didChangeSpot),
-            for: .valueChanged)
+            for: .valueChanged
+        )
+        
+        spotListFilterView.exitButton.addTarget(
+            self,
+            action: #selector(didTapExitButton),
+            for: .touchUpInside
+        )
     }
     
+}
+
+
+// MARK: - @objc functions
+
+private extension SpotListFilterViewController {
+    
+    @objc
+    func didChangeSpot(segment: UISegmentedControl) {
+        let index = segment.selectedSegmentIndex
+        viewModel.spotType.value = index == 0 ? .restaurant : .cafe
+      }
+    
+    
+    @objc
+    func didTapExitButton() {
+        self.dismiss(animated: true)
+    }
 }
 
 
@@ -78,12 +104,7 @@ private extension SpotListFilterViewController {
 
 private extension SpotListFilterViewController {
     
-    // TODO: restaurant
-    
     func updateView(_ spotType: SpotType) {
-        
-        // TODO: 세그먼트 바뀔 때 버튼 선택 전부 해제되는지 기획 확인
-        
         spotListFilterView.do {
             // NOTE: spot tag 바꾸기
             $0.switchSpotTagStack(spotType)
@@ -93,20 +114,14 @@ private extension SpotListFilterViewController {
             
             // NOTE: visit purpose tag는 cafe일 때만 보임
             $0.hideVisitPurposeSection(isHidden: spotType == .restaurant)
+            
+            $0.switchPriceSlider(spotType: spotType)
+            
+            $0.resetAllTagSelection()
+            
+            $0.resetSliderPosition(animated: false)
         }
     }
-}
-
-
-
-// MARK: - @objc functions
-
-private extension SpotListFilterViewController {
-    
-    @objc func didChangeSpot(segment: UISegmentedControl) {
-        let index = segment.selectedSegmentIndex
-        viewModel.spotType.value = index == 0 ? .restaurant : .cafe
-      }
     
 }
 

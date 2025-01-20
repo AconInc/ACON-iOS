@@ -21,6 +21,8 @@ enum StringLiterals {
         
         static let privacyPolicy = "개인정보처리방침"
         
+        static let logoText = "매번 맛집을 찾는라\n고민중인 당신을 위한 지도"
+        
     }
 
     enum TabBar {
@@ -143,6 +145,8 @@ enum StringLiterals {
     
     enum SpotListFilter {
         
+        static let pageTitle = "상세 조건"
+        
         static let restaurant = "음식점"
         
         static let cafe = "카페"
@@ -153,6 +157,15 @@ enum StringLiterals {
         
         static let visitPurposeSection = "방문 목적"
         
+        static let walkingSection = "도보 가능 거리"
+        
+        static let priceSection = "가격대"
+        
+        static let walkingTimes = ["5분 이내", "10분", "15분", "20분", "20분 이상"]
+        
+        static let restaurantPrices = ["5천원 이하", "1만원", "3만원", "5만원", "5만원 이상"]
+        
+        static let cafePrices = ["3천원 이하", "5천원", "1만원 이상"]
     }
     
     enum Analyzing {
@@ -163,4 +176,35 @@ enum StringLiterals {
         
     }
     
+    enum SpotDetail {
+        
+        static let isOpen = "영업중"
+        
+        static let isNotOpen = "영업전"
+        
+        static let menu = "메뉴"
+        
+        static let findCourse = "길 찾기"
+        
+    }
+    
+    enum WebView {
+        
+        static let error = "에러"
+        
+        static let cantFindWebPage = "웹페이지를 찾을 수 없습니다."
+        
+        static let privacyPolicyLink = "https://bit.ly/acon개인정보처리방침"
+        
+        static let termsOfUseLink = "https://bit.ly/acon서비스이용약관"
+        
+    }
+    
+    enum Network {
+        
+        static let accessToken = "accessToken"
+        
+        static let refreshToken = "refreshToken"
+        
+    }
 }

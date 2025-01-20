@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class SpotSearchView: BaseView {
+final class SpotSearchView: GlassmorphismView {
 
     // MARK: - UI Properties
     
@@ -150,8 +150,8 @@ final class SpotSearchView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        self.backgroundColor = .glaW10
-        self.backgroundColor?.withAlphaComponent(0.95)
+        self.setGlassColor(.glaW10)
+        
         self.setHandlerImageView()
         
         spotUploadLabel.do {
