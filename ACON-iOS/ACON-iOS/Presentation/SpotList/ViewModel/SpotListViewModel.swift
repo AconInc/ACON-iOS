@@ -20,11 +20,6 @@ class SpotListViewModel {
     var secondSpotList: [SpotModel] = []
     
     
-    // 위치 정보를 바인딩할 프로퍼티
-    var currentLocation: ObservablePattern<CLLocationCoordinate2D> = ObservablePattern(nil)
-    var locationError: ObservablePattern<String> = ObservablePattern(nil)
-    
-    
     // MARK: - Filter
     var spotType: ObservablePattern<SpotType> = ObservablePattern(.restaurant)
     
@@ -65,14 +60,9 @@ class SpotListViewModel {
         secondSpotList = Array(spotList.dropFirst(2))
     }
     
-    
-
-
-    
     func requestLocation() {
-        // 위치 권한 요청 및 업데이트 시작
-        ACLocationManager.shared.requestLocationAuthorization()
-        ACLocationManager.shared.startUpdatingLocation()
+        // 위치 권한 확인 및 업데이트 시작
+        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
     }
     
 }
@@ -80,22 +70,12 @@ class SpotListViewModel {
 
 extension SpotListViewModel: ACLocationManagerDelegate {
     
-    // MARK: - ACLocationManagerDelegate Methods
-    func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
-        // 위치 업데이트 시 호출
-        currentLocation = coordinate
-    }
-    
-//    func locationManager(_ manager: ACLocationManager, didFailWithError error: Error, vc: UIViewController?) {
-//        // 에러 발생 시 호출
-//        locationError = error.localizedDescription
-//    }
-    
-    func locationManagerDidChangeAuthorization(_ manager: ACLocationManager) {
-        // 권한 변경 시 호출
-        if manager.locationManager.authorizationStatus == .authorizedWhenInUse ||
-           manager.locationManager.authorizationStatus == .authorizedAlways {
-            manager.locationManager.requestLocation()
-        }
+    func locationManager(_ manager: ACLocationManager,
+                         didUpdateLocation coordinate: CLLocationCoordinate2D) {
+        
+        print("🛠️ coordinate: \(coordinate)")
+        
+        
+        // TODO: 추천 장소 리스트 POST 서버통신 -> spotListModel.Spot POST
     }
 }
