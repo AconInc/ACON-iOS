@@ -68,9 +68,9 @@ final class ReviewFinishedView: BaseView {
         }
         
         okButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*36/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
-            $0.height.equalTo(52)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.height*40/780)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*16/360)
+            $0.height.equalTo(ScreenUtils.height*52/780)
         }
         
     }

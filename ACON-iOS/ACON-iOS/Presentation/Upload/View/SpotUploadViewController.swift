@@ -54,7 +54,6 @@ class SpotUploadViewController: BaseNavViewController {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = true
-        self.spotUploadView.dropAcornButton.isEnabled = true
     }
     
     override func setHierarchy() {
