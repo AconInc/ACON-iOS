@@ -11,7 +11,7 @@ import Moya
 
 enum LocalVerificationTargetType {
     
-    case postLocalArea(requestBody: PostLocalAreaRequest)
+    case postLocalArea(_ requestBody: PostLocalAreaRequest)
     
 }
 
