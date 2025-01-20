@@ -33,6 +33,22 @@ enum SpotType {
     }
     
     
+    enum FilterCategoryType: CaseIterable {
+        
+        case restaurantFeature, cafeFeature, companion, visitPurpose
+        
+        var text: String {
+            switch self {
+            case .restaurantFeature: return "RESTAURANT_FEATURE"
+            case .cafeFeature: return "CAFE_FEATURE"
+            case .companion: return "COMPANION_TYPE"
+            case .visitPurpose: return "VISIT_PURPOSE"
+            }
+        }
+        
+    }
+    
+    
     // MARK: - 장소 상세 조건
     
     enum RestaurantFeatureType: CaseIterable {

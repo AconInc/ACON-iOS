@@ -5,35 +5,81 @@
 //  Created by 김유림 on 1/13/25.
 //
 
+import CoreLocation
 import Foundation
 
 class SpotListViewModel {
     
     // MARK: - Properties
     
-    var isFirstPage: ObservablePattern<Bool> = ObservablePattern(true)
+    var isNetworkingSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    private var givenSpotList: ObservablePattern<[Spot]> = ObservablePattern(Spots.dummy)
+    var spotList: [SpotModel] = []
     
-    var firstSpotList: [Spot] = []
-    var secondSpotList: [Spot] = []
+    var isUpdated: Bool = false
+    
+    
+    // MARK: - Filter
+    
+    // I will fix this on other branch ^^
+    var spotType: ObservablePattern<SpotType> = ObservablePattern(.restaurant)
+    
+    var filter: SpotFilterModel = .init(
+        latitude: 0,
+        longitude: 0,
+        condition: SpotConditionModel(
+            spotType: SpotType.restaurant.text,
+            filterList: [],
+            walkingTime: -1,
+            priceRange: -1
+        )
+    )
     
     
     // MARK: - Methods
     
     init() {
-        givenSpotList.bind { [weak self] spotList in
-            guard let self = self,
-                  let spotList = spotList else { return }
-            
-            splitSpotList(spotList)
-        }
+        ACLocationManager.shared.addDelegate(self)
     }
     
-    // TODO: 서버와 논의 후 변경 예정
-    private func splitSpotList(_ spotList: [Spot]) {
-        firstSpotList = Array(spotList.prefix(2))
-        secondSpotList = Array(spotList.dropFirst(2))
+    deinit {
+        ACLocationManager.shared.removeDelegate(self)
+    }
+    
+    func requestLocation() {
+        // 위치 권한 확인 및 업데이트 시작
+        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
+    }
+    
+}
+
+
+// MARK: - Networking
+
+extension SpotListViewModel {
+    
+    func fetchSpotList() {
+        
+        // TODO: spotList와 새로 fetch된 데이터 비교하여 isUpdated set
+        
+        isUpdated = true
+        
+        isNetworkingSuccess.value = true
+    }
+    
+}
+
+
+// MARK: - ACLocationManagerDelegate
+
+extension SpotListViewModel: ACLocationManagerDelegate {
+    
+    func locationManager(_ manager: ACLocationManager,
+                         didUpdateLocation coordinate: CLLocationCoordinate2D) {
+        
+        print("🛠️ coordinate: \(coordinate)")
+        
+        // TODO: 추천 장소 리스트 POST 서버통신 -> spotListModel.Spot POST
     }
     
 }
