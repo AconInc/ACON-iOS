@@ -149,6 +149,7 @@ final class LoginView: BaseView {
                         style: .c1,
                         color: .gray5)
             $0.setUnderline(range: NSRange(location: 0, length: termsOfUseLabel.text?.count ?? 4))
+            $0.isUserInteractionEnabled = true
         }
         
         privacyPolicyLabel.do {
@@ -156,6 +157,7 @@ final class LoginView: BaseView {
                         style: .c1,
                         color: .gray5)
             $0.setUnderline(range: NSRange(location: 0, length: privacyPolicyLabel.text?.count ?? 8))
+            $0.isUserInteractionEnabled = true
         }
     }
     

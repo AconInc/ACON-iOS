@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SpotListFilterView: BaseView {
+class SpotListFilterView: GlassmorphismView {
     
     // MARK: - UI Properties
     
@@ -19,7 +19,7 @@ class SpotListFilterView: BaseView {
     
     private let stackView = UIStackView()
     
-    private let footerView = UIView()
+    private let footerView = GlassmorphismView()
     
     private let resetButton = UIButton()
     
@@ -94,7 +94,6 @@ class SpotListFilterView: BaseView {
             pageTitleLabel,
             exitButton,
             scrollView,
-//            stackView,
             footerView
         )
         
@@ -214,9 +213,9 @@ class SpotListFilterView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        self.setHandlerImageView()
+        self.setGlassColor(.dimB60)
         
-        // TODO: 글라스모피즘 (to self, footerView)
+        self.setHandlerImageView()
         
         pageTitleLabel.setLabel(
             text: StringLiterals.SpotListFilter.pageTitle,
@@ -252,10 +251,6 @@ private extension SpotListFilterView {
     // MARK: - (Footer view)
     
     func setFooterUI() {
-        footerView.do {
-            $0.backgroundColor = .glaB30 // 글라스모피즘으로 변경
-        }
-        
         resetButton.do {
             var config = UIButton.Configuration.plain()
             config.image = .icReset
