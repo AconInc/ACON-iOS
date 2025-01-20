@@ -72,6 +72,7 @@
 		746261752D3EA7FD00A4E84F /* GetReviewVerificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261742D3EA7E500A4E84F /* GetReviewVerificationResponse.swift */; };
 		746261772D3EA88700A4E84F /* GetAcornCountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261762D3EA87B00A4E84F /* GetAcornCountResponse.swift */; };
 		746261792D3EA8DF00A4E84F /* UploadTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261782D3EA8D800A4E84F /* UploadTargetType.swift */; };
+		7462617B2D3EB06100A4E84F /* UploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462617A2D3EB05A00A4E84F /* UploadService.swift */; };
 		746F39822D342523003F8498 /* SheetUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* SheetUtils.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
 		747F4FC12D3DC80B003DECBF /* finishedUpload.json in Resources */ = {isa = PBXBuildFile; fileRef = 747F4FC02D3DC80B003DECBF /* finishedUpload.json */; };
@@ -225,6 +226,7 @@
 		746261742D3EA7E500A4E84F /* GetReviewVerificationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReviewVerificationResponse.swift; sourceTree = "<group>"; };
 		746261762D3EA87B00A4E84F /* GetAcornCountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAcornCountResponse.swift; sourceTree = "<group>"; };
 		746261782D3EA8D800A4E84F /* UploadTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTargetType.swift; sourceTree = "<group>"; };
+		7462617A2D3EB05A00A4E84F /* UploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
 		746F39812D342520003F8498 /* SheetUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetUtils.swift; sourceTree = "<group>"; };
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
 		747F4FC02D3DC80B003DECBF /* finishedUpload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = finishedUpload.json; sourceTree = "<group>"; };
@@ -593,6 +595,7 @@
 			children = (
 				746261612D3EA17800A4E84F /* DTO */,
 				746261782D3EA8D800A4E84F /* UploadTargetType.swift */,
+				7462617A2D3EB05A00A4E84F /* UploadService.swift */,
 			);
 			path = Upload;
 			sourceTree = "<group>";
@@ -1200,6 +1203,7 @@
 				1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */,
 				1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */,
 				D6978F502D36E3C800523A25 /* AnalyzingViewController.swift in Sources */,
+				7462617B2D3EB06100A4E84F /* UploadService.swift in Sources */,
 				74CDCE562D310B1600E3A21A /* String+.swift in Sources */,
 				74BF91FD2D381FF800B923E3 /* SpotDetailModel.swift in Sources */,
 				1547A8852D3595B600E96616 /* SpotListFilterModel.swift in Sources */,
