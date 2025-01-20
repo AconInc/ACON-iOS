@@ -46,12 +46,13 @@ class SpotListViewController: BaseNavViewController {
     }
     
     private func addTarget() {
-        spotListView.floatingFilterButton.addTarget(
+        spotListView.floatingFilterButton.button.addTarget(
             self,
             action: #selector(tappedFilterButton),
             for: .touchUpInside
         )
     }
+    
 }
 
 
@@ -66,6 +67,7 @@ extension SpotListViewController {
             spotListView.hideFooterLabel(isHidden: isFirstPage)
         }
     }
+    
 }
 
 
@@ -103,7 +105,6 @@ private extension SpotListViewController {
         }
     }
     
-    
     @objc
     func tappedFilterButton() {
         let vc = SpotListFilterViewController()
@@ -111,6 +112,7 @@ private extension SpotListViewController {
         
         present(vc, animated: true)
     }
+    
 }
 
 
