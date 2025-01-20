@@ -71,6 +71,7 @@
 		746261732D3EA78700A4E84F /* GetReiviewVerificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261722D3EA78400A4E84F /* GetReiviewVerificationRequest.swift */; };
 		746261752D3EA7FD00A4E84F /* GetReviewVerificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261742D3EA7E500A4E84F /* GetReviewVerificationResponse.swift */; };
 		746261772D3EA88700A4E84F /* GetAcornCountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261762D3EA87B00A4E84F /* GetAcornCountResponse.swift */; };
+		746261792D3EA8DF00A4E84F /* UploadTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261782D3EA8D800A4E84F /* UploadTargetType.swift */; };
 		746F39822D342523003F8498 /* SheetUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* SheetUtils.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
 		747F4FC12D3DC80B003DECBF /* finishedUpload.json in Resources */ = {isa = PBXBuildFile; fileRef = 747F4FC02D3DC80B003DECBF /* finishedUpload.json */; };
@@ -223,6 +224,7 @@
 		746261722D3EA78400A4E84F /* GetReiviewVerificationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReiviewVerificationRequest.swift; sourceTree = "<group>"; };
 		746261742D3EA7E500A4E84F /* GetReviewVerificationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReviewVerificationResponse.swift; sourceTree = "<group>"; };
 		746261762D3EA87B00A4E84F /* GetAcornCountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAcornCountResponse.swift; sourceTree = "<group>"; };
+		746261782D3EA8D800A4E84F /* UploadTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTargetType.swift; sourceTree = "<group>"; };
 		746F39812D342520003F8498 /* SheetUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetUtils.swift; sourceTree = "<group>"; };
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
 		747F4FC02D3DC80B003DECBF /* finishedUpload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = finishedUpload.json; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 			isa = PBXGroup;
 			children = (
 				746261612D3EA17800A4E84F /* DTO */,
+				746261782D3EA8D800A4E84F /* UploadTargetType.swift */,
 			);
 			path = Upload;
 			sourceTree = "<group>";
@@ -1222,6 +1225,7 @@
 				74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */,
 				741E68A62D3D61FA00DF99EF /* TestTargetType.swift in Sources */,
 				748D6F8F2D2BD340007690B4 /* UIButton+.swift in Sources */,
+				746261792D3EA8DF00A4E84F /* UploadTargetType.swift in Sources */,
 				741A07572D3558FE00778219 /* ReviewFinishedView.swift in Sources */,
 				1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
