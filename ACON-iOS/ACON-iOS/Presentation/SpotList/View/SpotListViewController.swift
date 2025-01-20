@@ -23,6 +23,8 @@ class SpotListViewController: BaseNavViewController {
         bindViewModel()
         setCollectionView()
         addTarget()
+        
+        spotListViewModel.requestLocation()
     }
     
     override func setHierarchy() {
@@ -61,11 +63,7 @@ class SpotListViewController: BaseNavViewController {
 extension SpotListViewController {
     
     func bindViewModel() {
-        spotListViewModel.isFirstPage.bind { [weak self] isFirstPage in
-            guard let self = self,
-                  let isFirstPage = isFirstPage else { return }
-            spotListView.hideFooterLabel(isHidden: isFirstPage)
-        }
+        
     }
     
 }
@@ -78,12 +76,9 @@ private extension SpotListViewController {
     @objc
     func handleRefreshControl() {
         print("refresh control 실행됨")
+        spotListViewModel.requestLocation()
         
-        if !spotListViewModel.secondSpotList.isEmpty {
-            spotListViewModel.isFirstPage.value?.toggle()
-        } else {
-            // TODO: 네트워크 요청
-        }
+        // TODO: 네트워크 요청
         
         DispatchQueue.main.async {
             // NOTE: 데이터 리로드 전 애니메이션
@@ -165,26 +160,23 @@ extension SpotListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        guard let isFirstPage = spotListViewModel.isFirstPage.value else { return 0 }
+        guard let spotList = spotListViewModel.spotList.value else { return 0 }
         
-        return isFirstPage ? spotListViewModel.firstSpotList.count : spotListViewModel.secondSpotList.count
+        return spotList.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let isFirstPage = spotListViewModel.isFirstPage.value,
+        guard let spotList = spotListViewModel.spotList.value,
               let item = collectionView.dequeueReusableCell(
                 withReuseIdentifier: SpotListCollectionViewCell.cellIdentifier,
                 for: indexPath
               ) as? SpotListCollectionViewCell
         else { return UICollectionViewCell() }
         
-        let spot = isFirstPage ? spotListViewModel.firstSpotList[indexPath.row] : spotListViewModel.secondSpotList[indexPath.row]
+        let bgColor: MatchingRateBgColorType = indexPath.item == 0 ? .dark : .light
         
-        // NOTE: 1번페이지 1번째 셀만 취향 일치율 배경색 어둡게
-        let bgColor: MatchingRateBgColorType = isFirstPage && indexPath.item == 0 ? .dark : .light
-        
-        item.bind(spot: spot, matchingRateBgColor: bgColor)
+        item.bind(spot: spotList[indexPath.item], matchingRateBgColor: bgColor)
         
         return item
     }
@@ -212,15 +204,12 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // NOTE: 1번페이지 1번째 셀만 크게
-        guard let isFirstPage = spotListViewModel.isFirstPage.value
-        else { return .zero }
-        
         let itemWidth: CGFloat = SpotListItemSizeType.itemWidth.value
         let collectionViewHeight: CGFloat = collectionView.frame.height
         let shortHeight: CGFloat = shortItemHeight(collectionViewHeight)
         let longHeight: CGFloat = longItemHeight(collectionViewHeight)
-        let itemHeight = isFirstPage && indexPath.item == 0 ? longHeight : shortHeight
+        
+        let itemHeight = indexPath.item == 0 ? longHeight : shortHeight
         
         return CGSize(width: itemWidth, height: itemHeight)
     }
