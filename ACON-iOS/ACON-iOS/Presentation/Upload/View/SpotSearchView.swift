@@ -91,7 +91,7 @@ final class SpotSearchView: BaseView {
         }
         
         searchSuggestionScrollView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*150/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.height*158/780)
             $0.height.equalTo(ScreenUtils.height*28/780)
             $0.trailing.equalToSuperview()
             $0.width.equalTo(ScreenUtils.width*340/360)
