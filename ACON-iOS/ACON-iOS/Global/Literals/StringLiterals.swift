@@ -95,7 +95,7 @@ enum StringLiterals {
         
         static let noMatchingSpots = "앗! 일치하는 장소가 없어요."
         
-        static let clickAcorn = "도토리를 클릭해보세요"
+        static let clickAcorn = "도토리를 터치해보세요"
         
         static let noAcorn = "도토리가 부족해요!"
         
