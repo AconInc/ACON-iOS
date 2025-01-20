@@ -21,6 +21,8 @@ enum StringLiterals {
         
         static let privacyPolicy = "개인정보처리방침"
         
+        static let logoText = "매번 맛집을 찾는라\n고민중인 당신을 위한 지도"
+        
     }
 
     enum TabBar {
@@ -193,4 +195,11 @@ enum StringLiterals {
         
     }
     
+    enum Network {
+        
+        static let accessToken = "accessToken"
+        
+        static let refreshToken = "refreshToken"
+        
+    }
 }
