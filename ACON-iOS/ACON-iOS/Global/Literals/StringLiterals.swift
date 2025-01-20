@@ -183,4 +183,11 @@ enum StringLiterals {
         
     }
     
+    enum Network {
+        
+        static let accessToken = "accessToken"
+        
+        static let refreshToken = "refreshToken"
+        
+    }
 }
