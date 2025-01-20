@@ -57,6 +57,7 @@
 		745C7E0D2D35A04A0074DBDB /* RelatedSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E0C2D35A03F0074DBDB /* RelatedSearchCollectionViewCell.swift */; };
 		745C7E122D35A62B0074DBDB /* UploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E112D35A6220074DBDB /* UploadModel.swift */; };
 		745C7E152D35AEC10074DBDB /* SpotSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E142D35AEBB0074DBDB /* SpotSearchViewModel.swift */; };
+		746F15B72D3E2083003EA031 /* LocalVerificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15B62D3E2079003EA031 /* LocalVerificationRequest.swift */; };
 		746F39822D342523003F8498 /* SheetUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* SheetUtils.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
 		748D6F412D2BC482007690B4 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F402D2BC482007690B4 /* Moya */; };
@@ -194,6 +195,7 @@
 		745C7E0C2D35A03F0074DBDB /* RelatedSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		745C7E112D35A6220074DBDB /* UploadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadModel.swift; sourceTree = "<group>"; };
 		745C7E142D35AEBB0074DBDB /* SpotSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotSearchViewModel.swift; sourceTree = "<group>"; };
+		746F15B62D3E2079003EA031 /* LocalVerificationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationRequest.swift; sourceTree = "<group>"; };
 		746F39812D342520003F8498 /* SheetUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetUtils.swift; sourceTree = "<group>"; };
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
 		748D6F612D2BCA1C007690B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -555,6 +557,22 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		746F15B42D3E2041003EA031 /* LocalVerification */ = {
+			isa = PBXGroup;
+			children = (
+				746F15B52D3E2073003EA031 /* DTO */,
+			);
+			path = LocalVerification;
+			sourceTree = "<group>";
+		};
+		746F15B52D3E2073003EA031 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				746F15B62D3E2079003EA031 /* LocalVerificationRequest.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
 		748D6F682D2BCA1C007690B4 /* ACON-iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -598,6 +616,7 @@
 		748D6F712D2BCA7E007690B4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				746F15B42D3E2041003EA031 /* LocalVerification */,
 				741E68A32D3D616200DF99EF /* Test */,
 				743069872D3D2EDA0033178C /* Base */,
 			);
@@ -1162,6 +1181,7 @@
 				74BF92112D391FFE00B923E3 /* LocalVerificationViewController.swift in Sources */,
 				74BF92122D391FFE00B923E3 /* LocalMapViewController.swift in Sources */,
 				74BF92132D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift in Sources */,
+				746F15B72D3E2083003EA031 /* LocalVerificationRequest.swift in Sources */,
 				74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */,
 				D696F1B22D3A7E3400CCD5FF /* CustomAlertView.swift in Sources */,
 				743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */,
