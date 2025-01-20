@@ -234,16 +234,7 @@ extension SpotSearchViewController: UICollectionViewDataSource {
 extension SpotSearchViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        print("=== shouldChangeCharactersIn ===")
-        // TODO: - 여기 dismiss 시점 문제는 아닌 듯. 나중에 해결되면 지우기 🍠
-        // NOTE: - 텍스트필드 / 키보드 문제도 아님. 키보드 전체 isHidden 처리해도 같은 문제 발생 🍠
-//        guard !isBeingDismissed else { return false }
-//        guard presentingViewController != nil else {
-//            print("===== ViewController is being dismissed =====")
-//            return false
-//        }
         acDebouncer.call { [weak self] in
-//            guard let self = self, !self.isBeingDismissed else { return }
             self?.updateSearchKeyword(textField.text ?? "")
         }
         return true
