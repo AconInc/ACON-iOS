@@ -101,8 +101,6 @@ private extension DropAcornViewController {
         let vc = ReviewFinishedViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: false)
-//        let vc = ReviewFinishedViewController()
-//        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     @objc
