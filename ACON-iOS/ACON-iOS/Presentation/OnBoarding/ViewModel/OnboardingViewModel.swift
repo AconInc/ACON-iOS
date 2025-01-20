@@ -18,9 +18,7 @@ final class OnboardingViewModel {
     var favoriteSpotStyle: ObservablePattern<String> = ObservablePattern(nil)
     
     var favoriteSpotRank: ObservablePattern<[String]> = ObservablePattern([])
-    
-    let onSuccessPostOnboarding: ObservablePattern<Bool> = ObservablePattern(nil)
-    
+        
     func postOnboarding(completion: @escaping (Bool) -> Void) {
         
         let onboardingData = OnboardingRequest(dislikeFoodList: dislike.value ?? [""],
@@ -32,16 +30,16 @@ final class OnboardingViewModel {
         print(onboardingData)
         
         ACService.shared.onboardingService.postOnboarding(onboardingData: onboardingData) { [weak self] response in
+            guard let self else { return }
+            
             switch response {
             case .success(_):
-                self?.onSuccessPostOnboarding.value = true
                 print("good")
-                completion(true) // 성공 시 true 반환
+                completion(true)
 
             default:
-                self?.onSuccessPostOnboarding.value = false
                 print("bad")
-                completion(false) // 성공 시 true 반환
+                completion(false)
             }
         }
     }
