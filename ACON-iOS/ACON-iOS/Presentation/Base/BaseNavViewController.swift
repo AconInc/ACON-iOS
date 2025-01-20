@@ -40,9 +40,9 @@ class BaseNavViewController: UIViewController {
     }
     
     func setHierarchy() {
-        self.view.addSubviews(topInsetView,
-                              navigationBarView,
-                              contentView)
+        self.view.addSubviews(contentView,
+                              topInsetView,
+                              navigationBarView)
         
         self.navigationBarView.addSubviews(leftButton,
                                            rightButton,
@@ -151,6 +151,23 @@ extension BaseNavViewController {
                         color: color)
             $0.textAlignment = alignment
         }
+    }
+    
+    func applyGlassmorphism(color: UIColor = .glaB30) {
+        let glassView = GlassmorphismView()
+        glassView.setGlassColor(color)
+        
+        view.insertSubview(glassView, aboveSubview: contentView)
+        
+        glassView.snp.makeConstraints {
+            $0.top.equalTo(topInsetView)
+            $0.bottom.horizontalEdges.equalTo(navigationBarView)
+        }
+        
+        [topInsetView, navigationBarView].forEach {
+            $0.backgroundColor = .clear
+        }
+        
     }
     
 }

@@ -20,7 +20,7 @@ final class CustomSlider: BaseView {
         return .init(width: .zero, height: thumbSize)
     }
     
-    lazy var value: Int = startIndex {
+    lazy var value: Int = 0 {
         didSet {
             delegate?.sliderView(self, changedValue: value)
         }
@@ -125,7 +125,6 @@ final class CustomSlider: BaseView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-//        updateLayoutToStartingPoint() // TODO: 이걸 넣으면 터치가 안 되는 문제 있음. 추후 수정
         
         updateStyle()
     }
@@ -136,19 +135,6 @@ final class CustomSlider: BaseView {
 // MARK: - Late UI Settings
 
 private extension CustomSlider {
-    
-    func updateLayoutToStartingPoint() {
-        let startPosX = CGFloat(Int(slicedPosX) * startIndex - Int(thumbSize) / 2)
-        touchBeganPosX = startPosX
-        
-        thumbView.snp.updateConstraints {
-            $0.left.equalTo(trackView).offset(startPosX)
-        }
-        
-        fillTrackView.snp.updateConstraints {
-            $0.width.equalTo(startPosX)
-        }
-    }
     
     func updateStyle() {
         if !didLayoutSubViews {
@@ -161,7 +147,41 @@ private extension CustomSlider {
                 roundedRect: thumbView.bounds,
                 cornerRadius: thumbView.layer.cornerRadius
             ).cgPath
+            
+            resetThumbPosition()
         }
+    }
+    
+}
+
+
+// MARK: - Public Methods
+
+extension CustomSlider {
+    
+    /// 슬라이더 초기 위치로 이동
+    func resetThumbPosition(animated: Bool = true) {
+        guard startIndex >= 0,
+              startIndex < indicators.count
+        else {
+            print("‼️ 슬라이더 초기화 파라미터 값 수정 필요‼️ startIndex 구간: 0 - \(indicators.count - 1) 사이")
+            return
+        }
+        
+        let targetPosX = slicedPosX * CGFloat(startIndex) - (thumbSize / 2)
+        
+        // NOTE: thumb 이동
+        if animated {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.updateThumbPosition(to: targetPosX)
+                self.layoutIfNeeded()
+            })
+        } else {
+            self.updateThumbPosition(to: targetPosX)
+        }
+        
+        // NOTE: value 업데이트
+        self.value = startIndex
     }
     
 }
@@ -175,25 +195,45 @@ private extension CustomSlider {
         self.slicedPosX = trackView.frame.width / CGFloat(indicators.count - 1)
         
         for (i, text) in indicators.enumerated() {
+            let alignment: NSTextAlignment = {
+                if i == 0 { return .left }
+                else if i == indicators.count - 1 { return .right }
+                else { return .center }
+            }()
+            
             let posX = slicedPosX * CGFloat(i)
-            let label = makeIndicatorLabel(text)
+            
+            let label = makeIndicatorLabel(text, alignment: alignment)
             
             addSubview(label)
+            
+            if i == 0 {
+                label.snp.makeConstraints {
+                    $0.leading.equalTo(trackView).offset(-thumbSize / 2)
+                }
+            } else if i == indicators.count - 1 {
+                label.snp.makeConstraints {
+                    $0.trailing.equalTo(trackView).offset(thumbSize / 2)
+                }
+            } else {
+                label.snp.makeConstraints {
+                    $0.centerX.equalTo(trackView.snp.left).offset(posX)
+                }
+            }
+            
             label.snp.makeConstraints {
                 $0.top.equalTo(trackView).offset(20)
-                $0.centerX.equalTo(trackView.snp.left).offset(posX)
                 $0.width.equalTo(labelWidth)
                 $0.bottom.equalToSuperview()
             }
-            print(text, posX)
         }
         
         didLayoutSubViews.toggle()
     }
     
-    func makeIndicatorLabel(_ text: String) -> UILabel {
+    func makeIndicatorLabel(_ text: String, alignment: NSTextAlignment) -> UILabel {
         let label = UILabel().then {
-            $0.setLabel(text: text, style: .c1, color: .gray4)
+            $0.setLabel(text: text, style: .c1, color: .gray4, alignment: alignment)
         }
         return label
     }
@@ -203,6 +243,17 @@ private extension CustomSlider {
         thumbView.addGestureRecognizer(gesture)
     }
     
+    // NOTE: 슬라이더 포인터 위치 업데이트
+    func updateThumbPosition(to position: CGFloat) {
+        thumbView.snp.updateConstraints {
+            $0.left.equalTo(trackView).offset(position)
+        }
+
+        fillTrackView.snp.updateConstraints {
+            $0.width.equalTo(position + (thumbSize / 2))
+        }
+    }
+    
 }
 
 
@@ -210,7 +261,8 @@ private extension CustomSlider {
 
 extension CustomSlider {
     
-    @objc func handlePan(_ recognizer: UIPanGestureRecognizer) {
+    @objc
+    func handlePan(_ recognizer: UIPanGestureRecognizer) {
         let translation = recognizer.translation(in: thumbView)
         
         if recognizer.state == .began {

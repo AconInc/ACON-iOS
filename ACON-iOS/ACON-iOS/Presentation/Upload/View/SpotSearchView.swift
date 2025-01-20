@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class SpotSearchView: BaseView {
+final class SpotSearchView: GlassmorphismView {
 
     // MARK: - UI Properties
     
@@ -26,11 +26,11 @@ final class SpotSearchView: BaseView {
     
     var doneButton: UIButton = UIButton()
     
-    var recommendedSpotScrollView: UIScrollView = UIScrollView()
+    var searchSuggestionScrollView: UIScrollView = UIScrollView()
     
-    var recommendedSpotStackView: UIStackView = UIStackView()
+    var searchSuggestionStackView: UIStackView = UIStackView()
 
-    var relatedSearchCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: relatedSearchCollectionViewFlowLayout)
+    var searchKeywordCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: relatedSearchCollectionViewFlowLayout)
     
     let emptyView: UIView = UIView()
 
@@ -56,13 +56,13 @@ final class SpotSearchView: BaseView {
         self.addSubviews(spotUploadLabel,
                          searchView,
                          doneButton,
-                         recommendedSpotScrollView,
-                         relatedSearchCollectionView,
+                         searchSuggestionScrollView,
+                         searchKeywordCollectionView,
                          emptyView)
         searchView.addSubviews(searchImageView,
                                searchTextField,
                                searchXButton)
-        recommendedSpotScrollView.addSubview(recommendedSpotStackView)
+        searchSuggestionScrollView.addSubview(searchSuggestionStackView)
         emptyView.addSubviews(emptyImageView, emptyLabel)
     }
     
@@ -90,14 +90,14 @@ final class SpotSearchView: BaseView {
             $0.height.equalTo(24)
         }
         
-        recommendedSpotScrollView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*150/780)
+        searchSuggestionScrollView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(ScreenUtils.height*158/780)
             $0.height.equalTo(ScreenUtils.height*28/780)
             $0.trailing.equalToSuperview()
             $0.width.equalTo(ScreenUtils.width*340/360)
         }
         
-        relatedSearchCollectionView.snp.makeConstraints {
+        searchKeywordCollectionView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.height*150/780)
             $0.height.equalTo(ScreenUtils.height*630/780 - safeAreaInsets.bottom)
             $0.width.equalTo(ScreenUtils.width*320/360)
@@ -130,9 +130,9 @@ final class SpotSearchView: BaseView {
             $0.width.height.equalTo(24)
         }
         
-        recommendedSpotStackView.snp.makeConstraints {
-            $0.edges.equalTo(recommendedSpotScrollView.contentLayoutGuide)
-            $0.height.equalTo(recommendedSpotScrollView.frameLayoutGuide.snp.height)
+        searchSuggestionStackView.snp.makeConstraints {
+            $0.edges.equalTo(searchSuggestionScrollView.contentLayoutGuide)
+            $0.height.equalTo(searchSuggestionScrollView.frameLayoutGuide.snp.height)
         }
         
         emptyImageView.snp.makeConstraints {
@@ -150,8 +150,8 @@ final class SpotSearchView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        self.backgroundColor = .glaW10
-        self.backgroundColor?.withAlphaComponent(0.95)
+        self.setGlassColor(.glaW10)
+        
         self.setHandlerImageView()
         
         spotUploadLabel.do {
@@ -175,18 +175,18 @@ final class SpotSearchView: BaseView {
                                   for: .normal)
         }
         
-        recommendedSpotScrollView.do {
+        searchSuggestionScrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.showsHorizontalScrollIndicator = false
         }
         
-        recommendedSpotStackView.do {
+        searchSuggestionStackView.do {
             $0.spacing = 8
             $0.distribution = .fill
             $0.alignment = .center
         }
         
-        relatedSearchCollectionView.do {
+        searchKeywordCollectionView.do {
             $0.backgroundColor = .clear
             $0.isScrollEnabled = true
             $0.isHidden = true
@@ -270,6 +270,20 @@ extension SpotSearchView {
             $0.setContentCompressionResistancePriority(.required, for: .horizontal)
         }
         return button
+    }
+    
+}
+
+
+// MARK: - Make RecommendedSpotButton
+
+extension SpotSearchView {
+    
+    func bindData(_ data: SearchSuggestionModel) {
+        for i in 0...4 {
+            let button = makeRecommendedSpotButton(data.spotList[i])
+            searchSuggestionStackView.addArrangedSubview(button)
+        }
     }
     
 }

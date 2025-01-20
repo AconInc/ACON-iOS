@@ -21,6 +21,8 @@ enum StringLiterals {
         
         static let privacyPolicy = "개인정보처리방침"
         
+        static let logoText = "매번 맛집을 찾는라\n고민중인 당신을 위한 지도"
+        
     }
 
     enum TabBar {
@@ -71,9 +73,9 @@ enum StringLiterals {
         
         static let uploadSpotName = "가게명 등록하기"
         
-        static let dropAcornsHere = "이곳에 도토리 남기기"
+        static let dropAcornsHere = "도토리로 리뷰남기기"
         
-        static let shallWeDropAcorns = "이제 도토리를\n떨어트려볼까요?"
+        static let shallWeDropAcorns = "도토리를 떨어트려\n리뷰를 남겨 볼까요?"
 
         static let useAcornToReview = "도토리를 사용해 리뷰를 남겨주세요."
         
@@ -94,6 +96,10 @@ enum StringLiterals {
         static let searchSpot = "가게명을 검색해주세요"
         
         static let noMatchingSpots = "앗! 일치하는 장소가 없어요."
+        
+        static let clickAcorn = "도토리를 터치해보세요"
+        
+        static let noAcorn = "도토리가 부족해요!"
         
     }
     
@@ -134,9 +140,12 @@ enum StringLiterals {
          static let localAcorn = "로컬 도토리"
 
          static let plainAcorn = "일반 도토리"
+        
      }
     
     enum SpotListFilter {
+        
+        static let pageTitle = "상세 조건"
         
         static let restaurant = "음식점"
         
@@ -179,7 +188,28 @@ enum StringLiterals {
         
     }
     
+
+    enum WebView {
+        
+        static let error = "에러"
+        
+        static let cantFindWebPage = "웹페이지를 찾을 수 없습니다."
+        
+        static let privacyPolicyLink = "https://bit.ly/acon개인정보처리방침"
+        
+        static let termsOfUseLink = "https://bit.ly/acon서비스이용약관"
+        
+    }
     
+    enum Network {
+        
+        static let accessToken = "accessToken"
+        
+        static let refreshToken = "refreshToken"
+        
+    }
+
+  
     enum DislikeTypes {
         
         static let dakbal = "닭발"

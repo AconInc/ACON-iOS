@@ -16,7 +16,9 @@ final class LoginView: BaseView {
     
     private let brandingLabel : UILabel = UILabel()
     
-    private let logoImage : UIImageView = UIImageView()
+    private let logoImageView : UIImageView = UIImageView()
+    
+    private var logoLabel : UILabel = UILabel()
     
     var googleLoginButton: UIButton = UIButton()
     
@@ -45,16 +47,28 @@ final class LoginView: BaseView {
         super.setHierarchy()
         
         self.addSubviews(brandingLabel,
-                         logoImage,
+                         logoImageView,
                          googleLoginButton,
                          appleLoginButton,
                          proceedLoginLabel,
                          termsOfUseLabel,
-                         privacyPolicyLabel)
+                         privacyPolicyLabel,
+                         logoLabel)
     }
     
     override func setLayout() {
         super.setLayout()
+        
+        logoImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview().offset(-20)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.widthRatio*224)
+        }
+        
+        logoLabel.snp.makeConstraints {
+            $0.bottom.equalTo(logoImageView.snp.top).offset(-10)
+            $0.centerX.equalToSuperview()
+        }
         
         googleLoginButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(ScreenUtils.height*172/780)
@@ -90,6 +104,19 @@ final class LoginView: BaseView {
     override func setStyle() {
         super.setStyle()
         
+        logoImageView.do {
+            $0.image = .acon
+            $0.contentMode = .scaleAspectFit
+        }
+        
+        logoLabel.do {
+            $0.setLabel(text: StringLiterals.Login.logoText,
+                        style: .s2,
+                        color: .acWhite,
+                        alignment: .center,
+                        numberOfLines: 2)
+        }
+        
         googleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
             $0.backgroundColor = .gray1
@@ -108,7 +135,7 @@ final class LoginView: BaseView {
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
                                   style: .s2,
                                   color: .acWhite)
-            
+    
         }
         
         proceedLoginLabel.do {
@@ -122,6 +149,7 @@ final class LoginView: BaseView {
                         style: .c1,
                         color: .gray5)
             $0.setUnderline(range: NSRange(location: 0, length: termsOfUseLabel.text?.count ?? 4))
+            $0.isUserInteractionEnabled = true
         }
         
         privacyPolicyLabel.do {
@@ -129,6 +157,7 @@ final class LoginView: BaseView {
                         style: .c1,
                         color: .gray5)
             $0.setUnderline(range: NSRange(location: 0, length: privacyPolicyLabel.text?.count ?? 8))
+            $0.isUserInteractionEnabled = true
         }
     }
     

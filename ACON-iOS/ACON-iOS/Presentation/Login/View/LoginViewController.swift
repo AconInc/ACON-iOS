@@ -50,7 +50,12 @@ class LoginViewController: BaseNavViewController {
     func addTarget() {
         loginView.googleLoginButton.addTarget(self, action: #selector(googleLoginButtonTapped), for: .touchUpInside)
         loginView.appleLoginButton.addTarget(self, action: #selector(appleLoginButtonTapped), for: .touchUpInside)
+        
+        loginView.privacyPolicyLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(privacyPolicyLabelTapped)))
+        loginView.termsOfUseLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(termsOfUseLabelTapped)))
+
     }
+    
 }
 
 
@@ -58,6 +63,18 @@ class LoginViewController: BaseNavViewController {
 
 extension LoginViewController {
 
+    @objc
+    func privacyPolicyLabelTapped() {
+        let privacyPolicyVC = DRWebViewController(urlString: StringLiterals.WebView.privacyPolicyLink)
+        self.present(privacyPolicyVC, animated: true)
+    }
+    
+    @objc
+    func termsOfUseLabelTapped() {
+        let termsOfUseVC = DRWebViewController(urlString: StringLiterals.WebView.termsOfUseLink)
+        self.present(termsOfUseVC, animated: true)
+    }
+    
     @objc
     func googleLoginButtonTapped() {
         loginViewModel.googleSignIn(presentingViewController: self)

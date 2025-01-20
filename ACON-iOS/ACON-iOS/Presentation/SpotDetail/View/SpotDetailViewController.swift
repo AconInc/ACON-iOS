@@ -52,6 +52,7 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
     override func setStyle() {
         super.setStyle()
         
+        self.applyGlassmorphism()
         self.setBackButton()
         updateCollectionViewHeight()
         bindNavBar(data: spotDetailViewModel.spotDetailDummyData)
@@ -60,8 +61,11 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
     
     private func addTarget() {
         spotDetailView.findCourseButton.addTarget(self,
-                                              action: #selector(findCourseButtonTapped),
-                                              for: .touchUpInside)
+                                                  action: #selector(findCourseButtonTapped),
+                                                  for: .touchUpInside)
+        
+        spotDetailView.gotoTopButton.addTarget(self,
+                                               action: #selector(scrollToTopButtonTapped), for: .touchUpInside)
     }
 
 }
@@ -74,6 +78,11 @@ private extension SpotDetailViewController {
     @objc
     func findCourseButtonTapped() {
         spotDetailViewModel.redirectToNaverMap()
+    }
+    
+    @objc
+    private func scrollToTopButtonTapped() {
+        spotDetailView.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
 }

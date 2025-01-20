@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Lottie
 import SnapKit
 import Then
 
@@ -24,6 +25,10 @@ final class DropAcornView: BaseView {
     
     var acornReviewLabel: UILabel = UILabel()
     
+    private let goAheadDropAcornLabel: UILabel = UILabel()
+    
+    var dropAcornLottieView: LottieAnimationView = LottieAnimationView()
+    
     var leaveReviewButton: UIButton = UIButton()
     
     
@@ -37,6 +42,8 @@ final class DropAcornView: BaseView {
                          acornNumberLabel,
                          acornStackView,
                          acornReviewLabel,
+                         goAheadDropAcornLabel,
+                         dropAcornLottieView,
                          leaveReviewButton)
     }
     
@@ -62,22 +69,33 @@ final class DropAcornView: BaseView {
         }
         
         acornStackView.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*172/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.height*214/780)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(208)
-            $0.height.equalTo(40)
+            $0.width.equalTo(240)
+            $0.height.equalTo(48)
         }
         
         acornReviewLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*146/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.height*192/780)
             $0.height.equalTo(18)
         }
         
+        goAheadDropAcornLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().inset(ScreenUtils.height*274/780)
+        }
+        
+        dropAcornLottieView.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(104)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.height*266/780)
+        }
+        
         leaveReviewButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*36/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
-            $0.height.equalTo(52)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.height*40/780)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*16/360)
+            $0.height.equalTo(ScreenUtils.height*52/780)
         }
         
     }
@@ -102,26 +120,30 @@ final class DropAcornView: BaseView {
                 let acornImageView = makeAcornImageButton()
                 $0.addArrangedSubview(acornImageView)
             }
-            $0.spacing = 2
-            $0.axis = .horizontal
         }
         
         acornReviewLabel.do {
             $0.setLabel(text: "0/5",
                         style: .b4,
-                        color: .gray3)
+                        color: .gray5)
+        }
+        
+        goAheadDropAcornLabel.do {
+            $0.setLabel(text: StringLiterals.Upload.clickAcorn,
+                        style: .b2,
+                        color: .acWhite)
         }
         
         leaveReviewButton.do {
             $0.setAttributedTitle(text: StringLiterals.Upload.reviewWithAcornsHere,
                                    style: .h8,
-                                  color: .gray6,
+                                  color: .acWhite,
                                   for: .disabled)
             $0.setAttributedTitle(text: StringLiterals.Upload.dropAcornsHere,
                                    style: .h8,
                                   color: .acWhite,
                                   for: .normal)
-            $0.backgroundColor = .gray8
+            $0.backgroundColor = .gray5
             $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
         }
     }
@@ -133,7 +155,7 @@ extension DropAcornView {
     func makeAcornImageButton() -> UIButton {
         let button = UIButton()
         button.snp.makeConstraints {
-            $0.width.height.equalTo(40)
+            $0.width.height.equalTo(48)
         }
         button.do {
             $0.setImage(.icGReview, for: .normal)
@@ -141,6 +163,16 @@ extension DropAcornView {
             $0.contentMode = .scaleAspectFit
         }
         return button
+    }
+    
+}
+
+extension DropAcornView {
+    
+    func bindData(_ data: AcornCountModel) {
+        self.acornNumberLabel.do {
+            $0.setPartialText(fullText: StringLiterals.Upload.acornsIHave + " \(data.acornCount)/25", textStyles: [(StringLiterals.Upload.acornsIHave, .b4, .gray5), (" \(data.acornCount)/25", .b4, .org1)])
+        }
     }
     
 }

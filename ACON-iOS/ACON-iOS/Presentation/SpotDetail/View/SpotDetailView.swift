@@ -47,17 +47,25 @@ final class SpotDetailView: BaseView {
     
     var findCourseButton: UIButton = UIButton()
     
+    var gotoTopButton: UIButton = UIButton()
+    
     static var menuCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().then {
         $0.minimumLineSpacing = 0
         $0.itemSize = CGSize(width: ScreenUtils.width*320/360, height: ScreenUtils.height*110/780)
     }
+    
+    private let navViewHeight: CGFloat = ScreenUtils.heightRatio * 56
+    
     
     // MARK: - Lifecycle
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(scrollView, stickyView, footerView)
+        self.addSubviews(scrollView,
+                         stickyView,
+                         footerView,
+                         gotoTopButton)
         scrollView.addSubviews(scrollContentView)
         scrollContentView.addSubviews(spotDetailImageView,
                                       openStatusButton,
@@ -75,14 +83,21 @@ final class SpotDetailView: BaseView {
     override func setLayout() {
         super.setLayout()
         
+        gotoTopButton.snp.makeConstraints{
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
+            $0.bottom.equalTo(footerView.snp.top).offset(-ScreenUtils.heightRatio * 16)
+            $0.size.equalTo(ScreenUtils.widthRatio * 44)
+        }
+        
         stickyView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
             $0.height.equalTo(36)
         }
         
         scrollView.snp.makeConstraints {
-            $0.top.horizontalEdges.equalToSuperview()
+            $0.top.equalToSuperview().offset(-navViewHeight)
+            $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview().inset(84)
         }
         
@@ -97,7 +112,8 @@ final class SpotDetailView: BaseView {
         }
         
         spotDetailImageView.snp.makeConstraints {
-            $0.top.horizontalEdges.equalToSuperview()
+            $0.top.equalToSuperview().offset(navViewHeight)
+            $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(ScreenUtils.height*196/780)
         }
         
@@ -169,6 +185,15 @@ final class SpotDetailView: BaseView {
     
     override func setStyle() {
         super.setStyle()
+        
+        gotoTopButton.do {
+            $0.backgroundColor = .gray7
+            $0.layer.borderWidth = 1
+            $0.layer.borderColor = UIColor.gray6.cgColor
+            $0.layer.cornerRadius = ScreenUtils.width * 44 / 360 / 2
+            $0.clipsToBounds = true
+            $0.setImage(UIImage(named:"upVector"), for: .normal)
+        }
         
         stickyView.do {
             $0.isHidden = true

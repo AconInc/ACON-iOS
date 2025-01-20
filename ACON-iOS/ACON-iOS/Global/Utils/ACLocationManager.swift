@@ -25,9 +25,11 @@ extension ACLocationManagerDelegate {
     }
     
     func locationManagerDidChangeAuthorization(_ manager: ACLocationManager) {
-        if manager.locationManager.authorizationStatus == .authorizedWhenInUse || manager.locationManager.authorizationStatus == .authorizedAlways {
-            manager.locationManager.requestLocation()
-        }
+        // TODO: - 이거 안 하면 위치 접근 권한 뜰 때 누르고, 다시 한 번 더 눌러야 제대로 된 서버통신 진행됨.
+        // NOTE: 위치 접근 권한 변경 시 바로 위치 로드
+//        if manager.locationManager.authorizationStatus == .authorizedWhenInUse || manager.locationManager.authorizationStatus == .authorizedAlways {
+//            manager.checkUserCurrentLocationAuthorization(manager.locationManager.authorizationStatus)
+//        }
     }
     
 }
@@ -38,6 +40,7 @@ class ACLocationManager: NSObject {
     
     let locationManager = CLLocationManager()
     private let multicastDelegate = MulticastDelegate<ACLocationManagerDelegate>()
+    private var isRequestingLocation: Bool = false
     
     private override init() {
         super.init()
@@ -92,13 +95,15 @@ class ACLocationManager: NSObject {
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestWhenInUseAuthorization()
         case .denied, .restricted:
-            // TODO: 설정 이동 Alert 커스텀 Alert으로 변경
             let scenes = UIApplication.shared.connectedScenes
             let windowScene = scenes.first as? UIWindowScene
             let window = windowScene?.windows.first
-            window?.rootViewController?.showDefaultAlert(title: StringLiterals.Alert.gpsDeniedTitle, message: StringLiterals.Alert.gpsDeniedMessage)
+            let alertHandler = AlertHandler()
+            alertHandler.showLocationAccessFailAlert(from: (window?.rootViewController)!)
         case .authorizedWhenInUse, .authorizedAlways:
-            locationManager.requestLocation()
+            guard !isRequestingLocation else { return }
+            isRequestingLocation = true
+            locationManager.startUpdatingLocation()
         default:
             print("zz 여기로안빠질듯")
         }
@@ -109,12 +114,15 @@ class ACLocationManager: NSObject {
 extension ACLocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let coordinate = locations.last?.coordinate {
-            multicastDelegate.invoke { delegate in
-                delegate.locationManager(self, didUpdateLocation: coordinate)
-            }
+        guard isRequestingLocation, let coordinate = locations.last?.coordinate else {
+            return
         }
+        isRequestingLocation = false
         stopUpdatingLocation()
+        
+        multicastDelegate.invoke { delegate in
+            delegate.locationManager(self, didUpdateLocation: coordinate)
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
