@@ -26,15 +26,6 @@ struct SpotModel: Equatable {
 }
 
 
-//// MARK: - Spots
-//
-//struct Spots {
-//    
-//    let array: [SpotModel]
-//    
-//}
-
-
 // MARK: - Dummy data (삭제 예정)
 
 extension SpotModel {
