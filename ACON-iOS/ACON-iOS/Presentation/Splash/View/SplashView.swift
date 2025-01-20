@@ -26,9 +26,9 @@ class SplashView: BaseView {
         
         splashLottieView.snp.makeConstraints {
             // TODO: - 디자인한테 물어보고 수정
-            $0.centerY.equalToSuperview()
-            $0.height.equalTo(390)
-            $0.width.equalTo(180)
+            $0.center.equalToSuperview()
+            $0.width.equalTo(360)
+            $0.height.equalTo(214)
         }
     }
     
