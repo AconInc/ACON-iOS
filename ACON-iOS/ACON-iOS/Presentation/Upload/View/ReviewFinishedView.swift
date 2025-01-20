@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Lottie
 import SnapKit
 import Then
 
@@ -18,7 +19,7 @@ final class ReviewFinishedView: BaseView {
     
     private let wishYouPreferenceLabel: UILabel = UILabel()
     
-    private let finishedReviewImageView: UIImageView = UIImageView()
+    let finishedReviewLottieView: LottieAnimationView = LottieAnimationView()
     
     private let closeViewLabel: UILabel = UILabel()
     
@@ -32,7 +33,7 @@ final class ReviewFinishedView: BaseView {
         
         self.addSubviews(finishedReviewLabel,
                          wishYouPreferenceLabel,
-                         finishedReviewImageView,
+                         finishedReviewLottieView,
                          closeViewLabel,
                          okButton)
     }
@@ -52,9 +53,10 @@ final class ReviewFinishedView: BaseView {
             $0.height.equalTo(18)
         }
         
-        finishedReviewImageView.snp.makeConstraints {
+        finishedReviewLottieView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(ScreenUtils.height*162/780)
+            // TODO: 디자인에게 사이즈 물어보기
             $0.width.equalTo(246)
             $0.height.equalTo(320)
         }
@@ -88,9 +90,10 @@ final class ReviewFinishedView: BaseView {
                         color: .gray3)
         }
         
-        finishedReviewImageView.do {
-            $0.image = .imgUploadFinish
+        finishedReviewLottieView.do {
+            $0.animation = LottieAnimation.named("finishedUpload")
             $0.contentMode = .scaleAspectFit
+            // TODO: 디자인에게 반복재생 물어보기
         }
         
         closeViewLabel.do {

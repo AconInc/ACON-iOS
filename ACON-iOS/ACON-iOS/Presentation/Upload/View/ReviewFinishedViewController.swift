@@ -35,6 +35,7 @@ class ReviewFinishedViewController: BaseNavViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         
+        self.reviewFinishedView.finishedReviewLottieView.play()
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.closeView()
         }
