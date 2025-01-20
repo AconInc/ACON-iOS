@@ -16,10 +16,19 @@ class LocalVerificationFinishedViewController: BaseViewController {
     
     private let localVerificationFinishedView = LocalVerificationFinishedView()
     
-    let localName = "동교동"
+    var localArea: String
     
     
     // MARK: - LifeCycle
+    
+    init(localArea: String) {
+        self.localArea = localArea
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +64,7 @@ class LocalVerificationFinishedViewController: BaseViewController {
         super.setStyle()
         
         localVerificationFinishedView.titleLabel.do {
-            $0.setLabel(text: StringLiterals.LocalVerification.now + localName + StringLiterals.LocalVerification.localAcornTitle,
+            $0.setLabel(text: StringLiterals.LocalVerification.now + localArea + StringLiterals.LocalVerification.localAcornTitle,
                         style: .h6,
                         color: .acWhite)
         }
