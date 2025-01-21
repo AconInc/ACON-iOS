@@ -58,7 +58,8 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         
         self.backgroundColor = .clear
         menuImageView.do {
-//            $0.image = .imgStoreDetailMenulist
+            $0.layer.cornerRadius = 6
+            $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
         }
     }
