@@ -15,6 +15,8 @@ class LoginViewModel {
     
     var onLoginSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
     
+    var idToken: String = ""
+    
     func googleSignIn(presentingViewController: UIViewController) {
         let clientID = Config.googleClientID
                 
@@ -29,19 +31,17 @@ class LoginViewModel {
             signInResult.user.refreshTokensIfNeeded { user, error in
                 guard error == nil else { return }
                 guard let user = user else { return }
-
-                let idToken = user.idToken?.tokenString
                 
-                // TODO: - Send this IDToken to Backend
-                print(idToken)
-                self.onLoginSuccess.value = true
+                self.idToken = user.idToken?.tokenString ?? ""
             }
         }
     }
     
     func appleSignIn(userInfo: ASAuthorizationAppleIDCredential) {
-        print(userInfo)
-        self.onLoginSuccess.value = true
+        if let idTokenData = userInfo.identityToken,
+           let idToken = String(data: idTokenData, encoding: .utf8) {
+            print(idToken)
+        }
     }
-     
+    
 }
