@@ -19,7 +19,8 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
 
     // MARK: - Properties
     
-    private let spotDetailViewModel = SpotDetailViewModel()
+    // TODO: - 이거 spotID 전 화면에서 넘겨받는 것으로 변경
+    private let spotDetailViewModel = SpotDetailViewModel(spotID: 1)
     
     private let spotDetailName: String = "가게명가게명"
     
@@ -33,6 +34,13 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
         addTarget()
         registerCell()
         setDelegate()
+        bindViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+
+        spotDetailViewModel.getSpotDetail()
     }
     
     override func setHierarchy() {
@@ -55,8 +63,6 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
         self.applyGlassmorphism()
         self.setBackButton()
         updateCollectionViewHeight()
-        bindNavBar(data: spotDetailViewModel.spotDetailDummyData)
-        spotDetailView.bindData(data: spotDetailViewModel.spotDetailDummyData)
     }
     
     private func addTarget() {
@@ -70,6 +76,23 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
 
 }
 
+
+// MARK: - bindViewModel
+
+private extension SpotDetailViewController {
+    
+    func bindViewModel() {
+        self.spotDetailViewModel.onSuccessGetSpotDetail.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.spotDetailViewModel.spotDetail.value else { return }
+            if onSuccess {
+                self?.bindNavBar(data: data)
+                self?.spotDetailView.bindData(data: data)
+            }
+        }
+        
+    }
+    
+}
 
 // MARK: - @objc methods
 

@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Kingfisher
 import SnapKit
 import Then
 
@@ -255,6 +256,7 @@ final class SpotDetailView: BaseView {
 extension SpotDetailView {
     
     func bindData(data: SpotDetailInfoModel) {
+        self.spotDetailImageView.kf.setImage(with: URL(string: data.firstImageURL), options: [.transition(.none),.cacheOriginalImage])
         let openStatus = data.openStatus
         self.openStatusButton.isSelected = openStatus
         self.openStatusButton.setAttributedTitle(
