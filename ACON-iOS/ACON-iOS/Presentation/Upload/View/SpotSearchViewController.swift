@@ -151,19 +151,18 @@ private extension SpotSearchViewController {
             }
         }
         
-        self.spotSearchViewModel.onSuccessGetSearchKeyword.bind { [weak self] onSuccess in
-            guard let onSuccess, let onUpdate = self?.spotSearchViewModel.updateSearchKeyword.value, let data = self?.spotSearchViewModel.searchKeywordData.value else { return }
-            if onSuccess && onUpdate {
+        // TODO: - 계속 불러야 해서 일단 데이터 자체 바인딩. 추후 로딩이 필요한 경우 onSuccessGetSearchKeyword으로 바인딩 로직 재구성
+        self.spotSearchViewModel.searchKeywordData.bind { [weak self] data in
+            guard let data = data else { return }
+            
+            DispatchQueue.main.async {
                 if data.count == 0 {
-                    DispatchQueue.main.async {
-                        // TODO: - 엠티뷰 처리
-                    }
+                    // TODO: - 엠티뷰 처리
+                    self?.spotSearchView.searchKeywordCollectionView.isHidden = true
                 } else {
-                    DispatchQueue.main.async {
-                        self?.spotSearchView.searchKeywordCollectionView.reloadData()
-                    }
+                    self?.spotSearchView.searchKeywordCollectionView.isHidden = false
+                    self?.spotSearchView.searchKeywordCollectionView.reloadData()
                 }
-                self?.spotSearchViewModel.updateSearchKeyword.value = false
             }
         }
         
@@ -216,7 +215,7 @@ extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
 extension SpotSearchViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return spotSearchViewModel.searchKeywordData.value?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

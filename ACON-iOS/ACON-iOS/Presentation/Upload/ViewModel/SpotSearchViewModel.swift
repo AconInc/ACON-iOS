@@ -53,10 +53,10 @@ class SpotSearchViewModel {
             switch response {
             case .success(let data):
                 self?.onSuccessGetSearchKeyword.value = true
-                let searchKeywords = data.suggestionList.map { keyword in
+                let searchKeywords = data.spotList.map { keyword in
                     return SearchKeywordModel(
                         spotID: keyword.spotId,
-                        spotName: keyword.spotName,
+                        spotName: keyword.name,
                         spotAddress: keyword.address,
                         spotType: keyword.spotType
                     )
