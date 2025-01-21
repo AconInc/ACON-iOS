@@ -21,6 +21,6 @@ struct SpotMenuInfo: Codable {
     
     let price: Int
     
-    let image: String
+    let image: String?
     
 }
