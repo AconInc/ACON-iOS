@@ -185,10 +185,12 @@ extension SpotDetailViewController: UICollectionViewDataSource {
 extension SpotDetailViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(spotDetailView.scrollView.contentOffset.y, spotDetailView.stickyHeaderView.frame.minY)
         let shouldShowSticky = spotDetailView.scrollView.contentOffset.y >= spotDetailView.stickyHeaderView.frame.minY
         spotDetailView.stickyView.isHidden = !shouldShowSticky
         spotDetailView.stickyHeaderView.isHidden = shouldShowSticky
+        
+        let shouldShowBlurSpotImageView = spotDetailView.scrollView.contentOffset.y > spotDetailView.navViewHeight
+        spotDetailView.blurSpotImageView.isHidden = shouldShowBlurSpotImageView
     }
 
 }
