@@ -23,6 +23,12 @@ class SplashViewController: BaseViewController {
             $0.play()
         }
         
+        splashView.logoLabel.alpha = 0
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            UIView.animate(withDuration: 0.3) {
+                self.splashView.logoLabel.alpha = 1
+            }
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             self.goToLoginVC()
         }
