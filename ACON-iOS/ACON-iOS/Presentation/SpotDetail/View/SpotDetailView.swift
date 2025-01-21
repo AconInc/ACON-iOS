@@ -128,32 +128,32 @@ final class SpotDetailView: BaseView {
         }
         
         openStatusButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*212/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.height*312/780 + navViewHeight)
             $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.width.equalTo(ScreenUtils.width*51/360)
             $0.height.equalTo(ScreenUtils.height*22/780)
         }
         
         addressImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*242/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.height*342/780 + navViewHeight)
             $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.width.height.equalTo(16)
         }
         
         addressLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*242/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.height*342/780 + navViewHeight)
             $0.leading.equalToSuperview().inset(ScreenUtils.width*38/360)
             $0.height.equalTo(18)
         }
         
         stickyHeaderView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*300/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.height*400/780 + navViewHeight)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.height.equalTo(36)
         }
         
         menuCollectionView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*353/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.height*453/780 + navViewHeight)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.height.equalTo(0)
             $0.bottom.lessThanOrEqualToSuperview()
