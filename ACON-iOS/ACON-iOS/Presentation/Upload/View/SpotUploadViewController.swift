@@ -159,7 +159,7 @@ extension SpotUploadViewController: ACLocationManagerDelegate {
 extension SpotUploadViewController {
     
     func setSpotSearchModal() {
-        let vc = SpotSearchViewController()
+        let vc = SpotSearchViewController(spotSearchViewModel: SpotSearchViewModel(latitude: self.latitude, longitude: self.longitude))
         vc.dismissCompletion = { [weak self] in
             DispatchQueue.main.async {
                 self?.removeBlurView()

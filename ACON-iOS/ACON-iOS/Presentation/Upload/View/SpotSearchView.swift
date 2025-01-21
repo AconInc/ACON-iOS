@@ -279,9 +279,12 @@ extension SpotSearchView {
 
 extension SpotSearchView {
     
-    func bindData(_ data: SearchSuggestionModel) {
+    func bindData(_ data: [SearchSuggestionModel]) {
+        searchSuggestionStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
         for i in 0...4 {
-            let button = makeRecommendedSpotButton(data.spotList[i])
+            let button = makeRecommendedSpotButton(data[i].spotName)
             searchSuggestionStackView.addArrangedSubview(button)
         }
     }
