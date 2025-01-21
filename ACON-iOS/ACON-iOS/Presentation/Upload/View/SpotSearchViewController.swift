@@ -136,6 +136,7 @@ private extension SpotSearchViewController {
     func searchXButtonTapped() {
         spotSearchView.searchTextField.text = ""
         spotSearchViewModel.getSearchSuggestion()
+        spotSearchView.doneButton.isEnabled = false
         spotSearchView.searchSuggestionStackView.isHidden = false
         spotSearchView.searchKeywordCollectionView.isHidden = true
     }
@@ -242,6 +243,7 @@ extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
         selectedSpotId = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotID ?? 1
         selectedSpotName = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotName ?? ""
         spotSearchView.searchTextField.text = selectedSpotName
+        spotSearchView.doneButton.isEnabled = true
         self.dismissKeyboard()
     }
     

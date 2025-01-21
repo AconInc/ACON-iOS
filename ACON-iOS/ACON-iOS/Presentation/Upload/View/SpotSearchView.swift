@@ -169,9 +169,14 @@ final class SpotSearchView: GlassmorphismView {
         }
         
         doneButton.do {
+            $0.isEnabled = false
             $0.setAttributedTitle(text: StringLiterals.Upload.done,
                                   style: .b2,
                                   color: .gray5,
+                                  for: .disabled)
+            $0.setAttributedTitle(text: StringLiterals.Upload.done,
+                                  style: .b2,
+                                  color: .acWhite,
                                   for: .normal)
         }
         
