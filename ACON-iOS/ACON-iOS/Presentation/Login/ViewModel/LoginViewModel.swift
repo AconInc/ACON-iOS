@@ -13,7 +13,7 @@ import AuthenticationServices
 
 class LoginViewModel {
     
-    var onLoginSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
+    var onSuccessLogin: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var idToken: String = ""
     
@@ -41,6 +41,19 @@ class LoginViewModel {
         if let idTokenData = userInfo.identityToken,
            let idToken = String(data: idTokenData, encoding: .utf8) {
             print(idToken)
+        }
+    }
+    
+    func postLogin(socialType: String, idToken: String) {
+        ACService.shared.authService.postLogin(PostLoginRequest(socialType: socialType, idToken: idToken)){ [weak self] response in
+            switch response {
+            case .success(let data):
+                self?.onSuccessLogin.value = true
+            default:
+                print("VM - Failed To postLogin")
+                self?.onSuccessLogin.value = false
+                return
+            }
         }
     }
     
