@@ -198,7 +198,7 @@ final class SpotDetailView: BaseView {
         
         blurSpotImageView.do {
             $0.setBlurView()
-            $0.image = .chickenFeet
+            $0.backgroundColor = .acWhite
             $0.contentMode = .scaleAspectFill
             $0.layer.contentsRect = CGRect(x: 0, y: 0, width: 1.0, height: navViewHeight/296)
             $0.clipsToBounds = true
@@ -274,7 +274,9 @@ final class SpotDetailView: BaseView {
 extension SpotDetailView {
     
     func bindData(data: SpotDetailInfoModel) {
-        self.spotDetailImageView.kf.setImage(with: URL(string: data.firstImageURL), options: [.transition(.none),.cacheOriginalImage])
+        [self.blurSpotImageView, self.spotDetailImageView].forEach {
+            $0.kf.setImage(with: URL(string: data.firstImageURL), options: [.transition(.none), .cacheOriginalImage])
+        }
         let openStatus = data.openStatus
         self.openStatusButton.isSelected = openStatus
         self.openStatusButton.setAttributedTitle(
