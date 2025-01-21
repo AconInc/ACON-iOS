@@ -117,7 +117,7 @@ extension SpotDetailViewModel: ACLocationManagerDelegate {
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
         guard let appName = Bundle.main.bundleIdentifier else { return }
         let sname = "내 위치"
-        let urlString = "nmap://route/walk?slat=\(coordinate.latitude)&slng=\(coordinate.longitude)&sname=\(sname)&dlat=\(String(describing: spotDetail.value?.latitude))&dlng=\(String(describing: spotDetail.value?.longitude))&dname=\(String(describing: spotDetail.value?.name))&appname=\(appName)"
+        let urlString = "nmap://route/walk?slat=\(coordinate.latitude)&slng=\(coordinate.longitude)&sname=\(sname)&dlat=\(spotDetail.value?.latitude ?? 0)&dlng=\(spotDetail.value?.longitude ?? 0)&dname=\(spotDetail.value?.name ?? "")&appname=\(appName)"
         guard let encodedStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         
         guard let url = URL(string: encodedStr) else { return }
