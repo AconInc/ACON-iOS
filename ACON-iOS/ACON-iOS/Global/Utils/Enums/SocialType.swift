@@ -9,7 +9,7 @@ import Foundation
 
 enum SocialType: String {
     
-    case GOGGLE
+    case GOOGLE
     
     case APPLE
     
