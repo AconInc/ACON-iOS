@@ -18,12 +18,6 @@ class SpotReviewViewModel {
     let onSuccessGetReviewVerification: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var reviewVerification: ObservablePattern<Bool> = ObservablePattern(nil)
-
-    init() {
-        self.onSuccessPostReview.value = false
-        self.onSuccessGetReviewVerification.value = true
-        self.reviewVerification.value = true
-    }
     
     func getAcornCount() {
         ACService.shared.uploadService.getAcornCount { [weak self] response in
@@ -35,7 +29,6 @@ class SpotReviewViewModel {
             default:
                 print("VM - Fail to getAcornCount")
                 self?.onSuccessGetAcornCount.value = false
-                return
             }
         }
     }
