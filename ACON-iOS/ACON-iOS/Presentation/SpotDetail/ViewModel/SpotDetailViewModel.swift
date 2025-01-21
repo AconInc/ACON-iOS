@@ -11,21 +11,6 @@ import CoreLocation
 
 class SpotDetailViewModel {
     
-    let menuDummyData: [SpotMenuModel] = [
-        SpotMenuModel(menuID: 1, name: "마라탕", price: 10000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "꿔바로우", price: 22000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "마라탕", price: 10000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "꿔바로우", price: 22000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "마라탕", price: 10000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "꿔바로우", price: 22000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "마라탕", price: 10000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "꿔바로우", price: 22000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "마라탕", price: 10000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "꿔바로우", price: 22000, imageURL: "")
-    ]
-    
-//    let spotDetailDummyData: SpotDetailInfoModel = SpotDetailInfoModel(spotID: 1, name: "아콘네 라면가게", spotType: "음식점", firstImageURL: "", openStatus: true, address: "서울시 마포구 동교동 27길 27", localAcornCount: 1, basicAcornCount: 1000, latitude: 37.556944, longitude: 126.923917)
-    
     let spotID: Int64
     
     let onSuccessGetSpotDetail: ObservablePattern<Bool> = ObservablePattern(nil)
