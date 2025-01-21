@@ -112,7 +112,7 @@ final class LoginView: BaseView {
         
         logoLabel.do {
             $0.setLabel(text: StringLiterals.Login.logoText,
-                        style: .s1,
+                        style: .h7,
                         color: .acWhite,
                         alignment: .center,
                         numberOfLines: 2)

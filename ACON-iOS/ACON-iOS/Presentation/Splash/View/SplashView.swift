@@ -26,14 +26,14 @@ class SplashView: BaseView {
     override func setLayout() {
         super.setLayout()
         
-//        splashLottieView.snp.makeConstraints {
-//            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*145)
-//            $0.centerX.equalToSuperview()
-//            $0.width.equalToSuperview()
-//        }
+        splashLottieView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*119)
+            $0.centerX.equalToSuperview()
+            $0.width.equalToSuperview()
+        }
         
         logoLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(ScreenUtils.heightRatio*344)
+            $0.top.equalToSuperview().offset(ScreenUtils.heightRatio*350)
             $0.centerX.equalToSuperview()
         }
     }
@@ -50,7 +50,7 @@ class SplashView: BaseView {
         
         logoLabel.do {
             $0.setLabel(text: StringLiterals.Login.logoText,
-                        style: .s1,
+                        style: .h7,
                         color: .acWhite,
                         alignment: .center,
                         numberOfLines: 2)
