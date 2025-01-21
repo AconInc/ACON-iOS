@@ -32,6 +32,10 @@ class SpotDetailViewModel {
         
     var spotDetail: ObservablePattern<SpotDetailInfoModel> = ObservablePattern(nil)
     
+    let onSuccessGetSpotMenu: ObservablePattern<Bool> = ObservablePattern(nil)
+        
+    var spotMenu: ObservablePattern<[SpotMenuModel]> = ObservablePattern(nil)
+    
     init(spotID: Int64) {
         self.spotID = spotID
         ACLocationManager.shared.addDelegate(self)
@@ -71,6 +75,25 @@ extension SpotDetailViewModel {
         }
     }
     
+    func getSpotMenu() {
+        ACService.shared.spotDetailService.getSpotMenu(spotID: spotID) { [weak self] response in
+            switch response {
+            case .success(let data):
+                let spotMenuData = data.menuList.map { menu in
+                    return SpotMenuModel(menuID: menu.id,
+                                         name: menu.name,
+                                         price: menu.price,
+                                         imageURL: menu.image)
+                    }
+                    self?.spotMenu.value = spotMenuData
+                    self?.onSuccessGetSpotMenu.value = true
+            default:
+                print("VM - Failed To getSpotMenu")
+                self?.onSuccessGetSpotMenu.value = false
+                return
+            }
+        }
+    }
 }
 
 
