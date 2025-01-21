@@ -135,6 +135,7 @@ private extension SpotSearchViewController {
     @objc
     func searchXButtonTapped() {
         spotSearchView.searchTextField.text = ""
+        spotSearchViewModel.getSearchSuggestion()
         spotSearchView.searchSuggestionStackView.isHidden = false
         spotSearchView.searchKeywordCollectionView.isHidden = true
     }
@@ -159,6 +160,7 @@ private extension SpotSearchViewController {
             guard let onSuccess, let data = self?.spotSearchViewModel.searchSuggestionData.value else { return }
             if onSuccess {
                 self?.spotSearchView.bindData(data)
+                self?.addActionToSearchKeywordButton()
             }
         }
         
@@ -177,9 +179,33 @@ private extension SpotSearchViewController {
                 }
             }
         }
-        
     }
 
+}
+
+
+// MARK: - 추천 검색어 클릭 로직
+
+private extension SpotSearchViewController {
+    
+    func addActionToSearchKeywordButton() {
+        spotSearchView.searchSuggestionStackView.arrangedSubviews.forEach { view in
+            if let button = view as? UIButton {
+                button.addTarget(self,
+                                 action: #selector(searchKeywordButtonTapped(_:)),
+                                 for: .touchUpInside)
+            }
+        }
+    }
+    
+    @objc
+    func searchKeywordButtonTapped(_ sender: UIButton) {
+        guard let spotName = sender.currentAttributedTitle?.string else { return }
+        spotSearchView.searchTextField.text = spotName
+        self.updateSearchKeyword(spotName)
+        spotSearchView.searchSuggestionStackView.isHidden = true
+    }
+    
 }
 
 
