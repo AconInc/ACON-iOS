@@ -20,7 +20,6 @@ enum SpotType {
         }
     }
     
-    
     var walkingTimeDefault: Int {
         return 50
     }
@@ -53,7 +52,7 @@ enum SpotType {
     
     enum RestaurantFeatureType: CaseIterable {
         
-        case korean, western, chinese, japanese, snack, asian, bar, excludeFranchise
+        case korean, western, chinese, japanese, koreanStreet, asian, bar, excludeFranchise
         
         var text: String {
             switch self {
@@ -61,7 +60,7 @@ enum SpotType {
             case .western: return "양식"
             case .chinese: return "중식"
             case .japanese: return "일식"
-            case .snack: return "간식"
+            case .koreanStreet: return "간식"
             case .asian: return "아시안"
             case .bar: return "술/bar"
             case .excludeFranchise: return "프랜차이즈 제외"
