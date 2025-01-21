@@ -18,6 +18,8 @@ struct GetSpotDetailResponse: Codable {
     let imageList: [String]
     
     let openStatus: Bool
+    
+    let address: String
 
     let localAcornCount: Int
     
