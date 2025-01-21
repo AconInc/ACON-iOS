@@ -36,6 +36,7 @@
 		741A06CA2D35415800778219 /* DropAcornViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741A06C92D35415200778219 /* DropAcornViewController.swift */; };
 		741A07572D3558FE00778219 /* ReviewFinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741A07562D3558F700778219 /* ReviewFinishedView.swift */; };
 		741A07592D355F1400778219 /* ReviewFinishedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741A07582D355F0100778219 /* ReviewFinishedViewController.swift */; };
+		74205D312D40398100D11557 /* splashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 74205D302D40398100D11557 /* splashLottie.json */; };
 		74220DD42D34363B000684BF /* SpotUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74220DD32D343633000684BF /* SpotUploadViewController.swift */; };
 		74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74220DD52D3436BE000684BF /* SpotUploadView.swift */; };
 		744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BAF162D300AB100F95B4A /* DummyComponent.swift */; };
@@ -162,6 +163,7 @@
 		741A06C92D35415200778219 /* DropAcornViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropAcornViewController.swift; sourceTree = "<group>"; };
 		741A07562D3558F700778219 /* ReviewFinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFinishedView.swift; sourceTree = "<group>"; };
 		741A07582D355F0100778219 /* ReviewFinishedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFinishedViewController.swift; sourceTree = "<group>"; };
+		74205D302D40398100D11557 /* splashLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = splashLottie.json; sourceTree = "<group>"; };
 		74220DD32D343633000684BF /* SpotUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadViewController.swift; sourceTree = "<group>"; };
 		74220DD52D3436BE000684BF /* SpotUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadView.swift; sourceTree = "<group>"; };
 		744BAF162D300AB100F95B4A /* DummyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyComponent.swift; sourceTree = "<group>"; };
@@ -592,6 +594,7 @@
 			children = (
 				748D6F772D2BCB90007690B4 /* Fonts */,
 				748D6F622D2BCA1C007690B4 /* Assets.xcassets */,
+				74205D302D40398100D11557 /* splashLottie.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -983,6 +986,7 @@
 				748D6F9F2D2BD655007690B4 /* Pretendard-Medium.otf in Resources */,
 				74B25C2E2D2FEFD3008BDCB7 /* Debug.xcconfig in Resources */,
 				748D6F9B2D2BD638007690B4 /* Pretendard-Bold.otf in Resources */,
+				74205D312D40398100D11557 /* splashLottie.json in Resources */,
 				748D6F6E2D2BCA1C007690B4 /* LaunchScreen.storyboard in Resources */,
 				748D6F9D2D2BD641007690B4 /* Pretendard-SemiBold.otf in Resources */,
 			);
