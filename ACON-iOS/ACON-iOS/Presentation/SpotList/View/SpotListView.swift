@@ -66,7 +66,8 @@ class SpotListView: BaseView {
         
         collectionView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(18)
-            $0.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
+            $0.bottom.equalToSuperview()
         }
         
         floatingButtonStack.snp.makeConstraints {
@@ -136,7 +137,10 @@ private extension SpotListView {
     }
     
     func setNoAcornView() {
-        noAcornView.backgroundColor = .gray9
+        noAcornView.do {
+            $0.backgroundColor = .gray9
+            $0.isHidden = true
+        }
         
         noAcornImageView.image = .imgEmptySearch
         
