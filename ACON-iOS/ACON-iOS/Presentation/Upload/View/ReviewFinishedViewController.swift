@@ -35,6 +35,7 @@ class ReviewFinishedViewController: BaseNavViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         
+        self.reviewFinishedView.finishedReviewLottieView.play()
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.closeView()
         }
@@ -54,7 +55,16 @@ class ReviewFinishedViewController: BaseNavViewController {
         }
     }
     
+    override func setStyle() {
+        super.setStyle()
+        
+        self.setXButton()
+    }
+    
     func addTarget() {
+        self.leftButton.addTarget(self,
+                                  action: #selector(xButtonTapped),
+                                  for: .touchUpInside)
         reviewFinishedView.okButton.addTarget(self,
                                               action: #selector(okButtonTapped),
                                               for: .touchUpInside)
@@ -66,6 +76,11 @@ class ReviewFinishedViewController: BaseNavViewController {
 // MARK: - @objc functions
 
 private extension ReviewFinishedViewController {
+    
+    @objc
+    func xButtonTapped() {
+        closeView()
+    }
     
     @objc
     func okButtonTapped() {
@@ -81,9 +96,11 @@ private extension ReviewFinishedViewController {
     
     @objc
     func closeView() {
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = ACTabBarController()
+        var topController: UIViewController = self
+        while let presenting = topController.presentingViewController {
+            topController = presenting
         }
+        topController.dismiss(animated: true)
     }
     
 }

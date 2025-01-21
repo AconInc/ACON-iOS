@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Kingfisher
 import SnapKit
 import Then
 
@@ -54,6 +55,9 @@ final class SpotDetailView: BaseView {
         $0.itemSize = CGSize(width: ScreenUtils.width*320/360, height: ScreenUtils.height*110/780)
     }
     
+    private let navViewHeight: CGFloat = ScreenUtils.heightRatio * 56
+    
+    
     // MARK: - Lifecycle
     
     override func setHierarchy() {
@@ -93,7 +97,8 @@ final class SpotDetailView: BaseView {
         }
         
         scrollView.snp.makeConstraints {
-            $0.top.horizontalEdges.equalToSuperview()
+            $0.top.equalToSuperview().offset(-navViewHeight)
+            $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview().inset(84)
         }
         
@@ -108,7 +113,8 @@ final class SpotDetailView: BaseView {
         }
         
         spotDetailImageView.snp.makeConstraints {
-            $0.top.horizontalEdges.equalToSuperview()
+            $0.top.equalToSuperview().offset(navViewHeight)
+            $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(ScreenUtils.height*196/780)
         }
         
@@ -209,6 +215,7 @@ final class SpotDetailView: BaseView {
                                                                     trailing: 10)
             $0.setAttributedTitle(text: StringLiterals.SpotDetail.isOpen, style: .b4)
             $0.configuration?.background.strokeWidth = 0
+            $0.isUserInteractionEnabled = false
         }
         
         addressImageView.do {
@@ -250,6 +257,7 @@ final class SpotDetailView: BaseView {
 extension SpotDetailView {
     
     func bindData(data: SpotDetailInfoModel) {
+        self.spotDetailImageView.kf.setImage(with: URL(string: data.firstImageURL), options: [.transition(.none),.cacheOriginalImage])
         let openStatus = data.openStatus
         self.openStatusButton.isSelected = openStatus
         self.openStatusButton.setAttributedTitle(

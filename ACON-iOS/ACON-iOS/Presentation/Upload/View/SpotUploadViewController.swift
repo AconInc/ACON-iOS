@@ -21,19 +21,25 @@ class SpotUploadViewController: BaseNavViewController {
     
     // MARK: - Properties
     
+    var spotReviewViewModel = SpotReviewViewModel()
+    
     var selectedSpotID: Int = -1
     
 //    var selectedSpotName: String = ""
+    
+    var latitude: Double = 0
+    
+    var longitude: Double = 0
+    
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setXButton()
-        self.setSecondTitleLabelStyle(title: StringLiterals.Upload.upload)
         addTarget()
         ACLocationManager.shared.addDelegate(self)
+        bindViewModel()
     }
     
     deinit {
@@ -63,6 +69,8 @@ class SpotUploadViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
+        self.setXButton()
+        self.setSecondTitleLabelStyle(title: StringLiterals.Upload.upload)
         self.spotUploadView.dropAcornButton.isEnabled = false
     }
     
@@ -80,6 +88,30 @@ class SpotUploadViewController: BaseNavViewController {
 
 }
 
+
+private extension SpotUploadViewController {
+
+    func bindViewModel() {
+        self.spotReviewViewModel.onSuccessGetReviewVerification.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.spotReviewViewModel.reviewVerification.value else { return }
+            if onSuccess {
+                if data {
+                    self?.spotUploadView.dropAcornButton.isEnabled = true
+                    self?.spotUploadView.dropAcornButton.backgroundColor = .gray5
+                } else {
+                    // TODO: - show Alert
+                    self?.spotUploadView.dropAcornButton.isEnabled = false
+                    self?.spotUploadView.dropAcornButton.backgroundColor = .gray8
+                    self?.spotUploadView.spotSearchButton.setAttributedTitle(text: StringLiterals.Upload.uploadSpotName,
+                                                                            style: .s2,
+                                                                            color: .gray5)
+                }
+                self?.spotReviewViewModel.reviewVerification.value = false
+            }
+        }
+    }
+    
+}
     
 // MARK: - @objc functions
 
@@ -87,19 +119,20 @@ private extension SpotUploadViewController {
 
     @objc
     func spotSearchButtonTapped() {
-        // TODO: - 위치 접근 권한 체크하기
         ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
     }
     
     @objc
     func dropAcornButtonTapped() {
-        let vc = DropAcornViewController()
-        navigationController?.pushViewController(vc, animated: false)
+        let vc = DropAcornViewController(spotID: selectedSpotID)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: false)
     }
     
     @objc
     func xButtonTapped() {
-        // TODO: 작성을 그만두시겠습니까 Alert 띄우기
+        let alertHandler = AlertHandler()
+        alertHandler.showReviewExitAlert(from: self)
     }
     
 }
@@ -107,9 +140,16 @@ private extension SpotUploadViewController {
 extension SpotUploadViewController: ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
-        // TODO: - 연관검색어 네트워크 요청
-        print("성공 - 위도: \(coordinate.latitude), 경도: \(coordinate.longitude)")
-        setSpotSearchModal()
+        // TODO: - 연관검색어 네트워크 요청 - 여기 아니면 spotSearch viewWillAppear
+
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            print("성공 - 위도: \(coordinate.latitude), 경도: \(coordinate.longitude)")
+            self.latitude = coordinate.latitude
+            self.longitude = coordinate.longitude
+            self.setSpotSearchModal()
+        }
     }
     
 }
@@ -119,37 +159,42 @@ extension SpotUploadViewController {
     
     func setSpotSearchModal() {
         let vc = SpotSearchViewController()
-        
         vc.dismissCompletion = { [weak self] in
-            self?.removeBlurView()
+            DispatchQueue.main.async {
+                self?.removeBlurView()
+            }
         }
         
-        // TODO: - 이 부분 로직 및 플로우 다시 짜기 !!
         vc.completionHandler = { [weak self] selectedSpotID, selectedSpotName in
             guard let self = self else { return }
             self.selectedSpotID = selectedSpotID
-//            self?.selectedSpotName = selectedSpotName
-            self.spotUploadView.spotSearchButton.do {
-                $0.setAttributedTitle(text: selectedSpotName,
-                                      style: .s2,
-                                      color: .acWhite)
-            }
-            if selectedSpotID > 0 {
-                self.spotUploadView.dropAcornButton.isEnabled = true
-                self.spotUploadView.dropAcornButton.backgroundColor = .gray5
-            } else {
-                self.spotUploadView.dropAcornButton.isEnabled = false
-                self.spotUploadView.dropAcornButton.backgroundColor = .gray8
-                self.spotUploadView.spotSearchButton.setAttributedTitle(text: StringLiterals.Upload.uploadSpotName,
-                                                                        style: .s2,
-                                                                        color: .gray5)
-
+            
+            DispatchQueue.main.async {
+                self.spotUploadView.spotSearchButton.do {
+                    $0.setAttributedTitle(text: selectedSpotName,
+                                          style: .s2,
+                                          color: .acWhite)
+                }
+                
+                if selectedSpotID > 0 {
+                    // TODO: - ReviewVerification 서버통신
+                } else {
+                    self.spotUploadView.dropAcornButton.isEnabled = false
+                    self.spotUploadView.dropAcornButton.backgroundColor = .gray8
+                    self.spotUploadView.spotSearchButton.setAttributedTitle(
+                        text: StringLiterals.Upload.uploadSpotName,
+                        style: .s2,
+                        color: .gray5)
+                }
             }
         }
-        
-        vc.setLongSheetLayout()
-        self.addBlurView()
-        self.present(vc, animated: true)
+
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.addBlurView()
+            vc.setLongSheetLayout()
+            self.present(vc, animated: true)
+        }
     }
     
 }

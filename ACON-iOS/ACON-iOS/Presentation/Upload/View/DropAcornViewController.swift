@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Lottie
 import SnapKit
 import Then
 
@@ -16,13 +17,24 @@ class DropAcornViewController: BaseNavViewController {
     
     private let dropAcornView = DropAcornView()
     
+    var reviewAcornCount: Int = 0
+    
+    var possessAcornCount: Int = 0
     
     // MARK: - Properties
     
-    var reviewAcornCount: Int = 0
+    var spotReviewViewModel = SpotReviewViewModel()
     
-    var posessAcornCount: Int = 5
+    var spotID: Int = 0
     
+    init(spotID: Int) {
+        self.spotID = spotID
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - LifeCycle
     
@@ -31,6 +43,7 @@ class DropAcornViewController: BaseNavViewController {
         
         self.setXButton()
         addTarget()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,14 +70,6 @@ class DropAcornViewController: BaseNavViewController {
         super.setStyle()
         
         self.dropAcornView.leaveReviewButton.isEnabled = false
-        self.dropAcornView.acornNumberLabel.do {
-            $0.setLabel(text: StringLiterals.Upload.acornsIHave,
-                        style: .b4,
-                        color: .gray5)
-            $0.setPartialText(fullText: StringLiterals.Upload.acornsIHave + " \(posessAcornCount)/25",
-                              textStyles: [(StringLiterals.Upload.acornsIHave, .b4, .gray5),
-                                           (" \(posessAcornCount)/25", .b4, .org1)])
-        }
     }
     
     func addTarget() {
@@ -90,9 +95,12 @@ private extension DropAcornViewController {
     
     @objc
     func leaveReviewButtonTapped() {
-        // TODO: - reviewAcornCount 서버 POST
+        // TODO: - reviewAcornCount 서버 POST -> spotReviewViewModel.postReviewData()
+        let data: ReviewPostModel = ReviewPostModel(spotID: spotID, acornCount: reviewAcornCount)
+        // TODO: - 여기서 가는 로직은 임시적용 (VM init에서 true할 수 없음) -> 나중에 지우기
         let vc = ReviewFinishedViewController()
-        navigationController?.pushViewController(vc, animated: false)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: false)
     }
     
     @objc
@@ -104,12 +112,58 @@ private extension DropAcornViewController {
         }
         dropAcornView.acornReviewLabel.text = "\(selectedIndex+1)/5"
         reviewAcornCount = selectedIndex + 1
-        enableLeaveReviewButton()
+        checkAcorn(reviewAcornCount)
     }
     
     @objc
     func xButtonTapped() {
-        // TODO: 작성을 그만두시겠습니까 Alert 띄우기
+        let alertHandler = AlertHandler()
+        alertHandler.showReviewExitAlert(from: self)
+    }
+    
+}
+
+
+// MARK: - bind ViewModel
+
+private extension DropAcornViewController {
+    
+    func bindViewModel() {
+        self.spotReviewViewModel.onSuccessGetAcornNum.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.spotReviewViewModel.acornNum.value else { return }
+            if onSuccess {
+                self?.possessAcornCount = data.acornCount
+                self?.dropAcornView.bindData(data)
+            }
+        }
+        
+        self.spotReviewViewModel.onSuccessPostReview.bind { [weak self] onSuccess in
+            guard let onSuccess else { return }
+            if onSuccess {
+                let vc = ReviewFinishedViewController()
+                self?.navigationController?.pushViewController(vc, animated: false)
+            }
+        }
+    }
+    
+}
+
+
+// MARK: - drop acorn 로직
+
+private extension DropAcornViewController {
+    
+    func checkAcorn(_ dropAcorn: Int) {
+        if dropAcorn > possessAcornCount {
+            ACToastController.show(StringLiterals.Upload.noAcorn, bottomInset: 112, delayTime: 1)
+            { [weak self] in return }
+            dropAcornView.dropAcornLottieView.isHidden = true
+            disableLeaveReviewButton()
+        } else {
+            dropAcornView.dropAcornLottieView.isHidden = false
+            toggleLottie(dropAcorn: dropAcorn)
+            enableLeaveReviewButton()
+        }
     }
     
 }
@@ -119,10 +173,45 @@ private extension DropAcornViewController {
 
 private extension DropAcornViewController {
     
+    // TODO: - 나중에 전부 buttonConfiguration에 넣고 enable만 toggle
     func enableLeaveReviewButton() {
         dropAcornView.leaveReviewButton.do {
             $0.isEnabled = true
             $0.backgroundColor = .org0
+        }
+    }
+    
+    func disableLeaveReviewButton() {
+        dropAcornView.leaveReviewButton.do {
+            $0.isEnabled = false
+            $0.backgroundColor = .gray5
+        }
+    }
+    
+}
+
+
+// MARK: - Lottie
+
+private extension DropAcornViewController {
+    
+    func toggleLottie(dropAcorn: Int) {
+        dropAcornView.dropAcornLottieView.do {
+            switch dropAcorn {
+            case 1:
+                $0.animation = LottieAnimation.named("drop1Acorn")
+            case 2:
+                $0.animation = LottieAnimation.named("drop2Acorn")
+            case 3:
+                $0.animation = LottieAnimation.named("drop3Acorn")
+            case 4:
+                $0.animation = LottieAnimation.named("drop4Acorn")
+            case 5:
+                $0.animation = LottieAnimation.named("drop5Acorn")
+            default:
+                $0.isHidden = true
+            }
+            $0.play()
         }
     }
     

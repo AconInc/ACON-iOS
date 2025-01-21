@@ -14,8 +14,8 @@ enum FavoriteSpotStyle: CaseIterable {
     
     var name: String {
         switch self {
-        case .nopo: return "노포"
-        case .modern: return "모던"
+        case .nopo: return StringLiterals.FavoriteSpotStyles.nopo
+        case .modern: return StringLiterals.FavoriteSpotStyles.modern
         }
     }
     
