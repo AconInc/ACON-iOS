@@ -137,7 +137,10 @@ private extension SpotListView {
     }
     
     func setNoAcornView() {
-        noAcornView.backgroundColor = .gray9
+        noAcornView.do {
+            $0.backgroundColor = .gray9
+            $0.isHidden = true
+        }
         
         noAcornImageView.image = .imgEmptySearch
         
