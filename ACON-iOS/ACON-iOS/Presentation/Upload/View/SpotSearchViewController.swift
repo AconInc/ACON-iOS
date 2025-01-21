@@ -64,20 +64,14 @@ class SpotSearchViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         spotSearchView.searchTextField.resignFirstResponder()
-        print("===== viewWillDisappear called =====")
-        print("isBeingDismissed: \(isBeingDismissed)")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("===== viewDidDisappear called =====")
-        print("hasCompletedSelection: \(hasCompletedSelection)")
         if isBeingDismissed {
             if hasCompletedSelection {
-                print("===== completionHandler will be called =====")
                 completionHandler?(selectedSpotId, selectedSpotName)
             }
-            print("===== dismissCompletion will be called =====")
             dismissCompletion?()
         }
     }
@@ -128,7 +122,6 @@ private extension SpotSearchViewController {
     func doneButtonTapped() {
         print("===== doneButton tapped =====")
         hasCompletedSelection = true
-        spotSearchView.searchTextField.resignFirstResponder()
         dismiss(animated: true)
     }
     
