@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct GetSpotDetailResponse: Codable {
     
     let id: Int64
