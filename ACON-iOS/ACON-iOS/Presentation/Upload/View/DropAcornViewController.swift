@@ -142,7 +142,8 @@ private extension DropAcornViewController {
             guard let onSuccess else { return }
             if onSuccess {
                 let vc = ReviewFinishedViewController()
-                self?.navigationController?.pushViewController(vc, animated: false)
+                vc.modalPresentationStyle = .fullScreen
+                self?.present(vc, animated: false)
             }
         }
     }
