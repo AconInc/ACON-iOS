@@ -63,6 +63,11 @@
 		7462615D2D3E5B6D00A4E84F /* drop4Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 746261592D3E5B6D00A4E84F /* drop4Acorn.json */; };
 		7462615E2D3E5B6D00A4E84F /* drop2Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 746261572D3E5B6D00A4E84F /* drop2Acorn.json */; };
 		7462615F2D3E5B6D00A4E84F /* drop3Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 746261582D3E5B6D00A4E84F /* drop3Acorn.json */; };
+		7462617F2D3F9F1400A4E84F /* GetSpotDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462617E2D3F9F0300A4E84F /* GetSpotDetailResponse.swift */; };
+		746261832D3F9FD900A4E84F /* GetSpotMenuResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261822D3F9FC600A4E84F /* GetSpotMenuResponse.swift */; };
+		746261852D3FA0A400A4E84F /* PostGuidedSpotRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261842D3FA08F00A4E84F /* PostGuidedSpotRequest.swift */; };
+		746261892D3FA29C00A4E84F /* SpotDetailTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261882D3FA29400A4E84F /* SpotDetailTargetType.swift */; };
+		7462618B2D3FA4A800A4E84F /* SpotDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462618A2D3FA4A200A4E84F /* SpotDetailService.swift */; };
 		746F39822D342523003F8498 /* SheetUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* SheetUtils.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
 		747F4FC12D3DC80B003DECBF /* finishedUpload.json in Resources */ = {isa = PBXBuildFile; fileRef = 747F4FC02D3DC80B003DECBF /* finishedUpload.json */; };
@@ -207,6 +212,11 @@
 		746261582D3E5B6D00A4E84F /* drop3Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop3Acorn.json; sourceTree = "<group>"; };
 		746261592D3E5B6D00A4E84F /* drop4Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop4Acorn.json; sourceTree = "<group>"; };
 		7462615A2D3E5B6D00A4E84F /* drop5Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop5Acorn.json; sourceTree = "<group>"; };
+		7462617E2D3F9F0300A4E84F /* GetSpotDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSpotDetailResponse.swift; sourceTree = "<group>"; };
+		746261822D3F9FC600A4E84F /* GetSpotMenuResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSpotMenuResponse.swift; sourceTree = "<group>"; };
+		746261842D3FA08F00A4E84F /* PostGuidedSpotRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGuidedSpotRequest.swift; sourceTree = "<group>"; };
+		746261882D3FA29400A4E84F /* SpotDetailTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailTargetType.swift; sourceTree = "<group>"; };
+		7462618A2D3FA4A200A4E84F /* SpotDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailService.swift; sourceTree = "<group>"; };
 		746F39812D342520003F8498 /* SheetUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetUtils.swift; sourceTree = "<group>"; };
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
 		747F4FC02D3DC80B003DECBF /* finishedUpload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = finishedUpload.json; sourceTree = "<group>"; };
@@ -562,6 +572,26 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		7462617C2D3F9E9400A4E84F /* SpotDetail */ = {
+			isa = PBXGroup;
+			children = (
+				7462617D2D3F9E9D00A4E84F /* DTO */,
+				746261882D3FA29400A4E84F /* SpotDetailTargetType.swift */,
+				7462618A2D3FA4A200A4E84F /* SpotDetailService.swift */,
+			);
+			path = SpotDetail;
+			sourceTree = "<group>";
+		};
+		7462617D2D3F9E9D00A4E84F /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				746261842D3FA08F00A4E84F /* PostGuidedSpotRequest.swift */,
+				746261822D3F9FC600A4E84F /* GetSpotMenuResponse.swift */,
+				7462617E2D3F9F0300A4E84F /* GetSpotDetailResponse.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
 		748D6F682D2BCA1C007690B4 /* ACON-iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -605,6 +635,7 @@
 		748D6F712D2BCA7E007690B4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				7462617C2D3F9E9400A4E84F /* SpotDetail */,
 				741E68A32D3D616200DF99EF /* Test */,
 				743069872D3D2EDA0033178C /* Base */,
 			);
@@ -1120,6 +1151,7 @@
 				741E68912D3D385A00DF99EF /* ACPlugin.swift in Sources */,
 				74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */,
 				1517FD7F2D3961A800638173 /* CustomSlider.swift in Sources */,
+				746261852D3FA0A400A4E84F /* PostGuidedSpotRequest.swift in Sources */,
 				741E68982D3D3D8E00DF99EF /* ErrorResponse.swift in Sources */,
 				748D6F822D2BCDB3007690B4 /* ScreenUtils.swift in Sources */,
 				741E68AC2D3D6DA800DF99EF /* HeaderType.swift in Sources */,
@@ -1130,6 +1162,7 @@
 				748D6F692D2BCA1C007690B4 /* AppDelegate.swift in Sources */,
 				74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */,
 				749A01032D3A6E0100CD7A90 /* ACDebouncer.swift in Sources */,
+				7462617F2D3F9F1400A4E84F /* GetSpotDetailResponse.swift in Sources */,
 				745C7E0D2D35A04A0074DBDB /* SearchKeywordCollectionViewCell.swift in Sources */,
 				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
 				74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */,
@@ -1206,15 +1239,18 @@
 				D6978F542D37B29100523A25 /* OnboardingMapping.swift in Sources */,
 				D6D0F51F2D36BAFE00326F17 /* OnboardingViewController.swift in Sources */,
 				744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */,
+				746261832D3F9FD900A4E84F /* GetSpotMenuResponse.swift in Sources */,
 				741E689A2D3D43FF00DF99EF /* EmptyResponse.swift in Sources */,
 				15CD256E2D3D795800320006 /* FloatingButton.swift in Sources */,
 				D696F1B62D3A83D600CCD5FF /* CustomAlertImageView.swift in Sources */,
 				741A06CA2D35415800778219 /* DropAcornViewController.swift in Sources */,
 				15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */,
+				7462618B2D3FA4A800A4E84F /* SpotDetailService.swift in Sources */,
 				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
 				1547A88B2D3596B600E96616 /* SpotType.swift in Sources */,
 				74BF92172D393B4A00B923E3 /* Int+.swift in Sources */,
 				748ECA6E2D3196F100BBC981 /* LoginViewController.swift in Sources */,
+				746261892D3FA29C00A4E84F /* SpotDetailTargetType.swift in Sources */,
 				D6E34C432D398B6000CEFA04 /* CustomAlertImageViewController.swift in Sources */,
 				741E68952D3D38BC00DF99EF /* BaseService.swift in Sources */,
 				D6E34C462D398B6000CEFA04 /* AlertType.swift in Sources */,
