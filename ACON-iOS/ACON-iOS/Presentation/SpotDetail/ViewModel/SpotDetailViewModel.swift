@@ -83,8 +83,8 @@ extension SpotDetailViewModel {
     }
     
     // TODO: - 추후 PostGuidedSpotRequest 그냥 삭제?
-    func postGuidedSpot(spotID: Int64) {
-        ACService.shared.spotDetailService.postGuidedSpot(requestBody: PostGuidedSpotRequest(spotId: spotID)){ [weak self] response in
+    func postGuidedSpot() {
+        ACService.shared.spotDetailService.postGuidedSpot(requestBody: PostGuidedSpotRequest(spotId: self.spotID)){ [weak self] response in
             switch response {
             case .success(let data):
                 self?.onSuccessPostGuidedSpotRequest.value = true

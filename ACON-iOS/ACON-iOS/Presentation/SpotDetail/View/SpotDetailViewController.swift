@@ -108,6 +108,7 @@ private extension SpotDetailViewController {
     
     @objc
     func findCourseButtonTapped() {
+        spotDetailViewModel.postGuidedSpot()
         spotDetailViewModel.redirectToNaverMap()
     }
     
