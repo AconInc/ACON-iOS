@@ -9,6 +9,12 @@ import Foundation
 
 enum StringLiterals {
     
+    enum UserDefaults {
+        
+        static let accessToken = "accessToken"
+        
+    }
+    
     enum Login {
         
         static let googleLogin = "Google로 계속하기"
