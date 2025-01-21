@@ -58,7 +58,8 @@ private extension SplashViewController {
     @objc
     func goToLoginVC() {
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = LoginViewController()
+            let navigationController = UINavigationController(rootViewController: LoginViewController())
+            sceneDelegate.window?.rootViewController = navigationController
         }
     }
     
