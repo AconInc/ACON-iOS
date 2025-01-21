@@ -6,17 +6,25 @@
 //
 
 import CoreLocation
-import Foundation
+import UIKit
 
 class SpotListViewModel {
     
     // MARK: - Properties
     
-    var isNetworkingSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
+    var isPostSpotListSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var spotList: [SpotModel] = []
+    var spotList: [SpotModel] = [SpotModel(id: 0,
+                                           imageURL: "imgEx1",
+                                           matchingRate: 100,
+                                           type: "CAFE",
+                                           name: "카페1",
+                                           walkingTime: 5
+                                          )]
     
     var isUpdated: Bool = false
+    
+    var userCoordinate: CLLocationCoordinate2D? = nil
     
     
     // MARK: - Filter
@@ -58,13 +66,43 @@ class SpotListViewModel {
 
 extension SpotListViewModel {
     
-    func fetchSpotList() {
+    func postSpotList() {
+        let requestBody = PostSpotListRequest(
+            latitude: userCoordinate?.latitude ?? 0,
+            longitude: userCoordinate?.longitude ?? 0,
+            condition: SpotCondition(
+                spotType: SpotType.restaurant.serverKey,
+                filterList: [],
+                walkingTime: -1,
+                priceRange: -1
+            )
+        )
         
-        // TODO: spotList와 새로 fetch된 데이터 비교하여 isUpdated set
-        
-        isUpdated = true
-        
-        isNetworkingSuccess.value = true
+        ACService.shared.spotListService.postSpotList(requestBody: requestBody) { [weak self] response in
+            switch response {
+            case .success(let data):
+                let spotList: [SpotModel] = data.spotList.map { data in
+                    let spot = SpotModel(
+                        id: data.id,
+                        imageURL: data.image,
+                        matchingRate: data.matchingRate,
+                        type: data.type,
+                        name: data.name,
+                        walkingTime: data.walkingTime
+                    )
+                    return spot
+                }
+                print("🥑spot:", spotList)
+                self?.isUpdated = spotList == self?.spotList
+                self?.spotList = spotList
+                self?.isPostSpotListSuccess.value = true
+            default:
+                print("🥑Failed To Post")
+                self?.isPostSpotListSuccess.value = false
+                return
+            }
+        }
+        // TODO: 네트워크 실패인 경우 isSuccess가 set이 안돼서 무한 로딩인데,,,, API가 살아나면 이 문제를 걱정하지 않아도 되는지,,, 확인하기,,,
     }
     
 }
@@ -76,10 +114,8 @@ extension SpotListViewModel: ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager,
                          didUpdateLocation coordinate: CLLocationCoordinate2D) {
-        
         print("🛠️ coordinate: \(coordinate)")
-        
-        // TODO: 추천 장소 리스트 POST 서버통신 -> spotListModel.Spot POST
+        userCoordinate = coordinate
     }
     
 }
