@@ -17,11 +17,9 @@ protocol LocalVerificationServiceProtocol {
 
 final class LocalVerificationService: BaseService<LocalVerificationTargetType>, LocalVerificationServiceProtocol {
 
-    let service = BaseService<LocalVerificationTargetType>()
-
     func postLocalArea(requestBody: PostLocalAreaRequest,
                        completion: @escaping (NetworkResult<PostLocalAreaResponse>) -> Void) {
-        service.provider.request(.postLocalArea(requestBody)) { result in
+        self.provider.request(.postLocalArea(requestBody)) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<PostLocalAreaResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: PostLocalAreaResponse.self)
