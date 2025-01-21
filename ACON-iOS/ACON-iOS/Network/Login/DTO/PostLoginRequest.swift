@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PostGoogleLoginRequest: Codable {
+struct PostLoginRequest: Codable {
     
     let socialType: String
     
