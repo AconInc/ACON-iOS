@@ -14,6 +14,8 @@ final class SpotDetailView: BaseView {
 
     // MARK: - UI Properties
     
+    var blurSpotImageView: UIImageView = UIImageView()
+    
     var stickyView: StickyHeaderView = StickyHeaderView()
     
     let scrollView: UIScrollView = UIScrollView()
@@ -62,7 +64,8 @@ final class SpotDetailView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(scrollView,
+        self.addSubviews(blurSpotImageView,
+                         scrollView,
                          stickyView,
                          footerView,
                          gotoTopButton)
@@ -82,6 +85,12 @@ final class SpotDetailView: BaseView {
     
     override func setLayout() {
         super.setLayout()
+        
+        blurSpotImageView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(-navViewHeight)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(navViewHeight)
+        }
         
         gotoTopButton.snp.makeConstraints{
             $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
@@ -114,7 +123,7 @@ final class SpotDetailView: BaseView {
         spotDetailImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(navViewHeight)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.height*196/780)
+            $0.height.equalTo(ScreenUtils.height*296/780)
         }
         
         openStatusButton.snp.makeConstraints {
@@ -185,6 +194,14 @@ final class SpotDetailView: BaseView {
     
     override func setStyle() {
         super.setStyle()
+        
+        blurSpotImageView.do {
+            $0.setBlurView()
+            $0.image = .chickenFeet
+            $0.contentMode = .scaleAspectFill
+            $0.layer.contentsRect = CGRect(x: 0, y: 0, width: 1.0, height: navViewHeight/296)
+            $0.clipsToBounds = true
+        }
         
         gotoTopButton.do {
             $0.backgroundColor = .gray7
