@@ -57,6 +57,10 @@ enum StringLiterals {
         
         static let gpsDeniedMessage = "설정에서 정확한 위치 권한을 허용해주세요."
         
+        static let loginFailTitle = "로그인할 수 없음"
+        
+        static let loginFailMessage = "문제가 발생했습니다.\n나중에 다시 시도해주세요."
+        
     }
     
     enum SheetUtils {

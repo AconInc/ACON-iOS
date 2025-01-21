@@ -98,17 +98,21 @@ extension LoginViewController {
 extension LoginViewController {
     
     func bindViewModel() {
-        self.loginViewModel.onLoginSuccess.bind { [weak self] onLoginSuccess in
-            guard let onLoginSuccess else { return }
+        self.loginViewModel.onSuccessLogin.bind { [weak self] onSuccess in
+            guard let onSuccess else { return }
             guard let self = self else { return }
-            onLoginSuccess ? navigateToLocalVerificationVC() : print("로그인 실패")
+            onSuccess ? navigateToLocalVerificationVC() : showLoginFailAlert()
         }
     }
     
-    // TODO: - 나중에 서버 로그인 Success 시 이동하는 것으로 변경 (ObservablePattern)
     func navigateToLocalVerificationVC() {
         let vc = LocalVerificationViewController()
         self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    func showLoginFailAlert() {
+        self.showDefaultAlert(title: StringLiterals.Alert.loginFailTitle,
+                              message: StringLiterals.Alert.loginFailMessage)
     }
     
 }
