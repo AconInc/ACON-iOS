@@ -19,6 +19,10 @@ class SplashViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         
+        splashView.splashLottieView.do {
+            $0.play()
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.goToLoginVC()
         }
@@ -33,8 +37,8 @@ class SplashViewController: BaseViewController {
     override func setLayout() {
         super.setLayout()
 
-        splashView.splashLottieView.do {
-            $0.play()
+        splashView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
 
