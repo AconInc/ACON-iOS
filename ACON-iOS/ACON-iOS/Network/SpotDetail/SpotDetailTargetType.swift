@@ -13,7 +13,7 @@ enum SpotDetailTargetType {
     
     case getSpotDetail(spotID: Int64)
     case getSpotMenu(spotID: Int64)
-    case postGuidedSpot
+    case postGuidedSpot(_ requestBody: PostGuidedSpotRequest)
     
 }
 
@@ -40,7 +40,12 @@ extension SpotDetailTargetType: TargetType {
     }
     
     var task: Task {
-        return .requestPlain
+        switch self {
+        case .postGuidedSpot(let requestBody):
+            return .requestJSONEncodable(requestBody)
+        default:
+            return .requestPlain
+        }
     }
     
     var headers: [String : String]? {

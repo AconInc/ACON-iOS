@@ -50,7 +50,7 @@ final class SpotDetailService: BaseService<SpotDetailTargetType>,
 
     func postGuidedSpot(requestBody: PostGuidedSpotRequest,
                         completion: @escaping (NetworkResult<EmptyResponse>) -> Void) {
-        self.provider.request(.postGuidedSpot) { result in
+        self.provider.request(.postGuidedSpot(requestBody)) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<EmptyResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: EmptyResponse.self)
