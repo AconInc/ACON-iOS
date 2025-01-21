@@ -39,7 +39,7 @@ final class UploadService: BaseService<UploadTargetType>, UploadServiceProtocol 
     }
     
     func postReview(requestBody: PostReviewRequest, completion: @escaping (NetworkResult<EmptyResponse>) -> Void) {
-        self.provider.request(.postReview) { result in
+        self.provider.request(.postReview(requestBody)) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<EmptyResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: EmptyResponse.self)

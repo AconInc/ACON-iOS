@@ -12,7 +12,7 @@ import Moya
 enum UploadTargetType {
     
     case getSearchSuggestion(_ parameter: GetSearchSuggestionRequest)
-    case postReview
+    case postReview(_ requestBody: PostReviewRequest)
     case getSearchKeyword(_ parameter: GetSearchKeywordRequest)
     case getReviewVerification(_ parameter: GetReviewVerificationRequest)
     case getAcornCount
@@ -61,10 +61,15 @@ extension UploadTargetType: TargetType {
     }
     
     var task: Task {
-        if let parameter = parameter {
-            return .requestParameters(parameters: parameter, encoding: URLEncoding.default)
-        } else {
-            return .requestPlain
+        switch self {
+        case .postReview(let requestBody):
+            return .requestJSONEncodable(requestBody)
+        default:
+            if let parameter = parameter {
+                return .requestParameters(parameters: parameter, encoding: URLEncoding.default)
+            } else {
+                return .requestPlain
+            }
         }
     }
     
