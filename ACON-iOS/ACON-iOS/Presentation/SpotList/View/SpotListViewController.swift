@@ -159,9 +159,7 @@ private extension SpotListViewController {
     }
     
     func setRefreshControl() {
-        // TODO: Refresh control 디자인 변경
-        
-        let control = UIRefreshControl()
+        let control = CustomRefreshControl()
         
         control.addTarget(self,
                           action: #selector(handleRefreshControl),
