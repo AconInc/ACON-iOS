@@ -34,8 +34,9 @@ class LoginModalView: GlassmorphismView {
         configuration.imagePlacement = .leading
         configuration.imagePadding = 4
         configuration.titleAlignment = .center
-        configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 24)
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 93, bottom: 12, trailing: 93)
+        configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 28)
+        // TODO: contentInsets 코드 삭제 고려해보기
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 87.5, bottom: 12, trailing: 87.5)
         return configuration
     }()
     
@@ -133,10 +134,11 @@ class LoginModalView: GlassmorphismView {
         googleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
             $0.backgroundColor = .gray1
-            $0.roundedButton(
-                cornerRadius: 6,
-                maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
-            )
+            $0.layer.cornerRadius = 6
+//            $0.roundedButton(
+//                cornerRadius: 6,
+//                maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
+//            )
             $0.setImage(.googleLogo, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.googleLogin,
                                   style: .s1,
