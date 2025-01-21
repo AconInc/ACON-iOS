@@ -99,14 +99,15 @@ private extension SpotUploadViewController {
                     self?.spotUploadView.dropAcornButton.isEnabled = true
                     self?.spotUploadView.dropAcornButton.backgroundColor = .gray5
                 } else {
-                    // TODO: - show Alert
+                    let alertHandler = AlertHandler()
+                    alertHandler.showLocationAccessFailImageAlert(from: self!)
                     self?.spotUploadView.dropAcornButton.isEnabled = false
                     self?.spotUploadView.dropAcornButton.backgroundColor = .gray8
                     self?.spotUploadView.spotSearchButton.setAttributedTitle(text: StringLiterals.Upload.uploadSpotName,
                                                                             style: .s2,
                                                                             color: .gray5)
                 }
-                self?.spotReviewViewModel.reviewVerification.value = false
+                self?.spotReviewViewModel.reviewVerification.value = nil
             }
         }
     }
