@@ -33,8 +33,8 @@ extension ACTabBarController {
         
         appearance.do {
             // 배경
+            $0.backgroundColor = .clear
             $0.configureWithOpaqueBackground()
-            $0.backgroundColor = UIColor.clear.withAlphaComponent(0)
             
             // 아이템
             $0.stackedLayoutAppearance.normal.iconColor = .acWhite
