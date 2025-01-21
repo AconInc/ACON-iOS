@@ -283,7 +283,6 @@ extension SpotDetailView {
             text: openStatus ? StringLiterals.SpotDetail.isOpen : StringLiterals.SpotDetail.isNotOpen,
             style: .b4
         )
-        
         self.addressLabel.setLabel(text: data.address,
                                              style: .b4,
                                              color: .gray4)

@@ -112,6 +112,7 @@ extension SpotDetailViewModel {
 
 
 // MARK: - 위치
+
 extension SpotDetailViewModel: ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
