@@ -64,6 +64,7 @@
 		7462617F2D3F9F1400A4E84F /* GetSpotDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462617E2D3F9F0300A4E84F /* GetSpotDetailResponse.swift */; };
 		746261832D3F9FD900A4E84F /* GetSpotMenuResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261822D3F9FC600A4E84F /* GetSpotMenuResponse.swift */; };
 		746261852D3FA0A400A4E84F /* PostGuidedSpotRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261842D3FA08F00A4E84F /* PostGuidedSpotRequest.swift */; };
+		746261892D3FA29C00A4E84F /* SpotDetailTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261882D3FA29400A4E84F /* SpotDetailTargetType.swift */; };
 		746F39822D342523003F8498 /* SheetUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* SheetUtils.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
 		747F4FC12D3DC80B003DECBF /* finishedUpload.json in Resources */ = {isa = PBXBuildFile; fileRef = 747F4FC02D3DC80B003DECBF /* finishedUpload.json */; };
@@ -209,6 +210,7 @@
 		7462617E2D3F9F0300A4E84F /* GetSpotDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSpotDetailResponse.swift; sourceTree = "<group>"; };
 		746261822D3F9FC600A4E84F /* GetSpotMenuResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSpotMenuResponse.swift; sourceTree = "<group>"; };
 		746261842D3FA08F00A4E84F /* PostGuidedSpotRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGuidedSpotRequest.swift; sourceTree = "<group>"; };
+		746261882D3FA29400A4E84F /* SpotDetailTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailTargetType.swift; sourceTree = "<group>"; };
 		746F39812D342520003F8498 /* SheetUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetUtils.swift; sourceTree = "<group>"; };
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
 		747F4FC02D3DC80B003DECBF /* finishedUpload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = finishedUpload.json; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 			isa = PBXGroup;
 			children = (
 				7462617D2D3F9E9D00A4E84F /* DTO */,
+				746261882D3FA29400A4E84F /* SpotDetailTargetType.swift */,
 			);
 			path = SpotDetail;
 			sourceTree = "<group>";
@@ -1235,6 +1238,7 @@
 				1547A88B2D3596B600E96616 /* SpotType.swift in Sources */,
 				74BF92172D393B4A00B923E3 /* Int+.swift in Sources */,
 				748ECA6E2D3196F100BBC981 /* LoginViewController.swift in Sources */,
+				746261892D3FA29C00A4E84F /* SpotDetailTargetType.swift in Sources */,
 				D6E34C432D398B6000CEFA04 /* CustomAlertImageViewController.swift in Sources */,
 				741E68952D3D38BC00DF99EF /* BaseService.swift in Sources */,
 				D6E34C462D398B6000CEFA04 /* AlertType.swift in Sources */,
