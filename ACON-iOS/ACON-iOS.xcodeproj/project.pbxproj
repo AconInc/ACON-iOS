@@ -63,6 +63,7 @@
 		7462615F2D3E5B6D00A4E84F /* drop3Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 746261582D3E5B6D00A4E84F /* drop3Acorn.json */; };
 		7462617F2D3F9F1400A4E84F /* GetSpotDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462617E2D3F9F0300A4E84F /* GetSpotDetailResponse.swift */; };
 		746261832D3F9FD900A4E84F /* GetSpotMenuResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261822D3F9FC600A4E84F /* GetSpotMenuResponse.swift */; };
+		746261852D3FA0A400A4E84F /* PostGuidedSpotRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261842D3FA08F00A4E84F /* PostGuidedSpotRequest.swift */; };
 		746F39822D342523003F8498 /* SheetUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* SheetUtils.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
 		747F4FC12D3DC80B003DECBF /* finishedUpload.json in Resources */ = {isa = PBXBuildFile; fileRef = 747F4FC02D3DC80B003DECBF /* finishedUpload.json */; };
@@ -207,6 +208,7 @@
 		7462615A2D3E5B6D00A4E84F /* drop5Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop5Acorn.json; sourceTree = "<group>"; };
 		7462617E2D3F9F0300A4E84F /* GetSpotDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSpotDetailResponse.swift; sourceTree = "<group>"; };
 		746261822D3F9FC600A4E84F /* GetSpotMenuResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSpotMenuResponse.swift; sourceTree = "<group>"; };
+		746261842D3FA08F00A4E84F /* PostGuidedSpotRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGuidedSpotRequest.swift; sourceTree = "<group>"; };
 		746F39812D342520003F8498 /* SheetUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetUtils.swift; sourceTree = "<group>"; };
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
 		747F4FC02D3DC80B003DECBF /* finishedUpload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = finishedUpload.json; sourceTree = "<group>"; };
@@ -572,6 +574,7 @@
 		7462617D2D3F9E9D00A4E84F /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				746261842D3FA08F00A4E84F /* PostGuidedSpotRequest.swift */,
 				746261822D3F9FC600A4E84F /* GetSpotMenuResponse.swift */,
 				7462617E2D3F9F0300A4E84F /* GetSpotDetailResponse.swift */,
 			);
@@ -1135,6 +1138,7 @@
 				741E68912D3D385A00DF99EF /* ACPlugin.swift in Sources */,
 				74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */,
 				1517FD7F2D3961A800638173 /* CustomSlider.swift in Sources */,
+				746261852D3FA0A400A4E84F /* PostGuidedSpotRequest.swift in Sources */,
 				741E68982D3D3D8E00DF99EF /* ErrorResponse.swift in Sources */,
 				748D6F822D2BCDB3007690B4 /* ScreenUtils.swift in Sources */,
 				741E68AC2D3D6DA800DF99EF /* HeaderType.swift in Sources */,
