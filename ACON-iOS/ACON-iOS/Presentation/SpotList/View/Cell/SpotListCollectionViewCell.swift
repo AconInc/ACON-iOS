@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Kingfisher
+
 class SpotListCollectionViewCell: BaseCollectionViewCell {
     
     // TODO: bgImage dim 처리
@@ -139,7 +141,11 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 extension SpotListCollectionViewCell {
     
     func bind(spot: SpotModel, matchingRateBgColor: MatchingRateBgColorType) {
-        bgImage.image = spot.image
+        if let imageURL = spot.imageURL {
+            bgImage.kf.setImage(
+                with: URL(string: imageURL),
+                options: [.transition(.none), .cacheOriginalImage])
+        }
         
         changeMatchingRateBgColor(matchingRateBgColor)
         
