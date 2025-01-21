@@ -7,17 +7,28 @@
 
 import UIKit
 
-final class OnboardingService: BaseService<OnboardingAPI> {
+final class OnboardingService: BaseService<OnboardingTargetType> {
     
     func postOnboarding(
-        onboardingData: OnboardingRequest,
-        completion: @escaping (NetworkResult<EmptyResponse>) -> Void
+        requestBody: OnboardingRequest,
+        completion: @escaping (NetworkResult<OnboardingResponse>) -> Void
     ) {
-        self.request(
-            type: EmptyResponse.self,
-            target: .postOnboarding(data: onboardingData),
-            completion: completion
-        )
+        
+        self.provider.request(.postOnboarding(data: requestBody)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult = self.judgeStatus(
+                    statusCode: response.statusCode,
+                    data: response.data,
+                    type: OnboardingResponse.self
+                )
+                completion(networkResult)
+            case .failure(let errorResponse):
+                print(errorResponse)
+            }
+            
+        }
+        
     }
-    
 }
+

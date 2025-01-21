@@ -8,25 +8,20 @@
 import Foundation
 import Moya
 
-enum OnboardingAPI {
+enum OnboardingTargetType {
+    
     case postOnboarding(data: OnboardingRequest)
+    
 }
 
-extension OnboardingAPI: TargetType {
-    
-    var baseURL: URL {
-        guard let urlString = Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String,
-              let url = URL(string: urlString) else {
-            fatalError("💢 BASE_URL이 잘못되었습니다! 💢")
-        }
-        return url
-    }
+
+extension OnboardingTargetType: TargetType {
     
     var path: String {
         switch self {
         case .postOnboarding:
             // TODO: i will chage
-            return utilPath + "メンバー"
+            return utilPath + "member/preference"
         }
     }
     
@@ -45,10 +40,10 @@ extension OnboardingAPI: TargetType {
     }
     
     var headers: [String: String]? {
-        //        let token = UserDefaults.standard.string(forKey: StringLiterals.Network.accessToken) ?? ""
-        //        let headers = HeaderType.headerWithToken(token: "Bearer " + token)
+        let token = UserDefaults.standard.string(forKey: StringLiterals.Network.accessToken) ?? ""
+        let headers = HeaderType.headerWithToken(token: "Bearer " + token)
         // TODO:  i will chage this to existHeader ㅇㅇ
-        let headers = HeaderType.noHeader
+        //        let headers = HeaderType.noHeader
         return headers
     }
 }

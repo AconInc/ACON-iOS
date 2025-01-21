@@ -18,30 +18,33 @@ final class OnboardingViewModel {
     var favoriteSpotStyle: ObservablePattern<String> = ObservablePattern(nil)
     
     var favoriteSpotRank: ObservablePattern<[String]> = ObservablePattern([])
-        
-    func postOnboarding(completion: @escaping (Bool) -> Void) {
+    
+    var postOnboardingResult: ObservablePattern<Bool?> = ObservablePattern(nil)
+    
+    
+    func postOnboarding() {
         
         let onboardingData = OnboardingRequest(dislikeFoodList: dislike.value ?? [""],
-                                           favoriteCuisineRank: favoriteCuisne.value ?? [""],
-                                           favoriteSpotType: favoriteSpotType.value ?? "",
-                                           favoriteSpotStyle: favoriteSpotStyle.value ?? "",
-                                           favoriteSpotRank: favoriteSpotRank.value ?? [""])
+                                               favoriteCuisineRank: favoriteCuisne.value ?? [""],
+                                               favoriteSpotType: favoriteSpotType.value ?? "",
+                                               favoriteSpotStyle: favoriteSpotStyle.value ?? "",
+                                               favoriteSpotRank: favoriteSpotRank.value ?? [""])
         
         print(onboardingData)
         
-        ACService.shared.onboardingService.postOnboarding(onboardingData: onboardingData) { [weak self] response in
+        ACService.shared.onboardingService.postOnboarding(requestBody: onboardingData) { [weak self] response in
             guard let self else { return }
             
             switch response {
             case .success(_):
-                print("good")
-                completion(true)
-
+                print("Onboarding Success")
+                self.postOnboardingResult.value = true
             default:
-                print("bad")
-                completion(false)
+                print("Onboarding Failed")
+                self.postOnboardingResult.value = false
             }
         }
     }
+    
 }
 

@@ -1,5 +1,5 @@
 //
-//  OnboardingDTO.swift
+//  OnboardingRequest.swift
 //  ACON-iOS
 //
 //  Created by Jaehyun Ahn on 1/20/25.

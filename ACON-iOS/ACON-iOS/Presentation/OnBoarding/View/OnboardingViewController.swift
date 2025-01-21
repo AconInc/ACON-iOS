@@ -39,7 +39,7 @@ final class OnboardingViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setBinding()
+        bindViewModel()
         updateContentView(for: currentStep)
     }
     
@@ -149,7 +149,7 @@ extension OnboardingViewController {
     
     
     
-    private func setBinding() {
+    private func bindViewModel() {
         viewModel.dislike.bind { [weak self] dislikedFoods in
             self?.updateNextButtonState(isEnabled: !(dislikedFoods?.isEmpty ?? true))
         }
@@ -169,6 +169,40 @@ extension OnboardingViewController {
         viewModel.favoriteSpotRank.bind { [weak self] ranks in
             self?.updateNextButtonState(isEnabled: ranks?.count == 4)
         }
+        
+        viewModel.postOnboardingResult.bind { [weak self] success in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                self.hideLoadingIndicator()
+            }
+            
+            guard let success = success else {
+                print("❌ Unexpected nil for success value")
+                return
+            }
+            
+            if success ?? false {// NOTE: about BOol? value check, i will fix this line
+                let analyzingVC = AnalyzingViewController()
+                analyzingVC.modalPresentationStyle = .fullScreen
+                DispatchQueue.main.async {
+                    self.present(analyzingVC, animated: true, completion: nil)
+                }
+            } else {
+                self.retryCount += 1
+                if self.retryCount < self.maxRetryCount {
+                    print("❌ 요청 실패: \(self.retryCount)번째 재시도 중...")
+                    self.showRetryProgress()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        self.viewModel.postOnboarding()
+                    }
+                } else {
+                    self.showRequsetRetryProgress()
+                }
+            }
+        }
+        
+        
     }
     
     private func updateContentView(for step: Int) {
@@ -367,36 +401,14 @@ extension OnboardingViewController {
 
 
 extension OnboardingViewController {
+    
     // NOTE: continue
     @objc private func nextButtonTapped() {
         if currentStep >= StringLiterals.OnboardingType.progressNumberList.count - 1 {
             
-            showLoadingIndicator() // loding スタト
+            showLoadingIndicator() // loding
             
-            // NOTE: POST
-            viewModel.postOnboarding() { [weak self] success in
-                guard let self = self else { return }
-                
-                self.hideLoadingIndicator()
-                
-                if success {
-                    let analyzingVC = AnalyzingViewController()
-                    analyzingVC.modalPresentationStyle = .fullScreen
-                    self.present(analyzingVC, animated: true, completion: nil)
-                } else {
-                    // NOTE: when you fail, retry
-                    self.retryCount += 1
-                    if self.retryCount < self.maxRetryCount {
-                        print("❌ 요청 실패: \(self.retryCount)번째 재시도 중...")
-                        self.showRetryProgress()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                            self.nextButtonTapped()
-                        }
-                    } else {
-                        showRequsetRetryProgress()
-                    }
-                }
-            }
+            viewModel.postOnboarding()
             return
         }
         
@@ -456,14 +468,12 @@ extension OnboardingViewController{
     }
     
     private func showRequsetRetryProgress() {
-        let alert = UIAlertController(
+        showDefaultAlert(
             title: "네트워크가 불안정 합니다.",
-            message: "앱을 종료하고 다시 실행해 주세요",
-            preferredStyle: .alert
+            message: "앱을 종료하고 다시 실행해 주세요"
         )
-        present(alert, animated: true, completion: nil)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            alert.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
         }
     }
     
