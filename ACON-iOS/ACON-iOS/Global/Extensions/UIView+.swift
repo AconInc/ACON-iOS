@@ -29,10 +29,16 @@ extension UIView {
     
     func setBlurView(){
         let viewBlurEffect = UIVisualEffectView()
-        viewBlurEffect.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        viewBlurEffect.effect = UIBlurEffect(style: .regular)
         
         self.addSubview(viewBlurEffect)
-        viewBlurEffect.frame = self.bounds
+        viewBlurEffect.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            viewBlurEffect.topAnchor.constraint(equalTo: self.topAnchor),
+            viewBlurEffect.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            viewBlurEffect.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            viewBlurEffect.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ])
     }
     
 }
