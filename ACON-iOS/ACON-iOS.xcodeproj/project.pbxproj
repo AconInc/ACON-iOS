@@ -32,6 +32,10 @@
 		15CD256E2D3D795800320006 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256D2D3D795800320006 /* FloatingButton.swift */; };
 		15CD25702D3F86E700320006 /* CustomRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */; };
 		15CD25742D3F8B0400320006 /* loadingWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = 15CD25732D3F8B0400320006 /* loadingWhite.json */; };
+		15CD25782D3FE31400320006 /* PostSpotListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25772D3FE31400320006 /* PostSpotListRequest.swift */; };
+		15CD257A2D3FEDBA00320006 /* SpotListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25792D3FEDBA00320006 /* SpotListService.swift */; };
+		15CD257C2D3FF13F00320006 /* PostSpotListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD257B2D3FF13F00320006 /* PostSpotListResponse.swift */; };
+		15CD257E2D3FF4F200320006 /* SpotListTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD257D2D3FF4F200320006 /* SpotListTargetType.swift */; };
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
 		74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */; };
 		74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */; };
@@ -176,6 +180,10 @@
 		15CD256D2D3D795800320006 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshControl.swift; sourceTree = "<group>"; };
 		15CD25732D3F8B0400320006 /* loadingWhite.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loadingWhite.json; sourceTree = "<group>"; };
+		15CD25772D3FE31400320006 /* PostSpotListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSpotListRequest.swift; sourceTree = "<group>"; };
+		15CD25792D3FEDBA00320006 /* SpotListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListService.swift; sourceTree = "<group>"; };
+		15CD257B2D3FF13F00320006 /* PostSpotListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSpotListResponse.swift; sourceTree = "<group>"; };
+		15CD257D2D3FF4F200320006 /* SpotListTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListTargetType.swift; sourceTree = "<group>"; };
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultitaskDelegate.swift; sourceTree = "<group>"; };
 		74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLocationManager.swift; sourceTree = "<group>"; };
@@ -451,6 +459,25 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+		15CD25752D3FE2D800320006 /* SpotList */ = {
+			isa = PBXGroup;
+			children = (
+				15CD25762D3FE2F200320006 /* DTO */,
+				15CD25792D3FEDBA00320006 /* SpotListService.swift */,
+				15CD257D2D3FF4F200320006 /* SpotListTargetType.swift */,
+			);
+			path = SpotList;
+			sourceTree = "<group>";
+		};
+		15CD25762D3FE2F200320006 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				15CD25772D3FE31400320006 /* PostSpotListRequest.swift */,
+				15CD257B2D3FF13F00320006 /* PostSpotListResponse.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
 		35A4AFEF7860C30E103669B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -607,6 +634,7 @@
 			children = (
 				741E68A32D3D616200DF99EF /* Test */,
 				743069872D3D2EDA0033178C /* Base */,
+				15CD25752D3FE2D800320006 /* SpotList */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1147,6 +1175,7 @@
 				15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */,
 				1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */,
 				1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */,
+				15CD25782D3FE31400320006 /* PostSpotListRequest.swift in Sources */,
 				D6978F502D36E3C800523A25 /* AnalyzingViewController.swift in Sources */,
 				74CDCE562D310B1600E3A21A /* String+.swift in Sources */,
 				74BF91FD2D381FF800B923E3 /* SpotDetailModel.swift in Sources */,
@@ -1190,6 +1219,7 @@
 				74BF92102D391FFE00B923E3 /* LocalVerificationFinishedView.swift in Sources */,
 				74BF92112D391FFE00B923E3 /* LocalVerificationViewController.swift in Sources */,
 				74BF92122D391FFE00B923E3 /* LocalMapViewController.swift in Sources */,
+				15CD257E2D3FF4F200320006 /* SpotListTargetType.swift in Sources */,
 				74BF92132D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift in Sources */,
 				74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */,
 				D696F1B22D3A7E3400CCD5FF /* CustomAlertView.swift in Sources */,
@@ -1210,6 +1240,7 @@
 				15CD256E2D3D795800320006 /* FloatingButton.swift in Sources */,
 				D696F1B62D3A83D600CCD5FF /* CustomAlertImageView.swift in Sources */,
 				741A06CA2D35415800778219 /* DropAcornViewController.swift in Sources */,
+				15CD257A2D3FEDBA00320006 /* SpotListService.swift in Sources */,
 				15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */,
 				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
 				1547A88B2D3596B600E96616 /* SpotType.swift in Sources */,
@@ -1220,6 +1251,7 @@
 				D6E34C462D398B6000CEFA04 /* AlertType.swift in Sources */,
 				D6E34C472D398B6000CEFA04 /* CustomAlertViewController.swift in Sources */,
 				745C7E022D358E900074DBDB /* SpotSearchView.swift in Sources */,
+				15CD257C2D3FF13F00320006 /* PostSpotListResponse.swift in Sources */,
 				D6D0F5132D36BA2900326F17 /* FavoriteCuisineCollectionView.swift in Sources */,
 				D6D0F5172D36BA9A00326F17 /* FavoriteSpotTypeCollectionView.swift in Sources */,
 				D6FF82EB2D380AAF00090233 /* FavoriteSpotRankType.swift in Sources */,
