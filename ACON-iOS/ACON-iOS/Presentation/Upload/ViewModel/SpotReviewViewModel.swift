@@ -19,16 +19,10 @@ class SpotReviewViewModel {
     
     var reviewVerification: ObservablePattern<Bool> = ObservablePattern(nil)
 
-//    let acornNumDummyData: AcornCountModel = AcornCountModel(acornCount: 3)
-    
-//    let reviewVerificationDummyData: Bool = true
-    
     init() {
-//        self.acornNum.value = acornNumDummyData
-//        self.onSuccessGetAcornNum.value = true
         self.onSuccessPostReview.value = false
-//        self.onSuccessGetReviewVerification.value = true
-//        self.reviewVerification.value = reviewVerificationDummyData
+        self.onSuccessGetReviewVerification.value = true
+        self.reviewVerification.value = true
     }
     
     func getAcornNum() {
