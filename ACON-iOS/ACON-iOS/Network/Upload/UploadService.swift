@@ -24,12 +24,10 @@ protocol UploadServiceProtocol {
 }
 
 final class UploadService: BaseService<UploadTargetType>, UploadServiceProtocol {
-    
-    let service = BaseService<UploadTargetType>()
-    
+
     func getSearchSuggestion(parameter: GetSearchSuggestionRequest,
                              completion: @escaping (NetworkResult<GetSearchSuggestionResponse>) -> Void) {
-        service.provider.request(.getSearchSuggestion(parameter)) { result in
+        self.provider.request(.getSearchSuggestion(parameter)) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<GetSearchSuggestionResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetSearchSuggestionResponse.self)
@@ -41,7 +39,7 @@ final class UploadService: BaseService<UploadTargetType>, UploadServiceProtocol 
     }
     
     func postReview(requestBody: PostReviewRequest, completion: @escaping (NetworkResult<EmptyResponse>) -> Void) {
-        service.provider.request(.postReview) { result in
+        self.provider.request(.postReview) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<EmptyResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: EmptyResponse.self)
@@ -53,7 +51,7 @@ final class UploadService: BaseService<UploadTargetType>, UploadServiceProtocol 
     }
     
     func getSearchKeyword(parameter: GetSearchKeywordRequest, completion: @escaping (NetworkResult<GetSearchKeywordResponse>) -> Void) {
-        service.provider.request(.getSearchKeyword(parameter)) { result in
+        self.provider.request(.getSearchKeyword(parameter)) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<GetSearchKeywordResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetSearchKeywordResponse.self)
@@ -65,7 +63,7 @@ final class UploadService: BaseService<UploadTargetType>, UploadServiceProtocol 
     }
     
     func getReviewVerification(parameter: GetReviewVerificationRequest, completion: @escaping (NetworkResult<GetReviewVerificationResponse>) -> Void) {
-        service.provider.request(.getReviewVerification(parameter)) { result in
+        self.provider.request(.getReviewVerification(parameter)) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<GetReviewVerificationResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetReviewVerificationResponse.self)
@@ -77,7 +75,7 @@ final class UploadService: BaseService<UploadTargetType>, UploadServiceProtocol 
     }
     
     func getAcornCount(completion: @escaping (NetworkResult<GetAcornCountResponse>) -> Void) {
-        service.provider.request(.getAcornCount) { result in
+        self.provider.request(.getAcornCount) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<GetAcornCountResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetAcornCountResponse.self)
