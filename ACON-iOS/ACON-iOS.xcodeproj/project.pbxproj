@@ -30,6 +30,8 @@
 		15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */; };
 		15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256A2D3D61F500320006 /* GlassmorphismView.swift */; };
 		15CD256E2D3D795800320006 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256D2D3D795800320006 /* FloatingButton.swift */; };
+		15CD25702D3F86E700320006 /* CustomRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */; };
+		15CD25742D3F8B0400320006 /* loadingWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = 15CD25732D3F8B0400320006 /* loadingWhite.json */; };
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
 		74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */; };
 		74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */; };
@@ -172,6 +174,8 @@
 		15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotFilterTagStackView.swift; sourceTree = "<group>"; };
 		15CD256A2D3D61F500320006 /* GlassmorphismView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismView.swift; sourceTree = "<group>"; };
 		15CD256D2D3D795800320006 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
+		15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshControl.swift; sourceTree = "<group>"; };
+		15CD25732D3F8B0400320006 /* loadingWhite.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loadingWhite.json; sourceTree = "<group>"; };
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultitaskDelegate.swift; sourceTree = "<group>"; };
 		74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLocationManager.swift; sourceTree = "<group>"; };
@@ -442,6 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				15CD256D2D3D795800320006 /* FloatingButton.swift */,
+				15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -848,6 +853,7 @@
 				746261582D3E5B6D00A4E84F /* drop3Acorn.json */,
 				746261592D3E5B6D00A4E84F /* drop4Acorn.json */,
 				7462615A2D3E5B6D00A4E84F /* drop5Acorn.json */,
+				15CD25732D3F8B0400320006 /* loadingWhite.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -1048,6 +1054,7 @@
 				74B25C2E2D2FEFD3008BDCB7 /* Debug.xcconfig in Resources */,
 				748D6F9B2D2BD638007690B4 /* Pretendard-Bold.otf in Resources */,
 				748D6F6E2D2BCA1C007690B4 /* LaunchScreen.storyboard in Resources */,
+				15CD25742D3F8B0400320006 /* loadingWhite.json in Resources */,
 				747F4FC12D3DC80B003DECBF /* finishedUpload.json in Resources */,
 				748D6F9D2D2BD641007690B4 /* Pretendard-SemiBold.otf in Resources */,
 				7462615B2D3E5B6D00A4E84F /* drop5Acorn.json in Resources */,
@@ -1126,6 +1133,7 @@
 				745C7E0D2D35A04A0074DBDB /* SearchKeywordCollectionViewCell.swift in Sources */,
 				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
 				74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */,
+				15CD25702D3F86E700320006 /* CustomRefreshControl.swift in Sources */,
 				746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */,
 				741A06C82D3532E500778219 /* DropAcornView.swift in Sources */,
 				748D6FA82D2C3F93007690B4 /* BaseViewController.swift in Sources */,
