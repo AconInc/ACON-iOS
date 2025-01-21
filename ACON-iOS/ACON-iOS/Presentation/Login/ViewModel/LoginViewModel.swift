@@ -15,8 +15,6 @@ class LoginViewModel {
     
     var onSuccessLogin: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var idToken: String = ""
-    
     func googleSignIn(presentingViewController: UIViewController) {
         let clientID = Config.googleClientID
                 
@@ -32,7 +30,8 @@ class LoginViewModel {
                 guard error == nil else { return }
                 guard let user = user else { return }
                 
-                self.idToken = user.idToken?.tokenString ?? ""
+                let idToken = user.idToken?.tokenString ?? ""
+                self.postLogin(socialType: SocialType.GOOGLE.rawValue, idToken: idToken)
             }
         }
     }
@@ -40,7 +39,7 @@ class LoginViewModel {
     func appleSignIn(userInfo: ASAuthorizationAppleIDCredential) {
         if let idTokenData = userInfo.identityToken,
            let idToken = String(data: idTokenData, encoding: .utf8) {
-            print(idToken)
+            postLogin(socialType: SocialType.APPLE.rawValue, idToken: idToken)
         }
     }
     
