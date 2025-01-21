@@ -36,8 +36,8 @@ class LocalVerificationViewModel {
         ACService.shared.localVerificationService.postLocalArea(requestBody: requestBody) { [weak self] response in
             switch response {
             case .success(let data):
-                self?.onSuccessPostLocalArea.value = true
                 self?.localArea.value = data.area
+                self?.onSuccessPostLocalArea.value = true
             default:
                 print("Failed To Post")
                 self?.onSuccessPostLocalArea.value = false
