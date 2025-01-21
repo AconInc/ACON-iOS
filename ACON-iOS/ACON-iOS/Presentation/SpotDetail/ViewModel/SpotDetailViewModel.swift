@@ -36,6 +36,8 @@ class SpotDetailViewModel {
         
     var spotMenu: ObservablePattern<[SpotMenuModel]> = ObservablePattern(nil)
     
+    let onSuccessPostGuidedSpotRequest: ObservablePattern<Bool> = ObservablePattern(nil)
+    
     init(spotID: Int64) {
         self.spotID = spotID
         ACLocationManager.shared.addDelegate(self)
@@ -94,6 +96,21 @@ extension SpotDetailViewModel {
             }
         }
     }
+    
+    // TODO: - 추후 PostGuidedSpotRequest 그냥 삭제?
+    func postGuidedSpot(spotID: Int64) {
+        ACService.shared.spotDetailService.postGuidedSpot(requestBody: PostGuidedSpotRequest(spotId: spotID)){ [weak self] response in
+            switch response {
+            case .success(let data):
+                self?.onSuccessPostGuidedSpotRequest.value = true
+            default:
+                print("VM - Failed To postGuidedSpot")
+                self?.onSuccessPostGuidedSpotRequest.value = false
+                return
+            }
+        }
+    }
+    
 }
 
 
