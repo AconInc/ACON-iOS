@@ -9,9 +9,9 @@ import Foundation
 
 class SpotReviewViewModel {
     
-    let onSuccessGetAcornNum: ObservablePattern<Bool> = ObservablePattern(nil)
+    let onSuccessGetAcornCount: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var acornNum: ObservablePattern<Int> = ObservablePattern(nil)
+    var acornCount: ObservablePattern<Int> = ObservablePattern(nil)
     
     let onSuccessPostReview: ObservablePattern<Bool> = ObservablePattern(nil)
     
@@ -25,15 +25,16 @@ class SpotReviewViewModel {
         self.reviewVerification.value = true
     }
     
-    func getAcornNum() {
+    func getAcornCount() {
         ACService.shared.uploadService.getAcornCount { [weak self] response in
             switch response {
             case .success(let data):
-                self?.onSuccessGetAcornNum.value = true
-                self?.acornNum.value = data.acornCount
+                self?.acornCount.value = data.acornCount
+                self?.onSuccessGetAcornCount.value = true
+                print(self?.acornCount.value, data.acornCount)
             default:
-                print("VM - Fail to getAcornNum")
-                self?.onSuccessGetAcornNum.value = false
+                print("VM - Fail to getAcornCount")
+                self?.onSuccessGetAcornCount.value = false
                 return
             }
         }

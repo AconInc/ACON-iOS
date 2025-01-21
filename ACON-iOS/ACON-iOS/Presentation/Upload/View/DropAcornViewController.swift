@@ -50,7 +50,7 @@ class DropAcornViewController: BaseNavViewController {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = true
-        spotReviewViewModel.getAcornNum()
+        spotReviewViewModel.getAcornCount()
     }
     
     override func setHierarchy() {
@@ -130,8 +130,8 @@ private extension DropAcornViewController {
 private extension DropAcornViewController {
     
     func bindViewModel() {
-        self.spotReviewViewModel.onSuccessGetAcornNum.bind { [weak self] onSuccess in
-            guard let onSuccess, let data = self?.spotReviewViewModel.acornNum.value else { return }
+        self.spotReviewViewModel.onSuccessGetAcornCount.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.spotReviewViewModel.acornCount.value else { return }
             if onSuccess {
                 self?.possessAcornCount = data
                 self?.dropAcornView.bindData(data)
