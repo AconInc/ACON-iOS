@@ -53,6 +53,12 @@ class SpotListViewController: BaseNavViewController {
             action: #selector(tappedFilterButton),
             for: .touchUpInside
         )
+        
+        spotListView.floatingLocationButton.button.addTarget(
+            self,
+            action: #selector(tappedLocationButton),
+            for: .touchUpInside
+        )
     }
     
 }
@@ -85,7 +91,6 @@ private extension SpotListViewController {
     func handleRefreshControl() {
         spotListViewModel.requestLocation()
         
-        
         DispatchQueue.main.async {
             // NOTE: 데이터 리로드 전 애니메이션
             UIView.animate(withDuration: 0.25, animations: {
@@ -110,6 +115,16 @@ private extension SpotListViewController {
         present(vc, animated: true)
     }
     
+    
+    @objc
+    func tappedLocationButton() {
+        // TODO: 내용 handleRefreshControl 부분으로 옮기기
+        // TODO: 로그인중인지 여부
+        let vc = LoginModalViewController()
+        vc.setShortSheetLayout()
+        
+        present(vc, animated: true)
+    }
 }
 
 
