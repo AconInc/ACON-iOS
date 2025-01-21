@@ -60,13 +60,14 @@ final class LoginView: BaseView {
         super.setLayout()
         
         logoImageView.snp.makeConstraints {
-            $0.centerY.equalToSuperview().offset(-20)
+            $0.top.equalToSuperview().offset(ScreenUtils.heightRatio*145)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.widthRatio*224)
+            $0.height.equalTo(ScreenUtils.heightRatio*91)
+            $0.width.equalTo(ScreenUtils.widthRatio*261)
         }
         
         logoLabel.snp.makeConstraints {
-            $0.bottom.equalTo(logoImageView.snp.top).offset(-10)
+            $0.top.equalToSuperview().offset(ScreenUtils.heightRatio*244)
             $0.centerX.equalToSuperview()
         }
         
@@ -105,13 +106,13 @@ final class LoginView: BaseView {
         super.setStyle()
         
         logoImageView.do {
-            $0.image = .acon
+            $0.image = .aconLogo
             $0.contentMode = .scaleAspectFit
         }
         
         logoLabel.do {
             $0.setLabel(text: StringLiterals.Login.logoText,
-                        style: .s2,
+                        style: .s1,
                         color: .acWhite,
                         alignment: .center,
                         numberOfLines: 2)
