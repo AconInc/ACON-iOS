@@ -58,5 +58,20 @@ class SpotReviewViewModel {
             }
         }
     }
+    
+    func postReview(spotID: Int64, acornCount: Int) {
+        let requestBody = PostReviewRequest(spotId: spotID, acornCount: acornCount)
+            
+        ACService.shared.uploadService.postReview(requestBody: PostReviewRequest(spotId: spotID, acornCount: acornCount)) { [weak self] response in
+            switch response {
+            case .success(_):
+                self?.onSuccessPostReview.value = true
+            default:
+                print("VM - Fail to postReview")
+                self?.onSuccessPostReview.value = false
+                return
+            }
+        }
+    }
 }
 
