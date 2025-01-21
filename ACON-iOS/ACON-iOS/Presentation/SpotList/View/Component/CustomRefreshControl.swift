@@ -33,16 +33,22 @@ class CustomRefreshControl: UIRefreshControl {
     }
     
     override func beginRefreshing() {
+        animationView.isHidden = false
+        
         super.beginRefreshing()
+        
         animationView.loopMode = .loop
         animationView.play()
     }
     
     override func endRefreshing() {
+        animationView.isHidden = true
         animationView.loopMode = .playOnce
+        
         animationView.play(completion: { (isFinished) in
             if isFinished {
                 super.endRefreshing()
+                
                 self.animationView.stop()
             }
         })

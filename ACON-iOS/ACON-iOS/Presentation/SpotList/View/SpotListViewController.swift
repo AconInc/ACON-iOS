@@ -118,11 +118,11 @@ private extension SpotListViewController {
 private extension SpotListViewController {
     
     func endRefreshingAndTransparancy() {
-        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.1, delay: 0) {
+            self.spotListView.collectionView.contentInset.top = 0
             self.spotListView.collectionView.setContentOffset(.zero, animated: true)
-            self.spotListView.collectionView.alpha = 1.0 // 투명도 복원
+            self.spotListView.collectionView.alpha = 1.0 // NOTE: 투명도 복원
         } completion: { _ in
-            // NOTE: 리프레시 종료
             self.spotListView.collectionView.refreshControl?.endRefreshing()
         }
     }
