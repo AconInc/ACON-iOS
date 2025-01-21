@@ -55,8 +55,8 @@
 		744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BAF162D300AB100F95B4A /* DummyComponent.swift */; };
 		745B19AC2D40021E00BDBDA4 /* PostLoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B19AB2D40021700BDBDA4 /* PostLoginRequest.swift */; };
 		745B19AE2D4002A100BDBDA4 /* PostLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B19AD2D40029A00BDBDA4 /* PostLoginResponse.swift */; };
-		745B19B02D4010F300BDBDA4 /* LoginTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B19AF2D4010F200BDBDA4 /* LoginTargetType.swift */; };
-		745B19B22D40240900BDBDA4 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B19B12D40240100BDBDA4 /* LoginService.swift */; };
+		745B19B02D4010F300BDBDA4 /* AuthTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B19AF2D4010F200BDBDA4 /* AuthTargetType.swift */; };
+		745B19B22D40240900BDBDA4 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B19B12D40240100BDBDA4 /* AuthService.swift */; };
 		745C7E022D358E900074DBDB /* SpotSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E012D358E870074DBDB /* SpotSearchView.swift */; };
 		745C7E042D3599DF0074DBDB /* SpotSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E032D3599D80074DBDB /* SpotSearchViewController.swift */; };
 		745C7E0D2D35A04A0074DBDB /* SearchKeywordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E0C2D35A03F0074DBDB /* SearchKeywordCollectionViewCell.swift */; };
@@ -208,8 +208,8 @@
 		744BAF162D300AB100F95B4A /* DummyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyComponent.swift; sourceTree = "<group>"; };
 		745B19AB2D40021700BDBDA4 /* PostLoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLoginRequest.swift; sourceTree = "<group>"; };
 		745B19AD2D40029A00BDBDA4 /* PostLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLoginResponse.swift; sourceTree = "<group>"; };
-		745B19AF2D4010F200BDBDA4 /* LoginTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTargetType.swift; sourceTree = "<group>"; };
-		745B19B12D40240100BDBDA4 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		745B19AF2D4010F200BDBDA4 /* AuthTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTargetType.swift; sourceTree = "<group>"; };
+		745B19B12D40240100BDBDA4 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		745C7E012D358E870074DBDB /* SpotSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotSearchView.swift; sourceTree = "<group>"; };
 		745C7E032D3599D80074DBDB /* SpotSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotSearchViewController.swift; sourceTree = "<group>"; };
 		745C7E0C2D35A03F0074DBDB /* SearchKeywordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -555,14 +555,14 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
-		745B19A92D4001AD00BDBDA4 /* Login */ = {
+		745B19A92D4001AD00BDBDA4 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				745B19AA2D4001B400BDBDA4 /* DTO */,
-				745B19AF2D4010F200BDBDA4 /* LoginTargetType.swift */,
-				745B19B12D40240100BDBDA4 /* LoginService.swift */,
+				745B19AF2D4010F200BDBDA4 /* AuthTargetType.swift */,
+				745B19B12D40240100BDBDA4 /* AuthService.swift */,
 			);
-			path = Login;
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		745B19AA2D4001B400BDBDA4 /* DTO */ = {
@@ -662,7 +662,7 @@
 		748D6F712D2BCA7E007690B4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				745B19A92D4001AD00BDBDA4 /* Login */,
+				745B19A92D4001AD00BDBDA4 /* Auth */,
 				7462617C2D3F9E9400A4E84F /* SpotDetail */,
 				741E68A32D3D616200DF99EF /* Test */,
 				743069872D3D2EDA0033178C /* Base */,
@@ -1186,7 +1186,7 @@
 				741E68AC2D3D6DA800DF99EF /* HeaderType.swift in Sources */,
 				D6232C952D3A294C003FF208 /* AlertHandler.swift in Sources */,
 				745C7E122D35A62B0074DBDB /* UploadModel.swift in Sources */,
-				745B19B22D40240900BDBDA4 /* LoginService.swift in Sources */,
+				745B19B22D40240900BDBDA4 /* AuthService.swift in Sources */,
 				748D6FAE2D2EBB9C007690B4 /* ACFont.swift in Sources */,
 				15A3F6E02D38724A00577E16 /* CustomSegmentedControl.swift in Sources */,
 				748D6F692D2BCA1C007690B4 /* AppDelegate.swift in Sources */,
@@ -1205,7 +1205,7 @@
 				748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */,
 				1547A8902D35B30C00E96616 /* FilterTagButtonType.swift in Sources */,
 				748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */,
-				745B19B02D4010F300BDBDA4 /* LoginTargetType.swift in Sources */,
+				745B19B02D4010F300BDBDA4 /* AuthTargetType.swift in Sources */,
 				74BF91FA2D38164400B923E3 /* SpotDetailView.swift in Sources */,
 				748D6F872D2BD247007690B4 /* UIView+.swift in Sources */,
 				15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */,

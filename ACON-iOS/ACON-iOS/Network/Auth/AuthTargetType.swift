@@ -1,5 +1,5 @@
 //
-//  LoginTargetType.swift
+//  AuthTargetType.swift
 //  ACON-iOS
 //
 //  Created by 이수민 on 1/22/25.
@@ -9,13 +9,13 @@ import Foundation
 
 import Moya
 
-enum LoginTargetType {
+enum AuthTargetType {
 
     case postLogin(_ requestBody: PostLoginRequest)
     
 }
 
-extension LoginTargetType: TargetType {
+extension AuthTargetType: TargetType {
 
     var method: Moya.Method {
         switch self {

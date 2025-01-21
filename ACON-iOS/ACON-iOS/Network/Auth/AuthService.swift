@@ -1,5 +1,5 @@
 //
-//  LoginService.swift
+//  AuthService.swift
 //  ACON-iOS
 //
 //  Created by 이수민 on 1/22/25.
@@ -9,7 +9,7 @@ import Foundation
 
 import Moya
 
-protocol LoginServiceProtocol {
+protocol AuthServiceProtocol {
     
     func postLogin(_ requestBody: PostLoginRequest,
                    completion: @escaping (NetworkResult<PostLoginResponse>) -> Void)
@@ -17,7 +17,7 @@ protocol LoginServiceProtocol {
     
 }
 
-final class LoginService: BaseService<LoginTargetType>, LoginServiceProtocol {
+final class AuthService: BaseService<AuthTargetType>, AuthServiceProtocol {
     
     func postLogin(_ requestBody: PostLoginRequest, completion: @escaping (NetworkResult<PostLoginResponse>) -> Void) {
         self.provider.request(.postLogin(requestBody)) { result in
