@@ -34,8 +34,20 @@ class SpotDetailViewModel {
     deinit {
        ACLocationManager.shared.removeDelegate(self)
     }
+
+}
+
+// MARK: - 서버 통신 메소드
+
+extension SpotDetailViewModel {
     
-    // MARK: - 네이버지도 Redirect
+    
+}
+
+
+// MARK: - 네이버지도 Redirect
+
+extension SpotDetailViewModel {
     
     func redirectToNaverMap() {
         ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
@@ -44,6 +56,8 @@ class SpotDetailViewModel {
     
 }
 
+
+// MARK: - 위치
 extension SpotDetailViewModel: ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
