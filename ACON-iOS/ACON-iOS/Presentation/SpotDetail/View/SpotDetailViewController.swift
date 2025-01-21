@@ -41,6 +41,7 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
         super.viewWillAppear(false)
 
         spotDetailViewModel.getSpotDetail()
+        spotDetailViewModel.getSpotMenu()
     }
     
     override func setHierarchy() {
@@ -87,6 +88,13 @@ private extension SpotDetailViewController {
             if onSuccess {
                 self?.bindNavBar(data: data)
                 self?.spotDetailView.bindData(data: data)
+            }
+        }
+        
+        self.spotDetailViewModel.onSuccessGetSpotMenu.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.spotDetailViewModel.spotMenu.value else { return }
+            if onSuccess {
+                self?.spotDetailView.menuCollectionView.reloadData()
             }
         }
         
@@ -138,9 +146,9 @@ private extension SpotDetailViewController {
     }
     
     func updateCollectionViewHeight() {
-        let numberOfItems = spotDetailViewModel.menuDummyData.count
+        let numberOfItems = spotDetailViewModel.spotMenu.value?.count
         let itemHeight = SpotDetailView.menuCollectionViewFlowLayout.itemSize.height
-        let totalHeight = itemHeight * CGFloat(numberOfItems)
+        let totalHeight = itemHeight * CGFloat(numberOfItems ?? 0)
         
         spotDetailView.menuCollectionView.snp.updateConstraints {
             $0.height.equalTo(totalHeight)
@@ -161,7 +169,7 @@ extension SpotDetailViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let data = spotDetailViewModel.menuDummyData[indexPath.item]
+        guard let data = spotDetailViewModel.spotMenu.value?[indexPath.item] else { return UICollectionViewCell() }
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.cellIdentifier, for: indexPath) as? MenuCollectionViewCell else {
             return UICollectionViewCell() }
         cell.dataBind(data, indexPath.item)
