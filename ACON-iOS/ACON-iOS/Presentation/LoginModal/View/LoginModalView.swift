@@ -11,6 +11,8 @@ class LoginModalView: GlassmorphismView {
     
     // MARK: - UI Properties
     
+    let exitButton = UIButton()
+    
     private let titleLabel = UILabel()
     
     private var subTitleLabel  = UILabel()
@@ -44,6 +46,7 @@ class LoginModalView: GlassmorphismView {
         super.setHierarchy()
         
         self.addSubviews(
+            exitButton,
             titleLabel,
             subTitleLabel,
             googleLoginButton,
@@ -60,6 +63,11 @@ class LoginModalView: GlassmorphismView {
     
     override func setLayout() {
         super.setLayout()
+        
+        exitButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(ScreenUtils.heightRatio * 21)
+            $0.trailing.equalToSuperview().offset(-ScreenUtils.widthRatio * 16)
+        }
         
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(ScreenUtils.heightRatio * 86)
@@ -106,6 +114,10 @@ class LoginModalView: GlassmorphismView {
         
         self.setHandlerImageView()
         
+        self.setGlassColor(.glaW10)
+        
+        exitButton.setImage(.icX, for: .normal)
+        
         titleLabel.setLabel(text: StringLiterals.LoginModal.title,
                             style: .h5,
                             color: .acWhite,
@@ -121,7 +133,10 @@ class LoginModalView: GlassmorphismView {
         googleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
             $0.backgroundColor = .gray1
-            $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
+            $0.roundedButton(
+                cornerRadius: 6,
+                maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
+            )
             $0.setImage(.googleLogo, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.googleLogin,
                                   style: .s1,
@@ -131,18 +146,22 @@ class LoginModalView: GlassmorphismView {
         appleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
             $0.backgroundColor = .gray9
-            $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
+            $0.roundedButton(
+                cornerRadius: 6,
+                maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
+            )
             $0.setImage(.appleLogo, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
                                   style: .s1,
                                   color: .acWhite)
-    
         }
         
         youAgreedLabel.do {
             $0.setLabel(text: StringLiterals.Login.youAgreed,
                         style: .b2,
-                        color: .gray3)
+                        color: .gray3,
+                        alignment: .center,
+                        numberOfLines: 2)
         }
         
         termsStackView.do {
@@ -154,7 +173,9 @@ class LoginModalView: GlassmorphismView {
             $0.setLabel(text: StringLiterals.Login.termsOfUse,
                         style: .b2,
                         color: .gray5)
-            $0.setUnderline(range: NSRange(location: 0, length: termsOfUseLabel.text?.count ?? 4))
+            $0.setUnderline(
+                range: NSRange(location: 0,
+                               length: termsOfUseLabel.text?.count ?? 4))
             $0.isUserInteractionEnabled = true
         }
         
@@ -162,7 +183,9 @@ class LoginModalView: GlassmorphismView {
             $0.setLabel(text: StringLiterals.Login.privacyPolicy,
                         style: .b2,
                         color: .gray5)
-            $0.setUnderline(range: NSRange(location: 0, length: privacyPolicyLabel.text?.count ?? 8))
+            $0.setUnderline(
+                range: NSRange(location: 0,
+                               length: privacyPolicyLabel.text?.count ?? 8))
             $0.isUserInteractionEnabled = true
         }
     }

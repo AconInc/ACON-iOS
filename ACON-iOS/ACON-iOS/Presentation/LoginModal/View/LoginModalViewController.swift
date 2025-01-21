@@ -44,11 +44,33 @@ class LoginModalViewController: BaseViewController {
     }
     
     func addTargets() {
-        loginModalView.googleLoginButton.addTarget(self, action: #selector(googleLoginButtonTapped), for: .touchUpInside)
-        loginModalView.appleLoginButton.addTarget(self, action: #selector(appleLoginButtonTapped), for: .touchUpInside)
+        loginModalView.googleLoginButton.addTarget(
+            self,
+            action: #selector(googleLoginButtonTapped),
+            for: .touchUpInside
+        )
         
-        loginModalView.privacyPolicyLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(privacyPolicyLabelTapped)))
-        loginModalView.termsOfUseLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(termsOfUseLabelTapped)))
+        loginModalView.appleLoginButton.addTarget(
+            self,
+            action: #selector(appleLoginButtonTapped),
+            for: .touchUpInside
+        )
+        
+        loginModalView.privacyPolicyLabel.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(privacyPolicyLabelTapped))
+        )
+        
+        loginModalView.termsOfUseLabel.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(termsOfUseLabelTapped))
+        )
+        
+        loginModalView.exitButton.addTarget(
+            self,
+            action: #selector(didTapExitButton),
+            for: .touchUpInside
+        )
     }
     
 }
@@ -85,6 +107,10 @@ extension LoginModalViewController {
         controller.performRequests()
     }
     
+    @objc
+    func didTapExitButton() {
+        self.dismiss(animated: true)
+    }
 }
 
 
