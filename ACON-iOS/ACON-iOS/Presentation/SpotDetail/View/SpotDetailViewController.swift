@@ -126,7 +126,7 @@ private extension SpotDetailViewController {
     func bindNavBar(data: SpotDetailInfoModel) {
         self.secondTitleLabel.do {
             $0.isHidden = false
-            $0.setPartialText(fullText: data.name+" "+data.spotType, textStyles: [(data.name+" ", .t2, .acWhite), (data.spotType, .b2, .gray4)])
+            $0.setPartialText(fullText: data.name+" "+data.spotType, textStyles: [(data.name+" ", .t2, .acWhite), (data.spotType, .b2, .acWhite)])
         }
     }
     
