@@ -24,4 +24,15 @@ extension UIView {
         layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
     }
     
+    
+    // MARK: - blurView subView로 추가
+    
+    func setBlurView(){
+        let viewBlurEffect = UIVisualEffectView()
+        viewBlurEffect.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        
+        self.addSubview(viewBlurEffect)
+        viewBlurEffect.frame = self.bounds
+    }
+    
 }
