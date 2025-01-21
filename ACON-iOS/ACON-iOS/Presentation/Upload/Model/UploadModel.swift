@@ -31,10 +31,13 @@ struct SearchKeywordModel: Equatable {
 
 struct SearchSuggestionModel: Equatable {
     
-    let spotList: [String]
+    let spotId: Int64
     
-    init(spotList: [String]) {
-        self.spotList = spotList
+    let spotName: String
+    
+    init(spotId: Int64, spotName: String) {
+        self.spotId = spotId
+        self.spotName = spotName
     }
     
 }
