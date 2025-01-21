@@ -56,6 +56,7 @@
 		745B19AC2D40021E00BDBDA4 /* PostLoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B19AB2D40021700BDBDA4 /* PostLoginRequest.swift */; };
 		745B19AE2D4002A100BDBDA4 /* PostLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B19AD2D40029A00BDBDA4 /* PostLoginResponse.swift */; };
 		745B19B02D4010F300BDBDA4 /* LoginTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B19AF2D4010F200BDBDA4 /* LoginTargetType.swift */; };
+		745B19B22D40240900BDBDA4 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B19B12D40240100BDBDA4 /* LoginService.swift */; };
 		745C7E022D358E900074DBDB /* SpotSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E012D358E870074DBDB /* SpotSearchView.swift */; };
 		745C7E042D3599DF0074DBDB /* SpotSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E032D3599D80074DBDB /* SpotSearchViewController.swift */; };
 		745C7E0D2D35A04A0074DBDB /* SearchKeywordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E0C2D35A03F0074DBDB /* SearchKeywordCollectionViewCell.swift */; };
@@ -208,6 +209,7 @@
 		745B19AB2D40021700BDBDA4 /* PostLoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLoginRequest.swift; sourceTree = "<group>"; };
 		745B19AD2D40029A00BDBDA4 /* PostLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLoginResponse.swift; sourceTree = "<group>"; };
 		745B19AF2D4010F200BDBDA4 /* LoginTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTargetType.swift; sourceTree = "<group>"; };
+		745B19B12D40240100BDBDA4 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		745C7E012D358E870074DBDB /* SpotSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotSearchView.swift; sourceTree = "<group>"; };
 		745C7E032D3599D80074DBDB /* SpotSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotSearchViewController.swift; sourceTree = "<group>"; };
 		745C7E0C2D35A03F0074DBDB /* SearchKeywordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -558,6 +560,7 @@
 			children = (
 				745B19AA2D4001B400BDBDA4 /* DTO */,
 				745B19AF2D4010F200BDBDA4 /* LoginTargetType.swift */,
+				745B19B12D40240100BDBDA4 /* LoginService.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1183,6 +1186,7 @@
 				741E68AC2D3D6DA800DF99EF /* HeaderType.swift in Sources */,
 				D6232C952D3A294C003FF208 /* AlertHandler.swift in Sources */,
 				745C7E122D35A62B0074DBDB /* UploadModel.swift in Sources */,
+				745B19B22D40240900BDBDA4 /* LoginService.swift in Sources */,
 				748D6FAE2D2EBB9C007690B4 /* ACFont.swift in Sources */,
 				15A3F6E02D38724A00577E16 /* CustomSegmentedControl.swift in Sources */,
 				748D6F692D2BCA1C007690B4 /* AppDelegate.swift in Sources */,
