@@ -63,7 +63,6 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
         
         self.applyGlassmorphism()
         self.setBackButton()
-        updateCollectionViewHeight()
     }
     
     private func addTarget() {
@@ -95,6 +94,7 @@ private extension SpotDetailViewController {
             guard let onSuccess, let data = self?.spotDetailViewModel.spotMenu.value else { return }
             if onSuccess {
                 self?.spotDetailView.menuCollectionView.reloadData()
+                self?.updateCollectionViewHeight()
             }
         }
         
@@ -166,7 +166,7 @@ private extension SpotDetailViewController {
 extension SpotDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return spotDetailViewModel.menuDummyData.count
+        return spotDetailViewModel.spotMenu.value?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
