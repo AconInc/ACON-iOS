@@ -152,6 +152,7 @@ private extension SpotSearchViewController {
         }
         
         // TODO: - 계속 불러야 해서 일단 데이터 자체 바인딩. 추후 로딩이 필요한 경우 onSuccessGetSearchKeyword으로 바인딩 로직 재구성
+        // TODO: - 또는 뷰모델에서 기존 키워드와 같은지 보고 updateKeyword이라는 옵저버블 패턴 만들어 updateKeyword.value = false
         self.spotSearchViewModel.searchKeywordData.bind { [weak self] data in
             guard let data = data else { return }
             
