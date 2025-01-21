@@ -57,7 +57,7 @@ final class SpotDetailView: BaseView {
         $0.itemSize = CGSize(width: ScreenUtils.width*320/360, height: ScreenUtils.height*110/780)
     }
     
-    private let navViewHeight: CGFloat = ScreenUtils.heightRatio * 56
+    let navViewHeight: CGFloat = ScreenUtils.heightRatio * 56
     
     
     // MARK: - Lifecycle
@@ -90,7 +90,7 @@ final class SpotDetailView: BaseView {
         blurSpotImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(-navViewHeight)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(navViewHeight)
+            $0.height.equalTo(ScreenUtils.height*296/780)
         }
         
         gotoTopButton.snp.makeConstraints{
@@ -197,11 +197,10 @@ final class SpotDetailView: BaseView {
         super.setStyle()
         
         blurSpotImageView.do {
-            $0.setBlurView()
             $0.backgroundColor = .acWhite
             $0.contentMode = .scaleAspectFill
-            $0.layer.contentsRect = CGRect(x: 0, y: 0, width: 1.0, height: navViewHeight/296)
             $0.clipsToBounds = true
+            $0.setBlurView()
         }
         
         gotoTopButton.do {
