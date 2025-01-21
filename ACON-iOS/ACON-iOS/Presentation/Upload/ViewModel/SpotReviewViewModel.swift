@@ -49,8 +49,8 @@ class SpotReviewViewModel {
         ACService.shared.uploadService.getReviewVerification(parameter: parameter) { [weak self] response in
             switch response {
             case .success(let data):
-                self?.onSuccessGetReviewVerification.value = true
                 self?.reviewVerification.value = data.success
+                self?.onSuccessGetReviewVerification.value = true
             default:
                 print("VM - Fail to get review verification")
                 self?.onSuccessGetReviewVerification.value = false
