@@ -129,8 +129,6 @@ extension SpotDetailViewModel: ACLocationManagerDelegate {
         } else {
             UIApplication.shared.open(appStoreURL)
         }
-        
-        // TODO: 최근 길 안내 POST 서버통신 -> spotDetailInfoModel.spotID POST
     }
     
 }
