@@ -111,6 +111,8 @@ enum StringLiterals {
         
         static let footerText = "장소는 최대 6순위까지만 제공됩니다."
         
+        static let noAcorn = "앗! 일치하는 도토리 맛집이 없어요"
+        
     }
     
     enum LocalVerification {
