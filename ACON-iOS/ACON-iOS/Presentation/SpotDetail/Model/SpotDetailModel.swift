@@ -57,7 +57,7 @@ struct SpotDetailInfoModel: Equatable {
 
 struct SpotMenuModel: Equatable {
     
-    let menuID: Int
+    let menuID: Int64
     
     let name: String
     
@@ -65,7 +65,7 @@ struct SpotMenuModel: Equatable {
     
     let imageURL: String
     
-    init(menuID: Int, name: String, price: Int, imageURL: String) {
+    init(menuID: Int64, name: String, price: Int, imageURL: String) {
         self.menuID = menuID
         self.name = name
         self.price = price
