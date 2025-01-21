@@ -50,6 +50,8 @@ class DropAcornViewController: BaseNavViewController {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = true
+        // TODO: - 전부 dismiss 될 때 viewWillAppear가 불려짐 - 쓸데없는 API 호출
+        // TODO: - ObservablePattern 사용해서 추후 해결?
         spotReviewViewModel.getAcornCount()
     }
     
