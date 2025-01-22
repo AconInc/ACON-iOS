@@ -21,13 +21,13 @@ final class SpotUploadView: BaseView {
     var spotSearchButtonConfiguration: UIButton.Configuration = {
         var configuration = UIButton.Configuration.plain()
         configuration.imagePlacement = .leading
-        configuration.imagePadding = 12
+        configuration.imagePadding = 4
         configuration.titleAlignment = .leading
         configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 24)
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 14,
-                                                              leading: 12,
+                                                              leading: ScreenUtils.widthRatio * 12,
                                                               bottom: 14,
-                                                              trailing: 194)
+                                                              trailing: ScreenUtils.widthRatio * 308 - 150)
         return configuration
     }()
     
