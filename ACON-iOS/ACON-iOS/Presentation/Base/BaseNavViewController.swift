@@ -206,7 +206,11 @@ extension BaseNavViewController {
     
     @objc
     func backButtonTapped() {
-        navigationController?.popViewController(animated: false)
+        if let navigationController = navigationController {
+            navigationController.popViewController(animated: false)
+        } else {
+            dismiss(animated: false)
+        }
     }
     
     
