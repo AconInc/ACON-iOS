@@ -74,6 +74,19 @@ enum SpotType {
             }
         }
         
+        var serverKey: String {
+            switch self {
+            case .korean: return "KOREAN"
+            case .western: return "WESTERN"
+            case .chinese: return "CHINESE"
+            case .japanese: return "JAPANESE"
+            case .koreanStreet: return "KOREAN_STREET"
+            case .asian: return "ASIAN"
+            case .bar: return "BAR"
+            case .excludeFranchise: return "EXCLUDE_FRANCHISE 제외"
+            }
+        }
+        
     }
     
     enum CafeFeatureType: CaseIterable {
