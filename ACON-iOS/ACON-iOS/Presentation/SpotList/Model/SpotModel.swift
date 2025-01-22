@@ -13,9 +13,9 @@ struct SpotModel: Equatable {
     
     let id: Int
     
-    let imageURL: String?
+    let imageURL: String
     
-    let matchingRate: Int
+    let matchingRate: Int?
     
     let type: String
     

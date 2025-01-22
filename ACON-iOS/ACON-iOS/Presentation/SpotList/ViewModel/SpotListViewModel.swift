@@ -14,13 +14,7 @@ class SpotListViewModel {
     
     var isPostSpotListSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var spotList: [SpotModel] = [SpotModel(id: 0,
-                                           imageURL: "imgEx1",
-                                           matchingRate: 100,
-                                           type: "CAFE",
-                                           name: "카페1",
-                                           walkingTime: 5
-                                          )]
+    var spotList: [SpotModel] = []
     
     var isUpdated: Bool = false
     

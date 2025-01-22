@@ -141,19 +141,18 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 extension SpotListCollectionViewCell {
     
     func bind(spot: SpotModel, matchingRateBgColor: MatchingRateBgColorType) {
-        if let imageURL = spot.imageURL {
-            bgImage.kf.setImage(
-                with: URL(string: imageURL),
-                options: [.transition(.none), .cacheOriginalImage])
-        }
+        bgImage.kf.setImage(
+            with: URL(string: spot.imageURL),
+            options: [.transition(.none), .cacheOriginalImage])
         
         changeMatchingRateBgColor(matchingRateBgColor)
         
-        
-        let matchingRateHead = StringLiterals.SpotList.matchingRate
-        let matchingRateStringSet = matchingRateHead + " " + String(spot.matchingRate) + "%"
-        matchingRateLabel.setLabel(text: matchingRateStringSet,
-                                   style: .b4)
+        if let matchingRate = spot.matchingRate {
+            let matchingRateHead = StringLiterals.SpotList.matchingRate
+            let matchingRateStringSet = matchingRateHead + " " + String(matchingRate) + "%"
+            matchingRateLabel.setLabel(text: matchingRateStringSet,
+                                       style: .b4)
+        }
         
         typeLabel.setLabel(text: spot.type,
                            style: .b4)
