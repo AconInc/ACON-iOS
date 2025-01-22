@@ -7,23 +7,19 @@
 
 import Foundation
 
-enum SpotCategoryType {
+enum SpotCategoryType: String, Codable {
     
-    case restaurant, cafe
-
-    init?(engText: String) {
-        switch engText {
-        case "RESTAURANT": self = .restaurant
-        case "CAFE": self = .cafe
-        default: return nil
-        }
-    }
+    case RESTAURANT = "RESTAURANT"
     
-    init?(korText: String) {
-        switch korText {
-        case "음식점": self = .restaurant
-        case "카페": self = .cafe
-        default: return nil
+    case CAFE = "CAFE"
+    
+    
+    var koreanText: String {
+        switch self {
+        case .RESTAURANT:
+            return "음식점"
+        case .CAFE:
+            return "카페"
         }
     }
     
