@@ -93,7 +93,7 @@ extension SpotListViewModel {
                     return spot
                 }
                 print("🥑spot:", spotList)
-                self?.isUpdated = spotList == self?.spotList
+                self?.isUpdated = spotList != self?.spotList
                 self?.spotList = spotList
                 self?.isPostSpotListSuccess.value = true
             default:
@@ -102,7 +102,7 @@ extension SpotListViewModel {
                 return
             }
         }
-        // TODO: 네트워크 실패인 경우 isSuccess가 set이 안돼서 무한 로딩인데,,,, API가 살아나면 이 문제를 걱정하지 않아도 되는지,,, 확인하기,,,
+        // TODO: TimeOut 설정하기; 서버가 다운 된 경우 isSuccess가 set이 안돼서 무한 로딩됨
     }
     
 }
