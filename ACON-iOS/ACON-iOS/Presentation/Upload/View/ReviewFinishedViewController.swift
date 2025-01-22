@@ -94,7 +94,12 @@ private extension ReviewFinishedViewController {
         while let presenting = topController.presentingViewController {
             topController = presenting
         }
-        topController.dismiss(animated: true)
+        
+        topController.dismiss(animated: true){ [weak self] in
+            if let tabBarController = UIApplication.shared.keyWindow?.rootViewController as? ACTabBarController {
+                tabBarController.selectedIndex = 0
+            }
+        }
     }
     
 }

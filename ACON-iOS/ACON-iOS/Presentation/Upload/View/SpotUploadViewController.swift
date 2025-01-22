@@ -31,6 +31,8 @@ class SpotUploadViewController: BaseNavViewController {
     
     var longitude: Double = 0
     
+    var isInDismissProcess: Bool = false
+    
     
     // MARK: - LifeCycle
     
@@ -120,6 +122,7 @@ private extension SpotUploadViewController {
     func nextButtonTapped() {
         let vc = DropAcornViewController(spotID: selectedSpotID)
         vc.modalPresentationStyle = .fullScreen
+        self.isInDismissProcess = true
         present(vc, animated: false)
     }
     
@@ -152,6 +155,8 @@ extension SpotUploadViewController: ACLocationManagerDelegate {
 extension SpotUploadViewController {
     
     func setSpotSearchModal() {
+        if isInDismissProcess { return }
+        
         let vc = SpotSearchViewController(spotSearchViewModel: SpotSearchViewModel(latitude: self.latitude, longitude: self.longitude))
         vc.dismissCompletion = { [weak self] in
             DispatchQueue.main.async {
