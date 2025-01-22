@@ -44,7 +44,7 @@ final class SpotSearchView: GlassmorphismView {
     static var relatedSearchCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .vertical
         $0.minimumLineSpacing = 0
-        $0.itemSize = CGSize(width: ScreenUtils.width*320/360, height: ScreenUtils.height*52/780)
+        $0.itemSize = CGSize(width: ScreenUtils.widthRatio*320, height: ScreenUtils.heightRatio*52)
     }
     
     
@@ -70,62 +70,62 @@ final class SpotSearchView: GlassmorphismView {
         super.setLayout()
 
         spotUploadLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*19/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*19)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(100)
             $0.height.equalTo(24)
         }
         
         searchView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*86/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*86)
             $0.height.equalTo(54)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.width*320/360)
+            $0.width.equalTo(ScreenUtils.widthRatio*320)
         }
         
         doneButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*19/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*19)
             $0.trailing.equalToSuperview().inset(20)
             $0.width.equalTo(40)
             $0.height.equalTo(24)
         }
         
         searchSuggestionScrollView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*158/780)
-            $0.height.equalTo(ScreenUtils.height*28/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*158)
+            $0.height.equalTo(ScreenUtils.heightRatio*28)
             $0.trailing.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.width*340/360)
+            $0.width.equalTo(ScreenUtils.widthRatio*340)
         }
         
         searchKeywordCollectionView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*150/780)
-            $0.height.equalTo(ScreenUtils.height*630/780 - safeAreaInsets.bottom)
-            $0.width.equalTo(ScreenUtils.width*320/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*150)
+            $0.height.equalTo(ScreenUtils.heightRatio*630 - safeAreaInsets.bottom)
+            $0.width.equalTo(ScreenUtils.widthRatio*320)
             $0.centerX.equalToSuperview()
         }
         
         emptyView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*200/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*200)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.width*146/360)
-            $0.height.equalTo(ScreenUtils.height*116/780)
+            $0.width.equalTo(ScreenUtils.widthRatio*146)
+            $0.height.equalTo(ScreenUtils.heightRatio*116)
         }
         
         searchImageView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*16/360)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*16)
             $0.centerY.equalToSuperview()
             $0.width.height.equalTo(24)
         }
         
         searchTextField.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*44/360)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*44)
             $0.centerY.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.width*232/360)
+            $0.width.equalTo(ScreenUtils.widthRatio*232)
             $0.height.equalTo(20)
         }
         
         searchXButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(ScreenUtils.width*6/360)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*6)
             $0.centerY.equalToSuperview()
             $0.width.height.equalTo(24)
         }
@@ -249,7 +249,7 @@ final class SpotSearchView: GlassmorphismView {
 
 extension SpotSearchView {
     
-    func makeRecommendedSpotButton(_ title: String) -> UIButton {
+    func makeRecommendedSpotButton(_ data: SearchSuggestionModel) -> UIButton {
         let button = UIButton()
         let recommendedSpotButtonConfiguration: UIButton.Configuration = {
             var configuration = UIButton.Configuration.plain()
@@ -267,12 +267,13 @@ extension SpotSearchView {
             $0.backgroundColor = .gray8
             $0.layer.cornerRadius = 14
             $0.configuration = recommendedSpotButtonConfiguration
-            $0.setAttributedTitle(text: title,
+            $0.setAttributedTitle(text: data.spotName,
                                   style: .b2,
                                   color: .acWhite)
             $0.titleLabel?.numberOfLines = 1
             $0.setContentHuggingPriority(.required, for: .horizontal)
             $0.setContentCompressionResistancePriority(.required, for: .horizontal)
+            $0.spotID = data.spotId
         }
         return button
     }
@@ -290,7 +291,7 @@ extension SpotSearchView {
         }
         if data.count != 0 {
             for i in 0...(data.count-1) {
-                let button = makeRecommendedSpotButton(data[i].spotName)
+                let button = makeRecommendedSpotButton(data[i])
                 searchSuggestionStackView.addArrangedSubview(button)
             }
         }

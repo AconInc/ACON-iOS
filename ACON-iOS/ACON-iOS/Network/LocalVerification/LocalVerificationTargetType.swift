@@ -39,9 +39,7 @@ extension LocalVerificationTargetType: TargetType {
     }
     
     var headers: [String : String]? {
-        // TODO: - 추후 유저디폴트 토큰으로 변경
-        let token = ""
-        let headers = HeaderType.headerWithToken(token: "Bearer " + token)
+        let headers = HeaderType.headerWithToken()
         return headers
     }
     

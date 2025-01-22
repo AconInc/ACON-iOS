@@ -41,17 +41,15 @@ class DropAcornViewController: BaseNavViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setXButton()
+        self.setBackButton()
         addTarget()
         bindViewModel()
-        // NOTE : 어처피 뷰 한 번만 불려서 viewWillAppear에서 부를 필요 X
-        spotReviewViewModel.getAcornCount()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
 
-        self.tabBarController?.tabBar.isHidden = true
+        spotReviewViewModel.getAcornCount()
     }
     
     override func setHierarchy() {

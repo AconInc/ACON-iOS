@@ -50,6 +50,7 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
 
+        self.tabBarController?.tabBar.isHidden = true
         spotDetailViewModel.getSpotDetail()
         spotDetailViewModel.getSpotMenu()
     }
@@ -196,12 +197,12 @@ extension SpotDetailViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //NOTE: - 내 맘대로 -68 함 (높이 36이라 72 해야할 것 같은데 아무튼 추후수정
-        let stickyPosition = ScreenUtils.height*400/780 + spotDetailView.navViewHeight - 68
+        let stickyPosition = ScreenUtils.heightRatio*400 + ScreenUtils.navViewHeight - 68
         let shouldShowSticky = scrollView.contentOffset.y >= stickyPosition
         spotDetailView.stickyView.isHidden = !shouldShowSticky
         spotDetailView.stickyHeaderView.isHidden = shouldShowSticky
         
-        let shouldShowBlurSpotImageView = spotDetailView.scrollView.contentOffset.y > spotDetailView.navViewHeight
+        let shouldShowBlurSpotImageView = spotDetailView.scrollView.contentOffset.y > ScreenUtils.navViewHeight
         spotDetailView.blurSpotImageView.isHidden = shouldShowBlurSpotImageView
     }
 

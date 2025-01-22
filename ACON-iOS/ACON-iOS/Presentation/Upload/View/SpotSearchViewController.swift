@@ -195,9 +195,12 @@ private extension SpotSearchViewController {
     @objc
     func searchKeywordButtonTapped(_ sender: UIButton) {
         guard let spotName = sender.currentAttributedTitle?.string else { return }
-        spotSearchView.searchTextField.text = spotName
-        self.updateSearchKeyword(spotName)
-        spotSearchView.searchSuggestionStackView.isHidden = true
+        selectedSpotId = sender.spotID
+        selectedSpotName = spotName
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.hasCompletedSelection = true
+            self?.dismiss(animated: true)
+        }
     }
     
 }

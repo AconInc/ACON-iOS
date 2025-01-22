@@ -22,12 +22,13 @@ class BaseNavViewController: UIViewController {
     
     var leftButton: UIButton = UIButton()
     
-    private var rightButton: UIButton = UIButton()
+    var rightButton: UIButton = UIButton()
     
     var titleLabel = UILabel()
     
     var secondTitleLabel: UILabel = UILabel()
     
+    var centerTitleLabel: UILabel = UILabel()
     
     // MARK: - Life Cycle
     
@@ -47,7 +48,8 @@ class BaseNavViewController: UIViewController {
         self.navigationBarView.addSubviews(leftButton,
                                            rightButton,
                                            titleLabel,
-                                           secondTitleLabel)
+                                           secondTitleLabel,
+                                           centerTitleLabel)
     }
     
     func setLayout() {
@@ -59,7 +61,7 @@ class BaseNavViewController: UIViewController {
         navigationBarView.snp.makeConstraints {
             $0.top.equalTo(topInsetView.snp.bottom)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.height*56/780)
+            $0.height.equalTo(ScreenUtils.heightRatio*56)
         }
         
         contentView.snp.makeConstraints {
@@ -69,22 +71,26 @@ class BaseNavViewController: UIViewController {
         
         leftButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(ScreenUtils.width*20/380)
+            $0.leading.equalToSuperview().offset(ScreenUtils.widthRatio*20)
         }
         
         rightButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(ScreenUtils.width*20/380)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*20)
         }
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*20)
         }
         
         secondTitleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*52/360)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*52)
+        }
+        
+        centerTitleLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
         
     }
@@ -97,7 +103,8 @@ class BaseNavViewController: UIViewController {
         [leftButton,
          rightButton,
          titleLabel,
-         secondTitleLabel].forEach { $0.isHidden = true }
+         secondTitleLabel,
+         centerTitleLabel].forEach { $0.isHidden = true }
     }
     
 }
@@ -153,6 +160,19 @@ extension BaseNavViewController {
         }
     }
     
+    func setCenterTitleLabelStyle(title: String,
+                            fontStyle: ACFontStyleType = .t2,
+                            color: UIColor = .acWhite,
+                            alignment: NSTextAlignment = .center) {
+        centerTitleLabel.do {
+            $0.isHidden = false
+            $0.setLabel(text: title,
+                        style: fontStyle,
+                        color: color)
+            $0.textAlignment = alignment
+        }
+    }
+    
     func applyGlassmorphism(color: UIColor = .glaB30) {
         let glassView = GlassmorphismView()
         glassView.setGlassColor(color)
@@ -186,7 +206,11 @@ extension BaseNavViewController {
     
     @objc
     func backButtonTapped() {
-        navigationController?.popViewController(animated: false)
+        if let navigationController = navigationController {
+            navigationController.popViewController(animated: false)
+        } else {
+            dismiss(animated: false)
+        }
     }
     
     
@@ -207,6 +231,24 @@ extension BaseNavViewController {
     }
     
     
+    // MARK: - 다음 버튼
+    
+    func setNextButton() {
+        rightButton.do {
+            $0.isHidden = false
+            $0.configuration?.baseBackgroundColor = .clear
+            $0.setAttributedTitle(text: StringLiterals.Upload.next,
+                                   style: .b2,
+                                  color: .acWhite,
+                                  for: .normal)
+            $0.setAttributedTitle(text: StringLiterals.Upload.next,
+                                   style: .b2,
+                                  color: .gray5,
+                                  for: .disabled)
+        }
+    }
+    
+
     // MARK: - X 버튼
     
     func setXButton() {

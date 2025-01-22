@@ -35,22 +35,22 @@ final class SearchKeywordCollectionViewCell: BaseCollectionViewCell {
         super.setLayout()
         
         spotNameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*7/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*7)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(20)
-            $0.width.equalTo(ScreenUtils.width*250/360)
+            $0.width.equalTo(ScreenUtils.widthRatio*250)
         }
         
         spotAddressLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*7/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*7)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(14)
-            $0.width.equalTo(ScreenUtils.width*250/360)
+            $0.width.equalTo(ScreenUtils.widthRatio*250)
         }
         
         spotTypeLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(14)
         }
     }

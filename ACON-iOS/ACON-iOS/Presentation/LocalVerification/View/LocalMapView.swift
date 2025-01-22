@@ -33,12 +33,12 @@ final class LocalMapView: BaseView {
         
         nMapView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.height*564/780)
+            $0.height.equalTo(ScreenUtils.heightRatio*564)
         }
         
         finishVerificationButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*36/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*36)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(52)
         }
         

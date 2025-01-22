@@ -98,7 +98,7 @@ private extension LocalVerificationFinishedViewController {
     @objc
     func goToTabView() {
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = ACTabBarController()
+            sceneDelegate.window?.rootViewController = OnboardingViewController()
         }
     }
     
