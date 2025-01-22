@@ -127,7 +127,7 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
               overlayTitle.alpha = 0
           } else if isDimmed {
               // 선택되지 않았지만 딤 처리 상태: 검정 딤 처리
-              overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+              overlayContainer.backgroundColor = UIColor.gray9.withAlphaComponent(0.2)
               overlayImageView.image = nil
               overlayImageView.alpha = 0
               overlayTitle.backgroundColor = UIColor.gray9.withAlphaComponent(0.3)
@@ -163,7 +163,7 @@ extension SmallBoxViewCell {
     
     private func applyOverlaySettings(isSelected: Int, isDimmed: Bool) {
         if isDimmed {
-            overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            overlayContainer.backgroundColor = UIColor.gray9.withAlphaComponent(0.2)
             overlayImageView.image = nil
             overlayImageView.alpha = 0
             overlayTitle.backgroundColor = UIColor.gray9.withAlphaComponent(0.3)
