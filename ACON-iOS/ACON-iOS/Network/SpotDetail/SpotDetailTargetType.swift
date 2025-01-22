@@ -56,8 +56,7 @@ extension SpotDetailTargetType: TargetType {
         case .getSpotMenu:
             headers = HeaderType.noHeader
         case .postGuidedSpot:
-            let token = UserDefaults.standard.string(forKey: StringLiterals.Network.accessToken) ?? ""
-            headers = HeaderType.headerWithToken(token: "Bearer " + token)
+            headers = HeaderType.headerWithToken()
         }
         return headers
     }
