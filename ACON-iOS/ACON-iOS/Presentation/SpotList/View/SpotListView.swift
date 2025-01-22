@@ -16,8 +16,6 @@ class SpotListView: BaseView {
         collectionViewLayout: UICollectionViewFlowLayout()
     )
     
-    private let footerLabel = UILabel()
-    
     private let floatingButtonStack = UIStackView()
     
     lazy var floatingFilterButton = FloatingButton(image: .icFilterW24)
@@ -42,7 +40,6 @@ class SpotListView: BaseView {
         super.setHierarchy()
         
         self.addSubviews(
-            footerLabel,
             collectionView,
             noAcornView,
             floatingButtonStack)
@@ -58,11 +55,6 @@ class SpotListView: BaseView {
     
     override func setLayout() {
         super.setLayout()
-        
-        footerLabel.snp.makeConstraints {
-            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-40)
-            $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
-        }
         
         collectionView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(-ScreenUtils.navViewHeight)
@@ -94,7 +86,6 @@ class SpotListView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        setFooterLabel()
         setCollectionView()
         setFloatingButtonStack()
         setNoAcornView()
@@ -106,17 +97,7 @@ class SpotListView: BaseView {
 // MARK: - UI Settings
 
 private extension SpotListView {
-    
-    func setFooterLabel() {
-        let text = StringLiterals.SpotList.footerText
-        footerLabel.setLabel(
-            text: text,
-            style: .b4,
-            color: .gray5,
-            alignment: .center
-        )
-    }
-    
+
     func setCollectionView() {
         let flowLayout = UICollectionViewFlowLayout()
         // NOTE: itemSize는 Controller에서 설정합니다. (indexPath에 따라 다르기 때문)
@@ -124,7 +105,7 @@ private extension SpotListView {
         flowLayout.scrollDirection = .vertical
         
         collectionView.do {
-            $0.backgroundColor = .clear
+            $0.backgroundColor = .gray9
             $0.setCollectionViewLayout(flowLayout, animated: true)
         }
     }
