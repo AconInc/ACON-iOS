@@ -32,8 +32,8 @@ extension ACTabBarController {
         let appearance = UITabBarAppearance()
         
         appearance.do {
-            $0.backgroundColor = .clear
             $0.configureWithOpaqueBackground()
+            $0.backgroundColor = .clear
             
             $0.stackedLayoutAppearance.normal.iconColor = .acWhite
             $0.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.acWhite]
