@@ -76,6 +76,7 @@ extension SpotListViewController {
     
     func bindViewModel() {
         spotListViewModel.isPostSpotListSuccess.bind { [weak self] isSuccess in
+            print("⚙️bindVM")
             guard let self = self,
                   let isSuccess = isSuccess else { return }
             print(isSuccess)
@@ -89,7 +90,7 @@ extension SpotListViewController {
             } else {
                 print("🥑Post 실패")
             }
-            
+            spotListViewModel.isPostSpotListSuccess.value = false
             endRefreshingAndTransparancy()
         }
     }
