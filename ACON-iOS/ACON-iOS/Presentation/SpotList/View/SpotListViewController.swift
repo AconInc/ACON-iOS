@@ -28,6 +28,13 @@ class SpotListViewController: BaseNavViewController {
         spotListViewModel.requestLocation()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+
+        handleRefreshControl()
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     override func setHierarchy() {
         super.setHierarchy()
         
@@ -61,12 +68,6 @@ class SpotListViewController: BaseNavViewController {
             action: #selector(tappedLocationButton),
             for: .touchUpInside
         )
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        handleRefreshControl()
     }
     
 }
