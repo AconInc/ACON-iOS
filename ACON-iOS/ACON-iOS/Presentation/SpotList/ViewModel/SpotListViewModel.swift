@@ -6,34 +6,41 @@
 //
 
 import CoreLocation
-import Foundation
+import UIKit
 
 class SpotListViewModel {
     
     // MARK: - Properties
     
-    var isNetworkingSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
+    var isPostSpotListSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var spotList: [SpotModel] = []
     
     var isUpdated: Bool = false
     
+    // TODO: userCoordinate 기본값 빼고 옵셔널로 만들기 (지금은 필터 설정했을 때 좌표가 0,0으로 찍히는 문제때문에 좌표 넣어둠...)
+    var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.559171017384145, longitude: 126.9219534442884)
+    
+    
+    var isFilterSet: ObservablePattern<Bool> = ObservablePattern(nil)
     
     // MARK: - Filter
     
     // I will fix this on other branch ^^
     var spotType: ObservablePattern<SpotType> = ObservablePattern(.restaurant)
     
-    var filter: SpotFilterModel = .init(
-        latitude: 0,
-        longitude: 0,
-        condition: SpotConditionModel(
-            spotType: SpotType.restaurant.text,
-            filterList: [],
-            walkingTime: -1,
-            priceRange: -1
-        )
-    )
+    var filterList: [SpotFilterListModel] = []
+    
+//    var filter: SpotFilterModel = .init(
+//        latitude: 0,
+//        longitude: 0,
+//        condition: SpotConditionModel(
+//            spotType: SpotType.restaurant.text,
+//            filterList: [],
+//            walkingTime: -1,
+//            priceRange: -1
+//        )
+//    )
     
     
     // MARK: - Methods
@@ -58,13 +65,50 @@ class SpotListViewModel {
 
 extension SpotListViewModel {
     
-    func fetchSpotList() {
+    func postSpotList() {
+        guard let spotType = self.spotType.value else { return }
+        let requestBody = PostSpotListRequest(
+            latitude: userCoordinate.latitude,
+            longitude: userCoordinate.longitude,
+            condition: SpotCondition(
+                spotType: spotType.serverKey,
+                filterList: filterList.map { filterList in
+                    let filterList = SpotFilterList(
+                        category: filterList.category,
+                        optionList: filterList.optionList)
+                    print("sssssss filter: \(filterList.category)")
+                    return filterList
+                },
+                walkingTime: -1,
+                priceRange: -1
+            )
+        )
         
-        // TODO: spotList와 새로 fetch된 데이터 비교하여 isUpdated set
-        
-        isUpdated = true
-        
-        isNetworkingSuccess.value = true
+        ACService.shared.spotListService.postSpotList(requestBody: requestBody) { [weak self] response in
+            switch response {
+            case .success(let data):
+                let spotList: [SpotModel] = data.spotList.map { data in
+                    let spot = SpotModel(
+                        id: data.id,
+                        imageURL: data.image,
+                        matchingRate: data.matchingRate,
+                        type: data.type,
+                        name: data.name,
+                        walkingTime: data.walkingTime
+                    )
+                    return spot
+                }
+                print("🥑spot:", spotList)
+                self?.isUpdated = spotList != self?.spotList
+                self?.spotList = spotList
+                self?.isPostSpotListSuccess.value = true
+            default:
+                print("🥑Failed To Post")
+                self?.isPostSpotListSuccess.value = false
+                return
+            }
+        }
+        // TODO: TimeOut 설정하기; 서버가 다운 된 경우 isSuccess가 set이 안돼서 무한 로딩됨
     }
     
 }
@@ -76,10 +120,8 @@ extension SpotListViewModel: ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager,
                          didUpdateLocation coordinate: CLLocationCoordinate2D) {
-        
         print("🛠️ coordinate: \(coordinate)")
-        
-        // TODO: 추천 장소 리스트 POST 서버통신 -> spotListModel.Spot POST
+        userCoordinate = coordinate
     }
     
 }

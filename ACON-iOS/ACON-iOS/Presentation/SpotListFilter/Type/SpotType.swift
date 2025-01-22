@@ -20,6 +20,12 @@ enum SpotType {
         }
     }
     
+    var serverKey: String {
+        switch self {
+        case .restaurant: return "RESTAURANT"
+        case .cafe: return "CAFE"
+        }
+    }
     
     var walkingTimeDefault: Int {
         return 50
@@ -37,7 +43,7 @@ enum SpotType {
         
         case restaurantFeature, cafeFeature, companion, visitPurpose
         
-        var text: String {
+        var serverKey: String {
             switch self {
             case .restaurantFeature: return "RESTAURANT_FEATURE"
             case .cafeFeature: return "CAFE_FEATURE"
@@ -53,7 +59,7 @@ enum SpotType {
     
     enum RestaurantFeatureType: CaseIterable {
         
-        case korean, western, chinese, japanese, snack, asian, bar, excludeFranchise
+        case korean, western, chinese, japanese, koreanStreet, asian, bar, excludeFranchise
         
         var text: String {
             switch self {
@@ -61,10 +67,23 @@ enum SpotType {
             case .western: return "양식"
             case .chinese: return "중식"
             case .japanese: return "일식"
-            case .snack: return "간식"
+            case .koreanStreet: return "간식"
             case .asian: return "아시안"
             case .bar: return "술/bar"
             case .excludeFranchise: return "프랜차이즈 제외"
+            }
+        }
+        
+        var serverKey: String {
+            switch self {
+            case .korean: return "KOREAN"
+            case .western: return "WESTERN"
+            case .chinese: return "CHINESE"
+            case .japanese: return "JAPANESE"
+            case .koreanStreet: return "KOREAN_STREET"
+            case .asian: return "ASIAN"
+            case .bar: return "BAR"
+            case .excludeFranchise: return "EXCLUDE_FRANCHISE 제외"
             }
         }
         
@@ -84,6 +103,16 @@ enum SpotType {
             }
         }
         
+        var serverKey: String {
+            switch self {
+            case .large: return "LARGE"
+            case .goodView: return "GOOD_VIEW"
+            case .dessert: return "DESSERT"
+            case .terace: return "TERRACE"
+            case .excludeFranchise: return "EXCLUDE_FRANCHISE"
+            }
+        }
+        
     }
     
     enum CompanionType: CaseIterable {
@@ -100,6 +129,16 @@ enum SpotType {
             }
         }
         
+        var serverKey: String {
+            switch self {
+            case .family: return "FAMILY"
+            case .date: return "DATE"
+            case .friend: return "FRIEND"
+            case .alone: return "ALONE"
+            case .group: return "GROUP"
+            }
+        }
+        
     }
     
     enum VisitPurposeType: CaseIterable {
@@ -110,6 +149,13 @@ enum SpotType {
             switch self {
             case .meeting: return "만남용"
             case .study: return "공부용"
+            }
+        }
+        
+        var serverKey: String {
+            switch self {
+            case .meeting: return "MEETING"
+            case .study: return "STUDY"
             }
         }
         

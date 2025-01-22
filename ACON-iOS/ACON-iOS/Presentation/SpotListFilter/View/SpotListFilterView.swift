@@ -23,7 +23,7 @@ class SpotListFilterView: GlassmorphismView {
     
     private let resetButton = UIButton()
     
-    private let conductButton = UIButton()
+    let conductButton = UIButton()
     
     
     // [Spot section]: 방문 장소 (restaurant, cafe)
@@ -357,9 +357,6 @@ private extension SpotListFilterView {
 extension SpotListFilterView {
     
     func switchSpotTagStack(_ spotType: SpotType) {
-        
-        // TODO: Model 대신 Type으로 바꾸기
-        
         switch spotType {
         case .restaurant:
             let tagTexts: [String] = SpotType.RestaurantFeatureType.allCases.map { return $0.text }
