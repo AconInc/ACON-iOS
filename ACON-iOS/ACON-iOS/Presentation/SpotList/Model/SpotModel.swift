@@ -11,7 +11,7 @@ import UIKit
 
 struct SpotModel: Equatable {
     
-    let id: Int
+    let id: Int64
     
     let imageURL: String
     

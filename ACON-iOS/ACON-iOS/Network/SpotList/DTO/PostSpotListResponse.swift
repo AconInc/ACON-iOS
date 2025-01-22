@@ -15,7 +15,7 @@ struct PostSpotListResponse: Codable {
 
 struct Spot: Codable {
     
-    let id: Int
+    let id: Int64
     let image: String
     let matchingRate: Int
     let type: String
