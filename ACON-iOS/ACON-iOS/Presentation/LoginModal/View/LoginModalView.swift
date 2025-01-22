@@ -135,10 +135,6 @@ class LoginModalView: GlassmorphismView {
             $0.configuration = socialLoginButtonConfiguration
             $0.backgroundColor = .gray1
             $0.layer.cornerRadius = 6
-//            $0.roundedButton(
-//                cornerRadius: 6,
-//                maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
-//            )
             $0.setImage(.googleLogo, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.googleLogin,
                                   style: .s1,
@@ -148,10 +144,7 @@ class LoginModalView: GlassmorphismView {
         appleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
             $0.backgroundColor = .gray9
-            $0.roundedButton(
-                cornerRadius: 6,
-                maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
-            )
+            $0.layer.cornerRadius = 6
             $0.setImage(.appleLogo, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
                                   style: .s1,
