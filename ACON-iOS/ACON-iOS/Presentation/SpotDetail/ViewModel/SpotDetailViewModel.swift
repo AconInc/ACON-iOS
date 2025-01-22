@@ -44,7 +44,7 @@ extension SpotDetailViewModel {
             case .success(let data):
                 let spotDetailData = SpotDetailInfoModel(spotID: data.id,
                                                          name: data.name,
-                                                         spotType: data.spotType,
+                                                         spotType: data.spotType.koreanText,
                                                          firstImageURL: data.imageList[0],
                                                          openStatus: data.openStatus,
                                                          address: data.address,
