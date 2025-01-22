@@ -61,6 +61,12 @@ class SpotListViewController: BaseNavViewController {
         )
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        handleRefreshControl()
+    }
+    
 }
 
 
@@ -106,11 +112,6 @@ private extension SpotListViewController {
             }) { _ in
                 
                 self.spotListViewModel.postSpotList()
-                
-//                DispatchQueue.main.asyncAfter(deadline: .now()+1) { // TODO: 네트워킹동안 뷰 작동 테스트를 위한 것. 추후 삭제
-//                    self.spotListViewModel.spotList = SpotModel.dummy
-//                    self.spotListViewModel.fetchSpotList()
-//                }
             }
         }
     }
