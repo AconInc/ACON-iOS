@@ -48,6 +48,9 @@ class LocalVerificationViewModel {
     
 }
 
+
+// MARK: - 위치 정보 가져오기
+
 extension LocalVerificationViewModel: ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
