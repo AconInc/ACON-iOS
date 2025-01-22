@@ -18,9 +18,11 @@ class SpotListView: BaseView {
     
     private let floatingButtonStack = UIStackView()
     
-    lazy var floatingFilterButton = FloatingButton(image: .icFilterW24)
+    lazy var floatingFilterButton = FloatingButton(image: .icFilterW28)
     
-    lazy var floatingLocationButton = FloatingButton(image: .icMyLocationW24)
+    lazy var floatingMapButton = FloatingButton(image: .icMapW28)
+    
+    lazy var floatingLocationButton = FloatingButton(image: .icMyGLocation28)
     
     private let noAcornView = UIView()
     
@@ -31,7 +33,7 @@ class SpotListView: BaseView {
     
     // MARK: - UI Property Sizes
     
-    private let floatingButtonSize: CGFloat = 36
+    private let floatingButtonSize: CGFloat = 44
     
     
     // MARK: - LifeCycles
@@ -44,9 +46,9 @@ class SpotListView: BaseView {
             noAcornView,
             floatingButtonStack)
         
-        floatingButtonStack.addArrangedSubviews(
-            floatingFilterButton,
-            floatingLocationButton)
+        floatingButtonStack.addArrangedSubviews(floatingLocationButton,
+                                                floatingMapButton,
+                                                floatingFilterButton)
         
         noAcornView.addSubviews(
             noAcornImageView,
