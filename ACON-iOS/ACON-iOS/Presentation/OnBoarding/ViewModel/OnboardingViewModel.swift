@@ -21,12 +21,10 @@ final class OnboardingViewModel {
     
     var postOnboardingResult: ObservablePattern<Bool> = ObservablePattern(nil)
     
-
     func postOnboarding() {
         
         let processedDislikeFoodList: [String] = {
                if let dislikeList = dislike.value, dislikeList.contains("NONE") {
-                   //dislikefood none -> case 400 error , so 임시 
                    return []
                }
                return dislike.value ?? [" "]

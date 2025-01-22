@@ -322,7 +322,7 @@ extension OnboardingViewController {
     private func updateNextButtonState(isEnabled: Bool) {
         nextButton.isEnabled = isEnabled
         nextButton.backgroundColor = isEnabled ? .gray5 : .gray8
-        nextButton.setTitleColor(isEnabled ? .acWhite : .gray6, for: .normal)
+        nextButton.setTitleColor(isEnabled ? .white : .gray6, for: .normal)
     }
     
     private func showOverlay() {
@@ -395,26 +395,26 @@ extension OnboardingViewController {
 
 extension OnboardingViewController {
     
-    // NOTE: continue
     @objc private func nextButtonTapped() {
         if currentStep >= StringLiterals.OnboardingType.progressNumberList.count - 1 {
-            
-            showLoadingIndicator() // loding
-            
+            showLoadingIndicator()
             viewModel.postOnboarding()
             return
         }
-        
+
+        let isConditionMet = checkSelectionCondition(for: currentStep + 1)
+
+        currentStep += 1
+        updateContentView(for: currentStep)
+        updateNextButtonState(isEnabled: isConditionMet)
+        updateProgressIndicator()
+
         if isOverlayVisible {
             hideOverlay()
             isOverlayVisible = false
         }
-        
-        currentStep += 1
-        updateContentView(for: currentStep)
-        updateNextButtonState(isEnabled: false)
-        updateProgressIndicator()
     }
+
     
     @objc private func backButtonTapped() {
         guard currentStep > 0 else { return }
@@ -468,4 +468,21 @@ extension OnboardingViewController{
         }
     }
     
+    private func checkSelectionCondition(for step: Int) -> Bool {
+        switch step {
+        case 0:
+            return !(viewModel.dislike.value?.isEmpty ?? true)
+        case 1:
+            return viewModel.favoriteCuisne.value?.count == 3
+        case 2:
+            return viewModel.favoriteSpotType.value != nil
+        case 3:
+            return viewModel.favoriteSpotStyle.value != nil
+        case 4:
+            return viewModel.favoriteSpotRank.value?.count == 4
+        default:
+            return false
+        }
+    }
+
 }
