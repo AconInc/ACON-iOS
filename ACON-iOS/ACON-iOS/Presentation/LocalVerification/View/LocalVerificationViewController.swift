@@ -48,12 +48,6 @@ class LocalVerificationViewController: BaseNavViewController {
         }
     }
     
-    override func setStyle() {
-        super.setStyle()
-        
-        self.localVerificationView.nextButton.isEnabled = false
-    }
-    
     func addTarget() {
         localVerificationView.verifyNewLocalButton.addTarget(self,
                                                              action: #selector(verifyLocationButtonTapped),
@@ -91,7 +85,7 @@ private extension LocalVerificationViewController {
         localVerificationView.verifyNewLocalButton.isSelected.toggle()
         let isSelected = localVerificationView.verifyNewLocalButton.isSelected
         localVerificationView.verifyNewLocalButton.configuration?.baseBackgroundColor = isSelected ? .gray7 : .gray9
-        localVerificationView.nextButton.isEnabled = isSelected
+//        localVerificationView.nextButton.isEnabled = isSelected
         localVerificationView.nextButton.backgroundColor = isSelected ? .gray5 : .gray8
     }
     
