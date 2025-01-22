@@ -18,8 +18,6 @@ final class LoginView: BaseView {
     
     private let logoImageView : UIImageView = UIImageView()
     
-    private var logoLabel : UILabel = UILabel()
-    
     var googleLoginButton: UIButton = UIButton()
     
     var appleLoginButton: UIButton = UIButton()
@@ -52,8 +50,7 @@ final class LoginView: BaseView {
                          appleLoginButton,
                          proceedLoginLabel,
                          termsOfUseLabel,
-                         privacyPolicyLabel,
-                         logoLabel)
+                         privacyPolicyLabel)
     }
     
     override func setLayout() {
@@ -64,11 +61,6 @@ final class LoginView: BaseView {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.heightRatio*91)
             $0.width.equalTo(ScreenUtils.widthRatio*261)
-        }
-        
-        logoLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(ScreenUtils.heightRatio*244)
-            $0.centerX.equalToSuperview()
         }
         
         googleLoginButton.snp.makeConstraints {
@@ -84,21 +76,19 @@ final class LoginView: BaseView {
         }
         
         proceedLoginLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*90/780)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.height*84/780)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(276)
         }
         
         termsOfUseLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*72/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*115.5/360)
-            $0.width.equalTo(38)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.height*60/780)
+            $0.leading.equalToSuperview().inset(ScreenUtils.width*120.5/360)
         }
         
         privacyPolicyLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*72/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*169.5/360)
-            $0.width.equalTo(75)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.height*60/780)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.width*120.5/360)
         }
     }
     
@@ -108,14 +98,6 @@ final class LoginView: BaseView {
         logoImageView.do {
             $0.image = .aconLogo
             $0.contentMode = .scaleAspectFit
-        }
-        
-        logoLabel.do {
-            $0.setLabel(text: StringLiterals.Login.logoText,
-                        style: .h7,
-                        color: .acWhite,
-                        alignment: .center,
-                        numberOfLines: 2)
         }
         
         googleLoginButton.do {
@@ -141,22 +123,25 @@ final class LoginView: BaseView {
         
         proceedLoginLabel.do {
             $0.setLabel(text: StringLiterals.Login.youAgreed,
-                        style: .c1,
-                        color: .gray3)
+                        style: .b4,
+                        color: .gray3,
+                        alignment: .center)
         }
         
         termsOfUseLabel.do {
             $0.setLabel(text: StringLiterals.Login.termsOfUse,
-                        style: .c1,
-                        color: .gray5)
+                        style: .b4,
+                        color: .gray5,
+                        alignment: .center)
             $0.setUnderline(range: NSRange(location: 0, length: termsOfUseLabel.text?.count ?? 4))
             $0.isUserInteractionEnabled = true
         }
         
         privacyPolicyLabel.do {
             $0.setLabel(text: StringLiterals.Login.privacyPolicy,
-                        style: .c1,
-                        color: .gray5)
+                        style: .b4,
+                        color: .gray5,
+                        alignment: .center)
             $0.setUnderline(range: NSRange(location: 0, length: privacyPolicyLabel.text?.count ?? 8))
             $0.isUserInteractionEnabled = true
         }
