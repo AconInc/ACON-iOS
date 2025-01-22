@@ -18,7 +18,7 @@ final class AnalyzingViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .gray9
         startLodingLottie()
     }
     

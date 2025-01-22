@@ -35,7 +35,7 @@ final class OnboardingViewController: BaseViewController {
     
     // NOTE: for
     private var maxRetryCount: Int { return 3 }
-    private var retryCount = 0
+    private var retryCount = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -182,7 +182,7 @@ extension OnboardingViewController {
                 return
             }
             
-            if success ?? false {// NOTE: about BOol? value check, i will fix this line
+            if success ?? true {// NOTE: about BOol? value check, i will fix this line
                 let analyzingVC = AnalyzingViewController()
                 analyzingVC.modalPresentationStyle = .fullScreen
                 DispatchQueue.main.async {

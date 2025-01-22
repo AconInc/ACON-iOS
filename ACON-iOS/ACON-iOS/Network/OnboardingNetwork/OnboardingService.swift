@@ -11,19 +11,21 @@ final class OnboardingService: BaseService<OnboardingTargetType> {
     
     func postOnboarding(
         requestBody: OnboardingRequest,
-        completion: @escaping (NetworkResult<OnboardingResponse>) -> Void
+        completion: @escaping (NetworkResult<EmptyResponse>) -> Void
     ) {
         
         self.provider.request(.postOnboarding(data: requestBody)) { result in
             switch result {
             case .success(let response):
+                print("⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️")
                 let networkResult = self.judgeStatus(
                     statusCode: response.statusCode,
                     data: response.data,
-                    type: OnboardingResponse.self
+                    type: EmptyResponse.self
                 )
                 completion(networkResult)
             case .failure(let errorResponse):
+                print("⭐️")
                 print(errorResponse)
             }
             

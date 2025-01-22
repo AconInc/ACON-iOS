@@ -24,7 +24,15 @@ final class OnboardingViewModel {
     
     func postOnboarding() {
         
-        let onboardingData = OnboardingRequest(dislikeFoodList: dislike.value ?? [""],
+        let processedDislikeFoodList: [String] = {
+               if let dislikeList = dislike.value, dislikeList.contains("NONE") {
+                   //dislikefood none -> case 400 error , so 임시 
+                   return ["YANGGOGI"]
+               }
+               return dislike.value ?? [" "]
+           }()
+        
+        let onboardingData = OnboardingRequest(dislikeFoodList: processedDislikeFoodList,
                                                favoriteCuisineRank: favoriteCuisne.value ?? [""],
                                                favoriteSpotType: favoriteSpotType.value ?? "",
                                                favoriteSpotStyle: favoriteSpotStyle.value ?? "",

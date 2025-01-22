@@ -6,8 +6,14 @@
 //
 
 import Foundation
-
+//EmptyResponse
 struct OnboardingResponse: Decodable {
-    let success: Bool
-    let message: String
+//    let code: Int
+//    let message: String
+//    
+//    init(code: Int = 200, message: String = "Default Success") {
+//          self.code = code
+//          self.message = message
+//      }
 }
+
