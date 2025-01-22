@@ -19,31 +19,36 @@ class LocalMapViewController: BaseNavViewController {
     
     private var viewBlurEffect: UIVisualEffectView = UIVisualEffectView()
     
-    private let coordinate: CLLocationCoordinate2D
+    private var localArea: String = ""
+    
+    private let localVerificationViewModel: LocalVerificationViewModel
+    
     
     // MARK: - LifeCycle
+
+    init(viewModel: LocalVerificationViewModel) {
+        self.localVerificationViewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setXButton()
         addTarget()
-    }
-    
-    init(coordinate: CLLocationCoordinate2D) {
-        self.coordinate = coordinate
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = true
-        moveCameraToLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        print(localVerificationViewModel.userCoordinate)
+        moveCameraToLocation(latitude: localVerificationViewModel.userCoordinate?.latitude ?? 0,
+                             longitude: localVerificationViewModel.userCoordinate?.longitude ?? 0)
     }
     
     override func setHierarchy() {
@@ -62,7 +67,7 @@ class LocalMapViewController: BaseNavViewController {
     
     override func setStyle() {
         super.setStyle()
-        
+
         self.setXButton()
         self.setSecondTitleLabelStyle(title: StringLiterals.LocalVerification.locateOnMap)
     }
@@ -75,14 +80,42 @@ class LocalMapViewController: BaseNavViewController {
 
 }
 
+
+// MARK: - bindViewModel
+
+private extension LocalMapViewController {
+
+    func bindViewModel() {
+        self.localVerificationViewModel.onSuccessPostLocalArea.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.localVerificationViewModel.localArea.value else { return }
+            if onSuccess {
+                self?.localArea = data
+                self?.presentVerificationFinsishedVC()
+            }
+        }
+    }
     
+}
+
+
 // MARK: - @objc functions
 
 private extension LocalMapViewController {
 
     @objc
     func finishVerificationButtonTapped() {
-        let vc = LocalVerificationFinishedViewController()
+        self.localVerificationViewModel.postLocalArea()
+    }
+    
+}
+
+
+// MARK: - @objc functions
+
+private extension LocalMapViewController {
+
+    func presentVerificationFinsishedVC() {
+        let vc = LocalVerificationFinishedViewController(localArea: self.localArea)
         vc.dismissCompletion = { [weak self] in
             self?.removeBlurView()
         }
@@ -93,7 +126,6 @@ private extension LocalMapViewController {
     }
     
 }
-
 
 // MARK: - Map Functions
 

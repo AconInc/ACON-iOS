@@ -23,15 +23,13 @@ class SpotUploadViewController: BaseNavViewController {
     
     var spotReviewViewModel = SpotReviewViewModel()
     
-    var selectedSpotID: Int = -1
+    var selectedSpotID: Int64 = -1
     
 //    var selectedSpotName: String = ""
     
     var latitude: Double = 0
     
     var longitude: Double = 0
-    
-    // NOTE: isModalPresenting, isLocationUpdated으로 플래그 검증 시도해봤으나, 유무 상관없이 튕김 🍠
     
     
     // MARK: - LifeCycle
@@ -101,14 +99,15 @@ private extension SpotUploadViewController {
                     self?.spotUploadView.dropAcornButton.isEnabled = true
                     self?.spotUploadView.dropAcornButton.backgroundColor = .gray5
                 } else {
-                    // TODO: - show Alert
+                    let alertHandler = AlertHandler()
+                    alertHandler.showLocationAccessFailImageAlert(from: self!)
                     self?.spotUploadView.dropAcornButton.isEnabled = false
                     self?.spotUploadView.dropAcornButton.backgroundColor = .gray8
                     self?.spotUploadView.spotSearchButton.setAttributedTitle(text: StringLiterals.Upload.uploadSpotName,
                                                                             style: .s2,
                                                                             color: .gray5)
                 }
-                self?.spotReviewViewModel.reviewVerification.value = false
+                self?.spotReviewViewModel.reviewVerification.value = nil
             }
         }
     }
@@ -126,20 +125,15 @@ private extension SpotUploadViewController {
     
     @objc
     func dropAcornButtonTapped() {
-//        TODO: - 🍠 딱히 이거의 타이밍 시점도 아닌 것 같음 -> 해결되면 지우기
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-//            guard let self = self else { return }
-//            let vc = DropAcornViewController(spotID: selectedSpotID)
-//            self.navigationController?.pushViewController(vc, animated: false)
-//        }
         let vc = DropAcornViewController(spotID: selectedSpotID)
-        navigationController?.pushViewController(vc, animated: false)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: false)
     }
     
     @objc
     func xButtonTapped() {
         let alertHandler = AlertHandler()
-        alertHandler.showReviewExitAlert(from: self)
+        alertHandler.showUploadExitAlert(from: self)
     }
     
 }
@@ -149,8 +143,6 @@ extension SpotUploadViewController: ACLocationManagerDelegate {
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
         // TODO: - 연관검색어 네트워크 요청 - 여기 아니면 spotSearch viewWillAppear
 
-        manager.stopUpdatingLocation()
-        manager.removeDelegate(self)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
@@ -167,32 +159,14 @@ extension SpotUploadViewController: ACLocationManagerDelegate {
 extension SpotUploadViewController {
     
     func setSpotSearchModal() {
-        print("===== setSpotSearchModal 시작 =====")
-        // TODO: - 🍠 이미 모달이 표시되어있는 문제도 아닌 듯. 해결되면 지울 것
-//        print("isModalPresenting", isModalPresenting)
-//        if presentedViewController == nil {
-//            isModalPresenting = false  // 실제로 표시된 모달이 없으면 강제로 false로 리셋
-//        }
-//        guard !isModalPresenting else { return }  // 이미 모달이 표시중이면 리턴
-        presentSpotSearchModal()
-    }
-    
-    func presentSpotSearchModal() {
-        print("===== presentSpotSearchModal 시작 =====")
-
-        let vc = SpotSearchViewController()
-        // TODO: 🍠 메인 스레드 업데이트도 딱히 의미없어보임. 해결되면 걍 없이 ㄱㄱ할 것
-        // NOTE: - 튕기는 시점도 제각각 🍠
-        // NOTE: - 정상 프로세스와 튕기는 프로세스의 콘솔이 아예 일치할 때도 있음...🍠
+        let vc = SpotSearchViewController(spotSearchViewModel: SpotSearchViewModel(latitude: self.latitude, longitude: self.longitude))
         vc.dismissCompletion = { [weak self] in
-            print("===== dismissCompletion 호출 =====")
             DispatchQueue.main.async {
                 self?.removeBlurView()
             }
         }
         
         vc.completionHandler = { [weak self] selectedSpotID, selectedSpotName in
-            print("===== completionHandler 호출 =====")
             guard let self = self else { return }
             self.selectedSpotID = selectedSpotID
             
@@ -204,7 +178,9 @@ extension SpotUploadViewController {
                 }
                 
                 if selectedSpotID > 0 {
-                    // TODO: - ReviewVerification 서버통신
+                    self.spotReviewViewModel.getReviewVerification(spotId: selectedSpotID,
+                                                                   latitude: self.latitude,
+                                                                   longitude: self.longitude)
                 } else {
                     self.spotUploadView.dropAcornButton.isEnabled = false
                     self.spotUploadView.dropAcornButton.backgroundColor = .gray8
@@ -220,10 +196,8 @@ extension SpotUploadViewController {
             guard let self = self else { return }
             self.addBlurView()
             vc.setLongSheetLayout()
-            self.present(vc, animated: true) {
-                print("===== present 완료 =====")
-            }
+            self.present(vc, animated: true)
         }
     }
-
+    
 }

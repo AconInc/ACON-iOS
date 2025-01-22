@@ -96,9 +96,11 @@ private extension ReviewFinishedViewController {
     
     @objc
     func closeView() {
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = ACTabBarController()
+        var topController: UIViewController = self
+        while let presenting = topController.presentingViewController {
+            topController = presenting
         }
+        topController.dismiss(animated: true)
     }
     
 }

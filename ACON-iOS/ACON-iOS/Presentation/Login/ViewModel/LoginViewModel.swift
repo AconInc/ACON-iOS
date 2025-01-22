@@ -13,35 +13,56 @@ import AuthenticationServices
 
 class LoginViewModel {
     
-    var onLoginSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
+    var onSuccessLogin: ObservablePattern<Bool> = ObservablePattern(nil)
     
     func googleSignIn(presentingViewController: UIViewController) {
+        // NOTE: - webClientID: 서버 전송용 -> 토큰 발급에 사용
+        // NOTE: - clientID: iOS 앱 인증용 (네이티브 로그인 플로우)
         let clientID = Config.googleClientID
-                
-        let config = GIDConfiguration(clientID: clientID)
+        let webClientID = Config.googleWebClientID
+        
+        // NOTE: - serverClientID < 프로퍼티가 서버 전송용
+        let config = GIDConfiguration(clientID: clientID,
+                                    serverClientID: webClientID)
                 
         GIDSignIn.sharedInstance.configuration = config
-                
+        
         GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { signInResult, error in
             guard error == nil else { return }
             guard let signInResult = signInResult else { return }
 
+            // NOTE: - serverClientID가 audience
             signInResult.user.refreshTokensIfNeeded { user, error in
                 guard error == nil else { return }
                 guard let user = user else { return }
-
-                let idToken = user.idToken?.tokenString
                 
-                // TODO: - Send this IDToken to Backend
-                print(idToken)
-                self.onLoginSuccess.value = true
+                let idToken = user.idToken?.tokenString ?? ""
+                self.postLogin(socialType: SocialType.GOOGLE.rawValue,
+                               idToken: idToken)
             }
         }
     }
     
     func appleSignIn(userInfo: ASAuthorizationAppleIDCredential) {
-        print(userInfo)
-        self.onLoginSuccess.value = true
+        if let idTokenData = userInfo.identityToken,
+           let idToken = String(data: idTokenData, encoding: .utf8) {
+            postLogin(socialType: SocialType.APPLE.rawValue, idToken: idToken)
+        }
     }
-     
+    
+    // TODO: - 앱잼 기간 내에는 우선 accessToken만 받아옴 - 나중에 refreshToken 받아오기
+    func postLogin(socialType: String, idToken: String) {
+        ACService.shared.authService.postLogin(PostLoginRequest(socialType: socialType, idToken: idToken)){ [weak self] response in
+            switch response {
+            case .success(let data):
+                UserDefaults.standard.set(data.accessToken, forKey: StringLiterals.UserDefaults.accessToken)
+                self?.onSuccessLogin.value = true
+            default:
+                print("VM - Failed To postLogin")
+                self?.onSuccessLogin.value = false
+                return
+            }
+        }
+    }
+    
 }

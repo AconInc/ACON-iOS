@@ -9,41 +9,71 @@ import Foundation
 
 class SpotSearchViewModel {
     
-    // TODO: - 추후 기본값 nil로 변경
+    var longitude: Double
+    
+    var latitude: Double
+    
     let onSuccessGetSearchSuggestion: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var searchSuggestionData: ObservablePattern<SearchSuggestionModel> = ObservablePattern(nil)
+    var searchSuggestionData: ObservablePattern<[SearchSuggestionModel]> = ObservablePattern(nil)
     
     let onSuccessGetSearchKeyword: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var searchKeywordData: ObservablePattern<[SearchKeywordModel]> = ObservablePattern(nil)
     
-    let updateSearchKeyword: ObservablePattern<Bool> = ObservablePattern(nil)
+//    let searchSuggestionDummyData: SearchSuggestionModel = SearchSuggestionModel(spotList: ["하이디라오", "신의주찹쌀순대", "뭐시기저시기", "카이센동우니도", "하잉"])
     
-    // TODO: - search keyword 엠티뷰와 분기처리 (data.count == 0 ? )
+    init(latitude: Double, longitude: Double) {
+        self.latitude = latitude
+        self.longitude = longitude
+//        self.searchSuggestionData.value = searchSuggestionDummyData
+//        self.onSuccessGetSearchSuggestion.value = true
+//        self.searchKeywordData.value = searchKeywordDummyData
+//        self.onSuccessGetSearchKeyword.value = true
+    }
     
-    let searchKeywordDummyData: [SearchKeywordModel] = [
-        SearchKeywordModel(spotID: 1, spotName: "1가게명가게명", spotAddress: "서울시 서울구 서울동 123", spotType: "음식점"),
-        SearchKeywordModel(spotID: 2, spotName: "2가게명가게명", spotAddress: "서울시 서울구 서울동 123", spotType: "카페"),
-        SearchKeywordModel(spotID: 3, spotName: "3가게명가게명", spotAddress: "서울시 서울구 서울동 123", spotType: "음식점"),
-        SearchKeywordModel(spotID: 1, spotName: "1가게명가게명", spotAddress: "서울시 서울구 서울동 123", spotType: "음식점"),
-        SearchKeywordModel(spotID: 2, spotName: "2가게명가게명", spotAddress: "서울시 서울구 서울동 123", spotType: "카페"),
-        SearchKeywordModel(spotID: 3, spotName: "3가게명가게명", spotAddress: "서울시 서울구 서울동 123", spotType: "음식점"),
-        SearchKeywordModel(spotID: 1, spotName: "1가게명가게명", spotAddress: "서울시 서울구 서울동 123", spotType: "음식점"),
-        SearchKeywordModel(spotID: 2, spotName: "2가게명가게명", spotAddress: "서울시 서울구 서울동 123", spotType: "카페"),
-        SearchKeywordModel(spotID: 3, spotName: "3가게명가게명", spotAddress: "서울시 서울구 서울동 123", spotType: "음식점"),
-        SearchKeywordModel(spotID: 1, spotName: "1가게명가게명", spotAddress: "서울시 서울구 서울동 123", spotType: "음식점")
-    ]
+    func getSearchKeyword(keyword: String) {
+        let parameter = GetSearchKeywordRequest(keyword: keyword)
+        
+        ACService.shared.uploadService.getSearchKeyword(parameter: parameter) { [weak self] response in
+            switch response {
+            case .success(let data):
+                self?.onSuccessGetSearchKeyword.value = true
+                let searchKeywords = data.spotList.map { keyword in
+                    return SearchKeywordModel(
+                        spotID: keyword.spotId,
+                        spotName: keyword.name,
+                        spotAddress: keyword.address,
+                        spotType: keyword.spotType.koreanText
+                    )
+                }
+                self?.searchKeywordData.value = searchKeywords
+            default:
+                print("VM - Fail to getSearchKeyword")
+                self?.onSuccessGetSearchKeyword.value = false
+                return
+            }
+        }
+    }
     
-    let searchSuggestionDummyData: SearchSuggestionModel = SearchSuggestionModel(spotList: ["하이디라오", "신의주찹쌀순대", "뭐시기저시기", "카이센동우니도", "하잉"])
-    
-    init() {
-        self.searchSuggestionData.value = searchSuggestionDummyData
-        self.onSuccessGetSearchSuggestion.value = true
-        self.searchKeywordData.value = searchKeywordDummyData
-        self.onSuccessGetSearchKeyword.value = true
-        // TODO: - 나중에 뷰모델에서 기존 키워드와 같은지 보고 updateKeyword.value = false
-        self.updateSearchKeyword.value = true
+    func getSearchSuggestion() {
+        let parameter = GetSearchSuggestionRequest(latitude: latitude, longitude: longitude)
+        
+        ACService.shared.uploadService.getSearchSuggestion(parameter: parameter) { [weak self] response in
+            switch response {
+            case .success(let data):
+                let searchSuggestionData = data.suggestionList.map { suggestion in
+                    return SearchSuggestionModel(spotId: suggestion.spotId,
+                                                 spotName: suggestion.spotName)
+                }
+                self?.searchSuggestionData.value = searchSuggestionData
+                self?.onSuccessGetSearchSuggestion.value = true
+            default:
+                print("VM - Fail to getSearchSuggestion")
+                self?.onSuccessGetSearchSuggestion.value = false
+                return
+            }
+        }
     }
     
 }
