@@ -900,7 +900,6 @@
 		D6D0F4FC2D36B8D300326F17 /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
-				D6D0F5002D36B95400326F17 /* Model */,
 				D6D0F4FE2D36B94800326F17 /* ViewModel */,
 				D6D0F4FD2D36B91100326F17 /* View */,
 			);
@@ -929,13 +928,6 @@
 				D6D0F51C2D36BAD900326F17 /* OnboardingViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		D6D0F5002D36B95400326F17 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		D6D0F5012D36B95B00326F17 /* Cell */ = {

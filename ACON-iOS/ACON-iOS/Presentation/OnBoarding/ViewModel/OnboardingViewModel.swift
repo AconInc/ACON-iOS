@@ -27,7 +27,7 @@ final class OnboardingViewModel {
         let processedDislikeFoodList: [String] = {
                if let dislikeList = dislike.value, dislikeList.contains("NONE") {
                    //dislikefood none -> case 400 error , so 임시 
-                   return ["YANGGOGI"]
+                   return []
                }
                return dislike.value ?? [" "]
            }()

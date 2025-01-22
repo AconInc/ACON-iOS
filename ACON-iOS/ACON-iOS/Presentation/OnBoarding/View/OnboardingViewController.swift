@@ -35,7 +35,7 @@ final class OnboardingViewController: BaseViewController {
     
     // NOTE: for
     private var maxRetryCount: Int { return 3 }
-    private var retryCount = 2
+    private var retryCount = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -182,7 +182,7 @@ extension OnboardingViewController {
                 return
             }
             
-            if success ?? true {// NOTE: about BOol? value check, i will fix this line
+            if success == true {// NOTE: about BOol? value check, i will fix this line
                 let analyzingVC = AnalyzingViewController()
                 analyzingVC.modalPresentationStyle = .fullScreen
                 DispatchQueue.main.async {
@@ -438,8 +438,6 @@ extension OnboardingViewController {
 }
 
 extension OnboardingViewController{
-    
-    
     private func showLoadingIndicator() {
         let loadingView = UIActivityIndicatorView(style: .large)
         loadingView.startAnimating()
@@ -470,7 +468,7 @@ extension OnboardingViewController{
     private func showRequsetRetryProgress() {
         showDefaultAlert(
             title: "네트워크가 불안정 합니다.",
-            message: "앱을 종료하고 다시 실행해 주세요"
+            message: "취향탐색에 실패했습니다.\n앱을 종료하고 다시 실행해 주세요"
         )
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
             self?.dismiss(animated: true, completion: nil)

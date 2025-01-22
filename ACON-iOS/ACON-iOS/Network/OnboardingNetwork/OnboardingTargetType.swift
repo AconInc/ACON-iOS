@@ -10,7 +10,7 @@ import Moya
 
 enum OnboardingTargetType {
     
-    case postOnboarding(data: OnboardingRequest)
+    case postOnboarding(requestBody: OnboardingRequest)
     
 }
 
@@ -20,7 +20,6 @@ extension OnboardingTargetType: TargetType {
     var path: String {
         switch self {
         case .postOnboarding:
-            // TODO: i will chage
             return utilPath + "member/preference"
         }
     }
@@ -42,8 +41,6 @@ extension OnboardingTargetType: TargetType {
     var headers: [String: String]? {
         let token = UserDefaults.standard.string(forKey: StringLiterals.Network.accessToken) ?? ""
         let headers = HeaderType.headerWithToken(token: "Bearer " + token)
-        // TODO:  i will chage this to existHeader ㅇㅇ
-        //        let headers = HeaderType.noHeader
         return headers
     }
 }

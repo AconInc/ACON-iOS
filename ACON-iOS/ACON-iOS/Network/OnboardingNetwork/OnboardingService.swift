@@ -14,7 +14,7 @@ final class OnboardingService: BaseService<OnboardingTargetType> {
         completion: @escaping (NetworkResult<EmptyResponse>) -> Void
     ) {
         
-        self.provider.request(.postOnboarding(data: requestBody)) { result in
+        self.provider.request(.postOnboarding(requestBody: requestBody)) { result in
             switch result {
             case .success(let response):
                 print("⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️")
