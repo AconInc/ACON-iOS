@@ -119,10 +119,10 @@ extension LoginModalViewController {
 extension LoginModalViewController {
     
     func bindViewModel() {
-        self.loginViewModel.onLoginSuccess.bind { [weak self] onLoginSuccess in
-            guard let onLoginSuccess else { return }
+        self.loginViewModel.onSuccessLogin.bind { [weak self] onSuccess in
+            guard let onSuccess else { return }
             guard let self = self else { return }
-            onLoginSuccess ? navigateToLocalVerificationVC() : print("로그인 실패")
+            onSuccess ? navigateToLocalVerificationVC() : print("로그인 실패")
         }
     }
     
