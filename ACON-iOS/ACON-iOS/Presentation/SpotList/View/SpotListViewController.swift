@@ -78,10 +78,8 @@ extension SpotListViewController {
     func bindViewModel() {
         
         spotListViewModel.isPostSpotListSuccess.bind { [weak self] isSuccess in
-            print("⚙️bindVM")
             guard let self = self,
                   let isSuccess = isSuccess else { return }
-            print("jdkfds\(isSuccess)")
             if isSuccess {
                 print("🥑\(spotListViewModel.isUpdated)")
                 if spotListViewModel.isUpdated {
