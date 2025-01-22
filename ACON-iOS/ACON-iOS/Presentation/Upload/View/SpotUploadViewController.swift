@@ -44,12 +44,6 @@ class SpotUploadViewController: BaseNavViewController {
     
     deinit {
        ACLocationManager.shared.removeDelegate(self)
-   }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
-
-        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func setHierarchy() {
