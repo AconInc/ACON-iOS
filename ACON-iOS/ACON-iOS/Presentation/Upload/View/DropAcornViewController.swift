@@ -99,7 +99,8 @@ private extension DropAcornViewController {
         let data: ReviewPostModel = ReviewPostModel(spotID: spotID, acornCount: reviewAcornCount)
         // TODO: - 여기서 가는 로직은 임시적용 (VM init에서 true할 수 없음) -> 나중에 지우기
         let vc = ReviewFinishedViewController()
-        self.navigationController?.pushViewController(vc, animated: false)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: false)
     }
     
     @objc
@@ -157,6 +158,7 @@ private extension DropAcornViewController {
             ACToastController.show(StringLiterals.Upload.noAcorn, bottomInset: 112, delayTime: 1)
             { [weak self] in return }
             dropAcornView.dropAcornLottieView.isHidden = true
+            disableLeaveReviewButton()
         } else {
             dropAcornView.dropAcornLottieView.isHidden = false
             toggleLottie(dropAcorn: dropAcorn)
@@ -171,10 +173,18 @@ private extension DropAcornViewController {
 
 private extension DropAcornViewController {
     
+    // TODO: - 나중에 전부 buttonConfiguration에 넣고 enable만 toggle
     func enableLeaveReviewButton() {
         dropAcornView.leaveReviewButton.do {
             $0.isEnabled = true
             $0.backgroundColor = .org0
+        }
+    }
+    
+    func disableLeaveReviewButton() {
+        dropAcornView.leaveReviewButton.do {
+            $0.isEnabled = false
+            $0.backgroundColor = .gray5
         }
     }
     

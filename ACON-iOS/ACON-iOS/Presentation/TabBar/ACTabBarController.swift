@@ -16,6 +16,7 @@ class ACTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        delegate = self
         configureTabBarAppearance()
         setNavViewControllers()
     }
@@ -31,7 +32,9 @@ extension ACTabBarController {
         let appearance = UITabBarAppearance()
         
         appearance.do {
-            $0.backgroundColor = .glaB30
+            $0.backgroundColor = .clear
+            $0.configureWithOpaqueBackground()
+            
             $0.stackedLayoutAppearance.normal.iconColor = .acWhite
             $0.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.acWhite]
             $0.stackedLayoutAppearance.selected.iconColor = .acWhite
@@ -40,6 +43,14 @@ extension ACTabBarController {
         
         tabBar.frame.size.height = ScreenUtils.height * 76/780
         tabBar.scrollEdgeAppearance = appearance
+        
+        // NOTE: 글라스모피즘 뷰 얹기
+        let glassView = GlassmorphismView()
+        tabBar.backgroundImage? = UIImage(systemName: "photo") ?? UIImage()
+        tabBar.addSubview(glassView)
+        glassView.snp.makeConstraints {
+            $0.edges.equalTo(tabBar)
+        }
     }
     
     private func setNavViewControllers() {
@@ -79,6 +90,26 @@ extension ACTabBarController {
         }
         
         return navViewController
+    }
+    
+}
+
+
+// MARK: - UITabBarControllerDelegate
+
+extension ACTabBarController: UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        guard let viewControllers = viewControllers else { return true }
+        guard let index = viewControllers.firstIndex(of: viewController) else { return true }
+        
+        if index == ACTabBarItemType.allCases.firstIndex(of: .upload) {
+            let uploadVC = SpotUploadViewController()
+            uploadVC.modalPresentationStyle = .fullScreen
+            present(uploadVC, animated: true)
+            return false
+        }
+        return true
     }
     
 }

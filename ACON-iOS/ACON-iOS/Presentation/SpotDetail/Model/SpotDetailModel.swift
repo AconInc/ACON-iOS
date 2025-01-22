@@ -10,7 +10,7 @@ import UIKit
 
 struct SpotDetailInfoModel: Equatable {
     
-    let spotID: Int
+    let spotID: Int64
     
     let name: String
     
@@ -30,7 +30,7 @@ struct SpotDetailInfoModel: Equatable {
     
     let longitude: Double
     
-    init(spotID: Int,
+    init(spotID: Int64,
          name: String,
          spotType: String,
          firstImageURL: String,
@@ -57,15 +57,15 @@ struct SpotDetailInfoModel: Equatable {
 
 struct SpotMenuModel: Equatable {
     
-    let menuID: Int
+    let menuID: Int64
     
     let name: String
     
     let price: Int
     
-    let imageURL: String
+    let imageURL: String?
     
-    init(menuID: Int, name: String, price: Int, imageURL: String) {
+    init(menuID: Int64, name: String, price: Int, imageURL: String?) {
         self.menuID = menuID
         self.name = name
         self.price = price

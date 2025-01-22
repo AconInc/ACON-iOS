@@ -19,6 +19,8 @@ final class ACService {
     
 //    lazy var authService: AuthService = AuthService()
     
+    lazy var spotDetailService: SpotDetailService = SpotDetailService()
+    
     lazy var localVerificationService: LocalVerificationService = LocalVerificationService()
     
 }

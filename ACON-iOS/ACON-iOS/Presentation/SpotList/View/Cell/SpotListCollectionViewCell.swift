@@ -138,7 +138,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
 extension SpotListCollectionViewCell {
     
-    func bind(spot: Spot, matchingRateBgColor: MatchingRateBgColorType) {
+    func bind(spot: SpotModel, matchingRateBgColor: MatchingRateBgColorType) {
         bgImage.image = spot.image
         
         changeMatchingRateBgColor(matchingRateBgColor)

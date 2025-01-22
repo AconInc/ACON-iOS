@@ -11,7 +11,7 @@ class GlassmorphismView: BaseView {
     
     // MARK: - Properties
     
-    private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+    private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
     
     private let vibrancyEffectView = UIVisualEffectView(
         effect: UIVibrancyEffect(blurEffect: UIBlurEffect(style: .regular))
@@ -51,6 +51,10 @@ extension GlassmorphismView {
     /// GlassmorphismView에는 기본적으로 glass color = .glaB30이 적용되어 있습니다.
     func setGlassColor(_ color: UIColor) {
         vibrancyEffectView.backgroundColor = color
+    }
+    
+    func setBlurStyle(_ style: UIBlurEffect.Style) {
+        blurEffectView.effect = UIBlurEffect(style: style)
     }
     
 }
