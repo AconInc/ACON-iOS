@@ -106,7 +106,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         
         matchingRateView.do {
             $0.backgroundColor = .gray9
-            $0.layer.contents = 2
+            $0.layer.cornerRadius = 2
         }
         
         matchingRateLabel.do {
