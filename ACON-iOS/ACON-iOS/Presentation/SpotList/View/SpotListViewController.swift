@@ -14,6 +14,7 @@ class SpotListViewController: BaseNavViewController {
     private let spotListView = SpotListView()
     private let spotListViewModel = SpotListViewModel()
     
+    private var selectedSpotCondition: SpotConditionModel = SpotConditionModel(spotType: .restaurant, filterList: [], walkingTime: -1, priceRange: -1)
     
     // MARK: - LifeCycle
     
@@ -75,12 +76,14 @@ class SpotListViewController: BaseNavViewController {
 extension SpotListViewController {
     
     func bindViewModel() {
+        
         spotListViewModel.isPostSpotListSuccess.bind { [weak self] isSuccess in
             print("⚙️bindVM")
             guard let self = self,
                   let isSuccess = isSuccess else { return }
-            print(isSuccess)
+            print("jdkfds\(isSuccess)")
             if isSuccess {
+                print("🥑\(spotListViewModel.isUpdated)")
                 if spotListViewModel.isUpdated {
                     spotListView.collectionView.reloadData()
                     print("🥑reloadData")
@@ -90,9 +93,11 @@ extension SpotListViewController {
             } else {
                 print("🥑Post 실패")
             }
-            spotListViewModel.isPostSpotListSuccess.value = false
+            spotListViewModel.isUpdated = false
+            spotListViewModel.isPostSpotListSuccess.value = nil
             endRefreshingAndTransparancy()
         }
+        
     }
     
 }
@@ -122,6 +127,14 @@ private extension SpotListViewController {
         let vc = SpotListFilterViewController()
         vc.setLongSheetLayout()
         
+        vc.completionHandler = { [weak self] selectedSpotCondition in
+            guard let self = self else { return }
+//            self.selectedSpotCondition = selectedSpotCondition
+            spotListViewModel.spotType.value = selectedSpotCondition.spotType
+            spotListViewModel.filterList = selectedSpotCondition.filterList
+            
+            spotListViewModel.postSpotList()
+        }
         present(vc, animated: true)
     }
     
