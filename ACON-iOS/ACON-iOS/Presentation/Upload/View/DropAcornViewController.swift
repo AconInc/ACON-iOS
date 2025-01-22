@@ -115,7 +115,7 @@ private extension DropAcornViewController {
     @objc
     func xButtonTapped() {
         let alertHandler = AlertHandler()
-        alertHandler.showReviewExitAlert(from: self)
+        alertHandler.showUploadExitAlert(from: self)
     }
     
 }

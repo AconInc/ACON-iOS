@@ -13,7 +13,6 @@ enum AlertType: CaseIterable {
     case locationAccessFailImage // 이건 사진
     case locationAccessDenied // 업로드 중
     case uploadExit // 업로드 중
-    case reviewExit // 리뷰 중
     
     var title: String {
         switch self {
@@ -23,7 +22,7 @@ enum AlertType: CaseIterable {
             return "위치 인식 실패"
         case .locationAccessDenied:
             return "위치를 확인 할 수 없습니다."
-        case .uploadExit, .reviewExit:
+        case .uploadExit:
             return "작성을 그만둘까요?"
         }
     }
@@ -36,7 +35,7 @@ enum AlertType: CaseIterable {
             return "현재 위치와 등록 장소가 오차 범위 밖에 있습니다.\n좀 더 가까이 이동해보세요."
         case .locationAccessDenied:
             return "acon을 사용하기 위해서는,\n설정에서 정확한 위치 권한을 허용해주세요."
-        case .uploadExit, .reviewExit:
+        case .uploadExit:
             return "작성 중인 내용이 저장되지 않아요."
         }
     }
@@ -44,8 +43,7 @@ enum AlertType: CaseIterable {
     var buttons: [String] {
         switch self {
         case .stoppedPreferenceAnalysis,
-             .uploadExit,
-             .reviewExit:
+                .uploadExit:
             return ["그만두기", "계속하기"]
         case .locationAccessFailImage:
             return ["확인"]
