@@ -31,7 +31,7 @@ final class LocalVerificationView: BaseView {
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 16,
                                                               leading: 16,
                                                               bottom: 16,
-                                                              trailing: 139)
+                                                              trailing: ScreenUtils.widthRatio*340-211)
         return configuration
     }()
 
