@@ -40,8 +40,7 @@ class SpotListCollectionViewHeader: UICollectionReusableView {
     func setLayout() {
         titleLabel.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-12)
+            $0.bottom.equalToSuperview().inset(12)
         }
     }
     
