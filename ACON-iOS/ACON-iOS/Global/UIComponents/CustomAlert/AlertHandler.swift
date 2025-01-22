@@ -51,13 +51,12 @@ class AlertHandler {
         let customAlertViewController = CustomAlertViewController()
         customAlertViewController.configure(with: .uploadExit)
         customAlertViewController.onClose = {
-            let mainViewController = ACTabBarController()
-            mainViewController.modalPresentationStyle = .fullScreen
-            viewController.present(mainViewController, animated: true)
+            var topController: UIViewController = viewController
+            while let presenting = topController.presentingViewController {
+                topController = presenting
+            }
+            topController.dismiss(animated: true)
         }
-        
-        presentAlert(customAlertViewController, from: viewController)
-    }
         presentAlert(customAlertViewController, from: viewController)
     }
     
