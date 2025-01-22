@@ -11,7 +11,7 @@ class SpotFilterTagStackView: UIStackView {
     
     // MARK: - UI Properties
     
-    private var tagButtons: [UIButton] = []
+    var tagButtons: [UIButton] = []
     
     
     // MARK: - LifeCycle
