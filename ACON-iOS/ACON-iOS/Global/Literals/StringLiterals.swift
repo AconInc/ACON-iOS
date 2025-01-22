@@ -89,9 +89,7 @@ enum StringLiterals {
         
         static let spotUpload2 = "장소등록"
         
-        static let uploadSpotName = "가게명을 검색해주세요."
-        
-        static let dropAcornsHere = "도토리로 리뷰남기기"
+        static let next = "다음"
         
         static let shallWeDropAcorns = "도토리를 떨어트려\n리뷰를 남겨 볼까요?"
 

@@ -139,7 +139,7 @@ final class DropAcornView: BaseView {
                                    style: .h8,
                                   color: .acWhite,
                                   for: .disabled)
-            $0.setAttributedTitle(text: StringLiterals.Upload.dropAcornsHere,
+            $0.setAttributedTitle(text: StringLiterals.Upload.next,
                                    style: .h8,
                                   color: .acWhite,
                                   for: .normal)
