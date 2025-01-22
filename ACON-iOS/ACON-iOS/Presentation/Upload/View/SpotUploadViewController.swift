@@ -23,7 +23,7 @@ class SpotUploadViewController: BaseNavViewController {
     
     var spotReviewViewModel = SpotReviewViewModel()
     
-    var selectedSpotID: Int = -1
+    var selectedSpotID: Int64 = -1
     
 //    var selectedSpotName: String = ""
     
@@ -99,14 +99,15 @@ private extension SpotUploadViewController {
                     self?.spotUploadView.dropAcornButton.isEnabled = true
                     self?.spotUploadView.dropAcornButton.backgroundColor = .gray5
                 } else {
-                    // TODO: - show Alert
+                    let alertHandler = AlertHandler()
+                    alertHandler.showLocationAccessFailImageAlert(from: self!)
                     self?.spotUploadView.dropAcornButton.isEnabled = false
                     self?.spotUploadView.dropAcornButton.backgroundColor = .gray8
                     self?.spotUploadView.spotSearchButton.setAttributedTitle(text: StringLiterals.Upload.uploadSpotName,
                                                                             style: .s2,
                                                                             color: .gray5)
                 }
-                self?.spotReviewViewModel.reviewVerification.value = false
+                self?.spotReviewViewModel.reviewVerification.value = nil
             }
         }
     }
@@ -132,7 +133,7 @@ private extension SpotUploadViewController {
     @objc
     func xButtonTapped() {
         let alertHandler = AlertHandler()
-        alertHandler.showReviewExitAlert(from: self)
+        alertHandler.showUploadExitAlert(from: self)
     }
     
 }
@@ -158,7 +159,7 @@ extension SpotUploadViewController: ACLocationManagerDelegate {
 extension SpotUploadViewController {
     
     func setSpotSearchModal() {
-        let vc = SpotSearchViewController()
+        let vc = SpotSearchViewController(spotSearchViewModel: SpotSearchViewModel(latitude: self.latitude, longitude: self.longitude))
         vc.dismissCompletion = { [weak self] in
             DispatchQueue.main.async {
                 self?.removeBlurView()
@@ -177,7 +178,9 @@ extension SpotUploadViewController {
                 }
                 
                 if selectedSpotID > 0 {
-                    // TODO: - ReviewVerification 서버통신
+                    self.spotReviewViewModel.getReviewVerification(spotId: selectedSpotID,
+                                                                   latitude: self.latitude,
+                                                                   longitude: self.longitude)
                 } else {
                     self.spotUploadView.dropAcornButton.isEnabled = false
                     self.spotUploadView.dropAcornButton.backgroundColor = .gray8

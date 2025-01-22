@@ -13,7 +13,7 @@ struct GetSpotDetailResponse: Codable {
     
     let name: String
     
-    let spotType: String
+    let spotType: SpotCategoryType
     
     let imageList: [String]
     
