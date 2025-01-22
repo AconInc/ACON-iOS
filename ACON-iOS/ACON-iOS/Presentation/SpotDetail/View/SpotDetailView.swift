@@ -54,7 +54,7 @@ final class SpotDetailView: BaseView {
     
     static var menuCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().then {
         $0.minimumLineSpacing = 0
-        $0.itemSize = CGSize(width: ScreenUtils.width*320/360, height: ScreenUtils.height*110/780)
+        $0.itemSize = CGSize(width: ScreenUtils.widthRatio*320, height: ScreenUtils.heightRatio*110)
     }
     
     let navViewHeight: CGFloat = ScreenUtils.heightRatio * 56
@@ -90,7 +90,7 @@ final class SpotDetailView: BaseView {
         blurSpotImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(-navViewHeight)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.height*296/780)
+            $0.height.equalTo(ScreenUtils.heightRatio*296)
         }
         
         gotoTopButton.snp.makeConstraints{
@@ -118,78 +118,78 @@ final class SpotDetailView: BaseView {
         
         footerView.snp.makeConstraints {
             $0.bottom.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.height*84/780)
+            $0.height.equalTo(ScreenUtils.heightRatio*84)
         }
         
         spotDetailImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(navViewHeight)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.height*296/780)
+            $0.height.equalTo(ScreenUtils.heightRatio*296)
         }
         
         openStatusButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*312/780 + navViewHeight)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
-            $0.width.equalTo(ScreenUtils.width*51/360)
-            $0.height.equalTo(ScreenUtils.height*22/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*312 + navViewHeight)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*20)
+            $0.width.equalTo(ScreenUtils.widthRatio*51)
+            $0.height.equalTo(ScreenUtils.heightRatio*22)
         }
         
         addressImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*342/780 + navViewHeight)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*342 + navViewHeight)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.width.height.equalTo(16)
         }
         
         addressLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*342/780 + navViewHeight)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*38/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*342 + navViewHeight)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*38)
             $0.height.equalTo(18)
         }
         
         stickyHeaderView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*400/780 + navViewHeight)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*400 + navViewHeight)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(36)
         }
         
         menuCollectionView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*453/780 + navViewHeight)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*453 + navViewHeight)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(0)
             $0.bottom.lessThanOrEqualToSuperview()
         }
         
         localAcornImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*18/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*18)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.width.height.equalTo(24)
         }
         
         localAcornCountLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*21/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*46/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*21)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*46)
             $0.width.equalTo(30)
             $0.height.equalTo(18)
         }
         
         plainAcornImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*18/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*82/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*18)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*82)
             $0.width.height.equalTo(24)
         }
         
         plainAcornCountLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*21/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*108/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*21)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*108)
             $0.width.equalTo(30)
             $0.height.equalTo(18)
         }
         
         findCourseButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*8/780)
-            $0.trailing.equalToSuperview().inset(ScreenUtils.width*20/360)
-            $0.width.equalTo(ScreenUtils.width*180/360)
-            $0.height.equalTo(ScreenUtils.height*44/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*8)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*20)
+            $0.width.equalTo(ScreenUtils.widthRatio*180)
+            $0.height.equalTo(ScreenUtils.heightRatio*44)
         }
     }
     
@@ -207,7 +207,7 @@ final class SpotDetailView: BaseView {
             $0.backgroundColor = .gray7
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.gray6.cgColor
-            $0.layer.cornerRadius = ScreenUtils.width * 44 / 360 / 2
+            $0.layer.cornerRadius = ScreenUtils.widthRatio * 44 / 2
             $0.clipsToBounds = true
             $0.setImage(UIImage(named:"upVector"), for: .normal)
         }

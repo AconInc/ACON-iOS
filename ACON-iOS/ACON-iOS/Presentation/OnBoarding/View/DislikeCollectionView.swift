@@ -55,7 +55,7 @@ extension DislikeCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let itemWidth = ScreenUtils.width * 101 / 360
+        let itemWidth = ScreenUtils.widthRatio * 101
         let itemHeight = itemWidth * 1.277
         return CGSize(width: itemWidth, height: itemHeight)
     }
@@ -65,7 +65,7 @@ extension DislikeCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return ScreenUtils.height * 12 / 780
+        return ScreenUtils.heightRatio * 12
     }
     
     func collectionView(
@@ -73,7 +73,7 @@ extension DislikeCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return ScreenUtils.width * 8 / 360
+        return ScreenUtils.widthRatio * 8
     }
     
     func collectionView(
@@ -81,7 +81,7 @@ extension DislikeCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAt section: Int
     ) -> UIEdgeInsets {
-        let horizontalInset = ScreenUtils.width * 10 / 360
+        let horizontalInset = ScreenUtils.widthRatio * 10
         let verticalInset = ScreenUtils.width * 84 / 780
         return UIEdgeInsets(
             top: verticalInset,

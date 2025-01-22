@@ -64,31 +64,31 @@ final class LoginView: BaseView {
         }
         
         googleLoginButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*172/780)
-            $0.height.equalTo(ScreenUtils.height*50/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*172)
+            $0.height.equalTo(ScreenUtils.heightRatio*50)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
         }
         
         appleLoginButton.snp.makeConstraints {
             $0.top.equalTo(googleLoginButton.snp.bottom).offset(8)
-            $0.height.equalTo(ScreenUtils.height*50/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.height.equalTo(ScreenUtils.heightRatio*50)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
         }
         
         proceedLoginLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*84/780)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*84)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(276)
         }
         
         termsOfUseLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*60/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*120.5/360)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*60)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*120.5)
         }
         
         privacyPolicyLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*60/780)
-            $0.trailing.equalToSuperview().inset(ScreenUtils.width*120.5/360)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*60)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*120.5)
         }
     }
     

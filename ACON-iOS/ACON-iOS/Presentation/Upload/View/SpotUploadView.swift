@@ -45,17 +45,17 @@ final class SpotUploadView: BaseView {
         super.setLayout()
         
         spotUploadLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*32/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*32)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(24)
             $0.width.equalTo(58)
         }
         
         spotSearchButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*64/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*64)
             $0.centerX.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
-            $0.height.equalTo(ScreenUtils.height*52/780)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
+            $0.height.equalTo(ScreenUtils.heightRatio*52)
         }
         
     }

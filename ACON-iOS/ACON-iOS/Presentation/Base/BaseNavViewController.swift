@@ -61,7 +61,7 @@ class BaseNavViewController: UIViewController {
         navigationBarView.snp.makeConstraints {
             $0.top.equalTo(topInsetView.snp.bottom)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.height*56/780)
+            $0.height.equalTo(ScreenUtils.heightRatio*56)
         }
         
         contentView.snp.makeConstraints {
@@ -71,22 +71,22 @@ class BaseNavViewController: UIViewController {
         
         leftButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(ScreenUtils.width*20/360)
+            $0.leading.equalToSuperview().offset(ScreenUtils.widthRatio*20)
         }
         
         rightButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*20)
         }
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*20)
         }
         
         secondTitleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*52/360)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*52)
         }
         
         centerTitleLabel.snp.makeConstraints {

@@ -64,33 +64,33 @@ final class CustomAlertImageView: BaseView {
         
         alertContainer.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.width * 279 / 360)
-            $0.height.equalTo(ScreenUtils.width * 279 / 360)
+            $0.width.equalTo(ScreenUtils.widthRatio * 279)
+            $0.height.equalTo(ScreenUtils.widthRatio * 279)
         }
         
         imageView.snp.makeConstraints {
-            $0.top.equalTo(alertContainer.snp.top).inset(ScreenUtils.width * 24 / 360)
+            $0.top.equalTo(alertContainer.snp.top).inset(ScreenUtils.widthRatio * 24)
             $0.centerX.equalTo(alertContainer)
-            $0.width.height.equalTo(ScreenUtils.width * 80 / 360)
+            $0.width.height.equalTo(ScreenUtils.widthRatio * 80)
         }
         
         titleLabel.snp.makeConstraints {
             $0.centerX.equalTo(alertContainer)
-            $0.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.width * 24 / 360)
-            $0.top.equalTo(imageView.snp.bottom).offset(ScreenUtils.width * 16 / 360)
+            $0.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.widthRatio * 24)
+            $0.top.equalTo(imageView.snp.bottom).offset(ScreenUtils.widthRatio * 16)
         }
         
         messageLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(ScreenUtils.width * 4 / 360)
-            $0.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.width * 24 / 360)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(ScreenUtils.widthRatio * 4)
+            $0.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.widthRatio * 24)
             $0.centerX.equalTo(alertContainer)
         }
         
         closeButton.snp.makeConstraints {
             $0.top.equalTo(messageLabel.snp.bottom).offset(20)
-            $0.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.width * 24 / 360)
-            $0.height.equalTo(ScreenUtils.width * 44 / 360)
-            $0.bottom.equalTo(alertContainer).inset(ScreenUtils.width * 24 / 360)
+            $0.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.widthRatio * 24)
+            $0.height.equalTo(ScreenUtils.widthRatio * 44)
+            $0.bottom.equalTo(alertContainer).inset(ScreenUtils.widthRatio * 24)
         }
     }
     

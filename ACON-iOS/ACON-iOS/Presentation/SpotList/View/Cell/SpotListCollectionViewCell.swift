@@ -55,8 +55,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     override func setLayout() {
         super.setLayout()
         
-        let horizontalSpace = ScreenUtils.width * 16 / 360
-        let verticalSpace = ScreenUtils.height * 16 / 780
+        let horizontalSpace = ScreenUtils.widthRatio * 16
+        let verticalSpace = ScreenUtils.heightRatio * 16
         
         bgImage.snp.makeConstraints {
             $0.edges.equalToSuperview()

@@ -17,7 +17,7 @@ struct SheetUtils {
         return UISheetPresentationController.Detent.custom(identifier: shortDetentIdentifier) { _ in
             let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
             let safeAreaBottom = windowScene?.windows.first?.safeAreaInsets.bottom ?? 0
-            return ScreenUtils.height*478/780 - safeAreaBottom
+            return ScreenUtils.heightRatio*478 - safeAreaBottom
         }
     }
     
@@ -25,7 +25,7 @@ struct SheetUtils {
          return UISheetPresentationController.Detent.custom(identifier: longDetentIdentifier) { _ in
              let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
              let safeAreaBottom = windowScene?.windows.first?.safeAreaInsets.bottom ?? 0
-             return ScreenUtils.height*558/780 - safeAreaBottom
+             return ScreenUtils.heightRatio*558 - safeAreaBottom
          }
      }
     
@@ -33,7 +33,7 @@ struct SheetUtils {
         return UISheetPresentationController.Detent.custom(identifier: longDetentIdentifier) { _ in
             let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
             let safeAreaBottom = windowScene?.windows.first?.safeAreaInsets.bottom ?? 0
-            return ScreenUtils.height*724/780 - safeAreaBottom
+            return ScreenUtils.heightRatio*724 - safeAreaBottom
         }
     }
     

@@ -51,25 +51,25 @@ final class DropAcornView: BaseView {
         super.setLayout()
         
         dropAcornLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*32/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*32)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(56)
         }
         
         useAcornToReviewLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*96/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*96)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(18)
         }
         
         acornNumberLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*122/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*122)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(18)
         }
         
         acornStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*214/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*214)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(240)
             $0.height.equalTo(48)
@@ -77,25 +77,25 @@ final class DropAcornView: BaseView {
         
         acornReviewLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(ScreenUtils.height*192/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*192)
             $0.height.equalTo(18)
         }
         
         goAheadDropAcornLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(ScreenUtils.height*274/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*274)
         }
         
         dropAcornLottieView.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(104)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.height*266/780)
+            $0.height.equalTo(ScreenUtils.heightRatio*266)
         }
         
         leaveReviewButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*40/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*16/360)
-            $0.height.equalTo(ScreenUtils.height*52/780)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*40)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*16)
+            $0.height.equalTo(ScreenUtils.heightRatio*52)
         }
         
     }
