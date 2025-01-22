@@ -50,6 +50,7 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
 
+        self.tabBarController?.tabBar.isHidden = true
         spotDetailViewModel.getSpotDetail()
         spotDetailViewModel.getSpotMenu()
     }
