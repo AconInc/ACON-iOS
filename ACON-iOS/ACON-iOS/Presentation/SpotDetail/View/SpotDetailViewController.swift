@@ -20,13 +20,23 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
     // MARK: - Properties
     
     // TODO: - 이거 spotID 전 화면에서 넘겨받는 것으로 변경
-    private let spotDetailViewModel = SpotDetailViewModel(spotID: 1)
+    private let spotDetailViewModel: SpotDetailViewModel
     
     private let spotDetailName: String = "가게명가게명"
     
     private let spotDetailType: String = "음식점"
     
     // MARK: - LifeCycle
+    
+    init(_ spotID: Int64) {
+        self.spotDetailViewModel = SpotDetailViewModel(spotID: spotID)
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

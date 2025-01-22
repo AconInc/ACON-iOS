@@ -247,6 +247,12 @@ extension SpotListViewController: UICollectionViewDataSource {
         return header
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = spotListViewModel.spotList[indexPath.item]
+        let vc = SpotDetailViewController(1) // TODO: 1 -> item.id로 변경
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 
