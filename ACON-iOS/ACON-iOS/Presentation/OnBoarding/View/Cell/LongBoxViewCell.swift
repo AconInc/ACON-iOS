@@ -29,6 +29,8 @@ final class LongBoxViewCell: BaseCollectionViewCell {
     override func setStyle() {
         super.setStyle()
         
+        backgroundColor = .clear
+
         imageView.do {
             $0.layer.cornerRadius = 8
             $0.backgroundColor = .clear
@@ -69,14 +71,14 @@ final class LongBoxViewCell: BaseCollectionViewCell {
         
         imageView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
-            $0.width.equalTo(154)
-            $0.height.equalTo(296)
+            $0.width.equalTo(154).priority(.low)
+            $0.height.equalTo(296).priority(.low)
         }
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(imageView.snp.bottom).offset(8)
             $0.centerX.equalTo(container)
-            $0.height.equalTo(20)
+            $0.height.equalTo(20).priority(.low)
         }
         
         overlayContainer.snp.makeConstraints {
