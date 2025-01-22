@@ -44,7 +44,7 @@ class SpotSearchViewModel {
                         spotID: keyword.spotId,
                         spotName: keyword.name,
                         spotAddress: keyword.address,
-                        spotType: keyword.spotType
+                        spotType: keyword.spotType.koreanText
                     )
                 }
                 self?.searchKeywordData.value = searchKeywords

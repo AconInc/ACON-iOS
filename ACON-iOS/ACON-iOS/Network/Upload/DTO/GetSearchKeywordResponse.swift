@@ -21,6 +21,6 @@ struct SearchKeyword: Codable {
     
     let address: String
     
-    let spotType: String
+    let spotType: SpotCategoryType
     
 }
