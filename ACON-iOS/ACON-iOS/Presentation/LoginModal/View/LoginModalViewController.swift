@@ -1,0 +1,154 @@
+//
+//  LoginModalViewController.swift
+//  ACON-iOS
+//
+//  Created by 김유림 on 1/22/25.
+//
+
+import UIKit
+import AuthenticationServices
+
+class LoginModalViewController: BaseViewController {
+    
+    // MARK: - UI Properties
+    
+    private let loginModalView = LoginModalView()
+    
+    
+    // MARK: - Properties
+    
+    private let loginViewModel = LoginViewModel()
+    
+    
+    // MARK: - LifeCycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        bindViewModel()
+        addTargets()
+    }
+    
+    override func setHierarchy() {
+        super.setHierarchy()
+        
+        view.addSubview(loginModalView)
+    }
+    
+    override func setLayout() {
+        super.setLayout()
+        
+        loginModalView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    func addTargets() {
+        loginModalView.googleLoginButton.addTarget(
+            self,
+            action: #selector(googleLoginButtonTapped),
+            for: .touchUpInside
+        )
+        
+        loginModalView.appleLoginButton.addTarget(
+            self,
+            action: #selector(appleLoginButtonTapped),
+            for: .touchUpInside
+        )
+        
+        loginModalView.privacyPolicyLabel.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(privacyPolicyLabelTapped))
+        )
+        
+        loginModalView.termsOfUseLabel.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(termsOfUseLabelTapped))
+        )
+        
+        loginModalView.exitButton.addTarget(
+            self,
+            action: #selector(didTapExitButton),
+            for: .touchUpInside
+        )
+    }
+    
+}
+
+
+// MARK: - @objc functions
+
+extension LoginModalViewController {
+
+    @objc
+    func privacyPolicyLabelTapped() {
+        let privacyPolicyVC = DRWebViewController(urlString: StringLiterals.WebView.privacyPolicyLink)
+        self.present(privacyPolicyVC, animated: true)
+    }
+    
+    @objc
+    func termsOfUseLabelTapped() {
+        let termsOfUseVC = DRWebViewController(urlString: StringLiterals.WebView.termsOfUseLink)
+        self.present(termsOfUseVC, animated: true)
+    }
+    
+    @objc
+    func googleLoginButtonTapped() {
+        loginViewModel.googleSignIn(presentingViewController: self)
+    }
+    
+    @objc
+    func appleLoginButtonTapped() {
+        let request = ASAuthorizationAppleIDProvider().createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.performRequests()
+    }
+    
+    @objc
+    func didTapExitButton() {
+        self.dismiss(animated: true)
+    }
+}
+
+
+// MARK: - bindViewModel
+
+extension LoginModalViewController {
+    
+    func bindViewModel() {
+        self.loginViewModel.onLoginSuccess.bind { [weak self] onLoginSuccess in
+            guard let onLoginSuccess else { return }
+            guard let self = self else { return }
+            onLoginSuccess ? navigateToLocalVerificationVC() : print("로그인 실패")
+        }
+    }
+    
+    // TODO: - 나중에 서버 로그인 Success 시 이동하는 것으로 변경 (ObservablePattern)
+    func navigateToLocalVerificationVC() {
+        let vc = LocalVerificationViewController()
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+}
+
+
+// MARK: - Apple Login Functions
+
+extension LoginModalViewController: ASAuthorizationControllerDelegate {
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential
+        else { return }
+        
+        self.loginViewModel.appleSignIn(userInfo: credential)
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
+        // TODO: - 에러 처리
+        print("apple login error")
+    }
+    
+}
