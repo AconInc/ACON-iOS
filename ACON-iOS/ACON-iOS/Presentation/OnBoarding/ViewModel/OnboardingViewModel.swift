@@ -21,7 +21,7 @@ final class OnboardingViewModel {
     
     var postOnboardingResult: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    
+
     func postOnboarding() {
         
         let processedDislikeFoodList: [String] = {

@@ -39,7 +39,7 @@ final class BigBoxViewCell: BaseCollectionViewCell {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
         }
-        // TODO: setLabel 적용시 레이아웃 오류
+        
         titleLabel.do {
             $0.font = ACFont.s2.font
             $0.textColor = .acWhite
@@ -117,7 +117,7 @@ extension BigBoxViewCell {
         }
         
         overlayImageView.image = UIImage(named: "\(isSelected)")
-        overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        overlayContainer.backgroundColor = UIColor.white.withAlphaComponent(0.4)
         overlayImageView.alpha = 1
     }
     

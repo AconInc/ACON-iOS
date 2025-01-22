@@ -270,9 +270,9 @@ extension OnboardingViewController {
             if selectedIndices.map({ $0.uppercased() }) == ["NONE"] {
                 self.isOverlayVisible.toggle()
                 if self.isOverlayVisible {
-                    self.showOverlay()
+//                    self.showOverlay()
                 } else {
-                    self.hideOverlay()
+//                    self.hideOverlay()
                 }
             } else {
                 self.hideOverlay()
@@ -328,7 +328,7 @@ extension OnboardingViewController {
     private func showOverlay() {
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self = self else { return }
-            self.contentView?.alpha = 0.5
+            self.contentView?.alpha = 0.3
         }
     }
     

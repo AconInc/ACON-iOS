@@ -118,7 +118,12 @@ extension FavoriteCuisineCollectionView: UICollectionViewDelegate, UICollectionV
         // NOTE: 터치한 순서를 기반으로 index를 설정
         let isSelected = selectedIndices.firstIndex(of: option.mappedValue).map { $0 + 1 } ?? 0
         
-        cell.configure(name: option.name, image: option.image, isSelected: isSelected)
+        let isDimmed = selectedIndices.count >= 3 && !selectedIndices.contains(option.mappedValue)
+
+        cell.configure(name: option.name,
+                       image: option.image,
+                       isSelected: isSelected,
+                       isDimmed: isDimmed)
         return cell
     }
     
