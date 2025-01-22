@@ -14,6 +14,7 @@ class SpotListViewController: BaseNavViewController {
     private let spotListView = SpotListView()
     private let spotListViewModel = SpotListViewModel()
     
+    private var selectedSpotCondition: SpotConditionModel = SpotConditionModel(spotType: .restaurant, filterList: [], walkingTime: -1, priceRange: -1)
     
     // MARK: - LifeCycle
     
@@ -62,6 +63,12 @@ class SpotListViewController: BaseNavViewController {
         )
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        handleRefreshControl()
+    }
+    
 }
 
 
@@ -70,15 +77,26 @@ class SpotListViewController: BaseNavViewController {
 extension SpotListViewController {
     
     func bindViewModel() {
-        spotListViewModel.isNetworkingSuccess.bind { [weak self] isSuccess in
-            guard let self = self else { return }
-            
-            if spotListViewModel.isUpdated {
-                spotListView.collectionView.reloadData()
+        
+        spotListViewModel.isPostSpotListSuccess.bind { [weak self] isSuccess in
+            guard let self = self,
+                  let isSuccess = isSuccess else { return }
+            if isSuccess {
+                print("🥑\(spotListViewModel.isUpdated)")
+                if spotListViewModel.isUpdated {
+                    spotListView.collectionView.reloadData()
+                    print("🥑reloadData")
+                } else {
+                    print("🥑데이터가 안 바뀌어서 리로드데이터 안 함")
+                }
+            } else {
+                print("🥑Post 실패")
             }
+            spotListViewModel.isUpdated = false
+            spotListViewModel.isPostSpotListSuccess.value = nil
             endRefreshingAndTransparancy()
-            
         }
+        
     }
     
 }
@@ -98,12 +116,7 @@ private extension SpotListViewController {
                 self.spotListView.collectionView.alpha = 0.5 // 투명도 낮춤
             }) { _ in
                 
-                // TODO: 네트워크 요청
-                
-                DispatchQueue.main.asyncAfter(deadline: .now()+1) { // TODO: 네트워킹동안 뷰 작동 테스트를 위한 것. 추후 삭제
-                    self.spotListViewModel.spotList = SpotModel.dummy
-                    self.spotListViewModel.fetchSpotList()
-                }
+                self.spotListViewModel.postSpotList()
             }
         }
     }
@@ -113,6 +126,14 @@ private extension SpotListViewController {
         let vc = SpotListFilterViewController()
         vc.setLongSheetLayout()
         
+        vc.completionHandler = { [weak self] selectedSpotCondition in
+            guard let self = self else { return }
+//            self.selectedSpotCondition = selectedSpotCondition
+            spotListViewModel.spotType.value = selectedSpotCondition.spotType
+            spotListViewModel.filterList = selectedSpotCondition.filterList
+            
+            spotListViewModel.postSpotList()
+        }
         present(vc, animated: true)
     }
     
@@ -142,7 +163,6 @@ private extension SpotListViewController {
             self.spotListView.collectionView.refreshControl?.endRefreshing()
         }
     }
-    
     
 }
 
@@ -243,6 +263,12 @@ extension SpotListViewController: UICollectionViewDataSource {
         }
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = spotListViewModel.spotList[indexPath.item]
+        let vc = SpotDetailViewController(1) // TODO: 1 -> item.id로 변경
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 

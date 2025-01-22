@@ -20,6 +20,7 @@ final class BigBoxViewCell: BaseCollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .clear
         setStyle()
         setHierarchy()
         setLayout()
@@ -38,7 +39,7 @@ final class BigBoxViewCell: BaseCollectionViewCell {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
         }
-        // TODO: setLabel 적용시 레이아웃 오류
+        
         titleLabel.do {
             $0.font = ACFont.s2.font
             $0.textColor = .acWhite
@@ -73,7 +74,7 @@ final class BigBoxViewCell: BaseCollectionViewCell {
         
         container.snp.makeConstraints {
             $0.edges.equalToSuperview()
-            $0.width.equalTo(154)
+            $0.width.equalTo(154).priority(.low)
         }
         
         imageView.snp.makeConstraints {
@@ -84,7 +85,7 @@ final class BigBoxViewCell: BaseCollectionViewCell {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(imageView.snp.bottom).offset(2)
             $0.centerX.equalTo(container)
-            $0.height.equalTo(35)
+            $0.height.equalTo(35).priority(.low)
         }
         
         overlayContainer.snp.makeConstraints {
@@ -116,7 +117,7 @@ extension BigBoxViewCell {
         }
         
         overlayImageView.image = UIImage(named: "\(isSelected)")
-        overlayContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        overlayContainer.backgroundColor = UIColor.white.withAlphaComponent(0.4)
         overlayImageView.alpha = 1
     }
     

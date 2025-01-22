@@ -19,6 +19,38 @@ final class OnboardingViewModel {
     
     var favoriteSpotRank: ObservablePattern<[String]> = ObservablePattern([])
     
-    // TODO : NetWorking
+    var postOnboardingResult: ObservablePattern<Bool> = ObservablePattern(nil)
+    
+    func postOnboarding() {
+        
+        let processedDislikeFoodList: [String] = {
+               if let dislikeList = dislike.value, dislikeList.contains("NONE") {
+                   return []
+               }
+               return dislike.value ?? [" "]
+           }()
+        
+        let onboardingData = OnboardingRequest(dislikeFoodList: processedDislikeFoodList,
+                                               favoriteCuisineRank: favoriteCuisne.value ?? [""],
+                                               favoriteSpotType: favoriteSpotType.value ?? "",
+                                               favoriteSpotStyle: favoriteSpotStyle.value ?? "",
+                                               favoriteSpotRank: favoriteSpotRank.value ?? [""])
+        
+        print(onboardingData)
+        
+        ACService.shared.onboardingService.postOnboarding(requestBody: onboardingData) { [weak self] response in
+            guard let self else { return }
+            
+            switch response {
+            case .success(_):
+                print("Onboarding Success")
+                self.postOnboardingResult.value = true
+            default:
+                print("Onboarding Failed")
+                self.postOnboardingResult.value = false
+            }
+        }
+    }
+    
 }
 

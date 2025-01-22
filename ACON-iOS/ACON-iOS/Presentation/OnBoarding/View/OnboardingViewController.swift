@@ -33,14 +33,20 @@ final class OnboardingViewController: BaseViewController {
     private let favoriteSpotStyleCollectionView = FavoriteSpotStyleCollectionView()
     private let favoriteSpotRankCollectionView = FavoriteSpotRankCollectionView()
     
+    // NOTE: for
+    private var maxRetryCount: Int { return 3 }
+    private var retryCount = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setBinding()
+        bindViewModel()
         updateContentView(for: currentStep)
     }
     
     override func setStyle() {
         super.setStyle()
+        
+        view.backgroundColor = .gray9
         
         backButton.do {
             $0.setImage(UIImage(named: "chevron.left"), for: .normal)
@@ -141,7 +147,9 @@ final class OnboardingViewController: BaseViewController {
 
 extension OnboardingViewController {
     
-    private func setBinding() {
+    
+    
+    private func bindViewModel() {
         viewModel.dislike.bind { [weak self] dislikedFoods in
             self?.updateNextButtonState(isEnabled: !(dislikedFoods?.isEmpty ?? true))
         }
@@ -161,6 +169,33 @@ extension OnboardingViewController {
         viewModel.favoriteSpotRank.bind { [weak self] ranks in
             self?.updateNextButtonState(isEnabled: ranks?.count == 4)
         }
+        
+        viewModel.postOnboardingResult.bind { [weak self] onSuccess in
+            guard let self = self else { return }
+            guard let onSuccess = onSuccess else { return }
+            
+            if onSuccess {
+                retryCount = 0
+                let analyzingVC = AnalyzingViewController()
+                analyzingVC.modalPresentationStyle = .fullScreen
+                DispatchQueue.main.async {
+                    self.present(analyzingVC, animated: true, completion: nil)
+                }
+            } else {
+                self.retryCount += 1
+                if self.retryCount < self.maxRetryCount {
+                    print("❌ 요청 실패: \(self.retryCount)번째 재시도 중...")
+                    self.showRetryProgress()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        self.viewModel.postOnboarding()
+                    }
+                } else {
+                    self.showRequsetRetryProgress()
+                }
+            }
+        }
+        
+        
     }
     
     private func updateContentView(for step: Int) {
@@ -235,9 +270,9 @@ extension OnboardingViewController {
             if selectedIndices.map({ $0.uppercased() }) == ["NONE"] {
                 self.isOverlayVisible.toggle()
                 if self.isOverlayVisible {
-                    self.showOverlay()
+//                    self.showOverlay()
                 } else {
-                    self.hideOverlay()
+//                    self.hideOverlay()
                 }
             } else {
                 self.hideOverlay()
@@ -287,13 +322,13 @@ extension OnboardingViewController {
     private func updateNextButtonState(isEnabled: Bool) {
         nextButton.isEnabled = isEnabled
         nextButton.backgroundColor = isEnabled ? .gray5 : .gray8
-        nextButton.setTitleColor(isEnabled ? .acWhite : .gray6, for: .normal)
+        nextButton.setTitleColor(isEnabled ? .white : .gray6, for: .normal)
     }
     
     private func showOverlay() {
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self = self else { return }
-            self.contentView?.alpha = 0.5
+            self.contentView?.alpha = 0.3
         }
     }
     
@@ -359,26 +394,27 @@ extension OnboardingViewController {
 
 
 extension OnboardingViewController {
-    // NOTE: continue
+    
     @objc private func nextButtonTapped() {
         if currentStep >= StringLiterals.OnboardingType.progressNumberList.count - 1 {
-            
-            let analyzingVC = AnalyzingViewController()
-            analyzingVC.modalPresentationStyle = .fullScreen
-            present(analyzingVC, animated: true, completion: nil)
+            showLoadingIndicator()
+            viewModel.postOnboarding()
             return
         }
-        
+
+        let isConditionMet = checkSelectionCondition(for: currentStep + 1)
+
+        currentStep += 1
+        updateContentView(for: currentStep)
+        updateNextButtonState(isEnabled: isConditionMet)
+        updateProgressIndicator()
+
         if isOverlayVisible {
             hideOverlay()
             isOverlayVisible = false
         }
-        
-        currentStep += 1
-        updateContentView(for: currentStep)
-        updateNextButtonState(isEnabled: false)
-        updateProgressIndicator()
     }
+
     
     @objc private func backButtonTapped() {
         guard currentStep > 0 else { return }
@@ -392,4 +428,61 @@ extension OnboardingViewController {
         alertHandler.showStoppedPreferenceAnalysisAlert(from: self)
     }
     
+}
+
+extension OnboardingViewController{
+    private func showLoadingIndicator() {
+        let loadingView = UIActivityIndicatorView(style: .large)
+        loadingView.startAnimating()
+        view.addSubview(loadingView)
+        loadingView.center = view.center
+        loadingView.tag = 999
+    }
+    
+    private func hideLoadingIndicator() {
+        if let loadingView = view.viewWithTag(999) as? UIActivityIndicatorView {
+            loadingView.stopAnimating()
+            loadingView.removeFromSuperview()
+        }
+    }
+    
+    private func showRetryProgress() {
+        let alert = UIAlertController(
+            title: "재시도 중",
+            message: "\(retryCount)번째 요청 실패. 재시도 중입니다...",
+            preferredStyle: .alert
+        )
+        present(alert, animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            alert.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    private func showRequsetRetryProgress() {
+        showDefaultAlert(
+            title: "취향탐색에 실패했습니다.",
+            message: "앱을 종료하고 다시 실행해 주세요"
+        )
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    private func checkSelectionCondition(for step: Int) -> Bool {
+        switch step {
+        case 0:
+            return !(viewModel.dislike.value?.isEmpty ?? true)
+        case 1:
+            return viewModel.favoriteCuisne.value?.count == 3
+        case 2:
+            return viewModel.favoriteSpotType.value != nil
+        case 3:
+            return viewModel.favoriteSpotStyle.value != nil
+        case 4:
+            return viewModel.favoriteSpotRank.value?.count == 4
+        default:
+            return false
+        }
+    }
+
 }

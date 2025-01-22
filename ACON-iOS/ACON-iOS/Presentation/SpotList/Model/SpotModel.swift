@@ -11,11 +11,11 @@ import UIKit
 
 struct SpotModel: Equatable {
     
-    let id: Int
+    let id: Int64
     
-    let image: UIImage?
+    let imageURL: String
     
-    let matchingRate: Int
+    let matchingRate: Int?
     
     let type: String
     
@@ -26,6 +26,13 @@ struct SpotModel: Equatable {
 }
 
 
+//struct SpotListModel: Equatable {
+//    
+//    let spots: [SpotModel]
+//    
+//}
+
+
 // MARK: - Dummy data (삭제 예정)
 
 extension SpotModel {
@@ -33,7 +40,7 @@ extension SpotModel {
     static let dummy: [SpotModel] = [
         SpotModel(
             id: 0,
-            image: .imgEx1,
+            imageURL: "imgEx1",
             matchingRate: 100,
             type: "CAFE",
             name: "카페1",
@@ -41,7 +48,7 @@ extension SpotModel {
         ),
         SpotModel(
             id: 1,
-            image: .imgEx2,
+            imageURL: "imgEx2",
             matchingRate: 88,
             type: "CAFE",
             name: "카페2",
@@ -49,7 +56,7 @@ extension SpotModel {
         ),
         SpotModel(
             id: 2,
-            image: .imgEx3,
+            imageURL: "imgEx3",
             matchingRate: 5,
             type: "RESTAURANT",
             name: "햄버거 가게3",
@@ -57,7 +64,7 @@ extension SpotModel {
         ),
         SpotModel(
             id: 3,
-            image: .imgEx4,
+            imageURL: "imgEx4",
             matchingRate: 50,
             type: "CAFE",
             name: "OO카페4",
@@ -65,7 +72,7 @@ extension SpotModel {
         ),
         SpotModel(
             id: 4,
-            image: .imgEx1,
+            imageURL: "imgEx1",
             matchingRate: 98,
             type: "CAFE",
             name: "카페5",
@@ -73,7 +80,7 @@ extension SpotModel {
         ),
         SpotModel(
             id: 5,
-            image: .imgEx2,
+            imageURL: "imgEx2",
             matchingRate: 88,
             type: "CAFE",
             name: "카페6",

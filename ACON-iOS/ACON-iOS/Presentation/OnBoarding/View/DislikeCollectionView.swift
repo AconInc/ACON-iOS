@@ -114,10 +114,13 @@ extension DislikeCollectionView: UICollectionViewDelegate, UICollectionViewDataS
         }
         let option = DislikeType.allCases[indexPath.row]
         let isSelected = selectedIndices.contains(option.mappedValue)
+        let isDimmed = selectedIndices.contains(DislikeType.none.mappedValue) && !isSelected
+
         cell.checkConfigure(
             name: option.name,
             image: option.image,
-            isSelected: isSelected
+            isSelected: isSelected,
+            isDimmed: isDimmed
         )
         return cell
     }
