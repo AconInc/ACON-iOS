@@ -282,9 +282,8 @@ extension SpotDetailView {
             style: .b4
         )
         self.addressLabel.setLabel(text: data.address,
-                                             style: .b4,
+                                             style: .b2,
                                              color: .gray4)
-        
         self.localAcornCountLabel.setLabel(text: String(data.localAcornCount),
                                                      style: .b4,
                                                      alignment: .right)
