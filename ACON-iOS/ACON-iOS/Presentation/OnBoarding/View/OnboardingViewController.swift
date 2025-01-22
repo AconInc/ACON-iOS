@@ -322,8 +322,19 @@ extension OnboardingViewController {
     private func updateNextButtonState(isEnabled: Bool) {
         nextButton.isEnabled = isEnabled
         nextButton.backgroundColor = isEnabled ? .gray5 : .gray8
-        nextButton.setTitleColor(isEnabled ? .white : .gray6, for: .normal)
-    }
+        // NOTE: when define component on up stage, It can't change button text color.. so, i define conponent attribute on here
+        let title = "다음"
+           let textColor: UIColor = isEnabled ? .white : .gray6
+           let font = ACFont.h8.font
+           
+           let attributedTitle = NSAttributedString(
+               string: title,
+               attributes: [
+                   .foregroundColor: textColor,
+                   .font: font
+               ]
+           )
+           nextButton.setAttributedTitle(attributedTitle, for: .normal)    }
     
     private func showOverlay() {
         UIView.animate(withDuration: 0.3) { [weak self] in
