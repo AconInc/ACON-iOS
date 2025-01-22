@@ -78,9 +78,7 @@ extension UploadTargetType: TargetType {
         switch self {
         case .getSearchKeyword, .getReviewVerification:
             headers = HeaderType.noHeader
-        case .getSearchSuggestion:
-            headers = HeaderType.basicHeader
-        case .postReview, .getAcornCount:
+        case .getSearchSuggestion, .postReview, .getAcornCount:
             headers = HeaderType.headerWithToken()
         }
         return headers
