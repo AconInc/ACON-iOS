@@ -11,31 +11,97 @@ import CoreLocation
 
 class SpotDetailViewModel {
     
-    let menuDummyData: [SpotMenuModel] = [
-        SpotMenuModel(menuID: 1, name: "마라탕", price: 10000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "꿔바로우", price: 22000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "마라탕", price: 10000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "꿔바로우", price: 22000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "마라탕", price: 10000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "꿔바로우", price: 22000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "마라탕", price: 10000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "꿔바로우", price: 22000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "마라탕", price: 10000, imageURL: ""),
-        SpotMenuModel(menuID: 1, name: "꿔바로우", price: 22000, imageURL: "")
-    ]
+    let spotID: Int64
     
-    let spotDetailDummyData: SpotDetailInfoModel = SpotDetailInfoModel(spotID: 1, name: "아콘네 라면가게", spotType: "음식점", firstImageURL: "", openStatus: true, address: "서울시 마포구 동교동 27길 27", localAcornCount: 1, basicAcornCount: 1000, latitude: 37.556944, longitude: 126.923917)
+    let onSuccessGetSpotDetail: ObservablePattern<Bool> = ObservablePattern(nil)
+        
+    var spotDetail: ObservablePattern<SpotDetailInfoModel> = ObservablePattern(nil)
     
+    let onSuccessGetSpotMenu: ObservablePattern<Bool> = ObservablePattern(nil)
+        
+    var spotMenu: ObservablePattern<[SpotMenuModel]> = ObservablePattern(nil)
     
-    init() {
+    let onSuccessPostGuidedSpotRequest: ObservablePattern<Bool> = ObservablePattern(nil)
+    
+    init(spotID: Int64) {
+        self.spotID = spotID
         ACLocationManager.shared.addDelegate(self)
     }
     
     deinit {
        ACLocationManager.shared.removeDelegate(self)
     }
+
+}
+
+// MARK: - 서버 통신 메소드
+
+extension SpotDetailViewModel {
     
-    // MARK: - 네이버지도 Redirect
+    func getSpotDetail() {
+        ACService.shared.spotDetailService.getSpotDetail(spotID: spotID) { [weak self] response in
+            switch response {
+            case .success(let data):
+                let spotDetailData = SpotDetailInfoModel(spotID: data.id,
+                                                         name: data.name,
+                                                         spotType: data.spotType.koreanText,
+                                                         firstImageURL: data.imageList[0],
+                                                         openStatus: data.openStatus,
+                                                         address: data.address,
+                                                         localAcornCount: data.localAcornCount,
+                                                         basicAcornCount: data.basicAcornCount,
+                                                         latitude: data.latitude,
+                                                         longitude: data.longitude)
+                self?.spotDetail.value = spotDetailData
+                self?.onSuccessGetSpotDetail.value = true
+            default:
+                print("VM - Failed To getSpotDetail")
+                self?.onSuccessGetSpotDetail.value = false
+                return
+            }
+        }
+    }
+    
+    func getSpotMenu() {
+        ACService.shared.spotDetailService.getSpotMenu(spotID: spotID) { [weak self] response in
+            switch response {
+            case .success(let data):
+                let spotMenuData = data.menuList.map { menu in
+                    return SpotMenuModel(menuID: menu.id,
+                                         name: menu.name,
+                                         price: menu.price,
+                                         imageURL: menu.image)
+                    }
+                    self?.spotMenu.value = spotMenuData
+                    self?.onSuccessGetSpotMenu.value = true
+            default:
+                print("VM - Failed To getSpotMenu")
+                self?.onSuccessGetSpotMenu.value = false
+                return
+            }
+        }
+    }
+    
+    // TODO: - 추후 PostGuidedSpotRequest 그냥 삭제?
+    func postGuidedSpot() {
+        ACService.shared.spotDetailService.postGuidedSpot(requestBody: PostGuidedSpotRequest(spotId: self.spotID)){ [weak self] response in
+            switch response {
+            case .success(let data):
+                self?.onSuccessPostGuidedSpotRequest.value = true
+            default:
+                print("VM - Failed To postGuidedSpot")
+                self?.onSuccessPostGuidedSpotRequest.value = false
+                return
+            }
+        }
+    }
+    
+}
+
+
+// MARK: - 네이버지도 Redirect
+
+extension SpotDetailViewModel {
     
     func redirectToNaverMap() {
         ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
@@ -44,12 +110,15 @@ class SpotDetailViewModel {
     
 }
 
+
+// MARK: - 위치
+
 extension SpotDetailViewModel: ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
         guard let appName = Bundle.main.bundleIdentifier else { return }
         let sname = "내 위치"
-        let urlString = "nmap://route/walk?slat=\(coordinate.latitude)&slng=\(coordinate.longitude)&sname=\(sname)&dlat=\(spotDetailDummyData.latitude)&dlng=\(spotDetailDummyData.longitude)&dname=\(spotDetailDummyData.name)&appname=\(appName)"
+        let urlString = "nmap://route/walk?slat=\(coordinate.latitude)&slng=\(coordinate.longitude)&sname=\(sname)&dlat=\(spotDetail.value?.latitude ?? 0)&dlng=\(spotDetail.value?.longitude ?? 0)&dname=\(spotDetail.value?.name ?? "")&appname=\(appName)"
         guard let encodedStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         
         guard let url = URL(string: encodedStr) else { return }
@@ -60,8 +129,6 @@ extension SpotDetailViewModel: ACLocationManagerDelegate {
         } else {
             UIApplication.shared.open(appStoreURL)
         }
-        
-        // TODO: 최근 길 안내 POST 서버통신 -> spotDetailInfoModel.spotID POST
     }
     
 }

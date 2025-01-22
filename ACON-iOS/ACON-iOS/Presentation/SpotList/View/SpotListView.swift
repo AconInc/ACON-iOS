@@ -119,7 +119,7 @@ private extension SpotListView {
     
     func setCollectionView() {
         let flowLayout = UICollectionViewFlowLayout()
-        // NOTE: itemSize는 Controller에서 설정합니다. (collectionView의 height이 필요하기 때문)
+        // NOTE: itemSize는 Controller에서 설정합니다. (indexPath에 따라 다르기 때문)
         flowLayout.minimumLineSpacing = SpotListItemSizeType.minimumLineSpacing.value
         flowLayout.scrollDirection = .vertical
         

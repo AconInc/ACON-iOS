@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreLocation
 
 import SnapKit
 import Then
@@ -17,7 +16,7 @@ class LocalVerificationViewController: BaseNavViewController {
     
     private let localVerificationView = LocalVerificationView()
     
-    private var userCoordinate: CLLocationCoordinate2D?
+    private let localVerificationViewModel = LocalVerificationViewModel()
     
     // MARK: - LifeCycle
     
@@ -26,11 +25,7 @@ class LocalVerificationViewController: BaseNavViewController {
         
         self.setXButton()
         addTarget()
-        ACLocationManager.shared.addDelegate(self)
-    }
-    
-    deinit {
-       ACLocationManager.shared.removeDelegate(self)
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +65,22 @@ class LocalVerificationViewController: BaseNavViewController {
 
 }
 
+
+// MARK: - bindViewModel
+
+private extension LocalVerificationViewController {
+    
+    func bindViewModel() {
+        self.localVerificationViewModel.isLocationChecked.bind { [weak self] isChecked in
+            guard let isChecked else { return }
+            if isChecked {
+                self?.pushToLocalMapVC()
+            }
+        }
+    }
+    
+}
+    
     
 // MARK: - @objc functions
 
@@ -86,26 +97,18 @@ private extension LocalVerificationViewController {
     
     @objc
     func nextButtonTapped() {
-        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
+        localVerificationViewModel.checkLocation()
     }
     
 }
 
-extension LocalVerificationViewController: ACLocationManagerDelegate {
-    
-    func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
-        print("성공 - 위도: \(coordinate.latitude), 경도: \(coordinate.longitude)")
-        self.userCoordinate = coordinate
-        pushToLocalMapVC()
-    }
-    
-}
+
+// MARK: - Navigation Logic
 
 extension LocalVerificationViewController {
 
     func pushToLocalMapVC() {
-        guard let coordinate = userCoordinate else { return }
-        let vc = LocalMapViewController(coordinate: coordinate)
+        let vc = LocalMapViewController(viewModel: localVerificationViewModel)
         navigationController?.pushViewController(vc, animated: false)
     }
     

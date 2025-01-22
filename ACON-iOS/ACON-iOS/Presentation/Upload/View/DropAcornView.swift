@@ -169,9 +169,9 @@ extension DropAcornView {
 
 extension DropAcornView {
     
-    func bindData(_ data: AcornCountModel) {
+    func bindData(_ acornCount: Int) {
         self.acornNumberLabel.do {
-            $0.setPartialText(fullText: StringLiterals.Upload.acornsIHave + " \(data.acornCount)/25", textStyles: [(StringLiterals.Upload.acornsIHave, .b4, .gray5), (" \(data.acornCount)/25", .b4, .org1)])
+            $0.setPartialText(fullText: StringLiterals.Upload.acornsIHave + " \(acornCount)/25", textStyles: [(StringLiterals.Upload.acornsIHave, .b4, .gray5), (" \(acornCount)/25", .b4, .org1)])
         }
     }
     

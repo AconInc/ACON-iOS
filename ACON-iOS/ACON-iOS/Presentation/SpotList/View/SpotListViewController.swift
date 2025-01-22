@@ -53,6 +53,12 @@ class SpotListViewController: BaseNavViewController {
             action: #selector(tappedFilterButton),
             for: .touchUpInside
         )
+        
+        spotListView.floatingLocationButton.button.addTarget(
+            self,
+            action: #selector(tappedLocationButton),
+            for: .touchUpInside
+        )
     }
     
 }
@@ -117,6 +123,16 @@ private extension SpotListViewController {
         present(vc, animated: true)
     }
     
+    
+    @objc
+    func tappedLocationButton() {
+        // TODO: 내용 handleRefreshControl 부분으로 옮기기
+        // TODO: 로그인중인지 여부
+        let vc = LoginModalViewController()
+        vc.setShortSheetLayout()
+        
+        present(vc, animated: true)
+    }
 }
 
 
@@ -227,11 +243,7 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemWidth: CGFloat = SpotListItemSizeType.itemWidth.value
-        let collectionViewHeight: CGFloat = collectionView.frame.height
-        let shortHeight: CGFloat = shortItemHeight(collectionViewHeight)
-        let longHeight: CGFloat = longItemHeight(collectionViewHeight)
-        
-        let itemHeight = indexPath.item == 0 ? longHeight : shortHeight
+        let itemHeight: CGFloat = indexPath.row == 0 ? SpotListItemSizeType.longItemHeight.value : SpotListItemSizeType.shortItemHeight.value
         
         return CGSize(width: itemWidth, height: itemHeight)
     }
@@ -242,26 +254,6 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
         let itemWidth: CGFloat = SpotListItemSizeType.itemWidth.value
         let itemHeight: CGFloat = SpotListItemSizeType.headerHeight.value
         return CGSize(width: itemWidth, height: itemHeight)
-    }
-    
-}
-
-
-// MARK: - CollectionView ItemSize Method
-
-extension SpotListViewController {
-    
-    func longItemHeight(_ collectionViewHeight: CGFloat) -> CGFloat {
-        let lineSpacing = SpotListItemSizeType.minimumLineSpacing.value
-        let headerHeight = SpotListItemSizeType.headerHeight.value
-        let shortHeight = shortItemHeight(collectionViewHeight)
-        return collectionViewHeight - shortHeight - lineSpacing - headerHeight
-    }
-    
-    func shortItemHeight(_ collectionViewHeight: CGFloat) -> CGFloat {
-        let lineSpacing = SpotListItemSizeType.minimumLineSpacing.value
-        let headerHeight = SpotListItemSizeType.headerHeight.value
-        return (collectionViewHeight - lineSpacing * 3 - headerHeight) / 4
     }
     
 }

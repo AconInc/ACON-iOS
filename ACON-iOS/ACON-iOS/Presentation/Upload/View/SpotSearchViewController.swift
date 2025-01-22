@@ -21,18 +21,28 @@ class SpotSearchViewController: BaseViewController {
     
     private var hasCompletedSelection = false
     
-    private let spotSearchViewModel = SpotSearchViewModel()
+    private var spotSearchViewModel: SpotSearchViewModel
     
     private let acDebouncer = ACDebouncer(delay: 0.3)
     
-    var completionHandler: ((Int, String) -> Void)?
+    var completionHandler: ((Int64, String) -> Void)?
     
-    private var selectedSpotId: Int = 0
+    private var selectedSpotId: Int64 = 0
     
     private var selectedSpotName: String = ""
       
     
     // MARK: - LifeCycle
+    
+    init(spotSearchViewModel: SpotSearchViewModel) {
+        self.spotSearchViewModel = spotSearchViewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,25 +58,20 @@ class SpotSearchViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         // TODO: - getSearchSuggestion 서버통신
+        spotSearchViewModel.getSearchSuggestion()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         spotSearchView.searchTextField.resignFirstResponder()
-        print("===== viewWillDisappear called =====")
-        print("isBeingDismissed: \(isBeingDismissed)")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("===== viewDidDisappear called =====")
-        print("hasCompletedSelection: \(hasCompletedSelection)")
         if isBeingDismissed {
             if hasCompletedSelection {
-                print("===== completionHandler will be called =====")
                 completionHandler?(selectedSpotId, selectedSpotName)
             }
-            print("===== dismissCompletion will be called =====")
             dismissCompletion?()
         }
     }
@@ -117,13 +122,14 @@ private extension SpotSearchViewController {
     func doneButtonTapped() {
         print("===== doneButton tapped =====")
         hasCompletedSelection = true
-        spotSearchView.searchTextField.resignFirstResponder()
         dismiss(animated: true)
     }
     
     @objc
     func searchXButtonTapped() {
         spotSearchView.searchTextField.text = ""
+        spotSearchViewModel.getSearchSuggestion()
+        spotSearchView.doneButton.isEnabled = false
         spotSearchView.searchSuggestionStackView.isHidden = false
         spotSearchView.searchKeywordCollectionView.isHidden = true
     }
@@ -148,27 +154,52 @@ private extension SpotSearchViewController {
             guard let onSuccess, let data = self?.spotSearchViewModel.searchSuggestionData.value else { return }
             if onSuccess {
                 self?.spotSearchView.bindData(data)
+                self?.addActionToSearchKeywordButton()
             }
         }
         
-        self.spotSearchViewModel.onSuccessGetSearchKeyword.bind { [weak self] onSuccess in
-            guard let onSuccess, let onUpdate = self?.spotSearchViewModel.updateSearchKeyword.value, let data = self?.spotSearchViewModel.searchKeywordData.value else { return }
-            if onSuccess && onUpdate {
+        // TODO: - 계속 불러야 해서 일단 데이터 자체 바인딩. 추후 로딩이 필요한 경우 onSuccessGetSearchKeyword으로 바인딩 로직 재구성
+        // TODO: - 또는 뷰모델에서 기존 키워드와 같은지 보고 updateKeyword이라는 옵저버블 패턴 만들어 updateKeyword.value = false
+        self.spotSearchViewModel.searchKeywordData.bind { [weak self] data in
+            guard let data = data else { return }
+            
+            DispatchQueue.main.async {
                 if data.count == 0 {
-                    DispatchQueue.main.async {
-                        // TODO: - 엠티뷰 처리
-                    }
+                    // TODO: - 엠티뷰 처리
+                    self?.spotSearchView.searchKeywordCollectionView.isHidden = true
                 } else {
-                    DispatchQueue.main.async {
-                        self?.spotSearchView.searchKeywordCollectionView.reloadData()
-                    }
+                    self?.spotSearchView.searchKeywordCollectionView.isHidden = false
+                    self?.spotSearchView.searchKeywordCollectionView.reloadData()
                 }
-                self?.spotSearchViewModel.updateSearchKeyword.value = false
             }
         }
-        
     }
 
+}
+
+
+// MARK: - 추천 검색어 클릭 로직
+
+private extension SpotSearchViewController {
+    
+    func addActionToSearchKeywordButton() {
+        spotSearchView.searchSuggestionStackView.arrangedSubviews.forEach { view in
+            if let button = view as? UIButton {
+                button.addTarget(self,
+                                 action: #selector(searchKeywordButtonTapped(_:)),
+                                 for: .touchUpInside)
+            }
+        }
+    }
+    
+    @objc
+    func searchKeywordButtonTapped(_ sender: UIButton) {
+        guard let spotName = sender.currentAttributedTitle?.string else { return }
+        spotSearchView.searchTextField.text = spotName
+        self.updateSearchKeyword(spotName)
+        spotSearchView.searchSuggestionStackView.isHidden = true
+    }
+    
 }
 
 
@@ -202,9 +233,10 @@ extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedSpotId = spotSearchViewModel.searchKeywordDummyData[indexPath.item].spotID
-        selectedSpotName = spotSearchViewModel.searchKeywordDummyData[indexPath.item].spotName
+        selectedSpotId = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotID ?? 1
+        selectedSpotName = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotName ?? ""
         spotSearchView.searchTextField.text = selectedSpotName
+        spotSearchView.doneButton.isEnabled = true
         self.dismissKeyboard()
     }
     
@@ -216,7 +248,7 @@ extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
 extension SpotSearchViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return spotSearchViewModel.searchKeywordData.value?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -248,7 +280,8 @@ extension SpotSearchViewController: UITextFieldDelegate {
 extension SpotSearchViewController{
     
     func updateSearchKeyword(_ text: String) {
-        // 뷰모델 서버통신함수 새로 부르기 - spotSearchViewModel.getSpotKeyword()
+        spotSearchViewModel.getSearchKeyword(keyword: text)
+        // TODO: - 빈 리스트?
     }
     
 }

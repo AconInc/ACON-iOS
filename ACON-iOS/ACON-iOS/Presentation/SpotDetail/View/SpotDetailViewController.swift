@@ -19,7 +19,8 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
 
     // MARK: - Properties
     
-    private let spotDetailViewModel = SpotDetailViewModel()
+    // TODO: - 이거 spotID 전 화면에서 넘겨받는 것으로 변경
+    private let spotDetailViewModel = SpotDetailViewModel(spotID: 1)
     
     private let spotDetailName: String = "가게명가게명"
     
@@ -33,6 +34,14 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
         addTarget()
         registerCell()
         setDelegate()
+        bindViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+
+        spotDetailViewModel.getSpotDetail()
+        spotDetailViewModel.getSpotMenu()
     }
     
     override func setHierarchy() {
@@ -54,9 +63,6 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
         
         self.applyGlassmorphism()
         self.setBackButton()
-        updateCollectionViewHeight()
-        bindNavBar(data: spotDetailViewModel.spotDetailDummyData)
-        spotDetailView.bindData(data: spotDetailViewModel.spotDetailDummyData)
     }
     
     private func addTarget() {
@@ -71,12 +77,38 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
 }
 
 
+// MARK: - bindViewModel
+
+private extension SpotDetailViewController {
+    
+    func bindViewModel() {
+        self.spotDetailViewModel.onSuccessGetSpotDetail.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.spotDetailViewModel.spotDetail.value else { return }
+            if onSuccess {
+                self?.bindNavBar(data: data)
+                self?.spotDetailView.bindData(data: data)
+            }
+        }
+        
+        self.spotDetailViewModel.onSuccessGetSpotMenu.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.spotDetailViewModel.spotMenu.value else { return }
+            if onSuccess {
+                self?.spotDetailView.menuCollectionView.reloadData()
+                self?.updateCollectionViewHeight()
+            }
+        }
+        
+    }
+    
+}
+
 // MARK: - @objc methods
 
 private extension SpotDetailViewController {
     
     @objc
     func findCourseButtonTapped() {
+        spotDetailViewModel.postGuidedSpot()
         spotDetailViewModel.redirectToNaverMap()
     }
     
@@ -94,7 +126,7 @@ private extension SpotDetailViewController {
     func bindNavBar(data: SpotDetailInfoModel) {
         self.secondTitleLabel.do {
             $0.isHidden = false
-            $0.setPartialText(fullText: data.name+" "+data.spotType, textStyles: [(data.name+" ", .t2, .acWhite), (data.spotType, .b2, .gray4)])
+            $0.setPartialText(fullText: data.name+" "+data.spotType, textStyles: [(data.name+" ", .t2, .acWhite), (data.spotType, .b2, .acWhite)])
         }
     }
     
@@ -115,9 +147,9 @@ private extension SpotDetailViewController {
     }
     
     func updateCollectionViewHeight() {
-        let numberOfItems = spotDetailViewModel.menuDummyData.count
+        let numberOfItems = spotDetailViewModel.spotMenu.value?.count
         let itemHeight = SpotDetailView.menuCollectionViewFlowLayout.itemSize.height
-        let totalHeight = itemHeight * CGFloat(numberOfItems)
+        let totalHeight = itemHeight * CGFloat(numberOfItems ?? 0)
         
         spotDetailView.menuCollectionView.snp.updateConstraints {
             $0.height.equalTo(totalHeight)
@@ -134,11 +166,11 @@ private extension SpotDetailViewController {
 extension SpotDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return spotDetailViewModel.menuDummyData.count
+        return spotDetailViewModel.spotMenu.value?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let data = spotDetailViewModel.menuDummyData[indexPath.item]
+        guard let data = spotDetailViewModel.spotMenu.value?[indexPath.item] else { return UICollectionViewCell() }
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.cellIdentifier, for: indexPath) as? MenuCollectionViewCell else {
             return UICollectionViewCell() }
         cell.dataBind(data, indexPath.item)
@@ -153,10 +185,14 @@ extension SpotDetailViewController: UICollectionViewDataSource {
 extension SpotDetailViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(spotDetailView.scrollView.contentOffset.y, spotDetailView.stickyHeaderView.frame.minY)
-        let shouldShowSticky = spotDetailView.scrollView.contentOffset.y >= spotDetailView.stickyHeaderView.frame.minY
+        //NOTE: - 내 맘대로 -68 함 (높이 36이라 72 해야할 것 같은데 아무튼 추후수정
+        let stickyPosition = ScreenUtils.height*400/780 + spotDetailView.navViewHeight - 68
+        let shouldShowSticky = scrollView.contentOffset.y >= stickyPosition
         spotDetailView.stickyView.isHidden = !shouldShowSticky
         spotDetailView.stickyHeaderView.isHidden = shouldShowSticky
+        
+        let shouldShowBlurSpotImageView = spotDetailView.scrollView.contentOffset.y > spotDetailView.navViewHeight
+        spotDetailView.blurSpotImageView.isHidden = shouldShowBlurSpotImageView
     }
 
 }

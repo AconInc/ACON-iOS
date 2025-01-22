@@ -25,9 +25,9 @@ class DropAcornViewController: BaseNavViewController {
     
     var spotReviewViewModel = SpotReviewViewModel()
     
-    var spotID: Int = 0
+    var spotID: Int64 = 0
     
-    init(spotID: Int) {
+    init(spotID: Int64) {
         self.spotID = spotID
         super.init(nibName: nil, bundle: nil)
     }
@@ -44,6 +44,8 @@ class DropAcornViewController: BaseNavViewController {
         self.setXButton()
         addTarget()
         bindViewModel()
+        // NOTE : 어처피 뷰 한 번만 불려서 viewWillAppear에서 부를 필요 X
+        spotReviewViewModel.getAcornCount()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,12 +97,7 @@ private extension DropAcornViewController {
     
     @objc
     func leaveReviewButtonTapped() {
-        // TODO: - reviewAcornCount 서버 POST -> spotReviewViewModel.postReviewData()
-        let data: ReviewPostModel = ReviewPostModel(spotID: spotID, acornCount: reviewAcornCount)
-        // TODO: - 여기서 가는 로직은 임시적용 (VM init에서 true할 수 없음) -> 나중에 지우기
-        let vc = ReviewFinishedViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: false)
+        spotReviewViewModel.postReview(spotID: spotID, acornCount: reviewAcornCount)
     }
     
     @objc
@@ -118,7 +115,7 @@ private extension DropAcornViewController {
     @objc
     func xButtonTapped() {
         let alertHandler = AlertHandler()
-        alertHandler.showReviewExitAlert(from: self)
+        alertHandler.showUploadExitAlert(from: self)
     }
     
 }
@@ -129,10 +126,10 @@ private extension DropAcornViewController {
 private extension DropAcornViewController {
     
     func bindViewModel() {
-        self.spotReviewViewModel.onSuccessGetAcornNum.bind { [weak self] onSuccess in
-            guard let onSuccess, let data = self?.spotReviewViewModel.acornNum.value else { return }
+        self.spotReviewViewModel.onSuccessGetAcornCount.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.spotReviewViewModel.acornCount.value else { return }
             if onSuccess {
-                self?.possessAcornCount = data.acornCount
+                self?.possessAcornCount = data
                 self?.dropAcornView.bindData(data)
             }
         }
@@ -141,7 +138,8 @@ private extension DropAcornViewController {
             guard let onSuccess else { return }
             if onSuccess {
                 let vc = ReviewFinishedViewController()
-                self?.navigationController?.pushViewController(vc, animated: false)
+                vc.modalPresentationStyle = .fullScreen
+                self?.present(vc, animated: false)
             }
         }
     }

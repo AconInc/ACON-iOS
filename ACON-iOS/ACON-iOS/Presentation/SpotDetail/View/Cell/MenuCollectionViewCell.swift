@@ -58,7 +58,8 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         
         self.backgroundColor = .clear
         menuImageView.do {
-//            $0.image = .imgStoreDetailMenulist
+            $0.layer.cornerRadius = 6
+            $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
         }
     }
@@ -67,13 +68,19 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
 
 extension MenuCollectionViewCell {
     
-    func dataBind(_ menuInfoData: SpotMenuModel, _ indexRow: Int) {
-        // TODO: imageView kf - 없으면 넣지 말기
-        menuNameLabel.setLabel(text: menuInfoData.name,
+    func dataBind(_ data: SpotMenuModel, _ indexRow: Int) {
+        if let imageURL = data.imageURL {
+            menuImageView.kf.setImage(with: URL(string: imageURL), options: [.transition(.none), .cacheOriginalImage])
+        }
+        menuNameLabel.setLabel(text: data.name,
                                style: .b2)
-        // TODO: 가격 쉼표 넣기
-        menuPriceLabel.setLabel(text: menuInfoData.price.formattedWithSeparator + "원",
-                               style: .s1)
+        if data.price == -1 {
+            menuPriceLabel.setLabel(text: "변동",
+                                   style: .s1)
+        } else {
+            menuPriceLabel.setLabel(text: data.price.formattedWithSeparator + "원",
+                                   style: .s1)
+        }
     }
     
 }

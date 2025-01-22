@@ -169,9 +169,14 @@ final class SpotSearchView: GlassmorphismView {
         }
         
         doneButton.do {
+            $0.isEnabled = false
             $0.setAttributedTitle(text: StringLiterals.Upload.done,
                                   style: .b2,
                                   color: .gray5,
+                                  for: .disabled)
+            $0.setAttributedTitle(text: StringLiterals.Upload.done,
+                                  style: .b2,
+                                  color: .acWhite,
                                   for: .normal)
         }
         
@@ -279,10 +284,15 @@ extension SpotSearchView {
 
 extension SpotSearchView {
     
-    func bindData(_ data: SearchSuggestionModel) {
-        for i in 0...4 {
-            let button = makeRecommendedSpotButton(data.spotList[i])
-            searchSuggestionStackView.addArrangedSubview(button)
+    func bindData(_ data: [SearchSuggestionModel]) {
+        searchSuggestionStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+        if data.count != 0 {
+            for i in 0...(data.count-1) {
+                let button = makeRecommendedSpotButton(data[i].spotName)
+                searchSuggestionStackView.addArrangedSubview(button)
+            }
         }
     }
     
