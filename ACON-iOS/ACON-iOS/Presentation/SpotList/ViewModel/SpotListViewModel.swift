@@ -22,6 +22,8 @@ class SpotListViewModel {
     var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.559171017384145, longitude: 126.9219534442884)
     
     
+    var isFilterSet: ObservablePattern<Bool> = ObservablePattern(nil)
+    
     // MARK: - Filter
     
     // I will fix this on other branch ^^
@@ -64,12 +66,12 @@ class SpotListViewModel {
 extension SpotListViewModel {
     
     func postSpotList() {
-        
+        guard let spotType = self.spotType.value else { return }
         let requestBody = PostSpotListRequest(
             latitude: userCoordinate.latitude,
             longitude: userCoordinate.longitude,
             condition: SpotCondition(
-                spotType: SpotType.restaurant.serverKey,
+                spotType: spotType.serverKey,
                 filterList: filterList.map { filterList in
                     let filterList = SpotFilterList(
                         category: filterList.category,
