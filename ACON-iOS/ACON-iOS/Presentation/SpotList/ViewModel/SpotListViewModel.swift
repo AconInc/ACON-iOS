@@ -18,7 +18,8 @@ class SpotListViewModel {
     
     var isUpdated: Bool = false
     
-    var userCoordinate: CLLocationCoordinate2D? = nil
+    // TODO: userCoordinate 기본값 빼고 옵셔널로 만들기 (지금은 필터 설정했을 때 좌표가 0,0으로 찍히는 문제때문에 좌표 넣어둠...)
+    var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.559171017384145, longitude: 126.9219534442884)
     
     
     // MARK: - Filter
@@ -26,16 +27,18 @@ class SpotListViewModel {
     // I will fix this on other branch ^^
     var spotType: ObservablePattern<SpotType> = ObservablePattern(.restaurant)
     
-    var filter: SpotFilterModel = .init(
-        latitude: 0,
-        longitude: 0,
-        condition: SpotConditionModel(
-            spotType: SpotType.restaurant.text,
-            filterList: [],
-            walkingTime: -1,
-            priceRange: -1
-        )
-    )
+    var filterList: [SpotFilterListModel] = []
+    
+//    var filter: SpotFilterModel = .init(
+//        latitude: 0,
+//        longitude: 0,
+//        condition: SpotConditionModel(
+//            spotType: SpotType.restaurant.text,
+//            filterList: [],
+//            walkingTime: -1,
+//            priceRange: -1
+//        )
+//    )
     
     
     // MARK: - Methods
@@ -61,12 +64,19 @@ class SpotListViewModel {
 extension SpotListViewModel {
     
     func postSpotList() {
+        
         let requestBody = PostSpotListRequest(
-            latitude: userCoordinate?.latitude ?? 0,
-            longitude: userCoordinate?.longitude ?? 0,
+            latitude: userCoordinate.latitude,
+            longitude: userCoordinate.longitude,
             condition: SpotCondition(
                 spotType: SpotType.restaurant.serverKey,
-                filterList: [],
+                filterList: filterList.map { filterList in
+                    let filterList = SpotFilterList(
+                        category: filterList.category,
+                        optionList: filterList.optionList)
+                    print("sssssss filter: \(filterList.category)")
+                    return filterList
+                },
                 walkingTime: -1,
                 priceRange: -1
             )
