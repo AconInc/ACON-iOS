@@ -112,7 +112,7 @@ final class LoginView: BaseView {
         
         appleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
-            $0.backgroundColor = .gray9
+            $0.backgroundColor = .acBlack
             $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
             $0.setImage(.appleLogo, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
