@@ -285,11 +285,11 @@ extension SpotDetailView {
                                              style: .b2,
                                              color: .gray4)
         self.localAcornCountLabel.setLabel(text: String(data.localAcornCount),
-                                                     style: .b4,
-                                                     alignment: .right)
+                                                     style: .s1,
+                                                     alignment: .left)
         self.plainAcornCountLabel.setLabel(text: String(data.basicAcornCount),
-                                                     style: .b4,
-                                                     alignment: .right)
+                                           style: .s1,
+                                           alignment: .left)
         
     }
     
