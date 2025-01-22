@@ -71,8 +71,8 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
         
         container.snp.makeConstraints {
             $0.edges.equalToSuperview()
-            $0.width.equalTo(101)
-            $0.height.equalTo(129)
+            $0.width.equalTo(101).priority(.low)
+            $0.height.equalTo(129).priority(.low)
         }
         
         imageView.snp.makeConstraints {
@@ -81,9 +81,9 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).offset(8)
+            $0.top.equalTo(imageView.snp.bottom).offset(8).priority(.low)
             $0.centerX.equalTo(container)
-            $0.height.equalTo(20)
+            $0.height.equalTo(20).priority(.low)
         }
         
         overlayContainer.snp.makeConstraints {

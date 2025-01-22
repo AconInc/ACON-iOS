@@ -57,9 +57,9 @@ enum DislikeType: CaseIterable {
         case .hoeYukhoe:
             return "HOE_YUKHOE"
         case .gopchang:
-            return "GOPCHANG"
+            return "GOPCHANG_MAKCHANG_DAECHANG"
         case .soondae:
-            return "SUNDAE"
+            return "SUNDAE_SEONJI"
         case .yanggogi:
             return "YANGGOGI"
         case .none:

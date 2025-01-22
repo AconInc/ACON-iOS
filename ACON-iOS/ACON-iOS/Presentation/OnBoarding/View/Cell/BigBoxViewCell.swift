@@ -20,6 +20,7 @@ final class BigBoxViewCell: BaseCollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .clear
         setStyle()
         setHierarchy()
         setLayout()
@@ -73,7 +74,7 @@ final class BigBoxViewCell: BaseCollectionViewCell {
         
         container.snp.makeConstraints {
             $0.edges.equalToSuperview()
-            $0.width.equalTo(154)
+            $0.width.equalTo(154).priority(.low)
         }
         
         imageView.snp.makeConstraints {
@@ -84,7 +85,7 @@ final class BigBoxViewCell: BaseCollectionViewCell {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(imageView.snp.bottom).offset(2)
             $0.centerX.equalTo(container)
-            $0.height.equalTo(35)
+            $0.height.equalTo(35).priority(.low)
         }
         
         overlayContainer.snp.makeConstraints {

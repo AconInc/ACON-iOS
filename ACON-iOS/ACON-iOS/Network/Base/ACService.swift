@@ -25,6 +25,8 @@ final class ACService {
 
     lazy var uploadService: UploadService = UploadService()
     
+    lazy var onboardingService: OnboardingService = OnboardingService()
+    
     lazy var spotListService = SpotListService()
     
 }
