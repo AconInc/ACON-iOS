@@ -70,8 +70,9 @@ class SpotUploadViewController: BaseNavViewController {
         super.setStyle()
         
         self.setXButton()
-        self.setSecondTitleLabelStyle(title: StringLiterals.Upload.upload)
+        self.setNextButton()
         self.spotUploadView.dropAcornButton.isEnabled = false
+        self.rightButton.isEnabled = false
     }
     
     func addTarget() {
@@ -81,9 +82,9 @@ class SpotUploadViewController: BaseNavViewController {
         spotUploadView.spotSearchButton.addTarget(self,
                                                   action: #selector(spotSearchButtonTapped),
                                                   for: .touchUpInside)
-        spotUploadView.dropAcornButton.addTarget(self,
-                                                 action: #selector(dropAcornButtonTapped),
-                                                 for: .touchUpInside)
+        self.rightButton.addTarget(self,
+                                   action: #selector(nextButtonTapped),
+                                    for: .touchUpInside)
     }
 
 }
@@ -96,14 +97,12 @@ private extension SpotUploadViewController {
             guard let onSuccess, let data = self?.spotReviewViewModel.reviewVerification.value else { return }
             if onSuccess {
                 if data {
-                    self?.spotUploadView.dropAcornButton.isEnabled = true
-                    self?.spotUploadView.dropAcornButton.backgroundColor = .gray5
+                    self?.rightButton.isEnabled = true
                 } else {
                     let alertHandler = AlertHandler()
                     alertHandler.showLocationAccessFailImageAlert(from: self!)
-                    self?.spotUploadView.dropAcornButton.isEnabled = false
-                    self?.spotUploadView.dropAcornButton.backgroundColor = .gray8
-                    self?.spotUploadView.spotSearchButton.setAttributedTitle(text: StringLiterals.Upload.uploadSpotName,
+                    self?.rightButton.isEnabled = false
+                    self?.spotUploadView.spotSearchButton.setAttributedTitle(text: StringLiterals.Upload.searchSpot,
                                                                             style: .s2,
                                                                             color: .gray5)
                 }
@@ -124,7 +123,7 @@ private extension SpotUploadViewController {
     }
     
     @objc
-    func dropAcornButtonTapped() {
+    func nextButtonTapped() {
         let vc = DropAcornViewController(spotID: selectedSpotID)
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: false)
@@ -182,10 +181,9 @@ extension SpotUploadViewController {
                                                                    latitude: self.latitude,
                                                                    longitude: self.longitude)
                 } else {
-                    self.spotUploadView.dropAcornButton.isEnabled = false
-                    self.spotUploadView.dropAcornButton.backgroundColor = .gray8
+                    self.rightButton.isEnabled = false
                     self.spotUploadView.spotSearchButton.setAttributedTitle(
-                        text: StringLiterals.Upload.uploadSpotName,
+                        text: StringLiterals.Upload.searchSpot,
                         style: .s2,
                         color: .gray5)
                 }

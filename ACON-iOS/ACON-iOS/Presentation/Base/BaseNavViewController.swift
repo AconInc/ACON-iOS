@@ -22,12 +22,13 @@ class BaseNavViewController: UIViewController {
     
     var leftButton: UIButton = UIButton()
     
-    private var rightButton: UIButton = UIButton()
+    var rightButton: UIButton = UIButton()
     
     var titleLabel = UILabel()
     
     var secondTitleLabel: UILabel = UILabel()
     
+    var centerTitleLabel: UILabel = UILabel()
     
     // MARK: - Life Cycle
     
@@ -207,6 +208,24 @@ extension BaseNavViewController {
     }
     
     
+    // MARK: - 다음 버튼
+    
+    func setNextButton() {
+        rightButton.do {
+            $0.isHidden = false
+            $0.configuration?.baseBackgroundColor = .clear
+            $0.setAttributedTitle(text: StringLiterals.Upload.next,
+                                   style: .b2,
+                                  color: .acWhite,
+                                  for: .normal)
+            $0.setAttributedTitle(text: StringLiterals.Upload.next,
+                                   style: .b2,
+                                  color: .gray5,
+                                  for: .disabled)
+        }
+    }
+    
+
     // MARK: - X 버튼
     
     func setXButton() {
