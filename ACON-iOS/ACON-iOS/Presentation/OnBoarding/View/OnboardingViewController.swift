@@ -52,6 +52,7 @@ final class OnboardingViewController: BaseViewController {
             $0.setImage(UIImage(named: "chevron.left"), for: .normal)
             $0.tintColor = .acWhite
             $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+            $0.alpha = 0
         }
         
         skipButton.do {
@@ -261,7 +262,6 @@ extension OnboardingViewController {
         progressTitle.text = StringLiterals.OnboardingType.progressTitleList[step]
     }
     
-    
     private func setDislikeCollectionView() {
         contentView = dislikeCollectionView
         dislikeCollectionView.onSelectionChanged = { [weak self] selectedIndices in
@@ -270,9 +270,9 @@ extension OnboardingViewController {
             if selectedIndices.map({ $0.uppercased() }) == ["NONE"] {
                 self.isOverlayVisible.toggle()
                 if self.isOverlayVisible {
-//                    self.showOverlay()
+                    //                    self.showOverlay()
                 } else {
-//                    self.hideOverlay()
+                    //                    self.hideOverlay()
                 }
             } else {
                 self.hideOverlay()
@@ -324,17 +324,17 @@ extension OnboardingViewController {
         nextButton.backgroundColor = isEnabled ? .gray5 : .gray8
         // NOTE: when define component on up stage, It can't change button text color.. so, i define conponent attribute on here
         let title = "다음"
-           let textColor: UIColor = isEnabled ? .white : .gray6
-           let font = ACFont.h8.font
-           
-           let attributedTitle = NSAttributedString(
-               string: title,
-               attributes: [
-                   .foregroundColor: textColor,
-                   .font: font
-               ]
-           )
-           nextButton.setAttributedTitle(attributedTitle, for: .normal)    }
+        let textColor: UIColor = isEnabled ? .white : .gray6
+        let font = ACFont.h8.font
+        
+        let attributedTitle = NSAttributedString(
+            string: title,
+            attributes: [
+                .foregroundColor: textColor,
+                .font: font
+            ]
+        )
+        nextButton.setAttributedTitle(attributedTitle, for: .normal)    }
     
     private func showOverlay() {
         UIView.animate(withDuration: 0.3) { [weak self] in
@@ -412,27 +412,31 @@ extension OnboardingViewController {
             viewModel.postOnboarding()
             return
         }
-
+        
         let isConditionMet = checkSelectionCondition(for: currentStep + 1)
-
+        
         currentStep += 1
+        buttonHide()
         updateContentView(for: currentStep)
         updateNextButtonState(isEnabled: isConditionMet)
         updateProgressIndicator()
-
+        
         if isOverlayVisible {
             hideOverlay()
             isOverlayVisible = false
         }
     }
-
     
     @objc private func backButtonTapped() {
         guard currentStep > 0 else { return }
+        
         currentStep -= 1
+        print("currentStep:",currentStep)
+        buttonHide()
         updateContentView(for: currentStep)
         updateNextButtonState(isEnabled: true)
         updateProgressIndicator()
+        
     }
     
     @objc private func nextStack(){
@@ -442,6 +446,7 @@ extension OnboardingViewController {
 }
 
 extension OnboardingViewController{
+    
     private func showLoadingIndicator() {
         let loadingView = UIActivityIndicatorView(style: .large)
         loadingView.startAnimating()
@@ -495,5 +500,17 @@ extension OnboardingViewController{
             return false
         }
     }
+    
+    private func buttonHide() {
+        print("currentStep:",currentStep)
 
+        if currentStep != 0 {
+            backButton.alpha = 1
+        }
+        if currentStep == 0 {
+            backButton.alpha = 0
+        }
+        
+    }
+    
 }
