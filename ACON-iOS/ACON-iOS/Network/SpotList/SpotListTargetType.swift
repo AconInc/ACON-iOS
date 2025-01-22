@@ -39,8 +39,7 @@ extension SpotListTargetType: TargetType {
     }
 
     var headers: [String : String]? {
-        // TODO: - 추후 유저디폴트 토큰으로 변경
-        let token = ""
+        let token = UserDefaults.standard.string(forKey: StringLiterals.Network.accessToken) ?? ""
         let headers = HeaderType.headerWithToken(token: "Bearer " + token)
         return headers
     }
