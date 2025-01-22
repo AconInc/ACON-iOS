@@ -21,13 +21,21 @@ enum StringLiterals {
         
         static let appleLogin = "Apple로 계속하기"
         
-        static let youAgreed = "가입을 진행할 경우, 아래의 정책에 대해 동의한 것으로 간주합니다."
+        static let youAgreed = "가입을 진행할 경우,\n아래의 정책에 대해 동의한 것으로 간주합니다."
         
         static let termsOfUse = "이용약관"
         
         static let privacyPolicy = "개인정보처리방침"
         
         static let logoText = "매번 맛집을 찾느라\n고민중인 당신을 위한 지도"
+        
+    }
+    
+    enum LoginModal {
+        
+        static let title = "acon에 로그인"
+        
+        static let subTitle = "지금 당신의 위치에서\n가장 최고의 맛집을 추천받아보세요"
         
     }
 

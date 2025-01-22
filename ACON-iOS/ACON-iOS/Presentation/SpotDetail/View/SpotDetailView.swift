@@ -15,6 +15,8 @@ final class SpotDetailView: BaseView {
 
     // MARK: - UI Properties
     
+    var blurSpotImageView: UIImageView = UIImageView()
+    
     var stickyView: StickyHeaderView = StickyHeaderView()
     
     let scrollView: UIScrollView = UIScrollView()
@@ -55,7 +57,7 @@ final class SpotDetailView: BaseView {
         $0.itemSize = CGSize(width: ScreenUtils.width*320/360, height: ScreenUtils.height*110/780)
     }
     
-    private let navViewHeight: CGFloat = ScreenUtils.heightRatio * 56
+    let navViewHeight: CGFloat = ScreenUtils.heightRatio * 56
     
     
     // MARK: - Lifecycle
@@ -63,7 +65,8 @@ final class SpotDetailView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(scrollView,
+        self.addSubviews(blurSpotImageView,
+                         scrollView,
                          stickyView,
                          footerView,
                          gotoTopButton)
@@ -83,6 +86,12 @@ final class SpotDetailView: BaseView {
     
     override func setLayout() {
         super.setLayout()
+        
+        blurSpotImageView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(-navViewHeight)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.height*296/780)
+        }
         
         gotoTopButton.snp.makeConstraints{
             $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
@@ -115,36 +124,36 @@ final class SpotDetailView: BaseView {
         spotDetailImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(navViewHeight)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.height*196/780)
+            $0.height.equalTo(ScreenUtils.height*296/780)
         }
         
         openStatusButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*212/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.height*312/780 + navViewHeight)
             $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.width.equalTo(ScreenUtils.width*51/360)
             $0.height.equalTo(ScreenUtils.height*22/780)
         }
         
         addressImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*242/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.height*342/780 + navViewHeight)
             $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.width.height.equalTo(16)
         }
         
         addressLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*242/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.height*342/780 + navViewHeight)
             $0.leading.equalToSuperview().inset(ScreenUtils.width*38/360)
             $0.height.equalTo(18)
         }
         
         stickyHeaderView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*300/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.height*400/780 + navViewHeight)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.height.equalTo(36)
         }
         
         menuCollectionView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*353/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.height*453/780 + navViewHeight)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
             $0.height.equalTo(0)
             $0.bottom.lessThanOrEqualToSuperview()
@@ -186,6 +195,13 @@ final class SpotDetailView: BaseView {
     
     override func setStyle() {
         super.setStyle()
+        
+        blurSpotImageView.do {
+            $0.backgroundColor = .acWhite
+            $0.contentMode = .scaleAspectFill
+            $0.clipsToBounds = true
+            $0.setBlurView()
+        }
         
         gotoTopButton.do {
             $0.backgroundColor = .gray7
@@ -257,14 +273,15 @@ final class SpotDetailView: BaseView {
 extension SpotDetailView {
     
     func bindData(data: SpotDetailInfoModel) {
-        self.spotDetailImageView.kf.setImage(with: URL(string: data.firstImageURL), options: [.transition(.none),.cacheOriginalImage])
+        [self.blurSpotImageView, self.spotDetailImageView].forEach {
+            $0.kf.setImage(with: URL(string: data.firstImageURL), options: [.transition(.none), .cacheOriginalImage])
+        }
         let openStatus = data.openStatus
         self.openStatusButton.isSelected = openStatus
         self.openStatusButton.setAttributedTitle(
             text: openStatus ? StringLiterals.SpotDetail.isOpen : StringLiterals.SpotDetail.isNotOpen,
             style: .b4
         )
-        
         self.addressLabel.setLabel(text: data.address,
                                              style: .b4,
                                              color: .gray4)

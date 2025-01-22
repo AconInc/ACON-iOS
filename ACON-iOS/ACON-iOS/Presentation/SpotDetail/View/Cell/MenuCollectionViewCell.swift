@@ -74,8 +74,13 @@ extension MenuCollectionViewCell {
         }
         menuNameLabel.setLabel(text: data.name,
                                style: .b2)
-        menuPriceLabel.setLabel(text: data.price.formattedWithSeparator + "원",
-                               style: .s1)
+        if data.price == -1 {
+            menuPriceLabel.setLabel(text: "변동",
+                                   style: .s1)
+        } else {
+            menuPriceLabel.setLabel(text: data.price.formattedWithSeparator + "원",
+                                   style: .s1)
+        }
     }
     
 }
