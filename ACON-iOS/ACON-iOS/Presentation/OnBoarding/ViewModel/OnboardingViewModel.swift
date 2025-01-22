@@ -19,7 +19,7 @@ final class OnboardingViewModel {
     
     var favoriteSpotRank: ObservablePattern<[String]> = ObservablePattern([])
     
-    var postOnboardingResult: ObservablePattern<Bool?> = ObservablePattern(nil)
+    var postOnboardingResult: ObservablePattern<Bool> = ObservablePattern(nil)
     
     
     func postOnboarding() {

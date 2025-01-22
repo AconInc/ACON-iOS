@@ -35,7 +35,7 @@ final class OnboardingViewController: BaseViewController {
     
     // NOTE: for
     private var maxRetryCount: Int { return 3 }
-    private var retryCount = 1
+    private var retryCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -170,19 +170,12 @@ extension OnboardingViewController {
             self?.updateNextButtonState(isEnabled: ranks?.count == 4)
         }
         
-        viewModel.postOnboardingResult.bind { [weak self] success in
+        viewModel.postOnboardingResult.bind { [weak self] onSuccess in
             guard let self = self else { return }
+            guard let onSuccess = onSuccess else { return }
             
-            DispatchQueue.main.async {
-                self.hideLoadingIndicator()
-            }
-            
-            guard let success = success else {
-                print("❌ Unexpected nil for success value")
-                return
-            }
-            
-            if success == true {// NOTE: about BOol? value check, i will fix this line
+            if onSuccess {
+                retryCount = 0
                 let analyzingVC = AnalyzingViewController()
                 analyzingVC.modalPresentationStyle = .fullScreen
                 DispatchQueue.main.async {
