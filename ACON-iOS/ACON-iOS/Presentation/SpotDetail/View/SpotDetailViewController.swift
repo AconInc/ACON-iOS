@@ -126,7 +126,7 @@ private extension SpotDetailViewController {
     func bindNavBar(data: SpotDetailInfoModel) {
         self.secondTitleLabel.do {
             $0.isHidden = false
-            $0.setPartialText(fullText: data.name+" "+data.spotType, textStyles: [(data.name+" ", .t2, .acWhite), (data.spotType, .b2, .gray4)])
+            $0.setPartialText(fullText: data.name+" "+data.spotType, textStyles: [(data.name+" ", .t2, .acWhite), (data.spotType, .b2, .acWhite)])
         }
     }
     
@@ -185,10 +185,14 @@ extension SpotDetailViewController: UICollectionViewDataSource {
 extension SpotDetailViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(spotDetailView.scrollView.contentOffset.y, spotDetailView.stickyHeaderView.frame.minY)
-        let shouldShowSticky = spotDetailView.scrollView.contentOffset.y >= spotDetailView.stickyHeaderView.frame.minY
+        //NOTE: - 내 맘대로 -68 함 (높이 36이라 72 해야할 것 같은데 아무튼 추후수정
+        let stickyPosition = ScreenUtils.height*400/780 + spotDetailView.navViewHeight - 68
+        let shouldShowSticky = scrollView.contentOffset.y >= stickyPosition
         spotDetailView.stickyView.isHidden = !shouldShowSticky
         spotDetailView.stickyHeaderView.isHidden = shouldShowSticky
+        
+        let shouldShowBlurSpotImageView = spotDetailView.scrollView.contentOffset.y > spotDetailView.navViewHeight
+        spotDetailView.blurSpotImageView.isHidden = shouldShowBlurSpotImageView
     }
 
 }
