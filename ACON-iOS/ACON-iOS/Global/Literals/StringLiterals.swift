@@ -9,6 +9,12 @@ import Foundation
 
 enum StringLiterals {
     
+    enum UserDefaults {
+        
+        static let accessToken = "accessToken"
+        
+    }
+    
     enum Login {
         
         static let googleLogin = "Google로 계속하기"
@@ -58,6 +64,10 @@ enum StringLiterals {
         static let gpsDeniedTitle = "'acon'에 대한 위치접근 권한이 없습니다."
         
         static let gpsDeniedMessage = "설정에서 정확한 위치 권한을 허용해주세요."
+        
+        static let loginFailTitle = "로그인할 수 없음"
+        
+        static let loginFailMessage = "문제가 발생했습니다.\n나중에 다시 시도해주세요."
         
     }
     
