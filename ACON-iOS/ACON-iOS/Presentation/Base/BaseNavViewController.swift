@@ -48,7 +48,8 @@ class BaseNavViewController: UIViewController {
         self.navigationBarView.addSubviews(leftButton,
                                            rightButton,
                                            titleLabel,
-                                           secondTitleLabel)
+                                           secondTitleLabel,
+                                           centerTitleLabel)
     }
     
     func setLayout() {
@@ -70,12 +71,12 @@ class BaseNavViewController: UIViewController {
         
         leftButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(ScreenUtils.width*20/380)
+            $0.leading.equalToSuperview().offset(ScreenUtils.width*20/360)
         }
         
         rightButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(ScreenUtils.width*20/380)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.width*20/360)
         }
         
         titleLabel.snp.makeConstraints {
@@ -88,6 +89,10 @@ class BaseNavViewController: UIViewController {
             $0.leading.equalToSuperview().inset(ScreenUtils.width*52/360)
         }
         
+        centerTitleLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
     }
     
     func setStyle() {
@@ -98,7 +103,8 @@ class BaseNavViewController: UIViewController {
         [leftButton,
          rightButton,
          titleLabel,
-         secondTitleLabel].forEach { $0.isHidden = true }
+         secondTitleLabel,
+         centerTitleLabel].forEach { $0.isHidden = true }
     }
     
 }
@@ -146,6 +152,19 @@ extension BaseNavViewController {
                             color: UIColor = .acWhite,
                             alignment: NSTextAlignment = .left) {
         secondTitleLabel.do {
+            $0.isHidden = false
+            $0.setLabel(text: title,
+                        style: fontStyle,
+                        color: color)
+            $0.textAlignment = alignment
+        }
+    }
+    
+    func setCenterTitleLabelStyle(title: String,
+                            fontStyle: ACFontStyleType = .t2,
+                            color: UIColor = .acWhite,
+                            alignment: NSTextAlignment = .center) {
+        centerTitleLabel.do {
             $0.isHidden = false
             $0.setLabel(text: title,
                         style: fontStyle,

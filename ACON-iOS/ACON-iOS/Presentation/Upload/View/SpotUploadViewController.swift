@@ -71,7 +71,7 @@ class SpotUploadViewController: BaseNavViewController {
         
         self.setXButton()
         self.setNextButton()
-        self.spotUploadView.dropAcornButton.isEnabled = false
+        self.setCenterTitleLabelStyle(title: StringLiterals.Upload.upload)
         self.rightButton.isEnabled = false
     }
     
