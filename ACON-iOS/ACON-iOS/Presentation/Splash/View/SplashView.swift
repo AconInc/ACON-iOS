@@ -15,12 +15,10 @@ class SplashView: BaseView {
     
     let splashLottieView = LottieAnimationView(name: "splashLottie")
     
-    var logoLabel : UILabel = UILabel()
-    
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(splashLottieView, logoLabel)
+        self.addSubviews(splashLottieView)
     }
     
     override func setLayout() {
@@ -31,11 +29,7 @@ class SplashView: BaseView {
             $0.centerX.equalToSuperview()
             $0.width.equalToSuperview()
         }
-        
-        logoLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(ScreenUtils.heightRatio*350)
-            $0.centerX.equalToSuperview()
-        }
+
     }
     
     override func setStyle() {
@@ -48,13 +42,6 @@ class SplashView: BaseView {
             $0.backgroundBehavior = .pauseAndRestore
         }
         
-        logoLabel.do {
-            $0.setLabel(text: StringLiterals.Login.logoText,
-                        style: .h7,
-                        color: .acWhite,
-                        alignment: .center,
-                        numberOfLines: 2)
-        }
     }
     
 }
