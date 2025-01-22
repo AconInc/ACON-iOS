@@ -60,4 +60,18 @@ extension UIButton {
          self.setAttributedTitle(attributedString, for: state)
      }
     
+    
+    // MARK: - spotID Associated Object 추가
+    
+    private static var spotIDKey: UInt8 = 0
+    
+    var spotID: Int64 {
+        get {
+            return (objc_getAssociatedObject(self, &UIButton.spotIDKey) as? Int64) ?? 0
+        }
+        set {
+            objc_setAssociatedObject(self, &UIButton.spotIDKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
 }
