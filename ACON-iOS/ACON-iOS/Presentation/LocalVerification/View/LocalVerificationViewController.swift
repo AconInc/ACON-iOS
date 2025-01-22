@@ -23,7 +23,6 @@ class LocalVerificationViewController: BaseNavViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setXButton()
         addTarget()
         bindViewModel()
     }
