@@ -249,7 +249,7 @@ final class SpotSearchView: GlassmorphismView {
 
 extension SpotSearchView {
     
-    func makeRecommendedSpotButton(_ title: String) -> UIButton {
+    func makeRecommendedSpotButton(_ data: SearchSuggestionModel) -> UIButton {
         let button = UIButton()
         let recommendedSpotButtonConfiguration: UIButton.Configuration = {
             var configuration = UIButton.Configuration.plain()
@@ -267,12 +267,13 @@ extension SpotSearchView {
             $0.backgroundColor = .gray8
             $0.layer.cornerRadius = 14
             $0.configuration = recommendedSpotButtonConfiguration
-            $0.setAttributedTitle(text: title,
+            $0.setAttributedTitle(text: data.spotName,
                                   style: .b2,
                                   color: .acWhite)
             $0.titleLabel?.numberOfLines = 1
             $0.setContentHuggingPriority(.required, for: .horizontal)
             $0.setContentCompressionResistancePriority(.required, for: .horizontal)
+            $0.spotID = data.spotId
         }
         return button
     }
@@ -290,7 +291,7 @@ extension SpotSearchView {
         }
         if data.count != 0 {
             for i in 0...(data.count-1) {
-                let button = makeRecommendedSpotButton(data[i].spotName)
+                let button = makeRecommendedSpotButton(data[i])
                 searchSuggestionStackView.addArrangedSubview(button)
             }
         }
