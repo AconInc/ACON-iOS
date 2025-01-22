@@ -467,8 +467,8 @@ extension OnboardingViewController{
     
     private func showRequsetRetryProgress() {
         showDefaultAlert(
-            title: "네트워크가 불안정 합니다.",
-            message: "취향탐색에 실패했습니다.\n앱을 종료하고 다시 실행해 주세요"
+            title: "취향탐색에 실패했습니다.",
+            message: "앱을 종료하고 다시 실행해 주세요"
         )
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
             self?.dismiss(animated: true, completion: nil)
