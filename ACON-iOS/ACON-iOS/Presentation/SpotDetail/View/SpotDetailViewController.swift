@@ -14,9 +14,11 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
     
     // MARK: - UI Properties
     
+    private let glassMorphismView = GlassmorphismView()
+    
     private let spotDetailView = SpotDetailView()
 
-
+    
     // MARK: - Properties
     
     // TODO: - 이거 spotID 전 화면에서 넘겨받는 것으로 변경
@@ -25,6 +27,7 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
     private let spotDetailName: String = "가게명가게명"
     
     private let spotDetailType: String = "음식점"
+    
     
     // MARK: - LifeCycle
     
@@ -113,6 +116,22 @@ private extension SpotDetailViewController {
     
 }
 
+// MARK: - 글라스모피즘 - BaseNavVC에 넣으면 오류 떠서 우선 여기에
+// TODO: - 추후 BaseNavVC로 빼기
+
+private extension SpotDetailViewController {
+    
+    func setGlassMorphism() {
+        self.view.insertSubview(glassMorphismView,
+                                aboveSubview: contentView)
+        glassMorphismView.snp.makeConstraints {
+            $0.top.equalTo(topInsetView)
+            $0.bottom.horizontalEdges.equalTo(navigationBarView)
+        }
+    }
+    
+}
+
 // MARK: - @objc methods
 
 private extension SpotDetailViewController {
@@ -196,11 +215,25 @@ extension SpotDetailViewController: UICollectionViewDataSource {
 extension SpotDetailViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //NOTE: - 내 맘대로 -68 함 (높이 36이라 72 해야할 것 같은데 아무튼 추후수정
+        let offset = scrollView.contentOffset.y
+        
+        //NOTE: - 내 맘대로 -68 함 (높이 36이라 72 해야할 것 같은데 아무튼 추후수정)
         let stickyPosition = ScreenUtils.heightRatio*400 + ScreenUtils.navViewHeight - 68
-        let shouldShowSticky = scrollView.contentOffset.y >= stickyPosition
+        let shouldShowSticky = offset >= stickyPosition
         spotDetailView.stickyView.isHidden = !shouldShowSticky
         spotDetailView.stickyHeaderView.isHidden = shouldShowSticky
+        
+        if offset > 0 {
+            [topInsetView, navigationBarView].forEach {
+                $0.backgroundColor = .clear
+            }
+            glassMorphismView.isHidden = false
+        } else {
+            [topInsetView, navigationBarView].forEach {
+                $0.backgroundColor = .gray9
+            }
+            glassMorphismView.isHidden = true
+        }
     }
-
+    
 }
