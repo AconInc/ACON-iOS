@@ -80,6 +80,12 @@ private extension SpotListFilterViewController {
             action: #selector(didTapConductButton),
             for: .touchUpInside
         )
+        
+        spotListFilterView.resetButton.addTarget(
+            self,
+            action: #selector(didTapResetButton),
+            for: .touchUpInside
+        )
     }
     
 }
@@ -124,6 +130,12 @@ private extension SpotListFilterViewController {
         // TODO: 도보 가능 거리, 가격대 필터링
         self.dismiss(animated: true)
     }
+    
+    @objc func didTapResetButton() {
+        spotListFilterView.resetAllTagSelection()
+        spotListFilterView.resetSliderPosition()
+    }
+    
 }
 
 
