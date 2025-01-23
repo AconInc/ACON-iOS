@@ -12,13 +12,15 @@ class SpotListViewModel {
     
     // MARK: - Properties
     
+    var onSuccessGetAddress: ObservablePattern<Bool> = ObservablePattern(nil)
+    
     var isPostSpotListSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var spotList: [SpotModel] = []
     
     var isUpdated: Bool = false
     
-    // TODO: userCoordinate 기본값 빼고 옵셔널로 만들기 (지금은 필터 설정했을 때 좌표가 0,0으로 찍히는 문제때문에 좌표 넣어둠...)
+    var myAddress: String = ""
     var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.559171017384145, longitude: 126.9219534442884)
     
     
@@ -64,11 +66,25 @@ class SpotListViewModel {
 
 extension SpotListViewModel {
     
+    func getAddress() {
+        ACService.shared.spotListService.getAddress(latitude: userCoordinate?.latitude ?? 0,
+                                                    longitude: userCoordinate?.longitude ?? 0) { [weak self] response in
+            switch response {
+            case .success(let data):
+                self?.myAddress = data.area
+                self?.onSuccessGetAddress.value = true
+            default:
+                self?.onSuccessGetAddress.value = false
+                return
+            }
+        }
+    }
+    
     func postSpotList() {
         print("🤍🤍🤍🤍spotType: \(spotType)")
         let requestBody = PostSpotListRequest(
-            latitude: userCoordinate.latitude,
-            longitude: userCoordinate.longitude,
+            latitude: userCoordinate?.latitude ?? 0,
+            longitude: userCoordinate?.longitude ?? 0,
             condition: SpotCondition(
                 spotType: spotType.value?.serverKey ?? "",
                 filterList: filterList.map { filterList in

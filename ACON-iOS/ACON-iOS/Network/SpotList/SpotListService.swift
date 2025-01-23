@@ -33,5 +33,22 @@ final class SpotListService: BaseService<SpotListTargetType>, SpotListServicePro
             }
         }
     }
+    
+    func getAddress(latitude: Double, longitude: Double,
+                     completion: @escaping (NetworkResult<PostLocalAreaResponse>) -> Void) {
+        self.provider.request(.getAddress(latitude, longitude)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<PostLocalAreaResponse> = self.judgeStatus(
+                    statusCode: response.statusCode,
+                    data: response.data,
+                    type: PostLocalAreaResponse.self
+                )
+                completion(networkResult)
+            case .failure(let errorResponse):
+                print(errorResponse)
+            }
+        }
+    }
 
 }

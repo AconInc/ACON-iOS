@@ -92,6 +92,16 @@ extension SpotListViewController {
     
     func bindViewModel() {
         
+        viewModel.onSuccessGetAddress.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
+            if onSuccess {
+                self.setTitleLabelStyle(title: viewModel.myAddress)
+            } else {
+                print("🥑Post 실패")
+            }
+        }
+        
         viewModel.isPostSpotListSuccess.bind { [weak self] isSuccess in
             guard let self = self,
                   let isSuccess = isSuccess else { return }
