@@ -361,7 +361,7 @@ extension SpotListFilterView {
         case .restaurant:
             let tagTexts: [String] = SpotType.RestaurantFeatureType.allCases.map { return $0.text }
             let firstLine: [String] = Array(tagTexts[0..<5])
-            let secondLine: [String] = Array(tagTexts[5..<7])
+            let secondLine: [String] = Array(tagTexts[5..<8])
             
             firstLineSpotTagStackView.switchTagButtons(titles: firstLine)
             secondLineSpotTagStackView.switchTagButtons(titles: secondLine)

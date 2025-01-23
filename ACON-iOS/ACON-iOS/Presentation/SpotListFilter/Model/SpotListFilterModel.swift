@@ -31,7 +31,7 @@ struct SpotConditionModel: Equatable {
 
 struct SpotFilterListModel: Equatable {
     
-    let category: String
+    let category: SpotType.FilterCategoryType
     
     let optionList: [String]
     
