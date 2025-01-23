@@ -56,7 +56,7 @@ extension FavoriteSpotStyleCollectionView: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         let itemWidth = ScreenUtils.width * 154 / 360
-        let itemHeight = itemWidth * 1.311
+        let itemHeight = itemWidth * 2.103
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
