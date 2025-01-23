@@ -16,7 +16,7 @@ final class SpotUploadView: BaseView {
     
     private let spotUploadLabel: UILabel = UILabel()
     
-    var spotSearchButton : UIButton = UIButton()
+    var spotSearchButton: UIButton = UIButton()
     
     var spotSearchButtonConfiguration: UIButton.Configuration = {
         var configuration = UIButton.Configuration.plain()
@@ -31,6 +31,8 @@ final class SpotUploadView: BaseView {
         return configuration
     }()
     
+    var spotNameLabel: UILabel = UILabel()
+    
 
     // MARK: - Lifecycle
     
@@ -38,7 +40,8 @@ final class SpotUploadView: BaseView {
         super.setHierarchy()
         
         self.addSubviews(spotUploadLabel,
-                         spotSearchButton)
+                         spotSearchButton,
+                         spotNameLabel)
     }
     
     override func setLayout() {
@@ -56,6 +59,12 @@ final class SpotUploadView: BaseView {
             $0.centerX.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(ScreenUtils.heightRatio*52)
+        }
+        
+        spotNameLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*64 + 14)
+            $0.centerX.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
         }
         
     }
@@ -81,6 +90,11 @@ final class SpotUploadView: BaseView {
                                   color: .gray5)
             
         }
+        
+        spotNameLabel.do {
+            $0.isHidden = true
+        }
+        
     }
     
 }

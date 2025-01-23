@@ -72,7 +72,7 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
     override func setStyle() {
         super.setStyle()
         
-        self.applyGlassmorphism()
+//        self.applyGlassmorphism()
         self.setBackButton()
     }
     

@@ -52,7 +52,7 @@ class SpotListViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
-        self.applyGlassmorphism()
+//        self.applyGlassmorphism()
         self.setTitleLabelStyle(title: "동네 인증")
     }
     

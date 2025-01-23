@@ -170,9 +170,15 @@ extension SpotUploadViewController {
             
             DispatchQueue.main.async {
                 self.spotUploadView.spotSearchButton.do {
-                    $0.setAttributedTitle(text: selectedSpotName,
+                    $0.setAttributedTitle(text: "",
                                           style: .s2,
                                           color: .acWhite)
+                }
+                
+                self.spotUploadView.spotNameLabel.do {
+                    $0.setLabel(text: selectedSpotName,
+                                style: .s2,
+                                color: .acWhite)
                 }
                 
                 if selectedSpotID > 0 {
@@ -181,6 +187,7 @@ extension SpotUploadViewController {
                                                                    longitude: self.longitude)
                 } else {
                     self.rightButton.isEnabled = false
+                    self.spotUploadView.spotNameLabel.isHidden = true
                     self.spotUploadView.spotSearchButton.setAttributedTitle(
                         text: StringLiterals.Upload.searchSpot,
                         style: .s2,
