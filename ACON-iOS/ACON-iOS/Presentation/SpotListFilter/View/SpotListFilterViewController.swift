@@ -126,14 +126,24 @@ private extension SpotListFilterViewController {
             self.filterList.append(visitPurposeFilter)
         }
         
-        self.spotCondition = SpotConditionModel(spotType: self.spotType, filterList: self.filterList, walkingTime: -1, priceRange: -1)
+        self.spotCondition = SpotConditionModel(
+            spotType: self.spotType,
+            filterList: self.filterList,
+            walkingTime: -1,
+            priceRange: -1
+        )
         // TODO: 도보 가능 거리, 가격대 필터링
         self.dismiss(animated: true)
     }
     
     @objc func didTapResetButton() {
-        spotListFilterView.resetAllTagSelection()
-        spotListFilterView.resetSliderPosition()
+        self.spotCondition = SpotConditionModel(
+            spotType: self.spotType,
+            filterList: [],
+            walkingTime: -1,
+            priceRange: -1
+        )
+        self.dismiss(animated: true)
     }
     
 }
