@@ -125,6 +125,7 @@ private extension SpotListViewController {
     
 }
 
+
 // MARK: - @objc functions
 
 private extension SpotListViewController {
