@@ -105,9 +105,8 @@ extension AnalyzingViewController {
     }
     
     private func navigateToNextScreen() {
-        // NOTE: 장소추천뷰로 이동 - 모달 방식
-        let mainViewController = ACTabBarController()
-        mainViewController.modalPresentationStyle = .fullScreen
-        present(mainViewController, animated: true)
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = ACTabBarController()
+        }
     }
 }

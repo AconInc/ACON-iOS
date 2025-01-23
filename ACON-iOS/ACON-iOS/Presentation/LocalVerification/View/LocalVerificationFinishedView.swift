@@ -47,44 +47,44 @@ final class LocalVerificationFinishedView: BaseView {
         super.setLayout()
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*32/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*32)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(56)
         }
         
         explainationLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*96/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*96)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(36)
         }
         
         localAcornImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*258/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*73/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*258)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*73)
             $0.width.height.equalTo(80)
         }
         
         plainAcornImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*258/780)
-            $0.trailing.equalToSuperview().inset(ScreenUtils.width*73/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*258)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*73)
             $0.width.height.equalTo(80)
         }
         
         localAcornLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*346/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*66/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*346)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*66)
             $0.width.equalTo(94)
         }
         
         plainAcornLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*346/780)
-            $0.trailing.equalToSuperview().inset(ScreenUtils.width*66/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*346)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*66)
             $0.width.equalTo(94)
         }
         
         startButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*36/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*36)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(52)
         }
         

@@ -89,9 +89,7 @@ enum StringLiterals {
         
         static let spotUpload2 = "장소등록"
         
-        static let uploadSpotName = "가게명 등록하기"
-        
-        static let dropAcornsHere = "도토리로 리뷰남기기"
+        static let next = "다음"
         
         static let shallWeDropAcorns = "도토리를 떨어트려\n리뷰를 남겨 볼까요?"
 
@@ -135,7 +133,7 @@ enum StringLiterals {
     
     enum LocalVerification {
 
-         static let needLocalVerification = "로컬 맛집 추천을 위해\n지역 인증이 필요해요."
+         static let needLocalVerification = "로컬 맛집 추천을 위해\n동네 인증이 필요해요"
 
          static let doLocalVerification = "자주 가는 동네로 지역 인증을 해보세요"
 
@@ -295,11 +293,11 @@ enum StringLiterals {
         static let progressNumberList = ["01", "02", "03", "04", "05"]
         
         static let progressTitleList = [
-            "어떤 음식을 피하고 싶으신가요?",
+            "싫어하는 음식을 선택해주세요",
             "선호 음식 Top3까지 순위를 매겨주세요.",
             "자주 가는 곳이 어디인가요?",
             "어떤 분위기의 공간이 좋으세요?",
-            "선호하는 맛집 스타일의\n 순위를 매겨주세요."
+            "선호하는 맛집 스타일의\n순위를 매겨주세요."
         ]
         
     }

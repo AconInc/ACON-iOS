@@ -46,7 +46,7 @@ final class ProfileView: BaseView {
         
         imageView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.height.equalTo(ScreenUtils.width * 113 / 360)
+            $0.width.height.equalTo(ScreenUtils.widthRatio * 113)
         }
         
         messageLabel.snp.makeConstraints {

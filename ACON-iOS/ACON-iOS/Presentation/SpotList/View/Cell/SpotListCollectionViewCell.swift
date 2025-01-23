@@ -57,8 +57,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     override func setLayout() {
         super.setLayout()
         
-        let horizontalSpace = ScreenUtils.width * 16 / 360
-        let verticalSpace = ScreenUtils.height * 16 / 780
+        let horizontalSpace = ScreenUtils.widthRatio * 16
+        let verticalSpace = ScreenUtils.heightRatio * 16
         
         bgImage.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -106,7 +106,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         
         matchingRateView.do {
             $0.backgroundColor = .gray9
-            $0.layer.contents = 2
+            $0.layer.cornerRadius = 2
         }
         
         matchingRateLabel.do {

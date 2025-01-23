@@ -47,10 +47,10 @@ extension BaseView {
         self.addSubview(handlerImageView)
 
         handlerImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*4/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*4)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.height*36/780)
-            $0.height.equalTo(ScreenUtils.height*3/780)
+            $0.width.equalTo(ScreenUtils.heightRatio*36)
+            $0.height.equalTo(ScreenUtils.heightRatio*3)
         }
 
         handlerImageView.do {

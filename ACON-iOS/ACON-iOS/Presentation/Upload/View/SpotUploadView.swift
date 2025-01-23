@@ -18,8 +18,6 @@ final class SpotUploadView: BaseView {
     
     var spotSearchButton : UIButton = UIButton()
     
-    var dropAcornButton: UIButton = UIButton()
-    
     var spotSearchButtonConfiguration: UIButton.Configuration = {
         var configuration = UIButton.Configuration.plain()
         configuration.imagePlacement = .leading
@@ -40,32 +38,26 @@ final class SpotUploadView: BaseView {
         super.setHierarchy()
         
         self.addSubviews(spotUploadLabel,
-                         spotSearchButton,
-                         dropAcornButton)
+                         spotSearchButton)
     }
     
     override func setLayout() {
         super.setLayout()
         
         spotUploadLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*32/780)
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*32)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(24)
             $0.width.equalTo(58)
         }
         
         spotSearchButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*64/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*64)
             $0.centerX.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
-            $0.height.equalTo(ScreenUtils.height*52/780)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
+            $0.height.equalTo(ScreenUtils.heightRatio*52)
         }
         
-        dropAcornButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*40/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*16/360)
-            $0.height.equalTo(ScreenUtils.height*52/780)
-        }
     }
     
     override func setStyle() {
@@ -84,27 +76,12 @@ final class SpotUploadView: BaseView {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor(resource: .gray7).cgColor
             $0.setImage(.icLocation, for: .normal)
-            $0.setAttributedTitle(text: StringLiterals.Upload.uploadSpotName,
+            $0.setAttributedTitle(text: StringLiterals.Upload.searchSpot,
                                   style: .s2,
                                   color: .gray5)
             
         }
-        
-        dropAcornButton.do {
-            $0.setAttributedTitle(text: StringLiterals.Upload.dropAcornsHere,
-                                   style: .h8,
-                                  color: .acWhite,
-                                  for: .normal)
-            $0.setAttributedTitle(text: StringLiterals.Upload.dropAcornsHere,
-                                   style: .h8,
-                                  color: .gray6,
-                                  for: .disabled)
-            // TODO: - enable 시 backgroundcolor gray5
-            $0.backgroundColor = .gray8
-            $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
-        }
     }
-    
     
 }
 

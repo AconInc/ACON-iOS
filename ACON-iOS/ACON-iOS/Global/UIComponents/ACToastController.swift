@@ -26,9 +26,9 @@ final class ACToastController {
         window.addSubview(toastView)
         
         toastView.snp.makeConstraints {
-            $0.height.equalTo(ScreenUtils.height*42/780)
+            $0.height.equalTo(ScreenUtils.heightRatio*42)
             $0.bottom.equalToSuperview().inset(Int(ScreenUtils.height)*bottomInset/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + delayTime) {
@@ -66,7 +66,7 @@ final class ACToastView: BaseView {
         addSubviews(messageLabel)
         
         messageLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(ScreenUtils.width*18/360)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*18)
             $0.centerY.equalToSuperview()
         }
                 

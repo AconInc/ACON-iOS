@@ -35,4 +35,11 @@ struct ScreenUtils {
         return height / figmaHeight
     }
     
+    
+    // MARK: - navBarView Height
+    
+    static var navViewHeight: CGFloat {
+        return ScreenUtils.heightRatio * 56
+    }
+    
 }

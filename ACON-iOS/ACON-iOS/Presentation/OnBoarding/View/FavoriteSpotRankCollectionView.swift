@@ -56,7 +56,7 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let itemWidth = ScreenUtils.width * 158 / 360
+        let itemWidth = ScreenUtils.widthRatio * 158
         let itemHeight = itemWidth * 1.2
         return CGSize(width: itemWidth, height: itemHeight)
     }
@@ -66,7 +66,7 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return ScreenUtils.height * 12 / 780
+        return ScreenUtils.heightRatio * 12
     }
     
     func collectionView(
@@ -74,7 +74,7 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return ScreenUtils.width * 6 / 360
+        return ScreenUtils.widthRatio * 6
     }
     
     func collectionView(

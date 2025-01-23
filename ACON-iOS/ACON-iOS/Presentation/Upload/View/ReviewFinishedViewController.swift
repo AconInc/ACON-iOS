@@ -26,12 +26,6 @@ class ReviewFinishedViewController: BaseNavViewController {
         addTarget()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
-
-        self.tabBarController?.tabBar.isHidden = true
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         

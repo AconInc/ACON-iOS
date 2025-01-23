@@ -62,34 +62,34 @@ final class CustomAlertView: BaseView {
         
         alertContainer.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.width * 279 / 360)
-            $0.height.greaterThanOrEqualTo(ScreenUtils.width * 279 / 360 * 0.5)
+            $0.width.equalTo(ScreenUtils.widthRatio * 279)
+            $0.height.greaterThanOrEqualTo(ScreenUtils.widthRatio * 279 * 0.5)
         }
         
         titleLabel.snp.makeConstraints {
             $0.centerX.equalTo(alertContainer)
-            $0.top.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.width * 24 / 360)
+            $0.top.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.widthRatio * 24)
         }
         
         messageLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(10)
-            $0.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.width * 24 / 360)
+            $0.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.widthRatio * 24)
             $0.centerX.equalTo(alertContainer)
         }
         
         closeButton.snp.makeConstraints {
             $0.top.equalTo(messageLabel.snp.bottom).offset(20)
             $0.trailing.equalTo(alertContainer.snp.centerX).offset(-4)
-            $0.width.equalTo(ScreenUtils.width * 112 / 360)
-            $0.height.equalTo(ScreenUtils.width * 44 / 360)
+            $0.width.equalTo(ScreenUtils.widthRatio * 112)
+            $0.height.equalTo(ScreenUtils.widthRatio * 44)
         }
         
         settingsButton.snp.makeConstraints {
             $0.top.equalTo(messageLabel.snp.bottom).offset(20)
             $0.leading.equalTo(alertContainer.snp.centerX).offset(4)
-            $0.width.equalTo(ScreenUtils.width * 112 / 360)
-            $0.height.equalTo(ScreenUtils.width * 44 / 360)
-            $0.bottom.equalTo(alertContainer.snp.bottom).inset(ScreenUtils.width * 24 / 360)
+            $0.width.equalTo(ScreenUtils.widthRatio * 112)
+            $0.height.equalTo(ScreenUtils.widthRatio * 44)
+            $0.bottom.equalTo(alertContainer.snp.bottom).inset(ScreenUtils.widthRatio * 24)
         }
     }
     

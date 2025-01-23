@@ -65,7 +65,7 @@ extension FavoriteSpotStyleCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return ScreenUtils.height * 6 / 780
+        return ScreenUtils.heightRatio * 6
     }
     
     func collectionView(
@@ -73,7 +73,7 @@ extension FavoriteSpotStyleCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return ScreenUtils.width * 8 / 360
+        return ScreenUtils.widthRatio * 8
     }
     
     func collectionView(

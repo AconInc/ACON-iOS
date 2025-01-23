@@ -36,20 +36,20 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         
         menuImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.width.height.equalTo(ScreenUtils.height*78/780)
+            $0.width.height.equalTo(ScreenUtils.heightRatio*78)
             $0.trailing.equalToSuperview()
         }
         
         menuNameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*31/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*31)
             $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(ScreenUtils.width*94/360)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*94)
         }
         
         menuPriceLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*31/780)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*31)
             $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(ScreenUtils.width*94/360)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*94)
         }
     }
     

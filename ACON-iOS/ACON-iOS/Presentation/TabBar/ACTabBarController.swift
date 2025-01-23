@@ -32,8 +32,8 @@ extension ACTabBarController {
         let appearance = UITabBarAppearance()
         
         appearance.do {
-            $0.backgroundColor = .clear
             $0.configureWithOpaqueBackground()
+            $0.backgroundColor = .clear
             
             $0.stackedLayoutAppearance.normal.iconColor = .acWhite
             $0.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.acWhite]
@@ -41,7 +41,7 @@ extension ACTabBarController {
             $0.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.acWhite]
         }
         
-        tabBar.frame.size.height = ScreenUtils.height * 76/780
+        tabBar.frame.size.height = ScreenUtils.heightRatio * 76
         tabBar.scrollEdgeAppearance = appearance
         
         // NOTE: 글라스모피즘 뷰 얹기

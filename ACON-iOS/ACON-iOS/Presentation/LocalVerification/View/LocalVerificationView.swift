@@ -50,27 +50,27 @@ final class LocalVerificationView: BaseView {
         super.setLayout()
         
         weNeedYourAddressLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*32/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*32)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(56)
         }
         
         doLocalVerificationLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*96/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*96)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(18)
         }
         
         verifyNewLocalButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*146/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*146)
             $0.centerX.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
-            $0.height.equalTo(ScreenUtils.height*52/780)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
+            $0.height.equalTo(ScreenUtils.heightRatio*52)
         }
         
         nextButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*36/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*36)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(52)
         }
         

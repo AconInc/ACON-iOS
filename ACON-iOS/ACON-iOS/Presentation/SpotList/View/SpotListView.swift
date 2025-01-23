@@ -16,13 +16,13 @@ class SpotListView: BaseView {
         collectionViewLayout: UICollectionViewFlowLayout()
     )
     
-    private let footerLabel = UILabel()
-    
     private let floatingButtonStack = UIStackView()
     
-    lazy var floatingFilterButton = FloatingButton(image: .icFilterW24)
+    lazy var floatingFilterButton = FloatingButton(image: .icFilterW28)
     
-    lazy var floatingLocationButton = FloatingButton(image: .icMyLocationW24)
+    lazy var floatingMapButton = FloatingButton(image: .icMapW28)
+    
+    lazy var floatingLocationButton = FloatingButton(image: .icMyGLocation28)
     
     private let noAcornView = UIView()
     
@@ -33,7 +33,7 @@ class SpotListView: BaseView {
     
     // MARK: - UI Property Sizes
     
-    private let floatingButtonSize: CGFloat = 36
+    private let floatingButtonSize: CGFloat = 44
     
     
     // MARK: - LifeCycles
@@ -42,14 +42,13 @@ class SpotListView: BaseView {
         super.setHierarchy()
         
         self.addSubviews(
-            footerLabel,
             collectionView,
             noAcornView,
             floatingButtonStack)
         
-        floatingButtonStack.addArrangedSubviews(
-            floatingFilterButton,
-            floatingLocationButton)
+        floatingButtonStack.addArrangedSubviews(floatingLocationButton,
+                                                floatingMapButton,
+                                                floatingFilterButton)
         
         noAcornView.addSubviews(
             noAcornImageView,
@@ -59,13 +58,8 @@ class SpotListView: BaseView {
     override func setLayout() {
         super.setLayout()
         
-        footerLabel.snp.makeConstraints {
-            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-40)
-            $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
-        }
-        
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide).offset(18)
+            $0.top.equalTo(self.safeAreaLayoutGuide).offset(-ScreenUtils.navViewHeight)
             $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
             $0.bottom.equalToSuperview()
         }
@@ -94,7 +88,6 @@ class SpotListView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        setFooterLabel()
         setCollectionView()
         setFloatingButtonStack()
         setNoAcornView()
@@ -106,17 +99,7 @@ class SpotListView: BaseView {
 // MARK: - UI Settings
 
 private extension SpotListView {
-    
-    func setFooterLabel() {
-        let text = StringLiterals.SpotList.footerText
-        footerLabel.setLabel(
-            text: text,
-            style: .b4,
-            color: .gray5,
-            alignment: .center
-        )
-    }
-    
+
     func setCollectionView() {
         let flowLayout = UICollectionViewFlowLayout()
         // NOTE: itemSize는 Controller에서 설정합니다. (indexPath에 따라 다르기 때문)
@@ -124,7 +107,7 @@ private extension SpotListView {
         flowLayout.scrollDirection = .vertical
         
         collectionView.do {
-            $0.backgroundColor = .clear
+            $0.backgroundColor = .gray9
             $0.setCollectionViewLayout(flowLayout, animated: true)
         }
     }
@@ -161,4 +144,9 @@ extension SpotListView {
         noAcornView.isHidden = isHidden
     }
     
+    func updateFilterButtonColor(_ isFilterSet: Bool) {
+        isFilterSet
+        ? floatingFilterButton.updateImage(.icFilterOrg28)
+        : floatingFilterButton.updateImage(.icFilterW28)
+    }
 }

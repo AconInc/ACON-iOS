@@ -81,9 +81,7 @@ extension UploadTargetType: TargetType {
         case .getSearchSuggestion:
             headers = HeaderType.basicHeader
         case .postReview, .getAcornCount:
-            // TODO: - 추후 유저디폴트 토큰으로 변경
-            let token = ""
-            headers = HeaderType.headerWithToken(token: "Bearer " + token)
+            headers = HeaderType.headerWithToken()
         }
         return headers
     }

@@ -42,35 +42,35 @@ final class ReviewFinishedView: BaseView {
         super.setLayout()
         
         finishedReviewLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*40/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*40)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(56)
         }
         
         wishYouPreferenceLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.height*104/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*20/360)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*104)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(18)
         }
         
         finishedReviewLottieView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(ScreenUtils.height*162/780)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*162)
             // TODO: 디자인에게 사이즈 물어보기
             $0.width.equalTo(246)
             $0.height.equalTo(320)
         }
         
         closeViewLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*100/780)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*100)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(18)
         }
         
         okButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.height*40/780)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.width*16/360)
-            $0.height.equalTo(ScreenUtils.height*52/780)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*40)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*16)
+            $0.height.equalTo(ScreenUtils.heightRatio*52)
         }
         
     }
