@@ -14,7 +14,7 @@ class BaseNavViewController: UIViewController {
     
     // MARK: - UI Properties
     
-    let topInsetView: UIView = UIView()
+    var topInsetView: UIView = UIView()
     
     var navigationBarView: UIView = UIView()
     
