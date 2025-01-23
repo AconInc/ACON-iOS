@@ -13,28 +13,30 @@ class SpotListFilterViewController: BaseViewController {
     
     private let spotListFilterView = SpotListFilterView()
     
-    private let viewModel = SpotListViewModel()
-    
-    var completionHandler: ((SpotConditionModel) -> Void)?
-    
-    var spotType: SpotType = .restaurant
-    
-    var spotCondition: SpotConditionModel = SpotConditionModel(spotType: .restaurant, filterList: [], walkingTime: -1, priceRange: -1)
-    
-    var filterList: [SpotFilterListModel] = []
+    private let viewModel: SpotListViewModel
     
     
     // MARK: - LifeCycles
+    
+    init(viewModel: SpotListViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addTargets()
-        updateView(spotType)
+        switchedSegment(viewModel.spotType.value)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         if isBeingDismissed {
             completionHandler?(spotCondition)
@@ -98,8 +100,9 @@ private extension SpotListFilterViewController {
     @objc
     func didChangeSpot(segment: UISegmentedControl) {
         let index = segment.selectedSegmentIndex
-        self.spotType = index == 0 ? .restaurant : .cafe
-        updateView(self.spotType)
+        let spotType: SpotType = index == 0 ? .restaurant : .cafe
+        viewModel.spotType.value = spotType
+        switchedSegment(spotType)
       }
     
     
