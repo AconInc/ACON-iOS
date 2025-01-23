@@ -28,6 +28,12 @@ class SpotListViewModel {
     
     var filterList: [SpotFilterListModel] = [] // TODO: SpotCondition으로 바꾸기
     
+    var walkingTime: SpotType.WalkingDistanceType = .fifteen
+    
+    var restaurantPrice: SpotType.RestaurantPriceType = .tenThousand
+    
+    var cafePrice: SpotType.CafePriceType = .fiveThousand
+    
     var spotCondition = SpotConditionModel(
         spotType: .restaurant,
         filterList: [],
@@ -71,8 +77,8 @@ extension SpotListViewModel {
                         optionList: filterList.optionList)
                     return filterList
                 },
-                walkingTime: -1,
-                priceRange: -1
+                walkingTime: walkingTime.serverKey,
+                priceRange: spotType.value == .restaurant ? restaurantPrice.serverKey : cafePrice.serverKey
             )
         )
         
@@ -90,7 +96,6 @@ extension SpotListViewModel {
                     )
                     return spot
                 }
-//                print("🥑spot:", spotList)
                 self?.isUpdated = spotList != self?.spotList
                 self?.spotList = spotList
                 self?.isPostSpotListSuccess.value = true

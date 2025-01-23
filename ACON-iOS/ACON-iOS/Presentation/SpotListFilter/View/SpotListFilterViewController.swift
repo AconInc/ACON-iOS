@@ -15,6 +15,12 @@ class SpotListFilterViewController: BaseViewController {
     
     private let viewModel: SpotListViewModel
     
+    var walkingTime: SpotType.WalkingDistanceType = .twentyFive
+    
+    var restaurantPrice: SpotType.RestaurantPriceType = .fiftyThousandAbove
+    
+    var cafePrice: SpotType.CafePriceType = .aboveTenThousand
+    
     
     // MARK: - LifeCycles
     
@@ -33,6 +39,7 @@ class SpotListFilterViewController: BaseViewController {
         
         addTargets()
         switchedSegment(viewModel.spotType.value)
+        setDelegate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +65,11 @@ class SpotListFilterViewController: BaseViewController {
         }
     }
     
+    private func setDelegate() {
+        spotListFilterView.walkingSlider.delegate = self
+        spotListFilterView.restaurantPriceSlider.delegate = self
+        spotListFilterView.cafePriceSlider.delegate = self
+    }
 }
 
 
@@ -124,18 +136,21 @@ private extension SpotListFilterViewController {
             let restaurantFilter = extractRestaurantFilter()
             let companionFilter = extractCompanionFilter()
             
-            self.viewModel.filterList.append(restaurantFilter)
-            self.viewModel.filterList.append(companionFilter)
+            viewModel.filterList.append(restaurantFilter)
+            viewModel.filterList.append(companionFilter)
             
         case .cafe:
             let cafeFilter = extractCafeFilter()
             let visitPurposeFilter = extractVisitPurposeFilter()
             
-            self.viewModel.filterList.append(cafeFilter)
-            self.viewModel.filterList.append(visitPurposeFilter)
+            viewModel.filterList.append(cafeFilter)
+            viewModel.filterList.append(visitPurposeFilter)
         }
         
-        // TODO: 도보 가능 거리, 가격대 필터링
+        viewModel.walkingTime = self.walkingTime
+        viewModel.restaurantPrice = self.restaurantPrice
+        viewModel.cafePrice = self.cafePrice
+        
         viewModel.postSpotList()
         self.dismiss(animated: true)
     }
@@ -182,10 +197,11 @@ private extension SpotListFilterViewController {
     }
     
     func applyConditions(spotType: SpotType, filterLists: [SpotFilterListModel]) {
+        // NOTE: 세그먼트 컨트롤 세팅
         spotListFilterView.segmentedControl.selectedSegmentIndex = spotType == .cafe ? 1 : 0
         switchedSegment(spotType)
-        print("🥑spotType: \(spotType)")
         
+        // NOTE: tag 세팅
         for filterList in filterLists {
             let category = filterList.category
             print("🥑applied filterList: \(filterList), 🥑spotType: \(spotType)")
@@ -203,6 +219,15 @@ private extension SpotListFilterViewController {
             }
         }
         
+        // NOTE: 슬라이더 세팅
+        let walkingTimeIndex = SpotType.WalkingDistanceType.allCases.firstIndex(of: viewModel.walkingTime) ?? 2
+        let restaurantPriceIndex = SpotType.RestaurantPriceType.allCases.firstIndex(of: viewModel.restaurantPrice) ?? 1
+        let cafePriceIndex = SpotType.CafePriceType.allCases.firstIndex(of: viewModel.cafePrice) ?? 2
+        
+        print("🫙 뷰모델 슬라이더 인덱스: \(walkingTimeIndex), \(restaurantPriceIndex), \(cafePriceIndex)")
+        spotListFilterView.walkingSlider.moveThumbPosition(to: walkingTimeIndex)
+        spotListFilterView.restaurantPriceSlider.moveThumbPosition(to: restaurantPriceIndex)
+        spotListFilterView.cafePriceSlider.moveThumbPosition(to: cafePriceIndex)
     }
     
 }
@@ -351,4 +376,31 @@ extension SpotListFilterViewController {
             }
         }
     }
+}
+
+
+// MARK: - Slider Delegate
+
+extension SpotListFilterViewController: SliderViewDelegate {
+    func sliderView(_ sender: CustomSlider, changedValue value: Int) {
+        
+        // NOTE: Wallking distance
+        if sender == spotListFilterView.walkingSlider {
+            let walkingTime = SpotType.WalkingDistanceType.allCases
+            self.walkingTime = walkingTime[value]
+        }
+        
+        // NOTE: Restaurant price
+        else if sender == spotListFilterView.restaurantPriceSlider {
+            let priceRange = SpotType.RestaurantPriceType.allCases
+            self.restaurantPrice = priceRange[value]
+        }
+        
+        // NOTE: Cafe price
+        else if sender == spotListFilterView.cafePriceSlider {
+            let priceRange = SpotType.CafePriceType.allCases
+            self.cafePrice = priceRange[value]
+        }
+    }
+    
 }
