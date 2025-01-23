@@ -288,6 +288,8 @@ extension CustomSlider {
             fillTrackView.snp.updateConstraints {
                 $0.width.equalTo(offSet)
             }
+            
+            value = Int(newValue)
         }
     }
     
