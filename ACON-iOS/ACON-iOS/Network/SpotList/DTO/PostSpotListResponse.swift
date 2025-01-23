@@ -18,7 +18,7 @@ struct Spot: Codable {
     let id: Int64
     let image: String
     let matchingRate: Int
-    let type: String
+    let type: SpotCategoryType
     let name: String
     let walkingTime: Int
     
