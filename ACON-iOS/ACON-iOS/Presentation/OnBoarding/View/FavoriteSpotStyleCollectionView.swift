@@ -12,12 +12,11 @@ import Then
 
 final class FavoriteSpotStyleCollectionView: UICollectionView {
     
-    var selectedStyle: String? {
+    var selectedStyle: String = "" {
         didSet {
             reloadData()
-            if let selectedStyle = selectedStyle {
-                onSelectionChanged?(selectedStyle)
-            }
+            print(selectedStyle)
+            onSelectionChanged?(selectedStyle)
         }
     }
     
@@ -56,8 +55,8 @@ extension FavoriteSpotStyleCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let itemWidth = ScreenUtils.widthRatio * 154
-        let itemHeight = itemWidth * 1.311
+        let itemWidth = ScreenUtils.width * 154 / 360
+        let itemHeight = itemWidth * 2.103
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
@@ -82,7 +81,7 @@ extension FavoriteSpotStyleCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAt section: Int
     ) -> UIEdgeInsets {
-        let horizontalInset = ScreenUtils.widthRatio * 10
+        let horizontalInset = ScreenUtils.width * 14 / 360
         let verticalInset = ScreenUtils.width * 84 / 780
         return UIEdgeInsets(
             top: verticalInset,
@@ -131,7 +130,7 @@ extension FavoriteSpotStyleCollectionView: UICollectionViewDelegate, UICollectio
         let selectedOption = FavoriteSpotStyle.allCases[indexPath.row]
         
         if selectedStyle == selectedOption.mappedValue {
-            selectedStyle = nil
+            selectedStyle = ""
         } else {
             selectedStyle = selectedOption.mappedValue
         }

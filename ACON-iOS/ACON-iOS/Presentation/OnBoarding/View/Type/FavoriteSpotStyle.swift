@@ -28,7 +28,7 @@ enum FavoriteSpotStyle: CaseIterable {
     
     var mappedValue: String {
         switch self {
-        case .nopo: return "TRADITIONAL"
+        case .nopo: return "VINTAGE"
         case .modern: return "MODERN"
         }
     }

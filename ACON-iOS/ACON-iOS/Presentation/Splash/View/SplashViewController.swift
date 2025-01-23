@@ -23,8 +23,8 @@ class SplashViewController: BaseViewController {
             $0.play()
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.goToNextVC()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.4) {
+            self.goToLoginVC()
         }
     }
     

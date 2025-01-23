@@ -12,7 +12,7 @@ class SpotListViewController: BaseNavViewController {
     // MARK: - Properties
     
     private let spotListView = SpotListView()
-    private let spotListViewModel = SpotListViewModel()
+    private let viewModel = SpotListViewModel()
     
     private var selectedSpotCondition: SpotConditionModel = SpotConditionModel(spotType: .restaurant, filterList: [], walkingTime: -1, priceRange: -1)
     
@@ -25,8 +25,8 @@ class SpotListViewController: BaseNavViewController {
         setCollectionView()
         addTarget()
         
-        spotListViewModel.requestLocation()
-        spotListViewModel.postSpotList()
+        viewModel.requestLocation()
+        viewModel.postSpotList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,12 +85,12 @@ extension SpotListViewController {
     
     func bindViewModel() {
         
-        spotListViewModel.isPostSpotListSuccess.bind { [weak self] isSuccess in
+        viewModel.isPostSpotListSuccess.bind { [weak self] isSuccess in
             guard let self = self,
                   let isSuccess = isSuccess else { return }
             if isSuccess {
-                print("🥑\(spotListViewModel.isUpdated)")
-                if spotListViewModel.isUpdated {
+                print("🥑\(viewModel.isUpdated)")
+                if viewModel.isUpdated {
                     spotListView.collectionView.reloadData()
                     print("🥑reloadData")
                 } else {
@@ -99,11 +99,13 @@ extension SpotListViewController {
             } else {
                 print("🥑Post 실패")
             }
-            spotListViewModel.isUpdated = false
-            spotListViewModel.isPostSpotListSuccess.value = nil
+            viewModel.isUpdated = false
+            viewModel.isPostSpotListSuccess.value = nil
             endRefreshingAndTransparancy()
+            
+            let isFilterSet = !viewModel.filterList.isEmpty
+            spotListView.updateFilterButtonColor(isFilterSet)
         }
-        
     }
     
 }
@@ -123,14 +125,15 @@ private extension SpotListViewController {
             }
             return
         }
-        spotListViewModel.requestLocation()
+        viewModel.requestLocation()
+        
         DispatchQueue.main.async {
             // NOTE: 데이터 리로드 전 애니메이션
             UIView.animate(withDuration: 0.25, animations: {
                 self.spotListView.collectionView.alpha = 0.5
             }) { _ in
                 
-                self.spotListViewModel.postSpotList()
+                self.viewModel.postSpotList()
             }
         }
     }
@@ -141,17 +144,8 @@ private extension SpotListViewController {
             presentLoginModal()
             return
         }
-        let vc = SpotListFilterViewController()
+        let vc = SpotListFilterViewController(viewModel: viewModel)
         vc.setLongSheetLayout()
-        
-        vc.completionHandler = { [weak self] selectedSpotCondition in
-            guard let self = self else { return }
-//            self.selectedSpotCondition = selectedSpotCondition
-            spotListViewModel.spotType.value = selectedSpotCondition.spotType
-            spotListViewModel.filterList = selectedSpotCondition.filterList
-            
-            spotListViewModel.postSpotList()
-        }
         present(vc, animated: true)
     }
     
@@ -247,7 +241,7 @@ extension SpotListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return spotListViewModel.spotList.count
+        return viewModel.spotList.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -260,7 +254,7 @@ extension SpotListViewController: UICollectionViewDataSource {
         
         let bgColor: MatchingRateBgColorType = indexPath.item == 0 ? .dark : .light
         
-        item.bind(spot: spotListViewModel.spotList[indexPath.item],
+        item.bind(spot: viewModel.spotList[indexPath.item],
                   matchingRateBgColor: bgColor)
         
         return item
@@ -293,7 +287,7 @@ extension SpotListViewController: UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = spotListViewModel.spotList[indexPath.item]
+        let item = viewModel.spotList[indexPath.item]
         let vc = SpotDetailViewController(1) // TODO: 1 -> item.id로 변경
         self.navigationController?.pushViewController(vc, animated: true)
     }

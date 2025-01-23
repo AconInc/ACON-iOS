@@ -126,11 +126,10 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
               overlayTitle.backgroundColor = .clear
               overlayTitle.alpha = 0
           } else if isDimmed {
-              // 선택되지 않았지만 딤 처리 상태: 검정 딤 처리
-              overlayContainer.backgroundColor = UIColor.gray9.withAlphaComponent(0.2)
+              overlayContainer.backgroundColor = UIColor.gray9.withAlphaComponent(0.9)
               overlayImageView.image = nil
               overlayImageView.alpha = 0
-              overlayTitle.backgroundColor = UIColor.gray9.withAlphaComponent(0.3)
+              overlayTitle.backgroundColor = UIColor.gray9.withAlphaComponent(0.7)
               overlayTitle.alpha = 1
           } else {
               // 기본 상태
@@ -163,10 +162,10 @@ extension SmallBoxViewCell {
     
     private func applyOverlaySettings(isSelected: Int, isDimmed: Bool) {
         if isDimmed {
-            overlayContainer.backgroundColor = UIColor.gray9.withAlphaComponent(0.2)
+            overlayContainer.backgroundColor = UIColor.gray9.withAlphaComponent(0.9)
             overlayImageView.image = nil
             overlayImageView.alpha = 0
-            overlayTitle.backgroundColor = UIColor.gray9.withAlphaComponent(0.3)
+            overlayTitle.backgroundColor = UIColor.gray9.withAlphaComponent(0.6)
             overlayTitle.alpha = 1
         } else if (1...3).contains(isSelected) {
             overlayImageView.image = UIImage(named: "\(isSelected)")
