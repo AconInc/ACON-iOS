@@ -86,6 +86,7 @@ extension SpotListViewController {
                 print("🥑\(viewModel.isUpdated)")
                 if viewModel.isUpdated {
                     spotListView.collectionView.reloadData()
+                    spotListView.hideSkeletonView(isHidden: true)
                     print("🥑reloadData")
                 } else {
                     print("🥑데이터가 안 바뀌어서 리로드데이터 안 함")
@@ -93,6 +94,7 @@ extension SpotListViewController {
             } else {
                 print("🥑Post 실패")
             }
+            
             viewModel.isUpdated = false
             viewModel.isPostSpotListSuccess.value = nil
             endRefreshingAndTransparancy()
@@ -120,6 +122,7 @@ private extension SpotListViewController {
             }) { _ in
                 
                 self.viewModel.postSpotList()
+                self.spotListView.hideSkeletonView(isHidden: false)
             }
         }
     }
