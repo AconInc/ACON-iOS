@@ -168,4 +168,78 @@ enum SpotType {
         
     }
     
+    enum WalkingDistanceType: CaseIterable {
+        
+        case five, ten, fifteen, twenty, twentyFive
+        
+        var text: String {
+            switch self {
+            case .five: return "5분 이내"
+            case .ten: return "10분"
+            case .fifteen: return "15분"
+            case .twenty: return "20분"
+            case .twentyFive: return "25분"
+            }
+        }
+        
+        var serverKey: Int {
+            switch self {
+            case .five: return 5
+            case .ten: return 10
+            case .fifteen: return 15
+            case .twenty: return 20
+            case .twentyFive: return -1
+            }
+        }
+        
+    }
+    
+    enum RestaurantPriceType: CaseIterable {
+        
+        case fiveThousand, tenThousand, thirtyThousand, fiftyThousand, fiftyThousandAbove
+        
+        var text: String {
+            switch self {
+            case .fiveThousand: return "5천원 이하"
+            case .tenThousand: return "1만원"
+            case .thirtyThousand: return "3만원"
+            case .fiftyThousand: return "5만원"
+            case .fiftyThousandAbove: return "5만원 이상"
+            }
+        }
+        
+        var serverKey: Int {
+            switch self {
+            case .fiveThousand: return 5000
+            case .tenThousand: return 10000
+            case .thirtyThousand: return 30000
+            case .fiftyThousand: return 50000
+            case .fiftyThousandAbove: return -1
+            }
+        }
+        
+    }
+    
+    enum CafePriceType: CaseIterable {
+        
+        case threeTousand, fiveThousand, aboveTenThousand
+        
+        var text: String {
+            switch self {
+            case .threeTousand: return "3천원 이하"
+            case .fiveThousand: return "5천원"
+            case .aboveTenThousand: return "1만원 이상"
+            }
+        }
+        
+        var serverKey: Int {
+            switch self {
+            case .threeTousand: return 3000
+            case .fiveThousand: return 5000
+            case .aboveTenThousand: return -1
+            }
+        }
+        
+    }
+    
 }

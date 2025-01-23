@@ -66,7 +66,7 @@ class SpotListFilterView: GlassmorphismView {
     private let walkingSectionTitleLabel = UILabel()
     
     let walkingSlider = CustomSlider(
-        indicators: StringLiterals.SpotListFilter.walkingTimes,
+        indicators: SpotType.WalkingDistanceType.allCases.map { return $0.text },
         startIndex: 2)
     
     
@@ -77,11 +77,11 @@ class SpotListFilterView: GlassmorphismView {
     private let priceSectionTitleLabel = UILabel()
     
     let restaurantPriceSlider = CustomSlider(
-        indicators: StringLiterals.SpotListFilter.restaurantPrices,
+        indicators: SpotType.RestaurantPriceType.allCases.map { return $0.text },
         startIndex: 1)
     
     let cafePriceSlider = CustomSlider(
-        indicators: StringLiterals.SpotListFilter.cafePrices,
+        indicators: SpotType.CafePriceType.allCases.map { return $0.text },
         startIndex: 1)
     
     
