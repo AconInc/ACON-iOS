@@ -58,4 +58,10 @@ class FloatingButton: GlassmorphismView {
         button.setImage(image, for: .normal)
     }
     
+    
+    // MARK: - Internal Methods
+    
+    func updateImage(_ image: UIImage?) {
+        button.setImage(image, for: .normal)
+    }
 }

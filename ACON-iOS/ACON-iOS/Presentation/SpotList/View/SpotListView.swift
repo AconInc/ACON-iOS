@@ -144,4 +144,9 @@ extension SpotListView {
         noAcornView.isHidden = isHidden
     }
     
+    func updateFilterButtonColor(_ isFilterSet: Bool) {
+        isFilterSet
+        ? floatingFilterButton.updateImage(.icFilterOrg28)
+        : floatingFilterButton.updateImage(.icFilterW28)
+    }
 }

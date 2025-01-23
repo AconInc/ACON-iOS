@@ -13,32 +13,35 @@ class SpotListFilterViewController: BaseViewController {
     
     private let spotListFilterView = SpotListFilterView()
     
-    private let viewModel = SpotListViewModel()
-    
-    var completionHandler: ((SpotConditionModel) -> Void)?
-    
-    var spotType: SpotType = .restaurant
-    
-    var spotCondition: SpotConditionModel = SpotConditionModel(spotType: .restaurant, filterList: [], walkingTime: -1, priceRange: -1)
-    
-    var filterList: [SpotFilterListModel] = []
+    private let viewModel: SpotListViewModel
     
     
     // MARK: - LifeCycles
+    
+    init(viewModel: SpotListViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addTargets()
-        updateView(spotType)
+        switchedSegment(viewModel.spotType.value)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        if isBeingDismissed {
-            completionHandler?(spotCondition)
-        }
+        applyConditions(
+            spotType: viewModel.spotType.value ?? .restaurant,
+            filterLists: viewModel.filterList
+        )
     }
     
     override func setHierarchy() {
@@ -80,6 +83,12 @@ private extension SpotListFilterViewController {
             action: #selector(didTapConductButton),
             for: .touchUpInside
         )
+        
+        spotListFilterView.resetButton.addTarget(
+            self,
+            action: #selector(didTapResetButton),
+            for: .touchUpInside
+        )
     }
     
 }
@@ -92,8 +101,9 @@ private extension SpotListFilterViewController {
     @objc
     func didChangeSpot(segment: UISegmentedControl) {
         let index = segment.selectedSegmentIndex
-        self.spotType = index == 0 ? .restaurant : .cafe
-        updateView(self.spotType)
+        let spotType: SpotType = index == 0 ? .restaurant : .cafe
+        viewModel.spotType.value = spotType
+        switchedSegment(spotType)
       }
     
     
@@ -104,26 +114,45 @@ private extension SpotListFilterViewController {
     
     @objc
     func didTapConductButton() {
-        switch self.spotType {
-        case .restaurant:
-            let restaurantFilter = configureRestaurantFilter()
-            let companionFilter = configureCompanionFilter()
-            
-            self.filterList.append(restaurantFilter)
-            self.filterList.append(companionFilter)
-            
-        case .cafe:
-            let cafeFilter = configureCafeFilter()
-            let visitPurposeFilter = configureVisitPurposeFilter()
-            
-            self.filterList.append(cafeFilter)
-            self.filterList.append(visitPurposeFilter)
+        guard let spotType = viewModel.spotType.value else {
+            viewModel.spotType.value = .restaurant
+            return // TODO: 인덱스 오류 해결
         }
         
-        self.spotCondition = SpotConditionModel(spotType: self.spotType, filterList: self.filterList, walkingTime: -1, priceRange: -1)
+        switch spotType {
+        case .restaurant:
+            let restaurantFilter = extractRestaurantFilter()
+            let companionFilter = extractCompanionFilter()
+            
+            self.viewModel.filterList.append(restaurantFilter)
+            self.viewModel.filterList.append(companionFilter)
+            
+        case .cafe:
+            let cafeFilter = extractCafeFilter()
+            let visitPurposeFilter = extractVisitPurposeFilter()
+            
+            self.viewModel.filterList.append(cafeFilter)
+            self.viewModel.filterList.append(visitPurposeFilter)
+        }
+        
         // TODO: 도보 가능 거리, 가격대 필터링
+        viewModel.postSpotList()
         self.dismiss(animated: true)
     }
+    
+    @objc func didTapResetButton() {
+        self.viewModel.spotType.value = nil
+        self.viewModel.filterList = []
+        self.viewModel.spotCondition = SpotConditionModel(
+            spotType: .restaurant,
+            filterList: [],
+            walkingTime: -1,
+            priceRange: -1
+        )
+        viewModel.postSpotList()
+        self.dismiss(animated: true)
+    }
+    
 }
 
 
@@ -131,7 +160,9 @@ private extension SpotListFilterViewController {
 
 private extension SpotListFilterViewController {
     
-    func updateView(_ spotType: SpotType) {
+    func switchedSegment(_ spotType: SpotType?) {
+        guard let spotType = spotType else { return }
+        
         spotListFilterView.do {
             // NOTE: spot tag 바꾸기
             $0.switchSpotTagStack(spotType)
@@ -150,6 +181,30 @@ private extension SpotListFilterViewController {
         }
     }
     
+    func applyConditions(spotType: SpotType, filterLists: [SpotFilterListModel]) {
+        spotListFilterView.segmentedControl.selectedSegmentIndex = spotType == .cafe ? 1 : 0
+        switchedSegment(spotType)
+        print("🥑spotType: \(spotType)")
+        
+        for filterList in filterLists {
+            let category = filterList.category
+            print("🥑applied filterList: \(filterList), 🥑spotType: \(spotType)")
+            
+            switch category {
+            case .restaurantFeature, .cafeFeature:
+                applySpotConditionToUI(
+                    spotType: spotType,
+                    optionList: filterList.optionList)
+
+            case .companion:
+                applyCompanionConditionToUI(optionList: filterList.optionList)
+            case .visitPurpose:
+                applyVisitPurposeConditionToUI(optionList: filterList.optionList)
+            }
+        }
+        
+    }
+    
 }
 
 
@@ -157,7 +212,9 @@ private extension SpotListFilterViewController {
 
 extension SpotListFilterViewController {
     
-    func configureRestaurantFilter() -> SpotFilterListModel {
+    // MARK: - UI -> VM
+    
+    func extractRestaurantFilter() -> SpotFilterListModel {
         let restaurantFeatures = SpotType.RestaurantFeatureType.allCases
         var restaurantFeatureOptionList: [String] = []
         
@@ -176,14 +233,14 @@ extension SpotListFilterViewController {
         }
         
         let restaurantFilterList = SpotFilterListModel(
-            category: SpotType.FilterCategoryType.restaurantFeature.serverKey,
+            category: SpotType.FilterCategoryType.restaurantFeature,
             optionList: restaurantFeatureOptionList
         )
         
         return restaurantFilterList
     }
     
-    func configureCafeFilter() -> SpotFilterListModel {
+    func extractCafeFilter() -> SpotFilterListModel {
         let cafeFeatures = SpotType.CafeFeatureType.allCases
         var cafeFeatureOptionList: [String] = []
         for (i, button) in spotListFilterView.firstLineSpotTagStackView.arrangedSubviews.enumerated() {
@@ -196,19 +253,19 @@ extension SpotListFilterViewController {
         for (i, button) in spotListFilterView.secondLineSpotTagStackView.arrangedSubviews.enumerated() {
             let tagButton = button as? FilterTagButton ?? UIButton()
             if tagButton.isSelected {
-                cafeFeatureOptionList.append(cafeFeatures[i + 5].serverKey)
+                cafeFeatureOptionList.append(cafeFeatures[i + 4].serverKey)
             }
         }
         
         let cafeFilterList = SpotFilterListModel(
-            category: SpotType.FilterCategoryType.cafeFeature.serverKey,
+            category: SpotType.FilterCategoryType.cafeFeature,
             optionList: cafeFeatureOptionList
         )
         
         return cafeFilterList
     }
     
-    func configureCompanionFilter() -> SpotFilterListModel {
+    func extractCompanionFilter() -> SpotFilterListModel {
         let companionType = SpotType.CompanionType.allCases
         var companionOptionList: [String] = []
         
@@ -220,14 +277,14 @@ extension SpotListFilterViewController {
         }
         
         let companionFilterList = SpotFilterListModel(
-            category: SpotType.FilterCategoryType.companion.serverKey,
+            category: SpotType.FilterCategoryType.companion,
             optionList: companionOptionList
         )
         
         return companionFilterList
     }
     
-    func configureVisitPurposeFilter() -> SpotFilterListModel {
+    func extractVisitPurposeFilter() -> SpotFilterListModel {
         let visitPurpose = SpotType.VisitPurposeType.allCases
         var visitPurposeOptionList: [String] = []
         
@@ -239,11 +296,59 @@ extension SpotListFilterViewController {
         }
         
         let visitPurposeFilterList = SpotFilterListModel(
-            category: SpotType.FilterCategoryType.visitPurpose.serverKey,
+            category: SpotType.FilterCategoryType.visitPurpose,
             optionList: visitPurposeOptionList
         )
         
         return visitPurposeFilterList
     }
     
+    
+    // MARK: - VM -> UI
+    
+    func applySpotConditionToUI(spotType: SpotType, optionList: [String]) {
+        let tagKeys: [String] = {
+            switch spotType {
+            case .restaurant:
+                return SpotType.RestaurantFeatureType.allCases.map { return $0.serverKey }
+            case .cafe:
+                return SpotType.CafeFeatureType.allCases.map { return $0.serverKey }
+            }
+        }()
+        
+        let firstLineKeys: [String] = Array(tagKeys[0..<spotType.firstLineCount])
+        let secondLineKeys: [String] = Array(tagKeys[spotType.firstLineCount...])
+        
+        for (i, tagKey) in firstLineKeys.enumerated() {
+            if optionList.contains(tagKey) {
+                (spotListFilterView.firstLineSpotTagStackView.arrangedSubviews[i] as? FilterTagButton ?? UIButton()).isSelected = true
+            }
+        }
+        
+        for (i, tagKey) in secondLineKeys.enumerated() {
+            if optionList.contains(tagKey) {
+                (spotListFilterView.secondLineSpotTagStackView.arrangedSubviews[i] as? FilterTagButton ?? UIButton()).isSelected = true
+            }
+        }
+    }
+    
+    func applyCompanionConditionToUI(optionList: [String]) {
+        let tagKeys = SpotType.CompanionType.allCases.map { return $0.serverKey }
+        
+        for (i, tagKey) in tagKeys.enumerated() {
+            if optionList.contains(tagKey) {
+                (spotListFilterView.companionTagStackView.arrangedSubviews[i] as? FilterTagButton ?? UIButton()).isSelected = true
+            }
+        }
+    }
+    
+    func applyVisitPurposeConditionToUI(optionList: [String]) {
+        let tagKeys = SpotType.VisitPurposeType.allCases.map { return $0.serverKey }
+        
+        for (i, tagKey) in tagKeys.enumerated() {
+            if optionList.contains(tagKey) {
+                (spotListFilterView.visitPurposeTagStackView.arrangedSubviews[i] as? FilterTagButton ?? UIButton()).isSelected = true
+            }
+        }
+    }
 }

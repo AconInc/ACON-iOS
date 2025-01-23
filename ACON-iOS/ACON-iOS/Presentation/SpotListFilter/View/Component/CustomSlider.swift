@@ -33,7 +33,7 @@ final class CustomSlider: BaseView {
     
     private let fillTrackView = UIView()
     
-    private lazy var thumbView = UIView()
+    private lazy var thumbView = WideTouchView()
     
     private var indicatorLabels: [UILabel] = [] // 라벨
     

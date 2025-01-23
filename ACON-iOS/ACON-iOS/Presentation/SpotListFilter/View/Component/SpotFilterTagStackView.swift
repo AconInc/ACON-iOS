@@ -9,11 +9,6 @@ import UIKit
 
 class SpotFilterTagStackView: UIStackView {
     
-    // MARK: - UI Properties
-    
-    private var tagButtons: [UIButton] = []
-    
-    
     // MARK: - LifeCycle
     
     override init(frame: CGRect) {
@@ -44,7 +39,6 @@ extension SpotFilterTagStackView {
         for title in titles {
             let button = FilterTagButton()
             button.setAttributedTitle(text: title, style: .b3)
-            tagButtons.append(button)
             self.addArrangedSubview(button)
         }
         
@@ -64,8 +58,9 @@ extension SpotFilterTagStackView {
     }
     
     func resetTagSelection() {
-        tagButtons.forEach {
-            $0.isSelected = false
+        self.arrangedSubviews.forEach { view in
+            let button = view as? FilterTagButton ?? UIButton()
+            button.isSelected = false
         }
     }
     
