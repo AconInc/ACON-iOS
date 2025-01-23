@@ -182,7 +182,7 @@ private extension SpotListFilterViewController {
     }
     
     func applyConditions(spotType: SpotType, filterLists: [SpotFilterListModel]) {
-        
+        spotListFilterView.segmentedControl.selectedSegmentIndex = spotType == .cafe ? 1 : 0
         switchedSegment(spotType)
         print("🥑spotType: \(spotType)")
         
@@ -334,7 +334,6 @@ extension SpotListFilterViewController {
         }
         
         for (i, tagKey) in secondLineKeys.enumerated() {
-            print(i, tagKey)
             if optionList.contains(tagKey) {
                 (spotListFilterView.secondLineSpotTagStackView.arrangedSubviews[i] as? FilterTagButton ?? UIButton()).isSelected = true
             }
