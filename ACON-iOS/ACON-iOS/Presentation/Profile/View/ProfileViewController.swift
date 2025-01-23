@@ -40,7 +40,10 @@ class ProfileViewController: BaseViewController {
     
     @objc
     func disableAutoLogin() {
-        print("djlkdsjlfes")
+        UserDefaults.standard.removeObject(forKey: StringLiterals.UserDefaults.accessToken)
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = SplashViewController()
+        }
     }
     
 }
