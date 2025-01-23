@@ -8,13 +8,39 @@
 import UIKit
 
 class SkeletonView: BaseView {
+    
+    // MARK: - Properties
+    
+    private let stackView = UIStackView()
+    
+    
+    // MARK: - Initializer
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    override func setHierarchy() {
+        super.setHierarchy()
+        
+        self.addSubviews(stackView)
     }
-    */
 
+    override func setLayout() {
+        super.setLayout()
+        
+        stackView.snp.makeConstraints {
+            $0.verticalEdges.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(20)
+        }
+    }
+    
+    override func setStyle() {
+        super.setStyle()
+        
+        stackView.do {
+            $0.axis = .vertical
+            $0.spacing = 12
+        }
+    }
+    
+    func addContentView() {
+        
+    }
 }

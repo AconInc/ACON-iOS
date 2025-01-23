@@ -28,6 +28,7 @@
 		15A3F6E02D38724A00577E16 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */; };
 		15A3F7A12D38C71900577E16 /* PriorityLowEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */; };
 		15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */; };
+		15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C0ED512D429F7400C9ED83 /* SkeletonView.swift */; };
 		15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256A2D3D61F500320006 /* GlassmorphismView.swift */; };
 		15CD256E2D3D795800320006 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256D2D3D795800320006 /* FloatingButton.swift */; };
 		15CD25702D3F86E700320006 /* CustomRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */; };
@@ -213,6 +214,7 @@
 		15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityLowEmptyView.swift; sourceTree = "<group>"; };
 		15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotFilterTagStackView.swift; sourceTree = "<group>"; };
+		15C0ED512D429F7400C9ED83 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		15CD256A2D3D61F500320006 /* GlassmorphismView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismView.swift; sourceTree = "<group>"; };
 		15CD256D2D3D795800320006 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshControl.swift; sourceTree = "<group>"; };
@@ -531,6 +533,7 @@
 			children = (
 				15CD256D2D3D795800320006 /* FloatingButton.swift */,
 				15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */,
+				15C0ED512D429F7400C9ED83 /* SkeletonView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1373,6 +1376,7 @@
 				D6FF82ED2D380B6100090233 /* FavoriteSpotType.swift in Sources */,
 				741E68912D3D385A00DF99EF /* ACPlugin.swift in Sources */,
 				745B19AE2D4002A100BDBDA4 /* PostLoginResponse.swift in Sources */,
+				15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */,
 				74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */,
 				746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */,
 				746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */,
