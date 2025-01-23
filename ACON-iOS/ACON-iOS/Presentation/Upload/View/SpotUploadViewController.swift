@@ -98,9 +98,6 @@ private extension SpotUploadViewController {
                     let alertHandler = AlertHandler()
                     alertHandler.showLocationAccessFailImageAlert(from: self!)
                     self?.rightButton.isEnabled = false
-                    self?.spotUploadView.spotSearchButton.setAttributedTitle(text: StringLiterals.Upload.searchSpot,
-                                                                            style: .s2,
-                                                                            color: .gray5)
                 }
                 self?.spotReviewViewModel.reviewVerification.value = nil
             }
