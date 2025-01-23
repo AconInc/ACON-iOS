@@ -107,12 +107,15 @@ extension LoginModalViewController {
 // MARK: - bindViewModel
 
 extension LoginModalViewController {
-    
+
     func bindViewModel() {
         self.loginViewModel.onSuccessLogin.bind { [weak self] onSuccess in
+            print("hi")
+            print(onSuccess)
             guard let onSuccess else { return }
             guard let self = self else { return }
-            onSuccess ? navigateToLocalVerificationVC() : showLoginFailAlert()
+            self.dismiss(animated: true)
+            onSuccess ? ACToastController.show(StringLiterals.LoginModal.successLogin, bottomInset: 112, delayTime: 1) { [weak self] in return } : showLoginFailAlert()
         }
     }
     
