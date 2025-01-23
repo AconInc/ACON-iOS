@@ -202,11 +202,23 @@ extension OnboardingViewController {
         contentView = getCollectionView(for: step)
         
         guard let contentView = contentView else { return }
+        
+        contentView.alpha = 0
+        contentView.transform = CGAffineTransform.identity
         // MARK: se Device response
         if step == 4, ScreenUtils.height < 800 {
             configureSmallDeviceLayout(for: contentView as! UICollectionView)
         } else {
-            configureDefaultLayout(for: contentView)
+            UIView.performWithoutAnimation {
+                
+                configureDefaultLayout(for: contentView)
+            }
+            view.layoutIfNeeded()
+            
+        }
+        
+        UICollectionView.animate(withDuration: 0.25) {
+            contentView.alpha = 1
         }
         
         updateProgressText(for: step)
@@ -248,6 +260,9 @@ extension OnboardingViewController {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(nextButton.snp.top)
         }
+        
+        contentView.alpha = 0
+        contentView.transform = .identity
     }
     
     private func configureSmallDeviceLayout(for contentView: UICollectionView) {
@@ -290,22 +305,22 @@ extension OnboardingViewController {
     
     private func setFavoriteSpotTypeCollectionView() {
         contentView = favoriteSpotTypeCollectionView
-
+        
         favoriteSpotTypeCollectionView.onSelectionChanged = { [weak self] selectedType in
             guard let self = self else { return }
-
+            
             self.viewModel.favoriteSpotType.value = selectedType.isEmpty ? nil : selectedType
             let isConditionMet = self.checkSelectionCondition(for: self.currentStep)
             self.updateNextButtonState(isEnabled: isConditionMet)
         }
     }
-
+    
     private func setFavoriteSpotStyleCollectionView() {
         contentView = favoriteSpotStyleCollectionView
         
         favoriteSpotStyleCollectionView.onSelectionChanged = { [weak self] selectedStyle in
             guard let self = self else { return }
-
+            
             self.viewModel.favoriteSpotStyle.value = selectedStyle.isEmpty ? nil : selectedStyle
             let isConditionMet = self.checkSelectionCondition(for: self.currentStep)
             self.updateNextButtonState(isEnabled: isConditionMet)
@@ -505,8 +520,6 @@ extension OnboardingViewController{
     }
     
     private func buttonHide() {
-        print("currentStep:",currentStep)
-
         if currentStep != 0 {
             backButton.alpha = 1
         }
