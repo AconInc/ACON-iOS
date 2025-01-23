@@ -12,12 +12,11 @@ import Then
 
 final class FavoriteSpotTypeCollectionView: UICollectionView {
     
-    var selectedSpotType: String? {
+    var selectedSpotType: String = " " {
         didSet {
             reloadData()
-            if let selectedSpotType = selectedSpotType {
-                onSelectionChanged?(selectedSpotType)
-            }
+            print(selectedSpotType)
+            onSelectionChanged?(selectedSpotType)
         }
     }
     
@@ -127,7 +126,7 @@ extension FavoriteSpotTypeCollectionView: UICollectionViewDelegate, UICollection
         let selectedOption = FavoriteSpotType.allCases[indexPath.row]
         
         if selectedSpotType == selectedOption.mappedValue {
-            selectedSpotType = nil
+            selectedSpotType = ""
         } else {
             selectedSpotType = selectedOption.mappedValue
         }

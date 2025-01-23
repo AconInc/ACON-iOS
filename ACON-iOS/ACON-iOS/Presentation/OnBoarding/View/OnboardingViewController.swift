@@ -52,6 +52,7 @@ final class OnboardingViewController: BaseViewController {
             $0.setImage(UIImage(named: "chevron.left"), for: .normal)
             $0.tintColor = .acWhite
             $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+            $0.alpha = 0
         }
         
         skipButton.do {
@@ -63,7 +64,7 @@ final class OnboardingViewController: BaseViewController {
         }
         
         progressView.do {
-            $0.backgroundColor = .lightGray
+            $0.backgroundColor = .gray8
         }
         
         progressIndicator.do {
@@ -147,8 +148,6 @@ final class OnboardingViewController: BaseViewController {
 
 extension OnboardingViewController {
     
-    
-    
     private func bindViewModel() {
         viewModel.dislike.bind { [weak self] dislikedFoods in
             self?.updateNextButtonState(isEnabled: !(dislikedFoods?.isEmpty ?? true))
@@ -203,11 +202,22 @@ extension OnboardingViewController {
         contentView = getCollectionView(for: step)
         
         guard let contentView = contentView else { return }
+        
+        contentView.alpha = 0
+        contentView.transform = CGAffineTransform.identity
         // MARK: se Device response
         if step == 4, ScreenUtils.height < 800 {
             configureSmallDeviceLayout(for: contentView as! UICollectionView)
         } else {
-            configureDefaultLayout(for: contentView)
+            UIView.performWithoutAnimation {
+                configureDefaultLayout(for: contentView)
+            }
+            view.layoutIfNeeded()
+            
+        }
+        
+        UICollectionView.animate(withDuration: 0.25) {
+            contentView.alpha = 1
         }
         
         updateProgressText(for: step)
@@ -249,6 +259,9 @@ extension OnboardingViewController {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(nextButton.snp.top)
         }
+        
+        contentView.alpha = 0
+        contentView.transform = .identity
     }
     
     private func configureSmallDeviceLayout(for contentView: UICollectionView) {
@@ -261,7 +274,6 @@ extension OnboardingViewController {
         progressTitle.text = StringLiterals.OnboardingType.progressTitleList[step]
     }
     
-    
     private func setDislikeCollectionView() {
         contentView = dislikeCollectionView
         dislikeCollectionView.onSelectionChanged = { [weak self] selectedIndices in
@@ -270,9 +282,9 @@ extension OnboardingViewController {
             if selectedIndices.map({ $0.uppercased() }) == ["NONE"] {
                 self.isOverlayVisible.toggle()
                 if self.isOverlayVisible {
-//                    self.showOverlay()
+                    //                    self.showOverlay()
                 } else {
-//                    self.hideOverlay()
+                    //                    self.hideOverlay()
                 }
             } else {
                 self.hideOverlay()
@@ -294,7 +306,11 @@ extension OnboardingViewController {
         contentView = favoriteSpotTypeCollectionView
         
         favoriteSpotTypeCollectionView.onSelectionChanged = { [weak self] selectedType in
-            self?.viewModel.favoriteSpotType.value = selectedType
+            guard let self = self else { return }
+            
+            self.viewModel.favoriteSpotType.value = selectedType.isEmpty ? nil : selectedType
+            let isConditionMet = self.checkSelectionCondition(for: self.currentStep)
+            self.updateNextButtonState(isEnabled: isConditionMet)
         }
     }
     
@@ -302,7 +318,11 @@ extension OnboardingViewController {
         contentView = favoriteSpotStyleCollectionView
         
         favoriteSpotStyleCollectionView.onSelectionChanged = { [weak self] selectedStyle in
-            self?.viewModel.favoriteSpotStyle.value = selectedStyle
+            guard let self = self else { return }
+            
+            self.viewModel.favoriteSpotStyle.value = selectedStyle.isEmpty ? nil : selectedStyle
+            let isConditionMet = self.checkSelectionCondition(for: self.currentStep)
+            self.updateNextButtonState(isEnabled: isConditionMet)
         }
     }
     
@@ -322,8 +342,19 @@ extension OnboardingViewController {
     private func updateNextButtonState(isEnabled: Bool) {
         nextButton.isEnabled = isEnabled
         nextButton.backgroundColor = isEnabled ? .gray5 : .gray8
-        nextButton.setTitleColor(isEnabled ? .white : .gray6, for: .normal)
-    }
+        // NOTE: when define component on up stage, It can't change button text color.. so, i define conponent attribute on here
+        let title = "다음"
+        let textColor: UIColor = isEnabled ? .white : .gray6
+        let font = ACFont.h8.font
+        
+        let attributedTitle = NSAttributedString(
+            string: title,
+            attributes: [
+                .foregroundColor: textColor,
+                .font: font
+            ]
+        )
+        nextButton.setAttributedTitle(attributedTitle, for: .normal)    }
     
     private func showOverlay() {
         UIView.animate(withDuration: 0.3) { [weak self] in
@@ -401,24 +432,25 @@ extension OnboardingViewController {
             viewModel.postOnboarding()
             return
         }
-
+        
         let isConditionMet = checkSelectionCondition(for: currentStep + 1)
-
         currentStep += 1
+        buttonHide()
         updateContentView(for: currentStep)
         updateNextButtonState(isEnabled: isConditionMet)
         updateProgressIndicator()
-
+        
         if isOverlayVisible {
             hideOverlay()
             isOverlayVisible = false
         }
     }
-
     
     @objc private func backButtonTapped() {
         guard currentStep > 0 else { return }
+        
         currentStep -= 1
+        buttonHide()
         updateContentView(for: currentStep)
         updateNextButtonState(isEnabled: true)
         updateProgressIndicator()
@@ -431,6 +463,7 @@ extension OnboardingViewController {
 }
 
 extension OnboardingViewController{
+    
     private func showLoadingIndicator() {
         let loadingView = UIActivityIndicatorView(style: .large)
         loadingView.startAnimating()
@@ -484,5 +517,9 @@ extension OnboardingViewController{
             return false
         }
     }
-
+    
+    private func buttonHide() {
+        backButton.alpha = (currentStep == 0) ? 0 : 1
+    }
+    
 }
