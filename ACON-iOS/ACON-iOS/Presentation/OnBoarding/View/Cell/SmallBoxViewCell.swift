@@ -126,7 +126,6 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
               overlayTitle.backgroundColor = .clear
               overlayTitle.alpha = 0
           } else if isDimmed {
-              // 선택되지 않았지만 딤 처리 상태: 검정 딤 처리
               overlayContainer.backgroundColor = UIColor.gray9.withAlphaComponent(0.9)
               overlayImageView.image = nil
               overlayImageView.alpha = 0

@@ -210,7 +210,6 @@ extension OnboardingViewController {
             configureSmallDeviceLayout(for: contentView as! UICollectionView)
         } else {
             UIView.performWithoutAnimation {
-                
                 configureDefaultLayout(for: contentView)
             }
             view.layoutIfNeeded()
@@ -520,13 +519,7 @@ extension OnboardingViewController{
     }
     
     private func buttonHide() {
-        if currentStep != 0 {
-            backButton.alpha = 1
-        }
-        if currentStep == 0 {
-            backButton.alpha = 0
-        }
-        
+        backButton.alpha = (currentStep == 0) ? 0 : 1
     }
     
 }

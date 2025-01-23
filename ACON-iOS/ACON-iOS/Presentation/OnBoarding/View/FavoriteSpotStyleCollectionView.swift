@@ -81,7 +81,7 @@ extension FavoriteSpotStyleCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAt section: Int
     ) -> UIEdgeInsets {
-        let horizontalInset = ScreenUtils.width * 10 / 360
+        let horizontalInset = ScreenUtils.width * 14 / 360
         let verticalInset = ScreenUtils.width * 84 / 780
         return UIEdgeInsets(
             top: verticalInset,
