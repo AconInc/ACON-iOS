@@ -248,14 +248,12 @@ private extension SpotListViewController {
     }
     
     func setRefreshControl() {
-        let control = CustomRefreshControl()
-        
-        control.addTarget(self,
-                          action: #selector(handleRefreshControl),
-                          for: .valueChanged
+        spotListView.collectionView.refreshControl = CustomRefreshControl()
+        spotListView.collectionView.refreshControl?.addTarget(
+            self,
+            action: #selector(handleRefreshControl),
+            for: .valueChanged
         )
-        
-        spotListView.collectionView.refreshControl = control
     }
     
 }
