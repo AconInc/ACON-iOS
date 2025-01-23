@@ -201,9 +201,6 @@ extension SpotDetailViewController: UIScrollViewDelegate {
         let shouldShowSticky = scrollView.contentOffset.y >= stickyPosition
         spotDetailView.stickyView.isHidden = !shouldShowSticky
         spotDetailView.stickyHeaderView.isHidden = shouldShowSticky
-        
-        let shouldShowBlurSpotImageView = spotDetailView.scrollView.contentOffset.y > ScreenUtils.navViewHeight
-        spotDetailView.blurSpotImageView.isHidden = shouldShowBlurSpotImageView
     }
 
 }
