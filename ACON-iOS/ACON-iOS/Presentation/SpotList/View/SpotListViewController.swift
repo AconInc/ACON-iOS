@@ -17,8 +17,7 @@ class SpotListViewController: BaseNavViewController {
     
     
     // MARK: - Properties
-    
-    private let spotListView = SpotListView()
+
     private let viewModel = SpotListViewModel()
     
     private var selectedSpotCondition: SpotConditionModel = SpotConditionModel(spotType: .restaurant, filterList: [], walkingTime: -1, priceRange: -1)
