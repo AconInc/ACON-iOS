@@ -290,3 +290,68 @@ extension SpotSearchViewController{
     }
     
 }
+
+import SwiftUI
+
+// Mock ViewModel for Preview
+class MockSpotSearchViewModel: SpotSearchViewModel {
+    init() {
+        // Providing mock coordinates for initialization
+        super.init(latitude: 37.7749, longitude: -122.4194)
+        
+        // Mock suggestion data
+        self.searchSuggestionData.value = [
+            SearchSuggestionModel(spotId: 1, spotName: "Mock Spot 1"),
+            SearchSuggestionModel(spotId: 2, spotName: "Mock Spot 2"),
+            SearchSuggestionModel(spotId: 3, spotName: "Mock Spot 3")
+        ]
+        self.onSuccessGetSearchSuggestion.value = true
+        
+        // Mock keyword data
+        self.searchKeywordData.value = [
+            SearchKeywordModel(
+                spotID: 101,
+                spotName: "Mock Keyword 1",
+                spotAddress: "123 Mock St",
+                spotType: "Cafe"
+            ),
+            SearchKeywordModel(
+                spotID: 102,
+                spotName: "Mock Keyword 2",
+                spotAddress: "456 Mock Ave",
+                spotType: "Restaurant"
+            )
+        ]
+        self.onSuccessGetSearchKeyword.value = true
+    }
+}
+
+// SwiftUI Preview Wrapper
+struct SpotSearchViewControllerPreview: UIViewControllerRepresentable {
+    
+    func makeUIViewController(context: Context) -> SpotSearchViewController {
+        // Use the mock ViewModel for preview
+        let mockViewModel = MockSpotSearchViewModel()
+        let viewController = SpotSearchViewController(spotSearchViewModel: mockViewModel)
+        
+        // Optionally configure the ViewController
+        viewController.completionHandler = { id, name in
+            print("Preview: Completion handler called with id: \(id), name: \(name)")
+        }
+        
+        return viewController
+    }
+    
+    func updateUIViewController(_ uiViewController: SpotSearchViewController, context: Context) {
+        // Optional updates during preview changes
+    }
+}
+
+// SwiftUI PreviewProvider
+struct SpotSearchViewController_Preview: PreviewProvider {
+    static var previews: some View {
+        SpotSearchViewControllerPreview()
+            .ignoresSafeArea()
+            .previewDisplayName("Spot Search ViewController")
+    }
+}
