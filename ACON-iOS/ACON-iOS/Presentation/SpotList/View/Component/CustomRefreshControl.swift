@@ -71,8 +71,9 @@ private extension CustomRefreshControl {
     
     func setLayout() {
         animationView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.size.equalTo(36)
+            $0.top.equalToSuperview().offset(60)
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(28)
         }
     }
     
