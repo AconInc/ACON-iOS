@@ -32,7 +32,6 @@ class SpotListViewController: BaseNavViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
 
-        handleRefreshControl()
         self.tabBarController?.tabBar.isHidden = false
     }
     
