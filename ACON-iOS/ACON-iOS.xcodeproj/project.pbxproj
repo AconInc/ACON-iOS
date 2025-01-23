@@ -32,12 +32,13 @@
 		15CD256E2D3D795800320006 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256D2D3D795800320006 /* FloatingButton.swift */; };
 		15CD25702D3F86E700320006 /* CustomRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */; };
 		15CD25742D3F8B0400320006 /* loadingWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = 15CD25732D3F8B0400320006 /* loadingWhite.json */; };
-		15CD25822D40364400320006 /* LoginModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25812D40364400320006 /* LoginModalViewController.swift */; };
-		15CD25842D40364F00320006 /* LoginModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25832D40364F00320006 /* LoginModalView.swift */; };
 		15CD25782D3FE31400320006 /* PostSpotListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25772D3FE31400320006 /* PostSpotListRequest.swift */; };
 		15CD257A2D3FEDBA00320006 /* SpotListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25792D3FEDBA00320006 /* SpotListService.swift */; };
 		15CD257C2D3FF13F00320006 /* PostSpotListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD257B2D3FF13F00320006 /* PostSpotListResponse.swift */; };
 		15CD257E2D3FF4F200320006 /* SpotListTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD257D2D3FF4F200320006 /* SpotListTargetType.swift */; };
+		15CD25822D40364400320006 /* LoginModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25812D40364400320006 /* LoginModalViewController.swift */; };
+		15CD25842D40364F00320006 /* LoginModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25832D40364F00320006 /* LoginModalView.swift */; };
+		15CD25892D42099100320006 /* WideTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25882D42099000320006 /* WideTouchView.swift */; };
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
 		74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */; };
 		74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */; };
@@ -216,12 +217,13 @@
 		15CD256D2D3D795800320006 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshControl.swift; sourceTree = "<group>"; };
 		15CD25732D3F8B0400320006 /* loadingWhite.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loadingWhite.json; sourceTree = "<group>"; };
-		15CD25812D40364400320006 /* LoginModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModalViewController.swift; sourceTree = "<group>"; };
-		15CD25832D40364F00320006 /* LoginModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModalView.swift; sourceTree = "<group>"; };
 		15CD25772D3FE31400320006 /* PostSpotListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSpotListRequest.swift; sourceTree = "<group>"; };
 		15CD25792D3FEDBA00320006 /* SpotListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListService.swift; sourceTree = "<group>"; };
 		15CD257B2D3FF13F00320006 /* PostSpotListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSpotListResponse.swift; sourceTree = "<group>"; };
 		15CD257D2D3FF4F200320006 /* SpotListTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListTargetType.swift; sourceTree = "<group>"; };
+		15CD25812D40364400320006 /* LoginModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModalViewController.swift; sourceTree = "<group>"; };
+		15CD25832D40364F00320006 /* LoginModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModalView.swift; sourceTree = "<group>"; };
+		15CD25882D42099000320006 /* WideTouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WideTouchView.swift; sourceTree = "<group>"; };
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultitaskDelegate.swift; sourceTree = "<group>"; };
 		74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLocationManager.swift; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				1547A88D2D35B13700E96616 /* FilterTagButton.swift */,
 				15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */,
 				15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */,
+				15CD25882D42099000320006 /* WideTouchView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -532,23 +535,6 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
-		15CD257F2D40361600320006 /* LoginModal */ = {
-			isa = PBXGroup;
-			children = (
-				15CD25802D40362500320006 /* View */,
-			);
-			path = LoginModal;
-			sourceTree = "<group>";
-		};
-		15CD25802D40362500320006 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				15CD25832D40364F00320006 /* LoginModalView.swift */,
-				15CD25812D40364400320006 /* LoginModalViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		15CD25752D3FE2D800320006 /* SpotList */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,6 +552,23 @@
 				15CD257B2D3FF13F00320006 /* PostSpotListResponse.swift */,
 			);
 			path = DTO;
+			sourceTree = "<group>";
+		};
+		15CD257F2D40361600320006 /* LoginModal */ = {
+			isa = PBXGroup;
+			children = (
+				15CD25802D40362500320006 /* View */,
+			);
+			path = LoginModal;
+			sourceTree = "<group>";
+		};
+		15CD25802D40362500320006 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				15CD25832D40364F00320006 /* LoginModalView.swift */,
+				15CD25812D40364400320006 /* LoginModalViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		35A4AFEF7860C30E103669B3 /* Frameworks */ = {
@@ -1454,6 +1457,7 @@
 				1547A8802D358E2700E96616 /* SpotListFilterView.swift in Sources */,
 				D6D0F51D2D36BAD900326F17 /* OnboardingViewModel.swift in Sources */,
 				74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */,
+				15CD25892D42099100320006 /* WideTouchView.swift in Sources */,
 				15A3F7A12D38C71900577E16 /* PriorityLowEmptyView.swift in Sources */,
 				74B817F32D3A7C8000C1D516 /* SpotReviewViewModel.swift in Sources */,
 				748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */,
