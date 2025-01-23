@@ -96,8 +96,10 @@ extension SpotListViewController {
             viewModel.isUpdated = false
             viewModel.isPostSpotListSuccess.value = nil
             endRefreshingAndTransparancy()
+            
+            let isFilterSet = !viewModel.filterList.isEmpty
+            spotListView.updateFilterButtonColor(isFilterSet)
         }
-        
     }
     
 }

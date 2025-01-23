@@ -22,8 +22,6 @@ class SpotListViewModel {
     var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.559171017384145, longitude: 126.9219534442884)
     
     
-    var isFilterSet: ObservablePattern<Bool> = ObservablePattern(nil)
-    
     // MARK: - Filter
     
     var spotType: ObservablePattern<SpotType> = ObservablePattern(nil)
