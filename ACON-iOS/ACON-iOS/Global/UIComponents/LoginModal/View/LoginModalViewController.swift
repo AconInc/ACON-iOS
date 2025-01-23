@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 import AuthenticationServices
 
 class LoginModalViewController: BaseViewController {
@@ -25,14 +26,14 @@ class LoginModalViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addTarget()
         bindViewModel()
-        addTargets()
     }
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        view.addSubview(loginModalView)
+        self.view.addSubview(loginModalView)
     }
     
     override func setLayout() {
@@ -43,34 +44,13 @@ class LoginModalViewController: BaseViewController {
         }
     }
     
-    func addTargets() {
-        loginModalView.googleLoginButton.addTarget(
-            self,
-            action: #selector(googleLoginButtonTapped),
-            for: .touchUpInside
-        )
+    func addTarget() {
+        loginModalView.googleLoginButton.addTarget(self, action: #selector(googleLoginButtonTapped), for: .touchUpInside)
+        loginModalView.appleLoginButton.addTarget(self, action: #selector(appleLoginButtonTapped), for: .touchUpInside)
         
-        loginModalView.appleLoginButton.addTarget(
-            self,
-            action: #selector(appleLoginButtonTapped),
-            for: .touchUpInside
-        )
-        
-        loginModalView.privacyPolicyLabel.addGestureRecognizer(UITapGestureRecognizer(
-            target: self,
-            action: #selector(privacyPolicyLabelTapped))
-        )
-        
-        loginModalView.termsOfUseLabel.addGestureRecognizer(UITapGestureRecognizer(
-            target: self,
-            action: #selector(termsOfUseLabelTapped))
-        )
-        
-        loginModalView.exitButton.addTarget(
-            self,
-            action: #selector(didTapExitButton),
-            for: .touchUpInside
-        )
+        loginModalView.privacyPolicyLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(privacyPolicyLabelTapped)))
+        loginModalView.termsOfUseLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(termsOfUseLabelTapped)))
+
     }
     
 }
@@ -80,6 +60,11 @@ class LoginModalViewController: BaseViewController {
 
 extension LoginModalViewController {
 
+    @objc
+    func xButtonTapped() {
+        self.dismiss(animated: true)
+    }
+    
     @objc
     func privacyPolicyLabelTapped() {
         let privacyPolicyVC = DRWebViewController(urlString: StringLiterals.WebView.privacyPolicyLink)
@@ -107,10 +92,6 @@ extension LoginModalViewController {
         controller.performRequests()
     }
     
-    @objc
-    func didTapExitButton() {
-        self.dismiss(animated: true)
-    }
 }
 
 
@@ -122,14 +103,18 @@ extension LoginModalViewController {
         self.loginViewModel.onSuccessLogin.bind { [weak self] onSuccess in
             guard let onSuccess else { return }
             guard let self = self else { return }
-            onSuccess ? navigateToLocalVerificationVC() : print("로그인 실패")
+            onSuccess ? navigateToLocalVerificationVC() : showLoginFailAlert()
         }
     }
     
-    // TODO: - 나중에 서버 로그인 Success 시 이동하는 것으로 변경 (ObservablePattern)
     func navigateToLocalVerificationVC() {
         let vc = LocalVerificationViewController()
         self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    func showLoginFailAlert() {
+        self.showDefaultAlert(title: StringLiterals.Alert.loginFailTitle,
+                              message: StringLiterals.Alert.loginFailMessage)
     }
     
 }
