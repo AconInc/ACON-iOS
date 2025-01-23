@@ -64,7 +64,7 @@ final class OnboardingViewController: BaseViewController {
         }
         
         progressView.do {
-            $0.backgroundColor = .lightGray
+            $0.backgroundColor = .gray8
         }
         
         progressIndicator.do {
@@ -158,8 +158,6 @@ extension OnboardingViewController {
         }
         
         viewModel.favoriteSpotType.bind { [weak self] spotType in
-            print("Bind Triggered. Spot Type: \(spotType ?? "nil")")
-
             self?.updateNextButtonState(isEnabled: spotType != nil)
         }
         
@@ -422,7 +420,6 @@ extension OnboardingViewController {
         }
         
         let isConditionMet = checkSelectionCondition(for: currentStep + 1)
-        
         currentStep += 1
         buttonHide()
         updateContentView(for: currentStep)
@@ -439,12 +436,10 @@ extension OnboardingViewController {
         guard currentStep > 0 else { return }
         
         currentStep -= 1
-        print("currentStep:",currentStep)
         buttonHide()
         updateContentView(for: currentStep)
         updateNextButtonState(isEnabled: true)
         updateProgressIndicator()
-        
     }
     
     @objc private func nextStack(){
