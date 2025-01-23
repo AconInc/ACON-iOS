@@ -52,10 +52,10 @@ class SpotListViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
-//        self.applyGlassmorphism()
         self.setTitleLabelStyle(title: "동네 인증")
+        setGlassMorphism()
     }
-    
+            
     private func addTarget() {
         spotListView.floatingFilterButton.button.addTarget(
             self,

@@ -173,22 +173,24 @@ extension BaseNavViewController {
         }
     }
     
-    func applyGlassmorphism(color: UIColor = .glaB30) {
-        let glassView = GlassmorphismView()
-        glassView.setGlassColor(color)
-        
-        view.insertSubview(glassView, aboveSubview: contentView)
-        
-        glassView.snp.makeConstraints {
-            $0.top.equalTo(topInsetView)
-            $0.bottom.horizontalEdges.equalTo(navigationBarView)
-        }
-        
-        [topInsetView, navigationBarView].forEach {
-            $0.backgroundColor = .clear
-        }
-        
-    }
+//    func applyGlassmorphismToNav(color: UIColor = .glaB30) {
+//        let glassView = GlassmorphismView()
+//        glassView.setGlassColor(color)
+//        
+//        view.insertSubview(glassView, aboveSubview: contentView)
+//        
+//        glassView.snp.makeConstraints {
+//            $0.top.equalTo(topInsetView)
+//            $0.bottom.horizontalEdges.equalTo(navigationBarView)
+//        }
+//        
+//        [topInsetView, navigationBarView].forEach {
+//            $0.backgroundColor = .clear
+//        }
+//        
+//    }
+    
+    
     
 }
 
