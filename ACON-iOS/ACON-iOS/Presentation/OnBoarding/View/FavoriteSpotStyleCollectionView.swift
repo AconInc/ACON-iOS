@@ -12,12 +12,11 @@ import Then
 
 final class FavoriteSpotStyleCollectionView: UICollectionView {
     
-    var selectedStyle: String? {
+    var selectedStyle: String = "" {
         didSet {
             reloadData()
-            if let selectedStyle = selectedStyle {
-                onSelectionChanged?(selectedStyle)
-            }
+            print(selectedStyle)
+            onSelectionChanged?(selectedStyle)
         }
     }
     
@@ -131,7 +130,7 @@ extension FavoriteSpotStyleCollectionView: UICollectionViewDelegate, UICollectio
         let selectedOption = FavoriteSpotStyle.allCases[indexPath.row]
         
         if selectedStyle == selectedOption.mappedValue {
-            selectedStyle = nil
+            selectedStyle = ""
         } else {
             selectedStyle = selectedOption.mappedValue
         }

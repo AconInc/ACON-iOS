@@ -148,8 +148,6 @@ final class OnboardingViewController: BaseViewController {
 
 extension OnboardingViewController {
     
-    
-    
     private func bindViewModel() {
         viewModel.dislike.bind { [weak self] dislikedFoods in
             self?.updateNextButtonState(isEnabled: !(dislikedFoods?.isEmpty ?? true))
@@ -160,6 +158,8 @@ extension OnboardingViewController {
         }
         
         viewModel.favoriteSpotType.bind { [weak self] spotType in
+            print("Bind Triggered. Spot Type: \(spotType ?? "nil")")
+
             self?.updateNextButtonState(isEnabled: spotType != nil)
         }
         
@@ -292,17 +292,25 @@ extension OnboardingViewController {
     
     private func setFavoriteSpotTypeCollectionView() {
         contentView = favoriteSpotTypeCollectionView
-        
+
         favoriteSpotTypeCollectionView.onSelectionChanged = { [weak self] selectedType in
-            self?.viewModel.favoriteSpotType.value = selectedType
+            guard let self = self else { return }
+
+            self.viewModel.favoriteSpotType.value = selectedType.isEmpty ? nil : selectedType
+            let isConditionMet = self.checkSelectionCondition(for: self.currentStep)
+            self.updateNextButtonState(isEnabled: isConditionMet)
         }
     }
-    
+
     private func setFavoriteSpotStyleCollectionView() {
         contentView = favoriteSpotStyleCollectionView
         
         favoriteSpotStyleCollectionView.onSelectionChanged = { [weak self] selectedStyle in
-            self?.viewModel.favoriteSpotStyle.value = selectedStyle
+            guard let self = self else { return }
+
+            self.viewModel.favoriteSpotStyle.value = selectedStyle.isEmpty ? nil : selectedStyle
+            let isConditionMet = self.checkSelectionCondition(for: self.currentStep)
+            self.updateNextButtonState(isEnabled: isConditionMet)
         }
     }
     
