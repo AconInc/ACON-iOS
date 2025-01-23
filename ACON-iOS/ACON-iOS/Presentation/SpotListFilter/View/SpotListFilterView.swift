@@ -21,7 +21,7 @@ class SpotListFilterView: GlassmorphismView {
     
     private let footerView = GlassmorphismView()
     
-    private let resetButton = UIButton()
+    let resetButton = UIButton()
     
     let conductButton = UIButton()
     
@@ -254,7 +254,7 @@ private extension SpotListFilterView {
         resetButton.do {
             var config = UIButton.Configuration.plain()
             config.image = .icReset
-            config.attributedTitle = AttributedString("재설정".ACStyle(.s2))
+            config.attributedTitle = AttributedString("초기화".ACStyle(.s2))
             $0.configuration = config
         }
         
