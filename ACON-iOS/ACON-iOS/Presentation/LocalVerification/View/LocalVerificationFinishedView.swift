@@ -47,44 +47,42 @@ final class LocalVerificationFinishedView: BaseView {
         super.setLayout()
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*32)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.height.equalTo(56)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*78)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*16)
         }
         
         explainationLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*96)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.height.equalTo(36)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*148)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*16)
         }
         
         localAcornImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*258)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*73)
-            $0.width.height.equalTo(80)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*240)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*60)
+            $0.width.height.equalTo(104)
         }
         
         plainAcornImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*258)
-            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*73)
-            $0.width.height.equalTo(80)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*240)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*60)
+            $0.width.height.equalTo(104)
         }
         
         localAcornLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*346)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*66)
-            $0.width.equalTo(94)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*352)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*60)
+            $0.width.equalTo(104)
         }
         
         plainAcornLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*346)
-            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*66)
-            $0.width.equalTo(94)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*352)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*60)
+            $0.width.equalTo(104)
         }
         
         startButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*36)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*40)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*16)
             $0.height.equalTo(52)
         }
         
@@ -99,7 +97,7 @@ final class LocalVerificationFinishedView: BaseView {
         
         explainationLabel.do {
             $0.setLabel(text:  StringLiterals.LocalVerification.localAcornExplaination,
-                        style: .b3,
+                        style: .b2,
                         color: .gray3)
         }
         
@@ -115,29 +113,29 @@ final class LocalVerificationFinishedView: BaseView {
         
         localAcornLabel.do {
             $0.setLabel(text: StringLiterals.LocalVerification.localAcorn,
-                        style: .s1,
+                        style: .h7,
                         color: .acWhite,
                         alignment: .center)
         }
         
         plainAcornLabel.do {
             $0.setLabel(text: StringLiterals.LocalVerification.plainAcorn,
-                        style: .s1,
+                        style: .h7,
                         color: .acWhite,
                         alignment: .center)
         }
         
         startButton.do {
             $0.setAttributedTitle(text: StringLiterals.LocalVerification.letsStart,
-                                   style: .h8,
+                                   style: .h7,
                                   color: .gray6,
                                   for: .disabled)
             $0.setAttributedTitle(text: StringLiterals.LocalVerification.letsStart,
-                                   style: .h8,
+                                   style: .h7,
                                   color: .acWhite,
                                   for: .normal)
             $0.backgroundColor = .gray8
-            $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
+            $0.layer.cornerRadius = 6
         }
     }
     

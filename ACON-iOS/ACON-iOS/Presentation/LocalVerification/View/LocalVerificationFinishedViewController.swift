@@ -65,7 +65,7 @@ class LocalVerificationFinishedViewController: BaseViewController {
         
         localVerificationFinishedView.titleLabel.do {
             $0.setLabel(text: StringLiterals.LocalVerification.now + localArea + StringLiterals.LocalVerification.localAcornTitle,
-                        style: .h6,
+                        style: .h5,
                         color: .acWhite)
         }
     }

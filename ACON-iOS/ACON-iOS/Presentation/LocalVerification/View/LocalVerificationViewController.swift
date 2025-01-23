@@ -23,7 +23,6 @@ class LocalVerificationViewController: BaseNavViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setXButton()
         addTarget()
         bindViewModel()
     }
@@ -46,12 +45,6 @@ class LocalVerificationViewController: BaseNavViewController {
         localVerificationView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-    }
-    
-    override func setStyle() {
-        super.setStyle()
-        
-        self.localVerificationView.nextButton.isEnabled = false
     }
     
     func addTarget() {
@@ -91,7 +84,7 @@ private extension LocalVerificationViewController {
         localVerificationView.verifyNewLocalButton.isSelected.toggle()
         let isSelected = localVerificationView.verifyNewLocalButton.isSelected
         localVerificationView.verifyNewLocalButton.configuration?.baseBackgroundColor = isSelected ? .gray7 : .gray9
-        localVerificationView.nextButton.isEnabled = isSelected
+//        localVerificationView.nextButton.isEnabled = isSelected
         localVerificationView.nextButton.backgroundColor = isSelected ? .gray5 : .gray8
     }
     

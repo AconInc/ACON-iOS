@@ -17,10 +17,14 @@ class ACTabBarController: UITabBarController {
         super.viewDidLoad()
         
         delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         configureTabBarAppearance()
         setNavViewControllers()
     }
-    
 }
 
 
@@ -42,11 +46,12 @@ extension ACTabBarController {
         }
         
         tabBar.frame.size.height = ScreenUtils.heightRatio * 76
+        tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
         
         // NOTE: 글라스모피즘 뷰 얹기
         let glassView = GlassmorphismView()
-        tabBar.backgroundImage? = UIImage(systemName: "photo") ?? UIImage()
+//        tabBar.backgroundImage? = UIImage(systemName: "photo") ?? UIImage()
         tabBar.addSubview(glassView)
         glassView.snp.makeConstraints {
             $0.edges.equalTo(tabBar)

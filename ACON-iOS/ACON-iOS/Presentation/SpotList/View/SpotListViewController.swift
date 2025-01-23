@@ -9,12 +9,20 @@ import UIKit
 
 class SpotListViewController: BaseNavViewController {
     
+    // MARK: - UI Properties
+    
+    private let glassMorphismView = GlassmorphismView()
+    
+    private let spotListView = SpotListView()
+    
+    
     // MARK: - Properties
     
     private let spotListView = SpotListView()
     private let viewModel = SpotListViewModel()
     
     private var selectedSpotCondition: SpotConditionModel = SpotConditionModel(spotType: .restaurant, filterList: [], walkingTime: -1, priceRange: -1)
+    
     
     // MARK: - LifeCycle
     
@@ -52,10 +60,10 @@ class SpotListViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
-        self.applyGlassmorphism()
         self.setTitleLabelStyle(title: "동네 인증")
+        setGlassMorphism()
     }
-    
+            
     private func addTarget() {
         spotListView.floatingFilterButton.button.addTarget(
             self,
@@ -99,6 +107,22 @@ extension SpotListViewController {
             
             let isFilterSet = !viewModel.filterList.isEmpty
             spotListView.updateFilterButtonColor(isFilterSet)
+        }
+    }
+    
+}
+
+
+// MARK: - 글라스모피즘 - BaseNavVC에 넣으면 오류 떠서 우선 여기에
+// TODO: - 추후 BaseNavVC로 빼기
+
+private extension SpotListViewController {
+    
+    func setGlassMorphism() {
+        self.view.insertSubview(glassMorphismView, aboveSubview: contentView)
+        glassMorphismView.snp.makeConstraints {
+            $0.top.equalTo(topInsetView)
+            $0.bottom.horizontalEdges.equalTo(navigationBarView)
         }
     }
     
@@ -257,11 +281,29 @@ extension SpotListViewController: UICollectionViewDataSource {
         }
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = viewModel.spotList[indexPath.item]
         let vc = SpotDetailViewController(1) // TODO: 1 -> item.id로 변경
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    // MARK: - 글라스모피즘 스크롤 시 선택
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+           
+        if offset > 0 {
+            [topInsetView, navigationBarView].forEach {
+                $0.backgroundColor = .clear
+            }
+            glassMorphismView.isHidden = false
+        } else {
+            [topInsetView, navigationBarView].forEach {
+                $0.backgroundColor = .gray9
+            }
+            glassMorphismView.isHidden = true
+        }
     }
 }
 

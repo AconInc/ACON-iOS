@@ -15,8 +15,6 @@ final class SpotDetailView: BaseView {
 
     // MARK: - UI Properties
     
-    var blurSpotImageView: UIImageView = UIImageView()
-    
     var stickyView: StickyHeaderView = StickyHeaderView()
     
     let scrollView: UIScrollView = UIScrollView()
@@ -38,7 +36,9 @@ final class SpotDetailView: BaseView {
         collectionViewLayout: menuCollectionViewFlowLayout
     )
     
-    private let footerView: UIView = UIView()
+    let footerGlassMorphismView = GlassmorphismView()
+
+    let footerView: UIView = UIView()
     
     private let localAcornImageView: UIImageView = UIImageView()
     
@@ -64,9 +64,9 @@ final class SpotDetailView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(blurSpotImageView,
-                         scrollView,
+        self.addSubviews(scrollView,
                          stickyView,
+                         footerGlassMorphismView,
                          footerView,
                          gotoTopButton)
         scrollView.addSubviews(scrollContentView)
@@ -85,12 +85,6 @@ final class SpotDetailView: BaseView {
     
     override func setLayout() {
         super.setLayout()
-        
-        blurSpotImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(-navViewHeight)
-            $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.heightRatio*296)
-        }
         
         gotoTopButton.snp.makeConstraints{
             $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
@@ -111,8 +105,15 @@ final class SpotDetailView: BaseView {
         }
         
         scrollContentView.snp.makeConstraints {
+//            $0.top.equalTo(scrollView.contentLayoutGuide).offset(-navViewHeight)
+//            $0.horizontalEdges.bottom.equalTo(scrollView.contentLayoutGuide)
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
+        }
+        
+        footerGlassMorphismView.snp.makeConstraints {
+            $0.bottom.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.heightRatio*84)
         }
         
         footerView.snp.makeConstraints {
@@ -195,13 +196,7 @@ final class SpotDetailView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        blurSpotImageView.do {
-            $0.backgroundColor = .acWhite
-            $0.contentMode = .scaleAspectFill
-            $0.clipsToBounds = true
-            $0.setBlurView()
-        }
-        
+        self.backgroundColor = .clear
         gotoTopButton.do {
             $0.backgroundColor = .gray7
             $0.layer.borderWidth = 1
@@ -217,6 +212,7 @@ final class SpotDetailView: BaseView {
         
         scrollView.do {
             $0.showsVerticalScrollIndicator = false
+            $0.bounces = false
         }
         
         spotDetailImageView.do {
@@ -245,7 +241,7 @@ final class SpotDetailView: BaseView {
         }
         
         footerView.do {
-            $0.backgroundColor = .gray9
+            $0.backgroundColor = .clear
         }
         
         localAcornImageView.do {
@@ -272,7 +268,7 @@ final class SpotDetailView: BaseView {
 extension SpotDetailView {
     
     func bindData(data: SpotDetailInfoModel) {
-        [self.blurSpotImageView, self.spotDetailImageView].forEach {
+        self.spotDetailImageView.do {
             $0.kf.setImage(with: URL(string: data.firstImageURL), options: [.transition(.none), .cacheOriginalImage])
         }
         let openStatus = data.openStatus
@@ -285,11 +281,11 @@ extension SpotDetailView {
                                              style: .b2,
                                              color: .gray4)
         self.localAcornCountLabel.setLabel(text: String(data.localAcornCount),
-                                                     style: .b4,
-                                                     alignment: .right)
+                                                     style: .s1,
+                                                     alignment: .left)
         self.plainAcornCountLabel.setLabel(text: String(data.basicAcornCount),
-                                                     style: .b4,
-                                                     alignment: .right)
+                                           style: .s1,
+                                           alignment: .left)
         
     }
     

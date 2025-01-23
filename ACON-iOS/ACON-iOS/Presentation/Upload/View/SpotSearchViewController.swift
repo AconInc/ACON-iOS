@@ -68,11 +68,13 @@ class SpotSearchViewController: BaseViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
         if isBeingDismissed {
             if hasCompletedSelection {
                 completionHandler?(selectedSpotId, selectedSpotName)
             }
             dismissCompletion?()
+            hasCompletedSelection = false
         }
     }
     
