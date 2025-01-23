@@ -38,6 +38,13 @@ enum SpotType {
         }
     }
     
+    var firstLineCount: Int { // TODO: 관련 코드 수정
+        switch self {
+        case .restaurant: return 5
+        case .cafe: return 4
+        }
+    }
+    
     
     enum FilterCategoryType: CaseIterable {
         

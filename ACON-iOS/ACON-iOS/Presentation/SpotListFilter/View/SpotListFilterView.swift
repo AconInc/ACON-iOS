@@ -357,22 +357,20 @@ private extension SpotListFilterView {
 extension SpotListFilterView {
     
     func switchSpotTagStack(_ spotType: SpotType) {
-        switch spotType {
-        case .restaurant:
-            let tagTexts: [String] = SpotType.RestaurantFeatureType.allCases.map { return $0.text }
-            let firstLine: [String] = Array(tagTexts[0..<5])
-            let secondLine: [String] = Array(tagTexts[5..<8])
-            
-            firstLineSpotTagStackView.switchTagButtons(titles: firstLine)
-            secondLineSpotTagStackView.switchTagButtons(titles: secondLine)
-        case .cafe:
-            let tagTexts: [String] = SpotType.CafeFeatureType.allCases.map { return $0.text }
-            let firstLine: [String] = Array(tagTexts[0..<4])
-            let secondLine: [String] = [tagTexts[4]]
-            
-            firstLineSpotTagStackView.switchTagButtons(titles: firstLine)
-            secondLineSpotTagStackView.switchTagButtons(titles: secondLine)
-        }
+        let tagTexts: [String] = {
+            switch spotType {
+            case .restaurant:
+                return SpotType.RestaurantFeatureType.allCases.map { return $0.text }
+            case .cafe:
+                return SpotType.CafeFeatureType.allCases.map { return $0.text }
+            }
+        }()
+        
+        let firstLine: [String] = Array(tagTexts[0..<spotType.firstLineCount])
+        let secondLine: [String] = Array(tagTexts[spotType.firstLineCount...])
+        
+        firstLineSpotTagStackView.switchTagButtons(titles: firstLine)
+        secondLineSpotTagStackView.switchTagButtons(titles: secondLine)
     }
     
     func hideCompanionSection(isHidden: Bool) {

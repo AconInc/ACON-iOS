@@ -307,13 +307,6 @@ extension SpotListFilterViewController {
     // MARK: - VM -> UI
     
     func applySpotConditionToUI(spotType: SpotType, optionList: [String]) {
-        let firstLineCount: Int = {
-            switch spotType {
-            case .restaurant: return 5
-            case .cafe: return 4
-            }
-        }()
-        
         let tagKeys: [String] = {
             switch spotType {
             case .restaurant:
@@ -323,9 +316,8 @@ extension SpotListFilterViewController {
             }
         }()
         
-        let firstLineKeys: [String] = Array(tagKeys[0..<firstLineCount])
-        
-        let secondLineKeys: [String] = Array(tagKeys[firstLineCount...])
+        let firstLineKeys: [String] = Array(tagKeys[0..<spotType.firstLineCount])
+        let secondLineKeys: [String] = Array(tagKeys[spotType.firstLineCount...])
         
         for (i, tagKey) in firstLineKeys.enumerated() {
             if optionList.contains(tagKey) {
