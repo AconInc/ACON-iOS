@@ -31,6 +31,8 @@ class SpotUploadViewController: BaseNavViewController {
     
     var longitude: Double = 0
     
+    var isInDismissProcess: Bool = false
+    
     
     // MARK: - LifeCycle
     
@@ -120,6 +122,7 @@ private extension SpotUploadViewController {
     func nextButtonTapped() {
         let vc = DropAcornViewController(spotID: selectedSpotID)
         vc.modalPresentationStyle = .fullScreen
+        self.isInDismissProcess = true
         present(vc, animated: false)
     }
     
@@ -152,6 +155,8 @@ extension SpotUploadViewController: ACLocationManagerDelegate {
 extension SpotUploadViewController {
     
     func setSpotSearchModal() {
+        if isInDismissProcess { return }
+        
         let vc = SpotSearchViewController(spotSearchViewModel: SpotSearchViewModel(latitude: self.latitude, longitude: self.longitude))
         vc.dismissCompletion = { [weak self] in
             DispatchQueue.main.async {
@@ -164,18 +169,18 @@ extension SpotUploadViewController {
             self.selectedSpotID = selectedSpotID
             
             DispatchQueue.main.async {
-                self.spotUploadView.spotSearchButton.do {
-                    $0.setAttributedTitle(text: selectedSpotName,
-                                          style: .s2,
-                                          color: .acWhite)
+                self.spotUploadView.spotNameLabel.do {
+                    $0.setLabel(text: selectedSpotName,
+                                style: .s2,
+                                color: .acWhite)
                 }
-                
                 if selectedSpotID > 0 {
                     self.spotReviewViewModel.getReviewVerification(spotId: selectedSpotID,
                                                                    latitude: self.latitude,
                                                                    longitude: self.longitude)
                 } else {
                     self.rightButton.isEnabled = false
+                    self.spotUploadView.spotNameLabel.isHidden = true
                     self.spotUploadView.spotSearchButton.setAttributedTitle(
                         text: StringLiterals.Upload.searchSpot,
                         style: .s2,

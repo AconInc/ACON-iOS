@@ -38,6 +38,8 @@
 		15CD257E2D3FF4F200320006 /* SpotListTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD257D2D3FF4F200320006 /* SpotListTargetType.swift */; };
 		15CD25822D40364400320006 /* LoginModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25812D40364400320006 /* LoginModalViewController.swift */; };
 		15CD25842D40364F00320006 /* LoginModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25832D40364F00320006 /* LoginModalView.swift */; };
+		15CD25822D40364400320006 /* LoginModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25812D40364400320006 /* LoginModalViewController.swift */; };
+		15CD25842D40364F00320006 /* LoginModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25832D40364F00320006 /* LoginModalView.swift */; };
 		15CD25892D42099100320006 /* WideTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25882D42099000320006 /* WideTouchView.swift */; };
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
 		74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */; };
@@ -57,11 +59,11 @@
 		741E68AA2D3D625E00DF99EF /* TestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E68A92D3D625A00DF99EF /* TestResponse.swift */; };
 		741E68AC2D3D6DA800DF99EF /* HeaderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E68AB2D3D6DA400DF99EF /* HeaderType.swift */; };
 		74205D2F2D40351700D11557 /* SocialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74205D2E2D40351400D11557 /* SocialType.swift */; };
-		74205D312D40398100D11557 /* splashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 74205D302D40398100D11557 /* splashLottie.json */; };
 		74220DD42D34363B000684BF /* SpotUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74220DD32D343633000684BF /* SpotUploadViewController.swift */; };
 		74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74220DD52D3436BE000684BF /* SpotUploadView.swift */; };
 		742544062D413CCD004F950F /* SpotListCollectionViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742544052D413CC6004F950F /* SpotListCollectionViewFooter.swift */; };
 		743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743069882D3D2F540033178C /* NetworkResult.swift */; };
+		7439FAF22D421A8000864AD0 /* splashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 7439FAF12D421A8000864AD0 /* splashLottie.json */; };
 		744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744BAF162D300AB100F95B4A /* DummyComponent.swift */; };
 		745000D72D403F0200262CBE /* lodingLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D62D403F0200262CBE /* lodingLottie.json */; };
 		745000D82D403F0200262CBE /* checkLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D52D403F0200262CBE /* checkLottie.json */; };
@@ -243,11 +245,11 @@
 		741E68A92D3D625A00DF99EF /* TestResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResponse.swift; sourceTree = "<group>"; };
 		741E68AB2D3D6DA400DF99EF /* HeaderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderType.swift; sourceTree = "<group>"; };
 		74205D2E2D40351400D11557 /* SocialType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialType.swift; sourceTree = "<group>"; };
-		74205D302D40398100D11557 /* splashLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = splashLottie.json; sourceTree = "<group>"; };
 		74220DD32D343633000684BF /* SpotUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadViewController.swift; sourceTree = "<group>"; };
 		74220DD52D3436BE000684BF /* SpotUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadView.swift; sourceTree = "<group>"; };
 		742544052D413CC6004F950F /* SpotListCollectionViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewFooter.swift; sourceTree = "<group>"; };
 		743069882D3D2F540033178C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		7439FAF12D421A8000864AD0 /* splashLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = splashLottie.json; sourceTree = "<group>"; };
 		744BAF162D300AB100F95B4A /* DummyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyComponent.swift; sourceTree = "<group>"; };
 		745000D52D403F0200262CBE /* checkLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = checkLottie.json; sourceTree = "<group>"; };
 		745000D62D403F0200262CBE /* lodingLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lodingLottie.json; sourceTree = "<group>"; };
@@ -1097,7 +1099,6 @@
 		74BF921A2D3972C500B923E3 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
-				74205D302D40398100D11557 /* splashLottie.json */,
 				747F4FC02D3DC80B003DECBF /* finishedUpload.json */,
 				746261562D3E5B6D00A4E84F /* drop1Acorn.json */,
 				746261572D3E5B6D00A4E84F /* drop2Acorn.json */,
@@ -1107,6 +1108,7 @@
 				15CD25732D3F8B0400320006 /* loadingWhite.json */,
 				745000D52D403F0200262CBE /* checkLottie.json */,
 				745000D62D403F0200262CBE /* lodingLottie.json */,
+				7439FAF12D421A8000864AD0 /* splashLottie.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -1312,10 +1314,10 @@
 				74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */,
 				74B25C302D2FEFE1008BDCB7 /* Release.xcconfig in Resources */,
 				748D6FA12D2BD65D007690B4 /* Pretendard-Regular.otf in Resources */,
+				7439FAF22D421A8000864AD0 /* splashLottie.json in Resources */,
 				748D6F9F2D2BD655007690B4 /* Pretendard-Medium.otf in Resources */,
 				74B25C2E2D2FEFD3008BDCB7 /* Debug.xcconfig in Resources */,
 				748D6F9B2D2BD638007690B4 /* Pretendard-Bold.otf in Resources */,
-				74205D312D40398100D11557 /* splashLottie.json in Resources */,
 				745000D72D403F0200262CBE /* lodingLottie.json in Resources */,
 				745000D82D403F0200262CBE /* checkLottie.json in Resources */,
 				748D6F6E2D2BCA1C007690B4 /* LaunchScreen.storyboard in Resources */,
