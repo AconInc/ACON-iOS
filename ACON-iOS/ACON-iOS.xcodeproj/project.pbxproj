@@ -325,6 +325,7 @@
 		748ECA6D2D3196ED00BBC981 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		748ECA702D31A72500BBC981 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACDebouncer.swift; sourceTree = "<group>"; };
+		74A8E7AF2D42C42300677408 /* ACON-iOSRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ACON-iOSRelease.entitlements"; sourceTree = "<group>"; };
 		74AB6EB02D2796D30094F873 /* ACON-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ACON-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74B25C2A2D2FEE3E008BDCB7 /* ACON-iOSDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ACON-iOSDebug.entitlements"; sourceTree = "<group>"; };
 		74B25C2B2D2FEE8C008BDCB7 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -809,6 +810,7 @@
 		748D6F682D2BCA1C007690B4 /* ACON-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				74A8E7AF2D42C42300677408 /* ACON-iOSRelease.entitlements */,
 				74B25C2A2D2FEE3E008BDCB7 /* ACON-iOSDebug.entitlements */,
 				748D6F722D2BCA93007690B4 /* Global */,
 				748D6F712D2BCA7E007690B4 /* Network */,
@@ -1590,7 +1592,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ACON.ACON-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Acon_dev;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = ACON_Dev;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1603,8 +1605,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "ACON-iOS/ACON-iOSRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -1626,7 +1629,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ACON.ACON-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Acon_release;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = ACON_AdHoc;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
