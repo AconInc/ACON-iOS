@@ -31,6 +31,7 @@ class SpotSearchViewController: BaseViewController {
     
     private var selectedSpotName: String = ""
       
+    private let emptyStateView: SearchEmptyView = SearchEmptyView()
     
     // MARK: - LifeCycle
     
@@ -81,7 +82,7 @@ class SpotSearchViewController: BaseViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.view.addSubview(spotSearchView)
+        self.view.addSubviews(spotSearchView,emptyStateView)
     }
     
     override func setLayout() {
@@ -90,6 +91,11 @@ class SpotSearchViewController: BaseViewController {
         spotSearchView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
+        emptyStateView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(16)
+        }
     }
     
     override func setStyle() {
@@ -97,6 +103,11 @@ class SpotSearchViewController: BaseViewController {
         
         self.view.backgroundColor = .glaW10
         self.view.backgroundColor?.withAlphaComponent(0.95)
+        
+        emptyStateView.do {
+            $0.isHidden = true
+        }
+        
     }
     
     func addTarget() {
@@ -169,7 +180,9 @@ private extension SpotSearchViewController {
                 if data.count == 0 {
                     // TODO: - 엠티뷰 처리
                     self?.spotSearchView.searchKeywordCollectionView.isHidden = true
+                    self?.emptyStateView.isHidden = false
                 } else {
+                    self?.emptyStateView.isHidden = true
                     self?.spotSearchView.searchKeywordCollectionView.isHidden = false
                     self?.spotSearchView.searchKeywordCollectionView.reloadData()
                 }
