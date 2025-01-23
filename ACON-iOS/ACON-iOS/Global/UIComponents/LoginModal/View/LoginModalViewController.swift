@@ -143,6 +143,7 @@ extension LoginModalViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
         // TODO: - 에러 처리
         print("apple login error")
+        self.showLoginFailAlert()
     }
     
 }
