@@ -33,6 +33,7 @@ class SpotListFilterViewController: BaseViewController {
         
         addTargets()
         switchedSegment(viewModel.spotType.value)
+        setDelegate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +59,11 @@ class SpotListFilterViewController: BaseViewController {
         }
     }
     
+    private func setDelegate() {
+        spotListFilterView.walkingSlider.delegate = self
+        spotListFilterView.restaurantPriceSlider.delegate = self
+        spotListFilterView.cafePriceSlider.delegate = self
+    }
 }
 
 
@@ -184,7 +190,6 @@ private extension SpotListFilterViewController {
     func applyConditions(spotType: SpotType, filterLists: [SpotFilterListModel]) {
         spotListFilterView.segmentedControl.selectedSegmentIndex = spotType == .cafe ? 1 : 0
         switchedSegment(spotType)
-        print("🥑spotType: \(spotType)")
         
         for filterList in filterLists {
             let category = filterList.category
@@ -349,6 +354,24 @@ extension SpotListFilterViewController {
             if optionList.contains(tagKey) {
                 (spotListFilterView.visitPurposeTagStackView.arrangedSubviews[i] as? FilterTagButton ?? UIButton()).isSelected = true
             }
+        }
+    }
+}
+
+extension SpotListFilterViewController: SliderViewDelegate {
+    func sliderView(_ sender: CustomSlider, changedValue value: Int) {
+        
+        // NOTE: Wallking distance
+        if sender == spotListFilterView.walkingSlider {
+            let walkingMinues = SpotType.WalkingDistanceType.allCases
+            viewModel.walkingDistance = walkingMinues[value].serverKey
+            print("🥑serverKey: \(walkingMinues[value].serverKey)")
+            
+        } else if sender == spotListFilterView.restaurantPriceSlider {
+            let walkingMinute = (value + 1) * 5
+            let serverValue = walkingMinute == 25 ? -1 : walkingMinute
+            viewModel.walkingDistance = serverValue
+            print("🥑serverValue: \(serverValue)")
         }
     }
 }

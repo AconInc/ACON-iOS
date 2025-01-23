@@ -28,6 +28,8 @@ class SpotListViewModel {
     
     var filterList: [SpotFilterListModel] = [] // TODO: SpotCondition으로 바꾸기
     
+    var walkingDistance: Int = -1
+    
     var spotCondition = SpotConditionModel(
         spotType: .restaurant,
         filterList: [],
@@ -90,7 +92,6 @@ extension SpotListViewModel {
                     )
                     return spot
                 }
-//                print("🥑spot:", spotList)
                 self?.isUpdated = spotList != self?.spotList
                 self?.spotList = spotList
                 self?.isPostSpotListSuccess.value = true
