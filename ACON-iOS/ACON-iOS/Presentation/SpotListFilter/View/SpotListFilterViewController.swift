@@ -358,20 +358,32 @@ extension SpotListFilterViewController {
     }
 }
 
+
+// MARK: - Slider Delegate
+
 extension SpotListFilterViewController: SliderViewDelegate {
     func sliderView(_ sender: CustomSlider, changedValue value: Int) {
         
         // NOTE: Wallking distance
         if sender == spotListFilterView.walkingSlider {
-            let walkingMinues = SpotType.WalkingDistanceType.allCases
-            viewModel.walkingDistance = walkingMinues[value].serverKey
-            print("🥑serverKey: \(walkingMinues[value].serverKey)")
-            
-        } else if sender == spotListFilterView.restaurantPriceSlider {
-            let walkingMinute = (value + 1) * 5
-            let serverValue = walkingMinute == 25 ? -1 : walkingMinute
-            viewModel.walkingDistance = serverValue
-            print("🥑serverValue: \(serverValue)")
+            let walkingTime = SpotType.WalkingDistanceType.allCases
+            viewModel.walkingTime = walkingTime[value].serverKey
+            print("🥑walkingTm serverKey: \(walkingTime[value].serverKey)")
+        }
+        
+        // NOTE: Restaurant price
+        else if sender == spotListFilterView.restaurantPriceSlider {
+            let priceRange = SpotType.RestaurantPriceType.allCases
+            viewModel.priceRange = priceRange[value].serverKey
+            print("🥑priceRng serverKey: \(priceRange[value].serverKey)")
+        }
+        
+        // NOTE: Cafe price
+        else if sender == spotListFilterView.cafePriceSlider {
+            let priceRange = SpotType.CafePriceType.allCases
+            viewModel.priceRange = priceRange[value].serverKey
+            print("🥑priceRng serverKey: \(priceRange[value].serverKey)")
         }
     }
+    
 }
