@@ -13,11 +13,8 @@ class ProfileViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func setStyle() {
-        super.setStyle()
         
+        addTarget()
     }
     
     override func setHierarchy() {
@@ -33,6 +30,17 @@ class ProfileViewController: BaseViewController {
         profileView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+    
+    func addTarget() {
+        profileView.disableAutoLoginButton.addTarget(self,
+                                                     action: #selector(disableAutoLogin),
+                                                     for: .touchUpInside)
+    }
+    
+    @objc
+    func disableAutoLogin() {
+        print("djlkdsjlfes")
     }
     
 }
