@@ -22,25 +22,24 @@ class SpotListViewModel {
     var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.559171017384145, longitude: 126.9219534442884)
     
     
-    var isFilterSet: ObservablePattern<Bool> = ObservablePattern(nil)
-    
     // MARK: - Filter
     
-    // I will fix this on other branch ^^
-    var spotType: ObservablePattern<SpotType> = ObservablePattern(.restaurant)
+    var spotType: ObservablePattern<SpotType> = ObservablePattern(nil)
     
-    var filterList: [SpotFilterListModel] = []
+    var filterList: [SpotFilterListModel] = [] // TODO: SpotCondition으로 바꾸기
     
-//    var filter: SpotFilterModel = .init(
-//        latitude: 0,
-//        longitude: 0,
-//        condition: SpotConditionModel(
-//            spotType: SpotType.restaurant.text,
-//            filterList: [],
-//            walkingTime: -1,
-//            priceRange: -1
-//        )
-//    )
+    var walkingTime: SpotType.WalkingDistanceType = .fifteen
+    
+    var restaurantPrice: SpotType.RestaurantPriceType = .tenThousand
+    
+    var cafePrice: SpotType.CafePriceType = .fiveThousand
+    
+    var spotCondition = SpotConditionModel(
+        spotType: .restaurant,
+        filterList: [],
+        walkingTime: -1,
+        priceRange: -1
+    )
     
     
     // MARK: - Methods
@@ -66,21 +65,20 @@ class SpotListViewModel {
 extension SpotListViewModel {
     
     func postSpotList() {
-        guard let spotType = self.spotType.value else { return }
+        print("🤍🤍🤍🤍spotType: \(spotType)")
         let requestBody = PostSpotListRequest(
             latitude: userCoordinate.latitude,
             longitude: userCoordinate.longitude,
             condition: SpotCondition(
-                spotType: spotType.serverKey,
+                spotType: spotType.value?.serverKey ?? "",
                 filterList: filterList.map { filterList in
                     let filterList = SpotFilterList(
-                        category: filterList.category,
+                        category: filterList.category.serverKey,
                         optionList: filterList.optionList)
-                    print("sssssss filter: \(filterList.category)")
                     return filterList
                 },
-                walkingTime: -1,
-                priceRange: -1
+                walkingTime: walkingTime.serverKey,
+                priceRange: spotType.value == .restaurant ? restaurantPrice.serverKey : cafePrice.serverKey
             )
         )
         
@@ -98,7 +96,6 @@ extension SpotListViewModel {
                     )
                     return spot
                 }
-                print("🥑spot:", spotList)
                 self?.isUpdated = spotList != self?.spotList
                 self?.spotList = spotList
                 self?.isPostSpotListSuccess.value = true
@@ -110,6 +107,8 @@ extension SpotListViewModel {
         }
         // TODO: TimeOut 설정하기; 서버가 다운 된 경우 isSuccess가 set이 안돼서 무한 로딩됨
     }
+    
+    
     
 }
 

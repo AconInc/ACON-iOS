@@ -82,7 +82,7 @@ extension FavoriteSpotRankCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAt section: Int
     ) -> UIEdgeInsets {
-        let horizontalInset = ScreenUtils.widthRatio * 12
+        let horizontalInset = ScreenUtils.width * 14 / 360
         let verticalInset = ScreenUtils.width * 84 / 780
         return UIEdgeInsets(
             top: verticalInset,

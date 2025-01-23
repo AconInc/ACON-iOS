@@ -33,7 +33,7 @@ final class CustomSlider: BaseView {
     
     private let fillTrackView = UIView()
     
-    private lazy var thumbView = UIView()
+    private lazy var thumbView = WideTouchView()
     
     private var indicatorLabels: [UILabel] = [] // 라벨
     
@@ -161,14 +161,19 @@ extension CustomSlider {
     
     /// 슬라이더 초기 위치로 이동
     func resetThumbPosition(animated: Bool = true) {
-        guard startIndex >= 0,
-              startIndex < indicators.count
+        moveThumbPosition(to: startIndex)
+    }
+    
+    /// 슬라이더 강제 이동
+    func moveThumbPosition(to index: Int, animated: Bool = true) {
+        guard index >= 0,
+              index < indicators.count
         else {
             print("‼️ 슬라이더 초기화 파라미터 값 수정 필요‼️ startIndex 구간: 0 - \(indicators.count - 1) 사이")
             return
         }
         
-        let targetPosX = slicedPosX * CGFloat(startIndex) - (thumbSize / 2)
+        let targetPosX = slicedPosX * CGFloat(index) - (thumbSize / 2)
         
         // NOTE: thumb 이동
         if animated {
@@ -182,7 +187,7 @@ extension CustomSlider {
         }
         
         // NOTE: value 업데이트
-        self.value = startIndex
+        self.value = index
     }
     
 }
@@ -289,6 +294,8 @@ extension CustomSlider {
             fillTrackView.snp.updateConstraints {
                 $0.width.equalTo(offSet+3)
             }
+            
+            value = Int(newValue)
         }
     }
     

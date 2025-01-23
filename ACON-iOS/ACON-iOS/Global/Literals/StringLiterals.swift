@@ -179,11 +179,6 @@ enum StringLiterals {
         
         static let priceSection = "가격대"
         
-        static let walkingTimes = ["5분 이내", "10분", "15분", "20분", "20분 이상"]
-        
-        static let restaurantPrices = ["5천원 이하", "1만원", "3만원", "5만원", "5만원 이상"]
-        
-        static let cafePrices = ["3천원 이하", "5천원", "1만원 이상"]
     }
     
     enum Analyzing {
@@ -295,7 +290,7 @@ enum StringLiterals {
         static let progressTitleList = [
             "싫어하는 음식을 선택해주세요",
             "선호 음식 Top3까지 순위를 매겨주세요.",
-            "지주 가는 곳이 어디인가요?",
+            "자주 가는 곳이 어디인가요?",
             "어떤 분위기의 공간이 좋으세요?",
             "선호하는 맛집 스타일의\n순위를 매겨주세요."
         ]
