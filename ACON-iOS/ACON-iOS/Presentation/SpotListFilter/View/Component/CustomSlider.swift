@@ -255,8 +255,9 @@ private extension CustomSlider {
         }
 
         fillTrackView.snp.updateConstraints {
-            $0.width.equalTo(position + (thumbSize / 2))
+            $0.width.equalTo(position + (thumbSize))
         }
+        
     }
     
 }
@@ -291,7 +292,7 @@ extension CustomSlider {
             }
             
             fillTrackView.snp.updateConstraints {
-                $0.width.equalTo(offSet)
+                $0.width.equalTo(offSet+3)
             }
             
             value = Int(newValue)

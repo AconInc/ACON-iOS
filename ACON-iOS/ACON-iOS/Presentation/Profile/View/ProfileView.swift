@@ -13,7 +13,10 @@ import SnapKit
 final class ProfileView: BaseView {
     
     private let imageView = UIImageView()
+    
     private let messageLabel = UILabel()
+    
+    var disableAutoLoginButton = UIButton()
     
     override func setStyle() {
         super.setStyle()
@@ -33,12 +36,19 @@ final class ProfileView: BaseView {
                         numberOfLines: 1)
         }
         
+        disableAutoLoginButton.do {
+            $0.setAttributedTitle(text: "자동로그인 해제", style: .b4)
+            $0.layer.borderColor = UIColor.acWhite.cgColor
+            $0.layer.borderWidth = 0.5
+        }
     }
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(imageView,messageLabel)
+        self.addSubviews(imageView,
+                         messageLabel,
+                         disableAutoLoginButton)
     }
     
     override func setLayout() {
@@ -53,6 +63,13 @@ final class ProfileView: BaseView {
             $0.top.equalTo(imageView.snp.bottom).offset(3)
             $0.centerX.equalTo(imageView)
         }
+        
+        disableAutoLoginButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(100)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.width.equalTo(100)
+        }
+        
     }
     
 }

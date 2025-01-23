@@ -24,9 +24,9 @@ class AlertHandler {
         customAlertViewController.configure(with: .stoppedPreferenceAnalysis)
         
         customAlertViewController.onClose = {
-            let mainViewController = ACTabBarController()
-            mainViewController.modalPresentationStyle = .fullScreen
-            viewController.present(mainViewController, animated: true)
+            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                sceneDelegate.window?.rootViewController = ACTabBarController()
+            }
         }
         
         presentAlert(customAlertViewController, from: viewController)

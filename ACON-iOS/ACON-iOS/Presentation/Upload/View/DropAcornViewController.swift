@@ -41,7 +41,6 @@ class DropAcornViewController: BaseNavViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setBackButton()
         addTarget()
         bindViewModel()
     }
@@ -69,6 +68,8 @@ class DropAcornViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
+        self.setButtonStyle(button: leftButton, image: .leftArrow)
+        self.setButtonAction(button: leftButton, target: self, action: #selector(dropAcornBackButtonTapped))
         self.dropAcornView.leaveReviewButton.isEnabled = false
     }
     
@@ -92,6 +93,14 @@ class DropAcornViewController: BaseNavViewController {
 // MARK: - @objc functions
 
 private extension DropAcornViewController {
+    
+    @objc
+    func dropAcornBackButtonTapped() {
+        if let spotUploadVC = presentingViewController as? SpotUploadViewController {
+            spotUploadVC.isInDismissProcess = false
+        }
+        dismiss(animated: false)
+    }
     
     @objc
     func leaveReviewButtonTapped() {

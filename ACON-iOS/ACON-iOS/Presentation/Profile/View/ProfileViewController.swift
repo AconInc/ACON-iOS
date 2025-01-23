@@ -13,11 +13,8 @@ class ProfileViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func setStyle() {
-        super.setStyle()
         
+        addTarget()
     }
     
     override func setHierarchy() {
@@ -32,6 +29,20 @@ class ProfileViewController: BaseViewController {
         
         profileView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+    }
+    
+    func addTarget() {
+        profileView.disableAutoLoginButton.addTarget(self,
+                                                     action: #selector(disableAutoLogin),
+                                                     for: .touchUpInside)
+    }
+    
+    @objc
+    func disableAutoLogin() {
+        UserDefaults.standard.removeObject(forKey: StringLiterals.UserDefaults.accessToken)
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = SplashViewController()
         }
     }
     

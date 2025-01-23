@@ -68,7 +68,7 @@ class LocalMapViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
 
-        self.setXButton()
+        self.setBackButton()
         self.setSecondTitleLabelStyle(title: StringLiterals.LocalVerification.locateOnMap)
     }
     
