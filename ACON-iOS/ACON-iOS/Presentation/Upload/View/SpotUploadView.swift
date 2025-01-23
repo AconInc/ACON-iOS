@@ -22,12 +22,11 @@ final class SpotUploadView: BaseView {
         var configuration = UIButton.Configuration.plain()
         configuration.imagePlacement = .leading
         configuration.imagePadding = 4
-        configuration.titleAlignment = .leading
         configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 24)
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 14,
                                                               leading: ScreenUtils.widthRatio * 12,
                                                               bottom: 14,
-                                                              trailing: ScreenUtils.widthRatio * 308 - 150)
+                                                              trailing: ScreenUtils.widthRatio * 308 - 24)
         return configuration
     }()
     
@@ -56,15 +55,13 @@ final class SpotUploadView: BaseView {
         
         spotSearchButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*64)
-            $0.centerX.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(ScreenUtils.heightRatio*52)
         }
         
         spotNameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*64 + 14)
-            $0.centerX.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
+            $0.centerY.equalTo(spotSearchButton.snp.centerY)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*32 + 24 + 4)
         }
         
     }
@@ -81,18 +78,16 @@ final class SpotUploadView: BaseView {
         spotSearchButton.do {
             $0.configuration = spotSearchButtonConfiguration
             $0.backgroundColor = .gray8
-            $0.roundedButton(cornerRadius: 4, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
+            $0.layer.cornerRadius = 4
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor(resource: .gray7).cgColor
             $0.setImage(.icLocation, for: .normal)
-            $0.setAttributedTitle(text: StringLiterals.Upload.searchSpot,
-                                  style: .s2,
-                                  color: .gray5)
-            
         }
         
         spotNameLabel.do {
-            $0.isHidden = true
+            $0.setLabel(text: StringLiterals.Upload.searchSpot,
+                        style: .s2,
+                        color: .gray5)
         }
         
     }

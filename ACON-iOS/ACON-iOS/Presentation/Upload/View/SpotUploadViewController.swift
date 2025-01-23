@@ -169,18 +169,11 @@ extension SpotUploadViewController {
             self.selectedSpotID = selectedSpotID
             
             DispatchQueue.main.async {
-                self.spotUploadView.spotSearchButton.do {
-                    $0.setAttributedTitle(text: "",
-                                          style: .s2,
-                                          color: .acWhite)
-                }
-                
                 self.spotUploadView.spotNameLabel.do {
                     $0.setLabel(text: selectedSpotName,
                                 style: .s2,
                                 color: .acWhite)
                 }
-                
                 if selectedSpotID > 0 {
                     self.spotReviewViewModel.getReviewVerification(spotId: selectedSpotID,
                                                                    latitude: self.latitude,
