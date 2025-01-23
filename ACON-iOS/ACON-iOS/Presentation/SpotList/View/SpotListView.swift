@@ -145,10 +145,8 @@ extension SpotListView {
     }
     
     func updateFilterButtonColor(_ isFilterSet: Bool) {
-        if isFilterSet {
-            floatingFilterButton.updateImage(.icFilterOrg28)
-        } else {
-            floatingFilterButton.updateImage(.icFilterW28)
-        }
+        isFilterSet
+        ? floatingFilterButton.updateImage(.icFilterOrg28)
+        : floatingFilterButton.updateImage(.icFilterW28)
     }
 }
