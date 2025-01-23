@@ -154,7 +154,7 @@ extension SpotListCollectionViewCell {
                                        style: .b4)
         }
         
-        typeLabel.setLabel(text: spot.type,
+        typeLabel.setLabel(text: spot.type.koreanText,
                            style: .b4)
         
         nameLabel.setLabel(text: spot.name,

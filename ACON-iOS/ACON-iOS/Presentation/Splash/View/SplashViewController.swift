@@ -24,7 +24,7 @@ class SplashViewController: BaseViewController {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.4) {
-            self.goToLoginVC()
+            self.goToNextVC()
         }
     }
     
@@ -50,11 +50,11 @@ class SplashViewController: BaseViewController {
 private extension SplashViewController {
     
     @objc
-    func goToLoginVC() {
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            let navigationController = UINavigationController(rootViewController: LoginViewController())
-            sceneDelegate.window?.rootViewController = navigationController
-        }
+    func goToNextVC() {
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        
+        let rootVC = AuthManager.shared.hasToken ? ACTabBarController() : UINavigationController(rootViewController: LoginViewController())
+        sceneDelegate?.window?.rootViewController = rootVC
     }
     
 }

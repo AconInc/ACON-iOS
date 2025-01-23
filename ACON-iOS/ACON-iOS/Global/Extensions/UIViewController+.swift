@@ -97,4 +97,14 @@ extension UIViewController {
         }
     }
     
+    
+    // MARK: - 로그인 안 했으면 모달시트 띄우기
+    
+    func presentLoginModal() {
+        let vc = LoginModalViewController()
+        vc.setShortSheetLayout()
+        
+        self.present(vc, animated: true)
+    }
+    
 }

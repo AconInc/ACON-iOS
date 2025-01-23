@@ -98,6 +98,7 @@
 		746261852D3FA0A400A4E84F /* PostGuidedSpotRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261842D3FA08F00A4E84F /* PostGuidedSpotRequest.swift */; };
 		746261892D3FA29C00A4E84F /* SpotDetailTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261882D3FA29400A4E84F /* SpotDetailTargetType.swift */; };
 		7462618B2D3FA4A800A4E84F /* SpotDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462618A2D3FA4A200A4E84F /* SpotDetailService.swift */; };
+		7462D0252D4262F300580464 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462D0242D4262EF00580464 /* AuthManager.swift */; };
 		746F15B72D3E2083003EA031 /* PostLocalAreaRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15B62D3E2079003EA031 /* PostLocalAreaRequest.swift */; };
 		746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15B82D3E2125003EA031 /* PostLocalAreaResponse.swift */; };
 		746F15BB2D3E2167003EA031 /* LocalVerificationTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15BA2D3E215C003EA031 /* LocalVerificationTargetType.swift */; };
@@ -283,6 +284,7 @@
 		746261842D3FA08F00A4E84F /* PostGuidedSpotRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGuidedSpotRequest.swift; sourceTree = "<group>"; };
 		746261882D3FA29400A4E84F /* SpotDetailTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailTargetType.swift; sourceTree = "<group>"; };
 		7462618A2D3FA4A200A4E84F /* SpotDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailService.swift; sourceTree = "<group>"; };
+		7462D0242D4262EF00580464 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		746F15B62D3E2079003EA031 /* PostLocalAreaRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocalAreaRequest.swift; sourceTree = "<group>"; };
 		746F15B82D3E2125003EA031 /* PostLocalAreaResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocalAreaResponse.swift; sourceTree = "<group>"; };
 		746F15BA2D3E215C003EA031 /* LocalVerificationTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationTargetType.swift; sourceTree = "<group>"; };
@@ -756,6 +758,14 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
+		7462D0232D4262EA00580464 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				7462D0242D4262EF00580464 /* AuthManager.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		746F15B42D3E2041003EA031 /* LocalVerification */ = {
 			isa = PBXGroup;
 			children = (
@@ -827,7 +837,6 @@
 				1558BADF2D31D41400ECDEF8 /* Profile */,
 				1558BA182D318FDB00ECDEF8 /* TabBar */,
 				748ECA692D31917A00BBC981 /* Login */,
-				15CD257F2D40361600320006 /* LoginModal */,
 				748D6FA22D2C3C3D007690B4 /* Base */,
 				748D6F672D2BCA1C007690B4 /* ViewController.swift */,
 			);
@@ -852,6 +861,7 @@
 		748D6F722D2BCA93007690B4 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				7462D0232D4262EA00580464 /* Service */,
 				748D6F832D2BCDE8007690B4 /* Protocols */,
 				748D6F7C2D2BCD13007690B4 /* Literals */,
 				748D6F7A2D2BCCF4007690B4 /* UIComponents */,
@@ -930,6 +940,7 @@
 				74BF92182D395FE400B923E3 /* ACToastController.swift */,
 				744BAF162D300AB100F95B4A /* DummyComponent.swift */,
 				15CD256A2D3D61F500320006 /* GlassmorphismView.swift */,
+				15CD257F2D40361600320006 /* LoginModal */,
 				D6E34C422D398B6000CEFA04 /* CustomAlert */,
 			);
 			path = UIComponents;
@@ -1475,6 +1486,7 @@
 				74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */,
 				D696F1B22D3A7E3400CCD5FF /* CustomAlertView.swift in Sources */,
 				743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */,
+				7462D0252D4262F300580464 /* AuthManager.swift in Sources */,
 				74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */,
 				74BF92042D3861A600B923E3 /* SpotDetailViewController.swift in Sources */,
 				15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */,

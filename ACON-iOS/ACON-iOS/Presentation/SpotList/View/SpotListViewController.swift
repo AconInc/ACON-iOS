@@ -17,8 +17,7 @@ class SpotListViewController: BaseNavViewController {
     
     
     // MARK: - Properties
-    
-    private let spotListView = SpotListView()
+
     private let viewModel = SpotListViewModel()
     
     private var selectedSpotCondition: SpotConditionModel = SpotConditionModel(spotType: .restaurant, filterList: [], walkingTime: -1, priceRange: -1)
@@ -34,12 +33,12 @@ class SpotListViewController: BaseNavViewController {
         addTarget()
         
         viewModel.requestLocation()
+        viewModel.postSpotList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
 
-        handleRefreshControl()
         self.tabBarController?.tabBar.isHidden = false
     }
     
@@ -74,6 +73,12 @@ class SpotListViewController: BaseNavViewController {
         spotListView.floatingLocationButton.button.addTarget(
             self,
             action: #selector(tappedLocationButton),
+            for: .touchUpInside
+        )
+        
+        spotListView.floatingMapButton.button.addTarget(
+            self,
+            action: #selector(tappedMapButton),
             for: .touchUpInside
         )
     }
@@ -135,12 +140,20 @@ private extension SpotListViewController {
     
     @objc
     func handleRefreshControl() {
+        guard AuthManager.shared.hasToken else {
+            presentLoginModal()
+            spotListView.collectionView.do {
+                $0.refreshControl?.endRefreshing()
+                $0.setContentOffset(.zero, animated: true)
+            }
+            return
+        }
         viewModel.requestLocation()
         
         DispatchQueue.main.async {
             // NOTE: 데이터 리로드 전 애니메이션
             UIView.animate(withDuration: 0.25, animations: {
-                self.spotListView.collectionView.alpha = 0.5 // 투명도 낮춤
+                self.spotListView.collectionView.alpha = 0.5
             }) { _ in
                 
                 self.viewModel.postSpotList()
@@ -150,6 +163,10 @@ private extension SpotListViewController {
     
     @objc
     func tappedFilterButton() {
+        guard AuthManager.shared.hasToken else {
+            presentLoginModal()
+            return
+        }
         let vc = SpotListFilterViewController(viewModel: viewModel)
         vc.setLongSheetLayout()
         present(vc, animated: true)
@@ -159,11 +176,21 @@ private extension SpotListViewController {
     @objc
     func tappedLocationButton() {
         // TODO: 내용 handleRefreshControl 부분으로 옮기기
-        // TODO: 로그인중인지 여부
-        let vc = LoginModalViewController()
-        vc.setShortSheetLayout()
-        
-        present(vc, animated: true)
+        guard AuthManager.shared.hasToken else {
+            presentLoginModal()
+            return
+        }
+        // TODO: 할 거 하기
+    }
+    
+    @objc
+    func tappedMapButton() {
+        // TODO: 내용 handleRefreshControl 부분으로 옮기기
+        guard AuthManager.shared.hasToken else {
+            presentLoginModal()
+            return
+        }
+        // TODO: 맵뷰 띄우기
     }
 }
 

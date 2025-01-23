@@ -178,8 +178,7 @@ extension CustomSlider {
         // NOTE: thumb 이동
         if animated {
             UIView.animate(withDuration: 0.3, animations: {
-                // TODO: - 이거 뺍시당
-//                self.updateThumbPosition(to: targetPosX)
+                self.updateThumbPosition(to: targetPosX)
                 self.layoutIfNeeded()
             })
         } else {
@@ -256,8 +255,9 @@ private extension CustomSlider {
         }
 
         fillTrackView.snp.updateConstraints {
-            $0.width.equalTo(position + (thumbSize / 2))
+            $0.width.equalTo(position + (thumbSize))
         }
+        
     }
     
 }

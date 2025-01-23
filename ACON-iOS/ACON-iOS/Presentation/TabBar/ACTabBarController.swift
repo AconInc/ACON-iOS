@@ -109,6 +109,11 @@ extension ACTabBarController: UITabBarControllerDelegate {
         guard let index = viewControllers.firstIndex(of: viewController) else { return true }
         
         if index == ACTabBarItemType.allCases.firstIndex(of: .upload) {
+            // TODO: - 리젝 사유 : 다른 탭에서 모달 뜸
+            guard AuthManager.shared.hasToken else {
+                presentLoginModal()
+                return false
+            }
             let uploadVC = SpotUploadViewController()
             uploadVC.modalPresentationStyle = .fullScreen
             present(uploadVC, animated: true)
