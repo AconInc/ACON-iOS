@@ -268,7 +268,7 @@ enum StringLiterals {
 
     enum FavoriteSpotStyles {
 
-        static let nopo = "노포"
+        static let nopo = "빈티지"
 
         static let modern = "모던"
 
