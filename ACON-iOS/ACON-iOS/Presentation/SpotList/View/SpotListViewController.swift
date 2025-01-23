@@ -26,6 +26,7 @@ class SpotListViewController: BaseNavViewController {
         addTarget()
         
         spotListViewModel.requestLocation()
+        spotListViewModel.postSpotList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +67,12 @@ class SpotListViewController: BaseNavViewController {
         spotListView.floatingLocationButton.button.addTarget(
             self,
             action: #selector(tappedLocationButton),
+            for: .touchUpInside
+        )
+        
+        spotListView.floatingMapButton.button.addTarget(
+            self,
+            action: #selector(tappedMapButton),
             for: .touchUpInside
         )
     }
@@ -109,12 +116,15 @@ private extension SpotListViewController {
     
     @objc
     func handleRefreshControl() {
+        guard AuthManager.shared.hasToken else {
+            presentLoginModal()
+            return
+        }
         spotListViewModel.requestLocation()
-        
         DispatchQueue.main.async {
             // NOTE: 데이터 리로드 전 애니메이션
             UIView.animate(withDuration: 0.25, animations: {
-                self.spotListView.collectionView.alpha = 0.5 // 투명도 낮춤
+                self.spotListView.collectionView.alpha = 0.5
             }) { _ in
                 
                 self.spotListViewModel.postSpotList()
@@ -124,6 +134,10 @@ private extension SpotListViewController {
     
     @objc
     func tappedFilterButton() {
+        guard AuthManager.shared.hasToken else {
+            presentLoginModal()
+            return
+        }
         let vc = SpotListFilterViewController()
         vc.setLongSheetLayout()
         
@@ -142,11 +156,21 @@ private extension SpotListViewController {
     @objc
     func tappedLocationButton() {
         // TODO: 내용 handleRefreshControl 부분으로 옮기기
-        // TODO: 로그인중인지 여부
-        let vc = LoginModalViewController()
-        vc.setShortSheetLayout()
-        
-        present(vc, animated: true)
+        guard AuthManager.shared.hasToken else {
+            presentLoginModal()
+            return
+        }
+        // TODO: 할 거 하기
+    }
+    
+    @objc
+    func tappedMapButton() {
+        // TODO: 내용 handleRefreshControl 부분으로 옮기기
+        guard AuthManager.shared.hasToken else {
+            presentLoginModal()
+            return
+        }
+        // TODO: 맵뷰 띄우기
     }
 }
 
