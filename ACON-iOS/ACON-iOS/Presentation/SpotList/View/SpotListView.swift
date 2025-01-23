@@ -30,6 +30,8 @@ class SpotListView: BaseView {
     
     private let noAcornLabel = UILabel()
     
+    private let skeletonView = SkeletonView()
+    
     
     // MARK: - UI Property Sizes
     
@@ -44,6 +46,7 @@ class SpotListView: BaseView {
         self.addSubviews(
             collectionView,
             noAcornView,
+            skeletonView,
             floatingButtonStack)
         
         floatingButtonStack.addArrangedSubviews(floatingLocationButton,
@@ -82,6 +85,10 @@ class SpotListView: BaseView {
         noAcornLabel.snp.makeConstraints {
             $0.top.equalTo(noAcornImageView.snp.bottom).offset(24)
             $0.centerX.equalTo(noAcornImageView)
+        }
+        
+        skeletonView.snp.makeConstraints {
+            $0.horizontalEdges.top.equalTo(self.safeAreaLayoutGuide)
         }
     }
     
@@ -148,5 +155,9 @@ extension SpotListView {
         isFilterSet
         ? floatingFilterButton.updateImage(.icFilterOrg28)
         : floatingFilterButton.updateImage(.icFilterW28)
+    }
+    
+    func hideSkeletonView(isHidden: Bool) {
+        skeletonView.isHidden = isHidden
     }
 }

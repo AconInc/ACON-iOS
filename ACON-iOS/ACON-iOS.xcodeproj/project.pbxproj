@@ -34,6 +34,7 @@
 		15C0ED672D42CD8800C9ED83 /* drop2Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED602D42CD8800C9ED83 /* drop2Acorn.json */; };
 		15C0ED682D42CD8800C9ED83 /* drop3Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED612D42CD8800C9ED83 /* drop3Acorn.json */; };
 		15C0ED6A2D42CDA300C9ED83 /* loadingWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED692D42CDA300C9ED83 /* loadingWhite.json */; };
+		15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C0ED512D429F7400C9ED83 /* SkeletonView.swift */; };
 		15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256A2D3D61F500320006 /* GlassmorphismView.swift */; };
 		15CD256E2D3D795800320006 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256D2D3D795800320006 /* FloatingButton.swift */; };
 		15CD25702D3F86E700320006 /* CustomRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */; };
@@ -183,6 +184,7 @@
 		D6E34C472D398B6000CEFA04 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E34C3E2D398B6000CEFA04 /* CustomAlertViewController.swift */; };
 		D6E452932D3AA47500CBED02 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E452902D3AA47500CBED02 /* ProfileView.swift */; };
 		D6E452942D3AA47500CBED02 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E452912D3AA47500CBED02 /* ProfileViewController.swift */; };
+		D6EA38152D42B88F002B68B9 /* SearchEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA38142D42B88F002B68B9 /* SearchEmptyView.swift */; };
 		D6FF82E92D3805F000090233 /* DislikeCollectionViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82E82D3805F000090233 /* DislikeCollectionViewType.swift */; };
 		D6FF82EB2D380AAF00090233 /* FavoriteSpotRankType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82EA2D380AAF00090233 /* FavoriteSpotRankType.swift */; };
 		D6FF82ED2D380B6100090233 /* FavoriteSpotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82EC2D380B6100090233 /* FavoriteSpotType.swift */; };
@@ -214,6 +216,7 @@
 		15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityLowEmptyView.swift; sourceTree = "<group>"; };
 		15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotFilterTagStackView.swift; sourceTree = "<group>"; };
+		15C0ED512D429F7400C9ED83 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		15C0ED5F2D42CD8800C9ED83 /* drop1Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop1Acorn.json; sourceTree = "<group>"; };
 		15C0ED602D42CD8800C9ED83 /* drop2Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop2Acorn.json; sourceTree = "<group>"; };
 		15C0ED612D42CD8800C9ED83 /* drop3Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop3Acorn.json; sourceTree = "<group>"; };
@@ -367,6 +370,7 @@
 		D6E34C3F2D398B6000CEFA04 /* CustomAlertImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertImageViewController.swift; sourceTree = "<group>"; };
 		D6E452902D3AA47500CBED02 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		D6E452912D3AA47500CBED02 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		D6EA38142D42B88F002B68B9 /* SearchEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEmptyView.swift; sourceTree = "<group>"; };
 		D6FF82E82D3805F000090233 /* DislikeCollectionViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeCollectionViewType.swift; sourceTree = "<group>"; };
 		D6FF82EA2D380AAF00090233 /* FavoriteSpotRankType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSpotRankType.swift; sourceTree = "<group>"; };
 		D6FF82EC2D380B6100090233 /* FavoriteSpotType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSpotType.swift; sourceTree = "<group>"; };
@@ -533,6 +537,7 @@
 			children = (
 				15CD256D2D3D795800320006 /* FloatingButton.swift */,
 				15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */,
+				15C0ED512D429F7400C9ED83 /* SkeletonView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -630,6 +635,7 @@
 				741A06C72D3532E000778219 /* DropAcornView.swift */,
 				74220DD52D3436BE000684BF /* SpotUploadView.swift */,
 				74220DD32D343633000684BF /* SpotUploadViewController.swift */,
+				D6EA38142D42B88F002B68B9 /* SearchEmptyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1384,6 +1390,7 @@
 				D6FF82ED2D380B6100090233 /* FavoriteSpotType.swift in Sources */,
 				741E68912D3D385A00DF99EF /* ACPlugin.swift in Sources */,
 				745B19AE2D4002A100BDBDA4 /* PostLoginResponse.swift in Sources */,
+				15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */,
 				74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */,
 				746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */,
 				746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */,
@@ -1438,6 +1445,7 @@
 				1547A8822D358E3000E96616 /* SpotListFilterViewController.swift in Sources */,
 				748D6FAA2D2C3FF1007690B4 /* BaseCollectionViewCell.swift in Sources */,
 				748ECA6B2D31918D00BBC981 /* LoginView.swift in Sources */,
+				D6EA38152D42B88F002B68B9 /* SearchEmptyView.swift in Sources */,
 				1547A6F22D33AD4500E96616 /* SpotModel.swift in Sources */,
 				748D6F972D2BD544007690B4 /* DummyType.swift in Sources */,
 				746261732D3EA78700A4E84F /* GetReiviewVerificationRequest.swift in Sources */,
