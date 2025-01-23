@@ -117,6 +117,10 @@ private extension SpotListViewController {
     func handleRefreshControl() {
         guard AuthManager.shared.hasToken else {
             presentLoginModal()
+            spotListView.collectionView.do {
+                $0.refreshControl?.endRefreshing()
+                $0.setContentOffset(.zero, animated: true)
+            }
             return
         }
         spotListViewModel.requestLocation()
