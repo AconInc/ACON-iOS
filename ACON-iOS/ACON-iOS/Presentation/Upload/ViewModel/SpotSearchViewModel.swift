@@ -26,10 +26,6 @@ class SpotSearchViewModel {
     init(latitude: Double, longitude: Double) {
         self.latitude = latitude
         self.longitude = longitude
-//        self.searchSuggestionData.value = searchSuggestionDummyData
-//        self.onSuccessGetSearchSuggestion.value = true
-//        self.searchKeywordData.value = searchKeywordDummyData
-//        self.onSuccessGetSearchKeyword.value = true
     }
     
     func getSearchKeyword(keyword: String) {
