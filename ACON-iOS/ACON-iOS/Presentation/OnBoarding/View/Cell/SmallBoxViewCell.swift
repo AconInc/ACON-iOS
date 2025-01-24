@@ -119,12 +119,16 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
         imageView.image = image ?? UIImage(systemName: "photo")
         
         if isSelected {
-              // 선택된 상태: 화이트 딤 처리
-              overlayContainer.backgroundColor = UIColor.white.withAlphaComponent(0.4)
-              overlayImageView.image = UIImage(named: "check")
-              overlayImageView.alpha = 1
-              overlayTitle.backgroundColor = .clear
-              overlayTitle.alpha = 0
+            // 선택된 상태: 화이트 딤 처리
+            overlayContainer.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+            overlayImageView.image = UIImage(named: "check")
+            overlayImageView.layer.shadowColor = UIColor.black.cgColor
+            overlayImageView.layer.shadowOpacity = 0.6
+            overlayImageView.layer.shadowOffset = CGSize(width: 0, height: 0)
+            overlayImageView.layer.shadowRadius = 4
+            overlayImageView.alpha = 1
+            overlayTitle.backgroundColor = .clear
+            overlayTitle.alpha = 0
           } else if isDimmed {
               overlayContainer.backgroundColor = UIColor.gray9.withAlphaComponent(0.9)
               overlayImageView.image = nil
@@ -169,7 +173,11 @@ extension SmallBoxViewCell {
             overlayTitle.alpha = 1
         } else if (1...3).contains(isSelected) {
             overlayImageView.image = UIImage(named: "\(isSelected)")
-            overlayContainer.backgroundColor = UIColor.white.withAlphaComponent(0.4)
+            overlayImageView.layer.shadowColor = UIColor.black.cgColor
+            overlayImageView.layer.shadowOpacity = 0.6
+            overlayImageView.layer.shadowOffset = CGSize(width: 0, height: 0)
+            overlayImageView.layer.shadowRadius = 4
+            overlayContainer.backgroundColor = UIColor.white.withAlphaComponent(0.3)
             overlayImageView.alpha = 1
             overlayTitle.backgroundColor = .clear
             overlayTitle.alpha = 0

@@ -101,8 +101,12 @@ final class LongBoxViewCell: BaseCollectionViewCell {
         imageView.image = image ?? UIImage(systemName: "photo")
         
         if isSelected {
-            overlayContainer.backgroundColor = UIColor.white.withAlphaComponent(0.4)
+            overlayContainer.backgroundColor = UIColor.white.withAlphaComponent(0.3)
             overlayImageView.image = UIImage(named: "check")
+            overlayImageView.layer.shadowColor = UIColor.black.cgColor
+            overlayImageView.layer.shadowOpacity = 0.6
+            overlayImageView.layer.shadowOffset = CGSize(width: 0, height: 0)
+            overlayImageView.layer.shadowRadius = 4
             overlayImageView.alpha = 1
         } else {
             overlayContainer.backgroundColor = .clear

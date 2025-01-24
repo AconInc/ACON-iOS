@@ -249,9 +249,9 @@ extension OnboardingViewController {
         view.addSubviews(contentView, nextButton)
         
         nextButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
-            $0.height.equalTo(44)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*40)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*16)
+            $0.height.equalTo(52)
         }
         
         contentView.snp.makeConstraints {
@@ -413,11 +413,10 @@ extension OnboardingViewController {
         
         nextButton.snp.makeConstraints {
             $0.top.equalTo(contentView.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalToSuperview().offset(-20)
-            $0.height.equalTo(44)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*40)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*16)
+            $0.height.equalTo(52)
         }
-        
         self.view.layoutIfNeeded()
     }
     
