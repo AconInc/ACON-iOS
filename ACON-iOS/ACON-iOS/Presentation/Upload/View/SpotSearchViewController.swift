@@ -243,6 +243,23 @@ extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
         selectedSpotName = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotName ?? ""
         spotSearchView.searchTextField.text = selectedSpotName
         self.dismissKeyboard()
+        spotSearchViewModel.getReviewVerification(spotId: selectedSpotId)
+        self.spotSearchViewModel.onSuccessGetReviewVerification.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.spotSearchViewModel.reviewVerification.value else { return }
+            if onSuccess {
+                if data {
+                    self?.hasCompletedSelection = true
+                    self?.dismiss(animated: true)
+                } else {
+                    let alertHandler = AlertHandler()
+                    alertHandler.showLocationAccessFailImageAlert(from: self!)
+                }
+                self?.spotSearchViewModel.reviewVerification.value = nil
+            }
+        }
+//        self.dismissKeyboard()
+//        hasCompletedSelection = true
+//        dismiss(animated: true)
     }
     
 }

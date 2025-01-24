@@ -21,7 +21,9 @@ class SpotSearchViewModel {
     
     var searchKeywordData: ObservablePattern<[SearchKeywordModel]> = ObservablePattern(nil)
     
-//    let searchSuggestionDummyData: SearchSuggestionModel = SearchSuggestionModel(spotList: ["하이디라오", "신의주찹쌀순대", "뭐시기저시기", "카이센동우니도", "하잉"])
+    let onSuccessGetReviewVerification: ObservablePattern<Bool> = ObservablePattern(nil)
+    
+    var reviewVerification: ObservablePattern<Bool> = ObservablePattern(nil)
     
     init(latitude: Double, longitude: Double) {
         self.latitude = latitude
@@ -67,6 +69,23 @@ class SpotSearchViewModel {
             default:
                 print("VM - Fail to getSearchSuggestion")
                 self?.onSuccessGetSearchSuggestion.value = false
+                return
+            }
+        }
+    }
+    
+    func getReviewVerification(spotId: Int64) {
+        let parameter = GetReviewVerificationRequest(spotId: spotId,
+                                                     latitude: self.latitude,
+                                                     longitude: self.longitude)
+        ACService.shared.uploadService.getReviewVerification(parameter: parameter) { [weak self] response in
+            switch response {
+            case .success(let data):
+                self?.reviewVerification.value = data.success
+                self?.onSuccessGetReviewVerification.value = true
+            default:
+                print("VM - Fail to get review verification")
+                self?.onSuccessGetReviewVerification.value = false
                 return
             }
         }

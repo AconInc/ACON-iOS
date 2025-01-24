@@ -41,7 +41,6 @@ class SpotUploadViewController: BaseNavViewController {
         
         addTarget()
         ACLocationManager.shared.addDelegate(self)
-        bindViewModel()
     }
     
     deinit {
@@ -85,26 +84,6 @@ class SpotUploadViewController: BaseNavViewController {
 
 }
 
-
-private extension SpotUploadViewController {
-
-    func bindViewModel() {
-        self.spotReviewViewModel.onSuccessGetReviewVerification.bind { [weak self] onSuccess in
-            guard let onSuccess, let data = self?.spotReviewViewModel.reviewVerification.value else { return }
-            if onSuccess {
-                if data {
-                    self?.rightButton.isEnabled = true
-                } else {
-                    let alertHandler = AlertHandler()
-                    alertHandler.showLocationAccessFailImageAlert(from: self!)
-                    self?.rightButton.isEnabled = false
-                }
-                self?.spotReviewViewModel.reviewVerification.value = nil
-            }
-        }
-    }
-    
-}
     
 // MARK: - @objc functions
 
@@ -164,24 +143,12 @@ extension SpotUploadViewController {
         vc.completionHandler = { [weak self] selectedSpotID, selectedSpotName in
             guard let self = self else { return }
             self.selectedSpotID = selectedSpotID
-            
+            self.rightButton.isEnabled = true
             DispatchQueue.main.async {
                 self.spotUploadView.spotNameLabel.do {
                     $0.setLabel(text: selectedSpotName,
                                 style: .s2,
                                 color: .acWhite)
-                }
-                if selectedSpotID > 0 {
-                    self.spotReviewViewModel.getReviewVerification(spotId: selectedSpotID,
-                                                                   latitude: self.latitude,
-                                                                   longitude: self.longitude)
-                } else {
-                    self.rightButton.isEnabled = false
-                    self.spotUploadView.spotNameLabel.isHidden = true
-                    self.spotUploadView.spotSearchButton.setAttributedTitle(
-                        text: StringLiterals.Upload.searchSpot,
-                        style: .s2,
-                        color: .gray5)
                 }
             }
         }
