@@ -99,12 +99,15 @@ extension SpotListViewController {
                 if viewModel.isUpdated {
                     spotListView.collectionView.reloadData()
                     spotListView.hideSkeletonView(isHidden: true)
+                    spotListView.hideNoAcornView(isHidden: !viewModel.spotList.isEmpty)
                     print("🥑reloadData")
                 } else {
                     print("🥑데이터가 안 바뀌어서 리로드데이터 안 함")
+                    spotListView.hideNoAcornView(isHidden: !viewModel.spotList.isEmpty)
                 }
             } else {
                 print("🥑Post 실패")
+                spotListView.hideNoAcornView(isHidden: !viewModel.spotList.isEmpty)
             }
             
             viewModel.isUpdated = false

@@ -45,8 +45,8 @@ class SpotListView: BaseView {
         
         self.addSubviews(
             collectionView,
-            noAcornView,
             skeletonView,
+            noAcornView,
             floatingButtonStack)
         
         floatingButtonStack.addArrangedSubviews(floatingLocationButton,
@@ -149,6 +149,7 @@ extension SpotListView {
     
     func hideNoAcornView(isHidden: Bool) {
         noAcornView.isHidden = isHidden
+        print("hidenoacornview :\(isHidden)")
     }
     
     func updateFilterButtonColor(_ isFilterSet: Bool) {
