@@ -55,7 +55,7 @@ extension FavoriteSpotTypeCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let itemWidth = ScreenUtils.widthRatio * 154
+        let itemWidth = ScreenUtils.width * 154 / 360
         let itemHeight = itemWidth * 2.103
         return CGSize(width: itemWidth, height: itemHeight)
     }
@@ -81,7 +81,7 @@ extension FavoriteSpotTypeCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAt section: Int
     ) -> UIEdgeInsets {
-        let horizontalInset = ScreenUtils.widthRatio * 10
+        let horizontalInset = ScreenUtils.width * 14 / 360
         let verticalInset = ScreenUtils.width * 84 / 780
         return UIEdgeInsets(
             top: verticalInset,
