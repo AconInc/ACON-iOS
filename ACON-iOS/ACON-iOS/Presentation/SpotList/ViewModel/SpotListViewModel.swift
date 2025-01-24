@@ -115,6 +115,7 @@ extension SpotListViewModel: ACLocationManagerDelegate {
     func locationManager(_ manager: ACLocationManager,
                          didUpdateLocation coordinate: CLLocationCoordinate2D) {
         print("🛠️ coordinate: \(coordinate)")
+        
         userCoordinate = coordinate
         
         postSpotList()
