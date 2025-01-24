@@ -20,6 +20,8 @@ class SpotListViewModel {
     
     var isUpdated: Bool = false
     
+    var myAddress: String = ""
+    
     var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
     
@@ -66,8 +68,8 @@ class SpotListViewModel {
 extension SpotListViewModel {
     
     func getAddress() {
-        ACService.shared.spotListService.getAddress(latitude: userCoordinate?.latitude ?? 0,
-                                                    longitude: userCoordinate?.longitude ?? 0) { [weak self] response in
+        ACService.shared.spotListService.getAddress(latitude: userCoordinate.latitude,
+                                                    longitude: userCoordinate.longitude) { [weak self] response in
             switch response {
             case .success(let data):
                 self?.myAddress = data.area
@@ -81,8 +83,8 @@ extension SpotListViewModel {
     
     func postSpotList() {
         let requestBody = PostSpotListRequest(
-            latitude: userCoordinate?.latitude ?? 0,
-            longitude: userCoordinate?.longitude ?? 0,
+            latitude: userCoordinate.latitude,
+            longitude: userCoordinate.longitude,
             condition: SpotCondition(
                 spotType: spotType.value?.serverKey ?? "",
                 filterList: filterList.map { filterList in
@@ -133,7 +135,7 @@ extension SpotListViewModel: ACLocationManagerDelegate {
         print("🛠️ coordinate: \(coordinate)")
         
         userCoordinate = coordinate
-        
+        getAddress()
         postSpotList()
     }
     
