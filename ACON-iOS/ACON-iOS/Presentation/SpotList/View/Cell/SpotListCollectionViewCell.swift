@@ -152,6 +152,8 @@ extension SpotListCollectionViewCell {
             let matchingRateStringSet = matchingRateHead + " " + String(matchingRate) + "%"
             matchingRateLabel.setLabel(text: matchingRateStringSet,
                                        style: .b4)
+        } else {
+            matchingRateView.isHidden = true
         }
         
         typeLabel.setLabel(text: spot.type.koreanText,
