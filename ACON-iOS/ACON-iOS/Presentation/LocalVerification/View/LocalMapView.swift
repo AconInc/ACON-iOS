@@ -17,6 +17,8 @@ final class LocalMapView: BaseView {
     
     let nMapView: NMFNaverMapView = NMFNaverMapView()
     
+    var acMapMarker: NMFMarker = NMFMarker()
+    
     var finishVerificationButton: UIButton = UIButton()
 
     // MARK: - Lifecycle
@@ -48,14 +50,21 @@ final class LocalMapView: BaseView {
         super.setStyle()
         
         nMapView.do {
-            $0.showLocationButton = true
+            $0.showLocationButton = false
             $0.showZoomControls = false
             $0.showScaleBar = false
             $0.showCompass = false
-            $0.mapView.positionMode = .normal
+            $0.mapView.positionMode = .disabled
             $0.mapView.zoomLevel = 17
             $0.mapView.minZoomLevel = 14
             $0.mapView.maxZoomLevel = 18
+        }
+
+        acMapMarker.do {
+            $0.iconImage = NMFOverlayImage(name: "ic_mark_48")
+            $0.width = 48
+            $0.height = 48
+            $0.mapView = nMapView.mapView
         }
         
         finishVerificationButton.do {
