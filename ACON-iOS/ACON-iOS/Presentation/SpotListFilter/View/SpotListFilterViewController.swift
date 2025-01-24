@@ -126,10 +126,8 @@ private extension SpotListFilterViewController {
     
     @objc
     func didTapConductButton() {
-        guard let spotType = viewModel.spotType.value else {
-            viewModel.spotType.value = .restaurant
-            return // TODO: 인덱스 오류 해결
-        }
+        let spotType = viewModel.spotType.value ?? .restaurant
+        viewModel.filterList = []
         
         switch spotType {
         case .restaurant:
