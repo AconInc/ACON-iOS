@@ -18,8 +18,7 @@ class SpotListViewModel {
     
     var isUpdated: Bool = false
     
-    // TODO: userCoordinate 기본값 빼고 옵셔널로 만들기 (지금은 필터 설정했을 때 좌표가 0,0으로 찍히는 문제때문에 좌표 넣어둠...)
-    var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.559171017384145, longitude: 126.9219534442884)
+    var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
     
     // MARK: - Filter
@@ -65,7 +64,6 @@ class SpotListViewModel {
 extension SpotListViewModel {
     
     func postSpotList() {
-        print("🤍🤍🤍🤍spotType: \(spotType)")
         let requestBody = PostSpotListRequest(
             latitude: userCoordinate.latitude,
             longitude: userCoordinate.longitude,
@@ -105,10 +103,7 @@ extension SpotListViewModel {
                 return
             }
         }
-        // TODO: TimeOut 설정하기; 서버가 다운 된 경우 isSuccess가 set이 안돼서 무한 로딩됨
     }
-    
-    
     
 }
 
@@ -121,6 +116,8 @@ extension SpotListViewModel: ACLocationManagerDelegate {
                          didUpdateLocation coordinate: CLLocationCoordinate2D) {
         print("🛠️ coordinate: \(coordinate)")
         userCoordinate = coordinate
+        
+        postSpotList()
     }
     
 }

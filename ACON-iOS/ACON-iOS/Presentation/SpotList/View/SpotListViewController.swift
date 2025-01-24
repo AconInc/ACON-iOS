@@ -33,7 +33,6 @@ class SpotListViewController: BaseNavViewController {
         addTarget()
         
         viewModel.requestLocation()
-        viewModel.postSpotList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -158,7 +157,7 @@ private extension SpotListViewController {
                 self.spotListView.collectionView.alpha = 0.5
             }) { _ in
                 
-                self.viewModel.postSpotList()
+                self.viewModel.requestLocation()
                 self.spotListView.hideSkeletonView(isHidden: false)
             }
         }

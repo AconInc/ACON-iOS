@@ -151,20 +151,21 @@ private extension SpotListFilterViewController {
         viewModel.restaurantPrice = self.restaurantPrice
         viewModel.cafePrice = self.cafePrice
         
-        viewModel.postSpotList()
+        viewModel.requestLocation()
         self.dismiss(animated: true)
     }
     
     @objc func didTapResetButton() {
-        self.viewModel.spotType.value = nil
-        self.viewModel.filterList = []
-        self.viewModel.spotCondition = SpotConditionModel(
+        viewModel.spotType.value = nil
+        viewModel.filterList = []
+        viewModel.spotCondition = SpotConditionModel(
             spotType: .restaurant,
             filterList: [],
             walkingTime: -1,
             priceRange: -1
         )
-        viewModel.postSpotList()
+        
+        viewModel.requestLocation()
         self.dismiss(animated: true)
     }
     
