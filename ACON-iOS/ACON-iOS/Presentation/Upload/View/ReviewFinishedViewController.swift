@@ -30,9 +30,20 @@ class ReviewFinishedViewController: BaseNavViewController {
         super.viewDidAppear(false)
         
         self.reviewFinishedView.finishedReviewLottieView.play()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.closeView()
+        var timeLeftToClose = 5
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            self.reviewFinishedView.closeViewLabel.do {
+                $0.setLabel(text: "\(timeLeftToClose)"+StringLiterals.Upload.closeAfter,
+                            style: .b3,
+                            color: .gray3)
+            }
+            timeLeftToClose -= 1
+            if timeLeftToClose < 0 {
+                timer.invalidate()
+                self.closeView()
+            }
         }
+        timer.fire()
     }
     
     override func setHierarchy() {

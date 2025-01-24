@@ -21,7 +21,7 @@ final class ReviewFinishedView: BaseView {
     
     let finishedReviewLottieView: LottieAnimationView = LottieAnimationView()
     
-    private let closeViewLabel: UILabel = UILabel()
+    var closeViewLabel: UILabel = UILabel()
     
     var okButton: UIButton = UIButton()
     
