@@ -156,7 +156,7 @@ final class SpotDetailView: BaseView {
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*453 + navViewHeight)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(0)
-            $0.bottom.lessThanOrEqualToSuperview()
+            $0.bottom.lessThanOrEqualToSuperview().inset(ScreenUtils.heightRatio*76)
         }
         
         localAcornImageView.snp.makeConstraints {
