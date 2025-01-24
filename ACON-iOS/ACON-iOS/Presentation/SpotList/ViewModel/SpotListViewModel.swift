@@ -12,11 +12,15 @@ class SpotListViewModel {
     
     // MARK: - Properties
     
+    var onSuccessGetAddress: ObservablePattern<Bool> = ObservablePattern(nil)
+    
     var isPostSpotListSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var spotList: [SpotModel] = []
     
     var isUpdated: Bool = false
+    
+    var myAddress: String = ""
     
     var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
@@ -55,6 +59,20 @@ class SpotListViewModel {
 // MARK: - Networking
 
 extension SpotListViewModel {
+    
+    func getAddress() {
+        ACService.shared.spotListService.getAddress(latitude: userCoordinate.latitude,
+                                                    longitude: userCoordinate.longitude) { [weak self] response in
+            switch response {
+            case .success(let data):
+                self?.myAddress = data.area
+                self?.onSuccessGetAddress.value = true
+            default:
+                self?.onSuccessGetAddress.value = false
+                return
+            }
+        }
+    }
     
     func postSpotList() {
         let requestBody = PostSpotListRequest(
@@ -110,7 +128,7 @@ extension SpotListViewModel: ACLocationManagerDelegate {
         print("🛠️ coordinate: \(coordinate)")
         
         userCoordinate = coordinate
-        
+        getAddress()
         postSpotList()
     }
     
