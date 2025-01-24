@@ -113,7 +113,9 @@ extension SpotListViewController {
                     print("🥑reloadData")
                 } else {
                     print("🥑데이터가 안 바뀌어서 리로드데이터 안 함")
-                    spotListView.hideNoAcornView(isHidden: !viewModel.spotList.isEmpty)
+                    let dataExists = !viewModel.spotList.isEmpty
+                    spotListView.hideNoAcornView(isHidden: dataExists)
+                    spotListView.hideSkeletonView(isHidden: dataExists)
                 }
             } else {
                 print("🥑Post 실패")
