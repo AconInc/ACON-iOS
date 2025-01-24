@@ -25,9 +25,10 @@ class SplashView: BaseView {
         super.setLayout()
         
         splashLottieView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*119)
+            // NOTE: 13 mini -> 110, 14 pro max -> 119, 15 pro -> 113
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*113)
             $0.centerX.equalToSuperview()
-            $0.width.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.widthRatio*300)
         }
 
     }

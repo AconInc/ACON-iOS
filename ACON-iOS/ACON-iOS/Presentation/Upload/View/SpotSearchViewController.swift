@@ -93,7 +93,7 @@ class SpotSearchViewController: BaseViewController {
         }
         
         emptyStateView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio * 496)
             $0.leading.trailing.equalToSuperview().inset(16)
         }
     }
@@ -111,10 +111,6 @@ class SpotSearchViewController: BaseViewController {
     }
     
     func addTarget() {
-        spotSearchView.doneButton.addTarget(self,
-                                              action: #selector(doneButtonTapped),
-                                              for: .touchUpInside)
-        
         spotSearchView.searchXButton.addTarget(self,
                                               action: #selector(searchXButtonTapped),
                                               for: .touchUpInside)
@@ -132,17 +128,9 @@ class SpotSearchViewController: BaseViewController {
 private extension SpotSearchViewController {
     
     @objc
-    func doneButtonTapped() {
-        print("===== doneButton tapped =====")
-        hasCompletedSelection = true
-        dismiss(animated: true)
-    }
-    
-    @objc
     func searchXButtonTapped() {
         spotSearchView.searchTextField.text = ""
         spotSearchViewModel.getSearchSuggestion()
-        spotSearchView.doneButton.isEnabled = false
         spotSearchView.searchSuggestionStackView.isHidden = false
         spotSearchView.searchKeywordCollectionView.isHidden = true
     }
@@ -254,8 +242,24 @@ extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
         selectedSpotId = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotID ?? 1
         selectedSpotName = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotName ?? ""
         spotSearchView.searchTextField.text = selectedSpotName
-        spotSearchView.doneButton.isEnabled = true
         self.dismissKeyboard()
+        spotSearchViewModel.getReviewVerification(spotId: selectedSpotId)
+        self.spotSearchViewModel.onSuccessGetReviewVerification.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.spotSearchViewModel.reviewVerification.value else { return }
+            if onSuccess {
+                if data {
+                    self?.hasCompletedSelection = true
+                    self?.dismiss(animated: true)
+                } else {
+                    let alertHandler = AlertHandler()
+                    alertHandler.showLocationAccessFailImageAlert(from: self!)
+                }
+                self?.spotSearchViewModel.reviewVerification.value = nil
+            }
+        }
+//        self.dismissKeyboard()
+//        hasCompletedSelection = true
+//        dismiss(animated: true)
     }
     
 }

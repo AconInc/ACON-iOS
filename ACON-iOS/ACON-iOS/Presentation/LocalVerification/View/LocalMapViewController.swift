@@ -133,6 +133,8 @@ extension LocalMapViewController {
     
     func moveCameraToLocation(latitude: Double, longitude: Double) {
         let position = NMGLatLng(lat: latitude, lng: longitude)
+        localMapView.acMapMarker.position = position
+        localMapView.acMapMarker.mapView = localMapView.nMapView.mapView
         let cameraUpdate = NMFCameraUpdate(scrollTo: position, zoomTo: 17)
         localMapView.nMapView.mapView.moveCamera(cameraUpdate)
     }
