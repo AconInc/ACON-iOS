@@ -24,8 +24,6 @@ final class SpotSearchView: GlassmorphismView {
     
     let searchXButton: UIButton = UIButton()
     
-    var doneButton: UIButton = UIButton()
-    
     var searchSuggestionScrollView: UIScrollView = UIScrollView()
     
     var searchSuggestionStackView: UIStackView = UIStackView()
@@ -55,7 +53,6 @@ final class SpotSearchView: GlassmorphismView {
         
         self.addSubviews(spotUploadLabel,
                          searchView,
-                         doneButton,
                          searchSuggestionScrollView,
                          searchKeywordCollectionView,
                          emptyView)
@@ -81,13 +78,6 @@ final class SpotSearchView: GlassmorphismView {
             $0.height.equalTo(54)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(ScreenUtils.widthRatio*320)
-        }
-        
-        doneButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*19)
-            $0.trailing.equalToSuperview().inset(20)
-            $0.width.equalTo(40)
-            $0.height.equalTo(24)
         }
         
         searchSuggestionScrollView.snp.makeConstraints {
@@ -166,18 +156,6 @@ final class SpotSearchView: GlassmorphismView {
             $0.roundCorners(cornerRadius: 4, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor(resource: .gray6).cgColor
-        }
-        
-        doneButton.do {
-            $0.isEnabled = false
-            $0.setAttributedTitle(text: StringLiterals.Upload.done,
-                                  style: .b2,
-                                  color: .gray5,
-                                  for: .disabled)
-            $0.setAttributedTitle(text: StringLiterals.Upload.done,
-                                  style: .b2,
-                                  color: .acWhite,
-                                  for: .normal)
         }
         
         searchSuggestionScrollView.do {

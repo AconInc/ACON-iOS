@@ -111,10 +111,6 @@ class SpotSearchViewController: BaseViewController {
     }
     
     func addTarget() {
-        spotSearchView.doneButton.addTarget(self,
-                                              action: #selector(doneButtonTapped),
-                                              for: .touchUpInside)
-        
         spotSearchView.searchXButton.addTarget(self,
                                               action: #selector(searchXButtonTapped),
                                               for: .touchUpInside)
@@ -132,17 +128,9 @@ class SpotSearchViewController: BaseViewController {
 private extension SpotSearchViewController {
     
     @objc
-    func doneButtonTapped() {
-        print("===== doneButton tapped =====")
-        hasCompletedSelection = true
-        dismiss(animated: true)
-    }
-    
-    @objc
     func searchXButtonTapped() {
         spotSearchView.searchTextField.text = ""
         spotSearchViewModel.getSearchSuggestion()
-        spotSearchView.doneButton.isEnabled = false
         spotSearchView.searchSuggestionStackView.isHidden = false
         spotSearchView.searchKeywordCollectionView.isHidden = true
     }
@@ -254,7 +242,6 @@ extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
         selectedSpotId = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotID ?? 1
         selectedSpotName = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotName ?? ""
         spotSearchView.searchTextField.text = selectedSpotName
-        spotSearchView.doneButton.isEnabled = true
         self.dismissKeyboard()
     }
     
