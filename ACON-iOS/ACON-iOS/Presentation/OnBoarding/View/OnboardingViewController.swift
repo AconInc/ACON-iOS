@@ -204,16 +204,12 @@ extension OnboardingViewController {
         guard let contentView = contentView else { return }
         
         contentView.alpha = 0
-        contentView.transform = CGAffineTransform.identity
         // MARK: se Device response
         if step == 4, ScreenUtils.height < 800 {
             configureSmallDeviceLayout(for: contentView as! UICollectionView)
         } else {
-            UIView.performWithoutAnimation {
                 configureDefaultLayout(for: contentView)
-            }
-            view.layoutIfNeeded()
-            
+                view.layoutIfNeeded()
         }
         
         UICollectionView.animate(withDuration: 0.25) {
@@ -260,8 +256,6 @@ extension OnboardingViewController {
             $0.bottom.equalTo(nextButton.snp.top)
         }
         
-        contentView.alpha = 0
-        contentView.transform = .identity
     }
     
     private func configureSmallDeviceLayout(for contentView: UICollectionView) {
