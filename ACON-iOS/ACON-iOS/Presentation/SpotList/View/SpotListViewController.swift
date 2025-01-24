@@ -109,12 +109,17 @@ extension SpotListViewController {
                 if viewModel.isUpdated {
                     spotListView.collectionView.reloadData()
                     spotListView.hideSkeletonView(isHidden: true)
+                    spotListView.hideNoAcornView(isHidden: !viewModel.spotList.isEmpty)
                     print("🥑reloadData")
                 } else {
                     print("🥑데이터가 안 바뀌어서 리로드데이터 안 함")
+                    let dataExists = !viewModel.spotList.isEmpty
+                    spotListView.hideNoAcornView(isHidden: dataExists)
+                    spotListView.hideSkeletonView(isHidden: dataExists)
                 }
             } else {
                 print("🥑Post 실패")
+                spotListView.hideNoAcornView(isHidden: !viewModel.spotList.isEmpty)
             }
             
             viewModel.isUpdated = false
@@ -320,7 +325,7 @@ extension SpotListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = viewModel.spotList[indexPath.item]
-        let vc = SpotDetailViewController(1) // TODO: 1 -> item.id로 변경
+        let vc = SpotDetailViewController(item.id)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
