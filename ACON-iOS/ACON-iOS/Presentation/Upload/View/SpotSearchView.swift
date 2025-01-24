@@ -95,7 +95,7 @@ final class SpotSearchView: GlassmorphismView {
         }
         
         emptyView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*200)
+            $0.top.equalToSuperview().offset(ScreenUtils.heightRatio*200)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(ScreenUtils.widthRatio*146)
             $0.height.equalTo(ScreenUtils.heightRatio*116)
@@ -124,17 +124,7 @@ final class SpotSearchView: GlassmorphismView {
             $0.edges.equalTo(searchSuggestionScrollView.contentLayoutGuide)
             $0.height.equalTo(searchSuggestionScrollView.frameLayoutGuide.snp.height)
         }
-        
-        emptyImageView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.centerX.equalToSuperview()
-            $0.width.height.equalTo(80)
-        }
-        
-        emptyLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
-            $0.centerX.equalToSuperview()
-        }
+
     }
     
     override func setStyle() {
@@ -177,10 +167,6 @@ final class SpotSearchView: GlassmorphismView {
             $0.showsVerticalScrollIndicator = false
         }
         
-        emptyView.do {
-            $0.isHidden = true
-        }
-        
         searchImageView.do {
             $0.image = .icSearch24
             $0.contentMode = .scaleAspectFit
@@ -207,17 +193,6 @@ final class SpotSearchView: GlassmorphismView {
             $0.imageView?.contentMode = .scaleAspectFit
         }
         
-        emptyImageView.do {
-            $0.image = .imgEmptySearch
-            $0.contentMode = .scaleAspectFit
-        }
-        
-        emptyLabel.do {
-            $0.setLabel(text: StringLiterals.Upload.noMatchingSpots,
-                        style: .b2,
-                        color: .gray4,
-                        alignment: .center)
-        }
     }
     
 }

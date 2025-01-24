@@ -93,7 +93,7 @@ class SpotSearchViewController: BaseViewController {
         }
         
         emptyStateView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio * 496)
             $0.leading.trailing.equalToSuperview().inset(16)
         }
     }
