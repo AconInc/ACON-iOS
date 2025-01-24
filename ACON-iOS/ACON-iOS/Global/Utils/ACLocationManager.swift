@@ -27,9 +27,9 @@ extension ACLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: ACLocationManager) {
         // TODO: - 이거 안 하면 위치 접근 권한 뜰 때 누르고, 다시 한 번 더 눌러야 제대로 된 서버통신 진행됨.
         // NOTE: 위치 접근 권한 변경 시 바로 위치 로드
-//        if manager.locationManager.authorizationStatus == .authorizedWhenInUse || manager.locationManager.authorizationStatus == .authorizedAlways {
-//            manager.checkUserCurrentLocationAuthorization(manager.locationManager.authorizationStatus)
-//        }
+        if manager.locationManager.authorizationStatus == .authorizedWhenInUse || manager.locationManager.authorizationStatus == .authorizedAlways {
+            manager.checkUserCurrentLocationAuthorization(manager.locationManager.authorizationStatus)
+        }
     }
     
 }

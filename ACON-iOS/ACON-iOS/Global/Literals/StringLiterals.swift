@@ -107,6 +107,8 @@ enum StringLiterals {
         
         static let closeAfterFiveSeconds = "5초 후 탭이 자동으로 닫힙니다."
         
+        static let closeAfter = "초 후 탭이 자동으로 닫힙니다."
+        
         static let ok = "확인"
         
         static let done = "완료"

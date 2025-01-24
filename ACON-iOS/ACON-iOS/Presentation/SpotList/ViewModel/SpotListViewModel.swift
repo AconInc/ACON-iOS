@@ -20,8 +20,7 @@ class SpotListViewModel {
     
     var isUpdated: Bool = false
     
-    var myAddress: String = ""
-    var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.559171017384145, longitude: 126.9219534442884)
+    var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
     
     // MARK: - Filter
@@ -81,7 +80,6 @@ extension SpotListViewModel {
     }
     
     func postSpotList() {
-        print("🤍🤍🤍🤍spotType: \(spotType)")
         let requestBody = PostSpotListRequest(
             latitude: userCoordinate?.latitude ?? 0,
             longitude: userCoordinate?.longitude ?? 0,
@@ -121,10 +119,7 @@ extension SpotListViewModel {
                 return
             }
         }
-        // TODO: TimeOut 설정하기; 서버가 다운 된 경우 isSuccess가 set이 안돼서 무한 로딩됨
     }
-    
-    
     
 }
 
@@ -136,7 +131,10 @@ extension SpotListViewModel: ACLocationManagerDelegate {
     func locationManager(_ manager: ACLocationManager,
                          didUpdateLocation coordinate: CLLocationCoordinate2D) {
         print("🛠️ coordinate: \(coordinate)")
+        
         userCoordinate = coordinate
+        
+        postSpotList()
     }
     
 }

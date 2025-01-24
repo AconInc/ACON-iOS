@@ -137,7 +137,7 @@ final class DropAcornView: BaseView {
         leaveReviewButton.do {
             $0.setAttributedTitle(text: StringLiterals.Upload.reviewWithAcornsHere,
                                    style: .h8,
-                                  color: .acWhite,
+                                  color: .gray5,
                                   for: .disabled)
             $0.setAttributedTitle(text: StringLiterals.Upload.next,
                                    style: .h8,
