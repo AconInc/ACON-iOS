@@ -100,6 +100,10 @@ final class BigBoxViewCell: BaseCollectionViewCell {
     func configure(name: String, image: UIImage?, isSelected: Int) {
         titleLabel.text = name
         imageView.image = image ?? UIImage(systemName: "photo")
+        overlayImageView.layer.shadowColor = UIColor.black.cgColor
+        overlayImageView.layer.shadowOpacity = 0.6
+        overlayImageView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        overlayImageView.layer.shadowRadius = 4
         
         applyOverlaySettings(isSelected: isSelected)
     }
@@ -117,7 +121,7 @@ extension BigBoxViewCell {
         }
         
         overlayImageView.image = UIImage(named: "\(isSelected)")
-        overlayContainer.backgroundColor = UIColor.white.withAlphaComponent(0.4)
+        overlayContainer.backgroundColor = UIColor.white.withAlphaComponent(0.3)
         overlayImageView.alpha = 1
     }
     
