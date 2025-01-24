@@ -17,11 +17,6 @@ class ACTabBarController: UITabBarController {
         super.viewDidLoad()
         
         delegate = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         configureTabBarAppearance()
         setNavViewControllers()
     }
@@ -51,7 +46,6 @@ extension ACTabBarController {
         
         // NOTE: 글라스모피즘 뷰 얹기
         let glassView = GlassmorphismView()
-//        tabBar.backgroundImage? = UIImage(systemName: "photo") ?? UIImage()
         tabBar.addSubview(glassView)
         glassView.snp.makeConstraints {
             $0.edges.equalTo(tabBar)

@@ -33,12 +33,11 @@ class SpotListViewController: BaseNavViewController {
         addTarget()
         
         viewModel.requestLocation()
-        viewModel.postSpotList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
-
+        
         self.tabBarController?.tabBar.isHidden = false
     }
     
@@ -158,7 +157,7 @@ private extension SpotListViewController {
                 self.spotListView.collectionView.alpha = 0.5
             }) { _ in
                 
-                self.viewModel.postSpotList()
+                self.viewModel.requestLocation()
                 self.spotListView.hideSkeletonView(isHidden: false)
             }
         }
@@ -248,14 +247,12 @@ private extension SpotListViewController {
     }
     
     func setRefreshControl() {
-        let control = CustomRefreshControl()
-        
-        control.addTarget(self,
-                          action: #selector(handleRefreshControl),
-                          for: .valueChanged
+        spotListView.collectionView.refreshControl = CustomRefreshControl()
+        spotListView.collectionView.refreshControl?.addTarget(
+            self,
+            action: #selector(handleRefreshControl),
+            for: .valueChanged
         )
-        
-        spotListView.collectionView.refreshControl = control
     }
     
 }
