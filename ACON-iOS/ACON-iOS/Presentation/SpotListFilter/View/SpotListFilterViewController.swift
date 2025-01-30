@@ -17,7 +17,7 @@ class SpotListFilterViewController: BaseViewController {
     
     var walkingTime: SpotType.WalkingDistanceType = .twentyFive
     
-    var restaurantPrice: SpotType.RestaurantPriceType = .fiftyThousandAbove
+    var restaurantPrice: SpotType.RestaurantPriceType = .aboveFiftyThousand
     
     var cafePrice: SpotType.CafePriceType = .aboveTenThousand
     
