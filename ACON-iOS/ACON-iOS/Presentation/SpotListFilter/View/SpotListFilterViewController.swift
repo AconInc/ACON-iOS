@@ -184,7 +184,7 @@ private extension SpotListFilterViewController {
             
             $0.resetAllTagSelection()
             
-            $0.resetSliderPosition(animated: false)
+            $0.resetSliderPosition()
         }
     }
     
