@@ -82,7 +82,7 @@ class SpotSearchViewController: BaseViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.view.addSubviews(spotSearchView,emptyStateView)
+        self.view.addSubviews(spotSearchView, emptyStateView)
     }
     
     override func setLayout() {
@@ -107,7 +107,6 @@ class SpotSearchViewController: BaseViewController {
         emptyStateView.do {
             $0.isHidden = true
         }
-        
     }
     
     func addTarget() {
