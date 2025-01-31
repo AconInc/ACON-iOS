@@ -133,11 +133,13 @@ private extension SpotSearchViewController {
         spotSearchViewModel.getSearchSuggestion()
         spotSearchView.searchSuggestionStackView.isHidden = false
         spotSearchView.searchKeywordCollectionView.isHidden = true
+        emptyStateView.isHidden = true
     }
     
     @objc
     func searchTextFieldDidChange(_ textField: UITextField) {
         if let text = textField.text {
+            emptyStateView.isHidden = text == ""
             spotSearchView.searchSuggestionStackView.isHidden = text != ""
             spotSearchView.searchKeywordCollectionView.isHidden = text == ""
         }
@@ -166,9 +168,9 @@ private extension SpotSearchViewController {
             
             DispatchQueue.main.async {
                 if data.count == 0 {
-                    // TODO: - 엠티뷰 처리
+                    self?.emptyStateView.isHidden = self?.spotSearchView.searchTextField.text == ""
                     self?.spotSearchView.searchKeywordCollectionView.isHidden = true
-                    self?.emptyStateView.isHidden = false
+                    self?.spotSearchView.searchKeywordCollectionView.reloadData()
                 } else {
                     self?.emptyStateView.isHidden = true
                     self?.spotSearchView.searchKeywordCollectionView.isHidden = false
