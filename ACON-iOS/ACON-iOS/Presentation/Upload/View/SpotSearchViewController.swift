@@ -176,6 +176,21 @@ private extension SpotSearchViewController {
                 }
             }
         }
+        
+        self.spotSearchViewModel.onSuccessGetReviewVerification.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.spotSearchViewModel.reviewVerification.value else { return }
+            if onSuccess {
+                if data {
+                    self?.hasCompletedSelection = true
+                    self?.dismiss(animated: true)
+                } else {
+                    let alertHandler = AlertHandler()
+                    alertHandler.showLocationAccessFailImageAlert(from: self!)
+                }
+                self?.spotSearchViewModel.reviewVerification.value = nil
+            }
+        }
+        
     }
 
 }
@@ -200,10 +215,7 @@ private extension SpotSearchViewController {
         guard let spotName = sender.currentAttributedTitle?.string else { return }
         selectedSpotId = sender.spotID
         selectedSpotName = spotName
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            self?.hasCompletedSelection = true
-            self?.dismiss(animated: true)
-        }
+        spotSearchViewModel.getReviewVerification(spotId: selectedSpotId)
     }
     
 }
@@ -244,22 +256,6 @@ extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
         spotSearchView.searchTextField.text = selectedSpotName
         self.dismissKeyboard()
         spotSearchViewModel.getReviewVerification(spotId: selectedSpotId)
-        self.spotSearchViewModel.onSuccessGetReviewVerification.bind { [weak self] onSuccess in
-            guard let onSuccess, let data = self?.spotSearchViewModel.reviewVerification.value else { return }
-            if onSuccess {
-                if data {
-                    self?.hasCompletedSelection = true
-                    self?.dismiss(animated: true)
-                } else {
-                    let alertHandler = AlertHandler()
-                    alertHandler.showLocationAccessFailImageAlert(from: self!)
-                }
-                self?.spotSearchViewModel.reviewVerification.value = nil
-            }
-        }
-//        self.dismissKeyboard()
-//        hasCompletedSelection = true
-//        dismiss(animated: true)
     }
     
 }
