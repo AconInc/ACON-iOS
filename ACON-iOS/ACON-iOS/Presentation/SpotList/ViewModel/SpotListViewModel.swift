@@ -33,9 +33,9 @@ class SpotListViewModel {
     
     var walkingTime: SpotType.WalkingDistanceType = .fifteen
     
-    var restaurantPrice: SpotType.RestaurantPriceType = .tenThousand
+    var restaurantPrice: SpotType.RestaurantPriceType = .aboveFiftyThousand
     
-    var cafePrice: SpotType.CafePriceType = .fiveThousand
+    var cafePrice: SpotType.CafePriceType = .aboveTenThousand
     
     
     // MARK: - Methods

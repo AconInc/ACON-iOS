@@ -196,7 +196,7 @@ enum SpotType {
     
     enum RestaurantPriceType: CaseIterable {
         
-        case fiveThousand, tenThousand, thirtyThousand, fiftyThousand, fiftyThousandAbove
+        case fiveThousand, tenThousand, thirtyThousand, fiftyThousand, aboveFiftyThousand
         
         var text: String {
             switch self {
@@ -204,7 +204,7 @@ enum SpotType {
             case .tenThousand: return "1만원"
             case .thirtyThousand: return "3만원"
             case .fiftyThousand: return "5만원"
-            case .fiftyThousandAbove: return "5만원 이상"
+            case .aboveFiftyThousand: return "5만원 이상"
             }
         }
         
@@ -214,7 +214,7 @@ enum SpotType {
             case .tenThousand: return 10000
             case .thirtyThousand: return 30000
             case .fiftyThousand: return 50000
-            case .fiftyThousandAbove: return -1
+            case .aboveFiftyThousand: return -1
             }
         }
         
