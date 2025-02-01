@@ -143,6 +143,7 @@ final class SpotDetailView: BaseView {
         addressLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*342 + navViewHeight)
             $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*38)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(18)
         }
         

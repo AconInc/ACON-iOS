@@ -68,7 +68,7 @@ class ACLocationManager: NSObject {
     }
     
     func checkUserDeviceLocationServiceAuthorization() {
-        // Execute on background thread to prevent UI blocking
+        // NOTE: - Execute on background thread to prevent UI blocking ??
         DispatchQueue.global().async { [weak self] in
             guard CLLocationManager.locationServicesEnabled() else {
                 DispatchQueue.main.async {

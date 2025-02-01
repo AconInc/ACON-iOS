@@ -82,7 +82,7 @@ class SpotSearchViewController: BaseViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.view.addSubviews(spotSearchView,emptyStateView)
+        self.view.addSubviews(spotSearchView, emptyStateView)
     }
     
     override func setLayout() {
@@ -107,7 +107,6 @@ class SpotSearchViewController: BaseViewController {
         emptyStateView.do {
             $0.isHidden = true
         }
-        
     }
     
     func addTarget() {
@@ -133,11 +132,13 @@ private extension SpotSearchViewController {
         spotSearchViewModel.getSearchSuggestion()
         spotSearchView.searchSuggestionStackView.isHidden = false
         spotSearchView.searchKeywordCollectionView.isHidden = true
+        emptyStateView.isHidden = true
     }
     
     @objc
     func searchTextFieldDidChange(_ textField: UITextField) {
         if let text = textField.text {
+            emptyStateView.isHidden = text == ""
             spotSearchView.searchSuggestionStackView.isHidden = text != ""
             spotSearchView.searchKeywordCollectionView.isHidden = text == ""
         }
@@ -166,9 +167,9 @@ private extension SpotSearchViewController {
             
             DispatchQueue.main.async {
                 if data.count == 0 {
-                    // TODO: - 엠티뷰 처리
+                    self?.emptyStateView.isHidden = self?.spotSearchView.searchTextField.text == ""
                     self?.spotSearchView.searchKeywordCollectionView.isHidden = true
-                    self?.emptyStateView.isHidden = false
+                    self?.spotSearchView.searchKeywordCollectionView.reloadData()
                 } else {
                     self?.emptyStateView.isHidden = true
                     self?.spotSearchView.searchKeywordCollectionView.isHidden = false
@@ -176,6 +177,21 @@ private extension SpotSearchViewController {
                 }
             }
         }
+        
+        self.spotSearchViewModel.onSuccessGetReviewVerification.bind { [weak self] onSuccess in
+            guard let onSuccess, let data = self?.spotSearchViewModel.reviewVerification.value else { return }
+            if onSuccess {
+                if data {
+                    self?.hasCompletedSelection = true
+                    self?.dismiss(animated: true)
+                } else {
+                    let alertHandler = AlertHandler()
+                    alertHandler.showLocationAccessFailImageAlert(from: self!)
+                }
+                self?.spotSearchViewModel.reviewVerification.value = nil
+            }
+        }
+        
     }
 
 }
@@ -200,10 +216,7 @@ private extension SpotSearchViewController {
         guard let spotName = sender.currentAttributedTitle?.string else { return }
         selectedSpotId = sender.spotID
         selectedSpotName = spotName
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            self?.hasCompletedSelection = true
-            self?.dismiss(animated: true)
-        }
+        spotSearchViewModel.getReviewVerification(spotId: selectedSpotId)
     }
     
 }
@@ -244,22 +257,6 @@ extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
         spotSearchView.searchTextField.text = selectedSpotName
         self.dismissKeyboard()
         spotSearchViewModel.getReviewVerification(spotId: selectedSpotId)
-        self.spotSearchViewModel.onSuccessGetReviewVerification.bind { [weak self] onSuccess in
-            guard let onSuccess, let data = self?.spotSearchViewModel.reviewVerification.value else { return }
-            if onSuccess {
-                if data {
-                    self?.hasCompletedSelection = true
-                    self?.dismiss(animated: true)
-                } else {
-                    let alertHandler = AlertHandler()
-                    alertHandler.showLocationAccessFailImageAlert(from: self!)
-                }
-                self?.spotSearchViewModel.reviewVerification.value = nil
-            }
-        }
-//        self.dismissKeyboard()
-//        hasCompletedSelection = true
-//        dismiss(animated: true)
     }
     
 }
