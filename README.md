@@ -13,14 +13,20 @@
 | <img src="https://github.com/user-attachments/assets/b4ff5177-333e-48c5-9295-95154c7b5275" width="333"/> | <img src="https://github.com/user-attachments/assets/5f7a3082-89c2-4bc3-9b7f-10e8ce0c7fa0" width="333"/> | <img src="https://github.com/user-attachments/assets/55e7f196-623e-4cb4-b800-2cd40c77f8d5" width="333"/> | 
 | <p align="center">`스플래시/로그인` `동네인증` <br>`업로드` `장소 상세`</p> | <p align="center">`장소탐색` <br>`필터링`</p> | <p align="center">`취향탐색` <br>`알럿`</p> |
 
+
+> 250112 - 250125: 
+[AND SOPT 35 APPJAM](https://github.com/SOPT-all/35-APPJAM-iOS-ACON)
+
 <br/>
+
 
 ## 🥑 시연영상
 
 
 [시연영상](https://github.com/user-attachments/assets/74d30cb9-2efc-453f-804b-fb44202cd52d)
 
-#### FLOW: 스플래시 -> 로그인 -> 동네인증 -> 취향탐색 (온보딩) -> 장소탐색 -> 장소상세 -> 업로드
+> 250125 기준 시연 영상입니다.
+<br/> **플로우 : 스플래시 -> 로그인 -> 동네인증 -> 취향탐색 (온보딩) -> 장소탐색 -> 장소상세 -> 업로드**
 
 
 <br/>
@@ -65,50 +71,3 @@
 > Branch Naming Rule : [prefix]/#[issue_num]
 
 <br/>
-
-
-## 🥜 Foldering
-```bash
-├── 📁 Application
-│   ├── AppDelegate
-│   ├── SceneDelegate
-│   ├── LaunchScreen
-├── 📁 Global
-│   ├── 🗂️ Protocols
-│   ├── 🗂️ Extensions
-│   ├── 🗂️ UIComponents
-│   ├── 🗂️ Utils
-│   │   ├── 🗂️ Enums
-│   │   ├── ScreenUtils
-│   │   ├── ObservablePattern
-│   ├── 🗂️ Literals
-│   │   ├── StringLiterals
-│   ├── 🗂️ Settings
-│   │   ├── 🗂️ Config
-│   │   ├── Info.plist
-│   ├── 🗂️ Resources
-│   │   ├── 🗂️ Font
-│   │   ├── Assets
-│   │   │   ├── Colors
-├── 📁 Network
-│   ├── 🗂️ View1
-│   │   ├── 🗂️ DTO
-│   │   ├── View1TargetType
-│   │   ├── View1Service
-│   ├── 🗂️ Base
-├── 📁 Presentation
-│   ├── 🗂️ View1
-│   │   ├── 🗂️ Model
-│   │   ├── 🗂️ ViewModel
-│   │   ├── 🗂️ View
-│   │   │   ├── 🗂️ Cell
-│   ├── 🗂️ Base
-│   │   ├── BaseNavViewController
-│   │   ├── BaseViewController
-│   │   ├── BaseView
-│   │   ├── BaseCollectionViewCell
-
-
-```
-
-<br/><br/>
