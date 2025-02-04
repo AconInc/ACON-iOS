@@ -14,7 +14,7 @@
 | <p align="center">`스플래시/로그인` `동네인증` <br>`업로드` `장소 상세`</p> | <p align="center">`장소탐색` <br>`필터링`</p> | <p align="center">`취향탐색` <br>`알럿`</p> |
 
 
-> 250112 - 250125: 
+> 1차 스프린트 (250112 - 250125) : 
 [AND SOPT 35 APPJAM](https://github.com/SOPT-all/35-APPJAM-iOS-ACON)
 
 <br/>
