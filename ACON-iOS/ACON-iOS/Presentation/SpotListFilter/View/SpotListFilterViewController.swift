@@ -145,6 +145,7 @@ private extension SpotListFilterViewController {
             viewModel.filterList.append(visitPurposeFilter)
         }
         
+        viewModel.spotType.value = spotType
         viewModel.walkingTime = self.walkingTime
         viewModel.restaurantPrice = self.restaurantPrice
         viewModel.cafePrice = self.cafePrice
