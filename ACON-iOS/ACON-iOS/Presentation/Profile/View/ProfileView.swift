@@ -156,6 +156,9 @@ final class ProfileView: BaseView {
         }
     }
     
+    
+    // MARK: - Internal Methods
+    
     func setAcornCountBox(_ possessingCount: Int) {
         let acornCountabel = UILabel()
         // TODO: partialText 가운데 정렬 되도록 수정
