@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: BaseViewController {
+class ProfileViewController: BaseNavViewController {
     
     private let profileView = ProfileView()
     
@@ -20,7 +20,7 @@ class ProfileViewController: BaseViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        view.addSubview(profileView)
+        contentView.addSubview(profileView)
 
     }
     
@@ -32,18 +32,24 @@ class ProfileViewController: BaseViewController {
         }
     }
     
-    func addTarget() {
-        profileView.disableAutoLoginButton.addTarget(self,
-                                                     action: #selector(disableAutoLogin),
-                                                     for: .touchUpInside)
+    override func setStyle() {
+        super.setStyle()
+        
+        self.setCenterTitleLabelStyle(title: "프로필", fontStyle: .h5)
     }
     
-    @objc
-    func disableAutoLogin() {
-        UserDefaults.standard.removeObject(forKey: StringLiterals.UserDefaults.accessToken)
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = SplashViewController()
-        }
+    func addTarget() {
+//        profileView.disableAutoLoginButton.addTarget(self,
+//                                                     action: #selector(disableAutoLogin),
+//                                                     for: .touchUpInside)
     }
+//    
+//    @objc
+//    func disableAutoLogin() {
+//        UserDefaults.standard.removeObject(forKey: StringLiterals.UserDefaults.accessToken)
+//        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+//            sceneDelegate.window?.rootViewController = SplashViewController()
+//        }
+//    }
     
 }
