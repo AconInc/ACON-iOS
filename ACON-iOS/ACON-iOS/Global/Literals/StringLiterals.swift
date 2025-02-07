@@ -301,4 +301,15 @@ enum StringLiterals {
         
     }
     
+    enum Profile {
+        
+        static let editProfile = "프로필 수정하기"
+        
+        static let needLogin = "로그인이 필요해요"
+        
+        static let acornPossession = "보유한 도토리 수"
+        
+        static let verifiedArea = "나의 인증 동네"
+    }
+    
 }

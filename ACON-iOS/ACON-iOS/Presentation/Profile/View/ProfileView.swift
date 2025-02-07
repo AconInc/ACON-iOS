@@ -12,64 +12,173 @@ import SnapKit
 
 final class ProfileView: BaseView {
     
-    private let imageView = UIImageView()
+    // MARK: - Helpers
     
-    private let messageLabel = UILabel()
+    private let horizontalInset: CGFloat = 20
     
-    var disableAutoLoginButton = UIButton()
+    private let profileImageSize: CGFloat = 60
+    
+    private let boxStackSpacing: CGFloat = 8
+    
+    private let totalAcornCount: Int = 25
+    
+    
+    // MARK: - UI Components
+    
+    private let profileImageView = UIImageView()
+    
+    private let usernameLabel = UILabel()
+    
+    var profileEditButton = UIButton()
+    
+    var needLoginButton = UIButton()
+    
+    private let boxStackView = UIStackView()
+    
+    private let acornCountBox = ProfileBoxComponent()
+    
+    private let verifiedAreaBox = ProfileBoxComponent()
+    
+//    var disableAutoLoginButton = UIButton()
+    
+    
+    // MARK: - LifeCycles
     
     override func setStyle() {
         super.setStyle()
         
         self.backgroundColor = .gray9
         
-        imageView.do {
-            $0.image = .construction
-            $0.contentMode = .scaleAspectFit
+        profileImageView.do {
+            $0.image = .imgProfileBasic60
+            $0.layer.cornerRadius = profileImageSize / 2
         }
         
-        messageLabel.do {
-            $0.setLabel(text: "지금은 공사중이에요!",
-                        style: .b2,
-                        color: .gray4,
-                        alignment: .center,
-                        numberOfLines: 1)
+        // TODO: Username 바인딩
+        usernameLabel.setLabel(text: "UserName", style: .h5)
+        
+        profileEditButton.do {
+            var config = UIButton.Configuration.plain()
+            config.contentInsets = .zero
+            config.attributedTitle = AttributedString(StringLiterals.Profile.editProfile.ACStyle(.s2, .gray4))
+            config.image = .icEditG20
+            config.imagePlacement = .trailing
+            config.imagePadding = 4
+            $0.configuration = config
         }
         
-        disableAutoLoginButton.do {
-            $0.setAttributedTitle(text: "자동로그인 해제", style: .b4)
-            $0.layer.borderColor = UIColor.acWhite.cgColor
-            $0.layer.borderWidth = 0.5
+        needLoginButton.do {
+            var config = UIButton.Configuration.plain()
+            config.contentInsets = .init(top: 15, leading: 0, bottom: 15, trailing: 15)
+            config.attributedTitle = AttributedString(StringLiterals.Profile.needLogin.ACStyle(.h5))
+            config.image = .icArrowRight28
+            config.imagePlacement = .trailing
+            config.imagePadding = 2
+            config.background.backgroundColor = .gray9
+            $0.configuration = config
         }
+        
+        boxStackView.do {
+            $0.axis = .horizontal
+            $0.spacing = boxStackSpacing
+        }
+        
+        acornCountBox.setStyle(
+            title: StringLiterals.Profile.acornPossession,
+            icon: .icLocalAconG20
+        )
+        
+        verifiedAreaBox.setStyle(
+            title: StringLiterals.Profile.verifiedArea,
+            icon: .icHometownG20
+        )
     }
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(imageView,
-                         messageLabel,
-                         disableAutoLoginButton)
+        self.addSubviews(
+            profileImageView,
+            usernameLabel,
+            profileEditButton,
+            needLoginButton,
+            boxStackView
+        )
+        
+        boxStackView.addArrangedSubviews(
+            acornCountBox,
+            verifiedAreaBox
+        )
     }
     
     override func setLayout() {
         super.setLayout()
         
-        imageView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalTo(ScreenUtils.widthRatio * 113)
+        profileImageView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(32)
+            $0.leading.equalToSuperview().offset(horizontalInset)
+            $0.size.equalTo(profileImageSize)
         }
         
-        messageLabel.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).offset(3)
-            $0.centerX.equalTo(imageView)
+        usernameLabel.snp.makeConstraints {
+            $0.top.equalTo(profileImageView).offset(4)
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(16)
+            $0.trailing.equalToSuperview().offset(-horizontalInset)
         }
         
-        disableAutoLoginButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(100)
-            $0.trailing.equalToSuperview().inset(20)
-            $0.width.equalTo(100)
+        profileEditButton.snp.makeConstraints {
+            $0.top.equalTo(usernameLabel.snp.bottom).offset(2)
+            $0.leading.equalTo(usernameLabel)
         }
         
+        needLoginButton.snp.makeConstraints {
+            $0.leading.equalTo(usernameLabel)
+            $0.centerY.equalTo(profileImageView)
+        }
+        
+        boxStackView.snp.makeConstraints {
+            $0.top.equalTo(profileImageView.snp.bottom).offset(32)
+            $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
+        }
+        
+        acornCountBox.snp.makeConstraints {
+            $0.width.equalTo(
+                (ScreenUtils.width - horizontalInset * 2 - boxStackSpacing) / 2
+            )
+            $0.height.equalTo(94)
+        }
+        
+        verifiedAreaBox.snp.makeConstraints {
+            $0.width.equalTo(
+                (ScreenUtils.width - horizontalInset * 2 - boxStackSpacing) / 2
+            )
+            $0.height.equalTo(94)
+        }
+    }
+    
+    
+    // MARK: - Internal Methods
+    
+    func setAcornCountBox(_ possessingCount: Int) {
+        let acornCountabel = UILabel()
+        let possessingString = possessingCount == 0 ? "00" : String(possessingCount)
+        // TODO: partialText 가운데 정렬 되도록 수정
+        acornCountabel.setPartialText(
+            fullText: "\(possessingString)/\(String(totalAcornCount))",
+            textStyles: [
+                (text: possessingString, style: .t2, color: .org1),
+                (text: "/\(String(totalAcornCount))", style: .s2, color: .gray5)
+            ]
+        )
+        
+        acornCountBox.setContentView(to: acornCountabel)
+    }
+    
+    func setVerifiedAreaBox(_ areaName: String) {
+        let label = UILabel()
+        label.setLabel(text: areaName, style: .t2, color: .org1)
+        
+        verifiedAreaBox.setContentView(to: label)
     }
     
 }
