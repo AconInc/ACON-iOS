@@ -161,11 +161,12 @@ final class ProfileView: BaseView {
     
     func setAcornCountBox(_ possessingCount: Int) {
         let acornCountabel = UILabel()
+        let possessingString = possessingCount == 0 ? "00" : String(possessingCount)
         // TODO: partialText 가운데 정렬 되도록 수정
         acornCountabel.setPartialText(
-            fullText: "\(String(possessingCount))/\(String(totalAcornCount))",
+            fullText: "\(possessingString)/\(String(totalAcornCount))",
             textStyles: [
-                (text: String(possessingCount), style: .t2, color: .org1),
+                (text: possessingString, style: .t2, color: .org1),
                 (text: "/\(String(totalAcornCount))", style: .s2, color: .gray5)
             ]
         )

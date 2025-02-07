@@ -39,7 +39,7 @@ class ProfileViewController: BaseNavViewController {
         
         // TODO: 뷰모델 바인딩
         profileView.needLoginButton.isHidden = true
-        profileView.setAcornCountBox(10)
+        profileView.setAcornCountBox(0)
         profileView.setVerifiedAreaBox("유림동")
     }
     
