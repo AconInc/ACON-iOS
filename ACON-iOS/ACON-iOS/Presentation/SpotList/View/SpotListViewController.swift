@@ -105,14 +105,13 @@ extension SpotListViewController {
             guard let self = self,
                   let isSuccess = isSuccess else { return }
             if isSuccess {
-                print("🥑\(viewModel.isUpdated)")
+                print("🥑데이터 바뀜 여부: \(viewModel.isUpdated)")
                 if viewModel.isUpdated {
                     spotListView.collectionView.reloadData()
                     spotListView.hideSkeletonView(isHidden: true)
                     spotListView.hideNoAcornView(isHidden: !viewModel.spotList.isEmpty)
-                    print("🥑reloadData")
                 } else {
-                    print("🥑데이터가 안 바뀌어서 리로드데이터 안 함")
+                    print("🥑데이터가 안 바뀌어서 reloadData 안 함")
                     let dataExists = !viewModel.spotList.isEmpty
                     spotListView.hideNoAcornView(isHidden: dataExists)
                     spotListView.hideSkeletonView(isHidden: dataExists)
