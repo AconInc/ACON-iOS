@@ -38,22 +38,14 @@ class ProfileViewController: BaseNavViewController {
         self.setCenterTitleLabelStyle(title: "프로필", fontStyle: .h5)
         
         // TODO: 뷰모델 바인딩
+        profileView.needLoginButton.isHidden = true
         profileView.setAcornCountBox(10)
         profileView.setVerifiedAreaBox("유림동")
     }
     
     func addTarget() {
-//        profileView.disableAutoLoginButton.addTarget(self,
-//                                                     action: #selector(disableAutoLogin),
-//                                                     for: .touchUpInside)
+        // TODO: needLoginButtonTapped
+        
+        // TODO: EditProfileButtonTapped
     }
-//    
-//    @objc
-//    func disableAutoLogin() {
-//        UserDefaults.standard.removeObject(forKey: StringLiterals.UserDefaults.accessToken)
-//        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-//            sceneDelegate.window?.rootViewController = SplashViewController()
-//        }
-//    }
-    
 }
