@@ -27,6 +27,8 @@ final class ProfileView: BaseView {
     
     var profileEditButton = UIButton()
     
+    var needLoginButton = UIButton()
+    
 //    var disableAutoLoginButton = UIButton()
     
     
@@ -54,6 +56,17 @@ final class ProfileView: BaseView {
             config.imagePadding = 4
             $0.configuration = config
         }
+        
+        needLoginButton.do {
+            var config = UIButton.Configuration.plain()
+            config.contentInsets = .init(top: 15, leading: 0, bottom: 15, trailing: 15)
+            config.attributedTitle = AttributedString(StringLiterals.Profile.needLogin.ACStyle(.h5))
+            config.image = .icArrowRight28
+            config.imagePlacement = .trailing
+            config.imagePadding = 2
+            config.background.backgroundColor = .gray9
+            $0.configuration = config
+        }
     }
     
     override func setHierarchy() {
@@ -62,7 +75,8 @@ final class ProfileView: BaseView {
         self.addSubviews(
             profileImageView,
             usernameLabel,
-            profileEditButton
+            profileEditButton,
+            needLoginButton
         )
     }
     
@@ -84,6 +98,11 @@ final class ProfileView: BaseView {
         profileEditButton.snp.makeConstraints {
             $0.top.equalTo(usernameLabel.snp.bottom).offset(2)
             $0.leading.equalTo(usernameLabel)
+        }
+        
+        needLoginButton.snp.makeConstraints {
+            $0.leading.equalTo(usernameLabel)
+            $0.centerY.equalTo(profileImageView)
         }
     }
     
