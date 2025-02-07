@@ -8,6 +8,10 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>acon에서 회원님 기기의 GPS를 사용하여 현재 위치기반 장소추천을 위해 위치접근에 대한 권한을 사용합니다.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>acon에서 회원님의 이미지 및 동영상을 공유할 수 있도록 지원하고 프로필 사진 변경, 후기 업로드 등의 목적으로 
+회원님의 앨범 라이브러리에 대한 
+액세스 권한을 사용합니다.</string>
 	<key>BASE_URL</key>
 	<string>${BASE_URL}</string>
 	<key>CFBundleURLTypes</key>
