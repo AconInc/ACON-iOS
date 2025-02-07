@@ -12,64 +12,79 @@ import SnapKit
 
 final class ProfileView: BaseView {
     
-    private let imageView = UIImageView()
+    // MARK: - Sizes
     
-    private let messageLabel = UILabel()
+    private let horizontalInset: CGFloat = 20
     
-    var disableAutoLoginButton = UIButton()
+    private let profileImageSize: CGFloat = 60
+    
+    
+    // MARK: - UI Components
+    
+    private let profileImageView = UIImageView()
+    
+    private let usernameLabel = UILabel()
+    
+    var profileEditButton = UIButton()
+    
+//    var disableAutoLoginButton = UIButton()
+    
+    
+    // MARK: - LifeCycles
     
     override func setStyle() {
         super.setStyle()
         
         self.backgroundColor = .gray9
         
-        imageView.do {
-            $0.image = .construction
-            $0.contentMode = .scaleAspectFit
+        profileImageView.do {
+            $0.image = .imgProfileBasic60
+            $0.layer.cornerRadius = profileImageSize / 2
         }
         
-        messageLabel.do {
-            $0.setLabel(text: "지금은 공사중이에요!",
-                        style: .b2,
-                        color: .gray4,
-                        alignment: .center,
-                        numberOfLines: 1)
-        }
+        // TODO: Username 바인딩
+        usernameLabel.setLabel(text: "UserName", style: .h5)
         
-        disableAutoLoginButton.do {
-            $0.setAttributedTitle(text: "자동로그인 해제", style: .b4)
-            $0.layer.borderColor = UIColor.acWhite.cgColor
-            $0.layer.borderWidth = 0.5
+        profileEditButton.do {
+            var config = UIButton.Configuration.plain()
+            config.contentInsets = .zero
+            config.attributedTitle = AttributedString(StringLiterals.Profile.editProfile.ACStyle(.s2, .gray4))
+            config.image = .icEditG20
+            config.imagePlacement = .trailing
+            config.imagePadding = 4
+            $0.configuration = config
         }
     }
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(imageView,
-                         messageLabel,
-                         disableAutoLoginButton)
+        self.addSubviews(
+            profileImageView,
+            usernameLabel,
+            profileEditButton
+        )
     }
     
     override func setLayout() {
         super.setLayout()
         
-        imageView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalTo(ScreenUtils.widthRatio * 113)
+        profileImageView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(32)
+            $0.leading.equalToSuperview().offset(horizontalInset)
+            $0.size.equalTo(profileImageSize)
         }
         
-        messageLabel.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).offset(3)
-            $0.centerX.equalTo(imageView)
+        usernameLabel.snp.makeConstraints {
+            $0.top.equalTo(profileImageView).offset(4)
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(16)
+            $0.trailing.equalToSuperview().offset(-horizontalInset)
         }
         
-        disableAutoLoginButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(100)
-            $0.trailing.equalToSuperview().inset(20)
-            $0.width.equalTo(100)
+        profileEditButton.snp.makeConstraints {
+            $0.top.equalTo(usernameLabel.snp.bottom).offset(2)
+            $0.leading.equalTo(usernameLabel)
         }
-        
     }
     
 }
