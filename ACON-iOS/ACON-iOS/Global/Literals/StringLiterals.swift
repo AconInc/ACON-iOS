@@ -305,6 +305,8 @@ enum StringLiterals {
         
         static let editProfile = "프로필 수정하기"
         
+        static let needLogin = "로그인이 필요해요"
+        
     }
     
 }
