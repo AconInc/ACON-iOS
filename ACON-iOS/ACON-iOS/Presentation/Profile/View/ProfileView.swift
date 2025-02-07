@@ -12,11 +12,15 @@ import SnapKit
 
 final class ProfileView: BaseView {
     
-    // MARK: - Sizes
+    // MARK: - Helpers
     
     private let horizontalInset: CGFloat = 20
     
     private let profileImageSize: CGFloat = 60
+    
+    private let boxStackSpacing: CGFloat = 8
+    
+    private let totalAcornCount: Int = 25
     
     
     // MARK: - UI Components
@@ -28,6 +32,12 @@ final class ProfileView: BaseView {
     var profileEditButton = UIButton()
     
     var needLoginButton = UIButton()
+    
+    private let boxStackView = UIStackView()
+    
+    private let acornCountBox = ProfileBoxComponent()
+    
+    private let verifiedAreaBox = ProfileBoxComponent()
     
 //    var disableAutoLoginButton = UIButton()
     
@@ -67,6 +77,21 @@ final class ProfileView: BaseView {
             config.background.backgroundColor = .gray9
             $0.configuration = config
         }
+        
+        boxStackView.do {
+            $0.axis = .horizontal
+            $0.spacing = boxStackSpacing
+        }
+        
+        acornCountBox.setStyle(
+            title: StringLiterals.Profile.acornPossession,
+            icon: .icLocalAconG20
+        )
+        
+        verifiedAreaBox.setStyle(
+            title: StringLiterals.Profile.verifiedArea,
+            icon: .icHometownG20
+        )
     }
     
     override func setHierarchy() {
@@ -76,7 +101,13 @@ final class ProfileView: BaseView {
             profileImageView,
             usernameLabel,
             profileEditButton,
-            needLoginButton
+            needLoginButton,
+            boxStackView
+        )
+        
+        boxStackView.addArrangedSubviews(
+            acornCountBox,
+            verifiedAreaBox
         )
     }
     
@@ -104,6 +135,46 @@ final class ProfileView: BaseView {
             $0.leading.equalTo(usernameLabel)
             $0.centerY.equalTo(profileImageView)
         }
+        
+        boxStackView.snp.makeConstraints {
+            $0.top.equalTo(profileImageView.snp.bottom).offset(32)
+            $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
+        }
+        
+        acornCountBox.snp.makeConstraints {
+            $0.width.equalTo(
+                (ScreenUtils.width - horizontalInset * 2 - boxStackSpacing) / 2
+            )
+            $0.height.equalTo(94)
+        }
+        
+        verifiedAreaBox.snp.makeConstraints {
+            $0.width.equalTo(
+                (ScreenUtils.width - horizontalInset * 2 - boxStackSpacing) / 2
+            )
+            $0.height.equalTo(94)
+        }
+    }
+    
+    func setAcornCountBox(_ possessingCount: Int) {
+        let acornCountabel = UILabel()
+        // TODO: partialText 가운데 정렬 되도록 수정
+        acornCountabel.setPartialText(
+            fullText: "\(String(possessingCount))/\(String(totalAcornCount))",
+            textStyles: [
+                (text: String(possessingCount), style: .t2, color: .org1),
+                (text: "/\(String(totalAcornCount))", style: .s2, color: .gray5)
+            ]
+        )
+        
+        acornCountBox.setContentView(to: acornCountabel)
+    }
+    
+    func setVerifiedAreaBox(_ areaName: String) {
+        let label = UILabel()
+        label.setLabel(text: areaName, style: .t2, color: .org1)
+        
+        verifiedAreaBox.setContentView(to: label)
     }
     
 }
