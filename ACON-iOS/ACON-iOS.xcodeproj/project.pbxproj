@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1517FD7F2D3961A800638173 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517FD7E2D3961A800638173 /* CustomSlider.swift */; };
+		1533FCD12D55EE2600F985A0 /* ProfileBoxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */; };
 		1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EA2D337F4100E96616 /* SpotListView.swift */; };
 		1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */; };
 		1547A6F22D33AD4500E96616 /* SpotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6F12D33AD4500E96616 /* SpotModel.swift */; };
@@ -192,6 +193,7 @@
 
 /* Begin PBXFileReference section */
 		1517FD7E2D3961A800638173 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
+		1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBoxComponent.swift; sourceTree = "<group>"; };
 		1547A6EA2D337F4100E96616 /* SpotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListView.swift; sourceTree = "<group>"; };
 		1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewCell.swift; sourceTree = "<group>"; };
 		1547A6F12D33AD4500E96616 /* SpotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotModel.swift; sourceTree = "<group>"; };
@@ -392,6 +394,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1533FCCF2D55EDD200F985A0 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		1547A6E92D326EDB00E96616 /* Type */ = {
 			isa = PBXGroup;
 			children = (
@@ -1192,6 +1202,7 @@
 		D6E452922D3AA47500CBED02 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1533FCCF2D55EDD200F985A0 /* Component */,
 				D6E452902D3AA47500CBED02 /* ProfileView.swift */,
 				D6E452912D3AA47500CBED02 /* ProfileViewController.swift */,
 			);
@@ -1478,6 +1489,7 @@
 				746261632D3EA1D500A4E84F /* GetSearchSuggestionResponse.swift in Sources */,
 				D61917EC2D3E484A001BF0EE /* OnboardingRequest.swift in Sources */,
 				744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */,
+				1533FCD12D55EE2600F985A0 /* ProfileBoxComponent.swift in Sources */,
 				746261832D3F9FD900A4E84F /* GetSpotMenuResponse.swift in Sources */,
 				15CD25842D40364F00320006 /* LoginModalView.swift in Sources */,
 				741E689A2D3D43FF00DF99EF /* EmptyResponse.swift in Sources */,
