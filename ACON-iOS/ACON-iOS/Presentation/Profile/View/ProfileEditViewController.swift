@@ -13,8 +13,20 @@ class ProfileEditViewController: BaseNavViewController {
     
     private let profileEditView = ProfileEditView()
     
+    private let viewModel: ProfileViewModel
+    
     
     // MARK: - Life Cycle
+    
+    init(_ viewModel: ProfileViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,17 +59,21 @@ class ProfileEditViewController: BaseNavViewController {
         
         self.setCenterTitleLabelStyle(title: StringLiterals.Profile.profileEditPageTitle)
         self.setBackButton()
-    }
-    
-    private func bindViewModel() {
-        // TODO: ViewModel 바인딩
-        profileEditView.setProfileImage(.imgProfileBasic60)
         
+        // TODO: TextField Delegate 설정
         profileEditView.setNicknameValidMessage(.nicknameTaken)
         
         profileEditView.setBirthdateValidMessage(.invalidChar)
         
         profileEditView.setVerifiedAreaValidMessage(.none)
+    }
+    
+}
+
+private extension ProfileEditViewController {
+    
+    func bindViewModel() {
+        profileEditView.setProfileImage(viewModel.userInfo.profileImageURL)
     }
     
 }
