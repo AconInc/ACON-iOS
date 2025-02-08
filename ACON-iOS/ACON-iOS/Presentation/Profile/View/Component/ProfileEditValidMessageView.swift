@@ -44,7 +44,7 @@ class ProfileEditValidMessageView: BaseView {
         
         secondIcon.snp.makeConstraints {
             $0.top.equalTo(firstIcon.snp.bottom).offset(4)
-            $0.leading.equalToSuperview()
+            $0.bottom.leading.equalToSuperview()
             $0.size.equalTo(20)
         }
         
@@ -59,8 +59,46 @@ class ProfileEditValidMessageView: BaseView {
             $0.image = .icError20
         }
         
-        [firstLine, secondLine].forEach {
-            $0.setLabel(text: "test", style: .s2, color: .red1)
+        hideFirstLine(true)
+        hideSecondLine(true)
+    }
+    
+    private func hideFirstLine(_ isHidden: Bool) {
+        [firstIcon, firstLine].forEach {
+            $0.isHidden = isHidden
+        }
+    }
+    
+    private func hideSecondLine(_ isHidden: Bool) {
+        [secondIcon, secondLine].forEach {
+            $0.isHidden = isHidden
+        }
+    }
+    
+    
+    // MARK: - Internal Methods
+    
+    func setValidMessage(_ type: ProfileValidMessageType) {
+        switch type {
+        case .none:
+            hideFirstLine(true)
+            hideSecondLine(true)
+            
+        case .nicknameMissing, .nicknameTaken, .invalidDate, .areaMissing:
+            hideFirstLine(false)
+            hideSecondLine(true)
+            firstLine.setLabel(text: type.texts[0], style: .s2, color: .red1)
+            
+        case .nicknameOK:
+            hideFirstLine(false)
+            hideSecondLine(true)
+            firstLine.setLabel(text: type.texts[0], style: .s2, color: .blue1)
+        
+        case .invalidChar:
+            hideFirstLine(false)
+            hideSecondLine(false)
+            firstLine.setLabel(text: type.texts[0], style: .s2, color: .red1)
+            secondLine.setLabel(text: type.texts[1], style: .s2, color: .red1)
         }
     }
     
