@@ -65,6 +65,12 @@ class ProfileViewController: BaseNavViewController {
             action: #selector(tappedEditProfileButton),
             for: .touchUpInside
         )
+        
+        profileView.disableAutoLoginButton.addTarget( // TODO: 삭제
+            self,
+            action: #selector(disableAutoLogin),
+            for: .touchUpInside
+        )
     }
     
 }
@@ -85,4 +91,13 @@ private extension ProfileViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc // TODO: 삭제
+    func disableAutoLogin() {
+        UserDefaults.standard.removeObject(
+            forKey: StringLiterals.UserDefaults.accessToken
+        )
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = SplashViewController()
+        }
+    }
 }

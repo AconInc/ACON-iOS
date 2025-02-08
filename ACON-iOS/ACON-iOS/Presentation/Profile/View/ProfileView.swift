@@ -39,6 +39,8 @@ final class ProfileView: BaseView {
     
     private let verifiedAreaBox = ProfileBoxComponent()
     
+    var disableAutoLoginButton = UIButton() // TODO: 삭제
+    
     
     // MARK: - LifeCycles
     
@@ -85,6 +87,12 @@ final class ProfileView: BaseView {
             title: StringLiterals.Profile.verifiedArea,
             icon: .icHometownG20
         )
+        
+        disableAutoLoginButton.do { // TODO: 삭제
+            $0.setAttributedTitle(text: "자동로그인 해제", style: .b4)
+            $0.layer.borderColor = UIColor.acWhite.cgColor
+            $0.layer.borderWidth = 0.5
+        }
     }
     
     override func setHierarchy() {
@@ -95,7 +103,8 @@ final class ProfileView: BaseView {
             nicknameLabel,
             profileEditButton,
             needLoginButton,
-            boxStackView
+            boxStackView,
+            disableAutoLoginButton // TODO: 삭제
         )
         
         boxStackView.addArrangedSubviews(
@@ -146,6 +155,12 @@ final class ProfileView: BaseView {
                 (ScreenUtils.width - horizontalInset * 2 - boxStackSpacing) / 2
             )
             $0.height.equalTo(94)
+        }
+        
+        disableAutoLoginButton.snp.makeConstraints { // TODO: 삭제
+            $0.bottom.equalToSuperview().inset(100)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.width.equalTo(100)
         }
     }
     
