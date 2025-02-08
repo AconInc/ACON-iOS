@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Kingfisher
 import Then
 import SnapKit
 
@@ -48,6 +49,7 @@ final class ProfileView: BaseView {
         super.setStyle()
         
         profileImageView.do {
+            $0.backgroundColor = .gray7 // NOTE: Skeleton
             $0.layer.cornerRadius = profileImageSize / 2
             $0.contentMode = .scaleAspectFill
         }
@@ -167,8 +169,11 @@ final class ProfileView: BaseView {
     
     // MARK: - Internal Methods
     
-    func setProfileImage(_ image: UIImage) {
-        profileImageView.image = image
+    func setProfileImage(_ imageURL: String) {
+        profileImageView.kf.setImage(
+            with: URL(string: imageURL),
+            options: [.transition(.none), .cacheOriginalImage]
+        )
     }
     
     func setNicknameLabel(_ text: String) {
@@ -178,7 +183,7 @@ final class ProfileView: BaseView {
     func setAcornCountBox(_ possessingCount: Int) {
         let acornCountabel = UILabel()
         let possessingString = possessingCount == 0 ? "00" : String(possessingCount)
-        // TODO: partialText 가운데 정렬 되도록 수정
+        // TODO: partialText 가운데 정렬 되도록 수정 (바닥 정렬인 partialText도 있어서 메소드 하나 더 만들어야 할 듯)
         acornCountabel.setPartialText(
             fullText: "\(possessingString)/\(String(totalAcornCount))",
             textStyles: [
