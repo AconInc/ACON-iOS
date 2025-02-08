@@ -50,6 +50,7 @@
 		15CD25822D40364400320006 /* LoginModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25812D40364400320006 /* LoginModalViewController.swift */; };
 		15CD25842D40364F00320006 /* LoginModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25832D40364F00320006 /* LoginModalView.swift */; };
 		15CD25892D42099100320006 /* WideTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25882D42099000320006 /* WideTouchView.swift */; };
+		15CF62BD2D575EC00000A10F /* ProfileEditValidMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */; };
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
 		74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */; };
 		74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */; };
@@ -239,6 +240,7 @@
 		15CD25812D40364400320006 /* LoginModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModalViewController.swift; sourceTree = "<group>"; };
 		15CD25832D40364F00320006 /* LoginModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModalView.swift; sourceTree = "<group>"; };
 		15CD25882D42099000320006 /* WideTouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WideTouchView.swift; sourceTree = "<group>"; };
+		15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditValidMessageView.swift; sourceTree = "<group>"; };
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultitaskDelegate.swift; sourceTree = "<group>"; };
 		74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLocationManager.swift; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 			children = (
 				1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */,
 				15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */,
+				15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1527,6 +1530,7 @@
 				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
 				1547A88B2D3596B600E96616 /* SpotType.swift in Sources */,
 				74BF92172D393B4A00B923E3 /* Int+.swift in Sources */,
+				15CF62BD2D575EC00000A10F /* ProfileEditValidMessageView.swift in Sources */,
 				7462616D2D3EA40600A4E84F /* GetSearchKeywordRequest.swift in Sources */,
 				748ECA6E2D3196F100BBC981 /* LoginViewController.swift in Sources */,
 				746261892D3FA29C00A4E84F /* SpotDetailTargetType.swift in Sources */,
