@@ -29,6 +29,9 @@
 		15A3F6E02D38724A00577E16 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */; };
 		15A3F7A12D38C71900577E16 /* PriorityLowEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */; };
 		15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */; };
+		15A48BF82D574B88003C2421 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BF72D574B88003C2421 /* ProfileModel.swift */; };
+		15A48BFA2D574BA5003C2421 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BF92D574BA5003C2421 /* ProfileEditView.swift */; };
+		15A48BFC2D574BB9003C2421 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BFB2D574BB9003C2421 /* ProfileEditViewController.swift */; };
 		15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C0ED512D429F7400C9ED83 /* SkeletonView.swift */; };
 		15C0ED642D42CD8800C9ED83 /* drop1Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED5F2D42CD8800C9ED83 /* drop1Acorn.json */; };
 		15C0ED652D42CD8800C9ED83 /* drop5Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED632D42CD8800C9ED83 /* drop5Acorn.json */; };
@@ -214,6 +217,9 @@
 		15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityLowEmptyView.swift; sourceTree = "<group>"; };
 		15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotFilterTagStackView.swift; sourceTree = "<group>"; };
+		15A48BF72D574B88003C2421 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		15A48BF92D574BA5003C2421 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
+		15A48BFB2D574BB9003C2421 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		15C0ED512D429F7400C9ED83 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		15C0ED5F2D42CD8800C9ED83 /* drop1Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop1Acorn.json; sourceTree = "<group>"; };
 		15C0ED602D42CD8800C9ED83 /* drop2Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop2Acorn.json; sourceTree = "<group>"; };
@@ -530,9 +536,18 @@
 		1558BADF2D31D41400ECDEF8 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				15A48BF42D574AFD003C2421 /* Model */,
 				D6E452922D3AA47500CBED02 /* View */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		15A48BF42D574AFD003C2421 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				15A48BF72D574B88003C2421 /* ProfileModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		15CD256C2D3D794300320006 /* Component */ = {
@@ -1205,6 +1220,8 @@
 				1533FCCF2D55EDD200F985A0 /* Component */,
 				D6E452902D3AA47500CBED02 /* ProfileView.swift */,
 				D6E452912D3AA47500CBED02 /* ProfileViewController.swift */,
+				15A48BF92D574BA5003C2421 /* ProfileEditView.swift */,
+				15A48BFB2D574BB9003C2421 /* ProfileEditViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1376,6 +1393,7 @@
 				741E68912D3D385A00DF99EF /* ACPlugin.swift in Sources */,
 				745B19AE2D4002A100BDBDA4 /* PostLoginResponse.swift in Sources */,
 				15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */,
+				15A48BFA2D574BA5003C2421 /* ProfileEditView.swift in Sources */,
 				74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */,
 				746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */,
 				746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */,
@@ -1409,6 +1427,7 @@
 				7462616F2D3EA48300A4E84F /* GetSearchKeywordResponse.swift in Sources */,
 				1547A8902D35B30C00E96616 /* FilterTagButtonType.swift in Sources */,
 				748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */,
+				15A48BF82D574B88003C2421 /* ProfileModel.swift in Sources */,
 				745B19B02D4010F300BDBDA4 /* AuthTargetType.swift in Sources */,
 				74BF91FA2D38164400B923E3 /* SpotDetailView.swift in Sources */,
 				748D6F872D2BD247007690B4 /* UIView+.swift in Sources */,
@@ -1474,6 +1493,7 @@
 				74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */,
 				D696F1B22D3A7E3400CCD5FF /* CustomAlertView.swift in Sources */,
 				743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */,
+				15A48BFC2D574BB9003C2421 /* ProfileEditViewController.swift in Sources */,
 				7462D0252D4262F300580464 /* AuthManager.swift in Sources */,
 				74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */,
 				74BF92042D3861A600B923E3 /* SpotDetailViewController.swift in Sources */,
