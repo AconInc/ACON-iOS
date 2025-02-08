@@ -79,22 +79,27 @@ class ProfileEditValidMessageView: BaseView {
     // MARK: - Internal Methods
     
     func setValidMessage(_ type: ProfileValidMessageType) {
+        let idxErrMsg: String = "⚠️Index out of range"
+        
         switch type {
         case .none:
             hideFirstLine(true)
             hideSecondLine(true)
             
         case .nicknameMissing, .nicknameTaken, .invalidDate, .areaMissing:
+            guard type.texts.count == 1 else { print(idxErrMsg); return }
             hideFirstLine(false)
             hideSecondLine(true)
             firstLine.setLabel(text: type.texts[0], style: .s2, color: .red1)
             
         case .nicknameOK:
+            guard type.texts.count == 1 else { print(idxErrMsg); return }
             hideFirstLine(false)
             hideSecondLine(true)
             firstLine.setLabel(text: type.texts[0], style: .s2, color: .blue1)
         
         case .invalidChar:
+            guard type.texts.count == 2 else { print(idxErrMsg); return }
             hideFirstLine(false)
             hideSecondLine(false)
             firstLine.setLabel(text: type.texts[0], style: .s2, color: .red1)
