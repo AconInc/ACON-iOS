@@ -46,7 +46,7 @@ class ProfileEditView: BaseView {
     
     var verifiedAreaValidMessageView = ProfileEditValidMessageView()
     
-    var saveButton = ProfileEditSaveButton()
+    var saveButton = UIButton()
     
     
     // MARK: - LifeCycles
@@ -72,14 +72,17 @@ class ProfileEditView: BaseView {
             $0.backgroundColor = .blue2
         }
         
-        verifiedAreaValidMessageView.do {
-            $0.backgroundColor = .blue2
-        }
-        
         saveButton.do {
             var config = UIButton.Configuration.filled()
             config.attributedTitle = AttributedString("저장".ACStyle(.h7))
             config.baseBackgroundColor = .gray7
+            config.baseForegroundColor = .gray5
+            $0.configuration = config
+        }
+        
+        saveButton.configurationUpdateHandler = {
+            guard var config = $0.configuration else { return }
+            config.baseForegroundColor = $0.isEnabled ? .acWhite : .gray5
             $0.configuration = config
         }
     }
@@ -170,8 +173,8 @@ class ProfileEditView: BaseView {
     
     // MARK: - Internal Methods
     
-    func setProfileImage(_ image: UIImage) {
-        profileImageEditButton.setImage(image)
+    func setProfileImage(_ imageURL: String) {
+        profileImageEditButton.setImage(imageURL)
     }
     
     func setNicknameValidMessage(_ type: ProfileValidMessageType) {
