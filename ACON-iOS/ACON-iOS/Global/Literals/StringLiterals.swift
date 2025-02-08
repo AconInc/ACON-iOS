@@ -312,6 +312,11 @@ enum StringLiterals {
         static let acornPossession = "보유한 도토리 수"
         
         static let verifiedArea = "나의 인증 동네"
+        
+        static let nicknamePlaceholder = "16자 이내 영문, 한글, 숫자, . , _ 만 사용가능"
+        
+        static let birthDatePlaceholder = "ex) 2025.01.01"
+        
     }
     
 }
