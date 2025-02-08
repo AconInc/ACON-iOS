@@ -27,7 +27,7 @@ final class ProfileView: BaseView {
     
     private let profileImageView = UIImageView()
     
-    private let usernameLabel = UILabel()
+    private let nicknameLabel = UILabel()
     
     var profileEditButton = UIButton()
     
@@ -51,9 +51,6 @@ final class ProfileView: BaseView {
             $0.layer.cornerRadius = profileImageSize / 2
             $0.contentMode = .scaleAspectFill
         }
-        
-        // TODO: Username 바인딩
-        usernameLabel.setLabel(text: "UserName", style: .h5)
         
         profileEditButton.do {
             var config = UIButton.Configuration.plain()
@@ -97,7 +94,7 @@ final class ProfileView: BaseView {
         
         self.addSubviews(
             profileImageView,
-            usernameLabel,
+            nicknameLabel,
             profileEditButton,
             needLoginButton,
             boxStackView
@@ -118,19 +115,19 @@ final class ProfileView: BaseView {
             $0.size.equalTo(profileImageSize)
         }
         
-        usernameLabel.snp.makeConstraints {
+        nicknameLabel.snp.makeConstraints {
             $0.top.equalTo(profileImageView).offset(4)
             $0.leading.equalTo(profileImageView.snp.trailing).offset(16)
             $0.trailing.equalToSuperview().offset(-horizontalInset)
         }
         
         profileEditButton.snp.makeConstraints {
-            $0.top.equalTo(usernameLabel.snp.bottom).offset(2)
-            $0.leading.equalTo(usernameLabel)
+            $0.top.equalTo(nicknameLabel.snp.bottom).offset(2)
+            $0.leading.equalTo(nicknameLabel)
         }
         
         needLoginButton.snp.makeConstraints {
-            $0.leading.equalTo(usernameLabel)
+            $0.leading.equalTo(nicknameLabel)
             $0.centerY.equalTo(profileImageView)
         }
         
@@ -159,6 +156,10 @@ final class ProfileView: BaseView {
     
     func setProfileImage(_ image: UIImage) {
         profileImageView.image = image
+    }
+    
+    func setNicknameLabel(_ text: String) {
+        nicknameLabel.setLabel(text: text, style: .h5)
     }
     
     func setAcornCountBox(_ possessingCount: Int) {

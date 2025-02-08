@@ -40,7 +40,8 @@ class ProfileViewController: BaseNavViewController {
         // TODO: 뷰모델 바인딩
         profileView.do {
             $0.needLoginButton.isHidden = true
-            $0.setProfileImage(.imgProfileBasic60) // TODO: imgProfileBasic60 에셋 삭제
+            $0.setProfileImage(.imgProfileBasic60) // TODO: imgProfileBasic60 에셋 삭제, 서버에서 기본이미지 불러오기
+            $0.setNicknameLabel("Username")
             $0.setAcornCountBox(0)
             $0.setVerifiedAreaBox("유림동")
         }
