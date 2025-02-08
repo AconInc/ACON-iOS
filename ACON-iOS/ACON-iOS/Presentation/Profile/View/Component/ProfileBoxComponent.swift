@@ -76,6 +76,10 @@ class ProfileBoxComponent: BaseView {
     }
     
     func setContentView(to contentView: UIView) {
+        self.contentView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+        
         self.contentView.addSubview(contentView)
         
         contentView.snp.makeConstraints {
