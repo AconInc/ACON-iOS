@@ -88,7 +88,6 @@ class ProfileEditView: BaseView {
             config.baseBackgroundColor = .gray7
             $0.configuration = config
         }
-        
     }
     
     override func setHierarchy() {
@@ -107,7 +106,6 @@ class ProfileEditView: BaseView {
             verifiedAreaValidMessageView,
             saveButton
         )
-        
     }
     
     override func setLayout() {
