@@ -9,12 +9,20 @@ import UIKit
 
 class ProfileViewController: BaseNavViewController {
     
+    // MARK: - Properties
+    
     private let profileView = ProfileView()
+    
+    private let viewModel = ProfileViewModel()
+    
+    
+    // MARK: - Life Cycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addTarget()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,7 +35,6 @@ class ProfileViewController: BaseNavViewController {
         super.setHierarchy()
         
         contentView.addSubview(profileView)
-
     }
     
     override func setLayout() {
@@ -42,15 +49,6 @@ class ProfileViewController: BaseNavViewController {
         super.setStyle()
         
         self.setCenterTitleLabelStyle(title: "프로필", fontStyle: .h5)
-        
-        // TODO: 뷰모델 바인딩
-        profileView.do {
-            $0.needLoginButton.isHidden = AuthManager.shared.hasToken
-            $0.setProfileImage(.imgProfileBasic60) // TODO: imgProfileBasic60 에셋 삭제, 서버에서 기본이미지 불러오기
-            $0.setNicknameLabel("Username")
-            $0.setAcornCountBox(0)
-            $0.setVerifiedAreaBox("유림동")
-        }
     }
     
     private func addTarget() {
@@ -75,6 +73,28 @@ class ProfileViewController: BaseNavViewController {
     
 }
 
+
+private extension ProfileViewController {
+    
+    func bindViewModel() {
+        viewModel.onLoginSuccess.bind { [weak self] onLoginSuccess in
+            guard let self = self,
+                  let onLoginSuccess = onLoginSuccess
+            else { return }
+            print("🥑onLoginSuccess: \(onLoginSuccess)")
+            self.profileView.needLoginButton.isHidden = onLoginSuccess
+        }
+        
+        // TODO: 뷰모델 바인딩
+        profileView.do {
+            $0.setProfileImage(.imgProfileBasic60) // TODO: imgProfileBasic60 에셋 삭제, 서버에서 기본이미지 불러오기
+            $0.setNicknameLabel("Username")
+            $0.setAcornCountBox(0)
+            $0.setVerifiedAreaBox("유림동")
+        }
+    }
+    
+}
 
 // MARK: - @objc functions
 
