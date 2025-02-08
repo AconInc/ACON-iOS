@@ -51,5 +51,25 @@ class ProfileViewController: BaseNavViewController {
         // TODO: needLoginButtonTapped
         
         // TODO: EditProfileButtonTapped
+        profileView.profileEditButton.addTarget(
+            self,
+            action: #selector(tappedEditProfileButton),
+            for: .touchUpInside
+        )
     }
+    
+    
+}
+
+
+// MARK: - @objc functions
+
+private extension ProfileViewController {
+    
+    @objc
+    func tappedEditProfileButton() {
+        let vc = ProfileEditViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
