@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Kingfisher
+
 class ProfileImageEditButton: UIButton {
     // MARK: - Helpers
     
@@ -42,6 +44,7 @@ class ProfileImageEditButton: UIButton {
         self.backgroundColor = .gray9
         
         profileImageView.do {
+            $0.backgroundColor = .gray7 // NOTE: Skeleton
             $0.layer.cornerRadius = size / 2
             $0.contentMode = .scaleAspectFill
         }
@@ -80,4 +83,10 @@ class ProfileImageEditButton: UIButton {
         profileImageView.image = image
     }
     
+    func setImage(_ imageURL: String) {
+        profileImageView.kf.setImage(
+            with: URL(string: imageURL),
+            options: [.transition(.none), .cacheOriginalImage]
+        )
+    }
 }
