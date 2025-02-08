@@ -45,7 +45,7 @@ class ProfileViewController: BaseNavViewController {
         
         // TODO: 뷰모델 바인딩
         profileView.do {
-            $0.needLoginButton.isHidden = true
+            $0.needLoginButton.isHidden = AuthManager.shared.hasToken
             $0.setProfileImage(.imgProfileBasic60) // TODO: imgProfileBasic60 에셋 삭제, 서버에서 기본이미지 불러오기
             $0.setNicknameLabel("Username")
             $0.setAcornCountBox(0)
@@ -53,10 +53,13 @@ class ProfileViewController: BaseNavViewController {
         }
     }
     
-    func addTarget() {
-        // TODO: needLoginButtonTapped
+    private func addTarget() {
+        profileView.needLoginButton.addTarget(
+            self,
+            action: #selector(tappedNeedLoginButton),
+            for: .touchUpInside
+        )
         
-        // TODO: EditProfileButtonTapped
         profileView.profileEditButton.addTarget(
             self,
             action: #selector(tappedEditProfileButton),
@@ -64,13 +67,17 @@ class ProfileViewController: BaseNavViewController {
         )
     }
     
-    
 }
 
 
 // MARK: - @objc functions
 
 private extension ProfileViewController {
+    
+    @objc
+    func tappedNeedLoginButton() {
+        presentLoginModal()
+    }
     
     @objc
     func tappedEditProfileButton() {
