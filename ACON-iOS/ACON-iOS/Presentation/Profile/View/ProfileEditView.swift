@@ -30,13 +30,13 @@ class ProfileEditView: BaseView {
     
     private let nicknameTitleLabel = UILabel()
     
-    var nicknameTextField = UITextField()
+    var nicknameTextField = ProfileEditTextField()
     
     var nicknameValidMessageView = ProfileEditValidMessageView()
     
     private let birthDateTitleLabel = UILabel()
     
-    var birthDateTextField = UITextField()
+    var birthDateTextField = ProfileEditTextField()
     
     var birthDateValidMessageView = ProfileEditValidMessageView()
     
@@ -57,19 +57,13 @@ class ProfileEditView: BaseView {
         nicknameTitleLabel.setLabel(text: "닉네임", style: .h8)
         
         nicknameTextField.do {
-            $0.backgroundColor = .blue2
+            $0.setStyle(placeholder: StringLiterals.Profile.nicknamePlaceholder)
         }
-        
-        nicknameValidMessageView.backgroundColor = .blue2
         
         birthDateTitleLabel.setLabel(text: "생년월일", style: .h8)
         
         birthDateTextField.do {
-            $0.backgroundColor = .blue2
-        }
-        
-        birthDateValidMessageView.do {
-            $0.backgroundColor = .blue2
+            $0.setStyle(placeholder: StringLiterals.Profile.birthDatePlaceholder)
         }
         
         verifiedAreaTitleLabel.setLabel(text: "인증동네", style: .h8)
