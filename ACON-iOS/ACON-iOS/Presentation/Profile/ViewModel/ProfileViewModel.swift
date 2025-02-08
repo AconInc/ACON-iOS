@@ -13,4 +13,12 @@ class ProfileViewModel {
     
     var onLoginSuccess: ObservablePattern<Bool> = ObservablePattern(AuthManager.shared.hasToken)
     
+    var userInfo = UserInfoModel(
+        profileImageURL: "",
+        nickname: "김유림",
+        birthDate: "20010101",
+        verifiedArea: "유림동",
+        possessingAcorns: 0
+    )
+    
 }

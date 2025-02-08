@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+struct UserInfoModel {
+    
+    var profileImageURL: String
+    
+    var nickname: String
+    
+    var birthDate: String?
+    
+    var verifiedArea: String
+    
+    var possessingAcorns: Int
+    
+}
