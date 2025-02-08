@@ -39,8 +39,6 @@ final class ProfileView: BaseView {
     
     private let verifiedAreaBox = ProfileBoxComponent()
     
-//    var disableAutoLoginButton = UIButton()
-    
     
     // MARK: - LifeCycles
     
