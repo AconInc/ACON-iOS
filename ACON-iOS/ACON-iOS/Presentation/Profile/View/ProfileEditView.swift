@@ -182,4 +182,16 @@ class ProfileEditView: BaseView {
         profileImageEditButton.setImage(image)
     }
     
+    func setNicknameValidMessage(_ type: ProfileValidMessageType) {
+        nicknameValidMessageView.setValidMessage(type)
+    }
+    
+    func setBirthdateValidMessage(_ type: ProfileValidMessageType) {
+        birthDateValidMessageView.setValidMessage(type)
+    }
+    
+    func setVerifiedAreaValidMessage(_ type: ProfileValidMessageType) {
+        verifiedAreaValidMessageView.setValidMessage(type)
+    }
+    
 }
