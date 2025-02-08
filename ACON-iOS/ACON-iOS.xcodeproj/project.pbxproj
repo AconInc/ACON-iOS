@@ -52,6 +52,7 @@
 		15CD25892D42099100320006 /* WideTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25882D42099000320006 /* WideTouchView.swift */; };
 		15CF62BD2D575EC00000A10F /* ProfileEditValidMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */; };
 		15CF62BF2D576B580000A10F /* ProfileEditSaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62BE2D576B580000A10F /* ProfileEditSaveButton.swift */; };
+		15CF62C22D577B600000A10F /* ProfileValidMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62C12D577B600000A10F /* ProfileValidMessageType.swift */; };
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
 		74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */; };
 		74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */; };
@@ -243,6 +244,7 @@
 		15CD25882D42099000320006 /* WideTouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WideTouchView.swift; sourceTree = "<group>"; };
 		15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditValidMessageView.swift; sourceTree = "<group>"; };
 		15CF62BE2D576B580000A10F /* ProfileEditSaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSaveButton.swift; sourceTree = "<group>"; };
+		15CF62C12D577B600000A10F /* ProfileValidMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileValidMessageType.swift; sourceTree = "<group>"; };
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultitaskDelegate.swift; sourceTree = "<group>"; };
 		74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLocationManager.swift; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 		1558BADF2D31D41400ECDEF8 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				15CF62C02D577B3E0000A10F /* Type */,
 				15A48BF42D574AFD003C2421 /* Model */,
 				D6E452922D3AA47500CBED02 /* View */,
 			);
@@ -603,6 +606,14 @@
 				15CD25812D40364400320006 /* LoginModalViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		15CF62C02D577B3E0000A10F /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				15CF62C12D577B600000A10F /* ProfileValidMessageType.swift */,
+			);
+			path = Type;
 			sourceTree = "<group>";
 		};
 		35A4AFEF7860C30E103669B3 /* Frameworks */ = {
@@ -1552,6 +1563,7 @@
 				D6D0F5152D36BA6500326F17 /* DislikeCollectionView.swift in Sources */,
 				74BF92072D38622B00B923E3 /* SpotDetailViewModel.swift in Sources */,
 				745C7E152D35AEC10074DBDB /* SpotSearchViewModel.swift in Sources */,
+				15CF62C22D577B600000A10F /* ProfileValidMessageType.swift in Sources */,
 				D6E452932D3AA47500CBED02 /* ProfileView.swift in Sources */,
 				15A48BFE2D57546A003C2421 /* ProfileImageEditButton.swift in Sources */,
 				D6E452942D3AA47500CBED02 /* ProfileViewController.swift in Sources */,
