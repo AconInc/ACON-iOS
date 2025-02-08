@@ -81,16 +81,17 @@ private extension ProfileViewController {
             guard let self = self,
                   let onLoginSuccess = onLoginSuccess
             else { return }
-            print("🥑onLoginSuccess: \(onLoginSuccess)")
-            self.profileView.needLoginButton.isHidden = onLoginSuccess
+            
+            self.profileView.do {
+                $0.needLoginButton.isHidden = onLoginSuccess
+                $0.setVerifiedAreaBox(onLoginSuccess ? self.viewModel.userInfo.verifiedArea : "인증하기")
+            }
         }
         
-        // TODO: 뷰모델 바인딩
         profileView.do {
-            $0.setProfileImage(.imgProfileBasic60) // TODO: imgProfileBasic60 에셋 삭제, 서버에서 기본이미지 불러오기
-            $0.setNicknameLabel("Username")
-            $0.setAcornCountBox(0)
-            $0.setVerifiedAreaBox("유림동")
+            $0.setProfileImage(viewModel.userInfo.profileImageURL)
+            $0.setNicknameLabel(viewModel.userInfo.nickname)
+            $0.setAcornCountBox(viewModel.userInfo.possessingAcorns)
         }
     }
     
@@ -115,7 +116,7 @@ private extension ProfileViewController {
     
     @objc
     func tappedEditProfileButton() {
-        let vc = ProfileEditViewController()
+        let vc = ProfileEditViewController(viewModel)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
