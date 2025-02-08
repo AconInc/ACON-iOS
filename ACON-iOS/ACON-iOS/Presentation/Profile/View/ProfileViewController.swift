@@ -38,9 +38,12 @@ class ProfileViewController: BaseNavViewController {
         self.setCenterTitleLabelStyle(title: "프로필", fontStyle: .h5)
         
         // TODO: 뷰모델 바인딩
-        profileView.needLoginButton.isHidden = true
-        profileView.setAcornCountBox(0)
-        profileView.setVerifiedAreaBox("유림동")
+        profileView.do {
+            $0.needLoginButton.isHidden = true
+            $0.setProfileImage(.imgProfileBasic60) // TODO: imgProfileBasic60 에셋 삭제
+            $0.setAcornCountBox(0)
+            $0.setVerifiedAreaBox("유림동")
+        }
     }
     
     func addTarget() {

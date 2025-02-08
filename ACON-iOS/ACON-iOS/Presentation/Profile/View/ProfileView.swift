@@ -23,7 +23,7 @@ final class ProfileView: BaseView {
     private let totalAcornCount: Int = 25
     
     
-    // MARK: - UI Components
+    // MARK: - UI Properties
     
     private let profileImageView = UIImageView()
     
@@ -48,8 +48,8 @@ final class ProfileView: BaseView {
         self.backgroundColor = .gray9
         
         profileImageView.do {
-            $0.image = .imgProfileBasic60
             $0.layer.cornerRadius = profileImageSize / 2
+            $0.contentMode = .scaleAspectFill
         }
         
         // TODO: Username 바인딩
@@ -156,6 +156,10 @@ final class ProfileView: BaseView {
     
     
     // MARK: - Internal Methods
+    
+    func setProfileImage(_ image: UIImage) {
+        profileImageView.image = image
+    }
     
     func setAcornCountBox(_ possessingCount: Int) {
         let acornCountabel = UILabel()
