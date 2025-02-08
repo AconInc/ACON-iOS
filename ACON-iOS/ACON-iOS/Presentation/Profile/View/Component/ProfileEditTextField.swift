@@ -1,13 +1,13 @@
 //
-//  ProfileEditSaveButton.swift
+//  ProfileEditTextField.swift
 //  ACON-iOS
 //
-//  Created by 김유림 on 2/8/25.
+//  Created by 김유림 on 2/9/25.
 //
 
 import UIKit
 
-class ProfileEditSaveButton: UIButton {
+class ProfileEditTextField: UITextField {
 
     /*
     // Only override draw() if you perform custom drawing.
