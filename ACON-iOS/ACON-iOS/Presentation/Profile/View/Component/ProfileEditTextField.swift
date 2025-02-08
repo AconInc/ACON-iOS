@@ -25,6 +25,7 @@ class ProfileEditTextField: UITextField {
         
         setStyle()
         addTarget()
+        addDoneButtonToKeyboard()
     }
     
     required init?(coder: NSCoder) {
@@ -77,6 +78,17 @@ class ProfileEditTextField: UITextField {
         )
     }
     
+    private func addDoneButtonToKeyboard() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(dismissKeyboard))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        toolbar.items = [flexSpace, doneButton]
+        self.inputAccessoryView = toolbar
+    }
+    
 }
 
 
@@ -87,6 +99,10 @@ private extension ProfileEditTextField {
     @objc
     func tappedClearButton() {
         self.text = ""
+    }
+    
+    @objc func dismissKeyboard() {
+        self.resignFirstResponder()
     }
     
 }
