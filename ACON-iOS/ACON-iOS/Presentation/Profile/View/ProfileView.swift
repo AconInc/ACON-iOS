@@ -45,8 +45,6 @@ final class ProfileView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        self.backgroundColor = .gray9
-        
         profileImageView.do {
             $0.layer.cornerRadius = profileImageSize / 2
             $0.contentMode = .scaleAspectFill
@@ -55,7 +53,7 @@ final class ProfileView: BaseView {
         profileEditButton.do {
             var config = UIButton.Configuration.plain()
             config.contentInsets = .zero
-            config.attributedTitle = AttributedString(StringLiterals.Profile.editProfile.ACStyle(.s2, .gray4))
+            config.attributedTitle = AttributedString(StringLiterals.Profile.profileEditButton.ACStyle(.s2, .gray4))
             config.image = .icEditG20
             config.imagePlacement = .trailing
             config.imagePadding = 4
