@@ -80,12 +80,14 @@ class ProfileEditTextField: UITextField {
     
     private func addDoneButtonToKeyboard() {
         let toolbar = UIToolbar()
-        toolbar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(dismissKeyboard))
+        let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(dismissKeyboard))
+        
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
+        toolbar.frame = .init(x: 0, y: 0, width: ScreenUtils.width, height: 44)
         toolbar.items = [flexSpace, doneButton]
+        
         self.inputAccessoryView = toolbar
     }
     
