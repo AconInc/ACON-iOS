@@ -84,7 +84,8 @@ private extension ProfileViewController {
             
             self.profileView.do {
                 $0.needLoginButton.isHidden = onLoginSuccess
-                $0.setVerifiedAreaBox(onLoginSuccess ? self.viewModel.userInfo.verifiedArea : "인증하기")
+                $0.setVerifiedAreaBox(onLogin: onLoginSuccess,
+                                      areaName: self.viewModel.userInfo.verifiedArea)
             }
         }
         

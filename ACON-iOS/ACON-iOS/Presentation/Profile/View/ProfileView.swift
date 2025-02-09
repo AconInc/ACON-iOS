@@ -199,9 +199,11 @@ extension ProfileView {
         acornCountBox.setContentView(to: acornCountabel)
     }
     
-    func setVerifiedAreaBox(_ areaName: String) {
+    func setVerifiedAreaBox(onLogin: Bool, areaName: String) {
         let label = UILabel()
-        label.setLabel(text: areaName, style: .t2, color: .org1)
+        label.setLabel(text: onLogin ? areaName : "인증 필요",
+                       style: .t2,
+                       color: onLogin ? .org1 : .gray5)
         
         verifiedAreaBox.setContentView(to: label)
     }
