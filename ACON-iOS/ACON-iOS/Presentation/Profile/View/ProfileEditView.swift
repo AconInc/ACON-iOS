@@ -24,7 +24,9 @@ class ProfileEditView: BaseView {
     
     // MARK: - UI Components
     
-    // TODO: ScrollView로 감싸기
+    private let scrollView = UIScrollView()
+    
+    private let contentView = UIView()
     
     private let profileImageEditButton = ProfileImageEditButton(size: 100)
     
@@ -92,6 +94,13 @@ class ProfileEditView: BaseView {
         super.setHierarchy()
         
         self.addSubviews(
+            scrollView,
+            saveButton
+        )
+        
+        scrollView.addSubview(contentView)
+        
+        contentView.addSubviews(
             profileImageEditButton,
             nicknameTitleLabel,
             nicknameTextField,
@@ -101,13 +110,28 @@ class ProfileEditView: BaseView {
             birthDateValidMessageView,
             verifiedAreaTitleLabel,
             verifiedAreaStackView,
-            verifiedAreaValidMessageView,
-            saveButton
+            verifiedAreaValidMessageView
         )
     }
     
     override func setLayout() {
         super.setLayout()
+        
+        scrollView.snp.makeConstraints {
+            $0.top.horizontalEdges.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.edges.width.equalTo(scrollView)
+            $0.height.greaterThanOrEqualTo(600) // TODO: 디자인 확인
+        }
+        
+        saveButton.snp.makeConstraints {
+            $0.top.equalTo(scrollView.snp.bottom).offset(12) // TODO: 디자인 확인
+            $0.bottom.equalToSuperview().offset(-39)
+            $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
+            $0.height.equalTo(52)
+        }
         
         profileImageEditButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(32)
@@ -151,6 +175,7 @@ class ProfileEditView: BaseView {
         verifiedAreaTitleLabel.snp.makeConstraints {
             $0.top.equalTo(birthDateTitleLabel).offset(sectionOffset)
             $0.leading.equalToSuperview().offset(horizontalInset)
+            $0.bottom.equalToSuperview().offset(-sectionOffset)
         }
         
         verifiedAreaStackView.snp.makeConstraints {
@@ -162,12 +187,6 @@ class ProfileEditView: BaseView {
             $0.top.equalTo(verifiedAreaStackView.snp.bottom).offset(validMessageOffset)
             $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
             $0.height.greaterThanOrEqualTo(20)
-        }
-        
-        saveButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-39)
-            $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
-            $0.height.equalTo(52)
         }
     }
     
