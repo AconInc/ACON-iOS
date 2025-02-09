@@ -59,13 +59,14 @@ class ProfileEditView: BaseView {
         nicknameTitleLabel.setLabel(text: "닉네임", style: .h8)
         
         nicknameTextField.do {
-            $0.setStyle(placeholder: StringLiterals.Profile.nicknamePlaceholder)
+            $0.setPlaceholder(as: StringLiterals.Profile.nicknamePlaceholder)
         }
         
         birthDateTitleLabel.setLabel(text: "생년월일", style: .h8)
         
         birthDateTextField.do {
-            $0.setStyle(placeholder: StringLiterals.Profile.birthDatePlaceholder)
+            $0.setPlaceholder(as: StringLiterals.Profile.birthDatePlaceholder)
+            $0.setDateStyle()
             $0.keyboardType = .numberPad
         }
         

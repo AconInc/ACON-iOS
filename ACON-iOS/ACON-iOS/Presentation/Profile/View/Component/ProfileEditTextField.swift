@@ -107,6 +107,32 @@ private extension ProfileEditTextField {
         self.resignFirstResponder()
     }
     
+    @objc
+    func applyDateFormat() {
+        let rawText = self.text?.replacingOccurrences(of: ".", with: "") ?? ""
+        self.text = dateFormat(rawText)
+    }
+    
+}
+
+
+// MARK: - Helpers
+
+private extension ProfileEditTextField {
+    
+    func dateFormat(_ text: String) -> String {
+        var formattedText = ""
+        
+        for (index, char) in text.enumerated() {
+            if index == 4 || index == 6 { // 4번째, 6번째 문자 뒤에 '.' 삽입
+                formattedText.append(".")
+            }
+            formattedText.append(char)
+        }
+        
+        return formattedText
+    }
+    
 }
 
 
@@ -114,8 +140,16 @@ private extension ProfileEditTextField {
 
 extension ProfileEditTextField {
     
-    func setStyle(placeholder: String) {
+    func setPlaceholder(as placeholder: String) {
         self.attributedPlaceholder = placeholder.ACStyle(.s1, .gray5)
+    }
+    
+    func setDateStyle() {
+        self.addTarget(
+            self,
+            action: #selector(applyDateFormat),
+            for: .editingChanged
+        )
     }
     
 }
