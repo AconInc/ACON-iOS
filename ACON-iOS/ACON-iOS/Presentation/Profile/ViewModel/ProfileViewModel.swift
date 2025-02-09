@@ -16,7 +16,7 @@ class ProfileViewModel {
     var userInfo = UserInfoModel(
         profileImageURL: "",
         nickname: "김유림",
-        birthDate: "20010101",
+        birthDate: nil,
         verifiedArea: "유림동",
         possessingAcorns: 0
     )
