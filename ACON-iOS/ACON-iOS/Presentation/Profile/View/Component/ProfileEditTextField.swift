@@ -17,6 +17,8 @@ class ProfileEditTextField: UITextField {
     
     private let clearButtonSize: CGFloat = 28
     
+    var observableText: ObservablePattern<String> = ObservablePattern(nil)
+    
     
     // MARK: - Initializer
     
@@ -101,6 +103,7 @@ private extension ProfileEditTextField {
     @objc
     func tappedClearButton() {
         self.text = ""
+        self.observableText.value = ""
     }
     
     @objc func dismissKeyboard() {
@@ -111,6 +114,11 @@ private extension ProfileEditTextField {
     func applyDateFormat() {
         let rawText = self.text?.replacingOccurrences(of: ".", with: "") ?? ""
         self.text = dateFormat(rawText)
+    }
+    
+    @objc
+    func setObservableText() {
+        self.observableText.value = self.text
     }
     
 }
@@ -148,6 +156,14 @@ extension ProfileEditTextField {
         self.addTarget(
             self,
             action: #selector(applyDateFormat),
+            for: .editingChanged
+        )
+    }
+    
+    func observeText() {
+        self.addTarget(
+            self,
+            action: #selector(setObservableText),
             for: .editingChanged
         )
     }
