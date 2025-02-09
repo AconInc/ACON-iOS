@@ -47,6 +47,7 @@ class ProfileEditViewController: BaseNavViewController {
         super.viewDidLoad()
         
         setDelegate()
+        addTarget()
         bindViewModel()
         bindObservable()
     }
@@ -84,6 +85,14 @@ class ProfileEditViewController: BaseNavViewController {
     private func setDelegate() {
         profileEditView.nicknameTextField.delegate = self
         profileEditView.birthDateTextField.delegate = self
+    }
+    
+    private func addTarget() {
+        profileEditView.profileImageEditButton.addTarget(
+            self,
+            action: #selector(profileImageEditButtonTapped),
+            for: .touchUpInside
+        )
     }
     
 }
@@ -166,7 +175,8 @@ private extension ProfileEditViewController {
 private extension ProfileEditViewController {
     
     // NOTE: 스크롤뷰의 contentInset을 조정하여 텍스트필드가 키보드에 가려지지 않도록 함
-    @objc func keyboardWillShow(_ notification: Notification) {
+    @objc
+    func keyboardWillShow(_ notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
         
         if let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
@@ -180,11 +190,17 @@ private extension ProfileEditViewController {
     }
     
     // NOTE: contentInset을 원래 상태로 복원
-    @objc func keyboardWillHide(_ notification: Notification) {
+    @objc
+    func keyboardWillHide(_ notification: Notification) {
         var contentInset = profileEditView.scrollView.contentInset
         contentInset.bottom = 0
         profileEditView.scrollView.contentInset = contentInset
         profileEditView.scrollView.scrollIndicatorInsets = contentInset
+    }
+    
+    @objc
+    func profileImageEditButtonTapped() {
+        print("profileImageEditButtonTapped")
     }
     
 }

@@ -28,7 +28,7 @@ class ProfileEditView: BaseView {
     
     private let contentView = UIView()
     
-    private let profileImageEditButton = ProfileImageEditButton(size: 100)
+    let profileImageEditButton = ProfileImageEditButton(size: 100)
     
     private let nicknameTitleLabel = UILabel()
     

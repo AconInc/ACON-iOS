@@ -9,7 +9,7 @@ import UIKit
 
 import Kingfisher
 
-class ProfileImageEditButton: UIButton {
+class ProfileImageEditButton: UIView {
     
     // MARK: - Helpers
     
@@ -22,7 +22,7 @@ class ProfileImageEditButton: UIButton {
     
     private let profileImageView = UIImageView()
     
-    private let cameraImageView = UIImageView()
+    private let cameraButton = UIButton()
     
     
     // MARK: - LifeCycles
@@ -50,16 +50,15 @@ class ProfileImageEditButton: UIButton {
             $0.contentMode = .scaleAspectFill
         }
         
-        cameraImageView.do {
-            $0.image = .icProfileImgEdit
-            $0.contentMode = .scaleAspectFit
+        cameraButton.do {
+            $0.setImage(.icProfileImgEdit, for: .normal)
         }
     }
     
     private func setHierarchy() {
         self.addSubviews(
             profileImageView,
-            cameraImageView
+            cameraButton
         )
     }
     
@@ -72,7 +71,7 @@ class ProfileImageEditButton: UIButton {
             $0.edges.equalToSuperview()
         }
         
-        cameraImageView.snp.makeConstraints {
+        cameraButton.snp.makeConstraints {
             $0.trailing.bottom.equalTo(profileImageView)
         }
     }
@@ -84,15 +83,15 @@ class ProfileImageEditButton: UIButton {
 
 extension ProfileImageEditButton {
     
-    override func setImage(_ image: UIImage?, for state: UIControl.State = .normal) {
-        profileImageView.image = image
-    }
-    
     func setImage(_ imageURL: String) {
         profileImageView.kf.setImage(
             with: URL(string: imageURL),
             options: [.transition(.none), .cacheOriginalImage]
         )
+    }
+    
+    func addTarget(_ target: Any?, action: Selector, for controlEvents: UIControl.Event) {
+        cameraButton.addTarget(target, action: action, for: controlEvents)
     }
     
 }
