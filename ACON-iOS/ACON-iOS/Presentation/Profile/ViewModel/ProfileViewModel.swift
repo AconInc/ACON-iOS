@@ -21,4 +21,6 @@ class ProfileViewModel {
         possessingAcorns: 0
     )
     
+    let maxNicknameLength: Int = 16
+    
 }

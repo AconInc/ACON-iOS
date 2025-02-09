@@ -141,9 +141,16 @@ private extension ProfileEditViewController {
 private extension ProfileEditViewController {
     
     func bindViewModel() {
-        profileEditView.setProfileImage(viewModel.userInfo.profileImageURL)
-        
-        // TODO: 요소 추가
+        // NOTE: 기본 데이터 바인딩
+        profileEditView.do {
+            $0.setProfileImage(viewModel.userInfo.profileImageURL)
+            $0.nicknameTextField.text = viewModel.userInfo.nickname
+            $0.setNicknameLengthLabel(
+                countPhoneme(text: viewModel.userInfo.nickname),
+                viewModel.maxNicknameLength
+                )
+            $0.birthDateTextField.text = viewModel.userInfo.birthDate
+        }
     }
     
 }
@@ -196,13 +203,15 @@ private extension ProfileEditViewController {
         if isValid {
             // NOTE: 유효성 체크 PASS -> 글자 수 체크 (음소)
             let phonemeCount = countPhoneme(text: finalString)
+            profileEditView.setNicknameLengthLabel(phonemeCount, viewModel.maxNicknameLength) // NOTE: UI Update
+            
             print("Character count: \(phonemeCount)")
             
             if phonemeCount == 0 {
                 profileEditView.setNicknameValidMessage(.nicknameMissing)
                 return true
             }
-            else if phonemeCount > 16 {
+            else if phonemeCount > viewModel.maxNicknameLength {
                 return false
             }
             else {
@@ -212,7 +221,7 @@ private extension ProfileEditViewController {
                 acDebouncer.call { [weak self] in
                     self?.profileEditView.setNicknameValidMessage(.nicknameOK)
                 }
-                return true
+                return phonemeCount == viewModel.maxNicknameLength ? false : true
             }
         }
         
