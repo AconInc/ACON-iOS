@@ -36,6 +36,8 @@ class ProfileEditView: BaseView {
     
     var nicknameValidMessageView = ProfileEditValidMessageView()
     
+    var nicknameLengthLabel = UILabel()
+    
     private let birthDateTitleLabel = UILabel()
     
     var birthDateTextField = ProfileEditTextField()
@@ -106,6 +108,7 @@ class ProfileEditView: BaseView {
             nicknameTitleLabel,
             nicknameTextField,
             nicknameValidMessageView,
+            nicknameLengthLabel,
             birthDateTitleLabel,
             birthDateTextField,
             birthDateValidMessageView,
@@ -154,6 +157,11 @@ class ProfileEditView: BaseView {
             $0.top.equalTo(nicknameTextField.snp.bottom).offset(validMessageOffset)
             $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
             $0.height.greaterThanOrEqualTo(44)
+        }
+        
+        nicknameLengthLabel.snp.makeConstraints {
+            $0.top.equalTo(nicknameValidMessageView)
+            $0.trailing.equalTo(nicknameValidMessageView)
         }
         
         birthDateTitleLabel.snp.makeConstraints {
@@ -208,6 +216,18 @@ class ProfileEditView: BaseView {
     
     func setVerifiedAreaValidMessage(_ type: ProfileValidMessageType) {
         verifiedAreaValidMessageView.setValidMessage(type)
+    }
+    
+    func setNicknameLengthLabel(_ currentLen: Int, _ maxLen: Int) {
+        let currentStr = String(currentLen)
+        let slashMaxStr = "/\(String(maxLen))"
+        nicknameLengthLabel.setPartialText(
+            fullText: currentStr + slashMaxStr,
+            textStyles: [
+                (text: currentStr, style: .s2, color: .acWhite),
+                (text: slashMaxStr, style: .s2, color: .gray5)
+            ]
+        )
     }
     
 }
