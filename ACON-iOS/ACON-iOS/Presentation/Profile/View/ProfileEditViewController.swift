@@ -94,54 +94,18 @@ extension ProfileEditViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        // MARK: - 닉네임 텍스트필드
-        
         if textField == profileEditView.nicknameTextField {
-            // 기존 텍스트와 새로운 문자열을 결합하여 최종 문자열을 만든다.
-            let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string
-            let koreanDeleted = isKoreanChar(textField.text?.last ?? " ") && range.length == 1
-            let koreanAdded = isKoreanChar(textField.text?.last ?? " ") && range.length == 0
-            
-            let finalString: String = koreanDeleted ? textField.text ?? "" : newString
-            
-            print("👉org: \(textField.text), range: \(range), string: \(string), newString: \(newString), finalStr: \(finalString)")
-            
-            // NOTE: 유효성 체크
-            let regex = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ._]*$"
-            let isValid = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: newString)
-            
-            if isValid {
-                // NOTE: 글자 수 체크
-                let phonemeCount = countPhoneme(text: finalString)
-                print("Character count: \(phonemeCount)")
-                
-                if phonemeCount == 0 {
-                    profileEditView.setNicknameValidMessage(.nicknameMissing)
-                } else if phonemeCount > 16 {
-                    return false
-                } else {
-                    profileEditView.setNicknameValidMessage(.none)
-                    // TODO: 빙글빙글 로띠 활성화
-                    // TODO: 서버 요청
-                    acDebouncer.call { [weak self] in
-                        self?.profileEditView.setNicknameValidMessage(.nicknameOK)
-                    }
-                }
-                
-            } else {
-                profileEditView.setNicknameValidMessage(.invalidChar)
-            }
-            return true
-        
-        
-        // MARK: - 생년월일 텍스트필드
-            
+            return nicknameTextfieldChange(
+                textField,
+                shouldChangeCharactersIn: range,
+                replacementString: string
+            )
         } else if textField == profileEditView.birthDateTextField {
-            
-            // TODO: 판별 로직 추가
-            profileEditView.setBirthdateValidMessage(.invalidDate)
-            
-            return true
+            return birthDateTextFieldChange(
+                textField,
+                shouldChangeCharactersIn: range,
+                replacementString: string
+            )
         }
         
         print("❌ Invaild Textfield")
@@ -151,9 +115,91 @@ extension ProfileEditViewController: UITextFieldDelegate {
 }
 
 
-// MARK: - TextField Delegate Helper
+// MARK: - TextField별 Delegate 메소드
 
 private extension ProfileEditViewController {
+    
+    // MARK: - 닉네임
+    // TODO: 한글 음소 수 오류 수정 - 텍스트필드 자체 문제라 어쩔 수 없을지도ㅜㅜ
+    func nicknameTextfieldChange(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string
+        let koreanDeleted = isKoreanChar(textField.text?.last ?? " ") && range.length == 1
+        //            let koreanAdded = isKoreanChar(textField.text?.last ?? " ") && range.length == 0
+        let finalString: String = koreanDeleted ? textField.text ?? "" : newString
+        print("👉org: \(textField.text), range: \(range), string: \(string), newString: \(newString), finalStr: \(finalString)")
+        
+        // NOTE: 유효성 체크
+        let regex = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ._]*$"
+        let isValid = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: newString)
+        
+        if isValid {
+            // NOTE: 유효성 체크 PASS -> 글자 수 체크 (음소)
+            let phonemeCount = countPhoneme(text: finalString)
+            print("Character count: \(phonemeCount)")
+            
+            if phonemeCount == 0 {
+                profileEditView.setNicknameValidMessage(.nicknameMissing)
+                return true
+            }
+            else if phonemeCount > 16 {
+                return false
+            }
+            else {
+                profileEditView.setNicknameValidMessage(.none)
+                // TODO: 빙글빙글 로띠 활성화
+                // TODO: 서버 요청
+                acDebouncer.call { [weak self] in
+                    self?.profileEditView.setNicknameValidMessage(.nicknameOK)
+                }
+                return true
+            }
+        }
+        
+        // NOTE: 유효성 검사 FAIL
+        else {
+            profileEditView.setNicknameValidMessage(.invalidChar)
+            return false
+        }
+    }
+    
+    
+    // MARK: - 생년월일
+    
+    func birthDateTextFieldChange(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let currentText = textField.text else { return true }
+        
+        // 백스페이스 처리
+        if string.isEmpty,
+           currentText.last == "." {
+            let newRange = NSRange(location: range.location - 1,
+                                   length: range.length + 1)
+            let newString = (textField.text as NSString?)?.replacingCharacters(
+                in: newRange, with: string) ?? string
+            textField.text = newString
+            return false
+        }
+        
+        // NOTE: 8자리 제한
+        let rawText = (currentText.replacingOccurrences(of: ".", with: "") + string)
+        print("rawText: \(rawText)")
+        if rawText.count < 8 {
+            profileEditView.setBirthdateValidMessage(.invalidDate)
+        } else if rawText.count == 8 {
+            // NOTE: Validity 체크
+            checkDateValidity(dateString: rawText)
+        }
+        
+        return rawText.count > 8 ? false : true
+    }
+    
+}
+
+
+// MARK: - TextField Helper
+
+private extension ProfileEditViewController {
+    
+    // MARK: - 닉네임
     
     // NOTE: 한글인지 확인하는 함수
     func isKorean(_ char: Character) -> Bool {
@@ -194,6 +240,45 @@ private extension ProfileEditViewController {
             }
         }
         return phonemeCount
+    }
+    
+    
+    // MARK: - 생년월일
+    
+    // NOTE: 생년월일 유효성 검사
+    func checkDateValidity(dateString: String) {
+        guard dateString.count == 8,
+              let year = Int(String(Array(dateString)[0..<4])),
+              let month = Int(String(Array(dateString)[4..<6])),
+              let day = Int(String(Array(dateString)[6...])),
+              let date = makeDate(year: year, month: month, day: day),
+              isValidDate(year: year, month: month, day: day),
+              isBeforeToday(date: date)
+        else {
+            profileEditView.setBirthdateValidMessage(.invalidDate)
+            return
+        }
+        profileEditView.setBirthdateValidMessage(.none)
+    }
+    
+    func makeDate(year: Int, month: Int, day: Int) -> Date? {
+        var dateComponents = DateComponents()
+        dateComponents.year = year
+        dateComponents.month = month
+        dateComponents.day = day
+
+        let calendar = Calendar.current
+        return calendar.date(from: dateComponents)
+    }
+    
+    func isValidDate(year: Int, month: Int, day: Int) -> Bool {
+        guard let monthEnum = DayOfMonthType(rawValue: month) else { return false }
+        return (1...monthEnum.days(in: year)).contains(day)
+    }
+    
+    func isBeforeToday(date: Date) -> Bool {
+        let today = Date()
+        return date < today
     }
     
 }
