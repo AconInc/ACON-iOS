@@ -47,8 +47,8 @@ class ProfileEditViewController: BaseNavViewController {
         super.viewDidLoad()
         
         setDelegate()
-        addObserver()
         bindViewModel()
+        bindObservable()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,7 +86,28 @@ class ProfileEditViewController: BaseNavViewController {
         profileEditView.birthDateTextField.delegate = self
     }
     
-    private func addObserver() {
+}
+
+
+// MARK: - Bindings
+
+private extension ProfileEditViewController {
+    
+    func bindViewModel() {
+        // NOTE: 기본 데이터 바인딩
+        profileEditView.do {
+            $0.setProfileImage(viewModel.userInfo.profileImageURL)
+            $0.nicknameTextField.text = viewModel.userInfo.nickname
+            $0.setNicknameLengthLabel(
+                countPhoneme(text: viewModel.userInfo.nickname),
+                viewModel.maxNicknameLength
+                )
+            $0.birthDateTextField.text = viewModel.userInfo.birthDate
+        }
+    }
+    
+    func bindObservable() {
+        // NOTE: Keyboard
         keyboardWillShowObserver = NotificationCenter.default.addObserver(
             forName: UIResponder.keyboardWillShowNotification,
             object: nil,
@@ -101,6 +122,41 @@ class ProfileEditViewController: BaseNavViewController {
             queue: .main
         ) { [weak self] notification in
             self?.keyboardWillHide(notification)
+        }
+        
+        // NOTE: 닉네임 TextField
+        profileEditView.nicknameTextField.observableText.bind { [weak self] text in
+            guard let self = self,
+                  let text = text else { return }
+            print("observed text: \(text)")
+            print("text 길이: \(countPhoneme(text: text))")
+            
+            // NOTE: 유효성 체크 PASS -> 글자 수 체크 (음소)
+            let phonemeCount = countPhoneme(text: text)
+            
+            // NOTE: UI 업데이트 - 글자 수
+            profileEditView.setNicknameLengthLabel(phonemeCount, viewModel.maxNicknameLength)
+            
+            // NOTE: UI 업데이트 - 유효성 메시지
+            if phonemeCount == 0 {
+                profileEditView.setNicknameValidMessage(.nicknameMissing)
+                // TODO: 텍스트를 싹 지울 경우 타이밍 문제 해결
+                /*"abc" -> ""으로 지웠을 때
+                 1. 지우는 순간에는 서버에 중복 확인 요청을 보냄 (151줄)
+                 2. 다 지워지면 유효성 메시지 .nicknameMissing이 세팅됨 (142줄)
+                 3. 중복 확인이 완료되면 유효성 메시지가 .OK로 세팅됨 (156줄)
+                 => "" 상태인데 .OK 메시지가 뜸 */
+            }
+            
+            else {
+                profileEditView.setNicknameValidMessage(.none)
+                // TODO: 빙글빙글 로띠 활성화
+                // TODO: 서버 요청
+                acDebouncer.call { [weak self] in
+                    self?.profileEditView.setNicknameValidMessage(.nicknameOK)
+                }
+                
+            }
         }
     }
     
@@ -131,26 +187,6 @@ private extension ProfileEditViewController {
         contentInset.bottom = 0
         profileEditView.scrollView.contentInset = contentInset
         profileEditView.scrollView.scrollIndicatorInsets = contentInset
-    }
-    
-}
-
-
-// MARK: - bindViewModel
-
-private extension ProfileEditViewController {
-    
-    func bindViewModel() {
-        // NOTE: 기본 데이터 바인딩
-        profileEditView.do {
-            $0.setProfileImage(viewModel.userInfo.profileImageURL)
-            $0.nicknameTextField.text = viewModel.userInfo.nickname
-            $0.setNicknameLengthLabel(
-                countPhoneme(text: viewModel.userInfo.nickname),
-                viewModel.maxNicknameLength
-                )
-            $0.birthDateTextField.text = viewModel.userInfo.birthDate
-        }
     }
     
 }
@@ -187,48 +223,25 @@ extension ProfileEditViewController: UITextFieldDelegate {
 
 private extension ProfileEditViewController {
     
-    // MARK: - 닉네임
-    // TODO: 한글 음소 수 오류 수정 - 텍스트필드 자체 문제라 어쩔 수 없을지도ㅜㅜ
+    // MARK: - 닉네임 (유효성 체크, 글자 수 넘기면 입력 막기)
+    
     func nicknameTextfieldChange(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string
         let koreanDeleted = isKoreanChar(textField.text?.last ?? " ") && range.length == 1
-        //            let koreanAdded = isKoreanChar(textField.text?.last ?? " ") && range.length == 0
         let finalString: String = koreanDeleted ? textField.text ?? "" : newString
-        print("👉org: \(textField.text), range: \(range), string: \(string), newString: \(newString), finalStr: \(finalString)")
         
         // NOTE: 유효성 체크
         let regex = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ._]*$"
-        let isValid = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: newString)
+        let isValid = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: finalString)
         
-        if isValid {
-            // NOTE: 유효성 체크 PASS -> 글자 수 체크 (음소)
-            let phonemeCount = countPhoneme(text: finalString)
-            profileEditView.setNicknameLengthLabel(phonemeCount, viewModel.maxNicknameLength) // NOTE: UI Update
-            
-            print("Character count: \(phonemeCount)")
-            
-            if phonemeCount == 0 {
-                profileEditView.setNicknameValidMessage(.nicknameMissing)
-                return true
-            }
-            else if phonemeCount > viewModel.maxNicknameLength {
-                return false
-            }
-            else {
-                profileEditView.setNicknameValidMessage(.none)
-                // TODO: 빙글빙글 로띠 활성화
-                // TODO: 서버 요청
-                acDebouncer.call { [weak self] in
-                    self?.profileEditView.setNicknameValidMessage(.nicknameOK)
-                }
-                return phonemeCount == viewModel.maxNicknameLength ? false : true
-            }
-        }
-        
-        // NOTE: 유효성 검사 FAIL
-        else {
+        if !isValid {
+            // NOTE: 유효성 체크 FAIL -> 입력 X
             profileEditView.setNicknameValidMessage(.invalidChar)
             return false
+        } else {
+            // NOTE: 유효성 체크 PASS -> 글자 수 체크 (음소) -> max 넘으면 입력 X
+            let phonemeCount = countPhoneme(text: finalString)
+            return phonemeCount > viewModel.maxNicknameLength ? false : true
         }
     }
     
