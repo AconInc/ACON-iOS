@@ -17,6 +17,9 @@ class ProfileEditViewController: BaseNavViewController {
     
     private let acDebouncer = ACDebouncer(delay: 0.5)
     
+    private var keyboardWillShowObserver: NSObjectProtocol?
+    private var keyboardWillHideObserver: NSObjectProtocol?
+    
     
     // MARK: - Life Cycle
     
@@ -24,6 +27,16 @@ class ProfileEditViewController: BaseNavViewController {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
+    }
+    
+    deinit {
+        if let keyboardWillShowObserver = keyboardWillShowObserver {
+            NotificationCenter.default.removeObserver(keyboardWillShowObserver)
+        }
+        
+        if let keyboardWillHideObserver = keyboardWillHideObserver {
+            NotificationCenter.default.removeObserver(keyboardWillHideObserver)
+        }
     }
     
     @MainActor required init?(coder: NSCoder) {
@@ -74,19 +87,21 @@ class ProfileEditViewController: BaseNavViewController {
     }
     
     private func addObserver() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow(_:)),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
+        keyboardWillShowObserver = NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillShowNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] notification in
+            self?.keyboardWillShow(notification)
+        }
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide(_:)),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
+        keyboardWillHideObserver = NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillHideNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] notification in
+            self?.keyboardWillHide(notification)
+        }
     }
     
 }
