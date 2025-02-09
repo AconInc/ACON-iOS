@@ -55,10 +55,6 @@ class ProfileEditValidMessageView: BaseView {
     }
     
     override func setStyle() {
-        [firstIcon, secondIcon].forEach {
-            $0.image = .icError20
-        }
-        
         hideFirstLine(true)
         hideSecondLine(true)
     }
@@ -90,18 +86,21 @@ class ProfileEditValidMessageView: BaseView {
             guard type.texts.count == 1 else { print(idxErrMsg); return }
             hideFirstLine(false)
             hideSecondLine(true)
+            firstIcon.image = .icError20
             firstLine.setLabel(text: type.texts[0], style: .s2, color: .red1)
             
         case .nicknameOK:
             guard type.texts.count == 1 else { print(idxErrMsg); return }
             hideFirstLine(false)
             hideSecondLine(true)
+            firstIcon.image = .icLocalCheckMark20
             firstLine.setLabel(text: type.texts[0], style: .s2, color: .blue1)
         
         case .invalidChar:
             guard type.texts.count == 2 else { print(idxErrMsg); return }
             hideFirstLine(false)
             hideSecondLine(false)
+            firstIcon.image = .icError20
             firstLine.setLabel(text: type.texts[0], style: .s2, color: .red1)
             secondLine.setLabel(text: type.texts[1], style: .s2, color: .red1)
         }
