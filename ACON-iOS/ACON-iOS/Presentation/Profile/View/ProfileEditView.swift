@@ -64,6 +64,7 @@ class ProfileEditView: BaseView {
         
         birthDateTextField.do {
             $0.setStyle(placeholder: StringLiterals.Profile.birthDatePlaceholder)
+            $0.keyboardType = .numberPad
         }
         
         verifiedAreaTitleLabel.setLabel(text: "인증동네", style: .h8)
