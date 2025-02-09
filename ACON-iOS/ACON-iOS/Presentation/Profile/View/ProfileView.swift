@@ -43,7 +43,7 @@ final class ProfileView: BaseView {
     var disableAutoLoginButton = UIButton() // TODO: 삭제
     
     
-    // MARK: - LifeCycles
+    // MARK: - Life Cycles
     
     override func setStyle() {
         super.setStyle()
@@ -166,8 +166,12 @@ final class ProfileView: BaseView {
         }
     }
     
-    
-    // MARK: - Internal Methods
+}
+
+
+// MARK: - Internal Methods
+
+extension ProfileView {
     
     func setProfileImage(_ imageURL: String) {
         profileImageView.kf.setImage(

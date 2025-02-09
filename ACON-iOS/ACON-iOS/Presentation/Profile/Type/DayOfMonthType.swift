@@ -8,6 +8,7 @@
 import Foundation
 
 enum DayOfMonthType: Int, CaseIterable {
+    
     case january = 1, february, march, april, may, june, july, august, september, october, november, december
     
     /// 월별 기본 일 수 (윤년 고려 X)

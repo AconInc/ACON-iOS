@@ -147,7 +147,6 @@ private extension ProfileEditViewController {
                  3. 중복 확인이 완료되면 유효성 메시지가 .OK로 세팅됨 (156줄)
                  => "" 상태인데 .OK 메시지가 뜸 */
             }
-            
             else {
                 profileEditView.setNicknameValidMessage(.none)
                 // TODO: 빙글빙글 로띠 활성화
@@ -155,7 +154,6 @@ private extension ProfileEditViewController {
                 acDebouncer.call { [weak self] in
                     self?.profileEditView.setNicknameValidMessage(.nicknameOK)
                 }
-                
             }
         }
     }

@@ -10,6 +10,7 @@ import UIKit
 import Kingfisher
 
 class ProfileImageEditButton: UIButton {
+    
     // MARK: - Helpers
     
     private let size: CGFloat
@@ -76,8 +77,12 @@ class ProfileImageEditButton: UIButton {
         }
     }
     
-    
-    // MARK: - Internal Methods
+}
+
+
+// MARK: - Internal Methods
+
+extension ProfileImageEditButton {
     
     override func setImage(_ image: UIImage?, for state: UIControl.State = .normal) {
         profileImageView.image = image
@@ -89,4 +94,5 @@ class ProfileImageEditButton: UIButton {
             options: [.transition(.none), .cacheOriginalImage]
         )
     }
+    
 }

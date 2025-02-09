@@ -129,4 +129,5 @@ private extension ProfileViewController {
             sceneDelegate.window?.rootViewController = SplashViewController()
         }
     }
+    
 }

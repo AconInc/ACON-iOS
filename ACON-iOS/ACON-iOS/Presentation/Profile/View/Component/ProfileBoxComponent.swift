@@ -64,8 +64,12 @@ class ProfileBoxComponent: BaseView {
         }
     }
     
-    
-    // MARK: - Internal Methods
+}
+
+
+// MARK: - Internal Methods
+
+extension ProfileBoxComponent {
     
     func setStyle(title: String, icon: UIImage) {
         titleLabel.attributedText = title.ACStyle(.s2, .gray2)
