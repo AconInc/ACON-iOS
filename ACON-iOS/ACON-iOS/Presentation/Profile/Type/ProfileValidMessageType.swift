@@ -25,7 +25,7 @@ enum ProfileValidMessageType {
         case .nicknameTaken: return ["이미 사용중인 닉네임이에요"]
         case .nicknameOK: return ["사용할 수 있는 닉네임이에요"]
         case .invalidDate: return ["정확한 생년월일을 적어주세요"]
-        case .areaMissing: return ["최소 1개의 동네를 인증해주세요"]
+        case .areaMissing: return ["로컬도토리를 위해 최소 1개의 동네를 인증해주세요"]
         }
     }
     
