@@ -34,6 +34,7 @@ class ProfileEditViewController: BaseNavViewController {
         super.viewDidLoad()
         
         setDelegate()
+        addObserver()
         bindViewModel()
     }
     
@@ -70,6 +71,51 @@ class ProfileEditViewController: BaseNavViewController {
     private func setDelegate() {
         profileEditView.nicknameTextField.delegate = self
         profileEditView.birthDateTextField.delegate = self
+    }
+    
+    private func addObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(_:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
+}
+
+
+// MARK: - @objc functions
+
+private extension ProfileEditViewController {
+    
+    // NOTE: 스크롤뷰의 contentInset을 조정하여 텍스트필드가 키보드에 가려지지 않도록 함
+    @objc func keyboardWillShow(_ notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        
+        if let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let keyboardHeight = keyboardFrame.height
+            
+            var contentInset = profileEditView.scrollView.contentInset
+            contentInset.bottom = keyboardHeight
+            profileEditView.scrollView.contentInset = contentInset
+            profileEditView.scrollView.scrollIndicatorInsets = contentInset
+        }
+    }
+    
+    // NOTE: contentInset을 원래 상태로 복원
+    @objc func keyboardWillHide(_ notification: Notification) {
+        var contentInset = profileEditView.scrollView.contentInset
+        contentInset.bottom = 0
+        profileEditView.scrollView.contentInset = contentInset
+        profileEditView.scrollView.scrollIndicatorInsets = contentInset
     }
     
 }
@@ -115,7 +161,7 @@ extension ProfileEditViewController: UITextFieldDelegate {
 }
 
 
-// MARK: - TextField별 Delegate 메소드
+// MARK: - TextField별 Delegate Method
 
 private extension ProfileEditViewController {
     
@@ -266,7 +312,7 @@ private extension ProfileEditViewController {
         dateComponents.year = year
         dateComponents.month = month
         dateComponents.day = day
-
+        
         let calendar = Calendar.current
         return calendar.date(from: dateComponents)
     }

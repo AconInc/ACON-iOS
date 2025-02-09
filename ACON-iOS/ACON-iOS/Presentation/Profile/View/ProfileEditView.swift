@@ -24,7 +24,7 @@ class ProfileEditView: BaseView {
     
     // MARK: - UI Components
     
-    private let scrollView = UIScrollView()
+    let scrollView = UIScrollView()
     
     private let contentView = UIView()
     
