@@ -48,6 +48,10 @@ class ProfileEditView: BaseView {
     
     let verifiedAreaStackView = UIStackView()
     
+    let verifiedAreaAddButton = UIButton()
+    
+    let verifiedAreaBox = LabelBoxWithDeletableButton()
+    
     private let verifiedAreaValidMessageView = ProfileEditValidMessageView()
     
     let saveButton = UIButton()
@@ -76,7 +80,20 @@ class ProfileEditView: BaseView {
         verifiedAreaTitleLabel.setLabel(text: "인증동네", style: .h8)
         
         verifiedAreaStackView.do {
-            $0.backgroundColor = .blue2
+            $0.axis = .horizontal
+        }
+        
+        verifiedAreaAddButton.do {
+            var config = UIButton.Configuration.plain()
+            config.contentInsets = .init(top: 12, leading: 12, bottom: 12, trailing: 16)
+            config.attributedTitle = AttributedString("동네 추가하기".ACStyle(.s1))
+            config.image = .icAdd20
+            config.imagePadding = 8
+            config.imagePlacement = .trailing
+            config.background.cornerRadius = 4
+            config.background.strokeColor = .gray5
+            config.background.strokeWidth = 1
+            $0.configuration = config
         }
         
         saveButton.do {
@@ -116,6 +133,10 @@ class ProfileEditView: BaseView {
             verifiedAreaTitleLabel,
             verifiedAreaStackView,
             verifiedAreaValidMessageView
+        )
+        
+        verifiedAreaStackView.addArrangedSubviews(
+            verifiedAreaAddButton
         )
     }
     
@@ -193,6 +214,16 @@ class ProfileEditView: BaseView {
             $0.leading.equalToSuperview().offset(horizontalInset)
         }
         
+        verifiedAreaAddButton.snp.makeConstraints {
+            $0.height.equalTo(48)
+            $0.width.equalTo(160)
+        }
+        
+        verifiedAreaBox.snp.makeConstraints{
+            $0.width.equalTo(160)
+            $0.height.equalTo(48)
+        }
+        
         verifiedAreaValidMessageView.snp.makeConstraints {
             $0.top.equalTo(verifiedAreaStackView.snp.bottom).offset(validMessageOffset)
             $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
@@ -229,6 +260,20 @@ class ProfileEditView: BaseView {
                 (text: slashMaxStr, style: .s2, color: .gray5)
             ]
         )
+    }
+    
+    func hideVerifiedAreaAddButton(_ isHidden: Bool) {
+        verifiedAreaAddButton.isHidden = isHidden
+    }
+    
+    func addVerifiedArea(_ areaName: String) {
+        verifiedAreaBox.setLabel(areaName)
+        verifiedAreaStackView.addArrangedSubview(verifiedAreaBox)
+    }
+    
+    func removeVerifiedArea() {
+        verifiedAreaStackView.removeArrangedSubview(verifiedAreaBox)
+        verifiedAreaBox.removeFromSuperview()
     }
     
 }
