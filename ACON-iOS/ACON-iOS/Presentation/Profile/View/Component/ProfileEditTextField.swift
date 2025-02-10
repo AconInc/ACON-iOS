@@ -9,15 +9,20 @@ import UIKit
 
 class ProfileEditTextField: UITextField {
     
+    // MARK: - Internal Property
+    
+    var observableText: ObservablePattern<String> = ObservablePattern(nil)
+    
+    
     // MARK: - UI Settings
     
     private let horizontalInset: CGFloat = 12
     
-    private let clearButton = UIButton()
-    
     private let clearButtonSize: CGFloat = 28
     
-    var observableText: ObservablePattern<String> = ObservablePattern(nil)
+    private let clearButtonSpacing: CGFloat = 16
+    
+    private let clearButton = UIButton()
     
     
     // MARK: - Initializer
@@ -49,7 +54,7 @@ class ProfileEditTextField: UITextField {
             $0.rightView?.frame = CGRect(
                 x: 0,
                 y: 0,
-                width: clearButtonSize + 16 + horizontalInset,
+                width: clearButtonSize + clearButtonSpacing + horizontalInset,
                 height: clearButtonSize
             )
             $0.rightView = clearButton
@@ -67,7 +72,12 @@ class ProfileEditTextField: UITextField {
         clearButton.do {
             var config = UIButton.Configuration.plain()
             config.image = .icDissmissCircleGray
-            config.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: horizontalInset)
+            config.contentInsets = .init(
+                top: 0,
+                leading: clearButtonSpacing,
+                bottom: 0,
+                trailing: horizontalInset
+            )
             $0.configuration = config
         }
     }

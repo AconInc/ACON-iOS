@@ -16,10 +16,6 @@ final class AuthManager {
         get {
             UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.accessToken) != nil
         }
-        
-        set {
-            print("🥑🥑🥑 [set] hasToken: \(newValue)")
-        }
     }
     
 }
