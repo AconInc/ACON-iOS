@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Kingfisher
 import Then
 import SnapKit
 
@@ -23,11 +24,11 @@ final class ProfileView: BaseView {
     private let totalAcornCount: Int = 25
     
     
-    // MARK: - UI Components
+    // MARK: - UI Properties
     
     private let profileImageView = UIImageView()
     
-    private let usernameLabel = UILabel()
+    private let nicknameLabel = UILabel()
     
     var profileEditButton = UIButton()
     
@@ -39,28 +40,24 @@ final class ProfileView: BaseView {
     
     private let verifiedAreaBox = ProfileBoxComponent()
     
-//    var disableAutoLoginButton = UIButton()
+    var disableAutoLoginButton = UIButton() // TODO: 삭제
     
     
-    // MARK: - LifeCycles
+    // MARK: - Life Cycles
     
     override func setStyle() {
         super.setStyle()
         
-        self.backgroundColor = .gray9
-        
         profileImageView.do {
-            $0.image = .imgProfileBasic60
+            $0.backgroundColor = .gray7 // NOTE: Skeleton
             $0.layer.cornerRadius = profileImageSize / 2
+            $0.contentMode = .scaleAspectFill
         }
-        
-        // TODO: Username 바인딩
-        usernameLabel.setLabel(text: "UserName", style: .h5)
         
         profileEditButton.do {
             var config = UIButton.Configuration.plain()
             config.contentInsets = .zero
-            config.attributedTitle = AttributedString(StringLiterals.Profile.editProfile.ACStyle(.s2, .gray4))
+            config.attributedTitle = AttributedString(StringLiterals.Profile.profileEditButton.ACStyle(.s2, .gray4))
             config.image = .icEditG20
             config.imagePlacement = .trailing
             config.imagePadding = 4
@@ -92,6 +89,12 @@ final class ProfileView: BaseView {
             title: StringLiterals.Profile.verifiedArea,
             icon: .icHometownG20
         )
+        
+        disableAutoLoginButton.do { // TODO: 삭제
+            $0.setAttributedTitle(text: "자동로그인 해제", style: .b4)
+            $0.layer.borderColor = UIColor.acWhite.cgColor
+            $0.layer.borderWidth = 0.5
+        }
     }
     
     override func setHierarchy() {
@@ -99,10 +102,11 @@ final class ProfileView: BaseView {
         
         self.addSubviews(
             profileImageView,
-            usernameLabel,
+            nicknameLabel,
             profileEditButton,
             needLoginButton,
-            boxStackView
+            boxStackView,
+            disableAutoLoginButton // TODO: 삭제
         )
         
         boxStackView.addArrangedSubviews(
@@ -120,19 +124,19 @@ final class ProfileView: BaseView {
             $0.size.equalTo(profileImageSize)
         }
         
-        usernameLabel.snp.makeConstraints {
+        nicknameLabel.snp.makeConstraints {
             $0.top.equalTo(profileImageView).offset(4)
             $0.leading.equalTo(profileImageView.snp.trailing).offset(16)
             $0.trailing.equalToSuperview().offset(-horizontalInset)
         }
         
         profileEditButton.snp.makeConstraints {
-            $0.top.equalTo(usernameLabel.snp.bottom).offset(2)
-            $0.leading.equalTo(usernameLabel)
+            $0.top.equalTo(nicknameLabel.snp.bottom).offset(2)
+            $0.leading.equalTo(nicknameLabel)
         }
         
         needLoginButton.snp.makeConstraints {
-            $0.leading.equalTo(usernameLabel)
+            $0.leading.equalTo(nicknameLabel)
             $0.centerY.equalTo(profileImageView)
         }
         
@@ -154,15 +158,36 @@ final class ProfileView: BaseView {
             )
             $0.height.equalTo(94)
         }
+        
+        disableAutoLoginButton.snp.makeConstraints { // TODO: 삭제
+            $0.bottom.equalToSuperview().inset(100)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.width.equalTo(100)
+        }
     }
     
+}
+
+
+// MARK: - Internal Methods
+
+extension ProfileView {
     
-    // MARK: - Internal Methods
+    func setProfileImage(_ imageURL: String) {
+        profileImageView.kf.setImage(
+            with: URL(string: imageURL),
+            options: [.transition(.none), .cacheOriginalImage]
+        )
+    }
+    
+    func setNicknameLabel(_ text: String) {
+        nicknameLabel.setLabel(text: text, style: .h5)
+    }
     
     func setAcornCountBox(_ possessingCount: Int) {
         let acornCountabel = UILabel()
         let possessingString = possessingCount == 0 ? "00" : String(possessingCount)
-        // TODO: partialText 가운데 정렬 되도록 수정
+        // TODO: partialText 가운데 정렬 되도록 수정 (바닥 정렬인 partialText도 있어서 메소드 하나 더 만들어야 할 듯)
         acornCountabel.setPartialText(
             fullText: "\(possessingString)/\(String(totalAcornCount))",
             textStyles: [
@@ -174,9 +199,11 @@ final class ProfileView: BaseView {
         acornCountBox.setContentView(to: acornCountabel)
     }
     
-    func setVerifiedAreaBox(_ areaName: String) {
+    func setVerifiedAreaBox(onLogin: Bool, areaName: String) {
         let label = UILabel()
-        label.setLabel(text: areaName, style: .t2, color: .org1)
+        label.setLabel(text: onLogin ? areaName : "인증 필요",
+                       style: .t2,
+                       color: onLogin ? .org1 : .gray5)
         
         verifiedAreaBox.setContentView(to: label)
     }

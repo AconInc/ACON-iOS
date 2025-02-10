@@ -303,13 +303,20 @@ enum StringLiterals {
     
     enum Profile {
         
-        static let editProfile = "프로필 수정하기"
+        static let profileEditPageTitle = "프로필 편집"
+        
+        static let profileEditButton = "프로필 수정하기"
         
         static let needLogin = "로그인이 필요해요"
         
         static let acornPossession = "보유한 도토리 수"
         
         static let verifiedArea = "나의 인증 동네"
+        
+        static let nicknamePlaceholder = "16자 이내 영문, 한글, 숫자, . , _ 만 사용가능"
+        
+        static let birthDatePlaceholder = "ex) 2025.01.01"
+        
     }
     
 }
