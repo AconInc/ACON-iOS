@@ -102,6 +102,7 @@ class ProfileEditValidMessageView: BaseView {
             hideSecondLine(false)
             firstIcon.image = .icError20
             firstLine.setLabel(text: type.texts[0], style: .s2, color: .red1)
+            secondIcon.image = .icError20
             secondLine.setLabel(text: type.texts[1], style: .s2, color: .red1)
         }
     }

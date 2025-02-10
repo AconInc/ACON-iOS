@@ -234,17 +234,20 @@ private extension ProfileEditViewController {
         // NOTE: 문자 유효성 체크 (입력마스크)
         let regex = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ._]*$"
         let isValid = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: finalString)
+        let phonemeCount = countPhoneme(text: finalString)
         
         if isValid {
             // NOTE: PASS -> 글자 수 체크(음소), max 넘으면 입력 X
-            let phonemeCount = countPhoneme(text: finalString)
             return phonemeCount > viewModel.maxNicknameLength ? false : true
         } else {
-            // NOTE: FAIL -> 입력 X, 유효성 메시지 n초후 숨김
-            profileEditView.setNicknameValidMessage(.invalidChar)
-            validMsgHideDebouncer.call { [weak self] in
-                guard let self = self else { return }
-                self.testNicknameValidity()
+            // NOTE: FAIL -> 입력 X
+            if phonemeCount <= viewModel.maxNicknameLength {
+                // NOTE: 16자 미만인 경우 유효성 메시지 n초간 띄움
+                profileEditView.setNicknameValidMessage(.invalidChar)
+                validMsgHideDebouncer.call { [weak self] in
+                    guard let self = self else { return }
+                    self.testNicknameValidity()
+                }
             }
             return false
         }
