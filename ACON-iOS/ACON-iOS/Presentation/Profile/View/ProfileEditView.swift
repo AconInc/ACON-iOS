@@ -32,25 +32,25 @@ class ProfileEditView: BaseView {
     
     private let nicknameTitleLabel = UILabel()
     
-    var nicknameTextField = ProfileEditTextField()
+    let nicknameTextField = ProfileEditTextField()
     
     private let nicknameValidMessageView = ProfileEditValidMessageView()
     
-    var nicknameLengthLabel = UILabel()
+    let nicknameLengthLabel = UILabel()
     
     private let birthDateTitleLabel = UILabel()
     
-    var birthDateTextField = ProfileEditTextField()
+    let birthDateTextField = ProfileEditTextField()
     
     private let birthDateValidMessageView = ProfileEditValidMessageView()
     
     private let verifiedAreaTitleLabel = UILabel()
     
-    var verifiedAreaStackView = UIStackView()
+    let verifiedAreaStackView = UIStackView()
     
     private let verifiedAreaValidMessageView = ProfileEditValidMessageView()
     
-    var saveButton = UIButton()
+    let saveButton = UIButton()
     
     
     // MARK: - LifeCycles
