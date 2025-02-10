@@ -15,7 +15,8 @@ class ProfileEditViewController: BaseNavViewController {
     
     private let viewModel: ProfileViewModel
     
-    private let acDebouncer = ACDebouncer(delay: 0.5)
+    private let validityTestDebouncer = ACDebouncer(delay: 0.5)
+    private let validMsgHideDebouncer = ACDebouncer(delay: 2)
     
     private var keyboardWillShowObserver: NSObjectProtocol?
     private var keyboardWillHideObserver: NSObjectProtocol?
@@ -133,36 +134,23 @@ private extension ProfileEditViewController {
             self?.keyboardWillHide(notification)
         }
         
-        // NOTE: 닉네임 TextField
+        // NOTE: 닉네임 TextField - 글자 수, 중복 확인(서버)
         profileEditView.nicknameTextField.observableText.bind { [weak self] text in
             guard let self = self,
                   let text = text else { return }
-            print("observed text: \(text)")
-            print("text 길이: \(countPhoneme(text: text))")
             
-            // NOTE: 유효성 체크 PASS -> 글자 수 체크 (음소)
+            // NOTE: 텍스트 변하면 유효성 메시지 숨김
+            profileEditView.setNicknameValidMessage(.none)
+            
+            // NOTE: UI 업데이트 - 글자 수 label
             let phonemeCount = countPhoneme(text: text)
+            profileEditView.setNicknameLengthLabel(phonemeCount,
+                                                   viewModel.maxNicknameLength)
             
-            // NOTE: UI 업데이트 - 글자 수
-            profileEditView.setNicknameLengthLabel(phonemeCount, viewModel.maxNicknameLength)
-            
-            // NOTE: UI 업데이트 - 유효성 메시지
-            if phonemeCount == 0 {
-                profileEditView.setNicknameValidMessage(.nicknameMissing)
-                // TODO: 텍스트를 싹 지울 경우 타이밍 문제 해결
-                /*"abc" -> ""으로 지웠을 때
-                 1. 지우는 순간에는 서버에 중복 확인 요청을 보냄 (151줄)
-                 2. 다 지워지면 유효성 메시지 .nicknameMissing이 세팅됨 (142줄)
-                 3. 중복 확인이 완료되면 유효성 메시지가 .OK로 세팅됨 (156줄)
-                 => "" 상태인데 .OK 메시지가 뜸 */
-            }
-            else {
-                profileEditView.setNicknameValidMessage(.none)
-                // TODO: 빙글빙글 로띠 활성화
-                // TODO: 서버 요청
-                acDebouncer.call { [weak self] in
-                    self?.profileEditView.setNicknameValidMessage(.nicknameOK)
-                }
+            // NOTE: 0.5초 뒤 유효성 검사
+            validityTestDebouncer.call { [weak self] in
+                guard let self = self else { return }
+                testNicknameValidity()
             }
         }
     }
@@ -225,7 +213,6 @@ extension ProfileEditViewController: UITextFieldDelegate {
                 replacementString: string
             )
         }
-        
         print("❌ Invaild Textfield")
         return false
     }
@@ -237,25 +224,29 @@ extension ProfileEditViewController: UITextFieldDelegate {
 
 private extension ProfileEditViewController {
     
-    // MARK: - 닉네임 (유효성 체크, 글자 수 넘기면 입력 막기)
+    // MARK: - 닉네임 (입력마스크, 글자 수 넘기면 입력 막기)
     
     func nicknameTextfieldChange(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string
         let koreanDeleted = isKoreanChar(textField.text?.last ?? " ") && range.length == 1
         let finalString: String = koreanDeleted ? textField.text ?? "" : newString
         
-        // NOTE: 유효성 체크
+        // NOTE: 문자 유효성 체크 (입력마스크)
         let regex = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ._]*$"
         let isValid = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: finalString)
         
-        if !isValid {
-            // NOTE: 유효성 체크 FAIL -> 입력 X
-            profileEditView.setNicknameValidMessage(.invalidChar)
-            return false
-        } else {
-            // NOTE: 유효성 체크 PASS -> 글자 수 체크 (음소) -> max 넘으면 입력 X
+        if isValid {
+            // NOTE: PASS -> 글자 수 체크(음소), max 넘으면 입력 X
             let phonemeCount = countPhoneme(text: finalString)
             return phonemeCount > viewModel.maxNicknameLength ? false : true
+        } else {
+            // NOTE: FAIL -> 입력 X, 유효성 메시지 n초후 숨김
+            profileEditView.setNicknameValidMessage(.invalidChar)
+            validMsgHideDebouncer.call { [weak self] in
+                guard let self = self else { return }
+                self.testNicknameValidity()
+            }
+            return false
         }
     }
     
@@ -278,7 +269,6 @@ private extension ProfileEditViewController {
         
         // NOTE: 8자리 제한
         let rawText = (currentText.replacingOccurrences(of: ".", with: "") + string)
-        print("rawText: \(rawText)")
         if rawText.count < 8 {
             profileEditView.setBirthdateValidMessage(.invalidDate)
         } else if rawText.count == 8 {
@@ -292,7 +282,7 @@ private extension ProfileEditViewController {
 }
 
 
-// MARK: - TextField Helper
+// MARK: - Validity Test Helper
 
 private extension ProfileEditViewController {
     
@@ -376,6 +366,24 @@ private extension ProfileEditViewController {
     func isBeforeToday(date: Date) -> Bool {
         let today = Date()
         return date < today
+    }
+    
+    func testNicknameValidity() {
+        let text = profileEditView.nicknameTextField.text ?? ""
+        let phonemeCount = countPhoneme(text: text)
+        
+        // TODO: 빙글빙글 로띠 활성화
+        
+        // NOTE: 닉네임을 입력해주세요.
+        if phonemeCount == 0 {
+            profileEditView.setNicknameValidMessage(.nicknameMissing)
+        }
+        // NOTE: 중복된 닉네임 OR 사용할 수 있는 닉네임
+        else {
+            // TODO: 서버 요청
+            profileEditView.setNicknameValidMessage(.nicknameOK)
+//            profileEditView.setNicknameValidMessage(.nicknameTaken)
+        }
     }
     
 }
