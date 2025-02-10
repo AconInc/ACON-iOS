@@ -34,7 +34,7 @@ class ProfileEditView: BaseView {
     
     var nicknameTextField = ProfileEditTextField()
     
-    var nicknameValidMessageView = ProfileEditValidMessageView()
+    private let nicknameValidMessageView = ProfileEditValidMessageView()
     
     var nicknameLengthLabel = UILabel()
     
@@ -42,13 +42,13 @@ class ProfileEditView: BaseView {
     
     var birthDateTextField = ProfileEditTextField()
     
-    var birthDateValidMessageView = ProfileEditValidMessageView()
+    private let birthDateValidMessageView = ProfileEditValidMessageView()
     
     private let verifiedAreaTitleLabel = UILabel()
     
     var verifiedAreaStackView = UIStackView()
     
-    var verifiedAreaValidMessageView = ProfileEditValidMessageView()
+    private let verifiedAreaValidMessageView = ProfileEditValidMessageView()
     
     var saveButton = UIButton()
     
