@@ -347,6 +347,7 @@ private extension ProfileEditViewController {
         // NOTE: 8자리 제한
         if rawText.count < 8 {
             profileEditView.setBirthdateValidMessage(.invalidDate)
+            profileEditView.birthDateTextField.changeBorderColor(toRed: true)
         } else if rawText.count == 8 {
             // NOTE: Validity 체크
             checkDateValidity(dateString: rawText)
@@ -419,9 +420,11 @@ private extension ProfileEditViewController {
               isBeforeToday(date: date)
         else {
             profileEditView.setBirthdateValidMessage(.invalidDate)
+            profileEditView.birthDateTextField.changeBorderColor(toRed: true)
             return
         }
         profileEditView.setBirthdateValidMessage(.none)
+        profileEditView.birthDateTextField.changeBorderColor(toRed: false)
     }
     
     func makeDate(year: Int, month: Int, day: Int) -> Date? {
