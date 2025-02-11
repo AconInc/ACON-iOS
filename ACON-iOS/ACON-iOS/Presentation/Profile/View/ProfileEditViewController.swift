@@ -127,13 +127,16 @@ private extension ProfileEditViewController {
             $0.birthDateTextField.text = viewModel.userInfo.birthDate
         }
         
-        viewModel.verifiedAreaEditing.bind { [weak self] area in
-            guard let self = self else { return }
-            if area == nil {
+        viewModel.verifiedAreaListEditing.bind { [weak self] areas in
+            guard let self = self,
+                  let areas = areas else { return }
+            print("new areas: \(areas)")
+            
+            if areas.isEmpty {
                 profileEditView.hideVerifiedAreaAddButton(false)
             } else {
                 profileEditView.hideVerifiedAreaAddButton(true)
-                profileEditView.addVerifiedArea(viewModel.verifiedAreaEditing.value ?? "")
+                profileEditView.addVerifiedArea(areas)
             }
         }
     }
@@ -215,13 +218,16 @@ private extension ProfileEditViewController {
     
     @objc
     func tappedVerifiedAreaAddButton() {
-        // TODO: 수정
-        viewModel.verifiedAreaEditing.value = "바뀐 유림동"
+        // TODO: 동네 인증하기 화면으로 연결
+        var newAreas = viewModel.verifiedAreaListEditing.value ?? []
+        newAreas.append(VerifiedAreaModel(id: 1, name: "바뀐 유림동"))
+        viewModel.verifiedAreaListEditing.value = newAreas
     }
     
     @objc
     func deleteVerifiedArea() {
-        viewModel.verifiedAreaEditing.value = nil
+        // TODO: 특정 인덱스만 날리도록 수정 (Sprint3)
+        viewModel.verifiedAreaListEditing.value?.removeAll()
         profileEditView.removeVerifiedArea()
     }
     

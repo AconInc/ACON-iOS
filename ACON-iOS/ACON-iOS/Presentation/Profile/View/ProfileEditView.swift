@@ -266,8 +266,10 @@ class ProfileEditView: BaseView {
         verifiedAreaAddButton.isHidden = isHidden
     }
     
-    func addVerifiedArea(_ areaName: String) {
-        verifiedAreaBox.setLabel(areaName)
+    func addVerifiedArea(_ verifiedAreas: [VerifiedAreaModel]) {
+        // TODO: 추후 여러 개 추가하는 로직으로 변경(Sprint3)
+        let firstAreaName = verifiedAreas.first?.name ?? ""
+        verifiedAreaBox.setLabel(firstAreaName)
         verifiedAreaStackView.addArrangedSubview(verifiedAreaBox)
     }
     

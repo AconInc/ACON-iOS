@@ -13,13 +13,13 @@ class ProfileViewModel {
     
     var onLoginSuccess: ObservablePattern<Bool> = ObservablePattern(AuthManager.shared.hasToken)
     
-    var verifiedAreaEditing: ObservablePattern<String> = ObservablePattern(nil)
+    var verifiedAreaListEditing: ObservablePattern<[VerifiedAreaModel]> = ObservablePattern(nil)
     
     var userInfo = UserInfoModel(
         profileImageURL: "",
         nickname: "김유림",
         birthDate: nil,
-        verifiedArea: "유림동",
+        verifiedAreaList: [VerifiedAreaModel(id: 1, name: "김유림")],
         possessingAcorns: 0
     )
     
@@ -29,7 +29,7 @@ class ProfileViewModel {
     // MARK: - Initializer
     
     init() {
-        verifiedAreaEditing.value = userInfo.verifiedArea
+        verifiedAreaListEditing.value = userInfo.verifiedAreaList
     }
     
 }

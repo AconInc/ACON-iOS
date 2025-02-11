@@ -82,10 +82,13 @@ private extension ProfileViewController {
                   let onLoginSuccess = onLoginSuccess
             else { return }
             
+            // TODO: 인증동네 추후 여러개로 수정(Sprint3)
+            let firstAreaName: String = self.viewModel.userInfo.verifiedAreaList.first?.name ?? "impossible"
+            
             self.profileView.do {
                 $0.needLoginButton.isHidden = onLoginSuccess
                 $0.setVerifiedAreaBox(onLogin: onLoginSuccess,
-                                      areaName: self.viewModel.userInfo.verifiedArea)
+                                      areaName: firstAreaName)
             }
         }
         

@@ -15,8 +15,17 @@ struct UserInfoModel {
     
     var birthDate: String?
     
-    var verifiedArea: String
+    var verifiedAreaList: [VerifiedAreaModel]
     
     var possessingAcorns: Int
+    
+}
+
+
+struct VerifiedAreaModel: Equatable {
+    
+    let id: Int
+    
+    var name: String
     
 }
