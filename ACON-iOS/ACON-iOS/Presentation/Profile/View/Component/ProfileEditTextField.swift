@@ -34,6 +34,7 @@ class ProfileEditTextField: UITextField {
         addTarget()
         addDoneButtonToKeyboard()
         observeText()
+        removeQuickTypeBar()
     }
     
     required init?(coder: NSCoder) {
@@ -102,6 +103,10 @@ class ProfileEditTextField: UITextField {
         toolbar.items = [flexSpace, doneButton]
         
         self.inputAccessoryView = toolbar
+    }
+    
+    private func removeQuickTypeBar() {
+        autocorrectionType = .no
     }
     
     private func observeText() {
