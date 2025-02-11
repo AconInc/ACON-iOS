@@ -14,6 +14,7 @@ class ProfileEditViewController: BaseNavViewController {
     private let profileEditView = ProfileEditView()
     
     private let viewModel: ProfileViewModel
+    private let localVerificationVM = LocalVerificationViewModel(flowType: .profileEdit)
     
     private let validityTestDebouncer = ACDebouncer(delay: 0.5)
     private let validMsgHideDebouncer = ACDebouncer(delay: 2)
@@ -139,6 +140,15 @@ private extension ProfileEditViewController {
                 profileEditView.addVerifiedArea(areas)
             }
         }
+        
+        localVerificationVM.localArea.bind { [weak self] area in
+            guard let self = self,
+                  let area = area else { return }
+            
+            var newAreas = viewModel.verifiedAreaListEditing.value ?? []
+            newAreas.append(VerifiedAreaModel(id: 1, name: area))
+            viewModel.verifiedAreaListEditing.value = newAreas
+        }
     }
     
     func bindObservable() {
@@ -218,10 +228,11 @@ private extension ProfileEditViewController {
     
     @objc
     func tappedVerifiedAreaAddButton() {
-        // TODO: 동네 인증하기 화면으로 연결
-        var newAreas = viewModel.verifiedAreaListEditing.value ?? []
-        newAreas.append(VerifiedAreaModel(id: 1, name: "바뀐 유림동"))
-        viewModel.verifiedAreaListEditing.value = newAreas
+        localVerificationVM.isLocationChecked.value = nil
+        localVerificationVM.onSuccessPostLocalArea.value = nil
+        
+        let vc = LocalVerificationViewController(viewModel: localVerificationVM)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc
