@@ -178,4 +178,8 @@ extension ProfileEditTextField {
         )
     }
     
+    func changeBorderColor(toRed: Bool) {
+        self.layer.borderColor = toRed ? UIColor.red1.cgColor : UIColor.gray6.cgColor
+    }
+    
 }

@@ -176,6 +176,7 @@ private extension ProfileEditViewController {
             
             // NOTE: 텍스트 변하면 유효성 메시지 숨김
             profileEditView.setNicknameValidMessage(.none)
+            profileEditView.nicknameTextField.changeBorderColor(toRed: false)
             
             // NOTE: UI 업데이트 - 글자 수 label
             let phonemeCount = countPhoneme(text: text)
@@ -293,8 +294,9 @@ private extension ProfileEditViewController {
         } else {
             // NOTE: FAIL -> 입력 X
             if phonemeCount <= viewModel.maxNicknameLength {
-                // NOTE: 16자 미만인 경우 유효성 메시지 n초간 띄움
+                // NOTE: 16자 미만인 경우 유효성 메시지 2초간 띄움
                 profileEditView.setNicknameValidMessage(.invalidChar)
+                textField.layer.borderColor = UIColor.red1.cgColor
                 validMsgHideDebouncer.call { [weak self] in
                     guard let self = self else { return }
                     self.testNicknameValidity()
@@ -431,11 +433,13 @@ private extension ProfileEditViewController {
         // NOTE: 닉네임을 입력해주세요.
         if phonemeCount == 0 {
             profileEditView.setNicknameValidMessage(.nicknameMissing)
+            profileEditView.nicknameTextField.changeBorderColor(toRed: true)
         }
         // NOTE: 중복된 닉네임 OR 사용할 수 있는 닉네임
         else {
             // TODO: 서버 요청
             profileEditView.setNicknameValidMessage(.nicknameOK)
+            profileEditView.nicknameTextField.changeBorderColor(toRed: false)
 //            profileEditView.setNicknameValidMessage(.nicknameTaken)
         }
     }
