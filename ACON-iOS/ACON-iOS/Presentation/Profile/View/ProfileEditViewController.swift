@@ -50,6 +50,7 @@ class ProfileEditViewController: BaseNavViewController {
         
         setDelegate()
         addTarget()
+        bindData()
         bindViewModel()
         bindObservable()
     }
@@ -58,6 +59,7 @@ class ProfileEditViewController: BaseNavViewController {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = true
+        configureTextFieldClearButton()
     }
     
     override func setHierarchy() {
@@ -116,7 +118,7 @@ class ProfileEditViewController: BaseNavViewController {
 
 private extension ProfileEditViewController {
     
-    func bindViewModel() {
+    func bindData() {
         // NOTE: 기본 데이터 바인딩
         profileEditView.do {
             $0.setProfileImage(viewModel.userInfo.profileImageURL)
@@ -127,7 +129,9 @@ private extension ProfileEditViewController {
                 )
             $0.birthDateTextField.text = viewModel.userInfo.birthDate
         }
-        
+    }
+    
+    func bindViewModel() {
         viewModel.verifiedAreaListEditing.bind { [weak self] areas in
             guard let self = self,
                   let areas = areas else { return }
@@ -152,7 +156,9 @@ private extension ProfileEditViewController {
     }
     
     func bindObservable() {
-        // NOTE: Keyboard
+        
+        // MARK: - Keyboard
+        
         keyboardWillShowObserver = NotificationCenter.default.addObserver(
             forName: UIResponder.keyboardWillShowNotification,
             object: nil,
@@ -169,12 +175,17 @@ private extension ProfileEditViewController {
             self?.keyboardWillHide(notification)
         }
         
-        // NOTE: 닉네임 TextField - 글자 수, 중복 확인(서버)
+        
+        // MARK: - 닉네임 TextField
+        
+        // NOTE: 글자 수, 중복 확인(서버)
         profileEditView.nicknameTextField.observableText.bind { [weak self] text in
             guard let self = self,
                   let text = text else { return }
             
-            // NOTE: 텍스트 변하면 유효성 메시지 숨김
+            configureTextFieldClearButton()
+            
+            // NOTE: 텍스트 변하면 유효성 메시지 숨김, 텍스트필드 UI 변경
             profileEditView.setNicknameValidMessage(.none)
             profileEditView.nicknameTextField.changeBorderColor(toRed: false)
             
@@ -188,6 +199,15 @@ private extension ProfileEditViewController {
                 guard let self = self else { return }
                 testNicknameValidity()
             }
+        }
+        
+        
+        // MARK: - 생년월일 TextField
+        
+        profileEditView.birthDateTextField.observableText.bind { [weak self] _ in
+            guard let self = self else { return }
+            
+            configureTextFieldClearButton()
         }
     }
     
@@ -311,8 +331,9 @@ private extension ProfileEditViewController {
     
     func birthDateTextFieldChange(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let currentText = textField.text else { return true }
+        let rawText = (currentText.replacingOccurrences(of: ".", with: "") + string)
         
-        // 백스페이스 처리
+        // NOTE: 백스페이스 처리
         if string.isEmpty,
            currentText.last == "." {
             let newRange = NSRange(location: range.location - 1,
@@ -324,7 +345,6 @@ private extension ProfileEditViewController {
         }
         
         // NOTE: 8자리 제한
-        let rawText = (currentText.replacingOccurrences(of: ".", with: "") + string)
         if rawText.count < 8 {
             profileEditView.setBirthdateValidMessage(.invalidDate)
         } else if rawText.count == 8 {
@@ -435,6 +455,7 @@ private extension ProfileEditViewController {
             profileEditView.setNicknameValidMessage(.nicknameMissing)
             profileEditView.nicknameTextField.changeBorderColor(toRed: true)
         }
+        
         // NOTE: 중복된 닉네임 OR 사용할 수 있는 닉네임
         else {
             // TODO: 서버 요청
@@ -442,6 +463,22 @@ private extension ProfileEditViewController {
             profileEditView.nicknameTextField.changeBorderColor(toRed: false)
 //            profileEditView.setNicknameValidMessage(.nicknameTaken)
         }
+    }
+    
+}
+
+
+// MARK: - UI Update methods
+
+private extension ProfileEditViewController {
+    
+    func configureTextFieldClearButton() {
+        
+        let nicknameTF = profileEditView.nicknameTextField
+        let birthDateTF = profileEditView.birthDateTextField
+        
+        nicknameTF.hideClearButton(isHidden: (nicknameTF.text ?? "").isEmpty)
+        birthDateTF.hideClearButton(isHidden: (birthDateTF.text ?? "").isEmpty)
     }
     
 }

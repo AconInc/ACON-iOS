@@ -104,7 +104,7 @@ class ProfileEditTextField: UITextField {
         self.inputAccessoryView = toolbar
     }
     
-    func observeText() {
+    private func observeText() {
         self.addTarget(
             self,
             action: #selector(setObservableText),
@@ -181,6 +181,10 @@ extension ProfileEditTextField {
     
     func changeBorderColor(toRed: Bool) {
         self.layer.borderColor = toRed ? UIColor.red1.cgColor : UIColor.gray6.cgColor
+    }
+    
+    func hideClearButton(isHidden: Bool) {
+        clearButton.isHidden = isHidden
     }
     
 }
