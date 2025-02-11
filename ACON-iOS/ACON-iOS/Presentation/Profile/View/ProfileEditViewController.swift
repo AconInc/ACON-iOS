@@ -91,7 +91,19 @@ class ProfileEditViewController: BaseNavViewController {
     private func addTarget() {
         profileEditView.profileImageEditButton.addTarget(
             self,
-            action: #selector(profileImageEditButtonTapped),
+            action: #selector(tappedProfileImageEditButton),
+            for: .touchUpInside
+        )
+        
+        profileEditView.verifiedAreaAddButton.addTarget(
+            self,
+            action: #selector(tappedVerifiedAreaAddButton),
+            for: .touchUpInside
+        )
+        
+        profileEditView.verifiedAreaBox.addTarget(
+            self,
+            action: #selector(deleteVerifiedArea),
             for: .touchUpInside
         )
     }
@@ -113,6 +125,16 @@ private extension ProfileEditViewController {
                 viewModel.maxNicknameLength
                 )
             $0.birthDateTextField.text = viewModel.userInfo.birthDate
+        }
+        
+        viewModel.verifiedAreaEditing.bind { [weak self] area in
+            guard let self = self else { return }
+            if area == nil {
+                profileEditView.hideVerifiedAreaAddButton(false)
+            } else {
+                profileEditView.hideVerifiedAreaAddButton(true)
+                profileEditView.addVerifiedArea(viewModel.verifiedAreaEditing.value ?? "")
+            }
         }
     }
     
@@ -187,8 +209,20 @@ private extension ProfileEditViewController {
     }
     
     @objc
-    func profileImageEditButtonTapped() {
+    func tappedProfileImageEditButton() {
         print("profileImageEditButtonTapped")
+    }
+    
+    @objc
+    func tappedVerifiedAreaAddButton() {
+        // TODO: 수정
+        viewModel.verifiedAreaEditing.value = "바뀐 유림동"
+    }
+    
+    @objc
+    func deleteVerifiedArea() {
+        viewModel.verifiedAreaEditing.value = nil
+        profileEditView.removeVerifiedArea()
     }
     
 }
