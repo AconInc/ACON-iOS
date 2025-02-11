@@ -66,7 +66,6 @@ class ProfileEditView: BaseView {
         
         nicknameTextField.do {
             $0.setPlaceholder(as: StringLiterals.Profile.nicknamePlaceholder)
-            $0.observeText()
         }
         
         birthDateTitleLabel.setLabel(text: "생년월일", style: .h8)

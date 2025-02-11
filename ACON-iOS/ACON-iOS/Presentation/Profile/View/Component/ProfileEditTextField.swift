@@ -33,6 +33,7 @@ class ProfileEditTextField: UITextField {
         setStyle()
         addTarget()
         addDoneButtonToKeyboard()
+        observeText()
     }
     
     required init?(coder: NSCoder) {
@@ -103,6 +104,14 @@ class ProfileEditTextField: UITextField {
         self.inputAccessoryView = toolbar
     }
     
+    func observeText() {
+        self.addTarget(
+            self,
+            action: #selector(setObservableText),
+            for: .editingChanged
+        )
+    }
+    
 }
 
 
@@ -166,14 +175,6 @@ extension ProfileEditTextField {
         self.addTarget(
             self,
             action: #selector(applyDateFormat),
-            for: .editingChanged
-        )
-    }
-    
-    func observeText() {
-        self.addTarget(
-            self,
-            action: #selector(setObservableText),
             for: .editingChanged
         )
     }
