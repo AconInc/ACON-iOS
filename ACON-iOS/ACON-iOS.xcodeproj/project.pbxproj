@@ -23,6 +23,7 @@
 		1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */; };
 		1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */; };
 		1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */; };
+		15A1471E2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */; };
 		15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */; };
 		15A3F6A82D36D5B900577E16 /* FilterTagButtonStackLineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6A72D36D5B900577E16 /* FilterTagButtonStackLineType.swift */; };
 		15A3F6AC2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */; };
@@ -217,6 +218,7 @@
 		1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarController.swift; sourceTree = "<group>"; };
 		1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarItemType.swift; sourceTree = "<group>"; };
 		1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
+		15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBoxWithDeletableButton.swift; sourceTree = "<group>"; };
 		15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListItemSizeType.swift; sourceTree = "<group>"; };
 		15A3F6A72D36D5B900577E16 /* FilterTagButtonStackLineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagButtonStackLineType.swift; sourceTree = "<group>"; };
 		15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewHeader.swift; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 				15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */,
 				15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */,
 				15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */,
+				15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1445,6 +1448,7 @@
 				74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */,
 				749A01032D3A6E0100CD7A90 /* ACDebouncer.swift in Sources */,
 				7462617F2D3F9F1400A4E84F /* GetSpotDetailResponse.swift in Sources */,
+				15A1471E2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift in Sources */,
 				745C7E0D2D35A04A0074DBDB /* SearchKeywordCollectionViewCell.swift in Sources */,
 				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
 				74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */,
