@@ -106,7 +106,7 @@ extension LoginViewController {
     }
     
     func navigateToLocalVerificationVC() {
-        let vm = LocalVerificationViewModel()
+        let vm = LocalVerificationViewModel(flowType: .onboarding)
         let vc = LocalVerificationViewController(viewModel: vm)
         self.navigationController?.pushViewController(vc, animated: false)
     }
