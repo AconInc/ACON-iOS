@@ -56,6 +56,14 @@ class LocalVerificationViewController: BaseNavViewController {
         }
     }
     
+    override func setStyle() {
+        super.setStyle()
+        
+        if localVerificationViewModel.flowType == .profileEdit {
+            self.setBackButton()
+        }
+    }
+    
     func addTarget() {
         localVerificationView.verifyNewLocalButton.addTarget(self,
                                                              action: #selector(verifyLocationButtonTapped),
