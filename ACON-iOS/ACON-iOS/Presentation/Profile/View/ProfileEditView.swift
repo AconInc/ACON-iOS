@@ -87,7 +87,7 @@ class ProfileEditView: BaseView {
             config.contentInsets = .init(top: 12, leading: 12, bottom: 12, trailing: 16)
             config.attributedTitle = AttributedString("동네 추가하기".ACStyle(.s1))
             config.image = .icAdd20
-            config.imagePadding = 8
+            config.imagePadding = 27
             config.imagePlacement = .trailing
             config.background.cornerRadius = 4
             config.background.strokeColor = .gray5

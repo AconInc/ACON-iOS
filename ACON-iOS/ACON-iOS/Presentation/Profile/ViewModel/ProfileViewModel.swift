@@ -19,7 +19,7 @@ class ProfileViewModel {
         profileImageURL: "",
         nickname: "김유림",
         birthDate: nil,
-        verifiedAreaList: [VerifiedAreaModel(id: 1, name: "김유림")],
+        verifiedAreaList: [VerifiedAreaModel(id: 1, name: "유림동")],
         possessingAcorns: 0
     )
     
