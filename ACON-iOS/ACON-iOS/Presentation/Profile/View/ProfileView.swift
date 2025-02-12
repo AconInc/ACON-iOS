@@ -86,7 +86,7 @@ final class ProfileView: BaseView {
         )
         
         verifiedAreaBox.setStyle(
-            title: StringLiterals.Profile.verifiedArea,
+            title: StringLiterals.Profile.myVerifiedArea,
             icon: .icHometownG20
         )
         
@@ -201,7 +201,7 @@ extension ProfileView {
     
     func setVerifiedAreaBox(onLogin: Bool, areaName: String) {
         let label = UILabel()
-        label.setLabel(text: onLogin ? areaName : "미인증",
+        label.setLabel(text: onLogin ? areaName : StringLiterals.Profile.notVerified,
                        style: .t2,
                        color: onLogin ? .org1 : .gray5)
         

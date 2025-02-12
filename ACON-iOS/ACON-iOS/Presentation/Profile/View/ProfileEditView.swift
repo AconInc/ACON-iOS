@@ -62,13 +62,13 @@ class ProfileEditView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        nicknameTitleLabel.setLabel(text: "닉네임", style: .h8)
+        nicknameTitleLabel.setLabel(text: StringLiterals.Profile.nickname, style: .h8)
         
         nicknameTextField.do {
             $0.setPlaceholder(as: StringLiterals.Profile.nicknamePlaceholder)
         }
         
-        birthDateTitleLabel.setLabel(text: "생년월일", style: .h8)
+        birthDateTitleLabel.setLabel(text: StringLiterals.Profile.birthDate, style: .h8)
         
         birthDateTextField.do {
             $0.setPlaceholder(as: StringLiterals.Profile.birthDatePlaceholder)
@@ -76,7 +76,7 @@ class ProfileEditView: BaseView {
             $0.keyboardType = .numberPad
         }
         
-        verifiedAreaTitleLabel.setLabel(text: "인증동네", style: .h8)
+        verifiedAreaTitleLabel.setLabel(text: StringLiterals.Profile.verifiedArea, style: .h8)
         
         verifiedAreaStackView.do {
             $0.axis = .horizontal
@@ -85,7 +85,7 @@ class ProfileEditView: BaseView {
         verifiedAreaAddButton.do {
             var config = UIButton.Configuration.plain()
             config.contentInsets = .init(top: 12, leading: 12, bottom: 12, trailing: 16)
-            config.attributedTitle = AttributedString("동네 추가하기".ACStyle(.s1))
+            config.attributedTitle = AttributedString(StringLiterals.Profile.addVerifiedArea.ACStyle(.s1))
             config.image = .icAdd20
             config.imagePadding = 27
             config.imagePlacement = .trailing
@@ -97,7 +97,7 @@ class ProfileEditView: BaseView {
         
         saveButton.do {
             var config = UIButton.Configuration.filled()
-            config.attributedTitle = AttributedString("저장".ACStyle(.h7))
+            config.attributedTitle = AttributedString(StringLiterals.Profile.save.ACStyle(.h7))
             config.baseBackgroundColor = .gray7
             config.baseForegroundColor = .gray5
             $0.configuration = config
