@@ -97,15 +97,16 @@ class ProfileEditView: BaseView {
         
         saveButton.do {
             var config = UIButton.Configuration.filled()
-            config.attributedTitle = AttributedString(StringLiterals.Profile.save.ACStyle(.h7))
+            config.attributedTitle = AttributedString(StringLiterals.Profile.save.ACStyle(.h7, .gray5))
             config.baseBackgroundColor = .gray7
-            config.baseForegroundColor = .gray5
             $0.configuration = config
         }
         
         saveButton.configurationUpdateHandler = {
             guard var config = $0.configuration else { return }
-            config.baseForegroundColor = $0.isEnabled ? .acWhite : .gray5
+            config.attributedTitle = AttributedString(
+                StringLiterals.Profile.save.ACStyle(.h7, $0.isEnabled ? .acWhite : .gray5)
+            )
             $0.configuration = config
         }
     }
