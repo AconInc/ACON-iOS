@@ -88,12 +88,13 @@ private extension LocalMapViewController {
     func bindViewModel() {
         self.localVerificationViewModel.onSuccessPostLocalArea.bind { [weak self] onSuccess in
             guard let onSuccess,
-                  let data = self?.localVerificationViewModel.localArea.value
+                  let data = self?.localVerificationViewModel.localArea.value,
+                  let flowType = self?.localVerificationViewModel.flowType
             else { return }
             
             print("onSuccessPostLocalArea: \(onSuccess)")
             if onSuccess {
-                switch self?.localVerificationViewModel.flowType {
+                switch flowType {
                 case .onboarding:
                     self?.localArea = data
                     self?.presentVerificationFinsishedVC()
@@ -105,8 +106,6 @@ private extension LocalMapViewController {
                             self?.navigationController?.popToViewController(profileEditVC.self, animated: true)
                         }
                     }
-                case .none:
-                    print("impossible case")
                 }
             }
         }
