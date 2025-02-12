@@ -10,6 +10,8 @@ import UIKit
 
 class AlbumViewModel {
 
+    // TODO: 메모리 최적화 처리
+    // TODO: PhotoManager로 로직 모두 옮길 것
     var photosInCurrentAlbum = PHFetchResult<PHAsset>()
     
     var smartAlbums = [PHAssetCollection]()
@@ -153,7 +155,7 @@ class AlbumViewModel {
     
     private var currentIndex = 0
     
-    private let fetchLimit = 80
+    private let fetchLimit = 50
 
     private var isLoadingPhotos = false
     

@@ -153,14 +153,13 @@ extension PhotoCollectionViewController: UICollectionViewDelegateFlowLayout {
         //TODO: - dim 처리
     }
     
+    /// 스크롤 시 다음 사진 batch를 불러줌.
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         let frameHeight = scrollView.frame.height
         
-        print(offsetY, contentHeight, frameHeight)
         if offsetY > contentHeight - frameHeight - 30 {
-            print("부르라고")
             loadPhotos()
         }
     }
