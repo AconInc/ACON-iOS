@@ -63,6 +63,8 @@
 		7414295D2D5D313200B69528 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7414295C2D5D312C00B69528 /* UITableViewCell+.swift */; };
 		741429602D5D391000B69528 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7414295F2D5D390B00B69528 /* SettingType.swift */; };
 		741429632D5D3CED00B69528 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741429622D5D3CE900B69528 /* SettingTableViewCell.swift */; };
+		741429652D5D470200B69528 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741429642D5D46FC00B69528 /* SettingViewModel.swift */; };
+		741429672D5D550C00B69528 /* AppVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741429662D5D550400B69528 /* AppVersionManager.swift */; };
 		741A06C82D3532E500778219 /* DropAcornView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741A06C72D3532E000778219 /* DropAcornView.swift */; };
 		741A06CA2D35415800778219 /* DropAcornViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741A06C92D35415200778219 /* DropAcornViewController.swift */; };
 		741A07572D3558FE00778219 /* ReviewFinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741A07562D3558F700778219 /* ReviewFinishedView.swift */; };
@@ -262,6 +264,8 @@
 		7414295C2D5D312C00B69528 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
 		7414295F2D5D390B00B69528 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
 		741429622D5D3CE900B69528 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		741429642D5D46FC00B69528 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		741429662D5D550400B69528 /* AppVersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionManager.swift; sourceTree = "<group>"; };
 		741A06C72D3532E000778219 /* DropAcornView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropAcornView.swift; sourceTree = "<group>"; };
 		741A06C92D35415200778219 /* DropAcornViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropAcornViewController.swift; sourceTree = "<group>"; };
 		741A07562D3558F700778219 /* ReviewFinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFinishedView.swift; sourceTree = "<group>"; };
@@ -645,6 +649,7 @@
 		15CF62C32D579F090000A10F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				741429642D5D46FC00B69528 /* SettingViewModel.swift */,
 				15CF62C42D579F2D0000A10F /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
@@ -827,6 +832,7 @@
 		7462D0232D4262EA00580464 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				741429662D5D550400B69528 /* AppVersionManager.swift */,
 				7462D0242D4262EF00580464 /* AuthManager.swift */,
 			);
 			path = Service;
@@ -1527,6 +1533,7 @@
 				741A07592D355F1400778219 /* ReviewFinishedViewController.swift in Sources */,
 				15A3F6AC2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift in Sources */,
 				748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */,
+				741429672D5D550C00B69528 /* AppVersionManager.swift in Sources */,
 				74205D2F2D40351700D11557 /* SocialType.swift in Sources */,
 				745C7E042D3599DF0074DBDB /* SpotSearchViewController.swift in Sources */,
 				74B25C2C2D2FEE8E008BDCB7 /* Config.swift in Sources */,
@@ -1566,6 +1573,7 @@
 				15A48BFC2D574BB9003C2421 /* ProfileEditViewController.swift in Sources */,
 				7462D0252D4262F300580464 /* AuthManager.swift in Sources */,
 				74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */,
+				741429652D5D470200B69528 /* SettingViewModel.swift in Sources */,
 				74BF92042D3861A600B923E3 /* SpotDetailViewController.swift in Sources */,
 				15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */,
 				1547A8732D34157700E96616 /* SpotListViewModel.swift in Sources */,
