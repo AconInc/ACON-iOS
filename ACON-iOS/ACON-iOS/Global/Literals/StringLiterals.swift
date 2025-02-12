@@ -303,6 +303,8 @@ enum StringLiterals {
     
     enum Profile {
         
+        static let profilePageTitle = "프로필"
+        
         static let profileEditPageTitle = "프로필 편집"
         
         static let profileEditButton = "프로필 수정하기"
