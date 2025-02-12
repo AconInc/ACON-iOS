@@ -22,9 +22,9 @@ class ProfileEditViewController: BaseNavViewController {
     private var keyboardWillShowObserver: NSObjectProtocol?
     private var keyboardWillHideObserver: NSObjectProtocol?
     
-    private var isNicknameAvailable: Bool = false
-    private var isBirthDateAvailable: Bool = false
-    private var isVerifiedAreaAvailable: Bool = false
+    private var isNicknameAvailable: Bool = true
+    private var isBirthDateAvailable: Bool = true
+    private var isVerifiedAreaAvailable: Bool = true
     
     
     // MARK: - Life Cycle
@@ -63,7 +63,8 @@ class ProfileEditViewController: BaseNavViewController {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = true
-        configureTextFieldClearButton()
+        let birthDateTF = profileEditView.birthDateTextField
+        birthDateTF.hideClearButton(isHidden: (birthDateTF.text ?? "").isEmpty)
         checkSaveAvailability()
     }
     
@@ -198,7 +199,7 @@ private extension ProfileEditViewController {
             guard let self = self,
                   let text = text else { return }
             
-            configureTextFieldClearButton()
+            profileEditView.nicknameTextField.hideClearButton(isHidden: text.isEmpty)
             
             // NOTE: 텍스트 변하면 유효성 메시지 숨김, 텍스트필드 UI 변경
             profileEditView.setNicknameValidMessage(.none)
@@ -219,10 +220,11 @@ private extension ProfileEditViewController {
         
         // MARK: - 생년월일 TextField
         
-        profileEditView.birthDateTextField.observableText.bind { [weak self] _ in
+        profileEditView.birthDateTextField.observableText.bind { [weak self] text in
             guard let self = self else { return }
+            let bindedText = text ?? ""
             
-            configureTextFieldClearButton()
+            profileEditView.birthDateTextField.hideClearButton(isHidden: bindedText.isEmpty)
         }
     }
     
@@ -369,12 +371,13 @@ private extension ProfileEditViewController {
     // MARK: - 생년월일
     
     func birthDateTextFieldChange(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let currentText = textField.text else { return true }
-        let rawText = (currentText.replacingOccurrences(of: ".", with: "") + string)
+        guard let currentString = textField.text else { print("date = nil"); return true }
+        let newString = (currentString as NSString).replacingCharacters(in: range, with: string)
+        let newRawString = (newString.replacingOccurrences(of: ".", with: ""))
         
         // NOTE: 백스페이스 처리
         if string.isEmpty,
-           currentText.last == "." {
+           currentString.last == "." {
             let newRange = NSRange(location: range.location - 1,
                                    length: range.length + 1)
             let newString = (textField.text as NSString?)?.replacingCharacters(
@@ -385,16 +388,20 @@ private extension ProfileEditViewController {
         
         // NOTE: 8자리 제한
         // TODO: 길이 0인 경우 OK인지 기획 확인
-        if rawText.count < 8 {
+        if newRawString.count == 0 {
+            profileEditView.setBirthdateValidMessage(.none)
+            profileEditView.birthDateTextField.changeBorderColor(toRed: false)
+            isBirthDateAvailable = true
+        } else if newRawString.count < 8 {
             profileEditView.setBirthdateValidMessage(.invalidDate)
             profileEditView.birthDateTextField.changeBorderColor(toRed: true)
             isBirthDateAvailable = false
-        } else if rawText.count == 8 {
+        } else if newRawString.count == 8 {
             // NOTE: Validity 체크
-            checkDateValidity(dateString: rawText)
+            checkBirthDateValidity(dateString: newRawString)
         }
         
-        return rawText.count > 8 ? false : true
+        return newRawString.count > 8 ? false : true
     }
     
 }
@@ -482,7 +489,7 @@ private extension ProfileEditViewController {
     // MARK: - 생년월일
     
     // NOTE: 생년월일 유효성 검사
-    func checkDateValidity(dateString: String) {
+    func checkBirthDateValidity(dateString: String) {
         guard dateString.count == 8,
               let year = Int(String(Array(dateString)[0..<4])),
               let month = Int(String(Array(dateString)[4..<6])),
@@ -519,22 +526,6 @@ private extension ProfileEditViewController {
     func isBeforeToday(date: Date) -> Bool {
         let today = Date()
         return date < today
-    }
-    
-}
-
-
-// MARK: - UI Update methods
-
-private extension ProfileEditViewController {
-    
-    func configureTextFieldClearButton() {
-        
-        let nicknameTF = profileEditView.nicknameTextField
-        let birthDateTF = profileEditView.birthDateTextField
-        
-        nicknameTF.hideClearButton(isHidden: (nicknameTF.text ?? "").isEmpty)
-        birthDateTF.hideClearButton(isHidden: (birthDateTF.text ?? "").isEmpty)
     }
     
 }
