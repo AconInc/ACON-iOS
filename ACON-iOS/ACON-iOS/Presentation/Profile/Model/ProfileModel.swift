@@ -21,6 +21,18 @@ struct UserInfoModel {
     
 }
 
+struct UserInfoEditModel {
+    
+    var profileImageURL: String
+    
+    var nickname: String
+    
+    var birthDate: String?
+    
+    var verifiedAreaList: [VerifiedAreaModel]
+    
+}
+
 
 struct VerifiedAreaModel: Equatable {
     

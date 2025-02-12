@@ -32,4 +32,14 @@ class ProfileViewModel {
         verifiedAreaListEditing.value = userInfo.verifiedAreaList
     }
     
+    
+    // MARK: - Methods
+    
+    func updateUserInfo(newUserInfo: UserInfoEditModel) {
+        userInfo.profileImageURL = newUserInfo.profileImageURL
+        userInfo.nickname = newUserInfo.nickname
+        userInfo.birthDate = newUserInfo.birthDate
+        userInfo.verifiedAreaList = newUserInfo.verifiedAreaList
+    }
+    
 }

@@ -109,6 +109,12 @@ class ProfileEditViewController: BaseNavViewController {
             action: #selector(deleteVerifiedArea),
             for: .touchUpInside
         )
+        
+        profileEditView.saveButton.addTarget(
+            self,
+            action: #selector(tappedSaveButton),
+            for: .touchUpInside
+        )
     }
     
 }
@@ -244,6 +250,7 @@ private extension ProfileEditViewController {
     
     @objc
     func tappedProfileImageEditButton() {
+        // TODO: 수정
         print("profileImageEditButtonTapped")
     }
     
@@ -261,6 +268,25 @@ private extension ProfileEditViewController {
         // TODO: 특정 인덱스만 날리도록 수정 (Sprint3)
         viewModel.verifiedAreaListEditing.value?.removeAll()
         profileEditView.removeVerifiedArea()
+    }
+    
+    @objc
+    func tappedSaveButton() {
+        guard let nickname: String = profileEditView.nicknameTextField.text,
+              let verifiedAreaList = viewModel.verifiedAreaListEditing.value else { return }
+        
+        viewModel.updateUserInfo(
+            newUserInfo: UserInfoEditModel(
+                profileImageURL: "newProfileImageURL", // TODO: 수정
+                nickname: nickname,
+                birthDate: profileEditView.birthDateTextField.text,
+                verifiedAreaList: verifiedAreaList
+            )
+        )
+        
+        // TODO: 서버 Post
+        
+        self.navigationController?.popViewController(animated: true)
     }
     
 }
