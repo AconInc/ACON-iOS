@@ -33,6 +33,7 @@ class ProfileEditTextField: UITextField {
         setStyle()
         addTarget()
         addDoneButtonToKeyboard()
+        observeText()
     }
     
     required init?(coder: NSCoder) {
@@ -40,34 +41,9 @@ class ProfileEditTextField: UITextField {
     }
     
     private func setStyle() {
-        self.do {
-            $0.backgroundColor = .gray9
-            $0.defaultTextAttributes = [
-                .font: ACFontStyleType.s1.font,
-                .kern: ACFontStyleType.s1.kerning,
-                .foregroundColor: UIColor.acWhite
-            ]
-            $0.layer.borderColor = UIColor.gray6.cgColor
-            $0.layer.borderWidth = 1
-            $0.layer.cornerRadius = 4
-            
-            $0.rightView?.frame = CGRect(
-                x: 0,
-                y: 0,
-                width: clearButtonSize + clearButtonSpacing + horizontalInset,
-                height: clearButtonSize
-            )
-            $0.rightView = clearButton
-            $0.rightViewMode = .always
-            
-            $0.leftView = UIView(frame: CGRect(
-                x: 0,
-                y: 0,
-                width: horizontalInset,
-                height: self.frame.height
-            ))
-            $0.leftViewMode = .always
-        }
+        setTextFieldStyle()
+        
+        setKeyboardStyle()
         
         clearButton.do {
             var config = UIButton.Configuration.plain()
@@ -101,6 +77,58 @@ class ProfileEditTextField: UITextField {
         toolbar.items = [flexSpace, doneButton]
         
         self.inputAccessoryView = toolbar
+    }
+    
+    private func observeText() {
+        self.addTarget(
+            self,
+            action: #selector(setObservableText),
+            for: .editingChanged
+        )
+    }
+    
+}
+
+
+// MARK: - UI Setting Methods
+
+private extension ProfileEditTextField {
+    
+    func setTextFieldStyle() {
+        self.do {
+            $0.backgroundColor = .gray9
+            $0.defaultTextAttributes = [
+                .font: ACFontStyleType.s1.font,
+                .kern: ACFontStyleType.s1.kerning,
+                .foregroundColor: UIColor.acWhite
+            ]
+            $0.layer.borderColor = UIColor.gray6.cgColor
+            $0.layer.borderWidth = 1
+            $0.layer.cornerRadius = 4
+        }
+    }
+    
+    func setKeyboardStyle() {
+        self.do {
+            $0.autocorrectionType = .no
+            
+            $0.rightView?.frame = CGRect(
+                x: 0,
+                y: 0,
+                width: clearButtonSize + clearButtonSpacing + horizontalInset,
+                height: clearButtonSize
+            )
+            $0.rightView = clearButton
+            $0.rightViewMode = .always
+            
+            $0.leftView = UIView(frame: CGRect(
+                x: 0,
+                y: 0,
+                width: horizontalInset,
+                height: self.frame.height
+            ))
+            $0.leftViewMode = .always
+        }
     }
     
 }
@@ -170,12 +198,12 @@ extension ProfileEditTextField {
         )
     }
     
-    func observeText() {
-        self.addTarget(
-            self,
-            action: #selector(setObservableText),
-            for: .editingChanged
-        )
+    func changeBorderColor(toRed: Bool) {
+        self.layer.borderColor = toRed ? UIColor.red1.cgColor : UIColor.gray6.cgColor
+    }
+    
+    func hideClearButton(isHidden: Bool) {
+        clearButton.isHidden = isHidden
     }
     
 }

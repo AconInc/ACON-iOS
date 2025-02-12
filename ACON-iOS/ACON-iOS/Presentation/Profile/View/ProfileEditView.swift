@@ -32,25 +32,29 @@ class ProfileEditView: BaseView {
     
     private let nicknameTitleLabel = UILabel()
     
-    var nicknameTextField = ProfileEditTextField()
+    let nicknameTextField = ProfileEditTextField()
     
     private let nicknameValidMessageView = ProfileEditValidMessageView()
     
-    var nicknameLengthLabel = UILabel()
+    let nicknameLengthLabel = UILabel()
     
     private let birthDateTitleLabel = UILabel()
     
-    var birthDateTextField = ProfileEditTextField()
+    let birthDateTextField = ProfileEditTextField()
     
     private let birthDateValidMessageView = ProfileEditValidMessageView()
     
     private let verifiedAreaTitleLabel = UILabel()
     
-    var verifiedAreaStackView = UIStackView()
+    let verifiedAreaStackView = UIStackView()
+    
+    let verifiedAreaAddButton = UIButton()
+    
+    let verifiedAreaBox = LabelBoxWithDeletableButton()
     
     private let verifiedAreaValidMessageView = ProfileEditValidMessageView()
     
-    var saveButton = UIButton()
+    let saveButton = UIButton()
     
     
     // MARK: - LifeCycles
@@ -58,14 +62,13 @@ class ProfileEditView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        nicknameTitleLabel.setLabel(text: "닉네임", style: .h8)
+        nicknameTitleLabel.setLabel(text: StringLiterals.Profile.nickname, style: .h8)
         
         nicknameTextField.do {
             $0.setPlaceholder(as: StringLiterals.Profile.nicknamePlaceholder)
-            $0.observeText()
         }
         
-        birthDateTitleLabel.setLabel(text: "생년월일", style: .h8)
+        birthDateTitleLabel.setLabel(text: StringLiterals.Profile.birthDate, style: .h8)
         
         birthDateTextField.do {
             $0.setPlaceholder(as: StringLiterals.Profile.birthDatePlaceholder)
@@ -73,15 +76,28 @@ class ProfileEditView: BaseView {
             $0.keyboardType = .numberPad
         }
         
-        verifiedAreaTitleLabel.setLabel(text: "인증동네", style: .h8)
+        verifiedAreaTitleLabel.setLabel(text: StringLiterals.Profile.verifiedArea, style: .h8)
         
         verifiedAreaStackView.do {
-            $0.backgroundColor = .blue2
+            $0.axis = .horizontal
+        }
+        
+        verifiedAreaAddButton.do {
+            var config = UIButton.Configuration.plain()
+            config.contentInsets = .init(top: 12, leading: 12, bottom: 12, trailing: 16)
+            config.attributedTitle = AttributedString(StringLiterals.Profile.addVerifiedArea.ACStyle(.s1))
+            config.image = .icAdd20
+            config.imagePadding = 27
+            config.imagePlacement = .trailing
+            config.background.cornerRadius = 4
+            config.background.strokeColor = .gray5
+            config.background.strokeWidth = 1
+            $0.configuration = config
         }
         
         saveButton.do {
             var config = UIButton.Configuration.filled()
-            config.attributedTitle = AttributedString("저장".ACStyle(.h7))
+            config.attributedTitle = AttributedString(StringLiterals.Profile.save.ACStyle(.h7))
             config.baseBackgroundColor = .gray7
             config.baseForegroundColor = .gray5
             $0.configuration = config
@@ -116,6 +132,10 @@ class ProfileEditView: BaseView {
             verifiedAreaTitleLabel,
             verifiedAreaStackView,
             verifiedAreaValidMessageView
+        )
+        
+        verifiedAreaStackView.addArrangedSubviews(
+            verifiedAreaAddButton
         )
     }
     
@@ -193,6 +213,16 @@ class ProfileEditView: BaseView {
             $0.leading.equalToSuperview().offset(horizontalInset)
         }
         
+        verifiedAreaAddButton.snp.makeConstraints {
+            $0.height.equalTo(48)
+            $0.width.equalTo(160)
+        }
+        
+        verifiedAreaBox.snp.makeConstraints{
+            $0.width.equalTo(160)
+            $0.height.equalTo(48)
+        }
+        
         verifiedAreaValidMessageView.snp.makeConstraints {
             $0.top.equalTo(verifiedAreaStackView.snp.bottom).offset(validMessageOffset)
             $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
@@ -229,6 +259,22 @@ class ProfileEditView: BaseView {
                 (text: slashMaxStr, style: .s2, color: .gray5)
             ]
         )
+    }
+    
+    func hideVerifiedAreaAddButton(_ isHidden: Bool) {
+        verifiedAreaAddButton.isHidden = isHidden
+    }
+    
+    func addVerifiedArea(_ verifiedAreas: [VerifiedAreaModel]) {
+        // TODO: 추후 여러 개 추가하는 로직으로 변경(Sprint3)
+        let firstAreaName = verifiedAreas.first?.name ?? ""
+        verifiedAreaBox.setLabel(firstAreaName)
+        verifiedAreaStackView.addArrangedSubview(verifiedAreaBox)
+    }
+    
+    func removeVerifiedArea() {
+        verifiedAreaStackView.removeArrangedSubview(verifiedAreaBox)
+        verifiedAreaBox.removeFromSuperview()
     }
     
 }

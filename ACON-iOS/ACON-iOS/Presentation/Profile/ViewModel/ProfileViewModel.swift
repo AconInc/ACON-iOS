@@ -13,14 +13,23 @@ class ProfileViewModel {
     
     var onLoginSuccess: ObservablePattern<Bool> = ObservablePattern(AuthManager.shared.hasToken)
     
+    var verifiedAreaListEditing: ObservablePattern<[VerifiedAreaModel]> = ObservablePattern(nil)
+    
     var userInfo = UserInfoModel(
         profileImageURL: "",
         nickname: "김유림",
         birthDate: nil,
-        verifiedArea: "유림동",
+        verifiedAreaList: [VerifiedAreaModel(id: 1, name: "유림동")],
         possessingAcorns: 0
     )
     
     let maxNicknameLength: Int = 16
+    
+    
+    // MARK: - Initializer
+    
+    init() {
+        verifiedAreaListEditing.value = userInfo.verifiedAreaList
+    }
     
 }
