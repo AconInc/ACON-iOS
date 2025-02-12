@@ -13,17 +13,38 @@ final class PhotoCollectionViewCell: BaseCollectionViewCell {
     
     private let photoImageView: UIImageView = UIImageView()
     
+    private let dimView: UIView = UIView()
+    
+    private let whiteView: UIView = UIView()
+    
+    
+    // MARK: - Properties
+    
+    override var isSelected: Bool {
+        didSet {
+            whiteView.alpha = isSelected ? 0.3 : 0
+            dimView.alpha = isSelected ? 0.3 : 0
+        }
+    }
     
     // MARK: - Lifecycle
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubview(photoImageView)
+        self.addSubviews(photoImageView, whiteView, dimView)
     }
     
     override func setLayout() {
         super.setLayout()
+        
+        whiteView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        dimView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         
         photoImageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -34,6 +55,16 @@ final class PhotoCollectionViewCell: BaseCollectionViewCell {
         super.setStyle()
         
         self.backgroundColor = .clear
+        self.isSelected = false
+        
+        whiteView.do {
+            $0.backgroundColor = .white
+        }
+        
+        dimView.do {
+            $0.backgroundColor = .gray6
+        }
+        
         photoImageView.do {
             $0.backgroundColor = .gray6
             $0.clipsToBounds = true

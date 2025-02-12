@@ -33,6 +33,8 @@ class PhotoCollectionViewController: BaseNavViewController {
 
     private var isDataLoaded = false
     
+    var selectedIndexPath: IndexPath?
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -70,7 +72,7 @@ class PhotoCollectionViewController: BaseNavViewController {
         
         self.setCenterTitleLabelStyle(title: "앨범")
         self.setBackButton()
-        self.setNextButton()
+        self.setSelectButton()
         
         photoCollectionView.do {
             $0.backgroundColor = .clear
@@ -150,7 +152,17 @@ extension PhotoCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //TODO: - dim 처리
+        if let previousIndexPath = selectedIndexPath {
+            // NOTE: deselectItem 메소드 사용 시 가끔 오류
+            if let cell = collectionView.cellForItem(at: previousIndexPath) as? PhotoCollectionViewCell {
+                cell.isSelected = false
+            }
+        }
+        
+        selectedIndexPath = indexPath
+        if let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell {
+            cell.isSelected = true
+        }
     }
     
     /// 스크롤 시 다음 사진 batch를 불러줌.
