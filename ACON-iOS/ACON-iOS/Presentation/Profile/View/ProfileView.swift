@@ -98,7 +98,6 @@ final class ProfileView: BaseView {
             $0.setSecondaryContentView(to: notVerifiedLabel)
         }
         
-        
         disableAutoLoginButton.do { // TODO: 삭제
             $0.setAttributedTitle(text: "자동로그인 해제", style: .b4)
             $0.layer.borderColor = UIColor.acWhite.cgColor
