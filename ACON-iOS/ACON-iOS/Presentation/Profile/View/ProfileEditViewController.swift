@@ -22,9 +22,21 @@ class ProfileEditViewController: BaseNavViewController {
     private var keyboardWillShowObserver: NSObjectProtocol?
     private var keyboardWillHideObserver: NSObjectProtocol?
     
-    private var isNicknameAvailable: Bool = true
-    private var isBirthDateAvailable: Bool = true
-    private var isVerifiedAreaAvailable: Bool = true
+    private var isNicknameAvailable: Bool = true {
+        didSet {
+            checkSaveAvailability()
+        }
+    }
+    private var isBirthDateAvailable: Bool = true {
+        didSet {
+            checkSaveAvailability()
+        }
+    }
+    private var isVerifiedAreaAvailable: Bool = true {
+        didSet {
+            checkSaveAvailability()
+        }
+    }
     
     
     // MARK: - Life Cycle
@@ -161,8 +173,6 @@ private extension ProfileEditViewController {
                 profileEditView.addVerifiedArea(areas)
                 isVerifiedAreaAvailable = true
             }
-            
-            checkSaveAvailability()
         }
         
         localVerificationVM.localArea.bind { [weak self] area in
@@ -204,9 +214,8 @@ private extension ProfileEditViewController {
             guard let self = self,
                   let text = text else { return }
             
-            // NOTE: 닉네임 필드 값이 변하면 일단 막기 (유효성검사를 0.5초 뒤에 하기 때문에)
+            // NOTE: 닉네임 필드 값이 변하면 일단 저장 막기 (유효성검사를 0.5초 뒤에 하기 때문에)
             isNicknameAvailable = false
-            checkSaveAvailability()
             
             profileEditView.nicknameTextField.hideClearButton(isHidden: text.isEmpty)
             
@@ -223,7 +232,6 @@ private extension ProfileEditViewController {
             validityTestDebouncer.call { [weak self] in
                 guard let self = self else { return }
                 checkNicknameValidity()
-                checkSaveAvailability()
             }
         }
         
@@ -241,8 +249,6 @@ private extension ProfileEditViewController {
                 profileEditView.birthDateTextField.changeBorderColor(toRed: false)
                 isBirthDateAvailable = true
             }
-            
-            checkSaveAvailability()
         }
     }
     
@@ -385,7 +391,7 @@ private extension ProfileEditViewController {
     // MARK: - 생년월일
     
     func birthDateTextFieldChange(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let currentString = textField.text else { print("date = nil"); return true }
+        guard let currentString = textField.text else { return true }
         let newString = (currentString as NSString).replacingCharacters(in: range, with: string)
         let newRawString = (newString.replacingOccurrences(of: ".", with: ""))
         
