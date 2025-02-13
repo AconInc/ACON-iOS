@@ -85,10 +85,19 @@ final class ProfileView: BaseView {
             icon: .icLocalAconG20
         )
         
-        verifiedAreaBox.setStyle(
-            title: StringLiterals.Profile.myVerifiedArea,
-            icon: .icHometownG20
-        )
+        verifiedAreaBox.do {
+            $0.setStyle(
+                title: StringLiterals.Profile.myVerifiedArea,
+                icon: .icHometownG20
+            )
+            
+            let notVerifiedLabel = UILabel()
+            notVerifiedLabel.setLabel(text: StringLiterals.Profile.notVerified,
+                           style: .t2,
+                           color: .gray5)
+            $0.setSecondaryContentView(to: notVerifiedLabel)
+        }
+        
         
         disableAutoLoginButton.do { // TODO: 삭제
             $0.setAttributedTitle(text: "자동로그인 해제", style: .b4)
@@ -199,13 +208,17 @@ extension ProfileView {
         acornCountBox.setContentView(to: acornCountabel)
     }
     
-    func setVerifiedAreaBox(onLogin: Bool, areaName: String) {
+    func setVerifiedAreaBox(areaName: String) {
         let label = UILabel()
-        label.setLabel(text: onLogin ? areaName : StringLiterals.Profile.notVerified,
+        label.setLabel(text: areaName,
                        style: .t2,
-                       color: onLogin ? .org1 : .gray5)
+                       color: .org1)
         
         verifiedAreaBox.setContentView(to: label)
+    }
+    
+    func setVerifiedAreaBox(onLoginSuccess: Bool) {
+        verifiedAreaBox.switchContentView(toSecondary: !onLoginSuccess)
     }
     
 }
