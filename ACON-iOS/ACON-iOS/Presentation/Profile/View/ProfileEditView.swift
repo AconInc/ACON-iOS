@@ -62,7 +62,13 @@ class ProfileEditView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        nicknameTitleLabel.setLabel(text: StringLiterals.Profile.nickname, style: .h8)
+        nicknameTitleLabel.setPartialText(
+            fullText: StringLiterals.Profile.nickname + StringLiterals.Profile.neccessaryStarWithSpace,
+            textStyles: [
+                (text: StringLiterals.Profile.nickname, style: .h8, color: .acWhite),
+                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .h8, color: .org1)
+            ]
+        )
         
         nicknameTextField.do {
             $0.setPlaceholder(as: StringLiterals.Profile.nicknamePlaceholder)
@@ -76,7 +82,13 @@ class ProfileEditView: BaseView {
             $0.keyboardType = .numberPad
         }
         
-        verifiedAreaTitleLabel.setLabel(text: StringLiterals.Profile.verifiedArea, style: .h8)
+        verifiedAreaTitleLabel.setPartialText(
+            fullText: StringLiterals.Profile.verifiedArea + StringLiterals.Profile.neccessaryStarWithSpace,
+            textStyles: [
+                (text: StringLiterals.Profile.verifiedArea, style: .h8, color: .acWhite),
+                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .h8, color: .org1)
+            ]
+        )
         
         verifiedAreaStackView.do {
             $0.axis = .horizontal

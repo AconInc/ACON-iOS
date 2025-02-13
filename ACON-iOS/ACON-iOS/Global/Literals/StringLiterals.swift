@@ -317,6 +317,8 @@ enum StringLiterals {
         
         static let myVerifiedArea = "나의 인증 동네"
         
+        static let neccessaryStarWithSpace = " *"
+        
         static let nickname = "닉네임"
         
         static let birthDate = "생년월일"
