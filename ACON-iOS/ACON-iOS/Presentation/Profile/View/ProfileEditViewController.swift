@@ -200,6 +200,10 @@ private extension ProfileEditViewController {
             guard let self = self,
                   let text = text else { return }
             
+            // NOTE: 닉네임 필드 값이 변하면 일단 막기 (유효성검사를 0.5초 뒤에 하기 때문에)
+            isNicknameAvailable = false
+            checkSaveAvailability()
+            
             profileEditView.nicknameTextField.hideClearButton(isHidden: text.isEmpty)
             
             // NOTE: 텍스트 변하면 유효성 메시지 숨김, 텍스트필드 UI 변경
