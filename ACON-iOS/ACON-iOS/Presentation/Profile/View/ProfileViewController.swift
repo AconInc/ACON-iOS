@@ -84,7 +84,7 @@ private extension ProfileViewController {
             
             self.profileView.do {
                 $0.needLoginButton.isHidden = onLoginSuccess
-                $0.setAcornCountBox(onLoginSuccess: onLoginSuccess)
+                $0.setAcornCountBox("??")
                 $0.setVerifiedAreaBox(onLoginSuccess: onLoginSuccess)
             }
         }
@@ -97,9 +97,10 @@ private extension ProfileViewController {
             let firstAreaName: String = self.viewModel.userInfo.value?.verifiedAreaList.first?.name ?? "impossible"
             
             profileView.do {
+                let possessingAcornStr = userInfo.possessingAcorns == 0 ? "00" : String(userInfo.possessingAcorns)
                 $0.setProfileImage(userInfo.profileImageURL)
                 $0.setNicknameLabel(userInfo.nickname)
-                $0.setAcornCountBox(userInfo.possessingAcorns)
+                $0.setAcornCountBox(possessingAcornStr)
                 $0.setVerifiedAreaBox(areaName: firstAreaName)
             }
         }

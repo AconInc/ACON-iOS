@@ -85,16 +85,6 @@ final class ProfileView: BaseView {
                 title: StringLiterals.Profile.acornPossession,
                 icon: .icLocalAconG20
             )
-            
-            let notVerifiedLabel = UILabel()
-            notVerifiedLabel.setPartialText(
-                fullText: StringLiterals.Profile.twoQuestionMarks + "/" + String(totalAcornCount),
-                textStyles: [
-                    (text: StringLiterals.Profile.twoQuestionMarks, style: .t2, color: .org1),
-                    (text: "/" + String(totalAcornCount), style: .s2, color: .gray5)
-                ]
-            )
-            $0.setSecondaryContentView(to: notVerifiedLabel)
         }
         
         verifiedAreaBox.do {
@@ -204,23 +194,22 @@ extension ProfileView {
         nicknameLabel.setLabel(text: text, style: .h5)
     }
     
-    func setAcornCountBox(_ possessingCount: Int) {
-        let acornCountabel = UILabel()
-        let possessingString = possessingCount == 0 ? "00" : String(possessingCount)
-        // TODO: partialText 가운데 정렬 되도록 수정 (바닥 정렬인 partialText도 있어서 메소드 하나 더 만들어야 할 듯)
-        acornCountabel.setPartialText(
-            fullText: "\(possessingString)/\(String(totalAcornCount))",
-            textStyles: [
-                (text: possessingString, style: .t2, color: .org1),
-                (text: "/\(String(totalAcornCount))", style: .s2, color: .gray5)
-            ]
-        )
+    func setAcornCountBox(_ possessingString: String) {
+        let labelStack = UIStackView()
+        let possessingLabel = UILabel()
+        let totalLabel = UILabel()
         
-        acornCountBox.setContentView(to: acornCountabel)
-    }
-    
-    func setAcornCountBox(onLoginSuccess: Bool) {
-        acornCountBox.switchContentView(toSecondary: !onLoginSuccess)
+        labelStack.do {
+            $0.axis = .horizontal
+            $0.alignment = .center
+            $0.spacing = 2
+        }
+        possessingLabel.setLabel(text: possessingString, style: .t2, color: .org1)
+        totalLabel.setLabel(text: "/" + String(totalAcornCount), style: .s2, color: .gray5)
+        
+        labelStack.addArrangedSubviews(possessingLabel, totalLabel)
+        
+        acornCountBox.setContentView(to: labelStack)
     }
     
     func setVerifiedAreaBox(areaName: String) {
