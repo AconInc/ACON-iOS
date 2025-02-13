@@ -22,6 +22,22 @@ class ProfileEditViewController: BaseNavViewController {
     private var keyboardWillShowObserver: NSObjectProtocol?
     private var keyboardWillHideObserver: NSObjectProtocol?
     
+    private var isNicknameAvailable: Bool = true {
+        didSet {
+            checkSaveAvailability()
+        }
+    }
+    private var isBirthDateAvailable: Bool = true {
+        didSet {
+            checkSaveAvailability()
+        }
+    }
+    private var isVerifiedAreaAvailable: Bool = true {
+        didSet {
+            checkSaveAvailability()
+        }
+    }
+    
     
     // MARK: - Life Cycle
     
@@ -59,7 +75,12 @@ class ProfileEditViewController: BaseNavViewController {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = true
-        configureTextFieldClearButton()
+        
+        // NOTE: 생일 필드는 옵셔널이기 때문에, 데이터가 텍스트필드에 바인딩된 후 clearButton configure를 해줘야 합니다
+        let birthDateTF = profileEditView.birthDateTextField
+        birthDateTF.hideClearButton(isHidden: (birthDateTF.text ?? "").isEmpty)
+        
+        checkSaveAvailability()
     }
     
     override func setHierarchy() {
@@ -109,6 +130,12 @@ class ProfileEditViewController: BaseNavViewController {
             action: #selector(deleteVerifiedArea),
             for: .touchUpInside
         )
+        
+        profileEditView.saveButton.addTarget(
+            self,
+            action: #selector(tappedSaveButton),
+            for: .touchUpInside
+        )
     }
     
 }
@@ -120,14 +147,15 @@ private extension ProfileEditViewController {
     
     func bindData() {
         // NOTE: 기본 데이터 바인딩
+        guard let userInfo = viewModel.userInfo.value else { return }
         profileEditView.do {
-            $0.setProfileImage(viewModel.userInfo.profileImageURL)
-            $0.nicknameTextField.text = viewModel.userInfo.nickname
+            $0.setProfileImage(userInfo.profileImageURL)
+            $0.nicknameTextField.text = userInfo.nickname
             $0.setNicknameLengthLabel(
-                countPhoneme(text: viewModel.userInfo.nickname),
+                countPhoneme(text: userInfo.nickname),
                 viewModel.maxNicknameLength
                 )
-            $0.birthDateTextField.text = viewModel.userInfo.birthDate
+            $0.birthDateTextField.text = userInfo.birthDate
         }
     }
     
@@ -139,9 +167,11 @@ private extension ProfileEditViewController {
             
             if areas.isEmpty {
                 profileEditView.hideVerifiedAreaAddButton(false)
+                isVerifiedAreaAvailable = false
             } else {
                 profileEditView.hideVerifiedAreaAddButton(true)
                 profileEditView.addVerifiedArea(areas)
+                isVerifiedAreaAvailable = true
             }
         }
         
@@ -150,6 +180,7 @@ private extension ProfileEditViewController {
                   let area = area else { return }
             
             var newAreas = viewModel.verifiedAreaListEditing.value ?? []
+            // TODO: VerifiedArea id 수정
             newAreas.append(VerifiedAreaModel(id: 1, name: area))
             viewModel.verifiedAreaListEditing.value = newAreas
         }
@@ -183,7 +214,10 @@ private extension ProfileEditViewController {
             guard let self = self,
                   let text = text else { return }
             
-            configureTextFieldClearButton()
+            // NOTE: 닉네임 필드 값이 변하면 일단 저장 막기 (유효성검사를 0.5초 뒤에 하기 때문에)
+            isNicknameAvailable = false
+            
+            profileEditView.nicknameTextField.hideClearButton(isHidden: text.isEmpty)
             
             // NOTE: 텍스트 변하면 유효성 메시지 숨김, 텍스트필드 UI 변경
             profileEditView.setNicknameValidMessage(.none)
@@ -197,17 +231,24 @@ private extension ProfileEditViewController {
             // NOTE: 0.5초 뒤 유효성 검사
             validityTestDebouncer.call { [weak self] in
                 guard let self = self else { return }
-                testNicknameValidity()
+                checkNicknameValidity()
             }
         }
         
         
         // MARK: - 생년월일 TextField
         
-        profileEditView.birthDateTextField.observableText.bind { [weak self] _ in
+        profileEditView.birthDateTextField.observableText.bind { [weak self] text in
             guard let self = self else { return }
+            let bindedText = text ?? ""
             
-            configureTextFieldClearButton()
+            profileEditView.birthDateTextField.hideClearButton(isHidden: bindedText.isEmpty)
+            
+            if bindedText.isEmpty {
+                profileEditView.setBirthdateValidMessage(.none)
+                profileEditView.birthDateTextField.changeBorderColor(toRed: false)
+                isBirthDateAvailable = true
+            }
         }
     }
     
@@ -244,6 +285,7 @@ private extension ProfileEditViewController {
     
     @objc
     func tappedProfileImageEditButton() {
+        // TODO: 수정
         print("profileImageEditButtonTapped")
     }
     
@@ -261,6 +303,25 @@ private extension ProfileEditViewController {
         // TODO: 특정 인덱스만 날리도록 수정 (Sprint3)
         viewModel.verifiedAreaListEditing.value?.removeAll()
         profileEditView.removeVerifiedArea()
+    }
+    
+    @objc
+    func tappedSaveButton() {
+        guard let nickname: String = profileEditView.nicknameTextField.text,
+              let verifiedAreaList = viewModel.verifiedAreaListEditing.value else { return }
+        
+        viewModel.updateUserInfo(
+            newUserInfo: UserInfoEditModel(
+                profileImageURL: "newProfileImageURL", // TODO: 수정
+                nickname: nickname,
+                birthDate: profileEditView.birthDateTextField.text,
+                verifiedAreaList: verifiedAreaList
+            )
+        )
+        
+        // TODO: 서버 Post
+        
+        self.navigationController?.popViewController(animated: true)
     }
     
 }
@@ -319,7 +380,7 @@ private extension ProfileEditViewController {
                 textField.layer.borderColor = UIColor.red1.cgColor
                 validMsgHideDebouncer.call { [weak self] in
                     guard let self = self else { return }
-                    self.testNicknameValidity()
+                    self.checkNicknameValidity()
                 }
             }
             return false
@@ -330,12 +391,13 @@ private extension ProfileEditViewController {
     // MARK: - 생년월일
     
     func birthDateTextFieldChange(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let currentText = textField.text else { return true }
-        let rawText = (currentText.replacingOccurrences(of: ".", with: "") + string)
+        guard let currentString = textField.text else { return true }
+        let newString = (currentString as NSString).replacingCharacters(in: range, with: string)
+        let newRawString = (newString.replacingOccurrences(of: ".", with: ""))
         
         // NOTE: 백스페이스 처리
         if string.isEmpty,
-           currentText.last == "." {
+           currentString.last == "." {
             let newRange = NSRange(location: range.location - 1,
                                    length: range.length + 1)
             let newString = (textField.text as NSString?)?.replacingCharacters(
@@ -345,15 +407,17 @@ private extension ProfileEditViewController {
         }
         
         // NOTE: 8자리 제한
-        if rawText.count < 8 {
+        // NOTE: 길이 0인 경우 ObservableBinding에서 .none처리
+        if newRawString.count < 8 {
             profileEditView.setBirthdateValidMessage(.invalidDate)
             profileEditView.birthDateTextField.changeBorderColor(toRed: true)
-        } else if rawText.count == 8 {
+            isBirthDateAvailable = false
+        } else if newRawString.count == 8 {
             // NOTE: Validity 체크
-            checkDateValidity(dateString: rawText)
+            checkBirthDateValidity(dateString: newRawString)
         }
         
-        return rawText.count > 8 ? false : true
+        return newRawString.count > 8 ? false : true
     }
     
 }
@@ -363,7 +427,38 @@ private extension ProfileEditViewController {
 
 private extension ProfileEditViewController {
     
+    // MARK: - 저장 가능 여부
+    
+    func checkSaveAvailability() {
+        let canSave: Bool = isNicknameAvailable && isBirthDateAvailable && isVerifiedAreaAvailable
+        profileEditView.saveButton.isEnabled = canSave
+    }
+    
+    
     // MARK: - 닉네임
+    
+    func checkNicknameValidity() {
+        let text = profileEditView.nicknameTextField.text ?? ""
+        let phonemeCount = countPhoneme(text: text)
+        
+        // TODO: 빙글빙글 로띠 활성화
+        
+        // NOTE: 닉네임을 입력해주세요.
+        if phonemeCount == 0 {
+            profileEditView.setNicknameValidMessage(.nicknameMissing)
+            profileEditView.nicknameTextField.changeBorderColor(toRed: true)
+            isNicknameAvailable = false
+        }
+        
+        // NOTE: 중복된 닉네임 OR 사용할 수 있는 닉네임
+        else {
+            // TODO: 서버 요청
+            profileEditView.setNicknameValidMessage(.nicknameOK)
+            profileEditView.nicknameTextField.changeBorderColor(toRed: false)
+            isNicknameAvailable = true
+//            profileEditView.setNicknameValidMessage(.nicknameTaken)
+        }
+    }
     
     // NOTE: 한글인지 확인하는 함수
     func isKorean(_ char: Character) -> Bool {
@@ -410,7 +505,7 @@ private extension ProfileEditViewController {
     // MARK: - 생년월일
     
     // NOTE: 생년월일 유효성 검사
-    func checkDateValidity(dateString: String) {
+    func checkBirthDateValidity(dateString: String) {
         guard dateString.count == 8,
               let year = Int(String(Array(dateString)[0..<4])),
               let month = Int(String(Array(dateString)[4..<6])),
@@ -421,10 +516,12 @@ private extension ProfileEditViewController {
         else {
             profileEditView.setBirthdateValidMessage(.invalidDate)
             profileEditView.birthDateTextField.changeBorderColor(toRed: true)
+            isBirthDateAvailable = false
             return
         }
         profileEditView.setBirthdateValidMessage(.none)
         profileEditView.birthDateTextField.changeBorderColor(toRed: false)
+        isBirthDateAvailable = true
     }
     
     func makeDate(year: Int, month: Int, day: Int) -> Date? {
@@ -445,43 +542,6 @@ private extension ProfileEditViewController {
     func isBeforeToday(date: Date) -> Bool {
         let today = Date()
         return date < today
-    }
-    
-    func testNicknameValidity() {
-        let text = profileEditView.nicknameTextField.text ?? ""
-        let phonemeCount = countPhoneme(text: text)
-        
-        // TODO: 빙글빙글 로띠 활성화
-        
-        // NOTE: 닉네임을 입력해주세요.
-        if phonemeCount == 0 {
-            profileEditView.setNicknameValidMessage(.nicknameMissing)
-            profileEditView.nicknameTextField.changeBorderColor(toRed: true)
-        }
-        
-        // NOTE: 중복된 닉네임 OR 사용할 수 있는 닉네임
-        else {
-            // TODO: 서버 요청
-            profileEditView.setNicknameValidMessage(.nicknameOK)
-            profileEditView.nicknameTextField.changeBorderColor(toRed: false)
-//            profileEditView.setNicknameValidMessage(.nicknameTaken)
-        }
-    }
-    
-}
-
-
-// MARK: - UI Update methods
-
-private extension ProfileEditViewController {
-    
-    func configureTextFieldClearButton() {
-        
-        let nicknameTF = profileEditView.nicknameTextField
-        let birthDateTF = profileEditView.birthDateTextField
-        
-        nicknameTF.hideClearButton(isHidden: (nicknameTF.text ?? "").isEmpty)
-        birthDateTF.hideClearButton(isHidden: (birthDateTF.text ?? "").isEmpty)
     }
     
 }

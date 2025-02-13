@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserInfoModel {
+struct UserInfoModel: Equatable {
     
     var profileImageURL: String
     
@@ -18,6 +18,18 @@ struct UserInfoModel {
     var verifiedAreaList: [VerifiedAreaModel]
     
     var possessingAcorns: Int
+    
+}
+
+struct UserInfoEditModel {
+    
+    var profileImageURL: String
+    
+    var nickname: String
+    
+    var birthDate: String?
+    
+    var verifiedAreaList: [VerifiedAreaModel]
     
 }
 

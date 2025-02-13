@@ -62,7 +62,13 @@ class ProfileEditView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        nicknameTitleLabel.setLabel(text: StringLiterals.Profile.nickname, style: .h8)
+        nicknameTitleLabel.setPartialText(
+            fullText: StringLiterals.Profile.nickname + StringLiterals.Profile.neccessaryStarWithSpace,
+            textStyles: [
+                (text: StringLiterals.Profile.nickname, style: .h8, color: .acWhite),
+                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .h8, color: .org1)
+            ]
+        )
         
         nicknameTextField.do {
             $0.setPlaceholder(as: StringLiterals.Profile.nicknamePlaceholder)
@@ -76,7 +82,13 @@ class ProfileEditView: BaseView {
             $0.keyboardType = .numberPad
         }
         
-        verifiedAreaTitleLabel.setLabel(text: StringLiterals.Profile.verifiedArea, style: .h8)
+        verifiedAreaTitleLabel.setPartialText(
+            fullText: StringLiterals.Profile.verifiedArea + StringLiterals.Profile.neccessaryStarWithSpace,
+            textStyles: [
+                (text: StringLiterals.Profile.verifiedArea, style: .h8, color: .acWhite),
+                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .h8, color: .org1)
+            ]
+        )
         
         verifiedAreaStackView.do {
             $0.axis = .horizontal
@@ -97,15 +109,16 @@ class ProfileEditView: BaseView {
         
         saveButton.do {
             var config = UIButton.Configuration.filled()
-            config.attributedTitle = AttributedString(StringLiterals.Profile.save.ACStyle(.h7))
+            config.attributedTitle = AttributedString(StringLiterals.Profile.save.ACStyle(.h7, .gray5))
             config.baseBackgroundColor = .gray7
-            config.baseForegroundColor = .gray5
             $0.configuration = config
         }
         
         saveButton.configurationUpdateHandler = {
             guard var config = $0.configuration else { return }
-            config.baseForegroundColor = $0.isEnabled ? .acWhite : .gray5
+            config.attributedTitle = AttributedString(
+                StringLiterals.Profile.save.ACStyle(.h7, $0.isEnabled ? .acWhite : .gray5)
+            )
             $0.configuration = config
         }
     }
