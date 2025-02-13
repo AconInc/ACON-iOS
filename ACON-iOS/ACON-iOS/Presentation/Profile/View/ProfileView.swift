@@ -86,14 +86,9 @@ final class ProfileView: BaseView {
                 icon: .icLocalAconG20
             )
             
-            let notVerifiedLabel = UILabel()
-            notVerifiedLabel.setPartialText(
-                fullText: StringLiterals.Profile.twoQuestionMarks + "/" + String(totalAcornCount),
-                textStyles: [
-                    (text: StringLiterals.Profile.twoQuestionMarks, style: .t2, color: .org1),
-                    (text: "/" + String(totalAcornCount), style: .s2, color: .gray5)
-                ]
-            )
+            let notVerifiedLabel = makeCountLabels(
+                StringLiterals.Profile.doubleQuestionMarks,
+                String(totalAcornCount))
             $0.setSecondaryContentView(to: notVerifiedLabel)
         }
         
@@ -189,6 +184,42 @@ final class ProfileView: BaseView {
 }
 
 
+// MARK: - Helpers
+
+private extension ProfileView {
+    
+    func makeCountLabels(_ currentString: String, _ totalString: String) -> UIView {
+        let contentView = UIView()
+        let labelStack = UIStackView()
+        let currentLabel = UILabel()
+        let totalLabel = UILabel()
+        
+        labelStack.do {
+            $0.axis = .horizontal
+            $0.alignment = .center
+            $0.spacing = 2
+        }
+        currentLabel.setLabel(text: currentString, style: .t2, color: .org1)
+        totalLabel.setLabel(text: "/" + String(totalString), style: .s2, color: .gray5)
+        
+        contentView.addSubview(labelStack)
+        labelStack.addArrangedSubviews(currentLabel, totalLabel)
+        
+        labelStack.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
+        // TODO: contentView - Width and horizontal position are ambiguous
+        contentView.snp.makeConstraints {
+            $0.width.height.greaterThanOrEqualTo(labelStack)
+        }
+        
+        return contentView
+    }
+    
+}
+
+
 // MARK: - Internal Methods
 
 extension ProfileView {
@@ -204,19 +235,12 @@ extension ProfileView {
         nicknameLabel.setLabel(text: text, style: .h5)
     }
     
-    func setAcornCountBox(_ possessingCount: Int) {
-        let acornCountabel = UILabel()
-        let possessingString = possessingCount == 0 ? "00" : String(possessingCount)
-        // TODO: partialText 가운데 정렬 되도록 수정 (바닥 정렬인 partialText도 있어서 메소드 하나 더 만들어야 할 듯)
-        acornCountabel.setPartialText(
-            fullText: "\(possessingString)/\(String(totalAcornCount))",
-            textStyles: [
-                (text: possessingString, style: .t2, color: .org1),
-                (text: "/\(String(totalAcornCount))", style: .s2, color: .gray5)
-            ]
-        )
+    func setAcornCountBox(_ currentCount: Int) {
+        let currentString = currentCount == 0 ? "00" : String(currentCount)
+        let totalString = String(totalAcornCount)
+        let countLabelStack = makeCountLabels(currentString, totalString)
         
-        acornCountBox.setContentView(to: acornCountabel)
+        acornCountBox.setContentView(to: countLabelStack)
     }
     
     func setAcornCountBox(onLoginSuccess: Bool) {
