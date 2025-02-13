@@ -226,6 +226,14 @@ private extension ProfileEditViewController {
             let bindedText = text ?? ""
             
             profileEditView.birthDateTextField.hideClearButton(isHidden: bindedText.isEmpty)
+            
+            if bindedText.isEmpty {
+                profileEditView.setBirthdateValidMessage(.none)
+                profileEditView.birthDateTextField.changeBorderColor(toRed: false)
+                isBirthDateAvailable = true
+            }
+            
+            checkSaveAvailability()
         }
     }
     
@@ -388,12 +396,8 @@ private extension ProfileEditViewController {
         }
         
         // NOTE: 8자리 제한
-        // TODO: 길이 0인 경우 OK인지 기획 확인
-        if newRawString.count == 0 {
-            profileEditView.setBirthdateValidMessage(.none)
-            profileEditView.birthDateTextField.changeBorderColor(toRed: false)
-            isBirthDateAvailable = true
-        } else if newRawString.count < 8 {
+        // NOTE: 길이 0인 경우 ObservableBinding에서 .none처리
+        if newRawString.count < 8 {
             profileEditView.setBirthdateValidMessage(.invalidDate)
             profileEditView.birthDateTextField.changeBorderColor(toRed: true)
             isBirthDateAvailable = false
