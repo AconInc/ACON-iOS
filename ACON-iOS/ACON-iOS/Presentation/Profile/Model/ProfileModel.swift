@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserInfoModel {
+struct UserInfoModel: Equatable {
     
     var profileImageURL: String
     

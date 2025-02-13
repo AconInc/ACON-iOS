@@ -15,12 +15,14 @@ class ProfileViewModel {
     
     var verifiedAreaListEditing: ObservablePattern<[VerifiedAreaModel]> = ObservablePattern(nil)
     
-    var userInfo = UserInfoModel(
-        profileImageURL: "",
-        nickname: "김유림",
-        birthDate: nil,
-        verifiedAreaList: [VerifiedAreaModel(id: 1, name: "유림동")],
-        possessingAcorns: 0
+    var userInfo: ObservablePattern<UserInfoModel> = ObservablePattern(
+        UserInfoModel(
+            profileImageURL: "",
+            nickname: "김유림",
+            birthDate: nil,
+            verifiedAreaList: [VerifiedAreaModel(id: 1, name: "유림동")],
+            possessingAcorns: 0
+        )
     )
     
     let maxNicknameLength: Int = 16
@@ -29,17 +31,17 @@ class ProfileViewModel {
     // MARK: - Initializer
     
     init() {
-        verifiedAreaListEditing.value = userInfo.verifiedAreaList
+        verifiedAreaListEditing.value = userInfo.value?.verifiedAreaList
     }
     
     
     // MARK: - Methods
     
     func updateUserInfo(newUserInfo: UserInfoEditModel) {
-        userInfo.profileImageURL = newUserInfo.profileImageURL
-        userInfo.nickname = newUserInfo.nickname
-        userInfo.birthDate = newUserInfo.birthDate
-        userInfo.verifiedAreaList = newUserInfo.verifiedAreaList
+        userInfo.value?.profileImageURL = newUserInfo.profileImageURL
+        userInfo.value?.nickname = newUserInfo.nickname
+        userInfo.value?.birthDate = newUserInfo.birthDate
+        userInfo.value?.verifiedAreaList = newUserInfo.verifiedAreaList
     }
     
 }
