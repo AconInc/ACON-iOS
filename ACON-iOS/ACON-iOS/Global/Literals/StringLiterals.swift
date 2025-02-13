@@ -311,6 +311,8 @@ enum StringLiterals {
         
         static let needLogin = "로그인이 필요해요"
         
+        static let twoQuestionMarks = "??"
+        
         static let notVerified = "미인증"
         
         static let acornPossession = "보유한 도토리 수"

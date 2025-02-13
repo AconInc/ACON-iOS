@@ -80,10 +80,22 @@ final class ProfileView: BaseView {
             $0.spacing = boxStackSpacing
         }
         
-        acornCountBox.setStyle(
-            title: StringLiterals.Profile.acornPossession,
-            icon: .icLocalAconG20
-        )
+        acornCountBox.do {
+            $0.setStyle(
+                title: StringLiterals.Profile.acornPossession,
+                icon: .icLocalAconG20
+            )
+            
+            let notVerifiedLabel = UILabel()
+            notVerifiedLabel.setPartialText(
+                fullText: StringLiterals.Profile.twoQuestionMarks + "/" + String(totalAcornCount),
+                textStyles: [
+                    (text: StringLiterals.Profile.twoQuestionMarks, style: .t2, color: .org1),
+                    (text: "/" + String(totalAcornCount), style: .s2, color: .gray5)
+                ]
+            )
+            $0.setSecondaryContentView(to: notVerifiedLabel)
+        }
         
         verifiedAreaBox.do {
             $0.setStyle(
@@ -205,6 +217,10 @@ extension ProfileView {
         )
         
         acornCountBox.setContentView(to: acornCountabel)
+    }
+    
+    func setAcornCountBox(onLoginSuccess: Bool) {
+        acornCountBox.switchContentView(toSecondary: !onLoginSuccess)
     }
     
     func setVerifiedAreaBox(areaName: String) {
