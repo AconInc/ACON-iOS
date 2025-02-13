@@ -63,8 +63,11 @@ class ProfileEditViewController: BaseNavViewController {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = true
+        
+        // NOTE: 생일 필드는 옵셔널이기 때문에, 데이터가 텍스트필드에 바인딩된 후 clearButton configure를 해줘야 합니다
         let birthDateTF = profileEditView.birthDateTextField
         birthDateTF.hideClearButton(isHidden: (birthDateTF.text ?? "").isEmpty)
+        
         checkSaveAvailability()
     }
     
@@ -167,6 +170,7 @@ private extension ProfileEditViewController {
                   let area = area else { return }
             
             var newAreas = viewModel.verifiedAreaListEditing.value ?? []
+            // TODO: VerifiedArea id 수정
             newAreas.append(VerifiedAreaModel(id: 1, name: area))
             viewModel.verifiedAreaListEditing.value = newAreas
         }
