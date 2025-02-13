@@ -153,13 +153,13 @@ private extension ProfileEditViewController {
             if areas.isEmpty {
                 profileEditView.hideVerifiedAreaAddButton(false)
                 isVerifiedAreaAvailable = false
-                checkSaveAvailability()
             } else {
                 profileEditView.hideVerifiedAreaAddButton(true)
                 profileEditView.addVerifiedArea(areas)
                 isVerifiedAreaAvailable = true
-                checkSaveAvailability()
             }
+            
+            checkSaveAvailability()
         }
         
         localVerificationVM.localArea.bind { [weak self] area in
@@ -219,6 +219,7 @@ private extension ProfileEditViewController {
             validityTestDebouncer.call { [weak self] in
                 guard let self = self else { return }
                 checkNicknameValidity()
+                checkSaveAvailability()
             }
         }
         
@@ -337,10 +338,6 @@ extension ProfileEditViewController: UITextFieldDelegate {
         }
         print("❌ Invaild Textfield")
         return false
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        checkSaveAvailability()
     }
     
 }
