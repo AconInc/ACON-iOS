@@ -11,7 +11,7 @@ struct SpotConditionModel: Equatable {
     
     let spotType: SpotType
     
-    let filterList: [SpotFilterListModel]
+    let filterList: [SpotFilterModel]
     
     let walkingTime: Int
     
@@ -19,7 +19,7 @@ struct SpotConditionModel: Equatable {
     
 }
 
-struct SpotFilterListModel: Equatable {
+struct SpotFilterModel: Equatable {
     
     let category: SpotType.FilterCategoryType
     

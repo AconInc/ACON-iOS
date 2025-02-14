@@ -189,7 +189,7 @@ private extension SpotListFilterViewController {
         }
     }
     
-    func applyConditions(spotType: SpotType, filterLists: [SpotFilterListModel]) {
+    func applyConditions(spotType: SpotType, filterLists: [SpotFilterModel]) {
         // NOTE: 세그먼트 컨트롤 세팅
         spotListFilterView.segmentedControl.selectedSegmentIndex = spotType == .cafe ? 1 : 0
         switchedSegment(spotType)
@@ -230,7 +230,7 @@ extension SpotListFilterViewController {
     
     // MARK: - UI -> VM
     
-    func extractRestaurantFilter() -> SpotFilterListModel {
+    func extractRestaurantFilter() -> SpotFilterModel {
         let restaurantFeatures = SpotType.RestaurantFeatureType.allCases
         var restaurantFeatureOptionList: [String] = []
         
@@ -248,7 +248,7 @@ extension SpotListFilterViewController {
             }
         }
         
-        let restaurantFilterList = SpotFilterListModel(
+        let restaurantFilterList = SpotFilterModel(
             category: SpotType.FilterCategoryType.restaurantFeature,
             optionList: restaurantFeatureOptionList
         )
@@ -256,7 +256,7 @@ extension SpotListFilterViewController {
         return restaurantFilterList
     }
     
-    func extractCafeFilter() -> SpotFilterListModel {
+    func extractCafeFilter() -> SpotFilterModel {
         let cafeFeatures = SpotType.CafeFeatureType.allCases
         var cafeFeatureOptionList: [String] = []
         for (i, button) in spotListFilterView.firstLineSpotTagStackView.arrangedSubviews.enumerated() {
@@ -273,7 +273,7 @@ extension SpotListFilterViewController {
             }
         }
         
-        let cafeFilterList = SpotFilterListModel(
+        let cafeFilterList = SpotFilterModel(
             category: SpotType.FilterCategoryType.cafeFeature,
             optionList: cafeFeatureOptionList
         )
@@ -281,7 +281,7 @@ extension SpotListFilterViewController {
         return cafeFilterList
     }
     
-    func extractCompanionFilter() -> SpotFilterListModel {
+    func extractCompanionFilter() -> SpotFilterModel {
         let companionType = SpotType.CompanionType.allCases
         var companionOptionList: [String] = []
         
@@ -292,7 +292,7 @@ extension SpotListFilterViewController {
             }
         }
         
-        let companionFilterList = SpotFilterListModel(
+        let companionFilterList = SpotFilterModel(
             category: SpotType.FilterCategoryType.companion,
             optionList: companionOptionList
         )
@@ -300,7 +300,7 @@ extension SpotListFilterViewController {
         return companionFilterList
     }
     
-    func extractVisitPurposeFilter() -> SpotFilterListModel {
+    func extractVisitPurposeFilter() -> SpotFilterModel {
         let visitPurpose = SpotType.VisitPurposeType.allCases
         var visitPurposeOptionList: [String] = []
         
@@ -311,7 +311,7 @@ extension SpotListFilterViewController {
             }
         }
         
-        let visitPurposeFilterList = SpotFilterListModel(
+        let visitPurposeFilterList = SpotFilterModel(
             category: SpotType.FilterCategoryType.visitPurpose,
             optionList: visitPurposeOptionList
         )

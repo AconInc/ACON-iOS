@@ -29,7 +29,7 @@ class SpotListViewModel {
     
     var spotType: ObservablePattern<SpotType> = ObservablePattern(nil)
     
-    var filterList: [SpotFilterListModel] = [] // TODO: SpotCondition으로 바꾸기
+    var filterList: [SpotFilterModel] = [] // TODO: SpotCondition으로 바꾸기
     
     var walkingTime: SpotType.WalkingDistanceType = .fifteen
     
