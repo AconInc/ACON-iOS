@@ -81,7 +81,7 @@ extension SpotListViewModel {
             condition: SpotCondition(
                 spotType: spotType.value?.serverKey ?? "",
                 filterList: filterList.map { filterList in
-                    let filterList = SpotFilterList(
+                    let filterList = SpotFilter(
                         category: filterList.category.serverKey,
                         optionList: filterList.optionList)
                     return filterList

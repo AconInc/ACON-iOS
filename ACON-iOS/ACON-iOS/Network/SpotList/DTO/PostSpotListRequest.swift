@@ -21,7 +21,7 @@ struct SpotCondition: Codable {
     
     let spotType: String
     
-    let filterList: [SpotFilterList]
+    let filterList: [SpotFilter] // TODO: Optional로 수정
     
     let walkingTime: Int
     
@@ -29,7 +29,7 @@ struct SpotCondition: Codable {
     
 }
 
-struct SpotFilterList: Codable {
+struct SpotFilter: Codable {
     
     let category: String
     
