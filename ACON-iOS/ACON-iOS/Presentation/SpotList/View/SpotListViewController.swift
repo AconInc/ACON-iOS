@@ -90,14 +90,11 @@ class SpotListViewController: BaseNavViewController {
 extension SpotListViewController {
     
     func bindViewModel() {
-        
         viewModel.onSuccessGetAddress.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
             if onSuccess {
                 self.setTitleLabelStyle(title: viewModel.myAddress)
-            } else {
-                print("🥑Post 실패")
             }
         }
         
