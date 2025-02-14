@@ -74,6 +74,7 @@ extension SpotListViewModel {
             guard let dong = placemark.subLocality else {
                 let city = placemark.locality ?? ""
                 myAddress = city
+                onSuccessGetAddress.value = true
                 print("📍동 정보 없어서 시 정보 연결함"); return
             }
             myAddress = dong
