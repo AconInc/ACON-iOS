@@ -6,3 +6,25 @@
 //
 
 import Foundation
+
+struct GetProfileResponse: Decodable {
+    
+    let image: String
+    
+    let nickname: String
+    
+    let leftAcornCount: Int
+    
+    let birthDate: String?
+    
+    let verifiedAreaList: [VerifiedArea]
+    
+}
+
+struct VerifiedArea: Decodable {
+    
+    let id: Int64
+    
+    let name: String
+    
+}
