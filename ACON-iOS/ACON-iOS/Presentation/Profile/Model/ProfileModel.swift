@@ -5,7 +5,7 @@
 //  Created by 김유림 on 2/8/25.
 //
 
-import Foundation
+import UIKit
 
 struct UserInfoModel: Equatable {
     
@@ -39,5 +39,13 @@ struct VerifiedAreaModel: Equatable {
     let id: Int
     
     var name: String
+    
+}
+
+struct SettingCellModel: Equatable {
+    
+    let image: UIImage?
+    
+    let title: String
     
 }

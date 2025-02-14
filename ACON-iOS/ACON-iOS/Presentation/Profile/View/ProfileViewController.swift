@@ -49,6 +49,7 @@ class ProfileViewController: BaseNavViewController {
         super.setStyle()
         
         self.setCenterTitleLabelStyle(title: StringLiterals.Profile.profilePageTitle, fontStyle: .h5)
+        self.setSettingButton()
     }
     
     private func addTarget() {

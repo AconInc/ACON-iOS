@@ -233,6 +233,20 @@ extension BaseNavViewController {
     }
     
     
+    // MARK: - 설정 버튼
+    
+    func setSettingButton() {
+        setButtonStyle(button: rightButton, image: .icSettingW28)
+        setButtonAction(button: rightButton, target: self, action: #selector(settingButtonTapped))
+    }
+    
+    @objc
+    func settingButtonTapped() {
+        let vc = ProfileSettingViewController()
+        navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    
     // MARK: - 다음 버튼
     
     func setNextButton() {
