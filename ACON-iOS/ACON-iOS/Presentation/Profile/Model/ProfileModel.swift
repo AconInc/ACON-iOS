@@ -36,7 +36,7 @@ struct UserInfoEditModel {
 
 struct VerifiedAreaModel: Equatable {
     
-    let id: Int
+    let id: Int64
     
     var name: String
     
