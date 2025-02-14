@@ -61,7 +61,7 @@ class SettingTableViewCell: UITableViewCell {
         
         updateLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalTo(arrowImageView.snp.leading).offset(4)
+            $0.trailing.equalTo(arrowImageView.snp.leading).offset(-4)
         }
         
         arrowImageView.snp.makeConstraints {

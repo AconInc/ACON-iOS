@@ -137,7 +137,7 @@ extension ProfileSettingViewController: UITableViewDelegate {
         titleLabel.snp.makeConstraints {
             $0.leading.centerY.equalToSuperview()
         }
-        titleLabel.setLabel(text: SettingType.getSectionTitle(section),
+        titleLabel.setLabel(text: SettingType.sectionTitles[section],
                            style: .s2,
                            color: .gray5)
         return headerView

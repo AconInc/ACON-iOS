@@ -95,15 +95,12 @@ extension SettingType.Account {
 
 extension SettingType {
     
-    static func getSectionTitle(_ section: Int) -> String {
-        switch section {
-        case 0: return "버전 정보"
-        case 1: return "약관 및 정책"
-        case 2: return "서비스 설정"
-        case 3: return "로그아웃 / 탈퇴"
-        default: return ""
-        }
-    }
+    static let sectionTitles: [String] = [
+        "버전 정보",
+        "약관 및 정책",
+        "서비스 설정",
+        "로그아웃 / 탈퇴"
+    ]
     
     static var allSections: [Int: Any] = [
         0: Info.allCases,
