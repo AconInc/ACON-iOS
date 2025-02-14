@@ -265,6 +265,23 @@ extension BaseNavViewController {
     }
     
     
+    // MARK: - 선택 버튼
+    
+    func setSelectButton() {
+        rightButton.do {
+            $0.isHidden = false
+            $0.configuration?.baseBackgroundColor = .clear
+            $0.setAttributedTitle(text: StringLiterals.Album.choose,
+                                   style: .s1,
+                                  color: .acWhite,
+                                  for: .normal)
+            $0.setAttributedTitle(text: StringLiterals.Album.choose,
+                                   style: .s1,
+                                  color: .gray5,
+                                  for: .disabled)
+        }
+    }
+
     // MARK: - X 버튼
     
     func setXButton() {

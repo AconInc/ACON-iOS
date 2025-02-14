@@ -48,7 +48,7 @@ class ProfileViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
-        self.setCenterTitleLabelStyle(title: "프로필", fontStyle: .h5)
+        self.setCenterTitleLabelStyle(title: StringLiterals.Profile.profilePageTitle, fontStyle: .h5)
         self.setSettingButton()
     }
     
@@ -83,20 +83,25 @@ private extension ProfileViewController {
                   let onLoginSuccess = onLoginSuccess
             else { return }
             
-            // TODO: 인증동네 추후 여러개로 수정(Sprint3)
-            let firstAreaName: String = self.viewModel.userInfo.verifiedAreaList.first?.name ?? "impossible"
-            
             self.profileView.do {
                 $0.needLoginButton.isHidden = onLoginSuccess
-                $0.setVerifiedAreaBox(onLogin: onLoginSuccess,
-                                      areaName: firstAreaName)
+                $0.setVerifiedAreaBox(onLoginSuccess: onLoginSuccess)
             }
         }
         
-        profileView.do {
-            $0.setProfileImage(viewModel.userInfo.profileImageURL)
-            $0.setNicknameLabel(viewModel.userInfo.nickname)
-            $0.setAcornCountBox(viewModel.userInfo.possessingAcorns)
+        viewModel.userInfo.bind { [weak self] userInfo in
+            guard let self = self,
+                  let userInfo = userInfo else { return }
+            
+            // TODO: 인증동네 추후 여러개로 수정(Sprint3)
+            let firstAreaName: String = self.viewModel.userInfo.value?.verifiedAreaList.first?.name ?? "impossible"
+            
+            profileView.do {
+                $0.setProfileImage(userInfo.profileImageURL)
+                $0.setNicknameLabel(userInfo.nickname)
+                $0.setAcornCountBox(userInfo.possessingAcorns)
+                $0.setVerifiedAreaBox(areaName: firstAreaName)
+            }
         }
     }
     

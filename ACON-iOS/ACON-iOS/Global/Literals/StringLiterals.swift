@@ -303,6 +303,8 @@ enum StringLiterals {
     
     enum Profile {
         
+        static let profilePageTitle = "프로필"
+        
         static let profileEditPageTitle = "프로필 편집"
         
         static let profileEditButton = "프로필 수정하기"
@@ -314,6 +316,8 @@ enum StringLiterals {
         static let acornPossession = "보유한 도토리 수"
         
         static let myVerifiedArea = "나의 인증 동네"
+        
+        static let neccessaryStarWithSpace = " *"
         
         static let nickname = "닉네임"
         
@@ -328,6 +332,12 @@ enum StringLiterals {
         static let addVerifiedArea = "동네 추가하기"
         
         static let save = "저장"
+        
+    }
+    
+    enum Album {
+        
+        static let choose = "선택"
         
     }
     

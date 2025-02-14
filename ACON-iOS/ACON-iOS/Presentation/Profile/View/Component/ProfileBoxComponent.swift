@@ -19,13 +19,16 @@ class ProfileBoxComponent: BaseView {
     
     private var contentView = UIView()
     
+    private var secondaryContentView = UIView()
+    
     
     // MARK: - LifeCycles
     
     override func setHierarchy() {
         self.addSubviews(
             titleStackView,
-            contentView
+            contentView,
+            secondaryContentView
         )
         
         titleStackView.addArrangedSubviews(
@@ -48,6 +51,10 @@ class ProfileBoxComponent: BaseView {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(titleStackView.snp.bottom).offset(10)
             $0.bottom.equalToSuperview().offset(-16)
+        }
+        
+        secondaryContentView.snp.makeConstraints {
+            $0.edges.equalTo(contentView)
         }
     }
     
@@ -89,6 +96,23 @@ extension ProfileBoxComponent {
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+    
+    func setSecondaryContentView(to contentView: UIView) {
+        self.secondaryContentView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+        
+        self.secondaryContentView.addSubview(contentView)
+        
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    func switchContentView(toSecondary: Bool) {
+        contentView.isHidden = toSecondary
+        secondaryContentView.isHidden = !toSecondary
     }
     
 }
