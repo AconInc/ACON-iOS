@@ -44,4 +44,28 @@ class ProfileViewModel {
         userInfo.verifiedAreaList = newUserInfo.verifiedAreaList
     }
     
+    
+    // MARK: - Networking
+    
+    func getProfile() {
+        ACService.shared.profileService.getProfile { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                let newUserInfo = UserInfoModel(
+                    profileImageURL: data.image,
+                    nickname: data.nickname,
+                    verifiedAreaList: data.verifiedAreaList.map {
+                        return VerifiedAreaModel(id: $0.id, name: $0.name)
+                    },
+                    possessingAcorns: data.leftAcornCount
+                )
+                userInfo = newUserInfo
+                onGetProfileSuccess.value = true
+            default:
+                onGetProfileSuccess.value = false
+            }
+        }
+    }
+    
 }

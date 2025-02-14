@@ -29,6 +29,7 @@ class ProfileViewController: BaseNavViewController {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = false
+        viewModel.getProfile()
     }
     
     override func setHierarchy() {
