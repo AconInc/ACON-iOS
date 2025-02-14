@@ -85,6 +85,7 @@ private extension ProfileViewController {
             
             self.profileView.do {
                 $0.needLoginButton.isHidden = onLoginSuccess
+                $0.setAcornCountBox(onLoginSuccess: onLoginSuccess)
                 $0.setVerifiedAreaBox(onLoginSuccess: onLoginSuccess)
             }
         }
