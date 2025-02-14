@@ -14,9 +14,4 @@ struct ImageAsset: Equatable {
     
     let asset: PHAsset
     
-    init(index: Int, asset: PHAsset) {
-        self.index = index
-        self.asset = asset
-    }
-    
 }

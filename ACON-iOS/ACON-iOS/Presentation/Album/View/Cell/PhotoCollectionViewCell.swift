@@ -80,6 +80,9 @@ final class PhotoCollectionViewCell: BaseCollectionViewCell {
     }
 }
 
+
+// MARK: - bind data
+
 extension PhotoCollectionViewCell {
     
     func dataBind(_ image: UIImage, _ indexRow: Int) {

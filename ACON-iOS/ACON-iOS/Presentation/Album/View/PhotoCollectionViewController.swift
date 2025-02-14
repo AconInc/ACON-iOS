@@ -11,21 +11,14 @@ class PhotoCollectionViewController: BaseNavViewController {
     
     // MARK: - UI Properties
     
-    var photoCollectionView: UICollectionView = UICollectionView(
-        frame: .zero,
-        collectionViewLayout: photoCollectionViewFlowLayout
-    )
+    lazy var photoCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: photoCollectionViewFlowLayout)
     
-    static let cellWidth = CGFloat((ScreenUtils.width - 12) / 4)
-    
-    static let cellSize = CGSize(width: cellWidth, height: cellWidth)
-    
-    static let thumbnailSize = CGSize(width: 300, height: 300)
-    
-    static var photoCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().then {
-        $0.minimumLineSpacing = 0
-        $0.itemSize = cellSize
+    var photoCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().then {
+        $0.minimumLineSpacing = 4
+        $0.minimumInteritemSpacing = 4
+        $0.itemSize = PhotoCollectionViewSizeType.cellSize.value
     }
+    
     
     // MARK: - Properties
     
@@ -34,6 +27,7 @@ class PhotoCollectionViewController: BaseNavViewController {
     private var isDataLoaded = false
     
     var selectedIndexPath: IndexPath?
+    
     
     // MARK: - LifeCycle
     
@@ -110,7 +104,7 @@ private extension PhotoCollectionViewController {
     func loadPhotos() {
         // NOTE: thumbnailSize 셀 크기로 하면 너무 화질 안 좋아짐 / 원본 사이즈는 현재 메모리 과부화 -> 적정선으로 우선 설정
         albumViewModel.loadPhotos(in: albumViewModel.smartAlbums.first,
-                                  thumbnailSize: PhotoCollectionViewController.thumbnailSize) {
+                                  thumbnailSize: PhotoCollectionViewSizeType.thumbnailSize.value) {
             self.isDataLoaded = true
             return
         }
@@ -138,17 +132,7 @@ extension PhotoCollectionViewController {
 extension PhotoCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return PhotoCollectionViewController.photoCollectionViewFlowLayout.itemSize
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 4
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 4
+        return photoCollectionViewFlowLayout.itemSize
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -180,7 +164,7 @@ extension PhotoCollectionViewController: UICollectionViewDelegateFlowLayout {
         /// 화면에서 벗어난 셀의 이미지 로드를 취소하고 캐시에서 제거
         if indexPath.item < albumViewModel.fetchedImages.count {
             let asset = albumViewModel.fetchedImages[indexPath.item].asset
-            albumViewModel.cancelImageLoad(for: asset, size: PhotoCollectionViewController.thumbnailSize)
+            albumViewModel.cancelImageLoad(for: asset, size: PhotoCollectionViewSizeType.thumbnailSize.value)
         }
     }
     
@@ -204,7 +188,7 @@ extension PhotoCollectionViewController: UICollectionViewDataSource {
         if let cachedImage = albumViewModel.getCachedImage(for: data) {
             cell.dataBind(cachedImage, indexPath.item)
         } else {
-            albumViewModel.setImageCache(for: data, size: PhotoCollectionViewController.thumbnailSize) { cachedImage in
+            albumViewModel.setImageCache(for: data, size: PhotoCollectionViewSizeType.thumbnailSize.value) { cachedImage in
                 DispatchQueue.main.async {
                     cell.dataBind(cachedImage ?? UIImage().withTintColor(.gray6),
                                   indexPath.item)
