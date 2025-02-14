@@ -7,16 +7,6 @@
 
 import Foundation
 
-struct SpotFilterModel: Equatable {
-    
-    let latitude: Double
-    
-    let longitude: Double
-    
-    let condition: SpotConditionModel
-    
-}
-
 struct SpotConditionModel: Equatable {
     
     let spotType: SpotType
