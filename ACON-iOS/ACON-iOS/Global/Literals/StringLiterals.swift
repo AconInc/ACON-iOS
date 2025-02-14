@@ -335,4 +335,10 @@ enum StringLiterals {
         
     }
     
+    enum Album {
+        
+        static let choose = "선택"
+        
+    }
+    
 }
