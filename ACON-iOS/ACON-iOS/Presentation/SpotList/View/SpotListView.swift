@@ -90,6 +90,11 @@ class SpotListView: BaseView {
         skeletonView.snp.makeConstraints {
             $0.horizontalEdges.top.equalTo(self.safeAreaLayoutGuide)
         }
+        
+        // TODO: 추후 삭제 (Sprint-2 출시를 위한 히든처리)
+        [floatingMapButton, floatingLocationButton].forEach {
+            $0.isHidden = true
+        }
     }
     
     override func setStyle() {
