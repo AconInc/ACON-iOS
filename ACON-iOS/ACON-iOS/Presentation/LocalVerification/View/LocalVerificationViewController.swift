@@ -16,9 +16,18 @@ class LocalVerificationViewController: BaseNavViewController {
     
     private let localVerificationView = LocalVerificationView()
     
-    private let localVerificationViewModel = LocalVerificationViewModel()
+    private let localVerificationViewModel: LocalVerificationViewModel
     
     // MARK: - LifeCycle
+    
+    init(viewModel: LocalVerificationViewModel) {
+        self.localVerificationViewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +53,14 @@ class LocalVerificationViewController: BaseNavViewController {
 
         localVerificationView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+    }
+    
+    override func setStyle() {
+        super.setStyle()
+        
+        if localVerificationViewModel.flowType == .profileEdit {
+            self.setBackButton()
         }
     }
     

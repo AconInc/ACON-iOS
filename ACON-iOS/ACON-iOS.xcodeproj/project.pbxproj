@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1517FD7F2D3961A800638173 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517FD7E2D3961A800638173 /* CustomSlider.swift */; };
+		1533FCD12D55EE2600F985A0 /* ProfileBoxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */; };
 		1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EA2D337F4100E96616 /* SpotListView.swift */; };
 		1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */; };
 		1547A6F22D33AD4500E96616 /* SpotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6F12D33AD4500E96616 /* SpotModel.swift */; };
@@ -22,12 +23,18 @@
 		1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */; };
 		1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */; };
 		1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */; };
+		15A1471E2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */; };
+		15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */; };
 		15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */; };
 		15A3F6A82D36D5B900577E16 /* FilterTagButtonStackLineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6A72D36D5B900577E16 /* FilterTagButtonStackLineType.swift */; };
 		15A3F6AC2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */; };
 		15A3F6E02D38724A00577E16 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */; };
 		15A3F7A12D38C71900577E16 /* PriorityLowEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */; };
 		15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */; };
+		15A48BF82D574B88003C2421 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BF72D574B88003C2421 /* ProfileModel.swift */; };
+		15A48BFA2D574BA5003C2421 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BF92D574BA5003C2421 /* ProfileEditView.swift */; };
+		15A48BFC2D574BB9003C2421 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BFB2D574BB9003C2421 /* ProfileEditViewController.swift */; };
+		15A48BFE2D57546A003C2421 /* ProfileImageEditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */; };
 		15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C0ED512D429F7400C9ED83 /* SkeletonView.swift */; };
 		15C0ED642D42CD8800C9ED83 /* drop1Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED5F2D42CD8800C9ED83 /* drop1Acorn.json */; };
 		15C0ED652D42CD8800C9ED83 /* drop5Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED632D42CD8800C9ED83 /* drop5Acorn.json */; };
@@ -45,6 +52,11 @@
 		15CD25822D40364400320006 /* LoginModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25812D40364400320006 /* LoginModalViewController.swift */; };
 		15CD25842D40364F00320006 /* LoginModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25832D40364F00320006 /* LoginModalView.swift */; };
 		15CD25892D42099100320006 /* WideTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25882D42099000320006 /* WideTouchView.swift */; };
+		15CF62BD2D575EC00000A10F /* ProfileEditValidMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */; };
+		15CF62C22D577B600000A10F /* ProfileValidMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62C12D577B600000A10F /* ProfileValidMessageType.swift */; };
+		15CF62C52D579F2D0000A10F /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62C42D579F2D0000A10F /* ProfileViewModel.swift */; };
+		15CF62C72D57DE680000A10F /* ProfileEditTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */; };
+		15D122292D58BD0200E79866 /* DayOfMonthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D122282D58BD0200E79866 /* DayOfMonthType.swift */; };
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
 		74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */; };
 		74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */; };
@@ -197,6 +209,7 @@
 
 /* Begin PBXFileReference section */
 		1517FD7E2D3961A800638173 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
+		1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBoxComponent.swift; sourceTree = "<group>"; };
 		1547A6EA2D337F4100E96616 /* SpotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListView.swift; sourceTree = "<group>"; };
 		1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewCell.swift; sourceTree = "<group>"; };
 		1547A6F12D33AD4500E96616 /* SpotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotModel.swift; sourceTree = "<group>"; };
@@ -211,12 +224,18 @@
 		1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarController.swift; sourceTree = "<group>"; };
 		1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarItemType.swift; sourceTree = "<group>"; };
 		1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
+		15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBoxWithDeletableButton.swift; sourceTree = "<group>"; };
+		15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFlowType.swift; sourceTree = "<group>"; };
 		15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListItemSizeType.swift; sourceTree = "<group>"; };
 		15A3F6A72D36D5B900577E16 /* FilterTagButtonStackLineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagButtonStackLineType.swift; sourceTree = "<group>"; };
 		15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewHeader.swift; sourceTree = "<group>"; };
 		15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityLowEmptyView.swift; sourceTree = "<group>"; };
 		15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotFilterTagStackView.swift; sourceTree = "<group>"; };
+		15A48BF72D574B88003C2421 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		15A48BF92D574BA5003C2421 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
+		15A48BFB2D574BB9003C2421 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
+		15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageEditButton.swift; sourceTree = "<group>"; };
 		15C0ED512D429F7400C9ED83 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		15C0ED5F2D42CD8800C9ED83 /* drop1Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop1Acorn.json; sourceTree = "<group>"; };
 		15C0ED602D42CD8800C9ED83 /* drop2Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop2Acorn.json; sourceTree = "<group>"; };
@@ -234,6 +253,11 @@
 		15CD25812D40364400320006 /* LoginModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModalViewController.swift; sourceTree = "<group>"; };
 		15CD25832D40364F00320006 /* LoginModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModalView.swift; sourceTree = "<group>"; };
 		15CD25882D42099000320006 /* WideTouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WideTouchView.swift; sourceTree = "<group>"; };
+		15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditValidMessageView.swift; sourceTree = "<group>"; };
+		15CF62C12D577B600000A10F /* ProfileValidMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileValidMessageType.swift; sourceTree = "<group>"; };
+		15CF62C42D579F2D0000A10F /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTextField.swift; sourceTree = "<group>"; };
+		15D122282D58BD0200E79866 /* DayOfMonthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfMonthType.swift; sourceTree = "<group>"; };
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultitaskDelegate.swift; sourceTree = "<group>"; };
 		74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLocationManager.swift; sourceTree = "<group>"; };
@@ -402,6 +426,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1533FCCF2D55EDD200F985A0 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */,
+				15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */,
+				15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */,
+				15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */,
+				15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		1547A6E92D326EDB00E96616 /* Type */ = {
 			isa = PBXGroup;
 			children = (
@@ -530,9 +566,28 @@
 		1558BADF2D31D41400ECDEF8 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				15CF62C02D577B3E0000A10F /* Type */,
+				15A48BF42D574AFD003C2421 /* Model */,
 				D6E452922D3AA47500CBED02 /* View */,
+				15CF62C32D579F090000A10F /* ViewModel */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		15A1471F2D5B2561003793EE /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
+		15A48BF42D574AFD003C2421 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				15A48BF72D574B88003C2421 /* ProfileModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		15CD256C2D3D794300320006 /* Component */ = {
@@ -579,6 +634,23 @@
 				15CD25812D40364400320006 /* LoginModalViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		15CF62C02D577B3E0000A10F /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				15CF62C12D577B600000A10F /* ProfileValidMessageType.swift */,
+				15D122282D58BD0200E79866 /* DayOfMonthType.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
+		15CF62C32D579F090000A10F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				15CF62C42D579F2D0000A10F /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		35A4AFEF7860C30E103669B3 /* Frameworks */ = {
@@ -1087,6 +1159,7 @@
 		74BF920F2D391FFE00B923E3 /* LocalVerification */ = {
 			isa = PBXGroup;
 			children = (
+				15A1471F2D5B2561003793EE /* Type */,
 				745A81CA2D3E428400E28002 /* ViewModel */,
 				74BF920E2D391FFE00B923E3 /* View */,
 			);
@@ -1255,8 +1328,11 @@
 		D6E452922D3AA47500CBED02 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1533FCCF2D55EDD200F985A0 /* Component */,
 				D6E452902D3AA47500CBED02 /* ProfileView.swift */,
 				D6E452912D3AA47500CBED02 /* ProfileViewController.swift */,
+				15A48BF92D574BA5003C2421 /* ProfileEditView.swift */,
+				15A48BFB2D574BB9003C2421 /* ProfileEditViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1428,6 +1504,7 @@
 				741E68912D3D385A00DF99EF /* ACPlugin.swift in Sources */,
 				745B19AE2D4002A100BDBDA4 /* PostLoginResponse.swift in Sources */,
 				15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */,
+				15A48BFA2D574BA5003C2421 /* ProfileEditView.swift in Sources */,
 				74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */,
 				746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */,
 				746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */,
@@ -1445,12 +1522,14 @@
 				74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */,
 				749A01032D3A6E0100CD7A90 /* ACDebouncer.swift in Sources */,
 				7462617F2D3F9F1400A4E84F /* GetSpotDetailResponse.swift in Sources */,
+				15A1471E2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift in Sources */,
 				745C7E0D2D35A04A0074DBDB /* SearchKeywordCollectionViewCell.swift in Sources */,
 				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
 				74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */,
 				15CD25702D3F86E700320006 /* CustomRefreshControl.swift in Sources */,
 				746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */,
 				741A06C82D3532E500778219 /* DropAcornView.swift in Sources */,
+				15D122292D58BD0200E79866 /* DayOfMonthType.swift in Sources */,
 				746261752D3EA7FD00A4E84F /* GetReviewVerificationResponse.swift in Sources */,
 				748D6FA82D2C3F93007690B4 /* BaseViewController.swift in Sources */,
 				D6FF82F92D381D6100090233 /* SmallBoxViewCell.swift in Sources */,
@@ -1459,10 +1538,12 @@
 				748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */,
 				747F4FBF2D3D9D44003DECBF /* SplashView.swift in Sources */,
 				7462616F2D3EA48300A4E84F /* GetSearchKeywordResponse.swift in Sources */,
+				15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */,
 				1547A8902D35B30C00E96616 /* FilterTagButtonType.swift in Sources */,
 				74D31C7C2D5BF90300B4B2B4 /* AlbumModel.swift in Sources */,
 				74D31C802D5C025900B4B2B4 /* PhotoCollectionViewCell.swift in Sources */,
 				748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */,
+				15A48BF82D574B88003C2421 /* ProfileModel.swift in Sources */,
 				745B19B02D4010F300BDBDA4 /* AuthTargetType.swift in Sources */,
 				74BF91FA2D38164400B923E3 /* SpotDetailView.swift in Sources */,
 				748D6F872D2BD247007690B4 /* UIView+.swift in Sources */,
@@ -1481,6 +1562,7 @@
 				D61917E92D3E4410001BF0EE /* OnboardingTargetType.swift in Sources */,
 				742544062D413CCD004F950F /* SpotListCollectionViewFooter.swift in Sources */,
 				1547A8822D358E3000E96616 /* SpotListFilterViewController.swift in Sources */,
+				15CF62C52D579F2D0000A10F /* ProfileViewModel.swift in Sources */,
 				748D6FAA2D2C3FF1007690B4 /* BaseCollectionViewCell.swift in Sources */,
 				748ECA6B2D31918D00BBC981 /* LoginView.swift in Sources */,
 				D6EA38152D42B88F002B68B9 /* SearchEmptyView.swift in Sources */,
@@ -1529,12 +1611,14 @@
 				74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */,
 				D696F1B22D3A7E3400CCD5FF /* CustomAlertView.swift in Sources */,
 				743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */,
+				15A48BFC2D574BB9003C2421 /* ProfileEditViewController.swift in Sources */,
 				741B58752D5ED21C0061CBF7 /* PhotoCollectionViewSizeType.swift in Sources */,
 				7462D0252D4262F300580464 /* AuthManager.swift in Sources */,
 				74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */,
 				74BF92042D3861A600B923E3 /* SpotDetailViewController.swift in Sources */,
 				15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */,
 				1547A8732D34157700E96616 /* SpotListViewModel.swift in Sources */,
+				15CF62C72D57DE680000A10F /* ProfileEditTextField.swift in Sources */,
 				748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */,
 				741E68A22D3D5FA200DF99EF /* ACService.swift in Sources */,
 				D6FF82E92D3805F000090233 /* DislikeCollectionViewType.swift in Sources */,
@@ -1546,6 +1630,7 @@
 				746261632D3EA1D500A4E84F /* GetSearchSuggestionResponse.swift in Sources */,
 				D61917EC2D3E484A001BF0EE /* OnboardingRequest.swift in Sources */,
 				744BAF172D300AB900F95B4A /* DummyComponent.swift in Sources */,
+				1533FCD12D55EE2600F985A0 /* ProfileBoxComponent.swift in Sources */,
 				746261832D3F9FD900A4E84F /* GetSpotMenuResponse.swift in Sources */,
 				15CD25842D40364F00320006 /* LoginModalView.swift in Sources */,
 				741E689A2D3D43FF00DF99EF /* EmptyResponse.swift in Sources */,
@@ -1560,6 +1645,7 @@
 				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
 				1547A88B2D3596B600E96616 /* SpotType.swift in Sources */,
 				74BF92172D393B4A00B923E3 /* Int+.swift in Sources */,
+				15CF62BD2D575EC00000A10F /* ProfileEditValidMessageView.swift in Sources */,
 				7462616D2D3EA40600A4E84F /* GetSearchKeywordRequest.swift in Sources */,
 				748ECA6E2D3196F100BBC981 /* LoginViewController.swift in Sources */,
 				746261892D3FA29C00A4E84F /* SpotDetailTargetType.swift in Sources */,
@@ -1577,7 +1663,9 @@
 				D6D0F5152D36BA6500326F17 /* DislikeCollectionView.swift in Sources */,
 				74BF92072D38622B00B923E3 /* SpotDetailViewModel.swift in Sources */,
 				745C7E152D35AEC10074DBDB /* SpotSearchViewModel.swift in Sources */,
+				15CF62C22D577B600000A10F /* ProfileValidMessageType.swift in Sources */,
 				D6E452932D3AA47500CBED02 /* ProfileView.swift in Sources */,
+				15A48BFE2D57546A003C2421 /* ProfileImageEditButton.swift in Sources */,
 				D6E452942D3AA47500CBED02 /* ProfileViewController.swift in Sources */,
 				748D6F6B2D2BCA1C007690B4 /* ViewController.swift in Sources */,
 				15A3F6A82D36D5B900577E16 /* FilterTagButtonStackLineType.swift in Sources */,

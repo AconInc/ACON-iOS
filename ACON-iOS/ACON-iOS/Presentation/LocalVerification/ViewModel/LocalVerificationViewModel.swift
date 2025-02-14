@@ -10,6 +10,8 @@ import Foundation
 
 class LocalVerificationViewModel {
     
+    var flowType: LocalVerificationFlowType
+    
     let onSuccessPostLocalArea: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var localArea: ObservablePattern<String> = ObservablePattern(nil)
@@ -18,7 +20,9 @@ class LocalVerificationViewModel {
     
     var userCoordinate: CLLocationCoordinate2D? = nil
     
-    init() {
+    init(flowType: LocalVerificationFlowType) {
+        self.flowType = flowType
+        
         ACLocationManager.shared.addDelegate(self)
     }
 

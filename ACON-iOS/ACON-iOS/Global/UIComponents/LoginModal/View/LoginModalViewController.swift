@@ -20,6 +20,8 @@ class LoginModalViewController: BaseViewController {
     
     private let loginViewModel = LoginViewModel()
     
+    var onSuccessLogin: ((Bool) -> ())?
+    
     
     // MARK: - LifeCycle
     
@@ -110,17 +112,17 @@ extension LoginModalViewController {
 
     func bindViewModel() {
         self.loginViewModel.onSuccessLogin.bind { [weak self] onSuccess in
-            print("hi")
-            print(onSuccess)
             guard let onSuccess else { return }
             guard let self = self else { return }
+            self.onSuccessLogin?(onSuccess)
             self.dismiss(animated: true)
             onSuccess ? ACToastController.show(StringLiterals.LoginModal.successLogin, bottomInset: 112, delayTime: 1) { [weak self] in return } : showLoginFailAlert()
         }
     }
     
     func navigateToLocalVerificationVC() {
-        let vc = LocalVerificationViewController()
+        let vm = LocalVerificationViewModel(flowType: .onboarding)
+        let vc = LocalVerificationViewController(viewModel: vm)
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
