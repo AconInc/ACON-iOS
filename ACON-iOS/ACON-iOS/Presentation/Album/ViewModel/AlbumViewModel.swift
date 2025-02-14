@@ -74,7 +74,7 @@ class AlbumViewModel {
                                                                     options: userCreatedAlbumsOptions)
     }
     
-    /// 앨범 전체 사진 가져오기  ( album 인자에 해당하는 앨범 입력, 미입력 시 전체 사진 불러옴)
+    /// 앨범 전체 사진 (이미지만, 영상 X)가져오기  ( album 인자에 해당하는 앨범 입력, 미입력 시 전체 사진 불러옴)
     func fetchPhotos(in album: PHAssetCollection? = nil) {
         guard checkPhotoLibraryAuthorization() else {
             requestAlbumPermission { granted in
@@ -88,6 +88,8 @@ class AlbumViewModel {
         let fetchOptions = PHFetchOptions()
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
         fetchOptions.sortDescriptors = [sortDescriptor]
+        /// 이미지만 가져오기
+        fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
         if let album = album {
             photosInCurrentAlbum = PHAsset.fetchAssets(in: album, options: fetchOptions)
         } else {
