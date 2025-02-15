@@ -29,13 +29,13 @@ class SpotListViewModel {
     
     var spotType: ObservablePattern<SpotType> = ObservablePattern(nil)
     
-    var filterList: [SpotFilterModel] = [] // TODO: SpotCondition으로 바꾸기
+    var filterList: [SpotFilterModel] = []
     
     var walkingTime: SpotType.WalkingDistanceType = .fifteen
     
-    var restaurantPrice: SpotType.RestaurantPriceType = .aboveFiftyThousand
+    var restaurantPrice: SpotType.RestaurantPriceType = .aboveFiftyThousand // TODO: 옵셔널로 변경
     
-    var cafePrice: SpotType.CafePriceType = .aboveTenThousand
+    var cafePrice: SpotType.CafePriceType = .aboveTenThousand // TODO: 옵셔널로 변경
     
     
     // MARK: - Methods
@@ -75,17 +75,17 @@ extension SpotListViewModel {
     }
     
     func postSpotList() {
+        let filterListDTO = filterList.map { filter in
+            return SpotFilter(category: filter.category.serverKey,
+                                       optionList: filter.optionList)
+        }
+        
         let requestBody = PostSpotListRequest(
             latitude: userCoordinate.latitude,
             longitude: userCoordinate.longitude,
             condition: SpotCondition(
-                spotType: spotType.value?.serverKey ?? "",
-                filterList: filterList.map { filterList in
-                    let filterList = SpotFilter(
-                        category: filterList.category.serverKey,
-                        optionList: filterList.optionList)
-                    return filterList
-                },
+                spotType: spotType.value?.serverKey,
+                filterList: filterList.isEmpty ? nil : filterListDTO,
                 walkingTime: walkingTime.serverKey,
                 priceRange: spotType.value == .restaurant ? restaurantPrice.serverKey : cafePrice.serverKey
             )
