@@ -50,12 +50,12 @@ class LoginViewModel {
         }
     }
     
-    // TODO: - 앱잼 기간 내에는 우선 accessToken만 받아옴 - 나중에 refreshToken 받아오기
     func postLogin(socialType: String, idToken: String) {
         ACService.shared.authService.postLogin(PostLoginRequest(socialType: socialType, idToken: idToken)){ [weak self] response in
             switch response {
             case .success(let data):
                 UserDefaults.standard.set(data.accessToken, forKey: StringLiterals.UserDefaults.accessToken)
+                UserDefaults.standard.set(data.refreshToken, forKey: StringLiterals.UserDefaults.refreshToken)
                 self?.onSuccessLogin.value = true
             default:
                 print("VM - Failed To postLogin")
