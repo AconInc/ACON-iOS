@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PostSpotListRequest: Codable {
+struct PostSpotListRequest: Encodable {
     
     let latitude: Double
     
@@ -17,19 +17,31 @@ struct PostSpotListRequest: Codable {
     
 }
 
-struct SpotCondition: Codable {
+struct SpotCondition: Encodable {
     
-    let spotType: String
+    let spotType: String?
     
-    let filterList: [SpotFilter] // TODO: Optional로 수정
+    let filterList: [SpotFilter]?
     
     let walkingTime: Int
     
-    let priceRange: Int
+    let priceRange: Int?
+    
+    enum CodingKeys: CodingKey {
+        case spotType, filterList, walkingTime, priceRange
+    }
+    
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(self.spotType, forKey: .spotType)
+        try container.encodeIfPresent(self.filterList, forKey: .filterList)
+        try container.encode(self.walkingTime, forKey: .walkingTime)
+        try container.encodeIfPresent(self.priceRange, forKey: .priceRange)
+    }
     
 }
 
-struct SpotFilter: Codable {
+struct SpotFilter: Encodable {
     
     let category: String
     
