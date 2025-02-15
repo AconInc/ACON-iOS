@@ -11,7 +11,7 @@ import GoogleSignIn
 import GoogleSignInSwift
 import AuthenticationServices
 
-class LoginViewModel {
+class LoginViewModel: Serviceable {
     
     var onSuccessLogin: ObservablePattern<Bool> = ObservablePattern(nil)
     
@@ -57,6 +57,10 @@ class LoginViewModel {
                 UserDefaults.standard.set(data.accessToken, forKey: StringLiterals.UserDefaults.accessToken)
                 UserDefaults.standard.set(data.refreshToken, forKey: StringLiterals.UserDefaults.refreshToken)
                 self?.onSuccessLogin.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.postLogin(socialType: socialType, idToken: idToken)
+                }
             default:
                 print("VM - Failed To postLogin")
                 self?.onSuccessLogin.value = false

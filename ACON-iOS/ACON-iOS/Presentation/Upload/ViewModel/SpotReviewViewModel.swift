@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SpotReviewViewModel {
+class SpotReviewViewModel: Serviceable {
     
     let onSuccessGetAcornCount: ObservablePattern<Bool> = ObservablePattern(nil)
     
@@ -22,6 +22,10 @@ class SpotReviewViewModel {
                 self?.acornCount.value = data.acornCount
                 self?.onSuccessGetAcornCount.value = true
                 print(self?.acornCount.value, data.acornCount)
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.getAcornCount()
+                }
             default:
                 print("VM - Fail to getAcornCount")
                 self?.onSuccessGetAcornCount.value = false
@@ -36,6 +40,10 @@ class SpotReviewViewModel {
             switch response {
             case .success(_):
                 self?.onSuccessPostReview.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.postReview(spotID: spotID, acornCount: acornCount)
+                }
             default:
                 print("VM - Fail to postReview")
                 self?.onSuccessPostReview.value = false
