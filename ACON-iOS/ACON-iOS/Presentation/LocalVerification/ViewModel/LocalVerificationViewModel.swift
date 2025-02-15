@@ -42,10 +42,12 @@ class LocalVerificationViewModel {
             case .success(let data):
                 self?.localArea.value = data.name
                 self?.onSuccessPostLocalArea.value = true
-                // TODO: id 관련 로직 추가
+//                UserDefaults.standard.set(data.id, forKey: StringLiterals.UserDefaults.hasVerifiedArea)
+//                print("🥑인증동네 id: \(data.id)") // TODO: 수정
             default:
                 print("Failed To Post")
                 self?.onSuccessPostLocalArea.value = false
+//                UserDefaults.standard.removeObject(forKey: StringLiterals.UserDefaults.hasVerifiedArea)
                 return
             }
         }
