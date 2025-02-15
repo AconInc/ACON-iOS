@@ -9,13 +9,13 @@ import Foundation
 
 struct SpotConditionModel: Equatable {
     
-    let spotType: SpotType
+    let spotType: SpotType?
     
-    let filterList: [SpotFilterModel]
+    let filterList: [SpotFilterModel]?
     
     let walkingTime: Int
     
-    let priceRange: Int
+    let priceRange: Int?
     
 }
 
