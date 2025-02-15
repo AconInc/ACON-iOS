@@ -10,6 +10,8 @@ import Foundation
 
 struct PostLocalAreaResponse: Codable {
     
-    let area: String
+    let id: Int64
+    
+    let name: String
     
 }

@@ -65,7 +65,7 @@ extension SpotListViewModel {
                                                     longitude: userCoordinate.longitude) { [weak self] response in
             switch response {
             case .success(let data):
-                self?.myAddress = data.area
+                self?.myAddress = data.name
                 self?.onSuccessGetAddress.value = true
             default:
                 self?.onSuccessGetAddress.value = false

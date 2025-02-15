@@ -40,8 +40,9 @@ class LocalVerificationViewModel {
         ACService.shared.localVerificationService.postLocalArea(requestBody: requestBody) { [weak self] response in
             switch response {
             case .success(let data):
-                self?.localArea.value = data.area
+                self?.localArea.value = data.name
                 self?.onSuccessPostLocalArea.value = true
+                // TODO: id 관련 로직 추가
             default:
                 print("Failed To Post")
                 self?.onSuccessPostLocalArea.value = false
