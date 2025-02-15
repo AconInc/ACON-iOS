@@ -18,4 +18,10 @@ final class AuthManager {
         }
     }
     
+    var hasVerifiedArea: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: StringLiterals.UserDefaults.hasVerifiedArea)
+        }
+    }
+    
 }

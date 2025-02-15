@@ -13,6 +13,8 @@ enum StringLiterals {
         
         static let accessToken = "accessToken"
         
+        static let hasVerifiedArea = "hasVerifiedArea"
+        
     }
     
     enum Login {
