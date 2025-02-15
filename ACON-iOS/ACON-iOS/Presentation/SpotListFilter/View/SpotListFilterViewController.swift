@@ -155,8 +155,7 @@ private extension SpotListFilterViewController {
     }
     
     @objc func didTapResetButton() {
-        viewModel.spotType.value = nil
-        viewModel.filterList = []
+        viewModel.resetConditions()
         viewModel.requestLocation()
         self.dismiss(animated: true)
     }

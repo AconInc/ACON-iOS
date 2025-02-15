@@ -10,6 +10,13 @@ import UIKit
 
 class SpotListViewModel {
     
+    // MARK: - Default Values
+    
+    let defaultWalkingTime: SpotType.WalkingDistanceType = .fifteen
+    let defaultRestaurantPrice: SpotType.RestaurantPriceType = .aboveFiftyThousand
+    let defaultCafePrice: SpotType.CafePriceType = .aboveTenThousand
+    
+    
     // MARK: - Properties
     
     var onSuccessGetAddress: ObservablePattern<Bool> = ObservablePattern(nil)
@@ -51,6 +58,14 @@ class SpotListViewModel {
     func requestLocation() {
         // 위치 권한 확인 및 업데이트 시작
         ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
+    }
+    
+    func resetConditions() {
+        spotType.value = nil
+        filterList.removeAll()
+        walkingTime = defaultWalkingTime
+        restaurantPrice = defaultRestaurantPrice
+        cafePrice = defaultCafePrice
     }
     
 }
