@@ -57,6 +57,7 @@ class LoginViewModel {
             case .success(let data):
                 UserDefaults.standard.set(data.accessToken, forKey: StringLiterals.UserDefaults.accessToken)
                 self?.onSuccessLogin.value = true
+                // TODO: hasVerifiedArea 바인딩
             default:
                 print("VM - Failed To postLogin")
                 self?.onSuccessLogin.value = false
