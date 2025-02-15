@@ -133,6 +133,8 @@ enum StringLiterals {
         
         static let noAcorn = "앗! 일치하는 도토리 맛집이 없어요"
         
+        static let failedToGetAddress = "위치 확인 실패" // TODO: 라이팅 기획과 논의
+        
     }
     
     enum LocalVerification {

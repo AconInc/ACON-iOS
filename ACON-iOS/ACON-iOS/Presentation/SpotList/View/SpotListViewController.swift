@@ -92,7 +92,7 @@ extension SpotListViewController {
         viewModel.onSuccessGetAddress.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
-            self.setTitleLabelStyle(title: onSuccess ? viewModel.myAddress : "위치 확인 실패")
+            self.setTitleLabelStyle(title: onSuccess ? viewModel.myAddress : StringLiterals.SpotList.failedToGetAddress)
         }
         
         viewModel.isPostSpotListSuccess.bind { [weak self] isSuccess in
