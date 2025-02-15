@@ -61,16 +61,24 @@ class SpotListViewModel {
 extension SpotListViewModel {
     
     func getAddress() {
-        ACService.shared.spotListService.getAddress(latitude: userCoordinate.latitude,
-                                                    longitude: userCoordinate.longitude) { [weak self] response in
-            switch response {
-            case .success(let data):
-                self?.myAddress = data.area
-                self?.onSuccessGetAddress.value = true
-            default:
+        let geocoder = CLGeocoder()
+        let location = CLLocation(latitude: userCoordinate.latitude, longitude: userCoordinate.longitude)
+        geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
+            guard let self = self,
+                  let placemark = placemarks?.first else {
+                print("📍ReverseGeocode Fail: \(String(describing: error?.localizedDescription))")
                 self?.onSuccessGetAddress.value = false
                 return
             }
+            
+            guard let dong = placemark.subLocality else {
+                let city = placemark.locality ?? ""
+                myAddress = city
+                onSuccessGetAddress.value = true
+                print("📍동 정보 없어서 시 정보 연결함"); return
+            }
+            myAddress = dong
+            onSuccessGetAddress.value = true
         }
     }
     
