@@ -88,7 +88,7 @@ private extension LocalMapViewController {
     func bindViewModel() {
         self.localVerificationViewModel.onSuccessPostLocalArea.bind { [weak self] onSuccess in
             guard let onSuccess,
-                  let data = self?.localVerificationViewModel.localArea.value,
+                  let data = self?.localVerificationViewModel.localAreaName.value,
                   let flowType = self?.localVerificationViewModel.flowType
             else { return }
             

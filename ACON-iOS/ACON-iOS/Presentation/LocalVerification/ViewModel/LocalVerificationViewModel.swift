@@ -14,7 +14,9 @@ class LocalVerificationViewModel {
     
     let onSuccessPostLocalArea: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var localArea: ObservablePattern<String> = ObservablePattern(nil)
+    var localAreaID: ObservablePattern<Int64> = ObservablePattern(nil)
+    
+    var localAreaName: ObservablePattern<String> = ObservablePattern(nil)
     
     let isLocationChecked: ObservablePattern<Bool> = ObservablePattern(nil)
     
@@ -40,7 +42,8 @@ class LocalVerificationViewModel {
         ACService.shared.localVerificationService.postLocalArea(requestBody: requestBody) { [weak self] response in
             switch response {
             case .success(let data):
-                self?.localArea.value = data.name
+                self?.localAreaID.value = data.id
+                self?.localAreaName.value = data.name
                 self?.onSuccessPostLocalArea.value = true
 //                UserDefaults.standard.set(data.id, forKey: StringLiterals.UserDefaults.hasVerifiedArea)
 //                print("🥑인증동네 id: \(data.id)") // TODO: 수정
