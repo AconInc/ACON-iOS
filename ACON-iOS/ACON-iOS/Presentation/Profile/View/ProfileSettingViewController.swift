@@ -211,7 +211,10 @@ extension ProfileSettingViewController: UITableViewDataSource {
             let items = SettingType.allSections[3] as! [SettingType.Account]
             switch items[indexPath.row] {
             case .logout:
-                // TODO: - 로그아웃
+                let alertHandler = AlertHandler()
+                alertHandler.showLogoutAlert(from: self) { [weak self] in
+                    self?.settingViewModel.logout()
+                }
                 return
             case .withdrawal:
                 // TODO: - 탈퇴 뷰컨 이동
