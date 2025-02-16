@@ -58,6 +58,7 @@ class LoginViewModel {
             switch response {
             case .success(let data):
                 UserDefaults.standard.set(data.accessToken, forKey: StringLiterals.UserDefaults.accessToken)
+                UserDefaults.standard.set(data.hasVerifiedArea, forKey: StringLiterals.UserDefaults.hasVerifiedArea)
                 self?.hasVerifiedArea = data.hasVerifiedArea
                 self?.onSuccessLogin.value = true
             default:
