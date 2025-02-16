@@ -5,8 +5,6 @@
 //  Created by Jaehyun Ahn on 2/17/25.
 //
 
-import Foundation
-
 import UIKit
 
 enum WithdrawalType: CaseIterable {

@@ -22,7 +22,7 @@ final class WithdrawalViewModel {
             inputText.value = nil
         }
     }
-
+    
     func updateInputText(_ text: String) {
         if selectedOption.value == StringLiterals.Withdrawal.optionOthers {
             inputText.value = text

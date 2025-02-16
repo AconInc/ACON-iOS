@@ -17,7 +17,6 @@ final class WithdrawalTableView: UITableView {
     var selectedSpotType: String = "" {
         didSet {
             reloadData()
-            print("📌 선택된 옵션: \(selectedSpotType)")
             onSelectionChanged?(selectedSpotType)
         }
     }
@@ -45,6 +44,7 @@ final class WithdrawalTableView: UITableView {
         dataSource = self
         register(WithdrawalTableViewCell.self, forCellReuseIdentifier: WithdrawalTableViewCell.cellIdentifier)
     }
+    
 }
 
 extension WithdrawalTableView: UITableViewDelegate, UITableViewDataSource {
@@ -79,7 +79,7 @@ extension WithdrawalTableView: UITableViewDelegate, UITableViewDataSource {
         } else {
             selectedSpotType = selectedOption.mappedValue
         }
-        
         viewModel?.updateSelectedOption(selectedSpotType)
     }
+    
 }

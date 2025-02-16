@@ -79,4 +79,5 @@ final class WithdrawalTableViewCell: BaseTableViewCell {
             withdrawalImageView.image = UIImage(named: "circle")
         }
     }
+    
 }

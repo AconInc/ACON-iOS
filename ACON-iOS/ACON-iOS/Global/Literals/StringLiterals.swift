@@ -364,6 +364,8 @@ enum StringLiterals {
         static let optionOthers = "기타"
         
         static let submit = "제출하기"
+        
+        static let withdrawalReason = "탈퇴하려는 이유를 적어주세요"
     }
     
     enum WithdrawalConfirmation {

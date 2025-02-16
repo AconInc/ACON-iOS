@@ -24,7 +24,6 @@ final class WithdrawalViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        optionsTableView.viewModel = viewModel
         
         setBinding()
     }
@@ -104,7 +103,7 @@ final class WithdrawalViewController: BaseViewController {
         optionsTableView.snp.makeConstraints {
             $0.top.equalTo(reasonDescriptionLabel.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(160)
+            $0.height.equalTo(200)
         }
         
         otherReasonTextFieldView.snp.makeConstraints{
@@ -119,6 +118,7 @@ final class WithdrawalViewController: BaseViewController {
             $0.height.equalTo(52)
         }
     }
+    
 }
 
 extension WithdrawalViewController {
@@ -128,17 +128,13 @@ extension WithdrawalViewController {
            let inputText = viewModel.inputText.value {
             viewModel.selectedOption.value = inputText
         }
-        
-        print("최종 선택된 옵션: \(viewModel.selectedOption.value ?? "nil")")
-        
-        // 🔥 여기서 시트를 띄우자!
         presentWithdrawalSheet()
     }
     
     private func presentWithdrawalSheet() {
         let sheetVC = WithdrawalConfirmationViewController()
         if let sheet = sheetVC.sheetPresentationController {
-            sheet.detents = [SheetUtils().acShortDetent] // 📌 중간 크기로 설정
+            sheet.detents = [SheetUtils().acShortDetent]
             sheet.prefersGrabberVisible = true
         }
         present(sheetVC, animated: true)
@@ -149,7 +145,7 @@ extension WithdrawalViewController {
     }
     
     private func setBinding() {
-        
+        optionsTableView.viewModel = viewModel
         self.buttonState()
         
         viewModel.selectedOption.bind { [weak self] selectedOption in
@@ -158,6 +154,7 @@ extension WithdrawalViewController {
             let isOtherSelected = selectedOption == StringLiterals.Withdrawal.optionOthers
             otherReasonTextFieldView.isHidden = !isOtherSelected
         }
+        
         viewModel.inputText.bind { [weak self] _ in
             guard let self = self else { return }
             self.buttonState()
@@ -169,7 +166,6 @@ extension WithdrawalViewController {
     }
     
     private func buttonState() {
-        
         let isOptionSelected = viewModel.selectedOption.value != nil
         let isInputTextValid = !(viewModel.inputText.value?.isEmpty ?? true)
         
@@ -182,23 +178,6 @@ extension WithdrawalViewController {
         let textColor = shouldEnableSubmitButton ? UIColor.acWhite : UIColor.gray5
 
         submitButton.setTitleColor(textColor, for: .normal)
-        
     }
     
-}
-
-
-import SwiftUI
-
-struct WithdrawalViewControllerPreview: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> UINavigationController {
-        let viewController = WithdrawalViewController()
-        return UINavigationController(rootViewController: viewController)
-    }
-    
-    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {}
-}
-
-#Preview {
-    WithdrawalViewControllerPreview()
 }

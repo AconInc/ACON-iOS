@@ -31,7 +31,7 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
 
         textView.do {
             $0.backgroundColor = .clear
-            $0.textColor = .gray5
+            $0.textColor = .white
             $0.font = .systemFont(ofSize: 16)
             $0.layer.borderColor = UIColor.gray6.cgColor
             $0.layer.borderWidth = 1.0
@@ -41,7 +41,7 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
         }
         
         placeholderLabel.do {
-            $0.text = "탈퇴하려는 이유를 적어주세요"
+            $0.text = StringLiterals.Withdrawal.withdrawalReason
             $0.font = .systemFont(ofSize: 16)
             $0.textColor = .lightGray
             $0.isHidden = false
@@ -94,8 +94,6 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
                   $0.height.equalTo(estimatedSize.height)
               }
           }
-      
-
         onTextChanged?(textView.text)
         updateCharacterCount(textView.text.count)
     }
@@ -112,4 +110,5 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
     func updateCharacterCount(_ count: Int) {
         characterCountLabel.text = "\(count) / 50"
     }
+    
 }
