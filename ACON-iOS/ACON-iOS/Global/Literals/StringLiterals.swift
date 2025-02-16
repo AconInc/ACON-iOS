@@ -347,4 +347,26 @@ enum StringLiterals {
         
     }
     
+    enum ReasonType {
+        
+        static let noSelection = "선택해주세요."
+        
+        static let notEnoughRestaurants = "등록된 맛집이 너무 적어요."
+        
+        static let notSatisfied = "추천결과가 만족스럽지 않아요."
+        
+        static let fakeReviews = "거짓 리뷰를 봤어요."
+        
+        static let other = "기타"
+    }
+    
+    enum WithDraw {
+        
+        static let mainTitle = "사용자ID님과 이별의 순간이왔어요..."
+        
+        static let description = "계정을 삭제하면 남겨두었던 리뷰 등 모든 활동정보가 삭제되며 데이터는 영구적으로 삭제되며 복구할 수 없어요."
+        
+        static let subDescription = "계정을 삭제하려는 이유를 알려주실 수 있나요?"
+    }
+    
 }
