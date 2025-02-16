@@ -51,9 +51,8 @@ class LocalVerificationViewModel: Serviceable {
                 }
 //                print("🥑인증동네 id: \(data.id)") // TODO: 수정
             default:
-                print("Failed To Post")
+                print("🥑Failed To Post Local Area")
                 self?.onSuccessPostLocalArea.value = false
-//                UserDefaults.standard.removeObject(forKey: StringLiterals.UserDefaults.hasVerifiedArea)
                 return
             }
         }
