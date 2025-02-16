@@ -27,4 +27,6 @@ final class ACService {
     
     lazy var spotListService = SpotListService()
     
+    lazy var profileService = ProfileService()
+    
 }
