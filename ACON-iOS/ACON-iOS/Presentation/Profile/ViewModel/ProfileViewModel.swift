@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ProfileViewModel {
+class ProfileViewModel: Serviceable {
     
     // MARK: - Properties
     
@@ -62,6 +62,10 @@ class ProfileViewModel {
                 )
                 userInfo = newUserInfo
                 onGetProfileSuccess.value = true
+            case .reIssueJWT:
+                self.handleReissue {
+                    self.getProfile()
+                }
             default:
                 onGetProfileSuccess.value = false
             }
