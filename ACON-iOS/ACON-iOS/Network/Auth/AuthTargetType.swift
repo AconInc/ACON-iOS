@@ -13,7 +13,7 @@ enum AuthTargetType {
 
     case postLogin(_ requestBody: PostLoginRequest)
     
-    case postLogout(_ requestBody: PostLoginRequest)
+    case postLogout(_ requestBody: PostLogoutRequest)
     
     case postReissue(_ requestBody: PostReissueRequest)
     
@@ -53,8 +53,10 @@ extension AuthTargetType: TargetType {
     var headers: [String : String]? {
         var headers = HeaderType.basicHeader
         switch self {
-        case .postLogin, .postLogout, .postReissue:
+        case .postLogin, .postReissue:
             headers = HeaderType.basicHeader
+        case .postLogout:
+            headers = HeaderType.headerWithToken()
         }
         return headers
     }
