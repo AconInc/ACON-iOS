@@ -52,6 +52,7 @@ final class ProfileView: BaseView {
             $0.backgroundColor = .gray7 // NOTE: Skeleton
             $0.layer.cornerRadius = profileImageSize / 2
             $0.contentMode = .scaleAspectFill
+            $0.clipsToBounds = true
         }
         
         profileEditButton.do {

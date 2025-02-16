@@ -8,7 +8,7 @@
 import CoreLocation
 import UIKit
 
-class SpotListViewModel {
+class SpotListViewModel: Serviceable {
     
     // MARK: - Properties
     
@@ -29,13 +29,13 @@ class SpotListViewModel {
     
     var spotType: ObservablePattern<SpotType> = ObservablePattern(nil)
     
-    var filterList: [SpotFilterListModel] = [] // TODO: SpotCondition으로 바꾸기
+    var filterList: [SpotFilterModel] = []
     
-    var walkingTime: SpotType.WalkingDistanceType = .fifteen
+    var walkingTime: SpotType.WalkingDistanceType = .defaultValue
     
-    var restaurantPrice: SpotType.RestaurantPriceType = .aboveFiftyThousand
+    var restaurantPrice: SpotType.RestaurantPriceType = .defaultValue // TODO: 옵셔널로 변경
     
-    var cafePrice: SpotType.CafePriceType = .aboveTenThousand
+    var cafePrice: SpotType.CafePriceType = .defaultValue // TODO: 옵셔널로 변경
     
     
     // MARK: - Methods
@@ -51,6 +51,14 @@ class SpotListViewModel {
     func requestLocation() {
         // 위치 권한 확인 및 업데이트 시작
         ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
+    }
+    
+    func resetConditions() {
+        spotType.value = nil
+        filterList.removeAll()
+        walkingTime = .defaultValue
+        restaurantPrice = .defaultValue
+        cafePrice = .defaultValue
     }
     
 }
@@ -83,17 +91,17 @@ extension SpotListViewModel {
     }
     
     func postSpotList() {
+        let filterListDTO = filterList.map { filter in
+            return SpotFilter(category: filter.category.serverKey,
+                                       optionList: filter.optionList)
+        }
+        
         let requestBody = PostSpotListRequest(
             latitude: userCoordinate.latitude,
             longitude: userCoordinate.longitude,
             condition: SpotCondition(
-                spotType: spotType.value?.serverKey ?? "",
-                filterList: filterList.map { filterList in
-                    let filterList = SpotFilterList(
-                        category: filterList.category.serverKey,
-                        optionList: filterList.optionList)
-                    return filterList
-                },
+                spotType: spotType.value?.serverKey,
+                filterList: filterList.isEmpty ? nil : filterListDTO,
                 walkingTime: walkingTime.serverKey,
                 priceRange: spotType.value == .restaurant ? restaurantPrice.serverKey : cafePrice.serverKey
             )
@@ -116,6 +124,10 @@ extension SpotListViewModel {
                 self?.isUpdated = spotList != self?.spotList
                 self?.spotList = spotList
                 self?.isPostSpotListSuccess.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.postSpotList()
+                }
             default:
                 print("🥑Failed To Post")
                 self?.isPostSpotListSuccess.value = false

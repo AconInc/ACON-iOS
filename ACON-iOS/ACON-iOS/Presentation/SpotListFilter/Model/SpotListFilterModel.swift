@@ -7,29 +7,19 @@
 
 import Foundation
 
-struct SpotFilterModel: Equatable {
-    
-    let latitude: Double
-    
-    let longitude: Double
-    
-    let condition: SpotConditionModel
-    
-}
-
 struct SpotConditionModel: Equatable {
     
-    let spotType: SpotType
+    let spotType: SpotType?
     
-    let filterList: [SpotFilterListModel]
+    let filterList: [SpotFilterModel]?
     
     let walkingTime: Int
     
-    let priceRange: Int
+    let priceRange: Int?
     
 }
 
-struct SpotFilterListModel: Equatable {
+struct SpotFilterModel: Equatable {
     
     let category: SpotType.FilterCategoryType
     

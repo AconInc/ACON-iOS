@@ -147,15 +147,13 @@ private extension ProfileEditViewController {
     
     func bindData() {
         // NOTE: 기본 데이터 바인딩
-        guard let userInfo = viewModel.userInfo.value else { return }
         profileEditView.do {
-            $0.setProfileImage(userInfo.profileImageURL)
-            $0.nicknameTextField.text = userInfo.nickname
-            $0.setNicknameLengthLabel(
-                countPhoneme(text: userInfo.nickname),
-                viewModel.maxNicknameLength
-                )
-            $0.birthDateTextField.text = userInfo.birthDate
+            $0.setProfileImage(viewModel.userInfo.profileImageURL)
+            $0.nicknameTextField.text = viewModel.userInfo.nickname
+            $0.setNicknameLengthLabel(countPhoneme(text: viewModel.userInfo.nickname),
+                                      viewModel.maxNicknameLength
+            )
+            $0.birthDateTextField.text = viewModel.userInfo.birthDate
         }
     }
     

@@ -8,7 +8,7 @@
 import CoreLocation
 import Foundation
 
-class LocalVerificationViewModel {
+class LocalVerificationViewModel: Serviceable {
     
     var flowType: LocalVerificationFlowType
     
@@ -45,6 +45,10 @@ class LocalVerificationViewModel {
                 self?.localAreaID.value = data.id
                 self?.localAreaName.value = data.name
                 self?.onSuccessPostLocalArea.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.postLocalArea()
+                }
 //                print("🥑인증동네 id: \(data.id)") // TODO: 수정
             default:
                 print("Failed To Post")
