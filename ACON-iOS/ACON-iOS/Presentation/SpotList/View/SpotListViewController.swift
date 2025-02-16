@@ -58,7 +58,6 @@ class SpotListViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
-        self.setTitleLabelStyle(title: "동네 인증")
         setGlassMorphism()
     }
             
@@ -90,15 +89,10 @@ class SpotListViewController: BaseNavViewController {
 extension SpotListViewController {
     
     func bindViewModel() {
-        
         viewModel.onSuccessGetAddress.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
-            if onSuccess {
-                self.setTitleLabelStyle(title: viewModel.myAddress)
-            } else {
-                print("🥑Post 실패")
-            }
+            self.setTitleLabelStyle(title: onSuccess ? viewModel.myAddress : StringLiterals.SpotList.failedToGetAddress)
         }
         
         viewModel.isPostSpotListSuccess.bind { [weak self] isSuccess in
