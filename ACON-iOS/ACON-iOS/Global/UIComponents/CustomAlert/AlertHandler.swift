@@ -84,7 +84,7 @@ private extension AlertHandler {
     
     // MARK: - Alert 프리젠테이션 공통 로직
     
-    private func presentAlert(_ alert: CustomAlertViewController, from viewController: UIViewController) {
+    func presentAlert(_ alert: CustomAlertViewController, from viewController: UIViewController) {
         alert.modalPresentationStyle = .overFullScreen
         alert.modalTransitionStyle = .crossDissolve
         viewController.present(alert, animated: true, completion: nil)
