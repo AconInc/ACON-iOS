@@ -60,6 +60,7 @@
 		15CF62C52D579F2D0000A10F /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62C42D579F2D0000A10F /* ProfileViewModel.swift */; };
 		15CF62C72D57DE680000A10F /* ProfileEditTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */; };
 		15D122292D58BD0200E79866 /* DayOfMonthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D122282D58BD0200E79866 /* DayOfMonthType.swift */; };
+		15DC053F2D623DD400B752DD /* PostLogoutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DC053E2D623DD400B752DD /* PostLogoutRequest.swift */; };
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
 		74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */; };
 		74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */; };
@@ -272,6 +273,7 @@
 		15CF62C42D579F2D0000A10F /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTextField.swift; sourceTree = "<group>"; };
 		15D122282D58BD0200E79866 /* DayOfMonthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfMonthType.swift; sourceTree = "<group>"; };
+		15DC053E2D623DD400B752DD /* PostLogoutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLogoutRequest.swift; sourceTree = "<group>"; };
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultitaskDelegate.swift; sourceTree = "<group>"; };
 		74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLocationManager.swift; sourceTree = "<group>"; };
@@ -805,6 +807,7 @@
 				74BBADF52D611B63003AB16C /* PostReissueResponse.swift */,
 				745B19AD2D40029A00BDBDA4 /* PostLoginResponse.swift */,
 				745B19AB2D40021700BDBDA4 /* PostLoginRequest.swift */,
+				15DC053E2D623DD400B752DD /* PostLogoutRequest.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1566,6 +1569,7 @@
 				151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */,
 				746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */,
 				746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */,
+				15DC053F2D623DD400B752DD /* PostLogoutRequest.swift in Sources */,
 				1517FD7F2D3961A800638173 /* CustomSlider.swift in Sources */,
 				746261852D3FA0A400A4E84F /* PostGuidedSpotRequest.swift in Sources */,
 				741E68982D3D3D8E00DF99EF /* ErrorResponse.swift in Sources */,
