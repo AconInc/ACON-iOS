@@ -10,13 +10,6 @@ import UIKit
 
 class SpotListViewModel: Serviceable {
     
-    // MARK: - Default Values
-    
-    let defaultWalkingTime: SpotType.WalkingDistanceType = .fifteen
-    let defaultRestaurantPrice: SpotType.RestaurantPriceType = .aboveFiftyThousand
-    let defaultCafePrice: SpotType.CafePriceType = .aboveTenThousand
-    
-    
     // MARK: - Properties
     
     var onSuccessGetAddress: ObservablePattern<Bool> = ObservablePattern(nil)
@@ -38,11 +31,11 @@ class SpotListViewModel: Serviceable {
     
     var filterList: [SpotFilterModel] = []
     
-    var walkingTime: SpotType.WalkingDistanceType = .fifteen
+    var walkingTime: SpotType.WalkingDistanceType = .defaultValue
     
-    var restaurantPrice: SpotType.RestaurantPriceType = .aboveFiftyThousand // TODO: 옵셔널로 변경
+    var restaurantPrice: SpotType.RestaurantPriceType = .defaultValue // TODO: 옵셔널로 변경
     
-    var cafePrice: SpotType.CafePriceType = .aboveTenThousand // TODO: 옵셔널로 변경
+    var cafePrice: SpotType.CafePriceType = .defaultValue // TODO: 옵셔널로 변경
     
     
     // MARK: - Methods
@@ -63,9 +56,9 @@ class SpotListViewModel: Serviceable {
     func resetConditions() {
         spotType.value = nil
         filterList.removeAll()
-        walkingTime = defaultWalkingTime
-        restaurantPrice = defaultRestaurantPrice
-        cafePrice = defaultCafePrice
+        walkingTime = .defaultValue
+        restaurantPrice = .defaultValue
+        cafePrice = .defaultValue
     }
     
 }

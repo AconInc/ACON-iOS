@@ -172,6 +172,8 @@ enum SpotType {
         
         case five, ten, fifteen, twenty, twentyFive
         
+        static let defaultValue: Self = .fifteen
+        
         var text: String {
             switch self {
             case .five: return "5분 이내"
@@ -198,6 +200,8 @@ enum SpotType {
         
         case fiveThousand, tenThousand, thirtyThousand, fiftyThousand, aboveFiftyThousand
         
+        static let defaultValue: Self = .aboveFiftyThousand
+        
         var text: String {
             switch self {
             case .fiveThousand: return "5천원 이하"
@@ -223,6 +227,8 @@ enum SpotType {
     enum CafePriceType: CaseIterable {
         
         case threeTousand, fiveThousand, aboveTenThousand
+        
+        static let defaultValue: Self = .aboveTenThousand
         
         var text: String {
             switch self {
