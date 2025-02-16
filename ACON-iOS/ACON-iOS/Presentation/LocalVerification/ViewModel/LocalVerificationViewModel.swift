@@ -45,7 +45,6 @@ class LocalVerificationViewModel {
                 self?.localAreaID.value = data.id
                 self?.localAreaName.value = data.name
                 self?.onSuccessPostLocalArea.value = true
-//                UserDefaults.standard.set(data.id, forKey: StringLiterals.UserDefaults.hasVerifiedArea)
 //                print("🥑인증동네 id: \(data.id)") // TODO: 수정
             default:
                 print("Failed To Post")
