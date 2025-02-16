@@ -4,7 +4,9 @@
 //
 //  Created by Jaehyun Ahn on 2/16/25.
 //
+
 import UIKit
+
 import SnapKit
 import Then
 
@@ -22,6 +24,8 @@ final class WithdrawalViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        optionsTableView.viewModel = viewModel
+        
         setBinding()
     }
     
@@ -48,14 +52,13 @@ final class WithdrawalViewController: BaseViewController {
         }
         
         submitButton.do {
-            $0.backgroundColor = .gray8
+            $0.backgroundColor = .gray7
             $0.layer.cornerRadius = 8
             $0.isEnabled = false
             $0.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
-            $0.setAttributedTitle(text: "제출",
-                                  style: ACFont.h8,
-                                  color: .gray6,
-                                  for: .normal)
+            $0.setTitle("제출하기", for: .normal)
+            $0.titleLabel?.font = ACFontStyleType.h7.font
+            $0.setTitleColor(.gray5, for: .normal)
         }
         
         otherReasonTextFieldView.isHidden = true
@@ -101,7 +104,7 @@ final class WithdrawalViewController: BaseViewController {
         optionsTableView.snp.makeConstraints {
             $0.top.equalTo(reasonDescriptionLabel.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(56 * 4)
+            $0.height.equalTo(160)
         }
         
         otherReasonTextFieldView.snp.makeConstraints{
@@ -121,7 +124,13 @@ final class WithdrawalViewController: BaseViewController {
 extension WithdrawalViewController {
     
     @objc func submitButtonTapped() {
-        print("go to popup")
+        if viewModel.selectedOption.value == StringLiterals.Withdrawal.optionOthers,
+           let inputText = viewModel.inputText.value {
+            viewModel.selectedOption.value = inputText 
+        }
+        //debug
+        print("최종 선택된 옵션: \(viewModel.selectedOption.value ?? "nil")")
+        
     }
     
     func didSelectOtherOption(isSelected: Bool) {
@@ -129,15 +138,40 @@ extension WithdrawalViewController {
     }
     
     private func setBinding() {
-        otherReasonTextFieldView.onTextChanged = { [weak self] text in
+        
+        self.buttonState()
+        
+        viewModel.selectedOption.bind { [weak self] selectedOption in
             guard let self = self else { return }
-            self.viewModel.inputText.value = text
+            
+            let isOtherSelected = selectedOption == StringLiterals.Withdrawal.optionOthers
+            otherReasonTextFieldView.isHidden = !isOtherSelected
+        }
+        viewModel.inputText.bind { [weak self] _ in
+            guard let self = self else { return }
+            self.buttonState()
         }
         
-        viewModel.inputText.bind { [weak self] text in
-            guard let self = self else { return }
-            self.otherReasonTextFieldView.updateCharacterCount(text?.count ?? 0)
+        otherReasonTextFieldView.onTextChanged = { [weak self] text in
+            self?.viewModel.updateInputText(text)
         }
+    }
+    
+    private func buttonState() {
+        
+        let isOptionSelected = viewModel.selectedOption.value != nil
+        let isInputTextValid = !(viewModel.inputText.value?.isEmpty ?? true)
+        
+        let shouldEnableSubmitButton = isOptionSelected &&
+        (viewModel.selectedOption.value != StringLiterals.Withdrawal.optionOthers || isInputTextValid)
+        
+        submitButton.isEnabled = shouldEnableSubmitButton
+        submitButton.backgroundColor = shouldEnableSubmitButton ? .gray6 : .gray7
+        
+        let textColor = shouldEnableSubmitButton ? UIColor.acWhite : UIColor.gray5
+
+        submitButton.setTitleColor(textColor, for: .normal)
+        
     }
 }
 

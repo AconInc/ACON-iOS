@@ -12,10 +12,12 @@ import Then
 
 final class WithdrawalTableView: UITableView {
     
-    var selectedSpotType: String = " " {
+    var viewModel: WithdrawalViewModel?
+    
+    var selectedSpotType: String = "" {
         didSet {
             reloadData()
-            print(selectedSpotType)
+            print("📌 선택된 옵션: \(selectedSpotType)")
             onSelectionChanged?(selectedSpotType)
         }
     }
@@ -66,7 +68,7 @@ extension WithdrawalTableView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50 
+        return 40
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -77,25 +79,7 @@ extension WithdrawalTableView: UITableViewDelegate, UITableViewDataSource {
         } else {
             selectedSpotType = selectedOption.mappedValue
         }
+        
+        viewModel?.updateSelectedOption(selectedSpotType)
     }
-}
-
-import SwiftUI
-
-struct WithdrawalTableViewPreview: UIViewRepresentable {
-    func makeUIView(context: Context) -> WithdrawalTableView {
-        let tableView = WithdrawalTableView()
-        tableView.selectedSpotType = WithdrawalType.optionFakeReviews.mappedValue
-        tableView.reloadData()  // 데이터 갱신 추가
-        return tableView
-    }
-    
-    func updateUIView(_ uiView: WithdrawalTableView, context: Context) {}
-}
-
-#Preview {
-    WithdrawalTableViewPreview()
-        .frame(height: 300)
-        .background(Color.black) // 테이블뷰 배경이 clear이므로 배경 추가
-        .padding()
 }
