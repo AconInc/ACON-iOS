@@ -51,11 +51,17 @@ extension Serviceable {
                         print("❄️ 기존 서버통신 다시 성공")
                         retryAction()
                     } else {
+                        for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                            UserDefaults.standard.removeObject(forKey: key.description)
+                        }
                         self.navigateToSplash()
                     }
                 }
             } catch {
                 DispatchQueue.main.async {
+                    for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                        UserDefaults.standard.removeObject(forKey: key.description)
+                    }
                     self.navigateToSplash()
                 }
             }
