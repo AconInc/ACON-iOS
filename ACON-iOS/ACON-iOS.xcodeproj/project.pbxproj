@@ -192,6 +192,8 @@
 		D61917EC2D3E484A001BF0EE /* OnboardingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917EB2D3E484A001BF0EE /* OnboardingRequest.swift */; };
 		D6232C952D3A294C003FF208 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6232C942D3A294C003FF208 /* AlertHandler.swift */; };
 		D652597C2D62775C00B8176E /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597B2D62775C00B8176E /* CustomTextFieldView.swift */; };
+		D652597E2D628EB000B8176E /* WithdrawalConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597D2D628EB000B8176E /* WithdrawalConfirmationViewController.swift */; };
+		D65259802D6291A800B8176E /* WithdrawalConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597F2D6291A800B8176E /* WithdrawalConfirmationView.swift */; };
 		D696F1B22D3A7E3400CCD5FF /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696F1B12D3A7E3400CCD5FF /* CustomAlertView.swift */; };
 		D696F1B62D3A83D600CCD5FF /* CustomAlertImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696F1B52D3A83D600CCD5FF /* CustomAlertImageView.swift */; };
 		D6978F502D36E3C800523A25 /* AnalyzingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F4F2D36E3C800523A25 /* AnalyzingViewController.swift */; };
@@ -410,6 +412,8 @@
 		D61917EB2D3E484A001BF0EE /* OnboardingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRequest.swift; sourceTree = "<group>"; };
 		D6232C942D3A294C003FF208 /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 		D652597B2D62775C00B8176E /* CustomTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
+		D652597D2D628EB000B8176E /* WithdrawalConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalConfirmationViewController.swift; sourceTree = "<group>"; };
+		D652597F2D6291A800B8176E /* WithdrawalConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalConfirmationView.swift; sourceTree = "<group>"; };
 		D696F1B12D3A7E3400CCD5FF /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		D696F1B52D3A83D600CCD5FF /* CustomAlertImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertImageView.swift; sourceTree = "<group>"; };
 		D6978F4F2D36E3C800523A25 /* AnalyzingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzingViewController.swift; sourceTree = "<group>"; };
@@ -1424,6 +1428,8 @@
 			children = (
 				D6E816A62D6247BB001E4EBF /* Type */,
 				D6E8168D2D6228F5001E4EBF /* WithdrawalViewController.swift */,
+				D652597D2D628EB000B8176E /* WithdrawalConfirmationViewController.swift */,
+				D652597F2D6291A800B8176E /* WithdrawalConfirmationView.swift */,
 				D6E816A42D623FE5001E4EBF /* WithdrawalTableView.swift */,
 				D652597B2D62775C00B8176E /* CustomTextFieldView.swift */,
 				D6E816A32D623E11001E4EBF /* Cell */,
@@ -1646,7 +1652,9 @@
 				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
 				74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */,
 				15CD25702D3F86E700320006 /* CustomRefreshControl.swift in Sources */,
+				D652597E2D628EB000B8176E /* WithdrawalConfirmationViewController.swift in Sources */,
 				746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */,
+				D65259802D6291A800B8176E /* WithdrawalConfirmationView.swift in Sources */,
 				741A06C82D3532E500778219 /* DropAcornView.swift in Sources */,
 				15D122292D58BD0200E79866 /* DayOfMonthType.swift in Sources */,
 				746261752D3EA7FD00A4E84F /* GetReviewVerificationResponse.swift in Sources */,

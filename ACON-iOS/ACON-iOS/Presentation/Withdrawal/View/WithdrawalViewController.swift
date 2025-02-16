@@ -126,11 +126,22 @@ extension WithdrawalViewController {
     @objc func submitButtonTapped() {
         if viewModel.selectedOption.value == StringLiterals.Withdrawal.optionOthers,
            let inputText = viewModel.inputText.value {
-            viewModel.selectedOption.value = inputText 
+            viewModel.selectedOption.value = inputText
         }
-        //debug
+        
         print("최종 선택된 옵션: \(viewModel.selectedOption.value ?? "nil")")
         
+        // 🔥 여기서 시트를 띄우자!
+        presentWithdrawalSheet()
+    }
+    
+    private func presentWithdrawalSheet() {
+        let sheetVC = WithdrawalConfirmationViewController()
+        if let sheet = sheetVC.sheetPresentationController {
+            sheet.detents = [SheetUtils().acShortDetent] // 📌 중간 크기로 설정
+            sheet.prefersGrabberVisible = true
+        }
+        present(sheetVC, animated: true)
     }
     
     func didSelectOtherOption(isSelected: Bool) {
@@ -173,6 +184,7 @@ extension WithdrawalViewController {
         submitButton.setTitleColor(textColor, for: .normal)
         
     }
+    
 }
 
 
