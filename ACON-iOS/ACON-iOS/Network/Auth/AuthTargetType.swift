@@ -13,13 +13,15 @@ enum AuthTargetType {
 
     case postLogin(_ requestBody: PostLoginRequest)
     
+    case postReissue(_ requestBody: PostReissueRequest)
+    
 }
 
 extension AuthTargetType: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .postLogin:
+        case .postLogin, .postReissue:
             return .post
         }
     }
@@ -28,6 +30,8 @@ extension AuthTargetType: TargetType {
         switch self {
         case .postLogin:
             return utilPath + "auth/login"
+        case .postReissue:
+            return utilPath + "auth/reissue"
         }
     }
     
@@ -35,13 +39,15 @@ extension AuthTargetType: TargetType {
         switch self {
         case .postLogin(let requestBody):
             return .requestJSONEncodable(requestBody)
+        case .postReissue(let requestBody):
+            return .requestJSONEncodable(requestBody)
         }
     }
     
     var headers: [String : String]? {
         var headers = HeaderType.basicHeader
         switch self {
-        case .postLogin:
+        case .postLogin, .postReissue:
             headers = HeaderType.basicHeader
         }
         return headers

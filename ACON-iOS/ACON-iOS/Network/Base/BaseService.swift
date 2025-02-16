@@ -62,6 +62,8 @@ class BaseService<T: TargetType> {
         switch statusCode {
         case 200:
             return decodeData(data: data, type: type)
+        case 401:
+            return .reIssueJWT
         case 400..<500:
             return decodeErrorData(data: data)
         case 500:

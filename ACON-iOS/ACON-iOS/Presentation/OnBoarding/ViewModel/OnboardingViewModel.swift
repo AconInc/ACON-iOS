@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class OnboardingViewModel {
+final class OnboardingViewModel: Serviceable {
     
     var dislike: ObservablePattern<[String]> = ObservablePattern([])
     
@@ -45,6 +45,10 @@ final class OnboardingViewModel {
             case .success(_):
                 print("Onboarding Success")
                 self.postOnboardingResult.value = true
+            case .reIssueJWT:
+                self.handleReissue { [weak self] in
+                    self?.postOnboarding()
+                }
             default:
                 print("Onboarding Failed")
                 self.postOnboardingResult.value = false

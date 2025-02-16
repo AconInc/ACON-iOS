@@ -8,7 +8,7 @@
 import CoreLocation
 import Foundation
 
-class LocalVerificationViewModel {
+class LocalVerificationViewModel: Serviceable {
     
     var flowType: LocalVerificationFlowType
     
@@ -42,6 +42,10 @@ class LocalVerificationViewModel {
             case .success(let data):
                 self?.localArea.value = data.area
                 self?.onSuccessPostLocalArea.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.postLocalArea()
+                }
             default:
                 print("Failed To Post")
                 self?.onSuccessPostLocalArea.value = false
