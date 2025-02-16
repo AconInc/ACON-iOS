@@ -16,7 +16,7 @@ final class WithdrawalViewController: BaseViewController {
     private let titleLabel = UILabel()
     private let reasonTitleLabel = UILabel()
     private let reasonDescriptionLabel = UILabel()
-    private let optionsTableView = WithdrawalCollectionView()
+    private let optionsTableView = WithdrawalTableView()
     private let submitButton = UIButton()
 
     override func viewDidLoad() {

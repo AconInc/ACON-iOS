@@ -211,7 +211,7 @@
 		D6E8168E2D6228F5001E4EBF /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E8168D2D6228F5001E4EBF /* WithdrawalViewController.swift */; };
 		D6E8169C2D622937001E4EBF /* WithdrawalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E8169B2D622937001E4EBF /* WithdrawalViewModel.swift */; };
 		D6E816A22D623E0E001E4EBF /* WithdrawalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E816A12D623E0E001E4EBF /* WithdrawalTableViewCell.swift */; };
-		D6E816A52D623FE5001E4EBF /* WithdrawalTabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E816A42D623FE5001E4EBF /* WithdrawalTabelView.swift */; };
+		D6E816A52D623FE5001E4EBF /* WithdrawalTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E816A42D623FE5001E4EBF /* WithdrawalTableView.swift */; };
 		D6E816A82D6247D1001E4EBF /* WithdrawalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E816A72D6247D1001E4EBF /* WithdrawalType.swift */; };
 		D6E816AA2D624DDB001E4EBF /* BaseTabelViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E816A92D624DDB001E4EBF /* BaseTabelViewCell.swift */; };
 		D6EA38152D42B88F002B68B9 /* SearchEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA38142D42B88F002B68B9 /* SearchEmptyView.swift */; };
@@ -428,7 +428,7 @@
 		D6E8168D2D6228F5001E4EBF /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
 		D6E8169B2D622937001E4EBF /* WithdrawalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewModel.swift; sourceTree = "<group>"; };
 		D6E816A12D623E0E001E4EBF /* WithdrawalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalTableViewCell.swift; sourceTree = "<group>"; };
-		D6E816A42D623FE5001E4EBF /* WithdrawalTabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalTabelView.swift; sourceTree = "<group>"; };
+		D6E816A42D623FE5001E4EBF /* WithdrawalTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalTableView.swift; sourceTree = "<group>"; };
 		D6E816A72D6247D1001E4EBF /* WithdrawalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalType.swift; sourceTree = "<group>"; };
 		D6E816A92D624DDB001E4EBF /* BaseTabelViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabelViewCell.swift; sourceTree = "<group>"; };
 		D6EA38142D42B88F002B68B9 /* SearchEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEmptyView.swift; sourceTree = "<group>"; };
@@ -1421,7 +1421,7 @@
 			children = (
 				D6E816A62D6247BB001E4EBF /* Type */,
 				D6E8168D2D6228F5001E4EBF /* WithdrawalViewController.swift */,
-				D6E816A42D623FE5001E4EBF /* WithdrawalTabelView.swift */,
+				D6E816A42D623FE5001E4EBF /* WithdrawalTableView.swift */,
 				D6E816A92D624DDB001E4EBF /* BaseTabelViewCell.swift */,
 				D6E816A32D623E11001E4EBF /* Cell */,
 			);
@@ -1769,7 +1769,7 @@
 				746261652D3EA26D00A4E84F /* GetSearchSuggestionRequest.swift in Sources */,
 				15CD257A2D3FEDBA00320006 /* SpotListService.swift in Sources */,
 				15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */,
-				D6E816A52D623FE5001E4EBF /* WithdrawalTabelView.swift in Sources */,
+				D6E816A52D623FE5001E4EBF /* WithdrawalTableView.swift in Sources */,
 				7462618B2D3FA4A800A4E84F /* SpotDetailService.swift in Sources */,
 				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
 				1547A88B2D3596B600E96616 /* SpotType.swift in Sources */,
