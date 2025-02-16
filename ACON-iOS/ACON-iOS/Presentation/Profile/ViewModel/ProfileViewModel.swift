@@ -55,6 +55,7 @@ class ProfileViewModel: Serviceable {
                 let newUserInfo = UserInfoModel(
                     profileImageURL: data.image,
                     nickname: data.nickname,
+                    birthDate: data.birthDate,
                     verifiedAreaList: data.verifiedAreaList.map {
                         return VerifiedAreaModel(id: $0.id, name: $0.name)
                     },
