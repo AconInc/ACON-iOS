@@ -11,14 +11,13 @@ import SnapKit
 import Then
 
 final class WithdrawalTableViewCell: BaseTableViewCell {
-    
+
     private let withdrawalImageView = UIImageView()
     private let titleLabel = UILabel()
     private let container = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .clear
         setStyle()
         setHierarchy()
         setLayout()
@@ -32,7 +31,7 @@ final class WithdrawalTableViewCell: BaseTableViewCell {
         super.setStyle()
         
         withdrawalImageView.do {
-            $0.image = UIImage(named: "defaultImage")
+            $0.image = UIImage(named: "circle")
             $0.backgroundColor = .clear
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
@@ -58,27 +57,26 @@ final class WithdrawalTableViewCell: BaseTableViewCell {
         
         container.snp.makeConstraints {
             $0.edges.equalToSuperview()
-            $0.width.equalTo(154).priority(.low)
         }
         
         withdrawalImageView.snp.makeConstraints {
-            $0.top.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(container.snp.width).multipliedBy(1.0)
+            $0.leading.equalTo(container.snp.leading)
+            $0.top.equalTo(container.snp.top)
+            $0.height.equalTo(22)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(withdrawalImageView.snp.bottom).offset(2)
-            $0.centerX.equalTo(container)
-            $0.height.equalTo(35).priority(.low)
+            $0.leading.equalTo(withdrawalImageView.snp.trailing).offset(8)
+            $0.centerY.equalTo(withdrawalImageView)
         }
     }
     
     func checkConfigure(name: String, isSelected: Bool) {
         titleLabel.text = name
         if isSelected {
-            withdrawalImageView.image = UIImage(named: "selectedImage") // 선택되었을 때의 이미지
+            withdrawalImageView.image = UIImage(named: "fillCircle")
         } else {
-            withdrawalImageView.image = UIImage(named: "defaultImage") // 기본 이미지
+            withdrawalImageView.image = UIImage(named: "circle")
         }
     }
 }

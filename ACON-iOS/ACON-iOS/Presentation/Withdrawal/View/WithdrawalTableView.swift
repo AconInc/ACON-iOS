@@ -41,7 +41,7 @@ final class WithdrawalTableView: UITableView {
     private func setDelegate() {
         delegate = self
         dataSource = self
-        register(WithdrawalTableViewCell.self, forCellReuseIdentifier: BaseTableViewCell.cellIdentifier)
+        register(WithdrawalTableViewCell.self, forCellReuseIdentifier: WithdrawalTableViewCell.cellIdentifier)
     }
 }
 
@@ -66,7 +66,7 @@ extension WithdrawalTableView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50 // 셀의 높이 설정
+        return 50 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -78,4 +78,24 @@ extension WithdrawalTableView: UITableViewDelegate, UITableViewDataSource {
             selectedSpotType = selectedOption.mappedValue
         }
     }
+}
+
+import SwiftUI
+
+struct WithdrawalTableViewPreview: UIViewRepresentable {
+    func makeUIView(context: Context) -> WithdrawalTableView {
+        let tableView = WithdrawalTableView()
+        tableView.selectedSpotType = WithdrawalType.optionFakeReviews.mappedValue
+        tableView.reloadData()  // 데이터 갱신 추가
+        return tableView
+    }
+    
+    func updateUIView(_ uiView: WithdrawalTableView, context: Context) {}
+}
+
+#Preview {
+    WithdrawalTableViewPreview()
+        .frame(height: 300)
+        .background(Color.black) // 테이블뷰 배경이 clear이므로 배경 추가
+        .padding()
 }

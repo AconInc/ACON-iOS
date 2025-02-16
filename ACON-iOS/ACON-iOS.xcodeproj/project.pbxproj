@@ -1118,6 +1118,7 @@
 				748D6FA72D2C3F8F007690B4 /* BaseViewController.swift */,
 				748D6FA52D2C3F40007690B4 /* BaseView.swift */,
 				748D6FA32D2C3C44007690B4 /* BaseNavViewController.swift */,
+				D6E816A92D624DDB001E4EBF /* BaseTabelViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1422,7 +1423,6 @@
 				D6E816A62D6247BB001E4EBF /* Type */,
 				D6E8168D2D6228F5001E4EBF /* WithdrawalViewController.swift */,
 				D6E816A42D623FE5001E4EBF /* WithdrawalTableView.swift */,
-				D6E816A92D624DDB001E4EBF /* BaseTabelViewCell.swift */,
 				D6E816A32D623E11001E4EBF /* Cell */,
 			);
 			path = View;
