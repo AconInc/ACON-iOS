@@ -16,7 +16,6 @@ final class WithdrawalViewModel {
         selectedOption.value = option
         
         if option == StringLiterals.Withdrawal.optionOthers {
-            print("ss")
             inputText.value = ""
         } else {
             inputText.value = nil
