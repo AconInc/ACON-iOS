@@ -8,7 +8,7 @@
 import CoreLocation
 import UIKit
 
-class SpotListViewModel {
+class SpotListViewModel: Serviceable {
     
     // MARK: - Properties
     
@@ -116,6 +116,10 @@ extension SpotListViewModel {
                 self?.isUpdated = spotList != self?.spotList
                 self?.spotList = spotList
                 self?.isPostSpotListSuccess.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.postSpotList()
+                }
             default:
                 print("🥑Failed To Post")
                 self?.isPostSpotListSuccess.value = false
