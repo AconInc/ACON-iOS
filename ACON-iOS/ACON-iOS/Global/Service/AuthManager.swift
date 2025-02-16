@@ -51,11 +51,13 @@ extension Serviceable {
                         print("❄️ 기존 서버통신 다시 성공")
                         retryAction()
                     } else {
+                        UserDefaults.standard.removeObject(forKey: StringLiterals.UserDefaults.accessToken)
                         self.navigateToSplash()
                     }
                 }
             } catch {
                 DispatchQueue.main.async {
+                    UserDefaults.standard.removeObject(forKey: StringLiterals.UserDefaults.accessToken)
                     self.navigateToSplash()
                 }
             }
