@@ -13,6 +13,8 @@ enum StringLiterals {
         
         static let accessToken = "accessToken"
         
+        static let refreshToken = "refreshToken"
+        
     }
     
     enum Login {
@@ -132,6 +134,8 @@ enum StringLiterals {
         static let footerText = "장소는 최대 6순위까지만 제공됩니다."
         
         static let noAcorn = "앗! 일치하는 도토리 맛집이 없어요"
+        
+        static let failedToGetAddress = "위치 확인 실패" // TODO: 라이팅 기획과 논의
         
     }
     
@@ -310,6 +314,8 @@ enum StringLiterals {
         static let profileEditButton = "프로필 수정하기"
         
         static let needLogin = "로그인이 필요해요"
+        
+        static let doubleQuestionMarks = "??"
         
         static let notVerified = "미인증"
         

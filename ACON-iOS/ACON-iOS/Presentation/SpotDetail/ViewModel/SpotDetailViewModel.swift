@@ -9,7 +9,7 @@ import UIKit
 
 import CoreLocation
 
-class SpotDetailViewModel {
+class SpotDetailViewModel: Serviceable {
     
     let spotID: Int64
     
@@ -54,6 +54,10 @@ extension SpotDetailViewModel {
                                                          longitude: data.longitude)
                 self?.spotDetail.value = spotDetailData
                 self?.onSuccessGetSpotDetail.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.getSpotDetail()
+                }
             default:
                 print("VM - Failed To getSpotDetail")
                 self?.onSuccessGetSpotDetail.value = false
@@ -74,6 +78,10 @@ extension SpotDetailViewModel {
                     }
                     self?.spotMenu.value = spotMenuData
                     self?.onSuccessGetSpotMenu.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.getSpotMenu()
+                }
             default:
                 print("VM - Failed To getSpotMenu")
                 self?.onSuccessGetSpotMenu.value = false
@@ -88,6 +96,10 @@ extension SpotDetailViewModel {
             switch response {
             case .success(let data):
                 self?.onSuccessPostGuidedSpotRequest.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.postGuidedSpot()
+                }
             default:
                 print("VM - Failed To postGuidedSpot")
                 self?.onSuccessPostGuidedSpotRequest.value = false
