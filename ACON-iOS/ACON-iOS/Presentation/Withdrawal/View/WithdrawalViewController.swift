@@ -4,13 +4,14 @@
 //
 //  Created by Jaehyun Ahn on 2/16/25.
 //
-
 import UIKit
-
 import SnapKit
 import Then
 
 final class WithdrawalViewController: BaseViewController {
+    
+    private let viewModel = WithdrawalViewModel()
+    private let otherReasonTextFieldView = CustomTextFieldView()
     
     private let backButton = UIButton()
     private let titleLabel = UILabel()
@@ -21,6 +22,7 @@ final class WithdrawalViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setBinding()
     }
     
     override func setStyle() {
@@ -55,6 +57,8 @@ final class WithdrawalViewController: BaseViewController {
                                   color: .gray6,
                                   for: .normal)
         }
+        
+        otherReasonTextFieldView.isHidden = true
     }
     
     override func setHierarchy() {
@@ -65,6 +69,7 @@ final class WithdrawalViewController: BaseViewController {
                          reasonTitleLabel,
                          reasonDescriptionLabel,
                          optionsTableView,
+                         otherReasonTextFieldView,
                          submitButton)
     }
     
@@ -99,18 +104,40 @@ final class WithdrawalViewController: BaseViewController {
             $0.height.equalTo(56 * 4)
         }
         
+        otherReasonTextFieldView.snp.makeConstraints{
+            $0.top.equalTo(optionsTableView.snp.bottom).offset(5)
+            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.height.equalTo(120)
+        }
+        
         submitButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
             $0.height.equalTo(52)
         }
     }
-    
 }
 
-extension WithdrawalViewController{
-    @objc func submitButtonTapped(){
+extension WithdrawalViewController {
+    
+    @objc func submitButtonTapped() {
         print("go to popup")
+    }
+    
+    func didSelectOtherOption(isSelected: Bool) {
+        otherReasonTextFieldView.isHidden = !isSelected
+    }
+    
+    private func setBinding() {
+        otherReasonTextFieldView.onTextChanged = { [weak self] text in
+            guard let self = self else { return }
+            self.viewModel.inputText.value = text
+        }
+        
+        viewModel.inputText.bind { [weak self] text in
+            guard let self = self else { return }
+            self.otherReasonTextFieldView.updateCharacterCount(text?.count ?? 0)
+        }
     }
 }
 
