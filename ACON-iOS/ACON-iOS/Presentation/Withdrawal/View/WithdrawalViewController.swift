@@ -16,10 +16,7 @@ final class WithdrawalViewController: BaseViewController {
     private let titleLabel = UILabel()
     private let reasonTitleLabel = UILabel()
     private let reasonDescriptionLabel = UILabel()
-    private let lackOfRestaurantsOptionButton = UIButton()
-    private let unsatisfiedRecommendationOptionButton = UIButton()
-    private let fakeReviewsOptionButton = UIButton()
-    private let othersOptionButton = UIButton()
+    private let optionsTableView = WithdrawalCollectionView()
     private let submitButton = UIButton()
 
     override func viewDidLoad() {
@@ -32,7 +29,7 @@ final class WithdrawalViewController: BaseViewController {
         view.backgroundColor = .gray9
 
         backButton.do {
-            $0.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+            $0.setImage(UIImage(named: "leftArrow"), for: .normal)
             $0.tintColor = .white
         }
 
@@ -67,6 +64,7 @@ final class WithdrawalViewController: BaseViewController {
                          titleLabel,
                          reasonTitleLabel,
                          reasonDescriptionLabel,
+                         optionsTableView,
                          submitButton)
     }
 
@@ -94,8 +92,13 @@ final class WithdrawalViewController: BaseViewController {
             $0.leading.equalTo(reasonTitleLabel)
             $0.trailing.equalToSuperview().offset(-20)
         }
-
         
+        optionsTableView.snp.makeConstraints {
+                    $0.top.equalTo(reasonDescriptionLabel.snp.bottom).offset(32)
+                    $0.leading.trailing.equalToSuperview().inset(20)
+                    $0.height.equalTo(56 * 4)
+                }
+
         submitButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
@@ -106,3 +109,30 @@ final class WithdrawalViewController: BaseViewController {
   
 }
 
+import SwiftUI
+
+struct WithdrawalViewControllerPreview: PreviewProvider {
+    static var previews: some View {
+        WithdrawalViewController().toPreview()
+    }
+}
+
+extension UIViewController {
+    func toPreview() -> some View {
+        UIViewControllerPreview(viewController: self)
+    }
+}
+
+struct UIViewControllerPreview<ViewController: UIViewController>: UIViewControllerRepresentable {
+    let viewController: ViewController
+
+    init(viewController: ViewController) {
+        self.viewController = viewController
+    }
+
+    func makeUIViewController(context: Context) -> ViewController {
+        return viewController
+    }
+
+    func updateUIViewController(_ uiViewController: ViewController, context: Context) { }
+}

@@ -210,6 +210,10 @@
 		D6E452942D3AA47500CBED02 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E452912D3AA47500CBED02 /* ProfileViewController.swift */; };
 		D6E8168E2D6228F5001E4EBF /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E8168D2D6228F5001E4EBF /* WithdrawalViewController.swift */; };
 		D6E8169C2D622937001E4EBF /* WithdrawalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E8169B2D622937001E4EBF /* WithdrawalViewModel.swift */; };
+		D6E816A22D623E0E001E4EBF /* WithdrawalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E816A12D623E0E001E4EBF /* WithdrawalTableViewCell.swift */; };
+		D6E816A52D623FE5001E4EBF /* WithdrawalTabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E816A42D623FE5001E4EBF /* WithdrawalTabelView.swift */; };
+		D6E816A82D6247D1001E4EBF /* WithdrawalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E816A72D6247D1001E4EBF /* WithdrawalType.swift */; };
+		D6E816AA2D624DDB001E4EBF /* BaseTabelViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E816A92D624DDB001E4EBF /* BaseTabelViewCell.swift */; };
 		D6EA38152D42B88F002B68B9 /* SearchEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA38142D42B88F002B68B9 /* SearchEmptyView.swift */; };
 		D6FF82E92D3805F000090233 /* DislikeCollectionViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82E82D3805F000090233 /* DislikeCollectionViewType.swift */; };
 		D6FF82EB2D380AAF00090233 /* FavoriteSpotRankType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF82EA2D380AAF00090233 /* FavoriteSpotRankType.swift */; };
@@ -423,6 +427,10 @@
 		D6E452912D3AA47500CBED02 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D6E8168D2D6228F5001E4EBF /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
 		D6E8169B2D622937001E4EBF /* WithdrawalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewModel.swift; sourceTree = "<group>"; };
+		D6E816A12D623E0E001E4EBF /* WithdrawalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalTableViewCell.swift; sourceTree = "<group>"; };
+		D6E816A42D623FE5001E4EBF /* WithdrawalTabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalTabelView.swift; sourceTree = "<group>"; };
+		D6E816A72D6247D1001E4EBF /* WithdrawalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalType.swift; sourceTree = "<group>"; };
+		D6E816A92D624DDB001E4EBF /* BaseTabelViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabelViewCell.swift; sourceTree = "<group>"; };
 		D6EA38142D42B88F002B68B9 /* SearchEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEmptyView.swift; sourceTree = "<group>"; };
 		D6FF82E82D3805F000090233 /* DislikeCollectionViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeCollectionViewType.swift; sourceTree = "<group>"; };
 		D6FF82EA2D380AAF00090233 /* FavoriteSpotRankType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSpotRankType.swift; sourceTree = "<group>"; };
@@ -1411,7 +1419,11 @@
 		D6E8168B2D6228D7001E4EBF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D6E816A62D6247BB001E4EBF /* Type */,
 				D6E8168D2D6228F5001E4EBF /* WithdrawalViewController.swift */,
+				D6E816A42D623FE5001E4EBF /* WithdrawalTabelView.swift */,
+				D6E816A92D624DDB001E4EBF /* BaseTabelViewCell.swift */,
+				D6E816A32D623E11001E4EBF /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1422,6 +1434,22 @@
 				D6E8169B2D622937001E4EBF /* WithdrawalViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D6E816A32D623E11001E4EBF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D6E816A12D623E0E001E4EBF /* WithdrawalTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		D6E816A62D6247BB001E4EBF /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				D6E816A72D6247D1001E4EBF /* WithdrawalType.swift */,
+			);
+			path = Type;
 			sourceTree = "<group>";
 		};
 		D6FF82E72D3805D500090233 /* Type */ = {
@@ -1620,6 +1648,7 @@
 				15D122292D58BD0200E79866 /* DayOfMonthType.swift in Sources */,
 				746261752D3EA7FD00A4E84F /* GetReviewVerificationResponse.swift in Sources */,
 				748D6FA82D2C3F93007690B4 /* BaseViewController.swift in Sources */,
+				D6E816A82D6247D1001E4EBF /* WithdrawalType.swift in Sources */,
 				D6FF82F92D381D6100090233 /* SmallBoxViewCell.swift in Sources */,
 				D6D0F5192D36BAAB00326F17 /* FavoriteSpotStyleCollectionView.swift in Sources */,
 				746261712D3EA50A00A4E84F /* SpotCategoryType.swift in Sources */,
@@ -1628,6 +1657,7 @@
 				747F4FBF2D3D9D44003DECBF /* SplashView.swift in Sources */,
 				7462616F2D3EA48300A4E84F /* GetSearchKeywordResponse.swift in Sources */,
 				15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */,
+				D6E816AA2D624DDB001E4EBF /* BaseTabelViewCell.swift in Sources */,
 				1547A8902D35B30C00E96616 /* FilterTagButtonType.swift in Sources */,
 				74D31C7C2D5BF90300B4B2B4 /* AlbumModel.swift in Sources */,
 				74D31C802D5C025900B4B2B4 /* PhotoCollectionViewCell.swift in Sources */,
@@ -1672,6 +1702,7 @@
 				74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */,
 				748D6F8F2D2BD340007690B4 /* UIButton+.swift in Sources */,
 				746261792D3EA8DF00A4E84F /* UploadTargetType.swift in Sources */,
+				D6E816A22D623E0E001E4EBF /* WithdrawalTableViewCell.swift in Sources */,
 				741A07572D3558FE00778219 /* ReviewFinishedView.swift in Sources */,
 				1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */,
 				74BBADF62D611B6B003AB16C /* PostReissueResponse.swift in Sources */,
@@ -1738,6 +1769,7 @@
 				746261652D3EA26D00A4E84F /* GetSearchSuggestionRequest.swift in Sources */,
 				15CD257A2D3FEDBA00320006 /* SpotListService.swift in Sources */,
 				15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */,
+				D6E816A52D623FE5001E4EBF /* WithdrawalTabelView.swift in Sources */,
 				7462618B2D3FA4A800A4E84F /* SpotDetailService.swift in Sources */,
 				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
 				1547A88B2D3596B600E96616 /* SpotType.swift in Sources */,
