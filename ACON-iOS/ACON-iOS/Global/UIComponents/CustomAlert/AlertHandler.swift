@@ -9,7 +9,8 @@ import UIKit
 
 class AlertHandler {
     
-    // MARK: 이미지 alert
+    // MARK: - 이미지 Alert
+    
     func showLocationAccessFailImageAlert(from viewController: UIViewController) {
         let customAlertImageViewController = CustomAlertImageViewController()
         customAlertImageViewController.configure(with: .locationAccessFailImage)
@@ -18,7 +19,9 @@ class AlertHandler {
         viewController.present(customAlertImageViewController, animated: true, completion: nil)
     }
     
-    // MARK: 취향 분석 중단 Alert
+    
+    // MARK: - 취향 분석 중단 Alert
+    
     func showStoppedPreferenceAnalysisAlert(from viewController: UIViewController) {
         let customAlertViewController = CustomAlertViewController()
         customAlertViewController.configure(with: .stoppedPreferenceAnalysis)
@@ -32,7 +35,9 @@ class AlertHandler {
         presentAlert(customAlertViewController, from: viewController)
     }
     
-    // MARK: 위치 권한 실패 Alert
+    
+    // MARK: - 위치 권한 실패 Alert
+    
     func showLocationAccessFailAlert(from viewController: UIViewController) {
         let customAlertViewController = CustomAlertViewController()
         customAlertViewController.configure(with: .locationAccessDenied)
@@ -45,8 +50,10 @@ class AlertHandler {
         
         presentAlert(customAlertViewController, from: viewController)
     }
-
-    // MARK: 업로드 중단 Alert
+    
+    
+    // MARK: - 업로드 중단 Alert
+    
     func showUploadExitAlert(from viewController: UIViewController) {
         let customAlertViewController = CustomAlertViewController()
         customAlertViewController.configure(with: .uploadExit)
@@ -60,7 +67,23 @@ class AlertHandler {
         presentAlert(customAlertViewController, from: viewController)
     }
     
-    // MARK: Alert 프리젠테이션 공통 로직
+    
+    // MARK: - 로그아웃 Alert
+    
+    func showLogoutAlert(from viewController: UIViewController, action: @escaping () -> Void) {
+        let alertVC = CustomAlertViewController()
+        alertVC.configure(with: .logout)
+        alertVC.onSettings = action
+        presentAlert(alertVC, from: viewController)
+    }
+    
+}
+
+
+private extension AlertHandler {
+    
+    // MARK: - Alert 프리젠테이션 공통 로직
+    
     private func presentAlert(_ alert: CustomAlertViewController, from viewController: UIViewController) {
         alert.modalPresentationStyle = .overFullScreen
         alert.modalTransitionStyle = .crossDissolve
