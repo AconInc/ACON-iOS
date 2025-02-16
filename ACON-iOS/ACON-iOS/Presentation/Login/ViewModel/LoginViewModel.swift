@@ -15,6 +15,8 @@ class LoginViewModel {
     
     var onSuccessLogin: ObservablePattern<Bool> = ObservablePattern(nil)
     
+    var hasVerifiedArea: Bool = false
+    
     func googleSignIn(presentingViewController: UIViewController) {
         // NOTE: - webClientID: 서버 전송용 -> 토큰 발급에 사용
         // NOTE: - clientID: iOS 앱 인증용 (네이티브 로그인 플로우)
@@ -56,8 +58,8 @@ class LoginViewModel {
             switch response {
             case .success(let data):
                 UserDefaults.standard.set(data.accessToken, forKey: StringLiterals.UserDefaults.accessToken)
+                self?.hasVerifiedArea = data.hasVerifiedArea
                 self?.onSuccessLogin.value = true
-                // TODO: hasVerifiedArea 바인딩
             default:
                 print("VM - Failed To postLogin")
                 self?.onSuccessLogin.value = false
