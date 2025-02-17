@@ -8,8 +8,7 @@
 import UIKit
 
 enum ACSheetDetent: String {
-    
-    case mini
+
     case short
     case middle
     case long
@@ -20,7 +19,6 @@ enum ACSheetDetent: String {
     
     var height: CGFloat {
         switch self {
-        case .mini: return 165
         case .short: return 478
         case .middle: return 558
         case .long: return 724
@@ -38,10 +36,6 @@ enum ACSheetDetent: String {
 }
 
 extension ACSheetDetent {
-    
-    static var miniDetent: UISheetPresentationController.Detent {
-        return mini.detent
-    }
     
     static var shortDetent: UISheetPresentationController.Detent {
         return short.detent

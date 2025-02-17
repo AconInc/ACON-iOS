@@ -64,7 +64,7 @@ class AlertHandler {
     // MARK: 사진 권한 Alert
     func showLibraryAccessFailAlert(from viewController: UIViewController) {
         let customAlertViewController = CustomAlertViewController()
-        customAlertViewController.configure(with: .locationAccessDenied)
+        customAlertViewController.configure(with: .libraryAccessDenied)
         
         customAlertViewController.onSettings = {
             guard let settingsURL = URL(string: UIApplication.openSettingsURLString),
