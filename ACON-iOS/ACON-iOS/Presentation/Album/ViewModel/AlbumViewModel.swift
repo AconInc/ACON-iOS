@@ -300,4 +300,38 @@ class AlbumViewModel {
     }
     
     
+    // MARK: - 고화질 이미지 가져오기
+    
+    func getHighQualityImage(index: Int, completion: @escaping (UIImage) -> Void) {
+        let asset = fetchedImages[index].asset
+        /// 이미지 원본 크기
+        let pixelSize = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
+        
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .highQualityFormat
+        options.isNetworkAccessAllowed = true
+        options.resizeMode = .exact
+        options.version = .current
+        
+        /// 이미지 요청
+        let requestID = PHImageManager.default().requestImage(
+            for: asset,
+            targetSize: pixelSize,
+            contentMode: .aspectFill,
+            options: options
+        ) { [weak self] image, info in
+            if image == nil {
+                    print("Failed to load image. Info:", info ?? [:])
+                }
+            if let image = image {
+                print("Loaded image size:", image.size)
+                completion(image)
+            } else {
+                completion(.imgProfileBasic80)
+                // TODO: - 이미지 로딩 실패 시 에러 처리
+                print("high quality image load failed")
+            }
+        }
+    }
+    
 }
