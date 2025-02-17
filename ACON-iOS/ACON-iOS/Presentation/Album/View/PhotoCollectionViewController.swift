@@ -86,11 +86,29 @@ class PhotoCollectionViewController: BaseNavViewController {
     }
     
     private func addTarget() {
-        
+        self.rightButton.addTarget(self,
+                                   action: #selector(goToPhotoSelectionVC),
+                                   for: .touchUpInside)
     }
 
 }
 
+
+// MARK: - @objc functions
+
+private extension PhotoCollectionViewController {
+    
+    @objc
+    func goToPhotoSelectionVC() {
+        albumViewModel.getHighQualityImage(index: selectedIndexPath?.item ?? 0) { [weak self] image in
+            let vc = PhotoSelectionViewController(image)
+            DispatchQueue.main.async {
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
+}
 
 // MARK: - bindViewModel
 
