@@ -30,5 +30,10 @@ final class WithdrawalViewModel {
             inputText.value = nil
         }
     
+    // TODO: make api
+    func postWithdrawal() {
+        print("selectedOption: \(String(describing: selectedOption.value))")
+    }
+    
 }
 

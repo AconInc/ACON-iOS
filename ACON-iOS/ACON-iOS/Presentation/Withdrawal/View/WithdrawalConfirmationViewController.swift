@@ -13,6 +13,7 @@ import Then
 final class WithdrawalConfirmationViewController: BaseViewController {
     
     private let confirmationView = WithdrawalConfirmationView()
+    private let viewmodel = WithdrawalViewModel()
     
     override func loadView() {
         view = confirmationView
@@ -32,15 +33,22 @@ extension WithdrawalConfirmationViewController{
         confirmationView.confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         confirmationView.closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
     }
-
+    
     @objc private func cancelButtonTapped() {
         dismiss(animated: true)
     }
-
+    
     @objc private func confirmButtonTapped() {
-        dismiss(animated: true)
+        
+        // TODO: api post
+        viewmodel.postWithdrawal()
+        
+        let mainVC = SplashViewController()
+        mainVC.modalPresentationStyle = .fullScreen
+        self.present(mainVC, animated: true)
     }
-
+    
+    
     @objc private func closeButtonTapped() {
         dismiss(animated: true)
     }
