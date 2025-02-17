@@ -120,7 +120,7 @@ class AlbumViewModel {
             guard fetchResult.count > 0 else { return }
             
             var albumThumbnail: UIImage = .imgProfileBasic80
-            if let firstAsset = fetchResult.firstObject {
+            if let firstAsset = fetchResult.lastObject {
                 let options = PHImageRequestOptions()
                 options.deliveryMode = .fastFormat
                 options.isNetworkAccessAllowed = true
