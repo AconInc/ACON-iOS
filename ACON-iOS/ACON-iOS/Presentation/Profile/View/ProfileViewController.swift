@@ -116,7 +116,7 @@ private extension ProfileViewController {
     func tappedNeedLoginButton() {
 //        presentLoginModal() // TODO: 메소드 수정 고민해보기 (SpotListVC도 로그인 성공했을 때 reloadData 시켜야할 것 같기 때문)
         let vc = LoginModalViewController()
-        vc.setShortSheetLayout()
+        vc.setSheetLayout(detent: .short)
         vc.onSuccessLogin = { [weak self] onSuccess in
             guard let self = self else { return }
             viewModel.onLoginSuccess.value = onSuccess
