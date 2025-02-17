@@ -4,12 +4,13 @@
 //
 //  Created by Jaehyun Ahn on 2/17/25.
 //
+
 import UIKit
 
 import SnapKit
 import Then
 
-final class WithdrawalConfirmationViewController: UIViewController {
+final class WithdrawalConfirmationViewController: BaseViewController {
     
     private let confirmationView = WithdrawalConfirmationView()
     

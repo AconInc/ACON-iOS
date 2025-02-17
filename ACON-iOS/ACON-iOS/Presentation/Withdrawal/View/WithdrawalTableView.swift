@@ -37,6 +37,7 @@ final class WithdrawalTableView: UITableView {
         backgroundColor = .clear
         separatorStyle = .none
         showsVerticalScrollIndicator = false
+        isScrollEnabled = false 
     }
     
     private func setDelegate() {

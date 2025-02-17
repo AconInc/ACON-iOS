@@ -10,13 +10,12 @@ import UIKit
 import SnapKit
 import Then
 
-final class WithdrawalViewController: BaseViewController {
+final class WithdrawalViewController: BaseNavViewController {
     
     private let viewModel = WithdrawalViewModel()
     private let otherReasonTextFieldView = CustomTextFieldView()
+    //    private let glassmorphismView = GlassmorphismView()
     
-    private let backButton = UIButton()
-    private let titleLabel = UILabel()
     private let reasonTitleLabel = UILabel()
     private let reasonDescriptionLabel = UILabel()
     private let optionsTableView = WithdrawalTableView()
@@ -33,14 +32,11 @@ final class WithdrawalViewController: BaseViewController {
         
         view.backgroundColor = .gray9
         
-        backButton.do {
-            $0.setImage(UIImage(named: "leftArrow"), for: .normal)
-            $0.tintColor = .white
-        }
+        setBackgroundColor(color: .gray9)
         
-        titleLabel.do {
-            $0.setLabel(text: StringLiterals.Withdrawal.title, style: .h5, color: .acWhite, alignment: .center, numberOfLines: 0)
-        }
+        setBackButton()
+        
+        setCenterTitleLabelStyle(title: "서비스 탈퇴")
         
         reasonTitleLabel.do {
             $0.setLabel(text: StringLiterals.Withdrawal.reasonTitle, style: .h5, color: .acWhite, alignment: .left, numberOfLines: 0)
@@ -61,42 +57,51 @@ final class WithdrawalViewController: BaseViewController {
         }
         
         otherReasonTextFieldView.isHidden = true
+        
+        
+        func backButtonTapped() {
+            if let navigationController = navigationController {
+                navigationController.popViewController(animated: true)
+            } else {
+                dismiss(animated: true)
+            }
+        }
     }
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        view.addSubviews(backButton,
-                         titleLabel,
-                         containerView)
+        navigationBarView.addSubviews(leftButton, titleLabel)
+        
+        view.addSubview(containerView)
         
         containerView.addSubviews(
-                   reasonTitleLabel,
-                   reasonDescriptionLabel,
-                   optionsTableView,
-                   otherReasonTextFieldView,
-                   submitButton
-               )
+            reasonTitleLabel,
+            reasonDescriptionLabel,
+            optionsTableView,
+            otherReasonTextFieldView,
+            submitButton
+        )
     }
     
     override func setLayout() {
         super.setLayout()
         
-        backButton.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+        leftButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)
             $0.size.equalTo(24)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.centerY.equalTo(backButton)
+            $0.centerY.equalTo(leftButton)
             $0.centerX.equalToSuperview()
         }
         
         containerView.snp.makeConstraints {
-                $0.top.equalTo(titleLabel.snp.bottom).offset(10)
-                $0.leading.trailing.bottom.equalToSuperview()
-            }
+            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
         
         reasonTitleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(40)
@@ -198,5 +203,28 @@ extension WithdrawalViewController {
         submitButton.setTitleColor(textColor, for: .normal)
     }
     
+}
+
+// MARK: up key mode
+extension WithdrawalViewController{
+    
+    
+}
+
+// MARK: about navigationbar
+extension WithdrawalViewController{
+    
+    @objc
+    override func backButtonTapped() {
+        // TODO: i will fix
+        let mainVC = SplashViewController()
+        
+        if let navigationController = navigationController {
+            navigationController.pushViewController(mainVC, animated: true)
+        } else {
+            mainVC.modalPresentationStyle = .fullScreen
+            present(mainVC, animated: true)
+        }
+    }
     
 }
