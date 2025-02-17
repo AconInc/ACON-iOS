@@ -23,13 +23,8 @@ final class WithdrawalViewController: BaseViewController {
     private let submitButton = UIButton()
     private let containerView = UIView()
     
-    deinit {
-        removeKeyboardObservers()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        addKeyboardObservers()
         setBinding()
     }
     
@@ -127,8 +122,8 @@ final class WithdrawalViewController: BaseViewController {
         }
         
         submitButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalTo(containerView.snp.bottom).offset(-16)
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.bottom.equalTo(containerView.snp.bottom).offset(-40)
             $0.height.equalTo(52)
         }
     }
@@ -177,6 +172,15 @@ extension WithdrawalViewController {
         otherReasonTextFieldView.onTextChanged = { [weak self] text in
             self?.viewModel.updateInputText(text)
         }
+        
+        viewModel.shouldDismissKeyboard.bind { [weak self] shouldDismiss in
+            guard let shouldDismiss = shouldDismiss else { return }
+            
+            if shouldDismiss {
+                self?.view.endEditing(true)
+                self?.viewModel.shouldDismissKeyboard.value = false
+            }
+        }
     }
     
     private func buttonState() {
@@ -194,73 +198,5 @@ extension WithdrawalViewController {
         submitButton.setTitleColor(textColor, for: .normal)
     }
     
-    private func setkeyboardObserver(){
-        
-        
-    }
-    
-    private func addKeyboardObservers() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillShow),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillHide),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
-    }
-    
-    private func removeKeyboardObservers() {
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillShowNotification,
-                                                  object: nil)
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillHideNotification,
-                                                  object: nil)
-    }
-    
-    @objc private func keyboardWillShow(notification: NSNotification) {
-        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-        
-        let keyboardHeight = keyboardSize.height
-        let safeAreaBottomInset = view.safeAreaInsets.bottom
-        containerView.snp.updateConstraints {
-                        $0.bottom.equalToSuperview().offset(-keyboardHeight + safeAreaBottomInset)
-                    }
-        
-        
-        if let textView = notification.object as? UITextView,
-           let scrollView = textView.superview as? UIScrollView {
-            
-            let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardHeight, right: 0.0)
-            scrollView.contentInset = contentInsets
-            scrollView.scrollIndicatorInsets = contentInsets
-            
-            var rect = view.frame
-            rect.size.height -= keyboardHeight
-            if !rect.contains(textView.frame.origin) {
-                scrollView.scrollRectToVisible(textView.frame, animated: true)
-            }
-        }
-        UIView.animate(withDuration: 0.25) {
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    @objc private func keyboardWillHide(notification: NSNotification) {
-        containerView.snp.updateConstraints {
-                       $0.bottom.equalToSuperview()
-                   }
-        
-        if let textView = notification.object as? UITextView,
-           let scrollView = textView.superview as? UIScrollView{
-            let contentInsets = UIEdgeInsets.zero
-            scrollView.contentInset = contentInsets
-            scrollView.scrollIndicatorInsets = contentInsets
-        }
-        UIView.animate(withDuration: 0.25) {
-            self.view.layoutIfNeeded()
-        }
-    }
     
 }

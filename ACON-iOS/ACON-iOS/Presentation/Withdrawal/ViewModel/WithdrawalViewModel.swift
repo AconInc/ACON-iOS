@@ -11,6 +11,18 @@ final class WithdrawalViewModel {
     
     var selectedOption: ObservablePattern<String> = ObservablePattern(nil)
     var inputText: ObservablePattern<String> = ObservablePattern(nil)
+    var shouldDismissKeyboard: ObservablePattern<Bool> = ObservablePattern(false)
+    
+    func updateInputText(_ text: String) {
+        if selectedOption.value == StringLiterals.Withdrawal.optionOthers {
+            inputText.value = text
+            
+            if text.contains("\n") {
+                shouldDismissKeyboard.value = true
+                inputText.value = text.replacingOccurrences(of: "\n", with: "") 
+            }
+        }
+    }
     
     func updateSelectedOption(_ option: String) {
         selectedOption.value = option
@@ -22,9 +34,4 @@ final class WithdrawalViewModel {
         }
     }
     
-    func updateInputText(_ text: String) {
-        if selectedOption.value == StringLiterals.Withdrawal.optionOthers {
-            inputText.value = text
-        }
-    }
 }
