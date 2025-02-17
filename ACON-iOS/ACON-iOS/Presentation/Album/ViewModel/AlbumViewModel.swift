@@ -238,6 +238,8 @@ class AlbumViewModel {
 
     private var isLoadingPhotos = false
     
+    private var isFirstLoad = true
+    
     let onSuccessLoadImages: ObservablePattern<Bool> = ObservablePattern(nil)
     
     func loadPhotos(in album: PHAssetCollection? = nil,
@@ -246,18 +248,19 @@ class AlbumViewModel {
         guard checkPhotoLibraryAuthorization() else {
             requestAlbumPermission { granted in
                 if granted {
-                    self.fetchAlbums()
+                    self.fetchPhotos(in: album)
                 }
             }
             return
         }
-
+        
         guard !isLoadingPhotos else { return }
         isLoadingPhotos = true
         
-        // 앨범이 비어있으면 먼저 가져오기
-        if photosInCurrentAlbum.count == 0 {
+        /// 새로운 앨범을 처음 로드하는 경우
+        if isFirstLoad {
             fetchPhotos(in: album)
+            isFirstLoad = false
         }
         
         let endIndex = min(currentIndex + fetchLimit, photosInCurrentAlbum.count)
@@ -287,12 +290,14 @@ class AlbumViewModel {
             self.onSuccessLoadImages.value = true
             completion()
         }
-        
-        func resetPhotoPagination() {
-            currentIndex = 0
-            fetchedImages.removeAll()
-            isLoadingPhotos = false
-        }
-        
     }
+        
+    func resetPhotoPagination() {
+        currentIndex = 0
+        isFirstLoad = true
+        fetchedImages.removeAll()
+        isLoadingPhotos = false
+    }
+    
+    
 }
