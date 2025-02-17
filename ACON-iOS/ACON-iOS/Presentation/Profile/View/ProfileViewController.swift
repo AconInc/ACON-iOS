@@ -136,6 +136,9 @@ private extension ProfileViewController {
         UserDefaults.standard.removeObject(
             forKey: StringLiterals.UserDefaults.accessToken
         )
+        UserDefaults.standard.removeObject( // TODO: 수정
+            forKey: StringLiterals.UserDefaults.hasVerifiedArea
+        )
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
             sceneDelegate.window?.rootViewController = SplashViewController()
         }

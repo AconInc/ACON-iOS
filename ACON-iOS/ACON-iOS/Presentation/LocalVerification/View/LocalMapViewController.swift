@@ -88,19 +88,37 @@ private extension LocalMapViewController {
     func bindViewModel() {
         self.localVerificationViewModel.onSuccessPostLocalArea.bind { [weak self] onSuccess in
             guard let onSuccess,
-                  let data = self?.localVerificationViewModel.localArea.value,
                   let flowType = self?.localVerificationViewModel.flowType
             else { return }
             
+            let areaName: String = self?.localVerificationViewModel.localAreaName.value ?? ""
+            
             print("onSuccessPostLocalArea: \(onSuccess)")
+
             if onSuccess {
                 switch flowType {
                 case .onboarding:
-                    self?.localArea = data
+                    self?.localArea = areaName
                     self?.presentVerificationFinsishedVC()
                 case .profileEdit:
                     guard let vcStack = self?.navigationController?.viewControllers else { return }
-                    self?.localArea = data
+                    self?.localArea = areaName
+                    for vc in vcStack {
+                        if let profileEditVC = vc as? ProfileEditViewController {
+                            self?.navigationController?.popToViewController(profileEditVC.self, animated: true)
+                        }
+                    }
+                }
+            } else {
+                // TODO: 에러코드별 액션 분기처리 (이후 스프린트)
+                // NOTE: ex) 유효하지 않은 위도 및 경도일 경우(40012), 이미 인증된 동네일 경우 (40032)
+                // NOTE: 일단은 다음 화면으로 넘어갈 수 있도록 success와 동일하게 처리
+                switch flowType {
+                case .onboarding:
+                    self?.localArea = areaName
+                    self?.presentVerificationFinsishedVC()
+                case .profileEdit:
+                    guard let vcStack = self?.navigationController?.viewControllers else { return }
                     for vc in vcStack {
                         if let profileEditVC = vc as? ProfileEditViewController {
                             self?.navigationController?.popToViewController(profileEditVC.self, animated: true)

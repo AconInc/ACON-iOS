@@ -173,7 +173,7 @@ private extension ProfileEditViewController {
             }
         }
         
-        localVerificationVM.localArea.bind { [weak self] area in
+        localVerificationVM.localAreaName.bind { [weak self] area in
             guard let self = self,
                   let area = area else { return }
             

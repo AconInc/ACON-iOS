@@ -13,4 +13,6 @@ struct PostLoginResponse: Codable {
     
     let refreshToken: String
     
+    let hasVerifiedArea: Bool
+    
 }
