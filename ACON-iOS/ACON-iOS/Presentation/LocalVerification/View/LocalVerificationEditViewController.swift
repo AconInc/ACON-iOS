@@ -24,6 +24,7 @@ class LocalVerificationEditViewController: BaseNavViewController {
         super.viewDidLoad()
         
         addTarget()
+        setDelegate()
         bindViewModel()
     }
     
@@ -56,9 +57,14 @@ class LocalVerificationEditViewController: BaseNavViewController {
         self.setSecondTitleLabelStyle(title: StringLiterals.LocalVerification.locateOnMap)
     }
     
-    func addTarget() {
+    private func addTarget() {
         
     }
+    
+    private func setDelegate() {
+        localVerificationEditView.delegate = self
+    }
+    
 }
 
 
@@ -93,6 +99,35 @@ private extension LocalVerificationEditViewController {
 //            newAreas.append(VerifiedAreaModel(id: 1, name: area))
 //            viewModel.verifiedAreaListEditing.value = newAreas
         }
+    }
+    
+}
+
+
+// MARK: - Delegate
+
+extension LocalVerificationEditViewController: LocalVerificationEditViewDelegate {
+    
+    func didTapAreaDeleteButton(_ verifiedArea: VerifiedAreaModel) {
+//        let onSuccessDeleting = viewModel.postDeleteVerifiedArea(area: verifiedArea)
+        
+        viewModel.postDeleteVerifiedArea(verifiedArea) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success:
+                self.localVerificationEditView.removeVerifiedArea(verifiedArea: verifiedArea)
+            case .failure(let error):
+                self.presentDeleteErrorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+    
+    // TODO: 삭제 (임시 코드임)
+    private func presentDeleteErrorAlert(message: String) {
+        let alert = UIAlertController(title: "삭제 실패", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        self.present(alert, animated: true)
     }
     
 }

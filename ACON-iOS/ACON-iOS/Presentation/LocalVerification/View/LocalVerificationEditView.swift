@@ -7,7 +7,21 @@
 
 import UIKit
 
+protocol LocalVerificationEditViewDelegate: AnyObject {
+    
+    func didTapAreaDeleteButton(_ verifiedAreaBox: VerifiedAreaModel)
+    
+}
+
+
 class LocalVerificationEditView: BaseView {
+    
+    // MARK: - Properties
+    
+    weak var delegate: LocalVerificationEditViewDelegate?
+    
+    var verifiedAreaBoxes: [LabelBoxWithDeletableButton] = []
+    
 
     // MARK: - Sizes
     
@@ -24,8 +38,6 @@ class LocalVerificationEditView: BaseView {
     
     let verifiedAreaStackView = UIStackView()
     
-    var verifiedAreaBoxes: [LabelBoxWithDeletableButton] = []
-    
     
 
     // MARK: - Lifecycle
@@ -36,7 +48,6 @@ class LocalVerificationEditView: BaseView {
         self.addSubviews(verifiedAreaTitleLabel,
                          verifiedAreaAddButton,
                          verifiedAreaStackView)
-        
     }
     
     override func setLayout() {
@@ -115,14 +126,19 @@ extension LocalVerificationEditView {
         verifiedAreaBoxes.append(verifiedAreaBox)
     }
     
-    func removeVerifiedArea(verifiedAreaBox: LabelBoxWithDeletableButton) {
-        verifiedAreaStackView.removeArrangedSubview(verifiedAreaBox)
-        for (i, box) in verifiedAreaBoxes.enumerated() {
-            if box == verifiedAreaBox {
-                self.verifiedAreaBoxes.remove(at: i)
+    func removeVerifiedArea(verifiedArea: VerifiedAreaModel) {
+        
+        // NOTE: Button을 담고 있는 Array에서 삭제
+        for (index, box) in verifiedAreaBoxes.enumerated() {
+            if box.verifiedArea?.id == verifiedArea.id {
+                // NOTE: View에서 삭제
+                verifiedAreaStackView.removeArrangedSubview(box)
+                box.removeFromSuperview()
+                
+                // NOTE: Array에서 삭제
+                self.verifiedAreaBoxes.remove(at: index)
             }
         }
-        verifiedAreaBox.removeFromSuperview()
     }
     
 }
@@ -133,14 +149,17 @@ extension LocalVerificationEditView {
 private extension LocalVerificationEditView {
     
     @objc
-        func tappedAreaDeleteButton(_ sender: UIButton) {
-            guard let box = (sender.superview)?.superview as? LabelBoxWithDeletableButton else { return }
-            
-            // TODO: ViewModel을 통해 API 요청 후 성공 시 삭제
-            removeVerifiedArea(verifiedAreaBox: box)
-            
-            print("removed: \(box.verifiedArea)")
-        }
+    func tappedAreaDeleteButton(_ sender: UIButton) {
+        guard let box = (sender.superview)?.superview as? LabelBoxWithDeletableButton,
+              let verifiedArea = box.verifiedArea else { return }
+        
+        delegate?.didTapAreaDeleteButton(
+            VerifiedAreaModel(
+                id: verifiedArea.id,
+                name: verifiedArea.name
+            )
+        )
+    }
     
     
 }
