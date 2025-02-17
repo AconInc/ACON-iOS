@@ -16,6 +16,12 @@ final class AuthManager {
             UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.accessToken) != nil
         }
     }
+    
+    var hasVerifiedArea: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: StringLiterals.UserDefaults.hasVerifiedArea)
+        }
+    }
 
     func handleTokenRefresh() async throws -> Bool {
         let refreshToken = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.refreshToken) ?? ""
@@ -71,12 +77,6 @@ extension Serviceable {
     private func navigateToSplash() {
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
             sceneDelegate.window?.rootViewController = SplashViewController()
-        }
-    }
-    
-    var hasVerifiedArea: Bool {
-        get {
-            UserDefaults.standard.bool(forKey: StringLiterals.UserDefaults.hasVerifiedArea)
         }
     }
     
