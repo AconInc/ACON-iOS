@@ -188,8 +188,9 @@ extension WithdrawalViewController {
         }
     }
     
-    private func buttonState() {
+    func buttonState() {
         let isOptionSelected = viewModel.selectedOption.value != nil
+        print("\ndldldldl:\(viewModel.selectedOption.value)")
         let isInputTextValid = !(viewModel.inputText.value?.isEmpty ?? true)
         
         let shouldEnableSubmitButton = isOptionSelected &&

@@ -14,14 +14,18 @@ final class WithdrawalTableView: UITableView {
     
     var viewModel: WithdrawalViewModel?
     
-    var selectedSpotType: String = "" {
+    private let options = [
+        StringLiterals.Withdrawal.optionLackOfRestaurants,
+        StringLiterals.Withdrawal.optionUnsatisfiedRecommendation,
+        StringLiterals.Withdrawal.optionFakeReviews,
+        StringLiterals.Withdrawal.optionOthers
+    ]
+    
+    private var selectedOption: String? {
         didSet {
             reloadData()
-            onSelectionChanged?(selectedSpotType)
         }
     }
-    
-    var onSelectionChanged: ((String) -> Void)?
     
     init() {
         super.init(frame: .zero, style: .plain)
@@ -37,7 +41,7 @@ final class WithdrawalTableView: UITableView {
         backgroundColor = .clear
         separatorStyle = .none
         showsVerticalScrollIndicator = false
-        isScrollEnabled = false 
+        isScrollEnabled = false
     }
     
     private func setDelegate() {
@@ -45,42 +49,30 @@ final class WithdrawalTableView: UITableView {
         dataSource = self
         register(WithdrawalTableViewCell.self, forCellReuseIdentifier: WithdrawalTableViewCell.cellIdentifier)
     }
-    
 }
 
 extension WithdrawalTableView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return WithdrawalType.allCases.count
+        return options.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = dequeueReusableCell(
-            withIdentifier: WithdrawalTableViewCell.cellIdentifier,
-            for: indexPath
-        ) as? WithdrawalTableViewCell else {
+        guard let cell = dequeueReusableCell(withIdentifier: WithdrawalTableViewCell.cellIdentifier, for: indexPath) as? WithdrawalTableViewCell else {
             return UITableViewCell()
         }
         
-        let option = WithdrawalType.allCases[indexPath.row]
-        let isSelected = selectedSpotType == option.mappedValue
-        cell.checkConfigure(name: option.name, isSelected: isSelected)
+        let option = options[indexPath.row]
+        let isSelected = selectedOption == option
+        cell.checkConfigure(name: option, isSelected: isSelected)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedOption = WithdrawalType.allCases[indexPath.row]
-        
-        if selectedSpotType == selectedOption.mappedValue {
-            selectedSpotType = ""
-        } else {
-            selectedSpotType = selectedOption.mappedValue
-        }
-        viewModel?.updateSelectedOption(selectedSpotType)
+        let option = options[indexPath.row]
+        selectedOption = (selectedOption == option) ? nil : option
+        viewModel?.updateSelectedOption(selectedOption) 
+
+        (superview?.superview as? WithdrawalViewController)?.buttonState()
     }
-    
 }

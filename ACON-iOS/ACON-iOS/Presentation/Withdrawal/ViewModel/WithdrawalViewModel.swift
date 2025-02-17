@@ -24,14 +24,11 @@ final class WithdrawalViewModel {
         }
     }
     
-    func updateSelectedOption(_ option: String) {
-        selectedOption.value = option
-        
-        if option == StringLiterals.Withdrawal.optionOthers {
-            inputText.value = ""
-        } else {
+    // TODO: inputText -> selectedOption
+    func updateSelectedOption(_ option: String?) {
+        selectedOption.value = option?.isEmpty == true ? nil : option
             inputText.value = nil
         }
-    }
     
 }
+
