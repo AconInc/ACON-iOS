@@ -17,7 +17,7 @@ class ProfileViewModel {
     
     var userInfo: ObservablePattern<UserInfoModel> = ObservablePattern(
         UserInfoModel(
-            profileImageURL: "",
+            profileImage: .imgProfileBasic80,
             nickname: "김유림",
             birthDate: nil,
             verifiedAreaList: [VerifiedAreaModel(id: 1, name: "유림동")],
@@ -38,7 +38,7 @@ class ProfileViewModel {
     // MARK: - Methods
     
     func updateUserInfo(newUserInfo: UserInfoEditModel) {
-        userInfo.value?.profileImageURL = newUserInfo.profileImageURL
+        userInfo.value?.profileImage = newUserInfo.profileImage
         userInfo.value?.nickname = newUserInfo.nickname
         userInfo.value?.birthDate = newUserInfo.birthDate
         userInfo.value?.verifiedAreaList = newUserInfo.verifiedAreaList

@@ -98,7 +98,7 @@ private extension ProfileViewController {
             let firstAreaName: String = self.viewModel.userInfo.value?.verifiedAreaList.first?.name ?? "impossible"
             
             profileView.do {
-                $0.setProfileImage(userInfo.profileImageURL)
+                $0.setProfileImage(userInfo.profileImage)
                 $0.setNicknameLabel(userInfo.nickname)
                 $0.setAcornCountBox(userInfo.possessingAcorns)
                 $0.setVerifiedAreaBox(areaName: firstAreaName)

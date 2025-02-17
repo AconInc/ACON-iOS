@@ -225,11 +225,8 @@ private extension ProfileView {
 
 extension ProfileView {
     
-    func setProfileImage(_ imageURL: String) {
-        profileImageView.kf.setImage(
-            with: URL(string: imageURL),
-            options: [.transition(.none), .cacheOriginalImage]
-        )
+    func setProfileImage(_ image: UIImage) {
+        profileImageView.image = image
     }
     
     func setNicknameLabel(_ text: String) {

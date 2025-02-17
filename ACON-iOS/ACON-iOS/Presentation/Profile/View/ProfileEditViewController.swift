@@ -38,6 +38,7 @@ class ProfileEditViewController: BaseNavViewController {
         }
     }
     
+    var profileImage: UIImage = .imgProfileBasic80
     
     // MARK: - Life Cycle
     
@@ -141,6 +142,18 @@ class ProfileEditViewController: BaseNavViewController {
 }
 
 
+// MARK: - ProfileIamge
+
+extension ProfileEditViewController {
+    
+    func updateProfileImage(_ image: UIImage) {
+        profileImage = image
+        profileEditView.setProfileImage(profileImage)
+    }
+   
+}
+
+
 // MARK: - Bindings
 
 private extension ProfileEditViewController {
@@ -149,7 +162,7 @@ private extension ProfileEditViewController {
         // NOTE: 기본 데이터 바인딩
         guard let userInfo = viewModel.userInfo.value else { return }
         profileEditView.do {
-            $0.setProfileImage(userInfo.profileImageURL)
+            $0.setProfileImage(userInfo.profileImage)
             $0.nicknameTextField.text = userInfo.nickname
             $0.setNicknameLengthLabel(
                 countPhoneme(text: userInfo.nickname),
@@ -285,8 +298,8 @@ private extension ProfileEditViewController {
     
     @objc
     func tappedProfileImageEditButton() {
-        // TODO: 수정
-        print("profileImageEditButtonTapped")
+        let vc = AlbumTableViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc
@@ -312,7 +325,7 @@ private extension ProfileEditViewController {
         
         viewModel.updateUserInfo(
             newUserInfo: UserInfoEditModel(
-                profileImageURL: "newProfileImageURL", // TODO: 수정
+                profileImage: profileImage,
                 nickname: nickname,
                 birthDate: profileEditView.birthDateTextField.text,
                 verifiedAreaList: verifiedAreaList

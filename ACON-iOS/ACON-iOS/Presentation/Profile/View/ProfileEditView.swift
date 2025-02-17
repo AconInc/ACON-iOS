@@ -246,8 +246,8 @@ class ProfileEditView: BaseView {
     
     // MARK: - Internal Methods
     
-    func setProfileImage(_ imageURL: String) {
-        profileImageEditButton.setImage(imageURL)
+    func setProfileImage(_ image: UIImage) {
+        profileImageEditButton.setImage(image)
     }
     
     func setNicknameValidMessage(_ type: ProfileValidMessageType) {
