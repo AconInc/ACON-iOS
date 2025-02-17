@@ -60,6 +60,20 @@ class AlertHandler {
         presentAlert(customAlertViewController, from: viewController)
     }
     
+    
+    // MARK: 사진 권한 Alert
+    func showLibraryAccessFailAlert(from viewController: UIViewController) {
+        let customAlertViewController = CustomAlertViewController()
+        customAlertViewController.configure(with: .locationAccessDenied)
+        
+        customAlertViewController.onSettings = {
+            guard let settingsURL = URL(string: UIApplication.openSettingsURLString),
+                  UIApplication.shared.canOpenURL(settingsURL) else { return }
+            UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+        }
+        presentAlert(customAlertViewController, from: viewController)
+    }
+    
     // MARK: Alert 프리젠테이션 공통 로직
     private func presentAlert(_ alert: CustomAlertViewController, from viewController: UIViewController) {
         alert.modalPresentationStyle = .overFullScreen
