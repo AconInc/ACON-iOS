@@ -26,7 +26,7 @@ enum AlertType: CaseIterable {
         case .uploadExit:
             return "작성을 그만둘까요?"
         case .libraryAccessDenied:
-            return "'acon'에 대해 라이브러리 읽기/쓰기 기능이 없어요"
+            return "'acon'에 대한 라이브러리 읽기/쓰기 기능이 없어요"
         }
     }
     
