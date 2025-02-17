@@ -97,6 +97,7 @@
 		745C7E0D2D35A04A0074DBDB /* SearchKeywordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E0C2D35A03F0074DBDB /* SearchKeywordCollectionViewCell.swift */; };
 		745C7E122D35A62B0074DBDB /* UploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E112D35A6220074DBDB /* UploadModel.swift */; };
 		745C7E152D35AEC10074DBDB /* SpotSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C7E142D35AEBB0074DBDB /* SpotSearchViewModel.swift */; };
+		745ECB9F2D615B73005129B0 /* AlbumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745ECB9E2D615B61005129B0 /* AlbumTableViewController.swift */; };
 		745ECBA12D615B9F005129B0 /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745ECBA02D615B99005129B0 /* AlbumTableViewCell.swift */; };
 		746261632D3EA1D500A4E84F /* GetSearchSuggestionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261622D3EA1C900A4E84F /* GetSearchSuggestionResponse.swift */; };
 		746261652D3EA26D00A4E84F /* GetSearchSuggestionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261642D3EA26300A4E84F /* GetSearchSuggestionRequest.swift */; };
@@ -305,6 +306,7 @@
 		745C7E0C2D35A03F0074DBDB /* SearchKeywordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordCollectionViewCell.swift; sourceTree = "<group>"; };
 		745C7E112D35A6220074DBDB /* UploadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadModel.swift; sourceTree = "<group>"; };
 		745C7E142D35AEBB0074DBDB /* SpotSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotSearchViewModel.swift; sourceTree = "<group>"; };
+		745ECB9E2D615B61005129B0 /* AlbumTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewController.swift; sourceTree = "<group>"; };
 		745ECBA02D615B99005129B0 /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
 		746261622D3EA1C900A4E84F /* GetSearchSuggestionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSearchSuggestionResponse.swift; sourceTree = "<group>"; };
 		746261642D3EA26300A4E84F /* GetSearchSuggestionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSearchSuggestionRequest.swift; sourceTree = "<group>"; };
@@ -1240,6 +1242,7 @@
 			children = (
 				741B58732D5ED20E0061CBF7 /* Type */,
 				74D31C7E2D5C024500B4B2B4 /* Cell */,
+				745ECB9E2D615B61005129B0 /* AlbumTableViewController.swift */,
 				74D31C792D5841D100B4B2B4 /* PhotoCollectionViewController.swift */,
 			);
 			path = View;
@@ -1585,6 +1588,7 @@
 				7462617B2D3EB06100A4E84F /* UploadService.swift in Sources */,
 				74CDCE562D310B1600E3A21A /* String+.swift in Sources */,
 				74BF91FD2D381FF800B923E3 /* SpotDetailModel.swift in Sources */,
+				745ECB9F2D615B73005129B0 /* AlbumTableViewController.swift in Sources */,
 				1547A8852D3595B600E96616 /* SpotListFilterModel.swift in Sources */,
 				748D6F8B2D2BD31B007690B4 /* UIStackView+.swift in Sources */,
 				748D6F912D2BD450007690B4 /* UILabel+.swift in Sources */,
