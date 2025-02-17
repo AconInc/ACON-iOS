@@ -305,7 +305,7 @@ private extension ProfileEditViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
             }))
             $0.addAction(UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { _ in
-                self.profileImage = .imgProfileBasic80
+                self.updateProfileImage(.imgProfileBasic80)
             }))
             $0.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         }
