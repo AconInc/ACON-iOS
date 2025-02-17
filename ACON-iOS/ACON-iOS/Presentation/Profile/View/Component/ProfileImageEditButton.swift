@@ -48,6 +48,7 @@ class ProfileImageEditButton: UIView {
             $0.backgroundColor = .gray7 // NOTE: Skeleton
             $0.layer.cornerRadius = size / 2
             $0.contentMode = .scaleAspectFill
+            $0.clipsToBounds = true
         }
         
         cameraButton.do {
