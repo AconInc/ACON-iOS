@@ -298,8 +298,18 @@ private extension ProfileEditViewController {
     
     @objc
     func tappedProfileImageEditButton() {
-        let vc = AlbumTableViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.do {
+            $0.addAction(UIAlertAction(title: "앨범에서 사진 업로드", style: .default, handler: { _ in
+                let vc = AlbumTableViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }))
+            $0.addAction(UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { _ in
+                self.profileImage = .imgProfileBasic80
+            }))
+            $0.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        }
+        present(alertController, animated: true)
     }
     
     @objc
