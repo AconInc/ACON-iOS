@@ -154,7 +154,7 @@ private extension LocalMapViewController {
             self?.removeBlurView()
         }
         
-        vc.setMiddleSheetLayout()
+        vc.setSheetLayout(detent: .middle)
         self.addBlurView()
         self.present(vc, animated: true)
     }

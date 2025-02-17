@@ -67,7 +67,7 @@ class AlertHandler {
         presentAlert(customAlertViewController, from: viewController)
     }
     
-    
+
     // MARK: - 로그아웃 Alert
     
     func showLogoutAlert(from viewController: UIViewController, action: @escaping () -> Void) {
@@ -77,14 +77,25 @@ class AlertHandler {
         presentAlert(alertVC, from: viewController)
     }
     
-}
-
-
-private extension AlertHandler {
     
-    // MARK: - Alert 프리젠테이션 공통 로직
+    // MARK: 사진 권한 Alert
     
-    func presentAlert(_ alert: CustomAlertViewController, from viewController: UIViewController) {
+    func showLibraryAccessFailAlert(from viewController: UIViewController) {
+        let customAlertViewController = CustomAlertViewController()
+        customAlertViewController.configure(with: .libraryAccessDenied)
+        
+        customAlertViewController.onSettings = {
+            guard let settingsURL = URL(string: UIApplication.openSettingsURLString),
+                  UIApplication.shared.canOpenURL(settingsURL) else { return }
+            UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+        }
+        presentAlert(customAlertViewController, from: viewController)
+    }
+    
+    
+    // MARK: Alert 프리젠테이션 공통 로직
+    
+    private func presentAlert(_ alert: CustomAlertViewController, from viewController: UIViewController) {
         alert.modalPresentationStyle = .overFullScreen
         alert.modalTransitionStyle = .crossDissolve
         viewController.present(alert, animated: true, completion: nil)

@@ -156,7 +156,7 @@ extension SpotUploadViewController {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.addBlurView()
-            vc.setLongSheetLayout()
+            vc.setSheetLayout(detent: .long)
             self.present(vc, animated: true)
         }
     }
