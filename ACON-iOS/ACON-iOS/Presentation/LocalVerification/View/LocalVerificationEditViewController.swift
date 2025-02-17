@@ -9,9 +9,11 @@ import UIKit
 
 class LocalVerificationEditViewController: BaseNavViewController {
     
-    // MARK: - UI Properties
+    // MARK: - Properties (View, ViewModels)
     
     private let localVerificationEditView = LocalVerificationEditView()
+    
+    private let viewModel = LocalVerificationEditViewModel()
     
     private let localVerificationVM = LocalVerificationViewModel(flowType: .profileEdit)
     
@@ -29,6 +31,7 @@ class LocalVerificationEditViewController: BaseNavViewController {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = true
+        viewModel.getVerifiedAreaList()
         
     }
     
@@ -64,6 +67,23 @@ class LocalVerificationEditViewController: BaseNavViewController {
 private extension LocalVerificationEditViewController {
     
     func bindViewModel(){
+        
+        viewModel.onGetVerifiedAreaListSuccess.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
+            
+            if onSuccess && viewModel.isAppendingVerifiedAreaList == false {
+                viewModel.isAppendingVerifiedAreaList = true
+                 
+                for area in viewModel.verifiedAreaList {
+                    localVerificationEditView.addVerifiedArea(area)
+                }
+                
+                viewModel.isAppendingVerifiedAreaList = false
+            }
+            
+        }
+        
         localVerificationVM.localAreaName.bind { [weak self] area in
             guard let self = self,
                   let area = area else { return }
