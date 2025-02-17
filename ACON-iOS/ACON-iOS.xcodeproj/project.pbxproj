@@ -121,7 +121,7 @@
 		746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15B82D3E2125003EA031 /* PostLocalAreaResponse.swift */; };
 		746F15BB2D3E2167003EA031 /* LocalVerificationTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15BA2D3E215C003EA031 /* LocalVerificationTargetType.swift */; };
 		746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15BC2D3E2258003EA031 /* LocalVerificationService.swift */; };
-		746F39822D342523003F8498 /* SheetUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* SheetUtils.swift */; };
+		746F39822D342523003F8498 /* ACSheetDetentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* ACSheetDetentType.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
 		747F4FBD2D3D9477003DECBF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F4FBC2D3D9470003DECBF /* SplashViewController.swift */; };
 		747F4FBF2D3D9D44003DECBF /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F4FBE2D3D9D40003DECBF /* SplashView.swift */; };
@@ -331,7 +331,7 @@
 		746F15B82D3E2125003EA031 /* PostLocalAreaResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocalAreaResponse.swift; sourceTree = "<group>"; };
 		746F15BA2D3E215C003EA031 /* LocalVerificationTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationTargetType.swift; sourceTree = "<group>"; };
 		746F15BC2D3E2258003EA031 /* LocalVerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationService.swift; sourceTree = "<group>"; };
-		746F39812D342520003F8498 /* SheetUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetUtils.swift; sourceTree = "<group>"; };
+		746F39812D342520003F8498 /* ACSheetDetentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACSheetDetentType.swift; sourceTree = "<group>"; };
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
 		747F4FBC2D3D9470003DECBF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		747F4FBE2D3D9D40003DECBF /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -690,20 +690,20 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		741B58732D5ED20E0061CBF7 /* Type */ = {
-			isa = PBXGroup;
-			children = (
-				741B58742D5ED2150061CBF7 /* PhotoCollectionViewSizeType.swift */,
-			);
-			path = Type;
-			sourceTree = "<group>";
-		};
 		741429612D5D3CDF00B69528 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				741429622D5D3CE900B69528 /* SettingTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		741B58732D5ED20E0061CBF7 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				741B58742D5ED2150061CBF7 /* PhotoCollectionViewSizeType.swift */,
+			);
+			path = Type;
 			sourceTree = "<group>";
 		};
 		74220DD12D34361E000684BF /* Upload */ = {
@@ -1024,7 +1024,6 @@
 			children = (
 				74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */,
 				74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */,
-				746F39812D342520003F8498 /* SheetUtils.swift */,
 				748D6F812D2BCDB0007690B4 /* ScreenUtils.swift */,
 				748D6F7F2D2BCD8F007690B4 /* ObservablePattern.swift */,
 				748D6F7B2D2BCCFF007690B4 /* Enums */,
@@ -1049,6 +1048,7 @@
 		748D6F7B2D2BCCFF007690B4 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				746F39812D342520003F8498 /* ACSheetDetentType.swift */,
 				74205D2E2D40351400D11557 /* SocialType.swift */,
 				746261702D3EA50700A4E84F /* SpotCategoryType.swift */,
 				741E68AB2D3D6DA400DF99EF /* HeaderType.swift */,
@@ -1629,7 +1629,7 @@
 				15CD25822D40364400320006 /* LoginModalViewController.swift in Sources */,
 				D6D0F50F2D36B99F00326F17 /* BigBoxViewCell.swift in Sources */,
 				745ECBA12D615B9F005129B0 /* AlbumTableViewCell.swift in Sources */,
-				746F39822D342523003F8498 /* SheetUtils.swift in Sources */,
+				746F39822D342523003F8498 /* ACSheetDetentType.swift in Sources */,
 				1547A8782D3550D900E96616 /* MatchingRateBgColorType.swift in Sources */,
 				1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */,
 				1547A8802D358E2700E96616 /* SpotListFilterView.swift in Sources */,
