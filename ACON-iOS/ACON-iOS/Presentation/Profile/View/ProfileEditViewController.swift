@@ -161,7 +161,7 @@ private extension ProfileEditViewController {
     func bindData() {
         // NOTE: 기본 데이터 바인딩
         profileEditView.do {
-            $0.setProfileImage(userInfo.profileImage)
+            $0.setProfileImageURL(viewModel.userInfo.profileImage)
             $0.nicknameTextField.text = viewModel.userInfo.nickname
             $0.setNicknameLengthLabel(countPhoneme(text: viewModel.userInfo.nickname),
                                       viewModel.maxNicknameLength

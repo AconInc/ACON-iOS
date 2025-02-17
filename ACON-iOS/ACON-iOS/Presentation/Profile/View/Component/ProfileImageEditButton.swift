@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Kingfisher
+
 class ProfileImageEditButton: UIView {
     
     // MARK: - Helpers
@@ -86,6 +88,13 @@ extension ProfileImageEditButton {
         profileImageView.image = image
     }
     
+    func setImageURL(_ imageURL: String) {
+        profileImageView.kf.setImage(
+            with: URL(string: imageURL),
+            options: [.transition(.none), .cacheOriginalImage]
+        )
+    }
+
     func addTarget(_ target: Any?, action: Selector, for controlEvents: UIControl.Event) {
         cameraButton.addTarget(target, action: action, for: controlEvents)
     }

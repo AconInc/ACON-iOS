@@ -250,6 +250,10 @@ class ProfileEditView: BaseView {
         profileImageEditButton.setImage(image)
     }
     
+    func setProfileImageURL(_ imageURL: String) {
+        profileImageEditButton.setImageURL(imageURL)
+    }
+    
     func setNicknameValidMessage(_ type: ProfileValidMessageType) {
         nicknameValidMessageView.setValidMessage(type)
     }

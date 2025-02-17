@@ -18,7 +18,7 @@ class ProfileViewModel: Serviceable {
     var verifiedAreaListEditing: ObservablePattern<[VerifiedAreaModel]> = ObservablePattern(nil)
     
     var userInfo = UserInfoModel(
-            profileImage: .imgProfileBasic80,
+            profileImage: "",
             nickname: "김유림",
             birthDate: nil,
             verifiedAreaList: [VerifiedAreaModel(id: 1, name: "유림동")],
@@ -38,7 +38,8 @@ class ProfileViewModel: Serviceable {
     // MARK: - Methods
     
     func updateUserInfo(newUserInfo: UserInfoEditModel) {
-        userInfo.profileImage = newUserInfo.profileImage
+        // TODO: - presignedurl string
+        userInfo.profileImage = ""
         userInfo.nickname = newUserInfo.nickname
         userInfo.birthDate = newUserInfo.birthDate
         userInfo.verifiedAreaList = newUserInfo.verifiedAreaList
@@ -53,7 +54,7 @@ class ProfileViewModel: Serviceable {
             switch response {
             case .success(let data):
                 let newUserInfo = UserInfoModel(
-                    profileImageURL: data.image,
+                    profileImage: data.image,
                     nickname: data.nickname,
                     birthDate: data.birthDate,
                     verifiedAreaList: data.verifiedAreaList.map {
