@@ -18,7 +18,7 @@ class LocalVerificationViewModel: Serviceable {
     
     var localAreaName: ObservablePattern<String> = ObservablePattern(nil)
     
-    let isLocationChecked: ObservablePattern<Bool> = ObservablePattern(nil)
+    var isLocationChecked: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var userCoordinate: CLLocationCoordinate2D? = nil
     
