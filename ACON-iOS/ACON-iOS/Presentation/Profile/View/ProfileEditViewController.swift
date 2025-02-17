@@ -125,7 +125,7 @@ class ProfileEditViewController: BaseNavViewController {
             for: .touchUpInside
         )
         
-        profileEditView.verifiedAreaBox.addTarget(
+        profileEditView.verifiedAreaBox.addDeleteAction(
             self,
             action: #selector(deleteVerifiedArea),
             for: .touchUpInside
