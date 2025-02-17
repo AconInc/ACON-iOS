@@ -105,9 +105,9 @@ extension ProfileSettingViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0, 2:
+        case 0:
             return 1
-        case 1, 3:
+        case 1, 2, 3:
             return 2
         default:
             return 0
@@ -206,12 +206,18 @@ extension ProfileSettingViewController: UITableViewDataSource {
                     sceneDelegate.window?.rootViewController = OnboardingViewController()
                     // TODO: - 어떤 경로인지 알려주는 플래그 필요
                 }
+            case .localVerification:
+                print("동네인증하기")
+                // TODO: - 동네인증하기 뷰 여기
             }
         case 3:
             let items = SettingType.allSections[3] as! [SettingType.Account]
             switch items[indexPath.row] {
             case .logout:
-                // TODO: - 로그아웃
+                let alertHandler = AlertHandler()
+                alertHandler.showLogoutAlert(from: self) { [weak self] in
+                    self?.settingViewModel.logout()
+                }
                 return
             case .withdrawal:
                 // TODO: - 탈퇴 뷰컨 이동

@@ -7,22 +7,22 @@
 
 import Foundation
 
-class ProfileViewModel {
+class ProfileViewModel: Serviceable {
     
     // MARK: - Properties
     
     var onLoginSuccess: ObservablePattern<Bool> = ObservablePattern(AuthManager.shared.hasToken)
     
+    var onGetProfileSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
+    
     var verifiedAreaListEditing: ObservablePattern<[VerifiedAreaModel]> = ObservablePattern(nil)
     
-    var userInfo: ObservablePattern<UserInfoModel> = ObservablePattern(
-        UserInfoModel(
+    var userInfo = UserInfoModel(
             profileImage: .imgProfileBasic80,
             nickname: "김유림",
             birthDate: nil,
             verifiedAreaList: [VerifiedAreaModel(id: 1, name: "유림동")],
             possessingAcorns: 0
-        )
     )
     
     let maxNicknameLength: Int = 16
@@ -31,17 +31,46 @@ class ProfileViewModel {
     // MARK: - Initializer
     
     init() {
-        verifiedAreaListEditing.value = userInfo.value?.verifiedAreaList
+        verifiedAreaListEditing.value = userInfo.verifiedAreaList
     }
     
     
     // MARK: - Methods
     
     func updateUserInfo(newUserInfo: UserInfoEditModel) {
-        userInfo.value?.profileImage = newUserInfo.profileImage
-        userInfo.value?.nickname = newUserInfo.nickname
-        userInfo.value?.birthDate = newUserInfo.birthDate
-        userInfo.value?.verifiedAreaList = newUserInfo.verifiedAreaList
+        userInfo.profileImage = newUserInfo.profileImage
+        userInfo.nickname = newUserInfo.nickname
+        userInfo.birthDate = newUserInfo.birthDate
+        userInfo.verifiedAreaList = newUserInfo.verifiedAreaList
+    }
+    
+    
+    // MARK: - Networking
+    
+    func getProfile() {
+        ACService.shared.profileService.getProfile { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                let newUserInfo = UserInfoModel(
+                    profileImageURL: data.image,
+                    nickname: data.nickname,
+                    birthDate: data.birthDate,
+                    verifiedAreaList: data.verifiedAreaList.map {
+                        return VerifiedAreaModel(id: $0.id, name: $0.name)
+                    },
+                    possessingAcorns: data.leftAcornCount
+                )
+                userInfo = newUserInfo
+                onGetProfileSuccess.value = true
+            case .reIssueJWT:
+                self.handleReissue {
+                    self.getProfile()
+                }
+            default:
+                onGetProfileSuccess.value = false
+            }
+        }
     }
     
 }

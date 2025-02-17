@@ -160,15 +160,13 @@ private extension ProfileEditViewController {
     
     func bindData() {
         // NOTE: 기본 데이터 바인딩
-        guard let userInfo = viewModel.userInfo.value else { return }
         profileEditView.do {
             $0.setProfileImage(userInfo.profileImage)
-            $0.nicknameTextField.text = userInfo.nickname
-            $0.setNicknameLengthLabel(
-                countPhoneme(text: userInfo.nickname),
-                viewModel.maxNicknameLength
-                )
-            $0.birthDateTextField.text = userInfo.birthDate
+            $0.nicknameTextField.text = viewModel.userInfo.nickname
+            $0.setNicknameLengthLabel(countPhoneme(text: viewModel.userInfo.nickname),
+                                      viewModel.maxNicknameLength
+            )
+            $0.birthDateTextField.text = viewModel.userInfo.birthDate
         }
     }
     
@@ -188,7 +186,7 @@ private extension ProfileEditViewController {
             }
         }
         
-        localVerificationVM.localArea.bind { [weak self] area in
+        localVerificationVM.localAreaName.bind { [weak self] area in
             guard let self = self,
                   let area = area else { return }
             

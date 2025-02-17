@@ -8,15 +8,17 @@
 import CoreLocation
 import Foundation
 
-class LocalVerificationViewModel {
+class LocalVerificationViewModel: Serviceable {
     
     var flowType: LocalVerificationFlowType
     
     let onSuccessPostLocalArea: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var localArea: ObservablePattern<String> = ObservablePattern(nil)
+    var localAreaID: ObservablePattern<Int64> = ObservablePattern(nil)
     
-    let isLocationChecked: ObservablePattern<Bool> = ObservablePattern(nil)
+    var localAreaName: ObservablePattern<String> = ObservablePattern(nil)
+    
+    var isLocationChecked: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var userCoordinate: CLLocationCoordinate2D? = nil
     
@@ -40,10 +42,16 @@ class LocalVerificationViewModel {
         ACService.shared.localVerificationService.postLocalArea(requestBody: requestBody) { [weak self] response in
             switch response {
             case .success(let data):
-                self?.localArea.value = data.area
+                self?.localAreaID.value = data.id
+                self?.localAreaName.value = data.name
                 self?.onSuccessPostLocalArea.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.postLocalArea()
+                }
+//                print("🥑인증동네 id: \(data.id)") // TODO: 수정
             default:
-                print("Failed To Post")
+                print("🥑Failed To Post Local Area")
                 self?.onSuccessPostLocalArea.value = false
                 return
             }

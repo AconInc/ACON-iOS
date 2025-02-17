@@ -11,9 +11,11 @@ import GoogleSignIn
 import GoogleSignInSwift
 import AuthenticationServices
 
-class LoginViewModel {
+class LoginViewModel: Serviceable {
     
     var onSuccessLogin: ObservablePattern<Bool> = ObservablePattern(nil)
+    
+    var hasVerifiedArea: Bool = false
     
     func googleSignIn(presentingViewController: UIViewController) {
         // NOTE: - webClientID: 서버 전송용 -> 토큰 발급에 사용
@@ -50,13 +52,19 @@ class LoginViewModel {
         }
     }
     
-    // TODO: - 앱잼 기간 내에는 우선 accessToken만 받아옴 - 나중에 refreshToken 받아오기
     func postLogin(socialType: String, idToken: String) {
         ACService.shared.authService.postLogin(PostLoginRequest(socialType: socialType, idToken: idToken)){ [weak self] response in
             switch response {
             case .success(let data):
                 UserDefaults.standard.set(data.accessToken, forKey: StringLiterals.UserDefaults.accessToken)
+                UserDefaults.standard.set(data.refreshToken, forKey: StringLiterals.UserDefaults.refreshToken)
+                UserDefaults.standard.set(data.hasVerifiedArea, forKey: StringLiterals.UserDefaults.hasVerifiedArea)
+                self?.hasVerifiedArea = data.hasVerifiedArea
                 self?.onSuccessLogin.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.postLogin(socialType: socialType, idToken: idToken)
+                }
             default:
                 print("VM - Failed To postLogin")
                 self?.onSuccessLogin.value = false

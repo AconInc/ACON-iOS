@@ -29,6 +29,7 @@ class ProfileViewController: BaseNavViewController {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = false
+        viewModel.getProfile()
     }
     
     override func setHierarchy() {
@@ -90,17 +91,16 @@ private extension ProfileViewController {
             }
         }
         
-        viewModel.userInfo.bind { [weak self] userInfo in
+        viewModel.onGetProfileSuccess.bind { [weak self] onSuccess in
             guard let self = self,
-                  let userInfo = userInfo else { return }
-            
+                  let onSuccess = onSuccess else { return }
+            // TODO: onSuccess 분기처리
             // TODO: 인증동네 추후 여러개로 수정(Sprint3)
-            let firstAreaName: String = self.viewModel.userInfo.value?.verifiedAreaList.first?.name ?? "impossible"
-            
+            let firstAreaName: String = self.viewModel.userInfo.verifiedAreaList.first?.name ?? "impossible"
             profileView.do {
-                $0.setProfileImage(userInfo.profileImage)
-                $0.setNicknameLabel(userInfo.nickname)
-                $0.setAcornCountBox(userInfo.possessingAcorns)
+                $0.setProfileImage(self.viewModel.userInfo.profileImage)
+                $0.setNicknameLabel(self.viewModel.userInfo.nickname)
+                $0.setAcornCountBox(self.viewModel.userInfo.possessingAcorns)
                 $0.setVerifiedAreaBox(areaName: firstAreaName)
             }
         }
@@ -135,6 +135,9 @@ private extension ProfileViewController {
     func disableAutoLogin() {
         UserDefaults.standard.removeObject(
             forKey: StringLiterals.UserDefaults.accessToken
+        )
+        UserDefaults.standard.removeObject( // TODO: 수정
+            forKey: StringLiterals.UserDefaults.hasVerifiedArea
         )
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
             sceneDelegate.window?.rootViewController = SplashViewController()

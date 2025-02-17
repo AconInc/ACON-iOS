@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SpotSearchViewModel {
+class SpotSearchViewModel: Serviceable {
     
     var longitude: Double
     
@@ -46,6 +46,10 @@ class SpotSearchViewModel {
                     )
                 }
                 self?.searchKeywordData.value = searchKeywords
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.getSearchKeyword(keyword: keyword)
+                }
             default:
                 print("VM - Fail to getSearchKeyword")
                 self?.onSuccessGetSearchKeyword.value = false
@@ -66,6 +70,10 @@ class SpotSearchViewModel {
                 }
                 self?.searchSuggestionData.value = searchSuggestionData
                 self?.onSuccessGetSearchSuggestion.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.getSearchSuggestion()
+                }
             default:
                 print("VM - Fail to getSearchSuggestion")
                 self?.onSuccessGetSearchSuggestion.value = false

@@ -13,6 +13,10 @@ enum StringLiterals {
         
         static let accessToken = "accessToken"
         
+        static let refreshToken = "refreshToken"
+        
+        static let hasVerifiedArea = "hasVerifiedArea"
+        
     }
     
     enum Login {
@@ -151,7 +155,7 @@ enum StringLiterals {
 
          static let finishVerification = "인증완료"
 
-         static let letsStart = "시작하기"
+         static let letsStart = "홈으로 가기"
 
          static let locateOnMap = "지도에서 위치 확인하기"
 
