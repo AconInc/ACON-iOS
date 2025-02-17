@@ -75,6 +75,14 @@ class AlbumTableViewController: BaseNavViewController {
 extension AlbumTableViewController {
     
     func bindViewModel() {
+        self.albumViewModel.onAlbumChange.bind { [weak self] onChange in
+            guard let onChange = onChange else { return }
+            if onChange {
+                self?.albumTableView.reloadData()
+                self?.albumViewModel.onAlbumChange.value = nil
+            }
+        }
+        
         self.albumViewModel.fetchedAlbumIndex.bind { [weak self] index in
             guard let index = index else { return }
             let indexPath = IndexPath(row: index, section: 0)

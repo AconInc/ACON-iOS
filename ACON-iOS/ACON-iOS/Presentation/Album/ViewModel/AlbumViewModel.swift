@@ -8,7 +8,7 @@
 import Photos
 import UIKit
 
-class AlbumViewModel {
+class AlbumViewModel: NSObject, PHPhotoLibraryChangeObserver {
 
     // TODO: 메모리 최적화 처리
     // TODO: PhotoManager로 로직 모두 옮길 것
@@ -30,6 +30,11 @@ class AlbumViewModel {
                     completion(true)
                 case .denied, .restricted, .notDetermined:
                     print("Album: 권한 거부")
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                       let rootViewController = windowScene.windows.first?.rootViewController {
+                        let alertHandler = AlertHandler()
+                        alertHandler.showLibraryAccessFailAlert(from: rootViewController)
+                    }
                     completion(false)
                 @unknown default:
                     print("Album: 알 수 없는 상태")
@@ -39,12 +44,37 @@ class AlbumViewModel {
         }
     }
     
-    // TODO: 사진 권한 관련 alert 적용
     private func checkPhotoLibraryAuthorization() -> Bool {
         let authStatus = PHPhotoLibrary.authorizationStatus()
         return authStatus == .authorized || authStatus == .limited
     }
     
+    
+    // MARK: - 앨범 사진 변경 시 리로드 (선택된 사진 접근에서 선택된 사진 변경한 경우)
+    
+    var onAlbumChange: ObservablePattern<Bool> = ObservablePattern(nil)
+    
+    override init() {
+        super.init()
+        
+        PHPhotoLibrary.shared().register(self)
+    }
+    
+    deinit {
+        PHPhotoLibrary.shared().unregisterChangeObserver(self)
+    }
+    
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            let currentAuth = PHPhotoLibrary.authorizationStatus()
+            if currentAuth == .authorized || currentAuth == .limited {
+                self.fetchAlbums()
+                onAlbumChange.value = true
+            }
+        }
+    }
     
     // MARK: - 앨범 가져오기
     
