@@ -343,6 +343,8 @@ enum StringLiterals {
         
         static let choose = "선택"
         
+        static let done = "완료"
+        
     }
     
 }
