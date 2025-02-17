@@ -22,14 +22,25 @@ class PhotoCollectionViewController: BaseNavViewController {
     
     // MARK: - Properties
     
-    private let albumViewModel = AlbumViewModel()
+    private let albumViewModel: AlbumViewModel
 
     private var isDataLoaded = false
     
     var selectedIndexPath: IndexPath?
     
+    private var isLoading = false
     
     // MARK: - LifeCycle
+    
+    init(_ albumViewModel: AlbumViewModel) {
+        self.albumViewModel = albumViewModel
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,9 +53,10 @@ class PhotoCollectionViewController: BaseNavViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         self.tabBarController?.tabBar.isHidden = true
-        loadPhotos()
+        albumViewModel.resetPhotoPagination()
+        self.loadPhotos()
     }
 
     override func setHierarchy() {
@@ -64,7 +76,7 @@ class PhotoCollectionViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
-        self.setCenterTitleLabelStyle(title: "앨범")
+        self.setCenterTitleLabelStyle(title: albumViewModel.albumInfo[albumViewModel.selectedAlbumIndex].title)
         self.setBackButton()
         self.setSelectButton()
         
@@ -103,7 +115,7 @@ private extension PhotoCollectionViewController {
     
     func loadPhotos() {
         // NOTE: thumbnailSize 셀 크기로 하면 너무 화질 안 좋아짐 / 원본 사이즈는 현재 메모리 과부화 -> 적정선으로 우선 설정
-        albumViewModel.loadPhotos(in: albumViewModel.smartAlbums.first,
+        albumViewModel.loadPhotos(in: albumViewModel.albums[albumViewModel.selectedAlbumIndex],
                                   thumbnailSize: PhotoCollectionViewSizeType.thumbnailSize.value) {
             self.isDataLoaded = true
             return
