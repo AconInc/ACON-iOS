@@ -41,7 +41,7 @@ extension UploadTargetType: TargetType {
         case .getReviewVerification:
             return utilPath + "spots/verify"
         case .getAcornCount:
-            return utilPath + "member/acorn"
+            return utilPath + "members/acorn"
         }
     }
     
