@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LocalVerificationEditViewModel {
+class LocalVerificationEditViewModel: Serviceable {
     
     // MARK: - Properties
     
@@ -21,14 +21,23 @@ class LocalVerificationEditViewModel {
     // MARK: - Networking
     
     func getVerifiedAreaList() {
-        // TODO: API 호출
-        
-        verifiedAreaList = [VerifiedAreaModel(id: 9999, name: "아콘동"),
-                            VerifiedAreaModel(id: 033, name: "유림동")
-        ]
-        
-        onGetVerifiedAreaListSuccess.value = true
-        //        onGetVerifiedAreaListSuccess.value = false
+        ACService.shared.localVerificationService.getVerifiedAreaList { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                let newVerifiedAreaList: [VerifiedAreaModel] = data.verifiedAreaList.map {
+                    VerifiedAreaModel(id: $0.id, name: $0.name)
+                }
+                verifiedAreaList = newVerifiedAreaList
+                onGetVerifiedAreaListSuccess.value = true
+            case .reIssueJWT:
+                self.handleReissue {
+                    self.getVerifiedAreaList()
+                }
+            default:
+                onGetVerifiedAreaListSuccess.value = false
+            }
+        }
     }
     
     func postDeleteVerifiedArea(_ area: VerifiedAreaModel, completion: @escaping (Result<Bool, Error>) -> Void) {
