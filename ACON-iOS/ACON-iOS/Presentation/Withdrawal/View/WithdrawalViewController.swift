@@ -34,6 +34,7 @@ final class WithdrawalViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setBinding()
         setKeyboardHandling()
         
@@ -86,9 +87,7 @@ final class WithdrawalViewController: BaseViewController {
         super.setHierarchy()
         
         view.addSubviews(containerView,
-                         
                          topInsetView,
-                         
                          glassMorphismView,
                          leftButton,
                          centerTitleLabel
@@ -113,7 +112,7 @@ final class WithdrawalViewController: BaseViewController {
         
         glassMorphismView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).offset(ScreenUtils.heightRatio * 56)
         }
         
@@ -130,7 +129,7 @@ final class WithdrawalViewController: BaseViewController {
         
         containerView.snp.makeConstraints {
             $0.top.equalTo(glassMorphismView.snp.bottom).offset(10)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.horizontalEdges.bottom.equalToSuperview()
         }
         
         reasonTitleLabel.snp.makeConstraints {
@@ -146,7 +145,7 @@ final class WithdrawalViewController: BaseViewController {
         
         optionsTableView.snp.makeConstraints {
             $0.top.equalTo(reasonDescriptionLabel.snp.bottom).offset(32)
-            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(180)
         }
         
@@ -157,7 +156,7 @@ final class WithdrawalViewController: BaseViewController {
         }
         
         submitButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.horizontalEdges.equalToSuperview().inset(16)
             $0.bottom.equalTo(containerView.snp.bottom).offset(-40)
             $0.height.equalTo(52)
         }
@@ -297,9 +296,9 @@ extension WithdrawalViewController {
 extension WithdrawalViewController{
     
     @objc func backButtonTapped() {
-
+        
         let mainVC = ProfileSettingViewController()
-
+        
         if let navigationController = navigationController {
             navigationController.pushViewController(mainVC, animated: true)
         } else {
@@ -336,6 +335,5 @@ extension WithdrawalViewController{
     func setButtonAction(button: UIButton, target: Any, action: Selector) {
         button.addTarget(target, action: action, for: .touchUpInside)
     }
-    
     
 }

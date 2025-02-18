@@ -29,6 +29,7 @@ final class WithdrawalTableView: UITableView {
     
     init() {
         super.init(frame: .zero, style: .plain)
+        
         setStyle()
         setDelegate()
     }

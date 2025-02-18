@@ -21,6 +21,7 @@ final class WithdrawalConfirmationViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setAction()
     }
     
@@ -41,7 +42,7 @@ extension WithdrawalConfirmationViewController{
     @objc private func confirmButtonTapped() {
         
         // TODO: api post
-        viewmodel.postWithdrawal()
+        viewmodel.withdrawalAPI()
         
         let mainVC = SplashViewController()
         mainVC.modalPresentationStyle = .fullScreen

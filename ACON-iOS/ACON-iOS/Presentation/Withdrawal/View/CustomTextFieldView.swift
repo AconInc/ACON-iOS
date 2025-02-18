@@ -20,6 +20,7 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         textView.delegate = self
     }
 
@@ -58,13 +59,12 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
 
     override func setHierarchy() {
         super.setHierarchy()
+        
         addSubviews(textView,placeholderLabel,characterCountLabel)
     }
 
     override func setLayout() {
         super.setLayout()
-        
-        textView.snp.removeConstraints()
 
         textView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()

@@ -351,7 +351,7 @@ enum StringLiterals {
         
         static let title = "서비스 탈퇴"
         
-        static let reasonTitle = "이번의 순간이 왔어요...\n떠나시려는 이유가 있을까요?"
+        static let reasonTitle = "이별의 순간이 왔어요...\n떠나시려는 이유가 있을까요?"
         
         static let reasonDescription = "어떤 부분이 마음에 들지 않았는지 알려주시면,\n더 좋은 acon을 만드는데 도움이 됩니다."
         
