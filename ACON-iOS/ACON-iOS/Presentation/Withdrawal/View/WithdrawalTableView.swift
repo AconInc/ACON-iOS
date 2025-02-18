@@ -64,6 +64,7 @@ extension WithdrawalTableView: UITableViewDelegate, UITableViewDataSource {
         
         let option = options[indexPath.row]
         let isSelected = selectedOption == option
+        
         cell.checkConfigure(name: option, isSelected: isSelected)
         return cell
     }
@@ -71,8 +72,8 @@ extension WithdrawalTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let option = options[indexPath.row]
         selectedOption = (selectedOption == option) ? nil : option
-        viewModel?.updateSelectedOption(selectedOption) 
-
+        viewModel?.updateSelectedOption(selectedOption)
+        
         (superview?.superview as? WithdrawalViewController)?.buttonState()
     }
 }

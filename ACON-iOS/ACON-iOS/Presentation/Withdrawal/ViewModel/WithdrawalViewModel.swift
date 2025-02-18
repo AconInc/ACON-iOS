@@ -12,28 +12,37 @@ final class WithdrawalViewModel {
     var selectedOption: ObservablePattern<String> = ObservablePattern(nil)
     var inputText: ObservablePattern<String> = ObservablePattern(nil)
     var shouldDismissKeyboard: ObservablePattern<Bool> = ObservablePattern(false)
+    var ectOption: ObservablePattern<Bool> = ObservablePattern(false)
     
-    func updateInputText(_ text: String) {
-        if selectedOption.value == StringLiterals.Withdrawal.optionOthers {
-            inputText.value = text
-            
-            if text.contains("\n") {
-                shouldDismissKeyboard.value = true
-                inputText.value = text.replacingOccurrences(of: "\n", with: "") 
+    
+    func updateSelectedOption(_ option: String?) {
+        selectedOption.value = option
+        
+        if option == StringLiterals.Withdrawal.optionOthers {
+            if let inputText = inputText.value, !inputText.isEmpty {
+                ectOption.value = true
+            } else {
+                ectOption.value = false
             }
+        } else if let optionValue = option, !optionValue.isEmpty {
+            ectOption.value = true
+            
+        } else {
+            ectOption.value = false
         }
     }
     
-    // TODO: inputText -> selectedOption
-    func updateSelectedOption(_ option: String?) {
-        selectedOption.value = option?.isEmpty == true ? nil : option
-            inputText.value = nil
+    func updateInputText(_ text: String?) {
+        inputText.value = text
+        
+        if selectedOption.value == StringLiterals.Withdrawal.optionOthers {
+            ectOption.value = (text?.isEmpty == false)
         }
+    }
     
     // TODO: make api
     func postWithdrawal() {
         print("selectedOption: \(String(describing: selectedOption.value))")
     }
-    
 }
 
