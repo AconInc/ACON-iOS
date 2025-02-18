@@ -187,6 +187,7 @@
 		74BF92192D395FE800B923E3 /* ACToastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92182D395FE400B923E3 /* ACToastController.swift */; };
 		74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92262D39956F00B923E3 /* StickyHeaderView.swift */; };
 		74C914D12D64DBBB00BC13E1 /* ImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C914D02D64DBAF00BC13E1 /* ImageType.swift */; };
+		74C914D32D64E01C00BC13E1 /* PutImageToPresignedURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C914D22D64E01000BC13E1 /* PutImageToPresignedURLRequest.swift */; };
 		74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */; };
 		74CDCE562D310B1600E3A21A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE552D310B1300E3A21A /* String+.swift */; };
 		74D297F22D63436F00DDEE31 /* GetPresignedURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D297F12D63435A00DDEE31 /* GetPresignedURLResponse.swift */; };
@@ -405,6 +406,7 @@
 		74BF92182D395FE400B923E3 /* ACToastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACToastController.swift; sourceTree = "<group>"; };
 		74BF92262D39956F00B923E3 /* StickyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyHeaderView.swift; sourceTree = "<group>"; };
 		74C914D02D64DBAF00BC13E1 /* ImageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageType.swift; sourceTree = "<group>"; };
+		74C914D22D64E01000BC13E1 /* PutImageToPresignedURLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutImageToPresignedURLRequest.swift; sourceTree = "<group>"; };
 		74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACFontStyleType.swift; sourceTree = "<group>"; };
 		74CDCE552D310B1300E3A21A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		74D297F12D63435A00DDEE31 /* GetPresignedURLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPresignedURLResponse.swift; sourceTree = "<group>"; };
@@ -1280,6 +1282,7 @@
 		74D297F02D63434D00DDEE31 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				74C914D22D64E01000BC13E1 /* PutImageToPresignedURLRequest.swift */,
 				74D297F52D63455D00DDEE31 /* GetPresignedURLRequest.swift */,
 				74D297F12D63435A00DDEE31 /* GetPresignedURLResponse.swift */,
 			);
@@ -1640,6 +1643,7 @@
 				7414295B2D5D2FC400B69528 /* ProfileSettingViewController.swift in Sources */,
 				748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */,
 				747F4FBF2D3D9D44003DECBF /* SplashView.swift in Sources */,
+				74C914D32D64E01C00BC13E1 /* PutImageToPresignedURLRequest.swift in Sources */,
 				7462616F2D3EA48300A4E84F /* GetSearchKeywordResponse.swift in Sources */,
 				74D297F82D63467900DDEE31 /* ImageService.swift in Sources */,
 				15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */,
