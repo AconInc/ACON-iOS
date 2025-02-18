@@ -10,10 +10,15 @@ import UIKit
 import SnapKit
 import Then
 
-final class WithdrawalViewController: BaseNavViewController {
+final class WithdrawalViewController: BaseViewController {
     
     private let viewModel = WithdrawalViewModel()
     private let otherReasonTextFieldView = CustomTextFieldView()
+    private let glassMorphismView = GlassmorphismView()
+    private let topInsetView = UIView()
+    
+    private let leftButton: UIButton = UIButton()
+    private let centerTitleLabel = UILabel()
     
     private let reasonTitleLabel = UILabel()
     private let reasonDescriptionLabel = UILabel()
@@ -31,6 +36,7 @@ final class WithdrawalViewController: BaseNavViewController {
         super.viewDidLoad()
         setBinding()
         setKeyboardHandling()
+        
     }
     
     override func setStyle() {
@@ -38,11 +44,13 @@ final class WithdrawalViewController: BaseNavViewController {
         
         view.backgroundColor = .gray9
         
-        setBackgroundColor(color: .gray9)
-        
         setBackButton()
         
         setCenterTitleLabelStyle(title: "서비스 탈퇴")
+        
+        topInsetView.backgroundColor = .clear
+        
+        glassMorphismView.alpha = 0
         
         reasonTitleLabel.do {
             $0.setLabel(text: StringLiterals.Withdrawal.reasonTitle, style: .h5, color: .acWhite, alignment: .left, numberOfLines: 0)
@@ -77,9 +85,14 @@ final class WithdrawalViewController: BaseNavViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        navigationBarView.addSubviews(leftButton, titleLabel)
-        
-        view.addSubview(containerView)
+        view.addSubviews(containerView,
+                         
+                         topInsetView,
+                         
+                         glassMorphismView,
+                         leftButton,
+                         centerTitleLabel
+        )
         
         containerView.addSubviews(
             reasonTitleLabel,
@@ -93,19 +106,30 @@ final class WithdrawalViewController: BaseNavViewController {
     override func setLayout() {
         super.setLayout()
         
+        topInsetView.snp.makeConstraints {
+            $0.top.horizontalEdges.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top)
+        }
+        
+        glassMorphismView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).offset(ScreenUtils.heightRatio * 56)
+        }
+        
         leftButton.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.centerY.equalTo(glassMorphismView.snp.bottom).offset(-ScreenUtils.heightRatio*28)
             $0.leading.equalToSuperview().offset(20)
             $0.size.equalTo(24)
         }
         
-        titleLabel.snp.makeConstraints {
+        centerTitleLabel.snp.makeConstraints {
+            $0.centerX.equalTo(glassMorphismView)
             $0.centerY.equalTo(leftButton)
-            $0.centerX.equalToSuperview()
         }
         
         containerView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
+            $0.top.equalTo(glassMorphismView.snp.bottom).offset(10)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
@@ -123,7 +147,7 @@ final class WithdrawalViewController: BaseNavViewController {
         optionsTableView.snp.makeConstraints {
             $0.top.equalTo(reasonDescriptionLabel.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(200)
+            $0.height.equalTo(180)
         }
         
         otherReasonTextFieldView.snp.makeConstraints{
@@ -235,7 +259,6 @@ extension WithdrawalViewController {
             object: nil
         )
         
-        // Setup tap gesture to dismiss keyboard
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
@@ -254,6 +277,7 @@ extension WithdrawalViewController {
             UIView.animate(withDuration: 0.3) {
                 self.containerView.transform = CGAffineTransform(translationX: 0, y: -offset)
             }
+            glassMorphismView.alpha = 1
         }
     }
     
@@ -261,19 +285,18 @@ extension WithdrawalViewController {
         UIView.animate(withDuration: 0.3) {
             self.containerView.transform = .identity
         }
+        glassMorphismView.alpha = 0
     }
     
     @objc override func dismissKeyboard() {
         view.endEditing(true)
     }
-    
 }
 
 // MARK: about navigationbar
 extension WithdrawalViewController{
     
-    @objc
-    override func backButtonTapped() {
+    @objc func backButtonTapped() {
         // TODO: i will fix
         let mainVC = SplashViewController()
         
@@ -284,5 +307,35 @@ extension WithdrawalViewController{
             present(mainVC, animated: true)
         }
     }
+    
+    func setCenterTitleLabelStyle(title: String,
+                                  fontStyle: ACFontStyleType = .t2,
+                                  color: UIColor = .acWhite,
+                                  alignment: NSTextAlignment = .center) {
+        centerTitleLabel.do {
+            $0.isHidden = false
+            $0.setLabel(text: title,
+                        style: fontStyle,
+                        color: color)
+            $0.textAlignment = alignment
+        }
+    }
+    
+    func setBackButton() {
+        setButtonStyle(button: leftButton, image: .leftArrow)
+        setButtonAction(button: leftButton, target: self, action: #selector(backButtonTapped))
+    }
+    
+    func setButtonStyle(button: UIButton, image: UIImage?) {
+        button.do {
+            $0.isHidden = false
+            $0.setImage(image, for: .normal)
+        }
+    }
+    
+    func setButtonAction(button: UIButton, target: Any, action: Selector) {
+        button.addTarget(target, action: action, for: .touchUpInside)
+    }
+    
     
 }
