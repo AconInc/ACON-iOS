@@ -31,7 +31,7 @@ extension SpotDetailTargetType: TargetType {
     var path: String {
         switch self {
         case .getSpotDetail(let spotID):
-            return utilPath + "spot/\(spotID)"
+            return utilPath + "spots/\(spotID)"
         case .getSpotMenu(let spotID):
             return utilPath + "spot/\(spotID)/menus"
         case .postGuidedSpot:
