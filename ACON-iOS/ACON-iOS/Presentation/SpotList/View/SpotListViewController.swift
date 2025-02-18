@@ -178,7 +178,7 @@ private extension SpotListViewController {
             return
         }
         let vc = SpotListFilterViewController(viewModel: viewModel)
-        vc.setLongSheetLayout()
+        vc.setSheetLayout(detent: .long)
         present(vc, animated: true)
     }
     

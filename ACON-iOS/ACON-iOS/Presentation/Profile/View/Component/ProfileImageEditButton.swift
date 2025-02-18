@@ -48,6 +48,7 @@ class ProfileImageEditButton: UIView {
             $0.backgroundColor = .gray7 // NOTE: Skeleton
             $0.layer.cornerRadius = size / 2
             $0.contentMode = .scaleAspectFill
+            $0.clipsToBounds = true
         }
         
         cameraButton.do {
@@ -83,13 +84,17 @@ class ProfileImageEditButton: UIView {
 
 extension ProfileImageEditButton {
     
-    func setImage(_ imageURL: String) {
+    func setImage(_ image: UIImage) {
+        profileImageView.image = image
+    }
+    
+    func setImageURL(_ imageURL: String) {
         profileImageView.kf.setImage(
             with: URL(string: imageURL),
             options: [.transition(.none), .cacheOriginalImage]
         )
     }
-    
+
     func addTarget(_ target: Any?, action: Selector, for controlEvents: UIControl.Event) {
         cameraButton.addTarget(target, action: action, for: controlEvents)
     }

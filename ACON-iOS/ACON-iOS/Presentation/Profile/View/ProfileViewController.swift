@@ -98,7 +98,7 @@ private extension ProfileViewController {
             // TODO: 인증동네 추후 여러개로 수정(Sprint3)
             let firstAreaName: String = self.viewModel.userInfo.verifiedAreaList.first?.name ?? "impossible"
             profileView.do {
-                $0.setProfileImage(self.viewModel.userInfo.profileImageURL)
+                $0.setProfileImage(self.viewModel.userInfo.profileImage)
                 $0.setNicknameLabel(self.viewModel.userInfo.nickname)
                 $0.setAcornCountBox(self.viewModel.userInfo.possessingAcorns)
                 $0.setVerifiedAreaBox(areaName: firstAreaName)
@@ -116,7 +116,7 @@ private extension ProfileViewController {
     func tappedNeedLoginButton() {
 //        presentLoginModal() // TODO: 메소드 수정 고민해보기 (SpotListVC도 로그인 성공했을 때 reloadData 시켜야할 것 같기 때문)
         let vc = LoginModalViewController()
-        vc.setShortSheetLayout()
+        vc.setSheetLayout(detent: .short)
         vc.onSuccessLogin = { [weak self] onSuccess in
             guard let self = self else { return }
             viewModel.onLoginSuccess.value = onSuccess
