@@ -23,9 +23,14 @@ final class WithdrawalViewController: BaseNavViewController {
     
     private var shouldEnableSubmitButton: Bool = false
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setBinding()
+        setKeyboardHandling()
     }
     
     override func setStyle() {
@@ -205,15 +210,62 @@ extension WithdrawalViewController {
         submitButton.backgroundColor = shouldEnableSubmitButton ? .gray6 : .gray7
         
         let textColor = shouldEnableSubmitButton ? UIColor.acWhite : UIColor.gray5
-
+        
         submitButton.setTitleColor(textColor, for: .normal)
     }
     
 }
 
-// MARK: up key mode
-extension WithdrawalViewController{
+// MARK: - Keyboard Handling
+extension WithdrawalViewController {
     
+    func setKeyboardHandling() {
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+        
+        // Setup tap gesture to dismiss keyboard
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        
+        let keyboardHeight = keyboardFrame.height
+        let textViewBottom = otherReasonTextFieldView.convert(otherReasonTextFieldView.bounds, to: view).maxY
+        let visibleArea = view.frame.height - keyboardHeight
+        
+        if textViewBottom > visibleArea {
+            let offset = textViewBottom - visibleArea + 20
+            
+            UIView.animate(withDuration: 0.3) {
+                self.containerView.transform = CGAffineTransform(translationX: 0, y: -offset)
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.containerView.transform = .identity
+        }
+    }
+    
+    @objc override func dismissKeyboard() {
+        view.endEditing(true)
+    }
     
 }
 
