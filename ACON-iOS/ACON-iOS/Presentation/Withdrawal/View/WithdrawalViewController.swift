@@ -297,9 +297,9 @@ extension WithdrawalViewController {
 extension WithdrawalViewController{
     
     @objc func backButtonTapped() {
-        // TODO: i will fix
-        let mainVC = SplashViewController()
-        
+
+        let mainVC = ProfileSettingViewController()
+
         if let navigationController = navigationController {
             navigationController.pushViewController(mainVC, animated: true)
         } else {
