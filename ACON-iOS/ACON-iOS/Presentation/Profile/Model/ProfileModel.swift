@@ -23,7 +23,7 @@ struct UserInfoModel: Equatable {
 
 struct UserInfoEditModel {
     
-    var profileImage: UIImage
+    var profileImage: String
     
     var nickname: String
     

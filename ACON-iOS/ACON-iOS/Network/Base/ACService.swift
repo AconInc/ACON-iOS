@@ -29,4 +29,6 @@ final class ACService {
     
     lazy var profileService = ProfileService()
     
+    lazy var imageService = ImageService()
+    
 }
