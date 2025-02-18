@@ -35,7 +35,7 @@ extension SpotDetailTargetType: TargetType {
         case .getSpotMenu(let spotID):
             return utilPath + "spot/\(spotID)/menus"
         case .postGuidedSpot:
-            return utilPath + "member/guided-spot"
+            return utilPath + "members/guided-spots"
         }
     }
     
