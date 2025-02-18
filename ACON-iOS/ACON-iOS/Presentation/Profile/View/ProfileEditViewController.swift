@@ -40,6 +40,9 @@ class ProfileEditViewController: BaseNavViewController {
     
     var profileImage: UIImage = .imgProfileBasic80
     
+    var isDefaultImage: Bool = true
+    
+    
     // MARK: - Life Cycle
     
     init(_ viewModel: ProfileViewModel) {
@@ -146,8 +149,9 @@ class ProfileEditViewController: BaseNavViewController {
 
 extension ProfileEditViewController {
     
-    func updateProfileImage(_ image: UIImage) {
+    func updateProfileImage(_ image: UIImage, _ isDefault: Bool = true) {
         profileImage = image
+        isDefaultImage = isDefault
         profileEditView.setProfileImage(profileImage)
     }
    
@@ -303,7 +307,7 @@ private extension ProfileEditViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
             }))
             $0.addAction(UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { _ in
-                self.updateProfileImage(.imgProfileBasic80)
+                self.updateProfileImage(.imgProfileBasic80, true)
             }))
             $0.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         }
