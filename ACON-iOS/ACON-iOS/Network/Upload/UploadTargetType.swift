@@ -39,7 +39,7 @@ extension UploadTargetType: TargetType {
         case .getSearchKeyword:
             return utilPath + "spots/search"
         case .getReviewVerification:
-            return utilPath + "spot/verify"
+            return utilPath + "spots/verify"
         case .getAcornCount:
             return utilPath + "member/acorn"
         }
