@@ -190,6 +190,21 @@ private extension ProfileEditViewController {
             }
         }
         
+        viewModel.onGetNicknameValiditySuccess.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
+            print("🥑onSuccessnickname: \(onSuccess)")
+            if onSuccess {
+                profileEditView.setNicknameValidMessage(.nicknameOK)
+                profileEditView.nicknameTextField.changeBorderColor(toRed: false)
+                isNicknameAvailable = true
+            } else {
+                profileEditView.setNicknameValidMessage(viewModel.nicknameValidityMessageType)
+                profileEditView.nicknameTextField.changeBorderColor(toRed: true)
+                isNicknameAvailable = false
+            }
+        }
+        
         localVerificationVM.localAreaName.bind { [weak self] area in
             guard let self = self,
                   let area = area else { return }
@@ -505,13 +520,9 @@ private extension ProfileEditViewController {
             isNicknameAvailable = false
         }
         
-        // NOTE: 중복된 닉네임 OR 사용할 수 있는 닉네임
+        // NOTE: 중복된 닉네임 OR 사용할 수 있는 닉네임(서버 확인)
         else {
-            // TODO: 서버 요청
-            profileEditView.setNicknameValidMessage(.nicknameOK)
-            profileEditView.nicknameTextField.changeBorderColor(toRed: false)
-            isNicknameAvailable = true
-//            profileEditView.setNicknameValidMessage(.nicknameTaken)
+            viewModel.getNicknameValidity(nickname: text)
         }
     }
     

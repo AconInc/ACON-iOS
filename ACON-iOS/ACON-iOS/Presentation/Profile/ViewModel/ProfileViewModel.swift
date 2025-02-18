@@ -15,6 +15,8 @@ class ProfileViewModel: Serviceable {
     
     var onGetProfileSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
     
+    var onGetNicknameValiditySuccess: ObservablePattern<Bool> = ObservablePattern(nil)
+    
     var onSuccessGetPresignedURL: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var onSuccessPutProfileImageToPresignedURL: ObservablePattern<Bool> = ObservablePattern(nil)
@@ -23,6 +25,8 @@ class ProfileViewModel: Serviceable {
                                                                 presignedURL: "")
     
     var verifiedAreaListEditing: ObservablePattern<[VerifiedAreaModel]> = ObservablePattern(nil)
+    
+    var nicknameValidityMessageType: ProfileValidMessageType = .none
     
     var userInfo = UserInfoModel(
             profileImage: "",
@@ -77,6 +81,31 @@ class ProfileViewModel: Serviceable {
                 }
             default:
                 onGetProfileSuccess.value = false
+            }
+        }
+    }
+    
+    func getNicknameValidity(nickname: String) {
+        let parameter = GetNicknameValidityRequestQuery(nickname: nickname)
+        
+        ACService.shared.profileService.getNicknameValidity(parameter: parameter) { [weak self] response in
+            switch response {
+            case .success(_):
+                self?.onGetNicknameValiditySuccess.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.getNicknameValidity(nickname: nickname)
+                }
+            case .requestErr(let error):
+                print("🥑nickname requestErr: \(error)")
+                if error.code == 40901 {
+                    self?.nicknameValidityMessageType = .nicknameTaken
+                } // TODO: 40051 반영
+                self?.onGetNicknameValiditySuccess.value = false
+            default:
+                print("🥑 VM - Fail to getNicknameValidity")
+                self?.onGetNicknameValiditySuccess.value = false
+                return
             }
         }
     }
