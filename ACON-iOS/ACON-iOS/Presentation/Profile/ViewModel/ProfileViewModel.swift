@@ -15,7 +15,7 @@ class ProfileViewModel: Serviceable {
     
     var onGetProfileSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var verifiedAreaListEditing: ObservablePattern<[VerifiedAreaModel]> = ObservablePattern(nil)
+    var verifiedAreaListEditing: ObservablePattern<[VerifiedAreaModel]> = ObservablePattern(nil) //TODO: 삭제
     
     var userInfo = UserInfoModel(
             profileImageURL: "",
@@ -31,7 +31,7 @@ class ProfileViewModel: Serviceable {
     // MARK: - Initializer
     
     init() {
-        verifiedAreaListEditing.value = userInfo.verifiedAreaList
+        verifiedAreaListEditing.value = userInfo.verifiedAreaList // TODO: 삭제
     }
     
     
