@@ -35,7 +35,7 @@ extension UploadTargetType: TargetType {
         case .getSearchSuggestion:
             return utilPath + "search-suggestions"
         case .postReview:
-            return utilPath + "review"
+            return utilPath + "reviews"
         case .getSearchKeyword:
             return utilPath + "spots/search"
         case .getReviewVerification:
