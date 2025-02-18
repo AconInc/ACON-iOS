@@ -12,6 +12,8 @@ import Moya
 enum ProfileTargetType {
     
     case getProfile
+    
+    case getNicknameValidity(_ parameter: GetNicknameValidityRequestQuery)
 
 }
 
@@ -21,6 +23,8 @@ extension ProfileTargetType: TargetType {
         switch self {
         case .getProfile:
             return .get
+        case .getNicknameValidity:
+            return .get
         }
     }
 
@@ -28,11 +32,15 @@ extension ProfileTargetType: TargetType {
         switch self {
         case .getProfile:
             return utilPath + "members/me"
+        case .getNicknameValidity(_):
+            return utilPath + "members/nickname/validate"
         }
     }
     
     var parameter: [String : Any]?  {
         switch self {
+        case .getNicknameValidity(let parameter):
+            return ["nickname": parameter.nickname]
         default:
             return .none
         }
@@ -40,6 +48,12 @@ extension ProfileTargetType: TargetType {
 
     var task: Task {
         switch self {
+        case .getNicknameValidity:
+            if let parameter = parameter {
+                return .requestParameters(parameters: parameter, encoding: URLEncoding.default)
+            } else {
+                return .requestPlain
+            }
         default:
             return .requestPlain
         }
@@ -48,6 +62,8 @@ extension ProfileTargetType: TargetType {
     var headers: [String : String]? {
         switch self {
         case .getProfile:
+            return HeaderType.tokenOnly()
+        case .getNicknameValidity:
             return HeaderType.tokenOnly()
         }
     }
