@@ -63,7 +63,7 @@ extension ProfileTargetType: TargetType {
         switch self {
         case .getProfile:
             return HeaderType.tokenOnly()
-        case .getNicknameValidity(_):
+        case .getNicknameValidity:
             return HeaderType.tokenOnly()
         }
     }
