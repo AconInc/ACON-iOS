@@ -27,7 +27,7 @@ extension OnboardingTargetType: TargetType {
     var method: Moya.Method {
         switch self {
         case .postOnboarding:
-            return .post
+            return .put
         }
     }
     
