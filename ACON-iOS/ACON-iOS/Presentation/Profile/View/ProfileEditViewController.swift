@@ -199,6 +199,36 @@ private extension ProfileEditViewController {
             newAreas.append(VerifiedAreaModel(id: 1, name: area))
             viewModel.verifiedAreaListEditing.value = newAreas
         }
+        
+        viewModel.onSuccessGetPresignedURL.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
+            if onSuccess, !isDefaultImage {
+                if let imageData: Data = profileImage.jpegData(compressionQuality: 0.5) {
+                    viewModel.putProfileImageToPresignedURL(imageData: imageData)
+                } else {
+                    self.showDefaultAlert(title: "이미지 업로드 실패", message: "이미지 업로드에 실패하였습니다.")
+                }
+                viewModel.onSuccessGetPresignedURL.value = nil
+            } else {
+                self.showDefaultAlert(title: "이미지 업로드 실패", message: "이미지 업로드에 실패하였습니다.")
+            }
+        }
+        
+        viewModel.onSuccessPutProfileImageToPresignedURL.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
+            if onSuccess {
+                // TODO: - 🧇 프로필 서버통신
+            } else {
+                self.showDefaultAlert(title: "이미지 업로드 실패", message: "이미지 업로드에 실패하였습니다.")
+            }
+            viewModel.onSuccessPutProfileImageToPresignedURL.value = nil
+        }
+        
+        // TODO:  🧇 뷰컨 pop 프로필 수정 통신 바인딩 안에서 진행
+//        self.navigationController?.popViewController(animated: true)
+        
     }
     
     func bindObservable() {
@@ -335,18 +365,18 @@ private extension ProfileEditViewController {
         guard let nickname: String = profileEditView.nicknameTextField.text,
               let verifiedAreaList = viewModel.verifiedAreaListEditing.value else { return }
         
-        viewModel.updateUserInfo(
-            newUserInfo: UserInfoEditModel(
-                profileImage: profileImage,
-                nickname: nickname,
-                birthDate: profileEditView.birthDateTextField.text,
-                verifiedAreaList: verifiedAreaList
-            )
-        )
+        var newUserInfo = UserInfoEditModel(profileImage: "",
+                                            nickname: nickname,
+                                            birthDate: profileEditView.birthDateTextField.text,
+                                            verifiedAreaList: verifiedAreaList)
+
+        viewModel.updateUserInfo(newUserInfo)
         
-        // TODO: 서버 Post
-        
-        self.navigationController?.popViewController(animated: true)
+        if !isDefaultImage {
+            viewModel.getProfilePresignedURL()
+        } else {
+            // TODO: - 🧇 프로필 수정 통신
+        }
     }
     
 }
