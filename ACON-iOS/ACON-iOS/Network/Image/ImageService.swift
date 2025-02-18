@@ -12,7 +12,10 @@ import Moya
 protocol ImageServiceProtocol {
     
     func getPresignedURL(parameter: GetPresignedURLRequest,
-                             completion: @escaping (NetworkResult<GetPresignedURLResponse>) -> Void)
+                         completion: @escaping (NetworkResult<GetPresignedURLResponse>) -> Void)
+    
+    func putImageToPresignedURL(requestBody: PutImageToPresignedURLRequest,
+                                completion: @escaping (Bool) -> Void)
     
 }
 
@@ -26,6 +29,17 @@ final class ImageService: BaseService<ImageTargetType>, ImageServiceProtocol {
                 completion(networkResult)
             case .failure(let errorResponse):
                 print(errorResponse)
+            }
+        }
+    }
+    
+    func putImageToPresignedURL(requestBody: PutImageToPresignedURLRequest, completion: @escaping (Bool) -> Void) {
+        self.provider.request(.putImageToPresignedURL(requestBody)) { result in
+            switch result {
+            case .success(let response):
+                completion(response.statusCode == 200)
+            case .failure:
+                completion(false)
             }
         }
     }
