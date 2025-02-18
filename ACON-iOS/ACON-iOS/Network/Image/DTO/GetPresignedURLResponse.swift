@@ -11,6 +11,6 @@ struct GetPresignedURLResponse: Decodable {
     
     let fileName: String
     
-    let preSignedURL: String
+    let preSignedUrl: String
     
 }
