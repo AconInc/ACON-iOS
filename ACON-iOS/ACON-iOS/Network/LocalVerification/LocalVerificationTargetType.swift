@@ -13,6 +13,8 @@ enum LocalVerificationTargetType {
     
     case postLocalArea(_ requestBody: PostLocalAreaRequest)
     
+    case getLocalAreaList
+    
 }
 
 extension LocalVerificationTargetType: TargetType {
@@ -21,6 +23,8 @@ extension LocalVerificationTargetType: TargetType {
         switch self {
         case .postLocalArea:
             return .post
+        case .getLocalAreaList:
+            return .get
         }
     }
     
@@ -28,6 +32,8 @@ extension LocalVerificationTargetType: TargetType {
         switch self {
         case .postLocalArea:
             return utilPath + "member/area"
+        case .getLocalAreaList:
+            return utilPath + "members/verified-areas"
         }
     }
     
@@ -35,6 +41,8 @@ extension LocalVerificationTargetType: TargetType {
         switch self {
         case .postLocalArea(let requestBody):
             return .requestJSONEncodable(requestBody)
+        case .getLocalAreaList:
+            return .requestPlain
         }
     }
     
