@@ -29,6 +29,7 @@
 		1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */; };
 		1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */; };
 		1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */; };
+		156AA72A2D6510E1005B8DCE /* GetNicknameValidityRequestQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7292D6510E1005B8DCE /* GetNicknameValidityRequestQuery.swift */; };
 		156AA7242D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */; };
 		15A1471E2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */; };
 		15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */; };
@@ -190,8 +191,14 @@
 		74BF92172D393B4A00B923E3 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92162D393B4700B923E3 /* Int+.swift */; };
 		74BF92192D395FE800B923E3 /* ACToastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92182D395FE400B923E3 /* ACToastController.swift */; };
 		74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92262D39956F00B923E3 /* StickyHeaderView.swift */; };
+		74C914D12D64DBBB00BC13E1 /* ImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C914D02D64DBAF00BC13E1 /* ImageType.swift */; };
+		74C914D32D64E01C00BC13E1 /* PutImageToPresignedURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C914D22D64E01000BC13E1 /* PutImageToPresignedURLRequest.swift */; };
 		74CDCE542D310A1C00E3A21A /* ACFontStyleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */; };
 		74CDCE562D310B1600E3A21A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE552D310B1300E3A21A /* String+.swift */; };
+		74D297F22D63436F00DDEE31 /* GetPresignedURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D297F12D63435A00DDEE31 /* GetPresignedURLResponse.swift */; };
+		74D297F42D6343E300DDEE31 /* ImageTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D297F32D6343D400DDEE31 /* ImageTargetType.swift */; };
+		74D297F62D63456400DDEE31 /* GetPresignedURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D297F52D63455D00DDEE31 /* GetPresignedURLRequest.swift */; };
+		74D297F82D63467900DDEE31 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D297F72D63467200DDEE31 /* ImageService.swift */; };
 		74D31C712D5832D000B4B2B4 /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D31C702D5832CC00B4B2B4 /* AlbumViewModel.swift */; };
 		74D31C7A2D5841EA00B4B2B4 /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D31C792D5841D100B4B2B4 /* PhotoCollectionViewController.swift */; };
 		74D31C7C2D5BF90300B4B2B4 /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D31C7B2D5BF8FD00B4B2B4 /* AlbumModel.swift */; };
@@ -249,6 +256,7 @@
 		1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarController.swift; sourceTree = "<group>"; };
 		1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarItemType.swift; sourceTree = "<group>"; };
 		1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
+		156AA7292D6510E1005B8DCE /* GetNicknameValidityRequestQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNicknameValidityRequestQuery.swift; sourceTree = "<group>"; };
 		156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVerifiedAreaListResponse.swift; sourceTree = "<group>"; };
 		15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBoxWithDeletableButton.swift; sourceTree = "<group>"; };
 		15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFlowType.swift; sourceTree = "<group>"; };
@@ -407,8 +415,14 @@
 		74BF92162D393B4700B923E3 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		74BF92182D395FE400B923E3 /* ACToastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACToastController.swift; sourceTree = "<group>"; };
 		74BF92262D39956F00B923E3 /* StickyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyHeaderView.swift; sourceTree = "<group>"; };
+		74C914D02D64DBAF00BC13E1 /* ImageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageType.swift; sourceTree = "<group>"; };
+		74C914D22D64E01000BC13E1 /* PutImageToPresignedURLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutImageToPresignedURLRequest.swift; sourceTree = "<group>"; };
 		74CDCE532D310A1100E3A21A /* ACFontStyleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACFontStyleType.swift; sourceTree = "<group>"; };
 		74CDCE552D310B1300E3A21A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		74D297F12D63435A00DDEE31 /* GetPresignedURLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPresignedURLResponse.swift; sourceTree = "<group>"; };
+		74D297F32D6343D400DDEE31 /* ImageTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTargetType.swift; sourceTree = "<group>"; };
+		74D297F52D63455D00DDEE31 /* GetPresignedURLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPresignedURLRequest.swift; sourceTree = "<group>"; };
+		74D297F72D63467200DDEE31 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		74D31C702D5832CC00B4B2B4 /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
 		74D31C792D5841D100B4B2B4 /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
 		74D31C7B2D5BF8FD00B4B2B4 /* AlbumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumModel.swift; sourceTree = "<group>"; };
@@ -478,6 +492,7 @@
 			isa = PBXGroup;
 			children = (
 				151003EB2D5FBF7200409DF4 /* GetProfileResponse.swift */,
+				156AA7292D6510E1005B8DCE /* GetNicknameValidityRequestQuery.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -997,6 +1012,7 @@
 				743069872D3D2EDA0033178C /* Base */,
 				15CD25752D3FE2D800320006 /* SpotList */,
 				151003E72D5FBEE900409DF4 /* Profile */,
+				74D297EF2D63432900DDEE31 /* Image */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1092,6 +1108,7 @@
 		748D6F7B2D2BCCFF007690B4 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				74C914D02D64DBAF00BC13E1 /* ImageType.swift */,
 				746F39812D342520003F8498 /* ACSheetDetentType.swift */,
 				74205D2E2D40351400D11557 /* SocialType.swift */,
 				746261702D3EA50700A4E84F /* SpotCategoryType.swift */,
@@ -1265,6 +1282,26 @@
 				74BF92262D39956F00B923E3 /* StickyHeaderView.swift */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		74D297EF2D63432900DDEE31 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				74D297F02D63434D00DDEE31 /* DTO */,
+				74D297F32D6343D400DDEE31 /* ImageTargetType.swift */,
+				74D297F72D63467200DDEE31 /* ImageService.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		74D297F02D63434D00DDEE31 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				74C914D22D64E01000BC13E1 /* PutImageToPresignedURLRequest.swift */,
+				74D297F52D63455D00DDEE31 /* GetPresignedURLRequest.swift */,
+				74D297F12D63435A00DDEE31 /* GetPresignedURLResponse.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		74D31C6B2D58318000B4B2B4 /* Album */ = {
@@ -1622,7 +1659,10 @@
 				7414295B2D5D2FC400B69528 /* ProfileSettingViewController.swift in Sources */,
 				748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */,
 				747F4FBF2D3D9D44003DECBF /* SplashView.swift in Sources */,
+				74C914D32D64E01C00BC13E1 /* PutImageToPresignedURLRequest.swift in Sources */,
 				7462616F2D3EA48300A4E84F /* GetSearchKeywordResponse.swift in Sources */,
+				156AA72A2D6510E1005B8DCE /* GetNicknameValidityRequestQuery.swift in Sources */,
+				74D297F82D63467900DDEE31 /* ImageService.swift in Sources */,
 				15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */,
 				1547A8902D35B30C00E96616 /* FilterTagButtonType.swift in Sources */,
 				74D31C7C2D5BF90300B4B2B4 /* AlbumModel.swift in Sources */,
@@ -1662,6 +1702,7 @@
 				D6FF82EF2D380BE800090233 /* FavoriteSpotStyle.swift in Sources */,
 				741A07592D355F1400778219 /* ReviewFinishedViewController.swift in Sources */,
 				15A3F6AC2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift in Sources */,
+				74D297F62D63456400DDEE31 /* GetPresignedURLRequest.swift in Sources */,
 				748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */,
 				741429672D5D550C00B69528 /* AppVersionManager.swift in Sources */,
 				74205D2F2D40351700D11557 /* SocialType.swift in Sources */,
@@ -1680,6 +1721,7 @@
 				D6D0F50F2D36B99F00326F17 /* BigBoxViewCell.swift in Sources */,
 				745ECBA12D615B9F005129B0 /* AlbumTableViewCell.swift in Sources */,
 				746F39822D342523003F8498 /* ACSheetDetentType.swift in Sources */,
+				74D297F42D6343E300DDEE31 /* ImageTargetType.swift in Sources */,
 				1547A8782D3550D900E96616 /* MatchingRateBgColorType.swift in Sources */,
 				1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */,
 				1547A8802D358E2700E96616 /* SpotListFilterView.swift in Sources */,
@@ -1706,6 +1748,7 @@
 				15A48BFC2D574BB9003C2421 /* ProfileEditViewController.swift in Sources */,
 				741B58752D5ED21C0061CBF7 /* PhotoCollectionViewSizeType.swift in Sources */,
 				7462D0252D4262F300580464 /* AuthManager.swift in Sources */,
+				74C914D12D64DBBB00BC13E1 /* ImageType.swift in Sources */,
 				74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */,
 				741429652D5D470200B69528 /* SettingViewModel.swift in Sources */,
 				74BF92042D3861A600B923E3 /* SpotDetailViewController.swift in Sources */,
@@ -1738,6 +1781,7 @@
 				15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */,
 				7462618B2D3FA4A800A4E84F /* SpotDetailService.swift in Sources */,
 				748D6F992D2BD54E007690B4 /* DummyProtocol.swift in Sources */,
+				74D297F22D63436F00DDEE31 /* GetPresignedURLResponse.swift in Sources */,
 				1547A88B2D3596B600E96616 /* SpotType.swift in Sources */,
 				74BF92172D393B4A00B923E3 /* Int+.swift in Sources */,
 				15CF62BD2D575EC00000A10F /* ProfileEditValidMessageView.swift in Sources */,

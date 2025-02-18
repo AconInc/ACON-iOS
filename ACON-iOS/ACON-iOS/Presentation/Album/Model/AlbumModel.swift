@@ -40,3 +40,11 @@ struct AlbumModel: Equatable {
     }
     
 }
+
+struct PresignedURLModel: Equatable {
+    
+    var fileName: String
+    
+    var presignedURL: String
+    
+}

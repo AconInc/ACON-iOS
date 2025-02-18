@@ -105,7 +105,7 @@ private extension PhotoSelectionViewController {
               let vc = navigationController.viewControllers.first(where: { $0 is ProfileEditViewController }) as? ProfileEditViewController else {
             return
         }
-        vc.updateProfileImage(profileImage)
+        vc.updateProfileImage(profileImage, false)
         navigationController.popToViewController(vc, animated: true)
     }
     

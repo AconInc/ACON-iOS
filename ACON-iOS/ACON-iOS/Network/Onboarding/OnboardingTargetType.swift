@@ -20,14 +20,14 @@ extension OnboardingTargetType: TargetType {
     var path: String {
         switch self {
         case .postOnboarding:
-            return utilPath + "member/preference"
+            return utilPath + "members/preference"
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .postOnboarding:
-            return .post
+            return .put
         }
     }
     
