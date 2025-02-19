@@ -13,7 +13,7 @@ import Then
 final class WithdrawalTableViewCell: BaseTableViewCell {
 
     private let withdrawalImageView = UIImageView()
-    private let titleLabel = UILabel()
+    private var titleLabel = UILabel()
     private let container = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -40,10 +40,11 @@ final class WithdrawalTableViewCell: BaseTableViewCell {
         }
         
         titleLabel.do {
-            $0.font = ACFont.s1.font
+            $0.setLabel(text: "",
+                        style: .s1,
+                        alignment: .center,
+                        numberOfLines: 0)
             $0.textColor = .acWhite
-            $0.textAlignment = .center
-            $0.numberOfLines = 0
         }
     }
     
