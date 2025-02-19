@@ -14,7 +14,7 @@ class ProfileEditViewController: BaseNavViewController {
     private let profileEditView = ProfileEditView()
     
     private let viewModel: ProfileViewModel
-    private let localVerificationVM = LocalVerificationViewModel(flowType: .profileEdit)
+    private let localVerificationVM = LocalVerificationViewModel(flowType: .adding)
     
     private let validityTestDebouncer = ACDebouncer(delay: 0.5)
     private let validMsgHideDebouncer = ACDebouncer(delay: 2)

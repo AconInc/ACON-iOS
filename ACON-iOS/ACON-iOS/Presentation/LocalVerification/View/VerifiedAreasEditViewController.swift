@@ -17,7 +17,7 @@ class VerifiedAreasEditViewController: BaseNavViewController {
     
     private var localVerificationVMAdding = LocalVerificationViewModel(flowType: .adding)
     
-    private var localVerificationVMChanging = LocalVerificationViewModel(flowType: .switching)
+    private var localVerificationVMSwitching = LocalVerificationViewModel(flowType: .switching)
     
     
     // MARK: - LifeCycle
@@ -113,58 +113,39 @@ private extension VerifiedAreasEditViewController {
         
         // MARK: - 추가버튼 눌러서 성공한 경우
         
-        localVerificationVMAdding.onSuccessPostLocalArea.bind { [weak self] onSuccess in
+        localVerificationVMAdding.verifiedArea.bind { [weak self] area in
             guard let self = self,
-                  let onSuccess = onSuccess else { return }
-            if onSuccess,
-               let newVerifiedArea = localVerificationVMChanging.verifiedArea {
-                let isExistingArea = viewModel.verifiedAreaList.contains(newVerifiedArea)
-                print("🥑isExistingArea: \(isExistingArea)")
-                
-                // NOTE: 새로 인증한 동네와 기존 동네가 동일할 경우 -> 추가 액션 없이 popVC
-                if isExistingArea {
-                    return
-                }
-                
-                // NOTE: 새로 인증한 동네와 기존 동네가 다른 경우 -> 새 동네 append
-                else {
-                    viewModel.verifiedAreaList.append(newVerifiedArea)
-                }
-                
-                localVerificationVMAdding.onSuccessPostLocalArea.value = nil
+                  let newVerifiedArea = area else { return }
+            let isExistingArea = viewModel.verifiedAreaList.contains(newVerifiedArea)
+            print("🥑isExistingArea: \(isExistingArea)")
+            
+            // NOTE: 새로 인증한 동네와 기존 동네가 동일할 경우 -> 추가 액션 없이 popVC
+            
+            // NOTE: 새로 인증한 동네와 기존 동네가 다른 경우 -> 새 동네 append
+            if !isExistingArea {
+                viewModel.verifiedAreaList.append(newVerifiedArea)
             }
         }
         
         
         // MARK: - 1개 남은 동네를 바꾸는 경우
         // TODO: MapView에서 onSuccess가 set되면 여기서 바인딩 클로저 실행이 안 됨
-        localVerificationVMChanging.onSuccessPostLocalArea.bind { [weak self] onSuccess in
-            print("🥑onSuccessPostLocalArea: \(onSuccess)")
+        localVerificationVMSwitching.verifiedArea.bind { [weak self] area in
             guard let self = self,
-                  let onSuccess = onSuccess else { return }
-            print("🥑onSuccessPostLocalArea: \(onSuccess)")
-            if onSuccess,
-               let newVerifiedArea = localVerificationVMChanging.verifiedArea {
-                let isExistingArea = viewModel.verifiedAreaList.contains(newVerifiedArea)
-                print("🥑isExistingArea: \(isExistingArea)")
-                
-                // NOTE: 새로 인증한 동네와 기존 동네가 동일할 경우 -> 추가 액션 없이 popVC
-                if isExistingArea {
-                    return
-                }
-                
-                // NOTE: 새로 인증한 동네와 기존 동네가 다른 경우 -> 기존 동네 DELETE, 새 동네 append
-                else {
-                    viewModel.postDeleteVerifiedArea(viewModel.verifiedAreaList[0])
-                    viewModel.verifiedAreaList.append(newVerifiedArea)
-                    print("배열 추가 O, Delete O")
-                }
-                localVerificationVMChanging.onSuccessPostLocalArea.value = nil
-            }
+                  let newVerifiedArea = area else { return }
+            let isExistingArea = viewModel.verifiedAreaList.contains(newVerifiedArea)
             
-            // NOTE: 새 동네 인증에 실패한 경우
-            // TODO: 네트워크 에러 등 알럿 띄워야할 것 같음
+            // NOTE: 새로 인증한 동네와 기존 동네가 동일할 경우 -> 추가 액션 없이 popVC
+            // NOTE: 새로 인증한 동네와 기존 동네가 다른 경우 -> 기존 동네 DELETE, 새 동네 append
+            if !isExistingArea {
+                viewModel.postDeleteVerifiedArea(viewModel.verifiedAreaList[0])
+                viewModel.verifiedAreaList.append(newVerifiedArea)
+            }
+            localVerificationVMSwitching.onSuccessPostLocalArea.value = nil
         }
+        
+        // NOTE: 새 동네 인증에 실패한 경우
+        // TODO: 네트워크 에러 등 알럿 띄워야할 것 같음
     }
     
 }
@@ -181,8 +162,8 @@ extension VerifiedAreasEditViewController: VerifiedAreasEditViewDelegate {
         if viewModel.verifiedAreaList.count == 1 {
             AlertHandler.shared.showWillYouChangeVerifiedAreaAlert(from: self) { [weak self] in
                 guard let self = self else { return }
-                localVerificationVMChanging = LocalVerificationViewModel(flowType: .switching) // NOTE: 뷰모델 초기화
-                let vc = LocalVerificationViewController(viewModel: localVerificationVMChanging)
+//                localVerificationVMSwitching = LocalVerificationViewModel(flowType: .switching) // NOTE: 뷰모델 초기화
+                let vc = LocalVerificationViewController(viewModel: localVerificationVMSwitching)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }

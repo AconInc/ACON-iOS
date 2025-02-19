@@ -18,6 +18,8 @@ class LocalVerificationViewModel: Serviceable {
     
     var localAreaName: ObservablePattern<String> = ObservablePattern(nil)
     
+    var verifiedArea: ObservablePattern<VerifiedAreaModel> = ObservablePattern(nil)
+    
     var isLocationChecked: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var userCoordinate: CLLocationCoordinate2D? = nil
@@ -42,6 +44,7 @@ class LocalVerificationViewModel: Serviceable {
         ACService.shared.localVerificationService.postLocalArea(requestBody: requestBody) { [weak self] response in
             switch response {
             case .success(let data):
+                self?.verifiedArea.value = VerifiedAreaModel(id: data.id, name: data.name)
                 self?.localAreaID.value = data.id
                 self?.localAreaName.value = data.name
                 self?.onSuccessPostLocalArea.value = true

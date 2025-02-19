@@ -209,7 +209,7 @@ extension ProfileSettingViewController: UITableViewDataSource {
             case .localVerification:
                 print("동네인증하기")
                 // TODO: - 동네인증하기 뷰 여기
-                let vc = LocalVerificationEditViewController()
+                let vc = VerifiedAreasEditViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         case 3:
