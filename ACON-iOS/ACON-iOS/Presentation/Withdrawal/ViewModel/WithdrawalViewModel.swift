@@ -44,13 +44,13 @@ final class WithdrawalViewModel {
     func withdrawalAPI() {
         let refreshToken = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.refreshToken) ?? ""
         
-        print("rrrr:\(refreshToken)")
-        print("aaaaa:\(String(describing: selectedOption.value))")
-        
         guard let reasonText = selectedOption.value else {
             print("⚠️")
             return
         }
+        
+        let withdrawalRequest = WithdrawalRequest(reason: reasonText, refreshToken: refreshToken)
+              print("📤 Withdrawal Request Body: \(withdrawalRequest)") // NOTE: DEGUB
         
         ACService.shared.withdrawalService.postWithdrawal(
             WithdrawalRequest(reason: reasonText, refreshToken: refreshToken)) { result in
