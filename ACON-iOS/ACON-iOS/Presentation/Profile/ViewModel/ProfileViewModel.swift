@@ -21,6 +21,8 @@ class ProfileViewModel: Serviceable {
     
     var onSuccessPutProfileImageToPresignedURL: ObservablePattern<Bool> = ObservablePattern(nil)
     
+    var onPatchProfileSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
+    
     var presignedURLInfo: PresignedURLModel = PresignedURLModel(fileName: "",
                                                                 presignedURL: "")
     
@@ -28,9 +30,9 @@ class ProfileViewModel: Serviceable {
     
     var userInfo = UserInfoModel(
             profileImage: "",
-            nickname: "김유림",
+            nickname: "",
             birthDate: nil,
-            verifiedAreaList: [VerifiedAreaModel(id: 1, name: "유림동")],
+            verifiedAreaList: [VerifiedAreaModel(id: 1, name: "")],
             possessingAcorns: 0
     )
     
@@ -39,11 +41,9 @@ class ProfileViewModel: Serviceable {
     
     // MARK: - Methods
     
-    func updateUserInfo(_ newUserInfo: UserInfoEditModel) {
-        // TODO: - presignedurl string
-        userInfo.profileImage = ""
-        userInfo.nickname = newUserInfo.nickname
-        userInfo.birthDate = newUserInfo.birthDate
+    func updateUserInfo(nickname: String, birthDate: String?) {
+        userInfo.nickname = nickname
+        userInfo.birthDate = birthDate
     }
     
     
@@ -128,6 +128,29 @@ class ProfileViewModel: Serviceable {
                 onSuccessPutProfileImageToPresignedURL.value = true
             } else {
                 onSuccessPutProfileImageToPresignedURL.value = false
+            }
+        }
+    }
+    
+    func patchProfile() {
+        let requestBody = PatchProfileRequest(
+            profileImage: userInfo.profileImage,
+            nickname: userInfo.nickname,
+            birthDate: userInfo.birthDate
+        )
+        
+        ACService.shared.profileService.patchProfile(requestBody: requestBody) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success:
+                onPatchProfileSuccess.value = true
+            case .reIssueJWT:
+                self.handleReissue {
+                    self.patchProfile()
+                }
+            default:
+                onPatchProfileSuccess.value = false
+                return
             }
         }
     }
