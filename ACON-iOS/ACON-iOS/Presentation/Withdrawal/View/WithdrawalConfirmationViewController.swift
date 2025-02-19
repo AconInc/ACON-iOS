@@ -13,8 +13,9 @@ import Then
 final class WithdrawalConfirmationViewController: BaseViewController {
     
     private let confirmationView = WithdrawalConfirmationView()
-    private let viewmodel = WithdrawalViewModel()
-    
+    var viewModel: WithdrawalViewModel?
+    var selectedReason: String?
+
     override func loadView() {
         view = confirmationView
     }
@@ -40,15 +41,13 @@ extension WithdrawalConfirmationViewController{
     }
     
     @objc private func confirmButtonTapped() {
-        
-        // TODO: api post
-        viewmodel.withdrawalAPI()
+
+        viewModel?.withdrawalAPI()
         
         let mainVC = SplashViewController()
         mainVC.modalPresentationStyle = .fullScreen
         self.present(mainVC, animated: true)
     }
-    
     
     @objc private func closeButtonTapped() {
         dismiss(animated: true)
