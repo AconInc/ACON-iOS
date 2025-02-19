@@ -101,7 +101,6 @@ private extension VerifiedAreasEditViewController {
         viewModel.onDeleteVerifiedAreaSuccess.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
-            
             if onSuccess,
                let area = viewModel.deletingVerifiedArea,
                let index = viewModel.verifiedAreaList.firstIndex(of: area) {
@@ -126,7 +125,6 @@ private extension VerifiedAreasEditViewController {
                 viewModel.verifiedAreaList.append(newVerifiedArea)
                 verifiedAreasEditView.addVerifiedArea(newVerifiedArea)
             }
-            
         }
         
         
@@ -144,9 +142,6 @@ private extension VerifiedAreasEditViewController {
                 verifiedAreasEditView.addVerifiedArea(newVerifiedArea)
             }
         }
-        
-        // NOTE: 새 동네 인증에 실패한 경우
-        // NOTE: 네트워크 에러 등 알럿 띄워야할 것 같음
     }
     
 }
@@ -157,13 +152,10 @@ private extension VerifiedAreasEditViewController {
 extension VerifiedAreasEditViewController: VerifiedAreasEditViewDelegate {
     
     func didTapAreaDeleteButton(_ verifiedArea: VerifiedAreaModel) {
-        print("🥑before delete verifiedAreaList: \(viewModel.verifiedAreaList)")
-        
         // NOTE: 동네가 1개 남은 상황에서 삭제버튼 누른 경우 -> Alert -> 동네인증
         if viewModel.verifiedAreaList.count == 1 {
             AlertHandler.shared.showWillYouChangeVerifiedAreaAlert(from: self) { [weak self] in
                 guard let self = self else { return }
-                localVerificationVMSwitching = LocalVerificationViewModel(flowType: .switching) // NOTE: 뷰모델 초기화
                 let vc = LocalVerificationViewController(viewModel: localVerificationVMSwitching)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
@@ -189,7 +181,6 @@ private extension VerifiedAreasEditViewController {
     
     @objc
     func tappedVerifiedAreaAddButton() {
-        localVerificationVMAdding = LocalVerificationViewModel(flowType: .adding) // NOTE: 뷰모델 초기화
         let vc = LocalVerificationViewController(viewModel: localVerificationVMAdding)
         self.navigationController?.pushViewController(vc, animated: true)
     }

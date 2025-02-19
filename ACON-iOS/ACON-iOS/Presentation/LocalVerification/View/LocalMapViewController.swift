@@ -111,10 +111,11 @@ private extension LocalMapViewController {
                 }
             }
             // TODO: 에러코드별 액션 분기처리 (이후 스프린트)
-            // NOTE: 일단 기본 Alert 띄움
             else {
                 self?.showDefaultAlert(title: "알림", message: "동네 인증을 완료할 수 없습니다. 앱을 재실행해주시기 바랍니다.")
             }
+            
+            self?.localVerificationViewModel.onSuccessPostLocalArea.value = nil
         }
     }
     
