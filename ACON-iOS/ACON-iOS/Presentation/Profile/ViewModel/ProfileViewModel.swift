@@ -132,20 +132,20 @@ class ProfileViewModel: Serviceable {
         }
     }
     
-    func patchProfile(userInfo: UserInfoEditModel) {
+    func patchProfile() {
         let requestBody = PatchProfileRequest(
-            profileImage: presignedURLInfo.fileName,
-            nickname: userInfo.nickname,
-            birthDate: userInfo.birthDate
+            profileImage: userInfo.profileImage,
+            nickname: userInfo.nickname
+//            birthDate: userInfo.birthDate?.isEmpty ?? true ? nil : userInfo.birthDate
         )
         
         ACService.shared.profileService.patchProfile(requestBody: requestBody) { [weak self] response in
             switch response {
-            case .success(_):
+            case .success:
                 self?.onPatchProfileSuccess.value = true
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
-                    self?.patchProfile(userInfo: userInfo)
+                    self?.patchProfile()
                 }
             default:
                 print("🥑 VM - Fail to patchProfile")
