@@ -45,6 +45,8 @@
 		15A48BFA2D574BA5003C2421 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BF92D574BA5003C2421 /* ProfileEditView.swift */; };
 		15A48BFC2D574BB9003C2421 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BFB2D574BB9003C2421 /* ProfileEditViewController.swift */; };
 		15A48BFE2D57546A003C2421 /* ProfileImageEditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */; };
+		15BFF8B92D665BAD00909C4F /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15BFF8B52D665A5B00909C4F /* Debug.xcconfig */; };
+		15BFF8BA2D665BAD00909C4F /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15BFF8B62D665A5B00909C4F /* Release.xcconfig */; };
 		15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C0ED512D429F7400C9ED83 /* SkeletonView.swift */; };
 		15C0ED642D42CD8800C9ED83 /* drop1Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED5F2D42CD8800C9ED83 /* drop1Acorn.json */; };
 		15C0ED652D42CD8800C9ED83 /* drop5Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED632D42CD8800C9ED83 /* drop5Acorn.json */; };
@@ -68,8 +70,6 @@
 		15CF62C72D57DE680000A10F /* ProfileEditTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */; };
 		15D122292D58BD0200E79866 /* DayOfMonthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D122282D58BD0200E79866 /* DayOfMonthType.swift */; };
 		15DC053F2D623DD400B752DD /* PostLogoutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DC053E2D623DD400B752DD /* PostLogoutRequest.swift */; };
-		4C38C1652D662351002306BD /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4C38C1642D662351002306BD /* Release.xcconfig */; };
-		4C38C16A2D66235C002306BD /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4C38C1672D66235C002306BD /* Debug.xcconfig */; };
 		4C6B2F332D65A15D0089BCB6 /* WithdrawalTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B2F312D65A15D0089BCB6 /* WithdrawalTargetType.swift */; };
 		4C6B2F342D65A15D0089BCB6 /* WithdrawalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B2F302D65A15D0089BCB6 /* WithdrawalService.swift */; };
 		4C6B2F352D65A15D0089BCB6 /* WithdrawalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B2F2E2D65A15D0089BCB6 /* WithdrawalRequest.swift */; };
@@ -285,6 +285,8 @@
 		15A48BF92D574BA5003C2421 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		15A48BFB2D574BB9003C2421 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageEditButton.swift; sourceTree = "<group>"; };
+		15BFF8B52D665A5B00909C4F /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		15BFF8B62D665A5B00909C4F /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		15C0ED512D429F7400C9ED83 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		15C0ED5F2D42CD8800C9ED83 /* drop1Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop1Acorn.json; sourceTree = "<group>"; };
 		15C0ED602D42CD8800C9ED83 /* drop2Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop2Acorn.json; sourceTree = "<group>"; };
@@ -308,8 +310,6 @@
 		15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTextField.swift; sourceTree = "<group>"; };
 		15D122282D58BD0200E79866 /* DayOfMonthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfMonthType.swift; sourceTree = "<group>"; };
 		15DC053E2D623DD400B752DD /* PostLogoutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLogoutRequest.swift; sourceTree = "<group>"; };
-		4C38C1642D662351002306BD /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		4C38C1672D66235C002306BD /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		4C6B2F2E2D65A15D0089BCB6 /* WithdrawalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalRequest.swift; sourceTree = "<group>"; };
 		4C6B2F302D65A15D0089BCB6 /* WithdrawalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalService.swift; sourceTree = "<group>"; };
 		4C6B2F312D65A15D0089BCB6 /* WithdrawalTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalTargetType.swift; sourceTree = "<group>"; };
@@ -847,8 +847,8 @@
 		744BAF182D300BC900F95B4A /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				4C38C1642D662351002306BD /* Release.xcconfig */,
-				4C38C1672D66235C002306BD /* Debug.xcconfig */,
+				15BFF8B52D665A5B00909C4F /* Debug.xcconfig */,
+				15BFF8B62D665A5B00909C4F /* Release.xcconfig */,
 				74B25C312D2FF022008BDCB7 /* Shared.xcconfig */,
 				74B25C2B2D2FEE8C008BDCB7 /* Config.swift */,
 			);
@@ -1632,6 +1632,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15BFF8B92D665BAD00909C4F /* Debug.xcconfig in Resources */,
+				15BFF8BA2D665BAD00909C4F /* Release.xcconfig in Resources */,
 				748D6F6C2D2BCA1C007690B4 /* Assets.xcassets in Resources */,
 				74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */,
 				15C0ED642D42CD8800C9ED83 /* drop1Acorn.json in Resources */,
@@ -1645,11 +1647,9 @@
 				748D6F9B2D2BD638007690B4 /* Pretendard-Bold.otf in Resources */,
 				745000D72D403F0200262CBE /* lodingLottie.json in Resources */,
 				745000D82D403F0200262CBE /* checkLottie.json in Resources */,
-				4C38C1652D662351002306BD /* Release.xcconfig in Resources */,
 				15C0ED6A2D42CDA300C9ED83 /* loadingWhite.json in Resources */,
 				748D6F6E2D2BCA1C007690B4 /* LaunchScreen.storyboard in Resources */,
 				747F4FC12D3DC80B003DECBF /* finishedUpload.json in Resources */,
-				4C38C16A2D66235C002306BD /* Debug.xcconfig in Resources */,
 				748D6F9D2D2BD641007690B4 /* Pretendard-SemiBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2006,6 +2006,7 @@
 		};
 		74AB6EC62D2796D50094F873 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15BFF8B52D665A5B00909C4F /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -2069,6 +2070,7 @@
 		};
 		74AB6EC72D2796D50094F873 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15BFF8B62D665A5B00909C4F /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

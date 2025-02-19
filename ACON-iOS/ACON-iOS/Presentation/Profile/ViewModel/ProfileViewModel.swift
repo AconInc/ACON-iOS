@@ -90,7 +90,9 @@ class ProfileViewModel: Serviceable {
                 print("🥑nickname requestErr: \(error)")
                 if error.code == 40901 {
                     self?.nicknameValidityMessageType = .nicknameTaken
-                } // TODO: 40051 반영
+                } else if error.code == 40051 {
+                    self?.nicknameValidityMessageType = .invalidChar
+                }
                 self?.onGetNicknameValiditySuccess.value = false
             default:
                 print("🥑 VM - Fail to getNicknameValidity")

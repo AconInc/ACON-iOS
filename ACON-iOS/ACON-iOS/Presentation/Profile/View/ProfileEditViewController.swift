@@ -148,7 +148,7 @@ private extension ProfileEditViewController {
         profileEditView.do {
             $0.setProfileImageURL(viewModel.userInfo.profileImage)
             $0.nicknameTextField.text = viewModel.userInfo.nickname
-            $0.setNicknameLengthLabel(countPhoneme(text: viewModel.userInfo.nickname),
+            $0.setNicknameLengthLabel(countByte(text: viewModel.userInfo.nickname),
                                       viewModel.maxNicknameLength
             )
             $0.birthDateTextField.text = viewModel.userInfo.birthDate
@@ -229,7 +229,6 @@ private extension ProfileEditViewController {
         profileEditView.nicknameTextField.observableText.bind { [weak self] text in
             guard let self = self,
                   let text = text else { return }
-            
             // NOTE: 닉네임 필드 값이 변하면 일단 저장 막기 (유효성검사를 0.5초 뒤에 하기 때문에)
             isNicknameAvailable = false
             
@@ -241,9 +240,16 @@ private extension ProfileEditViewController {
             profileEditView.setNicknameValidMessage(.none)
             profileEditView.nicknameTextField.changeBorderColor(toRed: false)
             
+            // NOTE: 텍스트 변하면 byte 검사, 넘으면 자르기
+            if countByte(text: text) > viewModel.maxNicknameLength {
+                profileEditView.nicknameTextField.text?.popLast()
+                // NOTE: observableText가 set되면서 다시 처음으로 실행될 것임
+            }
+            
+            let byte = countByte(text: profileEditView.nicknameTextField.text ?? text)
+            
             // NOTE: UI 업데이트 - 글자 수 label
-            let phonemeCount = countPhoneme(text: text)
-            profileEditView.setNicknameLengthLabel(phonemeCount,
+            profileEditView.setNicknameLengthLabel(byte,
                                                    viewModel.maxNicknameLength)
             
             // NOTE: 0.5초 뒤 유효성 검사
@@ -377,14 +383,15 @@ private extension ProfileEditViewController {
         // NOTE: 문자 유효성 체크 (입력마스크)
         let regex = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ._]*$"
         let isValid = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: finalString)
-        let phonemeCount = countPhoneme(text: finalString)
+        let byte = countByte(text: finalString)
         
         if isValid {
             // NOTE: PASS -> 글자 수 체크(음소), max 넘으면 입력 X
-            return phonemeCount > viewModel.maxNicknameLength ? false : true
+            return true
+            return byte + 2 > viewModel.maxNicknameLength ? false : true // TODO: 한글 입력을 위해 + 2
         } else {
             // NOTE: FAIL -> 입력 X
-            if phonemeCount <= viewModel.maxNicknameLength {
+            if byte <= viewModel.maxNicknameLength {
                 // NOTE: 16자 미만인 경우 유효성 메시지 2초간 띄움
                 profileEditView.setNicknameValidMessage(.invalidChar)
                 textField.layer.borderColor = UIColor.red1.cgColor
@@ -449,10 +456,10 @@ private extension ProfileEditViewController {
     
     func checkNicknameValidity() {
         let text = profileEditView.nicknameTextField.text ?? ""
-        let phonemeCount = countPhoneme(text: text)
+        let byte = countByte(text: text)
         
         // NOTE: 닉네임을 입력해주세요.
-        if phonemeCount == 0 {
+        if byte == 0 {
             profileEditView.setNicknameValidMessage(.nicknameMissing)
             profileEditView.nicknameTextField.changeBorderColor(toRed: true)
             isNicknameAvailable = false
@@ -473,36 +480,8 @@ private extension ProfileEditViewController {
         return String(char).range(of: "[가-힣]", options: .regularExpression) != nil
     }
     
-    // NOTE: 음소의 개수를 구하는 함수
-    func getKoreanPhonemeCount(_ char: Character) -> Int {
-        let syllable = String(char)
-        guard let unicodeScalar = syllable.unicodeScalars.first else { return 1 }
-        
-        // 한글의 유니코드 범위 계산
-        let base: UInt32 = 0xAC00
-        let finalConsonantCount: UInt32 = 28
-        
-        let syllableValue = unicodeScalar.value - base
-        
-        let finalConsonantIndex = syllableValue % finalConsonantCount
-        if finalConsonantIndex == 0 {
-            return 2  // 종성이 없는 경우 자음+모음만
-        } else {
-            return 3  // 종성이 있는 경우 자음+모음+종성
-        }
-    }
-    
-    func countPhoneme(text: String) -> Int {
-        var phonemeCount = 0
-        
-        for char in text {
-            if isKoreanChar(char) {
-                phonemeCount += getKoreanPhonemeCount(char)
-            } else {
-                phonemeCount += 1
-            }
-        }
-        return phonemeCount
+    func countByte(text: String) -> Int {
+        return text.reduce(0) { $0 + (isKorean($1) ? 2 : 1) }
     }
     
     
