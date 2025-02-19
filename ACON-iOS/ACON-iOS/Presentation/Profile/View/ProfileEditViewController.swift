@@ -14,7 +14,6 @@ class ProfileEditViewController: BaseNavViewController {
     private let profileEditView = ProfileEditView()
     
     private let viewModel: ProfileViewModel
-    private let localVerificationVM = LocalVerificationViewModel(flowType: .profileEdit)
     
     private let validityTestDebouncer = ACDebouncer(delay: 0.5)
     private let validMsgHideDebouncer = ACDebouncer(delay: 2)
@@ -24,15 +23,12 @@ class ProfileEditViewController: BaseNavViewController {
     
     private var isNicknameAvailable: Bool = true {
         didSet {
+            // NOTE: 검증이 완료되었으므로 로딩 로띠 종료
+            profileEditView.nicknameTextField.endCheckingAnimation()
             checkSaveAvailability()
         }
     }
     private var isBirthDateAvailable: Bool = true {
-        didSet {
-            checkSaveAvailability()
-        }
-    }
-    private var isVerifiedAreaAvailable: Bool = true {
         didSet {
             checkSaveAvailability()
         }
@@ -106,9 +102,6 @@ class ProfileEditViewController: BaseNavViewController {
         
         self.setCenterTitleLabelStyle(title: StringLiterals.Profile.profileEditPageTitle)
         self.setBackButton()
-        
-        // TODO: 인증동네 버튼 로직 연결
-        profileEditView.setVerifiedAreaValidMessage(.none)
     }
     
     private func setDelegate() {
@@ -120,18 +113,6 @@ class ProfileEditViewController: BaseNavViewController {
         profileEditView.profileImageEditButton.addTarget(
             self,
             action: #selector(tappedProfileImageEditButton),
-            for: .touchUpInside
-        )
-        
-        profileEditView.verifiedAreaAddButton.addTarget(
-            self,
-            action: #selector(tappedVerifiedAreaAddButton),
-            for: .touchUpInside
-        )
-        
-        profileEditView.verifiedAreaBox.addTarget(
-            self,
-            action: #selector(deleteVerifiedArea),
             for: .touchUpInside
         )
         
@@ -175,25 +156,10 @@ private extension ProfileEditViewController {
     }
     
     func bindViewModel() {
-        viewModel.verifiedAreaListEditing.bind { [weak self] areas in
-            guard let self = self,
-                  let areas = areas else { return }
-            print("new areas: \(areas)")
-            
-            if areas.isEmpty {
-                profileEditView.hideVerifiedAreaAddButton(false)
-                isVerifiedAreaAvailable = false
-            } else {
-                profileEditView.hideVerifiedAreaAddButton(true)
-                profileEditView.addVerifiedArea(areas)
-                isVerifiedAreaAvailable = true
-            }
-        }
-        
         viewModel.onGetNicknameValiditySuccess.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
-            print("🥑onSuccessnickname: \(onSuccess)")
+            
             if onSuccess {
                 profileEditView.setNicknameValidMessage(.nicknameOK)
                 profileEditView.nicknameTextField.changeBorderColor(toRed: false)
@@ -203,16 +169,6 @@ private extension ProfileEditViewController {
                 profileEditView.nicknameTextField.changeBorderColor(toRed: true)
                 isNicknameAvailable = false
             }
-        }
-        
-        localVerificationVM.localAreaName.bind { [weak self] area in
-            guard let self = self,
-                  let area = area else { return }
-            
-            var newAreas = viewModel.verifiedAreaListEditing.value ?? []
-            // TODO: VerifiedArea id 수정
-            newAreas.append(VerifiedAreaModel(id: 1, name: area))
-            viewModel.verifiedAreaListEditing.value = newAreas
         }
         
         viewModel.onSuccessGetPresignedURL.bind { [weak self] onSuccess in
@@ -277,7 +233,9 @@ private extension ProfileEditViewController {
             // NOTE: 닉네임 필드 값이 변하면 일단 저장 막기 (유효성검사를 0.5초 뒤에 하기 때문에)
             isNicknameAvailable = false
             
+            // NOTE: clear버튼 숨기고 로딩 로띠 실행
             profileEditView.nicknameTextField.hideClearButton(isHidden: text.isEmpty)
+            profileEditView.nicknameTextField.startCheckingAnimation()
             
             // NOTE: 텍스트 변하면 유효성 메시지 숨김, 텍스트필드 UI 변경
             profileEditView.setNicknameValidMessage(.none)
@@ -360,30 +318,12 @@ private extension ProfileEditViewController {
     }
     
     @objc
-    func tappedVerifiedAreaAddButton() {
-        localVerificationVM.isLocationChecked.value = nil
-        localVerificationVM.onSuccessPostLocalArea.value = nil
-        
-        let vc = LocalVerificationViewController(viewModel: localVerificationVM)
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @objc
-    func deleteVerifiedArea() {
-        // TODO: 특정 인덱스만 날리도록 수정 (Sprint3)
-        viewModel.verifiedAreaListEditing.value?.removeAll()
-        profileEditView.removeVerifiedArea()
-    }
-    
-    @objc
     func tappedSaveButton() {
-        guard let nickname: String = profileEditView.nicknameTextField.text,
-              let verifiedAreaList = viewModel.verifiedAreaListEditing.value else { return }
+        guard let nickname: String = profileEditView.nicknameTextField.text else { return }
         
         var newUserInfo = UserInfoEditModel(profileImage: "",
                                             nickname: nickname,
-                                            birthDate: profileEditView.birthDateTextField.text,
-                                            verifiedAreaList: verifiedAreaList)
+                                            birthDate: profileEditView.birthDateTextField.text)
 
         viewModel.updateUserInfo(newUserInfo)
         
@@ -500,7 +440,7 @@ private extension ProfileEditViewController {
     // MARK: - 저장 가능 여부
     
     func checkSaveAvailability() {
-        let canSave: Bool = isNicknameAvailable && isBirthDateAvailable && isVerifiedAreaAvailable
+        let canSave: Bool = isNicknameAvailable && isBirthDateAvailable
         profileEditView.saveButton.isEnabled = canSave
     }
     
@@ -510,8 +450,6 @@ private extension ProfileEditViewController {
     func checkNicknameValidity() {
         let text = profileEditView.nicknameTextField.text ?? ""
         let phonemeCount = countPhoneme(text: text)
-        
-        // TODO: 빙글빙글 로띠 활성화
         
         // NOTE: 닉네임을 입력해주세요.
         if phonemeCount == 0 {

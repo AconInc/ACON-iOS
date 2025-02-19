@@ -15,6 +15,8 @@ enum AlertType: CaseIterable {
     case uploadExit // 업로드 중
     case logout
     case libraryAccessDenied // 사진 권한 X
+    case deleteVerifiedArea
+    case changeVerifiedArea
     
     var title: String {
         switch self {
@@ -30,6 +32,10 @@ enum AlertType: CaseIterable {
             return "로그아웃 하시겠어요?"
         case .libraryAccessDenied:
             return "'acon'에 대한 라이브러리 읽기/쓰기 기능이 없어요"
+        case .deleteVerifiedArea:
+            return "" // NOTE: 메소드에서 설정
+        case .changeVerifiedArea:
+            return "동네 변경"
         }
     }
     
@@ -47,6 +53,10 @@ enum AlertType: CaseIterable {
             return "현재 계정으로 다시 로그인하면\n데이터를 불러올 수 있어요"
         case .libraryAccessDenied:
             return "설정에서 라이브러리 읽기/쓰기 권한을 켜시겠어요?"
+        case .deleteVerifiedArea:
+            return ""
+        case .changeVerifiedArea:
+            return "동네는 최소 1개 이상을 선택해야 해요.\n현재 설정된 동네를 변경할까요?"
         }
     }
     
@@ -61,6 +71,10 @@ enum AlertType: CaseIterable {
             return ["그만두기", "설정으로 가기"]
         case .logout:
             return ["취소", "로그아웃하기"]
+        case .deleteVerifiedArea:
+            return ["취소", "삭제하기"]
+        case .changeVerifiedArea:
+            return ["취소", "변경하기"]
         }
     }
 

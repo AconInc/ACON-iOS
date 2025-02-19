@@ -142,32 +142,6 @@ enum StringLiterals {
     }
     
     enum LocalVerification {
-
-         static let needLocalVerification = "로컬 맛집 추천을 위해\n동네 인증이 필요해요"
-
-         static let doLocalVerification = "자주 가는 동네로 지역 인증을 해보세요"
-
-         static let new = "새로운"
-
-         static let verifyLocal = " 나의 동네 인증하기"
-
-         static let next = "다음"
-
-         static let finishVerification = "인증완료"
-
-         static let letsStart = "홈으로 가기"
-
-         static let locateOnMap = "지도에서 위치 확인하기"
-
-         static let now = "이제 "
-
-         static let localAcornTitle = "에\n로컬 도토리를 떨어트릴 수 있어요!"
-
-         static let localAcornExplaination = "로컬 도토리는 로컬 맛집을 보증하는 도토리에요.\n만족스러운 식사 후 리뷰에 사용해보세요!"
-
-         static let localAcorn = "로컬 도토리"
-
-         static let plainAcorn = "일반 도토리"
         
         static let needLocalVerification = "로컬 맛집 추천을 위해\n동네 인증이 필요해요"
         
@@ -181,7 +155,7 @@ enum StringLiterals {
         
         static let finishVerification = "인증완료"
         
-        static let letsStart = "시작하기"
+        static let letsStart = "홈으로 가기"
         
         static let locateOnMap = "지도에서 위치 확인하기"
         
@@ -194,6 +168,8 @@ enum StringLiterals {
         static let localAcorn = "로컬 도토리"
         
         static let plainAcorn = "일반 도토리"
+        
+        static let willYouDeleteThis = "을 삭제할까요?"
         
     }
     

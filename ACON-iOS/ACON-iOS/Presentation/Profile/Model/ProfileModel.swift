@@ -29,8 +29,6 @@ struct UserInfoEditModel {
     
     var birthDate: String?
     
-    var verifiedAreaList: [VerifiedAreaModel]
-    
 }
 
 

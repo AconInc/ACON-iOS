@@ -26,8 +26,6 @@ class ProfileViewModel: Serviceable {
     var presignedURLInfo: PresignedURLModel = PresignedURLModel(fileName: "",
                                                                 presignedURL: "")
     
-    var verifiedAreaListEditing: ObservablePattern<[VerifiedAreaModel]> = ObservablePattern(nil)
-    
     var nicknameValidityMessageType: ProfileValidMessageType = .none
     
     var userInfo = UserInfoModel(
@@ -41,13 +39,6 @@ class ProfileViewModel: Serviceable {
     let maxNicknameLength: Int = 16
     
     
-    // MARK: - Initializer
-    
-    init() {
-        verifiedAreaListEditing.value = userInfo.verifiedAreaList
-    }
-    
-    
     // MARK: - Methods
     
     func updateUserInfo(_ newUserInfo: UserInfoEditModel) {
@@ -55,7 +46,6 @@ class ProfileViewModel: Serviceable {
         userInfo.profileImage = ""
         userInfo.nickname = newUserInfo.nickname
         userInfo.birthDate = newUserInfo.birthDate
-        userInfo.verifiedAreaList = newUserInfo.verifiedAreaList
     }
     
     

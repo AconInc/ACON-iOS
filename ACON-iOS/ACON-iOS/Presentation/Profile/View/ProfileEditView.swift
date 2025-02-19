@@ -44,16 +44,6 @@ class ProfileEditView: BaseView {
     
     private let birthDateValidMessageView = ProfileEditValidMessageView()
     
-    private let verifiedAreaTitleLabel = UILabel()
-    
-    let verifiedAreaStackView = UIStackView()
-    
-    let verifiedAreaAddButton = UIButton()
-    
-    let verifiedAreaBox = LabelBoxWithDeletableButton()
-    
-    private let verifiedAreaValidMessageView = ProfileEditValidMessageView()
-    
     let saveButton = UIButton()
     
     
@@ -80,31 +70,6 @@ class ProfileEditView: BaseView {
             $0.setPlaceholder(as: StringLiterals.Profile.birthDatePlaceholder)
             $0.setDateStyle()
             $0.keyboardType = .numberPad
-        }
-        
-        verifiedAreaTitleLabel.setPartialText(
-            fullText: StringLiterals.Profile.verifiedArea + StringLiterals.Profile.neccessaryStarWithSpace,
-            textStyles: [
-                (text: StringLiterals.Profile.verifiedArea, style: .h8, color: .acWhite),
-                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .h8, color: .org1)
-            ]
-        )
-        
-        verifiedAreaStackView.do {
-            $0.axis = .horizontal
-        }
-        
-        verifiedAreaAddButton.do {
-            var config = UIButton.Configuration.plain()
-            config.contentInsets = .init(top: 12, leading: 12, bottom: 12, trailing: 16)
-            config.attributedTitle = AttributedString(StringLiterals.Profile.addVerifiedArea.ACStyle(.s1))
-            config.image = .icAdd20
-            config.imagePadding = 27
-            config.imagePlacement = .trailing
-            config.background.cornerRadius = 4
-            config.background.strokeColor = .gray5
-            config.background.strokeWidth = 1
-            $0.configuration = config
         }
         
         saveButton.do {
@@ -141,14 +106,7 @@ class ProfileEditView: BaseView {
             nicknameLengthLabel,
             birthDateTitleLabel,
             birthDateTextField,
-            birthDateValidMessageView,
-            verifiedAreaTitleLabel,
-            verifiedAreaStackView,
-            verifiedAreaValidMessageView
-        )
-        
-        verifiedAreaStackView.addArrangedSubviews(
-            verifiedAreaAddButton
+            birthDateValidMessageView
         )
     }
     
@@ -214,33 +172,6 @@ class ProfileEditView: BaseView {
             $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
             $0.height.greaterThanOrEqualTo(20)
         }
-        
-        verifiedAreaTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(birthDateTitleLabel).offset(sectionOffset)
-            $0.leading.equalToSuperview().offset(horizontalInset)
-            $0.bottom.equalToSuperview().offset(-sectionOffset)
-        }
-        
-        verifiedAreaStackView.snp.makeConstraints {
-            $0.top.equalTo(verifiedAreaTitleLabel.snp.bottom).offset(textFieldOffset)
-            $0.leading.equalToSuperview().offset(horizontalInset)
-        }
-        
-        verifiedAreaAddButton.snp.makeConstraints {
-            $0.height.equalTo(48)
-            $0.width.equalTo(160)
-        }
-        
-        verifiedAreaBox.snp.makeConstraints{
-            $0.width.equalTo(160)
-            $0.height.equalTo(48)
-        }
-        
-        verifiedAreaValidMessageView.snp.makeConstraints {
-            $0.top.equalTo(verifiedAreaStackView.snp.bottom).offset(validMessageOffset)
-            $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
-            $0.height.greaterThanOrEqualTo(20)
-        }
     }
     
     
@@ -262,10 +193,6 @@ class ProfileEditView: BaseView {
         birthDateValidMessageView.setValidMessage(type)
     }
     
-    func setVerifiedAreaValidMessage(_ type: ProfileValidMessageType) {
-        verifiedAreaValidMessageView.setValidMessage(type)
-    }
-    
     func setNicknameLengthLabel(_ currentLen: Int, _ maxLen: Int) {
         let currentStr = String(currentLen)
         let slashMaxStr = "/\(String(maxLen))"
@@ -276,22 +203,6 @@ class ProfileEditView: BaseView {
                 (text: slashMaxStr, style: .s2, color: .gray5)
             ]
         )
-    }
-    
-    func hideVerifiedAreaAddButton(_ isHidden: Bool) {
-        verifiedAreaAddButton.isHidden = isHidden
-    }
-    
-    func addVerifiedArea(_ verifiedAreas: [VerifiedAreaModel]) {
-        // TODO: 추후 여러 개 추가하는 로직으로 변경(Sprint3)
-        let firstAreaName = verifiedAreas.first?.name ?? ""
-        verifiedAreaBox.setLabel(firstAreaName)
-        verifiedAreaStackView.addArrangedSubview(verifiedAreaBox)
-    }
-    
-    func removeVerifiedArea() {
-        verifiedAreaStackView.removeArrangedSubview(verifiedAreaBox)
-        verifiedAreaBox.removeFromSuperview()
     }
     
 }
