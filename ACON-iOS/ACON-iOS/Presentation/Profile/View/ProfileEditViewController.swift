@@ -14,7 +14,6 @@ class ProfileEditViewController: BaseNavViewController {
     private let profileEditView = ProfileEditView()
     
     private let viewModel: ProfileViewModel
-    private let localVerificationVM = LocalVerificationViewModel(flowType: .adding)
     
     private let validityTestDebouncer = ACDebouncer(delay: 0.5)
     private let validMsgHideDebouncer = ACDebouncer(delay: 2)
@@ -28,11 +27,6 @@ class ProfileEditViewController: BaseNavViewController {
         }
     }
     private var isBirthDateAvailable: Bool = true {
-        didSet {
-            checkSaveAvailability()
-        }
-    }
-    private var isVerifiedAreaAvailable: Bool = true {
         didSet {
             checkSaveAvailability()
         }
@@ -106,9 +100,6 @@ class ProfileEditViewController: BaseNavViewController {
         
         self.setCenterTitleLabelStyle(title: StringLiterals.Profile.profileEditPageTitle)
         self.setBackButton()
-        
-        // TODO: 인증동네 버튼 로직 연결
-        profileEditView.setVerifiedAreaValidMessage(.none)
     }
     
     private func setDelegate() {
@@ -120,18 +111,6 @@ class ProfileEditViewController: BaseNavViewController {
         profileEditView.profileImageEditButton.addTarget(
             self,
             action: #selector(tappedProfileImageEditButton),
-            for: .touchUpInside
-        )
-        
-        profileEditView.verifiedAreaAddButton.addTarget(
-            self,
-            action: #selector(tappedVerifiedAreaAddButton),
-            for: .touchUpInside
-        )
-        
-        profileEditView.verifiedAreaBox.addDeleteAction(
-            self,
-            action: #selector(deleteVerifiedArea),
             for: .touchUpInside
         )
         
@@ -175,21 +154,6 @@ private extension ProfileEditViewController {
     }
     
     func bindViewModel() {
-        viewModel.verifiedAreaListEditing.bind { [weak self] areas in
-            guard let self = self,
-                  let areas = areas else { return }
-            print("new areas: \(areas)")
-            
-            if areas.isEmpty {
-                profileEditView.hideVerifiedAreaAddButton(false)
-                isVerifiedAreaAvailable = false
-            } else {
-                profileEditView.hideVerifiedAreaAddButton(true)
-                profileEditView.addVerifiedArea(areas)
-                isVerifiedAreaAvailable = true
-            }
-        }
-        
         viewModel.onGetNicknameValiditySuccess.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
@@ -203,16 +167,6 @@ private extension ProfileEditViewController {
                 profileEditView.nicknameTextField.changeBorderColor(toRed: true)
                 isNicknameAvailable = false
             }
-        }
-        
-        localVerificationVM.localAreaName.bind { [weak self] area in
-            guard let self = self,
-                  let area = area else { return }
-            
-            var newAreas = viewModel.verifiedAreaListEditing.value ?? []
-            // TODO: VerifiedArea id 수정
-            newAreas.append(VerifiedAreaModel(id: 1, name: area))
-            viewModel.verifiedAreaListEditing.value = newAreas
         }
         
         viewModel.onSuccessGetPresignedURL.bind { [weak self] onSuccess in
@@ -360,30 +314,12 @@ private extension ProfileEditViewController {
     }
     
     @objc
-    func tappedVerifiedAreaAddButton() {
-        localVerificationVM.isLocationChecked.value = nil
-        localVerificationVM.onSuccessPostLocalArea.value = nil
-        
-        let vc = LocalVerificationViewController(viewModel: localVerificationVM)
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @objc
-    func deleteVerifiedArea() {
-        // TODO: 특정 인덱스만 날리도록 수정 (Sprint3)
-        viewModel.verifiedAreaListEditing.value?.removeAll()
-        profileEditView.removeVerifiedArea()
-    }
-    
-    @objc
     func tappedSaveButton() {
-        guard let nickname: String = profileEditView.nicknameTextField.text,
-              let verifiedAreaList = viewModel.verifiedAreaListEditing.value else { return }
+        guard let nickname: String = profileEditView.nicknameTextField.text else { return }
         
         var newUserInfo = UserInfoEditModel(profileImage: "",
                                             nickname: nickname,
-                                            birthDate: profileEditView.birthDateTextField.text,
-                                            verifiedAreaList: verifiedAreaList)
+                                            birthDate: profileEditView.birthDateTextField.text)
 
         viewModel.updateUserInfo(newUserInfo)
         
@@ -500,7 +436,7 @@ private extension ProfileEditViewController {
     // MARK: - 저장 가능 여부
     
     func checkSaveAvailability() {
-        let canSave: Bool = isNicknameAvailable && isBirthDateAvailable && isVerifiedAreaAvailable
+        let canSave: Bool = isNicknameAvailable && isBirthDateAvailable
         profileEditView.saveButton.isEnabled = canSave
     }
     
