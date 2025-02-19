@@ -42,7 +42,29 @@ final class WithdrawalViewModel {
     
     // TODO: make api
     func withdrawalAPI() {
-        print("selectedOption: \(String(describing: selectedOption.value))")
+        let refreshToken = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.refreshToken) ?? ""
+        
+        print("rrrr:\(refreshToken)")
+        print("aaaaa:\(String(describing: selectedOption.value))")
+        
+        guard let reasonText = selectedOption.value else {
+            print("⚠️")
+            return
+        }
+        
+        ACService.shared.withdrawalService.postWithdrawal(
+            WithdrawalRequest(reason: reasonText, refreshToken: refreshToken)) { result in
+                switch result {
+                case .success:
+                    print("⚙️WithDrawal 成功")
+                    for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                        UserDefaults.standard.removeObject(forKey: key.description)
+                    }
+                    
+                default:
+                    print("⚙️Logout Failed")
+                }
+            }
     }
 }
 

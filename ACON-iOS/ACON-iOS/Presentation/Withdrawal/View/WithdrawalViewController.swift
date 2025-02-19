@@ -177,7 +177,7 @@ extension WithdrawalViewController {
     private func presentWithdrawalSheet() {
         let sheetVC = WithdrawalConfirmationViewController()
         if let sheet = sheetVC.sheetPresentationController {
-            sheet.detents = [SheetUtils().acShortDetent]
+            sheet.detents = [ACSheetDetent.shortDetent]
             sheet.prefersGrabberVisible = true
         }
         

@@ -39,7 +39,10 @@ extension WithdrawalTargetType: TargetType {
     }
     
     var headers: [String: String]? {
-        let headers = HeaderType.headerWithToken()
-        return headers
+        switch self {
+        case .postWithdrawal:
+            return HeaderType.headerWithToken()
+        }
     }
+    
 }

@@ -5,9 +5,20 @@
 //  Created by Jaehyun Ahn on 2/18/25.
 //
 
-import UIKit
+import Foundation
 
-final class WithdrawalService: BaseService<WithdrawalTargetType> {
+import Moya
+
+protocol WithdrawalProtocol {
+    
+    func postWithdrawal(
+        _ requestBody: WithdrawalRequest,
+        completion: @escaping (NetworkResult<EmptyResponse>) -> Void
+    )
+    
+}
+
+final class WithdrawalService: BaseService<WithdrawalTargetType>, WithdrawalProtocol {
     
     func postWithdrawal(
         _ requestBody: WithdrawalRequest,
