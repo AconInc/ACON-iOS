@@ -23,7 +23,7 @@ class SpotListFilterView: GlassmorphismView {
     
     let resetButton = UIButton()
     
-    let conductButton = UIButton()
+    let conductButton = LoadingAnimatedButton()
     
     
     // [Spot section]: 방문 장소 (restaurant, cafe)
