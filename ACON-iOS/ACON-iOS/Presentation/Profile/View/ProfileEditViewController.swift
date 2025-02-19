@@ -229,7 +229,7 @@ private extension ProfileEditViewController {
         profileEditView.nicknameTextField.observableText.bind { [weak self] text in
             guard let self = self,
                   let text = text else { return }
-            
+            let byte = countByte(text: text)
             // NOTE: 닉네임 필드 값이 변하면 일단 저장 막기 (유효성검사를 0.5초 뒤에 하기 때문에)
             isNicknameAvailable = false
             
@@ -241,11 +241,15 @@ private extension ProfileEditViewController {
             profileEditView.setNicknameValidMessage(.none)
             profileEditView.nicknameTextField.changeBorderColor(toRed: false)
             
+            // NOTE: 텍스트 변하면 byte 검사, 넘으면 자르기
+            if countByte(text: text) > viewModel.maxNicknameLength {
+                profileEditView.nicknameTextField.text?.popLast()
+                // NOTE: observableText가 set되면서 다시 처음으로 실행될 것임
+            }
+            
             // NOTE: UI 업데이트 - 글자 수 label
-            let byte = countByte(text: text)
             profileEditView.setNicknameLengthLabel(byte,
                                                    viewModel.maxNicknameLength)
-//            print("🥑 text: \(text), 바이트수: \(text.byteSize()) byte")
             
             // NOTE: 0.5초 뒤 유효성 검사
             validityTestDebouncer.call { [weak self] in
@@ -382,7 +386,8 @@ private extension ProfileEditViewController {
         
         if isValid {
             // NOTE: PASS -> 글자 수 체크(음소), max 넘으면 입력 X
-            return byte > viewModel.maxNicknameLength ? false : true
+            return true
+            return byte + 2 > viewModel.maxNicknameLength ? false : true // TODO: 한글 입력을 위해 + 2
         } else {
             // NOTE: FAIL -> 입력 X
             if byte <= viewModel.maxNicknameLength {
