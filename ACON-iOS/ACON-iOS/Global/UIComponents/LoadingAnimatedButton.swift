@@ -24,7 +24,6 @@ class LoadingAnimatedButton: UIButton {
         setHierarchy()
         setLayout()
         setStyle()
-        addTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -53,22 +52,6 @@ private extension LoadingAnimatedButton {
         animationView.do {
             $0.isHidden = true
         }
-    }
-    
-    func addTarget() {
-        self.addTarget(self, action: #selector(toggleSelf), for: .touchUpInside)
-    }
-    
-}
-
-
-// MARK: - @objc functions
-
-private extension LoadingAnimatedButton {
-    
-    @objc
-    func toggleSelf(_ sender: UIButton) {
-        isSelected.toggle()
     }
     
 }
