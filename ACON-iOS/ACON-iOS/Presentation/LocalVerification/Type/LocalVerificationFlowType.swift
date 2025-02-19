@@ -9,6 +9,6 @@ import Foundation
 
 enum LocalVerificationFlowType {
     
-    case onboarding, profileEdit
+    case onboarding, adding, switching
     
 }

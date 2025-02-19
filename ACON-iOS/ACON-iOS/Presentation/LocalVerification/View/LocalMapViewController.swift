@@ -100,32 +100,18 @@ private extension LocalMapViewController {
                 case .onboarding:
                     self?.localArea = areaName
                     self?.presentVerificationFinsishedVC()
-                case .profileEdit:
+                case .adding, .switching:
                     guard let vcStack = self?.navigationController?.viewControllers else { return }
                     self?.localArea = areaName
                     for vc in vcStack {
-                        if let profileEditVC = vc as? ProfileEditViewController {
-                            self?.navigationController?.popToViewController(profileEditVC.self, animated: true)
-                        }
-                    }
-                }
-            } else {
-                // TODO: 에러코드별 액션 분기처리 (이후 스프린트)
-                // NOTE: ex) 유효하지 않은 위도 및 경도일 경우(40012), 이미 인증된 동네일 경우 (40032)
-                // NOTE: 일단은 다음 화면으로 넘어갈 수 있도록 success와 동일하게 처리
-                switch flowType {
-                case .onboarding:
-                    self?.localArea = areaName
-                    self?.presentVerificationFinsishedVC()
-                case .profileEdit:
-                    guard let vcStack = self?.navigationController?.viewControllers else { return }
-                    for vc in vcStack {
-                        if let profileEditVC = vc as? ProfileEditViewController {
-                            self?.navigationController?.popToViewController(profileEditVC.self, animated: true)
+                        if let verifiedAreaEditVC = vc as? VerifiedAreasEditViewController {
+                            self?.navigationController?.popToViewController(verifiedAreaEditVC.self, animated: true)
                         }
                     }
                 }
             }
+            // TODO: 에러코드별 액션 분기처리 (이후 스프린트)
+            // NOTE: 지금은 Alert도 안 뜨고 다음 화면으로 안 넘어가짐
         }
     }
     
