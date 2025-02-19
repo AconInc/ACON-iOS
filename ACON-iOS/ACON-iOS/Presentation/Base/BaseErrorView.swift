@@ -36,7 +36,7 @@ class BaseErrorView: BaseView {
     ) {
         self.errorImage = errorImage
         self.errorMessage = errorMessage
-        self.buttonTitle = buttonText
+        self.buttonTitle = buttonTitle
         
         super.init(frame: .zero)
     }
