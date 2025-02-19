@@ -220,8 +220,8 @@ extension ProfileSettingViewController: UITableViewDataSource {
                 }
                 return
             case .withdrawal:
-                // TODO: - 탈퇴 뷰컨 이동
-                return
+                let vc = WithdrawalViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         default:
             return
