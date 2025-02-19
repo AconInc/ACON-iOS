@@ -83,6 +83,7 @@ private extension SpotListFilterViewController {
             guard let onFinish = onFinish else { return }
             
             if onFinish {
+                self?.spotListFilterView.conductButton.endLoadingAnimation()
                 self?.dismiss(animated: true)
             }
             
@@ -171,6 +172,7 @@ private extension SpotListFilterViewController {
         viewModel.cafePrice = self.cafePrice
         
         viewModel.requestLocation()
+        spotListFilterView.conductButton.startLoadingAnimation()
     }
     
     @objc func didTapResetButton() {
