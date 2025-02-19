@@ -19,7 +19,7 @@ enum StringLiterals {
         
     }
     
-    enum ErrorMessages {
+    enum Error {
         
         static let checkInternet = "인터넷 연결을 확인해주세요"
         
