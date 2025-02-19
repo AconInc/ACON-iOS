@@ -14,6 +14,8 @@ enum ProfileTargetType {
     case getProfile
     
     case getNicknameValidity(_ parameter: GetNicknameValidityRequestQuery)
+    
+    case patchProfile(_ requestBody: PatchProfileRequest)
 
 }
 
@@ -25,6 +27,8 @@ extension ProfileTargetType: TargetType {
             return .get
         case .getNicknameValidity:
             return .get
+        case .patchProfile(_):
+            return .patch
         }
     }
 
@@ -34,6 +38,8 @@ extension ProfileTargetType: TargetType {
             return utilPath + "members/me"
         case .getNicknameValidity(_):
             return utilPath + "members/nickname/validate"
+        case .patchProfile(_):
+            return utilPath + "members/me"
         }
     }
     
@@ -65,6 +71,8 @@ extension ProfileTargetType: TargetType {
             return HeaderType.tokenOnly()
         case .getNicknameValidity:
             return HeaderType.tokenOnly()
+        case .patchProfile(_):
+            return HeaderType.headerWithToken()
         }
     }
 

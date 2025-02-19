@@ -15,6 +15,9 @@ protocol ProfileServiceProtocol {
     
     func getNicknameValidity(parameter: GetNicknameValidityRequestQuery,
                              completion: @escaping (NetworkResult<EmptyResponse>) -> Void)
+    
+    func patchProfile(requestBody: PatchProfileRequest,
+                      completion: @escaping (NetworkResult<GetProfileResponse>) -> Void)
 
 }
 
@@ -47,6 +50,22 @@ final class ProfileService: BaseService<ProfileTargetType>, ProfileServiceProtoc
                     type: EmptyResponse.self
                 )
                 completion(networkResult)
+            case .failure(let errorResponse):
+                print(errorResponse)
+            }
+        }
+    }
+    
+    func patchProfile(requestBody: PatchProfileRequest,
+                      completion: @escaping (NetworkResult<GetProfileResponse>) -> Void) {
+        self.provider.request(.patchProfile(requestBody)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<EmptyResponse> = self.judgeStatus(
+                    statusCode: response.statusCode,
+                    data: response.data,
+                    type: EmptyResponse.self
+                )
             case .failure(let errorResponse):
                 print(errorResponse)
             }
