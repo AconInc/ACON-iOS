@@ -27,7 +27,7 @@ extension ProfileTargetType: TargetType {
             return .get
         case .getNicknameValidity:
             return .get
-        case .patchProfile(_):
+        case .patchProfile:
             return .patch
         }
     }
@@ -73,7 +73,7 @@ extension ProfileTargetType: TargetType {
             return HeaderType.tokenOnly()
         case .getNicknameValidity:
             return HeaderType.tokenOnly()
-        case .patchProfile(_):
+        case .patchProfile:
             return HeaderType.headerWithToken()
         }
     }

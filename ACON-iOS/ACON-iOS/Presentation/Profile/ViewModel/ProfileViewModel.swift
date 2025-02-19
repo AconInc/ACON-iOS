@@ -30,9 +30,9 @@ class ProfileViewModel: Serviceable {
     
     var userInfo = UserInfoModel(
             profileImage: "",
-            nickname: "김유림",
+            nickname: "",
             birthDate: nil,
-            verifiedAreaList: [VerifiedAreaModel(id: 1, name: "유림동")],
+            verifiedAreaList: [VerifiedAreaModel(id: 1, name: "")],
             possessingAcorns: 0
     )
     
@@ -133,21 +133,21 @@ class ProfileViewModel: Serviceable {
     func patchProfile() {
         let requestBody = PatchProfileRequest(
             profileImage: userInfo.profileImage,
-            nickname: userInfo.nickname
-//            birthDate: userInfo.birthDate?.isEmpty ?? true ? nil : userInfo.birthDate
+            nickname: userInfo.nickname,
+            birthDate: userInfo.birthDate
         )
         
         ACService.shared.profileService.patchProfile(requestBody: requestBody) { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success:
-                self?.onPatchProfileSuccess.value = true
+                onPatchProfileSuccess.value = true
             case .reIssueJWT:
-                self?.handleReissue { [weak self] in
-                    self?.patchProfile()
+                self.handleReissue {
+                    self.patchProfile()
                 }
             default:
-                print("🥑 VM - Fail to patchProfile")
-                self?.onPatchProfileSuccess.value = false
+                onPatchProfileSuccess.value = false
                 return
             }
         }
