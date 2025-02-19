@@ -97,11 +97,15 @@ private extension ProfileViewController {
             // TODO: onSuccess 분기처리
             // TODO: 인증동네 추후 여러개로 수정(Sprint3)
             let firstAreaName: String = self.viewModel.userInfo.verifiedAreaList.first?.name ?? "impossible"
-            profileView.do {
-                $0.setProfileImage(self.viewModel.userInfo.profileImage)
-                $0.setNicknameLabel(self.viewModel.userInfo.nickname)
-                $0.setAcornCountBox(self.viewModel.userInfo.possessingAcorns)
-                $0.setVerifiedAreaBox(areaName: firstAreaName)
+            if onSuccess {
+                profileView.do {
+                    $0.setProfileImage(self.viewModel.userInfo.profileImage)
+                    $0.setNicknameLabel(self.viewModel.userInfo.nickname)
+                    $0.setAcornCountBox(self.viewModel.userInfo.possessingAcorns)
+                    $0.setVerifiedAreaBox(areaName: firstAreaName)
+                }
+            } else {
+                self.showDefaultAlert(title: "프로필 로드 실패", message: "프로필 정보 로드에 실패했습니다.")
             }
         }
     }

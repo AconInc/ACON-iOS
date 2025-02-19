@@ -101,6 +101,8 @@ private extension SpotDetailViewController {
             if onSuccess {
                 self?.bindNavBar(data: data)
                 self?.spotDetailView.bindData(data: data)
+            } else {
+                self?.showDefaultAlert(title: "장소 정보 로드 실패", message: "장소 정보 로드에 실패했습니다.")
             }
         }
         
@@ -109,6 +111,8 @@ private extension SpotDetailViewController {
             if onSuccess {
                 self?.spotDetailView.menuCollectionView.reloadData()
                 self?.updateCollectionViewHeight()
+            } else {
+                self?.showDefaultAlert(title: "장소 메뉴 로드 실패", message: "장소 메뉴 로드에 실패했습니다.")
             }
         }
         
