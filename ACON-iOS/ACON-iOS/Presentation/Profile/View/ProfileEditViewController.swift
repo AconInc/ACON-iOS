@@ -229,7 +229,6 @@ private extension ProfileEditViewController {
         profileEditView.nicknameTextField.observableText.bind { [weak self] text in
             guard let self = self,
                   let text = text else { return }
-            let byte = countByte(text: text)
             // NOTE: 닉네임 필드 값이 변하면 일단 저장 막기 (유효성검사를 0.5초 뒤에 하기 때문에)
             isNicknameAvailable = false
             
@@ -246,6 +245,8 @@ private extension ProfileEditViewController {
                 profileEditView.nicknameTextField.text?.popLast()
                 // NOTE: observableText가 set되면서 다시 처음으로 실행될 것임
             }
+            
+            let byte = countByte(text: profileEditView.nicknameTextField.text ?? text)
             
             // NOTE: UI 업데이트 - 글자 수 label
             profileEditView.setNicknameLengthLabel(byte,
