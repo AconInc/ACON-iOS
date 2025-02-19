@@ -21,6 +21,8 @@ class ProfileViewModel: Serviceable {
     
     var onSuccessPutProfileImageToPresignedURL: ObservablePattern<Bool> = ObservablePattern(nil)
     
+    var onPatchProfileSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
+    
     var presignedURLInfo: PresignedURLModel = PresignedURLModel(fileName: "",
                                                                 presignedURL: "")
     
@@ -136,6 +138,29 @@ class ProfileViewModel: Serviceable {
                 onSuccessPutProfileImageToPresignedURL.value = true
             } else {
                 onSuccessPutProfileImageToPresignedURL.value = false
+            }
+        }
+    }
+    
+    func patchProfile(userInfo: UserInfoEditModel) {
+        let requestBody = PatchProfileRequest(
+            profileImage: presignedURLInfo.presignedURL,
+            nickname: userInfo.nickname,
+            birthDate: userInfo.birthDate
+        )
+        
+        ACService.shared.profileService.patchProfile(requestBody: requestBody) { [weak self] response in
+            switch response {
+            case .success(_):
+                self?.onPatchProfileSuccess.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.patchProfile(userInfo: userInfo)
+                }
+            default:
+                print("🥑 VM - Fail to patchProfile")
+                self?.onPatchProfileSuccess.value = false
+                return
             }
         }
     }
