@@ -36,7 +36,7 @@ class ProfileEditViewController: BaseNavViewController {
     
     var profileImage: UIImage = .imgProfileBasic80
     
-    var isDefaultImage: Bool = true
+    var isDefaultImage: Bool? = nil
     
     
     // MARK: - Life Cycle
@@ -173,7 +173,8 @@ private extension ProfileEditViewController {
         
         viewModel.onSuccessGetPresignedURL.bind { [weak self] onSuccess in
             guard let self = self,
-                  let onSuccess = onSuccess else { return }
+                  let onSuccess = onSuccess,
+                  let isDefaultImage = isDefaultImage else { return }
             if onSuccess, !isDefaultImage {
                 if let imageData: Data = profileImage.jpegData(compressionQuality: 0.5) {
                     viewModel.putProfileImageToPresignedURL(imageData: imageData)
@@ -326,14 +327,18 @@ private extension ProfileEditViewController {
     func tappedSaveButton() {
         guard let nickname: String = profileEditView.nicknameTextField.text else { return }
         
-        var newUserInfo = UserInfoEditModel(profileImage: "",
-                                            nickname: nickname,
-                                            birthDate: profileEditView.birthDateTextField.text)
-
-        viewModel.updateUserInfo(newUserInfo)
+        let newUserInfo: UserInfoEditModel
+        let birthDateText = profileEditView.birthDateTextField.text
+        viewModel.updateUserInfo(nickname: nickname,
+                                 birthDate: birthDateText?.isEmpty ?? true ? nil : birthDateText)
         
-        if !isDefaultImage {
-            viewModel.getProfilePresignedURL()
+        if let isDefaultImage {
+            viewModel.userInfo.profileImage = isDefaultImage ? "" : viewModel.presignedURLInfo.fileName
+            if isDefaultImage {
+                viewModel.patchProfile()
+            } else {
+                viewModel.getProfilePresignedURL()
+            }
         } else {
             viewModel.patchProfile()
         }

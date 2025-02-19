@@ -41,11 +41,9 @@ class ProfileViewModel: Serviceable {
     
     // MARK: - Methods
     
-    func updateUserInfo(_ newUserInfo: UserInfoEditModel) {
-        // TODO: - presignedurl string
-        userInfo.profileImage = ""
-        userInfo.nickname = newUserInfo.nickname
-        userInfo.birthDate = newUserInfo.birthDate
+    func updateUserInfo(nickname: String, birthDate: String?) {
+        userInfo.nickname = nickname
+        userInfo.birthDate = birthDate
     }
     
     
