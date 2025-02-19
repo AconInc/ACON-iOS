@@ -29,7 +29,9 @@ class ProfileViewController: BaseNavViewController {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = false
-        viewModel.getProfile()
+        if AuthManager.shared.hasToken {
+            viewModel.getProfile()
+        }
     }
     
     override func setHierarchy() {
@@ -124,6 +126,7 @@ private extension ProfileViewController {
         vc.onSuccessLogin = { [weak self] onSuccess in
             guard let self = self else { return }
             viewModel.onLoginSuccess.value = onSuccess
+            viewModel.getProfile()
         }
         
         self.present(vc, animated: true)
