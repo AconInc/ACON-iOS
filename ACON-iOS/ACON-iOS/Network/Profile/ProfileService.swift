@@ -17,7 +17,7 @@ protocol ProfileServiceProtocol {
                              completion: @escaping (NetworkResult<EmptyResponse>) -> Void)
     
     func patchProfile(requestBody: PatchProfileRequest,
-                      completion: @escaping (NetworkResult<GetProfileResponse>) -> Void)
+                      completion: @escaping (NetworkResult<EmptyResponse>) -> Void)
 
 }
 
@@ -57,7 +57,7 @@ final class ProfileService: BaseService<ProfileTargetType>, ProfileServiceProtoc
     }
     
     func patchProfile(requestBody: PatchProfileRequest,
-                      completion: @escaping (NetworkResult<GetProfileResponse>) -> Void) {
+                      completion: @escaping (NetworkResult<EmptyResponse>) -> Void) {
         self.provider.request(.patchProfile(requestBody)) { result in
             switch result {
             case .success(let response):
@@ -66,6 +66,7 @@ final class ProfileService: BaseService<ProfileTargetType>, ProfileServiceProtoc
                     data: response.data,
                     type: EmptyResponse.self
                 )
+                completion(networkResult)
             case .failure(let errorResponse):
                 print(errorResponse)
             }
