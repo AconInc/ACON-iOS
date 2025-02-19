@@ -134,7 +134,7 @@ class ProfileViewModel: Serviceable {
     
     func patchProfile(userInfo: UserInfoEditModel) {
         let requestBody = PatchProfileRequest(
-            profileImage: presignedURLInfo.presignedURL,
+            profileImage: presignedURLInfo.fileName,
             nickname: userInfo.nickname,
             birthDate: userInfo.birthDate
         )
