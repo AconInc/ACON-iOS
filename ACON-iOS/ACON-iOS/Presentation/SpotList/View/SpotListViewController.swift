@@ -95,11 +95,11 @@ extension SpotListViewController {
             self.setTitleLabelStyle(title: onSuccess ? viewModel.myAddress : StringLiterals.SpotList.failedToGetAddress)
         }
         
-        viewModel.isPostSpotListSuccess.bind { [weak self] isSuccess in
+        viewModel.onSuccessPostSpotList.bind { [weak self] isSuccess in
             guard let self = self,
                   let isSuccess = isSuccess else { return }
             if isSuccess {
-                if viewModel.isUpdated {
+                if viewModel.hasSpotListChanged {
                     print("🥑데이터 바뀌어서 reloadData 함")
                     spotListView.collectionView.reloadData()
                     spotListView.hideSkeletonView(isHidden: true)
@@ -115,8 +115,8 @@ extension SpotListViewController {
                 spotListView.hideNoAcornView(isHidden: !viewModel.spotList.isEmpty)
             }
             
-            viewModel.isUpdated = false
-            viewModel.isPostSpotListSuccess.value = nil
+            viewModel.hasSpotListChanged = false
+            viewModel.onSuccessPostSpotList.value = nil
             endRefreshingAndTransparancy()
             
             let isFilterSet = !viewModel.filterList.isEmpty

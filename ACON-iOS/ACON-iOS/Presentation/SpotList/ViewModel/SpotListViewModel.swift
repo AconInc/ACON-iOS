@@ -14,11 +14,11 @@ class SpotListViewModel: Serviceable {
     
     var onSuccessGetAddress: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var isPostSpotListSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
+    var onSuccessPostSpotList: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var spotList: [SpotModel] = []
     
-    var isUpdated: Bool = false
+    var hasSpotListChanged: Bool = false
     
     var myAddress: String = ""
     
@@ -121,16 +121,16 @@ extension SpotListViewModel {
                     )
                     return spot
                 }
-                self?.isUpdated = spotList != self?.spotList
+                self?.hasSpotListChanged = spotList != self?.spotList
                 self?.spotList = spotList
-                self?.isPostSpotListSuccess.value = true
+                self?.onSuccessPostSpotList.value = true
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
                     self?.postSpotList()
                 }
             default:
                 print("🥑Failed To Post")
-                self?.isPostSpotListSuccess.value = false
+                self?.onSuccessPostSpotList.value = false
                 return
             }
         }
