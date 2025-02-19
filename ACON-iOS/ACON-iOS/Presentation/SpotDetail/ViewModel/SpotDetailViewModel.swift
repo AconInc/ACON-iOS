@@ -94,7 +94,7 @@ extension SpotDetailViewModel {
     func postGuidedSpot() {
         ACService.shared.spotDetailService.postGuidedSpot(requestBody: PostGuidedSpotRequest(spotId: self.spotID)){ [weak self] response in
             switch response {
-            case .success(let data):
+            case .success:
                 self?.onSuccessPostGuidedSpotRequest.value = true
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in

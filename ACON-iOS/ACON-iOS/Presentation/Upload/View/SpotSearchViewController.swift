@@ -157,6 +157,8 @@ private extension SpotSearchViewController {
             if onSuccess {
                 self?.spotSearchView.bindData(data)
                 self?.addActionToSearchKeywordButton()
+            } else {
+                self?.showDefaultAlert(title: "추천 검색어 로드 실패", message: "추천 검색어 로드에 실패했습니다.")
             }
         }
         
@@ -189,6 +191,8 @@ private extension SpotSearchViewController {
                     alertHandler.showLocationAccessFailImageAlert(from: self!)
                 }
                 self?.spotSearchViewModel.reviewVerification.value = nil
+            } else {
+                self?.showDefaultAlert(title: "연관 검색어 로드 실패", message: "연관 검색어 로드에 실패했습니다.")
             }
         }
         

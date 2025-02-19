@@ -21,7 +21,6 @@ class SpotReviewViewModel: Serviceable {
             case .success(let data):
                 self?.acornCount.value = data.acornCount
                 self?.onSuccessGetAcornCount.value = true
-                print(self?.acornCount.value, data.acornCount)
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
                     self?.getAcornCount()
@@ -34,8 +33,6 @@ class SpotReviewViewModel: Serviceable {
     }
     
     func postReview(spotID: Int64, acornCount: Int) {
-        let requestBody = PostReviewRequest(spotId: spotID, acornCount: acornCount)
-            
         ACService.shared.uploadService.postReview(requestBody: PostReviewRequest(spotId: spotID, acornCount: acornCount)) { [weak self] response in
             switch response {
             case .success(_):

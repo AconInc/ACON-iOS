@@ -85,6 +85,8 @@ private extension LocalVerificationViewController {
             guard let isChecked else { return }
             if isChecked {
                 self?.pushToLocalMapVC()
+            } else {
+                self?.showDefaultAlert(title: "위치 확인 실패", message: "위치를 확인할 수 없습니다.")
             }
         }
     }

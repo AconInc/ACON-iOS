@@ -29,7 +29,9 @@ class ProfileViewController: BaseNavViewController {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = false
-        viewModel.getProfile()
+        if AuthManager.shared.hasToken {
+            viewModel.getProfile()
+        }
     }
     
     override func setHierarchy() {
@@ -66,11 +68,6 @@ class ProfileViewController: BaseNavViewController {
             for: .touchUpInside
         )
         
-        profileView.disableAutoLoginButton.addTarget( // TODO: 삭제
-            self,
-            action: #selector(disableAutoLogin),
-            for: .touchUpInside
-        )
     }
     
 }
@@ -97,11 +94,15 @@ private extension ProfileViewController {
             // TODO: onSuccess 분기처리
             // TODO: 인증동네 추후 여러개로 수정(Sprint3)
             let firstAreaName: String = self.viewModel.userInfo.verifiedAreaList.first?.name ?? "impossible"
-            profileView.do {
-                $0.setProfileImage(self.viewModel.userInfo.profileImage)
-                $0.setNicknameLabel(self.viewModel.userInfo.nickname)
-                $0.setAcornCountBox(self.viewModel.userInfo.possessingAcorns)
-                $0.setVerifiedAreaBox(areaName: firstAreaName)
+            if onSuccess {
+                profileView.do {
+                    $0.setProfileImage(self.viewModel.userInfo.profileImage)
+                    $0.setNicknameLabel(self.viewModel.userInfo.nickname)
+                    $0.setAcornCountBox(self.viewModel.userInfo.possessingAcorns)
+                    $0.setVerifiedAreaBox(areaName: firstAreaName)
+                }
+            } else {
+                self.showDefaultAlert(title: "프로필 로드 실패", message: "프로필 정보 로드에 실패했습니다.")
             }
         }
     }
@@ -120,6 +121,7 @@ private extension ProfileViewController {
         vc.onSuccessLogin = { [weak self] onSuccess in
             guard let self = self else { return }
             viewModel.onLoginSuccess.value = onSuccess
+            viewModel.getProfile()
         }
         
         self.present(vc, animated: true)
@@ -129,19 +131,6 @@ private extension ProfileViewController {
     func tappedEditProfileButton() {
         let vc = ProfileEditViewController(viewModel)
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @objc // TODO: 삭제
-    func disableAutoLogin() {
-        UserDefaults.standard.removeObject(
-            forKey: StringLiterals.UserDefaults.accessToken
-        )
-        UserDefaults.standard.removeObject( // TODO: 수정
-            forKey: StringLiterals.UserDefaults.hasVerifiedArea
-        )
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = SplashViewController()
-        }
     }
     
 }

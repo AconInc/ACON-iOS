@@ -27,9 +27,20 @@ extension UIViewController {
     func showDefaultAlert(title: String, message: String, okText: String = StringLiterals.Alert.ok) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         // TODO: - 추후 배경색 및 폰트색도 변경
-//        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .org0
+        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .gray8
+        let titleAttributes = [NSAttributedString.Key.foregroundColor: UIColor.acWhite]
+        let messageAttributes = [NSAttributedString.Key.foregroundColor: UIColor.acWhite]
+        
+        let titleString = NSAttributedString(string: title, attributes: titleAttributes)
+        let messageString = NSAttributedString(string: message, attributes: messageAttributes)
+        
+        alert.setValue(titleString, forKey: "attributedTitle")
+        alert.setValue(messageString, forKey: "attributedMessage")
+            
+        
         let okAction = UIAlertAction(title: okText, style: .default, handler: nil)
         alert.addAction(okAction)
+        okAction.setValue(UIColor.org2, forKey: "titleTextColor")
         present(alert, animated: true, completion: nil)
     }
     
