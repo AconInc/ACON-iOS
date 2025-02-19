@@ -20,7 +20,7 @@ class LocalVerificationEditViewModel: Serviceable {
     
     var onGetVerifiedAreaListSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var onDeleteVerifiedAreaSuccess: ObservablePattern<Bool> = ObservablePattern(nil) // TODO: 필요 없을지도?
+    var onDeleteVerifiedAreaSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var deletingVerifiedArea: VerifiedAreaModel?
     
@@ -68,15 +68,6 @@ class LocalVerificationEditViewModel: Serviceable {
                 return
             }
         }
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//            let isSuccess = Bool.random() // NOTE: 임시로 성공/실패를 랜덤 처리
-//            if isSuccess {
-//                completion(.success(true))
-//            } else {
-//                completion(.failure(NSError(domain: "DeleteError", code: 400, userInfo: [NSLocalizedDescriptionKey: "삭제 실패"])))
-//            }
-//        }
     }
     
 }
