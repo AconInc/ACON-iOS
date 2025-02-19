@@ -190,16 +190,21 @@ private extension ProfileEditViewController {
             guard let self = self,
                   let onSuccess = onSuccess else { return }
             if onSuccess {
-                // TODO: - 🧇 프로필 서버통신
+                viewModel.patchProfile()
             } else {
                 self.showDefaultAlert(title: "이미지 업로드 실패", message: "이미지 업로드에 실패하였습니다.")
             }
             viewModel.onSuccessPutProfileImageToPresignedURL.value = nil
         }
         
-        // TODO:  🧇 뷰컨 pop 프로필 수정 통신 바인딩 안에서 진행
-//        self.navigationController?.popViewController(animated: true)
-        
+        viewModel.onPatchProfileSuccess.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
+            if onSuccess {
+                self.navigationController?.popViewController(animated: true)
+            }
+            viewModel.onPatchProfileSuccess.value = nil
+        }
     }
     
     func bindObservable() {
@@ -330,14 +335,7 @@ private extension ProfileEditViewController {
         if !isDefaultImage {
             viewModel.getProfilePresignedURL()
         } else {
-            // TODO: - 🧇 프로필 수정 통신
-            viewModel.patchProfile(
-                userInfo: UserInfoEditModel(
-                    profileImage: viewModel.userInfo.profileImage,
-                    nickname: viewModel.userInfo.nickname,
-                    birthDate: viewModel.userInfo.birthDate
-                )
-            )
+            viewModel.patchProfile()
         }
     }
     
