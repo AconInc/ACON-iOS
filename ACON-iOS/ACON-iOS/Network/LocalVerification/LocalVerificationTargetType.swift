@@ -27,7 +27,7 @@ extension LocalVerificationTargetType: TargetType {
     var path: String {
         switch self {
         case .postLocalArea:
-            return utilPath + "member/area"
+            return utilPath + "members/verified-areas"
         }
     }
     

@@ -20,6 +20,7 @@ enum SettingType {
     
     enum PersonalSetting: CaseIterable {
         case onboarding
+        case localVerification
     }
     
     enum Account: CaseIterable {
@@ -37,7 +38,7 @@ extension SettingType.Info {
         switch self {
         case .version:
             return SettingCellModel(
-                image: UIImage.icProfileVersion,
+                image: .icProfileVersion,
                 title: "현재 버전"
             )
         }
@@ -66,8 +67,13 @@ extension SettingType.PersonalSetting {
         switch self {
         case .onboarding:
             return SettingCellModel(
-                image: UIImage.icProfileGoOnboarding,
+                image: .icProfileGoOnboarding,
                 title: "취향탐색 다시하기"
+            )
+        case .localVerification:
+            return SettingCellModel(
+                image: .icTownSignUp,
+                title: "동네 인증하기"
             )
         }
     }
@@ -78,12 +84,12 @@ extension SettingType.Account {
         switch self {
         case .logout:
             return SettingCellModel(
-                image: UIImage.icProfileLogout,
+                image: .icProfileLogout,
                 title: "로그아웃하기"
             )
         case .withdrawal:
             return SettingCellModel(
-                image: UIImage.icProfileWithdraw,
+                image: .icProfileWithdraw,
                 title: "서비스 탈퇴"
             )
         }

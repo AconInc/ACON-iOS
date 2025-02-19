@@ -15,10 +15,21 @@ class ProfileViewModel: Serviceable {
     
     var onGetProfileSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
     
+    var onGetNicknameValiditySuccess: ObservablePattern<Bool> = ObservablePattern(nil)
+    
+    var onSuccessGetPresignedURL: ObservablePattern<Bool> = ObservablePattern(nil)
+    
+    var onSuccessPutProfileImageToPresignedURL: ObservablePattern<Bool> = ObservablePattern(nil)
+    
+    var presignedURLInfo: PresignedURLModel = PresignedURLModel(fileName: "",
+                                                                presignedURL: "")
+    
     var verifiedAreaListEditing: ObservablePattern<[VerifiedAreaModel]> = ObservablePattern(nil)
     
+    var nicknameValidityMessageType: ProfileValidMessageType = .none
+    
     var userInfo = UserInfoModel(
-            profileImageURL: "",
+            profileImage: "",
             nickname: "김유림",
             birthDate: nil,
             verifiedAreaList: [VerifiedAreaModel(id: 1, name: "유림동")],
@@ -37,8 +48,9 @@ class ProfileViewModel: Serviceable {
     
     // MARK: - Methods
     
-    func updateUserInfo(newUserInfo: UserInfoEditModel) {
-        userInfo.profileImageURL = newUserInfo.profileImageURL
+    func updateUserInfo(_ newUserInfo: UserInfoEditModel) {
+        // TODO: - presignedurl string
+        userInfo.profileImage = ""
         userInfo.nickname = newUserInfo.nickname
         userInfo.birthDate = newUserInfo.birthDate
         userInfo.verifiedAreaList = newUserInfo.verifiedAreaList
@@ -53,7 +65,7 @@ class ProfileViewModel: Serviceable {
             switch response {
             case .success(let data):
                 let newUserInfo = UserInfoModel(
-                    profileImageURL: data.image,
+                    profileImage: data.image,
                     nickname: data.nickname,
                     birthDate: data.birthDate,
                     verifiedAreaList: data.verifiedAreaList.map {
@@ -69,6 +81,61 @@ class ProfileViewModel: Serviceable {
                 }
             default:
                 onGetProfileSuccess.value = false
+            }
+        }
+    }
+    
+    func getNicknameValidity(nickname: String) {
+        let parameter = GetNicknameValidityRequestQuery(nickname: nickname)
+        
+        ACService.shared.profileService.getNicknameValidity(parameter: parameter) { [weak self] response in
+            switch response {
+            case .success(_):
+                self?.onGetNicknameValiditySuccess.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.getNicknameValidity(nickname: nickname)
+                }
+            case .requestErr(let error):
+                print("🥑nickname requestErr: \(error)")
+                if error.code == 40901 {
+                    self?.nicknameValidityMessageType = .nicknameTaken
+                } // TODO: 40051 반영
+                self?.onGetNicknameValiditySuccess.value = false
+            default:
+                print("🥑 VM - Fail to getNicknameValidity")
+                self?.onGetNicknameValiditySuccess.value = false
+                return
+            }
+        }
+    }
+    
+    func getProfilePresignedURL() {
+        ACService.shared.imageService.getPresignedURL(parameter: GetPresignedURLRequest(imageType: ImageType.PROFILE.rawValue)) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                presignedURLInfo = PresignedURLModel(fileName: data.fileName,
+                                                     presignedURL: data.preSignedUrl)
+                self.userInfo.profileImage = data.fileName
+                onSuccessGetPresignedURL.value = true
+            case .reIssueJWT:
+                self.handleReissue {
+                    self.getProfilePresignedURL()
+                }
+            default:
+                onSuccessGetPresignedURL.value = false
+            }
+        }
+    }
+    
+    func putProfileImageToPresignedURL(imageData: Data) {
+        ACService.shared.imageService.putImageToPresignedURL(requestBody: PutImageToPresignedURLRequest(presignedURL: presignedURLInfo.presignedURL, imageData: imageData)) { [weak self] isSuccess in
+            guard let self = self else { return }
+            if isSuccess {
+                onSuccessPutProfileImageToPresignedURL.value = true
+            } else {
+                onSuccessPutProfileImageToPresignedURL.value = false
             }
         }
     }

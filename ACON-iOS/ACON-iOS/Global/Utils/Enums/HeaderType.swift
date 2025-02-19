@@ -13,6 +13,10 @@ enum HeaderType {
     
     static let basicHeader = ["Content-Type" : "application/json"]
     
+    static func imageHeader(imageData: Data) -> [String: String] {
+        return ["Content-Type" : "image/jpeg", "Content-Length": "\(imageData.count)" ]
+    }
+    
     static func headerWithToken() -> [String: String] {
         let token = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.accessToken) ?? ""
         return ["Content-Type" : "application/json", "Authorization" : "Bearer " + token]

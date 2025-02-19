@@ -38,6 +38,10 @@ class ProfileEditViewController: BaseNavViewController {
         }
     }
     
+    var profileImage: UIImage = .imgProfileBasic80
+    
+    var isDefaultImage: Bool = true
+    
     
     // MARK: - Life Cycle
     
@@ -141,6 +145,19 @@ class ProfileEditViewController: BaseNavViewController {
 }
 
 
+// MARK: - ProfileIamge
+
+extension ProfileEditViewController {
+    
+    func updateProfileImage(_ image: UIImage, _ isDefault: Bool = true) {
+        profileImage = image
+        isDefaultImage = isDefault
+        profileEditView.setProfileImage(profileImage)
+    }
+   
+}
+
+
 // MARK: - Bindings
 
 private extension ProfileEditViewController {
@@ -148,7 +165,7 @@ private extension ProfileEditViewController {
     func bindData() {
         // NOTE: 기본 데이터 바인딩
         profileEditView.do {
-            $0.setProfileImage(viewModel.userInfo.profileImageURL)
+            $0.setProfileImageURL(viewModel.userInfo.profileImage)
             $0.nicknameTextField.text = viewModel.userInfo.nickname
             $0.setNicknameLengthLabel(countPhoneme(text: viewModel.userInfo.nickname),
                                       viewModel.maxNicknameLength
@@ -173,7 +190,22 @@ private extension ProfileEditViewController {
             }
         }
         
-        localVerificationVM.localArea.bind { [weak self] area in
+        viewModel.onGetNicknameValiditySuccess.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
+            print("🥑onSuccessnickname: \(onSuccess)")
+            if onSuccess {
+                profileEditView.setNicknameValidMessage(.nicknameOK)
+                profileEditView.nicknameTextField.changeBorderColor(toRed: false)
+                isNicknameAvailable = true
+            } else {
+                profileEditView.setNicknameValidMessage(viewModel.nicknameValidityMessageType)
+                profileEditView.nicknameTextField.changeBorderColor(toRed: true)
+                isNicknameAvailable = false
+            }
+        }
+        
+        localVerificationVM.localAreaName.bind { [weak self] area in
             guard let self = self,
                   let area = area else { return }
             
@@ -182,6 +214,36 @@ private extension ProfileEditViewController {
             newAreas.append(VerifiedAreaModel(id: 1, name: area))
             viewModel.verifiedAreaListEditing.value = newAreas
         }
+        
+        viewModel.onSuccessGetPresignedURL.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
+            if onSuccess, !isDefaultImage {
+                if let imageData: Data = profileImage.jpegData(compressionQuality: 0.5) {
+                    viewModel.putProfileImageToPresignedURL(imageData: imageData)
+                } else {
+                    self.showDefaultAlert(title: "이미지 업로드 실패", message: "이미지 업로드에 실패하였습니다.")
+                }
+                viewModel.onSuccessGetPresignedURL.value = nil
+            } else {
+                self.showDefaultAlert(title: "이미지 업로드 실패", message: "이미지 업로드에 실패하였습니다.")
+            }
+        }
+        
+        viewModel.onSuccessPutProfileImageToPresignedURL.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
+            if onSuccess {
+                // TODO: - 🧇 프로필 서버통신
+            } else {
+                self.showDefaultAlert(title: "이미지 업로드 실패", message: "이미지 업로드에 실패하였습니다.")
+            }
+            viewModel.onSuccessPutProfileImageToPresignedURL.value = nil
+        }
+        
+        // TODO:  🧇 뷰컨 pop 프로필 수정 통신 바인딩 안에서 진행
+//        self.navigationController?.popViewController(animated: true)
+        
     }
     
     func bindObservable() {
@@ -283,8 +345,18 @@ private extension ProfileEditViewController {
     
     @objc
     func tappedProfileImageEditButton() {
-        // TODO: 수정
-        print("profileImageEditButtonTapped")
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.do {
+            $0.addAction(UIAlertAction(title: "앨범에서 사진 업로드", style: .default, handler: { _ in
+                let vc = AlbumTableViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }))
+            $0.addAction(UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { _ in
+                self.updateProfileImage(.imgProfileBasic80, true)
+            }))
+            $0.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        }
+        present(alertController, animated: true)
     }
     
     @objc
@@ -308,18 +380,18 @@ private extension ProfileEditViewController {
         guard let nickname: String = profileEditView.nicknameTextField.text,
               let verifiedAreaList = viewModel.verifiedAreaListEditing.value else { return }
         
-        viewModel.updateUserInfo(
-            newUserInfo: UserInfoEditModel(
-                profileImageURL: "newProfileImageURL", // TODO: 수정
-                nickname: nickname,
-                birthDate: profileEditView.birthDateTextField.text,
-                verifiedAreaList: verifiedAreaList
-            )
-        )
+        var newUserInfo = UserInfoEditModel(profileImage: "",
+                                            nickname: nickname,
+                                            birthDate: profileEditView.birthDateTextField.text,
+                                            verifiedAreaList: verifiedAreaList)
+
+        viewModel.updateUserInfo(newUserInfo)
         
-        // TODO: 서버 Post
-        
-        self.navigationController?.popViewController(animated: true)
+        if !isDefaultImage {
+            viewModel.getProfilePresignedURL()
+        } else {
+            // TODO: - 🧇 프로필 수정 통신
+        }
     }
     
 }
@@ -448,13 +520,9 @@ private extension ProfileEditViewController {
             isNicknameAvailable = false
         }
         
-        // NOTE: 중복된 닉네임 OR 사용할 수 있는 닉네임
+        // NOTE: 중복된 닉네임 OR 사용할 수 있는 닉네임(서버 확인)
         else {
-            // TODO: 서버 요청
-            profileEditView.setNicknameValidMessage(.nicknameOK)
-            profileEditView.nicknameTextField.changeBorderColor(toRed: false)
-            isNicknameAvailable = true
-//            profileEditView.setNicknameValidMessage(.nicknameTaken)
+            viewModel.getNicknameValidity(nickname: text)
         }
     }
     

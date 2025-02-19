@@ -99,8 +99,8 @@ extension SpotListViewController {
             guard let self = self,
                   let isSuccess = isSuccess else { return }
             if isSuccess {
-                print("🥑데이터 바뀜 여부: \(viewModel.isUpdated)")
                 if viewModel.isUpdated {
+                    print("🥑데이터 바뀌어서 reloadData 함")
                     spotListView.collectionView.reloadData()
                     spotListView.hideSkeletonView(isHidden: true)
                     spotListView.hideNoAcornView(isHidden: !viewModel.spotList.isEmpty)
@@ -111,7 +111,7 @@ extension SpotListViewController {
                     spotListView.hideSkeletonView(isHidden: dataExists)
                 }
             } else {
-                print("🥑Post 실패")
+                print("🥑추천장소리스트 Post 실패")
                 spotListView.hideNoAcornView(isHidden: !viewModel.spotList.isEmpty)
             }
             
@@ -178,7 +178,7 @@ private extension SpotListViewController {
             return
         }
         let vc = SpotListFilterViewController(viewModel: viewModel)
-        vc.setLongSheetLayout()
+        vc.setSheetLayout(detent: .long)
         present(vc, animated: true)
     }
     

@@ -9,7 +9,7 @@ import UIKit
 
 struct UserInfoModel: Equatable {
     
-    var profileImageURL: String
+    var profileImage: String
     
     var nickname: String
     
@@ -23,7 +23,7 @@ struct UserInfoModel: Equatable {
 
 struct UserInfoEditModel {
     
-    var profileImageURL: String
+    var profileImage: String
     
     var nickname: String
     

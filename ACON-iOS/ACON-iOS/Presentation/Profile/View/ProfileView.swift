@@ -231,7 +231,7 @@ extension ProfileView {
             options: [.transition(.none), .cacheOriginalImage]
         )
     }
-    
+
     func setNicknameLabel(_ text: String) {
         nicknameLabel.setLabel(text: text, style: .h5)
     }

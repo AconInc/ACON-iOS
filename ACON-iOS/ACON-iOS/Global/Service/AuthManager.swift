@@ -16,6 +16,12 @@ final class AuthManager {
             UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.accessToken) != nil
         }
     }
+    
+    var hasVerifiedArea: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: StringLiterals.UserDefaults.hasVerifiedArea)
+        }
+    }
 
     func handleTokenRefresh() async throws -> Bool {
         let refreshToken = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.refreshToken) ?? ""

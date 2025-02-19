@@ -53,7 +53,32 @@ private extension SplashViewController {
     func goToNextVC() {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         
-        let rootVC = AuthManager.shared.hasToken ? ACTabBarController() : UINavigationController(rootViewController: LoginViewController())
+        let hasToken = AuthManager.shared.hasToken
+        let hasVerifiedArea = AuthManager.shared.hasVerifiedArea
+        
+        var rootVC: UIViewController
+        
+        // NOTE: 자동로그인O && 지역인증O -> TabBar로 이동
+        if hasToken && hasVerifiedArea {
+            rootVC = ACTabBarController()
+        }
+        
+        // NOTE: 자동로그인O && 지역인증X -> 지역인증으로 이동
+        else if hasToken && !hasVerifiedArea {
+            let vm = LocalVerificationViewModel(flowType: .onboarding)
+            // TODO: 자동으로 맵뷰로 넘어가는 문제 해결
+            rootVC = UINavigationController(
+                rootViewController: LocalVerificationViewController(viewModel: vm)
+            )
+        }
+        
+        // NOTE: 자동로그인X -> 로그인VC로 이동
+        else {
+            rootVC = UINavigationController(
+                rootViewController: LoginViewController()
+            )
+        }
+        
         sceneDelegate?.window?.rootViewController = rootVC
     }
     

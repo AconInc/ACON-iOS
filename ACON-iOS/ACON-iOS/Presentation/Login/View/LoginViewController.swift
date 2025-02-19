@@ -101,7 +101,14 @@ extension LoginViewController {
         self.loginViewModel.onSuccessLogin.bind { [weak self] onSuccess in
             guard let onSuccess else { return }
             guard let self = self else { return }
-            onSuccess ? navigateToLocalVerificationVC() : showLoginFailAlert()
+            let hasVerifiedArea = loginViewModel.hasVerifiedArea
+            if onSuccess && hasVerifiedArea {
+                switchRootToTabBar()
+            } else if onSuccess && !hasVerifiedArea {
+                navigateToLocalVerificationVC()
+            } else {
+                showLoginFailAlert()
+            }
         }
     }
     
@@ -109,6 +116,12 @@ extension LoginViewController {
         let vm = LocalVerificationViewModel(flowType: .onboarding)
         let vc = LocalVerificationViewController(viewModel: vm)
         self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    func switchRootToTabBar() {
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = ACTabBarController()
+        }
     }
     
     func showLoginFailAlert() {
