@@ -9,6 +9,9 @@ import UIKit
 
 class AlertHandler {
     
+    static let shared = AlertHandler()
+    
+    
     // MARK: - 이미지 Alert
     
     func showLocationAccessFailImageAlert(from viewController: UIViewController) {
@@ -70,7 +73,8 @@ class AlertHandler {
 
     // MARK: - 로그아웃 Alert
     
-    func showLogoutAlert(from viewController: UIViewController, action: @escaping () -> Void) {
+    func showLogoutAlert(from viewController: UIViewController,
+                         action: @escaping () -> Void) {
         let alertVC = CustomAlertViewController()
         alertVC.configure(with: .logout)
         alertVC.onSettings = action
@@ -78,7 +82,7 @@ class AlertHandler {
     }
     
     
-    // MARK: 사진 권한 Alert
+    // MARK: - 사진 권한 Alert
     
     func showLibraryAccessFailAlert(from viewController: UIViewController) {
         let customAlertViewController = CustomAlertViewController()
@@ -93,9 +97,42 @@ class AlertHandler {
     }
     
     
-    // MARK: Alert 프리젠테이션 공통 로직
+    // MARK: - 인증동네 삭제 Alert
     
-    private func presentAlert(_ alert: CustomAlertViewController, from viewController: UIViewController) {
+    func showWillYouDeleteVerifiedAreaAlert(from viewController: UIViewController,
+                                            areaName: String,
+                                            action: @escaping () -> Void) {
+        let alertVC = CustomAlertTitleAndButtonsViewController()
+        alertVC.configure(with: .deleteVerifiedArea)
+        alertVC.reConfigureTitle(
+            title: areaName + StringLiterals.LocalVerification.willYouDeleteThis
+        )
+        alertVC.onSettings = action
+        presentAlert(alertVC, from: viewController)
+    }
+    
+    func showWillYouChangeVerifiedAreaAlert(from viewController: UIViewController,
+                                            action: @escaping () -> Void) {
+        let alertVC = CustomAlertViewController()
+        alertVC.configure(with: .changeVerifiedArea)
+        alertVC.onSettings = action
+        presentAlert(alertVC, from: viewController)
+    }
+    
+}
+
+
+// MARK: - Alert 프리젠테이션 공통 로직
+
+private extension AlertHandler {
+    
+    func presentAlert(_ alert: CustomAlertViewController, from viewController: UIViewController) {
+        alert.modalPresentationStyle = .overFullScreen
+        alert.modalTransitionStyle = .crossDissolve
+        viewController.present(alert, animated: true, completion: nil)
+    }
+    
+    func presentAlert(_ alert: CustomAlertTitleAndButtonsViewController, from viewController: UIViewController) {
         alert.modalPresentationStyle = .overFullScreen
         alert.modalTransitionStyle = .crossDissolve
         viewController.present(alert, animated: true, completion: nil)
