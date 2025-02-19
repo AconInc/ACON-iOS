@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Lottie
+
 class ProfileEditTextField: UITextField {
     
     // MARK: - Internal Property
@@ -22,7 +24,13 @@ class ProfileEditTextField: UITextField {
     
     private let clearButtonSpacing: CGFloat = 16
     
+    private let rightItemView = UIView()
+    
     private let clearButton = UIButton()
+    
+    private let loadingRightView = UIView()
+    
+    private let animationView = LottieAnimationView(name: "loadingWhite")
     
     
     // MARK: - Initializer
@@ -30,6 +38,8 @@ class ProfileEditTextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
+        setHierarchy()
+        setLayout()
         setStyle()
         addTarget()
         addDoneButtonToKeyboard()
@@ -40,10 +50,27 @@ class ProfileEditTextField: UITextField {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func setHierarchy() {
+        loadingRightView.addSubview(animationView)
+    }
+    
+    private func setLayout() {
+        animationView.snp.makeConstraints {
+            $0.verticalEdges.equalToSuperview()
+            $0.leading.equalToSuperview().offset(clearButtonSpacing)
+            $0.trailing.equalToSuperview().offset(-horizontalInset)
+            $0.size.equalTo(28)
+        }
+    }
+    
     private func setStyle() {
         setTextFieldStyle()
         
         setKeyboardStyle()
+        
+        animationView.do {
+            $0.isHidden = true
+        }
         
         clearButton.do {
             var config = UIButton.Configuration.plain()
@@ -206,4 +233,22 @@ extension ProfileEditTextField {
         clearButton.isHidden = isHidden
     }
     
+    func startCheckingAnimation() {
+        self.rightView = loadingRightView
+        animationView.isHidden = false
+        animationView.loopMode = .loop
+        animationView.play()
+    }
+    
+    func endCheckingAnimation() {
+        self.rightView = clearButton
+        animationView.isHidden = true
+        animationView.loopMode = .playOnce
+        
+        animationView.play(completion: { (isFinished) in
+            if isFinished {
+                self.animationView.stop()
+            }
+        })
+    }
 }
