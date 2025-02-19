@@ -24,6 +24,8 @@ class ProfileEditViewController: BaseNavViewController {
     
     private var isNicknameAvailable: Bool = true {
         didSet {
+            // NOTE: 검증이 완료되었으므로 로딩 로띠 종료
+            profileEditView.nicknameTextField.endCheckingAnimation()
             checkSaveAvailability()
         }
     }
@@ -193,7 +195,7 @@ private extension ProfileEditViewController {
         viewModel.onGetNicknameValiditySuccess.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
-            print("🥑onSuccessnickname: \(onSuccess)")
+            
             if onSuccess {
                 profileEditView.setNicknameValidMessage(.nicknameOK)
                 profileEditView.nicknameTextField.changeBorderColor(toRed: false)
@@ -277,7 +279,9 @@ private extension ProfileEditViewController {
             // NOTE: 닉네임 필드 값이 변하면 일단 저장 막기 (유효성검사를 0.5초 뒤에 하기 때문에)
             isNicknameAvailable = false
             
+            // NOTE: clear버튼 숨기고 로딩 로띠 실행
             profileEditView.nicknameTextField.hideClearButton(isHidden: text.isEmpty)
+            profileEditView.nicknameTextField.startCheckingAnimation()
             
             // NOTE: 텍스트 변하면 유효성 메시지 숨김, 텍스트필드 UI 변경
             profileEditView.setNicknameValidMessage(.none)
@@ -508,10 +512,9 @@ private extension ProfileEditViewController {
     // MARK: - 닉네임
     
     func checkNicknameValidity() {
+        
         let text = profileEditView.nicknameTextField.text ?? ""
         let phonemeCount = countPhoneme(text: text)
-        
-        // TODO: 빙글빙글 로띠 활성화
         
         // NOTE: 닉네임을 입력해주세요.
         if phonemeCount == 0 {
