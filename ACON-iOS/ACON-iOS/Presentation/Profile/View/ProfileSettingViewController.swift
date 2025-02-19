@@ -100,7 +100,7 @@ extension ProfileSettingViewController {
 extension ProfileSettingViewController: UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return AuthManager.shared.hasToken ? 4 : 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
