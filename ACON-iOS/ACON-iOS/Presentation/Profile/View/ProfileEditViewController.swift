@@ -512,7 +512,6 @@ private extension ProfileEditViewController {
     // MARK: - 닉네임
     
     func checkNicknameValidity() {
-        
         let text = profileEditView.nicknameTextField.text ?? ""
         let phonemeCount = countPhoneme(text: text)
         
