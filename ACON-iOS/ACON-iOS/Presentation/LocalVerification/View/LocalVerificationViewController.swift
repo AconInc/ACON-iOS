@@ -59,7 +59,7 @@ class LocalVerificationViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
-        if localVerificationViewModel.flowType == .profileEdit {
+        if localVerificationViewModel.flowType == .adding || localVerificationViewModel.flowType == .switching {
             self.setBackButton()
         }
     }

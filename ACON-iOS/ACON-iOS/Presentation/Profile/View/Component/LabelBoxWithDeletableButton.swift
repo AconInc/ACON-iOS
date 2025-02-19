@@ -17,6 +17,7 @@ class LabelBoxWithDeletableButton: BaseView {
     
     private let deleteButton = UIButton()
     
+    var verifiedArea: VerifiedAreaModel? = nil
     
     // MARK: - Life Cycles
     
@@ -73,7 +74,7 @@ extension LabelBoxWithDeletableButton {
         label.setLabel(text: text, style: .s1)
     }
     
-    func addTarget(_ target: Any?,
+    func addDeleteAction(_ target: Any?,
                    action: Selector,
                    for controlEvents: UIControl.Event) {
         deleteButton.addTarget(target, action: action, for: controlEvents)
