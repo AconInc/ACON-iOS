@@ -641,7 +641,6 @@
 				15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */,
 				15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */,
 				15CD25882D42099000320006 /* WideTouchView.swift */,
-				15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1151,6 +1150,7 @@
 				74BF92182D395FE400B923E3 /* ACToastController.swift */,
 				744BAF162D300AB100F95B4A /* DummyComponent.swift */,
 				15CD256A2D3D61F500320006 /* GlassmorphismView.swift */,
+				15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */,
 				15CD257F2D40361600320006 /* LoginModal */,
 				D6E34C422D398B6000CEFA04 /* CustomAlert */,
 			);
