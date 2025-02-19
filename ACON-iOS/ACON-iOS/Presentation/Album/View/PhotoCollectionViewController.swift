@@ -120,8 +120,6 @@ private extension PhotoCollectionViewController {
             if onSuccess {
                 self?.photoCollectionView.reloadData()
                 self?.albumViewModel.onSuccessLoadImages.value = false
-            } else {
-                self?.showDefaultAlert(title: "이미지 로드 실패", message: "이미지 로드에 실패했습니다.")
             }
         }
     }
