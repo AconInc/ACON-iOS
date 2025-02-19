@@ -14,7 +14,7 @@ class LocalVerificationViewModel: Serviceable {
     
     let onSuccessPostLocalArea: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var localAreaID: ObservablePattern<Int64> = ObservablePattern(nil)
+    var verifiedArea: ObservablePattern<VerifiedAreaModel> = ObservablePattern(nil)
     
     var localAreaName: ObservablePattern<String> = ObservablePattern(nil)
     
@@ -42,14 +42,13 @@ class LocalVerificationViewModel: Serviceable {
         ACService.shared.localVerificationService.postLocalArea(requestBody: requestBody) { [weak self] response in
             switch response {
             case .success(let data):
-                self?.localAreaID.value = data.id
+                self?.verifiedArea.value = VerifiedAreaModel(id: data.id, name: data.name)
                 self?.localAreaName.value = data.name
                 self?.onSuccessPostLocalArea.value = true
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
                     self?.postLocalArea()
                 }
-//                print("🥑인증동네 id: \(data.id)") // TODO: 수정
             default:
                 print("🥑Failed To Post Local Area")
                 self?.onSuccessPostLocalArea.value = false
