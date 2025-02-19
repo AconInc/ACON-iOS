@@ -19,6 +19,14 @@ enum StringLiterals {
         
     }
     
+    enum ErrorMessages {
+        
+        static let checkInternet = "인터넷 연결을 확인해주세요"
+        
+        static let reload = "다시 불러오기"
+        
+    }
+    
     enum Login {
         
         static let googleLogin = "Google로 계속하기"
