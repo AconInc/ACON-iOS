@@ -163,7 +163,7 @@ extension VerifiedAreasEditViewController: VerifiedAreasEditViewDelegate {
         if viewModel.verifiedAreaList.count == 1 {
             AlertHandler.shared.showWillYouChangeVerifiedAreaAlert(from: self) { [weak self] in
                 guard let self = self else { return }
-//                localVerificationVMSwitching = LocalVerificationViewModel(flowType: .switching) // NOTE: 뷰모델 초기화
+                localVerificationVMSwitching = LocalVerificationViewModel(flowType: .switching) // NOTE: 뷰모델 초기화
                 let vc = LocalVerificationViewController(viewModel: localVerificationVMSwitching)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
@@ -175,7 +175,6 @@ extension VerifiedAreasEditViewController: VerifiedAreasEditViewDelegate {
                 from: self,
                 areaName: verifiedArea.name) { [weak self] in
                 guard let self = self else { return }
-                    
                 viewModel.postDeleteVerifiedArea(verifiedArea)
             }
         }

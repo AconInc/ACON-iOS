@@ -207,8 +207,6 @@ extension ProfileSettingViewController: UITableViewDataSource {
                     // TODO: - 어떤 경로인지 알려주는 플래그 필요
                 }
             case .localVerification:
-                print("동네인증하기")
-                // TODO: - 동네인증하기 뷰 여기
                 let vc = VerifiedAreasEditViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }

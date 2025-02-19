@@ -114,7 +114,7 @@ extension VerifiedAreasEditView {
         let verifiedAreaBox = LabelBoxWithDeletableButton().then {
             $0.verifiedArea = verifiedArea
             $0.setLabel(name)
-            $0.addDeleteAction( // 미구현
+            $0.addDeleteAction(
                 self,
                 action: #selector(tappedAreaDeleteButton),
                 for: .touchUpInside
@@ -169,6 +169,5 @@ private extension VerifiedAreasEditView {
             )
         )
     }
-    
     
 }
