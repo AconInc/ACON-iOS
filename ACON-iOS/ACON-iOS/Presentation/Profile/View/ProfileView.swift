@@ -51,6 +51,7 @@ final class ProfileView: BaseView {
             $0.layer.cornerRadius = profileImageSize / 2
             $0.contentMode = .scaleAspectFill
             $0.clipsToBounds = true
+            $0.image = .imgProfileBasic80
         }
         
         profileEditButton.do {
