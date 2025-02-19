@@ -131,7 +131,6 @@ private extension VerifiedAreasEditViewController {
         
         
         // MARK: - 1개 남은 동네를 바꾸는 경우
-        // TODO: MapView에서 onSuccess가 set되면 여기서 바인딩 클로저 실행이 안 됨
         localVerificationVMSwitching.verifiedArea.bind { [weak self] area in
             guard let self = self,
                   let newVerifiedArea = area else { return }
@@ -147,7 +146,7 @@ private extension VerifiedAreasEditViewController {
         }
         
         // NOTE: 새 동네 인증에 실패한 경우
-        // TODO: 네트워크 에러 등 알럿 띄워야할 것 같음
+        // NOTE: 네트워크 에러 등 알럿 띄워야할 것 같음
     }
     
 }
