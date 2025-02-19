@@ -16,6 +16,8 @@ class SpotListViewModel: Serviceable {
     
     var onSuccessPostSpotList: ObservablePattern<Bool> = ObservablePattern(nil)
     
+    var onFinishRefreshingSpotList: ObservablePattern<Bool> = ObservablePattern(nil)
+    
     var spotList: [SpotModel] = []
     
     var hasSpotListChanged: Bool = false

@@ -37,6 +37,7 @@ class SpotListFilterViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bindViewModel()
         addTargets()
         switchedSegment(viewModel.spotType.value)
         setDelegate()
@@ -70,6 +71,25 @@ class SpotListFilterViewController: BaseViewController {
         spotListFilterView.restaurantPriceSlider.delegate = self
         spotListFilterView.cafePriceSlider.delegate = self
     }
+}
+
+
+// MARK: - Bindings
+
+private extension SpotListFilterViewController {
+    
+    func bindViewModel() {
+        viewModel.onFinishRefreshingSpotList.bind { [weak self] onFinish in
+            guard let onFinish = onFinish else { return }
+            
+            if onFinish {
+                self?.dismiss(animated: true)
+            }
+            
+            self?.viewModel.onFinishRefreshingSpotList.value = nil
+        }
+    }
+    
 }
 
 
@@ -151,7 +171,6 @@ private extension SpotListFilterViewController {
         viewModel.cafePrice = self.cafePrice
         
         viewModel.requestLocation()
-        self.dismiss(animated: true)
     }
     
     @objc func didTapResetButton() {

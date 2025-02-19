@@ -121,6 +121,8 @@ extension SpotListViewController {
             
             let isFilterSet = !viewModel.filterList.isEmpty
             spotListView.updateFilterButtonColor(isFilterSet)
+            
+            viewModel.onFinishRefreshingSpotList.value = true
         }
     }
     
