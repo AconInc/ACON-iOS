@@ -28,13 +28,13 @@ class VerifiedAreasEditViewController: BaseNavViewController {
         addTarget()
         setDelegate()
         bindViewModel()
+        viewModel.getVerifiedAreaList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = true
-        viewModel.getVerifiedAreaList()
     }
     
     override func setHierarchy() {
@@ -124,7 +124,9 @@ private extension VerifiedAreasEditViewController {
             // NOTE: 새로 인증한 동네와 기존 동네가 다른 경우 -> 새 동네 append
             if !isExistingArea {
                 viewModel.verifiedAreaList.append(newVerifiedArea)
+                verifiedAreasEditView.addVerifiedArea(newVerifiedArea)
             }
+            
         }
         
         
@@ -140,8 +142,8 @@ private extension VerifiedAreasEditViewController {
             if !isExistingArea {
                 viewModel.postDeleteVerifiedArea(viewModel.verifiedAreaList[0])
                 viewModel.verifiedAreaList.append(newVerifiedArea)
+                verifiedAreasEditView.addVerifiedArea(newVerifiedArea)
             }
-            localVerificationVMSwitching.onSuccessPostLocalArea.value = nil
         }
         
         // NOTE: 새 동네 인증에 실패한 경우
