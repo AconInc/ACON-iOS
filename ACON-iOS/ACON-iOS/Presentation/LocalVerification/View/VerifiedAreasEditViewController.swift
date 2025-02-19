@@ -7,15 +7,17 @@
 
 import UIKit
 
-class LocalVerificationEditViewController: BaseNavViewController {
+class VerifiedAreasEditViewController: BaseNavViewController {
     
     // MARK: - Properties (View, ViewModels)
     
-    private let localVerificationEditView = LocalVerificationEditView()
+    private let localVerificationEditView = VerifiedAreasEditView()
     
     private let viewModel = LocalVerificationEditViewModel()
     
-    private let localVerificationVM = LocalVerificationViewModel(flowType: .profileEdit)
+    private let localVerificationVMAdding = LocalVerificationViewModel(flowType: .adding)
+    
+    private let localVerificationVMChanging = LocalVerificationViewModel(flowType: .changing)
     
     
     // MARK: - LifeCycle
@@ -70,7 +72,7 @@ class LocalVerificationEditViewController: BaseNavViewController {
 
 // MARK: - Bindings
 
-private extension LocalVerificationEditViewController {
+private extension VerifiedAreasEditViewController {
     
     func bindViewModel(){
         
@@ -90,14 +92,37 @@ private extension LocalVerificationEditViewController {
             
         }
         
-        localVerificationVM.localAreaName.bind { [weak self] area in
+        viewModel.onDeleteVerifiedAreaSuccess.bind { [weak self] onSuccess in
             guard let self = self,
-                  let area = area else { return }
+                  let onSuccess = onSuccess else { return }
+            
+            if onSuccess,
+               let area = viewModel.deletingVerifiedArea {
+                localVerificationEditView.removeVerifiedArea(verifiedArea: area)
+            } else if let error = viewModel.deleteVerifiedAreaErrorCode {
+                presentDeleteErrorAlert(message: error.errorMessage)
+            }
+        }
+        
+        localVerificationVMAdding.onSuccessPostLocalArea.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
             
 //            var newAreas = viewModel.verifiedAreaListEditing.value ?? []
 //            // TODO: VerifiedArea id 수정
 //            newAreas.append(VerifiedAreaModel(id: 1, name: area))
 //            viewModel.verifiedAreaListEditing.value = newAreas
+        }
+        
+        localVerificationVMChanging.onSuccessPostLocalArea.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
+            if onSuccess,
+                let verifiedArea = localVerificationVMChanging.verifiedArea {
+                viewModel.verifiedAreaList.append(verifiedArea)
+                
+                // TODO: DELETE Area
+            }
         }
     }
     
@@ -106,21 +131,19 @@ private extension LocalVerificationEditViewController {
 
 // MARK: - Delegate
 
-extension LocalVerificationEditViewController: LocalVerificationEditViewDelegate {
+extension VerifiedAreasEditViewController: LocalVerificationEditViewDelegate {
     
     func didTapAreaDeleteButton(_ verifiedArea: VerifiedAreaModel) {
 //        let onSuccessDeleting = viewModel.postDeleteVerifiedArea(area: verifiedArea)
-        
-        viewModel.postDeleteVerifiedArea(verifiedArea) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success:
-                self.localVerificationEditView.removeVerifiedArea(verifiedArea: verifiedArea)
-            case .failure(let error):
-                self.presentDeleteErrorAlert(message: error.localizedDescription)
+        if viewModel.verifiedAreaList.count == 1 {
+            AlertHandler.shared.showWillYouChangeVerifiedAreaAlert(from: self) { [weak self] in
+                guard let self = self else { return }
+                // TODO: 1. push 동네인증 VC
+                let vc = LocalVerificationViewController(viewModel: localVerificationVMChanging)
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         }
+        viewModel.postDeleteVerifiedArea(verifiedArea)
     }
     
     // TODO: 삭제 (임시 코드임)

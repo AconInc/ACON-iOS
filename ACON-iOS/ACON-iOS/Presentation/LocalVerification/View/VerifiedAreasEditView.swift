@@ -14,7 +14,7 @@ protocol LocalVerificationEditViewDelegate: AnyObject {
 }
 
 
-class LocalVerificationEditView: BaseView {
+class VerifiedAreasEditView: BaseView {
     
     // MARK: - Properties
     
@@ -107,7 +107,7 @@ class LocalVerificationEditView: BaseView {
 
 // MARK: - Internal Methods
 
-extension LocalVerificationEditView {
+extension VerifiedAreasEditView {
     
     func addVerifiedArea(_ verifiedArea: VerifiedAreaModel) {
         let name = verifiedArea.name
@@ -146,7 +146,7 @@ extension LocalVerificationEditView {
 
 // MARK: - @objc function
 
-private extension LocalVerificationEditView {
+private extension VerifiedAreasEditView {
     
     @objc
     func tappedAreaDeleteButton(_ sender: UIButton) {
