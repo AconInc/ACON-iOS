@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol LocalVerificationEditViewDelegate: AnyObject {
+protocol VerifiedAreasEditViewDelegate: AnyObject {
     
     func didTapAreaDeleteButton(_ verifiedAreaBox: VerifiedAreaModel)
     
@@ -18,7 +18,7 @@ class VerifiedAreasEditView: BaseView {
     
     // MARK: - Properties
     
-    weak var delegate: LocalVerificationEditViewDelegate?
+    weak var delegate: VerifiedAreasEditViewDelegate?
     
     var verifiedAreaBoxes: [LabelBoxWithDeletableButton] = []
     
@@ -139,6 +139,15 @@ extension VerifiedAreasEditView {
                 self.verifiedAreaBoxes.remove(at: index)
             }
         }
+    }
+    
+    func removeAllVerifiedAreas() {
+        for box in verifiedAreaBoxes {
+            verifiedAreaStackView.removeArrangedSubview(box)
+            box.removeFromSuperview()
+        }
+        
+        self.verifiedAreaBoxes.removeAll()
     }
     
 }
