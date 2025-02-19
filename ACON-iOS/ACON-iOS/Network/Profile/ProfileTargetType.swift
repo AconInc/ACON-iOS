@@ -32,7 +32,7 @@ extension ProfileTargetType: TargetType {
         switch self {
         case .getProfile:
             return utilPath + "members/me"
-        case .getNicknameValidity(_):
+        case .getNicknameValidity:
             return utilPath + "members/nickname/validate"
         }
     }

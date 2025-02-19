@@ -31,7 +31,6 @@
 		1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */; };
 		156AA7242D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */; };
 		156AA72A2D6510E1005B8DCE /* GetNicknameValidityRequestQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7292D6510E1005B8DCE /* GetNicknameValidityRequestQuery.swift */; };
-		156D925A2D652AAF0037F8F1 /* DeleteVerifiedAreaErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D92592D652AAF0037F8F1 /* DeleteVerifiedAreaErrorType.swift */; };
 		156D925C2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925B2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift */; };
 		156D925E2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925D2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift */; };
 		15A1471E2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */; };
@@ -261,7 +260,6 @@
 		1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
 		156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVerifiedAreaListResponse.swift; sourceTree = "<group>"; };
 		156AA7292D6510E1005B8DCE /* GetNicknameValidityRequestQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNicknameValidityRequestQuery.swift; sourceTree = "<group>"; };
-		156D92592D652AAF0037F8F1 /* DeleteVerifiedAreaErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteVerifiedAreaErrorType.swift; sourceTree = "<group>"; };
 		156D925B2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTitleAndButtonsView.swift; sourceTree = "<group>"; };
 		156D925D2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTitleAndButtonsViewController.swift; sourceTree = "<group>"; };
 		15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBoxWithDeletableButton.swift; sourceTree = "<group>"; };
@@ -655,7 +653,6 @@
 			isa = PBXGroup;
 			children = (
 				15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */,
-				156D92592D652AAF0037F8F1 /* DeleteVerifiedAreaErrorType.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -1722,7 +1719,6 @@
 				746261792D3EA8DF00A4E84F /* UploadTargetType.swift in Sources */,
 				741A07572D3558FE00778219 /* ReviewFinishedView.swift in Sources */,
 				1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */,
-				156D925A2D652AAF0037F8F1 /* DeleteVerifiedAreaErrorType.swift in Sources */,
 				74BBADF62D611B6B003AB16C /* PostReissueResponse.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
 				747F4FBD2D3D9477003DECBF /* SplashViewController.swift in Sources */,
