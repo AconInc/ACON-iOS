@@ -1,0 +1,48 @@
+//
+//  WithDrawViewModel.swift
+//  ACON-iOS
+//
+//  Created by Jaehyun Ahn on 2/16/25.
+//
+
+import Foundation
+
+final class WithdrawalViewModel {
+    
+    var selectedOption: ObservablePattern<String> = ObservablePattern(nil)
+    var inputText: ObservablePattern<String> = ObservablePattern(nil)
+    var shouldDismissKeyboard: ObservablePattern<Bool> = ObservablePattern(false)
+    var ectOption: ObservablePattern<Bool> = ObservablePattern(false)
+    
+    
+    func updateSelectedOption(_ option: String?) {
+        selectedOption.value = option
+        
+        if option == StringLiterals.Withdrawal.optionOthers {
+            if let inputText = inputText.value, !inputText.isEmpty {
+                ectOption.value = true
+            } else {
+                ectOption.value = false
+            }
+        } else if let optionValue = option, !optionValue.isEmpty {
+            ectOption.value = true
+            
+        } else {
+            ectOption.value = false
+        }
+    }
+    
+    func updateInputText(_ text: String?) {
+        inputText.value = text
+        
+        if selectedOption.value == StringLiterals.Withdrawal.optionOthers {
+            ectOption.value = (text?.isEmpty == false)
+        }
+    }
+    
+    // TODO: make api
+    func withdrawalAPI() {
+        print("selectedOption: \(String(describing: selectedOption.value))")
+    }
+}
+

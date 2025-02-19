@@ -44,7 +44,7 @@ enum StringLiterals {
         static let successLogin = "로그인이 완료되었습니다."
         
     }
-
+    
     enum TabBar {
         
         static let spotList = "장소"
@@ -98,7 +98,7 @@ enum StringLiterals {
         static let next = "다음"
         
         static let shallWeDropAcorns = "도토리를 떨어트려\n리뷰를 남겨 볼까요?"
-
+        
         static let useAcornToReview = "도토리를 사용해 리뷰를 남겨주세요."
         
         static let acornsIHave = "보유한 도토리 수"
@@ -169,7 +169,33 @@ enum StringLiterals {
 
          static let plainAcorn = "일반 도토리"
         
-     }
+        static let needLocalVerification = "로컬 맛집 추천을 위해\n동네 인증이 필요해요"
+        
+        static let doLocalVerification = "자주 가는 동네로 지역 인증을 해보세요"
+        
+        static let new = "새로운"
+        
+        static let verifyLocal = " 나의 동네 인증하기"
+        
+        static let next = "다음"
+        
+        static let finishVerification = "인증완료"
+        
+        static let letsStart = "시작하기"
+        
+        static let locateOnMap = "지도에서 위치 확인하기"
+        
+        static let now = "이제 "
+        
+        static let localAcornTitle = "에\n로컬 도토리를 떨어트릴 수 있어요!"
+        
+        static let localAcornExplaination = "로컬 도토리는 로컬 맛집을 보증하는 도토리에요.\n만족스러운 식사 후 리뷰에 사용해보세요!"
+        
+        static let localAcorn = "로컬 도토리"
+        
+        static let plainAcorn = "일반 도토리"
+        
+    }
     
     enum SpotListFilter {
         
@@ -211,7 +237,7 @@ enum StringLiterals {
         
     }
     
-
+    
     enum WebView {
         
         static let error = "에러"
@@ -231,8 +257,8 @@ enum StringLiterals {
         static let refreshToken = "refreshToken"
         
     }
-
-  
+    
+    
     enum DislikeTypes {
         
         static let dakbal = "닭발"
@@ -246,55 +272,55 @@ enum StringLiterals {
         static let yanggogi = "양고기"
         
         static let none = " "
-
+        
     }
     
     enum FavoriteSpotRankTypes {
-
+        
         static let mood = "분위기가 감각적인"
-
+        
         static let new = "새로운 음식의 경험"
-
+        
         static let quality = "합리적인 가격과 양"
-
+        
         static let special = "특별한 날, 고급스러운"
-
+        
     }
-
+    
     enum FavoriteSpotTypes {
-
+        
         static let restaurant = "음식점"
-
+        
         static let cafe = "카페"
-
+        
     }
-
+    
     enum FavoriteSpotStyles {
-
+        
         static let nopo = "빈티지"
-
+        
         static let modern = "모던"
-
+        
     }
-
+    
     enum FavoriteCuisineTypes {
-
+        
         static let korean = "한식"
-
+        
         static let western = "양식"
-
+        
         static let chinese = "중식"
-
+        
         static let japanese = "일식"
-
+        
         static let koreanStreet = "분식"
-
+        
         static let asian = "아시안"
-
+        
     }
     
     enum OnboardingType {
-
+        
         static let progressNumberList = ["01", "02", "03", "04", "05"]
         
         static let progressTitleList = [
@@ -349,6 +375,38 @@ enum StringLiterals {
         
         static let done = "완료"
         
+    }
+    
+    enum Withdrawal {
+        
+        static let title = "서비스 탈퇴"
+        
+        static let reasonTitle = "이별의 순간이 왔어요...\n떠나시려는 이유가 있을까요?"
+        
+        static let reasonDescription = "어떤 부분이 마음에 들지 않았는지 알려주시면,\n더 좋은 acon을 만드는데 도움이 됩니다."
+        
+        static let optionLackOfRestaurants = "등록된 맛집이 너무 적어요"
+        
+        static let optionUnsatisfiedRecommendation = "추천 결과가 만족스럽지 않아요"
+        
+        static let optionFakeReviews = "거짓 리뷰를 봤어요"
+        
+        static let optionOthers = "기타"
+        
+        static let submit = "제출하기"
+        
+        static let withdrawalReason = "탈퇴하려는 이유를 적어주세요"
+    }
+    
+    enum WithdrawalConfirmation {
+        
+        static let title = "지금 탈퇴를 진행할까요?"
+        
+        static let description = "지금 탈퇴를 진행하면 취향정보, 리뷰 등\n모든 데이터는 영구적으로 삭제되며 복구할 수 없어요"
+        
+        static let cancelButtonTitle = "취소하기"
+        
+        static let confirmButtonTitle = "아쉽지만 탈퇴하기"
     }
     
 }
