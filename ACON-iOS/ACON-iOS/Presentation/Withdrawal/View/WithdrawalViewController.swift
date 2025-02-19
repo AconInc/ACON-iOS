@@ -12,7 +12,7 @@ import Then
 
 final class WithdrawalViewController: BaseViewController {
     
-    private let viewModel = WithdrawalViewModel()
+    var viewModel = WithdrawalViewModel()
     private let otherReasonTextFieldView = CustomTextFieldView()
     private let glassMorphismView = GlassmorphismView()
     private let topInsetView = UIView()
@@ -176,8 +176,10 @@ extension WithdrawalViewController {
     
     private func presentWithdrawalSheet() {
         let sheetVC = WithdrawalConfirmationViewController()
+        
         if let sheet = sheetVC.sheetPresentationController {
-            sheet.detents = [SheetUtils().acShortDetent]
+            sheetVC.viewModel = viewModel
+            sheet.detents = [ACSheetDetent.shortDetent]
             sheet.prefersGrabberVisible = true
         }
         
