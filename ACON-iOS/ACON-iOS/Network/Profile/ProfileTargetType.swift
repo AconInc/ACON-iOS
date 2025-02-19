@@ -60,6 +60,8 @@ extension ProfileTargetType: TargetType {
             } else {
                 return .requestPlain
             }
+        case .patchProfile(let requestBody):
+            return .requestJSONEncodable(requestBody)
         default:
             return .requestPlain
         }

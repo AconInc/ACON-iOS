@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PatchProfileRequest {
+struct PatchProfileRequest: Encodable {
     
     let profileImage: String
     
