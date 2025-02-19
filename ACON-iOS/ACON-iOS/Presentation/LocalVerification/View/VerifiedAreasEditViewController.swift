@@ -11,13 +11,13 @@ class VerifiedAreasEditViewController: BaseNavViewController {
     
     // MARK: - Properties (View, ViewModels)
     
-    private let localVerificationEditView = VerifiedAreasEditView()
+    private let verifiedAreasEditView = VerifiedAreasEditView()
     
     private let viewModel = LocalVerificationEditViewModel()
     
-    private let localVerificationVMAdding = LocalVerificationViewModel(flowType: .adding)
+    private var localVerificationVMAdding = LocalVerificationViewModel(flowType: .adding)
     
-    private let localVerificationVMChanging = LocalVerificationViewModel(flowType: .changing)
+    private var localVerificationVMChanging = LocalVerificationViewModel(flowType: .switching)
     
     
     // MARK: - LifeCycle
@@ -35,19 +35,18 @@ class VerifiedAreasEditViewController: BaseNavViewController {
 
         self.tabBarController?.tabBar.isHidden = true
         viewModel.getVerifiedAreaList()
-        
     }
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.contentView.addSubview(localVerificationEditView)
+        self.contentView.addSubview(verifiedAreasEditView)
     }
     
     override func setLayout() {
         super.setLayout()
 
-        localVerificationEditView.snp.makeConstraints {
+        verifiedAreasEditView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
@@ -60,11 +59,15 @@ class VerifiedAreasEditViewController: BaseNavViewController {
     }
     
     private func addTarget() {
-        
+        verifiedAreasEditView.verifiedAreaAddButton.addTarget(
+            self,
+            action: #selector(tappedVerifiedAreaAddButton),
+            for: .touchUpInside
+        )
     }
     
     private func setDelegate() {
-        localVerificationEditView.delegate = self
+        verifiedAreasEditView.delegate = self
     }
     
 }
@@ -75,16 +78,19 @@ class VerifiedAreasEditViewController: BaseNavViewController {
 private extension VerifiedAreasEditViewController {
     
     func bindViewModel(){
-        
         viewModel.onGetVerifiedAreaListSuccess.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
+            
+            print("🥑onGetVerifiedAreaListSuccess: \(onSuccess)")
+            
+            verifiedAreasEditView.removeAllVerifiedAreas()
             
             if onSuccess && viewModel.isAppendingVerifiedAreaList == false {
                 viewModel.isAppendingVerifiedAreaList = true
                  
                 for area in viewModel.verifiedAreaList {
-                    localVerificationEditView.addVerifiedArea(area)
+                    verifiedAreasEditView.addVerifiedArea(area)
                 }
                 
                 viewModel.isAppendingVerifiedAreaList = false
@@ -97,32 +103,67 @@ private extension VerifiedAreasEditViewController {
                   let onSuccess = onSuccess else { return }
             
             if onSuccess,
-               let area = viewModel.deletingVerifiedArea {
-                localVerificationEditView.removeVerifiedArea(verifiedArea: area)
-            } else if let error = viewModel.deleteVerifiedAreaErrorCode {
-                presentDeleteErrorAlert(message: error.errorMessage)
+               let area = viewModel.deletingVerifiedArea,
+               let index = viewModel.verifiedAreaList.firstIndex(of: area) {
+                viewModel.verifiedAreaList.remove(at: index)
+                verifiedAreasEditView.removeVerifiedArea(verifiedArea: area)
             }
         }
+        
+        
+        // MARK: - 추가버튼 눌러서 성공한 경우
         
         localVerificationVMAdding.onSuccessPostLocalArea.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
-            
-//            var newAreas = viewModel.verifiedAreaListEditing.value ?? []
-//            // TODO: VerifiedArea id 수정
-//            newAreas.append(VerifiedAreaModel(id: 1, name: area))
-//            viewModel.verifiedAreaListEditing.value = newAreas
+            if onSuccess,
+               let newVerifiedArea = localVerificationVMChanging.verifiedArea {
+                let isExistingArea = viewModel.verifiedAreaList.contains(newVerifiedArea)
+                print("🥑isExistingArea: \(isExistingArea)")
+                
+                // NOTE: 새로 인증한 동네와 기존 동네가 동일할 경우 -> 추가 액션 없이 popVC
+                if isExistingArea {
+                    return
+                }
+                
+                // NOTE: 새로 인증한 동네와 기존 동네가 다른 경우 -> 새 동네 append
+                else {
+                    viewModel.verifiedAreaList.append(newVerifiedArea)
+                }
+                
+                localVerificationVMAdding.onSuccessPostLocalArea.value = nil
+            }
         }
         
+        
+        // MARK: - 1개 남은 동네를 바꾸는 경우
+        // TODO: MapView에서 onSuccess가 set되면 여기서 바인딩 클로저 실행이 안 됨
         localVerificationVMChanging.onSuccessPostLocalArea.bind { [weak self] onSuccess in
+            print("🥑onSuccessPostLocalArea: \(onSuccess)")
             guard let self = self,
                   let onSuccess = onSuccess else { return }
+            print("🥑onSuccessPostLocalArea: \(onSuccess)")
             if onSuccess,
-                let verifiedArea = localVerificationVMChanging.verifiedArea {
-                viewModel.verifiedAreaList.append(verifiedArea)
+               let newVerifiedArea = localVerificationVMChanging.verifiedArea {
+                let isExistingArea = viewModel.verifiedAreaList.contains(newVerifiedArea)
+                print("🥑isExistingArea: \(isExistingArea)")
                 
-                // TODO: DELETE Area
+                // NOTE: 새로 인증한 동네와 기존 동네가 동일할 경우 -> 추가 액션 없이 popVC
+                if isExistingArea {
+                    return
+                }
+                
+                // NOTE: 새로 인증한 동네와 기존 동네가 다른 경우 -> 기존 동네 DELETE, 새 동네 append
+                else {
+                    viewModel.postDeleteVerifiedArea(viewModel.verifiedAreaList[0])
+                    viewModel.verifiedAreaList.append(newVerifiedArea)
+                    print("배열 추가 O, Delete O")
+                }
+                localVerificationVMChanging.onSuccessPostLocalArea.value = nil
             }
+            
+            // NOTE: 새 동네 인증에 실패한 경우
+            // TODO: 네트워크 에러 등 알럿 띄워야할 것 같음
         }
     }
     
@@ -131,26 +172,45 @@ private extension VerifiedAreasEditViewController {
 
 // MARK: - Delegate
 
-extension VerifiedAreasEditViewController: LocalVerificationEditViewDelegate {
+extension VerifiedAreasEditViewController: VerifiedAreasEditViewDelegate {
     
     func didTapAreaDeleteButton(_ verifiedArea: VerifiedAreaModel) {
-//        let onSuccessDeleting = viewModel.postDeleteVerifiedArea(area: verifiedArea)
+        print("🥑before delete verifiedAreaList: \(viewModel.verifiedAreaList)")
+        
+        // NOTE: 동네가 1개 남은 상황에서 삭제버튼 누른 경우 -> Alert -> 동네인증
         if viewModel.verifiedAreaList.count == 1 {
             AlertHandler.shared.showWillYouChangeVerifiedAreaAlert(from: self) { [weak self] in
                 guard let self = self else { return }
-                // TODO: 1. push 동네인증 VC
+                localVerificationVMChanging = LocalVerificationViewModel(flowType: .switching) // NOTE: 뷰모델 초기화
                 let vc = LocalVerificationViewController(viewModel: localVerificationVMChanging)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
-        viewModel.postDeleteVerifiedArea(verifiedArea)
+        
+        // NOTE: 동네가 여러개 남은 상황에서 삭제버튼 누른 경우 -> Alert -> 삭제
+        else {
+            AlertHandler.shared.showWillYouDeleteVerifiedAreaAlert(
+                from: self,
+                areaName: verifiedArea.name) { [weak self] in
+                guard let self = self else { return }
+                    
+                viewModel.postDeleteVerifiedArea(verifiedArea)
+            }
+        }
     }
     
-    // TODO: 삭제 (임시 코드임)
-    private func presentDeleteErrorAlert(message: String) {
-        let alert = UIAlertController(title: "삭제 실패", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default))
-        self.present(alert, animated: true)
+}
+
+
+// MARK: - @objc functions
+
+private extension VerifiedAreasEditViewController {
+    
+    @objc
+    func tappedVerifiedAreaAddButton() {
+        localVerificationVMAdding = LocalVerificationViewModel(flowType: .adding) // NOTE: 뷰모델 초기화
+        let vc = LocalVerificationViewController(viewModel: localVerificationVMAdding)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

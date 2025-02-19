@@ -13,14 +13,23 @@ class LocalVerificationEditViewModel: Serviceable {
     
     var verifiedAreaList: [VerifiedAreaModel] = []
     
+    var isAppendingVerifiedAreaList: Bool = false
+    
+    
+    // MARK: - Networking Properties
+    
     var onGetVerifiedAreaListSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var isAppendingVerifiedAreaList: Bool = false
+    var onDeleteVerifiedAreaSuccess: ObservablePattern<Bool> = ObservablePattern(nil) // TODO: 필요 없을지도?
+    
+    var deletingVerifiedArea: VerifiedAreaModel?
     
     
     // MARK: - Networking
     
     func getVerifiedAreaList() {
+        verifiedAreaList.removeAll()
+        
         ACService.shared.localVerificationService.getVerifiedAreaList { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -40,19 +49,34 @@ class LocalVerificationEditViewModel: Serviceable {
         }
     }
     
-    func postDeleteVerifiedArea(_ area: VerifiedAreaModel, completion: @escaping (Result<Bool, Error>) -> Void) {
+    func postDeleteVerifiedArea(_ area: VerifiedAreaModel) {
         print("postDeleteVerifiedArea")
+        deletingVerifiedArea = area
+        let verifiedAreaIDStr = String(area.id)
         
-        // TODO: API 요청 추가
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let isSuccess = Bool.random() // NOTE: 임시로 성공/실패를 랜덤 처리
-            if isSuccess {
-                completion(.success(true))
-            } else {
-                completion(.failure(NSError(domain: "DeleteError", code: 400, userInfo: [NSLocalizedDescriptionKey: "삭제 실패"])))
+        ACService.shared.localVerificationService.deleteVerifiedArea(verifiedAreaID: verifiedAreaIDStr) { [weak self] response in
+            switch response {
+            case .success:
+                self?.onDeleteVerifiedAreaSuccess.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.postDeleteVerifiedArea(area)
+                }
+            default:
+                print("🥑 VM - Fail to delete VerifiedArea")
+                self?.onDeleteVerifiedAreaSuccess.value = false
+                return
             }
         }
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//            let isSuccess = Bool.random() // NOTE: 임시로 성공/실패를 랜덤 처리
+//            if isSuccess {
+//                completion(.success(true))
+//            } else {
+//                completion(.failure(NSError(domain: "DeleteError", code: 400, userInfo: [NSLocalizedDescriptionKey: "삭제 실패"])))
+//            }
+//        }
     }
     
 }
