@@ -335,7 +335,6 @@ private extension ProfileEditViewController {
     func tappedSaveButton() {
         guard let nickname: String = profileEditView.nicknameTextField.text else { return }
         
-        let newUserInfo: UserInfoEditModel
         let birthDateText = profileEditView.birthDateTextField.text
         viewModel.updateUserInfo(nickname: nickname,
                                  birthDate: birthDateText?.isEmpty ?? true ? nil : birthDateText)

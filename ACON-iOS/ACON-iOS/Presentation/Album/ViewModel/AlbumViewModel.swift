@@ -344,12 +344,12 @@ class AlbumViewModel: NSObject, PHPhotoLibraryChangeObserver {
         options.version = .current
         
         /// 이미지 요청
-        let requestID = PHImageManager.default().requestImage(
+        PHImageManager.default().requestImage(
             for: asset,
             targetSize: pixelSize,
             contentMode: .aspectFill,
             options: options
-        ) { [weak self] image, info in
+        ) { image, info in
             if image == nil {
                     print("Failed to load image. Info:", info ?? [:])
                 }

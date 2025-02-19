@@ -107,7 +107,7 @@ private extension SpotDetailViewController {
         }
         
         self.spotDetailViewModel.onSuccessGetSpotMenu.bind { [weak self] onSuccess in
-            guard let onSuccess, let data = self?.spotDetailViewModel.spotMenu.value else { return }
+            guard let onSuccess else { return }
             if onSuccess {
                 self?.spotDetailView.menuCollectionView.reloadData()
                 self?.updateCollectionViewHeight()

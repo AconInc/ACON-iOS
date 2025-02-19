@@ -46,7 +46,6 @@ class LocalMapViewController: BaseNavViewController {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = true
-        print(localVerificationViewModel.userCoordinate)
         moveCameraToLocation(latitude: localVerificationViewModel.userCoordinate?.latitude ?? 0,
                              longitude: localVerificationViewModel.userCoordinate?.longitude ?? 0)
     }

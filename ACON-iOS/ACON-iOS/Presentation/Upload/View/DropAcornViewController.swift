@@ -166,7 +166,7 @@ private extension DropAcornViewController {
     func checkAcorn(_ dropAcorn: Int) {
         if dropAcorn > possessAcornCount {
             ACToastController.show(StringLiterals.Upload.noAcorn, bottomInset: 112, delayTime: 1)
-            { [weak self] in return }
+            { return }
             dropAcornView.dropAcornLottieView.isHidden = true
             disableLeaveReviewButton()
         } else {
