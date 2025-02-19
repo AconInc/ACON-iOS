@@ -331,6 +331,13 @@ private extension ProfileEditViewController {
             viewModel.getProfilePresignedURL()
         } else {
             // TODO: - 🧇 프로필 수정 통신
+            viewModel.patchProfile(
+                userInfo: UserInfoEditModel(
+                    profileImage: viewModel.userInfo.profileImage,
+                    nickname: viewModel.userInfo.nickname,
+                    birthDate: viewModel.userInfo.birthDate
+                )
+            )
         }
     }
     
