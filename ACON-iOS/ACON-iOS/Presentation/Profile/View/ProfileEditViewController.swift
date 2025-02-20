@@ -403,8 +403,12 @@ private extension ProfileEditViewController {
         } else {
             // NOTE: FAIL -> 입력 X
             if byte <= viewModel.maxNicknameLength {
-                // NOTE: 16자 미만인 경우 유효성 메시지 2초간 띄움
-                profileEditView.setNicknameValidMessage(.invalidChar)
+                // NOTE: 언어인지 특수문자인지 판별
+                if string.unicodeScalars.allSatisfy({ $0.properties.isAlphabetic }) {
+                    profileEditView.setNicknameValidMessage(.invalidLanguage)
+                } else {
+                    profileEditView.setNicknameValidMessage(.invalidSymbol)
+                }
                 textField.layer.borderColor = UIColor.red1.cgColor
                 validMsgHideDebouncer.call { [weak self] in
                     guard let self = self else { return }

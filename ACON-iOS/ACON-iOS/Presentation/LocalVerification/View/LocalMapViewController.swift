@@ -93,7 +93,8 @@ private extension LocalMapViewController {
             let areaName: String = self?.localVerificationViewModel.localAreaName.value ?? ""
             
             print("onSuccessPostLocalArea: \(onSuccess)")
-
+            UserDefaults.standard.set(onSuccess,
+                                      forKey: StringLiterals.UserDefaults.hasVerifiedArea)
             if onSuccess {
                 switch flowType {
                 case .onboarding:
