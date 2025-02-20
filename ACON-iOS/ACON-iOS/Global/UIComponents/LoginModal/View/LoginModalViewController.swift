@@ -116,14 +116,37 @@ extension LoginModalViewController {
             guard let self = self else { return }
             self.onSuccessLogin?(onSuccess)
             self.dismiss(animated: true)
-            onSuccess ? ACToastController.show(StringLiterals.LoginModal.successLogin, bottomInset: 112, delayTime: 1) { return } : showLoginFailAlert()
+            
+            let hasVerifiedArea = loginViewModel.hasVerifiedArea
+            if onSuccess && hasVerifiedArea {
+                print("🥑onSuccess && hasVerifiedArea")
+                ACToastController.show(
+                    StringLiterals.LoginModal.successLogin,
+                    bottomInset: 112,
+                    delayTime: 1
+                ) { return }
+                switchRootToTabBar()
+            } else if onSuccess && !hasVerifiedArea {
+                print("🥑onSuccess && !hasVerifiedArea")
+                navigateToLocalVerificationVC()
+            } else {
+                showLoginFailAlert()
+            }
+        }
+    }
+    
+    func switchRootToTabBar() {
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = ACTabBarController()
         }
     }
     
     func navigateToLocalVerificationVC() {
         let vm = LocalVerificationViewModel(flowType: .onboarding)
         let vc = LocalVerificationViewController(viewModel: vm)
-        self.navigationController?.pushViewController(vc, animated: false)
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = UINavigationController(rootViewController: vc)
+        }
     }
     
     func showLoginFailAlert() {
