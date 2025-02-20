@@ -35,9 +35,9 @@ class SpotListViewModel: Serviceable {
     
     var walkingTime: SpotType.WalkingDistanceType = .defaultValue
     
-    var restaurantPrice: SpotType.RestaurantPriceType = .defaultValue // TODO: 옵셔널로 변경
+    var restaurantPrice: SpotType.RestaurantPriceType? = nil
     
-    var cafePrice: SpotType.CafePriceType = .defaultValue // TODO: 옵셔널로 변경
+    var cafePrice: SpotType.CafePriceType? = nil
     
     
     // MARK: - Methods
@@ -59,8 +59,8 @@ class SpotListViewModel: Serviceable {
         spotType.value = nil
         filterList.removeAll()
         walkingTime = .defaultValue
-        restaurantPrice = .defaultValue
-        cafePrice = .defaultValue
+        restaurantPrice = nil
+        cafePrice = nil
     }
     
 }
@@ -105,7 +105,7 @@ extension SpotListViewModel {
                 spotType: spotType.value?.serverKey,
                 filterList: filterList.isEmpty ? nil : filterListDTO,
                 walkingTime: walkingTime.serverKey,
-                priceRange: spotType.value == .restaurant ? restaurantPrice.serverKey : cafePrice.serverKey
+                priceRange: spotType.value == .restaurant ? restaurantPrice?.serverKey : cafePrice?.serverKey
             )
         )
         

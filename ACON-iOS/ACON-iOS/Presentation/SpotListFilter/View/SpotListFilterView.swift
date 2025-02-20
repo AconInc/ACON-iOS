@@ -78,11 +78,11 @@ class SpotListFilterView: GlassmorphismView {
     
     let restaurantPriceSlider = CustomSlider(
         indicators: SpotType.RestaurantPriceType.allCases.map { return $0.text },
-        startIndex: 4)
+        startIndex: 1)
     
     let cafePriceSlider = CustomSlider(
         indicators: SpotType.CafePriceType.allCases.map { return $0.text },
-        startIndex: 2)
+        startIndex: 1)
     
     
     // MARK: - Lifecycle

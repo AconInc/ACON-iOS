@@ -200,7 +200,7 @@ enum SpotType {
         
         case fiveThousand, tenThousand, thirtyThousand, fiftyThousand, aboveFiftyThousand
         
-        static let defaultValue: Self = .aboveFiftyThousand
+        static let defaultValue: Self = .tenThousand
         
         var text: String {
             switch self {
@@ -228,7 +228,7 @@ enum SpotType {
         
         case threeTousand, fiveThousand, aboveTenThousand
         
-        static let defaultValue: Self = .aboveTenThousand
+        static let defaultValue: Self = .fiveThousand
         
         var text: String {
             switch self {

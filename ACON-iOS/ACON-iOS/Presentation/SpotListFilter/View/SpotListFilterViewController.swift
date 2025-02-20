@@ -233,8 +233,8 @@ private extension SpotListFilterViewController {
         
         // NOTE: 슬라이더 세팅
         let walkingTimeIndex = SpotType.WalkingDistanceType.allCases.firstIndex(of: viewModel.walkingTime) ?? 2
-        let restaurantPriceIndex = SpotType.RestaurantPriceType.allCases.firstIndex(of: viewModel.restaurantPrice) ?? 1
-        let cafePriceIndex = SpotType.CafePriceType.allCases.firstIndex(of: viewModel.cafePrice) ?? 2
+        let restaurantPriceIndex = SpotType.RestaurantPriceType.allCases.firstIndex(of: viewModel.restaurantPrice ?? .defaultValue) ?? 1
+        let cafePriceIndex = SpotType.CafePriceType.allCases.firstIndex(of: viewModel.cafePrice ?? .defaultValue) ?? 2
         
         spotListFilterView.walkingSlider.moveThumbPosition(to: walkingTimeIndex)
         spotListFilterView.restaurantPriceSlider.moveThumbPosition(to: restaurantPriceIndex)
