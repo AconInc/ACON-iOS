@@ -91,7 +91,7 @@ class ProfileViewModel: Serviceable {
                 if error.code == 40901 {
                     self?.nicknameValidityMessageType = .nicknameTaken
                 } else if error.code == 40051 {
-                    self?.nicknameValidityMessageType = .invalidChar
+                    self?.nicknameValidityMessageType = .invalidSymbolAndLang
                 }
                 self?.onGetNicknameValiditySuccess.value = false
             default:

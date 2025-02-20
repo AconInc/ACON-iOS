@@ -82,7 +82,7 @@ class ProfileEditValidMessageView: BaseView {
             hideFirstLine(true)
             hideSecondLine(true)
             
-        case .nicknameMissing, .nicknameTaken, .invalidDate, .areaMissing:
+        case .nicknameMissing, .nicknameTaken, .invalidDate, .areaMissing, .invalidSymbol, .invalidLanguage:
             guard type.texts.count == 1 else { print(idxErrMsg); return }
             hideFirstLine(false)
             hideSecondLine(true)
@@ -96,7 +96,7 @@ class ProfileEditValidMessageView: BaseView {
             firstIcon.image = .icLocalCheckMark20
             firstLine.setLabel(text: type.texts[0], style: .s2, color: .blue1)
         
-        case .invalidChar:
+        case .invalidSymbolAndLang:
             guard type.texts.count == 2 else { print(idxErrMsg); return }
             hideFirstLine(false)
             hideSecondLine(false)
