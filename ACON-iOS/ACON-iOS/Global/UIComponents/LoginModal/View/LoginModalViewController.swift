@@ -116,7 +116,7 @@ extension LoginModalViewController {
             guard let self = self else { return }
             self.onSuccessLogin?(onSuccess)
             self.dismiss(animated: true)
-            onSuccess ? ACToastController.show(StringLiterals.LoginModal.successLogin, bottomInset: 112, delayTime: 1) { [weak self] in return } : showLoginFailAlert()
+            onSuccess ? ACToastController.show(StringLiterals.LoginModal.successLogin, bottomInset: 112, delayTime: 1) { return } : showLoginFailAlert()
         }
     }
     

@@ -94,6 +94,8 @@ private extension VerifiedAreasEditViewController {
                 }
                 
                 viewModel.isAppendingVerifiedAreaList = false
+            } else {
+                self.showDefaultAlert(title: "인증 동네 로드 실패", message: "인증 동네 로드에 실패했습니다.")
             }
             
         }
@@ -106,6 +108,8 @@ private extension VerifiedAreasEditViewController {
                let index = viewModel.verifiedAreaList.firstIndex(of: area) {
                 viewModel.verifiedAreaList.remove(at: index)
                 verifiedAreasEditView.removeVerifiedArea(verifiedArea: area)
+            } else {
+                self.showDefaultAlert(title: "인증 동네 삭제 실패", message: "인증 동네 삭제에 실패했습니다.")
             }
         }
         

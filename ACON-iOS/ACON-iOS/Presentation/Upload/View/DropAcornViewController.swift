@@ -138,6 +138,9 @@ private extension DropAcornViewController {
             if onSuccess {
                 self?.possessAcornCount = data
                 self?.dropAcornView.bindData(data)
+            } else {
+                // TODO: - 👠 이건 없애는 게 UI에 좋을 듯
+                self?.showDefaultAlert(title: "도토리 개수 로드 실패", message: "도토리 개수 로드에 실패했습니다.")
             }
         }
         
@@ -147,6 +150,8 @@ private extension DropAcornViewController {
                 let vc = ReviewFinishedViewController()
                 vc.modalPresentationStyle = .fullScreen
                 self?.present(vc, animated: false)
+            } else {
+                self?.showDefaultAlert(title: "리뷰 포스트 실패", message: "도토리 개수 로드에 실패했습니다.")
             }
         }
     }
@@ -161,7 +166,7 @@ private extension DropAcornViewController {
     func checkAcorn(_ dropAcorn: Int) {
         if dropAcorn > possessAcornCount {
             ACToastController.show(StringLiterals.Upload.noAcorn, bottomInset: 112, delayTime: 1)
-            { [weak self] in return }
+            { return }
             dropAcornView.dropAcornLottieView.isHidden = true
             disableLeaveReviewButton()
         } else {
