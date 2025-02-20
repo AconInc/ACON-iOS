@@ -159,8 +159,15 @@ private extension SpotDetailViewController {
     
     func bindNavBar(data: SpotDetailInfoModel) {
         self.secondTitleLabel.do {
+            $0.textAlignment = .left
             $0.isHidden = false
-            $0.setPartialText(fullText: data.name+" "+data.spotType, textStyles: [(data.name+" ", .t2, .acWhite), (data.spotType, .b2, .acWhite)])
+            
+            let fullText = NSMutableAttributedString()
+            fullText.append(data.name.ACStyle(ACFontStyleType.t2))
+            fullText.append(" ".ACStyle(ACFontStyleType.t2))
+            fullText.append(data.spotType.ACStyle(ACFontStyleType.b2))
+
+            $0.attributedText = fullText
         }
     }
     
