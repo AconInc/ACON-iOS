@@ -145,6 +145,7 @@ private extension LocalMapViewController {
         }
         
         vc.setSheetLayout(detent: .middle)
+        vc.isModalInPresentation = true
         self.addBlurView()
         self.present(vc, animated: true)
     }
