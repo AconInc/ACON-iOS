@@ -177,12 +177,7 @@ extension WithdrawalViewController {
     private func presentWithdrawalSheet() {
         let sheetVC = WithdrawalConfirmationViewController()
         
-        if let sheet = sheetVC.sheetPresentationController {
-            sheetVC.viewModel = viewModel
-            sheet.detents = [ACSheetDetent.shortDetent]
-            sheet.prefersGrabberVisible = true
-        }
-        
+        sheetVC.setSheetLayout(detent: .short)
         DispatchQueue.main.async {
             self.otherReasonTextFieldView.isHidden = (self.viewModel.selectedOption.value != StringLiterals.Withdrawal.optionOthers)
         }
