@@ -100,7 +100,12 @@ extension SpotListViewController {
                   let onSuccess = onSuccess else { return }
             if onSuccess {
                 setTitleLabelStyle(title: viewModel.currentDong)
+            } else if viewModel.errorType == .unsupportedRegion {
+                self.setTitleLabelStyle(title: StringLiterals.SpotList.unsupportedRegionNavTitle)
+            } else {
+                self.setTitleLabelStyle(title: StringLiterals.SpotList.failedToGetAddressNavTitle)
             }
+            viewModel.onSuccessGetDong.value = nil
         }
         
         viewModel.onSuccessPostSpotList.bind { [weak self] isSuccess in
@@ -137,11 +142,6 @@ extension SpotListViewController {
             if showErrorView {
                 errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
                                    buttonTitle: nil)
-                
-                if viewModel.errorType == .unsupportedRegion {
-                    self.setTitleLabelStyle(title: StringLiterals.SpotList.unsupportedRegionNavTitle)
-                }
-                
                 errorView.isHidden = false
             } else {
                 errorView.isHidden = true
