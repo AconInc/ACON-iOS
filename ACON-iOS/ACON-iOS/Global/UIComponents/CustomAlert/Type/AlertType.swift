@@ -11,6 +11,7 @@ enum AlertType: CaseIterable {
     
     case stoppedPreferenceAnalysis // 온보딩 중
     case locationAccessFailImage // 이건 사진
+    case unsupportedRegion // 리뷰 - 위치 인증 실패
     case locationAccessDenied // 업로드 중
     case uploadExit // 업로드 중
     case logout
@@ -24,6 +25,8 @@ enum AlertType: CaseIterable {
             return "취향분석을 그만둘까요?"
         case .locationAccessFailImage:
             return "위치 인식 실패"
+        case .unsupportedRegion:
+            return "위치 인증 실패"
         case .locationAccessDenied:
             return "위치를 확인할 수 없습니다."
         case .uploadExit:
@@ -45,6 +48,8 @@ enum AlertType: CaseIterable {
             return "선호도 조사만이 남아있어요!\n1분 내로 빠르게 끝내실 수 있어요."
         case .locationAccessFailImage:
             return "현재 위치와 등록 장소가 오차 범위 밖에 있습니다.\n좀 더 가까이 이동해보세요."
+        case .unsupportedRegion:
+            return "현재 인증이 불가능한 지역에 있어요."
         case .locationAccessDenied:
             return "acon을 사용하기 위해서는,\n설정에서 정확한 위치 권한을 허용해주세요."
         case .uploadExit:
@@ -65,7 +70,7 @@ enum AlertType: CaseIterable {
         case .stoppedPreferenceAnalysis,
                 .uploadExit:
             return ["그만두기", "계속하기"]
-        case .locationAccessFailImage:
+        case .locationAccessFailImage, .unsupportedRegion:
             return ["확인"]
         case .locationAccessDenied, .libraryAccessDenied:
             return ["그만두기", "설정으로 가기"]

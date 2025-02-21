@@ -22,6 +22,14 @@ class AlertHandler {
         viewController.present(customAlertImageViewController, animated: true, completion: nil)
     }
     
+    func showUnsupportedRegionImageAlert(from viewController: UIViewController) {
+        let customAlertImageViewController = CustomAlertImageViewController()
+        customAlertImageViewController.configure(with: .locationAccessFailImage)
+        customAlertImageViewController.modalPresentationStyle = .overFullScreen
+        customAlertImageViewController.modalTransitionStyle = .crossDissolve
+        viewController.present(customAlertImageViewController, animated: true, completion: nil)
+    }
+    
     
     // MARK: - 취향 분석 중단 Alert
     
