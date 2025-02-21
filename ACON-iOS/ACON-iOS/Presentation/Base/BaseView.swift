@@ -50,7 +50,7 @@ extension BaseView {
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*4)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(ScreenUtils.heightRatio*36)
-            $0.height.equalTo(ScreenUtils.heightRatio*3)
+            $0.height.equalTo(ScreenUtils.heightRatio*5)
         }
 
         handlerImageView.do {

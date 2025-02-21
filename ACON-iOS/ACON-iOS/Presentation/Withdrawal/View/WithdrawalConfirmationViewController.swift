@@ -24,11 +24,37 @@ final class WithdrawalConfirmationViewController: BaseViewController {
         super.viewDidLoad()
         
         setAction()
+        bindViewModel()
     }
     
 }
 
-extension WithdrawalConfirmationViewController{
+
+// MARK: - bind VM
+
+extension WithdrawalConfirmationViewController {
+    
+    func bindViewModel() {
+        viewModel?.onSuccessWithdrawal.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
+            
+            if onSuccess {
+                if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                    sceneDelegate.window?.rootViewController = SplashViewController()
+                }
+            } else {
+                self.showDefaultAlert(title: "탈퇴 실패", message: "탈퇴에 실패했습니다.")
+            }
+        }
+    }
+    
+}
+
+
+// MARK: - setAction
+
+extension WithdrawalConfirmationViewController {
     
     private func setAction() {
         confirmationView.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
@@ -41,12 +67,7 @@ extension WithdrawalConfirmationViewController{
     }
     
     @objc private func confirmButtonTapped() {
-
         viewModel?.withdrawalAPI()
-        
-        let mainVC = SplashViewController()
-        mainVC.modalPresentationStyle = .fullScreen
-        self.present(mainVC, animated: true)
     }
     
     @objc private func closeButtonTapped() {

@@ -38,14 +38,6 @@ final class WithdrawalTableViewCell: BaseTableViewCell {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
         }
-        
-        titleLabel.do {
-            $0.setLabel(text: "",
-                        style: .s1,
-                        alignment: .center,
-                        numberOfLines: 0)
-            $0.textColor = .acWhite
-        }
     }
     
     override func setHierarchy() {
@@ -75,7 +67,10 @@ final class WithdrawalTableViewCell: BaseTableViewCell {
     }
     
     func checkConfigure(name: String, isSelected: Bool) {
-        titleLabel.text = name
+        titleLabel.setLabel(text: name,
+                    style: .s1,
+                    alignment: .center,
+                    numberOfLines: 0)
         if isSelected {
             withdrawalImageView.image = UIImage(named: "fillCircle")
         } else {

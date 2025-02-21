@@ -30,8 +30,10 @@ final class WithdrawalConfirmationView: GlassmorphismView {
     override func setStyle() {
         super.setStyle()
         
+        self.setHandlerImageView()
+        
         iconImageView.do {
-            $0.image = UIImage(named: "img_empty_search") 
+            $0.image = .imgEmptySearch
             $0.contentMode = .scaleAspectFit
         }
         
@@ -52,25 +54,20 @@ final class WithdrawalConfirmationView: GlassmorphismView {
         }
         
         cancelButton.do {
-            $0.setTitle(StringLiterals.WithdrawalConfirmation.cancelButtonTitle, for: .normal)
             $0.backgroundColor = .gray5
-            $0.setTitleColor(.white, for: .normal)
-            $0.titleLabel?.font = ACFontStyleType.h7.font
+            $0.setAttributedTitle(text: StringLiterals.WithdrawalConfirmation.cancelButtonTitle, style: .h7)
             $0.layer.cornerRadius = 6
         }
         
         confirmButton.do {
-            $0.setTitle(StringLiterals.WithdrawalConfirmation.confirmButtonTitle, for: .normal)
             $0.backgroundColor = .org1
-            $0.setTitleColor(.white, for: .normal)
-            $0.titleLabel?.font = ACFontStyleType.h7.font
+            $0.setAttributedTitle(text: StringLiterals.WithdrawalConfirmation.confirmButtonTitle, style: .h7)
             $0.layer.cornerRadius = 6
         }
         
         closeButton.do {
-            $0.setImage(UIImage(systemName: "icX"), for: .normal)
-            $0.contentMode = .scaleAspectFit
-            $0.tintColor = .white
+            $0.setImage(.icX, for: .normal)
+            $0.tintColor = .acWhite
         }
     }
     
