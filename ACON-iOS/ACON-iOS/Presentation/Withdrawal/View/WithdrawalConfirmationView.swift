@@ -54,18 +54,14 @@ final class WithdrawalConfirmationView: GlassmorphismView {
         }
         
         cancelButton.do {
-            $0.setTitle(StringLiterals.WithdrawalConfirmation.cancelButtonTitle, for: .normal)
             $0.backgroundColor = .gray5
-            $0.setTitleColor(.white, for: .normal)
-            $0.titleLabel?.font = ACFontStyleType.h7.font
+            $0.setAttributedTitle(text: StringLiterals.WithdrawalConfirmation.cancelButtonTitle, style: .h7)
             $0.layer.cornerRadius = 6
         }
         
         confirmButton.do {
-            $0.setTitle(StringLiterals.WithdrawalConfirmation.confirmButtonTitle, for: .normal)
             $0.backgroundColor = .org1
-            $0.setTitleColor(.white, for: .normal)
-            $0.titleLabel?.font = ACFontStyleType.h7.font
+            $0.setAttributedTitle(text: StringLiterals.WithdrawalConfirmation.confirmButtonTitle, style: .h7)
             $0.layer.cornerRadius = 6
         }
         
