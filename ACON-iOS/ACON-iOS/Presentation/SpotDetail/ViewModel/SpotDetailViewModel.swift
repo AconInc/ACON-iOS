@@ -116,8 +116,8 @@ extension SpotDetailViewModel {
 extension SpotDetailViewModel {
     
     func redirectToNaverMap() {
+        ACLocationManager.shared.stopUpdatingLocation()
         ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
-        ACLocationManager.shared.startUpdatingLocation()
     }
     
 }
@@ -128,6 +128,8 @@ extension SpotDetailViewModel {
 extension SpotDetailViewModel: ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
+        ACLocationManager.shared.stopUpdatingLocation()
+        ACLocationManager.shared.removeDelegate(self)
         guard let appName = Bundle.main.bundleIdentifier else { return }
         let sname = "내 위치"
         let urlString = "nmap://route/walk?slat=\(coordinate.latitude)&slng=\(coordinate.longitude)&sname=\(sname)&dlat=\(spotDetail.value?.latitude ?? 0)&dlng=\(spotDetail.value?.longitude ?? 0)&dname=\(spotDetail.value?.name ?? "")&appname=\(appName)"
