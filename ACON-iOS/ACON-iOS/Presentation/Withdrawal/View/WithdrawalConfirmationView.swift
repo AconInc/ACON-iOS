@@ -30,6 +30,8 @@ final class WithdrawalConfirmationView: GlassmorphismView {
     override func setStyle() {
         super.setStyle()
         
+        self.setHandlerImageView()
+        
         iconImageView.do {
             $0.image = UIImage(named: "img_empty_search") 
             $0.contentMode = .scaleAspectFit
