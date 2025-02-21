@@ -44,9 +44,9 @@ extension WithdrawalConfirmationViewController{
 
         viewModel?.withdrawalAPI()
         
-        let mainVC = SplashViewController()
-        mainVC.modalPresentationStyle = .fullScreen
-        self.present(mainVC, animated: true)
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = SplashViewController()
+        }
     }
     
     @objc private func closeButtonTapped() {
