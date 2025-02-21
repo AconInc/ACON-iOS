@@ -29,7 +29,7 @@ class BaseErrorView: BaseView {
     
     // MARK: - Initializer
     
-    init(
+    init( // TODO: 삭제하고 setStyle internal 메소드 사용 (115줄)
         errorImage: UIImage = .icError1140,
         errorMessage: String,
         buttonTitle: String
@@ -103,6 +103,51 @@ class BaseErrorView: BaseView {
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(40)
             $0.centerX.equalToSuperview()
         }
+    }
+    
+}
+
+
+// MARK: - Internal Methods
+
+extension BaseErrorView {
+    
+    func setStyle(errorImage: UIImage = .icError1140,
+                  errorMessage: String?,
+                  buttonTitle: String?) {
+        errorImageView.do {
+            $0.image = errorImage
+            $0.contentMode = .scaleAspectFit
+        }
+        
+        if let errorMessage = errorMessage {
+            descriptionLabel.do {
+                $0.isHidden = false
+                $0.setLabel(text: errorMessage,
+                            style: .s1,
+                            color: .gray4)
+            }
+        } else {
+            descriptionLabel.isHidden = true
+        }
+        
+        if let buttonTitle = buttonTitle {
+            confirmButton.do {
+                var config = UIButton.Configuration.filled()
+                config.attributedTitle = AttributedString(
+                    buttonTitle.ACStyle(.h7)
+                
+                )
+                config.baseBackgroundColor = .org1
+                config.background.cornerRadius = 6
+                config.contentInsets = .init(top: 13, leading: 16, bottom: 13, trailing: 16)
+                $0.configuration = config
+                $0.isHidden = false
+            }
+        } else {
+            confirmButton.isHidden = true
+        }
+        
     }
     
 }

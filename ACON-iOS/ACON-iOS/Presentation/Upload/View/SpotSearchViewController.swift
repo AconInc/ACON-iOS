@@ -153,13 +153,20 @@ private extension SpotSearchViewController {
 
     func bindViewModel() {
         self.spotSearchViewModel.onSuccessGetSearchSuggestion.bind { [weak self] onSuccess in
-            guard let onSuccess, let data = self?.spotSearchViewModel.searchSuggestionData.value else { return }
+            guard let onSuccess else { return }
             if onSuccess {
+                guard let data = self?.spotSearchViewModel.searchSuggestionData.value else { return }
                 self?.spotSearchView.bindData(data)
                 self?.addActionToSearchKeywordButton()
             } else {
+                let errorType = self?.spotSearchViewModel.reviewVerificationErrorType
+                let alertHandler = AlertHandler()
+                if errorType == .unsupportedRegion {
+                    alertHandler.showUnsupportedRegionImageAlert(from: self!)
+                } // TODO: errorType == 존재하지 않는 장소일 때 Alert 필요 (40403 에러)
                 self?.showDefaultAlert(title: "추천 검색어 로드 실패", message: "추천 검색어 로드에 실패했습니다.")
             }
+            self?.spotSearchViewModel.onSuccessGetSearchSuggestion.value = nil
         }
         
         // TODO: - 계속 불러야 해서 일단 데이터 자체 바인딩. 추후 로딩이 필요한 경우 onSuccessGetSearchKeyword으로 바인딩 로직 재구성
@@ -181,8 +188,9 @@ private extension SpotSearchViewController {
         }
         
         self.spotSearchViewModel.onSuccessGetReviewVerification.bind { [weak self] onSuccess in
-            guard let onSuccess, let data = self?.spotSearchViewModel.reviewVerification.value else { return }
+            guard let onSuccess else { return }
             if onSuccess {
+                guard let data = self?.spotSearchViewModel.reviewVerification.value else { return }
                 if data {
                     self?.hasCompletedSelection = true
                     self?.dismiss(animated: true)
@@ -190,10 +198,15 @@ private extension SpotSearchViewController {
                     let alertHandler = AlertHandler()
                     alertHandler.showLocationAccessFailImageAlert(from: self!)
                 }
-                self?.spotSearchViewModel.reviewVerification.value = nil
             } else {
+                let errorType = self?.spotSearchViewModel.reviewVerificationErrorType
+                let alertHandler = AlertHandler()
+                if errorType == .unsupportedRegion {
+                    alertHandler.showUnsupportedRegionImageAlert(from: self!)
+                } // TODO: errorType == 존재하지 않는 장소일 때 Alert 필요 (40403 에러)
                 self?.showDefaultAlert(title: "연관 검색어 로드 실패", message: "연관 검색어 로드에 실패했습니다.")
             }
+            self?.spotSearchViewModel.reviewVerification.value = nil
         }
         
     }

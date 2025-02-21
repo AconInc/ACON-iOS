@@ -30,7 +30,7 @@
 		1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */; };
 		1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */; };
 		156AA7242D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */; };
-		156AA72A2D6510E1005B8DCE /* GetNicknameValidityRequestQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7292D6510E1005B8DCE /* GetNicknameValidityRequestQuery.swift */; };
+		156AA72A2D6510E1005B8DCE /* GetNicknameValidityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7292D6510E1005B8DCE /* GetNicknameValidityRequest.swift */; };
 		156D925C2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925B2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift */; };
 		156D925E2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925D2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift */; };
 		156D92602D6570A90037F8F1 /* PatchProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */; };
@@ -46,6 +46,10 @@
 		15A48BFA2D574BA5003C2421 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BF92D574BA5003C2421 /* ProfileEditView.swift */; };
 		15A48BFC2D574BB9003C2421 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BFB2D574BB9003C2421 /* ProfileEditViewController.swift */; };
 		15A48BFE2D57546A003C2421 /* ProfileImageEditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */; };
+		15AA6D132D68AAB1008021C6 /* GetDongResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA6D122D68AAB1008021C6 /* GetDongResponse.swift */; };
+		15AA6D152D68AC09008021C6 /* GetDongRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA6D142D68AC09008021C6 /* GetDongRequest.swift */; };
+		15AA6D172D68B4EF008021C6 /* SpotListErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA6D162D68B4EF008021C6 /* SpotListErrorType.swift */; };
+		15AA6D1A2D68C4AD008021C6 /* ReviewVerificationErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA6D192D68C4AD008021C6 /* ReviewVerificationErrorType.swift */; };
 		15BFF8B92D665BAD00909C4F /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15BFF8B52D665A5B00909C4F /* Debug.xcconfig */; };
 		15BFF8BA2D665BAD00909C4F /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15BFF8B62D665A5B00909C4F /* Release.xcconfig */; };
 		15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C0ED512D429F7400C9ED83 /* SkeletonView.swift */; };
@@ -71,8 +75,8 @@
 		15CF62C72D57DE680000A10F /* ProfileEditTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */; };
 		15D122292D58BD0200E79866 /* DayOfMonthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D122282D58BD0200E79866 /* DayOfMonthType.swift */; };
 		15DC053F2D623DD400B752DD /* PostLogoutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DC053E2D623DD400B752DD /* PostLogoutRequest.swift */; };
-		15F45F862D66877200BD6B9C /* LoadingAnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */; };
 		15F45F842D6664C900BD6B9C /* BaseErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F45F832D6664C900BD6B9C /* BaseErrorView.swift */; };
+		15F45F862D66877200BD6B9C /* LoadingAnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */; };
 		4C6B2F332D65A15D0089BCB6 /* WithdrawalTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B2F312D65A15D0089BCB6 /* WithdrawalTargetType.swift */; };
 		4C6B2F342D65A15D0089BCB6 /* WithdrawalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B2F302D65A15D0089BCB6 /* WithdrawalService.swift */; };
 		4C6B2F352D65A15D0089BCB6 /* WithdrawalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B2F2E2D65A15D0089BCB6 /* WithdrawalRequest.swift */; };
@@ -272,7 +276,7 @@
 		1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarItemType.swift; sourceTree = "<group>"; };
 		1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
 		156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVerifiedAreaListResponse.swift; sourceTree = "<group>"; };
-		156AA7292D6510E1005B8DCE /* GetNicknameValidityRequestQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNicknameValidityRequestQuery.swift; sourceTree = "<group>"; };
+		156AA7292D6510E1005B8DCE /* GetNicknameValidityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNicknameValidityRequest.swift; sourceTree = "<group>"; };
 		156D925B2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTitleAndButtonsView.swift; sourceTree = "<group>"; };
 		156D925D2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTitleAndButtonsViewController.swift; sourceTree = "<group>"; };
 		156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchProfileRequest.swift; sourceTree = "<group>"; };
@@ -288,6 +292,10 @@
 		15A48BF92D574BA5003C2421 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		15A48BFB2D574BB9003C2421 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageEditButton.swift; sourceTree = "<group>"; };
+		15AA6D122D68AAB1008021C6 /* GetDongResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDongResponse.swift; sourceTree = "<group>"; };
+		15AA6D142D68AC09008021C6 /* GetDongRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDongRequest.swift; sourceTree = "<group>"; };
+		15AA6D162D68B4EF008021C6 /* SpotListErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListErrorType.swift; sourceTree = "<group>"; };
+		15AA6D192D68C4AD008021C6 /* ReviewVerificationErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewVerificationErrorType.swift; sourceTree = "<group>"; };
 		15BFF8B52D665A5B00909C4F /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		15BFF8B62D665A5B00909C4F /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		15C0ED512D429F7400C9ED83 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
@@ -313,8 +321,8 @@
 		15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTextField.swift; sourceTree = "<group>"; };
 		15D122282D58BD0200E79866 /* DayOfMonthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfMonthType.swift; sourceTree = "<group>"; };
 		15DC053E2D623DD400B752DD /* PostLogoutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLogoutRequest.swift; sourceTree = "<group>"; };
-		15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimatedButton.swift; sourceTree = "<group>"; };
 		15F45F832D6664C900BD6B9C /* BaseErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseErrorView.swift; sourceTree = "<group>"; };
+		15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimatedButton.swift; sourceTree = "<group>"; };
 		4C6B2F2E2D65A15D0089BCB6 /* WithdrawalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalRequest.swift; sourceTree = "<group>"; };
 		4C6B2F302D65A15D0089BCB6 /* WithdrawalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalService.swift; sourceTree = "<group>"; };
 		4C6B2F312D65A15D0089BCB6 /* WithdrawalTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalTargetType.swift; sourceTree = "<group>"; };
@@ -522,7 +530,7 @@
 			isa = PBXGroup;
 			children = (
 				151003EB2D5FBF7200409DF4 /* GetProfileResponse.swift */,
-				156AA7292D6510E1005B8DCE /* GetNicknameValidityRequestQuery.swift */,
+				156AA7292D6510E1005B8DCE /* GetNicknameValidityRequest.swift */,
 				156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */,
 			);
 			path = DTO;
@@ -590,6 +598,7 @@
 			children = (
 				1547A8772D3550D900E96616 /* MatchingRateBgColorType.swift */,
 				15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */,
+				15AA6D162D68B4EF008021C6 /* SpotListErrorType.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -692,6 +701,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		15AA6D182D68C494008021C6 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				15AA6D192D68C4AD008021C6 /* ReviewVerificationErrorType.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
 		15CD256C2D3D794300320006 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -717,6 +734,8 @@
 			children = (
 				15CD25772D3FE31400320006 /* PostSpotListRequest.swift */,
 				15CD257B2D3FF13F00320006 /* PostSpotListResponse.swift */,
+				15AA6D142D68AC09008021C6 /* GetDongRequest.swift */,
+				15AA6D122D68AAB1008021C6 /* GetDongResponse.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -811,6 +830,7 @@
 		74220DD12D34361E000684BF /* Upload */ = {
 			isa = PBXGroup;
 			children = (
+				15AA6D182D68C494008021C6 /* Type */,
 				745C7E0E2D35A53E0074DBDB /* Model */,
 				745C7E132D35AEA70074DBDB /* ViewModel */,
 				74220DD22D34362C000684BF /* View */,
@@ -1756,7 +1776,7 @@
 				747F4FBF2D3D9D44003DECBF /* SplashView.swift in Sources */,
 				74C914D32D64E01C00BC13E1 /* PutImageToPresignedURLRequest.swift in Sources */,
 				7462616F2D3EA48300A4E84F /* GetSearchKeywordResponse.swift in Sources */,
-				156AA72A2D6510E1005B8DCE /* GetNicknameValidityRequestQuery.swift in Sources */,
+				156AA72A2D6510E1005B8DCE /* GetNicknameValidityRequest.swift in Sources */,
 				74D297F82D63467900DDEE31 /* ImageService.swift in Sources */,
 				15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */,
 				D6E816AA2D624DDB001E4EBF /* BaseTabelViewCell.swift in Sources */,
@@ -1841,10 +1861,12 @@
 				74BF92122D391FFE00B923E3 /* LocalMapViewController.swift in Sources */,
 				D6E8168E2D6228F5001E4EBF /* WithdrawalViewController.swift in Sources */,
 				15F45F842D6664C900BD6B9C /* BaseErrorView.swift in Sources */,
+				15AA6D132D68AAB1008021C6 /* GetDongResponse.swift in Sources */,
 				746261692D3EA33300A4E84F /* PostReviewRequest.swift in Sources */,
 				15CD257E2D3FF4F200320006 /* SpotListTargetType.swift in Sources */,
 				156D925C2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift in Sources */,
 				74BF92132D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift in Sources */,
+				15AA6D152D68AC09008021C6 /* GetDongRequest.swift in Sources */,
 				746F15B72D3E2083003EA031 /* PostLocalAreaRequest.swift in Sources */,
 				74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */,
 				D696F1B22D3A7E3400CCD5FF /* CustomAlertView.swift in Sources */,
@@ -1854,6 +1876,7 @@
 				7462D0252D4262F300580464 /* AuthManager.swift in Sources */,
 				74C914D12D64DBBB00BC13E1 /* ImageType.swift in Sources */,
 				74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */,
+				15AA6D1A2D68C4AD008021C6 /* ReviewVerificationErrorType.swift in Sources */,
 				741429652D5D470200B69528 /* SettingViewModel.swift in Sources */,
 				74BF92042D3861A600B923E3 /* SpotDetailViewController.swift in Sources */,
 				15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */,
@@ -1897,6 +1920,7 @@
 				748ECA6E2D3196F100BBC981 /* LoginViewController.swift in Sources */,
 				746261892D3FA29C00A4E84F /* SpotDetailTargetType.swift in Sources */,
 				D6E34C432D398B6000CEFA04 /* CustomAlertImageViewController.swift in Sources */,
+				15AA6D172D68B4EF008021C6 /* SpotListErrorType.swift in Sources */,
 				741E68952D3D38BC00DF99EF /* BaseService.swift in Sources */,
 				746F15BB2D3E2167003EA031 /* LocalVerificationTargetType.swift in Sources */,
 				D6E34C462D398B6000CEFA04 /* AlertType.swift in Sources */,

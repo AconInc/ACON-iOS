@@ -13,7 +13,7 @@ protocol ProfileServiceProtocol {
 
     func getProfile(completion: @escaping (NetworkResult<GetProfileResponse>) -> Void)
     
-    func getNicknameValidity(parameter: GetNicknameValidityRequestQuery,
+    func getNicknameValidity(parameter: GetNicknameValidityRequest,
                              completion: @escaping (NetworkResult<EmptyResponse>) -> Void)
     
     func patchProfile(requestBody: PatchProfileRequest,
@@ -39,7 +39,7 @@ final class ProfileService: BaseService<ProfileTargetType>, ProfileServiceProtoc
         }
     }
     
-    func getNicknameValidity(parameter: GetNicknameValidityRequestQuery,
+    func getNicknameValidity(parameter: GetNicknameValidityRequest,
                              completion: @escaping (NetworkResult<EmptyResponse>) -> Void) {
         self.provider.request(.getNicknameValidity(parameter)) { result in
             switch result {
