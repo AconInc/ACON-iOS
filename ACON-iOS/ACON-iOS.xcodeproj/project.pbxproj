@@ -71,8 +71,8 @@
 		15CF62C72D57DE680000A10F /* ProfileEditTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */; };
 		15D122292D58BD0200E79866 /* DayOfMonthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D122282D58BD0200E79866 /* DayOfMonthType.swift */; };
 		15DC053F2D623DD400B752DD /* PostLogoutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DC053E2D623DD400B752DD /* PostLogoutRequest.swift */; };
-		15F45F862D66877200BD6B9C /* LoadingAnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */; };
 		15F45F842D6664C900BD6B9C /* BaseErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F45F832D6664C900BD6B9C /* BaseErrorView.swift */; };
+		15F45F862D66877200BD6B9C /* LoadingAnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */; };
 		4C6B2F332D65A15D0089BCB6 /* WithdrawalTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B2F312D65A15D0089BCB6 /* WithdrawalTargetType.swift */; };
 		4C6B2F342D65A15D0089BCB6 /* WithdrawalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B2F302D65A15D0089BCB6 /* WithdrawalService.swift */; };
 		4C6B2F352D65A15D0089BCB6 /* WithdrawalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B2F2E2D65A15D0089BCB6 /* WithdrawalRequest.swift */; };
@@ -210,6 +210,7 @@
 		74D31C7A2D5841EA00B4B2B4 /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D31C792D5841D100B4B2B4 /* PhotoCollectionViewController.swift */; };
 		74D31C7C2D5BF90300B4B2B4 /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D31C7B2D5BF8FD00B4B2B4 /* AlbumModel.swift */; };
 		74D31C802D5C025900B4B2B4 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D31C7F2D5C025200B4B2B4 /* PhotoCollectionViewCell.swift */; };
+		74D831922D6878A5003384C6 /* AmplitudeSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 74D831912D6878A5003384C6 /* AmplitudeSwift */; };
 		D61917E92D3E4410001BF0EE /* OnboardingTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917E82D3E4410001BF0EE /* OnboardingTargetType.swift */; };
 		D61917EC2D3E484A001BF0EE /* OnboardingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917EB2D3E484A001BF0EE /* OnboardingRequest.swift */; };
 		D6232C952D3A294C003FF208 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6232C942D3A294C003FF208 /* AlertHandler.swift */; };
@@ -313,8 +314,8 @@
 		15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTextField.swift; sourceTree = "<group>"; };
 		15D122282D58BD0200E79866 /* DayOfMonthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfMonthType.swift; sourceTree = "<group>"; };
 		15DC053E2D623DD400B752DD /* PostLogoutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLogoutRequest.swift; sourceTree = "<group>"; };
-		15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimatedButton.swift; sourceTree = "<group>"; };
 		15F45F832D6664C900BD6B9C /* BaseErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseErrorView.swift; sourceTree = "<group>"; };
+		15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimatedButton.swift; sourceTree = "<group>"; };
 		4C6B2F2E2D65A15D0089BCB6 /* WithdrawalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalRequest.swift; sourceTree = "<group>"; };
 		4C6B2F302D65A15D0089BCB6 /* WithdrawalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalService.swift; sourceTree = "<group>"; };
 		4C6B2F312D65A15D0089BCB6 /* WithdrawalTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalTargetType.swift; sourceTree = "<group>"; };
@@ -494,6 +495,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74D831922D6878A5003384C6 /* AmplitudeSwift in Frameworks */,
 				748D6F4D2D2BC76C007690B4 /* GoogleSignIn in Frameworks */,
 				74B25C252D2FD30A008BDCB7 /* Lottie in Frameworks */,
 				748D6F4A2D2BC52B007690B4 /* Kingfisher in Frameworks */,
@@ -1586,6 +1588,7 @@
 				748D6F4C2D2BC76C007690B4 /* GoogleSignIn */,
 				748D6F4E2D2BC76C007690B4 /* GoogleSignInSwift */,
 				74B25C242D2FD30A008BDCB7 /* Lottie */,
+				74D831912D6878A5003384C6 /* AmplitudeSwift */,
 			);
 			productName = "ACON-iOS";
 			productReference = 74AB6EB02D2796D30094F873 /* ACON-iOS.app */;
@@ -1622,6 +1625,7 @@
 				748D6F482D2BC52B007690B4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				748D6F4B2D2BC76C007690B4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				74B25C232D2FD30A008BDCB7 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				74D831902D6878A5003384C6 /* XCRemoteSwiftPackageReference "Amplitude-Swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 74AB6EB12D2796D30094F873 /* Products */;
@@ -2205,6 +2209,14 @@
 				minimumVersion = 4.5.1;
 			};
 		};
+		74D831902D6878A5003384C6 /* XCRemoteSwiftPackageReference "Amplitude-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/amplitude/Amplitude-Swift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2242,6 +2254,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 74B25C232D2FD30A008BDCB7 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		74D831912D6878A5003384C6 /* AmplitudeSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 74D831902D6878A5003384C6 /* XCRemoteSwiftPackageReference "Amplitude-Swift" */;
+			productName = AmplitudeSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
