@@ -146,6 +146,8 @@ extension SpotListViewController {
             } else {
                 errorView.isHidden = true
             }
+            
+            viewModel.showErrorView.value = nil
         }
     }
     

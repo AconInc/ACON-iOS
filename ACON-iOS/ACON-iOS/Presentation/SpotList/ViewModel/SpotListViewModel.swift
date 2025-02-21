@@ -94,6 +94,8 @@ extension SpotListViewModel {
                     if error.code == 40405 {
                         self?.errorType = .unsupportedRegion
                         self?.showErrorView.value = true
+                    } else {
+                        self?.showErrorView.value = false
                     }
                     self?.onSuccessGetDong.value = false
                 default:
