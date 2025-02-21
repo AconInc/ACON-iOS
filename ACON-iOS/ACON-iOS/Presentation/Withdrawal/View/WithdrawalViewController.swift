@@ -178,6 +178,8 @@ extension WithdrawalViewController {
         let sheetVC = WithdrawalConfirmationViewController()
         
         sheetVC.setSheetLayout(detent: .short)
+        sheetVC.isModalInPresentation = true
+        
         DispatchQueue.main.async {
             self.otherReasonTextFieldView.isHidden = (self.viewModel.selectedOption.value != StringLiterals.Withdrawal.optionOthers)
         }
