@@ -32,13 +32,14 @@ class SpotListViewController: BaseNavViewController {
         setCollectionView()
         addTarget()
         
-        viewModel.requestLocation()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         
         self.tabBarController?.tabBar.isHidden = false
+        viewModel.requestLocation()
     }
     
     override func setHierarchy() {
