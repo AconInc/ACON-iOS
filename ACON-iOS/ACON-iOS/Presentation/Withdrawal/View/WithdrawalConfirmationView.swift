@@ -68,9 +68,8 @@ final class WithdrawalConfirmationView: GlassmorphismView {
         }
         
         closeButton.do {
-            $0.setImage(UIImage(systemName: "icX"), for: .normal)
-            $0.contentMode = .scaleAspectFit
-            $0.tintColor = .white
+            $0.setImage(.icX, for: .normal)
+            $0.tintColor = .acWhite
         }
     }
     
