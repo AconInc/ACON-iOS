@@ -10,15 +10,10 @@ import UIKit
 import SnapKit
 import Then
 
-final class WithdrawalViewController: BaseViewController {
+final class WithdrawalViewController: BaseNavViewController {
     
     var viewModel = WithdrawalViewModel()
     private let otherReasonTextFieldView = CustomTextFieldView()
-    private let glassMorphismView = GlassmorphismView()
-    private let topInsetView = UIView()
-    
-    private let leftButton: UIButton = UIButton()
-    private let centerTitleLabel = UILabel()
     
     private let reasonTitleLabel = UILabel()
     private let reasonDescriptionLabel = UILabel()
@@ -43,13 +38,9 @@ final class WithdrawalViewController: BaseViewController {
     override func setStyle() {
         super.setStyle()
         
-        view.backgroundColor = .gray9
-        
-        setBackButton()
-        
-        setCenterTitleLabelStyle(title: "서비스 탈퇴")
-        
-        topInsetView.backgroundColor = .clear
+        self.setBackButton()
+        self.setCenterTitleLabelStyle(title: "서비스 탈퇴")
+        self.setGlassMorphism()
         
         glassMorphismView.alpha = 0
         
@@ -86,12 +77,8 @@ final class WithdrawalViewController: BaseViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        view.addSubviews(containerView,
-                         topInsetView,
-                         glassMorphismView,
-                         leftButton,
-                         centerTitleLabel
-        )
+        contentView.addSubviews(containerView,
+                         glassMorphismView)
         
         containerView.addSubviews(
             reasonTitleLabel,
@@ -105,30 +92,8 @@ final class WithdrawalViewController: BaseViewController {
     override func setLayout() {
         super.setLayout()
         
-        topInsetView.snp.makeConstraints {
-            $0.top.horizontalEdges.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top)
-        }
-        
-        glassMorphismView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).offset(ScreenUtils.heightRatio * 56)
-        }
-        
-        leftButton.snp.makeConstraints {
-            $0.centerY.equalTo(glassMorphismView.snp.bottom).offset(-ScreenUtils.heightRatio*28)
-            $0.leading.equalToSuperview().offset(20)
-            $0.size.equalTo(24)
-        }
-        
-        centerTitleLabel.snp.makeConstraints {
-            $0.centerX.equalTo(glassMorphismView)
-            $0.centerY.equalTo(leftButton)
-        }
-        
         containerView.snp.makeConstraints {
-            $0.top.equalTo(glassMorphismView.snp.bottom).offset(10)
+            $0.top.equalToSuperview().inset(10)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
         
@@ -177,11 +142,8 @@ extension WithdrawalViewController {
     private func presentWithdrawalSheet() {
         let sheetVC = WithdrawalConfirmationViewController()
         
-        if let sheet = sheetVC.sheetPresentationController {
-            sheetVC.viewModel = viewModel
-            sheet.detents = [ACSheetDetent.shortDetent]
-            sheet.prefersGrabberVisible = true
-        }
+        sheetVC.setSheetLayout(detent: .short)
+        sheetVC.isModalInPresentation = true
         
         DispatchQueue.main.async {
             self.otherReasonTextFieldView.isHidden = (self.viewModel.selectedOption.value != StringLiterals.Withdrawal.optionOthers)
@@ -292,50 +254,4 @@ extension WithdrawalViewController {
     @objc override func dismissKeyboard() {
         view.endEditing(true)
     }
-}
-
-// MARK: about navigationbar
-extension WithdrawalViewController{
-    
-    @objc func backButtonTapped() {
-        
-        let mainVC = ProfileSettingViewController()
-        
-        if let navigationController = navigationController {
-            navigationController.pushViewController(mainVC, animated: true)
-        } else {
-            mainVC.modalPresentationStyle = .fullScreen
-            present(mainVC, animated: true)
-        }
-    }
-    
-    func setCenterTitleLabelStyle(title: String,
-                                  fontStyle: ACFontStyleType = .t2,
-                                  color: UIColor = .acWhite,
-                                  alignment: NSTextAlignment = .center) {
-        centerTitleLabel.do {
-            $0.isHidden = false
-            $0.setLabel(text: title,
-                        style: fontStyle,
-                        color: color)
-            $0.textAlignment = alignment
-        }
-    }
-    
-    func setBackButton() {
-        setButtonStyle(button: leftButton, image: .leftArrow)
-        setButtonAction(button: leftButton, target: self, action: #selector(backButtonTapped))
-    }
-    
-    func setButtonStyle(button: UIButton, image: UIImage?) {
-        button.do {
-            $0.isHidden = false
-            $0.setImage(image, for: .normal)
-        }
-    }
-    
-    func setButtonAction(button: UIButton, target: Any, action: Selector) {
-        button.addTarget(target, action: action, for: .touchUpInside)
-    }
-    
 }

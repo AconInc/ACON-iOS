@@ -119,13 +119,18 @@ extension LoginModalViewController {
             
             let hasVerifiedArea = loginViewModel.hasVerifiedArea
             if onSuccess && hasVerifiedArea {
-                print("🥑onSuccess && hasVerifiedArea")
                 ACToastController.show(
                     StringLiterals.LoginModal.successLogin,
                     bottomInset: 112,
                     delayTime: 1
                 ) { return }
-                switchRootToTabBar()
+                
+                let authStatus = ACLocationManager.shared.locationManager.authorizationStatus
+                if authStatus == .denied || authStatus == .restricted {
+                    navigateToLocalVerificationVC()
+                } else {
+                    switchRootToTabBar()
+                }
             } else if onSuccess && !hasVerifiedArea {
                 print("🥑onSuccess && !hasVerifiedArea")
                 navigateToLocalVerificationVC()
@@ -171,7 +176,6 @@ extension LoginModalViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
         // TODO: - 에러 처리
         print("apple login error")
-        self.showLoginFailAlert()
     }
     
 }

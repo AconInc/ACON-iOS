@@ -93,6 +93,15 @@ class AlertHandler {
                   UIApplication.shared.canOpenURL(settingsURL) else { return }
             UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
         }
+        customAlertViewController.onClose = {
+            customAlertViewController.dismiss(animated: true) {
+                if let tabBarController = viewController as? ACTabBarController,
+                   let navController = tabBarController.selectedViewController as? UINavigationController,
+                   let profileEditVC = navController.viewControllers.first(where: { $0 is ProfileEditViewController }) as? ProfileEditViewController {
+                    navController.popToViewController(profileEditVC, animated: true)
+                }
+            }
+        }
         presentAlert(customAlertViewController, from: viewController)
     }
     
