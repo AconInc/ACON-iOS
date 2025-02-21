@@ -12,6 +12,7 @@ import Then
 
 final class CustomTextFieldView: BaseView, UITextViewDelegate {
 
+    private let scrollView = UIScrollView()
     private let textView = UITextView()
     private let characterCountLabel = UILabel()
     private let placeholderLabel = UILabel()
@@ -31,6 +32,11 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
     override func setStyle() {
         super.setStyle()
 
+        scrollView.do {
+            $0.showsVerticalScrollIndicator = true
+            $0.alwaysBounceVertical = true
+        }
+        
         textView.do {
             $0.backgroundColor = .clear
             $0.textColor = .white
@@ -40,8 +46,9 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
             $0.layer.cornerRadius = 4.0
             $0.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             $0.delegate = self
+            $0.isScrollEnabled = false
         }
-        
+
         placeholderLabel.do {
             $0.text = StringLiterals.Withdrawal.withdrawalReason
             $0.font = .systemFont(ofSize: 16)
@@ -59,26 +66,37 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
 
     override func setHierarchy() {
         super.setHierarchy()
-        
-        addSubviews(textView,placeholderLabel,characterCountLabel)
+
+        addSubview(scrollView)
+        scrollView.addSubview(textView)
+        addSubviews(placeholderLabel, characterCountLabel)
     }
+
 
     override func setLayout() {
         super.setLayout()
 
-        textView.snp.makeConstraints {
+        scrollView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.height.greaterThanOrEqualTo(100).priority(.required)
+            $0.bottom.equalTo(characterCountLabel.snp.top).offset(-4)
         }
         
+        textView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.trailing.equalTo(self)
+            $0.width.equalTo(self)
+            $0.height.greaterThanOrEqualTo(100).priority(.required)
+        }
+
+
         placeholderLabel.snp.makeConstraints {
             $0.top.equalTo(textView).offset(10)
             $0.leading.equalTo(textView).offset(15)
             $0.trailing.equalTo(textView).offset(-10)
         }
-        
+
         characterCountLabel.snp.makeConstraints {
-            $0.top.equalTo(textView.snp.bottom).offset(4)
+            $0.top.equalTo(scrollView.snp.bottom).offset(4)
             $0.trailing.equalTo(textView.snp.trailing)
             $0.bottom.equalToSuperview()
         }
@@ -87,29 +105,21 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = !textView.text.isEmpty
 
-        let size = CGSize(width: textView.frame.width, height: .infinity)
-        let estimatedSize = textView.sizeThatFits(size)
-      
-        if estimatedSize.height > 100 {
-              textView.snp.updateConstraints {
-                  $0.height.equalTo(estimatedSize.height)
-              }
-          }
         onTextChanged?(textView.text)
         updateCharacterCount(textView.text.count)
+
     }
-    
+
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-         let currentText = textView.text ?? ""
-         guard let stringRange = Range(range, in: currentText) else { return false }
-         
-         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
-         
-         return updatedText.count <= 50
-     }
+        let currentText = textView.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
+
+        return updatedText.count <= 50
+    }
 
     func updateCharacterCount(_ count: Int) {
         characterCountLabel.text = "\(count) / 50"
     }
-    
 }
