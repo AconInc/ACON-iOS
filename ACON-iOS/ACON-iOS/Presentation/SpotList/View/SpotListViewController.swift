@@ -11,8 +11,6 @@ class SpotListViewController: BaseNavViewController {
     
     // MARK: - UI Properties
     
-    private let glassMorphismView = GlassmorphismView()
-    
     private let spotListView = SpotListView()
     
     
@@ -124,22 +122,6 @@ extension SpotListViewController {
             spotListView.updateFilterButtonColor(isFilterSet)
             
             viewModel.onFinishRefreshingSpotList.value = true
-        }
-    }
-    
-}
-
-
-// MARK: - 글라스모피즘 - BaseNavVC에 넣으면 오류 떠서 우선 여기에
-// TODO: - 추후 BaseNavVC로 빼기
-
-private extension SpotListViewController {
-    
-    func setGlassMorphism() {
-        self.view.insertSubview(glassMorphismView, aboveSubview: contentView)
-        glassMorphismView.snp.makeConstraints {
-            $0.top.equalTo(topInsetView)
-            $0.bottom.horizontalEdges.equalTo(navigationBarView)
         }
     }
     
@@ -335,12 +317,12 @@ extension SpotListViewController: UICollectionViewDataSource {
             [topInsetView, navigationBarView].forEach {
                 $0.backgroundColor = .clear
             }
-            glassMorphismView.isHidden = false
+            self.glassMorphismView.isHidden = false
         } else {
             [topInsetView, navigationBarView].forEach {
                 $0.backgroundColor = .gray9
             }
-            glassMorphismView.isHidden = true
+            self.glassMorphismView.isHidden = true
         }
     }
 }
