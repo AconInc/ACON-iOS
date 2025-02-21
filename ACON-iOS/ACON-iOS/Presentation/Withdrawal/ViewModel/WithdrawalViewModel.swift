@@ -14,6 +14,7 @@ final class WithdrawalViewModel {
     var shouldDismissKeyboard: ObservablePattern<Bool> = ObservablePattern(false)
     var ectOption: ObservablePattern<Bool> = ObservablePattern(false)
     
+    let onSuccessWithdrawal: ObservablePattern<Bool> = ObservablePattern(nil)
     
     func updateSelectedOption(_ option: String?) {
         selectedOption.value = option
@@ -60,8 +61,9 @@ final class WithdrawalViewModel {
                     for key in UserDefaults.standard.dictionaryRepresentation().keys {
                         UserDefaults.standard.removeObject(forKey: key.description)
                     }
-                    
+                    self.onSuccessWithdrawal.value = true
                 default:
+                    self.onSuccessWithdrawal.value = false
                     print("⚙️Logout Failed")
                 }
             }
