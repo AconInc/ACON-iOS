@@ -25,6 +25,8 @@ class SpotSearchViewModel: Serviceable {
     
     var reviewVerification: ObservablePattern<Bool> = ObservablePattern(nil)
     
+    var reviewVerificationErrorType: ReviewVerificationErrorType? = nil
+    
     init(latitude: Double, longitude: Double) {
         self.latitude = latitude
         self.longitude = longitude
@@ -74,6 +76,14 @@ class SpotSearchViewModel: Serviceable {
                 self?.handleReissue { [weak self] in
                     self?.getSearchSuggestion()
                 }
+            case .requestErr(let error):
+                print("🥑getSearchSuggestion requestErr: \(error)")
+                if error.code == 40403 {
+                    self?.reviewVerificationErrorType = .unknownSpot
+                } else if error.code == 40405 {
+                    self?.reviewVerificationErrorType = .unsupportedRegion
+                }
+                self?.onSuccessGetSearchSuggestion.value = false
             default:
                 print("VM - Fail to getSearchSuggestion")
                 self?.onSuccessGetSearchSuggestion.value = false
@@ -91,6 +101,18 @@ class SpotSearchViewModel: Serviceable {
             case .success(let data):
                 self?.reviewVerification.value = data.success
                 self?.onSuccessGetReviewVerification.value = true
+            case .requestErr(let error):
+                print("🥑get reviewVerification requestErr: \(error)")
+                if error.code == 40403 {
+                    self?.reviewVerificationErrorType = .unknownSpot
+                } else if error.code == 40405 {
+                    self?.reviewVerificationErrorType = .unsupportedRegion
+                }
+                self?.onSuccessGetReviewVerification.value = false
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.getReviewVerification(spotId: spotId)
+                }
             default:
                 print("VM - Fail to get review verification")
                 self?.onSuccessGetReviewVerification.value = false

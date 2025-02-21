@@ -9,6 +9,6 @@ import Foundation
 
 enum ReviewVerificationErrorType {
     
-    case locationAccessFail, unsupportedRegion
+    case unknownSpot, unsupportedRegion
     
 }
