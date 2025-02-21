@@ -96,7 +96,6 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
         }
 
         characterCountLabel.snp.makeConstraints {
-            $0.top.equalTo(scrollView.snp.bottom).offset(4)
             $0.trailing.equalTo(textView.snp.trailing)
             $0.bottom.equalToSuperview()
         }
@@ -107,7 +106,11 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
 
         onTextChanged?(textView.text)
         updateCharacterCount(textView.text.count)
-
+        scrollToCaret()
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+         scrollToCaret()
     }
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -121,5 +124,24 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
 
     func updateCharacterCount(_ count: Int) {
         characterCountLabel.text = "\(count) / 50"
+    }
+
+    private func scrollToCaret() {
+        guard let selectedTextRange = textView.selectedTextRange else { return }
+
+        let caretRect = textView.caretRect(for: selectedTextRange.start)
+        let caretRectInScrollView = textView.convert(caretRect, to: scrollView)
+           
+        var contentOffset = scrollView.contentOffset
+        let textViewHeight = textView.bounds.height
+
+        if caretRectInScrollView.maxY > (scrollView.bounds.height + contentOffset.y) {
+            contentOffset.y = caretRectInScrollView.maxY - scrollView.bounds.height
+            scrollView.setContentOffset(contentOffset, animated: true)
+
+        } else if caretRectInScrollView.minY < contentOffset.y {
+             contentOffset.y = caretRectInScrollView.minY
+             scrollView.setContentOffset(contentOffset, animated: true)
+        }
     }
 }
