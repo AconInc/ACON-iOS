@@ -87,6 +87,7 @@ class BaseNavViewController: UIViewController {
         secondTitleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*52)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*20)
         }
         
         centerTitleLabel.snp.makeConstraints {
