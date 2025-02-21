@@ -24,8 +24,6 @@ class SpotListView: BaseView {
     
     lazy var floatingLocationButton = FloatingButton(image: .icMyGLocation28)
     
-    private let noAcornView = UIView()
-    
     private let noAcornImageView = UIImageView()
     
     private let noAcornLabel = UILabel()
@@ -46,16 +44,11 @@ class SpotListView: BaseView {
         self.addSubviews(
             collectionView,
             skeletonView,
-            noAcornView,
             floatingButtonStack)
         
         floatingButtonStack.addArrangedSubviews(floatingLocationButton,
                                                 floatingMapButton,
                                                 floatingFilterButton)
-        
-        noAcornView.addSubviews(
-            noAcornImageView,
-            noAcornLabel)
     }
     
     override func setLayout() {
@@ -70,21 +63,6 @@ class SpotListView: BaseView {
         floatingButtonStack.snp.makeConstraints {
             $0.trailing.equalTo(self.safeAreaLayoutGuide).offset(-20)
             $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-16)
-        }
-        
-        noAcornView.snp.makeConstraints {
-            $0.edges.equalTo(collectionView)
-        }
-        
-        noAcornImageView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(ScreenUtils.heightRatio * 180)
-            $0.size.equalTo(ScreenUtils.widthRatio * 140)
-        }
-        
-        noAcornLabel.snp.makeConstraints {
-            $0.top.equalTo(noAcornImageView.snp.bottom).offset(24)
-            $0.centerX.equalTo(noAcornImageView)
         }
         
         skeletonView.snp.makeConstraints {
@@ -102,7 +80,6 @@ class SpotListView: BaseView {
         
         setCollectionView()
         setFloatingButtonStack()
-        setNoAcornView()
     }
     
 }
@@ -131,31 +108,12 @@ private extension SpotListView {
         }
     }
     
-    func setNoAcornView() {
-        noAcornView.do {
-            $0.backgroundColor = .gray9
-            $0.isHidden = true
-        }
-        
-        noAcornImageView.image = .imgEmptySearch
-        
-        noAcornLabel.setLabel(
-            text: StringLiterals.SpotList.noAcorn,
-            style: .s1,
-            color: .gray4)
-    }
-    
 }
 
 
 // MARK: - Binding
 
 extension SpotListView {
-    
-    func hideNoAcornView(isHidden: Bool) {
-        noAcornView.isHidden = isHidden
-        print("hidenoacornview :\(isHidden)")
-    }
     
     func updateFilterButtonColor(_ isFilterSet: Bool) {
         isFilterSet
@@ -166,4 +124,5 @@ extension SpotListView {
     func hideSkeletonView(isHidden: Bool) {
         skeletonView.isHidden = isHidden
     }
+    
 }

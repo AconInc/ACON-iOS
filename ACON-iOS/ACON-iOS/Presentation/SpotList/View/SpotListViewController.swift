@@ -13,6 +13,8 @@ class SpotListViewController: BaseNavViewController {
     
     private let spotListView = SpotListView()
     
+    private let errorView = BaseErrorView(errorMessage: "", buttonTitle: "")
+    
     
     // MARK: - Properties
 
@@ -43,7 +45,7 @@ class SpotListViewController: BaseNavViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        contentView.addSubview(spotListView)
+        contentView.addSubviews(spotListView, errorView)
     }
     
     override func setLayout() {
@@ -52,12 +54,17 @@ class SpotListViewController: BaseNavViewController {
         spotListView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
+        errorView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     override func setStyle() {
         super.setStyle()
         
         setGlassMorphism()
+        errorView.isHidden = true
     }
             
     private func addTarget() {
@@ -88,10 +95,12 @@ class SpotListViewController: BaseNavViewController {
 extension SpotListViewController {
     
     func bindViewModel() {
-        viewModel.onSuccessGetAddress.bind { [weak self] onSuccess in
+        viewModel.onSuccessGetDong.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
-            self.setTitleLabelStyle(title: onSuccess ? viewModel.myAddress : StringLiterals.SpotList.failedToGetAddress)
+            if onSuccess {
+                setTitleLabelStyle(title: viewModel.currentDong)
+            }
         }
         
         viewModel.onSuccessPostSpotList.bind { [weak self] isSuccess in
@@ -102,16 +111,13 @@ extension SpotListViewController {
                     print("🥑데이터 바뀌어서 reloadData 함")
                     spotListView.collectionView.reloadData()
                     spotListView.hideSkeletonView(isHidden: true)
-                    spotListView.hideNoAcornView(isHidden: !viewModel.spotList.isEmpty)
                 } else {
                     print("🥑데이터가 안 바뀌어서 reloadData 안 함")
                     let dataExists = !viewModel.spotList.isEmpty
-                    spotListView.hideNoAcornView(isHidden: dataExists)
                     spotListView.hideSkeletonView(isHidden: dataExists)
                 }
             } else {
                 print("🥑추천장소리스트 Post 실패")
-                spotListView.hideNoAcornView(isHidden: !viewModel.spotList.isEmpty)
             }
             
             viewModel.hasSpotListChanged = false
@@ -122,6 +128,24 @@ extension SpotListViewController {
             spotListView.updateFilterButtonColor(isFilterSet)
             
             viewModel.onFinishRefreshingSpotList.value = true
+        }
+        
+        viewModel.showErrorView.bind { [weak self] showErrorView in
+            guard let self = self,
+                  let showErrorView = showErrorView else { return }
+            
+            if showErrorView {
+                errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
+                                   buttonTitle: nil)
+                
+                if viewModel.errorType == .unsupportedRegion {
+                    self.setTitleLabelStyle(title: StringLiterals.SpotList.unsupportedRegionNavTitle)
+                }
+                
+                errorView.isHidden = false
+            } else {
+                errorView.isHidden = true
+            }
         }
     }
     
