@@ -76,8 +76,10 @@ extension UploadTargetType: TargetType {
     var headers: [String : String]? {
         var headers = HeaderType.noHeader
         switch self {
-        case .getSearchKeyword, .getReviewVerification:
+        case .getSearchKeyword:
             headers = HeaderType.noHeader
+        case .getReviewVerification:
+            headers = HeaderType.tokenOnly()
         case .getSearchSuggestion, .postReview, .getAcornCount:
             headers = HeaderType.headerWithToken()
         }
