@@ -14,7 +14,7 @@ protocol SpotListServiceProtocol {
     func postSpotList(requestBody: PostSpotListRequest,
                       completion: @escaping (NetworkResult<PostSpotListResponse>) -> Void)
     
-    func getDong(query: GetDongRequestQuery,
+    func getDong(query: GetDongRequest,
                  completion: @escaping (NetworkResult<GetDongResponse>) -> Void)
 
 }
@@ -38,7 +38,7 @@ final class SpotListService: BaseService<SpotListTargetType>, SpotListServicePro
         }
     }
     
-    func getDong(query: GetDongRequestQuery,
+    func getDong(query: GetDongRequest,
                  completion: @escaping (NetworkResult<GetDongResponse>) -> Void) {
         self.provider.request(.getDong(query)) { result in
             switch result {

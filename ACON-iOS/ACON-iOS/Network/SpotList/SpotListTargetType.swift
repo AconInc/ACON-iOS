@@ -13,7 +13,7 @@ enum SpotListTargetType {
 
     case postSpotList(_ requestBody: PostSpotListRequest)
     
-    case getDong(_ query: GetDongRequestQuery)
+    case getDong(_ query: GetDongRequest)
 
 }
 

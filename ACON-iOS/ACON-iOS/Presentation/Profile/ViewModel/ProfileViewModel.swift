@@ -76,7 +76,7 @@ class ProfileViewModel: Serviceable {
     }
     
     func getNicknameValidity(nickname: String) {
-        let parameter = GetNicknameValidityRequestQuery(nickname: nickname)
+        let parameter = GetNicknameValidityRequest(nickname: nickname)
         
         ACService.shared.profileService.getNicknameValidity(parameter: parameter) { [weak self] response in
             switch response {

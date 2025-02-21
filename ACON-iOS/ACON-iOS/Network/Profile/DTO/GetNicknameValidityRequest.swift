@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GetNicknameValidityRequestQuery {
+struct GetNicknameValidityRequest {
     
     let nickname: String
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GetDongRequestQuery {
+struct GetDongRequest {
     
     let latitude: Double
     

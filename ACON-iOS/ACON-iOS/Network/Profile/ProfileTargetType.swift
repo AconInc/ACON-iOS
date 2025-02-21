@@ -13,7 +13,7 @@ enum ProfileTargetType {
     
     case getProfile
     
-    case getNicknameValidity(_ parameter: GetNicknameValidityRequestQuery)
+    case getNicknameValidity(_ parameter: GetNicknameValidityRequest)
     
     case patchProfile(_ requestBody: PatchProfileRequest)
 

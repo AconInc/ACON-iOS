@@ -75,7 +75,7 @@ class SpotListViewModel: Serviceable {
 extension SpotListViewModel {
     
     func getDong() {
-        let requestQuery = GetDongRequestQuery(latitude: userCoordinate.latitude,
+        let requestQuery = GetDongRequest(latitude: userCoordinate.latitude,
                                                longitude: userCoordinate.longitude)
         
         ACService.shared.spotListService.getDong(
