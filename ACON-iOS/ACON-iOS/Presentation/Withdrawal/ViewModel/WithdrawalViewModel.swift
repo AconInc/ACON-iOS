@@ -41,7 +41,6 @@ final class WithdrawalViewModel {
         }
     }
     
-    // TODO: make api
     func withdrawalAPI() {
         let refreshToken = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.refreshToken) ?? ""
         
@@ -49,24 +48,19 @@ final class WithdrawalViewModel {
             print("⚠️")
             return
         }
-        
-        let withdrawalRequest = WithdrawalRequest(reason: reasonText, refreshToken: refreshToken)
-              print("📤 Withdrawal Request Body: \(withdrawalRequest)") // NOTE: DEGUB
-        
+
         ACService.shared.withdrawalService.postWithdrawal(
             WithdrawalRequest(reason: reasonText, refreshToken: refreshToken)) { result in
-                switch result {
-                case .success:
-                    print("⚙️WithDrawal 成功")
-                    for key in UserDefaults.standard.dictionaryRepresentation().keys {
-                        UserDefaults.standard.removeObject(forKey: key.description)
-                    }
-                    self.onSuccessWithdrawal.value = true
-                default:
-                    self.onSuccessWithdrawal.value = false
-                    print("⚙️Logout Failed")
+            switch result {
+            case .success:
+                for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                    UserDefaults.standard.removeObject(forKey: key.description)
                 }
+                self.onSuccessWithdrawal.value = true
+            default:
+                self.onSuccessWithdrawal.value = false
             }
+        }
     }
 }
 
