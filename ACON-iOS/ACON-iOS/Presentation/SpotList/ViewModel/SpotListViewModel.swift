@@ -12,17 +12,21 @@ class SpotListViewModel: Serviceable {
     
     // MARK: - Properties
     
-    var onSuccessGetAddress: ObservablePattern<Bool> = ObservablePattern(nil)
+    var onSuccessGetDong: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var onSuccessPostSpotList: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var onFinishRefreshingSpotList: ObservablePattern<Bool> = ObservablePattern(nil)
     
+    var showErrorView: ObservablePattern<Bool> = ObservablePattern(nil)
+    
+    var errorType: SpotListErrorType? = nil
+    
     var spotList: [SpotModel] = []
     
     var hasSpotListChanged: Bool = false
     
-    var myAddress: String = ""
+    var currentDong: String = ""
     
     var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
@@ -70,26 +74,34 @@ class SpotListViewModel: Serviceable {
 
 extension SpotListViewModel {
     
-    func getAddress() {
-        let geocoder = CLGeocoder()
-        let location = CLLocation(latitude: userCoordinate.latitude, longitude: userCoordinate.longitude)
-        geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
-            guard let self = self,
-                  let placemark = placemarks?.first else {
-                print("📍ReverseGeocode Fail: \(String(describing: error?.localizedDescription))")
-                self?.onSuccessGetAddress.value = false
-                return
+    func getDong() {
+        let requestQuery = GetDongRequestQuery(latitude: userCoordinate.latitude,
+                                               longitude: userCoordinate.longitude)
+        
+        ACService.shared.spotListService.getDong(
+            query: requestQuery) { [weak self] response in
+                switch response {
+                case .success(let data):
+                    self?.currentDong = data.area
+                    self?.showErrorView.value = false
+                    self?.onSuccessGetDong.value = true
+                case .reIssueJWT:
+                    self?.handleReissue { [weak self] in
+                        self?.getDong()
+                    }
+                case .requestErr(let error):
+                    print("🥑getDong requestErr: \(error)")
+                    if error.code == 40405 {
+                        self?.errorType = .unsupportedRegion
+                        self?.showErrorView.value = true
+                    }
+                    self?.onSuccessGetDong.value = false
+                default:
+                    print("🥑vm - Failed to get dong")
+                    self?.onSuccessGetDong.value = false
+                    return
+                }
             }
-            
-            guard let dong = placemark.subLocality else {
-                let city = placemark.locality ?? ""
-                myAddress = city
-                onSuccessGetAddress.value = true
-                print("📍동 정보 없어서 시 정보 연결함"); return
-            }
-            myAddress = dong
-            onSuccessGetAddress.value = true
-        }
     }
     
     func postSpotList() {
@@ -125,11 +137,24 @@ extension SpotListViewModel {
                 }
                 self?.hasSpotListChanged = spotList != self?.spotList
                 self?.spotList = spotList
+                if spotList.isEmpty {
+                    self?.errorType = .emptyList
+                    self?.showErrorView.value = true
+                } else {
+                    self?.showErrorView.value = false
+                }
                 self?.onSuccessPostSpotList.value = true
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
                     self?.postSpotList()
                 }
+            case .requestErr(let error):
+                print("🥑post spotList requestErr: \(error)")
+                if error.code == 40405 {
+                    self?.errorType = .unsupportedRegion
+                    self?.showErrorView.value = true
+                }
+                self?.onSuccessPostSpotList.value = false
             default:
                 print("🥑Failed To Post")
                 self?.onSuccessPostSpotList.value = false
@@ -150,7 +175,7 @@ extension SpotListViewModel: ACLocationManagerDelegate {
         print("🛠️ coordinate: \(coordinate)")
         
         userCoordinate = coordinate
-        getAddress()
+        getDong()
         postSpotList()
     }
     
