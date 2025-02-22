@@ -83,6 +83,7 @@
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
 		74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */; };
 		74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */; };
+		741056172D6A4C4E002E8200 /* AmplitudeLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741056162D6A4C48002E8200 /* AmplitudeLiterals.swift */; };
 		7414295B2D5D2FC400B69528 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7414295A2D5D2FBA00B69528 /* ProfileSettingViewController.swift */; };
 		7414295D2D5D313200B69528 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7414295C2D5D312C00B69528 /* UITableViewCell+.swift */; };
 		741429602D5D391000B69528 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7414295F2D5D390B00B69528 /* SettingType.swift */; };
@@ -332,6 +333,7 @@
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultitaskDelegate.swift; sourceTree = "<group>"; };
 		74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLocationManager.swift; sourceTree = "<group>"; };
+		741056162D6A4C48002E8200 /* AmplitudeLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeLiterals.swift; sourceTree = "<group>"; };
 		7414295A2D5D2FBA00B69528 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		7414295C2D5D312C00B69528 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
 		7414295F2D5D390B00B69528 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
@@ -1200,6 +1202,7 @@
 		748D6F7C2D2BCD13007690B4 /* Literals */ = {
 			isa = PBXGroup;
 			children = (
+				741056162D6A4C48002E8200 /* AmplitudeLiterals.swift */,
 				748D6F7D2D2BCD6E007690B4 /* StringLiterals.swift */,
 			);
 			path = Literals;
@@ -1838,6 +1841,7 @@
 				74205D2F2D40351700D11557 /* SocialType.swift in Sources */,
 				745C7E042D3599DF0074DBDB /* SpotSearchViewController.swift in Sources */,
 				74B25C2C2D2FEE8E008BDCB7 /* Config.swift in Sources */,
+				741056172D6A4C4E002E8200 /* AmplitudeLiterals.swift in Sources */,
 				74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */,
 				748D6F8F2D2BD340007690B4 /* UIButton+.swift in Sources */,
 				746261792D3EA8DF00A4E84F /* UploadTargetType.swift in Sources */,
