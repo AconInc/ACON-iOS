@@ -28,6 +28,9 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
     
     private let spotDetailType: String = "음식점"
     
+    private var startTime: Date?
+    
+    private var timer: Timer?
     
     // MARK: - LifeCycle
     
@@ -56,6 +59,18 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
         self.tabBarController?.tabBar.isHidden = true
         spotDetailViewModel.getSpotDetail()
         spotDetailViewModel.getSpotMenu()
+        
+        startTime = Date()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        timer?.invalidate()
+        timer = nil
+        
+        if let startTime = startTime {
+            let timeInterval = Date().timeIntervalSince(startTime)
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["place_detail_duration": timeInterval])
+        }
     }
     
     override func setHierarchy() {
@@ -135,6 +150,7 @@ private extension SpotDetailViewController {
     func findCourseButtonTapped() {
         spotDetailViewModel.postGuidedSpot()
         spotDetailViewModel.redirectToNaverMap()
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_navigation": true])
     }
     
     @objc
