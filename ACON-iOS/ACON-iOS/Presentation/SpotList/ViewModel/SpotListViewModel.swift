@@ -18,8 +18,6 @@ class SpotListViewModel: Serviceable {
     
     var onFinishRefreshingSpotList: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var showErrorView: ObservablePattern<Bool> = ObservablePattern(nil)
-    
     var errorType: SpotListErrorType? = nil
     
     var spotList: [SpotModel] = []
@@ -83,7 +81,6 @@ extension SpotListViewModel {
                 switch response {
                 case .success(let data):
                     self?.currentDong = data.area
-                    self?.showErrorView.value = false
                     self?.onSuccessGetDong.value = true
                 case .reIssueJWT:
                     self?.handleReissue { [weak self] in
@@ -93,9 +90,8 @@ extension SpotListViewModel {
                     print("🥑getDong requestErr: \(error)")
                     if error.code == 40405 {
                         self?.errorType = .unsupportedRegion
-                        self?.showErrorView.value = true
                     } else {
-                        self?.showErrorView.value = false
+                        self?.errorType = .serverRequestFail // TODO: 에러 뷰 또는 Alert 띄우기
                     }
                     self?.onSuccessGetDong.value = false
                 default:
@@ -141,9 +137,6 @@ extension SpotListViewModel {
                 self?.spotList = spotList
                 if spotList.isEmpty {
                     self?.errorType = .emptyList
-                    self?.showErrorView.value = true
-                } else {
-                    self?.showErrorView.value = false
                 }
                 self?.onSuccessPostSpotList.value = true
             case .reIssueJWT:
@@ -154,7 +147,8 @@ extension SpotListViewModel {
                 print("🥑post spotList requestErr: \(error)")
                 if error.code == 40405 {
                     self?.errorType = .unsupportedRegion
-                    self?.showErrorView.value = true
+                } else {
+                    self?.errorType = .serverRequestFail // TODO: 에러 뷰 또는 Alert 띄우기
                 }
                 self?.onSuccessPostSpotList.value = false
             default:
@@ -178,7 +172,6 @@ extension SpotListViewModel: ACLocationManagerDelegate {
         
         userCoordinate = coordinate
         getDong()
-        postSpotList()
     }
     
 }

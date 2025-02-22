@@ -13,8 +13,6 @@ class SpotListViewController: BaseNavViewController {
     
     private let spotListView = SpotListView()
     
-    private let errorView = BaseErrorView(errorMessage: "", buttonTitle: "")
-    
     
     // MARK: - Properties
 
@@ -43,7 +41,7 @@ class SpotListViewController: BaseNavViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        contentView.addSubviews(spotListView, errorView)
+        contentView.addSubview(spotListView)
     }
     
     override func setLayout() {
@@ -52,17 +50,13 @@ class SpotListViewController: BaseNavViewController {
         spotListView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
-        errorView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
     }
     
     override func setStyle() {
         super.setStyle()
         
         setGlassMorphism()
-        errorView.isHidden = true
+        spotListView.errorView.isHidden = true
     }
             
     private func addTarget() {
@@ -83,6 +77,12 @@ class SpotListViewController: BaseNavViewController {
             action: #selector(tappedMapButton),
             for: .touchUpInside
         )
+        
+        spotListView.errorView.confirmButton.addTarget(
+            self,
+            action: #selector(tappedReloadButton),
+            for: .touchUpInside
+        )
     }
     
 }
@@ -96,13 +96,30 @@ extension SpotListViewController {
         viewModel.onSuccessGetDong.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
+            
+            // NOTE: 법정동 조회 성공 -> 네비게이션타이틀
             if onSuccess {
+                viewModel.postSpotList()
                 setTitleLabelStyle(title: viewModel.currentDong)
-            } else if viewModel.errorType == .unsupportedRegion {
-                self.setTitleLabelStyle(title: StringLiterals.SpotList.unsupportedRegionNavTitle)
-            } else {
-                self.setTitleLabelStyle(title: StringLiterals.SpotList.failedToGetAddressNavTitle)
             }
+            
+            // NOTE: 법정동 조회 실패 (서비스불가지역) -> 에러 뷰, 네비게이션타이틀
+            else if viewModel.errorType == .unsupportedRegion {
+                self.setTitleLabelStyle(title: StringLiterals.SpotList.unsupportedRegionNavTitle)
+                spotListView.errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
+                                   buttonTitle: "새로고침 하기")
+            }
+            
+            // NOTE: 법정동 조회 실패 (기타 에러) -> 에러뷰, 네비게이션타이틀
+            else {
+                self.setTitleLabelStyle(title: StringLiterals.SpotList.failedToGetAddressNavTitle)
+                spotListView.errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
+                                   buttonTitle: "새로고침 하기")
+            }
+            
+            // NOTE: 에러뷰 숨김 여부 처리
+            spotListView.errorView.isHidden = onSuccess
+            
             viewModel.onSuccessGetDong.value = nil
         }
         
@@ -110,14 +127,25 @@ extension SpotListViewController {
             guard let self = self,
                   let isSuccess = isSuccess else { return }
             if isSuccess {
+                spotListView.errorView.isHidden = true
                 if viewModel.hasSpotListChanged {
                     print("🥑데이터 바뀌어서 reloadData 함")
                     spotListView.collectionView.reloadData()
-                    spotListView.hideSkeletonView(isHidden: true)
                 } else {
                     print("🥑데이터가 안 바뀌어서 reloadData 안 함")
-                    let dataExists = !viewModel.spotList.isEmpty
-                    spotListView.hideSkeletonView(isHidden: dataExists)
+                }
+                
+                // NOTE: 스켈레톤 최소 0.5초 유지
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                    guard let self = self else { return }
+                    spotListView.hideSkeletonView(isHidden: true)
+                    if viewModel.spotList.isEmpty {
+                        spotListView.errorView.setStyle(
+                            errorMessage: viewModel.errorType?.errorMessage,
+                            buttonTitle: "새로고침 하기"
+                        )
+                        spotListView.errorView.isHidden = false
+                    }
                 }
             } else {
                 print("🥑추천장소리스트 Post 실패")
@@ -131,21 +159,6 @@ extension SpotListViewController {
             spotListView.updateFilterButtonColor(isFilterSet)
             
             viewModel.onFinishRefreshingSpotList.value = true
-        }
-        
-        viewModel.showErrorView.bind { [weak self] showErrorView in
-            guard let self = self,
-                  let showErrorView = showErrorView else { return }
-            
-            if showErrorView {
-                errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
-                                   buttonTitle: nil)
-                errorView.isHidden = false
-            } else {
-                errorView.isHidden = true
-            }
-            
-            viewModel.showErrorView.value = nil
         }
     }
     
@@ -172,10 +185,10 @@ private extension SpotListViewController {
             // NOTE: 데이터 리로드 전 애니메이션
             UIView.animate(withDuration: 0.25, animations: {
                 self.spotListView.collectionView.alpha = 0.5
-            }) { _ in
+            }) { [weak self] _ in
                 
-                self.viewModel.requestLocation()
-                self.spotListView.hideSkeletonView(isHidden: false)
+                self?.viewModel.requestLocation()
+                self?.spotListView.hideSkeletonView(isHidden: false)
             }
         }
     }
@@ -211,6 +224,18 @@ private extension SpotListViewController {
         }
         // TODO: 맵뷰 띄우기
     }
+    
+    @objc
+    func tappedReloadButton() {
+        spotListView.hideSkeletonView(isHidden: false)
+        guard AuthManager.shared.hasToken else {
+            presentLoginModal()
+            return
+        }
+        spotListView.hideSkeletonView(isHidden: false)
+        viewModel.requestLocation()
+    }
+    
 }
 
 
