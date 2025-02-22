@@ -23,6 +23,8 @@ class SpotDetailViewModel: Serviceable {
     
     let onSuccessPostGuidedSpotRequest: ObservablePattern<Bool> = ObservablePattern(nil)
     
+    let isLocationKorea: ObservablePattern<Bool> = ObservablePattern(nil)
+    
     init(spotID: Int64) {
         self.spotID = spotID
     }
@@ -124,18 +126,21 @@ extension SpotDetailViewModel: ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
         ACLocationManager.shared.removeDelegate(self)
-        guard let appName = Bundle.main.bundleIdentifier else { return }
-        let sname = "내 위치"
-        let urlString = "nmap://route/walk?slat=\(coordinate.latitude)&slng=\(coordinate.longitude)&sname=\(sname)&dlat=\(spotDetail.value?.latitude ?? 0)&dlng=\(spotDetail.value?.longitude ?? 0)&dname=\(spotDetail.value?.name ?? "")&appname=\(appName)"
-        guard let encodedStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-        
-        guard let url = URL(string: encodedStr) else { return }
-        guard let appStoreURL = URL(string: "itms-apps://itunes.apple.com/app/id311867728?mt=8") else { return }
-        
-        if UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        } else {
-            UIApplication.shared.open(appStoreURL)
+        self.isLocationKorea.value = LocationUtils.isKorea(coordinate.latitude, coordinate.longitude)
+        if isLocationKorea.value == true {
+            guard let appName = Bundle.main.bundleIdentifier else { return }
+            let sname = "내 위치"
+            let urlString = "nmap://route/walk?slat=\(coordinate.latitude)&slng=\(coordinate.longitude)&sname=\(sname)&dlat=\(spotDetail.value?.latitude ?? 0)&dlng=\(spotDetail.value?.longitude ?? 0)&dname=\(spotDetail.value?.name ?? "")&appname=\(appName)"
+            guard let encodedStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+            
+            guard let url = URL(string: encodedStr) else { return }
+            guard let appStoreURL = URL(string: "itms-apps://itunes.apple.com/app/id311867728?mt=8") else { return }
+            
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            } else {
+                UIApplication.shared.open(appStoreURL)
+            }
         }
     }
     
