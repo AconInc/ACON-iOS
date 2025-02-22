@@ -238,8 +238,8 @@ extension ProfileView {
         let label = UILabel()
         label.setLabel(text: areaName,
                        style: .t2,
-                       color: .org1)
-        
+                       color: .org1,
+                       alignment: .center)
         verifiedAreaBox.setContentView(to: label)
     }
     

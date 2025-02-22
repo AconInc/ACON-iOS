@@ -116,6 +116,12 @@ private extension SpotDetailViewController {
             }
         }
         
+        self.spotDetailViewModel.isLocationKorea.bind { [weak self] isLocationKorea in
+            guard let isLocationKorea else { return }
+            if !isLocationKorea {
+                self?.showDefaultAlert(title: "알림", message: "현재 네이버지도 사용이 불가능한 지역에 있어요.")
+            }
+        }
     }
     
 }
@@ -137,6 +143,7 @@ private extension SpotDetailViewController {
     }
     
 }
+
 
 // MARK: - setUI
 

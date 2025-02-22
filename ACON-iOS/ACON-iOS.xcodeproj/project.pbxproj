@@ -216,6 +216,7 @@
 		74D31C7C2D5BF90300B4B2B4 /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D31C7B2D5BF8FD00B4B2B4 /* AlbumModel.swift */; };
 		74D31C802D5C025900B4B2B4 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D31C7F2D5C025200B4B2B4 /* PhotoCollectionViewCell.swift */; };
 		74D831922D6878A5003384C6 /* AmplitudeSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 74D831912D6878A5003384C6 /* AmplitudeSwift */; };
+		74E38D342D69B46F009449D4 /* LocationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E38D332D69B468009449D4 /* LocationUtils.swift */; };
 		D61917E92D3E4410001BF0EE /* OnboardingTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917E82D3E4410001BF0EE /* OnboardingTargetType.swift */; };
 		D61917EC2D3E484A001BF0EE /* OnboardingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917EB2D3E484A001BF0EE /* OnboardingRequest.swift */; };
 		D6232C952D3A294C003FF208 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6232C942D3A294C003FF208 /* AlertHandler.swift */; };
@@ -460,6 +461,7 @@
 		74D31C792D5841D100B4B2B4 /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
 		74D31C7B2D5BF8FD00B4B2B4 /* AlbumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumModel.swift; sourceTree = "<group>"; };
 		74D31C7F2D5C025200B4B2B4 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		74E38D332D69B468009449D4 /* LocationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUtils.swift; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB785B4E26FA7C11BB85A55D /* Pods-ACON-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D61917E82D3E4410001BF0EE /* OnboardingTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTargetType.swift; sourceTree = "<group>"; };
@@ -1158,6 +1160,7 @@
 		748D6F792D2BCCEF007690B4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				74E38D332D69B468009449D4 /* LocationUtils.swift */,
 				74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */,
 				74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */,
 				748D6F812D2BCDB0007690B4 /* ScreenUtils.swift */,
@@ -1894,6 +1897,7 @@
 				741E68A22D3D5FA200DF99EF /* ACService.swift in Sources */,
 				D6FF82E92D3805F000090233 /* DislikeCollectionViewType.swift in Sources */,
 				156AA7242D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift in Sources */,
+				74E38D342D69B46F009449D4 /* LocationUtils.swift in Sources */,
 				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,
 				D6FF82F72D381C2000090233 /* LongBoxViewCell.swift in Sources */,
 				D6978F542D37B29100523A25 /* OnboardingService.swift in Sources */,
