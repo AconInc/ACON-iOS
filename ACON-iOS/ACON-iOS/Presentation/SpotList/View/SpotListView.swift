@@ -30,6 +30,8 @@ class SpotListView: BaseView {
     
     private let skeletonView = SkeletonView()
     
+    let errorView = BaseErrorView()
+    
     
     // MARK: - UI Property Sizes
     
@@ -44,6 +46,7 @@ class SpotListView: BaseView {
         self.addSubviews(
             collectionView,
             skeletonView,
+            errorView,
             floatingButtonStack)
         
         floatingButtonStack.addArrangedSubviews(floatingLocationButton,
@@ -67,6 +70,10 @@ class SpotListView: BaseView {
         
         skeletonView.snp.makeConstraints {
             $0.horizontalEdges.top.equalTo(self.safeAreaLayoutGuide)
+        }
+        
+        errorView.snp.makeConstraints {
+            $0.edges.equalTo(collectionView)
         }
         
         // TODO: 추후 삭제 (Sprint-2 출시를 위한 히든처리)

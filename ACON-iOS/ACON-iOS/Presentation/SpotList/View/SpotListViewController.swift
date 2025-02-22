@@ -13,8 +13,6 @@ class SpotListViewController: BaseNavViewController {
     
     private let spotListView = SpotListView()
     
-    private let errorView = BaseErrorView(errorMessage: "", buttonTitle: "")
-    
     
     // MARK: - Properties
 
@@ -45,7 +43,7 @@ class SpotListViewController: BaseNavViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        contentView.addSubviews(spotListView, errorView)
+        contentView.addSubview(spotListView)
     }
     
     override func setLayout() {
@@ -54,17 +52,13 @@ class SpotListViewController: BaseNavViewController {
         spotListView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
-        errorView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
     }
     
     override func setStyle() {
         super.setStyle()
         
         setGlassMorphism()
-        errorView.isHidden = true
+        spotListView.errorView.isHidden = true
     }
             
     private func addTarget() {
@@ -140,11 +134,11 @@ extension SpotListViewController {
                   let showErrorView = showErrorView else { return }
             
             if showErrorView {
-                errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
+                spotListView.errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
                                    buttonTitle: nil)
-                errorView.isHidden = false
+                spotListView.errorView.isHidden = false
             } else {
-                errorView.isHidden = true
+                spotListView.errorView.isHidden = true
             }
             
             viewModel.showErrorView.value = nil
