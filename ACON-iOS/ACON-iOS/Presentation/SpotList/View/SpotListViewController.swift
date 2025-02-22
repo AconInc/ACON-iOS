@@ -136,7 +136,7 @@ extension SpotListViewController {
                 }
                 
                 // NOTE: 스켈레톤 최소 0.5초 유지
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
                     guard let self = self else { return }
                     spotListView.hideSkeletonView(isHidden: true)
                     if viewModel.spotList.isEmpty {
