@@ -77,7 +77,6 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
         
         self.setBackButton()
         self.setGlassMorphism()
-//        setGlassMorphism()
     }
     
     private func addTarget() {

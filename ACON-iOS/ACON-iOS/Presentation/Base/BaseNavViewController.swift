@@ -32,6 +32,8 @@ class BaseNavViewController: UIViewController {
     
     let glassMorphismView = GlassmorphismView()
     
+    var backCompletion: (() -> Void)?
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -194,18 +196,21 @@ extension BaseNavViewController {
     
     // MARK: - 뒤로가기 버튼
     
-    func setBackButton() {
+    func setBackButton(completion: (() -> Void)? = nil) {
         setButtonStyle(button: leftButton, image: .leftArrow)
         setButtonAction(button: leftButton, target: self, action: #selector(backButtonTapped))
+        self.backCompletion = completion
     }
     
     @objc
     func backButtonTapped() {
+        backCompletion?()
         if let navigationController = navigationController {
             navigationController.popViewController(animated: true)
         } else {
             dismiss(animated: true)
         }
+        self.backCompletion = nil
     }
     
     
