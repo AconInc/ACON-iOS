@@ -101,6 +101,7 @@ extension SpotListViewController {
             if onSuccess {
                 viewModel.postSpotList()
                 setTitleLabelStyle(title: viewModel.currentDong)
+                spotListView.floatingFilterButton.isHidden = false
             }
             
             // NOTE: 법정동 조회 실패 (서비스불가지역) -> 에러 뷰, 네비게이션타이틀
@@ -108,6 +109,7 @@ extension SpotListViewController {
                 self.setTitleLabelStyle(title: StringLiterals.SpotList.unsupportedRegionNavTitle)
                 spotListView.errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
                                    buttonTitle: "새로고침 하기")
+                spotListView.floatingFilterButton.isHidden = true
             }
             
             // NOTE: 법정동 조회 실패 (기타 에러) -> 에러뷰, 네비게이션타이틀
@@ -115,6 +117,7 @@ extension SpotListViewController {
                 self.setTitleLabelStyle(title: StringLiterals.SpotList.failedToGetAddressNavTitle)
                 spotListView.errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
                                    buttonTitle: "새로고침 하기")
+                spotListView.floatingFilterButton.isHidden = true
             }
             
             // NOTE: 에러뷰 숨김 여부 처리
@@ -142,7 +145,7 @@ extension SpotListViewController {
                     if viewModel.spotList.isEmpty {
                         spotListView.errorView.setStyle(
                             errorMessage: viewModel.errorType?.errorMessage,
-                            buttonTitle: "새로고침하기"
+                            buttonTitle: nil
                         )
                         spotListView.errorView.isHidden = false
                     }
@@ -201,6 +204,8 @@ private extension SpotListViewController {
         }
         let vc = SpotListFilterViewController(viewModel: viewModel)
         vc.setSheetLayout(detent: .long)
+        vc.isModalInPresentation = true
+        
         present(vc, animated: true)
     }
     
@@ -353,6 +358,11 @@ extension SpotListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = viewModel.spotList[indexPath.item]
         let vc = SpotDetailViewController(item.id)
+        ACLocationManager.shared.removeDelegate(viewModel)
+        vc.backCompletion = { [weak self] in
+            guard let self = self else { return }
+            ACLocationManager.shared.addDelegate(self.viewModel)
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

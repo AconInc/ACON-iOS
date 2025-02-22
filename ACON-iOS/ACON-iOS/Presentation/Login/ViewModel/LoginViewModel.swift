@@ -61,8 +61,8 @@ class LoginViewModel: Serviceable {
                 UserDefaults.standard.set(data.hasVerifiedArea, forKey: StringLiterals.UserDefaults.hasVerifiedArea)
                 self?.hasVerifiedArea = data.hasVerifiedArea
                 // TODO: - (중요) 추후 진짜 유저 아이디로 변경
-                AmplitudeManager.shared.setUserID("testsumin")
-                AmplitudeManager.shared.setUserProperty(userProperties: ["id": "testsumin"])
+                AmplitudeManager.shared.setUserID(data.externalUUID)
+                AmplitudeManager.shared.setUserProperty(userProperties: ["id": data.externalUUID])
                 self?.onSuccessLogin.value = true
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in

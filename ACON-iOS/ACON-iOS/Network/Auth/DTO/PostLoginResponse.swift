@@ -15,4 +15,6 @@ struct PostLoginResponse: Codable {
     
     let hasVerifiedArea: Bool
     
+    let externalUUID: String
+    
 }
