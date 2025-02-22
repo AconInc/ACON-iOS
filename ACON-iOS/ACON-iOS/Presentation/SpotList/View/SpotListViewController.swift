@@ -207,6 +207,11 @@ private extension SpotListViewController {
         vc.isModalInPresentation = true
         
         present(vc, animated: true)
+        
+        // NOTE: 앰플리튜드
+        AmplitudeManager.shared.trackEventWithProperties(
+            AmplitudeLiterals.EventName.filter,
+            properties: ["click_filter?" : true])
     }
     
     
