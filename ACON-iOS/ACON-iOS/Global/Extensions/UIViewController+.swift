@@ -89,8 +89,8 @@ extension UIViewController {
     
     // MARK: - 로그인 안 했으면 모달시트 띄우기
     
-    func presentLoginModal() {
-        let vc = LoginModalViewController()
+    func presentLoginModal(_ presentedModalType: String) {
+        let vc = LoginModalViewController(presentedModalType)
         vc.setSheetLayout(detent: .short)
         
         self.present(vc, animated: true)
