@@ -20,6 +20,8 @@ class LocalVerificationViewModel: Serviceable {
     
     var isLocationChecked: ObservablePattern<Bool> = ObservablePattern(nil)
     
+    var isLocationKorea: Bool = true
+    
     var userCoordinate: CLLocationCoordinate2D? = nil
     
     init(flowType: LocalVerificationFlowType) {
@@ -65,8 +67,8 @@ class LocalVerificationViewModel: Serviceable {
 extension LocalVerificationViewModel: ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
-        print("성공 - 위도: \(coordinate.latitude), 경도: \(coordinate.longitude)")
         self.userCoordinate = coordinate
+        self.isLocationKorea = LocationUtils.isKorea(coordinate.latitude, coordinate.longitude)
         isLocationChecked.value = true
     }
     
