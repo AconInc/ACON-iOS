@@ -91,7 +91,7 @@ extension SpotListViewModel {
                     if error.code == 40405 {
                         self?.errorType = .unsupportedRegion
                     } else {
-                        self?.errorType = .networkFail
+                        self?.errorType = .serverRequestFail // TODO: 에러 뷰 또는 Alert 띄우기
                     }
                     self?.onSuccessGetDong.value = false
                 default:
@@ -148,7 +148,7 @@ extension SpotListViewModel {
                 if error.code == 40405 {
                     self?.errorType = .unsupportedRegion
                 } else {
-                    self?.errorType = .networkFail
+                    self?.errorType = .serverRequestFail // TODO: 에러 뷰 또는 Alert 띄우기
                 }
                 self?.onSuccessPostSpotList.value = false
             default:
