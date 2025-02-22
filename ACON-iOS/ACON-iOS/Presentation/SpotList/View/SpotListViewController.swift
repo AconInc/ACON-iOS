@@ -142,7 +142,7 @@ extension SpotListViewController {
                     if viewModel.spotList.isEmpty {
                         spotListView.errorView.setStyle(
                             errorMessage: viewModel.errorType?.errorMessage,
-                            buttonTitle: "새로고침 하기"
+                            buttonTitle: "새로고침하기"
                         )
                         spotListView.errorView.isHidden = false
                     }
