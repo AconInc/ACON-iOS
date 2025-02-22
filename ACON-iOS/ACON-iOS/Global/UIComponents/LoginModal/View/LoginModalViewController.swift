@@ -118,22 +118,25 @@ extension LoginModalViewController {
             self.dismiss(animated: true)
             
             let hasVerifiedArea = loginViewModel.hasVerifiedArea
-            if onSuccess && hasVerifiedArea {
-                ACToastController.show(
-                    StringLiterals.LoginModal.successLogin,
-                    bottomInset: 112,
-                    delayTime: 1
-                ) { return }
-                
-                let authStatus = ACLocationManager.shared.locationManager.authorizationStatus
-                if authStatus == .denied || authStatus == .restricted {
-                    navigateToLocalVerificationVC()
+            if onSuccess {
+                if hasVerifiedArea {
+                    ACToastController.show(
+                        StringLiterals.LoginModal.successLogin,
+                        bottomInset: 112,
+                        delayTime: 1
+                    ) { return }
+                    
+                    let authStatus = ACLocationManager.shared.locationManager.authorizationStatus
+                    if authStatus == .denied || authStatus == .restricted {
+                        navigateToLocalVerificationVC()
+                    } else {
+                        switchRootToTabBar()
+                    }
                 } else {
-                    switchRootToTabBar()
+                    print("🥑onSuccess && !hasVerifiedArea")
+                    navigateToLocalVerificationVC()
                 }
-            } else if onSuccess && !hasVerifiedArea {
-                print("🥑onSuccess && !hasVerifiedArea")
-                navigateToLocalVerificationVC()
+                AmplitudeManager.shared.trackEventWithProperties("did_login", properties: ["is_modal": true])
             } else {
                 showLoginFailAlert()
             }
