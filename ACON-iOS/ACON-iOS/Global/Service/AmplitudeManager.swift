@@ -1,0 +1,58 @@
+//
+//  AmplitudeManager.swift
+//  ACON-iOS
+//
+//  Created by 이수민 on 2/21/25.
+//
+
+import Foundation
+
+import AmplitudeSwift
+
+final class AmplitudeManager {
+    
+    static let shared = AmplitudeManager()
+    
+    private var amplitude: Amplitude?
+    
+    private init() {}
+    
+    func initialize() {
+        let amplitudeApiKey = Config.amplitudeKey
+        let config = Configuration(apiKey: amplitudeApiKey)
+        config.logLevel = .DEBUG
+        amplitude = Amplitude(configuration: config)
+    }
+    
+    func setUserID(_ userID: String) {
+        // TODO: - (중요 - 출시 전 진행) 추후 서버에서 내려주는 걸로 수정
+        amplitude?.setUserId(userId: userID)
+    }
+    
+    func getUserID() -> String {
+        guard let userID = amplitude?.getUserId() else { return "" }
+        return userID
+    }
+    
+    // NOTE: - 기존 사용자와 세션을 초기화
+    func reset() {
+        amplitude?.reset()
+    }
+    
+    // NOTE: - 프로퍼티가 있는 이벤트 트래킹
+    func trackEventWithProperties(_ event: String, properties: [String: Any]) {
+        let event = BaseEvent(
+            callback: { (event: BaseEvent, code: Int, message: String) -> Void in
+                print("eventCallback: \(event.eventType), code: \(code), message: \(message)")
+            },
+            eventType: event,
+            eventProperties: properties)
+        self.amplitude?.track(event: event)
+    }
+    
+    // NOTE: - 유저 프로퍼티 세팅
+    func setUserProperty(userProperties: [String: Any]) {
+        amplitude?.identify(userProperties: userProperties)
+    }
+    
+}
