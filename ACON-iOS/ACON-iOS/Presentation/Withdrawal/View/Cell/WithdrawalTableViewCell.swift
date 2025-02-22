@@ -11,7 +11,7 @@ import SnapKit
 import Then
 
 final class WithdrawalTableViewCell: BaseTableViewCell {
-
+    
     private let withdrawalImageView = UIImageView()
     private var titleLabel = UILabel()
     private let container = UIView()
@@ -19,7 +19,7 @@ final class WithdrawalTableViewCell: BaseTableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-
+        
         setStyle()
         setHierarchy()
         setLayout()
@@ -32,7 +32,11 @@ final class WithdrawalTableViewCell: BaseTableViewCell {
     override func setStyle() {
         super.setStyle()
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        
         withdrawalImageView.do {
+            $0.isUserInteractionEnabled = true
+            $0.addGestureRecognizer(tapGesture)
             $0.image = UIImage(named: "circle")
             $0.backgroundColor = .clear
             $0.clipsToBounds = true
@@ -68,14 +72,21 @@ final class WithdrawalTableViewCell: BaseTableViewCell {
     
     func checkConfigure(name: String, isSelected: Bool) {
         titleLabel.setLabel(text: name,
-                    style: .s1,
-                    alignment: .center,
-                    numberOfLines: 0)
+                            style: .s1,
+                            alignment: .center,
+                            numberOfLines: 0)
         if isSelected {
             withdrawalImageView.image = UIImage(named: "fillCircle")
         } else {
             withdrawalImageView.image = UIImage(named: "circle")
         }
+    }
+    
+    @objc private func imageTapped() {
+        guard let tableView = superview as? UITableView else { return }
+        guard let indexPath = tableView.indexPath(for: self) else { return }
+        
+        (tableView as? WithdrawalTableView)?.handleSelection(at: indexPath)
     }
     
 }
