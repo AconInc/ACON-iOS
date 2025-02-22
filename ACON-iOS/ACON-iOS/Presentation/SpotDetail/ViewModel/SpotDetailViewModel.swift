@@ -29,7 +29,7 @@ class SpotDetailViewModel: Serviceable {
     }
     
     deinit {
-       ACLocationManager.shared.removeDelegate(self)
+        ACLocationManager.shared.removeDelegate(self)
     }
 
 }
@@ -116,7 +116,7 @@ extension SpotDetailViewModel {
 extension SpotDetailViewModel {
     
     func redirectToNaverMap() {
-        ACLocationManager.shared.stopUpdatingLocation()
+        ACLocationManager.shared.addDelegate(self)
         ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
     }
     
@@ -128,7 +128,6 @@ extension SpotDetailViewModel {
 extension SpotDetailViewModel: ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
-        ACLocationManager.shared.stopUpdatingLocation()
         ACLocationManager.shared.removeDelegate(self)
         guard let appName = Bundle.main.bundleIdentifier else { return }
         let sname = "내 위치"
