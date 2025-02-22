@@ -29,15 +29,13 @@ class SpotListViewController: BaseNavViewController {
         bindViewModel()
         setCollectionView()
         addTarget()
-        
-
+        viewModel.requestLocation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         
         self.tabBarController?.tabBar.isHidden = false
-        viewModel.requestLocation()
     }
     
     override func setHierarchy() {
@@ -93,6 +91,7 @@ extension SpotListViewController {
             guard let self = self,
                   let onSuccess = onSuccess else { return }
             if onSuccess {
+                viewModel.postSpotList()
                 setTitleLabelStyle(title: viewModel.currentDong)
             } else if viewModel.errorType == .unsupportedRegion {
                 self.setTitleLabelStyle(title: StringLiterals.SpotList.unsupportedRegionNavTitle)
@@ -132,7 +131,6 @@ extension SpotListViewController {
         viewModel.showErrorView.bind { [weak self] showErrorView in
             guard let self = self,
                   let showErrorView = showErrorView else { return }
-            
             if showErrorView {
                 spotListView.errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
                                    buttonTitle: nil)

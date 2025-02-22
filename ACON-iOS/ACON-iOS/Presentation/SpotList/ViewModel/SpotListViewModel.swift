@@ -93,10 +93,8 @@ extension SpotListViewModel {
                     print("🥑getDong requestErr: \(error)")
                     if error.code == 40405 {
                         self?.errorType = .unsupportedRegion
-                        self?.showErrorView.value = true
-                    } else {
-                        self?.showErrorView.value = false
                     }
+                    self?.showErrorView.value = true
                     self?.onSuccessGetDong.value = false
                 default:
                     print("🥑vm - Failed to get dong")
@@ -154,8 +152,8 @@ extension SpotListViewModel {
                 print("🥑post spotList requestErr: \(error)")
                 if error.code == 40405 {
                     self?.errorType = .unsupportedRegion
-                    self?.showErrorView.value = true
                 }
+                self?.showErrorView.value = true
                 self?.onSuccessPostSpotList.value = false
             default:
                 print("🥑Failed To Post")
@@ -178,7 +176,6 @@ extension SpotListViewModel: ACLocationManagerDelegate {
         
         userCoordinate = coordinate
         getDong()
-        postSpotList()
     }
     
 }
