@@ -81,13 +81,32 @@ class LocalVerificationViewController: BaseNavViewController {
 private extension LocalVerificationViewController {
     
     func bindViewModel() {
-        self.localVerificationViewModel.isLocationChecked.bind { [weak self] isChecked in
-            guard let isChecked else { return }
+        localVerificationViewModel.isLocationChecked.bind { [weak self] isChecked in
+            guard let self = self,
+                  let isChecked else { return }
             if isChecked {
-                self?.pushToLocalMapVC()
+                if localVerificationViewModel.isLocationKorea {
+                    pushToLocalMapVC()
+                } else {
+                    switch localVerificationViewModel.flowType {
+                    case .onboarding:
+                        self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "온보딩으로 이동", completion: {
+                            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                                sceneDelegate.window?.rootViewController = OnboardingViewController()
+                            }
+                        })
+                    default:
+                        self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "홈으로 이동", completion: {
+                            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                                sceneDelegate.window?.rootViewController = ACTabBarController()
+                            }
+                        })
+                    }
+                }
             } else {
-                self?.showDefaultAlert(title: "위치 확인 실패", message: "위치를 확인할 수 없습니다.")
+                self.showDefaultAlert(title: "위치 확인 실패", message: "위치를 확인할 수 없습니다.")
             }
+            localVerificationViewModel.isLocationChecked.value = nil
         }
     }
     

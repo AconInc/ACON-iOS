@@ -24,7 +24,10 @@ extension UIViewController {
     
     // MARK: - 아이폰 기본 확인 Alert 띄우기
     
-    func showDefaultAlert(title: String, message: String, okText: String = StringLiterals.Alert.ok) {
+    func showDefaultAlert(title: String,
+                          message: String,
+                          okText: String = StringLiterals.Alert.ok,
+                          completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         // TODO: - 추후 배경색 및 폰트색도 변경
         alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .gray8
@@ -38,10 +41,13 @@ extension UIViewController {
         alert.setValue(messageString, forKey: "attributedMessage")
             
         
-        let okAction = UIAlertAction(title: okText, style: .default, handler: nil)
+        let okAction = UIAlertAction(title: okText, style: .default) { _ in
+            completion?()
+        }
         alert.addAction(okAction)
         okAction.setValue(UIColor.org2, forKey: "titleTextColor")
-        present(alert, animated: true, completion: nil)
+        
+        present(alert, animated: true)
     }
     
     

@@ -93,7 +93,7 @@ private extension ProfileViewController {
                   let onSuccess = onSuccess else { return }
             // TODO: onSuccess 분기처리
             // TODO: 인증동네 추후 여러개로 수정(Sprint3)
-            let firstAreaName: String = self.viewModel.userInfo.verifiedAreaList.first?.name ?? "impossible"
+            let firstAreaName: String = self.viewModel.userInfo.verifiedAreaList.first?.name ?? "???"
             if onSuccess {
                 profileView.do {
                     $0.setProfileImage(self.viewModel.userInfo.profileImage)
