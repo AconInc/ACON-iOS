@@ -18,8 +18,6 @@ class SpotListViewModel: Serviceable {
     
     var onFinishRefreshingSpotList: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var showErrorView: ObservablePattern<Bool> = ObservablePattern(nil)
-    
     var errorType: SpotListErrorType? = nil
     
     var spotList: [SpotModel] = []
@@ -83,7 +81,6 @@ extension SpotListViewModel {
                 switch response {
                 case .success(let data):
                     self?.currentDong = data.area
-                    self?.showErrorView.value = false
                     self?.onSuccessGetDong.value = true
                 case .reIssueJWT:
                     self?.handleReissue { [weak self] in
@@ -93,8 +90,9 @@ extension SpotListViewModel {
                     print("🥑getDong requestErr: \(error)")
                     if error.code == 40405 {
                         self?.errorType = .unsupportedRegion
+                    } else {
+                        self?.errorType = .networkFail
                     }
-                    self?.showErrorView.value = true
                     self?.onSuccessGetDong.value = false
                 default:
                     print("🥑vm - Failed to get dong")
@@ -139,9 +137,6 @@ extension SpotListViewModel {
                 self?.spotList = spotList
                 if spotList.isEmpty {
                     self?.errorType = .emptyList
-                    self?.showErrorView.value = true
-                } else {
-                    self?.showErrorView.value = false
                 }
                 self?.onSuccessPostSpotList.value = true
             case .reIssueJWT:
@@ -152,8 +147,9 @@ extension SpotListViewModel {
                 print("🥑post spotList requestErr: \(error)")
                 if error.code == 40405 {
                     self?.errorType = .unsupportedRegion
+                } else {
+                    self?.errorType = .networkFail
                 }
-                self?.showErrorView.value = true
                 self?.onSuccessPostSpotList.value = false
             default:
                 print("🥑Failed To Post")
