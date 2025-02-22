@@ -353,6 +353,11 @@ extension SpotListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = viewModel.spotList[indexPath.item]
         let vc = SpotDetailViewController(item.id)
+        ACLocationManager.shared.removeDelegate(viewModel)
+        vc.backCompletion = { [weak self] in
+            guard let self = self else { return }
+            ACLocationManager.shared.addDelegate(self.viewModel)
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
