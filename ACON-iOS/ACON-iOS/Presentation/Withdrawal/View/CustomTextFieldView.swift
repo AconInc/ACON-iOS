@@ -114,6 +114,11 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
     }
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        if text == "\n" {
+                return false
+            }
+        
         let currentText = textView.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
 
