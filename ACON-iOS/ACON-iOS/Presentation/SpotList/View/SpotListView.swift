@@ -46,8 +46,8 @@ class SpotListView: BaseView {
         self.addSubviews(
             collectionView,
             skeletonView,
-            floatingButtonStack,
-            errorView)
+            errorView,
+            floatingButtonStack)
         
         floatingButtonStack.addArrangedSubviews(floatingLocationButton,
                                                 floatingMapButton,
