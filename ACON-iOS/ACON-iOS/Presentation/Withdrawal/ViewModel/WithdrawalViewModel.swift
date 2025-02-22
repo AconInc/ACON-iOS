@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class WithdrawalViewModel {
+final class WithdrawalViewModel: Serviceable {
     
     var selectedOption: ObservablePattern<String> = ObservablePattern(nil)
     var inputText: ObservablePattern<String> = ObservablePattern(nil)
@@ -57,6 +57,10 @@ final class WithdrawalViewModel {
                     UserDefaults.standard.removeObject(forKey: key.description)
                 }
                 self.onSuccessWithdrawal.value = true
+            case .reIssueJWT:
+                self.handleReissue { [weak self] in
+                    self?.withdrawalAPI()
+                }
             default:
                 self.onSuccessWithdrawal.value = false
             }
