@@ -90,7 +90,7 @@ enum SpotType {
             case .koreanStreet: return "KOREAN_STREET"
             case .asian: return "ASIAN"
             case .bar: return "BAR"
-            case .excludeFranchise: return "EXCLUDE_FRANCHISE 제외"
+            case .excludeFranchise: return "EXCLUDE_FRANCHISE"
             }
         }
         
@@ -184,13 +184,13 @@ enum SpotType {
             }
         }
         
-        var serverKey: Int {
+        var serverKey: Int? {
             switch self {
             case .five: return 5
             case .ten: return 10
             case .fifteen: return 15
             case .twenty: return 20
-            case .twentyFive: return -1
+            case .twentyFive: return nil
             }
         }
         
@@ -212,13 +212,13 @@ enum SpotType {
             }
         }
         
-        var serverKey: Int {
+        var serverKey: Int? {
             switch self {
             case .fiveThousand: return 5000
             case .tenThousand: return 10000
             case .thirtyThousand: return 30000
             case .fiftyThousand: return 50000
-            case .aboveFiftyThousand: return -1
+            case .aboveFiftyThousand: return nil
             }
         }
         
@@ -238,11 +238,11 @@ enum SpotType {
             }
         }
         
-        var serverKey: Int {
+        var serverKey: Int? {
             switch self {
             case .threeTousand: return 3000
             case .fiveThousand: return 5000
-            case .aboveTenThousand: return -1
+            case .aboveTenThousand: return nil
             }
         }
         
