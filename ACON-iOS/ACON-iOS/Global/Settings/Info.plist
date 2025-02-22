@@ -32,6 +32,8 @@
 	<string>${GOOGLE_WEB_CLIENT_ID}</string>
 	<key>NMFClientId</key>
 	<string>${NMAP_CLIENT_KEY}</string>
+	<key>AMPLITUDE_KEY</key>
+	<string>${AMPLITUDE_KEY}</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

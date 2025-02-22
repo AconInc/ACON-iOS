@@ -21,6 +21,8 @@ enum Config {
             
             static let nMapClientKey = "NMFClientId"
             
+            static let amplitudeKey = "AMPLITUDE_KEY"
+            
         }
         
     }
@@ -61,6 +63,13 @@ extension Config {
     static let nMapClientKey: String = {
         guard let key = Config.infoDictionary[Keys.Plist.nMapClientKey] as? String else {
             fatalError("nMapClientKey is not set in plist for this configuration")
+        }
+        return key
+    }()
+    
+    static let amplitudeKey: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.amplitudeKey] as? String else {
+            fatalError("amplitudeKey is not set in plist for this configuration")
         }
         return key
     }()
