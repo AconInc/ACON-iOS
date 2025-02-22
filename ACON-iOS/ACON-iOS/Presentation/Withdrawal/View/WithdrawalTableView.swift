@@ -50,6 +50,15 @@ final class WithdrawalTableView: UITableView {
         dataSource = self
         register(WithdrawalTableViewCell.self, forCellReuseIdentifier: WithdrawalTableViewCell.cellIdentifier)
     }
+    
+    func handleSelection(at indexPath: IndexPath) {
+        let option = options[indexPath.row]
+        selectedOption = option
+        viewModel?.updateSelectedOption(selectedOption)
+        
+        (superview?.superview as? WithdrawalViewController)?.buttonState()
+    }
+    
 }
 
 extension WithdrawalTableView: UITableViewDelegate, UITableViewDataSource {
@@ -70,11 +79,4 @@ extension WithdrawalTableView: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let option = options[indexPath.row]
-        selectedOption = option
-        viewModel?.updateSelectedOption(selectedOption)
-        
-        (superview?.superview as? WithdrawalViewController)?.buttonState()
-    }
 }

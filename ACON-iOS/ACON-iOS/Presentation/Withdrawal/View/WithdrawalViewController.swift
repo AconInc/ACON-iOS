@@ -63,7 +63,7 @@ final class WithdrawalViewController: BaseNavViewController {
         }
         
         otherReasonTextFieldView.isHidden = true
-        
+
         
         func backButtonTapped() {
             if let navigationController = navigationController {
