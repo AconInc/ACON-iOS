@@ -25,11 +25,6 @@ class SpotDetailViewModel: Serviceable {
     
     init(spotID: Int64) {
         self.spotID = spotID
-        ACLocationManager.shared.addDelegate(self)
-    }
-    
-    deinit {
-        ACLocationManager.shared.removeDelegate(self)
     }
 
 }
