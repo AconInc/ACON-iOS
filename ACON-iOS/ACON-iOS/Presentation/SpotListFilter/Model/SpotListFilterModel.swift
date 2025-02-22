@@ -13,7 +13,7 @@ struct SpotConditionModel: Equatable {
     
     let filterList: [SpotFilterModel]?
     
-    let walkingTime: Int
+    let walkingTime: Int?
     
     let priceRange: Int?
     

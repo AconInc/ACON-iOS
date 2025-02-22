@@ -35,7 +35,7 @@ class BaseErrorView: BaseView {
         
         errorImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(100 * ScreenUtils.heightRatio)
+            $0.centerY.equalToSuperview().offset(-150)
             $0.size.equalTo(ScreenUtils.widthRatio*140)
         }
         
@@ -83,7 +83,11 @@ extension BaseErrorView {
                     buttonTitle.ACStyle(.h7)
                 
                 )
-                config.baseBackgroundColor = .org1
+                
+                config.baseBackgroundColor = .subOrg35
+                config.baseForegroundColor = .acWhite
+                config.background.strokeColor = .org1
+                config.background.strokeWidth = 1
                 config.background.cornerRadius = 6
                 config.contentInsets = .init(top: 13, leading: 16, bottom: 13, trailing: 16)
                 $0.configuration = config

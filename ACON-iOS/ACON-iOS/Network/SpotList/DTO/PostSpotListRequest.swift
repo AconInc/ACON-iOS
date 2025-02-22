@@ -23,7 +23,7 @@ struct SpotCondition: Encodable {
     
     let filterList: [SpotFilter]?
     
-    let walkingTime: Int
+    let walkingTime: Int?
     
     let priceRange: Int?
     
@@ -35,7 +35,7 @@ struct SpotCondition: Encodable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.spotType, forKey: .spotType)
         try container.encodeIfPresent(self.filterList, forKey: .filterList)
-        try container.encode(self.walkingTime, forKey: .walkingTime)
+        try container.encodeIfPresent(self.walkingTime, forKey: .walkingTime)
         try container.encodeIfPresent(self.priceRange, forKey: .priceRange)
     }
     
