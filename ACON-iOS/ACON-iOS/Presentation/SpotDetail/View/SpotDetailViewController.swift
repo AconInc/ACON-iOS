@@ -144,6 +144,7 @@ private extension SpotDetailViewController {
     
 }
 
+
 // MARK: - setUI
 
 private extension SpotDetailViewController {
