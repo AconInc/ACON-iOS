@@ -21,11 +21,11 @@ enum AmplitudeLiterals {
         
         static let filter = "filter"
         
-        static let place_upload = "place_upload"
+        static let placeUpload = "place_upload"
         
-        static let service_withdraw = "service_withdra"
+        static let serviceㅂWithdraw = "service_withdraw"
         
-        static let service_logout = "service_logout"
+        static let serviceLogout = "service_logout"
         
     }
     
