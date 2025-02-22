@@ -9,15 +9,6 @@ import UIKit
 
 class BaseErrorView: BaseView {
     
-    // MARK: - Datas
-    
-    private let errorImage: UIImage
-    
-    private let errorMessage: String
-    
-    private let buttonTitle: String
-    
-    
     // MARK: - UI Properties
     
     private let errorImageView = UIImageView()
@@ -27,53 +18,7 @@ class BaseErrorView: BaseView {
     let confirmButton = UIButton()
     
     
-    // MARK: - Initializer
-    
-    init( // TODO: 삭제하고 setStyle internal 메소드 사용 (115줄)
-        errorImage: UIImage = .icError1140,
-        errorMessage: String,
-        buttonTitle: String
-    ) {
-        self.errorImage = errorImage
-        self.errorMessage = errorMessage
-        self.buttonTitle = buttonTitle
-        
-        super.init(frame: .zero)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
     // MARK: - UI Setting Methods
-    
-    override func setStyle() {
-        super.setStyle()
-        
-        errorImageView.do {
-            $0.image = errorImage
-            $0.contentMode = .scaleAspectFit
-        }
-        
-        descriptionLabel.do {
-            $0.setLabel(text: errorMessage,
-                        style: .s1,
-                        color: .gray4)
-        }
-        
-        confirmButton.do {
-            var config = UIButton.Configuration.filled()
-            config.attributedTitle = AttributedString(
-                buttonTitle.ACStyle(.h7)
-            
-            )
-            config.baseBackgroundColor = .org1
-            config.background.cornerRadius = 6
-            config.contentInsets = .init(top: 13, leading: 16, bottom: 13, trailing: 16)
-            $0.configuration = config
-        }
-    }
     
     override func setHierarchy() {
         super.setHierarchy()
