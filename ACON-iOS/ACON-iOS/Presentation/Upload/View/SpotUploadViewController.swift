@@ -99,6 +99,7 @@ private extension SpotUploadViewController {
         let vc = DropAcornViewController(spotID: selectedSpotID)
         vc.modalPresentationStyle = .fullScreen
         self.isInDismissProcess = true
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.placeUpload, properties: ["click_review_next": true])
         present(vc, animated: false)
     }
     
