@@ -150,6 +150,11 @@ private extension SpotListFilterViewController {
         let spotType = viewModel.spotType.value ?? .restaurant
         viewModel.filterList = []
         
+        // NOTE: 앰플리튜드
+        let didSlideWalkingTime: Bool = viewModel.walkingTime != walkingTime
+        let didSlideRestaurantPrice: Bool = viewModel.restaurantPrice != restaurantPrice
+        let didSlideCafePrice: Bool = viewModel.cafePrice != cafePrice
+        
         switch spotType {
         case .restaurant:
             let restaurantFilter = extractRestaurantFilter()
@@ -158,12 +163,42 @@ private extension SpotListFilterViewController {
             viewModel.filterList.append(restaurantFilter)
             viewModel.filterList.append(companionFilter)
             
+            // NOTE: 앰플리튜드
+            AmplitudeManager.shared.trackEventWithProperties(
+                AmplitudeLiterals.EventName.filter,
+                properties: [
+                    "choose_filter_restaurant?" : true,
+                    "filter_visit_click_food" : restaurantFilter.optionList,
+                    "filter_passenger_click_restaurant" : companionFilter.optionList,
+                    "filter_walk_slide_restaurant" : walkingTime,
+                    "filter_price_slide_restaurant" : restaurantPrice,
+                    "slide_walk_restaurant?" : didSlideWalkingTime,
+                    "slide_price_restaurant?" : didSlideRestaurantPrice,
+                    "complete_filter_restaurant?" : !(!didSlideWalkingTime && !didSlideWalkingTime && restaurantFilter.optionList.isEmpty && companionFilter.optionList.isEmpty)
+                ]
+            )
+            
         case .cafe:
             let cafeFilter = extractCafeFilter()
             let visitPurposeFilter = extractVisitPurposeFilter()
             
             viewModel.filterList.append(cafeFilter)
             viewModel.filterList.append(visitPurposeFilter)
+            
+            // NOTE: 앰플리튜드
+            AmplitudeManager.shared.trackEventWithProperties(
+                AmplitudeLiterals.EventName.filter,
+                properties: [
+                    "choose_filter_cafe?" : true,
+                    "filter_visit_click_cafe" : cafeFilter.optionList,
+                    "filter_purpose_click_ cafe" : visitPurposeFilter.optionList,
+                    "filter_walk_slide_cafe" : walkingTime,
+                    "filter_price_slide_cafe" : cafePrice,
+                    "slide_walk_cafe?" : didSlideWalkingTime,
+                    "slide_price_cafe?" : didSlideCafePrice,
+                    "complete_filter_cafe?" : !(!didSlideWalkingTime && !didSlideCafePrice && cafeFilter.optionList.isEmpty && visitPurposeFilter.optionList.isEmpty)
+                ]
+            )
         }
         
         viewModel.spotType.value = spotType
