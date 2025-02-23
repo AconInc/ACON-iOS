@@ -24,8 +24,6 @@ class SpotDetailViewModel: Serviceable {
     
     let onSuccessPostGuidedSpotRequest: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    let isLocationKorea: ObservablePattern<Bool> = ObservablePattern(nil)
-    
     var mapType: String = "APPLE"
     
     let sname = "내 위치"
@@ -169,12 +167,9 @@ extension SpotDetailViewModel: ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
         ACLocationManager.shared.removeDelegate(self)
-        self.isLocationKorea.value = LocationUtils.isKorea(coordinate.latitude, coordinate.longitude)
         
         if mapType == "NAVER" {
-            if isLocationKorea.value == true {
-                openNMaps(startCoordinate: coordinate)
-            }
+            openNMaps(startCoordinate: coordinate)
         } else if mapType == "APPLE" {
             openAppleMaps(startCoordinate: coordinate)
         }

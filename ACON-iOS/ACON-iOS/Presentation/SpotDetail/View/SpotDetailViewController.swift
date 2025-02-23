@@ -130,13 +130,6 @@ private extension SpotDetailViewController {
                 self?.showDefaultAlert(title: "장소 메뉴 로드 실패", message: "장소 메뉴 로드에 실패했습니다.")
             }
         }
-        
-        self.spotDetailViewModel.isLocationKorea.bind { [weak self] isLocationKorea in
-            guard let isLocationKorea else { return }
-            if !isLocationKorea {
-                self?.showDefaultAlert(title: "알림", message: "현재 네이버지도 사용이 불가능한 지역에 있어요.")
-            }
-        }
     }
     
 }
