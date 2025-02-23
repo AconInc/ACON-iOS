@@ -25,7 +25,6 @@ final class AmplitudeManager {
     }
     
     func setUserID(_ userID: String) {
-        // TODO: - (중요 - 출시 전 진행) 추후 서버에서 내려주는 걸로 수정
         amplitude?.setUserId(userId: userID)
     }
     
