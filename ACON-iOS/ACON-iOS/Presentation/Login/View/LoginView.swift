@@ -118,7 +118,8 @@ final class LoginView: BaseView {
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
                                   style: .s2,
                                   color: .acWhite)
-    
+            $0.layer.borderColor = UIColor.gray5.cgColor
+            $0.layer.borderWidth = 1
         }
         
         proceedLoginLabel.do {
