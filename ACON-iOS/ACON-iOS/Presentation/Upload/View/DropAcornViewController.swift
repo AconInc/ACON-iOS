@@ -105,8 +105,7 @@ private extension DropAcornViewController {
     @objc
     func leaveReviewButtonTapped() {
         spotReviewViewModel.postReview(spotID: spotID, acornCount: reviewAcornCount)
-        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.placeUpload, properties: ["click_review_acon": true])
-        AmplitudeManager.shared.setUserProperty(userProperties: ["num_of_acon": reviewAcornCount])
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.placeUpload, properties: ["click_review_acon": true, "num_of_acon": reviewAcornCount, "spot_id": reviewAcornCount])
     }
     
     @objc
