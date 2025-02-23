@@ -168,13 +168,17 @@ private extension SpotListFilterViewController {
                 AmplitudeLiterals.EventName.filter,
                 properties: [
                     "choose_filter_restaurant?" : true,
-                    "filter_visit_click_food" : restaurantFilter.optionList,
-                    "filter_passenger_click_restaurant" : companionFilter.optionList,
-                    "filter_walk_slide_restaurant" : walkingTime,
-                    "filter_price_slide_restaurant" : restaurantPrice,
                     "slide_walk_restaurant?" : didSlideWalkingTime,
                     "slide_price_restaurant?" : didSlideRestaurantPrice,
                     "complete_filter_restaurant?" : !(!didSlideWalkingTime && !didSlideWalkingTime && restaurantFilter.optionList.isEmpty && companionFilter.optionList.isEmpty)
+                ]
+            )
+            AmplitudeManager.shared.setUserProperty(
+                userProperties: [
+                    "filter_visit_click_food" : restaurantFilter.optionList,
+                    "filter_passenger_click_restaurant" : companionFilter.optionList,
+                    "filter_walk_slide_restaurant" : walkingTime,
+                    "filter_price_slide_restaurant" : restaurantPrice
                 ]
             )
             
@@ -190,13 +194,17 @@ private extension SpotListFilterViewController {
                 AmplitudeLiterals.EventName.filter,
                 properties: [
                     "choose_filter_cafe?" : true,
+                    "slide_walk_cafe?" : didSlideWalkingTime,
+                    "slide_price_cafe?" : didSlideCafePrice,
+                    "complete_filter_cafe?" : !(!didSlideWalkingTime && !didSlideCafePrice && cafeFilter.optionList.isEmpty && visitPurposeFilter.optionList.isEmpty)
+                ]
+            )
+            AmplitudeManager.shared.setUserProperty(
+                userProperties: [
                     "filter_visit_click_cafe" : cafeFilter.optionList,
                     "filter_purpose_click_ cafe" : visitPurposeFilter.optionList,
                     "filter_walk_slide_cafe" : walkingTime,
                     "filter_price_slide_cafe" : cafePrice,
-                    "slide_walk_cafe?" : didSlideWalkingTime,
-                    "slide_price_cafe?" : didSlideCafePrice,
-                    "complete_filter_cafe?" : !(!didSlideWalkingTime && !didSlideCafePrice && cafeFilter.optionList.isEmpty && visitPurposeFilter.optionList.isEmpty)
                 ]
             )
         }
