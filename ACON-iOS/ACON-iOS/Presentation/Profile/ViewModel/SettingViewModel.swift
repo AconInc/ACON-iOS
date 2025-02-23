@@ -29,6 +29,7 @@ class SettingViewModel: Serviceable {
                     for key in UserDefaults.standard.dictionaryRepresentation().keys {
                         UserDefaults.standard.removeObject(forKey: key.description)
                     }
+                    AmplitudeManager.shared.reset()
                     self.navigateToSplash()
                 case .reIssueJWT:
                     self.handleReissue { [weak self] in

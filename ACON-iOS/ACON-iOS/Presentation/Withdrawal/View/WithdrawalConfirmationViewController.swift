@@ -43,6 +43,7 @@ extension WithdrawalConfirmationViewController {
                 if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
                     sceneDelegate.window?.rootViewController = SplashViewController()
                 }
+                AmplitudeManager.shared.reset()
             } else {
                 self.showDefaultAlert(title: "탈퇴 실패", message: "탈퇴에 실패했습니다.")
             }
