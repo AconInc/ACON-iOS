@@ -67,6 +67,7 @@ extension WithdrawalConfirmationViewController {
     }
     
     @objc private func confirmButtonTapped() {
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceWithdraw, properties: ["delete_id": true])
         viewModel?.withdrawalAPI()
     }
     

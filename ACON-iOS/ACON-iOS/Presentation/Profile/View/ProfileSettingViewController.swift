@@ -220,6 +220,7 @@ extension ProfileSettingViewController: UITableViewDataSource {
                 }
                 return
             case .withdrawal:
+                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceWithdraw, properties: ["click_exit_service": true])
                 let vc = WithdrawalViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }
