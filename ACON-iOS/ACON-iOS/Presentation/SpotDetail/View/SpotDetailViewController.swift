@@ -149,8 +149,19 @@ private extension SpotDetailViewController {
     @objc
     func findCourseButtonTapped() {
         spotDetailViewModel.postGuidedSpot()
-        spotDetailViewModel.redirectToNaverMap()
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_navigation?": true])
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.do {
+            $0.addAction(UIAlertAction(title: "네이버 지도", style: .default, handler: { _ in
+                self.spotDetailViewModel.redirectToNaverMap()
+            }))
+            $0.addAction(UIAlertAction(title: "Apple 지도", style: .default, handler: { _ in
+                self.spotDetailViewModel.redirectToAppleMap()
+            }))
+            $0.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        }
+        present(alertController, animated: true)
     }
     
     @objc

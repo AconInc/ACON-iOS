@@ -8,6 +8,7 @@
 import UIKit
 
 import CoreLocation
+import MapKit
 
 class SpotDetailViewModel: Serviceable {
     
@@ -24,6 +25,10 @@ class SpotDetailViewModel: Serviceable {
     let onSuccessPostGuidedSpotRequest: ObservablePattern<Bool> = ObservablePattern(nil)
     
     let isLocationKorea: ObservablePattern<Bool> = ObservablePattern(nil)
+    
+    var mapType: String = "APPLE"
+    
+    let sname = "내 위치"
     
     init(spotID: Int64) {
         self.spotID = spotID
@@ -114,7 +119,45 @@ extension SpotDetailViewModel {
     
     func redirectToNaverMap() {
         ACLocationManager.shared.addDelegate(self)
+        self.mapType = "NAVER"
         ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
+    }
+    
+    func redirectToAppleMap() {
+        ACLocationManager.shared.addDelegate(self)
+        self.mapType = "APPLE"
+        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
+    }
+    
+    func openNMaps(startCoordinate: CLLocationCoordinate2D) {
+        guard let appName = Bundle.main.bundleIdentifier else { return }
+        let urlString = "nmap://route/walk?slat=\(startCoordinate.latitude)&slng=\(startCoordinate.longitude)&sname=\(sname)&dlat=\(spotDetail.value?.latitude ?? 0)&dlng=\(spotDetail.value?.longitude ?? 0)&dname=\(spotDetail.value?.name ?? "")&appname=\(appName)"
+        guard let encodedStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+        
+        guard let url = URL(string: encodedStr) else { return }
+        guard let appStoreURL = URL(string: "itms-apps://itunes.apple.com/app/id311867728?mt=8") else { return }
+        
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        } else {
+            UIApplication.shared.open(appStoreURL)
+        }
+    }
+    
+    func openAppleMaps(startCoordinate: CLLocationCoordinate2D) {
+        let start = MKMapItem(placemark: MKPlacemark(coordinate: startCoordinate))
+        start.name = self.sname
+        let destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: spotDetail.value?.latitude ?? 0, longitude: spotDetail.value?.longitude ?? 0)))
+        destination.name = spotDetail.value?.name ?? ""
+        
+        let launchOptions = [
+            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking
+        ]
+        
+        MKMapItem.openMaps(
+            with: [start, destination],
+            launchOptions: launchOptions
+        )
     }
     
 }
@@ -127,20 +170,13 @@ extension SpotDetailViewModel: ACLocationManagerDelegate {
     func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
         ACLocationManager.shared.removeDelegate(self)
         self.isLocationKorea.value = LocationUtils.isKorea(coordinate.latitude, coordinate.longitude)
-        if isLocationKorea.value == true {
-            guard let appName = Bundle.main.bundleIdentifier else { return }
-            let sname = "내 위치"
-            let urlString = "nmap://route/walk?slat=\(coordinate.latitude)&slng=\(coordinate.longitude)&sname=\(sname)&dlat=\(spotDetail.value?.latitude ?? 0)&dlng=\(spotDetail.value?.longitude ?? 0)&dname=\(spotDetail.value?.name ?? "")&appname=\(appName)"
-            guard let encodedStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-            
-            guard let url = URL(string: encodedStr) else { return }
-            guard let appStoreURL = URL(string: "itms-apps://itunes.apple.com/app/id311867728?mt=8") else { return }
-            
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url)
-            } else {
-                UIApplication.shared.open(appStoreURL)
+        
+        if mapType == "NAVER" {
+            if isLocationKorea.value == true {
+                openNMaps(startCoordinate: coordinate)
             }
+        } else if mapType == "APPLE" {
+            openAppleMaps(startCoordinate: coordinate)
         }
     }
     
