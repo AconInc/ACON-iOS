@@ -177,8 +177,8 @@ private extension SpotListFilterViewController {
                 userProperties: [
                     "filter_visit_click_food" : restaurantFilter.optionList,
                     "filter_passenger_click_restaurant" : companionFilter.optionList,
-                    "filter_walk_slide_restaurant" : walkingTime,
-                    "filter_price_slide_restaurant" : restaurantPrice
+                    "filter_walk_slide_restaurant" : walkingTime.text,
+                    "filter_price_slide_restaurant" : restaurantPrice.text
                 ]
             )
             
@@ -203,8 +203,8 @@ private extension SpotListFilterViewController {
                 userProperties: [
                     "filter_visit_click_cafe" : cafeFilter.optionList,
                     "filter_purpose_click_ cafe" : visitPurposeFilter.optionList,
-                    "filter_walk_slide_cafe" : walkingTime,
-                    "filter_price_slide_cafe" : cafePrice,
+                    "filter_walk_slide_cafe" : walkingTime.text,
+                    "filter_price_slide_cafe" : cafePrice.text,
                 ]
             )
         }
