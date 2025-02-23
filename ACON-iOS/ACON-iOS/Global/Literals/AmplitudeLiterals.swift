@@ -23,7 +23,7 @@ enum AmplitudeLiterals {
         
         static let placeUpload = "place_upload"
         
-        static let serviceㅂWithdraw = "service_withdraw"
+        static let serviceWithdraw = "service_withdraw"
         
         static let serviceLogout = "service_logout"
         
