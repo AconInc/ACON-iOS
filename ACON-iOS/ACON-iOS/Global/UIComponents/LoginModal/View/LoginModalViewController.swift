@@ -22,8 +22,19 @@ class LoginModalViewController: BaseViewController {
     
     var onSuccessLogin: ((Bool) -> ())?
     
+    var presentedVCType: String
+    
     
     // MARK: - LifeCycle
+    
+    init(_ presentedVCType: String) {
+        self.presentedVCType = presentedVCType
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,7 +147,7 @@ extension LoginModalViewController {
                     print("🥑onSuccess && !hasVerifiedArea")
                     navigateToLocalVerificationVC()
                 }
-                AmplitudeManager.shared.trackEventWithProperties("did_login", properties: ["is_modal": true])
+                AmplitudeManager.shared.trackEventWithProperties(self.presentedVCType, properties: ["did_modal_login?": true])
             } else {
                 showLoginFailAlert()
             }

@@ -205,6 +205,7 @@ extension ProfileSettingViewController: UITableViewDataSource {
                 if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
                     sceneDelegate.window?.rootViewController = OnboardingViewController()
                     // TODO: - 어떤 경로인지 알려주는 플래그 필요
+                    AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["retry_onboarding?": true])
                 }
             case .localVerification:
                 let vc = VerifiedAreasEditViewController()
@@ -216,10 +217,12 @@ extension ProfileSettingViewController: UITableViewDataSource {
             case .logout:
                 let alertHandler = AlertHandler()
                 alertHandler.showLogoutAlert(from: self) { [weak self] in
+                    AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceLogout, properties: ["click_logout?": true])
                     self?.settingViewModel.logout()
                 }
                 return
             case .withdrawal:
+                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceWithdraw, properties: ["click_exit_service?": true])
                 let vc = WithdrawalViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }

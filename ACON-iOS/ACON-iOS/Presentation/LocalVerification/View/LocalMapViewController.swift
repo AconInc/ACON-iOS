@@ -128,6 +128,7 @@ private extension LocalMapViewController {
 
     @objc
     func finishVerificationButtonTapped() {
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.areaVerified, properties: ["complete_area?": true])
         self.localVerificationViewModel.postLocalArea()
     }
     

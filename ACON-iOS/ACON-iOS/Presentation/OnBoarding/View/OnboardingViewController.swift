@@ -426,6 +426,7 @@ extension OnboardingViewController {
             return
         }
         
+        sendOnboardingAmplitude(currentStep)
         let isConditionMet = checkSelectionCondition(for: currentStep + 1)
         currentStep += 1
         buttonHide()
@@ -513,6 +514,35 @@ extension OnboardingViewController{
     
     private func buttonHide() {
         backButton.alpha = (currentStep == 0) ? 0 : 1
+    }
+    
+}
+
+
+// MARK: - Amplitude
+
+extension OnboardingViewController {
+    
+    private func sendOnboardingAmplitude(_ step: Int) {
+        switch step {
+        case 0:
+            AmplitudeManager.shared.setUserProperty(userProperties: ["dislike_food": viewModel.dislike.value ?? []])
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_dislike_food?": true])
+        case 1:
+            AmplitudeManager.shared.setUserProperty(userProperties: ["favorite_food_rank": viewModel.favoriteCuisne.value ?? []])
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_favorite_food_rank?": true])
+        case 2:
+            AmplitudeManager.shared.setUserProperty(userProperties: ["favorite_spot": viewModel.favoriteSpotType.value ?? []])
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_favorite_spot?": true])
+        case 3:
+            AmplitudeManager.shared.setUserProperty(userProperties: ["favorite_spot_mood": viewModel.favoriteSpotStyle.value ?? []])
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_favorite_spot_mood?": true])
+        case 4:
+            AmplitudeManager.shared.setUserProperty(userProperties: ["favorite_spot_style_rank": viewModel.favoriteSpotRank.value ?? []])
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_favorite_spot_style_rank?": true])
+        default:
+            return
+        }
     }
     
 }

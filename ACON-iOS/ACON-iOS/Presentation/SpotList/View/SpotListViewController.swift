@@ -175,7 +175,7 @@ private extension SpotListViewController {
     @objc
     func handleRefreshControl() {
         guard AuthManager.shared.hasToken else {
-            presentLoginModal()
+            presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
             spotListView.collectionView.do {
                 $0.refreshControl?.endRefreshing()
                 $0.setContentOffset(.zero, animated: true)
@@ -199,7 +199,7 @@ private extension SpotListViewController {
     @objc
     func tappedFilterButton() {
         guard AuthManager.shared.hasToken else {
-            presentLoginModal()
+            presentLoginModal(AmplitudeLiterals.EventName.filter)
             return
         }
         let vc = SpotListFilterViewController(viewModel: viewModel)
@@ -220,7 +220,7 @@ private extension SpotListViewController {
     func tappedLocationButton() {
         // TODO: 내용 handleRefreshControl 부분으로 옮기기
         guard AuthManager.shared.hasToken else {
-            presentLoginModal()
+            presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
             return
         }
         // TODO: 할 거 하기
@@ -230,7 +230,7 @@ private extension SpotListViewController {
     func tappedMapButton() {
         // TODO: 내용 handleRefreshControl 부분으로 옮기기
         guard AuthManager.shared.hasToken else {
-            presentLoginModal()
+            presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
             return
         }
         // TODO: 맵뷰 띄우기
@@ -240,7 +240,7 @@ private extension SpotListViewController {
     func tappedReloadButton() {
         spotListView.hideSkeletonView(isHidden: false)
         guard AuthManager.shared.hasToken else {
-            presentLoginModal()
+            presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
             return
         }
         spotListView.hideSkeletonView(isHidden: false)
