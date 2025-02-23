@@ -526,20 +526,20 @@ extension OnboardingViewController {
     private func sendOnboardingAmplitude(_ step: Int) {
         switch step {
         case 0:
-            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_dislike_food?": true])
             AmplitudeManager.shared.setUserProperty(userProperties: ["dislike_food": viewModel.dislike.value ?? []])
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_dislike_food?": true])
         case 1:
+            AmplitudeManager.shared.setUserProperty(userProperties: ["favorite_food_rank": viewModel.favoriteCuisne.value ?? []])
             AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_favorite_food_rank?": true])
-            AmplitudeManager.shared.setUserProperty(userProperties: ["dislike_food": viewModel.favoriteCuisne.value ?? []])
         case 2:
+            AmplitudeManager.shared.setUserProperty(userProperties: ["favorite_spot": viewModel.favoriteSpotType.value ?? []])
             AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_favorite_spot?": true])
-            AmplitudeManager.shared.setUserProperty(userProperties: ["dislike_food": viewModel.favoriteSpotType.value ?? []])
         case 3:
+            AmplitudeManager.shared.setUserProperty(userProperties: ["favorite_spot_mood": viewModel.favoriteSpotStyle.value ?? []])
             AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_favorite_spot_mood?": true])
-            AmplitudeManager.shared.setUserProperty(userProperties: ["dislike_food": viewModel.favoriteSpotStyle.value ?? []])
         case 4:
+            AmplitudeManager.shared.setUserProperty(userProperties: ["favorite_spot_style_rank": viewModel.favoriteSpotRank.value ?? []])
             AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_favorite_spot_style_rank?": true])
-            AmplitudeManager.shared.setUserProperty(userProperties: ["dislike_food": viewModel.favoriteSpotRank.value ?? []])
         default:
             return
         }
