@@ -103,7 +103,7 @@ extension LoginViewController {
             guard let self = self else { return }
             let hasVerifiedArea = loginViewModel.hasVerifiedArea
             if onSuccess {
-                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.login, properties: ["did_login": true])
+                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.login, properties: ["did_login?": true])
                 hasVerifiedArea ? switchRootToTabBar() : navigateToLocalVerificationVC()
             } else {
                 showLoginFailAlert()

@@ -85,7 +85,7 @@ private extension LocalVerificationFinishedViewController {
     
     @objc
     func startButtonTapped() {
-        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.areaVerified, properties: ["click_go_home": true])
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.areaVerified, properties: ["click_go_home?": true])
         goToTabView()
     }
     

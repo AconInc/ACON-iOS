@@ -147,7 +147,7 @@ extension LoginModalViewController {
                     print("🥑onSuccess && !hasVerifiedArea")
                     navigateToLocalVerificationVC()
                 }
-                AmplitudeManager.shared.trackEventWithProperties(self.presentedVCType, properties: ["did_modal_login": true])
+                AmplitudeManager.shared.trackEventWithProperties(self.presentedVCType, properties: ["did_modal_login?": true])
             } else {
                 showLoginFailAlert()
             }

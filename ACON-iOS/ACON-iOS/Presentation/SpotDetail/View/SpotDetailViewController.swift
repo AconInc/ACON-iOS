@@ -150,7 +150,7 @@ private extension SpotDetailViewController {
     func findCourseButtonTapped() {
         spotDetailViewModel.postGuidedSpot()
         spotDetailViewModel.redirectToNaverMap()
-        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_navigation": true])
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_navigation?": true])
     }
     
     @objc

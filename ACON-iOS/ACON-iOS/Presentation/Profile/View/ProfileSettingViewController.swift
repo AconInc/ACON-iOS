@@ -215,14 +215,14 @@ extension ProfileSettingViewController: UITableViewDataSource {
             let items = SettingType.allSections[3] as! [SettingType.Account]
             switch items[indexPath.row] {
             case .logout:
-                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceLogout, properties: ["click_logout": true])
+                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceLogout, properties: ["click_logout?": true])
                 let alertHandler = AlertHandler()
                 alertHandler.showLogoutAlert(from: self) { [weak self] in
                     self?.settingViewModel.logout()
                 }
                 return
             case .withdrawal:
-                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceWithdraw, properties: ["click_exit_service": true])
+                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceWithdraw, properties: ["click_exit_service?": true])
                 let vc = WithdrawalViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }

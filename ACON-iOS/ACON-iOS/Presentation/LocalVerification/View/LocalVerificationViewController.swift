@@ -128,7 +128,7 @@ private extension LocalVerificationViewController {
     
     @objc
     func nextButtonTapped() {
-        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.areaVerified, properties: ["click_area_next": true])
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.areaVerified, properties: ["click_area_next?": true])
         localVerificationViewModel.checkLocation()
     }
     
