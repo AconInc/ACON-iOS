@@ -205,6 +205,7 @@ extension ProfileSettingViewController: UITableViewDataSource {
                 if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
                     sceneDelegate.window?.rootViewController = OnboardingViewController()
                     // TODO: - 어떤 경로인지 알려주는 플래그 필요
+                    AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["retry_onboarding?": true])
                 }
             case .localVerification:
                 let vc = VerifiedAreasEditViewController()

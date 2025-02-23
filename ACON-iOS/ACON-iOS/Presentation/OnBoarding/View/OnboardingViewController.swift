@@ -426,6 +426,7 @@ extension OnboardingViewController {
             return
         }
         
+        sendOnboardingAmplitude(currentStep)
         let isConditionMet = checkSelectionCondition(for: currentStep + 1)
         currentStep += 1
         buttonHide()
@@ -513,6 +514,35 @@ extension OnboardingViewController{
     
     private func buttonHide() {
         backButton.alpha = (currentStep == 0) ? 0 : 1
+    }
+    
+}
+
+
+// MARK: - Amplitude
+
+extension OnboardingViewController {
+    
+    private func sendOnboardingAmplitude(_ step: Int) {
+        switch step {
+        case 0:
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_dislike_food?": true])
+            AmplitudeManager.shared.setUserProperty(userProperties: ["dislike_food": viewModel.dislike.value ?? []])
+        case 1:
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_favorite_food_rank?": true])
+            AmplitudeManager.shared.setUserProperty(userProperties: ["dislike_food": viewModel.favoriteCuisne.value ?? []])
+        case 2:
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_favorite_spot?": true])
+            AmplitudeManager.shared.setUserProperty(userProperties: ["dislike_food": viewModel.favoriteSpotType.value ?? []])
+        case 3:
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_favorite_spot_mood?": true])
+            AmplitudeManager.shared.setUserProperty(userProperties: ["dislike_food": viewModel.favoriteSpotStyle.value ?? []])
+        case 4:
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["complete_favorite_spot_style_rank?": true])
+            AmplitudeManager.shared.setUserProperty(userProperties: ["dislike_food": viewModel.favoriteSpotRank.value ?? []])
+        default:
+            return
+        }
     }
     
 }
