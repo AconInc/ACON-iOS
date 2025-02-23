@@ -211,7 +211,8 @@ private extension SpotListViewController {
         // NOTE: 앰플리튜드
         AmplitudeManager.shared.trackEventWithProperties(
             AmplitudeLiterals.EventName.filter,
-            properties: ["click_filter?" : true])
+            properties: ["click_filter?" : true]
+        )
     }
     
     
