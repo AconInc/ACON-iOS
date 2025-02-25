@@ -149,6 +149,8 @@ class LoginModalView: GlassmorphismView {
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
                                   style: .s1,
                                   color: .acWhite)
+            $0.layer.borderColor = UIColor.gray5.cgColor
+            $0.layer.borderWidth = 1
         }
         
         youAgreedLabel.do {

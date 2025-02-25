@@ -120,9 +120,8 @@ extension ACLocationManager: CLLocationManagerDelegate {
         isRequestingLocation = false
         stopUpdatingLocation()
         
-        let testCoordinate = CLLocationCoordinate2D(latitude: 37.5666791, longitude: -126.9782914)
         multicastDelegate.invoke { delegate in
-            delegate.locationManager(self, didUpdateLocation: testCoordinate)
+            delegate.locationManager(self, didUpdateLocation: coordinate)
         }
     }
     
