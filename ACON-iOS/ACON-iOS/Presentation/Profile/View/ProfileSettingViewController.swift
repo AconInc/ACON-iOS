@@ -182,10 +182,11 @@ extension ProfileSettingViewController: UITableViewDataSource {
             let items = SettingType.allSections[0] as! [SettingType.Info]
             switch items[indexPath.row] {
             case .version:
-                if !settingViewModel.isLatestVersion {
-                    // TODO: go to appstore
-                    print("go to appstore")
-                    return
+                Task {
+                    let isLatestVersion = await AppVersionManager.shared.checkExactVersion()
+                    if !isLatestVersion {
+                        AppVersionManager.shared.openAppStore()
+                    }
                 }
             }
         case 1:

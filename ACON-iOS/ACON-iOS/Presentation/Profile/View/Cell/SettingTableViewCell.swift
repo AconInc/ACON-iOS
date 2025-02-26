@@ -113,10 +113,15 @@ extension SettingTableViewCell {
     }
     
     func bindVersionData() {
-        let isLatestVersion = viewModel.isLatestVersion
-        arrowImageView.isHidden = isLatestVersion
-        versionLabel.isHidden = !isLatestVersion
-        updateLabel.isHidden = isLatestVersion
+        Task {
+            let isLatestVersion = await AppVersionManager.shared.checkExactVersion()
+            
+            DispatchQueue.main.async {
+                self.arrowImageView.isHidden = isLatestVersion
+                self.versionLabel.isHidden = !isLatestVersion
+                self.updateLabel.isHidden = isLatestVersion
+            }
+        }
     }
     
 }
