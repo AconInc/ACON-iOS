@@ -39,6 +39,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        
+        // NOTE: 스플래시 (2.4초) 이후
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            self.checkUpdate()
+        }
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
@@ -47,6 +52,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    private func checkUpdate() {
+        Task {
+            let updateAvailable = await AppVersionManager.shared.checkMajorMinorVersion() == false
+            if updateAvailable {
+                await MainActor.run {
+                    window?.rootViewController?.showDefaultAlert(title: "업데이트 알림",
+                                                                                    message: "지금 앱스토어에서 새로워진 acon을 만나보세요!",
+                                                                                    okText: "업데이트",
+                                                                                    isCancelAvailable: true,
+                                                                 cancelText: "나중에") {
+                        AppVersionManager.shared.openAppStore()
+                    }
+                }
+            }
+        }
+    }
 
 }
 
