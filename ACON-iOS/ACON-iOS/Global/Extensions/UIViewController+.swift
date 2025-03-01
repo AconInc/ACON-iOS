@@ -27,6 +27,8 @@ extension UIViewController {
     func showDefaultAlert(title: String,
                           message: String,
                           okText: String = StringLiterals.Alert.ok,
+                          isCancelAvailable: Bool = false,
+                          cancelText: String = "취소",
                           completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         // TODO: - 추후 배경색 및 폰트색도 변경
@@ -46,6 +48,12 @@ extension UIViewController {
         }
         alert.addAction(okAction)
         okAction.setValue(UIColor.org2, forKey: "titleTextColor")
+        
+        if isCancelAvailable {
+            let cancelAction = UIAlertAction(title: cancelText, style: .cancel)
+            alert.addAction(cancelAction)
+            cancelAction.setValue(UIColor.gray5, forKey: "titleTextColor")
+        }
         
         present(alert, animated: true)
     }

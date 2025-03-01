@@ -9,16 +9,6 @@ import UIKit
 
 class SettingViewModel: Serviceable {
     
-    var isLatestVersion: Bool = true
-    
-    // TODO: - 앱 버전 체크 로직 -> Sprint 3
-//    func checkAppVersion(completion: @escaping () -> Void) {
-//        AppVersionManager.checkVersion { [weak self] isLatest in
-//            self?.isLatestVersion = isLatest
-//            completion()
-//        }
-//    }
-    
     func logout() {
         let refreshToken = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.refreshToken) ?? ""
         ACService.shared.authService.postLogout(

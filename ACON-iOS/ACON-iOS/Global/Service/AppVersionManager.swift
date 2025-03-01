@@ -5,40 +5,64 @@
 //  Created by 이수민 on 2/13/25.
 //
 
-import Foundation
+import UIKit
 
 class AppVersionManager {
     
-    // MARK: - 버전 체크 로직
-    // TODO: - 추후 더 나은 방식의 비동기처리로 리팩
-//    static func checkVersion(completion: @escaping (Bool) -> Void) {
-//        getUpdatedVersion { updatedVersion in
-//            guard let dictionary = Bundle.main.infoDictionary,
-//                  let currentVersion = dictionary["CFBundleShortVersionString"] as? String else {
-//                completion(false)
-//                return
-//            }
-//            completion(updatedVersion == currentVersion)
-//        }
-//    }
+    static let shared = AppVersionManager()
     
-//    static func getUpdatedVersion(completion: @escaping (String) -> Void) {
-//        guard let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(Bundle.main.bundleIdentifier ?? "")") else {
-//            completion("")
-//            return
-//        }
-//        
-//        URLSession.shared.dataTask(with: url) { data, response, error in
-//            guard let data = data,
-//                  let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
-//                  let results = json["results"] as? [[String: Any]],
-//                  results.count > 0,
-//                  let appStoreVersion = results[0]["version"] as? String else {
-//                completion("")
-//                return
-//            }
-//            completion(appStoreVersion)
-//        }.resume()
-//    }
+    private let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    
+    private init() { }
+    
+    private let appStoreURLString = "itms-apps://itunes.apple.com/app/apple-store/6740120473"
+    
+    private let lookUpURLString = "https://itunes.apple.com/lookup?id=6740120473&country=kr"
+    
+    func getAppStoreVersion() async -> String? {
+        guard let url = URL(string: lookUpURLString) else { return nil }
+            
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            guard let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
+                  let results = json["results"] as? [[String: Any]],
+                  results.count > 0,
+                  let appStoreVersion = results[0]["version"] as? String else {
+                return nil
+            }
+            return appStoreVersion
+        } catch {
+            return nil
+        }
+    }
+    
+    func openAppStore() {
+        guard let url = URL(string: appStoreURLString) else { return }
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    func checkExactVersion() async -> Bool {
+        guard let appStoreVersion = await getAppStoreVersion() else { return false }
+        return appStoreVersion == currentVersion
+    }
+    
+    func checkMajorMinorVersion() async -> Bool {
+        guard let currentVersion = currentVersion,
+              let appStoreVersion = await getAppStoreVersion() else { return false }
+        
+        let splitAppStoreVersion = appStoreVersion.split(separator: ".").map { $0 }
+        let splitCurrentVersion = currentVersion.split(separator: ".").map { $0 }
+        
+        guard splitAppStoreVersion.count >= 2 && splitCurrentVersion.count >= 2 else { return true }
+        
+        if splitCurrentVersion[0].compare(splitAppStoreVersion[0], options: .numeric) == .orderedAscending {
+            return false
+        } else if splitCurrentVersion[1].compare(splitAppStoreVersion[1], options: .numeric) == .orderedAscending {
+            return false
+        }
+        return true
+    }
     
 }
