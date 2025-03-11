@@ -1,6 +1,7 @@
 # 🌰 ACON-iOS
 
 > **매번 맛집을 찾느라 고민 중인 당신을 위한 지도앱, Acon**
+> #### [Appstore](https://apps.apple.com/kr/app/acon/id6740120473)
 
 ![Frame 2085665410](https://github.com/user-attachments/assets/6d1640b2-1b26-42ae-9eb0-2887960c8f2c)
 
@@ -20,16 +21,6 @@
 <br/>
 
 
-## 🥑 시연영상
-
-
-[시연영상](https://github.com/user-attachments/assets/74d30cb9-2efc-453f-804b-fb44202cd52d)
-
-> 250125 기준 시연 영상입니다.
-<br/> **플로우 : 스플래시 -> 로그인 -> 동네인증 -> 취향탐색 (온보딩) -> 장소탐색 -> 장소상세 -> 업로드**
-
-
-<br/>
 
 ## 🥜 Library
 | Library | Purpose        | Version                                            |
