@@ -32,7 +32,7 @@ class ProfileEditView: BaseView {
     
     private let nicknameTitleLabel = UILabel()
     
-    let nicknameTextField = ProfileEditTextField()
+    let nicknameTextField = ACTextField()
     
     private let nicknameValidMessageView = ProfileEditValidMessageView()
     
@@ -40,7 +40,7 @@ class ProfileEditView: BaseView {
     
     private let birthDateTitleLabel = UILabel()
     
-    let birthDateTextField = ProfileEditTextField()
+    let birthDateTextField = ACTextField()
     
     private let birthDateValidMessageView = ProfileEditValidMessageView()
     
@@ -68,8 +68,8 @@ class ProfileEditView: BaseView {
         
         birthDateTextField.do {
             $0.setPlaceholder(as: StringLiterals.Profile.birthDatePlaceholder)
-            $0.setDateStyle()
-            $0.keyboardType = .numberPad
+            $0.setAsDateField()
+            $0.textField.keyboardType = .numberPad
         }
         
         saveButton.do {

@@ -360,13 +360,13 @@ extension ProfileEditViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        if textField == profileEditView.nicknameTextField {
+        if textField == profileEditView.nicknameTextField.textField {
             return nicknameTextfieldChange(
                 textField,
                 shouldChangeCharactersIn: range,
                 replacementString: string
             )
-        } else if textField == profileEditView.birthDateTextField {
+        } else if textField == profileEditView.birthDateTextField.textField {
             return birthDateTextFieldChange(
                 textField,
                 shouldChangeCharactersIn: range,
