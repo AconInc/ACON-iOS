@@ -20,11 +20,6 @@ final class ACTextField: UIView {
         set { textField.text = newValue }
     }
 
-    var placeholder: String? {
-        get { textField.placeholder }
-        set { textField.placeholder = newValue }
-    }
-
     var delegate: UITextFieldDelegate? {
         get { textField.delegate }
         set { textField.delegate = newValue }
