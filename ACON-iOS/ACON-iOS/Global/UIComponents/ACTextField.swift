@@ -132,7 +132,7 @@ final class ACTextField: UIView {
         }
         
         clearButton.do {
-            $0.setImage(.icDissmissCircleGray, for: .normal)
+            $0.setImage(.icDismissCircleGray, for: .normal)
         }
         
         if icon != nil {

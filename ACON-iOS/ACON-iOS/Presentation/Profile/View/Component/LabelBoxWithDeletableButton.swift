@@ -59,7 +59,7 @@ class LabelBoxWithDeletableButton: BaseView {
         }
         
         deleteButton.do {
-            $0.setImage(.icDissmissCircleGray, for: .normal)
+            $0.setImage(.icDismissCircleGray, for: .normal)
         }
     }
     
