@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		150A105C2DA28F2600B0BC9A /* ACTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150A105B2DA28F2600B0BC9A /* ACTextField.swift */; };
 		151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003EB2D5FBF7200409DF4 /* GetProfileResponse.swift */; };
 		151003EE2D5FC48B00409DF4 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003ED2D5FC48B00409DF4 /* ProfileService.swift */; };
 		151003F02D5FC4C600409DF4 /* ProfileTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003EF2D5FC4C600409DF4 /* ProfileTargetType.swift */; };
@@ -257,6 +258,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		150A105B2DA28F2600B0BC9A /* ACTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTextField.swift; sourceTree = "<group>"; };
 		151003EB2D5FBF7200409DF4 /* GetProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileResponse.swift; sourceTree = "<group>"; };
 		151003ED2D5FC48B00409DF4 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		151003EF2D5FC4C600409DF4 /* ProfileTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTargetType.swift; sourceTree = "<group>"; };
@@ -1182,6 +1184,7 @@
 				15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */,
 				15CD257F2D40361600320006 /* LoginModal */,
 				D6E34C422D398B6000CEFA04 /* CustomAlert */,
+				150A105B2DA28F2600B0BC9A /* ACTextField.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -1811,6 +1814,7 @@
 				4C6B2F332D65A15D0089BCB6 /* WithdrawalTargetType.swift in Sources */,
 				4C6B2F342D65A15D0089BCB6 /* WithdrawalService.swift in Sources */,
 				4C6B2F352D65A15D0089BCB6 /* WithdrawalRequest.swift in Sources */,
+				150A105C2DA28F2600B0BC9A /* ACTextField.swift in Sources */,
 				74CDCE562D310B1600E3A21A /* String+.swift in Sources */,
 				74BF91FD2D381FF800B923E3 /* SpotDetailModel.swift in Sources */,
 				745ECB9F2D615B73005129B0 /* AlbumTableViewController.swift in Sources */,
