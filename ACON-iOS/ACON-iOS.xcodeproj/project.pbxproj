@@ -73,7 +73,6 @@
 		15CF62BD2D575EC00000A10F /* ProfileEditValidMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */; };
 		15CF62C22D577B600000A10F /* ProfileValidMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62C12D577B600000A10F /* ProfileValidMessageType.swift */; };
 		15CF62C52D579F2D0000A10F /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62C42D579F2D0000A10F /* ProfileViewModel.swift */; };
-		15CF62C72D57DE680000A10F /* ProfileEditTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */; };
 		15D122292D58BD0200E79866 /* DayOfMonthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D122282D58BD0200E79866 /* DayOfMonthType.swift */; };
 		15DC053F2D623DD400B752DD /* PostLogoutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DC053E2D623DD400B752DD /* PostLogoutRequest.swift */; };
 		15F45F842D6664C900BD6B9C /* BaseErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F45F832D6664C900BD6B9C /* BaseErrorView.swift */; };
@@ -324,7 +323,6 @@
 		15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditValidMessageView.swift; sourceTree = "<group>"; };
 		15CF62C12D577B600000A10F /* ProfileValidMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileValidMessageType.swift; sourceTree = "<group>"; };
 		15CF62C42D579F2D0000A10F /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTextField.swift; sourceTree = "<group>"; };
 		15D122282D58BD0200E79866 /* DayOfMonthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfMonthType.swift; sourceTree = "<group>"; };
 		15DC053E2D623DD400B752DD /* PostLogoutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLogoutRequest.swift; sourceTree = "<group>"; };
 		15F45F832D6664C900BD6B9C /* BaseErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseErrorView.swift; sourceTree = "<group>"; };
@@ -552,7 +550,6 @@
 				1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */,
 				15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */,
 				15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */,
-				15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */,
 				15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */,
 			);
 			path = Component;
@@ -1900,7 +1897,6 @@
 				15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */,
 				1547A8732D34157700E96616 /* SpotListViewModel.swift in Sources */,
 				D6E8169C2D622937001E4EBF /* WithdrawalViewModel.swift in Sources */,
-				15CF62C72D57DE680000A10F /* ProfileEditTextField.swift in Sources */,
 				748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */,
 				741E68A22D3D5FA200DF99EF /* ACService.swift in Sources */,
 				D6FF82E92D3805F000090233 /* DislikeCollectionViewType.swift in Sources */,
