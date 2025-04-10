@@ -34,9 +34,9 @@ final class ProfileEditViewController: BaseNavViewController {
         }
     }
     
-    var profileImage: UIImage = .imgProfileBasic80
+    private var profileImage: UIImage = .imgProfileBasic80
     
-    var isDefaultImage: Bool? = nil
+    private var isDefaultImage: Bool? = nil
     
     
     // MARK: - Life Cycle

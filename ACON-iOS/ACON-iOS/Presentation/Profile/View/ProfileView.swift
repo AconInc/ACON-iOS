@@ -30,9 +30,9 @@ final class ProfileView: BaseView {
     
     private let nicknameLabel = UILabel()
     
-    var profileEditButton = UIButton()
+    let profileEditButton = UIButton()
     
-    var needLoginButton = UIButton()
+    let needLoginButton = UIButton()
     
     private let boxStackView = UIStackView()
     

@@ -11,12 +11,13 @@ final class ProfileSettingViewController: BaseNavViewController {
 
     // MARK: - UI Properties
 
-    var settingTableView: UITableView = UITableView(frame: .zero, style: .grouped)
+    private let settingTableView: UITableView = UITableView(frame: .zero, style: .grouped)
 
 
     // MARK: - Properties
 
-    let settingViewModel: SettingViewModel = SettingViewModel()
+    private let settingViewModel: SettingViewModel = SettingViewModel()
+
 
     // MARK: - LifeCycle
 
