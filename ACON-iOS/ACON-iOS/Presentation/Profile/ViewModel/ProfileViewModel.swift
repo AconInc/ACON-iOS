@@ -8,26 +8,26 @@
 import Foundation
 
 final class ProfileViewModel: Serviceable {
-    
+
     // MARK: - Properties
-    
+
     var onLoginSuccess: ObservablePattern<Bool> = ObservablePattern(AuthManager.shared.hasToken)
-    
+
     var onGetProfileSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
-    
+
     var onGetNicknameValiditySuccess: ObservablePattern<Bool> = ObservablePattern(nil)
-    
+
     var onSuccessGetPresignedURL: ObservablePattern<Bool> = ObservablePattern(nil)
-    
+
     var onSuccessPutProfileImageToPresignedURL: ObservablePattern<Bool> = ObservablePattern(nil)
-    
+
     var onPatchProfileSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
-    
+
     var presignedURLInfo: PresignedURLModel = PresignedURLModel(fileName: "",
                                                                 presignedURL: "")
-    
+
     var nicknameValidityMessageType: ProfileValidMessageType = .none
-    
+
     var userInfo = UserInfoModel(
             profileImage: "",
             nickname: "",
@@ -35,23 +35,24 @@ final class ProfileViewModel: Serviceable {
             verifiedAreaList: [VerifiedAreaModel(id: 1, name: "")],
             possessingAcorns: 0
     )
-    
+
     let maxNicknameLength: Int = 16
-    
-    
+
+
     // MARK: - Methods
-    
+
     func updateUserInfo(nickname: String, birthDate: String?) {
         userInfo.nickname = nickname
         userInfo.birthDate = birthDate
     }
-    
-    
+
+
     // MARK: - Networking
-    
+
     func getProfile() {
         ACService.shared.profileService.getProfile { [weak self] response in
             guard let self = self else { return }
+
             switch response {
             case .success(let data):
                 let newUserInfo = UserInfoModel(
@@ -74,10 +75,10 @@ final class ProfileViewModel: Serviceable {
             }
         }
     }
-    
+
     func getNicknameValidity(nickname: String) {
         let parameter = GetNicknameValidityRequest(nickname: nickname)
-        
+
         ACService.shared.profileService.getNicknameValidity(parameter: parameter) { [weak self] response in
             switch response {
             case .success(_):
@@ -101,10 +102,13 @@ final class ProfileViewModel: Serviceable {
             }
         }
     }
-    
+
     func getProfilePresignedURL() {
-        ACService.shared.imageService.getPresignedURL(parameter: GetPresignedURLRequest(imageType: ImageType.PROFILE.rawValue)) { [weak self] response in
+        ACService.shared.imageService.getPresignedURL(
+            parameter: GetPresignedURLRequest(imageType: ImageType.PROFILE.rawValue)
+        ) { [weak self] response in
             guard let self = self else { return }
+
             switch response {
             case .success(let data):
                 presignedURLInfo = PresignedURLModel(fileName: data.fileName,
@@ -120,7 +124,7 @@ final class ProfileViewModel: Serviceable {
             }
         }
     }
-    
+
     func putProfileImageToPresignedURL(imageData: Data) {
         ACService.shared.imageService.putImageToPresignedURL(requestBody: PutImageToPresignedURLRequest(presignedURL: presignedURLInfo.presignedURL, imageData: imageData)) { [weak self] isSuccess in
             guard let self = self else { return }
@@ -131,14 +135,14 @@ final class ProfileViewModel: Serviceable {
             }
         }
     }
-    
+
     func patchProfile() {
         let requestBody = PatchProfileRequest(
             profileImage: userInfo.profileImage,
             nickname: userInfo.nickname,
             birthDate: userInfo.birthDate
         )
-        
+
         ACService.shared.profileService.patchProfile(requestBody: requestBody) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -154,5 +158,5 @@ final class ProfileViewModel: Serviceable {
             }
         }
     }
-    
+
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 final class SettingViewModel: Serviceable {
-    
+
     func logout() {
         let refreshToken = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.refreshToken) ?? ""
         ACService.shared.authService.postLogout(
@@ -30,11 +30,11 @@ final class SettingViewModel: Serviceable {
                 }
         }
     }
-    
+
     private func navigateToSplash() {
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
             sceneDelegate.window?.rootViewController = SplashViewController()
         }
     }
-    
+
 }
