@@ -362,7 +362,7 @@ extension ProfileEditViewController: UITextFieldDelegate {
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         if textField == profileEditView.nicknameTextField {
-            return nicknameTextfieldChange(
+            return nicknameTextFieldChange(
                 textField,
                 shouldChangeCharactersIn: range,
                 replacementString: string
@@ -387,7 +387,7 @@ private extension ProfileEditViewController {
 
     // MARK: - 닉네임 (입력마스크, 글자 수 넘기면 입력 막기)
 
-    func nicknameTextfieldChange(_ textField: UITextField,
+    func nicknameTextFieldChange(_ textField: UITextField,
                                  shouldChangeCharactersIn range: NSRange,
                                  replacementString string: String) -> Bool {
         let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string
