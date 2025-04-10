@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LabelBoxWithDeletableButton: BaseView {
+final class LabelBoxWithDeletableButton: BaseView {
     
     // MARK: - UI Properties
     

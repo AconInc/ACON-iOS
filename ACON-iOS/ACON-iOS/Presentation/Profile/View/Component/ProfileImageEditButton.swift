@@ -9,7 +9,7 @@ import UIKit
 
 import Kingfisher
 
-class ProfileImageEditButton: UIView {
+final class ProfileImageEditButton: UIView {
     
     // MARK: - Helpers
     

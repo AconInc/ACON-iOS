@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileEditValidMessageView: BaseView {
+final class ProfileEditValidMessageView: BaseView {
     
     // MARK: - UI Properties
     

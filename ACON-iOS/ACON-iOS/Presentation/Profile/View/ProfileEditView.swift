@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileEditView: BaseView {
+final class ProfileEditView: BaseView {
     
     // MARK: - Helpers
     

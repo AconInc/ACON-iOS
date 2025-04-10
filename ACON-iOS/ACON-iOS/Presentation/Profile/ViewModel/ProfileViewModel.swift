@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ProfileViewModel: Serviceable {
+final class ProfileViewModel: Serviceable {
     
     // MARK: - Properties
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileBoxComponent: BaseView {
+final class ProfileBoxComponent: BaseView {
     
     // MARK: - UI Components
     

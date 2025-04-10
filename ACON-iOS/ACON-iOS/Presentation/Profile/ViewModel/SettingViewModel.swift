@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingViewModel: Serviceable {
+final class SettingViewModel: Serviceable {
     
     func logout() {
         let refreshToken = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.refreshToken) ?? ""
