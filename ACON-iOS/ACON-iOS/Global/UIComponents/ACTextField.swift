@@ -36,6 +36,14 @@ final class ACTextField: UIView {
 
     private var icon: UIImage?
 
+    private var bgColor: UIColor
+
+    private var borderColor: UIColor
+
+    private var borderWidth: CGFloat
+
+    private var cornerRadius: CGFloat
+
     private let iconImageView = UIImageView()
 
     let textField = UITextField()
@@ -47,8 +55,18 @@ final class ACTextField: UIView {
 
     // MARK: - Initializer
 
-    init(icon: UIImage? = nil) {
+    init(
+        icon: UIImage? = nil,
+        backgroundColor: UIColor = .gray8,
+        borderColor: UIColor = .gray6,
+        borderWidth: CGFloat = 1,
+        cornerRadius: CGFloat = 4
+    ) {
         self.icon = icon
+        self.bgColor = backgroundColor
+        self.borderColor = borderColor
+        self.borderWidth = borderWidth
+        self.cornerRadius = cornerRadius
         
         super.init(frame: .zero)
         
@@ -106,11 +124,11 @@ final class ACTextField: UIView {
 
     private func setStyle() {
         self.do {
-            $0.backgroundColor = .gray8
+            $0.backgroundColor = bgColor
             $0.clipsToBounds = true
-            $0.layer.borderColor = UIColor.gray6.cgColor
-            $0.layer.borderWidth = 1
-            $0.layer.cornerRadius = 4
+            $0.layer.borderColor = borderColor.cgColor
+            $0.layer.borderWidth = borderWidth
+            $0.layer.cornerRadius = cornerRadius
         }
         
         textField.do {
