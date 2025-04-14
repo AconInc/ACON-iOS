@@ -428,6 +428,7 @@
 		748ECA6D2D3196ED00BBC981 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		748ECA702D31A72500BBC981 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		749234992D687B0D0025F700 /* AmplitudeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeManager.swift; sourceTree = "<group>"; };
+		7496EC1A2DACF3E500508EA8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACDebouncer.swift; sourceTree = "<group>"; };
 		74A8E7AF2D42C42300677408 /* ACON-iOSRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ACON-iOSRelease.entitlements"; sourceTree = "<group>"; };
 		74AB6EB02D2796D30094F873 /* ACON-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ACON-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1155,6 +1156,7 @@
 			children = (
 				744BAF182D300BC900F95B4A /* Config */,
 				748D6F632D2BCA1C007690B4 /* Info.plist */,
+				7496EC1A2DACF3E500508EA8 /* GoogleService-Info.plist */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
