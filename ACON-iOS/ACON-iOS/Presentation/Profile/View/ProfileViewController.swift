@@ -7,39 +7,39 @@
 
 import UIKit
 
-class ProfileViewController: BaseNavViewController {
-    
+final class ProfileViewController: BaseNavViewController {
+
     // MARK: - Properties
-    
+
     private let profileView = ProfileView()
-    
+
     private let viewModel = ProfileViewModel()
-    
-    
+
+
     // MARK: - Life Cycles
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         addTarget()
         bindViewModel()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.tabBarController?.tabBar.isHidden = false
         if AuthManager.shared.hasToken {
             viewModel.getProfile()
         }
     }
-    
+
     override func setHierarchy() {
         super.setHierarchy()
         
         contentView.addSubview(profileView)
     }
-    
+
     override func setLayout() {
         super.setLayout()
         
@@ -47,47 +47,49 @@ class ProfileViewController: BaseNavViewController {
             $0.edges.equalToSuperview()
         }
     }
-    
+
     override func setStyle() {
         super.setStyle()
-        
+
         self.setCenterTitleLabelStyle(title: StringLiterals.Profile.profilePageTitle, fontStyle: .h5)
         self.setSettingButton()
     }
-    
+
     private func addTarget() {
         profileView.needLoginButton.addTarget(
             self,
             action: #selector(tappedNeedLoginButton),
             for: .touchUpInside
         )
-        
+
         profileView.profileEditButton.addTarget(
             self,
             action: #selector(tappedEditProfileButton),
             for: .touchUpInside
         )
-        
+
     }
-    
+
 }
 
 
+// MARK: - Bindings
+
 private extension ProfileViewController {
-    
+
     func bindViewModel() {
         viewModel.onLoginSuccess.bind { [weak self] onLoginSuccess in
             guard let self = self,
                   let onLoginSuccess = onLoginSuccess
             else { return }
-            
+
             self.profileView.do {
                 $0.needLoginButton.isHidden = onLoginSuccess
                 $0.setAcornCountBox(onLoginSuccess: onLoginSuccess)
                 $0.setVerifiedAreaBox(onLoginSuccess: onLoginSuccess)
             }
         }
-        
+
         viewModel.onGetProfileSuccess.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
@@ -106,13 +108,13 @@ private extension ProfileViewController {
             }
         }
     }
-    
+
 }
 
 // MARK: - @objc functions
 
 private extension ProfileViewController {
-    
+
     @objc
     func tappedNeedLoginButton() {
 //        presentLoginModal() // TODO: 메소드 수정 고민해보기 (SpotListVC도 로그인 성공했을 때 reloadData 시켜야할 것 같기 때문)
@@ -123,14 +125,13 @@ private extension ProfileViewController {
             viewModel.onLoginSuccess.value = onSuccess
             viewModel.getProfile()
         }
-        
         self.present(vc, animated: true)
     }
-    
+
     @objc
     func tappedEditProfileButton() {
         let vc = ProfileEditViewController(viewModel)
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
+
 }
