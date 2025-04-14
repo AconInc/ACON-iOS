@@ -109,3 +109,6 @@ xcuserdata
 
 # macOS specific
 .DS_Store
+
+# Firebase Plist
+GoogleService-Info.plist
