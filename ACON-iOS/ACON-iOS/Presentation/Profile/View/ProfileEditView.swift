@@ -96,9 +96,7 @@ final class ProfileEditView: BaseView {
             saveButton
         )
 
-        scrollView.addSubview(
-            contentView
-        )
+        scrollView.addSubview(contentView)
 
         contentView.addSubviews(
             profileImageEditButton,
