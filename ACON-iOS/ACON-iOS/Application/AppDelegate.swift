@@ -6,13 +6,22 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseCrashlytics
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        /// 엠플리튜드 초기화
         AmplitudeManager.shared.initialize()
+        
+        /// 파이어베이스 초기화
+        FirebaseApp.configure()
+        
+        Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(true)
+        
         return true
     }
 
