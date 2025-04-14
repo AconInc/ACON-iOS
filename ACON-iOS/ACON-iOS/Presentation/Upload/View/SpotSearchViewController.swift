@@ -49,9 +49,9 @@ class SpotSearchViewController: BaseViewController {
         super.viewDidLoad()
         
         self.hideKeyboard()
-        addTarget()
         registerCell()
         setDelegate()
+        bindTextField()
         bindViewModel()
     }
     
@@ -108,48 +108,27 @@ class SpotSearchViewController: BaseViewController {
             $0.isHidden = true
         }
     }
-    
-    func addTarget() {
-        spotSearchView.searchXButton.addTarget(self,
-                                              action: #selector(searchXButtonTapped),
-                                              for: .touchUpInside)
-        
-        spotSearchView.searchTextField.addTarget(self,
-                           action: #selector(searchTextFieldDidChange),
-                           for: .editingChanged)
-    }
 
 }
 
-    
-// MARK: - @objc functions
+
+// MARK: - Bind TextField, ViewModel
 
 private extension SpotSearchViewController {
-    
-    @objc
-    func searchXButtonTapped() {
-        spotSearchView.searchTextField.text = ""
-        spotSearchViewModel.getSearchSuggestion()
-        spotSearchView.searchSuggestionStackView.isHidden = false
-        spotSearchView.searchKeywordCollectionView.isHidden = true
-        emptyStateView.isHidden = true
-    }
-    
-    @objc
-    func searchTextFieldDidChange(_ textField: UITextField) {
-        if let text = textField.text {
-            emptyStateView.isHidden = text == ""
-            spotSearchView.searchSuggestionStackView.isHidden = text != ""
-            spotSearchView.searchKeywordCollectionView.isHidden = text == ""
+
+    func bindTextField() {
+        spotSearchView.searchTextField.observableText.bind { [weak self] text in
+            if let text = text {
+                self?.emptyStateView.isHidden = text.isEmpty
+                self?.spotSearchView.searchSuggestionStackView.isHidden = !text.isEmpty
+                self?.spotSearchView.searchKeywordCollectionView.isHidden = text.isEmpty
+                
+                self?.acDebouncer.call { [weak self] in
+                    self?.updateSearchKeyword(text)
+                }
+            }
         }
     }
-    
-}
-
-
-// MARK: - Bind ViewModel
-
-private extension SpotSearchViewController {
 
     func bindViewModel() {
         self.spotSearchViewModel.onSuccessGetSearchSuggestion.bind { [weak self] onSuccess in
@@ -250,7 +229,6 @@ private extension SpotSearchViewController {
     func setDelegate() {
         spotSearchView.searchKeywordCollectionView.delegate = self
         spotSearchView.searchKeywordCollectionView.dataSource = self
-        spotSearchView.searchTextField.delegate = self
     }
     
 }
@@ -293,19 +271,6 @@ extension SpotSearchViewController: UICollectionViewDataSource {
             return UICollectionViewCell() }
         cell.bindData(data, indexPath.item)
         return cell
-    }
-    
-}
-
-// MARK: - TextField
-
-extension SpotSearchViewController: UITextFieldDelegate {
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        acDebouncer.call { [weak self] in
-            self?.updateSearchKeyword(textField.text ?? "")
-        }
-        return true
     }
     
 }

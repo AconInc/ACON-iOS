@@ -15,28 +15,22 @@ final class SpotSearchView: GlassmorphismView {
     // MARK: - UI Properties
     
     private let spotUploadLabel: UILabel = UILabel()
-    
-    let searchView: UIView = UIView()
-    
-    var searchTextField: UITextField = UITextField()
-    
-    let searchImageView: UIImageView = UIImageView()
-    
-    let searchXButton: UIButton = UIButton()
-    
+
+    var searchTextField = ACTextField(icon: .icSearch24, borderColor: .gray5)
+
     var searchSuggestionScrollView: UIScrollView = UIScrollView()
-    
+
     var searchSuggestionStackView: UIStackView = UIStackView()
 
     var searchKeywordCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: relatedSearchCollectionViewFlowLayout)
-    
+
     let emptyView: UIView = UIView()
 
     private let emptyImageView: UIImageView = UIImageView()
 
     private let emptyLabel: UILabel = UILabel()
 
-    
+
     // MARK: - Properties
     
     static var relatedSearchCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().then {
@@ -52,13 +46,10 @@ final class SpotSearchView: GlassmorphismView {
         super.setHierarchy()
         
         self.addSubviews(spotUploadLabel,
-                         searchView,
+                         searchTextField,
                          searchSuggestionScrollView,
                          searchKeywordCollectionView,
                          emptyView)
-        searchView.addSubviews(searchImageView,
-                               searchTextField,
-                               searchXButton)
         searchSuggestionScrollView.addSubview(searchSuggestionStackView)
         emptyView.addSubviews(emptyImageView, emptyLabel)
     }
@@ -73,7 +64,7 @@ final class SpotSearchView: GlassmorphismView {
             $0.height.equalTo(24)
         }
         
-        searchView.snp.makeConstraints {
+        searchTextField.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*86)
             $0.height.equalTo(54)
             $0.centerX.equalToSuperview()
@@ -101,30 +92,10 @@ final class SpotSearchView: GlassmorphismView {
             $0.height.equalTo(ScreenUtils.heightRatio*116)
         }
         
-        searchImageView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*16)
-            $0.centerY.equalToSuperview()
-            $0.width.height.equalTo(24)
-        }
-        
-        searchTextField.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*44)
-            $0.centerY.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.widthRatio*232)
-            $0.height.equalTo(20)
-        }
-        
-        searchXButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*6)
-            $0.centerY.equalToSuperview()
-            $0.width.height.equalTo(24)
-        }
-        
         searchSuggestionStackView.snp.makeConstraints {
             $0.edges.equalTo(searchSuggestionScrollView.contentLayoutGuide)
             $0.height.equalTo(searchSuggestionScrollView.frameLayoutGuide.snp.height)
         }
-
     }
     
     override func setStyle() {
@@ -141,11 +112,8 @@ final class SpotSearchView: GlassmorphismView {
                         alignment: .center)
         }
         
-        searchView.do {
-            $0.backgroundColor = .gray8
-            $0.roundCorners(cornerRadius: 4, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor(resource: .gray6).cgColor
+        searchTextField.do {
+            $0.setPlaceholder(as: StringLiterals.Upload.searchSpot)
         }
         
         searchSuggestionScrollView.do {
@@ -166,33 +134,6 @@ final class SpotSearchView: GlassmorphismView {
             // TODO: - 기획 측에 이거 질문
             $0.showsVerticalScrollIndicator = false
         }
-        
-        searchImageView.do {
-            $0.image = .icSearch24
-            $0.contentMode = .scaleAspectFit
-        }
-        
-        searchTextField.do {
-            $0.attributedPlaceholder = StringLiterals.Upload.searchSpot.ACStyle(.b2, .gray5)
-            $0.defaultTextAttributes = [
-                .font: ACFontStyleType.b2.font,
-                .kern: ACFontStyleType.b2.kerning,
-                .paragraphStyle: {
-                    let paragraphStyle = NSMutableParagraphStyle()
-                    paragraphStyle.minimumLineHeight = ACFontStyleType.b2.lineHeight
-                    paragraphStyle.maximumLineHeight = ACFontStyleType.b2.lineHeight
-                    return paragraphStyle
-                }(),
-                .foregroundColor: UIColor.acWhite,
-                .baselineOffset: (ACFontStyleType.b2.lineHeight - ACFontStyleType.b2.font.lineHeight) / 2
-            ]
-        }
-        
-        searchXButton.do {
-            $0.setImage(.icDissmissCircleGray, for: .normal)
-            $0.imageView?.contentMode = .scaleAspectFit
-        }
-        
     }
     
 }

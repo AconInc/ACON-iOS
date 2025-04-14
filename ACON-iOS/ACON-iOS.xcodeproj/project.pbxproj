@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		150A105C2DA28F2600B0BC9A /* ACTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150A105B2DA28F2600B0BC9A /* ACTextField.swift */; };
 		151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003EB2D5FBF7200409DF4 /* GetProfileResponse.swift */; };
 		151003EE2D5FC48B00409DF4 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003ED2D5FC48B00409DF4 /* ProfileService.swift */; };
 		151003F02D5FC4C600409DF4 /* ProfileTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003EF2D5FC4C600409DF4 /* ProfileTargetType.swift */; };
@@ -72,7 +73,6 @@
 		15CF62BD2D575EC00000A10F /* ProfileEditValidMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */; };
 		15CF62C22D577B600000A10F /* ProfileValidMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62C12D577B600000A10F /* ProfileValidMessageType.swift */; };
 		15CF62C52D579F2D0000A10F /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62C42D579F2D0000A10F /* ProfileViewModel.swift */; };
-		15CF62C72D57DE680000A10F /* ProfileEditTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */; };
 		15D122292D58BD0200E79866 /* DayOfMonthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D122282D58BD0200E79866 /* DayOfMonthType.swift */; };
 		15DC053F2D623DD400B752DD /* PostLogoutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DC053E2D623DD400B752DD /* PostLogoutRequest.swift */; };
 		15F45F842D6664C900BD6B9C /* BaseErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F45F832D6664C900BD6B9C /* BaseErrorView.swift */; };
@@ -257,6 +257,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		150A105B2DA28F2600B0BC9A /* ACTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTextField.swift; sourceTree = "<group>"; };
 		151003EB2D5FBF7200409DF4 /* GetProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileResponse.swift; sourceTree = "<group>"; };
 		151003ED2D5FC48B00409DF4 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		151003EF2D5FC4C600409DF4 /* ProfileTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTargetType.swift; sourceTree = "<group>"; };
@@ -322,7 +323,6 @@
 		15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditValidMessageView.swift; sourceTree = "<group>"; };
 		15CF62C12D577B600000A10F /* ProfileValidMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileValidMessageType.swift; sourceTree = "<group>"; };
 		15CF62C42D579F2D0000A10F /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTextField.swift; sourceTree = "<group>"; };
 		15D122282D58BD0200E79866 /* DayOfMonthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfMonthType.swift; sourceTree = "<group>"; };
 		15DC053E2D623DD400B752DD /* PostLogoutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLogoutRequest.swift; sourceTree = "<group>"; };
 		15F45F832D6664C900BD6B9C /* BaseErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseErrorView.swift; sourceTree = "<group>"; };
@@ -550,7 +550,6 @@
 				1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */,
 				15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */,
 				15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */,
-				15CF62C62D57DE680000A10F /* ProfileEditTextField.swift */,
 				15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */,
 			);
 			path = Component;
@@ -1177,6 +1176,7 @@
 			children = (
 				746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */,
 				749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */,
+				150A105B2DA28F2600B0BC9A /* ACTextField.swift */,
 				74BF92182D395FE400B923E3 /* ACToastController.swift */,
 				15CD256A2D3D61F500320006 /* GlassmorphismView.swift */,
 				15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */,
@@ -1811,6 +1811,7 @@
 				4C6B2F332D65A15D0089BCB6 /* WithdrawalTargetType.swift in Sources */,
 				4C6B2F342D65A15D0089BCB6 /* WithdrawalService.swift in Sources */,
 				4C6B2F352D65A15D0089BCB6 /* WithdrawalRequest.swift in Sources */,
+				150A105C2DA28F2600B0BC9A /* ACTextField.swift in Sources */,
 				74CDCE562D310B1600E3A21A /* String+.swift in Sources */,
 				74BF91FD2D381FF800B923E3 /* SpotDetailModel.swift in Sources */,
 				745ECB9F2D615B73005129B0 /* AlbumTableViewController.swift in Sources */,
@@ -1896,7 +1897,6 @@
 				15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */,
 				1547A8732D34157700E96616 /* SpotListViewModel.swift in Sources */,
 				D6E8169C2D622937001E4EBF /* WithdrawalViewModel.swift in Sources */,
-				15CF62C72D57DE680000A10F /* ProfileEditTextField.swift in Sources */,
 				748D6FA42D2C3C48007690B4 /* BaseNavViewController.swift in Sources */,
 				741E68A22D3D5FA200DF99EF /* ACService.swift in Sources */,
 				D6FF82E92D3805F000090233 /* DislikeCollectionViewType.swift in Sources */,
