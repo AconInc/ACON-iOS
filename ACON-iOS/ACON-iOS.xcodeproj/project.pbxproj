@@ -141,6 +141,7 @@
 		7462618B2D3FA4A800A4E84F /* SpotDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462618A2D3FA4A200A4E84F /* SpotDetailService.swift */; };
 		7462D0252D4262F300580464 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462D0242D4262EF00580464 /* AuthManager.swift */; };
 		746AA0342DAD0EE300E28B66 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 746AA0332DAD0EE300E28B66 /* FirebaseCrashlytics */; };
+		746AA0352DAD0EFF00E28B66 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7496EC1A2DACF3E500508EA8 /* GoogleService-Info.plist */; };
 		746F15B72D3E2083003EA031 /* PostLocalAreaRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15B62D3E2079003EA031 /* PostLocalAreaRequest.swift */; };
 		746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15B82D3E2125003EA031 /* PostLocalAreaResponse.swift */; };
 		746F15BB2D3E2167003EA031 /* LocalVerificationTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15BA2D3E215C003EA031 /* LocalVerificationTargetType.swift */; };
@@ -1607,6 +1608,7 @@
 				74AB6EAD2D2796D30094F873 /* Frameworks */,
 				74AB6EAE2D2796D30094F873 /* Resources */,
 				ABEBC82D47ACAD3E4288F557 /* [CP] Embed Pods Frameworks */,
+				7496EC1F2DACFCEB00508EA8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1694,6 +1696,7 @@
 				745000D82D403F0200262CBE /* checkLottie.json in Resources */,
 				15C0ED6A2D42CDA300C9ED83 /* loadingWhite.json in Resources */,
 				748D6F6E2D2BCA1C007690B4 /* LaunchScreen.storyboard in Resources */,
+				746AA0352DAD0EFF00E28B66 /* GoogleService-Info.plist in Resources */,
 				747F4FC12D3DC80B003DECBF /* finishedUpload.json in Resources */,
 				748D6F9D2D2BD641007690B4 /* Pretendard-SemiBold.otf in Resources */,
 			);
@@ -1702,6 +1705,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		7496EC1F2DACFCEB00508EA8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}.debug.dylib",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
 		A30CE1671A2D6179E9BB4ABC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1995,6 +2021,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = KX5Q77JSUF;
 				GENERATE_INFOPLIST_FILE = YES;
