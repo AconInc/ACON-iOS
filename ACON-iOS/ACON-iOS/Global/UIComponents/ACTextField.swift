@@ -44,6 +44,8 @@ final class ACTextField: UIView {
 
     private var cornerRadius: CGFloat
 
+    private var fontStyle: ACFontStyleType
+
     private let iconImageView = UIImageView()
 
     let textField = UITextField()
@@ -60,13 +62,15 @@ final class ACTextField: UIView {
         backgroundColor: UIColor = .gray8,
         borderColor: UIColor = .gray6,
         borderWidth: CGFloat = 1,
-        cornerRadius: CGFloat = 4
+        cornerRadius: CGFloat = 4,
+        fontStyle: ACFontStyleType = .s1
     ) {
         self.icon = icon
         self.bgColor = backgroundColor
         self.borderColor = borderColor
         self.borderWidth = borderWidth
         self.cornerRadius = cornerRadius
+        self.fontStyle = fontStyle
         
         super.init(frame: .zero)
         
@@ -134,8 +138,8 @@ final class ACTextField: UIView {
         textField.do {
             $0.autocorrectionType = .no
             $0.defaultTextAttributes = [
-                .font: ACFontStyleType.s1.font,
-                .kern: ACFontStyleType.s1.kerning,
+                .font: fontStyle.font,
+                .kern: fontStyle.kerning,
                 .foregroundColor: UIColor.acWhite
             ]
         }
