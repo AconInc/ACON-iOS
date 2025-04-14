@@ -108,7 +108,7 @@ final class ACTextField: UIView {
         self.do {
             $0.backgroundColor = .gray8
             $0.clipsToBounds = true
-            $0.layer.borderColor = UIColor.gray5.cgColor
+            $0.layer.borderColor = UIColor.gray6.cgColor
             $0.layer.borderWidth = 1
             $0.layer.cornerRadius = 4
         }
@@ -178,7 +178,8 @@ private extension ACTextField {
         self.observableText.value = ""
     }
 
-    @objc func dismissKeyboard() {
+    @objc
+    func dismissKeyboard() {
         textField.resignFirstResponder()
     }
 
@@ -219,8 +220,8 @@ extension ACTextField {
         )
     }
 
-    func changeBorderColor(toRed: Bool) {
-        self.layer.borderColor = toRed ? UIColor.red1.cgColor : UIColor.gray6.cgColor
+    func changeBorderColor(to color: UIColor) {
+        self.layer.borderColor = color.cgColor
     }
 
     func hideClearButton(isHidden: Bool) {

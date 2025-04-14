@@ -114,6 +114,7 @@ final class SpotSearchView: GlassmorphismView {
         
         searchTextField.do {
             $0.setPlaceholder(as: StringLiterals.Upload.searchSpot)
+            $0.changeBorderColor(to: .gray5)
         }
         
         searchSuggestionScrollView.do {
