@@ -7,20 +7,20 @@
 
 import UIKit
 
-class ProfileEditViewController: BaseNavViewController {
-    
+final class ProfileEditViewController: BaseNavViewController {
+
     // MARK: - Properties
-    
+
     private let profileEditView = ProfileEditView()
-    
+
     private let viewModel: ProfileViewModel
-    
+
     private let validityTestDebouncer = ACDebouncer(delay: 0.5)
     private let validMsgHideDebouncer = ACDebouncer(delay: 2)
     
     private var keyboardWillShowObserver: NSObjectProtocol?
     private var keyboardWillHideObserver: NSObjectProtocol?
-    
+
     private var isNicknameAvailable: Bool = true {
         didSet {
             // NOTE: 검증이 완료되었으므로 로딩 로띠 종료
@@ -33,20 +33,20 @@ class ProfileEditViewController: BaseNavViewController {
             checkSaveAvailability()
         }
     }
-    
-    var profileImage: UIImage = .imgProfileBasic80
-    
-    var isDefaultImage: Bool? = nil
-    
-    
-    // MARK: - Life Cycle
-    
+
+    private var profileImage: UIImage = .imgProfileBasic80
+
+    private var isDefaultImage: Bool? = nil
+
+
+    // MARK: - Life Cycles
+
     init(_ viewModel: ProfileViewModel) {
         self.viewModel = viewModel
-        
+
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     deinit {
         if let keyboardWillShowObserver = keyboardWillShowObserver {
             NotificationCenter.default.removeObserver(keyboardWillShowObserver)
@@ -56,93 +56,93 @@ class ProfileEditViewController: BaseNavViewController {
             NotificationCenter.default.removeObserver(keyboardWillHideObserver)
         }
     }
-    
+
     @MainActor required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setDelegate()
         addTarget()
         bindData()
         bindViewModel()
         bindObservable()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.tabBarController?.tabBar.isHidden = true
-        
+
         // NOTE: 생일 필드는 옵셔널이기 때문에, 데이터가 텍스트필드에 바인딩된 후 clearButton configure를 해줘야 합니다
         let birthDateTF = profileEditView.birthDateTextField
         birthDateTF.hideClearButton(isHidden: (birthDateTF.text ?? "").isEmpty)
-        
+
         checkSaveAvailability()
     }
-    
+
     override func setHierarchy() {
         super.setHierarchy()
-        
+
         contentView.addSubview(profileEditView)
     }
-    
+
     override func setLayout() {
         super.setLayout()
-        
+
         profileEditView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
-    
+
     override func setStyle() {
         super.setStyle()
-        
+
         self.setCenterTitleLabelStyle(title: StringLiterals.Profile.profileEditPageTitle)
         self.setBackButton()
     }
-    
+
     private func setDelegate() {
         profileEditView.nicknameTextField.delegate = self
         profileEditView.birthDateTextField.delegate = self
     }
-    
+
     private func addTarget() {
         profileEditView.profileImageEditButton.addTarget(
             self,
             action: #selector(tappedProfileImageEditButton),
             for: .touchUpInside
         )
-        
+
         profileEditView.saveButton.addTarget(
             self,
             action: #selector(tappedSaveButton),
             for: .touchUpInside
         )
     }
-    
+
 }
 
 
 // MARK: - ProfileIamge
 
 extension ProfileEditViewController {
-    
+
     func updateProfileImage(_ image: UIImage, _ isDefault: Bool = true) {
         profileImage = image
         isDefaultImage = isDefault
         profileEditView.setProfileImage(profileImage)
     }
-   
+
 }
 
 
 // MARK: - Bindings
 
 private extension ProfileEditViewController {
-    
+
     func bindData() {
         // NOTE: 기본 데이터 바인딩
         profileEditView.do {
@@ -154,12 +154,12 @@ private extension ProfileEditViewController {
             $0.birthDateTextField.text = viewModel.userInfo.birthDate
         }
     }
-    
+
     func bindViewModel() {
         viewModel.onGetNicknameValiditySuccess.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
-            
+
             if onSuccess {
                 profileEditView.setNicknameValidMessage(.nicknameOK)
                 profileEditView.nicknameTextField.changeBorderColor(toRed: false)
@@ -170,11 +170,12 @@ private extension ProfileEditViewController {
                 isNicknameAvailable = false
             }
         }
-        
+
         viewModel.onSuccessGetPresignedURL.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess,
                   let isDefaultImage = isDefaultImage else { return }
+
             if onSuccess, !isDefaultImage {
                 if let imageData: Data = profileImage.jpegData(compressionQuality: 0.5) {
                     viewModel.putProfileImageToPresignedURL(imageData: imageData)
@@ -186,7 +187,7 @@ private extension ProfileEditViewController {
                 self.showDefaultAlert(title: "이미지 업로드 실패", message: "이미지 업로드에 실패하였습니다.")
             }
         }
-        
+
         viewModel.onSuccessPutProfileImageToPresignedURL.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
@@ -197,7 +198,7 @@ private extension ProfileEditViewController {
             }
             viewModel.onSuccessPutProfileImageToPresignedURL.value = nil
         }
-        
+
         viewModel.onPatchProfileSuccess.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
@@ -209,11 +210,11 @@ private extension ProfileEditViewController {
             viewModel.onPatchProfileSuccess.value = nil
         }
     }
-    
+
     func bindObservable() {
-        
+
         // MARK: - Keyboard
-        
+
         keyboardWillShowObserver = NotificationCenter.default.addObserver(
             forName: UIResponder.keyboardWillShowNotification,
             object: nil,
@@ -221,7 +222,7 @@ private extension ProfileEditViewController {
         ) { [weak self] notification in
             self?.keyboardWillShow(notification)
         }
-        
+
         keyboardWillHideObserver = NotificationCenter.default.addObserver(
             forName: UIResponder.keyboardWillHideNotification,
             object: nil,
@@ -229,53 +230,53 @@ private extension ProfileEditViewController {
         ) { [weak self] notification in
             self?.keyboardWillHide(notification)
         }
-        
-        
+
+
         // MARK: - 닉네임 TextField
-        
+
         // NOTE: 글자 수, 중복 확인(서버)
         profileEditView.nicknameTextField.observableText.bind { [weak self] text in
             guard let self = self,
                   let text = text else { return }
             // NOTE: 닉네임 필드 값이 변하면 일단 저장 막기 (유효성검사를 0.5초 뒤에 하기 때문에)
             isNicknameAvailable = false
-            
+
             // NOTE: clear버튼 숨기고 로딩 로띠 실행
             profileEditView.nicknameTextField.hideClearButton(isHidden: text.isEmpty)
             profileEditView.nicknameTextField.startCheckingAnimation()
-            
+
             // NOTE: 텍스트 변하면 유효성 메시지 숨김, 텍스트필드 UI 변경
             profileEditView.setNicknameValidMessage(.none)
             profileEditView.nicknameTextField.changeBorderColor(toRed: false)
-            
+
             // NOTE: 텍스트 변하면 byte 검사, 넘으면 자르기
             if countByte(text: text) > viewModel.maxNicknameLength {
                 profileEditView.nicknameTextField.text?.popLast()
                 // NOTE: observableText가 set되면서 다시 처음으로 실행될 것임
             }
-            
+
             let byte = countByte(text: profileEditView.nicknameTextField.text ?? text)
-            
+
             // NOTE: UI 업데이트 - 글자 수 label
             profileEditView.setNicknameLengthLabel(byte,
                                                    viewModel.maxNicknameLength)
-            
+
             // NOTE: 0.5초 뒤 유효성 검사
             validityTestDebouncer.call { [weak self] in
                 guard let self = self else { return }
                 checkNicknameValidity()
             }
         }
-        
-        
+
+
         // MARK: - 생년월일 TextField
-        
+
         profileEditView.birthDateTextField.observableText.bind { [weak self] text in
             guard let self = self else { return }
             let bindedText = text ?? ""
-            
+
             profileEditView.birthDateTextField.hideClearButton(isHidden: bindedText.isEmpty)
-            
+
             if bindedText.isEmpty {
                 profileEditView.setBirthdateValidMessage(.none)
                 profileEditView.birthDateTextField.changeBorderColor(toRed: false)
@@ -283,29 +284,28 @@ private extension ProfileEditViewController {
             }
         }
     }
-    
+
 }
 
 
 // MARK: - @objc functions
 
 private extension ProfileEditViewController {
-    
+
     // NOTE: 스크롤뷰의 contentInset을 조정하여 텍스트필드가 키보드에 가려지지 않도록 함
     @objc
     func keyboardWillShow(_ notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
-        
+
         if let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
             let keyboardHeight = keyboardFrame.height
-            
             var contentInset = profileEditView.scrollView.contentInset
             contentInset.bottom = keyboardHeight
             profileEditView.scrollView.contentInset = contentInset
             profileEditView.scrollView.scrollIndicatorInsets = contentInset
         }
     }
-    
+
     // NOTE: contentInset을 원래 상태로 복원
     @objc
     func keyboardWillHide(_ notification: Notification) {
@@ -314,7 +314,7 @@ private extension ProfileEditViewController {
         profileEditView.scrollView.contentInset = contentInset
         profileEditView.scrollView.scrollIndicatorInsets = contentInset
     }
-    
+
     @objc
     func tappedProfileImageEditButton() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -330,7 +330,7 @@ private extension ProfileEditViewController {
         }
         present(alertController, animated: true)
     }
-    
+
     @objc
     func tappedSaveButton() {
         guard let nickname: String = profileEditView.nicknameTextField.text else { return }
@@ -338,7 +338,7 @@ private extension ProfileEditViewController {
         let birthDateText = profileEditView.birthDateTextField.text
         viewModel.updateUserInfo(nickname: nickname,
                                  birthDate: birthDateText?.isEmpty ?? true ? nil : birthDateText)
-        
+
         if let isDefaultImage {
             viewModel.userInfo.profileImage = isDefaultImage ? "" : viewModel.presignedURLInfo.fileName
             if isDefaultImage {
@@ -350,18 +350,19 @@ private extension ProfileEditViewController {
             viewModel.patchProfile()
         }
     }
-    
+
 }
 
 
 // MARK: - TextFieldDelegate
 
 extension ProfileEditViewController: UITextFieldDelegate {
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
+
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
         if textField == profileEditView.nicknameTextField.textField {
-            return nicknameTextfieldChange(
+            return nicknameTextFieldChange(
                 textField,
                 shouldChangeCharactersIn: range,
                 replacementString: string
@@ -376,26 +377,28 @@ extension ProfileEditViewController: UITextFieldDelegate {
         print("❌ Invaild Textfield")
         return false
     }
-    
+
 }
 
 
 // MARK: - TextField별 Delegate Method
 
 private extension ProfileEditViewController {
-    
+
     // MARK: - 닉네임 (입력마스크, 글자 수 넘기면 입력 막기)
-    
-    func nicknameTextfieldChange(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+    func nicknameTextFieldChange(_ textField: UITextField,
+                                 shouldChangeCharactersIn range: NSRange,
+                                 replacementString string: String) -> Bool {
         let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string
         let koreanDeleted = isKoreanChar(textField.text?.last ?? " ") && range.length == 1
         let finalString: String = koreanDeleted ? textField.text ?? "" : newString
-        
+
         // NOTE: 문자 유효성 체크 (입력마스크)
         let regex = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ._]*$"
         let isValid = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: finalString)
         let byte = countByte(text: finalString)
-        
+
         if isValid {
             // NOTE: PASS -> 글자 수 체크(음소), max 넘으면 입력 X
             return true
@@ -418,15 +421,15 @@ private extension ProfileEditViewController {
             return false
         }
     }
-    
-    
+
+
     // MARK: - 생년월일
-    
+
     func birthDateTextFieldChange(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let currentString = textField.text else { return true }
         let newString = (currentString as NSString).replacingCharacters(in: range, with: string)
         let newRawString = (newString.replacingOccurrences(of: ".", with: ""))
-        
+
         // NOTE: 백스페이스 처리
         if string.isEmpty,
            currentString.last == "." {
@@ -437,7 +440,7 @@ private extension ProfileEditViewController {
             textField.text = newString
             return false
         }
-        
+
         // NOTE: 8자리 제한
         // NOTE: 길이 0인 경우 ObservableBinding에서 .none처리
         if newRawString.count < 8 {
@@ -448,60 +451,60 @@ private extension ProfileEditViewController {
             // NOTE: Validity 체크
             checkBirthDateValidity(dateString: newRawString)
         }
-        
+
         return newRawString.count > 8 ? false : true
     }
-    
+
 }
 
 
 // MARK: - Validity Test Helper
 
 private extension ProfileEditViewController {
-    
+
     // MARK: - 저장 가능 여부
-    
+
     func checkSaveAvailability() {
         let canSave: Bool = isNicknameAvailable && isBirthDateAvailable
         profileEditView.saveButton.isEnabled = canSave
     }
-    
-    
+
+
     // MARK: - 닉네임
-    
+
     func checkNicknameValidity() {
         let text = profileEditView.nicknameTextField.text ?? ""
         let byte = countByte(text: text)
-        
+
         // NOTE: 닉네임을 입력해주세요.
         if byte == 0 {
             profileEditView.setNicknameValidMessage(.nicknameMissing)
             profileEditView.nicknameTextField.changeBorderColor(toRed: true)
             isNicknameAvailable = false
         }
-        
+
         // NOTE: 중복된 닉네임 OR 사용할 수 있는 닉네임(서버 확인)
         else {
             viewModel.getNicknameValidity(nickname: text)
         }
     }
-    
+
     // NOTE: 한글인지 확인하는 함수
     func isKorean(_ char: Character) -> Bool {
         return String(char).range(of: "[가-힣ㄱ-ㅎㅏ-ㅣ]", options: .regularExpression) != nil
     }
-    
+
     func isKoreanChar(_ char: Character) -> Bool {
         return String(char).range(of: "[가-힣]", options: .regularExpression) != nil
     }
-    
+
     func countByte(text: String) -> Int {
         return text.reduce(0) { $0 + (isKorean($1) ? 2 : 1) }
     }
-    
-    
+
+
     // MARK: - 생년월일
-    
+
     // NOTE: 생년월일 유효성 검사
     func checkBirthDateValidity(dateString: String) {
         guard dateString.count == 8,
@@ -517,11 +520,12 @@ private extension ProfileEditViewController {
             isBirthDateAvailable = false
             return
         }
+
         profileEditView.setBirthdateValidMessage(.none)
         profileEditView.birthDateTextField.changeBorderColor(toRed: false)
         isBirthDateAvailable = true
     }
-    
+
     func makeDate(year: Int, month: Int, day: Int) -> Date? {
         var dateComponents = DateComponents()
         dateComponents.year = year
@@ -531,15 +535,15 @@ private extension ProfileEditViewController {
         let calendar = Calendar.current
         return calendar.date(from: dateComponents)
     }
-    
+
     func isValidDate(year: Int, month: Int, day: Int) -> Bool {
         guard let monthEnum = DayOfMonthType(rawValue: month) else { return false }
         return (1...monthEnum.days(in: year)).contains(day)
     }
-    
+
     func isBeforeToday(date: Date) -> Bool {
         let today = Date()
         return date < today
     }
-    
+
 }

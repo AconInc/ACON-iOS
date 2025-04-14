@@ -7,25 +7,24 @@
 
 import UIKit
 
-class ProfileSettingViewController: BaseNavViewController {
+final class ProfileSettingViewController: BaseNavViewController {
 
     // MARK: - UI Properties
 
-    var settingTableView: UITableView = UITableView(frame: .zero, style: .grouped)
+    private let settingTableView: UITableView = UITableView(frame: .zero, style: .grouped)
 
 
     // MARK: - Properties
 
-    let settingViewModel: SettingViewModel = SettingViewModel()
+    private let settingViewModel: SettingViewModel = SettingViewModel()
 
-    // MARK: - LifeCycle
+
+    // MARK: - LifeCycles
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addTarget()
         registerCell()
-        bindViewModel()
         setDelegate()
     }
 
@@ -37,7 +36,7 @@ class ProfileSettingViewController: BaseNavViewController {
 
     override func setHierarchy() {
         super.setHierarchy()
-        
+
         self.contentView.addSubview(settingTableView)
     }
     
@@ -64,21 +63,6 @@ class ProfileSettingViewController: BaseNavViewController {
         }
     }
 
-    private func addTarget() {
-
-    }
-
-}
-
-
-// MARK: - bindViewModel
-
-private extension ProfileSettingViewController {
-
-    func bindViewModel() {
-        
-    }
-
 }
 
 
@@ -98,11 +82,11 @@ extension ProfileSettingViewController {
 }
 
 extension ProfileSettingViewController: UITableViewDelegate {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return AuthManager.shared.hasToken ? 4 : 2
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -113,11 +97,11 @@ extension ProfileSettingViewController: UITableViewDelegate {
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 48
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
@@ -142,18 +126,17 @@ extension ProfileSettingViewController: UITableViewDelegate {
                            color: .gray5)
         return headerView
     }
-    
+
 }
 
 extension ProfileSettingViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.cellIdentifier, for: indexPath) as? SettingTableViewCell else {
-            return UITableViewCell()
-        }
-        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.cellIdentifier, for: indexPath) as? SettingTableViewCell
+        else { return UITableViewCell() }
+
         let cellModel: SettingCellModel
-            
+
         switch indexPath.section {
         case 0:
             let items = SettingType.allSections[0] as! [SettingType.Info]
@@ -171,11 +154,11 @@ extension ProfileSettingViewController: UITableViewDataSource {
         default:
             return cell
         }
-        
+
         cell.configure(with: cellModel)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
@@ -231,5 +214,5 @@ extension ProfileSettingViewController: UITableViewDataSource {
             return
         }
     }
-    
+
 }
