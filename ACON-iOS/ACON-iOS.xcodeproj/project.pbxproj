@@ -140,6 +140,7 @@
 		746261892D3FA29C00A4E84F /* SpotDetailTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261882D3FA29400A4E84F /* SpotDetailTargetType.swift */; };
 		7462618B2D3FA4A800A4E84F /* SpotDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462618A2D3FA4A200A4E84F /* SpotDetailService.swift */; };
 		7462D0252D4262F300580464 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462D0242D4262EF00580464 /* AuthManager.swift */; };
+		746AA0342DAD0EE300E28B66 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 746AA0332DAD0EE300E28B66 /* FirebaseCrashlytics */; };
 		746F15B72D3E2083003EA031 /* PostLocalAreaRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15B62D3E2079003EA031 /* PostLocalAreaRequest.swift */; };
 		746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15B82D3E2125003EA031 /* PostLocalAreaResponse.swift */; };
 		746F15BB2D3E2167003EA031 /* LocalVerificationTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15BA2D3E215C003EA031 /* LocalVerificationTargetType.swift */; };
@@ -514,6 +515,7 @@
 				748D6F4D2D2BC76C007690B4 /* GoogleSignIn in Frameworks */,
 				74B25C252D2FD30A008BDCB7 /* Lottie in Frameworks */,
 				748D6F4A2D2BC52B007690B4 /* Kingfisher in Frameworks */,
+				746AA0342DAD0EE300E28B66 /* FirebaseCrashlytics in Frameworks */,
 				748D6F412D2BC482007690B4 /* Moya in Frameworks */,
 				748D6F4F2D2BC76C007690B4 /* GoogleSignInSwift in Frameworks */,
 				748D6F472D2BC519007690B4 /* Then in Frameworks */,
@@ -1620,6 +1622,7 @@
 				748D6F4E2D2BC76C007690B4 /* GoogleSignInSwift */,
 				74B25C242D2FD30A008BDCB7 /* Lottie */,
 				74D831912D6878A5003384C6 /* AmplitudeSwift */,
+				746AA0332DAD0EE300E28B66 /* FirebaseCrashlytics */,
 			);
 			productName = "ACON-iOS";
 			productReference = 74AB6EB02D2796D30094F873 /* ACON-iOS.app */;
@@ -1657,6 +1660,7 @@
 				748D6F4B2D2BC76C007690B4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				74B25C232D2FD30A008BDCB7 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				74D831902D6878A5003384C6 /* XCRemoteSwiftPackageReference "Amplitude-Swift" */,
+				746AA0302DAD0EE300E28B66 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 74AB6EB12D2796D30094F873 /* Products */;
@@ -2210,6 +2214,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		746AA0302DAD0EE300E28B66 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.11.0;
+			};
+		};
 		748D6F3F2D2BC482007690B4 /* XCRemoteSwiftPackageReference "moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/moya/moya";
@@ -2269,6 +2281,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		746AA0332DAD0EE300E28B66 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 746AA0302DAD0EE300E28B66 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
 		748D6F402D2BC482007690B4 /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 748D6F3F2D2BC482007690B4 /* XCRemoteSwiftPackageReference "moya" */;
