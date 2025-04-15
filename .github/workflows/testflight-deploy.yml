@@ -1,6 +1,8 @@
 name: Testflight Deploy
 on:
   push:
+    branches:
+      - setting/#109
     tags:
       - 'v*'  # 태그: v1.0.0 형식
 
