@@ -1,0 +1,106 @@
+default_platform(:ios)
+platform :ios do
+  before_all do
+    # 기본 .env 파일 로드
+    Dotenv.load('.env.default')
+    
+    # 환경에 따른 .env 파일 로드
+    if ENV["ENVIRONMENT"] == "production"
+      Dotenv.load('.env.prod')
+    else
+      Dotenv.load('.env.dev')
+    end
+  end
+  
+  desc "개발자 기기 등록"
+  lane :register_devices do
+    # devices.txt 파일에서 기기 등록
+    register_devices(devices_file: "./devices.txt")
+    
+    # 기기 등록 후 프로비저닝 프로파일 업데이트
+    match(type: "development", force_for_new_devices: true)
+    match(type: "adhoc", force_for_new_devices: true)
+  end
+  
+  desc "Development 빌드"
+  lane :dev do
+    # 개발용 인증서 동기화 (private 저장소에서)
+    match(
+      type: "development",
+      readonly: true,
+      git_url: ENV["MATCH_GIT_URL"],
+      app_identifier: ENV["APP_IDENTIFIER"]
+    )
+    
+    # CocoaPods 설치
+    cocoapods
+    
+    # 개발용 빌드
+    gym(
+      workspace: "ACON-iOS.xcworkspace",
+      scheme: "ACON-iOS",
+      configuration: "Debug",
+      export_method: "development"
+    )
+  end
+  
+  desc "TestFlight 배포"
+  lane :beta do
+    # App Store 인증서 동기화 (private 저장소에서)
+    match(
+      type: "appstore",
+      readonly: true,
+      git_url: ENV["MATCH_GIT_URL"],
+      app_identifier: ENV["APP_IDENTIFIER"]
+    )
+    
+    # CocoaPods 설치
+    cocoapods
+    
+    # 빌드 번호 증가
+    increment_build_number
+    
+    # 앱 빌드
+    gym(
+      workspace: "ACON-iOS.xcworkspace",
+      scheme: "ACON-iOS",
+      configuration: "Release",
+      export_method: "app-store"
+    )
+    
+    # TestFlight 업로드
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true
+    )
+  end
+  
+  desc "App Store 배포"
+  lane :release do
+    # App Store 인증서 동기화
+    match(
+      type: "appstore",
+      readonly: true,
+      git_url: ENV["MATCH_GIT_URL"],
+      app_identifier: ENV["APP_IDENTIFIER"]
+    )
+    
+    # CocoaPods 설치
+    cocoapods
+    
+    # 앱 빌드
+    gym(
+      workspace: "ACON-iOS.xcworkspace",
+      scheme: "ACON-iOS",
+      configuration: "Release",
+      export_method: "app-store"
+    )
+    
+    # App Store Connect 업로드
+    upload_to_app_store(
+      force: true,
+      skip_metadata: false,
+      skip_screenshots: true,
+      submit_for_review: false
+    )
+  end
+end
