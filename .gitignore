@@ -79,6 +79,15 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 
+# 환경변수
+.env
+.env.*
+!.env.example
+
+# Ruby/Bundler
+.bundle
+vendor/
+
 # Code Injection
 # After new code Injection tools there's a generated folder /iOSInjectionProject
 # https://github.com/johnno1962/injectionforxcode
