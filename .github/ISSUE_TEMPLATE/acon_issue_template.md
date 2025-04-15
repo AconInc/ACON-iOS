@@ -1,5 +1,5 @@
 ---
-name: NEW_ISSUE_TEMPLATE
+name: acon_issue_template
 about: Acon iOS issue template
 title: "[FEAT]"
 labels: ''
