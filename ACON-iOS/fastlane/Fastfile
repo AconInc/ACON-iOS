@@ -39,8 +39,8 @@ platform :ios do
     
     # 개발용 빌드
     gym(
-      workspace: "ACON-iOS.xcworkspace",
-      scheme: "ACON-iOS",
+      workspace: ENV["WORKSPACE_NAME"],
+      scheme: ENV["SCHEME_NAME"],
       configuration: "Debug",
       export_method: "development"
     )
@@ -77,8 +77,8 @@ platform :ios do
     
     # 앱 빌드
     gym(
-      workspace: "ACON-iOS.xcworkspace",
-      scheme: "ACON-iOS",
+      workspace: ENV["WORKSPACE_NAME"],
+      scheme: ENV["SCHEME_NAME"],
       configuration: "Release",
       export_method: "app-store"
     )
@@ -121,8 +121,8 @@ platform :ios do
     
     # 앱 빌드
     gym(
-      workspace: "ACON-iOS.xcworkspace",
-      scheme: "ACON-iOS",
+      workspace: ENV["WORKSPACE_NAME"],
+      scheme: ENV["SCHEME_NAME"],
       configuration: "Release",
       export_method: "app-store"
     )
