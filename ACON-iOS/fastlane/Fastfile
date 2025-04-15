@@ -103,4 +103,20 @@ platform :ios do
       submit_for_review: false
     )
   end
+  
+  after_all do |lane|
+    slack(
+      message: "App successfully deployed from lane: #{lane}. Version: #{get_version_number}, Build: #{get_build_number}",
+      success: true,
+      slack_url: ENV["SLACK_WEBHOOK_URL"]
+    )
+  end
+  
+  error do |lane, exception|
+    slack(
+      message: "Error deploying from lane: #{lane}, error: #{exception}",
+      success: false,
+      slack_url: ENV["SLACK_WEBHOOK_URL"]
+    )
+  end
 end
