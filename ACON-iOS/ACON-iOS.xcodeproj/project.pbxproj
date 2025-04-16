@@ -2024,9 +2024,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = KX5Q77JSUF;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "ACON-iOS/Global/Settings/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = acon;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "acon에서 회원님 기기의 GPS를 사용하여 현재 위치기반 장소추천을 위해 위치접근에 대한 권한을 사용합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "acon에서 회원님의 이미지 및 동영상을 공유할 수 있도록 지원하고 프로필 사진 변경, 후기 업로드 등의 목적으로 \n회원님의 앨범 라이브러리에 대한 액세스 권한을 사용합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -2065,9 +2067,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = KX5Q77JSUF;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "ACON-iOS/Global/Settings/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = acon;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "acon에서 회원님 기기의 GPS를 사용하여 현재 위치기반 장소추천을 위해 위치접근에 대한 권한을 사용합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "acon에서 회원님의 이미지 및 동영상을 공유할 수 있도록 지원하고 프로필 사진 변경, 후기 업로드 등의 목적으로 \n회원님의 앨범 라이브러리에 대한 액세스 권한을 사용합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
