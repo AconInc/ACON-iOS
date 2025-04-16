@@ -1,155 +1,186 @@
 default_platform(:ios)
 platform :ios do
-  before_all do
-    # 기본 .env 파일 로드 (로컬 개발용)
-    if ENV["CI"] != "true"
-      Dotenv.load('.env.default')
-      
-      # 환경에 따른 .env 파일 로드
-      if ENV["ENVIRONMENT"] == "production"
-        Dotenv.load('.env.prod')
-      else
-        Dotenv.load('.env.dev')
-      end
-    end
-  end
-  
-  desc "개발자 기기 등록"
-  lane :register_devices do
-    # devices.txt 파일에서 기기 등록
-    register_devices(devices_file: "./devices.txt", team_id: ENV["TEAM_ID"])
-    
-    # 기기 등록 후 프로비저닝 프로파일 업데이트
-    match(type: "development", force_for_new_devices: true)
-    match(type: "adhoc", force_for_new_devices: true)
-  end
-  
-  desc "Development 빌드"
-  lane :dev do
-    # 개발용 인증서 동기화 (private 저장소에서)
-    match(
-      type: "development",
-      readonly: true,
-      git_url: ENV["MATCH_GIT_URL"],
-      app_identifier: ENV["APP_IDENTIFIER"]
-    )
-    
-    # CocoaPods 설치
-    cocoapods
-    
-    # 개발용 빌드
-    gym(
-      workspace: ENV["WORKSPACE_NAME"],
-      scheme: ENV["SCHEME_NAME"],
-      configuration: "Debug",
-      export_method: "development"
-    )
-  end
-  
-  desc "TestFlight 배포"
-  lane :beta do
-    # App Store Connect API 키 설정
-    api_key = app_store_connect_api_key(
-      key_id: ENV["ASC_KEY_ID"],
-      issuer_id: ENV["ASC_ISSUER_ID"],
-      key_content: ENV["ASC_KEY_CONTENT"],
-      duration: 1200
-    )
-    
-    # App Store 인증서 동기화
-    match(
-      type: "appstore",
-      readonly: true,
-      git_url: ENV["MATCH_GIT_URL"],
-      app_identifier: ENV["APP_IDENTIFIER"],
-      api_key: api_key
-    )
-    
-    # CocoaPods 설치
-    cocoapods
-    
-    # 빌드 번호 증가 (CI에서는 빌드 번호를 환경 변수로 제공)
-    if ENV["CI"] == "true" && ENV["BUILD_NUMBER"]
-      increment_build_number(build_number: ENV["BUILD_NUMBER"])
-    else
-      increment_build_number
-    end
-    
-    # 앱 빌드
-    gym(
-      workspace: ENV["WORKSPACE_NAME"],
-      scheme: ENV["SCHEME_NAME"],
-      configuration: "Release",
-      export_method: "app-store"
-    )
-    
-    # TestFlight 업로드
-    upload_to_testflight(
-      skip_waiting_for_build_processing: true,
-      api_key: api_key
-    )
-  end
-  
-  desc "App Store 배포"
-  lane :release do
-    # App Store Connect API 키 설정
-    api_key = app_store_connect_api_key(
-      key_id: ENV["ASC_KEY_ID"],
-      issuer_id: ENV["ASC_ISSUER_ID"],
-      key_content: ENV["ASC_KEY_CONTENT"],
-      duration: 1200
-    )
-    
-    # App Store 인증서 동기화
-    match(
-      type: "appstore",
-      readonly: true,
-      git_url: ENV["MATCH_GIT_URL"],
-      app_identifier: ENV["APP_IDENTIFIER"],
-      api_key: api_key
-    )
-    
-    # CocoaPods 설치
-    cocoapods
-    
-    # 빌드 번호 증가
-    if ENV["CI"] == "true" && ENV["BUILD_NUMBER"]
-      increment_build_number(build_number: ENV["BUILD_NUMBER"])
-    else
-      increment_build_number
-    end
-    
-    # 앱 빌드
-    gym(
-      workspace: ENV["WORKSPACE_NAME"],
-      scheme: ENV["SCHEME_NAME"],
-      configuration: "Release",
-      export_method: "app-store"
-    )
-    
-    # App Store Connect 업로드
-    upload_to_app_store(
-      force: true,
-      skip_metadata: false,
-      skip_screenshots: true,
-      submit_for_review: false,
-      api_key: api_key
-    )
-  end
-  
-  after_all do |lane|
-    slack(
-      message: "App successfully deployed from lane: #{lane}. Version: #{get_version_number}, Build: #{get_build_number}",
-      success: true,
-      slack_url: ENV["SLACK_WEBHOOK_URL"]
-    )
-  end
-  
-  error do |lane, exception|
-    slack(
-      message: "Error deploying from lane: #{lane}, error: #{exception}",
-      success: false,
-      slack_url: ENV["SLACK_WEBHOOK_URL"]
-    )
-  end
+ before_all do
+   # 기본 .env 파일 로드 (로컬 개발용)
+   if ENV["CI"] != "true"
+     Dotenv.load('.env.default')
+   end
+ end
+
+#####
+
+ desc "Set Marketing and Build version"
+ lane :set_version do |options|
+   increment_version_number(
+     version_number: options[:version],
+     xcodeproj: "./ACON-iOS.xcodeproj"
+   )
+
+   increment_build_number(
+     build_number: Time.new.strftime("%Y.%m%d.%H%M"), # 2023.0703.2100
+     xcodeproj: "./ACON-iOS.xcodeproj"
+   )
+ end
+ 
+######
+
+ desc "개발자 기기 등록"
+ lane :register_device do
+   # devices.txt 파일에서 기기 등록
+   register_devices(devices_file: "./devices.txt", team_id: ENV["TEAM_ID"])
+   
+   # 기기 등록 후 프로비저닝 프로파일 업데이트
+   match(type: "development", force_for_new_devices: true)
+   match(type: "adhoc", force_for_new_devices: true)
+ end
+ 
+######
+
+ desc "Development 빌드"
+ lane :dev do
+   # 개발용 인증서 동기화 (private 저장소에서)
+   match(
+     type: "development",
+     readonly: true,
+     git_url: ENV["MATCH_GIT_URL"],
+     app_identifier: ENV["APP_IDENTIFIER"]
+   )
+   
+   # CocoaPods 설치
+   cocoapods
+   
+   # 개발용 빌드
+   gym(
+     workspace: ENV["WORKSPACE_NAME"],
+     scheme: ENV["SCHEME_NAME"],
+     configuration: "Debug",
+     export_method: "development"
+   )
+ end
+ 
+######
+
+ desc "TestFlight 배포"
+ lane :beta do |options|
+   # 기본값 설정
+   version_number = options[:version_number]
+   
+   # App Store Connect API 키 설정
+   api_key = app_store_connect_api_key(
+     key_id: ENV["ASC_KEY_ID"],
+     issuer_id: ENV["ASC_ISSUER_ID"],
+     key_content: Base64.decode64(ENV["ASC_KEY_CONTENT_BASE64"]),
+     duration: 1200
+   )
+   
+   # App Store 인증서 동기화
+   match(
+     type: "appstore",
+     readonly: true,
+     git_url: ENV["MATCH_GIT_URL"],
+     app_identifier: ENV["APP_IDENTIFIER"],
+     api_key: api_key
+   )
+   
+   # CocoaPods 설치
+   cocoapods
+   
+   if version_number
+     puts "버전 정보: #{version_number}"
+     set_version(version: version_number)
+   else 
+     puts "버전 입력 X"
+     increment_build_number(
+       build_number: Time.new.strftime("%Y.%m%d.%H%M"),
+       xcodeproj: "./ACON-iOS.xcodeproj"
+     )
+   end
+   
+   # 앱 빌드
+   gym(
+     workspace: ENV["WORKSPACE_NAME"],
+     scheme: ENV["SCHEME_NAME"],
+     configuration: "Release",
+     export_method: "app-store"
+   )
+   
+   # TestFlight 업로드
+   upload_to_testflight(
+     skip_waiting_for_build_processing: true,
+     api_key: api_key
+   )
+ end
+ 
+######
+
+ desc "App Store 배포"
+ lane :release do |options|
+   version_number = options[:version_number]
+   
+   # App Store Connect API 키 설정
+   api_key = app_store_connect_api_key(
+     key_id: ENV["ASC_KEY_ID"],
+     issuer_id: ENV["ASC_ISSUER_ID"],
+     key_content: Base64.decode64(ENV["ASC_KEY_CONTENT_BASE64"]),
+     duration: 1200
+   )
+   
+   # App Store 인증서 동기화
+   match(
+     type: "appstore",
+     readonly: true,
+     git_url: ENV["MATCH_GIT_URL"],
+     app_identifier: ENV["APP_IDENTIFIER"],
+     api_key: api_key
+   )
+   
+   # CocoaPods 설치
+   cocoapods
+   
+   if version_number
+     # 특정 버전으로 설정
+     set_version(version: version_number)
+   else
+     # 빌드 번호 증가
+     increment_build_number(
+       build_number: Time.new.strftime("%Y.%m%d.%H%M"),
+       xcodeproj: "./ACON-iOS.xcodeproj"
+     )
+   end
+   
+   # 앱 빌드
+   gym(
+     workspace: ENV["WORKSPACE_NAME"],
+     scheme: ENV["SCHEME_NAME"],
+     configuration: "Release",
+     export_method: "app-store"
+   )
+   
+   # App Store Connect 업로드
+   upload_to_app_store(
+     force: true,
+     skip_metadata: false,
+     skip_screenshots: true,
+     submit_for_review: false,
+     api_key: api_key
+   )
+ end
+ 
+###### Slack
+
+ after_all do |lane|
+   slack(
+     message: "App successfully deployed from lane: #{lane}. Version: #{get_version_number}, Build: #{get_build_number}",
+     success: true,
+     slack_url: ENV["SLACK_WEBHOOK_URL"]
+   )
+ end
+ 
+ error do |lane, exception|
+   slack(
+     message: "Error deploying from lane: #{lane}, error: #{exception}",
+     success: false,
+     slack_url: ENV["SLACK_WEBHOOK_URL"]
+   )
+ end
 end
