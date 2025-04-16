@@ -21,7 +21,7 @@ class SearchEmptyView: BaseView {
         super.setStyle()
         
         imageView.do {
-            $0.image = .imgEmptySearch
+            $0.image = .icError1
             $0.contentMode = .scaleAspectFit
             $0.translatesAutoresizingMaskIntoConstraints = false
         }

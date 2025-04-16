@@ -33,7 +33,7 @@ final class WithdrawalConfirmationView: GlassmorphismView {
         self.setHandlerImageView()
         
         iconImageView.do {
-            $0.image = .imgEmptySearch
+            $0.image = .icError1
             $0.contentMode = .scaleAspectFit
         }
         

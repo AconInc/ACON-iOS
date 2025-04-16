@@ -57,7 +57,7 @@ class BaseErrorView: BaseView {
 
 extension BaseErrorView {
     
-    func setStyle(errorImage: UIImage = .icError1140,
+    func setStyle(errorImage: UIImage = .icError1,
                   errorMessage: String?,
                   buttonTitle: String?) {
         errorImageView.do {

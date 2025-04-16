@@ -33,7 +33,7 @@ final class CustomAlertImageView: BaseView {
         
         imageView.do {
             $0.contentMode = .scaleAspectFit
-            $0.image = .dotoriX
+            $0.image = .icError2
         }
         
         alertContainer.do {

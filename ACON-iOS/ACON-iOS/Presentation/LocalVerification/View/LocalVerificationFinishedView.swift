@@ -102,12 +102,12 @@ final class LocalVerificationFinishedView: BaseView {
         }
         
         localAcornImageView.do {
-            $0.image = .localAcorn
+            $0.image = .icLocalAcon
             $0.contentMode = .scaleAspectFit
         }
         
         plainAcornImageView.do {
-            $0.image = .plainAcorn
+            $0.image = .icNormalAcon
             $0.contentMode = .scaleAspectFit
         }
         
