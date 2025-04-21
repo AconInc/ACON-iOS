@@ -121,7 +121,7 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
         if isSelected {
             // 선택된 상태: 화이트 딤 처리
             overlayContainer.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-            overlayImageView.image = UIImage(named: "check")
+            overlayImageView.image = .icCheck
             overlayImageView.layer.shadowColor = UIColor.black.cgColor
             overlayImageView.layer.shadowOpacity = 0.6
             overlayImageView.layer.shadowOffset = CGSize(width: 0, height: 0)

@@ -81,7 +81,7 @@ final class SpotUploadView: BaseView {
             $0.layer.cornerRadius = 4
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor(resource: .gray700).cgColor
-            $0.setImage(.icLocation, for: .normal)
+            $0.setImage(.icLocationGray, for: .normal)
         }
         
         spotNameLabel.do {

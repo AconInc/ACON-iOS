@@ -98,7 +98,7 @@ final class LocalVerificationView: BaseView {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor(resource: .gray800).cgColor
 //            $0.setImage(.icRadio, for: .normal)
-            $0.setImage(.icRadioSelected, for: .normal)
+            $0.setImage(.icRadioPressed, for: .normal)
             $0.setPartialTitle(fullText: StringLiterals.LocalVerification.new + StringLiterals.LocalVerification.verifyLocal,
                                textStyles: [(StringLiterals.LocalVerification.new, .s2, .primaryDefault), (StringLiterals.LocalVerification.verifyLocal, .s2, .acWhite)])
             $0.isUserInteractionEnabled = false

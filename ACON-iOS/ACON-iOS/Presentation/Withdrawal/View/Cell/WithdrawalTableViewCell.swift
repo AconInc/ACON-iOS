@@ -37,7 +37,7 @@ final class WithdrawalTableViewCell: BaseTableViewCell {
         withdrawalImageView.do {
             $0.isUserInteractionEnabled = true
             $0.addGestureRecognizer(tapGesture)
-            $0.image = UIImage(named: "circle")
+            $0.image = .icRadio
             $0.backgroundColor = .clear
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
@@ -76,9 +76,9 @@ final class WithdrawalTableViewCell: BaseTableViewCell {
                             alignment: .center,
                             numberOfLines: 0)
         if isSelected {
-            withdrawalImageView.image = UIImage(named: "fillCircle")
+            withdrawalImageView.image = .icRadioPressed
         } else {
-            withdrawalImageView.image = UIImage(named: "circle")
+            withdrawalImageView.image = .icRadio
         }
     }
     

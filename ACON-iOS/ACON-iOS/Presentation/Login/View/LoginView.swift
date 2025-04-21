@@ -96,7 +96,7 @@ final class LoginView: BaseView {
         super.setStyle()
         
         logoImageView.do {
-            $0.image = .aconLogo
+            $0.image = .icWordLogoSplashOrg
             $0.contentMode = .scaleAspectFit
         }
         
@@ -104,7 +104,7 @@ final class LoginView: BaseView {
             $0.configuration = socialLoginButtonConfiguration
             $0.backgroundColor = .gray100
             $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
-            $0.setImage(.googleLogo, for: .normal)
+            $0.setImage(.icGoogle, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.googleLogin,
                                   style: .s2,
                                   color: .acBlack)
@@ -114,7 +114,7 @@ final class LoginView: BaseView {
             $0.configuration = socialLoginButtonConfiguration
             $0.backgroundColor = .acBlack
             $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
-            $0.setImage(.appleLogo, for: .normal)
+            $0.setImage(.icApple, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
                                   style: .s2,
                                   color: .acWhite)

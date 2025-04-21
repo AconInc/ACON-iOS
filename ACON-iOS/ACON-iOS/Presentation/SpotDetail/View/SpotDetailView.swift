@@ -204,7 +204,7 @@ final class SpotDetailView: BaseView {
             $0.layer.borderColor = UIColor.gray600.cgColor
             $0.layer.cornerRadius = ScreenUtils.widthRatio * 44 / 2
             $0.clipsToBounds = true
-            $0.setImage(UIImage(named:"upVector"), for: .normal)
+            $0.setImage(.icArrowUp, for: .normal)
         }
         
         stickyView.do {
@@ -231,7 +231,7 @@ final class SpotDetailView: BaseView {
         }
         
         addressImageView.do {
-            $0.image = .icLocation
+            $0.image = .icLocationGray
             $0.contentMode = .scaleAspectFill
         }
         

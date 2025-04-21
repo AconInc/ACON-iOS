@@ -132,7 +132,7 @@ class AlbumViewModel: NSObject, PHPhotoLibraryChangeObserver {
         /// albumInfo 호출은 비동기, 화면 테이블뷰는 순서를 지켜서 띄워야 함 -> albumInfo에 append하는 것이 아닌, albumInfo를 스켈레톤으로 채운 뒤 로드 완료되면 교체
         let skeletonAlbumModel = AlbumModel(title: "",
                                             count: -1,
-                                            thumbnailImage: .skeletonEmptyAlbum)
+                                            thumbnailImage: .imgSkeletonEmptyAlbum)
         albumInfo = Array(repeating: skeletonAlbumModel, count: albums.count)
         
         for (index, album) in albums.enumerated() {
@@ -149,7 +149,7 @@ class AlbumViewModel: NSObject, PHPhotoLibraryChangeObserver {
             let fetchResult = PHAsset.fetchAssets(in: album, options: fetchOptions)
             guard fetchResult.count > 0 else { return }
             
-            var albumThumbnail: UIImage = .skeletonEmptyAlbum
+            var albumThumbnail: UIImage = .imgSkeletonEmptyAlbum
             if let firstAsset = fetchResult.lastObject {
                 let options = PHImageRequestOptions()
                 options.deliveryMode = .fastFormat
@@ -162,7 +162,7 @@ class AlbumViewModel: NSObject, PHPhotoLibraryChangeObserver {
                     contentMode: .aspectFill,
                     options: options
                 ) { image, _ in
-                    albumThumbnail = image ?? .skeletonEmptyAlbum
+                    albumThumbnail = image ?? .imgSkeletonEmptyAlbum
                 }
             }
             

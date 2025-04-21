@@ -115,7 +115,7 @@ class LoginModalView: GlassmorphismView {
         
         self.setHandlerImageView()
         
-        exitButton.setImage(.icX, for: .normal)
+        exitButton.setImage(.icDismiss, for: .normal)
         
         titleLabel.setLabel(text: StringLiterals.LoginModal.title,
                             style: .h5,
@@ -133,7 +133,7 @@ class LoginModalView: GlassmorphismView {
             $0.configuration = socialLoginButtonConfiguration
             $0.backgroundColor = .gray100
             $0.layer.cornerRadius = 6
-            $0.setImage(.googleLogo, for: .normal)
+            $0.setImage(.icGoogle, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.googleLogin,
                                   style: .s1,
                                   color: .acBlack)
@@ -143,7 +143,7 @@ class LoginModalView: GlassmorphismView {
             $0.configuration = socialLoginButtonConfiguration
             $0.backgroundColor = .gray900
             $0.layer.cornerRadius = 6
-            $0.setImage(.appleLogo, for: .normal)
+            $0.setImage(.icApple, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
                                   style: .s1,
                                   color: .acWhite)

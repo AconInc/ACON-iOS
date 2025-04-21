@@ -158,8 +158,8 @@ extension DropAcornView {
             $0.width.height.equalTo(48)
         }
         button.do {
-            $0.setImage(.icGReview, for: .normal)
-            $0.setImage(.icWReview, for: .selected)
+            $0.setImage(.icReviewG, for: .normal)
+            $0.setImage(.icReviewW, for: .selected)
             $0.contentMode = .scaleAspectFit
         }
         return button

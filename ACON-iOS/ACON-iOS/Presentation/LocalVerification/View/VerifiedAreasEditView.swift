@@ -87,7 +87,7 @@ class VerifiedAreasEditView: BaseView {
             var config = UIButton.Configuration.plain()
             config.contentInsets = .init(top: 12, leading: 12, bottom: 12, trailing: 16)
             config.attributedTitle = AttributedString(StringLiterals.Profile.addVerifiedArea.ACStyle(.s1))
-            config.image = .icAdd20
+            config.image = .icAdd
             config.imagePadding = 4
             config.imagePlacement = .leading
             config.background.cornerRadius = 4

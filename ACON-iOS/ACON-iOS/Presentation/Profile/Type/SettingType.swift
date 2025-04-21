@@ -84,7 +84,7 @@ extension SettingType.Account {
         switch self {
         case .logout:
             return SettingCellModel(
-                image: .icProfileLogout,
+                image: .icProfileLoginInfo,
                 title: "로그아웃하기"
             )
         case .withdrawal:

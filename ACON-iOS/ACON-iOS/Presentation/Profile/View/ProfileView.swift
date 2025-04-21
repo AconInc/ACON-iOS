@@ -51,14 +51,14 @@ final class ProfileView: BaseView {
             $0.layer.cornerRadius = profileImageSize / 2
             $0.contentMode = .scaleAspectFill
             $0.clipsToBounds = true
-            $0.image = .imgProfileBasic80
+            $0.image = .imgProfileBasic
         }
 
         profileEditButton.do {
             var config = UIButton.Configuration.plain()
             config.contentInsets = .zero
             config.attributedTitle = AttributedString(StringLiterals.Profile.profileEditButton.ACStyle(.s2, .gray400))
-            config.image = .icEditG20
+            config.image = .icEditG
             config.imagePlacement = .trailing
             config.imagePadding = 4
             $0.configuration = config
@@ -68,7 +68,7 @@ final class ProfileView: BaseView {
             var config = UIButton.Configuration.plain()
             config.contentInsets = .init(top: 15, leading: 0, bottom: 15, trailing: 15)
             config.attributedTitle = AttributedString(StringLiterals.Profile.needLogin.ACStyle(.h5))
-            config.image = .icArrowRight28
+            config.image = .icArrowRight
             config.imagePlacement = .trailing
             config.imagePadding = 2
             config.background.backgroundColor = .gray900
@@ -83,7 +83,7 @@ final class ProfileView: BaseView {
         acornCountBox.do {
             $0.setStyle(
                 title: StringLiterals.Profile.acornPossession,
-                icon: .icLocalAconG20
+                icon: .icLocalAconG
             )
 
             let notVerifiedLabel = makeCountLabels(
@@ -95,7 +95,7 @@ final class ProfileView: BaseView {
         verifiedAreaBox.do {
             $0.setStyle(
                 title: StringLiterals.Profile.myVerifiedArea,
-                icon: .icHometownG20
+                icon: .icHometownG
             )
 
             let notVerifiedLabel = UILabel()

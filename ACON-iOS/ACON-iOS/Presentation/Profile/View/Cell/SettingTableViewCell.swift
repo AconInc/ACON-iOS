@@ -102,7 +102,7 @@ final class SettingTableViewCell: UITableViewCell {
         
         arrowImageView.do {
             $0.contentMode = .scaleAspectFit
-            $0.image = .icArrowRightG20
+            $0.image = .icArrowRightG
         }
     }
 

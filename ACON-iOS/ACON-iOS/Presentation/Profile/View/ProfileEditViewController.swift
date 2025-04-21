@@ -34,7 +34,7 @@ final class ProfileEditViewController: BaseNavViewController {
         }
     }
 
-    private var profileImage: UIImage = .imgProfileBasic80
+    private var profileImage: UIImage = .imgProfileBasic
 
     private var isDefaultImage: Bool? = nil
 
@@ -324,7 +324,7 @@ private extension ProfileEditViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
             }))
             $0.addAction(UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { _ in
-                self.updateProfileImage(.imgProfileBasic80, true)
+                self.updateProfileImage(.imgProfileBasic, true)
             }))
             $0.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         }

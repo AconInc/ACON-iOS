@@ -61,7 +61,7 @@ final class LocalMapView: BaseView {
         }
 
         acMapMarker.do {
-            $0.iconImage = NMFOverlayImage(name: "ic_mark_48")
+            $0.iconImage = NMFOverlayImage(name: "ic_mark")
             $0.width = 48
             $0.height = 48
             $0.mapView = nMapView.mapView

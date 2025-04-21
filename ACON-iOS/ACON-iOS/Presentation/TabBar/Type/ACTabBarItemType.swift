@@ -31,22 +31,22 @@ enum ACTabBarItemType: CaseIterable {
     var normalItemImage: UIImage {
         switch self {
         case .spotList:
-            return .icSpotGla24
+            return .icSpotGla
         case .upload:
-            return .icUploadGla24
+            return .icUploadGla
         case .profile:
-            return .icMypageGla24
+            return .icMypageGla
         }
     }
     
     var selectedItemImage: UIImage {
         switch self {
         case .spotList:
-            return .icSpotW24
+            return .icSpotW
         case .upload:
-            return .icUploadW24
+            return .icUploadW
         case .profile:
-            return .icMypageW24
+            return .icMypageW
         }
     }
     

@@ -30,13 +30,13 @@ enum FavoriteSpotRankType: CaseIterable {
     var image: UIImage {
         switch self {
         case .mood:
-            return .moodPlace
+            return .imgMoodPlace
         case .new:
-            return .newPlace
+            return .imgNewPlace
         case .quality:
-            return .qualityPlace
+            return .imgQualityPlace
         case .special:
-            return .specialPlace
+            return .imgSpecialPlace
         }
     }
 

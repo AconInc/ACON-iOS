@@ -16,7 +16,7 @@ final class SpotSearchView: GlassmorphismView {
     
     private let spotUploadLabel: UILabel = UILabel()
 
-    var searchTextField = ACTextField(icon: .icSearch24, borderColor: .gray500)
+    var searchTextField = ACTextField(icon: .icSearch, borderColor: .gray500)
 
     var searchSuggestionScrollView: UIScrollView = UIScrollView()
 

@@ -68,7 +68,7 @@ class DropAcornViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
-        self.setButtonStyle(button: leftButton, image: .leftArrow)
+        self.setButtonStyle(button: leftButton, image: .icArrowLeft)
         self.setButtonAction(button: leftButton, target: self, action: #selector(dropAcornBackButtonTapped))
         self.dropAcornView.leaveReviewButton.isEnabled = false
     }

@@ -49,7 +49,7 @@ final class OnboardingViewController: BaseViewController {
         view.backgroundColor = .gray900
         
         backButton.do {
-            $0.setImage(UIImage(named: "chevron.left"), for: .normal)
+            $0.setImage(.icArrowLeft, for: .normal)
             $0.tintColor = .acWhite
             $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
             $0.alpha = 0

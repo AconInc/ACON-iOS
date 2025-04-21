@@ -221,7 +221,7 @@ class SpotListFilterView: GlassmorphismView {
             text: StringLiterals.SpotListFilter.pageTitle,
             style: .h8)
         
-        exitButton.setImage(.icX, for: .normal)
+        exitButton.setImage(.icDismiss, for: .normal)
         
         stackView.do {
             $0.axis = .vertical

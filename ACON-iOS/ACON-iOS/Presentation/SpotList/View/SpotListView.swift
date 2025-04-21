@@ -18,11 +18,11 @@ class SpotListView: BaseView {
     
     private let floatingButtonStack = UIStackView()
     
-    lazy var floatingFilterButton = FloatingButton(image: .icFilterW28)
+    lazy var floatingFilterButton = FloatingButton(image: .icFilterW)
     
-    lazy var floatingMapButton = FloatingButton(image: .icMapW28)
+    lazy var floatingMapButton = FloatingButton(image: .icMapW)
     
-    lazy var floatingLocationButton = FloatingButton(image: .icMyGLocation28)
+    lazy var floatingLocationButton = FloatingButton(image: .icMyGLocation)
     
     private let noAcornImageView = UIImageView()
     
@@ -124,8 +124,8 @@ extension SpotListView {
     
     func updateFilterButtonColor(_ isFilterSet: Bool) {
         isFilterSet
-        ? floatingFilterButton.updateImage(.icFilterOrg28)
-        : floatingFilterButton.updateImage(.icFilterW28)
+        ? floatingFilterButton.updateImage(.icFilterOrg)
+        : floatingFilterButton.updateImage(.icFilterW)
     }
     
     func hideSkeletonView(isHidden: Bool) {

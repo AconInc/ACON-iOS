@@ -66,7 +66,7 @@ final class WithdrawalConfirmationView: GlassmorphismView {
         }
         
         closeButton.do {
-            $0.setImage(.icX, for: .normal)
+            $0.setImage(.icDismiss, for: .normal)
             $0.tintColor = .acWhite
         }
     }

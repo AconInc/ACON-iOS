@@ -100,7 +100,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         
         dimImage.do {
             $0.clipsToBounds = true
-            $0.image = .imgGra1
+            $0.image = .cmpGra1
             $0.layer.cornerRadius = 6
         }
         
@@ -128,7 +128,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         }
         
         walkingIcon.do {
-            $0.image = .icWalking24
+            $0.image = .icWalking
             $0.contentMode = .scaleAspectFit
         }
     }
