@@ -213,7 +213,7 @@ class SpotListFilterView: GlassmorphismView {
     override func setStyle() {
         super.setStyle()
         
-        self.setGlassColor(.dimB60)
+        self.setGlassColor(.glassBDefault)
         
         self.setHandlerImageView()
         
@@ -251,6 +251,8 @@ private extension SpotListFilterView {
     // MARK: - (Footer view)
     
     func setFooterUI() {
+        footerView.setGlassColor(.glassBDefault)
+        
         resetButton.do {
             var config = UIButton.Configuration.plain()
             config.image = .icReset

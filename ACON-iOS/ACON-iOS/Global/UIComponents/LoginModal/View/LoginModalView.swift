@@ -115,8 +115,6 @@ class LoginModalView: GlassmorphismView {
         
         self.setHandlerImageView()
         
-        self.setGlassColor(.glaW10)
-        
         exitButton.setImage(.icX, for: .normal)
         
         titleLabel.setLabel(text: StringLiterals.LoginModal.title,

@@ -245,6 +245,10 @@ final class SpotDetailView: BaseView {
             $0.backgroundColor = .clear
         }
         
+        footerGlassMorphismView.do {
+            $0.setGlassColor(.glassBDefault)
+        }
+        
         localAcornImageView.do {
             $0.image = .icLocal
             $0.contentMode = .scaleAspectFit

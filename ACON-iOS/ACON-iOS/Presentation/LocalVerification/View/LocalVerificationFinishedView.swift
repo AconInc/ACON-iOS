@@ -92,7 +92,7 @@ final class LocalVerificationFinishedView: BaseView {
         super.setStyle()
         
         self.setHandlerImageView()
-        self.backgroundColor = .dimB60
+        self.backgroundColor = .dimDefault
         self.backgroundColor?.withAlphaComponent(0.8)
         
         explainationLabel.do {
