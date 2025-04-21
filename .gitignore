@@ -122,3 +122,5 @@ xcuserdata
 
 # Firebase Plist
 GoogleService-Info.plist
+
+ACON-iOS/fastlane/env.default
