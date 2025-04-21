@@ -9,16 +9,11 @@ import UIKit
 
 class SpotListViewController: BaseNavViewController {
     
-    // MARK: - UI Properties
+    // MARK: - Properties
     
     private let spotListView = SpotListView()
     
-    
-    // MARK: - Properties
-
     private let viewModel = SpotListViewModel()
-    
-    private var selectedSpotCondition: SpotConditionModel = SpotConditionModel(spotType: .restaurant, filterList: [], walkingTime: -1, priceRange: -1)
     
     
     // MARK: - LifeCycle
