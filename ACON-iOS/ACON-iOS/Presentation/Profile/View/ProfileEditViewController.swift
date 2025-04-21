@@ -166,7 +166,7 @@ private extension ProfileEditViewController {
                 isNicknameAvailable = true
             } else {
                 profileEditView.setNicknameValidMessage(viewModel.nicknameValidityMessageType)
-                profileEditView.nicknameTextField.changeBorderColor(to: .red1)
+                profileEditView.nicknameTextField.changeBorderColor(to: .labelDanger)
                 isNicknameAvailable = false
             }
         }
@@ -412,7 +412,7 @@ private extension ProfileEditViewController {
                 } else {
                     profileEditView.setNicknameValidMessage(.invalidSymbol)
                 }
-                textField.layer.borderColor = UIColor.red1.cgColor
+                textField.layer.borderColor = UIColor.labelDanger.cgColor
                 validMsgHideDebouncer.call { [weak self] in
                     guard let self = self else { return }
                     self.checkNicknameValidity()
@@ -445,7 +445,7 @@ private extension ProfileEditViewController {
         // NOTE: 길이 0인 경우 ObservableBinding에서 .none처리
         if newRawString.count < 8 {
             profileEditView.setBirthdateValidMessage(.invalidDate)
-            profileEditView.birthDateTextField.changeBorderColor(to: .red1)
+            profileEditView.birthDateTextField.changeBorderColor(to: .labelDanger)
             isBirthDateAvailable = false
         } else if newRawString.count == 8 {
             // NOTE: Validity 체크
@@ -479,7 +479,7 @@ private extension ProfileEditViewController {
         // NOTE: 닉네임을 입력해주세요.
         if byte == 0 {
             profileEditView.setNicknameValidMessage(.nicknameMissing)
-            profileEditView.nicknameTextField.changeBorderColor(to: .red1)
+            profileEditView.nicknameTextField.changeBorderColor(to: .labelDanger)
             isNicknameAvailable = false
         }
 
@@ -516,7 +516,7 @@ private extension ProfileEditViewController {
               isBeforeToday(date: date)
         else {
             profileEditView.setBirthdateValidMessage(.invalidDate)
-            profileEditView.birthDateTextField.changeBorderColor(to: .red1)
+            profileEditView.birthDateTextField.changeBorderColor(to: .labelDanger)
             isBirthDateAvailable = false
             return
         }
