@@ -103,7 +103,7 @@ private extension SpotListView {
         flowLayout.scrollDirection = .vertical
         
         collectionView.do {
-            $0.backgroundColor = .gray9
+            $0.backgroundColor = .gray900
             $0.setCollectionViewLayout(flowLayout, animated: true)
         }
     }

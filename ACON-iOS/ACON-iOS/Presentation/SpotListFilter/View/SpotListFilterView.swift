@@ -261,7 +261,7 @@ private extension SpotListFilterView {
         conductButton.do {
             var config = UIButton.Configuration.filled()
             config.attributedTitle = AttributedString("결과 보기".ACStyle(.h8))
-            config.baseBackgroundColor = .gray5
+            config.baseBackgroundColor = .gray500
             $0.configuration = config
         }
     }

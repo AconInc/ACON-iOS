@@ -77,17 +77,17 @@ final class SpotUploadView: BaseView {
         
         spotSearchButton.do {
             $0.configuration = spotSearchButtonConfiguration
-            $0.backgroundColor = .gray8
+            $0.backgroundColor = .gray800
             $0.layer.cornerRadius = 4
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor(resource: .gray7).cgColor
+            $0.layer.borderColor = UIColor(resource: .gray700).cgColor
             $0.setImage(.icLocation, for: .normal)
         }
         
         spotNameLabel.do {
             $0.setLabel(text: StringLiterals.Upload.searchSpot,
                         style: .s2,
-                        color: .gray5)
+                        color: .gray500)
         }
         
     }

@@ -220,7 +220,7 @@ extension PhotoCollectionViewController: UICollectionViewDataSource {
         } else {
             albumViewModel.setImageCache(for: data, size: PhotoCollectionViewSizeType.thumbnailSize.value) { cachedImage in
                 DispatchQueue.main.async {
-                    cell.dataBind(cachedImage ?? UIImage().withTintColor(.gray6),
+                    cell.dataBind(cachedImage ?? UIImage().withTintColor(.gray600),
                                   indexPath.item)
                 }
             }

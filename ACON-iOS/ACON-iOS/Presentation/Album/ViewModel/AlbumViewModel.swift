@@ -357,7 +357,7 @@ class AlbumViewModel: NSObject, PHPhotoLibraryChangeObserver {
                 print("Loaded image size:", image.size)
                 completion(image)
             } else {
-                completion(UIImage().withTintColor(.gray9))
+                completion(UIImage().withTintColor(.gray900))
                 // TODO: - 이미지 로딩 실패 시 에러 처리
                 print("high quality image load failed")
             }

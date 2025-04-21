@@ -195,7 +195,7 @@ private extension DropAcornViewController {
     func disableLeaveReviewButton() {
         dropAcornView.leaveReviewButton.do {
             $0.isEnabled = false
-            $0.backgroundColor = .gray5
+            $0.backgroundColor = .gray500
         }
     }
     

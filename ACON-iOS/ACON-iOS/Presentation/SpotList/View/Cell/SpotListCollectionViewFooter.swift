@@ -50,7 +50,7 @@ class SpotListCollectionViewFooter: UICollectionReusableView {
         footerLabel.setLabel(
             text: text,
             style: .b4,
-            color: .gray5,
+            color: .gray500,
             alignment: .center
         )
     }

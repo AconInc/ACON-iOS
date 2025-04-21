@@ -47,7 +47,7 @@ final class ProfileView: BaseView {
         super.setStyle()
 
         profileImageView.do {
-            $0.backgroundColor = .gray7 // NOTE: Skeleton
+            $0.backgroundColor = .gray700 // NOTE: Skeleton
             $0.layer.cornerRadius = profileImageSize / 2
             $0.contentMode = .scaleAspectFill
             $0.clipsToBounds = true
@@ -57,7 +57,7 @@ final class ProfileView: BaseView {
         profileEditButton.do {
             var config = UIButton.Configuration.plain()
             config.contentInsets = .zero
-            config.attributedTitle = AttributedString(StringLiterals.Profile.profileEditButton.ACStyle(.s2, .gray4))
+            config.attributedTitle = AttributedString(StringLiterals.Profile.profileEditButton.ACStyle(.s2, .gray400))
             config.image = .icEditG20
             config.imagePlacement = .trailing
             config.imagePadding = 4
@@ -71,7 +71,7 @@ final class ProfileView: BaseView {
             config.image = .icArrowRight28
             config.imagePlacement = .trailing
             config.imagePadding = 2
-            config.background.backgroundColor = .gray9
+            config.background.backgroundColor = .gray900
             $0.configuration = config
         }
 
@@ -101,7 +101,7 @@ final class ProfileView: BaseView {
             let notVerifiedLabel = UILabel()
             notVerifiedLabel.setLabel(text: StringLiterals.Profile.notVerified,
                            style: .t2,
-                           color: .gray5)
+                           color: .gray500)
             $0.setSecondaryContentView(to: notVerifiedLabel)
         }
     }
@@ -187,7 +187,7 @@ private extension ProfileView {
             $0.spacing = 2
         }
         currentLabel.setLabel(text: currentString, style: .t2, color: .primaryDefault)
-        totalLabel.setLabel(text: "/" + String(totalString), style: .s2, color: .gray5)
+        totalLabel.setLabel(text: "/" + String(totalString), style: .s2, color: .gray500)
 
         contentView.addSubview(labelStack)
         labelStack.addArrangedSubviews(currentLabel, totalLabel)

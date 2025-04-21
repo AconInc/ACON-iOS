@@ -48,9 +48,9 @@ class CustomSegmentedControl: UISegmentedControl {
         self.do {
             $0.selectedSegmentIndex = 0
             $0.selectedSegmentTintColor = .acWhite
-            $0.backgroundColor = .gray8
-            $0.setTitleTextAttributes(ACStyle(.s2, .gray5), for: .normal)
-            $0.setTitleTextAttributes(ACStyle(.s2, .gray9), for: .selected)
+            $0.backgroundColor = .gray800
+            $0.setTitleTextAttributes(ACStyle(.s2, .gray500), for: .normal)
+            $0.setTitleTextAttributes(ACStyle(.s2, .gray900), for: .selected)
         }
     }
     

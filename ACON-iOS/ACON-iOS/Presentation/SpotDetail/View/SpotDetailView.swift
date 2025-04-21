@@ -199,9 +199,9 @@ final class SpotDetailView: BaseView {
         
         self.backgroundColor = .clear
         gotoTopButton.do {
-            $0.backgroundColor = .gray7
+            $0.backgroundColor = .gray700
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.gray6.cgColor
+            $0.layer.borderColor = UIColor.gray600.cgColor
             $0.layer.cornerRadius = ScreenUtils.widthRatio * 44 / 2
             $0.clipsToBounds = true
             $0.setImage(UIImage(named:"upVector"), for: .normal)
@@ -217,7 +217,7 @@ final class SpotDetailView: BaseView {
         }
         
         spotDetailImageView.do {
-            $0.backgroundColor = .gray7
+            $0.backgroundColor = .gray700
         }
         
         openStatusButton.do {
@@ -280,7 +280,7 @@ extension SpotDetailView {
         )
         self.addressLabel.setLabel(text: data.address,
                                              style: .b2,
-                                             color: .gray4)
+                                             color: .gray400)
         self.localAcornCountLabel.setLabel(text: String(data.localAcornCount),
                                                      style: .s1,
                                                      alignment: .left)

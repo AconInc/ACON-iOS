@@ -253,7 +253,7 @@ extension SpotDetailViewController: UIScrollViewDelegate {
             self.glassMorphismView.isHidden = false
         } else {
             [topInsetView, navigationBarView].forEach {
-                $0.backgroundColor = .gray9
+                $0.backgroundColor = .gray900
             }
             self.glassMorphismView.isHidden = true
         }

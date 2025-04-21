@@ -53,7 +53,7 @@ class AlbumTableViewController: BaseNavViewController {
         self.setBackButton()
         
         albumTableView.do {
-            $0.backgroundColor = .gray9
+            $0.backgroundColor = .gray900
             $0.separatorStyle = .none
             $0.showsVerticalScrollIndicator = false
             $0.alwaysBounceVertical = true

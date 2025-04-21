@@ -70,7 +70,7 @@ extension BaseErrorView {
                 $0.isHidden = false
                 $0.setLabel(text: errorMessage,
                             style: .s1,
-                            color: .gray4)
+                            color: .gray400)
             }
         } else {
             descriptionLabel.isHidden = true

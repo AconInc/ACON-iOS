@@ -32,7 +32,7 @@ extension UIViewController {
                           completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         // TODO: - 추후 배경색 및 폰트색도 변경
-        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .gray8
+        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .gray800
         let titleAttributes = [NSAttributedString.Key.foregroundColor: UIColor.acWhite]
         let messageAttributes = [NSAttributedString.Key.foregroundColor: UIColor.acWhite]
         
@@ -52,7 +52,7 @@ extension UIViewController {
         if isCancelAvailable {
             let cancelAction = UIAlertAction(title: cancelText, style: .cancel)
             alert.addAction(cancelAction)
-            cancelAction.setValue(UIColor.gray5, forKey: "titleTextColor")
+            cancelAction.setValue(UIColor.gray500, forKey: "titleTextColor")
         }
         
         present(alert, animated: true)

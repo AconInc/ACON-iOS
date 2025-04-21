@@ -13,8 +13,8 @@ class FilterTagButton: UIButton {
     
     override var isSelected: Bool {
         didSet {
-            configuration?.baseBackgroundColor = isSelected ? .primaryLight.withAlphaComponent(0.35) : .gray8
-            configuration?.background.strokeColor = isSelected ? .primaryDefault : .gray6
+            configuration?.baseBackgroundColor = isSelected ? .primaryLight.withAlphaComponent(0.35) : .gray800
+            configuration?.background.strokeColor = isSelected ? .primaryDefault : .gray600
         }
     }
     
@@ -43,9 +43,9 @@ private extension FilterTagButton {
     
     func configureButton() {
         var config = UIButton.Configuration.filled()
-        config.baseBackgroundColor = .gray8
+        config.baseBackgroundColor = .gray800
         config.baseForegroundColor = .acWhite
-        config.background.strokeColor = .gray6
+        config.background.strokeColor = .gray600
         config.background.strokeWidth = 1
         config.cornerStyle = .capsule
         config.titleAlignment = .center

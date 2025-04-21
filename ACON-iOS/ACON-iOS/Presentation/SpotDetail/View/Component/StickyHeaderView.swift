@@ -38,7 +38,7 @@ class StickyHeaderView: BaseView {
     }
     
     override func setStyle() {
-        self.backgroundColor = .gray9
+        self.backgroundColor = .gray900
         self.alpha = 1
         
         menuLabel.do {

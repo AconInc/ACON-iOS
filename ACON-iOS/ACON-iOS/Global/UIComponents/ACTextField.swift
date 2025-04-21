@@ -59,8 +59,8 @@ final class ACTextField: UIView {
 
     init(
         icon: UIImage? = nil,
-        backgroundColor: UIColor = .gray8,
-        borderColor: UIColor = .gray6,
+        backgroundColor: UIColor = .gray800,
+        borderColor: UIColor = .gray600,
         borderWidth: CGFloat = 1,
         cornerRadius: CGFloat = 4,
         fontStyle: ACFontStyleType = .s1
@@ -231,7 +231,7 @@ private extension ACTextField {
 extension ACTextField {
 
     func setPlaceholder(as placeholder: String) {
-        textField.attributedPlaceholder = placeholder.ACStyle(.s1, .gray5)
+        textField.attributedPlaceholder = placeholder.ACStyle(.s1, .gray500)
     }
 
     func setAsDateField() {

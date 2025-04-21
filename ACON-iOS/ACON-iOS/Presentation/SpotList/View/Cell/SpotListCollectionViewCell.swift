@@ -105,7 +105,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         }
         
         matchingRateView.do {
-            $0.backgroundColor = .gray9
+            $0.backgroundColor = .gray900
             $0.layer.cornerRadius = 2
         }
         
@@ -164,7 +164,7 @@ extension SpotListCollectionViewCell {
         
         walkingTimeLabel.setLabel(text: "\(String(spot.walkingTime))분",
                                   style: .b4,
-                                  color: .gray3)
+                                  color: .gray300)
     }
     
 }

@@ -98,7 +98,7 @@ final class LocalVerificationFinishedView: BaseView {
         explainationLabel.do {
             $0.setLabel(text:  StringLiterals.LocalVerification.localAcornExplaination,
                         style: .b2,
-                        color: .gray3)
+                        color: .gray300)
         }
         
         localAcornImageView.do {
@@ -128,13 +128,13 @@ final class LocalVerificationFinishedView: BaseView {
         startButton.do {
             $0.setAttributedTitle(text: StringLiterals.LocalVerification.letsStart,
                                    style: .h7,
-                                  color: .gray6,
+                                  color: .gray600,
                                   for: .disabled)
             $0.setAttributedTitle(text: StringLiterals.LocalVerification.letsStart,
                                    style: .h7,
                                   color: .acWhite,
                                   for: .normal)
-            $0.backgroundColor = .gray8
+            $0.backgroundColor = .gray800
             $0.layer.cornerRadius = 6
         }
     }

@@ -91,7 +91,7 @@ class VerifiedAreasEditView: BaseView {
             config.imagePadding = 4
             config.imagePlacement = .leading
             config.background.cornerRadius = 4
-            config.background.strokeColor = .gray5
+            config.background.strokeColor = .gray500
             config.background.strokeWidth = 1
             $0.configuration = config
         }

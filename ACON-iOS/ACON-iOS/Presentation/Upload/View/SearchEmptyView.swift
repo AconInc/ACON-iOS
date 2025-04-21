@@ -27,7 +27,7 @@ class SearchEmptyView: BaseView {
         }
         
         textLabel.do {
-            $0.setLabel(text: "앗! 일치하는 장소가 없어요.", style: .s1, color: .gray4, alignment: .center)
+            $0.setLabel(text: "앗! 일치하는 장소가 없어요.", style: .s1, color: .gray400, alignment: .center)
         }
         
     }

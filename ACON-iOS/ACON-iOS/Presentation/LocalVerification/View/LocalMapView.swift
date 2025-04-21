@@ -72,7 +72,7 @@ final class LocalMapView: BaseView {
                                   style: .h8,
                                   color: .acWhite,
                                   for: .normal)
-            $0.backgroundColor = .gray5
+            $0.backgroundColor = .gray500
             $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
         }
     }

@@ -121,9 +121,9 @@ private extension LocalVerificationViewController {
     func verifyLocationButtonTapped() {
         localVerificationView.verifyNewLocalButton.isSelected.toggle()
         let isSelected = localVerificationView.verifyNewLocalButton.isSelected
-        localVerificationView.verifyNewLocalButton.configuration?.baseBackgroundColor = isSelected ? .gray7 : .gray9
+        localVerificationView.verifyNewLocalButton.configuration?.baseBackgroundColor = isSelected ? .gray700 : .gray900
 //        localVerificationView.nextButton.isEnabled = isSelected
-        localVerificationView.nextButton.backgroundColor = isSelected ? .gray5 : .gray8
+        localVerificationView.nextButton.backgroundColor = isSelected ? .gray500 : .gray800
     }
     
     @objc

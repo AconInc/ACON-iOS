@@ -13,7 +13,7 @@ enum MatchingRateBgColorType {
     
     var color: UIColor {
         switch self {
-        case .dark: return .gray9
+        case .dark: return .gray900
         case .light: return .glaW20
         }
     }

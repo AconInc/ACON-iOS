@@ -48,13 +48,13 @@ final class WithdrawalConfirmationView: GlassmorphismView {
         descriptionLabel.do {
             $0.setLabel(text: StringLiterals.WithdrawalConfirmation.description,
                         style: .s1,
-                        color: .gray3,
+                        color: .gray300,
                         alignment: .left,
                         numberOfLines: 2)
         }
         
         cancelButton.do {
-            $0.backgroundColor = .gray5
+            $0.backgroundColor = .gray500
             $0.setAttributedTitle(text: StringLiterals.WithdrawalConfirmation.cancelButtonTitle, style: .h7)
             $0.layer.cornerRadius = 6
         }

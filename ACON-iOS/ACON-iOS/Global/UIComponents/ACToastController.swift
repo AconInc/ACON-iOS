@@ -70,7 +70,7 @@ final class ACToastView: BaseView {
             $0.centerY.equalToSuperview()
         }
                 
-        backgroundColor = .gray8
+        backgroundColor = .gray800
         layer.cornerRadius = 4
     }
     

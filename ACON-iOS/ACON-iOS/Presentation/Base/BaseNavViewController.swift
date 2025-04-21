@@ -101,7 +101,7 @@ class BaseNavViewController: UIViewController {
     }
     
     func setStyle() {
-        self.view.backgroundColor = .gray9
+        self.view.backgroundColor = .gray900
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
@@ -257,7 +257,7 @@ extension BaseNavViewController {
                                   for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Upload.next,
                                    style: .b2,
-                                  color: .gray5,
+                                  color: .gray500,
                                   for: .disabled)
         }
     }
@@ -275,7 +275,7 @@ extension BaseNavViewController {
                                   for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Album.choose,
                                    style: .s1,
-                                  color: .gray5,
+                                  color: .gray500,
                                   for: .disabled)
         }
     }
@@ -293,7 +293,7 @@ extension BaseNavViewController {
                                   for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Album.done,
                                    style: .s1,
-                                  color: .gray5,
+                                  color: .gray500,
                                   for: .disabled)
         }
     }

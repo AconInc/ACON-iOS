@@ -71,7 +71,7 @@ class AlbumTableViewCell: UITableViewCell {
     }
     
     func setStyle() {
-        self.backgroundColor = .gray9
+        self.backgroundColor = .gray900
         
         thumbnailImageView.do {
             $0.contentMode = .scaleAspectFill
@@ -97,7 +97,7 @@ extension AlbumTableViewCell {
             if albumInfo.count >= 0 {
                 $0.setLabel(text: "\(albumInfo.count)",
                             style: .b2,
-                            color: .gray4)
+                            color: .gray400)
             }
         }
         thumbnailImageView.image = albumInfo.thumbnailImage

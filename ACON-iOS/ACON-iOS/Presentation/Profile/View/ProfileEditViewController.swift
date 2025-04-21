@@ -162,7 +162,7 @@ private extension ProfileEditViewController {
 
             if onSuccess {
                 profileEditView.setNicknameValidMessage(.nicknameOK)
-                profileEditView.nicknameTextField.changeBorderColor(to: .gray6)
+                profileEditView.nicknameTextField.changeBorderColor(to: .gray600)
                 isNicknameAvailable = true
             } else {
                 profileEditView.setNicknameValidMessage(viewModel.nicknameValidityMessageType)
@@ -247,7 +247,7 @@ private extension ProfileEditViewController {
 
             // NOTE: 텍스트 변하면 유효성 메시지 숨김, 텍스트필드 UI 변경
             profileEditView.setNicknameValidMessage(.none)
-            profileEditView.nicknameTextField.changeBorderColor(to: .gray6)
+            profileEditView.nicknameTextField.changeBorderColor(to: .gray600)
 
             // NOTE: 텍스트 변하면 byte 검사, 넘으면 자르기
             if countByte(text: text) > viewModel.maxNicknameLength {
@@ -279,7 +279,7 @@ private extension ProfileEditViewController {
 
             if bindedText.isEmpty {
                 profileEditView.setBirthdateValidMessage(.none)
-                profileEditView.birthDateTextField.changeBorderColor(to: .gray6)
+                profileEditView.birthDateTextField.changeBorderColor(to: .gray600)
                 isBirthDateAvailable = true
             }
         }
@@ -522,7 +522,7 @@ private extension ProfileEditViewController {
         }
 
         profileEditView.setBirthdateValidMessage(.none)
-        profileEditView.birthDateTextField.changeBorderColor(to: .gray6)
+        profileEditView.birthDateTextField.changeBorderColor(to: .gray600)
         isBirthDateAvailable = true
     }
 
