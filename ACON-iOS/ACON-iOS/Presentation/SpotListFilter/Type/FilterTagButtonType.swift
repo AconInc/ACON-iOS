@@ -13,14 +13,14 @@ enum FilterTagButtonType {
     
     var bgColor: UIColor {
         switch self {
-        case .selected: return .subOrg35
+        case .selected: return .primaryDefault.withAlphaComponent(0.35)
         case .unselected: return .gray8
         }
     }
     
     var strokeColor: UIColor {
         switch self {
-        case .selected: return .org1
+        case .selected: return .primaryDefault
         case .unselected: return .gray6
         }
     }

@@ -256,7 +256,7 @@ final class SpotDetailView: BaseView {
         }
         
         findCourseButton.do {
-            $0.backgroundColor = .org1
+            $0.backgroundColor = .primaryDefault
             $0.roundedButton(cornerRadius: 10, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner])
             $0.setAttributedTitle(text: StringLiterals.SpotDetail.findCourse, style: .h8)
         }

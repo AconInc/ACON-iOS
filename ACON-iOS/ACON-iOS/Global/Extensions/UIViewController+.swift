@@ -47,7 +47,7 @@ extension UIViewController {
             completion?()
         }
         alert.addAction(okAction)
-        okAction.setValue(UIColor.org2, forKey: "titleTextColor")
+        okAction.setValue(UIColor.primaryLight, forKey: "titleTextColor")
         
         if isCancelAvailable {
             let cancelAction = UIAlertAction(title: cancelText, style: .cancel)

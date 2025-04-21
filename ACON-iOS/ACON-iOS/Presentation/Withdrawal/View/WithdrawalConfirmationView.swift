@@ -60,7 +60,7 @@ final class WithdrawalConfirmationView: GlassmorphismView {
         }
         
         confirmButton.do {
-            $0.backgroundColor = .org1
+            $0.backgroundColor = .primaryDefault
             $0.setAttributedTitle(text: StringLiterals.WithdrawalConfirmation.confirmButtonTitle, style: .h7)
             $0.layer.cornerRadius = 6
         }

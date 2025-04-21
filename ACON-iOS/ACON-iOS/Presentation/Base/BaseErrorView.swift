@@ -84,9 +84,9 @@ extension BaseErrorView {
                 
                 )
                 
-                config.baseBackgroundColor = .subOrg35
+                config.baseBackgroundColor = .primaryLight.withAlphaComponent(0.35)
                 config.baseForegroundColor = .acWhite
-                config.background.strokeColor = .org1
+                config.background.strokeColor = .primaryDefault
                 config.background.strokeWidth = 1
                 config.background.cornerRadius = 6
                 config.contentInsets = .init(top: 13, leading: 16, bottom: 13, trailing: 16)

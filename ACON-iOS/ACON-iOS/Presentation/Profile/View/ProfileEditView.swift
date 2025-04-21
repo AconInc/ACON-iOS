@@ -56,7 +56,7 @@ final class ProfileEditView: BaseView {
             fullText: StringLiterals.Profile.nickname + StringLiterals.Profile.neccessaryStarWithSpace,
             textStyles: [
                 (text: StringLiterals.Profile.nickname, style: .h8, color: .acWhite),
-                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .h8, color: .org1)
+                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .h8, color: .primaryDefault)
             ]
         )
 

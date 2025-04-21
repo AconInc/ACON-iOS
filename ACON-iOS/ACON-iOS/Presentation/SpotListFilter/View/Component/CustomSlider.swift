@@ -107,7 +107,7 @@ final class CustomSlider: BaseView {
         }
         
         fillTrackView.do {
-            $0.backgroundColor = .mainOrg50
+            $0.backgroundColor = .primaryDefault.withAlphaComponent(0.5)
             $0.layer.cornerRadius = barHeight / 2
         }
         

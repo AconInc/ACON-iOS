@@ -186,7 +186,7 @@ private extension ProfileView {
             $0.alignment = .center
             $0.spacing = 2
         }
-        currentLabel.setLabel(text: currentString, style: .t2, color: .org1)
+        currentLabel.setLabel(text: currentString, style: .t2, color: .primaryDefault)
         totalLabel.setLabel(text: "/" + String(totalString), style: .s2, color: .gray5)
 
         contentView.addSubview(labelStack)
@@ -238,7 +238,7 @@ extension ProfileView {
         let label = UILabel()
         label.setLabel(text: areaName,
                        style: .t2,
-                       color: .org1,
+                       color: .primaryDefault,
                        alignment: .center)
         verifiedAreaBox.setContentView(to: label)
     }

@@ -13,8 +13,8 @@ class FilterTagButton: UIButton {
     
     override var isSelected: Bool {
         didSet {
-            configuration?.baseBackgroundColor = isSelected ? .subOrg35 : .gray8
-            configuration?.background.strokeColor = isSelected ? .org1 : .gray6
+            configuration?.baseBackgroundColor = isSelected ? .primaryLight.withAlphaComponent(0.35) : .gray8
+            configuration?.background.strokeColor = isSelected ? .primaryDefault : .gray6
         }
     }
     

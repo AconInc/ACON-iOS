@@ -79,7 +79,7 @@ class VerifiedAreasEditView: BaseView {
             fullText: StringLiterals.Profile.verifiedArea + StringLiterals.Profile.neccessaryStarWithSpace,
             textStyles: [
                 (text: StringLiterals.Profile.verifiedArea, style: .h8, color: .acWhite),
-                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .h8, color: .org1)
+                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .h8, color: .primaryDefault)
             ]
         )
         
