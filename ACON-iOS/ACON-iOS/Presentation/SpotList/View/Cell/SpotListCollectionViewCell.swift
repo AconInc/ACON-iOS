@@ -100,7 +100,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         
         dimImage.do {
             $0.clipsToBounds = true
-            $0.image = .dimGra2
+            $0.image = .imgGra1
             $0.layer.cornerRadius = 6
         }
         
