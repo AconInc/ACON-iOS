@@ -45,10 +45,10 @@ final class ProfileImageEditButton: UIView {
     // MARK: - UI Setting Methods
 
     private func setStyle() {
-        self.backgroundColor = .gray9
+        self.backgroundColor = .gray900
 
         profileImageView.do {
-            $0.backgroundColor = .gray7 // NOTE: Skeleton
+            $0.backgroundColor = .gray700 // NOTE: Skeleton
             $0.layer.cornerRadius = size / 2
             $0.contentMode = .scaleAspectFill
             $0.clipsToBounds = true

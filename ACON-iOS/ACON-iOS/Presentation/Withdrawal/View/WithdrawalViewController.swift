@@ -49,17 +49,17 @@ final class WithdrawalViewController: BaseNavViewController {
         }
         
         reasonDescriptionLabel.do {
-            $0.setLabel(text: StringLiterals.Withdrawal.reasonDescription, style: .s2, color: .gray5, alignment: .left, numberOfLines: 2)
+            $0.setLabel(text: StringLiterals.Withdrawal.reasonDescription, style: .s2, color: .gray500, alignment: .left, numberOfLines: 2)
         }
         
         submitButton.do {
-            $0.backgroundColor = .gray7
+            $0.backgroundColor = .gray700
             $0.layer.cornerRadius = 8
             $0.isEnabled = false
             $0.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
             $0.setTitle("제출하기", for: .normal)
             $0.titleLabel?.font = ACFontStyleType.h7.font
-            $0.setTitleColor(.gray5, for: .normal)
+            $0.setTitleColor(.gray500, for: .normal)
         }
         
         otherReasonTextFieldView.isHidden = true
@@ -196,9 +196,9 @@ extension WithdrawalViewController {
     func buttonState() {
         shouldEnableSubmitButton = viewModel.ectOption.value ?? true
         submitButton.isEnabled = shouldEnableSubmitButton
-        submitButton.backgroundColor = shouldEnableSubmitButton ? .gray6 : .gray7
+        submitButton.backgroundColor = shouldEnableSubmitButton ? .gray600 : .gray700
         
-        let textColor = shouldEnableSubmitButton ? UIColor.acWhite : UIColor.gray5
+        let textColor = shouldEnableSubmitButton ? UIColor.acWhite : UIColor.gray500
         
         submitButton.setTitleColor(textColor, for: .normal)
     }

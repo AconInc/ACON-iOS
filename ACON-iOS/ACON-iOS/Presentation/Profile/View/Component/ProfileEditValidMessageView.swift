@@ -86,24 +86,24 @@ final class ProfileEditValidMessageView: BaseView {
             guard type.texts.count == 1 else { print(idxErrMsg); return }
             hideFirstLine(false)
             hideSecondLine(true)
-            firstIcon.image = .icError20
-            firstLine.setLabel(text: type.texts[0], style: .s2, color: .red1)
+            firstIcon.image = .icError
+            firstLine.setLabel(text: type.texts[0], style: .s2, color: .labelDanger)
 
         case .nicknameOK:
             guard type.texts.count == 1 else { print(idxErrMsg); return }
             hideFirstLine(false)
             hideSecondLine(true)
-            firstIcon.image = .icLocalCheckMark20
-            firstLine.setLabel(text: type.texts[0], style: .s2, color: .blue1)
+            firstIcon.image = .icLocalCheckMark
+            firstLine.setLabel(text: type.texts[0], style: .s2, color: .labelAction)
 
         case .invalidSymbolAndLang:
             guard type.texts.count == 2 else { print(idxErrMsg); return }
             hideFirstLine(false)
             hideSecondLine(false)
-            firstIcon.image = .icError20
-            firstLine.setLabel(text: type.texts[0], style: .s2, color: .red1)
-            secondIcon.image = .icError20
-            secondLine.setLabel(text: type.texts[1], style: .s2, color: .red1)
+            firstIcon.image = .icError
+            firstLine.setLabel(text: type.texts[0], style: .s2, color: .labelDanger)
+            secondIcon.image = .icError
+            secondLine.setLabel(text: type.texts[1], style: .s2, color: .labelDanger)
         }
     }
 

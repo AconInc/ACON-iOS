@@ -115,9 +115,7 @@ class LoginModalView: GlassmorphismView {
         
         self.setHandlerImageView()
         
-        self.setGlassColor(.glaW10)
-        
-        exitButton.setImage(.icX, for: .normal)
+        exitButton.setImage(.icDismiss, for: .normal)
         
         titleLabel.setLabel(text: StringLiterals.LoginModal.title,
                             style: .h5,
@@ -127,15 +125,15 @@ class LoginModalView: GlassmorphismView {
         
         subTitleLabel.setLabel(text: StringLiterals.LoginModal.subTitle,
                                style: .b1,
-                               color: .gray2,
+                               color: .gray200,
                                alignment: .center,
                         numberOfLines: 2)
         
         googleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
-            $0.backgroundColor = .gray1
+            $0.backgroundColor = .gray100
             $0.layer.cornerRadius = 6
-            $0.setImage(.googleLogo, for: .normal)
+            $0.setImage(.icGoogle, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.googleLogin,
                                   style: .s1,
                                   color: .acBlack)
@@ -143,20 +141,20 @@ class LoginModalView: GlassmorphismView {
         
         appleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
-            $0.backgroundColor = .gray9
+            $0.backgroundColor = .gray900
             $0.layer.cornerRadius = 6
-            $0.setImage(.appleLogo, for: .normal)
+            $0.setImage(.icApple, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
                                   style: .s1,
                                   color: .acWhite)
-            $0.layer.borderColor = UIColor.gray5.cgColor
+            $0.layer.borderColor = UIColor.gray500.cgColor
             $0.layer.borderWidth = 1
         }
         
         youAgreedLabel.do {
             $0.setLabel(text: StringLiterals.Login.youAgreed,
                         style: .b2,
-                        color: .gray3,
+                        color: .gray300,
                         alignment: .center,
                         numberOfLines: 2)
         }
@@ -169,7 +167,7 @@ class LoginModalView: GlassmorphismView {
         termsOfUseLabel.do {
             $0.setLabel(text: StringLiterals.Login.termsOfUse,
                         style: .b2,
-                        color: .gray5)
+                        color: .gray500)
             $0.setUnderline(
                 range: NSRange(location: 0,
                                length: termsOfUseLabel.text?.count ?? 4))
@@ -179,7 +177,7 @@ class LoginModalView: GlassmorphismView {
         privacyPolicyLabel.do {
             $0.setLabel(text: StringLiterals.Login.privacyPolicy,
                         style: .b2,
-                        color: .gray5)
+                        color: .gray500)
             $0.setUnderline(
                 range: NSRange(location: 0,
                                length: privacyPolicyLabel.text?.count ?? 8))

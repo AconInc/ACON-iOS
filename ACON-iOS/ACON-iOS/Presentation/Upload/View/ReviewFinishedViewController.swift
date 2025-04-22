@@ -35,7 +35,7 @@ class ReviewFinishedViewController: BaseNavViewController {
             self.reviewFinishedView.closeViewLabel.do {
                 $0.setLabel(text: "\(timeLeftToClose)"+StringLiterals.Upload.closeAfter,
                             style: .b3,
-                            color: .gray3)
+                            color: .gray300)
             }
             timeLeftToClose -= 1
             if timeLeftToClose < 0 {

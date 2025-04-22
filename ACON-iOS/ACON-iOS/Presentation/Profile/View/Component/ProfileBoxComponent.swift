@@ -60,7 +60,7 @@ final class ProfileBoxComponent: BaseView {
 
     override func setStyle() {
         self.do {
-            $0.backgroundColor = .gray8
+            $0.backgroundColor = .gray800
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 6
         }
@@ -79,7 +79,7 @@ final class ProfileBoxComponent: BaseView {
 extension ProfileBoxComponent {
 
     func setStyle(title: String, icon: UIImage) {
-        titleLabel.attributedText = title.ACStyle(.s2, .gray2)
+        titleLabel.attributedText = title.ACStyle(.s2, .gray200)
 
         iconImageView.do {
             $0.image = icon

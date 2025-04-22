@@ -34,7 +34,7 @@ class SkeletonView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        self.backgroundColor = .gray9
+        self.backgroundColor = .gray900
         
         stackView.do {
             $0.axis = .vertical
@@ -56,7 +56,7 @@ class SkeletonView: BaseView {
         let longView = UIView()
         
         longView.do {
-            $0.backgroundColor = .gray7
+            $0.backgroundColor = .gray700
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 6
             $0.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -74,7 +74,7 @@ class SkeletonView: BaseView {
         let smallView = UIView()
         
         smallView.do {
-            $0.backgroundColor = .gray7
+            $0.backgroundColor = .gray700
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 6
         }

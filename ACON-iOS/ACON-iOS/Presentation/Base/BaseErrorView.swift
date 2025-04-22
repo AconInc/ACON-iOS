@@ -57,7 +57,7 @@ class BaseErrorView: BaseView {
 
 extension BaseErrorView {
     
-    func setStyle(errorImage: UIImage = .icError1140,
+    func setStyle(errorImage: UIImage = .icError1,
                   errorMessage: String?,
                   buttonTitle: String?) {
         errorImageView.do {
@@ -70,7 +70,7 @@ extension BaseErrorView {
                 $0.isHidden = false
                 $0.setLabel(text: errorMessage,
                             style: .s1,
-                            color: .gray4)
+                            color: .gray400)
             }
         } else {
             descriptionLabel.isHidden = true
@@ -84,9 +84,9 @@ extension BaseErrorView {
                 
                 )
                 
-                config.baseBackgroundColor = .subOrg35
+                config.baseBackgroundColor = .primaryLight.withAlphaComponent(0.35)
                 config.baseForegroundColor = .acWhite
-                config.background.strokeColor = .org1
+                config.background.strokeColor = .primaryDefault
                 config.background.strokeWidth = 1
                 config.background.cornerRadius = 6
                 config.contentInsets = .init(top: 13, leading: 16, bottom: 13, trailing: 16)

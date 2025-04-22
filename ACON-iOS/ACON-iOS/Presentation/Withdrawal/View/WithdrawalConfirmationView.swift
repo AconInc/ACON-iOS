@@ -33,7 +33,7 @@ final class WithdrawalConfirmationView: GlassmorphismView {
         self.setHandlerImageView()
         
         iconImageView.do {
-            $0.image = .imgEmptySearch
+            $0.image = .icError1
             $0.contentMode = .scaleAspectFit
         }
         
@@ -48,25 +48,25 @@ final class WithdrawalConfirmationView: GlassmorphismView {
         descriptionLabel.do {
             $0.setLabel(text: StringLiterals.WithdrawalConfirmation.description,
                         style: .s1,
-                        color: .gray3,
+                        color: .gray300,
                         alignment: .left,
                         numberOfLines: 2)
         }
         
         cancelButton.do {
-            $0.backgroundColor = .gray5
+            $0.backgroundColor = .gray500
             $0.setAttributedTitle(text: StringLiterals.WithdrawalConfirmation.cancelButtonTitle, style: .h7)
             $0.layer.cornerRadius = 6
         }
         
         confirmButton.do {
-            $0.backgroundColor = .org1
+            $0.backgroundColor = .primaryDefault
             $0.setAttributedTitle(text: StringLiterals.WithdrawalConfirmation.confirmButtonTitle, style: .h7)
             $0.layer.cornerRadius = 6
         }
         
         closeButton.do {
-            $0.setImage(.icX, for: .normal)
+            $0.setImage(.icDismiss, for: .normal)
             $0.tintColor = .acWhite
         }
     }

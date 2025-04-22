@@ -31,7 +31,7 @@ final class CustomAlertTitleAndButtonsView: BaseView {
         self.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         
         alertContainer.do {
-            $0.backgroundColor = .gray8
+            $0.backgroundColor = .gray800
             $0.layer.cornerRadius = 8
             $0.clipsToBounds = true
         }
@@ -39,12 +39,12 @@ final class CustomAlertTitleAndButtonsView: BaseView {
         closeButton.do {
             $0.layer.cornerRadius = 8
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.gray5.cgColor
+            $0.layer.borderColor = UIColor.gray500.cgColor
         }
         
         settingsButton.do {
             $0.layer.cornerRadius = 8
-            $0.backgroundColor = .gray5
+            $0.backgroundColor = .gray500
         }
         
     }
@@ -101,7 +101,7 @@ final class CustomAlertTitleAndButtonsView: BaseView {
         closeButton.setAttributedTitle(
             text: leftButton,
             style: ACFont.s2,
-            color: .gray3,
+            color: .gray300,
             for: .normal
         )
         

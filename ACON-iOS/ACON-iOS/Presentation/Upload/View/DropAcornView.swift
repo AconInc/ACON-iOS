@@ -112,7 +112,7 @@ final class DropAcornView: BaseView {
         useAcornToReviewLabel.do {
             $0.setLabel(text: StringLiterals.Upload.useAcornToReview,
                         style: .b3,
-                        color: .gray3)
+                        color: .gray300)
         }
         
         acornStackView.do {
@@ -125,7 +125,7 @@ final class DropAcornView: BaseView {
         acornReviewLabel.do {
             $0.setLabel(text: "0/5",
                         style: .b4,
-                        color: .gray5)
+                        color: .gray500)
         }
         
         goAheadDropAcornLabel.do {
@@ -137,13 +137,13 @@ final class DropAcornView: BaseView {
         leaveReviewButton.do {
             $0.setAttributedTitle(text: StringLiterals.Upload.reviewWithAcornsHere,
                                    style: .h8,
-                                  color: .gray5,
+                                  color: .gray500,
                                   for: .disabled)
             $0.setAttributedTitle(text: StringLiterals.Upload.next,
                                    style: .h8,
                                   color: .acWhite,
                                   for: .normal)
-            $0.backgroundColor = .gray5
+            $0.backgroundColor = .gray500
             $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
         }
     }
@@ -158,8 +158,8 @@ extension DropAcornView {
             $0.width.height.equalTo(48)
         }
         button.do {
-            $0.setImage(.icGReview, for: .normal)
-            $0.setImage(.icWReview, for: .selected)
+            $0.setImage(.icReviewG, for: .normal)
+            $0.setImage(.icReviewW, for: .selected)
             $0.contentMode = .scaleAspectFit
         }
         return button
@@ -171,7 +171,7 @@ extension DropAcornView {
     
     func bindData(_ acornCount: Int) {
         self.acornNumberLabel.do {
-            $0.setPartialText(fullText: StringLiterals.Upload.acornsIHave + " \(acornCount)/25", textStyles: [(StringLiterals.Upload.acornsIHave, .b4, .gray5), (" \(acornCount)/25", .b4, .org1)])
+            $0.setPartialText(fullText: StringLiterals.Upload.acornsIHave + " \(acornCount)/25", textStyles: [(StringLiterals.Upload.acornsIHave, .b4, .gray500), (" \(acornCount)/25", .b4, .primaryDefault)])
         }
     }
     

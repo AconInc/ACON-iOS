@@ -62,11 +62,11 @@ final class PhotoCollectionViewCell: BaseCollectionViewCell {
         }
         
         dimView.do {
-            $0.backgroundColor = .gray6
+            $0.backgroundColor = .gray600
         }
         
         photoImageView.do {
-            $0.backgroundColor = .gray6
+            $0.backgroundColor = .gray600
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
         }

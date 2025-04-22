@@ -41,7 +41,7 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
             $0.backgroundColor = .clear
             $0.textColor = .white
             $0.font = .systemFont(ofSize: 16)
-            $0.layer.borderColor = UIColor.gray6.cgColor
+            $0.layer.borderColor = UIColor.gray600.cgColor
             $0.layer.borderWidth = 1.0
             $0.layer.cornerRadius = 4.0
             $0.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)

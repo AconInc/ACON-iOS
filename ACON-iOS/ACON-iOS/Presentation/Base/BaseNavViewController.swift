@@ -101,7 +101,7 @@ class BaseNavViewController: UIViewController {
     }
     
     func setStyle() {
-        self.view.backgroundColor = .gray9
+        self.view.backgroundColor = .gray900
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
@@ -197,7 +197,7 @@ extension BaseNavViewController {
     // MARK: - 뒤로가기 버튼
     
     func setBackButton(completion: (() -> Void)? = nil) {
-        setButtonStyle(button: leftButton, image: .leftArrow)
+        setButtonStyle(button: leftButton, image: .icArrowLeft)
         setButtonAction(button: leftButton, target: self, action: #selector(backButtonTapped))
         self.backCompletion = completion
     }
@@ -234,7 +234,7 @@ extension BaseNavViewController {
     // MARK: - 설정 버튼
     
     func setSettingButton() {
-        setButtonStyle(button: rightButton, image: .icSettingW28)
+        setButtonStyle(button: rightButton, image: .icSettingW)
         setButtonAction(button: rightButton, target: self, action: #selector(settingButtonTapped))
     }
     
@@ -257,7 +257,7 @@ extension BaseNavViewController {
                                   for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Upload.next,
                                    style: .b2,
-                                  color: .gray5,
+                                  color: .gray500,
                                   for: .disabled)
         }
     }
@@ -275,7 +275,7 @@ extension BaseNavViewController {
                                   for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Album.choose,
                                    style: .s1,
-                                  color: .gray5,
+                                  color: .gray500,
                                   for: .disabled)
         }
     }
@@ -293,7 +293,7 @@ extension BaseNavViewController {
                                   for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Album.done,
                                    style: .s1,
-                                  color: .gray5,
+                                  color: .gray500,
                                   for: .disabled)
         }
     }
@@ -301,7 +301,7 @@ extension BaseNavViewController {
     // MARK: - X 버튼
     
     func setXButton() {
-        setButtonStyle(button: leftButton, image: .icX)
+        setButtonStyle(button: leftButton, image: .icDismiss)
     }
     
 }

@@ -87,7 +87,7 @@ final class ReviewFinishedView: BaseView {
         wishYouPreferenceLabel.do {
             $0.setLabel(text: StringLiterals.Upload.wishYouPreference,
                         style: .b3,
-                        color: .gray3)
+                        color: .gray300)
         }
         
         finishedReviewLottieView.do {
@@ -99,7 +99,7 @@ final class ReviewFinishedView: BaseView {
         closeViewLabel.do {
             $0.setLabel(text: StringLiterals.Upload.closeAfterFiveSeconds,
                         style: .b3,
-                        color: .gray3)
+                        color: .gray300)
         }
         
         okButton.do {
@@ -107,7 +107,7 @@ final class ReviewFinishedView: BaseView {
                                   style: .h8,
                                   color: .acWhite,
                                   for: .normal)
-            $0.backgroundColor = .gray5
+            $0.backgroundColor = .gray500
             $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
         }
     }

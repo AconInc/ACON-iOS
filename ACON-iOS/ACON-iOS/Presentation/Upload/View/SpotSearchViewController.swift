@@ -101,7 +101,7 @@ class SpotSearchViewController: BaseViewController {
     override func setStyle() {
         super.setStyle()
         
-        self.view.backgroundColor = .glaW10
+        self.view.backgroundColor = .glassWLight
         self.view.backgroundColor?.withAlphaComponent(0.95)
         
         emptyStateView.do {

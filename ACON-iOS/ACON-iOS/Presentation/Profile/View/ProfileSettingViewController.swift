@@ -56,7 +56,7 @@ final class ProfileSettingViewController: BaseNavViewController {
         self.setBackButton()
         
         settingTableView.do {
-            $0.backgroundColor = .gray9
+            $0.backgroundColor = .gray900
             $0.sectionHeaderTopPadding = 0
             $0.separatorInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
             $0.separatorStyle = .none
@@ -123,7 +123,7 @@ extension ProfileSettingViewController: UITableViewDelegate {
         }
         titleLabel.setLabel(text: SettingType.sectionTitles[section],
                            style: .s2,
-                           color: .gray5)
+                           color: .gray500)
         return headerView
     }
 
