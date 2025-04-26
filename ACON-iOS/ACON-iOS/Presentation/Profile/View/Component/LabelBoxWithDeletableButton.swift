@@ -44,8 +44,8 @@ final class LabelBoxWithDeletableButton: BaseView {
 
     override func setStyle() {
         self.do {
-            $0.backgroundColor = .gray8
-            $0.layer.borderColor = UIColor.gray6.cgColor
+            $0.backgroundColor = .gray800
+            $0.layer.borderColor = UIColor.gray600.cgColor
             $0.layer.borderWidth = 1
             $0.layer.cornerRadius = 4
         }

@@ -47,18 +47,18 @@ final class ProfileView: BaseView {
         super.setStyle()
 
         profileImageView.do {
-            $0.backgroundColor = .gray7 // NOTE: Skeleton
+            $0.backgroundColor = .gray700 // NOTE: Skeleton
             $0.layer.cornerRadius = profileImageSize / 2
             $0.contentMode = .scaleAspectFill
             $0.clipsToBounds = true
-            $0.image = .imgProfileBasic80
+            $0.image = .imgProfileBasic
         }
 
         profileEditButton.do {
             var config = UIButton.Configuration.plain()
             config.contentInsets = .zero
-            config.attributedTitle = AttributedString(StringLiterals.Profile.profileEditButton.ACStyle(.s2, .gray4))
-            config.image = .icEditG20
+            config.attributedTitle = AttributedString(StringLiterals.Profile.profileEditButton.ACStyle(.s2, .gray400))
+            config.image = .icEditG
             config.imagePlacement = .trailing
             config.imagePadding = 4
             $0.configuration = config
@@ -68,10 +68,10 @@ final class ProfileView: BaseView {
             var config = UIButton.Configuration.plain()
             config.contentInsets = .init(top: 15, leading: 0, bottom: 15, trailing: 15)
             config.attributedTitle = AttributedString(StringLiterals.Profile.needLogin.ACStyle(.h5))
-            config.image = .icArrowRight28
+            config.image = .icArrowRight
             config.imagePlacement = .trailing
             config.imagePadding = 2
-            config.background.backgroundColor = .gray9
+            config.background.backgroundColor = .gray900
             $0.configuration = config
         }
 
@@ -83,7 +83,7 @@ final class ProfileView: BaseView {
         acornCountBox.do {
             $0.setStyle(
                 title: StringLiterals.Profile.acornPossession,
-                icon: .icLocalAconG20
+                icon: .icLocalAconG
             )
 
             let notVerifiedLabel = makeCountLabels(
@@ -95,13 +95,13 @@ final class ProfileView: BaseView {
         verifiedAreaBox.do {
             $0.setStyle(
                 title: StringLiterals.Profile.myVerifiedArea,
-                icon: .icHometownG20
+                icon: .icHometownG
             )
 
             let notVerifiedLabel = UILabel()
             notVerifiedLabel.setLabel(text: StringLiterals.Profile.notVerified,
                            style: .t2,
-                           color: .gray5)
+                           color: .gray500)
             $0.setSecondaryContentView(to: notVerifiedLabel)
         }
     }
@@ -186,8 +186,8 @@ private extension ProfileView {
             $0.alignment = .center
             $0.spacing = 2
         }
-        currentLabel.setLabel(text: currentString, style: .t2, color: .org1)
-        totalLabel.setLabel(text: "/" + String(totalString), style: .s2, color: .gray5)
+        currentLabel.setLabel(text: currentString, style: .t2, color: .primaryDefault)
+        totalLabel.setLabel(text: "/" + String(totalString), style: .s2, color: .gray500)
 
         contentView.addSubview(labelStack)
         labelStack.addArrangedSubviews(currentLabel, totalLabel)
@@ -238,7 +238,7 @@ extension ProfileView {
         let label = UILabel()
         label.setLabel(text: areaName,
                        style: .t2,
-                       color: .org1,
+                       color: .primaryDefault,
                        alignment: .center)
         verifiedAreaBox.setContentView(to: label)
     }

@@ -56,7 +56,7 @@ final class ProfileEditView: BaseView {
             fullText: StringLiterals.Profile.nickname + StringLiterals.Profile.neccessaryStarWithSpace,
             textStyles: [
                 (text: StringLiterals.Profile.nickname, style: .h8, color: .acWhite),
-                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .h8, color: .org1)
+                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .h8, color: .primaryDefault)
             ]
         )
 
@@ -74,15 +74,15 @@ final class ProfileEditView: BaseView {
 
         saveButton.do {
             var config = UIButton.Configuration.filled()
-            config.attributedTitle = AttributedString(StringLiterals.Profile.save.ACStyle(.h7, .gray5))
-            config.baseBackgroundColor = .gray7
+            config.attributedTitle = AttributedString(StringLiterals.Profile.save.ACStyle(.h7, .gray500))
+            config.baseBackgroundColor = .gray700
             $0.configuration = config
         }
 
         saveButton.configurationUpdateHandler = {
             guard var config = $0.configuration else { return }
             config.attributedTitle = AttributedString(
-                StringLiterals.Profile.save.ACStyle(.h7, $0.isEnabled ? .acWhite : .gray5)
+                StringLiterals.Profile.save.ACStyle(.h7, $0.isEnabled ? .acWhite : .gray500)
             )
             $0.configuration = config
         }
@@ -200,7 +200,7 @@ final class ProfileEditView: BaseView {
             fullText: currentStr + slashMaxStr,
             textStyles: [
                 (text: currentStr, style: .s2, color: .acWhite),
-                (text: slashMaxStr, style: .s2, color: .gray5)
+                (text: slashMaxStr, style: .s2, color: .gray500)
             ]
         )
     }

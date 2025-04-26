@@ -102,12 +102,12 @@ final class CustomSlider: BaseView {
         self.backgroundColor = .clear
         
         trackView.do {
-            $0.backgroundColor = .gray8
+            $0.backgroundColor = .gray800
             $0.layer.cornerRadius = barHeight / 2
         }
         
         fillTrackView.do {
-            $0.backgroundColor = .mainOrg50
+            $0.backgroundColor = .primaryDefault.withAlphaComponent(0.5)
             $0.layer.cornerRadius = barHeight / 2
         }
         
@@ -238,7 +238,7 @@ private extension CustomSlider {
     
     func makeIndicatorLabel(_ text: String, alignment: NSTextAlignment) -> UILabel {
         let label = UILabel().then {
-            $0.setLabel(text: text, style: .c1, color: .gray4, alignment: alignment)
+            $0.setLabel(text: text, style: .c1, color: .gray400, alignment: alignment)
         }
         return label
     }

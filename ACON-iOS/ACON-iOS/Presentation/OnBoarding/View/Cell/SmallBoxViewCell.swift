@@ -121,7 +121,7 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
         if isSelected {
             // 선택된 상태: 화이트 딤 처리
             overlayContainer.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-            overlayImageView.image = UIImage(named: "check")
+            overlayImageView.image = .icCheck
             overlayImageView.layer.shadowColor = UIColor.black.cgColor
             overlayImageView.layer.shadowOpacity = 0.6
             overlayImageView.layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -130,10 +130,10 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
             overlayTitle.backgroundColor = .clear
             overlayTitle.alpha = 0
           } else if isDimmed {
-              overlayContainer.backgroundColor = UIColor.gray9.withAlphaComponent(0.9)
+              overlayContainer.backgroundColor = UIColor.gray900.withAlphaComponent(0.9)
               overlayImageView.image = nil
               overlayImageView.alpha = 0
-              overlayTitle.backgroundColor = UIColor.gray9.withAlphaComponent(0.7)
+              overlayTitle.backgroundColor = UIColor.gray900.withAlphaComponent(0.7)
               overlayTitle.alpha = 1
           } else {
               // 기본 상태
@@ -154,7 +154,7 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
             alignment: .center,
             numberOfLines: 0
         )
-        titleLabel.backgroundColor = .gray9
+        titleLabel.backgroundColor = .gray900
         imageView.image = image ?? UIImage(systemName: "photo")
         
         applyOverlaySettings(isSelected: isSelected, isDimmed: isDimmed)
@@ -166,10 +166,10 @@ extension SmallBoxViewCell {
     
     private func applyOverlaySettings(isSelected: Int, isDimmed: Bool) {
         if isDimmed {
-            overlayContainer.backgroundColor = UIColor.gray9.withAlphaComponent(0.9)
+            overlayContainer.backgroundColor = UIColor.gray900.withAlphaComponent(0.9)
             overlayImageView.image = nil
             overlayImageView.alpha = 0
-            overlayTitle.backgroundColor = UIColor.gray9.withAlphaComponent(0.6)
+            overlayTitle.backgroundColor = UIColor.gray900.withAlphaComponent(0.6)
             overlayTitle.alpha = 1
         } else if (1...3).contains(isSelected) {
             overlayImageView.image = UIImage(named: "\(isSelected)")

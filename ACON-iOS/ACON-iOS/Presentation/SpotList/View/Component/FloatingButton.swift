@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Then
+
 class FloatingButton: GlassmorphismView {
     
     // MARK: - Properties
@@ -52,8 +54,11 @@ class FloatingButton: GlassmorphismView {
     override func setStyle() {
         super.setStyle()
         
-        self.clipsToBounds = true
-        self.layer.cornerRadius = size / 2
+        self.do {
+            $0.clipsToBounds = true
+            $0.layer.cornerRadius = size / 2
+            $0.setGlassColor(.glassBDefault)
+        }
         
         button.setImage(image, for: .normal)
     }

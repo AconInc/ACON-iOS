@@ -88,19 +88,19 @@ final class LocalVerificationView: BaseView {
         doLocalVerificationLabel.do {
             $0.setLabel(text:  StringLiterals.LocalVerification.doLocalVerification,
                         style: .b3,
-                        color: .gray3)
+                        color: .gray300)
         }
         
         verifyNewLocalButton.do {
             $0.configuration = verifyNewLocalButtonConfiguration
-            $0.backgroundColor = .gray7
+            $0.backgroundColor = .gray700
             $0.roundedButton(cornerRadius: 4, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor(resource: .gray8).cgColor
+            $0.layer.borderColor = UIColor(resource: .gray800).cgColor
 //            $0.setImage(.icRadio, for: .normal)
-            $0.setImage(.icRadioSelected, for: .normal)
+            $0.setImage(.icRadioPressed, for: .normal)
             $0.setPartialTitle(fullText: StringLiterals.LocalVerification.new + StringLiterals.LocalVerification.verifyLocal,
-                               textStyles: [(StringLiterals.LocalVerification.new, .s2, .org1), (StringLiterals.LocalVerification.verifyLocal, .s2, .acWhite)])
+                               textStyles: [(StringLiterals.LocalVerification.new, .s2, .primaryDefault), (StringLiterals.LocalVerification.verifyLocal, .s2, .acWhite)])
             $0.isUserInteractionEnabled = false
         }
         
@@ -109,7 +109,7 @@ final class LocalVerificationView: BaseView {
                                    style: .h8,
                                   color: .acWhite,
                                   for: .normal)
-            $0.backgroundColor = .gray5
+            $0.backgroundColor = .gray500
             $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
         }
     }

@@ -34,7 +34,7 @@ final class ProfileEditViewController: BaseNavViewController {
         }
     }
 
-    private var profileImage: UIImage = .imgProfileBasic80
+    private var profileImage: UIImage = .imgProfileBasic
 
     private var isDefaultImage: Bool? = nil
 
@@ -162,11 +162,11 @@ private extension ProfileEditViewController {
 
             if onSuccess {
                 profileEditView.setNicknameValidMessage(.nicknameOK)
-                profileEditView.nicknameTextField.changeBorderColor(to: .gray6)
+                profileEditView.nicknameTextField.changeBorderColor(to: .gray600)
                 isNicknameAvailable = true
             } else {
                 profileEditView.setNicknameValidMessage(viewModel.nicknameValidityMessageType)
-                profileEditView.nicknameTextField.changeBorderColor(to: .red1)
+                profileEditView.nicknameTextField.changeBorderColor(to: .labelDanger)
                 isNicknameAvailable = false
             }
         }
@@ -247,7 +247,7 @@ private extension ProfileEditViewController {
 
             // NOTE: 텍스트 변하면 유효성 메시지 숨김, 텍스트필드 UI 변경
             profileEditView.setNicknameValidMessage(.none)
-            profileEditView.nicknameTextField.changeBorderColor(to: .gray6)
+            profileEditView.nicknameTextField.changeBorderColor(to: .gray600)
 
             // NOTE: 텍스트 변하면 byte 검사, 넘으면 자르기
             if countByte(text: text) > viewModel.maxNicknameLength {
@@ -279,7 +279,7 @@ private extension ProfileEditViewController {
 
             if bindedText.isEmpty {
                 profileEditView.setBirthdateValidMessage(.none)
-                profileEditView.birthDateTextField.changeBorderColor(to: .gray6)
+                profileEditView.birthDateTextField.changeBorderColor(to: .gray600)
                 isBirthDateAvailable = true
             }
         }
@@ -324,7 +324,7 @@ private extension ProfileEditViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
             }))
             $0.addAction(UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { _ in
-                self.updateProfileImage(.imgProfileBasic80, true)
+                self.updateProfileImage(.imgProfileBasic, true)
             }))
             $0.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         }
@@ -412,7 +412,7 @@ private extension ProfileEditViewController {
                 } else {
                     profileEditView.setNicknameValidMessage(.invalidSymbol)
                 }
-                textField.layer.borderColor = UIColor.red1.cgColor
+                textField.layer.borderColor = UIColor.labelDanger.cgColor
                 validMsgHideDebouncer.call { [weak self] in
                     guard let self = self else { return }
                     self.checkNicknameValidity()
@@ -445,7 +445,7 @@ private extension ProfileEditViewController {
         // NOTE: 길이 0인 경우 ObservableBinding에서 .none처리
         if newRawString.count < 8 {
             profileEditView.setBirthdateValidMessage(.invalidDate)
-            profileEditView.birthDateTextField.changeBorderColor(to: .red1)
+            profileEditView.birthDateTextField.changeBorderColor(to: .labelDanger)
             isBirthDateAvailable = false
         } else if newRawString.count == 8 {
             // NOTE: Validity 체크
@@ -479,7 +479,7 @@ private extension ProfileEditViewController {
         // NOTE: 닉네임을 입력해주세요.
         if byte == 0 {
             profileEditView.setNicknameValidMessage(.nicknameMissing)
-            profileEditView.nicknameTextField.changeBorderColor(to: .red1)
+            profileEditView.nicknameTextField.changeBorderColor(to: .labelDanger)
             isNicknameAvailable = false
         }
 
@@ -516,13 +516,13 @@ private extension ProfileEditViewController {
               isBeforeToday(date: date)
         else {
             profileEditView.setBirthdateValidMessage(.invalidDate)
-            profileEditView.birthDateTextField.changeBorderColor(to: .red1)
+            profileEditView.birthDateTextField.changeBorderColor(to: .labelDanger)
             isBirthDateAvailable = false
             return
         }
 
         profileEditView.setBirthdateValidMessage(.none)
-        profileEditView.birthDateTextField.changeBorderColor(to: .gray6)
+        profileEditView.birthDateTextField.changeBorderColor(to: .gray600)
         isBirthDateAvailable = true
     }
 

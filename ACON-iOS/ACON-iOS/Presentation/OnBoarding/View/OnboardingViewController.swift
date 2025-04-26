@@ -46,10 +46,10 @@ final class OnboardingViewController: BaseViewController {
     override func setStyle() {
         super.setStyle()
         
-        view.backgroundColor = .gray9
+        view.backgroundColor = .gray900
         
         backButton.do {
-            $0.setImage(UIImage(named: "chevron.left"), for: .normal)
+            $0.setImage(.icArrowLeft, for: .normal)
             $0.tintColor = .acWhite
             $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
             $0.alpha = 0
@@ -64,7 +64,7 @@ final class OnboardingViewController: BaseViewController {
         }
         
         progressView.do {
-            $0.backgroundColor = .gray8
+            $0.backgroundColor = .gray800
         }
         
         progressIndicator.do {
@@ -73,7 +73,7 @@ final class OnboardingViewController: BaseViewController {
         
         progressNumber.do {
             $0.font = ACFont.h4.font
-            $0.textColor = .gray5
+            $0.textColor = .gray500
         }
         
         progressTitle.do {
@@ -84,13 +84,13 @@ final class OnboardingViewController: BaseViewController {
         }
         
         nextButton.do {
-            $0.backgroundColor = .gray8
+            $0.backgroundColor = .gray800
             $0.layer.cornerRadius = 8
             $0.isEnabled = false
             $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
             $0.setAttributedTitle(text: "다음",
                                   style: ACFont.h8,
-                                  color: .gray6,
+                                  color: .gray600,
                                   for: .normal)
         }
     }
@@ -335,10 +335,10 @@ extension OnboardingViewController {
     
     private func updateNextButtonState(isEnabled: Bool) {
         nextButton.isEnabled = isEnabled
-        nextButton.backgroundColor = isEnabled ? .gray5 : .gray8
+        nextButton.backgroundColor = isEnabled ? .gray500 : .gray800
         // NOTE: when define component on up stage, It can't change button text color.. so, i define conponent attribute on here
         let title = "다음"
-        let textColor: UIColor = isEnabled ? .white : .gray6
+        let textColor: UIColor = isEnabled ? .white : .gray600
         let font = ACFont.h8.font
         
         let attributedTitle = NSAttributedString(

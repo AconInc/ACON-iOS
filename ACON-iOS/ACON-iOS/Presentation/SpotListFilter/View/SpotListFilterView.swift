@@ -213,7 +213,7 @@ class SpotListFilterView: GlassmorphismView {
     override func setStyle() {
         super.setStyle()
         
-        self.setGlassColor(.dimB60)
+        self.setGlassColor(.glassBDefault)
         
         self.setHandlerImageView()
         
@@ -221,7 +221,7 @@ class SpotListFilterView: GlassmorphismView {
             text: StringLiterals.SpotListFilter.pageTitle,
             style: .h8)
         
-        exitButton.setImage(.icX, for: .normal)
+        exitButton.setImage(.icDismiss, for: .normal)
         
         stackView.do {
             $0.axis = .vertical
@@ -251,6 +251,8 @@ private extension SpotListFilterView {
     // MARK: - (Footer view)
     
     func setFooterUI() {
+        footerView.setGlassColor(.glassBDefault)
+        
         resetButton.do {
             var config = UIButton.Configuration.plain()
             config.image = .icReset
@@ -261,7 +263,7 @@ private extension SpotListFilterView {
         conductButton.do {
             var config = UIButton.Configuration.filled()
             config.attributedTitle = AttributedString("결과 보기".ACStyle(.h8))
-            config.baseBackgroundColor = .gray5
+            config.baseBackgroundColor = .gray500
             $0.configuration = config
         }
     }

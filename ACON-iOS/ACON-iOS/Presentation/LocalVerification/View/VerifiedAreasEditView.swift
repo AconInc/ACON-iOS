@@ -79,7 +79,7 @@ class VerifiedAreasEditView: BaseView {
             fullText: StringLiterals.Profile.verifiedArea + StringLiterals.Profile.neccessaryStarWithSpace,
             textStyles: [
                 (text: StringLiterals.Profile.verifiedArea, style: .h8, color: .acWhite),
-                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .h8, color: .org1)
+                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .h8, color: .primaryDefault)
             ]
         )
         
@@ -87,11 +87,11 @@ class VerifiedAreasEditView: BaseView {
             var config = UIButton.Configuration.plain()
             config.contentInsets = .init(top: 12, leading: 12, bottom: 12, trailing: 16)
             config.attributedTitle = AttributedString(StringLiterals.Profile.addVerifiedArea.ACStyle(.s1))
-            config.image = .icAdd20
+            config.image = .icAdd
             config.imagePadding = 4
             config.imagePlacement = .leading
             config.background.cornerRadius = 4
-            config.background.strokeColor = .gray5
+            config.background.strokeColor = .gray500
             config.background.strokeWidth = 1
             $0.configuration = config
         }

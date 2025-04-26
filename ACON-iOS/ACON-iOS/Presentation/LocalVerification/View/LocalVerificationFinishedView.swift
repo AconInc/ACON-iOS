@@ -92,22 +92,22 @@ final class LocalVerificationFinishedView: BaseView {
         super.setStyle()
         
         self.setHandlerImageView()
-        self.backgroundColor = .dimB60
+        self.backgroundColor = .dimDefault
         self.backgroundColor?.withAlphaComponent(0.8)
         
         explainationLabel.do {
             $0.setLabel(text:  StringLiterals.LocalVerification.localAcornExplaination,
                         style: .b2,
-                        color: .gray3)
+                        color: .gray300)
         }
         
         localAcornImageView.do {
-            $0.image = .localAcorn
+            $0.image = .icLocalAcon
             $0.contentMode = .scaleAspectFit
         }
         
         plainAcornImageView.do {
-            $0.image = .plainAcorn
+            $0.image = .icNormalAcon
             $0.contentMode = .scaleAspectFit
         }
         
@@ -128,13 +128,13 @@ final class LocalVerificationFinishedView: BaseView {
         startButton.do {
             $0.setAttributedTitle(text: StringLiterals.LocalVerification.letsStart,
                                    style: .h7,
-                                  color: .gray6,
+                                  color: .gray600,
                                   for: .disabled)
             $0.setAttributedTitle(text: StringLiterals.LocalVerification.letsStart,
                                    style: .h7,
                                   color: .acWhite,
                                   for: .normal)
-            $0.backgroundColor = .gray8
+            $0.backgroundColor = .gray800
             $0.layer.cornerRadius = 6
         }
     }

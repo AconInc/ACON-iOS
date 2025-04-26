@@ -36,17 +36,17 @@ enum DislikeType: CaseIterable {
     var image: UIImage {
         switch self {
         case .dakbal:
-            return .chickenFeet
+            return .imgChickenfeet
         case .hoeYukhoe:
-            return .sashimi
+            return .imgSashimi
         case .gopchang:
-            return .intestines
+            return .imgIntestines
         case .soondae:
-            return .soonde
+            return .imgSoonde
         case .yanggogi:
-            return .lamb
+            return .imgLamb
         case .none:
-            return .none
+            return .imgNone
         }
     }
 

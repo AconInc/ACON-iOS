@@ -68,7 +68,7 @@ class DropAcornViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
-        self.setButtonStyle(button: leftButton, image: .leftArrow)
+        self.setButtonStyle(button: leftButton, image: .icArrowLeft)
         self.setButtonAction(button: leftButton, target: self, action: #selector(dropAcornBackButtonTapped))
         self.dropAcornView.leaveReviewButton.isEnabled = false
     }
@@ -188,14 +188,14 @@ private extension DropAcornViewController {
     func enableLeaveReviewButton() {
         dropAcornView.leaveReviewButton.do {
             $0.isEnabled = true
-            $0.backgroundColor = .org0
+            $0.backgroundColor = .primaryDefault
         }
     }
     
     func disableLeaveReviewButton() {
         dropAcornView.leaveReviewButton.do {
             $0.isEnabled = false
-            $0.backgroundColor = .gray5
+            $0.backgroundColor = .gray500
         }
     }
     

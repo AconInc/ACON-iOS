@@ -71,10 +71,10 @@ extension SearchKeywordCollectionViewCell {
                                color: .acWhite)
         spotAddressLabel.setLabel(text: relatedSearchData?.spotAddress ?? "",
                                style: .c1,
-                               color: .gray4)
+                               color: .gray400)
         spotTypeLabel.setLabel(text: relatedSearchData?.spotType ?? "",
                                style: .c1,
-                               color: .gray4,
+                               color: .gray400,
                                alignment: .right)
     }
     

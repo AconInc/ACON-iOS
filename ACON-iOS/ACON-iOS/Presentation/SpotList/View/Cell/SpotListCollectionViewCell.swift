@@ -100,12 +100,12 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         
         dimImage.do {
             $0.clipsToBounds = true
-            $0.image = .dimGra2
+            $0.image = .cmpGra1
             $0.layer.cornerRadius = 6
         }
         
         matchingRateView.do {
-            $0.backgroundColor = .gray9
+            $0.backgroundColor = .gray900
             $0.layer.cornerRadius = 2
         }
         
@@ -128,7 +128,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         }
         
         walkingIcon.do {
-            $0.image = .icWalking24
+            $0.image = .icWalking
             $0.contentMode = .scaleAspectFit
         }
     }
@@ -164,7 +164,7 @@ extension SpotListCollectionViewCell {
         
         walkingTimeLabel.setLabel(text: "\(String(spot.walkingTime))분",
                                   style: .b4,
-                                  color: .gray3)
+                                  color: .gray300)
     }
     
 }

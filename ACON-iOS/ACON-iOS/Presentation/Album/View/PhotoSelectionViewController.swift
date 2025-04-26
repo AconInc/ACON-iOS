@@ -75,7 +75,7 @@ class PhotoSelectionViewController: BaseNavViewController {
         self.setDoneButton()
         
         profileImageView.do {
-            $0.backgroundColor = .blue1
+            $0.backgroundColor = .labelAction
             $0.image = profileImage
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill

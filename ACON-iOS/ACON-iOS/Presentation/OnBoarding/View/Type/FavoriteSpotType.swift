@@ -21,8 +21,8 @@ enum FavoriteSpotType: CaseIterable {
     
     var image: UIImage {
         switch self {
-        case .restaurant: return .restaurant
-        case .cafe: return .cafe
+        case .restaurant: return .imgRestaurant
+        case .cafe: return .imgCafe
         }
     }
     

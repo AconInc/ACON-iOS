@@ -78,7 +78,7 @@ final class SettingTableViewCell: UITableViewCell {
     }
 
     func setStyle() {
-        self.backgroundColor = .gray9
+        self.backgroundColor = .gray900
         
         settingImageView.do {
             $0.contentMode = .scaleAspectFit
@@ -88,7 +88,7 @@ final class SettingTableViewCell: UITableViewCell {
             $0.isHidden = true
             $0.setLabel(text: "최신버전",
                         style: .s2,
-                        color: .gray4,
+                        color: .gray400,
                         alignment: .right)
         }
         
@@ -96,13 +96,13 @@ final class SettingTableViewCell: UITableViewCell {
             $0.isHidden = true
             $0.setLabel(text: "업데이트하러 가기",
                         style: .s2,
-                        color: .gray4,
+                        color: .gray400,
                         alignment: .right)
         }
         
         arrowImageView.do {
             $0.contentMode = .scaleAspectFit
-            $0.image = .icArrowRightG20
+            $0.image = .icArrowRightG
         }
     }
 

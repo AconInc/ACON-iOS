@@ -16,7 +16,7 @@ final class SpotSearchView: GlassmorphismView {
     
     private let spotUploadLabel: UILabel = UILabel()
 
-    var searchTextField = ACTextField(icon: .icSearch24, borderColor: .gray5)
+    var searchTextField = ACTextField(icon: .icSearch, borderColor: .gray500)
 
     var searchSuggestionScrollView: UIScrollView = UIScrollView()
 
@@ -101,8 +101,6 @@ final class SpotSearchView: GlassmorphismView {
     override func setStyle() {
         super.setStyle()
         
-        self.setGlassColor(.glaW10)
-        
         self.setHandlerImageView()
         
         spotUploadLabel.do {
@@ -158,7 +156,7 @@ extension SpotSearchView {
             $0.height.equalTo(28)
         }
         button.do {
-            $0.backgroundColor = .gray8
+            $0.backgroundColor = .gray800
             $0.layer.cornerRadius = 14
             $0.configuration = recommendedSpotButtonConfiguration
             $0.setAttributedTitle(text: data.spotName,

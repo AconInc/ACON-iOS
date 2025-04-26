@@ -61,7 +61,7 @@ final class LocalMapView: BaseView {
         }
 
         acMapMarker.do {
-            $0.iconImage = NMFOverlayImage(name: "ic_mark_48")
+            $0.iconImage = NMFOverlayImage(name: "ic_mark")
             $0.width = 48
             $0.height = 48
             $0.mapView = nMapView.mapView
@@ -72,7 +72,7 @@ final class LocalMapView: BaseView {
                                   style: .h8,
                                   color: .acWhite,
                                   for: .normal)
-            $0.backgroundColor = .gray5
+            $0.backgroundColor = .gray500
             $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
         }
     }

@@ -33,18 +33,18 @@ final class CustomAlertImageView: BaseView {
         
         imageView.do {
             $0.contentMode = .scaleAspectFit
-            $0.image = .dotoriX
+            $0.image = .icError2
         }
         
         alertContainer.do {
-            $0.backgroundColor = .gray8
+            $0.backgroundColor = .gray800
             $0.layer.cornerRadius = 8
             $0.clipsToBounds = true
         }
         
         closeButton.do {
             $0.layer.cornerRadius = 8
-            $0.backgroundColor = .gray5
+            $0.backgroundColor = .gray500
         }
         
     }
@@ -110,7 +110,7 @@ final class CustomAlertImageView: BaseView {
             $0.setLabel(
                 text: message,
                 style: ACFont.b2,
-                color: .gray3,
+                color: .gray300,
                 alignment: .center,
                 numberOfLines: 2
             )

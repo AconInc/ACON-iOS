@@ -9,16 +9,11 @@ import UIKit
 
 class SpotListViewController: BaseNavViewController {
     
-    // MARK: - UI Properties
+    // MARK: - Properties
     
     private let spotListView = SpotListView()
     
-    
-    // MARK: - Properties
-
     private let viewModel = SpotListViewModel()
-    
-    private var selectedSpotCondition: SpotConditionModel = SpotConditionModel(spotType: .restaurant, filterList: [], walkingTime: -1, priceRange: -1)
     
     
     // MARK: - LifeCycle
@@ -414,7 +409,7 @@ extension SpotListViewController: UICollectionViewDataSource {
             self.glassMorphismView.isHidden = false
         } else {
             [topInsetView, navigationBarView].forEach {
-                $0.backgroundColor = .gray9
+                $0.backgroundColor = .gray900
             }
             self.glassMorphismView.isHidden = true
         }

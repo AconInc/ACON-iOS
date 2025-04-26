@@ -31,7 +31,7 @@ class BaseCollectionViewCell: UICollectionViewCell {
     func setLayout() {}
     
     func setStyle() {
-        self.backgroundColor = .gray9
+        self.backgroundColor = .gray900
     }
     
 }

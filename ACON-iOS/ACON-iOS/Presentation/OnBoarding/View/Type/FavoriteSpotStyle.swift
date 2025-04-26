@@ -21,8 +21,8 @@ enum FavoriteSpotStyle: CaseIterable {
     
     var image: UIImage {
         switch self {
-        case .nopo: return .nopo
-        case .modern: return .mordern
+        case .nopo: return .imgNopo
+        case .modern: return .imgMordern
         }
     }
     
