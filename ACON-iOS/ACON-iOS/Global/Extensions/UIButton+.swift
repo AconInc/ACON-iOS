@@ -33,7 +33,17 @@ extension UIButton {
         let attributedString = text.ACStyle(style, color)
         self.setAttributedTitle(attributedString, for: state)
     }
-    
+
+    func setAttributedTitle(
+         text: String,
+         style: ACFontType,
+         color: UIColor = .acWhite,
+         for state: UIControl.State = .normal
+     ) {
+         let attributedString = text.attributedString(style, color)
+         self.setAttributedTitle(attributedString, for: state)
+     }
+
     /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
     @available(*, deprecated, message: "Acon 2.0.0 이후에서 더 이상 사용되지 않습니다.")
     func setPartialTitle(
@@ -66,33 +76,19 @@ extension UIButton {
          self.setAttributedTitle(attributedString, for: state)
      }
 
-
-    // MARK: - New
-
-    func setAttributedTitle(
-         text: String,
-         style: ACFontType,
-         color: UIColor = .acWhite,
-         for state: UIControl.State = .normal
-     ) {
-         let attributedString = text.attributedString(style, color)
-         
-         self.setAttributedTitle(attributedString, for: state)
-     }
-     
      func setPartialTitle(
           fullText: String,
           textStyles: [(text: String, style: ACFontType, color: UIColor)]
      ) {
          let attributedString = NSMutableAttributedString(string: fullText)
-         
+
          textStyles.forEach { textStyle in
              guard let range = fullText.range(of: textStyle.text) else { return }
              let nsRange = NSRange(range, in: fullText)
              let subText = textStyle.text
              var currentLocation = nsRange.location
              var index = subText.startIndex
-             
+
              // NOTE: 언어별로 kerning 다르게 적용(한글은 -2.5%, 그 외는 0%)
              while index < subText.endIndex {
                  let character = subText[index]
@@ -100,7 +96,7 @@ extension UIButton {
                  let languageEndIndex = subText[index...].firstIndex {
                      $0.isKorean != character.isKorean
                  } ?? subText.endIndex
-                 
+
                  let partLength = subText.distance(from: index, to: languageEndIndex)
                  let partRange = NSRange(location: currentLocation, length: partLength)
                  
@@ -113,7 +109,7 @@ extension UIButton {
                  currentLocation += partLength
                  index = languageEndIndex
              }
-             
+
              // NOTE: 부분 스트링 전체에 속성 적용
              let paragraphStyle = NSMutableParagraphStyle()
              paragraphStyle.minimumLineHeight = textStyle.style.fontStyle.lineHeight
@@ -126,14 +122,13 @@ extension UIButton {
                 .paragraphStyle: paragraphStyle,
                 .baselineOffset: baseLineOffset
              ]
-             
              attributedString.addAttributes(commonAttributes, range: nsRange)
          }
-         
+
          self.setAttributedTitle(attributedString, for: state)
      }
-    
-    
+
+
     // MARK: - spotID Associated Object 추가
     
     private static var spotIDKey: UInt8 = 0
