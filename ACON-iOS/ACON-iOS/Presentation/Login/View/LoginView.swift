@@ -28,15 +28,17 @@ final class LoginView: BaseView {
     
     var privacyPolicyLabel: UILabel = UILabel()
     
-    var socialLoginButtonConfiguration: UIButton.Configuration = {
+    lazy var socialLoginButtonConfiguration: UIButton.Configuration = {
         var configuration = UIButton.Configuration.plain()
         configuration.imagePlacement = .leading
-        configuration.imagePadding = 4
+        configuration.imagePadding = 60
         configuration.titleAlignment = .center
         configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 24)
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 93, bottom: 12, trailing: 93)
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 24, bottom: 15, trailing: 24)
         return configuration
     }()
+    
+    private let loginButtonHeight: CGFloat = 54
     
     
     // MARK: - Lifecycle
@@ -65,13 +67,13 @@ final class LoginView: BaseView {
         
         googleLoginButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*172)
-            $0.height.equalTo(ScreenUtils.heightRatio*44)
+            $0.height.equalTo(loginButtonHeight)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
         }
         
         appleLoginButton.snp.makeConstraints {
             $0.top.equalTo(googleLoginButton.snp.bottom).offset(8)
-            $0.height.equalTo(ScreenUtils.heightRatio*44)
+            $0.height.equalTo(loginButtonHeight)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
         }
         
@@ -102,21 +104,23 @@ final class LoginView: BaseView {
         
         googleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
+            $0.contentHorizontalAlignment = .leading
+            $0.layer.cornerRadius = loginButtonHeight / 2
             $0.backgroundColor = .gray100
-            $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
             $0.setImage(.icGoogle, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.googleLogin,
-                                  style: .s2,
-                                  color: .acBlack)
+                                  style: .t4(.semibold),
+                                  color: .gray500)
         }
         
         appleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
+            $0.contentHorizontalAlignment = .leading
+            $0.layer.cornerRadius = loginButtonHeight / 2
             $0.backgroundColor = .acBlack
-            $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
             $0.setImage(.icApple, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
-                                  style: .s2,
+                                  style: .t4(.semibold),
                                   color: .acWhite)
             $0.layer.borderColor = UIColor.gray500.cgColor
             $0.layer.borderWidth = 1
@@ -124,15 +128,15 @@ final class LoginView: BaseView {
         
         proceedLoginLabel.do {
             $0.setLabel(text: StringLiterals.Login.youAgreed,
-                        style: .b4,
-                        color: .gray300,
+                        style: .c1(.regular),
+                        color: .acWhite,
                         alignment: .center)
         }
         
         termsOfUseLabel.do {
             $0.setLabel(text: StringLiterals.Login.termsOfUse,
-                        style: .b4,
-                        color: .gray500,
+                        style: .c1(.semibold),
+                        color: .acWhite,
                         alignment: .center)
             $0.setUnderline(range: NSRange(location: 0, length: termsOfUseLabel.text?.count ?? 4))
             $0.isUserInteractionEnabled = true
@@ -140,8 +144,8 @@ final class LoginView: BaseView {
         
         privacyPolicyLabel.do {
             $0.setLabel(text: StringLiterals.Login.privacyPolicy,
-                        style: .b4,
-                        color: .gray500,
+                        style: .c1(.semibold),
+                        color: .acWhite,
                         alignment: .center)
             $0.setUnderline(range: NSRange(location: 0, length: privacyPolicyLabel.text?.count ?? 8))
             $0.isUserInteractionEnabled = true

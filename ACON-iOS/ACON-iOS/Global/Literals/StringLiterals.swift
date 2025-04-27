@@ -33,7 +33,7 @@ enum StringLiterals {
         
         static let appleLogin = "Apple로 계속하기"
         
-        static let youAgreed = "가입을 진행할 경우,\n아래의 정책에 대해 동의한 것으로 간주합니다."
+        static let youAgreed = "가입을 진행할 경우,아래의 정책에 대해 동의한 것으로 간주합니다."
         
         static let termsOfUse = "이용약관"
         

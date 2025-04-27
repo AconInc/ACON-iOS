@@ -32,13 +32,14 @@ class LoginModalView: GlassmorphismView {
     var socialLoginButtonConfiguration: UIButton.Configuration = {
         var configuration = UIButton.Configuration.plain()
         configuration.imagePlacement = .leading
-        configuration.imagePadding = 4
+        configuration.imagePadding = 60
         configuration.titleAlignment = .center
-        configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 28)
-        // TODO: contentInsets 코드 삭제 고려해보기
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 87.5, bottom: 12, trailing: 87.5)
+        configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 24)
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 24, bottom: 15, trailing: 24)
         return configuration
     }()
+    
+    private let loginButtonHeight: CGFloat = 54
     
     
     // MARK: - Lifecycle
@@ -118,34 +119,36 @@ class LoginModalView: GlassmorphismView {
         exitButton.setImage(.icDismiss, for: .normal)
         
         titleLabel.setLabel(text: StringLiterals.LoginModal.title,
-                            style: .h5,
+                            style: .h4(.semibold),
                             color: .acWhite,
                             alignment: .center,
                             numberOfLines: 1)
         
         subTitleLabel.setLabel(text: StringLiterals.LoginModal.subTitle,
-                               style: .b1,
+                               style: .b1(.regular),
                                color: .gray200,
                                alignment: .center,
                         numberOfLines: 2)
         
         googleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
-            $0.backgroundColor = .gray100
-            $0.layer.cornerRadius = 6
+            $0.contentHorizontalAlignment = .leading
+            $0.layer.cornerRadius = loginButtonHeight / 2
+            $0.backgroundColor = .acWhite
             $0.setImage(.icGoogle, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.googleLogin,
-                                  style: .s1,
-                                  color: .acBlack)
+                                  style: .t4(.semibold),
+                                  color: .gray500)
         }
         
         appleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
+            $0.contentHorizontalAlignment = .leading
+            $0.layer.cornerRadius = loginButtonHeight / 2
             $0.backgroundColor = .gray900
-            $0.layer.cornerRadius = 6
             $0.setImage(.icApple, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
-                                  style: .s1,
+                                  style: .t4(.semibold),
                                   color: .acWhite)
             $0.layer.borderColor = UIColor.gray500.cgColor
             $0.layer.borderWidth = 1
@@ -153,7 +156,7 @@ class LoginModalView: GlassmorphismView {
         
         youAgreedLabel.do {
             $0.setLabel(text: StringLiterals.Login.youAgreed,
-                        style: .b2,
+                        style: .b1(.regular),
                         color: .gray300,
                         alignment: .center,
                         numberOfLines: 2)
@@ -166,7 +169,7 @@ class LoginModalView: GlassmorphismView {
         
         termsOfUseLabel.do {
             $0.setLabel(text: StringLiterals.Login.termsOfUse,
-                        style: .b2,
+                        style: .c1(.regular),
                         color: .gray500)
             $0.setUnderline(
                 range: NSRange(location: 0,
@@ -176,7 +179,7 @@ class LoginModalView: GlassmorphismView {
         
         privacyPolicyLabel.do {
             $0.setLabel(text: StringLiterals.Login.privacyPolicy,
-                        style: .b2,
+                        style: .c1(.regular),
                         color: .gray500)
             $0.setUnderline(
                 range: NSRange(location: 0,
