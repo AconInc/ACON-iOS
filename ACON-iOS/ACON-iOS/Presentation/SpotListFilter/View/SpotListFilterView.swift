@@ -256,7 +256,7 @@ private extension SpotListFilterView {
         resetButton.do {
             var config = UIButton.Configuration.plain()
             config.image = .icReset
-            config.attributedTitle = AttributedString("초기화".ACStyle(.s2))
+            config.attributedTitle = AttributedString("초기화".attributedString(.t5(.semibold)))
             $0.configuration = config
         }
         

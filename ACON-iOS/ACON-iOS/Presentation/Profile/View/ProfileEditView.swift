@@ -52,11 +52,11 @@ final class ProfileEditView: BaseView {
     override func setStyle() {
         super.setStyle()
 
-        nicknameTitleLabel.setPartialText(
+        nicknameTitleLabel.setNewPartialText(
             fullText: StringLiterals.Profile.nickname + StringLiterals.Profile.neccessaryStarWithSpace,
             textStyles: [
-                (text: StringLiterals.Profile.nickname, style: .h8, color: .acWhite),
-                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .h8, color: .primaryDefault)
+                (text: StringLiterals.Profile.nickname, style: .t4(.semibold), color: .acWhite),
+                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .t4(.semibold), color: .primaryDefault)
             ]
         )
 
@@ -196,13 +196,14 @@ final class ProfileEditView: BaseView {
     func setNicknameLengthLabel(_ currentLen: Int, _ maxLen: Int) {
         let currentStr = String(currentLen)
         let slashMaxStr = "/\(String(maxLen))"
-        nicknameLengthLabel.setPartialText(
-            fullText: currentStr + slashMaxStr,
-            textStyles: [
-                (text: currentStr, style: .s2, color: .acWhite),
-                (text: slashMaxStr, style: .s2, color: .gray500)
-            ]
-        )
+        nicknameLengthLabel
+            .setNewPartialText(
+                fullText: currentStr + slashMaxStr,
+                textStyles: [
+                    (text: currentStr, style: .t5(.semibold), color: .acWhite),
+                    (text: slashMaxStr, style: .t5(.semibold), color: .gray500)
+                ]
+            )
     }
 
 }

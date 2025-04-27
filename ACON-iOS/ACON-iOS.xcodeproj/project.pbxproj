@@ -15,7 +15,7 @@
 		151BD9532D6332A5005E657F /* VerifiedAreasEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151BD9522D6332A5005E657F /* VerifiedAreasEditView.swift */; };
 		151BD9552D63375D005E657F /* VerifiedAreasEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151BD9542D63375D005E657F /* VerifiedAreasEditViewController.swift */; };
 		151BD9572D633C37005E657F /* LocalVerificationEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151BD9562D633C37005E657F /* LocalVerificationEditViewModel.swift */; };
-		151FBFBA2DBD2F1B005F4D0D /* ACFontType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151FBFB92DBD2F1B005F4D0D /* ACFontType.swift */; };
+		151FBFBA2DBD2F1B005F4D0D /* NewACFontType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151FBFB92DBD2F1B005F4D0D /* NewACFontType.swift */; };
 		151FC0C92DBD5DA0005F4D0D /* Character+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151FC0C82DBD5DA0005F4D0D /* Character+.swift */; };
 		1533FCD12D55EE2600F985A0 /* ProfileBoxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */; };
 		1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EA2D337F4100E96616 /* SpotListView.swift */; };
@@ -62,6 +62,7 @@
 		15C0ED672D42CD8800C9ED83 /* drop2Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED602D42CD8800C9ED83 /* drop2Acorn.json */; };
 		15C0ED682D42CD8800C9ED83 /* drop3Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED612D42CD8800C9ED83 /* drop3Acorn.json */; };
 		15C0ED6A2D42CDA300C9ED83 /* loadingWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED692D42CDA300C9ED83 /* loadingWhite.json */; };
+		15C93D0E2DBD9B4E002862DF /* ACFontStyle(Temp).swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C93D0D2DBD9B4E002862DF /* ACFontStyle(Temp).swift */; };
 		15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256A2D3D61F500320006 /* GlassmorphismView.swift */; };
 		15CD256E2D3D795800320006 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256D2D3D795800320006 /* FloatingButton.swift */; };
 		15CD25702D3F86E700320006 /* CustomRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */; };
@@ -267,7 +268,7 @@
 		151BD9522D6332A5005E657F /* VerifiedAreasEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiedAreasEditView.swift; sourceTree = "<group>"; };
 		151BD9542D63375D005E657F /* VerifiedAreasEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiedAreasEditViewController.swift; sourceTree = "<group>"; };
 		151BD9562D633C37005E657F /* LocalVerificationEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationEditViewModel.swift; sourceTree = "<group>"; };
-		151FBFB92DBD2F1B005F4D0D /* ACFontType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACFontType.swift; sourceTree = "<group>"; };
+		151FBFB92DBD2F1B005F4D0D /* NewACFontType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewACFontType.swift; sourceTree = "<group>"; };
 		151FC0C82DBD5DA0005F4D0D /* Character+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+.swift"; sourceTree = "<group>"; };
 		1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBoxComponent.swift; sourceTree = "<group>"; };
 		1547A6EA2D337F4100E96616 /* SpotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListView.swift; sourceTree = "<group>"; };
@@ -314,6 +315,7 @@
 		15C0ED622D42CD8800C9ED83 /* drop4Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop4Acorn.json; sourceTree = "<group>"; };
 		15C0ED632D42CD8800C9ED83 /* drop5Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop5Acorn.json; sourceTree = "<group>"; };
 		15C0ED692D42CDA300C9ED83 /* loadingWhite.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loadingWhite.json; sourceTree = "<group>"; };
+		15C93D0D2DBD9B4E002862DF /* ACFontStyle(Temp).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ACFontStyle(Temp).swift"; sourceTree = "<group>"; };
 		15CD256A2D3D61F500320006 /* GlassmorphismView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismView.swift; sourceTree = "<group>"; };
 		15CD256D2D3D795800320006 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshControl.swift; sourceTree = "<group>"; };
@@ -1199,7 +1201,8 @@
 				74205D2E2D40351400D11557 /* SocialType.swift */,
 				746261702D3EA50700A4E84F /* SpotCategoryType.swift */,
 				741E68AB2D3D6DA400DF99EF /* HeaderType.swift */,
-				151FBFB92DBD2F1B005F4D0D /* ACFontType.swift */,
+				151FBFB92DBD2F1B005F4D0D /* NewACFontType.swift */,
+				15C93D0D2DBD9B4E002862DF /* ACFontStyle(Temp).swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1922,7 +1925,7 @@
 				7462D0252D4262F300580464 /* AuthManager.swift in Sources */,
 				74C914D12D64DBBB00BC13E1 /* ImageType.swift in Sources */,
 				74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */,
-				151FBFBA2DBD2F1B005F4D0D /* ACFontType.swift in Sources */,
+				151FBFBA2DBD2F1B005F4D0D /* NewACFontType.swift in Sources */,
 				15AA6D1A2D68C4AD008021C6 /* ReviewVerificationErrorType.swift in Sources */,
 				741429652D5D470200B69528 /* SettingViewModel.swift in Sources */,
 				74BF92042D3861A600B923E3 /* SpotDetailViewController.swift in Sources */,
@@ -1982,6 +1985,7 @@
 				15F45F862D66877200BD6B9C /* LoadingAnimatedButton.swift in Sources */,
 				D6FF82EB2D380AAF00090233 /* FavoriteSpotRankType.swift in Sources */,
 				D6D0F5152D36BA6500326F17 /* DislikeCollectionView.swift in Sources */,
+				15C93D0E2DBD9B4E002862DF /* ACFontStyle(Temp).swift in Sources */,
 				74BF92072D38622B00B923E3 /* SpotDetailViewModel.swift in Sources */,
 				151003EE2D5FC48B00409DF4 /* ProfileService.swift in Sources */,
 				151003F02D5FC4C600409DF4 /* ProfileTargetType.swift in Sources */,

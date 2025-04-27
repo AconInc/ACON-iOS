@@ -110,7 +110,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         }
         
         matchingRateLabel.do {
-            $0.setText(.b4, .acWhite)
+            $0.setNewText(.c1(.regular))
         }
         
         stackView.do {
