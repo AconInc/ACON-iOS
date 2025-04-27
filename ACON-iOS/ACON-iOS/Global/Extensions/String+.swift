@@ -10,7 +10,7 @@ import UIKit
 extension String {
 
     /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
-    @available(*, deprecated, message: "Acon 2.0.0 이후에서 더 이상 사용되지 않습니다. \n 대신 `attributedString(_ style: ACFontType, _ color: UIColor = .acWhite)`를 사용하세요")
+    @available(*, deprecated, message: "Acon 2.0부터 더 이상 사용되지 않습니다. 대신 `attributedString(_ style:, _ color:)`를 사용해주세요")
     func ACStyle(_ style: OldACFontStyleType, _ color: UIColor = .acWhite) -> NSAttributedString {
         let attributes: [NSAttributedString.Key: Any] = [
             .font: style.font,

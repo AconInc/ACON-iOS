@@ -12,7 +12,7 @@ extension UILabel {
     // MARK: - UILabel Text 설정
 
     /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
-    @available(*, deprecated, message: "Acon 2.0.0 이후에서 더 이상 사용되지 않습니다.")
+    @available(*, deprecated, message: "Acon 2.0부터 더 이상 사용되지 않습니다.")
     func setText(_ style: OldACFontStyleType, _ color: UIColor = .acWhite) {
         self.attributedText = text?.ACStyle(style, color)
     }
@@ -25,7 +25,7 @@ extension UILabel {
     // MARK: - UILabel 설정
 
     /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
-    @available(*, deprecated, message: "Acon 2.0.0 이후에서 더 이상 사용되지 않습니다.")
+    @available(*, deprecated, message: "Acon 2.0부터 더 이상 사용되지 않습니다.")
     func setLabel(
         text: String,
         style: OldACFontStyleType,
@@ -56,7 +56,7 @@ extension UILabel {
     // MARK: - UILabel 내에서 스타일 다를 때
 
     /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
-    @available(*, deprecated, message: "Acon 2.0.0 이후에서 더 이상 사용되지 않습니다.")
+    @available(*, deprecated, message: "Acon 2.0부터 더 이상 사용되지 않습니다.")
     func setPartialText(
         fullText: String,
         textStyles: [(text: String, style: OldACFontStyleType, color: UIColor)]

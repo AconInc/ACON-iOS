@@ -5,19 +5,52 @@
 //  Created by 김유림 on 4/27/25.
 //
 
-import Foundation
-
-//
-//  ACFont.swift
-//  ACON-iOS
-//
-//  Created by 이수민 on 1/8/25.
-//
-
 import UIKit
 
+// MARK: - FontStyleType
+
 /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
-@available(*, deprecated, message: "Acon 2.0.0 이후에서 더 이상 사용되지 않습니다. 대신 `ACFont`를 사용하세요")
+@available(*, deprecated, message: "Acon 2.0부터 더 이상 사용되지 않습니다. 대신 `ACFontStyleType`을 사용하세요")
+struct OldACFontStyleType {
+    
+    let font: UIFont
+    let kerning: CGFloat
+    let lineHeight: CGFloat
+    
+}
+
+extension OldACFontStyleType {
+    
+    static var h1: OldACFontStyleType { OldACFont.h1 }
+    static var h2: OldACFontStyleType { OldACFont.h2 }
+    static var h3: OldACFontStyleType { OldACFont.h3 }
+    static var h4: OldACFontStyleType { OldACFont.h4 }
+    static var h5: OldACFontStyleType { OldACFont.h5 }
+    static var h6: OldACFontStyleType { OldACFont.h6 }
+    static var h7: OldACFontStyleType { OldACFont.h7 }
+    static var h8: OldACFontStyleType { OldACFont.h8 }
+    
+    static var t1: OldACFontStyleType { OldACFont.t1 }
+    static var t2: OldACFontStyleType { OldACFont.t2 }
+    static var t3: OldACFontStyleType { OldACFont.t3 }
+    
+    static var s1: OldACFontStyleType { OldACFont.s1 }
+    static var s2: OldACFontStyleType { OldACFont.s2 }
+    
+    static var b1: OldACFontStyleType { OldACFont.b1 }
+    static var b2: OldACFontStyleType { OldACFont.b2 }
+    static var b3: OldACFontStyleType { OldACFont.b3 }
+    static var b4: OldACFontStyleType { OldACFont.b4 }
+    
+    static var c1: OldACFontStyleType { OldACFont.c1 }
+    
+}
+
+
+// MARK: - Font
+
+/// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
+@available(*, deprecated, message: "Acon 2.0부터 더 이상 사용되지 않습니다. 대신 `ACFont`를 사용하세요")
 enum OldACFont {
     
     private enum FontName {
@@ -155,52 +188,5 @@ enum OldACFont {
         kerning: 11 * -0.023,
         lineHeight: 16
     )
-    
-}
-
-
-//
-//  ACFontStyleType.swift
-//  ACON-iOS
-//
-//  Created by 이수민 on 1/10/25.
-//
-
-import UIKit
-
-/// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
-@available(*, deprecated, message: "Acon 2.0.0 이후에서 더 이상 사용되지 않습니다. 대신 `ACFontStyleType`을 사용하세요")
-struct OldACFontStyleType {
-    
-    let font: UIFont
-    let kerning: CGFloat
-    let lineHeight: CGFloat
-    
-}
-
-extension OldACFontStyleType {
-    
-    static var h1: OldACFontStyleType { OldACFont.h1 }
-    static var h2: OldACFontStyleType { OldACFont.h2 }
-    static var h3: OldACFontStyleType { OldACFont.h3 }
-    static var h4: OldACFontStyleType { OldACFont.h4 }
-    static var h5: OldACFontStyleType { OldACFont.h5 }
-    static var h6: OldACFontStyleType { OldACFont.h6 }
-    static var h7: OldACFontStyleType { OldACFont.h7 }
-    static var h8: OldACFontStyleType { OldACFont.h8 }
-    
-    static var t1: OldACFontStyleType { OldACFont.t1 }
-    static var t2: OldACFontStyleType { OldACFont.t2 }
-    static var t3: OldACFontStyleType { OldACFont.t3 }
-    
-    static var s1: OldACFontStyleType { OldACFont.s1 }
-    static var s2: OldACFontStyleType { OldACFont.s2 }
-    
-    static var b1: OldACFontStyleType { OldACFont.b1 }
-    static var b2: OldACFontStyleType { OldACFont.b2 }
-    static var b3: OldACFontStyleType { OldACFont.b3 }
-    static var b4: OldACFontStyleType { OldACFont.b4 }
-    
-    static var c1: OldACFontStyleType { OldACFont.c1 }
     
 }
