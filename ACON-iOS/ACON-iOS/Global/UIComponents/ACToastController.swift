@@ -77,7 +77,7 @@ final class ACToastView: BaseView {
     private func configure(message: String,
                            buttonTitle: String,
                            buttonAction: @escaping () -> Void) {
-        messageLabel.setLabel(text: message, style: .b3)
+        messageLabel.setLabel(text: message, style: .t4(.regular))
         actionButton.setTitle(buttonTitle, for: .normal)
         actionButton.addAction(UIAction { _ in
             buttonAction()
