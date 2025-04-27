@@ -32,14 +32,12 @@ enum ACFontType {
         case light
         case regular
         case semibold
-        case bold
 
         var fontName: String {
             switch self {
             case .light: return "Pretendard-Light"
             case .regular: return "Pretendard-Regular"
             case .semibold: return "Pretendard-SemiBold"
-            case .bold: return "Pretendard-Bold"
             }
         }
     }

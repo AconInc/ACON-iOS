@@ -156,7 +156,7 @@ class LoginModalView: GlassmorphismView {
         
         youAgreedLabel.do {
             $0.setLabel(text: StringLiterals.Login.youAgreed,
-                        style: .b1(.regular),
+                        style: .c1(.regular),
                         color: .gray300,
                         alignment: .center,
                         numberOfLines: 2)

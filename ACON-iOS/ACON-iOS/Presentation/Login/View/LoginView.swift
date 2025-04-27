@@ -80,17 +80,16 @@ final class LoginView: BaseView {
         proceedLoginLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*60)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(276)
         }
         
         termsOfUseLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*36)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*120.5)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*111.5)
         }
         
         privacyPolicyLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*36)
-            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*120.5)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*111.5)
         }
     }
     
