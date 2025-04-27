@@ -44,7 +44,7 @@ final class ACTextField: UIView {
 
     private var cornerRadius: CGFloat
 
-    private var fontStyle: OldACFontStyleType
+    private var fontStyle: ACFontType
 
     private let iconImageView = UIImageView()
 
@@ -63,7 +63,7 @@ final class ACTextField: UIView {
         borderColor: UIColor = .gray600,
         borderWidth: CGFloat = 1,
         cornerRadius: CGFloat = 4,
-        fontStyle: OldACFontStyleType = .s1
+        fontStyle: ACFontType = .t4(.regular)
     ) {
         self.icon = icon
         self.bgColor = backgroundColor
@@ -138,8 +138,8 @@ final class ACTextField: UIView {
         textField.do {
             $0.autocorrectionType = .no
             $0.defaultTextAttributes = [
-                .font: fontStyle.font,
-                .kern: fontStyle.kerning,
+                .font: ACFontType.t4(.semibold).fontStyle.font,
+                .kern: fontStyle.kerning(isKorean: false),
                 .foregroundColor: UIColor.acWhite
             ]
         }
@@ -149,7 +149,7 @@ final class ACTextField: UIView {
         }
         
         clearButton.do {
-            $0.setImage(.icDismissCircleGray, for: .normal)
+            $0.setImage(.icClear, for: .normal)
         }
         
         if icon != nil {
@@ -231,7 +231,7 @@ private extension ACTextField {
 extension ACTextField {
 
     func setPlaceholder(as placeholder: String) {
-        textField.attributedPlaceholder = placeholder.ACStyle(.s1, .gray500)
+        textField.attributedPlaceholder = placeholder.attributedString(fontStyle, .gray500)
     }
 
     func setAsDateField() {
