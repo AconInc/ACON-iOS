@@ -58,7 +58,7 @@ final class WithdrawalViewController: BaseNavViewController {
             $0.isEnabled = false
             $0.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
             $0.setTitle("제출하기", for: .normal)
-            $0.titleLabel?.font = ACFontStyleType.h7.font
+            $0.titleLabel?.font = OldACFontStyleType.h7.font
             $0.setTitleColor(.gray500, for: .normal)
         }
         

@@ -43,7 +43,7 @@ final class AnalyzingViewController: BaseViewController {
         analyzingLabel.do {
             $0.setLabel(
                 text: StringLiterals.Analyzing.analyzing,
-                style: ACFontStyleType.h6,
+                style: OldACFontStyleType.h6,
                 color: .acWhite,
                 alignment: .center,
                 numberOfLines: 0

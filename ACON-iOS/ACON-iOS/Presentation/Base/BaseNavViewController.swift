@@ -140,7 +140,7 @@ extension BaseNavViewController {
     }
     
     func setTitleLabelStyle(title: String,
-                            fontStyle: ACFontStyleType = .t2,
+                            fontStyle: OldACFontStyleType = .t2,
                             color: UIColor = .acWhite,
                             alignment: NSTextAlignment = .left) {
         titleLabel.do {
@@ -153,7 +153,7 @@ extension BaseNavViewController {
     }
     
     func setSecondTitleLabelStyle(title: String,
-                            fontStyle: ACFontStyleType = .t2,
+                            fontStyle: OldACFontStyleType = .t2,
                             color: UIColor = .acWhite,
                             alignment: NSTextAlignment = .left) {
         secondTitleLabel.do {
@@ -166,7 +166,7 @@ extension BaseNavViewController {
     }
     
     func setCenterTitleLabelStyle(title: String,
-                            fontStyle: ACFontStyleType = .t2,
+                            fontStyle: OldACFontStyleType = .t2,
                             color: UIColor = .acWhite,
                             alignment: NSTextAlignment = .center) {
         centerTitleLabel.do {

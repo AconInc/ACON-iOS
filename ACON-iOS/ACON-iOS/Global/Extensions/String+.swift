@@ -8,8 +8,10 @@
 import UIKit
 
 extension String {
-    
-    func ACStyle(_ style: ACFontStyleType, _ color: UIColor = .acWhite) -> NSAttributedString {
+
+    /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
+    @available(*, deprecated, message: "Acon 2.0.0 이후에서 더 이상 사용되지 않습니다. \n 대신 `attributedString(_ style: ACFontType, _ color: UIColor = .acWhite)`를 사용하세요")
+    func ACStyle(_ style: OldACFontStyleType, _ color: UIColor = .acWhite) -> NSAttributedString {
         let attributes: [NSAttributedString.Key: Any] = [
             .font: style.font,
             .kern: style.kerning,
@@ -27,7 +29,7 @@ extension String {
     }
     
     /// kerning(한글: -2.5%, 그 외: 0%),  lineHeight, color가 적용된 스트링입니다.
-    func attributedString(_ style: NewACFontType, _ color: UIColor = .acWhite) -> NSAttributedString {
+    func attributedString(_ style: ACFontType, _ color: UIColor = .acWhite) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: self)
         
         // NOTE: 언어별로 kerning 다르게 적용(한글은 -2.5%, 그 외는 0%)

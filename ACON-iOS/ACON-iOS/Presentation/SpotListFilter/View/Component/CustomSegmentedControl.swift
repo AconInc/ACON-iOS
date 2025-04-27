@@ -54,7 +54,7 @@ class CustomSegmentedControl: UISegmentedControl {
         }
     }
     
-    func ACStyle(_ style: ACFontStyleType, _ color: UIColor = .acWhite) -> [NSAttributedString.Key: Any] {
+    func ACStyle(_ style: OldACFontStyleType, _ color: UIColor = .acWhite) -> [NSAttributedString.Key: Any] {
         let attributes: [NSAttributedString.Key: Any] = [
             .font: style.font,
             .kern: style.kerning,

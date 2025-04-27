@@ -19,10 +19,14 @@ extension UIButton {
     
     
     // MARK: - 버튼 타이틀 설정
-    
+
+    // MARK: - Deprecated
+
+    /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
+    @available(*, deprecated, message: "Acon 2.0.0 이후에서 더 이상 사용되지 않습니다.")
     func setAttributedTitle(
         text: String,
-        style: ACFontStyleType,
+        style: OldACFontStyleType,
         color: UIColor = .acWhite,
         for state: UIControl.State = .normal
     ) {
@@ -30,9 +34,11 @@ extension UIButton {
         self.setAttributedTitle(attributedString, for: state)
     }
     
+    /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
+    @available(*, deprecated, message: "Acon 2.0.0 이후에서 더 이상 사용되지 않습니다.")
     func setPartialTitle(
          fullText: String,
-         textStyles: [(text: String, style: ACFontStyleType, color: UIColor)]
+         textStyles: [(text: String, style: OldACFontStyleType, color: UIColor)]
      ) {
          let attributedString = NSMutableAttributedString(string: fullText)
 
@@ -59,11 +65,13 @@ extension UIButton {
 
          self.setAttributedTitle(attributedString, for: state)
      }
-    
-    
-    func setNewAttributedTitle(
+
+
+    // MARK: - New
+
+    func setAttributedTitle(
          text: String,
-         style: NewACFontType,
+         style: ACFontType,
          color: UIColor = .acWhite,
          for state: UIControl.State = .normal
      ) {
@@ -72,9 +80,9 @@ extension UIButton {
          self.setAttributedTitle(attributedString, for: state)
      }
      
-     func setNewPartialTitle(
+     func setPartialTitle(
           fullText: String,
-          textStyles: [(text: String, style: NewACFontType, color: UIColor)]
+          textStyles: [(text: String, style: ACFontType, color: UIColor)]
      ) {
          let attributedString = NSMutableAttributedString(string: fullText)
          

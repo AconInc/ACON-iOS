@@ -175,9 +175,9 @@ private extension SpotDetailViewController {
             $0.isHidden = false
             
             let fullText = NSMutableAttributedString()
-            fullText.append(data.name.ACStyle(ACFontStyleType.t2))
-            fullText.append(" ".ACStyle(ACFontStyleType.t2))
-            fullText.append(data.spotType.ACStyle(ACFontStyleType.b2))
+            fullText.append(data.name.ACStyle(OldACFontStyleType.t2))
+            fullText.append(" ".ACStyle(OldACFontStyleType.t2))
+            fullText.append(data.spotType.ACStyle(OldACFontStyleType.b2))
 
             $0.attributedText = fullText
         }

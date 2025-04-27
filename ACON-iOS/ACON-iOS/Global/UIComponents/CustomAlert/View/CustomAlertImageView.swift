@@ -99,7 +99,7 @@ final class CustomAlertImageView: BaseView {
         titleLabel.do {
             $0.setLabel(
                 text: title,
-                style: ACFont.h8,
+                style: OldACFont.h8,
                 color: .acWhite,
                 alignment: .center,
                 numberOfLines: 2
@@ -109,7 +109,7 @@ final class CustomAlertImageView: BaseView {
         messageLabel.do {
             $0.setLabel(
                 text: message,
-                style: ACFont.b2,
+                style: OldACFont.b2,
                 color: .gray300,
                 alignment: .center,
                 numberOfLines: 2
@@ -119,7 +119,7 @@ final class CustomAlertImageView: BaseView {
         closeButton.do {
             $0.setAttributedTitle(
                 text: buttonText,
-                style: ACFont.s2,
+                style: OldACFont.s2,
                 color: .acWhite,
                 for: .normal
             )
@@ -128,7 +128,7 @@ final class CustomAlertImageView: BaseView {
         closeButton.do {
             $0.setAttributedTitle(
                 text: buttonText,
-                style: ACFont.s2,
+                style: OldACFont.s2,
                 color: .acWhite,
                 for: .normal
             )

@@ -44,7 +44,7 @@ final class ACTextField: UIView {
 
     private var cornerRadius: CGFloat
 
-    private var fontStyle: ACFontStyleType
+    private var fontStyle: OldACFontStyleType
 
     private let iconImageView = UIImageView()
 
@@ -63,7 +63,7 @@ final class ACTextField: UIView {
         borderColor: UIColor = .gray600,
         borderWidth: CGFloat = 1,
         cornerRadius: CGFloat = 4,
-        fontStyle: ACFontStyleType = .s1
+        fontStyle: OldACFontStyleType = .s1
     ) {
         self.icon = icon
         self.bgColor = backgroundColor

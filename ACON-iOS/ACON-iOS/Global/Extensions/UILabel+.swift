@@ -11,20 +11,24 @@ extension UILabel {
     
     // MARK: - UILabel Text 설정
     
-    func setText(_ style: ACFontStyleType, _ color: UIColor = .acWhite) {
+    /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
+    @available(*, deprecated, message: "Acon 2.0.0 이후에서 더 이상 사용되지 않습니다.")
+    func setText(_ style: OldACFontStyleType, _ color: UIColor = .acWhite) {
         self.attributedText = text?.ACStyle(style, color)
     }
     
-    func setNewText(_ style: NewACFontType, _ color: UIColor = .acWhite) {
+    func setText(_ style: ACFontType, _ color: UIColor = .acWhite) {
         self.attributedText = text?.attributedString(style, color)
     }
     
     
     // MARK: - UILabel 설정
     
+    /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
+    @available(*, deprecated, message: "Acon 2.0.0 이후에서 더 이상 사용되지 않습니다.")
     func setLabel(
         text: String,
-        style: ACFontStyleType,
+        style: OldACFontStyleType,
         color: UIColor = .acWhite,
         alignment: NSTextAlignment = .left,
         numberOfLines: Int = 0
@@ -35,15 +39,15 @@ extension UILabel {
         self.numberOfLines = numberOfLines
     }
     
-    func setNewLabel(
+    func setLabel(
         text: String,
-        style: NewACFontType,
+        style: ACFontType,
         color: UIColor = .acWhite,
         alignment: NSTextAlignment = .left,
         numberOfLines: Int = 0
     ) {
         self.text = text
-        setNewText(style, color)
+        setText(style, color)
         self.textAlignment = alignment
         self.numberOfLines = numberOfLines
     }
@@ -53,7 +57,7 @@ extension UILabel {
     
     func setPartialText(
         fullText: String,
-        textStyles: [(text: String, style: ACFontStyleType, color: UIColor)]
+        textStyles: [(text: String, style: OldACFontStyleType, color: UIColor)]
     ) {
         let attributedString = NSMutableAttributedString(string: fullText)
         
@@ -84,7 +88,7 @@ extension UILabel {
 
     func setNewPartialText(
          fullText: String,
-         textStyles: [(text: String, style: NewACFontType, color: UIColor)]
+         textStyles: [(text: String, style: ACFontType, color: UIColor)]
     ) {
         let attributedString = NSMutableAttributedString(string: fullText)
 
