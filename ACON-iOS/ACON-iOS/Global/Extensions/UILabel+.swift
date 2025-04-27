@@ -86,7 +86,7 @@ extension UILabel {
         self.attributedText = attributedString
     }
 
-    func setNewPartialText(
+    func setPartialText(
          fullText: String,
          textStyles: [(text: String, style: ACFontType, color: UIColor)]
     ) {
