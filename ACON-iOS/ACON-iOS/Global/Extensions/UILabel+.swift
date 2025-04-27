@@ -8,22 +8,22 @@
 import UIKit
 
 extension UILabel {
-    
+
     // MARK: - UILabel Text 설정
-    
+
     /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
     @available(*, deprecated, message: "Acon 2.0.0 이후에서 더 이상 사용되지 않습니다.")
     func setText(_ style: OldACFontStyleType, _ color: UIColor = .acWhite) {
         self.attributedText = text?.ACStyle(style, color)
     }
-    
+
     func setText(_ style: ACFontType, _ color: UIColor = .acWhite) {
         self.attributedText = text?.attributedString(style, color)
     }
-    
-    
+
+
     // MARK: - UILabel 설정
-    
+
     /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
     @available(*, deprecated, message: "Acon 2.0.0 이후에서 더 이상 사용되지 않습니다.")
     func setLabel(
@@ -38,7 +38,7 @@ extension UILabel {
         self.textAlignment = alignment
         self.numberOfLines = numberOfLines
     }
-    
+
     func setLabel(
         text: String,
         style: ACFontType,
@@ -51,16 +51,18 @@ extension UILabel {
         self.textAlignment = alignment
         self.numberOfLines = numberOfLines
     }
-    
-    
+
+
     // MARK: - UILabel 내에서 스타일 다를 때
-    
+
+    /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
+    @available(*, deprecated, message: "Acon 2.0.0 이후에서 더 이상 사용되지 않습니다.")
     func setPartialText(
         fullText: String,
         textStyles: [(text: String, style: OldACFontStyleType, color: UIColor)]
     ) {
         let attributedString = NSMutableAttributedString(string: fullText)
-        
+
         textStyles.forEach { textStyle in
             if let range = fullText.range(of: textStyle.text) {
                 let nsRange = NSRange(range, in: fullText)
@@ -82,7 +84,7 @@ extension UILabel {
                 }
             }
         }
-        
+
         self.attributedText = attributedString
     }
 
@@ -138,10 +140,10 @@ extension UILabel {
 
         self.attributedText = attributedString
     }
-    
-    
+
+
     // MARK: - UILabel 밑줄
-    
+
     func setUnderline(range: NSRange) {
         let attributedString: NSMutableAttributedString
         if let existingAttributedText = self.attributedText {
@@ -152,5 +154,4 @@ extension UILabel {
         self.attributedText = attributedString
     }
 
-    
 }

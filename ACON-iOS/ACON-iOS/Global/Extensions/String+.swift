@@ -76,8 +76,6 @@ extension String {
                 value: value,
                 range: NSRange(location: 0, length: self.count)
             )
-            print("😡String+ Font lineHeight: \(style.fontStyle.lineHeight)")
-            
         }
         
         return attributedString
