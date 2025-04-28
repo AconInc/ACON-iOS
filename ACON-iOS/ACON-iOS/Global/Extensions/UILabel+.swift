@@ -13,7 +13,7 @@ extension UILabel {
 
     /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
     @available(*, deprecated, message: "Acon 2.0부터 더 이상 사용되지 않습니다.")
-    func setTextOld(_ style: OldACFontStyleType, _ color: UIColor = .acWhite) {
+    func setText(_ style: OldACFontStyleType, _ color: UIColor = .acWhite) {
         self.attributedText = text?.ACStyle(style, color)
     }
 
@@ -34,7 +34,7 @@ extension UILabel {
         numberOfLines: Int = 0
     ) {
         self.text = text
-        setTextOld(style, color)
+        setText(style, color)
         self.textAlignment = alignment
         self.numberOfLines = numberOfLines
     }
