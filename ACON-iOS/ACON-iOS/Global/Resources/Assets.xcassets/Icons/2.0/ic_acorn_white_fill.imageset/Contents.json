@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_acorn_white_fill.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
