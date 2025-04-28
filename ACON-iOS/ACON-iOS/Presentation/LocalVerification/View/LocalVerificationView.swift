@@ -101,7 +101,7 @@ final class LocalVerificationView: BaseView {
 //            $0.setImage(.icRadio, for: .normal)
             $0.setImage(.icRadioPressed, for: .normal)
             $0.setPartialTitle(fullText: StringLiterals.LocalVerification.new + StringLiterals.LocalVerification.verifyLocal,
-                                  textStyles: [(StringLiterals.LocalVerification.new, .t5(.semibold), .primaryDefault), (StringLiterals.LocalVerification.verifyLocal, .t5(.semibold), .acWhite)])
+                               textStyles: [(StringLiterals.LocalVerification.new, .t5SB, .primaryDefault), (StringLiterals.LocalVerification.verifyLocal, .t5SB, .acWhite)])
             $0.isUserInteractionEnabled = false
         }
         

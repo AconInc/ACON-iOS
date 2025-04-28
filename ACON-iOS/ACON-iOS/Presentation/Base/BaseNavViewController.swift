@@ -140,7 +140,7 @@ extension BaseNavViewController {
     }
     
     func setTitleLabelStyle(title: String,
-                            fontStyle: ACFontType = .t4(.semibold),
+                            fontStyle: ACFontType = .t4SB,
                             color: UIColor = .acWhite,
                             alignment: NSTextAlignment = .left) {
         titleLabel.do {
@@ -153,7 +153,7 @@ extension BaseNavViewController {
     }
     
     func setSecondTitleLabelStyle(title: String,
-                                  fontStyle: ACFontType = .t4(.semibold),
+                                  fontStyle: ACFontType = .t4SB,
                                   color: UIColor = .acWhite,
                                   alignment: NSTextAlignment = .left) {
         secondTitleLabel.do {
@@ -166,7 +166,7 @@ extension BaseNavViewController {
     }
     
     func setCenterTitleLabelStyle(title: String,
-                                  fontStyle: ACFontType = .t4(.semibold),
+                                  fontStyle: ACFontType = .t4SB,
                                   color: UIColor = .acWhite,
                                   alignment: NSTextAlignment = .center) {
         centerTitleLabel.do {
@@ -219,7 +219,7 @@ extension BaseNavViewController {
     func setSkipButton() {
         rightButton.do {
             $0.isHidden = false
-            $0.setAttributedTitle(text: "건너뛰기", style: .t4(.semibold))
+            $0.setAttributedTitle(text: "건너뛰기", style: .t4SB)
             setButtonAction(button: rightButton, target: self, action: #selector(skipButtonTapped))
         }
     }
@@ -252,11 +252,11 @@ extension BaseNavViewController {
             $0.isHidden = false
             $0.configuration?.baseBackgroundColor = .clear
             $0.setAttributedTitle(text: StringLiterals.Upload.next,
-                                  style: .t4(.semibold),
+                                  style: .t4SB,
                                   color: .labelAction,
                                   for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Upload.next,
-                                  style: .t4(.semibold),
+                                  style: .t4SB,
                                   color: .gray300,
                                   for: .disabled)
         }
@@ -270,11 +270,11 @@ extension BaseNavViewController {
             $0.isHidden = false
             $0.configuration?.baseBackgroundColor = .clear
             $0.setAttributedTitle(text: StringLiterals.Album.choose,
-                                  style: .t4(.semibold),
+                                  style: .t4SB,
                                   color: .labelAction,
                                   for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Album.choose,
-                                  style: .t4(.semibold),
+                                  style: .t4SB,
                                   color: .gray300,
                                   for: .disabled)
         }
@@ -288,11 +288,11 @@ extension BaseNavViewController {
             $0.isHidden = false
             $0.configuration?.baseBackgroundColor = .clear
             $0.setAttributedTitle(text: StringLiterals.Album.done,
-                                  style: .t4(.semibold),
+                                  style: .t4SB,
                                   color: .labelAction,
                                   for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Album.done,
-                                  style: .t4(.semibold),
+                                  style: .t4SB,
                                   color: .gray300,
                                   for: .disabled)
         }

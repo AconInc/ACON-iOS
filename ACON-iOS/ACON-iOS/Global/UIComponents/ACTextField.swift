@@ -63,7 +63,7 @@ final class ACTextField: UIView {
         borderColor: UIColor = .gray600,
         borderWidth: CGFloat = 1,
         cornerRadius: CGFloat = 4,
-        fontStyle: ACFontType = .t4(.regular)
+        fontStyle: ACFontType = .t4R
     ) {
         self.icon = icon
         self.bgColor = backgroundColor
@@ -138,7 +138,7 @@ final class ACTextField: UIView {
         textField.do {
             $0.autocorrectionType = .no
             $0.defaultTextAttributes = [
-                .font: ACFontType.t4(.semibold).fontStyle.font,
+                .font: ACFontType.t4SB.fontStyle.font,
                 .kern: fontStyle.kerning(isKorean: false),
                 .foregroundColor: UIColor.acWhite
             ]

@@ -27,7 +27,7 @@ struct ACFontStyle {
 
 
 enum ACFontType {
-    
+
     enum Weight {
         case light
         case regular
@@ -42,39 +42,59 @@ enum ACFontType {
         }
     }
 
-    case h1(_ weight: ACFontType.Weight)
-    case h2(_ weight: ACFontType.Weight)
-    case h3(_ weight: ACFontType.Weight)
-    case h4(_ weight: ACFontType.Weight)
+    case h1R, h1SB
+    case h2R, h2SB
+    case h3R, h3SB
+    case h4R, h4SB
 
-    case t1(_ weight: ACFontType.Weight)
-    case t2(_ weight: ACFontType.Weight)
-    case t3(_ weight: ACFontType.Weight)
-    case t4(_ weight: ACFontType.Weight)
-    case t5(_ weight: ACFontType.Weight)
+    case t1L, t1R, t1SB
+    case t2L, t2R, t2SB
+    case t3L, t3R, t3SB
+    case t4L, t4R, t4SB
+    case t5L, t5R, t5SB
 
-    case b1(_ weight: ACFontType.Weight)
+    case b1L, b1R, b1SB
 
-    case c1(_ weight: ACFontType.Weight)
-    case c2(_ weight: ACFontType.Weight)
+    case c1L, c1R, c1SB
+    case c2L, c2R, c2SB
 
     var fontStyle: ACFontStyle {
         switch self {
-        case .h1(let weight): return ACFontStyle(weight, size: 32, lineHeight: 42)
-        case .h2(let weight): return ACFontStyle(weight, size: 28, lineHeight: 38)
-        case .h3(let weight): return ACFontStyle(weight, size: 24, lineHeight: 34)
-        case .h4(let weight): return ACFontStyle(weight, size: 20, lineHeight: 28)
+        case .h1R: return ACFontStyle(.regular, size: 32, lineHeight: 42)
+        case .h2R: return ACFontStyle(.regular, size: 28, lineHeight: 38)
+        case .h3R: return ACFontStyle(.regular, size: 24, lineHeight: 34)
+        case .h4R: return ACFontStyle(.regular, size: 20, lineHeight: 28)
+        case .h1SB: return ACFontStyle(.semibold, size: 32, lineHeight: 42)
+        case .h2SB: return ACFontStyle(.semibold, size: 28, lineHeight: 38)
+        case .h3SB: return ACFontStyle(.semibold, size: 24, lineHeight: 34)
+        case .h4SB: return ACFontStyle(.semibold, size: 20, lineHeight: 28)
 
-        case .t1(let weight): return ACFontStyle(weight, size: 24, lineHeight: 34)
-        case .t2(let weight): return ACFontStyle(weight, size: 20, lineHeight: 28)
-        case .t3(let weight): return ACFontStyle(weight, size: 18, lineHeight: 26)
-        case .t4(let weight): return ACFontStyle(weight, size: 16, lineHeight: 24)
-        case .t5(let weight): return ACFontStyle(weight, size: 14, lineHeight: 20)
+        case .t1L: return ACFontStyle(.light, size: 24, lineHeight: 34)
+        case .t2L: return ACFontStyle(.light, size: 20, lineHeight: 28)
+        case .t3L: return ACFontStyle(.light, size: 18, lineHeight: 26)
+        case .t4L: return ACFontStyle(.light, size: 16, lineHeight: 24)
+        case .t5L: return ACFontStyle(.light, size: 14, lineHeight: 20)
+        case .t1R: return ACFontStyle(.regular, size: 24, lineHeight: 34)
+        case .t2R: return ACFontStyle(.regular, size: 20, lineHeight: 28)
+        case .t3R: return ACFontStyle(.regular, size: 18, lineHeight: 26)
+        case .t4R: return ACFontStyle(.regular, size: 16, lineHeight: 24)
+        case .t5R: return ACFontStyle(.regular, size: 14, lineHeight: 20)
+        case .t1SB: return ACFontStyle(.semibold, size: 24, lineHeight: 34)
+        case .t2SB: return ACFontStyle(.semibold, size: 20, lineHeight: 28)
+        case .t3SB: return ACFontStyle(.semibold, size: 18, lineHeight: 26)
+        case .t4SB: return ACFontStyle(.semibold, size: 16, lineHeight: 24)
+        case .t5SB: return ACFontStyle(.semibold, size: 14, lineHeight: 20)
+            
+        case .b1L: return ACFontStyle(.light, size: 14, lineHeight: 20)
+        case .b1R: return ACFontStyle(.regular, size: 14, lineHeight: 20)
+        case .b1SB: return ACFontStyle(.semibold, size: 14, lineHeight: 20)
 
-        case .b1(let weight): return ACFontStyle(weight, size: 14, lineHeight: 20)
-
-        case .c1(let weight): return ACFontStyle(weight, size: 12, lineHeight: 18)
-        case .c2(let weight): return ACFontStyle(weight, size: 11, lineHeight: 16)
+        case .c1L: return ACFontStyle(.light, size: 12, lineHeight: 18)
+        case .c2L: return ACFontStyle(.light, size: 11, lineHeight: 16)
+        case .c1R: return ACFontStyle(.regular, size: 12, lineHeight: 18)
+        case .c2R: return ACFontStyle(.regular, size: 11, lineHeight: 16)
+        case .c1SB: return ACFontStyle(.semibold, size: 12, lineHeight: 18)
+        case .c2SB: return ACFontStyle(.semibold, size: 11, lineHeight: 16)
         }
     }
 

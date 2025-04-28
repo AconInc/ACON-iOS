@@ -108,7 +108,7 @@ final class LoginView: BaseView {
             $0.backgroundColor = .gray100
             $0.setImage(.icGoogle, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.googleLogin,
-                                  style: .t4(.semibold),
+                                  style: .t4SB,
                                   color: .gray500)
         }
         
@@ -119,7 +119,7 @@ final class LoginView: BaseView {
             $0.backgroundColor = .acBlack
             $0.setImage(.icApple, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
-                                  style: .t4(.semibold),
+                                  style: .t4SB,
                                   color: .acWhite)
             $0.layer.borderColor = UIColor.gray500.cgColor
             $0.layer.borderWidth = 1
@@ -127,14 +127,14 @@ final class LoginView: BaseView {
         
         proceedLoginLabel.do {
             $0.setLabel(text: StringLiterals.Login.youAgreed,
-                        style: .c1(.regular),
+                        style: .c1R,
                         color: .acWhite,
                         alignment: .center)
         }
         
         termsOfUseLabel.do {
             $0.setLabel(text: StringLiterals.Login.termsOfUse,
-                        style: .c1(.semibold),
+                        style: .c1SB,
                         color: .acWhite,
                         alignment: .center)
             $0.setUnderline(range: NSRange(location: 0, length: termsOfUseLabel.text?.count ?? 4))
@@ -143,7 +143,7 @@ final class LoginView: BaseView {
         
         privacyPolicyLabel.do {
             $0.setLabel(text: StringLiterals.Login.privacyPolicy,
-                        style: .c1(.semibold),
+                        style: .c1SB,
                         color: .acWhite,
                         alignment: .center)
             $0.setUnderline(range: NSRange(location: 0, length: privacyPolicyLabel.text?.count ?? 8))

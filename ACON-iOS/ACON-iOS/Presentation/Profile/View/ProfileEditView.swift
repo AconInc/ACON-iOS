@@ -55,8 +55,8 @@ final class ProfileEditView: BaseView {
         nicknameTitleLabel.setPartialText(
             fullText: StringLiterals.Profile.nickname + StringLiterals.Profile.neccessaryStarWithSpace,
             textStyles: [
-                (text: StringLiterals.Profile.nickname, style: .t4(.semibold), color: .acWhite),
-                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .t4(.semibold), color: .primaryDefault)
+                (text: StringLiterals.Profile.nickname, style: .t4SB, color: .acWhite),
+                (text: StringLiterals.Profile.neccessaryStarWithSpace, style: .t4SB, color: .primaryDefault)
             ]
         )
 
@@ -200,8 +200,8 @@ final class ProfileEditView: BaseView {
             .setPartialText(
                 fullText: currentStr + slashMaxStr,
                 textStyles: [
-                    (text: currentStr, style: .t5(.semibold), color: .acWhite),
-                    (text: slashMaxStr, style: .t5(.semibold), color: .gray500)
+                    (text: currentStr, style: .t5R, color: .acWhite),
+                    (text: slashMaxStr, style: .t5R, color: .gray500)
                 ]
             )
     }

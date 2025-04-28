@@ -77,7 +77,7 @@ extension BaseErrorView {
             descriptionLabel.do {
                 $0.isHidden = false
                 $0.setLabel(text: errorMessage,
-                            style: .b1(.regular),
+                            style: .b1R,
                             color: .gray200)
             }
         } else {
@@ -87,7 +87,7 @@ extension BaseErrorView {
         if let buttonTitle = buttonTitle {
             confirmButton.setAttributedTitle(
                 text: buttonTitle,
-                style: .b1(.semibold),
+                style: .b1SB,
                 color: .labelAction)
         } else {
             confirmButton.isHidden = true
