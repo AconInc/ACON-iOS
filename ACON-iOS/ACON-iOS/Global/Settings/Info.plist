@@ -65,10 +65,9 @@
 회원님의 앨범 라이브러리에 대한 액세스 권한을 사용합니다.</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Pretendard-Light.otf</string>
 		<string>Pretendard-Regular.otf</string>
-		<string>Pretendard-Medium.otf</string>
 		<string>Pretendard-SemiBold.otf</string>
-		<string>Pretendard-Bold.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

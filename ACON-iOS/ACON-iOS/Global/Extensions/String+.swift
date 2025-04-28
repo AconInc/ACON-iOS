@@ -27,23 +27,23 @@ extension String {
         
         return NSAttributedString(string: self, attributes: attributes)
     }
-    
+
     /// kerning(한글: -2.5%, 그 외: 0%),  lineHeight, color가 적용된 스트링입니다.
     func attributedString(_ style: ACFontType, _ color: UIColor = .acWhite) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: self)
-        
+
         // NOTE: 언어별로 kerning 다르게 적용(한글은 -2.5%, 그 외는 0%)
         var currentLocation = 0
         var index = self.startIndex
-        
+
         while index < self.endIndex {
             let character = self[index]
-            let language: Language = character.isKorean ? .korean : .other
+            let language: LanguageType = character.isKorean ? .korean : .other
             
             let languageEndIndex = self[index...].firstIndex {
                 $0.isKorean != character.isKorean
             } ?? self.endIndex
-            
+
             let partLength = self.distance(from: index, to: languageEndIndex)
             let partRange = NSRange(location: currentLocation, length: partLength)
             
@@ -53,12 +53,12 @@ extension String {
                 value: kerning,
                 range: partRange
             )
-            
+
             // NOTE: 다음 단위로 이동
             currentLocation += partLength
             index = languageEndIndex
         }
-        
+
         // NOTE: 스트링 전체에 속성 적용
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.minimumLineHeight = style.fontStyle.lineHeight
@@ -77,22 +77,14 @@ extension String {
                 range: NSRange(location: 0, length: self.count)
             )
         }
-        
+
         return attributedString
     }
-}
 
 
-// MARK: - Language
+    // MARK: - Language
 
-extension String {
-
-    enum Language {
-        case korean
-        case other
-    }
-
-    func detectLanguage() -> Language {
+    func detectLanguage() -> LanguageType {
         // Unicode ranges for Korean characters
         let koreanRanges = [
             0xAC00...0xD7A3,  // Hangul Syllables
