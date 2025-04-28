@@ -51,7 +51,7 @@ final class ProfileViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
 
-        self.setCenterTitleLabelStyle(title: StringLiterals.Profile.profilePageTitle, fontStyle: .h5)
+        self.setCenterTitleLabelStyle(title: StringLiterals.Profile.profilePageTitle)
         self.setSettingButton()
     }
 

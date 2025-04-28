@@ -225,7 +225,8 @@ final class SpotDetailView: BaseView {
                                                                     leading: 10,
                                                                     bottom: 2,
                                                                     trailing: 10)
-            $0.setAttributedTitle(text: StringLiterals.SpotDetail.isOpen, style: .b4)
+            $0.setAttributedTitle(text: StringLiterals.SpotDetail.isOpen, style: .c1SB)
+            
             $0.configuration?.background.strokeWidth = 0
             $0.isUserInteractionEnabled = false
         }
@@ -262,7 +263,7 @@ final class SpotDetailView: BaseView {
         findCourseButton.do {
             $0.backgroundColor = .primaryDefault
             $0.roundedButton(cornerRadius: 10, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner])
-            $0.setAttributedTitle(text: StringLiterals.SpotDetail.findCourse, style: .h8)
+            $0.setAttributedTitle(text: StringLiterals.SpotDetail.findCourse, style: .t4SB)
         }
         
     }

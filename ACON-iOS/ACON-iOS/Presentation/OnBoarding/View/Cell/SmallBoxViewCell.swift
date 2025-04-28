@@ -111,7 +111,7 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
     func checkConfigure(name: String, image: UIImage?, isSelected: Bool, isDimmed: Bool = false) {
         titleLabel.setLabel(
             text: name,
-            style: ACFont.s2,
+            style: OldACFont.s2,
             color: .acWhite,
             alignment: .center,
             numberOfLines: 0
@@ -149,7 +149,7 @@ final class SmallBoxViewCell: BaseCollectionViewCell {
     func configure(name: String, image: UIImage?, isSelected: Int, isDimmed: Bool = false) {
         titleLabel.setLabel(
             text: name,
-            style: ACFont.s2,
+            style: OldACFont.s2,
             color: .acWhite,
             alignment: .center,
             numberOfLines: 0

@@ -31,7 +31,7 @@ final class LocalVerificationView: BaseView {
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 16,
                                                               leading: 16,
                                                               bottom: 16,
-                                                              trailing: ScreenUtils.widthRatio*340-211)
+                                                              trailing: 16)
         return configuration
     }()
 
@@ -93,6 +93,7 @@ final class LocalVerificationView: BaseView {
         
         verifyNewLocalButton.do {
             $0.configuration = verifyNewLocalButtonConfiguration
+            $0.contentHorizontalAlignment = .leading
             $0.backgroundColor = .gray700
             $0.roundedButton(cornerRadius: 4, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
             $0.layer.borderWidth = 1
@@ -100,7 +101,7 @@ final class LocalVerificationView: BaseView {
 //            $0.setImage(.icRadio, for: .normal)
             $0.setImage(.icRadioPressed, for: .normal)
             $0.setPartialTitle(fullText: StringLiterals.LocalVerification.new + StringLiterals.LocalVerification.verifyLocal,
-                               textStyles: [(StringLiterals.LocalVerification.new, .s2, .primaryDefault), (StringLiterals.LocalVerification.verifyLocal, .s2, .acWhite)])
+                               textStyles: [(StringLiterals.LocalVerification.new, .t5SB, .primaryDefault), (StringLiterals.LocalVerification.verifyLocal, .t5SB, .acWhite)])
             $0.isUserInteractionEnabled = false
         }
         

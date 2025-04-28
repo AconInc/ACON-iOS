@@ -41,7 +41,7 @@ final class BigBoxViewCell: BaseCollectionViewCell {
         }
         
         titleLabel.do {
-            $0.font = ACFont.s2.font
+            $0.font = OldACFont.s2.font
             $0.textColor = .acWhite
             $0.textAlignment = .center
             $0.numberOfLines = 0

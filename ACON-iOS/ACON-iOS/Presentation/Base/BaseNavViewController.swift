@@ -140,7 +140,7 @@ extension BaseNavViewController {
     }
     
     func setTitleLabelStyle(title: String,
-                            fontStyle: ACFontStyleType = .t2,
+                            fontStyle: ACFontType = .t4SB,
                             color: UIColor = .acWhite,
                             alignment: NSTextAlignment = .left) {
         titleLabel.do {
@@ -153,9 +153,9 @@ extension BaseNavViewController {
     }
     
     func setSecondTitleLabelStyle(title: String,
-                            fontStyle: ACFontStyleType = .t2,
-                            color: UIColor = .acWhite,
-                            alignment: NSTextAlignment = .left) {
+                                  fontStyle: ACFontType = .t4SB,
+                                  color: UIColor = .acWhite,
+                                  alignment: NSTextAlignment = .left) {
         secondTitleLabel.do {
             $0.isHidden = false
             $0.setLabel(text: title,
@@ -166,9 +166,9 @@ extension BaseNavViewController {
     }
     
     func setCenterTitleLabelStyle(title: String,
-                            fontStyle: ACFontStyleType = .t2,
-                            color: UIColor = .acWhite,
-                            alignment: NSTextAlignment = .center) {
+                                  fontStyle: ACFontType = .t4SB,
+                                  color: UIColor = .acWhite,
+                                  alignment: NSTextAlignment = .center) {
         centerTitleLabel.do {
             $0.isHidden = false
             $0.setLabel(text: title,
@@ -219,7 +219,7 @@ extension BaseNavViewController {
     func setSkipButton() {
         rightButton.do {
             $0.isHidden = false
-            $0.setAttributedTitle(text: "건너뛰기", style: .b2)
+            $0.setAttributedTitle(text: "건너뛰기", style: .t4SB)
             setButtonAction(button: rightButton, target: self, action: #selector(skipButtonTapped))
         }
     }
@@ -252,12 +252,12 @@ extension BaseNavViewController {
             $0.isHidden = false
             $0.configuration?.baseBackgroundColor = .clear
             $0.setAttributedTitle(text: StringLiterals.Upload.next,
-                                   style: .b2,
-                                  color: .acWhite,
+                                  style: .t4SB,
+                                  color: .labelAction,
                                   for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Upload.next,
-                                   style: .b2,
-                                  color: .gray500,
+                                  style: .t4SB,
+                                  color: .gray300,
                                   for: .disabled)
         }
     }
@@ -270,12 +270,12 @@ extension BaseNavViewController {
             $0.isHidden = false
             $0.configuration?.baseBackgroundColor = .clear
             $0.setAttributedTitle(text: StringLiterals.Album.choose,
-                                   style: .s1,
-                                  color: .acWhite,
+                                  style: .t4SB,
+                                  color: .labelAction,
                                   for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Album.choose,
-                                   style: .s1,
-                                  color: .gray500,
+                                  style: .t4SB,
+                                  color: .gray300,
                                   for: .disabled)
         }
     }
@@ -288,12 +288,12 @@ extension BaseNavViewController {
             $0.isHidden = false
             $0.configuration?.baseBackgroundColor = .clear
             $0.setAttributedTitle(text: StringLiterals.Album.done,
-                                   style: .s1,
-                                  color: .acWhite,
+                                  style: .t4SB,
+                                  color: .labelAction,
                                   for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Album.done,
-                                   style: .s1,
-                                  color: .gray500,
+                                  style: .t4SB,
+                                  color: .gray300,
                                   for: .disabled)
         }
     }

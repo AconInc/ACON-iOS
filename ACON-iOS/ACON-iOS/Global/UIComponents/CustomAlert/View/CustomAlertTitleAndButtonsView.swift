@@ -91,7 +91,7 @@ final class CustomAlertTitleAndButtonsView: BaseView {
         titleLabel.do {
             $0.setLabel(
                 text: title,
-                style: ACFont.h8,
+                style: OldACFont.h8,
                 color: .acWhite,
                 alignment: .center,
                 numberOfLines: 2
@@ -100,14 +100,14 @@ final class CustomAlertTitleAndButtonsView: BaseView {
 
         closeButton.setAttributedTitle(
             text: leftButton,
-            style: ACFont.s2,
+            style: OldACFont.s2,
             color: .gray300,
             for: .normal
         )
         
         settingsButton.setAttributedTitle(
             text: rightButton,
-            style: ACFont.s2,
+            style: OldACFont.s2,
             color: .acWhite,
             for: .normal
         )
@@ -117,7 +117,7 @@ final class CustomAlertTitleAndButtonsView: BaseView {
         titleLabel.do {
             $0.setLabel(
                 text: title,
-                style: ACFont.h8,
+                style: OldACFont.h8,
                 color: .acWhite,
                 alignment: .center,
                 numberOfLines: 2

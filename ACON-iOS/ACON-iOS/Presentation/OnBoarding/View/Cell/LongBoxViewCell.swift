@@ -93,7 +93,7 @@ final class LongBoxViewCell: BaseCollectionViewCell {
     func checkConfigure(name: String, image: UIImage?, isSelected: Bool) {
         titleLabel.setLabel(
                 text: name,
-                style: ACFont.s2,
+                style: OldACFont.s2,
                 color: .acWhite,
                 alignment: .center,
                 numberOfLines: 0

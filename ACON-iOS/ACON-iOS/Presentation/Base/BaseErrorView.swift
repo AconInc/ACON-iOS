@@ -8,55 +8,63 @@
 import UIKit
 
 class BaseErrorView: BaseView {
-    
+
     // MARK: - UI Properties
-    
+
+    private let container = UIView()
+
     private let errorImageView = UIImageView()
-    
+
     private let descriptionLabel = UILabel()
-    
+
     let confirmButton = UIButton()
-    
-    
+
+
     // MARK: - UI Setting Methods
-    
+
     override func setHierarchy() {
         super.setHierarchy()
-        
-        self.addSubviews(
+
+        self.addSubview(container)
+
+        container.addSubviews(
             errorImageView,
             descriptionLabel,
             confirmButton
         )
     }
-    
+
     override func setLayout() {
         super.setLayout()
-        
-        errorImageView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().offset(-150)
-            $0.size.equalTo(ScreenUtils.widthRatio*140)
+
+        container.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
-        
+
+        errorImageView.snp.makeConstraints {
+            $0.top.centerX.equalToSuperview()
+            $0.size.equalTo(36)
+        }
+
         descriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(errorImageView.snp.bottom).offset(24)
+            $0.top.equalTo(errorImageView.snp.bottom).offset(10)
             $0.centerX.equalTo(errorImageView)
         }
-        
+
         confirmButton.snp.makeConstraints{
-            $0.top.equalTo(descriptionLabel.snp.bottom).offset(40)
-            $0.centerX.equalToSuperview()
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(12)
+            $0.bottom.equalToSuperview()
+            $0.centerX.equalTo(errorImageView)
         }
     }
-    
+
 }
 
 
 // MARK: - Internal Methods
 
 extension BaseErrorView {
-    
+
     func setStyle(errorImage: UIImage = .icError1,
                   errorMessage: String?,
                   buttonTitle: String?) {
@@ -64,39 +72,27 @@ extension BaseErrorView {
             $0.image = errorImage
             $0.contentMode = .scaleAspectFit
         }
-        
+
         if let errorMessage = errorMessage {
             descriptionLabel.do {
                 $0.isHidden = false
                 $0.setLabel(text: errorMessage,
-                            style: .s1,
-                            color: .gray400)
+                            style: .b1R,
+                            color: .gray200)
             }
         } else {
             descriptionLabel.isHidden = true
         }
         
         if let buttonTitle = buttonTitle {
-            confirmButton.do {
-                var config = UIButton.Configuration.filled()
-                config.attributedTitle = AttributedString(
-                    buttonTitle.ACStyle(.h7)
-                
-                )
-                
-                config.baseBackgroundColor = .primaryLight.withAlphaComponent(0.35)
-                config.baseForegroundColor = .acWhite
-                config.background.strokeColor = .primaryDefault
-                config.background.strokeWidth = 1
-                config.background.cornerRadius = 6
-                config.contentInsets = .init(top: 13, leading: 16, bottom: 13, trailing: 16)
-                $0.configuration = config
-                $0.isHidden = false
-            }
+            confirmButton.setAttributedTitle(
+                text: buttonTitle,
+                style: .b1SB,
+                color: .labelAction)
         } else {
             confirmButton.isHidden = true
         }
         
     }
-    
+
 }

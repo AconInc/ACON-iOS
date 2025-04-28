@@ -58,7 +58,7 @@ final class OnboardingViewController: BaseViewController {
         skipButton.do {
             $0.addTarget(self, action: #selector(nextStack), for: .touchUpInside)
             $0.setAttributedTitle(text: "건너뛰기",
-                                  style: ACFont.b2,
+                                  style: OldACFont.b2,
                                   color: .acWhite,
                                   for: .normal)
         }
@@ -72,12 +72,12 @@ final class OnboardingViewController: BaseViewController {
         }
         
         progressNumber.do {
-            $0.font = ACFont.h4.font
+            $0.font = OldACFont.h4.font
             $0.textColor = .gray500
         }
         
         progressTitle.do {
-            $0.font = ACFont.h6.font
+            $0.font = OldACFont.h6.font
             $0.textColor = .acWhite
             $0.numberOfLines = 0
             $0.lineBreakMode = .byWordWrapping
@@ -89,7 +89,7 @@ final class OnboardingViewController: BaseViewController {
             $0.isEnabled = false
             $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
             $0.setAttributedTitle(text: "다음",
-                                  style: ACFont.h8,
+                                  style: OldACFont.h8,
                                   color: .gray600,
                                   for: .normal)
         }
@@ -339,7 +339,7 @@ extension OnboardingViewController {
         // NOTE: when define component on up stage, It can't change button text color.. so, i define conponent attribute on here
         let title = "다음"
         let textColor: UIColor = isEnabled ? .white : .gray600
-        let font = ACFont.h8.font
+        let font = OldACFont.h8.font
         
         let attributedTitle = NSAttributedString(
             string: title,
