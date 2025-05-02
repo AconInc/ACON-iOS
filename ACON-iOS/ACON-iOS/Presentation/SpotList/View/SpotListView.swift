@@ -97,24 +97,26 @@ class SpotListView: BaseView {
 private extension SpotListView {
 
     func setCollectionView() {
-        let flowLayout = UICollectionViewFlowLayout()
-        // NOTE: itemSize는 Controller에서 설정합니다. (indexPath에 따라 다르기 때문)
+        let flowLayout = SpotListCollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(width: SpotListItemSizeType.itemMaxWidth.value,
+                                     height: SpotListItemSizeType.itemMaxHeight.value)
         flowLayout.minimumLineSpacing = SpotListItemSizeType.minimumLineSpacing.value
         flowLayout.scrollDirection = .vertical
-        
+
         collectionView.do {
             $0.backgroundColor = .gray900
             $0.setCollectionViewLayout(flowLayout, animated: true)
+            $0.decelerationRate = .fast
         }
     }
-    
+
     func setFloatingButtonStack() {
         floatingButtonStack.do {
             $0.axis = .vertical
             $0.spacing = 8
         }
     }
-    
+
 }
 
 

@@ -63,8 +63,8 @@ class SkeletonView: BaseView {
         }
         
         longView.snp.makeConstraints {
-            $0.width.equalTo(SpotListItemSizeType.itemWidth.value)
-            $0.height.equalTo(SpotListItemSizeType.longItemHeight.value)
+            $0.width.equalTo(SpotListItemSizeType.itemMaxWidth.value)
+            $0.height.equalTo(SpotListItemSizeType.itemMaxHeight.value)
         }
         
         return longView
@@ -80,8 +80,8 @@ class SkeletonView: BaseView {
         }
         
         smallView.snp.makeConstraints {
-            $0.width.equalTo(SpotListItemSizeType.itemWidth.value)
-            $0.height.equalTo(SpotListItemSizeType.shortItemHeight.value)
+            $0.width.equalTo(SpotListItemSizeType.itemMaxWidth.value)
+            $0.height.equalTo(SpotListItemSizeType.itemMinHeight.value)
         }
         
         return smallView
