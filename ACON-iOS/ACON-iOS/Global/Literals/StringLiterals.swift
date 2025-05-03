@@ -151,6 +151,10 @@ enum StringLiterals {
         
         static let unsupportedRegionErrorMessage = "앗! 서비스 지원이 불가능한 지역에 있어요"
         
+        static let walk = "도보 "
+        
+        static let minuteFindCourse = "분 길찾기"
+        
     }
     
     enum LocalVerification {
