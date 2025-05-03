@@ -7,20 +7,41 @@
 
 import UIKit
 
+import SnapKit
+
 extension UIButton {
-    
+
     // MARK: - 버튼 모서리 둥글게
-    
+
     func roundedButton(cornerRadius: CGFloat, maskedCorners: CACornerMask) {
         clipsToBounds = true
         layer.cornerRadius = cornerRadius
         layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
     }
-    
-    
-    // MARK: - 버튼 타이틀 설정
 
-    // MARK: - Deprecated
+
+    // MARK: - Glassmorphism 배경 설정
+
+    func setGlassmorphismBackground(
+        _ cornerRadius: CGFloat,
+        glassColor: UIColor = .clear,
+        blurStyle: UIBlurEffect.Style = .systemUltraThinMaterial
+    ) {
+        let glassView = GlassmorphismView()
+        glassView.clipsToBounds = true
+        glassView.layer.cornerRadius = cornerRadius
+        glassView.setGlassColor(glassColor)
+        glassView.setBlurStyle(blurStyle)
+        
+        self.insertSubview(glassView, at: 0)
+        
+        glassView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+
+
+    // MARK: - 단일 ACStyle 타이틀 설정
 
     /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
     @available(*, deprecated, message: "Acon 2.0부터 더 이상 사용되지 않습니다.")
@@ -43,6 +64,9 @@ extension UIButton {
          let attributedString = text.attributedString(style, color)
          self.setAttributedTitle(attributedString, for: state)
      }
+
+
+    // MARK: - 복수 ACStyle 타이틀 설정
 
     /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
     @available(*, deprecated, message: "Acon 2.0부터 더 이상 사용되지 않습니다.")
