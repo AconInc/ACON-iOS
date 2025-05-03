@@ -49,17 +49,25 @@ jobs:
           DUE_DATE="${{ steps.issue-parser.outputs.issueparser_dueDate }}"
           DESCRIPTION="${{ steps.md2jira.outputs.output-text }}"
 
-          FIELDS=$(jq -nc \
-            --arg parent "$EPIC_ID" \
-            --arg description "$DESCRIPTION" \
-            '{
-              parent: { key: $parent },
-              description: $description
-            }'
-          )
-          [ -n "$DUE_DATE" ] && FIELDS=$(echo "$FIELDS" | jq --arg duedate "$DUE_DATE" -c '. + { duedate: $duedate }')
-          FIELDS=$(echo "$FIELDS" | jq -c '.')
-          echo "fields=$FIELDS" >> $GITHUB_OUTPUT
+          # 기본 빈 JSON 객체
+          FIELDS=$(jq -nc '{}')
+
+          # description 있을 경우 추가
+          if [ -n "$DESCRIPTION" ]; then
+            FIELDS=$(echo "$FIELDS" | jq --arg description "$DESCRIPTION" '. + {description: $description}')
+          fi
+
+          # epicId 있을 경우 parent 추가
+          if [ -n "$EPIC_ID" ]; then
+            FIELDS=$(echo "$FIELDS" | jq --arg parent "$EPIC_ID" '. + {parent: { key: $parent }}')
+          fi
+
+          # dueDate 있을 경우 추가
+          if [ -n "$DUE_DATE" ]; then
+            FIELDS=$(echo "$FIELDS" | jq --arg duedate "$DUE_DATE" '. + {duedate: $duedate}')
+          fi
+
+          echo "fields=$(echo "$FIELDS" | jq -c '.')" >> $GITHUB_OUTPUT
 
       - name: Create Task
         id: create
@@ -84,4 +92,4 @@ jobs:
           actions: 'create-comment'
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.issue.number }}
-          body: 'Jira Task Created: [${{ steps.create.outputs.issue }}](${{ secrets.JIRA_BASE_URL }}/browse/${{ steps.create.outputs.issue }})'  
+          body: 'Jira Task Created: [${{ steps.create.outputs.issue }}](${{ secrets.JIRA_BASE_URL }}/browse/${{ steps.create.outputs.issue }})'
