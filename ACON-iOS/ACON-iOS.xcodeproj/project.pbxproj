@@ -38,6 +38,9 @@
 		156D925E2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925D2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift */; };
 		156D92602D6570A90037F8F1 /* PatchProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */; };
 		157135B12DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157135B02DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift */; };
+		157C061F2DC5E7CE000B04AF /* SpotTagType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C061E2DC5E7CE000B04AF /* SpotTagType.swift */; };
+		157C06212DC5EBB4000B04AF /* SpotTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C06202DC5EBB4000B04AF /* SpotTagButton.swift */; };
+		157C0AC12DC689E7000B04AF /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C0AC02DC689E7000B04AF /* UIImage+.swift */; };
 		15A1471E2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */; };
 		15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */; };
 		15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */; };
@@ -292,6 +295,9 @@
 		156D925D2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTitleAndButtonsViewController.swift; sourceTree = "<group>"; };
 		156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchProfileRequest.swift; sourceTree = "<group>"; };
 		157135B02DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		157C061E2DC5E7CE000B04AF /* SpotTagType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTagType.swift; sourceTree = "<group>"; };
+		157C06202DC5EBB4000B04AF /* SpotTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTagButton.swift; sourceTree = "<group>"; };
+		157C0AC02DC689E7000B04AF /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBoxWithDeletableButton.swift; sourceTree = "<group>"; };
 		15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFlowType.swift; sourceTree = "<group>"; };
 		15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListItemSizeType.swift; sourceTree = "<group>"; };
@@ -615,6 +621,7 @@
 				1547A8772D3550D900E96616 /* MatchingRateBgColorType.swift */,
 				15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */,
 				15AA6D162D68B4EF008021C6 /* SpotListErrorType.swift */,
+				157C061E2DC5E7CE000B04AF /* SpotTagType.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -731,6 +738,7 @@
 				15CD256D2D3D795800320006 /* FloatingButton.swift */,
 				15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */,
 				15C0ED512D429F7400C9ED83 /* SkeletonView.swift */,
+				157C06202DC5EBB4000B04AF /* SpotTagButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1129,6 +1137,7 @@
 				7414295C2D5D312C00B69528 /* UITableViewCell+.swift */,
 				748D6F942D2BD4D6007690B4 /* UICollectionViewCell+.swift */,
 				748D6F902D2BD44C007690B4 /* UILabel+.swift */,
+				157C0AC02DC689E7000B04AF /* UIImage+.swift */,
 				748D6F8E2D2BD33D007690B4 /* UIButton+.swift */,
 				748D6F8A2D2BD316007690B4 /* UIStackView+.swift */,
 				748D6F882D2BD28E007690B4 /* UIViewController+.swift */,
@@ -1785,6 +1794,7 @@
 				741E68912D3D385A00DF99EF /* ACPlugin.swift in Sources */,
 				745B19AE2D4002A100BDBDA4 /* PostLoginResponse.swift in Sources */,
 				15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */,
+				157C0AC12DC689E7000B04AF /* UIImage+.swift in Sources */,
 				15A48BFA2D574BA5003C2421 /* ProfileEditView.swift in Sources */,
 				74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */,
 				151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */,
@@ -1847,6 +1857,7 @@
 				D6978F502D36E3C800523A25 /* AnalyzingViewController.swift in Sources */,
 				7462617B2D3EB06100A4E84F /* UploadService.swift in Sources */,
 				4C6B2F332D65A15D0089BCB6 /* WithdrawalTargetType.swift in Sources */,
+				157C06212DC5EBB4000B04AF /* SpotTagButton.swift in Sources */,
 				4C6B2F342D65A15D0089BCB6 /* WithdrawalService.swift in Sources */,
 				4C6B2F352D65A15D0089BCB6 /* WithdrawalRequest.swift in Sources */,
 				150A105C2DA28F2600B0BC9A /* ACTextField.swift in Sources */,
@@ -1986,6 +1997,7 @@
 				15CD257C2D3FF13F00320006 /* PostSpotListResponse.swift in Sources */,
 				D6D0F5132D36BA2900326F17 /* FavoriteCuisineCollectionView.swift in Sources */,
 				D6D0F5172D36BA9A00326F17 /* FavoriteSpotTypeCollectionView.swift in Sources */,
+				157C061F2DC5E7CE000B04AF /* SpotTagType.swift in Sources */,
 				15F45F862D66877200BD6B9C /* LoadingAnimatedButton.swift in Sources */,
 				D6FF82EB2D380AAF00090233 /* FavoriteSpotRankType.swift in Sources */,
 				D6D0F5152D36BA6500326F17 /* DislikeCollectionView.swift in Sources */,
