@@ -24,14 +24,16 @@ class SpotListCollectionViewFlowLayout: UICollectionViewFlowLayout {
         let centerY: CGFloat = collectionView.contentOffset.y + (collectionView.bounds.height / 2)
 
         for attribute in attributes {
-            let distanceFromCenter = abs(attribute.center.y - centerY)
-            let transitionDistance: CGFloat = maxCellSize.height / 2
-            let ratio = min(distanceFromCenter / transitionDistance, 1.0)
-            let currentWidth = maxCellSize.width - (maxCellSize.width - minCellSize.width) * ratio
-            let scale = currentWidth / maxCellSize.width
-
-            attribute.transform = CGAffineTransform(scaleX: scale, y: scale)
-            attribute.alpha = 1.0 - (0.2 * ratio)
+            if attribute.representedElementCategory == .cell {
+                let distanceFromCenter = abs(attribute.center.y - centerY)
+                let transitionDistance: CGFloat = maxCellSize.height / 2
+                let ratio = min(distanceFromCenter / transitionDistance, 1.0)
+                let currentWidth = maxCellSize.width - (maxCellSize.width - minCellSize.width) * ratio
+                let scale = currentWidth / maxCellSize.width
+                
+                attribute.transform = CGAffineTransform(scaleX: scale, y: scale)
+                attribute.alpha = 1.0 - (0.2 * ratio)
+            }
         }
 
         return attributes
