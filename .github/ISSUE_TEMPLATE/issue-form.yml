@@ -24,7 +24,6 @@ body:
     attributes:
       label: '📝 상세 내용'
       description: '진행할 이슈와 작업 항목을 작성해주세요.'
-      placeholder: ''
       value: |
         ## 🐿️ Issue
         <!-- 이슈 설명 -->
