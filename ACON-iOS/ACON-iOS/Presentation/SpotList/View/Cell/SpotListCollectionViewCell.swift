@@ -128,7 +128,7 @@ extension SpotListCollectionViewCell {
         }
 
         // TODO: API 나오면 실제 데이터로 바꾸기 (tempTags -> Tags)
-        let tempTags: [SpotTagType] = [.local, .new]
+        let tempTags: [SpotTagType] = [.new, .local, .top(number: 1)]
         tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         tempTags.forEach { tag in
             tagStackView.addArrangedSubview(SpotTagButton(tag))

@@ -18,7 +18,7 @@ enum SpotListItemSizeType {
         case .itemMinWidth: return 264 * ScreenUtils.widthRatio
         case .itemMaxHeight: return 444 * ScreenUtils.heightRatio
         case .itemMinHeight: return 380 * ScreenUtils.heightRatio
-        case .headerHeight: return 52 + ScreenUtils.navViewHeight
+        case .headerHeight: return 54 + ScreenUtils.navViewHeight
         case .footerHeight: return 114
         }
     }

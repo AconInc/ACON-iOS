@@ -87,6 +87,9 @@ class SpotListView: BaseView {
         
         setCollectionView()
         setFloatingButtonStack()
+        
+        // TODO: 배경 블러
+        // TODO: 커스텀 토글
     }
     
 }
@@ -104,7 +107,7 @@ private extension SpotListView {
         flowLayout.scrollDirection = .vertical
 
         collectionView.do {
-            $0.backgroundColor = .gray900
+            $0.backgroundColor = .clear
             $0.setCollectionViewLayout(flowLayout, animated: true)
             $0.decelerationRate = .fast
         }
