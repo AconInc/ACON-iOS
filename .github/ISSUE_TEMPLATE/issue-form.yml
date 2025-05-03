@@ -18,11 +18,19 @@ body:
       placeholder: '2025-05-07'
     validations:
       required: false
-      
+
   - type: textarea
     id: description
     attributes:
       label: '📝 상세 내용'
-      description: '이슈에 대해서 설명해주세요'
+      description: '진행할 이슈와 작업 항목을 작성해주세요.'
+      placeholder: ''
+      value: |
+        ## 🐿️ Issue
+        <!-- 이슈 설명 -->
+
+        ## 🍉 Todo
+        <!-- 진행할 작업 -->
+        - [ ] todo!
     validations:
       required: false
