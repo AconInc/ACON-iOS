@@ -76,13 +76,13 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         bgImage.do {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
-            $0.layer.cornerRadius = 6
+            $0.layer.cornerRadius = 20
         }
 
         dimImage.do {
             $0.clipsToBounds = true
             $0.image = .imgGra1
-            $0.layer.cornerRadius = 6
+            $0.layer.cornerRadius = 20
         }
 
         acornCountButton.do {
