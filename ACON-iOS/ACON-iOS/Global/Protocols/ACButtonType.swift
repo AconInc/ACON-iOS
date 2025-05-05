@@ -15,6 +15,8 @@ protocol ButtonStyleType {
     
     var glassmorphismType: GlassmorphismType? { get }
     
+    var borderGlassmorphismType: GlassmorphismType? { get }
+    
     var cornerRadius: CGFloat { get }
     
     var borderColor: UIColor { get }
@@ -32,6 +34,8 @@ extension ButtonStyleType {
     var backgroundColor: UIColor { return .clear }
     
     var glassmorphismType: GlassmorphismType? { return nil }
+    
+    var borderGlassmorphismType: GlassmorphismType? { return nil }
     
     var textColor: UIColor { return .acWhite }
     
@@ -98,7 +102,7 @@ struct GlassDefault: ButtonStyleType {
     
     var glassmorphismType: GlassmorphismType? { return .buttonGlassDefault }
     
-    var textStyle: ACFontType
+    var borderGlassmorphismType: GlassmorphismType?
     
     var borderWidth: CGFloat
     

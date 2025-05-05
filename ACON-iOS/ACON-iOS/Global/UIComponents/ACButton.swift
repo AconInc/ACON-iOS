@@ -118,14 +118,13 @@ extension ACButton {
             $0.backgroundColor = style.backgroundColor
             
             if let glassmorphismType = style.glassmorphismType {
-                /// borderWidth > 0 이면 테두리만 글모, 0일 경우 전체 배경 글모
-                if style.borderWidth > 0 && style.borderColor == .clear {
-                    glassBorderAttributes = GlassBorderAttributes(width: style.borderWidth,
-                                                                  cornerRadius: style.cornerRadius,
-                                                                  glassmorphismType: glassmorphismType)
-                } else {
-                    setGlassmorphism(glassmorphismType)
-                }
+                setGlassmorphism(glassmorphismType)
+            }
+            
+            if let borderGlassmorphismType = style.borderGlassmorphismType {
+                glassBorderAttributes = GlassBorderAttributes(width: style.borderWidth,
+                                                              cornerRadius: style.cornerRadius,
+                                                              glassmorphismType: borderGlassmorphismType)
             }
             
             $0.layer.cornerRadius = style.cornerRadius
@@ -168,7 +167,7 @@ extension ACButton {
     // MARK: - Set Glassmorphism Border
 
     private func applyGlassBorder(_ attributes: GlassBorderAttributes) {
-        glassmorphismView?.removeFromSuperview()
+        borderGlassmorphismView?.removeFromSuperview()
         borderLayer?.removeFromSuperlayer()
         self.layer.borderWidth = 0
         
