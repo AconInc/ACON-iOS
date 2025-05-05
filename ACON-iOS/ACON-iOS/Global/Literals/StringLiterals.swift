@@ -137,17 +137,19 @@ enum StringLiterals {
     
     enum SpotList {
         
+        static let restaurant = "식당"
+        
+        static let cafe = "카페"
+        
         static let matchingRate = "취향 일치율"
         
         static let headerTitle = "지금, 나에게 딱 맞는 맛집이에요"
         
         static let footerText = "장소는 최대 6순위까지만 제공됩니다."
         
-        static let failedToGetAddressNavTitle = "위치 확인 실패" // TODO: 라이팅 기획과 논의
-        
         static let emptySpotListErrorMessage = "앗! 일치하는 도토리 맛집이 없어요"
         
-        static let unsupportedRegionNavTitle = "서비스 불가지역"
+        static let unsupportedRegion = "서비스 불가지역"
         
         static let unsupportedRegionErrorMessage = "앗! 서비스 지원이 불가능한 지역에 있어요"
         

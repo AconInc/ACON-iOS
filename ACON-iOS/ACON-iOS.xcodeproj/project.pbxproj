@@ -37,6 +37,7 @@
 		156D925C2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925B2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift */; };
 		156D925E2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925D2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift */; };
 		156D92602D6570A90037F8F1 /* PatchProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */; };
+		157C0BE82DC897EE000B04AF /* SpotToggleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */; };
 		15A1471E2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */; };
 		15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */; };
 		15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */; };
@@ -290,6 +291,7 @@
 		156D925B2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTitleAndButtonsView.swift; sourceTree = "<group>"; };
 		156D925D2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTitleAndButtonsViewController.swift; sourceTree = "<group>"; };
 		156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchProfileRequest.swift; sourceTree = "<group>"; };
+		157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotToggleButtonView.swift; sourceTree = "<group>"; };
 		15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBoxWithDeletableButton.swift; sourceTree = "<group>"; };
 		15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFlowType.swift; sourceTree = "<group>"; };
 		15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListItemSizeType.swift; sourceTree = "<group>"; };
@@ -728,6 +730,7 @@
 				15CD256D2D3D795800320006 /* FloatingButton.swift */,
 				15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */,
 				15C0ED512D429F7400C9ED83 /* SkeletonView.swift */,
+				157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1786,6 +1789,7 @@
 				74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */,
 				151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */,
 				746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */,
+				157C0BE82DC897EE000B04AF /* SpotToggleButtonView.swift in Sources */,
 				746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */,
 				151FC0C92DBD5DA0005F4D0D /* Character+.swift in Sources */,
 				15DC053F2D623DD400B752DD /* PostLogoutRequest.swift in Sources */,
