@@ -291,7 +291,7 @@ private extension SpotListFilterView {
 // MARK: - Internal Methods (Update UI)
 
 extension SpotListFilterView {
-    
+
     func switchSpotTagStack(_ spotType: SpotType) {
         let tagTexts: [String] = {
             switch spotType {
@@ -301,27 +301,28 @@ extension SpotListFilterView {
                 return SpotType.CafeFeatureType.allCases.map { return $0.text }
             }
         }()
-        
+
         let firstLine: [String] = Array(tagTexts[0..<spotType.firstLineCount])
         let secondLine: [String] = Array(tagTexts[spotType.firstLineCount...])
-        
         firstLineSpotTagStackView.switchTagButtons(titles: firstLine)
         secondLineSpotTagStackView.switchTagButtons(titles: secondLine)
         
         let operatingHours: SpotType.OperatingHours = spotType == .restaurant ? .overMidnight : .overTenPM
-        
         operatingHoursButton.setAttributedTitle(text: operatingHours.text, style: .b1R)
-        
+
         priceSectionView.isHidden = spotType == .cafe
     }
-    
-    
+
     func resetAllTagSelection() {
         [operatingHoursButton, goodPriceButton].forEach { $0.isSelected = false }
         [firstLineSpotTagStackView,
          secondLineSpotTagStackView].forEach {
             $0.resetTagSelection()
         }
+    }
+
+    func enableFooterButtons(_ isEnabled: Bool) {
+        [resetButton, conductButton].forEach { $0.isEnabled = isEnabled }
     }
 
 }
