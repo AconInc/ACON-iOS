@@ -139,7 +139,7 @@ enum StringLiterals {
         
         static let matchingRate = "취향 일치율"
         
-        static let headerTitle = "지금, 나에게 딱 맞는 맛집이에요"
+        static let bestChoice = "최고의 선택."
         
         static let footerText = "장소는 최대 6순위까지만 제공됩니다."
         
@@ -150,6 +150,10 @@ enum StringLiterals {
         static let unsupportedRegionNavTitle = "서비스 불가지역"
         
         static let unsupportedRegionErrorMessage = "앗! 서비스 지원이 불가능한 지역에 있어요"
+        
+        static let walk = "도보 "
+        
+        static let minuteFindCourse = "분 길찾기"
         
     }
     

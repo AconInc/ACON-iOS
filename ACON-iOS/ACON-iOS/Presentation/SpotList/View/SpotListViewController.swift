@@ -414,26 +414,18 @@ extension SpotListViewController: UICollectionViewDataSource {
             self.glassMorphismView.isHidden = true
         }
     }
+
 }
 
 
 // MARK: - CollectionViewDelegateFlowLayout
 
 extension SpotListViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth: CGFloat = SpotListItemSizeType.itemWidth.value
-        let itemHeight: CGFloat = indexPath.row == 0 ? SpotListItemSizeType.longItemHeight.value : SpotListItemSizeType.shortItemHeight.value
-        
-        return CGSize(width: itemWidth, height: itemHeight)
-    }
-    
+
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let itemWidth: CGFloat = SpotListItemSizeType.itemWidth.value
+        let itemWidth: CGFloat = SpotListItemSizeType.itemMaxWidth.value
         let itemHeight: CGFloat = SpotListItemSizeType.headerHeight.value
         return CGSize(width: itemWidth, height: itemHeight)
     }
@@ -441,9 +433,27 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForFooterInSection section: Int) -> CGSize {
-        let itemWidth: CGFloat = SpotListItemSizeType.itemWidth.value
+        let itemWidth: CGFloat = SpotListItemSizeType.itemMaxWidth.value
         let itemHeight: CGFloat = SpotListItemSizeType.footerHeight.value
         return CGSize(width: itemWidth, height: itemHeight)
     }
-    
+
+}
+
+
+// MARK: - UIScrollViewDelegate
+
+extension SpotListViewController: UIScrollViewDelegate {
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView,
+                                   withVelocity velocity: CGPoint,
+                                   targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let cellHeight = SpotListItemSizeType.itemMaxHeight.value + SpotListItemSizeType.minimumLineSpacing.value
+        let targetY = targetContentOffset.pointee.y
+        
+        // NOTE: 화면 중앙과 가장 가까운 셀을 찾아 화면 중앙으로 이동
+        let newTargetY = round(targetY / cellHeight) * cellHeight + SpotListItemSizeType.minimumLineSpacing.value / 2
+        targetContentOffset.pointee = CGPoint(x: 0, y: newTargetY)
+    }
+
 }

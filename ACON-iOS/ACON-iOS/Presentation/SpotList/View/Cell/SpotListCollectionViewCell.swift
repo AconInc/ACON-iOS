@@ -17,48 +17,30 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     
     private let bgImage = UIImageView()
     private let dimImage = UIImageView()
-    
-    private let matchingRateView = UIView()
-    private let matchingRateLabel = UILabel()
-    
-    private let stackView = UIStackView()
-    
-    private let titleStackView = UIStackView()
-    private let typeLabel = UILabel()
-    private let nameLabel = UILabel()
-    
-    private let timeInfoStackView = UIStackView()
-    private let walkingIcon = UIImageView()
-    private let walkingTimeLabel = UILabel()
+
+    private let titleLabel = UILabel()
+    private let acornCountButton = UIButton()
+    private let tagStackView = UIStackView()
+    private let findCourseButton = UIButton()
     
     
     // MARK: - Life Cycle
     
     override func setHierarchy() {
         super.setHierarchy()
-        
+
         self.addSubviews(bgImage,
                          dimImage,
-                         matchingRateView,
-                         stackView)
-        
-        matchingRateView.addSubview(matchingRateLabel)
-        
-        stackView.addArrangedSubviews(titleStackView,
-                                      timeInfoStackView)
-        
-        titleStackView.addArrangedSubviews(typeLabel,
-                                           nameLabel)
-        
-        timeInfoStackView.addArrangedSubviews(walkingIcon,
-                                              walkingTimeLabel)
+                         titleLabel,
+                         acornCountButton,
+                         tagStackView,
+                         findCourseButton)
     }
     
     override func setLayout() {
         super.setLayout()
         
-        let horizontalSpace = ScreenUtils.widthRatio * 16
-        let verticalSpace = ScreenUtils.heightRatio * 16
+        let edge = ScreenUtils.widthRatio * 20
         
         bgImage.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -67,115 +49,95 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         dimImage.snp.makeConstraints {
             $0.edges.equalTo(bgImage)
         }
-        
-        matchingRateView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(horizontalSpace)
-            $0.top.equalToSuperview().offset(verticalSpace)
-            $0.width.equalTo(96)
-            $0.height.equalTo(22)
+ 
+        titleLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().offset(edge)
+            $0.width.equalTo(210 * ScreenUtils.widthRatio)
+        }
+
+        acornCountButton.snp.makeConstraints {
+            $0.top.equalTo(titleLabel)
+            $0.trailing.equalToSuperview().inset(edge)
         }
         
-        matchingRateLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
+        tagStackView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(8)
+            $0.leading.equalTo(titleLabel)
         }
-        
-        stackView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(horizontalSpace)
-            $0.bottom.equalToSuperview().inset(verticalSpace)
-        }
-        
-        walkingIcon.snp.makeConstraints {
-            $0.size.equalTo(16)
+
+        findCourseButton.snp.makeConstraints {
+            $0.bottom.trailing.equalToSuperview().inset(edge)
         }
     }
-    
+
     override func setStyle() {
         backgroundColor = .clear
-        
+
         bgImage.do {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
-            $0.layer.cornerRadius = 6
+            $0.layer.cornerRadius = 20
         }
-        
+
         dimImage.do {
             $0.clipsToBounds = true
             $0.image = .imgGra1
-            $0.layer.cornerRadius = 6
+            $0.layer.cornerRadius = 20
         }
-        
-        matchingRateView.do {
-            $0.backgroundColor = .gray900
-            $0.layer.cornerRadius = 2
+
+        acornCountButton.do {
+            var config = UIButton.Configuration.plain()
+            let acorn: UIImage = .icAcornLine.resize(to: .init(width: 24, height: 24))
+            config.image = acorn
+            config.imagePadding = 2
+            config.titleAlignment = .leading
+            config.contentInsets = .zero
+            $0.configuration = config
         }
-        
-        matchingRateLabel.do {
-            $0.setText(.c1R)
-        }
-        
-        stackView.do {
-            $0.axis = .vertical
+
+        tagStackView.do {
             $0.spacing = 4
         }
-        
-        titleStackView.do {
-            $0.axis = .vertical
-            $0.spacing = 0
-        }
-        
-        timeInfoStackView.do {
-            $0.spacing = 0
-        }
-        
-        walkingIcon.do {
-            $0.image = .icWalking
-            $0.contentMode = .scaleAspectFit
+
+        findCourseButton.do {
+            $0.setGlassmorphismBackground(10)
+            var config = UIButton.Configuration.plain()
+            config.contentInsets = .init(top: 8, leading: 23, bottom: 8, trailing: 23)
+            $0.configuration = config
         }
     }
-    
+
 }
 
 
 // MARK: - Binding
 
 extension SpotListCollectionViewCell {
-    
+
     func bind(spot: SpotModel, matchingRateBgColor: MatchingRateBgColorType) {
         bgImage.kf.setImage(
             with: URL(string: spot.imageURL),
             options: [.transition(.none), .cacheOriginalImage])
-        
-        changeMatchingRateBgColor(matchingRateBgColor)
-        
-        if let matchingRate = spot.matchingRate {
-            let matchingRateHead = StringLiterals.SpotList.matchingRate
-            let matchingRateStringSet = matchingRateHead + " " + String(matchingRate) + "%"
-            matchingRateLabel.setLabel(text: matchingRateStringSet,
-                                       style: .b4)
-        } else {
-            matchingRateView.isHidden = true
+
+        titleLabel.setLabel(text: spot.name, style: .t4SB)
+
+        // TODO: API 나오면 실제 데이터로 바꾸기 (matchingRate -> acornCount)
+        if let acornCount = spot.matchingRate {
+            let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
+            acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
         }
-        
-        typeLabel.setLabel(text: spot.type.koreanText,
-                           style: .b4)
-        
-        nameLabel.setLabel(text: spot.name,
-                           style: .h7)
-        
-        walkingTimeLabel.setLabel(text: "\(String(spot.walkingTime))분",
-                                  style: .b4,
-                                  color: .gray300)
+
+        // TODO: API 나오면 실제 데이터로 바꾸기 (tempTags -> Tags)
+        let tempTags: [SpotTagType] = [.new, .local, .top(number: 1)]
+        tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        tempTags.forEach { tag in
+            tagStackView.addArrangedSubview(SpotTagButton(tag))
+        }
+
+        let walk: String = StringLiterals.SpotList.walk
+        let findCourse: String = StringLiterals.SpotList.minuteFindCourse
+        let courseTitle: String = walk + String(spot.walkingTime) + findCourse
+        findCourseButton.setAttributedTitle(text: courseTitle, style: .b1SB)
     }
-    
-}
 
-
-// MARK: - UI Change Methods
-
-extension SpotListCollectionViewCell {
-    
-    private func changeMatchingRateBgColor(_ matchingRateBgColor: MatchingRateBgColorType) {
-        matchingRateView.backgroundColor = matchingRateBgColor.color
-    }
-    
 }
