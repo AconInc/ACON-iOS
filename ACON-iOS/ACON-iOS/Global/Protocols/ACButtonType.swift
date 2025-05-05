@@ -13,11 +13,7 @@ protocol ButtonStyleType {
 
     var backgroundColor: UIColor { get }
     
-    var blurEffectStyle: UIBlurEffect.Style? { get }
-    
-    var blurIntensity: CGFloat? { get }
-    
-    var vibrancyEffect: UIVibrancyEffect? { get }
+    var glassmorphismType: GlassmorphismType? { get }
     
     var cornerRadius: CGFloat { get }
     
@@ -33,9 +29,13 @@ protocol ButtonStyleType {
 
 extension ButtonStyleType {
     
-    var blurEffect: UIBlurEffect.Style? { return nil }
+    var backgroundColor: UIColor { return .clear }
     
-    var vibrancyEffect: UIVibrancyEffect? { return nil }
+    var glassmorphismType: GlassmorphismType? { return nil }
+    
+    var textColor: UIColor { return .acWhite }
+    
+    var textStyle: ACFontType { return .b1SB }
     
     var borderColor: UIColor { return .clear }
     
@@ -92,25 +92,76 @@ extension ConfigButtonStyleType {
 
 // MARK: - Acon 2.0 Button Type
 
+/// 글모가 적용된 버튼은 무조건 배경색상이 Clear이며, 배경색도 글모로 정합니다 !
+
 struct GlassDefault: ButtonStyleType {
     
-    var backgroundColor: UIColor { return UIColor.acWhite.withAlphaComponent(0.2) }
-    
-    var blurEffectStyle: UIBlurEffect.Style? { return .systemUltraThinMaterialLight }
-
-    var blurIntensity: CGFloat? { return 0.2 }
-    
-//    var vibrancyEffect: UIVibrancyEffect? { return UIVibrancyEffect(blurEffect: UIBlurEffect(style: .systemUltraThinMaterialLight), style: .secondaryFill) }
-    
-    var textColor: UIColor { return .acWhite }
+    var glassmorphismType: GlassmorphismType? { return .buttonGlassDefault }
     
     var textStyle: ACFontType
     
+    var borderWidth: CGFloat
+    
     var cornerRadius: CGFloat
     
-    init(textStyle: ACFontType, cornerRadius: CGFloat) {
+    init(cornerRadius: CGFloat, textStyle: ACFontType = .b1SB, borderWidth: CGFloat = 0) {
+        self.cornerRadius = cornerRadius
+        self.textStyle = textStyle
+        self.borderWidth = borderWidth
+    }
+    
+}
+
+struct GlassSelected: ButtonStyleType {
+    
+    var glassmorphismType: GlassmorphismType? { return .buttonGlassSelected }
+    
+    var textStyle: ACFontType
+    
+    var borderWidth: CGFloat
+    
+    var cornerRadius: CGFloat
+    
+    init(cornerRadius: CGFloat, textStyle: ACFontType, borderWidth: CGFloat = 0) {
         self.textStyle = textStyle
         self.cornerRadius = cornerRadius
+        self.borderWidth = borderWidth
+    }
+    
+}
+
+struct GlassDisabled: ButtonStyleType {
+    
+    var glassmorphismType: GlassmorphismType? { return .buttonGlassDisabled }
+    
+    var textStyle: ACFontType
+    
+    var borderWidth: CGFloat
+    
+    var cornerRadius: CGFloat
+    
+    init(textStyle: ACFontType, cornerRadius: CGFloat, borderWidth: CGFloat = 0) {
+        self.textStyle = textStyle
+        self.cornerRadius = cornerRadius
+        self.borderWidth = borderWidth
+    }
+    
+}
+
+struct GlassPressed: ButtonStyleType {
+    
+    var glassmorphismType: GlassmorphismType? { return .buttonGlassPressed }
+    
+    var textStyle: ACFontType
+    
+    var borderWidth: CGFloat
+    
+    var cornerRadius: CGFloat
+    
+    init(textStyle: ACFontType, cornerRadius: CGFloat, borderWidth: CGFloat = 0) {
+        self.textStyle = textStyle
+        self.cornerRadius = cornerRadius
+        self.borderWidth = borderWidth
     }
     
 }
