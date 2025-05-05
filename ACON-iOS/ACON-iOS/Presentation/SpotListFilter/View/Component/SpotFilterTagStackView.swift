@@ -23,7 +23,7 @@ class SpotFilterTagStackView: UIStackView {
     
     private func setStyle() {
         self.axis = .horizontal
-        self.spacing = 5
+        self.spacing = 8
     }
     
 }
@@ -38,7 +38,7 @@ extension SpotFilterTagStackView {
     func addTagButtons(titles: [String]) {
         for title in titles {
             let button = FilterTagButton()
-            button.setAttributedTitle(text: title, style: .b3)
+            button.setAttributedTitle(text: title, style: .b1R)
             self.addArrangedSubview(button)
         }
         
@@ -50,7 +50,7 @@ extension SpotFilterTagStackView {
         
         for title in titles {
             let button = FilterTagButton()
-            button.setAttributedTitle(text: title, style: .b3)
+            button.setAttributedTitle(text: title, style: .b1R)
             self.addArrangedSubview(button)
         }
         
