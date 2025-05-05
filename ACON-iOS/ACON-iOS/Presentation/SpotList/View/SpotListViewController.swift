@@ -15,6 +15,8 @@ class SpotListViewController: BaseNavViewController {
     
     private let viewModel = SpotListViewModel()
     
+    private let spotToggleButton = SpotToggleButtonView()
+    
     
     // MARK: - LifeCycle
     
@@ -22,6 +24,7 @@ class SpotListViewController: BaseNavViewController {
         super.viewDidLoad()
         
         bindViewModel()
+        bindObservable()
         setCollectionView()
         addTarget()
         viewModel.requestLocation()
@@ -37,6 +40,7 @@ class SpotListViewController: BaseNavViewController {
         super.setHierarchy()
         
         contentView.addSubview(spotListView)
+        navigationBarView.addSubview(spotToggleButton)
     }
     
     override func setLayout() {
@@ -44,6 +48,10 @@ class SpotListViewController: BaseNavViewController {
         
         spotListView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+        
+        spotToggleButton.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
     
@@ -95,13 +103,11 @@ extension SpotListViewController {
             // NOTE: 법정동 조회 성공 -> 네비게이션타이틀
             if onSuccess {
                 viewModel.postSpotList()
-                setTitleLabelStyle(title: viewModel.currentDong)
                 spotListView.floatingFilterButton.isHidden = false
             }
             
             // NOTE: 법정동 조회 실패 (서비스불가지역) -> 에러 뷰, 네비게이션타이틀
             else if viewModel.errorType == .unsupportedRegion {
-                self.setTitleLabelStyle(title: StringLiterals.SpotList.unsupportedRegionNavTitle)
                 spotListView.errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
                                    buttonTitle: "새로고침 하기")
                 spotListView.floatingFilterButton.isHidden = true
@@ -109,7 +115,6 @@ extension SpotListViewController {
             
             // NOTE: 법정동 조회 실패 (기타 에러) -> 에러뷰, 네비게이션타이틀
             else {
-                self.setTitleLabelStyle(title: StringLiterals.SpotList.failedToGetAddressNavTitle)
                 spotListView.errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
                                    buttonTitle: "새로고침 하기")
                 spotListView.floatingFilterButton.isHidden = true
@@ -157,6 +162,14 @@ extension SpotListViewController {
             spotListView.updateFilterButtonColor(isFilterSet)
             
             viewModel.onFinishRefreshingSpotList.value = true
+        }
+    }
+    
+    func bindObservable() {
+        spotToggleButton.selectedType.bind { [weak self] spotType in
+            print("🥑 selectedSpotType: \(spotType)")
+            // TODO: 뷰모델 바인딩 수정
+            self?.viewModel.spotType.value = spotType
         }
     }
     
