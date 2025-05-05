@@ -189,21 +189,23 @@ enum StringLiterals {
     
     enum SpotListFilter {
         
-        static let pageTitle = "상세 조건"
+        static let pageTitle = "상세조건"
         
         static let restaurant = "음식점"
         
         static let cafe = "카페"
         
-        static let spotSection = "방문 장소"
+        static let kind = "종류"
         
-        static let companionSection = "함께 하는 사람"
+        static let operatingHours = "운영시간"
         
-        static let visitPurposeSection = "방문 목적"
+        static let priceSection = "가격"
         
-        static let walkingSection = "도보 가능 거리"
+        static let goodPricePlace = "가성비 좋은 곳"
         
-        static let priceSection = "가격대"
+        static let reset = "초기화"
+        
+        static let showResults = "결과보기"
         
     }
     

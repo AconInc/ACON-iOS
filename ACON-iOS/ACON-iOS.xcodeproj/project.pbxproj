@@ -43,7 +43,6 @@
 		15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */; };
 		15A3F6A82D36D5B900577E16 /* FilterTagButtonStackLineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6A72D36D5B900577E16 /* FilterTagButtonStackLineType.swift */; };
 		15A3F6AC2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */; };
-		15A3F6E02D38724A00577E16 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */; };
 		15A3F7A12D38C71900577E16 /* PriorityLowEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */; };
 		15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */; };
 		15A48BF82D574B88003C2421 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BF72D574B88003C2421 /* ProfileModel.swift */; };
@@ -297,7 +296,6 @@
 		15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListItemSizeType.swift; sourceTree = "<group>"; };
 		15A3F6A72D36D5B900577E16 /* FilterTagButtonStackLineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagButtonStackLineType.swift; sourceTree = "<group>"; };
 		15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewHeader.swift; sourceTree = "<group>"; };
-		15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityLowEmptyView.swift; sourceTree = "<group>"; };
 		15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotFilterTagStackView.swift; sourceTree = "<group>"; };
 		15A48BF72D574B88003C2421 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
@@ -659,7 +657,6 @@
 		1547A88C2D35AE5C00E96616 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */,
 				1517FD7E2D3961A800638173 /* CustomSlider.swift */,
 				1547A88D2D35B13700E96616 /* FilterTagButton.swift */,
 				15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */,
@@ -1802,7 +1799,6 @@
 				D6232C952D3A294C003FF208 /* AlertHandler.swift in Sources */,
 				745C7E122D35A62B0074DBDB /* UploadModel.swift in Sources */,
 				745B19B22D40240900BDBDA4 /* AuthService.swift in Sources */,
-				15A3F6E02D38724A00577E16 /* CustomSegmentedControl.swift in Sources */,
 				748D6F692D2BCA1C007690B4 /* AppDelegate.swift in Sources */,
 				74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */,
 				749A01032D3A6E0100CD7A90 /* ACDebouncer.swift in Sources */,

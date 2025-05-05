@@ -80,6 +80,7 @@ private extension FilterTagButton {
             $0.isUserInteractionEnabled = false
             $0.layer.zPosition = -1 // NOTE: 버튼에 설정한 stroke를 가리지 않음
             $0.layer.cornerRadius = height / 2
+            $0.setBlurStyle(.systemUltraThinMaterialLight)
         }
     }
 

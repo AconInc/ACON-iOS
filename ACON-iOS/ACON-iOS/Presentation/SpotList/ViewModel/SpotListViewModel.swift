@@ -20,7 +20,9 @@ class SpotListViewModel: Serviceable {
     
     var errorType: SpotListErrorType? = nil
     
-    var spotList: [SpotModel] = []
+    var spotList: [SpotModel] = [] // TODO: 삭제
+    var restaurantList: [SpotModel] = []
+    var cafeList: [SpotModel] = []
     
     var hasSpotListChanged: Bool = false
     
@@ -31,15 +33,9 @@ class SpotListViewModel: Serviceable {
     
     // MARK: - Filter
     
-    var spotType: ObservablePattern<SpotType> = ObservablePattern(nil)
+    var spotType: SpotType = .restaurant
     
     var filterList: [SpotFilterModel] = []
-    
-    var walkingTime: SpotType.WalkingDistanceType = .defaultValue
-    
-    var restaurantPrice: SpotType.RestaurantPriceType? = nil
-    
-    var cafePrice: SpotType.CafePriceType? = nil
     
     
     // MARK: - Methods
@@ -58,11 +54,7 @@ class SpotListViewModel: Serviceable {
     }
     
     func resetConditions() {
-        spotType.value = nil
         filterList.removeAll()
-        walkingTime = .defaultValue
-        restaurantPrice = nil
-        cafePrice = nil
     }
     
 }
@@ -112,10 +104,10 @@ extension SpotListViewModel {
             latitude: userCoordinate.latitude,
             longitude: userCoordinate.longitude,
             condition: SpotCondition(
-                spotType: spotType.value?.serverKey,
+                spotType: spotType.serverKey,
                 filterList: filterList.isEmpty ? nil : filterListDTO,
-                walkingTime: walkingTime.serverKey,
-                priceRange: spotType.value == .restaurant ? restaurantPrice?.serverKey : cafePrice?.serverKey
+                walkingTime: nil,
+                priceRange: nil
             )
         )
         
@@ -134,7 +126,13 @@ extension SpotListViewModel {
                     return spot
                 }
                 self?.hasSpotListChanged = spotList != self?.spotList
-                self?.spotList = spotList
+                
+                if self?.spotType == .restaurant {
+                    self?.restaurantList = spotList
+                } else {
+                    self?.cafeList = spotList
+                }
+                
                 if spotList.isEmpty {
                     self?.errorType = .emptyList
                 }

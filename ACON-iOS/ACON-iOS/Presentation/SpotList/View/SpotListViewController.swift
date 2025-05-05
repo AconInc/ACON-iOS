@@ -142,7 +142,10 @@ extension SpotListViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
                     guard let self = self else { return }
                     spotListView.hideSkeletonView(isHidden: true)
-                    if viewModel.spotList.isEmpty {
+                    
+                    let isRestaurantEmpty: Bool = viewModel.spotType == .restaurant && viewModel.restaurantList.isEmpty
+                    let isCafeEmpty: Bool = viewModel.spotType == .cafe && viewModel.cafeList.isEmpty
+                    if isRestaurantEmpty || isCafeEmpty {
                         spotListView.errorView.setStyle(
                             errorMessage: viewModel.errorType?.errorMessage,
                             buttonTitle: nil
@@ -167,9 +170,14 @@ extension SpotListViewController {
     
     func bindObservable() {
         spotToggleButton.selectedType.bind { [weak self] spotType in
-            print("🥑 selectedSpotType: \(spotType)")
-            // TODO: 뷰모델 바인딩 수정
-            self?.viewModel.spotType.value = spotType
+            guard let self = self,
+                  let spotType = spotType else { return }
+            viewModel.spotType = spotType
+            
+            spotListView.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            spotListView.collectionView.reloadData()
+            viewModel.filterList = []
+            viewModel.postSpotList()
         }
     }
     
@@ -325,7 +333,7 @@ extension SpotListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return viewModel.spotList.count
+        return viewModel.spotType == .restaurant ? viewModel.restaurantList.count : viewModel.cafeList.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -338,8 +346,14 @@ extension SpotListViewController: UICollectionViewDataSource {
         
         let bgColor: MatchingRateBgColorType = indexPath.item == 0 ? .dark : .light
         
-        item.bind(spot: viewModel.spotList[indexPath.item],
-                  matchingRateBgColor: bgColor)
+        switch viewModel.spotType {
+        case .restaurant:
+            item.bind(spot: viewModel.restaurantList[indexPath.item],
+                      matchingRateBgColor: bgColor)
+        case .cafe:
+            item.bind(spot: viewModel.cafeList[indexPath.item],
+                      matchingRateBgColor: bgColor)
+        }
         
         return item
     }
