@@ -29,6 +29,8 @@ class ACButton: UIButton {
     
     private var glassmorphismView: GlassmorphismView?
     
+    private var borderGlassmorphismView: GlassmorphismView?
+    
     private var borderLayer: CAShapeLayer?
     
     
@@ -36,6 +38,8 @@ class ACButton: UIButton {
     
     private var glassBorderAttributes: GlassBorderAttributes?
 
+    private var glassButtonType: GlassButtonType?
+    
     
     // MARK: - Lifecycle
     
@@ -47,6 +51,7 @@ class ACButton: UIButton {
     ) {
         super.init(frame: .zero)
         
+        self.glassButtonType = style.glassButtonType
         setProperties(style, title, image, isEnabled)
     }
     
@@ -63,6 +68,25 @@ class ACButton: UIButton {
         if let attributes = glassBorderAttributes, bounds.width > 0, bounds.height > 0 {
             applyGlassBorder(attributes)
         }
+    }
+    
+    
+    // MARK: - 버튼 상태
+    
+    override var isHighlighted: Bool {
+        didSet { updateButtonState() }
+    }
+    
+    override var isSelected: Bool {
+        didSet { updateButtonState() }
+    }
+    
+    override var isEnabled: Bool {
+        didSet { updateButtonState() }
+    }
+    
+    var isLoading: Bool = false {
+        didSet { updateButtonState() }
     }
     
 }
@@ -191,6 +215,44 @@ extension ACButton {
             let maskView = UIView(frame: bounds)
             maskView.layer.addSublayer(maskLayer)
             glassmorphismView.mask = maskView
+        }
+    }
+    
+}
+
+
+// MARK: - Update Button State
+
+extension ACButton {
+
+    private func updateButtonState() {
+        let glassType: GlassmorphismType
+        
+        if !isEnabled {
+            glassType = .buttonGlassDisabled
+            // 타이틀 컬러 gray300 변경
+            setTitleColor(.gray300, for: .disabled)
+        } else if isHighlighted {
+            glassType = .buttonGlassPressed
+        } else if isSelected {
+            glassType = .buttonGlassSelected
+            if self.glassButtonType == .full_100_b1r {
+                self.layer.borderWidth = 1
+                self.layer.borderColor = UIColor.acWhite.cgColor
+            }
+        } else {
+            glassType = .buttonGlassDefault
+        }
+        
+        setGlassmorphism(glassType)
+        
+        if let attributes = glassBorderAttributes {
+            let updatedAttributes = GlassBorderAttributes(
+                width: attributes.width,
+                cornerRadius: attributes.cornerRadius,
+                glassmorphismType: glassType
+            )
+            applyGlassBorder(updatedAttributes)
         }
     }
     

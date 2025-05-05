@@ -17,6 +17,8 @@ protocol ButtonStyleType {
     
     var borderGlassmorphismType: GlassmorphismType? { get }
     
+    var glassButtonType: GlassButtonType? { get }
+    
     var cornerRadius: CGFloat { get }
     
     var borderColor: UIColor { get }
@@ -36,6 +38,8 @@ extension ButtonStyleType {
     var glassmorphismType: GlassmorphismType? { return nil }
     
     var borderGlassmorphismType: GlassmorphismType? { return nil }
+    
+    var glassButtonType: GlassButtonType? { return nil }
     
     var textColor: UIColor { return .acWhite }
     
@@ -98,74 +102,36 @@ extension ConfigButtonStyleType {
 
 /// 글모가 적용된 버튼은 무조건 배경색상이 Clear이며, 배경색도 글모로 정합니다 !
 
-struct GlassDefault: ButtonStyleType {
+struct GlassButton: ButtonStyleType {
     
-    var glassmorphismType: GlassmorphismType? { return .buttonGlassDefault }
+    var glassmorphismType: GlassmorphismType?
     
     var borderGlassmorphismType: GlassmorphismType?
     
-    var borderWidth: CGFloat
-    
-    var cornerRadius: CGFloat
-    
-    init(cornerRadius: CGFloat, textStyle: ACFontType = .b1SB, borderWidth: CGFloat = 0) {
-        self.cornerRadius = cornerRadius
-        self.textStyle = textStyle
-        self.borderWidth = borderWidth
-    }
-    
-}
-
-struct GlassSelected: ButtonStyleType {
-    
-    var glassmorphismType: GlassmorphismType? { return .buttonGlassSelected }
+    var glassButtonType: GlassButtonType?
     
     var textStyle: ACFontType
     
-    var borderWidth: CGFloat
-    
-    var cornerRadius: CGFloat
-    
-    init(cornerRadius: CGFloat, textStyle: ACFontType, borderWidth: CGFloat = 0) {
-        self.textStyle = textStyle
-        self.cornerRadius = cornerRadius
-        self.borderWidth = borderWidth
-    }
-    
-}
-
-struct GlassDisabled: ButtonStyleType {
-    
-    var glassmorphismType: GlassmorphismType? { return .buttonGlassDisabled }
-    
-    var textStyle: ACFontType
+    var textColor: UIColor
     
     var borderWidth: CGFloat
     
-    var cornerRadius: CGFloat
-    
-    init(textStyle: ACFontType, cornerRadius: CGFloat, borderWidth: CGFloat = 0) {
-        self.textStyle = textStyle
-        self.cornerRadius = cornerRadius
-        self.borderWidth = borderWidth
-    }
-    
-}
-
-struct GlassPressed: ButtonStyleType {
-    
-    var glassmorphismType: GlassmorphismType? { return .buttonGlassPressed }
-    
-    var textStyle: ACFontType
-    
-    var borderWidth: CGFloat
+    var borderColor: UIColor
     
     var cornerRadius: CGFloat
     
-    init(textStyle: ACFontType, cornerRadius: CGFloat, borderWidth: CGFloat = 0) {
-        self.textStyle = textStyle
-        self.cornerRadius = cornerRadius
-        self.borderWidth = borderWidth
+    init(glassmorphismType: GlassmorphismType? = nil,
+         borderGlassmorphismType: GlassmorphismType? = nil,
+         buttonType: GlassButtonType) {
+        self.glassmorphismType = glassmorphismType
+        self.borderGlassmorphismType = borderGlassmorphismType
+        self.glassButtonType = buttonType
+        
+        self.cornerRadius = buttonType.cornerRadius
+        self.textStyle = buttonType.textStyle
+        self.textColor = buttonType.textColor
+        self.borderWidth = buttonType.borderWidth
+        self.borderColor = buttonType.borderColor
     }
     
 }
