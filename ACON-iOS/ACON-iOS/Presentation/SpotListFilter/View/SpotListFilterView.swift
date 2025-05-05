@@ -19,7 +19,8 @@ class SpotListFilterView: GlassmorphismView {
     
     private let stackView = UIStackView()
     
-    private let footerView = GlassmorphismView()
+    // 🍇 TODO: 글모 Type 확인
+    private let footerView = GlassmorphismView(.buttonGlassDefault)
     
     let resetButton = UIButton()
     
@@ -86,6 +87,15 @@ class SpotListFilterView: GlassmorphismView {
     
     
     // MARK: - Lifecycle
+    
+    init() {
+        // 🍇 TODO: 글모 Type 확인
+        super.init(.bottomSheetGlass)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func setHierarchy() {
         super.setHierarchy()
@@ -213,8 +223,6 @@ class SpotListFilterView: GlassmorphismView {
     override func setStyle() {
         super.setStyle()
         
-        self.setGlassColor(.glassBDefault)
-        
         self.setHandlerImageView()
         
         pageTitleLabel.setLabel(
@@ -251,8 +259,6 @@ private extension SpotListFilterView {
     // MARK: - (Footer view)
     
     func setFooterUI() {
-        footerView.setGlassColor(.glassBDefault)
-        
         resetButton.do {
             var config = UIButton.Configuration.plain()
             config.image = .icReset

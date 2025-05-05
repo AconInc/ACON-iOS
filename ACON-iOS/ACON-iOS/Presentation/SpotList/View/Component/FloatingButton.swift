@@ -25,7 +25,8 @@ class FloatingButton: GlassmorphismView {
         self.image = image
         self.size = size
         
-        super.init(frame: .zero)
+        // 🍇 TODO: 글모 Type 확인
+        super.init(.buttonGlassDefault)
     }
     
     @MainActor required init?(coder: NSCoder) {
@@ -57,7 +58,6 @@ class FloatingButton: GlassmorphismView {
         self.do {
             $0.clipsToBounds = true
             $0.layer.cornerRadius = size / 2
-            $0.setGlassColor(.glassBDefault)
         }
         
         button.setImage(image, for: .normal)

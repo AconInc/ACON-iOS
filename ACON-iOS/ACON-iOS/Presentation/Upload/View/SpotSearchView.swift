@@ -42,6 +42,15 @@ final class SpotSearchView: GlassmorphismView {
     
     // MARK: - Lifecycle
     
+    init() {
+        // 🍇 TODO: 글모 Type 확인
+        super.init(.bottomSheetGlass)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func setHierarchy() {
         super.setHierarchy()
         
