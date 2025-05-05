@@ -113,6 +113,7 @@
 		742544062D413CCD004F950F /* SpotListCollectionViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742544052D413CC6004F950F /* SpotListCollectionViewFooter.swift */; };
 		743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743069882D3D2F540033178C /* NetworkResult.swift */; };
 		743900912DC50926002F91B1 /* UIVisualEffectView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900902DC50918002F91B1 /* UIVisualEffectView+.swift */; };
+		743900932DC75451002F91B1 /* GlassmorphismType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900922DC7544C002F91B1 /* GlassmorphismType.swift */; };
 		7439FAF22D421A8000864AD0 /* splashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 7439FAF12D421A8000864AD0 /* splashLottie.json */; };
 		745000D72D403F0200262CBE /* lodingLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D62D403F0200262CBE /* lodingLottie.json */; };
 		745000D82D403F0200262CBE /* checkLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D52D403F0200262CBE /* checkLottie.json */; };
@@ -369,6 +370,7 @@
 		742544052D413CC6004F950F /* SpotListCollectionViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewFooter.swift; sourceTree = "<group>"; };
 		743069882D3D2F540033178C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		743900902DC50918002F91B1 /* UIVisualEffectView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVisualEffectView+.swift"; sourceTree = "<group>"; };
+		743900922DC7544C002F91B1 /* GlassmorphismType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismType.swift; sourceTree = "<group>"; };
 		7439FAF12D421A8000864AD0 /* splashLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = splashLottie.json; sourceTree = "<group>"; };
 		745000D52D403F0200262CBE /* checkLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = checkLottie.json; sourceTree = "<group>"; };
 		745000D62D403F0200262CBE /* lodingLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lodingLottie.json; sourceTree = "<group>"; };
@@ -1203,6 +1205,7 @@
 		748D6F7B2D2BCCFF007690B4 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				743900922DC7544C002F91B1 /* GlassmorphismType.swift */,
 				74C914D02D64DBAF00BC13E1 /* ImageType.swift */,
 				746F39812D342520003F8498 /* ACSheetDetentType.swift */,
 				74205D2E2D40351400D11557 /* SocialType.swift */,
@@ -1893,6 +1896,7 @@
 				746261792D3EA8DF00A4E84F /* UploadTargetType.swift in Sources */,
 				D6E816A22D623E0E001E4EBF /* WithdrawalTableViewCell.swift in Sources */,
 				741A07572D3558FE00778219 /* ReviewFinishedView.swift in Sources */,
+				743900932DC75451002F91B1 /* GlassmorphismType.swift in Sources */,
 				1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */,
 				74BBADF62D611B6B003AB16C /* PostReissueResponse.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
