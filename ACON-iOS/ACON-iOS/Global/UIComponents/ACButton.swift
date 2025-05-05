@@ -9,9 +9,9 @@ import UIKit
 
 class ACButton: UIButton {
     
-    private var blurView: UIVisualEffectView?
+    // MARK: - UI Properties
     
-//    private var vibrancyView: UIVisualEffectView?
+    private var glassmorphismView: GlassmorphismView?
     
     init(
         style: ButtonStyleType,
@@ -28,6 +28,13 @@ class ACButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        glassmorphismView?.layer.cornerRadius = self.layer.cornerRadius
+        glassmorphismView?.layer.masksToBounds = true
+        
+    }
 }
 
 extension ACButton {
@@ -83,6 +90,7 @@ extension ACButton {
             if let blurIntensity = style.blurIntensity,
                let blurEffectStyle = style.blurEffectStyle {
                 setBlurEffect(blurIntensity, blurEffectStyle)
+                    setGlassmorphism(glassmorphismType)
             }
             
             $0.layer.cornerRadius = style.cornerRadius
@@ -106,36 +114,19 @@ extension ACButton {
     }
      
     
-    // MARK: - Set Blur Effect
+    // MARK: - Set Glassmorphism
     
-    private func setBlurEffect(_ blurIntensity: CGFloat, _ blurEffectStyle: UIBlurEffect.Style) {
-
+    private func setGlassmorphism(_ glassmorphismType: GlassmorphismType) {
+        glassmorphismView?.removeFromSuperview()
         self.backgroundColor = .clear
         
-        blurView?.removeFromSuperview()
-        blurView = UIVisualEffectView(effect: nil).then {
+        glassmorphismView = GlassmorphismView(glassmorphismType).then {
             self.insertSubview($0, at: 0)
         }
-        blurView?.setBlurDensity(blurIntensity, blurEffectStyle)
-        blurView?.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+
+        glassmorphismView?.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
-
-        // vibrancy 관련
-//        vibrancyView?.removeFromSuperview()
-//        vibrancyView = UIVisualEffectView(effect: vibrancyEffect).then {
-//            blurView?.contentView.addSubview($0)
-//        }
-//        vibrancyView?.snp.makeConstraints { make in
-//            make.edges.equalToSuperview()
-//        }
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        blurView?.layer.cornerRadius = self.layer.cornerRadius
-        blurView?.layer.masksToBounds = true
     }
     
 }
