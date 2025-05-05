@@ -64,7 +64,6 @@
 		15C0ED6A2D42CDA300C9ED83 /* loadingWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED692D42CDA300C9ED83 /* loadingWhite.json */; };
 		15C93D0E2DBD9B4E002862DF /* OldACFontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C93D0D2DBD9B4E002862DF /* OldACFontStyle.swift */; };
 		15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256A2D3D61F500320006 /* GlassmorphismView.swift */; };
-		15CD256E2D3D795800320006 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256D2D3D795800320006 /* FloatingButton.swift */; };
 		15CD25702D3F86E700320006 /* CustomRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */; };
 		15CD25782D3FE31400320006 /* PostSpotListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25772D3FE31400320006 /* PostSpotListRequest.swift */; };
 		15CD257A2D3FEDBA00320006 /* SpotListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25792D3FEDBA00320006 /* SpotListService.swift */; };
@@ -317,7 +316,6 @@
 		15C0ED692D42CDA300C9ED83 /* loadingWhite.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loadingWhite.json; sourceTree = "<group>"; };
 		15C93D0D2DBD9B4E002862DF /* OldACFontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldACFontStyle.swift; sourceTree = "<group>"; };
 		15CD256A2D3D61F500320006 /* GlassmorphismView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismView.swift; sourceTree = "<group>"; };
-		15CD256D2D3D795800320006 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshControl.swift; sourceTree = "<group>"; };
 		15CD25772D3FE31400320006 /* PostSpotListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSpotListRequest.swift; sourceTree = "<group>"; };
 		15CD25792D3FEDBA00320006 /* SpotListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListService.swift; sourceTree = "<group>"; };
@@ -724,7 +722,6 @@
 		15CD256C2D3D794300320006 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				15CD256D2D3D795800320006 /* FloatingButton.swift */,
 				15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */,
 				15C0ED512D429F7400C9ED83 /* SkeletonView.swift */,
 				157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */,
@@ -1950,7 +1947,6 @@
 				746261832D3F9FD900A4E84F /* GetSpotMenuResponse.swift in Sources */,
 				15CD25842D40364F00320006 /* LoginModalView.swift in Sources */,
 				741E689A2D3D43FF00DF99EF /* EmptyResponse.swift in Sources */,
-				15CD256E2D3D795800320006 /* FloatingButton.swift in Sources */,
 				156D925E2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift in Sources */,
 				D696F1B62D3A83D600CCD5FF /* CustomAlertImageView.swift in Sources */,
 				745B19AC2D40021E00BDBDA4 /* PostLoginRequest.swift in Sources */,
