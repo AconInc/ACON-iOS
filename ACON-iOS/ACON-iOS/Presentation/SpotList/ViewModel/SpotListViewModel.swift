@@ -20,11 +20,8 @@ class SpotListViewModel: Serviceable {
     
     var errorType: SpotListErrorType? = nil
     
-    var spotList: [SpotModel] = [] // TODO: 삭제
     var restaurantList: [SpotModel] = []
     var cafeList: [SpotModel] = []
-    
-    var hasSpotListChanged: Bool = false
     
     var currentDong: String = ""
     
@@ -125,22 +122,21 @@ extension SpotListViewModel {
                     )
                     return spot
                 }
-                self?.hasSpotListChanged = spotList != self?.spotList
-                
+
                 if self?.spotType == .restaurant {
                     self?.restaurantList = spotList
                 } else {
                     self?.cafeList = spotList
                 }
-                
-                if spotList.isEmpty {
-                    self?.errorType = .emptyList
-                }
+
+                if spotList.isEmpty { self?.errorType = .emptyList }
                 self?.onSuccessPostSpotList.value = true
+
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
                     self?.postSpotList()
                 }
+
             case .requestErr(let error):
                 print("🥑post spotList requestErr: \(error)")
                 if error.code == 40405 {
@@ -149,6 +145,7 @@ extension SpotListViewModel {
                     self?.errorType = .serverRequestFail // TODO: 에러 뷰 또는 Alert 띄우기
                 }
                 self?.onSuccessPostSpotList.value = false
+
             default:
                 print("🥑Failed To Post")
                 self?.onSuccessPostSpotList.value = false

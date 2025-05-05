@@ -143,12 +143,7 @@ extension SpotListViewController {
                   let isSuccess = isSuccess else { return }
             if isSuccess {
                 spotListView.errorView.isHidden = true
-                if viewModel.hasSpotListChanged {
-                    print("🥑데이터 바뀌어서 reloadData 함")
-                    spotListView.collectionView.reloadData()
-                } else {
-                    print("🥑데이터가 안 바뀌어서 reloadData 안 함")
-                }
+                spotListView.collectionView.reloadData()
                 
                 // NOTE: 스켈레톤 최소 0.5초 유지
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
@@ -169,7 +164,6 @@ extension SpotListViewController {
                 print("🥑추천장소리스트 Post 실패")
             }
             
-            viewModel.hasSpotListChanged = false
             viewModel.onSuccessPostSpotList.value = nil
             endRefreshingAndTransparancy()
             
@@ -374,7 +368,7 @@ extension SpotListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = viewModel.spotList[indexPath.item]
+        let item = viewModel.spotType == .restaurant ? viewModel.restaurantList[indexPath.item] : viewModel.cafeList[indexPath.item]
         let vc = SpotDetailViewController(item.id)
         
         ACLocationManager.shared.removeDelegate(viewModel)

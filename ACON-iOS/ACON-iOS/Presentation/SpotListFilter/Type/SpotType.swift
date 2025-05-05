@@ -30,7 +30,7 @@ enum SpotType {
     var firstLineCount: Int { // TODO: 관련 코드 수정
         switch self {
         case .restaurant: return 5
-        case .cafe: return 4
+        case .cafe: return 2
         }
     }
 
@@ -55,31 +55,33 @@ enum SpotType {
     
     enum RestaurantFeatureType: CaseIterable {
         
-        case korean, western, chinese, japanese, koreanStreet, asian, bar, excludeFranchise
+        case korean, chinese, japanese, western, asian, fusion, koreanStreet, buffet, bar
         
         var text: String {
             switch self {
             case .korean: return "한식"
-            case .western: return "양식"
             case .chinese: return "중식"
             case .japanese: return "일식"
-            case .koreanStreet: return "간식"
+            case .western: return "양식"
             case .asian: return "아시안"
+            case .fusion: return "퓨전"
+            case .koreanStreet: return "분식"
+            case .buffet: return "뷔페"
             case .bar: return "술/bar"
-            case .excludeFranchise: return "프랜차이즈 제외"
             }
         }
         
         var serverKey: String {
             switch self {
             case .korean: return "KOREAN"
-            case .western: return "WESTERN"
             case .chinese: return "CHINESE"
             case .japanese: return "JAPANESE"
-            case .koreanStreet: return "KOREAN_STREET"
+            case .western: return "WESTERN"
             case .asian: return "ASIAN"
+            case .fusion: return "FUSION"
+            case .koreanStreet: return "KOREAN_STREET"
+            case .buffet: return "BUFFET"
             case .bar: return "BAR"
-            case .excludeFranchise: return "EXCLUDE_FRANCHISE"
             }
         }
         
@@ -87,24 +89,18 @@ enum SpotType {
     
     enum CafeFeatureType: CaseIterable {
         
-        case large, goodView, dessert, terace, excludeFranchise
+        case goodForWork, excludeFranchise
         
         var text: String {
             switch self {
-            case .large: return "대형"
-            case .goodView: return "뷰 좋은 곳"
-            case .dessert: return "디저트"
-            case .terace: return "테라스"
+            case .goodForWork: return "작업하기 좋은 곳"
             case .excludeFranchise: return "프랜차이즈 제외"
             }
         }
         
         var serverKey: String {
             switch self {
-            case .large: return "LARGE"
-            case .goodView: return "GOOD_VIEW"
-            case .dessert: return "DESSERT"
-            case .terace: return "TERRACE"
+            case .goodForWork: return "GOOD_FOR_WORK" // TODO: 명세 나오면 수정
             case .excludeFranchise: return "EXCLUDE_FRANCHISE"
             }
         }
