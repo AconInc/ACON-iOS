@@ -114,6 +114,7 @@
 		743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743069882D3D2F540033178C /* NetworkResult.swift */; };
 		743900912DC50926002F91B1 /* UIVisualEffectView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900902DC50918002F91B1 /* UIVisualEffectView+.swift */; };
 		743900932DC75451002F91B1 /* GlassmorphismType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900922DC7544C002F91B1 /* GlassmorphismType.swift */; };
+		743900972DC8696A002F91B1 /* GlassButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900962DC86966002F91B1 /* GlassButtonType.swift */; };
 		7439FAF22D421A8000864AD0 /* splashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 7439FAF12D421A8000864AD0 /* splashLottie.json */; };
 		745000D72D403F0200262CBE /* lodingLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D62D403F0200262CBE /* lodingLottie.json */; };
 		745000D82D403F0200262CBE /* checkLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D52D403F0200262CBE /* checkLottie.json */; };
@@ -371,6 +372,7 @@
 		743069882D3D2F540033178C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		743900902DC50918002F91B1 /* UIVisualEffectView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVisualEffectView+.swift"; sourceTree = "<group>"; };
 		743900922DC7544C002F91B1 /* GlassmorphismType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismType.swift; sourceTree = "<group>"; };
+		743900962DC86966002F91B1 /* GlassButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonType.swift; sourceTree = "<group>"; };
 		7439FAF12D421A8000864AD0 /* splashLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = splashLottie.json; sourceTree = "<group>"; };
 		745000D52D403F0200262CBE /* checkLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = checkLottie.json; sourceTree = "<group>"; };
 		745000D62D403F0200262CBE /* lodingLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lodingLottie.json; sourceTree = "<group>"; };
@@ -1205,6 +1207,7 @@
 		748D6F7B2D2BCCFF007690B4 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				743900962DC86966002F91B1 /* GlassButtonType.swift */,
 				743900922DC7544C002F91B1 /* GlassmorphismType.swift */,
 				74C914D02D64DBAF00BC13E1 /* ImageType.swift */,
 				746F39812D342520003F8498 /* ACSheetDetentType.swift */,
@@ -1816,6 +1819,7 @@
 				749A01032D3A6E0100CD7A90 /* ACDebouncer.swift in Sources */,
 				7462617F2D3F9F1400A4E84F /* GetSpotDetailResponse.swift in Sources */,
 				15A1471E2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift in Sources */,
+				743900972DC8696A002F91B1 /* GlassButtonType.swift in Sources */,
 				745C7E0D2D35A04A0074DBDB /* SearchKeywordCollectionViewCell.swift in Sources */,
 				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
 				74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */,
