@@ -37,8 +37,12 @@ class ACButton: UIButton {
     // MARK: - Properties
     
     private var glassBorderAttributes: GlassBorderAttributes?
-
-    private var glassButtonType: GlassButtonType?
+    
+    private var buttonStyleType: ButtonStyleType = DefaultButton()
+    
+    private var title: String?
+    
+    var buttonState: GlassButtonState = .default
     
     
     // MARK: - Lifecycle
@@ -51,7 +55,9 @@ class ACButton: UIButton {
     ) {
         super.init(frame: .zero)
         
-        self.glassButtonType = style.glassButtonType
+        // TODO: 일부 glass 버튼 때문에 buttonStyleType & title 저장, 추후 더 나은 구조로 리팩
+        self.buttonStyleType = style
+        self.title = title
         setProperties(style, title, image, isEnabled)
     }
     
@@ -68,25 +74,6 @@ class ACButton: UIButton {
         if let attributes = glassBorderAttributes, bounds.width > 0, bounds.height > 0 {
             applyGlassBorder(attributes)
         }
-    }
-    
-    
-    // MARK: - 버튼 상태
-    
-    override var isHighlighted: Bool {
-        didSet { updateButtonState() }
-    }
-    
-    override var isSelected: Bool {
-        didSet { updateButtonState() }
-    }
-    
-    override var isEnabled: Bool {
-        didSet { updateButtonState() }
-    }
-    
-    var isLoading: Bool = false {
-        didSet { updateButtonState() }
     }
     
 }
@@ -180,6 +167,7 @@ extension ACButton {
         
         glassmorphismView = GlassmorphismView(glassmorphismType).then {
             self.insertSubview($0, at: 0)
+            $0.isUserInteractionEnabled = false
         }
 
         glassmorphismView?.snp.makeConstraints {
@@ -225,25 +213,40 @@ extension ACButton {
 
 extension ACButton {
 
-    private func updateButtonState() {
+    // TODO: 전체적으로 번잡(엣지케이스 등), 추후 리팩 예정
+    /// 메소드 단순화 / GlassButton Class 따로 빼기 / 프로퍼티들 단일화  등 고려
+    func updateGlassButtonState(state: GlassButtonState) {
         let glassType: GlassmorphismType
         
-        if !isEnabled {
+        self.buttonState = state
+        
+        self.isEnabled = true
+        self.isSelected = false
+        self.isHighlighted = false
+        
+        switch state {
+        case .disabled:
+            self.isEnabled = false
             glassType = .buttonGlassDisabled
-            // 타이틀 컬러 gray300 변경
-            setTitleColor(.gray300, for: .disabled)
-        } else if isHighlighted {
+            self.setAttributedTitle(text: title ?? "",
+                                    style: buttonStyleType.textStyle,
+                                    color: .gray300,
+                                    for: .disabled)
+        case .pressed:
+            self.isHighlighted = true
             glassType = .buttonGlassPressed
-        } else if isSelected {
+        case .selected:
+            self.isSelected = true
             glassType = .buttonGlassSelected
-            if self.glassButtonType == .full_100_b1r {
-                self.layer.borderWidth = 1
-                self.layer.borderColor = UIColor.acWhite.cgColor
-            }
-        } else {
+        case .loading:
+            self.isEnabled = false
+            glassType = .buttonGlassDefault
+        default:
+            /// default, loading
             glassType = .buttonGlassDefault
         }
         
+        // NOTE: 글모 적용
         setGlassmorphism(glassType)
         
         if let attributes = glassBorderAttributes {
@@ -253,6 +256,30 @@ extension ACButton {
                 glassmorphismType: glassType
             )
             applyGlassBorder(updatedAttributes)
+        }
+        
+        // NOTE: 로딩 이미지 추가/해제
+        if state == .loading {
+            self.setAttributedTitle(nil, for: .normal)
+            self.setImage(.icProgress, for: .normal)
+            if let imageView = self.imageView {
+                self.bringSubviewToFront(imageView)
+            }
+        } else {
+            self.setAttributedTitle(text: title ?? "",
+                                    style: buttonStyleType.textStyle,
+                                    color: buttonStyleType.textColor)
+            self.setImage(nil, for: .normal)
+        }
+        
+        // NOTE: 엣지 케이스 : 보더 변경사항
+        if self.buttonStyleType.glassButtonType == .full_100_b1r {
+            if state == .selected {
+                self.layer.borderWidth = 1
+                self.layer.borderColor = UIColor.acWhite.cgColor
+            } else {
+                self.layer.borderWidth = 0
+            }
         }
     }
     
