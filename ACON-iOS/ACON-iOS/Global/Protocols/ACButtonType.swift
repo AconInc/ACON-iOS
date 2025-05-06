@@ -135,3 +135,7 @@ struct GlassButton: ButtonStyleType {
     }
     
 }
+
+
+struct DefaultButton: ButtonStyleType { }
+
