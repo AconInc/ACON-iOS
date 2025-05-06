@@ -8,11 +8,17 @@
 import UIKit
 
 enum GlassButtonType {
+    
     case full_12_t4SB
+    
     case line_12_b1SB
+    
     case full_10_b1SB
+    
     case full_100_b1SB
+    
     case full_100_b1r
+    
     case both_20_labelAction_t4R
     
     var cornerRadius: CGFloat {

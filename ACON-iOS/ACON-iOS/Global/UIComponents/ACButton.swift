@@ -7,22 +7,6 @@
 
 import UIKit
 
-struct GlassBorderAttributes {
-    
-    let width: CGFloat
-    
-    let cornerRadius: CGFloat
-    
-    let glassmorphismType: GlassmorphismType
-    
-    init(width: CGFloat, cornerRadius: CGFloat, glassmorphismType: GlassmorphismType) {
-        self.width = width
-        self.cornerRadius = cornerRadius
-        self.glassmorphismType = glassmorphismType
-    }
-    
-}
-
 class ACButton: UIButton {
     
     // MARK: - UI Properties
@@ -65,18 +49,10 @@ class ACButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        glassmorphismView?.layer.cornerRadius = self.layer.cornerRadius
-        glassmorphismView?.layer.masksToBounds = true
-        
-        if let attributes = glassBorderAttributes, bounds.width > 0, bounds.height > 0 {
-            applyGlassBorder(attributes)
-        }
-    }
-    
 }
+
+
+// MARK: - Set Default Button Properites
 
 extension ACButton {
     
@@ -157,10 +133,34 @@ extension ACButton {
             }
         }
     }
-     
     
-    // MARK: - Set Glassmorphism
+}
+
+
+// MARK: - GlassButton 관련 메소드 -
+
+struct GlassBorderAttributes {
     
+    let width: CGFloat
+    
+    let cornerRadius: CGFloat
+    
+    let glassmorphismType: GlassmorphismType
+    
+    init(width: CGFloat, cornerRadius: CGFloat, glassmorphismType: GlassmorphismType) {
+        self.width = width
+        self.cornerRadius = cornerRadius
+        self.glassmorphismType = glassmorphismType
+    }
+    
+}
+
+
+// MARK: - Set Glassmorphism / Glassmorphism Border
+
+extension ACButton {
+    
+    ///Set Glassmorphism
     private func setGlassmorphism(_ glassmorphismType: GlassmorphismType) {
         glassmorphismView?.removeFromSuperview()
         self.backgroundColor = .clear
@@ -176,8 +176,7 @@ extension ACButton {
     }
     
     
-    // MARK: - Set Glassmorphism Border
-
+    /// Set Glassmorphism Border
     private func applyGlassBorder(_ attributes: GlassBorderAttributes) {
         borderGlassmorphismView?.removeFromSuperview()
         borderLayer?.removeFromSuperlayer()
@@ -206,10 +205,21 @@ extension ACButton {
         }
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        glassmorphismView?.layer.cornerRadius = self.layer.cornerRadius
+        glassmorphismView?.layer.masksToBounds = true
+        
+        if let attributes = glassBorderAttributes, bounds.width > 0, bounds.height > 0 {
+            applyGlassBorder(attributes)
+        }
+    }
+    
 }
 
 
-// MARK: - Update Button State
+// MARK: - Update GlassButton State
 
 extension ACButton {
 
