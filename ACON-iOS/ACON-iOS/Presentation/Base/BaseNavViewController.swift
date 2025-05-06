@@ -30,7 +30,8 @@ class BaseNavViewController: UIViewController {
     
     var centerTitleLabel: UILabel = UILabel()
     
-    let glassMorphismView = GlassmorphismView()
+    // 🍇 TODO: 글모 Type 확인
+    let glassMorphismView = GlassmorphismView(.buttonGlassDisabled)
     
     var backCompletion: (() -> Void)?
     

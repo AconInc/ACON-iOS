@@ -36,7 +36,7 @@ final class SpotDetailView: BaseView {
         collectionViewLayout: menuCollectionViewFlowLayout
     )
     
-    let footerGlassMorphismView = GlassmorphismView()
+    let footerGlassMorphismView = GlassmorphismView(.buttonGlassDisabled)
 
     let footerView: UIView = UIView()
     
@@ -244,10 +244,6 @@ final class SpotDetailView: BaseView {
         
         footerView.do {
             $0.backgroundColor = .clear
-        }
-        
-        footerGlassMorphismView.do {
-            $0.setGlassColor(.glassBDefault)
         }
         
         localAcornImageView.do {

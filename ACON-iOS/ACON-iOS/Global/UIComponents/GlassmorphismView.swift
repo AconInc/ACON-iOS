@@ -11,14 +11,24 @@ class GlassmorphismView: BaseView {
     
     // MARK: - Properties
     
-    private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
+    private lazy var blurEffectView = UIVisualEffectView(effect: nil)
     
-    private let vibrancyEffectView = UIVisualEffectView(
-        effect: UIVibrancyEffect(blurEffect: UIBlurEffect(style: .regular))
-    )
+    private lazy var vibrancyEffectView = UIVisualEffectView(effect: nil)
+    
+    private var glassMorphismType: GlassmorphismType
     
     
     // MARK: - LifeCycles
+    
+    init(_ glassMorphismType: GlassmorphismType) {
+        self.glassMorphismType = glassMorphismType
+        
+        super.init(frame: .zero)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func setHierarchy() {
         super.setHierarchy()
@@ -34,27 +44,36 @@ class GlassmorphismView: BaseView {
             $0.edges.equalToSuperview()
         }
         
+        vibrancyEffectView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     override func setStyle() {
         self.backgroundColor = .clear
-        vibrancyEffectView.backgroundColor = .glassWLight
+        
+        setGlassMorphism(glassMorphismType)
     }
     
 }
 
 
-// MARK: - UI Update Methods
+// MARK: - Set GlassMorphism
 
 extension GlassmorphismView {
     
-    /// NOTE: - GlassmorphismView에는 기본적으로 glass color = .glassWLight가 적용되어 있습니다.
-    func setGlassColor(_ color: UIColor) {
-        vibrancyEffectView.backgroundColor = color
+    func setGlassMorphism(_ type: GlassmorphismType) {
+        blurEffectView.setBlurDensity(type.blurIntensity, type.blurEffectStyle)
+        
+        if let vibrancyStyle = type.vibrancyEffectStyle {
+            vibrancyEffectView.effect = UIVibrancyEffect(
+                blurEffect: UIBlurEffect(style: type.blurEffectStyle),
+                style: vibrancyStyle
+            )
+            blurEffectView.contentView.addSubview(vibrancyEffectView)
+        } else {
+            vibrancyEffectView.removeFromSuperview()
+        }
     }
-    
-    func setBlurStyle(_ style: UIBlurEffect.Style) {
-        blurEffectView.effect = UIBlurEffect(style: style)
-    }
-    
+
 }
