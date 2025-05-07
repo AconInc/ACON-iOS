@@ -244,7 +244,7 @@ enum StringLiterals {
     
     enum Onboarding {
         
-        static let dislikeFoodTitle = "싫어하는 음식을 알려줄 수 있나요?"
+        static let dislikeFoodTitle = "싫어하는 음식을\n알려줄 수 있나요?"
         
         static let dislikeFoodDescription = "싫어하는 음식은 설정에서 다시 수정할 수 있어요"
         
