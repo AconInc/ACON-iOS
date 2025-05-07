@@ -31,6 +31,8 @@ class LoginViewController: BaseNavViewController {
         addTarget()
         bindViewModel()
         self.setSkipButton()
+        self.showDefaultAlert(title: "업데이트로 인한 서비스 제한",
+                              message: "Acon1.0의 경우, 서버 업데이트로 인해 일부 기능이 정상적으로 동작하지 않을 수 있습니다.")
     }
     
     override func setHierarchy() {
