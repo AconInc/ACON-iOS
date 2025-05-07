@@ -17,13 +17,13 @@ enum GlassButtonType {
     
     case full_100_b1SB
     
-    case full_100_b1r
+    case full_100_b1R
     
     case both_20_labelAction_t4R
     
     var cornerRadius: CGFloat {
         switch self {
-        case .full_100_b1SB, .full_100_b1r:
+        case .full_100_b1SB, .full_100_b1R:
             return 100
         case .both_20_labelAction_t4R:
             return 20
@@ -42,7 +42,7 @@ enum GlassButtonType {
             return .t4R
         case .full_12_t4SB:
             return .t4SB
-        case .full_100_b1r:
+        case .full_100_b1R:
             return .b1R
         }
     }
