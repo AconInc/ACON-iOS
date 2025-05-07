@@ -293,4 +293,11 @@ extension ACButton {
         }
     }
     
+    func updateGlassButtonTitle(_ title: String) {
+        self.title = title
+        self.setAttributedTitle(text: title,
+                                style: buttonStyleType.textStyle,
+                                color: buttonStyleType.textColor)
+    }
+    
 }
