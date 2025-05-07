@@ -114,7 +114,6 @@ extension ACButton {
                                                               glassmorphismType: borderGlassmorphismType)
             }
             
-            $0.layer.cornerRadius = style.cornerRadius
             $0.isEnabled = isEnabled
             
             if style.borderWidth > 0 {
@@ -207,7 +206,9 @@ extension ACButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+    
+        self.layer.cornerRadius = self.bounds.height * buttonStyleType.cornerRadius / 200
+    
         glassmorphismView?.layer.cornerRadius = self.layer.cornerRadius
         glassmorphismView?.layer.masksToBounds = true
         
@@ -252,7 +253,7 @@ extension ACButton {
             self.isEnabled = false
             glassType = .buttonGlassDefault
         default:
-            /// default, loading
+            /// default
             glassType = .buttonGlassDefault
         }
         
