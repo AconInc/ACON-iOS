@@ -196,6 +196,7 @@
 		748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748ECA702D31A72500BBC981 /* LoginViewModel.swift */; };
 		7492349A2D687B140025F700 /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749234992D687B0D0025F700 /* AmplitudeManager.swift */; };
 		749A01032D3A6E0100CD7A90 /* ACDebouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */; };
+		74A13D6B2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A13D6A2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		74B25C252D2FD30A008BDCB7 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 74B25C242D2FD30A008BDCB7 /* Lottie */; };
 		74B25C2C2D2FEE8E008BDCB7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B25C2B2D2FEE8C008BDCB7 /* Config.swift */; };
 		74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C312D2FF022008BDCB7 /* Shared.xcconfig */; };
@@ -437,6 +438,7 @@
 		749234992D687B0D0025F700 /* AmplitudeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeManager.swift; sourceTree = "<group>"; };
 		7496EC1A2DACF3E500508EA8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACDebouncer.swift; sourceTree = "<group>"; };
+		74A13D6A2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		74A8E7AF2D42C42300677408 /* ACON-iOSRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ACON-iOSRelease.entitlements"; sourceTree = "<group>"; };
 		74AB6EB02D2796D30094F873 /* ACON-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ACON-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74B25C2A2D2FEE3E008BDCB7 /* ACON-iOSDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ACON-iOSDebug.entitlements"; sourceTree = "<group>"; };
@@ -1172,6 +1174,7 @@
 		748D6F7A2D2BCCF4007690B4 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				74A13D6A2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift */,
 				74DDBA8C2DC45E4300BF9824 /* ACButton.swift */,
 				746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */,
 				749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */,
@@ -1856,6 +1859,7 @@
 				74BF92132D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift in Sources */,
 				15AA6D152D68AC09008021C6 /* GetDongRequest.swift in Sources */,
 				74DDBA8D2DC45E4500BF9824 /* ACButton.swift in Sources */,
+				74A13D6B2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				746F15B72D3E2083003EA031 /* PostLocalAreaRequest.swift in Sources */,
 				74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */,
 				D696F1B22D3A7E3400CCD5FF /* CustomAlertView.swift in Sources */,
