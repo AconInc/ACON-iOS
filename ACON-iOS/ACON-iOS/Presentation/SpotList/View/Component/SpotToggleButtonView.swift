@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SpotToggleButtonView: GlassmorphismView { // TODO: 수정
+class SpotToggleButtonView: GlassmorphismView {
 
     var selectedType: ObservablePattern<SpotType> = ObservablePattern(.restaurant)
 
@@ -21,7 +21,7 @@ class SpotToggleButtonView: GlassmorphismView { // TODO: 수정
     private let horizontalPadding: CGFloat = 16
     private let spacing: CGFloat = 28
 
-    override init(_ glassMorphismType: GlassmorphismType = .buttonGlassDefault) {
+    init() {
         super.init(.buttonGlassDefault)
 
         addTarget()
@@ -29,6 +29,7 @@ class SpotToggleButtonView: GlassmorphismView { // TODO: 수정
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+
         addTarget()
     }
 
@@ -72,9 +73,6 @@ class SpotToggleButtonView: GlassmorphismView { // TODO: 수정
         super.setStyle()
 
         self.do {
-            // TODO: 수민 글라모 작업 이후 수정
-//            $0.setGlassColor(.acWhite.withAlphaComponent(0.2))
-//            $0.setBlurStyle(.systemUltraThinMaterial)
             $0.layer.cornerRadius = height / 2
             $0.clipsToBounds = true
         }
