@@ -11,7 +11,7 @@ final class DislikeFoodCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - UI Properties
     
-    private let chipButton : ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_100_b1r))
+    private var chipButton : ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_100_b1R))
     
     
     // MARK: - Lifecycle
@@ -34,6 +34,9 @@ final class DislikeFoodCollectionViewCell: BaseCollectionViewCell {
         super.setStyle()
         
         self.backgroundColor = .clear
+        chipButton.do {
+            $0.updateGlassButtonState(state: .default)
+        }
     }
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
@@ -60,9 +63,6 @@ extension DislikeFoodCollectionViewCell {
     
     func bindData(_ title: String?, _ indexRow: Int) {
         chipButton.updateGlassButtonTitle(title ?? "")
-        
-        setNeedsLayout()
-        layoutIfNeeded()
     }
     
 }
