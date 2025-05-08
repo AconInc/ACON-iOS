@@ -19,6 +19,9 @@ class SpotListFilterView: GlassmorphismView {
     
     private let stackView = UIStackView()
     
+    // 🍇 TODO: 글모 Type 확인
+    private let footerView = GlassmorphismView(.buttonGlassDefault)
+    
     let resetButton = UIButton()
     
     let conductButton = LoadingAnimatedButton()
@@ -63,6 +66,15 @@ class SpotListFilterView: GlassmorphismView {
     
     
     // MARK: - Lifecycle
+    
+    init() {
+        // 🍇 TODO: 글모 Type 확인
+        super.init(.bottomSheetGlass)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func setHierarchy() {
         super.setHierarchy()
@@ -176,8 +188,6 @@ class SpotListFilterView: GlassmorphismView {
     
     override func setStyle() {
         super.setStyle()
-        
-        self.setGlassColor(.glassBDefault)
         
         self.setHandlerImageView()
         

@@ -31,7 +31,7 @@ struct ScreenUtils {
     }
     
     static var heightRatio: CGFloat {
-        let figmaHeight: CGFloat = 780
+        let figmaHeight: CGFloat = 740
         return height / figmaHeight
     }
     

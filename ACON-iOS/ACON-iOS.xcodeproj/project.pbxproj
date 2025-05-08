@@ -38,6 +38,10 @@
 		156D925E2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925D2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift */; };
 		156D92602D6570A90037F8F1 /* PatchProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */; };
 		157C0BE82DC897EE000B04AF /* SpotToggleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */; };
+		157135B12DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157135B02DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift */; };
+		157C061F2DC5E7CE000B04AF /* SpotTagType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C061E2DC5E7CE000B04AF /* SpotTagType.swift */; };
+		157C06212DC5EBB4000B04AF /* SpotTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C06202DC5EBB4000B04AF /* SpotTagButton.swift */; };
+		157C0AC12DC689E7000B04AF /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C0AC02DC689E7000B04AF /* UIImage+.swift */; };
 		15A1471E2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */; };
 		15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */; };
 		15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */; };
@@ -111,6 +115,9 @@
 		74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74220DD52D3436BE000684BF /* SpotUploadView.swift */; };
 		742544062D413CCD004F950F /* SpotListCollectionViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742544052D413CC6004F950F /* SpotListCollectionViewFooter.swift */; };
 		743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743069882D3D2F540033178C /* NetworkResult.swift */; };
+		743900912DC50926002F91B1 /* UIVisualEffectView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900902DC50918002F91B1 /* UIVisualEffectView+.swift */; };
+		743900932DC75451002F91B1 /* GlassmorphismType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900922DC7544C002F91B1 /* GlassmorphismType.swift */; };
+		743900972DC8696A002F91B1 /* GlassButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900962DC86966002F91B1 /* GlassButtonType.swift */; };
 		7439FAF22D421A8000864AD0 /* splashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 7439FAF12D421A8000864AD0 /* splashLottie.json */; };
 		745000D72D403F0200262CBE /* lodingLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D62D403F0200262CBE /* lodingLottie.json */; };
 		745000D82D403F0200262CBE /* checkLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D52D403F0200262CBE /* checkLottie.json */; };
@@ -152,6 +159,7 @@
 		746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15BC2D3E2258003EA031 /* LocalVerificationService.swift */; };
 		746F39822D342523003F8498 /* ACSheetDetentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* ACSheetDetentType.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
+		747BB6CE2DCA66F000352874 /* GlassButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */; };
 		747F4FBD2D3D9477003DECBF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F4FBC2D3D9470003DECBF /* SplashViewController.swift */; };
 		747F4FBF2D3D9D44003DECBF /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F4FBE2D3D9D40003DECBF /* SplashView.swift */; };
 		747F4FC12D3DC80B003DECBF /* finishedUpload.json in Resources */ = {isa = PBXBuildFile; fileRef = 747F4FC02D3DC80B003DECBF /* finishedUpload.json */; };
@@ -219,6 +227,8 @@
 		74D31C7C2D5BF90300B4B2B4 /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D31C7B2D5BF8FD00B4B2B4 /* AlbumModel.swift */; };
 		74D31C802D5C025900B4B2B4 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D31C7F2D5C025200B4B2B4 /* PhotoCollectionViewCell.swift */; };
 		74D831922D6878A5003384C6 /* AmplitudeSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 74D831912D6878A5003384C6 /* AmplitudeSwift */; };
+		74DDBA8B2DC45E3B00BF9824 /* ACButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DDBA8A2DC45E3400BF9824 /* ACButtonType.swift */; };
+		74DDBA8D2DC45E4500BF9824 /* ACButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DDBA8C2DC45E4300BF9824 /* ACButton.swift */; };
 		74E38D342D69B46F009449D4 /* LocationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E38D332D69B468009449D4 /* LocationUtils.swift */; };
 		D61917E92D3E4410001BF0EE /* OnboardingTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917E82D3E4410001BF0EE /* OnboardingTargetType.swift */; };
 		D61917EC2D3E484A001BF0EE /* OnboardingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917EB2D3E484A001BF0EE /* OnboardingRequest.swift */; };
@@ -290,6 +300,10 @@
 		156D925D2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTitleAndButtonsViewController.swift; sourceTree = "<group>"; };
 		156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchProfileRequest.swift; sourceTree = "<group>"; };
 		157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotToggleButtonView.swift; sourceTree = "<group>"; };
+		157135B02DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		157C061E2DC5E7CE000B04AF /* SpotTagType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTagType.swift; sourceTree = "<group>"; };
+		157C06202DC5EBB4000B04AF /* SpotTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTagButton.swift; sourceTree = "<group>"; };
+		157C0AC02DC689E7000B04AF /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBoxWithDeletableButton.swift; sourceTree = "<group>"; };
 		15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFlowType.swift; sourceTree = "<group>"; };
 		15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListItemSizeType.swift; sourceTree = "<group>"; };
@@ -363,6 +377,9 @@
 		74220DD52D3436BE000684BF /* SpotUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadView.swift; sourceTree = "<group>"; };
 		742544052D413CC6004F950F /* SpotListCollectionViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewFooter.swift; sourceTree = "<group>"; };
 		743069882D3D2F540033178C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		743900902DC50918002F91B1 /* UIVisualEffectView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVisualEffectView+.swift"; sourceTree = "<group>"; };
+		743900922DC7544C002F91B1 /* GlassmorphismType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismType.swift; sourceTree = "<group>"; };
+		743900962DC86966002F91B1 /* GlassButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonType.swift; sourceTree = "<group>"; };
 		7439FAF12D421A8000864AD0 /* splashLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = splashLottie.json; sourceTree = "<group>"; };
 		745000D52D403F0200262CBE /* checkLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = checkLottie.json; sourceTree = "<group>"; };
 		745000D62D403F0200262CBE /* lodingLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lodingLottie.json; sourceTree = "<group>"; };
@@ -402,6 +419,7 @@
 		746F15BC2D3E2258003EA031 /* LocalVerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationService.swift; sourceTree = "<group>"; };
 		746F39812D342520003F8498 /* ACSheetDetentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACSheetDetentType.swift; sourceTree = "<group>"; };
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
+		747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonState.swift; sourceTree = "<group>"; };
 		747F4FBC2D3D9470003DECBF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		747F4FBE2D3D9D40003DECBF /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		747F4FC02D3DC80B003DECBF /* finishedUpload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = finishedUpload.json; sourceTree = "<group>"; };
@@ -466,6 +484,8 @@
 		74D31C792D5841D100B4B2B4 /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
 		74D31C7B2D5BF8FD00B4B2B4 /* AlbumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumModel.swift; sourceTree = "<group>"; };
 		74D31C7F2D5C025200B4B2B4 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		74DDBA8A2DC45E3400BF9824 /* ACButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButtonType.swift; sourceTree = "<group>"; };
+		74DDBA8C2DC45E4300BF9824 /* ACButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButton.swift; sourceTree = "<group>"; };
 		74E38D332D69B468009449D4 /* LocationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUtils.swift; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB785B4E26FA7C11BB85A55D /* Pods-ACON-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -573,6 +593,7 @@
 				15CD256C2D3D794300320006 /* Component */,
 				1547A6ED2D33850600E96616 /* Cell */,
 				1547A6EA2D337F4100E96616 /* SpotListView.swift */,
+				157135B02DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift */,
 				1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */,
 			);
 			path = View;
@@ -610,6 +631,7 @@
 				1547A8772D3550D900E96616 /* MatchingRateBgColorType.swift */,
 				15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */,
 				15AA6D162D68B4EF008021C6 /* SpotListErrorType.swift */,
+				157C061E2DC5E7CE000B04AF /* SpotTagType.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -725,6 +747,7 @@
 				15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */,
 				15C0ED512D429F7400C9ED83 /* SkeletonView.swift */,
 				157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */,
+				157C06202DC5EBB4000B04AF /* SpotTagButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1117,12 +1140,14 @@
 		748D6F752D2BCAA8007690B4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				743900902DC50918002F91B1 /* UIVisualEffectView+.swift */,
 				74BF92162D393B4700B923E3 /* Int+.swift */,
 				74CDCE552D310B1300E3A21A /* String+.swift */,
 				151FC0C82DBD5DA0005F4D0D /* Character+.swift */,
 				7414295C2D5D312C00B69528 /* UITableViewCell+.swift */,
 				748D6F942D2BD4D6007690B4 /* UICollectionViewCell+.swift */,
 				748D6F902D2BD44C007690B4 /* UILabel+.swift */,
+				157C0AC02DC689E7000B04AF /* UIImage+.swift */,
 				748D6F8E2D2BD33D007690B4 /* UIButton+.swift */,
 				748D6F8A2D2BD316007690B4 /* UIStackView+.swift */,
 				748D6F882D2BD28E007690B4 /* UIViewController+.swift */,
@@ -1177,6 +1202,7 @@
 		748D6F7A2D2BCCF4007690B4 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				74DDBA8C2DC45E4300BF9824 /* ACButton.swift */,
 				746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */,
 				749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */,
 				150A105B2DA28F2600B0BC9A /* ACTextField.swift */,
@@ -1192,6 +1218,9 @@
 		748D6F7B2D2BCCFF007690B4 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */,
+				743900962DC86966002F91B1 /* GlassButtonType.swift */,
+				743900922DC7544C002F91B1 /* GlassmorphismType.swift */,
 				74C914D02D64DBAF00BC13E1 /* ImageType.swift */,
 				746F39812D342520003F8498 /* ACSheetDetentType.swift */,
 				74205D2E2D40351400D11557 /* SocialType.swift */,
@@ -1216,6 +1245,7 @@
 		748D6F832D2BCDE8007690B4 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				74DDBA8A2DC45E3400BF9824 /* ACButtonType.swift */,
 				748D6F982D2BD549007690B4 /* DummyProtocol.swift */,
 			);
 			path = Protocols;
@@ -1779,6 +1809,7 @@
 				741E68912D3D385A00DF99EF /* ACPlugin.swift in Sources */,
 				745B19AE2D4002A100BDBDA4 /* PostLoginResponse.swift in Sources */,
 				15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */,
+				157C0AC12DC689E7000B04AF /* UIImage+.swift in Sources */,
 				15A48BFA2D574BA5003C2421 /* ProfileEditView.swift in Sources */,
 				74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */,
 				151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */,
@@ -1801,6 +1832,7 @@
 				749A01032D3A6E0100CD7A90 /* ACDebouncer.swift in Sources */,
 				7462617F2D3F9F1400A4E84F /* GetSpotDetailResponse.swift in Sources */,
 				15A1471E2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift in Sources */,
+				743900972DC8696A002F91B1 /* GlassButtonType.swift in Sources */,
 				745C7E0D2D35A04A0074DBDB /* SearchKeywordCollectionViewCell.swift in Sources */,
 				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
 				74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */,
@@ -1813,6 +1845,7 @@
 				746261752D3EA7FD00A4E84F /* GetReviewVerificationResponse.swift in Sources */,
 				748D6FA82D2C3F93007690B4 /* BaseViewController.swift in Sources */,
 				D6FF82F92D381D6100090233 /* SmallBoxViewCell.swift in Sources */,
+				157135B12DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift in Sources */,
 				D6D0F5192D36BAAB00326F17 /* FavoriteSpotStyleCollectionView.swift in Sources */,
 				746261712D3EA50A00A4E84F /* SpotCategoryType.swift in Sources */,
 				7414295B2D5D2FC400B69528 /* ProfileSettingViewController.swift in Sources */,
@@ -1820,6 +1853,7 @@
 				747F4FBF2D3D9D44003DECBF /* SplashView.swift in Sources */,
 				74C914D32D64E01C00BC13E1 /* PutImageToPresignedURLRequest.swift in Sources */,
 				7462616F2D3EA48300A4E84F /* GetSearchKeywordResponse.swift in Sources */,
+				74DDBA8B2DC45E3B00BF9824 /* ACButtonType.swift in Sources */,
 				156AA72A2D6510E1005B8DCE /* GetNicknameValidityRequest.swift in Sources */,
 				74D297F82D63467900DDEE31 /* ImageService.swift in Sources */,
 				15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */,
@@ -1840,6 +1874,7 @@
 				D6978F502D36E3C800523A25 /* AnalyzingViewController.swift in Sources */,
 				7462617B2D3EB06100A4E84F /* UploadService.swift in Sources */,
 				4C6B2F332D65A15D0089BCB6 /* WithdrawalTargetType.swift in Sources */,
+				157C06212DC5EBB4000B04AF /* SpotTagButton.swift in Sources */,
 				4C6B2F342D65A15D0089BCB6 /* WithdrawalService.swift in Sources */,
 				4C6B2F352D65A15D0089BCB6 /* WithdrawalRequest.swift in Sources */,
 				150A105C2DA28F2600B0BC9A /* ACTextField.swift in Sources */,
@@ -1861,6 +1896,7 @@
 				74D31C712D5832D000B4B2B4 /* AlbumViewModel.swift in Sources */,
 				1547A6F22D33AD4500E96616 /* SpotModel.swift in Sources */,
 				746261732D3EA78700A4E84F /* GetReiviewVerificationRequest.swift in Sources */,
+				743900912DC50926002F91B1 /* UIVisualEffectView+.swift in Sources */,
 				74BF92022D385D8700B923E3 /* MenuCollectionViewCell.swift in Sources */,
 				74220DD42D34363B000684BF /* SpotUploadViewController.swift in Sources */,
 				D6FF82F12D380C4D00090233 /* FavoriteCuisineType.swift in Sources */,
@@ -1879,6 +1915,7 @@
 				746261792D3EA8DF00A4E84F /* UploadTargetType.swift in Sources */,
 				D6E816A22D623E0E001E4EBF /* WithdrawalTableViewCell.swift in Sources */,
 				741A07572D3558FE00778219 /* ReviewFinishedView.swift in Sources */,
+				743900932DC75451002F91B1 /* GlassmorphismType.swift in Sources */,
 				1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */,
 				74BBADF62D611B6B003AB16C /* PostReissueResponse.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
@@ -1912,6 +1949,7 @@
 				156D925C2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift in Sources */,
 				74BF92132D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift in Sources */,
 				15AA6D152D68AC09008021C6 /* GetDongRequest.swift in Sources */,
+				74DDBA8D2DC45E4500BF9824 /* ACButton.swift in Sources */,
 				746F15B72D3E2083003EA031 /* PostLocalAreaRequest.swift in Sources */,
 				74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */,
 				D696F1B22D3A7E3400CCD5FF /* CustomAlertView.swift in Sources */,
@@ -1960,6 +1998,7 @@
 				74D297F22D63436F00DDEE31 /* GetPresignedURLResponse.swift in Sources */,
 				1547A88B2D3596B600E96616 /* SpotType.swift in Sources */,
 				74BF92172D393B4A00B923E3 /* Int+.swift in Sources */,
+				747BB6CE2DCA66F000352874 /* GlassButtonState.swift in Sources */,
 				15CF62BD2D575EC00000A10F /* ProfileEditValidMessageView.swift in Sources */,
 				741429632D5D3CED00B69528 /* SettingTableViewCell.swift in Sources */,
 				7462616D2D3EA40600A4E84F /* GetSearchKeywordRequest.swift in Sources */,
@@ -1978,6 +2017,7 @@
 				15CD257C2D3FF13F00320006 /* PostSpotListResponse.swift in Sources */,
 				D6D0F5132D36BA2900326F17 /* FavoriteCuisineCollectionView.swift in Sources */,
 				D6D0F5172D36BA9A00326F17 /* FavoriteSpotTypeCollectionView.swift in Sources */,
+				157C061F2DC5E7CE000B04AF /* SpotTagType.swift in Sources */,
 				15F45F862D66877200BD6B9C /* LoadingAnimatedButton.swift in Sources */,
 				D6FF82EB2D380AAF00090233 /* FavoriteSpotRankType.swift in Sources */,
 				D6D0F5152D36BA6500326F17 /* DislikeCollectionView.swift in Sources */,

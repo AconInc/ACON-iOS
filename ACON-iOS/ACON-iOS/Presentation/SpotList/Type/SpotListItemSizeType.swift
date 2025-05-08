@@ -9,15 +9,16 @@ import Foundation
 
 enum SpotListItemSizeType {
     
-    case minimumLineSpacing, itemWidth, longItemHeight, shortItemHeight, headerHeight, footerHeight
+    case minimumLineSpacing, itemMaxWidth, itemMinWidth, itemMaxHeight, itemMinHeight, headerHeight, footerHeight
     
     var value: CGFloat {
         switch self {
-        case .minimumLineSpacing: return 12
-        case .itemWidth: return ScreenUtils.width - 40
-        case .longItemHeight: return SpotListItemSizeType.itemWidth.value * 1.24
-        case .shortItemHeight: return SpotListItemSizeType.itemWidth.value * 0.39
-        case .headerHeight: return 52 + ScreenUtils.navViewHeight
+        case .minimumLineSpacing: return -20
+        case .itemMaxWidth: return 328 * ScreenUtils.widthRatio
+        case .itemMinWidth: return 264 * ScreenUtils.widthRatio
+        case .itemMaxHeight: return 444 * ScreenUtils.heightRatio
+        case .itemMinHeight: return 380 * ScreenUtils.heightRatio
+        case .headerHeight: return 54 + ScreenUtils.navViewHeight
         case .footerHeight: return 114
         }
     }

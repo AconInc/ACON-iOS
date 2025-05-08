@@ -19,10 +19,11 @@ final class WithdrawalConfirmationView: GlassmorphismView {
     let confirmButton = UIButton(type: .system)
     let closeButton = UIButton(type: .system)
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        // 🍇 TODO: 글모 Type 확인
+        super.init(.bottomSheetGlass)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

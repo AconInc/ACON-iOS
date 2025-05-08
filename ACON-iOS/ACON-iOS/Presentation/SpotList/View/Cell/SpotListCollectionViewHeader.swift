@@ -39,15 +39,15 @@ class SpotListCollectionViewHeader: UICollectionReusableView {
     
     func setLayout() {
         titleLabel.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.bottom.equalToSuperview().inset(12)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(8)
         }
     }
     
     func setStyle() {
         backgroundColor = .clear
-        let title = StringLiterals.SpotList.headerTitle
-        titleLabel.setLabel(text: title, style: .h7)
+        let title = StringLiterals.SpotList.bestChoice
+        titleLabel.setLabel(text: title, style: .t2SB)
     }
     
 }

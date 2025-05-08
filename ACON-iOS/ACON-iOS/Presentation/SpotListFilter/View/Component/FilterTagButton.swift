@@ -11,7 +11,7 @@ class FilterTagButton: UIButton {
 
     // MARK: - Properties
 
-    private let glassView = GlassmorphismView()
+    private let glassView = GlassmorphismView(.buttonGlassDefault)
     private let height: CGFloat = 38
 
     override var isSelected: Bool {
@@ -19,7 +19,6 @@ class FilterTagButton: UIButton {
             configuration?.background.strokeColor = isSelected ? .acWhite : .clear
             
             // TODO: 글래스모피즘 수정
-            glassView.setBlurStyle(isSelected ? .systemThinMaterialLight : .systemUltraThinMaterialLight)
         }
     }
 
@@ -80,7 +79,7 @@ private extension FilterTagButton {
             $0.isUserInteractionEnabled = false
             $0.layer.zPosition = -1 // NOTE: 버튼에 설정한 stroke를 가리지 않음
             $0.layer.cornerRadius = height / 2
-            $0.setBlurStyle(.systemUltraThinMaterialLight)
+//            $0.setBlurStyle(.systemUltraThinMaterialLight) // TODO: 글래스모피즘 수정
         }
     }
 

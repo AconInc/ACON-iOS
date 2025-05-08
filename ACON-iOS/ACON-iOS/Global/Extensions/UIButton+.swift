@@ -7,37 +7,16 @@
 
 import UIKit
 
+import SnapKit
+
 extension UIButton {
-    
+
     // MARK: - 버튼 모서리 둥글게
-    
+
     func roundedButton(cornerRadius: CGFloat, maskedCorners: CACornerMask) {
         clipsToBounds = true
         layer.cornerRadius = cornerRadius
         layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
-    }
-
-
-    // MARK: - Glassmorphism 배경 설정
-
-    func setGlassmorphismBackground(
-        _ cornerRadius: CGFloat,
-        glassColor: UIColor = .clear,
-        blurStyle: UIBlurEffect.Style = .systemUltraThinMaterial
-    ) {
-        let glassView = GlassmorphismView()
-        glassView.clipsToBounds = true
-        glassView.isUserInteractionEnabled = false
-        glassView.layer.zPosition = -1 // NOTE: 버튼에 설정한 stroke를 가리지 않음
-        glassView.layer.cornerRadius = cornerRadius
-        glassView.setGlassColor(glassColor)
-        glassView.setBlurStyle(blurStyle)
-        
-        self.insertSubview(glassView, at: 0)
-        
-        glassView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
     }
 
 
