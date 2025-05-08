@@ -34,9 +34,6 @@ final class DislikeFoodCollectionViewCell: BaseCollectionViewCell {
         super.setStyle()
         
         self.backgroundColor = .clear
-        chipButton.do {
-            $0.updateGlassButtonState(state: .default)
-        }
     }
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
@@ -50,12 +47,27 @@ final class DislikeFoodCollectionViewCell: BaseCollectionViewCell {
         return layoutAttributes
     }
 
-    //TODO: - ACButton 글모 디자인 제대로 안 뜨는 문제 !!!!!!!!!
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        chipButton.frame = self.bounds
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                self.chipButton.updateGlassButtonState(state: .selected)
+            } else {
+                self.chipButton.updateGlassButtonState(state: .default)
+            }
+        }
     }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            if isHighlighted {
+                self.chipButton.updateGlassButtonState(state: .pressed)
+            } else {
+                self.chipButton.updateGlassButtonState(state: .default)
+            }
+        }
+    }
+    
+    //TODO: - chipButton 글모 하얗게디자인 제대로 안 뜨는 문제 !!!!!!!!! + 셀 선택 안됨
     
 }
 

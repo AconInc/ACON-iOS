@@ -19,9 +19,9 @@ final class OnboardingView: BaseView {
     
     let dislikeFoodCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: dislikeFoodCollectionViewFlowLayout)
     
-    private let commentLabel: UILabel = UILabel()
+    let commentLabel: UILabel = UILabel()
     
-    private let lightImageView: UIImageView = UIImageView()
+    let lightImageView: UIImageView = UIImageView()
     
     var startButton: ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_12_t4SB), title: StringLiterals.Onboarding.start)
     
@@ -123,9 +123,6 @@ final class OnboardingView: BaseView {
         }
         
         commentLabel.do {
-            $0.setLabel(text: StringLiterals.Onboarding.dislikeFoodDescription,
-                        style: .t5R,
-                        color: .gray500)
             $0.isHidden = true
         }
         
