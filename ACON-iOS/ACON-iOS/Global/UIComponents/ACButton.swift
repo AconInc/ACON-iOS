@@ -102,6 +102,8 @@ extension ACButton {
             config = .plain()
         }
 
+        config.baseBackgroundColor = .clear
+
         config.imagePlacement = style.imagePlacement
         config.imagePadding = style.imagePadding
         
