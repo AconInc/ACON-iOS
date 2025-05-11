@@ -100,7 +100,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         }
 
         findCourseButton.do {
-            $0.setGlassmorphismBackground(10)
+//            $0.setGlassmorphismBackground(10)
             var config = UIButton.Configuration.plain()
             config.contentInsets = .init(top: 8, leading: 23, bottom: 8, trailing: 23)
             $0.configuration = config

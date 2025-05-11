@@ -22,23 +22,23 @@ extension UIButton {
 
     // MARK: - Glassmorphism 배경 설정
 
-    func setGlassmorphismBackground(
-        _ cornerRadius: CGFloat,
-        glassColor: UIColor = .clear,
-        blurStyle: UIBlurEffect.Style = .systemUltraThinMaterial
-    ) {
-        let glassView = GlassmorphismView()
-        glassView.clipsToBounds = true
-        glassView.layer.cornerRadius = cornerRadius
-        glassView.setGlassColor(glassColor)
-        glassView.setBlurStyle(blurStyle)
-        
-        self.insertSubview(glassView, at: 0)
-        
-        glassView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-    }
+//    func setGlassmorphismBackground(
+//        _ cornerRadius: CGFloat,
+//        glassColor: UIColor = .clear,
+//        blurStyle: UIBlurEffect.Style = .systemUltraThinMaterial
+//    ) {
+//        let glassView = GlassmorphismView()
+//        glassView.clipsToBounds = true
+//        glassView.layer.cornerRadius = cornerRadius
+//        glassView.setGlassColor(glassColor)
+//        glassView.setBlurStyle(blurStyle)
+//        
+//        self.insertSubview(glassView, at: 0)
+//        
+//        glassView.snp.makeConstraints {
+//            $0.edges.equalToSuperview()
+//        }
+//    }
 
 
     // MARK: - 단일 ACStyle 타이틀 설정
