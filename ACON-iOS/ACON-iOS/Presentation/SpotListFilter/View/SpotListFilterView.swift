@@ -292,7 +292,7 @@ private extension SpotListFilterView {
             text: StringLiterals.SpotListFilter.priceSection,
             style: .t5SB)
 
-        goodPriceButton.setAttributedTitle(text: StringLiterals.SpotListFilter.goodPricePlace, style: .b1R)
+        goodPriceButton.setProperties(StringLiterals.SpotListFilter.goodPricePlace)
     }
     
 }
@@ -318,7 +318,7 @@ extension SpotListFilterView {
         secondLineSpotTagStackView.switchTagButtons(titles: secondLine)
         
         let operatingHours: SpotType.OperatingHours = spotType == .restaurant ? .overMidnight : .overTenPM
-        operatingHoursButton.setAttributedTitle(text: operatingHours.text, style: .b1R)
+        operatingHoursButton.setProperties(operatingHours.text)
 
         priceSectionView.isHidden = spotType == .cafe
     }
