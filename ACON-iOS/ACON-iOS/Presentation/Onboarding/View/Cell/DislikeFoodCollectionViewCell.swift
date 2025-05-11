@@ -14,6 +14,40 @@ final class DislikeFoodCollectionViewCell: BaseCollectionViewCell {
     private var chipButton : ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_100_b1R))
 
     
+    // MARK: - Properties
+
+    /// 그냥 isSelected 사용 시 didSelectItems 때 무조건 true 돼서 싱크 안 맞음
+    var isChipSelected: Bool {
+        didSet {
+            if isChipSelected {
+                self.chipButton.updateGlassButtonState(state: .selected)
+            } else {
+                self.chipButton.updateGlassButtonState(state: .default)
+            }
+        }
+    }
+    
+    var isChipEnabled: Bool {
+        didSet {
+            if isChipEnabled {
+                self.chipButton.updateGlassButtonState(state: .default)
+            } else {
+                self.chipButton.updateGlassButtonState(state: .disabled)
+            }
+        }
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            if isHighlighted {
+                self.chipButton.updateGlassButtonState(state: .pressed)
+            } else {
+                self.chipButton.updateGlassButtonState(state: .default)
+            }
+        }
+    }
+    
+    
     // MARK: - Lifecycle
     
     override init(frame: CGRect) {
@@ -60,37 +94,6 @@ final class DislikeFoodCollectionViewCell: BaseCollectionViewCell {
         return layoutAttributes
     }
 
-    /// 그냥 isSelected 사용 시 didSelectItems 때 무조건 true 돼서 싱크 안 맞음
-    var isChipSelected: Bool {
-        didSet {
-            if isChipSelected {
-                self.chipButton.updateGlassButtonState(state: .selected)
-            } else {
-                self.chipButton.updateGlassButtonState(state: .default)
-            }
-        }
-    }
-    
-    var isChipEnabled: Bool {
-        didSet {
-            if isChipEnabled {
-                self.chipButton.updateGlassButtonState(state: .default)
-            } else {
-                self.chipButton.updateGlassButtonState(state: .disabled)
-            }
-        }
-    }
-    
-    override var isHighlighted: Bool {
-        didSet {
-            if isHighlighted {
-                self.chipButton.updateGlassButtonState(state: .pressed)
-            } else {
-                self.chipButton.updateGlassButtonState(state: .default)
-            }
-        }
-    }
-    
 }
 
 extension DislikeFoodCollectionViewCell {

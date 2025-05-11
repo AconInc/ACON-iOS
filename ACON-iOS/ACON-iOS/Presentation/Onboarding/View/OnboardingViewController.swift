@@ -165,7 +165,7 @@ extension OnboardingViewController: UICollectionViewDataSource {
 
 // MARK: - @objc methods
 
-extension OnboardingViewController {
+private extension OnboardingViewController {
     
     @objc
     func noDislikeButtonTapped() {

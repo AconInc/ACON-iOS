@@ -17,7 +17,7 @@ final class OnboardingView: BaseView {
     
     var noDislikeFoodButton : ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_100_b1R), title: "없음")
     
-    let dislikeFoodCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: dislikeFoodCollectionViewFlowLayout)
+    lazy var dislikeFoodCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: dislikeFoodCollectionViewFlowLayout)
     
     let commentLabel: UILabel = UILabel()
     
@@ -26,7 +26,7 @@ final class OnboardingView: BaseView {
     // TODO: - cornerradius 12 좀 작아보임, 30은 돼야 하나
     var startButton: ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_12_t4SB), title: StringLiterals.Onboarding.start)
     
-    static let dislikeFoodCollectionViewFlowLayout: UICollectionViewFlowLayout = {
+    private let dislikeFoodCollectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = LeftAlignedCollectionViewFlowLayout()
         layout.do {
             $0.scrollDirection = .vertical
