@@ -339,6 +339,9 @@ extension SpotListViewController: UICollectionViewDataSource {
                       matchingRateBgColor: bgColor)
         }
         
+        let showLoginCell = !AuthManager.shared.hasToken && indexPath.item > 4
+        item.showLoginCell(showLoginCell)
+        
         return item
     }
     
@@ -376,7 +379,12 @@ extension SpotListViewController: UICollectionViewDataSource {
             guard let self = self else { return }
             ACLocationManager.shared.addDelegate(self.viewModel)
         }
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        if AuthManager.shared.hasToken {
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            presentLoginModal(AmplitudeLiterals.EventName.tappedSpotCell)
+        }
         
         // NOTE: 앰플리튜드
         if indexPath.item == 0 {

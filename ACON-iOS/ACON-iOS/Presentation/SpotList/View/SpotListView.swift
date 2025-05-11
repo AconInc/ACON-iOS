@@ -22,7 +22,7 @@ class SpotListView: BaseView {
 
     private let skeletonView = SkeletonView()
 
-    let errorView = BaseErrorView()
+    let errorView = BaseErrorView(.imageTitleButton)
 
 
     // MARK: - LifeCycles
