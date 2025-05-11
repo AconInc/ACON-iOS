@@ -11,6 +11,8 @@ class BaseErrorView: BaseView {
 
     // MARK: - UI Properties
 
+    private let glassView = GlassmorphismView(.backgroundGlass)
+
     private let container = UIView()
 
     private let errorImageView = UIImageView()
@@ -25,7 +27,7 @@ class BaseErrorView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
 
-        self.addSubview(container)
+        self.addSubviews(glassView, container)
 
         container.addSubviews(
             errorImageView,
@@ -36,6 +38,10 @@ class BaseErrorView: BaseView {
 
     override func setLayout() {
         super.setLayout()
+
+        glassView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
 
         container.snp.makeConstraints {
             $0.center.equalToSuperview()
@@ -58,6 +64,12 @@ class BaseErrorView: BaseView {
         }
     }
 
+    override func setStyle() {
+        self.backgroundColor = .clear
+
+        glassView.isHidden = true
+    }
+
 }
 
 
@@ -66,8 +78,10 @@ class BaseErrorView: BaseView {
 extension BaseErrorView {
 
     func setStyle(errorImage: UIImage = .icError1,
-                  errorMessage: String?,
-                  buttonTitle: String?) {
+                  errorMessage: String? = nil,
+                  buttonTitle: String? = nil,
+                  backgroundColor: UIColor = .gray900,
+                  glassMorphismtype: GlassmorphismType? = nil) {
         errorImageView.do {
             $0.image = errorImage
             $0.contentMode = .scaleAspectFit
@@ -78,7 +92,8 @@ extension BaseErrorView {
                 $0.isHidden = false
                 $0.setLabel(text: errorMessage,
                             style: .b1R,
-                            color: .gray200)
+                            color: .gray200,
+                            alignment: .center)
             }
         } else {
             descriptionLabel.isHidden = true
@@ -93,6 +108,10 @@ extension BaseErrorView {
             confirmButton.isHidden = true
         }
         
+        if let glassType = glassMorphismtype {
+            glassView.isHidden = false
+            glassView.setGlassMorphism(glassType)
+        }
     }
 
 }
