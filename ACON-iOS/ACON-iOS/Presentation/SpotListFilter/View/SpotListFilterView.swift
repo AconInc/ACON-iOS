@@ -288,9 +288,7 @@ private extension SpotListFilterView {
     // MARK: - (Price section)
     
     func setPriceSectionUI() {
-        priceSectionTitleLabel.setLabel(
-            text: StringLiterals.SpotListFilter.priceSection,
-            style: .t5SB)
+        priceSectionView.isHidden = true
     }
     
 }
@@ -318,8 +316,13 @@ extension SpotListFilterView {
         let operatingHours: SpotType.OperatingHours = spotType == .restaurant ? .overMidnight : .overTenPM
         operatingHoursButton.setProperties(operatingHours.text)
         
-        goodPriceButton.setProperties(StringLiterals.SpotListFilter.goodPricePlace)
-        priceSectionView.isHidden = spotType == .cafe
+        if spotType == .restaurant {
+            priceSectionTitleLabel.setLabel(
+                text: StringLiterals.SpotListFilter.priceSection,
+                style: .t5SB)
+            goodPriceButton.setProperties(StringLiterals.SpotListFilter.goodPricePlace)
+            priceSectionView.isHidden = false
+        }
     }
 
     func resetAllTagSelection() {
