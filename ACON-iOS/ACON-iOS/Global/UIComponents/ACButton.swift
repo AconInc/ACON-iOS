@@ -89,7 +89,7 @@ extension ACButton {
     
     // MARK: - Set Button Configuration
     
-    func setConfig(_ style: ConfigButtonStyleType) {
+    private func setConfig(_ style: ConfigButtonStyleType) {
         
         var config: UIButton.Configuration
         
@@ -118,10 +118,10 @@ extension ACButton {
     
     // MARK: - Set Button Style
     
-    func setButtonStyle(_ style: ButtonStyleType,
-                        _ title: String?,
-                        _ image: UIImage?,
-                        _ isEnabled: Bool) {
+    private func setButtonStyle(_ style: ButtonStyleType,
+                                _ title: String?,
+                                _ image: UIImage?,
+                                _ isEnabled: Bool) {
         
         self.do {
             $0.backgroundColor = style.backgroundColor
