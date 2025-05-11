@@ -67,14 +67,18 @@ final class DislikeFoodCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    //TODO: - chipButton 글모 하얗게디자인 제대로 안 뜨는 문제 !!!!!!!!! + 셀 선택 안됨
-    
 }
 
 extension DislikeFoodCollectionViewCell {
     
     func bindData(_ title: String?, _ indexRow: Int) {
         chipButton.updateGlassButtonTitle(title ?? "")
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
+
+        DispatchQueue.main.async {
+            self.chipButton.updateGlassButtonState(state: .default)
+        }
     }
     
 }
