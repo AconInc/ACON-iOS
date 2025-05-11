@@ -37,6 +37,7 @@
 		156D925C2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925B2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift */; };
 		156D925E2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925D2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift */; };
 		156D92602D6570A90037F8F1 /* PatchProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */; };
+		157C0BE82DC897EE000B04AF /* SpotToggleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */; };
 		157135B12DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157135B02DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift */; };
 		157C061F2DC5E7CE000B04AF /* SpotTagType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C061E2DC5E7CE000B04AF /* SpotTagType.swift */; };
 		157C06212DC5EBB4000B04AF /* SpotTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C06202DC5EBB4000B04AF /* SpotTagButton.swift */; };
@@ -46,7 +47,6 @@
 		15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */; };
 		15A3F6A82D36D5B900577E16 /* FilterTagButtonStackLineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6A72D36D5B900577E16 /* FilterTagButtonStackLineType.swift */; };
 		15A3F6AC2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */; };
-		15A3F6E02D38724A00577E16 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */; };
 		15A3F7A12D38C71900577E16 /* PriorityLowEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */; };
 		15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */; };
 		15A48BF82D574B88003C2421 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BF72D574B88003C2421 /* ProfileModel.swift */; };
@@ -68,7 +68,6 @@
 		15C0ED6A2D42CDA300C9ED83 /* loadingWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED692D42CDA300C9ED83 /* loadingWhite.json */; };
 		15C93D0E2DBD9B4E002862DF /* OldACFontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C93D0D2DBD9B4E002862DF /* OldACFontStyle.swift */; };
 		15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256A2D3D61F500320006 /* GlassmorphismView.swift */; };
-		15CD256E2D3D795800320006 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256D2D3D795800320006 /* FloatingButton.swift */; };
 		15CD25702D3F86E700320006 /* CustomRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */; };
 		15CD25782D3FE31400320006 /* PostSpotListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25772D3FE31400320006 /* PostSpotListRequest.swift */; };
 		15CD257A2D3FEDBA00320006 /* SpotListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25792D3FEDBA00320006 /* SpotListService.swift */; };
@@ -300,6 +299,7 @@
 		156D925B2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTitleAndButtonsView.swift; sourceTree = "<group>"; };
 		156D925D2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTitleAndButtonsViewController.swift; sourceTree = "<group>"; };
 		156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchProfileRequest.swift; sourceTree = "<group>"; };
+		157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotToggleButtonView.swift; sourceTree = "<group>"; };
 		157135B02DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		157C061E2DC5E7CE000B04AF /* SpotTagType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTagType.swift; sourceTree = "<group>"; };
 		157C06202DC5EBB4000B04AF /* SpotTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTagButton.swift; sourceTree = "<group>"; };
@@ -309,7 +309,6 @@
 		15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListItemSizeType.swift; sourceTree = "<group>"; };
 		15A3F6A72D36D5B900577E16 /* FilterTagButtonStackLineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagButtonStackLineType.swift; sourceTree = "<group>"; };
 		15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewHeader.swift; sourceTree = "<group>"; };
-		15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityLowEmptyView.swift; sourceTree = "<group>"; };
 		15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotFilterTagStackView.swift; sourceTree = "<group>"; };
 		15A48BF72D574B88003C2421 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
@@ -331,7 +330,6 @@
 		15C0ED692D42CDA300C9ED83 /* loadingWhite.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loadingWhite.json; sourceTree = "<group>"; };
 		15C93D0D2DBD9B4E002862DF /* OldACFontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldACFontStyle.swift; sourceTree = "<group>"; };
 		15CD256A2D3D61F500320006 /* GlassmorphismView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismView.swift; sourceTree = "<group>"; };
-		15CD256D2D3D795800320006 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshControl.swift; sourceTree = "<group>"; };
 		15CD25772D3FE31400320006 /* PostSpotListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSpotListRequest.swift; sourceTree = "<group>"; };
 		15CD25792D3FEDBA00320006 /* SpotListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListService.swift; sourceTree = "<group>"; };
@@ -679,7 +677,6 @@
 		1547A88C2D35AE5C00E96616 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				15A3F6DF2D38724A00577E16 /* CustomSegmentedControl.swift */,
 				1517FD7E2D3961A800638173 /* CustomSlider.swift */,
 				1547A88D2D35B13700E96616 /* FilterTagButton.swift */,
 				15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */,
@@ -747,9 +744,9 @@
 		15CD256C2D3D794300320006 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				15CD256D2D3D795800320006 /* FloatingButton.swift */,
 				15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */,
 				15C0ED512D429F7400C9ED83 /* SkeletonView.swift */,
+				157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */,
 				157C06202DC5EBB4000B04AF /* SpotTagButton.swift */,
 			);
 			path = Component;
@@ -1817,6 +1814,7 @@
 				74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */,
 				151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */,
 				746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */,
+				157C0BE82DC897EE000B04AF /* SpotToggleButtonView.swift in Sources */,
 				746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */,
 				151FC0C92DBD5DA0005F4D0D /* Character+.swift in Sources */,
 				15DC053F2D623DD400B752DD /* PostLogoutRequest.swift in Sources */,
@@ -1829,7 +1827,6 @@
 				D6232C952D3A294C003FF208 /* AlertHandler.swift in Sources */,
 				745C7E122D35A62B0074DBDB /* UploadModel.swift in Sources */,
 				745B19B22D40240900BDBDA4 /* AuthService.swift in Sources */,
-				15A3F6E02D38724A00577E16 /* CustomSegmentedControl.swift in Sources */,
 				748D6F692D2BCA1C007690B4 /* AppDelegate.swift in Sources */,
 				74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */,
 				749A01032D3A6E0100CD7A90 /* ACDebouncer.swift in Sources */,
@@ -1988,7 +1985,6 @@
 				746261832D3F9FD900A4E84F /* GetSpotMenuResponse.swift in Sources */,
 				15CD25842D40364F00320006 /* LoginModalView.swift in Sources */,
 				741E689A2D3D43FF00DF99EF /* EmptyResponse.swift in Sources */,
-				15CD256E2D3D795800320006 /* FloatingButton.swift in Sources */,
 				156D925E2D65375B0037F8F1 /* CustomAlertTitleAndButtonsViewController.swift in Sources */,
 				D696F1B62D3A83D600CCD5FF /* CustomAlertImageView.swift in Sources */,
 				745B19AC2D40021E00BDBDA4 /* PostLoginRequest.swift in Sources */,

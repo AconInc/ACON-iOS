@@ -20,27 +20,6 @@ extension UIButton {
     }
 
 
-    // MARK: - Glassmorphism 배경 설정
-
-    func setGlassmorphismBackground(
-        _ cornerRadius: CGFloat,
-        glassColor: UIColor = .clear,
-        blurStyle: UIBlurEffect.Style = .systemUltraThinMaterial
-    ) {
-        let glassView = GlassmorphismView()
-        glassView.clipsToBounds = true
-        glassView.layer.cornerRadius = cornerRadius
-        glassView.setGlassColor(glassColor)
-        glassView.setBlurStyle(blurStyle)
-        
-        self.insertSubview(glassView, at: 0)
-        
-        glassView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-    }
-
-
     // MARK: - 단일 ACStyle 타이틀 설정
 
     /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.

@@ -15,12 +15,6 @@ class SpotListFilterViewController: BaseViewController {
     
     private let viewModel: SpotListViewModel
     
-    var walkingTime: SpotType.WalkingDistanceType = .twentyFive
-    
-    var restaurantPrice: SpotType.RestaurantPriceType = .aboveFiftyThousand
-    
-    var cafePrice: SpotType.CafePriceType = .aboveTenThousand
-    
     
     // MARK: - LifeCycles
     
@@ -39,15 +33,14 @@ class SpotListFilterViewController: BaseViewController {
         
         bindViewModel()
         addTargets()
-        switchedSegment(viewModel.spotType.value)
-        setDelegate()
+        switchedSegment(viewModel.spotType)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         applyConditions(
-            spotType: viewModel.spotType.value ?? .restaurant,
+            spotType: viewModel.spotType,
             filterLists: viewModel.filterList
         )
     }
@@ -65,12 +58,7 @@ class SpotListFilterViewController: BaseViewController {
             $0.edges.equalToSuperview()
         }
     }
-    
-    private func setDelegate() {
-        spotListFilterView.walkingSlider.delegate = self
-        spotListFilterView.restaurantPriceSlider.delegate = self
-        spotListFilterView.cafePriceSlider.delegate = self
-    }
+
 }
 
 
@@ -99,12 +87,6 @@ private extension SpotListFilterViewController {
 private extension SpotListFilterViewController {
     
     func addTargets() {
-        spotListFilterView.segmentedControl.addTarget(
-            self,
-            action: #selector(didChangeSpot),
-            for: .valueChanged
-        )
-        
         spotListFilterView.exitButton.addTarget(
             self,
             action: #selector(didTapExitButton),
@@ -130,81 +112,48 @@ private extension SpotListFilterViewController {
 // MARK: - @objc functions
 
 private extension SpotListFilterViewController {
-    
-    @objc
-    func didChangeSpot(segment: UISegmentedControl) {
-        let index = segment.selectedSegmentIndex
-        let spotType: SpotType = index == 0 ? .restaurant : .cafe
-        viewModel.spotType.value = spotType
-        switchedSegment(spotType)
-      }
-    
-    
+
     @objc
     func didTapExitButton() {
         self.dismiss(animated: true)
     }
-    
+
     @objc
     func didTapConductButton() {
-        let spotType = viewModel.spotType.value ?? .restaurant
         viewModel.filterList = []
         
         // NOTE: 앰플리튜드
-        let didSlideWalkingTime: Bool = viewModel.walkingTime != walkingTime
-        let didSlideRestaurantPrice: Bool = viewModel.restaurantPrice != restaurantPrice
-        let didSlideCafePrice: Bool = viewModel.cafePrice != cafePrice
-        
-        switch spotType {
+        switch viewModel.spotType {
         case .restaurant:
             let restaurantFilter = extractRestaurantFilter()
-            let companionFilter = extractCompanionFilter()
             
             viewModel.filterList.append(restaurantFilter)
-            viewModel.filterList.append(companionFilter)
             
             // NOTE: 앰플리튜드
             AmplitudeManager.shared.trackEventWithProperties(
                 AmplitudeLiterals.EventName.filter,
                 properties: [
                     "choose_filter_restaurant?" : true,
-                    "slide_walk_restaurant?" : didSlideWalkingTime,
-                    "slide_price_restaurant?" : didSlideRestaurantPrice,
                     "filter_visit_click_food" : restaurantFilter.optionList,
-                    "filter_passenger_click_restaurant" : companionFilter.optionList,
-                    "filter_walk_slide_restaurant" : walkingTime.text,
-                    "filter_price_slide_restaurant" : restaurantPrice.text,
-                    "complete_filter_restaurant?" : !(!didSlideWalkingTime && !didSlideWalkingTime && restaurantFilter.optionList.isEmpty && companionFilter.optionList.isEmpty)
+                    "complete_filter_restaurant?" : !restaurantFilter.optionList.isEmpty
                 ]
             )
             
         case .cafe:
             let cafeFilter = extractCafeFilter()
-            let visitPurposeFilter = extractVisitPurposeFilter()
             
             viewModel.filterList.append(cafeFilter)
-            viewModel.filterList.append(visitPurposeFilter)
             
             // NOTE: 앰플리튜드
             AmplitudeManager.shared.trackEventWithProperties(
                 AmplitudeLiterals.EventName.filter,
                 properties: [
                     "choose_filter_cafe?" : true,
-                    "slide_walk_cafe?" : didSlideWalkingTime,
-                    "slide_price_cafe?" : didSlideCafePrice,
                     "filter_visit_click_cafe" : cafeFilter.optionList,
-                    "filter_purpose_click_ cafe" : visitPurposeFilter.optionList,
-                    "filter_walk_slide_cafe" : walkingTime.text,
-                    "filter_price_slide_cafe" : cafePrice.text,
-                    "complete_filter_cafe?" : !(!didSlideWalkingTime && !didSlideCafePrice && cafeFilter.optionList.isEmpty && visitPurposeFilter.optionList.isEmpty)
+                    "complete_filter_cafe?" : !cafeFilter.optionList.isEmpty
                 ]
             )
         }
-        
-        viewModel.spotType.value = spotType
-        viewModel.walkingTime = self.walkingTime
-        viewModel.restaurantPrice = self.restaurantPrice
-        viewModel.cafePrice = self.cafePrice
         
         viewModel.requestLocation()
         spotListFilterView.conductButton.startLoadingAnimation()
@@ -229,24 +178,12 @@ private extension SpotListFilterViewController {
         spotListFilterView.do {
             // NOTE: spot tag 바꾸기
             $0.switchSpotTagStack(spotType)
-            
-            // NOTE: companion tag는 restaurant일 때만 보임
-            $0.hideCompanionSection(isHidden: spotType == .cafe)
-            
-            // NOTE: visit purpose tag는 cafe일 때만 보임
-            $0.hideVisitPurposeSection(isHidden: spotType == .restaurant)
-            
-            $0.switchPriceSlider(spotType: spotType)
-            
             $0.resetAllTagSelection()
-            
-            $0.resetSliderPosition()
         }
     }
     
     func applyConditions(spotType: SpotType, filterLists: [SpotFilterModel]) {
         // NOTE: 세그먼트 컨트롤 세팅
-        spotListFilterView.segmentedControl.selectedSegmentIndex = spotType == .cafe ? 1 : 0
         switchedSegment(spotType)
         
         // NOTE: tag 세팅
@@ -258,22 +195,8 @@ private extension SpotListFilterViewController {
                 applySpotConditionToUI(
                     spotType: spotType,
                     optionList: filterList.optionList)
-
-            case .companion:
-                applyCompanionConditionToUI(optionList: filterList.optionList)
-            case .visitPurpose:
-                applyVisitPurposeConditionToUI(optionList: filterList.optionList)
             }
         }
-        
-        // NOTE: 슬라이더 세팅
-        let walkingTimeIndex = SpotType.WalkingDistanceType.allCases.firstIndex(of: viewModel.walkingTime) ?? 2
-        let restaurantPriceIndex = SpotType.RestaurantPriceType.allCases.firstIndex(of: viewModel.restaurantPrice ?? .defaultValue) ?? 1
-        let cafePriceIndex = SpotType.CafePriceType.allCases.firstIndex(of: viewModel.cafePrice ?? .defaultValue) ?? 2
-        
-        spotListFilterView.walkingSlider.moveThumbPosition(to: walkingTimeIndex)
-        spotListFilterView.restaurantPriceSlider.moveThumbPosition(to: restaurantPriceIndex)
-        spotListFilterView.cafePriceSlider.moveThumbPosition(to: cafePriceIndex)
     }
     
 }
@@ -336,44 +259,6 @@ extension SpotListFilterViewController {
         return cafeFilterList
     }
     
-    func extractCompanionFilter() -> SpotFilterModel {
-        let companionType = SpotType.CompanionType.allCases
-        var companionOptionList: [String] = []
-        
-        for (i, button) in spotListFilterView.companionTagStackView.arrangedSubviews.enumerated() {
-            let tagButton = button as? FilterTagButton ?? UIButton()
-            if tagButton.isSelected {
-                companionOptionList.append(companionType[i].serverKey)
-            }
-        }
-        
-        let companionFilterList = SpotFilterModel(
-            category: SpotType.FilterCategoryType.companion,
-            optionList: companionOptionList
-        )
-        
-        return companionFilterList
-    }
-    
-    func extractVisitPurposeFilter() -> SpotFilterModel {
-        let visitPurpose = SpotType.VisitPurposeType.allCases
-        var visitPurposeOptionList: [String] = []
-        
-        for (i, button) in spotListFilterView.visitPurposeTagStackView.arrangedSubviews.enumerated() {
-            let tagButton = button as? FilterTagButton ?? UIButton()
-            if tagButton.isSelected {
-                visitPurposeOptionList.append(visitPurpose[i].serverKey)
-            }
-        }
-        
-        let visitPurposeFilterList = SpotFilterModel(
-            category: SpotType.FilterCategoryType.visitPurpose,
-            optionList: visitPurposeOptionList
-        )
-        
-        return visitPurposeFilterList
-    }
-    
     
     // MARK: - VM -> UI
     
@@ -402,51 +287,5 @@ extension SpotListFilterViewController {
             }
         }
     }
-    
-    func applyCompanionConditionToUI(optionList: [String]) {
-        let tagKeys = SpotType.CompanionType.allCases.map { return $0.serverKey }
-        
-        for (i, tagKey) in tagKeys.enumerated() {
-            if optionList.contains(tagKey) {
-                (spotListFilterView.companionTagStackView.arrangedSubviews[i] as? FilterTagButton ?? UIButton()).isSelected = true
-            }
-        }
-    }
-    
-    func applyVisitPurposeConditionToUI(optionList: [String]) {
-        let tagKeys = SpotType.VisitPurposeType.allCases.map { return $0.serverKey }
-        
-        for (i, tagKey) in tagKeys.enumerated() {
-            if optionList.contains(tagKey) {
-                (spotListFilterView.visitPurposeTagStackView.arrangedSubviews[i] as? FilterTagButton ?? UIButton()).isSelected = true
-            }
-        }
-    }
-}
 
-
-// MARK: - Slider Delegate
-
-extension SpotListFilterViewController: SliderViewDelegate {
-    func sliderView(_ sender: CustomSlider, changedValue value: Int) {
-        
-        // NOTE: Wallking distance
-        if sender == spotListFilterView.walkingSlider {
-            let walkingTime = SpotType.WalkingDistanceType.allCases
-            self.walkingTime = walkingTime[value]
-        }
-        
-        // NOTE: Restaurant price
-        else if sender == spotListFilterView.restaurantPriceSlider {
-            let priceRange = SpotType.RestaurantPriceType.allCases
-            self.restaurantPrice = priceRange[value]
-        }
-        
-        // NOTE: Cafe price
-        else if sender == spotListFilterView.cafePriceSlider {
-            let priceRange = SpotType.CafePriceType.allCases
-            self.cafePrice = priceRange[value]
-        }
-    }
-    
 }

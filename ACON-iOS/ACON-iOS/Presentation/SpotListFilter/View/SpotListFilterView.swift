@@ -32,8 +32,6 @@ class SpotListFilterView: GlassmorphismView {
     private let spotSectionStackView = UIStackView()
     
     private let spotSectionTitleLabel = UILabel()
-
-    lazy var segmentedControl = CustomSegmentedControl()
     
     private let spotTagStackView = UIStackView()
     
@@ -42,48 +40,29 @@ class SpotListFilterView: GlassmorphismView {
     let secondLineSpotTagStackView = SpotFilterTagStackView()
     
     
-    // [Companion section]: 함께 하는 사람 (restaurant)
+    // [Operating hours]: 운영 시간 (restaurant, cafe)
     
-    private let companionSectionStackView = UIStackView()
+    private let operatingHoursSectionView = UIView()
     
-    private let companionSectionTitleLabel = UILabel()
+    private let operatingHoursSectionTitleLabel = UILabel()
     
-    let companionTagStackView = SpotFilterTagStackView()
-    
-    
-    // [Visit purpose]: 방문 목적 (cafe)
-    
-    private let visitPurposeSectionStackView = UIStackView()
-    
-    private let visitPurposeSectionTitleLabel = UILabel()
-    
-    let visitPurposeTagStackView = SpotFilterTagStackView()
-    
-    
-    // [Walking time]: 도보 가능 거리 (restaurant, cafe)
-    
-    private let walkingSectionStackView = UIStackView()
-    
-    private let walkingSectionTitleLabel = UILabel()
-    
-    let walkingSlider = CustomSlider(
-        indicators: SpotType.WalkingDistanceType.allCases.map { return $0.text },
-        startIndex: 2)
+    private let operatingHoursButton = FilterTagButton()
     
     
     // [Price range]: 가격대 (restaurant, cafe)
     
-    private let priceSectionStackView = UIStackView()
+    private let priceSectionView = UIView()
     
     private let priceSectionTitleLabel = UILabel()
     
-    let restaurantPriceSlider = CustomSlider(
-        indicators: SpotType.RestaurantPriceType.allCases.map { return $0.text },
-        startIndex: 1)
+    private let goodPriceButton = FilterTagButton()
     
-    let cafePriceSlider = CustomSlider(
-        indicators: SpotType.CafePriceType.allCases.map { return $0.text },
-        startIndex: 1)
+    
+    // MARK: - Size
+    
+    private let horizontalEdge: CGFloat = 16
+    private let sectionSpacing: CGFloat = 40
+    private let innerSectionSpacing: CGFloat = 12
     
     
     // MARK: - Lifecycle
@@ -104,29 +83,23 @@ class SpotListFilterView: GlassmorphismView {
             pageTitleLabel,
             exitButton,
             scrollView,
-            footerView
+            resetButton,
+            conductButton
         )
         
         scrollView.addSubview(stackView)
         
         stackView.addArrangedSubviews(
             spotSectionStackView,
-            companionSectionStackView,
-            visitPurposeSectionStackView,
-            walkingSectionStackView,
-            priceSectionStackView
+            operatingHoursSectionView,
+            priceSectionView
         )
         
-        footerView.addSubviews(
-            resetButton,
-            conductButton
-        )
         
         // [Spot section]
         
         spotSectionStackView.addArrangedSubviews(
             spotSectionTitleLabel,
-            segmentedControl,
             spotTagStackView
         )
         
@@ -136,40 +109,19 @@ class SpotListFilterView: GlassmorphismView {
         )
         
         
-        // [Companion section]
-        
-        companionSectionStackView.addArrangedSubviews(
-            companionSectionTitleLabel,
-            companionTagStackView
+        // [Operating hours section]
+        operatingHoursSectionView.addSubviews(
+            operatingHoursSectionTitleLabel,
+            operatingHoursButton
         )
         
         
-        // [Visit purpose section]
+        // [Price section]
         
-        visitPurposeSectionStackView
-            .addArrangedSubviews(
-                visitPurposeSectionTitleLabel,
-                visitPurposeTagStackView
-            )
-        
-        
-        // [Walking time]
-        
-        walkingSectionStackView
-            .addArrangedSubviews(
-                walkingSectionTitleLabel,
-                walkingSlider
-            )
-        
-        
-        // [Price range]
-        
-        priceSectionStackView
-            .addArrangedSubviews(
-                priceSectionTitleLabel,
-                restaurantPriceSlider,
-                cafePriceSlider
-            )
+        priceSectionView.addSubviews(
+            priceSectionTitleLabel,
+            goodPriceButton
+        )
     }
     
     override func setLayout() {
@@ -182,42 +134,56 @@ class SpotListFilterView: GlassmorphismView {
         
         exitButton.snp.makeConstraints {
             $0.centerY.equalTo(pageTitleLabel)
-            $0.trailing.equalToSuperview().offset(-20)
+            $0.trailing.equalToSuperview().offset(-horizontalEdge)
         }
         
         scrollView.snp.makeConstraints {
             $0.top.equalTo(pageTitleLabel.snp.bottom).offset(9)
             $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalTo(footerView.snp.top)
+            $0.bottom.equalTo(conductButton.snp.top)
         }
         
         stackView.snp.makeConstraints {
             $0.verticalEdges.equalToSuperview().inset(ScreenUtils.heightRatio * 41)
-            $0.width.equalTo(ScreenUtils.widthRatio * 320)
+            $0.horizontalEdges.equalToSuperview().inset(horizontalEdge)
             $0.centerX.equalToSuperview()
         }
         
-        footerView.snp.makeConstraints {
-            $0.height.equalTo(ScreenUtils.heightRatio * 84)
+        operatingHoursSectionTitleLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview()
+        }
+        
+        operatingHoursButton.snp.makeConstraints {
+            $0.top.equalTo(operatingHoursSectionTitleLabel.snp.bottom).offset(innerSectionSpacing)
+            $0.leading.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview()
+        }
+        
+        
+        priceSectionTitleLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview()
+        }
+        
+        goodPriceButton.snp.makeConstraints {
+            $0.top.equalTo(priceSectionTitleLabel.snp.bottom).offset(innerSectionSpacing)
+            $0.leading.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
         
         resetButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(20)
-            $0.centerY.equalTo(conductButton)
+            $0.leading.equalToSuperview().offset(horizontalEdge)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.height.equalTo(44)
+            $0.width.equalTo(120 * ScreenUtils.widthRatio)
         }
         
         conductButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(-horizontalEdge)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide)
             $0.height.equalTo(44)
-            $0.width.equalTo(ScreenUtils.widthRatio * 232)
-            $0.top.equalToSuperview().offset(8)
-            $0.trailing.equalToSuperview().offset(-20)
+            $0.width.equalTo(200 * ScreenUtils.widthRatio)
         }
-        
-        segmentedControl.snp.makeConstraints {
-            $0.height.equalTo(37)
-        }
+
     }
     
     override func setStyle() {
@@ -227,25 +193,18 @@ class SpotListFilterView: GlassmorphismView {
         
         pageTitleLabel.setLabel(
             text: StringLiterals.SpotListFilter.pageTitle,
-            style: .h8)
+            style: .t3SB)
         
         exitButton.setImage(.icDismiss, for: .normal)
         
         stackView.do {
             $0.axis = .vertical
-            $0.spacing = 32
+            $0.spacing = sectionSpacing
         }
         
         setFooterUI()
-        
         setSpotSectionUI()
-        
-        setCompanionSectionUI()
-        
-        setVisitPurposeSectionUI()
-        
-        setWalkingSectionUI()
-        
+        setOperatingHoursSectionUI()
         setPriceSectionUI()
     }
     
@@ -260,17 +219,41 @@ private extension SpotListFilterView {
     
     func setFooterUI() {
         resetButton.do {
-            var config = UIButton.Configuration.plain()
-            config.image = .icReset
-            config.attributedTitle = AttributedString("초기화".attributedString(.t5SB))
+            var config = UIButton.Configuration.bordered()
+            config.baseBackgroundColor = .clear
+            config.cornerStyle = .capsule
+            config.background.strokeWidth = 1
             $0.configuration = config
+
+            // NOTE: 상태 변경에 따라 UI 업데이트
+            $0.configurationUpdateHandler = { button in
+                switch button.state {
+                case .disabled:
+                    button.configuration?.attributedTitle = AttributedString(StringLiterals.SpotListFilter.reset.attributedString(.b1SB, .gray300))
+                    button.configuration?.background.strokeColor = .gray500 // TODO: Disabled glass로 변경
+                default:
+                    button.configuration?.attributedTitle = AttributedString(StringLiterals.SpotListFilter.reset.attributedString(.b1SB, .acWhite))
+                    button.configuration?.background.strokeColor = .gray400 // TODO: Disabled glass로 변경
+                }
+            }
         }
         
         conductButton.do {
             var config = UIButton.Configuration.filled()
-            config.attributedTitle = AttributedString("결과 보기".ACStyle(.h8))
-            config.baseBackgroundColor = .gray500
+            config.cornerStyle = .capsule
             $0.configuration = config
+
+            // NOTE: 상태 변경에 따라 UI 업데이트
+            $0.configurationUpdateHandler = { button in
+                switch button.state {
+                case .disabled:
+                    button.configuration?.attributedTitle = AttributedString(StringLiterals.SpotListFilter.showResults.attributedString(.b1SB, .gray300))
+                    button.configuration?.baseBackgroundColor = .gray600 // TODO: glass로 변경
+                default:
+                    button.configuration?.attributedTitle = AttributedString(StringLiterals.SpotListFilter.showResults.attributedString(.b1SB, .acWhite))
+                    button.configuration?.baseBackgroundColor = .gray400 // TODO: glass로 변경
+                }
+            }
         }
     }
     
@@ -280,12 +263,12 @@ private extension SpotListFilterView {
     func setSpotSectionUI() {
         spotSectionStackView.do {
             $0.axis = .vertical
-            $0.spacing = 12
+            $0.spacing = innerSectionSpacing
         }
         
         spotSectionTitleLabel.do {
-            $0.setLabel(text: StringLiterals.SpotListFilter.spotSection,
-                        style: .s2)
+            $0.setLabel(text: StringLiterals.SpotListFilter.kind,
+                        style: .t5SB)
         }
         
         spotTagStackView.do {
@@ -294,67 +277,18 @@ private extension SpotListFilterView {
             $0.spacing = 5
         }
     }
+
+
+    // MARK: - (Operating hours section)
     
-    
-    // MARK: - (Companion section)
-    
-    func setCompanionSectionUI() {
-        companionSectionStackView.do {
-            $0.axis = .vertical
-            $0.spacing = 12
-        }
-        
-        companionSectionTitleLabel.setLabel(
-            text: StringLiterals.SpotListFilter.companionSection,
-            style: .s2)
-        
-        let tags: [String] = SpotType.CompanionType.allCases.map { return $0.text }
-        companionTagStackView.addTagButtons(titles: tags)
+    func setOperatingHoursSectionUI() {
+        operatingHoursSectionTitleLabel.setLabel(text: StringLiterals.SpotListFilter.operatingHours, style: .t5SB)
     }
-    
-    
-    // MARK: - (Visit purpose section)
-    
-    func setVisitPurposeSectionUI() {
-        visitPurposeSectionStackView.do {
-            $0.axis = .vertical
-            $0.spacing = 12
-        }
-        
-        visitPurposeSectionTitleLabel.setLabel(
-            text: StringLiterals.SpotListFilter.visitPurposeSection,
-            style: .s2)
-        
-        let tags: [String] = SpotType.VisitPurposeType.allCases.map { return $0.text }
-        visitPurposeTagStackView.addTagButtons(titles: tags)
-    }
-    
-    
-    // MARK: - (Walking section)
-    
-    func setWalkingSectionUI() {
-        walkingSectionStackView.do {
-            $0.axis = .vertical
-            $0.spacing = 12
-        }
-        
-        walkingSectionTitleLabel.setLabel(
-            text: StringLiterals.SpotListFilter.walkingSection,
-            style: .s2)
-    }
-    
     
     // MARK: - (Price section)
     
     func setPriceSectionUI() {
-        priceSectionStackView.do {
-            $0.axis = .vertical
-            $0.spacing = 12
-        }
-        
-        priceSectionTitleLabel.setLabel(
-            text: StringLiterals.SpotListFilter.priceSection,
-            style: .s2)
+        priceSectionView.isHidden = true
     }
     
 }
@@ -363,7 +297,7 @@ private extension SpotListFilterView {
 // MARK: - Internal Methods (Update UI)
 
 extension SpotListFilterView {
-    
+
     func switchSpotTagStack(_ spotType: SpotType) {
         let tagTexts: [String] = {
             switch spotType {
@@ -373,49 +307,34 @@ extension SpotListFilterView {
                 return SpotType.CafeFeatureType.allCases.map { return $0.text }
             }
         }()
-        
+
         let firstLine: [String] = Array(tagTexts[0..<spotType.firstLineCount])
         let secondLine: [String] = Array(tagTexts[spotType.firstLineCount...])
-        
         firstLineSpotTagStackView.switchTagButtons(titles: firstLine)
         secondLineSpotTagStackView.switchTagButtons(titles: secondLine)
-    }
-    
-    func hideCompanionSection(isHidden: Bool) {
-        companionSectionStackView.isHidden = isHidden
-    }
-    
-    func hideVisitPurposeSection(isHidden: Bool) {
-        visitPurposeSectionStackView.isHidden = isHidden
-    }
-    
-    func switchPriceSlider(spotType: SpotType) {
-        switch spotType {
-        case .restaurant:
-            restaurantPriceSlider.isHidden = false
-            cafePriceSlider.isHidden = true
-            
-        case .cafe:
-            restaurantPriceSlider.isHidden = true
-            cafePriceSlider.isHidden = false
+        
+        let operatingHours: SpotType.OperatingHours = spotType == .restaurant ? .overMidnight : .overTenPM
+        operatingHoursButton.setProperties(operatingHours.text)
+        
+        if spotType == .restaurant {
+            priceSectionTitleLabel.setLabel(
+                text: StringLiterals.SpotListFilter.priceSection,
+                style: .t5SB)
+            goodPriceButton.setProperties(StringLiterals.SpotListFilter.goodPricePlace)
+            priceSectionView.isHidden = false
         }
     }
-    
+
     func resetAllTagSelection() {
+        [operatingHoursButton, goodPriceButton].forEach { $0.isSelected = false }
         [firstLineSpotTagStackView,
-         secondLineSpotTagStackView,
-         companionTagStackView,
-         visitPurposeTagStackView].forEach {
+         secondLineSpotTagStackView].forEach {
             $0.resetTagSelection()
         }
     }
-    
-    func resetSliderPosition(animated: Bool = true) {
-        [walkingSlider,
-         restaurantPriceSlider,
-         cafePriceSlider].forEach {
-            $0.resetThumbPosition(animated: animated)
-        }
+
+    func enableFooterButtons(_ isEnabled: Bool) {
+        [resetButton, conductButton].forEach { $0.isEnabled = isEnabled }
     }
-    
+
 }
