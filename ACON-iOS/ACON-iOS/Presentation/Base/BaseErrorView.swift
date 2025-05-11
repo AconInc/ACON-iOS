@@ -8,7 +8,9 @@
 import UIKit
 
 enum ErrorViewStyleType {
+
     case imageTitle, imageTitleButton
+
 }
 
 class BaseErrorView: BaseView {
