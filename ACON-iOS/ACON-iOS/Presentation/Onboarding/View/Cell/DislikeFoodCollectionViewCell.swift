@@ -11,7 +11,7 @@ final class DislikeFoodCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - UI Properties
     
-    private var chipButton : ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_100_b1R))
+    private var chipButton : ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_19_b1R))
 
     
     // MARK: - Properties
@@ -99,7 +99,7 @@ final class DislikeFoodCollectionViewCell: BaseCollectionViewCell {
 extension DislikeFoodCollectionViewCell {
     
     func bindData(_ title: String?, _ indexRow: Int) {
-        chipButton.updateGlassButtonTitle(title ?? "")
+        chipButton.updateButtonTitle(title ?? "")
         self.setNeedsLayout()
         self.layoutIfNeeded()
 

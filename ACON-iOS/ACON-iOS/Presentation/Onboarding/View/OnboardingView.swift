@@ -15,7 +15,7 @@ final class OnboardingView: BaseView {
     
     private let descriptionLabel: UILabel = UILabel()
     
-    var noDislikeFoodButton : ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_100_b1R), title: "없음")
+    var noDislikeFoodButton : ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_19_b1R), title: "없음")
     
     lazy var dislikeFoodCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: dislikeFoodCollectionViewFlowLayout)
     

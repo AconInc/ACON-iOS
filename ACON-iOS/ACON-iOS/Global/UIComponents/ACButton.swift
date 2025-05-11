@@ -56,7 +56,7 @@ class ACButton: UIButton {
 
 extension ACButton {
     
-    func setButton(_ style: ButtonStyleType,
+    private func setButton(_ style: ButtonStyleType,
                    _ title: String? = nil,
                    _ image: UIImage? = nil,
                    _ isEnabled: Bool = true) {
@@ -65,20 +65,6 @@ extension ACButton {
         }
         buttonStyleType = style
         setButtonStyle(style, title, image, isEnabled)
-        self.do {
-            $0.title = title
-            $0.imageView?.image = image
-            $0.isEnabled = isEnabled
-        }
-    }
-    
-    func setProperties(_ title: String? = nil,
-                       _ image: UIImage? = nil,
-                       _ isEnabled: Bool = true) {
-        if let style = buttonStyleType as? ConfigButtonStyleType {
-            setConfig(style)
-        }
-        setButtonStyle(buttonStyleType, title, image, isEnabled)
         self.do {
             $0.title = title
             $0.imageView?.image = image
@@ -138,6 +124,8 @@ extension ACButton {
             
             $0.isEnabled = isEnabled
             
+            $0.layer.cornerRadius = style.cornerRadius
+            
             if style.borderWidth > 0 {
                 $0.layer.borderWidth = style.borderWidth
                 $0.layer.borderColor = style.borderColor.cgColor
@@ -153,6 +141,24 @@ extension ACButton {
                 $0.setImage(image, for: .normal)
             }
         }
+    }
+    
+}
+
+
+// MARK: - 버튼 속성 업데이트 메소드
+
+extension ACButton {
+    
+    func updateButtonTitle(_ title: String) {
+        self.title = title
+        self.setAttributedTitle(text: title,
+                                style: buttonStyleType.textStyle,
+                                color: buttonStyleType.textColor)
+    }
+    
+    func updateButtonImage(_ image: UIImage) {
+        self.setImage(image, for: .normal)
     }
     
 }
@@ -228,8 +234,6 @@ extension ACButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-    
-        self.layer.cornerRadius = self.bounds.height * buttonStyleType.cornerRadius / 200
     
         glassmorphismView?.layer.cornerRadius = self.layer.cornerRadius
         glassmorphismView?.layer.masksToBounds = true
@@ -314,13 +318,6 @@ extension ACButton {
                 self.layer.borderWidth = 0
             }
         }
-    }
-    
-    func updateGlassButtonTitle(_ title: String) {
-        self.title = title
-        self.setAttributedTitle(text: title,
-                                style: buttonStyleType.textStyle,
-                                color: buttonStyleType.textColor)
     }
     
 }
