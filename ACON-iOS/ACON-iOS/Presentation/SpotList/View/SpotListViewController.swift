@@ -15,6 +15,10 @@ class SpotListViewController: BaseNavViewController {
     
     private let viewModel = SpotListViewModel()
     
+    private let spotToggleButton = SpotToggleButtonView()
+    
+    private let filterButton = UIButton()
+    
     
     // MARK: - LifeCycle
     
@@ -22,6 +26,7 @@ class SpotListViewController: BaseNavViewController {
         super.viewDidLoad()
         
         bindViewModel()
+        bindObservable()
         setCollectionView()
         addTarget()
         viewModel.requestLocation()
@@ -37,6 +42,7 @@ class SpotListViewController: BaseNavViewController {
         super.setHierarchy()
         
         contentView.addSubview(spotListView)
+        navigationBarView.addSubviews(spotToggleButton, filterButton)
     }
     
     override func setLayout() {
@@ -45,6 +51,16 @@ class SpotListViewController: BaseNavViewController {
         spotListView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
+        spotToggleButton.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
+        filterButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(16)
+            $0.size.equalTo(36)
+        }
     }
     
     override func setStyle() {
@@ -52,24 +68,31 @@ class SpotListViewController: BaseNavViewController {
         
         setGlassMorphism()
         spotListView.errorView.isHidden = true
+        
+        filterButton.do {
+            var config = UIButton.Configuration.filled()
+            config.image = .icFilter
+            config.background.strokeWidth = 1
+            config.cornerStyle = .capsule
+            $0.configuration = config
+            
+            $0.configurationUpdateHandler = { button in
+                switch button.state {
+                case .selected:
+                    button.configuration?.baseBackgroundColor = .gray600 // TODO: glassmorphism
+                    button.configuration?.background.strokeColor = .gray300
+                default:
+                    button.configuration?.baseBackgroundColor = .clear
+                    button.configuration?.background.strokeColor = .clear
+                }
+            }
+        }
     }
             
     private func addTarget() {
-        spotListView.floatingFilterButton.button.addTarget(
+        filterButton.addTarget(
             self,
             action: #selector(tappedFilterButton),
-            for: .touchUpInside
-        )
-        
-        spotListView.floatingLocationButton.button.addTarget(
-            self,
-            action: #selector(tappedLocationButton),
-            for: .touchUpInside
-        )
-        
-        spotListView.floatingMapButton.button.addTarget(
-            self,
-            action: #selector(tappedMapButton),
             for: .touchUpInside
         )
         
@@ -95,24 +118,18 @@ extension SpotListViewController {
             // NOTE: 법정동 조회 성공 -> 네비게이션타이틀
             if onSuccess {
                 viewModel.postSpotList()
-                setTitleLabelStyle(title: viewModel.currentDong)
-                spotListView.floatingFilterButton.isHidden = false
             }
             
             // NOTE: 법정동 조회 실패 (서비스불가지역) -> 에러 뷰, 네비게이션타이틀
             else if viewModel.errorType == .unsupportedRegion {
-                self.setTitleLabelStyle(title: StringLiterals.SpotList.unsupportedRegionNavTitle)
                 spotListView.errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
                                    buttonTitle: "새로고침 하기")
-                spotListView.floatingFilterButton.isHidden = true
             }
             
             // NOTE: 법정동 조회 실패 (기타 에러) -> 에러뷰, 네비게이션타이틀
             else {
-                self.setTitleLabelStyle(title: StringLiterals.SpotList.failedToGetAddressNavTitle)
                 spotListView.errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
                                    buttonTitle: "새로고침 하기")
-                spotListView.floatingFilterButton.isHidden = true
             }
             
             // NOTE: 에러뷰 숨김 여부 처리
@@ -126,18 +143,16 @@ extension SpotListViewController {
                   let isSuccess = isSuccess else { return }
             if isSuccess {
                 spotListView.errorView.isHidden = true
-                if viewModel.hasSpotListChanged {
-                    print("🥑데이터 바뀌어서 reloadData 함")
-                    spotListView.collectionView.reloadData()
-                } else {
-                    print("🥑데이터가 안 바뀌어서 reloadData 안 함")
-                }
+                spotListView.collectionView.reloadData()
                 
                 // NOTE: 스켈레톤 최소 0.5초 유지
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
                     guard let self = self else { return }
                     spotListView.hideSkeletonView(isHidden: true)
-                    if viewModel.spotList.isEmpty {
+                    
+                    let isRestaurantEmpty: Bool = viewModel.spotType == .restaurant && viewModel.restaurantList.isEmpty
+                    let isCafeEmpty: Bool = viewModel.spotType == .cafe && viewModel.cafeList.isEmpty
+                    if isRestaurantEmpty || isCafeEmpty {
                         spotListView.errorView.setStyle(
                             errorMessage: viewModel.errorType?.errorMessage,
                             buttonTitle: nil
@@ -149,14 +164,25 @@ extension SpotListViewController {
                 print("🥑추천장소리스트 Post 실패")
             }
             
-            viewModel.hasSpotListChanged = false
             viewModel.onSuccessPostSpotList.value = nil
             endRefreshingAndTransparancy()
             
-            let isFilterSet = !viewModel.filterList.isEmpty
-            spotListView.updateFilterButtonColor(isFilterSet)
+            filterButton.isSelected = !viewModel.filterList.isEmpty
             
             viewModel.onFinishRefreshingSpotList.value = true
+        }
+    }
+    
+    func bindObservable() {
+        spotToggleButton.selectedType.bind { [weak self] spotType in
+            guard let self = self,
+                  let spotType = spotType else { return }
+            viewModel.spotType = spotType
+            
+            spotListView.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            spotListView.collectionView.reloadData()
+            viewModel.filterList = []
+            viewModel.postSpotList()
         }
     }
     
@@ -209,28 +235,7 @@ private extension SpotListViewController {
             properties: ["click_filter?" : true]
         )
     }
-    
-    
-    @objc
-    func tappedLocationButton() {
-        // TODO: 내용 handleRefreshControl 부분으로 옮기기
-        guard AuthManager.shared.hasToken else {
-            presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
-            return
-        }
-        // TODO: 할 거 하기
-    }
-    
-    @objc
-    func tappedMapButton() {
-        // TODO: 내용 handleRefreshControl 부분으로 옮기기
-        guard AuthManager.shared.hasToken else {
-            presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
-            return
-        }
-        // TODO: 맵뷰 띄우기
-    }
-    
+
     @objc
     func tappedReloadButton() {
         spotListView.hideSkeletonView(isHidden: false)
@@ -312,7 +317,7 @@ extension SpotListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return viewModel.spotList.count
+        return viewModel.spotType == .restaurant ? viewModel.restaurantList.count : viewModel.cafeList.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -325,8 +330,14 @@ extension SpotListViewController: UICollectionViewDataSource {
         
         let bgColor: MatchingRateBgColorType = indexPath.item == 0 ? .dark : .light
         
-        item.bind(spot: viewModel.spotList[indexPath.item],
-                  matchingRateBgColor: bgColor)
+        switch viewModel.spotType {
+        case .restaurant:
+            item.bind(spot: viewModel.restaurantList[indexPath.item],
+                      matchingRateBgColor: bgColor)
+        case .cafe:
+            item.bind(spot: viewModel.cafeList[indexPath.item],
+                      matchingRateBgColor: bgColor)
+        }
         
         return item
     }
@@ -357,7 +368,7 @@ extension SpotListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = viewModel.spotList[indexPath.item]
+        let item = viewModel.spotType == .restaurant ? viewModel.restaurantList[indexPath.item] : viewModel.cafeList[indexPath.item]
         let vc = SpotDetailViewController(item.id)
         
         ACLocationManager.shared.removeDelegate(viewModel)

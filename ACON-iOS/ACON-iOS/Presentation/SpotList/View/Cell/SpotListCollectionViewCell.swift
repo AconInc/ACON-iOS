@@ -10,18 +10,16 @@ import UIKit
 import Kingfisher
 
 class SpotListCollectionViewCell: BaseCollectionViewCell {
-    
-    // TODO: bgImage dim 처리
-    
+
     // MARK: - UI Properties
-    
+
     private let bgImage = UIImageView()
     private let dimImage = UIImageView()
 
     private let titleLabel = UILabel()
     private let acornCountButton = UIButton()
     private let tagStackView = UIStackView()
-    private let findCourseButton = UIButton()
+    private let findCourseButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
     
     
     // MARK: - Life Cycle
@@ -67,6 +65,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
         findCourseButton.snp.makeConstraints {
             $0.bottom.trailing.equalToSuperview().inset(edge)
+            $0.width.equalTo(140)
+            $0.height.equalTo(36)
         }
     }
 
@@ -97,13 +97,6 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
         tagStackView.do {
             $0.spacing = 4
-        }
-
-        findCourseButton.do {
-//            $0.setGlassmorphismBackground(10)
-            var config = UIButton.Configuration.plain()
-            config.contentInsets = .init(top: 8, leading: 23, bottom: 8, trailing: 23)
-            $0.configuration = config
         }
     }
 

@@ -20,9 +20,8 @@ class SpotListViewModel: Serviceable {
     
     var errorType: SpotListErrorType? = nil
     
-    var spotList: [SpotModel] = []
-    
-    var hasSpotListChanged: Bool = false
+    var restaurantList: [SpotModel] = []
+    var cafeList: [SpotModel] = []
     
     var currentDong: String = ""
     
@@ -31,15 +30,9 @@ class SpotListViewModel: Serviceable {
     
     // MARK: - Filter
     
-    var spotType: ObservablePattern<SpotType> = ObservablePattern(nil)
+    var spotType: SpotType = .restaurant
     
     var filterList: [SpotFilterModel] = []
-    
-    var walkingTime: SpotType.WalkingDistanceType = .defaultValue
-    
-    var restaurantPrice: SpotType.RestaurantPriceType? = nil
-    
-    var cafePrice: SpotType.CafePriceType? = nil
     
     
     // MARK: - Methods
@@ -58,11 +51,7 @@ class SpotListViewModel: Serviceable {
     }
     
     func resetConditions() {
-        spotType.value = nil
         filterList.removeAll()
-        walkingTime = .defaultValue
-        restaurantPrice = nil
-        cafePrice = nil
     }
     
 }
@@ -112,10 +101,10 @@ extension SpotListViewModel {
             latitude: userCoordinate.latitude,
             longitude: userCoordinate.longitude,
             condition: SpotCondition(
-                spotType: spotType.value?.serverKey,
+                spotType: spotType.serverKey,
                 filterList: filterList.isEmpty ? nil : filterListDTO,
-                walkingTime: walkingTime.serverKey,
-                priceRange: spotType.value == .restaurant ? restaurantPrice?.serverKey : cafePrice?.serverKey
+                walkingTime: nil,
+                priceRange: nil
             )
         )
         
@@ -133,16 +122,21 @@ extension SpotListViewModel {
                     )
                     return spot
                 }
-                self?.hasSpotListChanged = spotList != self?.spotList
-                self?.spotList = spotList
-                if spotList.isEmpty {
-                    self?.errorType = .emptyList
+
+                if self?.spotType == .restaurant {
+                    self?.restaurantList = spotList
+                } else {
+                    self?.cafeList = spotList
                 }
+
+                if spotList.isEmpty { self?.errorType = .emptyList }
                 self?.onSuccessPostSpotList.value = true
+
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
                     self?.postSpotList()
                 }
+
             case .requestErr(let error):
                 print("🥑post spotList requestErr: \(error)")
                 if error.code == 40405 {
@@ -151,6 +145,7 @@ extension SpotListViewModel {
                     self?.errorType = .serverRequestFail // TODO: 에러 뷰 또는 Alert 띄우기
                 }
                 self?.onSuccessPostSpotList.value = false
+
             default:
                 print("🥑Failed To Post")
                 self?.onSuccessPostSpotList.value = false

@@ -42,7 +42,7 @@ class ACButton: UIButton {
         // TODO: 일부 glass 버튼 때문에 buttonStyleType & title 저장, 추후 더 나은 구조로 리팩
         self.buttonStyleType = style
         self.title = title
-        setProperties(style, title, image, isEnabled)
+        setButton(style, title, image, isEnabled)
     }
     
     required init?(coder: NSCoder) {
@@ -56,20 +56,40 @@ class ACButton: UIButton {
 
 extension ACButton {
     
-    func setProperties(_ style: ButtonStyleType,
-                       _ title: String? = nil,
-                       _ image: UIImage? = nil,
-                       _ isEnabled: Bool) {
+    func setButton(_ style: ButtonStyleType,
+                   _ title: String? = nil,
+                   _ image: UIImage? = nil,
+                   _ isEnabled: Bool = true) {
         if let style = style as? ConfigButtonStyleType {
             setConfig(style)
         }
+        buttonStyleType = style
         setButtonStyle(style, title, image, isEnabled)
+        self.do {
+            $0.title = title
+            $0.imageView?.image = image
+            $0.isEnabled = isEnabled
+        }
+    }
+    
+    func setProperties(_ title: String? = nil,
+                       _ image: UIImage? = nil,
+                       _ isEnabled: Bool = true) {
+        if let style = buttonStyleType as? ConfigButtonStyleType {
+            setConfig(style)
+        }
+        setButtonStyle(buttonStyleType, title, image, isEnabled)
+        self.do {
+            $0.title = title
+            $0.imageView?.image = image
+            $0.isEnabled = isEnabled
+        }
     }
     
     
     // MARK: - Set Button Configuration
     
-    func setConfig(_ style: ConfigButtonStyleType) {
+    private func setConfig(_ style: ConfigButtonStyleType) {
         
         var config: UIButton.Configuration
         
@@ -81,6 +101,8 @@ extension ACButton {
         @unknown default:
             config = .plain()
         }
+
+        config.baseBackgroundColor = .clear
 
         config.imagePlacement = style.imagePlacement
         config.imagePadding = style.imagePadding
@@ -96,10 +118,10 @@ extension ACButton {
     
     // MARK: - Set Button Style
     
-    func setButtonStyle(_ style: ButtonStyleType,
-                        _ title: String?,
-                        _ image: UIImage?,
-                        _ isEnabled: Bool) {
+    private func setButtonStyle(_ style: ButtonStyleType,
+                                _ title: String?,
+                                _ image: UIImage?,
+                                _ isEnabled: Bool) {
         
         self.do {
             $0.backgroundColor = style.backgroundColor
@@ -284,7 +306,7 @@ extension ACButton {
         }
         
         // NOTE: 엣지 케이스 : 보더 변경사항
-        if self.buttonStyleType.glassButtonType == .full_100_b1R {
+        if self.buttonStyleType.glassButtonType == .full_19_b1R {
             if state == .selected {
                 self.layer.borderWidth = 1
                 self.layer.borderColor = UIColor.acWhite.cgColor

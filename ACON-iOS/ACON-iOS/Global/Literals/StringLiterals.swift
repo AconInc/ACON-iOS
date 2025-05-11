@@ -137,17 +137,19 @@ enum StringLiterals {
     
     enum SpotList {
         
+        static let restaurant = "식당"
+        
+        static let cafe = "카페"
+        
         static let matchingRate = "취향 일치율"
         
         static let bestChoice = "최고의 선택."
         
         static let footerText = "장소는 최대 6순위까지만 제공됩니다."
         
-        static let failedToGetAddressNavTitle = "위치 확인 실패" // TODO: 라이팅 기획과 논의
-        
         static let emptySpotListErrorMessage = "앗! 일치하는 도토리 맛집이 없어요"
         
-        static let unsupportedRegionNavTitle = "서비스 불가지역"
+        static let unsupportedRegion = "서비스 불가지역"
         
         static let unsupportedRegionErrorMessage = "앗! 서비스 지원이 불가능한 지역에 있어요"
         
@@ -191,21 +193,23 @@ enum StringLiterals {
     
     enum SpotListFilter {
         
-        static let pageTitle = "상세 조건"
+        static let pageTitle = "상세조건"
         
         static let restaurant = "음식점"
         
         static let cafe = "카페"
         
-        static let spotSection = "방문 장소"
+        static let kind = "종류"
         
-        static let companionSection = "함께 하는 사람"
+        static let operatingHours = "운영시간"
         
-        static let visitPurposeSection = "방문 목적"
+        static let priceSection = "가격"
         
-        static let walkingSection = "도보 가능 거리"
+        static let goodPricePlace = "가성비 좋은 곳"
         
-        static let priceSection = "가격대"
+        static let reset = "초기화"
+        
+        static let showResults = "결과보기"
         
     }
     

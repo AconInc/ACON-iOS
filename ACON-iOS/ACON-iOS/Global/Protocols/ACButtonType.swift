@@ -72,7 +72,7 @@ protocol ConfigButtonStyleType: ButtonStyleType {
     
     var imagePadding: CGFloat { get }
     
-    var preferredSymbolConfigurationForImage: CGFloat { get }
+    var preferredSymbolConfigurationForImage: CGFloat? { get }
     
     var titleAlignment: UIButton.Configuration.TitleAlignment { get }
     
@@ -92,6 +92,8 @@ extension ConfigButtonStyleType {
     var imagePadding: CGFloat { return .zero }
     
     var titleAlignment: UIButton.Configuration.TitleAlignment { return .center }
+    
+    var contentInsets: NSDirectionalEdgeInsets { return .init() }
     
     var showsActivityIndicator: Bool { return false }
     
@@ -132,6 +134,45 @@ struct GlassButton: ButtonStyleType {
         self.textColor = buttonType.textColor
         self.borderWidth = buttonType.borderWidth
         self.borderColor = buttonType.borderColor
+    }
+    
+}
+
+
+struct GlassConfigButton: ButtonStyleType, ConfigButtonStyleType {
+    
+    var preferredSymbolConfigurationForImage: CGFloat?
+    
+    var glassmorphismType: GlassmorphismType?
+    
+    var borderGlassmorphismType: GlassmorphismType?
+    
+    var glassButtonType: GlassButtonType?
+    
+    var textStyle: ACFontType
+    
+    var textColor: UIColor
+    
+    var borderWidth: CGFloat
+    
+    var borderColor: UIColor
+    
+    var cornerRadius: CGFloat
+    
+    var contentInsets: NSDirectionalEdgeInsets
+    
+    init(glassmorphismType: GlassmorphismType? = nil,
+         borderGlassmorphismType: GlassmorphismType? = nil,
+         buttonType: GlassButtonType) {
+        self.glassmorphismType = glassmorphismType
+        self.borderGlassmorphismType = borderGlassmorphismType
+        self.glassButtonType = buttonType
+        self.textStyle = buttonType.textStyle
+        self.textColor = buttonType.textColor
+        self.borderWidth = buttonType.borderWidth
+        self.borderColor = buttonType.borderColor
+        self.cornerRadius = buttonType.cornerRadius
+        self.contentInsets = buttonType.contentInsets
     }
     
 }
