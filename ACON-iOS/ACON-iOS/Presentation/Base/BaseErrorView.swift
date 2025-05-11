@@ -7,9 +7,15 @@
 
 import UIKit
 
+enum ErrorViewStyleType {
+    case imageTitle, imageTitleButton
+}
+
 class BaseErrorView: BaseView {
 
     // MARK: - UI Properties
+
+    private let styleType: ErrorViewStyleType
 
     private let glassView = GlassmorphismView(.backgroundGlass)
 
@@ -20,6 +26,16 @@ class BaseErrorView: BaseView {
     private let descriptionLabel = UILabel()
 
     let confirmButton = UIButton()
+
+    init(_ styleType: ErrorViewStyleType) {
+        self.styleType = styleType
+
+        super.init(frame: .zero)
+    }
+
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
 
     // MARK: - UI Setting Methods
@@ -52,15 +68,24 @@ class BaseErrorView: BaseView {
             $0.size.equalTo(36)
         }
 
-        descriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(errorImageView.snp.bottom).offset(10)
-            $0.centerX.equalTo(errorImageView)
-        }
+        switch styleType {
+        case .imageTitle:
+            descriptionLabel.snp.makeConstraints {
+                $0.top.equalTo(errorImageView.snp.bottom).offset(10)
+                $0.centerX.equalTo(errorImageView)
+                $0.bottom.equalToSuperview()
+            }
+        case .imageTitleButton:
+            descriptionLabel.snp.makeConstraints {
+                $0.top.equalTo(errorImageView.snp.bottom).offset(10)
+                $0.centerX.equalTo(errorImageView)
+            }
 
-        confirmButton.snp.makeConstraints{
-            $0.top.equalTo(descriptionLabel.snp.bottom).offset(12)
-            $0.bottom.equalToSuperview()
-            $0.centerX.equalTo(errorImageView)
+            confirmButton.snp.makeConstraints{
+                $0.top.equalTo(descriptionLabel.snp.bottom).offset(12)
+                $0.bottom.equalToSuperview()
+                $0.centerX.equalTo(errorImageView)
+            }
         }
     }
 
