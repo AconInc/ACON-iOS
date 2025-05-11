@@ -23,6 +23,7 @@ final class OnboardingView: BaseView {
     
     let lightImageView: UIImageView = UIImageView()
     
+    // TODO: - cornerradius 12 좀 작아보임, 30은 돼야 하나
     var startButton: ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_12_t4SB), title: StringLiterals.Onboarding.start)
     
     static let dislikeFoodCollectionViewFlowLayout: UICollectionViewFlowLayout = {
@@ -30,7 +31,7 @@ final class OnboardingView: BaseView {
         layout.do {
             $0.scrollDirection = .vertical
             $0.minimumInteritemSpacing = 8
-            $0.minimumLineSpacing = 10
+            $0.minimumLineSpacing = 8
             $0.sectionInset = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
             $0.estimatedItemSize = CGSize(width: 100, height: 38)
         }
@@ -47,8 +48,8 @@ final class OnboardingView: BaseView {
                          descriptionLabel,
                          noDislikeFoodButton,
                          dislikeFoodCollectionView,
-                         commentLabel,
                          lightImageView,
+                         commentLabel,
                          startButton)
     }
     
@@ -80,22 +81,22 @@ final class OnboardingView: BaseView {
             $0.height.equalTo(176)
         }
         
-        commentLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*80)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(20)
-        }
-        
         lightImageView.snp.makeConstraints {
             $0.size.equalTo(275)
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*531)
             $0.centerX.equalToSuperview()
         }
         
+        commentLabel.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(21+ScreenUtils.heightRatio*80)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(20)
+        }
+
         startButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*16)
+            $0.bottom.equalToSuperview().inset(21+ScreenUtils.heightRatio*16)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*16)
-            $0.height.equalTo(ScreenUtils.heightRatio*54)
+            $0.height.equalTo(54)
         }
         
     }
@@ -103,7 +104,6 @@ final class OnboardingView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        //TODO: - 왜 이렇게 피그마 폰트랑 안 맞는 느낌이지
         titleLabel.do {
             $0.setLabel(text: StringLiterals.Onboarding.dislikeFoodTitle, style: .t1SB)
         }
@@ -120,6 +120,7 @@ final class OnboardingView: BaseView {
         
         dislikeFoodCollectionView.do {
             $0.backgroundColor = .clear
+            $0.isScrollEnabled = false
         }
         
         commentLabel.do {
