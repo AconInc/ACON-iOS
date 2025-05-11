@@ -314,13 +314,13 @@ extension SpotListFilterView {
         secondLineSpotTagStackView.switchTagButtons(titles: secondLine)
         
         let operatingHours: SpotType.OperatingHours = spotType == .restaurant ? .overMidnight : .overTenPM
-        operatingHoursButton.setProperties(operatingHours.text)
+        operatingHoursButton.updateButtonTitle(operatingHours.text)
         
         if spotType == .restaurant {
             priceSectionTitleLabel.setLabel(
                 text: StringLiterals.SpotListFilter.priceSection,
                 style: .t5SB)
-            goodPriceButton.setProperties(StringLiterals.SpotListFilter.goodPricePlace)
+            goodPriceButton.updateButtonTitle(StringLiterals.SpotListFilter.goodPricePlace)
             priceSectionView.isHidden = false
         }
     }

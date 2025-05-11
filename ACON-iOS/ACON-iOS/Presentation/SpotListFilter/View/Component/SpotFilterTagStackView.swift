@@ -50,7 +50,7 @@ extension SpotFilterTagStackView {
         
         for title in titles {
             let button = FilterTagButton()
-            button.setProperties(title)
+            button.updateButtonTitle(title)
             self.addArrangedSubview(button)
         }
         

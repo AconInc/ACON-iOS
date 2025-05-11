@@ -14,7 +14,9 @@ class FilterTagButton: ACButton {
     init() {
         super.init(style: GlassConfigButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_19_b1R))
 
-        updateGlassButtonState(state: .default)
+        DispatchQueue.main.async {
+            self.updateGlassButtonState(state: .default)
+        }
 
         self.addTarget(self, action: #selector(toggleSelf), for: .touchUpInside)
         self.addTarget(self, action: #selector(touchDownSelf), for: .touchDown)
