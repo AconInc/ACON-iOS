@@ -283,7 +283,7 @@ extension ACButton {
         }
         
         // NOTE: 엣지 케이스 : 보더 변경사항
-        if self.buttonStyleType.glassButtonType == .full_100_b1r {
+        if self.buttonStyleType.glassButtonType == .full_19_b1R {
             if state == .selected {
                 self.layer.borderWidth = 1
                 self.layer.borderColor = UIColor.acWhite.cgColor

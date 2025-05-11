@@ -15,16 +15,18 @@ enum GlassButtonType {
     
     case full_10_b1SB
     
-    case full_100_b1SB
+    case full_22_b1SB
     
-    case full_100_b1r
+    case full_19_b1R
     
     case both_20_labelAction_t4R
     
     var cornerRadius: CGFloat {
         switch self {
-        case .full_100_b1SB, .full_100_b1r:
-            return 100
+        case .full_22_b1SB:
+            return 22
+        case .full_19_b1R:
+            return 19
         case .both_20_labelAction_t4R:
             return 20
         case .full_12_t4SB, .line_12_b1SB:
@@ -36,13 +38,13 @@ enum GlassButtonType {
     
     var textStyle: ACFontType {
         switch self {
-        case .full_100_b1SB, .line_12_b1SB, .full_10_b1SB:
+        case .full_22_b1SB, .line_12_b1SB, .full_10_b1SB:
             return .b1SB
         case .both_20_labelAction_t4R:
             return .t4R
         case .full_12_t4SB:
             return .t4SB
-        case .full_100_b1r:
+        case .full_19_b1R:
             return .b1R
         }
     }
