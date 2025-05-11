@@ -12,9 +12,20 @@ final class DislikeFoodCollectionViewCell: BaseCollectionViewCell {
     // MARK: - UI Properties
     
     private var chipButton : ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_100_b1R))
-    
+
     
     // MARK: - Lifecycle
+    
+    override init(frame: CGRect) {
+        self.isChipSelected = false
+        self.isChipEnabled = true
+        
+        super.init(frame: frame)
+    }
+    
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func setHierarchy() {
         super.setHierarchy()
@@ -34,6 +45,8 @@ final class DislikeFoodCollectionViewCell: BaseCollectionViewCell {
         super.setStyle()
         
         self.backgroundColor = .clear
+        self.isSelected = false
+        chipButton.isUserInteractionEnabled = false
     }
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
@@ -47,12 +60,23 @@ final class DislikeFoodCollectionViewCell: BaseCollectionViewCell {
         return layoutAttributes
     }
 
-    override var isSelected: Bool {
+    /// 그냥 isSelected 사용 시 didSelectItems 때 무조건 true 돼서 싱크 안 맞음
+    var isChipSelected: Bool {
         didSet {
-            if isSelected {
+            if isChipSelected {
                 self.chipButton.updateGlassButtonState(state: .selected)
             } else {
                 self.chipButton.updateGlassButtonState(state: .default)
+            }
+        }
+    }
+    
+    var isChipEnabled: Bool {
+        didSet {
+            if isChipEnabled {
+                self.chipButton.updateGlassButtonState(state: .default)
+            } else {
+                self.chipButton.updateGlassButtonState(state: .disabled)
             }
         }
     }

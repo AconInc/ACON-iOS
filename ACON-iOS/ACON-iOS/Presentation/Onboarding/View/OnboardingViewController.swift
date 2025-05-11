@@ -107,30 +107,37 @@ extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? DislikeFoodCollectionViewCell {
-            cell.isSelected.toggle()
-            /// 해산물 예외처리
-            if cell.isSelected {
+            cell.isChipSelected.toggle()
+            
+            if cell.isChipSelected {
+                /// 해산물 예외처리
                 if indexPath.item == 6 {
                     for i in 0..<6 {
                         let seafoodIndexPath = IndexPath(item: i, section: indexPath.section)
-                        if let otherCell = collectionView.cellForItem(at: seafoodIndexPath) as? DislikeFoodCollectionViewCell, !otherCell.isSelected {
-                            otherCell.isSelected = true
-                            if ((selectedFood.value?.contains(categories[i])) == nil) {
+                        if let otherCell = collectionView.cellForItem(at: seafoodIndexPath) as? DislikeFoodCollectionViewCell, !otherCell.isChipSelected {
+                            otherCell.isChipSelected = true
+                            if !(selectedFood.value?.contains(categories[indexPath.item]) ?? false) {
                                 selectedFood.value?.append(categories[i])
                             }
                         }
                     }
                 }
-                if ((selectedFood.value?.contains(categories[indexPath.item])) == nil) {
+                if !(selectedFood.value?.contains(categories[indexPath.item]) ?? false) {
+                    if selectedFood.value == nil {
+                        selectedFood.value = []
+                        onboardingView.noDislikeFoodButton.updateGlassButtonState(state: .disabled)
+                    }
                     selectedFood.value?.append(categories[indexPath.item])
                 }
             } else {
                 if let index = selectedFood.value?.firstIndex(of: categories[indexPath.item]) {
                     selectedFood.value?.remove(at: index)
+                    if selectedFood.value == [] {
+                        selectedFood.value = nil
+                        onboardingView.noDislikeFoodButton.updateGlassButtonState(state: .default)
+                    }
                 }
             }
-            
-            print(selectedFood.value)
         }
     }
 
@@ -165,12 +172,12 @@ extension OnboardingViewController {
         if onboardingView.noDislikeFoodButton.buttonState == .selected {
             onboardingView.noDislikeFoodButton.updateGlassButtonState(state: .default)
             selectedFood.value = nil
-            // TODO: 컬뷰 모든 버튼 able
+            enableAllCells(true)
             
         } else {
             onboardingView.noDislikeFoodButton.updateGlassButtonState(state: .selected)
             selectedFood.value = []
-            // TODO: 컬뷰 모든 버튼 disable
+            enableAllCells(false)
         }
     }
     
@@ -178,6 +185,22 @@ extension OnboardingViewController {
     func startButtonTapped() {
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
             sceneDelegate.window?.rootViewController = ACTabBarController()
+        }
+    }
+    
+}
+
+
+// MARK: - 셀 전체 활성화 / 비활성화 로직
+
+extension OnboardingViewController {
+    
+    private func enableAllCells(_ enable: Bool) {
+        for cell in onboardingView.dislikeFoodCollectionView.visibleCells {
+            if let cell = cell as? DislikeFoodCollectionViewCell {
+                cell.isUserInteractionEnabled = enable
+                cell.isChipEnabled = enable
+            }
         }
     }
     
