@@ -16,8 +16,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     private let bgImage = UIImageView()
     private let dimImage = UIImageView()
 
-    private let noImageErrorView = BaseErrorView(.imageTitle)
-    private let loginErrorView = BaseErrorView(.imageTitleButton)
+    private let noImageErrorView = SpotListErrorView(.imageTitle)
+    private let loginErrorView = SpotListErrorView(.imageTitleButton)
 
     private let titleLabel = UILabel()
     private let acornCountButton = UIButton()

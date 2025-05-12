@@ -1,5 +1,5 @@
 //
-//  BaseNetworkErrorView.swift
+//  SpotListErrorView.swift
 //  ACON-iOS
 //
 //  Created by 김유림 on 2/20/25.
@@ -7,17 +7,17 @@
 
 import UIKit
 
-enum ErrorViewStyleType {
+enum SpotListErrorStyleType {
 
     case imageTitle, imageTitleButton
 
 }
 
-class BaseErrorView: BaseView {
+class SpotListErrorView: BaseView {
 
     // MARK: - UI Properties
 
-    private let styleType: ErrorViewStyleType
+    private let styleType: SpotListErrorStyleType
 
     private let glassView = GlassmorphismView(.backgroundGlass)
 
@@ -29,7 +29,7 @@ class BaseErrorView: BaseView {
 
     let confirmButton = UIButton()
 
-    init(_ styleType: ErrorViewStyleType) {
+    init(_ styleType: SpotListErrorStyleType) {
         self.styleType = styleType
 
         super.init(frame: .zero)
@@ -102,7 +102,7 @@ class BaseErrorView: BaseView {
 
 // MARK: - Internal Methods
 
-extension BaseErrorView {
+extension SpotListErrorView {
 
     func setStyle(errorImage: UIImage = .icError1,
                   errorMessage: String? = nil,
