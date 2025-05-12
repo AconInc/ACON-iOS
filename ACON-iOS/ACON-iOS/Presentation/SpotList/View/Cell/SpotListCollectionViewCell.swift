@@ -16,38 +16,49 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     private let bgImage = UIImageView()
     private let dimImage = UIImageView()
 
+    private let noImageErrorView = SpotListErrorView(.imageTitle)
+    private let loginErrorView = SpotListErrorView(.imageTitleButton)
+
     private let titleLabel = UILabel()
     private let acornCountButton = UIButton()
     private let tagStackView = UIStackView()
     private let findCourseButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
-    
-    
+
+    private let cornerRadius: CGFloat = 20
+
+
     // MARK: - Life Cycle
-    
+
     override func setHierarchy() {
         super.setHierarchy()
 
         self.addSubviews(bgImage,
                          dimImage,
+                         noImageErrorView,
                          titleLabel,
                          acornCountButton,
                          tagStackView,
-                         findCourseButton)
+                         findCourseButton,
+                         loginErrorView)
     }
-    
+
     override func setLayout() {
         super.setLayout()
-        
+
         let edge = ScreenUtils.widthRatio * 20
-        
+
         bgImage.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
+
         dimImage.snp.makeConstraints {
             $0.edges.equalTo(bgImage)
         }
- 
+
+        noImageErrorView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
         titleLabel.snp.makeConstraints {
             $0.top.leading.equalToSuperview().offset(edge)
             $0.width.equalTo(210 * ScreenUtils.widthRatio)
@@ -68,6 +79,11 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.width.equalTo(140)
             $0.height.equalTo(36)
         }
+
+        loginErrorView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
     }
 
     override func setStyle() {
@@ -76,13 +92,22 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         bgImage.do {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
-            $0.layer.cornerRadius = 20
+            $0.layer.cornerRadius = cornerRadius
         }
 
         dimImage.do {
             $0.clipsToBounds = true
             $0.image = .imgGra1
-            $0.layer.cornerRadius = 20
+            $0.layer.cornerRadius = cornerRadius
+        }
+
+        noImageErrorView.do {
+            $0.isHidden = true
+            $0.clipsToBounds = true
+            $0.layer.cornerRadius = cornerRadius
+            $0.setStyle(errorImage: .icAcornGlass,
+                        errorMessage: StringLiterals.SpotList.preparingImages,
+                        glassMorphismtype: .noImageErrorGlass)
         }
 
         acornCountButton.do {
@@ -98,6 +123,16 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         tagStackView.do {
             $0.spacing = 4
         }
+
+        loginErrorView.do {
+            $0.isHidden = true
+            $0.clipsToBounds = true
+            $0.layer.cornerRadius = cornerRadius
+            $0.setStyle(errorImage: .icLock,
+                        errorMessage: StringLiterals.SpotList.needLoginToSeeMore,
+                        buttonTitle: StringLiterals.SpotList.loginInThreeSeconds,
+                        glassMorphismtype: .needLoginErrorGlass)
+        }
     }
 
 }
@@ -110,7 +145,19 @@ extension SpotListCollectionViewCell {
     func bind(spot: SpotModel, matchingRateBgColor: MatchingRateBgColorType) {
         bgImage.kf.setImage(
             with: URL(string: spot.imageURL),
-            options: [.transition(.none), .cacheOriginalImage])
+            placeholder: UIImage.imgSkeletonBg,
+            options: [.transition(.none), .cacheOriginalImage],
+            completionHandler: { result in
+                switch result {
+                case .success:
+                    self.noImageErrorView.isHidden = true
+                case .failure(let error):
+                    print("😢 이미지 로드 실패: \(error)")
+                    self.bgImage.image = nil
+                    self.noImageErrorView.isHidden = false
+                }
+            }
+        )
 
         titleLabel.setLabel(text: spot.name, style: .t4SB)
 
@@ -131,6 +178,10 @@ extension SpotListCollectionViewCell {
         let findCourse: String = StringLiterals.SpotList.minuteFindCourse
         let courseTitle: String = walk + String(spot.walkingTime) + findCourse
         findCourseButton.setAttributedTitle(text: courseTitle, style: .b1SB)
+    }
+
+    func showLoginCell(_ show: Bool) {
+        loginErrorView.isHidden = !show
     }
 
 }

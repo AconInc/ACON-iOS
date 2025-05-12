@@ -27,6 +27,10 @@ enum AmplitudeLiterals {
         
         static let serviceLogout = "service_logout"
         
+        static let loginInThreeSeconds = "login_in_three_seconds" // TODO: 앰플에 필드 정의 필요
+        
+        static let tappedSpotCell = "tapped_spot_cell" // TODO: 앰플에 필드 정의 필요
+        
     }
     
 }

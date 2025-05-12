@@ -157,6 +157,12 @@ enum StringLiterals {
         
         static let minuteFindCourse = "분 길찾기"
         
+        static let preparingImages = "장소 이미지를\n준비하고 있어요"
+        
+        static let needLoginToSeeMore = "더 많은 장소를 보기 위해\n로그인이 필요해요"
+        
+        static let loginInThreeSeconds = "3초 만에 로그인 하러 가기"
+        
     }
     
     enum LocalVerification {
