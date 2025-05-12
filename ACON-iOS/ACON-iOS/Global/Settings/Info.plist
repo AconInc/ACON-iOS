@@ -53,6 +53,10 @@
 	<true/>
 	<key>NMFClientId</key>
 	<string>${NMAP_CLIENT_KEY}</string>
+	<key>NMFNcpKeyId</key>
+	<string>${NMF_NCP_KEY_ID}</string>
+	<key>NMFCustomStyleID</key>
+	<string>${NMF_CUSTOM_STYLE_ID}</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
