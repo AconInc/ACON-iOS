@@ -19,8 +19,11 @@ final class LocalMapView: BaseView {
     
     var acMapMarker: NMFMarker = NMFMarker()
     
-    var finishVerificationButton: UIButton = UIButton()
-
+    var finishVerificationButton: ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault,
+                                                                         buttonType: .full_12_t4SB),
+                                                      title: StringLiterals.LocalVerification.finishVerification)
+    
+    
     // MARK: - Lifecycle
     
     override func setHierarchy() {
@@ -32,10 +35,9 @@ final class LocalMapView: BaseView {
     
     override func setLayout() {
         super.setLayout()
-        
+
         nMapView.snp.makeConstraints {
-            $0.top.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.heightRatio*564)
+            $0.edges.equalToSuperview()
         }
         
         finishVerificationButton.snp.makeConstraints {
@@ -54,26 +56,23 @@ final class LocalMapView: BaseView {
             $0.showZoomControls = false
             $0.showScaleBar = false
             $0.showCompass = false
-            $0.mapView.positionMode = .disabled
-            $0.mapView.zoomLevel = 17
-            $0.mapView.minZoomLevel = 14
-            $0.mapView.maxZoomLevel = 18
+            $0.mapView.do {
+                $0.positionMode = .disabled
+                $0.zoomLevel = 17
+                $0.minZoomLevel = 14
+                $0.maxZoomLevel = 18
+                $0.customStyleId = Config.nmfCustomStyleID
+                $0.logoAlign = .rightTop
+                $0.logoMargin = ConstraintInsets(top: ScreenUtils.topInsetHeight+ScreenUtils.heightRatio*80, left: 0, bottom: 0, right: ScreenUtils.widthRatio*16)
+            }
         }
 
         acMapMarker.do {
-            $0.iconImage = NMFOverlayImage(name: "ic_mark")
-            $0.width = 48
-            $0.height = 48
+            $0.iconImage = NMFOverlayImage(name: "ic_location")
+            // TODO: 피그마상 36x36인데 우선 디자인과 100X100으로 합의
+            $0.width = 100
+            $0.height = 100
             $0.mapView = nMapView.mapView
-        }
-        
-        finishVerificationButton.do {
-            $0.setAttributedTitle(text: StringLiterals.LocalVerification.finishVerification,
-                                  style: .h8,
-                                  color: .acWhite,
-                                  for: .normal)
-            $0.backgroundColor = .gray500
-            $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
         }
     }
     

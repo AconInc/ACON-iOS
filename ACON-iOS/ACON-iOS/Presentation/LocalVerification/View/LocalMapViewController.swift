@@ -60,13 +60,15 @@ class LocalMapViewController: BaseNavViewController {
         super.setLayout()
 
         localMapView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(self.topInsetView.snp.top)
+            $0.bottom.horizontalEdges.equalToSuperview()
         }
     }
     
     override func setStyle() {
         super.setStyle()
 
+        self.setGlassMorphism()
         self.setBackButton()
         self.setSecondTitleLabelStyle(title: StringLiterals.LocalVerification.locateOnMap)
     }
@@ -99,7 +101,7 @@ private extension LocalMapViewController {
                 switch flowType {
                 case .onboarding:
                     self?.localArea = areaName
-                    self?.presentVerificationFinsishedVC()
+                    self?.navigateToOnboarding()
                 case .adding, .switching:
                     guard let vcStack = self?.navigationController?.viewControllers else { return }
                     self?.localArea = areaName
@@ -135,20 +137,14 @@ private extension LocalMapViewController {
 }
 
 
-// MARK: - @objc functions
+// MARK: - navigation functions
 
 private extension LocalMapViewController {
 
-    func presentVerificationFinsishedVC() {
-        let vc = LocalVerificationFinishedViewController(localArea: self.localArea)
-        vc.dismissCompletion = { [weak self] in
-            self?.removeBlurView()
+    func navigateToOnboarding() {
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = OnboardingViewController()
         }
-        
-        vc.setSheetLayout(detent: .middle)
-        vc.isModalInPresentation = true
-        self.addBlurView()
-        self.present(vc, animated: true)
     }
     
 }
