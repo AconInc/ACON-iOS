@@ -219,14 +219,6 @@ enum StringLiterals {
         
     }
     
-    enum Analyzing {
-        
-        static let analyzing = "회원님의 취향을 \n빠르게 분석하고 있어요"
-        
-        static let analyzingAfter = "분석이 완료되었어요\n추천 맛집을 보여드릴게요!"
-        
-    }
-    
     enum SpotDetail {
         
         static let isOpen = "영업중"
@@ -260,6 +252,19 @@ enum StringLiterals {
         
     }
     
+    enum Onboarding {
+        
+        static let dislikeFoodTitle = "싫어하는 음식을\n알려줄 수 있나요?"
+        
+        static let dislikeFoodDescription = "싫어하는 음식은 설정에서 다시 수정할 수 있어요"
+        
+        static let allFood = "모든 음식을 잘 드시는 분이군요!"
+        
+        static let notAllFood = "확인했어요! 센스있게 추천해드릴게요"
+        
+        static let start = "시작하기"
+        
+    }
     
     enum DislikeTypes {
         
@@ -274,64 +279,6 @@ enum StringLiterals {
         static let yanggogi = "양고기"
         
         static let none = " "
-        
-    }
-    
-    enum FavoriteSpotRankTypes {
-        
-        static let mood = "분위기가 감각적인"
-        
-        static let new = "새로운 음식의 경험"
-        
-        static let quality = "합리적인 가격과 양"
-        
-        static let special = "특별한 날, 고급스러운"
-        
-    }
-    
-    enum FavoriteSpotTypes {
-        
-        static let restaurant = "음식점"
-        
-        static let cafe = "카페"
-        
-    }
-    
-    enum FavoriteSpotStyles {
-        
-        static let nopo = "빈티지"
-        
-        static let modern = "모던"
-        
-    }
-    
-    enum FavoriteCuisineTypes {
-        
-        static let korean = "한식"
-        
-        static let western = "양식"
-        
-        static let chinese = "중식"
-        
-        static let japanese = "일식"
-        
-        static let koreanStreet = "분식"
-        
-        static let asian = "아시안"
-        
-    }
-    
-    enum OnboardingType {
-        
-        static let progressNumberList = ["01", "02", "03", "04", "05"]
-        
-        static let progressTitleList = [
-            "싫어하는 음식을 선택해주세요",
-            "선호 음식 Top3까지 순위를 매겨주세요.",
-            "자주 가는 곳이 어디인가요?",
-            "어떤 분위기의 공간이 좋으세요?",
-            "선호하는 맛집 스타일의\n순위를 매겨주세요."
-        ]
         
     }
     
