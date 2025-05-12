@@ -189,7 +189,7 @@ extension BaseNavViewController {
         }
         glassMorphismView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
-            $0.bottom.equalTo(navigationBarView)
+            $0.height.equalTo(ScreenUtils.topInsetHeight + ScreenUtils.navViewHeight)
         }
         self.view.layoutIfNeeded()
         glassMorphismView.setGradient()
