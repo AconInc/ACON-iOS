@@ -151,9 +151,19 @@ extension MenuImageSlideViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.cellIdentifier, for: indexPath) as? MenuCollectionViewCell else { return UICollectionViewCell() }
         item.setImage(imageURL: imageURLs[indexPath.item], isPinchable: true)
+
+        item.onZooming = { [weak self] isZooming in
+            if isZooming {
+                self?.hideArrowButtons()
+            } else {
+                self?.updateArrowButtonsVisibility()
+            }
+        }
+
         item.onBackgroundTapped = { [weak self] in
             self?.dismiss(animated: true)
         }
+
         return item
     }
  
@@ -200,6 +210,10 @@ private extension MenuImageSlideViewController {
         let currentIndex = indexPath.item
         leftButton.isHidden = currentIndex == 0
         rightButton.isHidden = currentIndex == imageURLs.count - 1
+    }
+
+    private func hideArrowButtons() {
+        [leftButton, rightButton].forEach { $0.isHidden = true }
     }
 
 }

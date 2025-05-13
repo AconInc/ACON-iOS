@@ -14,6 +14,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
 
     var onBackgroundTapped: (() -> Void)?
+    var onZooming: ((Bool) -> Void)?
 
     private let imageView = UIImageView()
 
@@ -83,8 +84,10 @@ private extension MenuCollectionViewCell {
         case .ended:
             gesture.scale = 1.0
             imageView.clipsToBounds = true
+            onZooming?(false)
         case .changed:
             imageView.clipsToBounds = false
+            onZooming?(true)
         default: break
         }
 
