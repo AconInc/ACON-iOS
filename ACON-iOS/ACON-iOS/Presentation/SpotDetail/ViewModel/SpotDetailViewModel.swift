@@ -17,6 +17,7 @@ class SpotDetailViewModel: Serviceable {
     let onSuccessGetSpotDetail: ObservablePattern<Bool> = ObservablePattern(nil)
         
     var spotDetail: ObservablePattern<SpotDetailInfoModel> = ObservablePattern(nil)
+    let imageURLs: [String] = ["https://www.bhc.co.kr/upload/bhc/menu/%EC%96%91%EB%85%90%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_410x271.jpg","https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg","https://images.immediate.co.uk/production/volatile/sites/30/2022/03/Pancake-grazing-board-bc15106.jpg?quality=90&resize=556,505","https://natashaskitchen.com/wp-content/uploads/2020/03/Pan-Seared-Steak-4.jpg","https://i.namu.wiki/i/oFHlYDjoEh8f-cc3lNK9jAemRkbXxNGwUg7XiW5LGS6DF1P2x8GCeNQxbQhVIwtUS1u53YPw-uoyqpmLtrGNJA.webp","https://i.namu.wiki/i/dgjXU86ae29hDSCza-L0GZlFt3T9lRx1Ug9cKtqWSzMzs7Cd0CN2SzyLFEJcHVFviKcxAlIwxcllT9s2sck0RA.jpg"] // TODO: DTO 수정되면 삭제
     
     let onSuccessGetSpotMenu: ObservablePattern<Bool> = ObservablePattern(nil)
         
