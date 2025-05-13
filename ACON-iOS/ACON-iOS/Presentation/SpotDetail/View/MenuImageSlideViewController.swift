@@ -22,6 +22,8 @@ class MenuImageSlideViewController: BaseViewController {
     private let imageWidth: CGFloat = 230 * ScreenUtils.widthRatio
     private let imageHeight: CGFloat = 325 * ScreenUtils.heightRatio
 
+    private var hasUpdatedArrowButtons = false
+
     init(_ imageURLs: [String]) {
         self.imageURLs = imageURLs
 
@@ -42,7 +44,20 @@ class MenuImageSlideViewController: BaseViewController {
         setLayout()
         setStyle()
         setDelegate()
+        addTarget()
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        if !hasUpdatedArrowButtons {
+            updateArrowButtonsVisibility()
+            hasUpdatedArrowButtons = true
+        }
+    }
+
+
+    // MARK: - UI setting methods
 
     override func setHierarchy() {
         super.setHierarchy()
@@ -97,7 +112,29 @@ class MenuImageSlideViewController: BaseViewController {
 
     private func setDelegate() {
         collectionView.dataSource = self
+        collectionView.delegate = self
+
         collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.cellIdentifier)
+    }
+
+    private func addTarget() {
+        leftButton.addTarget(self, action: #selector(tappedLeftButton), for: .touchUpInside)
+        rightButton.addTarget(self, action: #selector(tappedRightButton), for: .touchUpInside)
+    }
+
+}
+
+
+// MARK: - @objc functions
+
+private extension MenuImageSlideViewController {
+
+    @objc private func tappedLeftButton() {
+        scrollCollectionView(by: -1)
+    }
+
+    @objc private func tappedRightButton() {
+        scrollCollectionView(by: 1)
     }
 
 }
@@ -120,4 +157,49 @@ extension MenuImageSlideViewController: UICollectionViewDataSource {
         return item
     }
  
+}
+
+extension MenuImageSlideViewController: UICollectionViewDelegate {
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        updateArrowButtonsVisibility()
+    }
+
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        updateArrowButtonsVisibility()
+    }
+
+}
+
+
+// MARK: - Helper
+
+private extension MenuImageSlideViewController {
+
+    private func scrollCollectionView(by offset: Int) {
+        let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+
+        if let indexPath = collectionView.indexPathForItem(at: visiblePoint) {
+            var newIndex = indexPath.item + offset
+            newIndex = max(0, min(imageURLs.count - 1, newIndex))
+
+            collectionView.scrollToItem(at: IndexPath(item: newIndex, section: 0),
+                                        at: .centeredHorizontally,
+                                        animated: true)
+        }
+
+    }
+
+    private func updateArrowButtonsVisibility() {
+        let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        
+        guard let indexPath = collectionView.indexPathForItem(at: visiblePoint) else { return }
+
+        let currentIndex = indexPath.item
+        leftButton.isHidden = currentIndex == 0
+        rightButton.isHidden = currentIndex == imageURLs.count - 1
+    }
+
 }
