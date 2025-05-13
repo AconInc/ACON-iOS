@@ -77,3 +77,25 @@ extension GlassmorphismView {
     }
 
 }
+
+
+// MARK: - Set Gradient
+
+extension GlassmorphismView {
+    
+    func setGradient(topColor: UIColor = .gray900.withAlphaComponent(1),
+                     bottomColor: UIColor = .gray900.withAlphaComponent(0.1)) {
+        layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer()
+        }
+        
+        let gradient = CAGradientLayer()
+        gradient.do {
+            $0.frame = bounds
+            $0.colors = [topColor.cgColor, bottomColor.cgColor]
+            $0.startPoint = CGPoint(x: 0.5, y: 0.0)
+            $0.endPoint = CGPoint(x: 0.5, y: 1.0)
+        }
+        layer.insertSublayer(gradient, at: 0)
+    }
+    
+}

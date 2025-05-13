@@ -210,10 +210,8 @@
 		74BF92022D385D8700B923E3 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92012D385D8100B923E3 /* MenuCollectionViewCell.swift */; };
 		74BF92042D3861A600B923E3 /* SpotDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92032D38619E00B923E3 /* SpotDetailViewController.swift */; };
 		74BF92072D38622B00B923E3 /* SpotDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92062D38622600B923E3 /* SpotDetailViewModel.swift */; };
-		74BF92102D391FFE00B923E3 /* LocalVerificationFinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920A2D391FFE00B923E3 /* LocalVerificationFinishedView.swift */; };
 		74BF92112D391FFE00B923E3 /* LocalVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920D2D391FFE00B923E3 /* LocalVerificationViewController.swift */; };
 		74BF92122D391FFE00B923E3 /* LocalMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92092D391FFE00B923E3 /* LocalMapViewController.swift */; };
-		74BF92132D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920B2D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift */; };
 		74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92082D391FFE00B923E3 /* LocalMapView.swift */; };
 		74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920C2D391FFE00B923E3 /* LocalVerificationView.swift */; };
 		74BF92172D393B4A00B923E3 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92162D393B4700B923E3 /* Int+.swift */; };
@@ -458,8 +456,6 @@
 		74BF92062D38622600B923E3 /* SpotDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailViewModel.swift; sourceTree = "<group>"; };
 		74BF92082D391FFE00B923E3 /* LocalMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMapView.swift; sourceTree = "<group>"; };
 		74BF92092D391FFE00B923E3 /* LocalMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMapViewController.swift; sourceTree = "<group>"; };
-		74BF920A2D391FFE00B923E3 /* LocalVerificationFinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFinishedView.swift; sourceTree = "<group>"; };
-		74BF920B2D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFinishedViewController.swift; sourceTree = "<group>"; };
 		74BF920C2D391FFE00B923E3 /* LocalVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationView.swift; sourceTree = "<group>"; };
 		74BF920D2D391FFE00B923E3 /* LocalVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationViewController.swift; sourceTree = "<group>"; };
 		74BF92162D393B4700B923E3 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
@@ -1361,8 +1357,6 @@
 			children = (
 				74BF92082D391FFE00B923E3 /* LocalMapView.swift */,
 				74BF92092D391FFE00B923E3 /* LocalMapViewController.swift */,
-				74BF920A2D391FFE00B923E3 /* LocalVerificationFinishedView.swift */,
-				74BF920B2D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift */,
 				74BF920C2D391FFE00B923E3 /* LocalVerificationView.swift */,
 				74BF920D2D391FFE00B923E3 /* LocalVerificationViewController.swift */,
 				151BD9522D6332A5005E657F /* VerifiedAreasEditView.swift */,
@@ -1879,7 +1873,6 @@
 				748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */,
 				74BF92192D395FE800B923E3 /* ACToastController.swift in Sources */,
 				1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */,
-				74BF92102D391FFE00B923E3 /* LocalVerificationFinishedView.swift in Sources */,
 				74BF92112D391FFE00B923E3 /* LocalVerificationViewController.swift in Sources */,
 				74BF92122D391FFE00B923E3 /* LocalMapViewController.swift in Sources */,
 				D6E8168E2D6228F5001E4EBF /* WithdrawalViewController.swift in Sources */,
@@ -1888,7 +1881,6 @@
 				746261692D3EA33300A4E84F /* PostReviewRequest.swift in Sources */,
 				15CD257E2D3FF4F200320006 /* SpotListTargetType.swift in Sources */,
 				156D925C2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift in Sources */,
-				74BF92132D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift in Sources */,
 				15AA6D152D68AC09008021C6 /* GetDongRequest.swift in Sources */,
 				74DDBA8D2DC45E4500BF9824 /* ACButton.swift in Sources */,
 				74A13D6B2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,

@@ -14,64 +14,60 @@ final class LocalVerificationView: BaseView {
 
     // MARK: - UI Properties
     
-    private let weNeedYourAddressLabel: UILabel = UILabel()
+    private let backgroundImageView: UIImageView = UIImageView()
     
-    private let doLocalVerificationLabel: UILabel = UILabel()
+    private let titleLabel: UILabel = UILabel()
     
-    var verifyNewLocalButton: UIButton = UIButton()
+    private let descriptionLabel: UILabel = UILabel()
     
-    var nextButton: UIButton = UIButton()
+    private let oneSecondLabel: UILabel = UILabel()
     
-    var verifyNewLocalButtonConfiguration: UIButton.Configuration = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.imagePlacement = .leading
-        configuration.imagePadding = 8
-        configuration.titleAlignment = .leading
-        configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 20)
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 16,
-                                                              leading: 16,
-                                                              bottom: 16,
-                                                              trailing: 16)
-        return configuration
-    }()
+    var nextButton: ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_12_t4SB), title: StringLiterals.LocalVerification.next)
+    
 
     // MARK: - Lifecycle
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(weNeedYourAddressLabel,
-                         doLocalVerificationLabel,
-                         verifyNewLocalButton,
+        self.addSubviews(backgroundImageView,
+                         titleLabel,
+                         descriptionLabel,
+                         oneSecondLabel,
                          nextButton)
     }
     
     override func setLayout() {
         super.setLayout()
         
-        weNeedYourAddressLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*32)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.height.equalTo(56)
-        }
-        
-        doLocalVerificationLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*96)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.height.equalTo(18)
-        }
-        
-        verifyNewLocalButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*146)
+        backgroundImageView.snp.makeConstraints {
+            $0.size.equalTo(ScreenUtils.heightRatio*480)
             $0.centerX.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.height.equalTo(ScreenUtils.heightRatio*52)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*256)
+        }
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*455)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(68)
+        }
+        
+        descriptionLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*535)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(20)
+        }
+        
+        oneSecondLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*613)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(20)
         }
         
         nextButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*36)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.height.equalTo(52)
+            $0.bottom.equalToSuperview().inset(21+ScreenUtils.heightRatio*16)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*16)
+            $0.height.equalTo(54)
         }
         
     }
@@ -79,39 +75,26 @@ final class LocalVerificationView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        weNeedYourAddressLabel.do {
-            $0.setLabel(text: StringLiterals.LocalVerification.needLocalVerification,
-                        style: .h6,
-                        color: .acWhite)
+        backgroundImageView.do {
+            $0.image = .imgBackgroundLocalCertification
         }
         
-        doLocalVerificationLabel.do {
-            $0.setLabel(text:  StringLiterals.LocalVerification.doLocalVerification,
-                        style: .b3,
-                        color: .gray300)
+        titleLabel.do {
+            $0.setLabel(text: StringLiterals.LocalVerification.title,
+                        style: .t1SB,
+                        alignment: .center)
         }
         
-        verifyNewLocalButton.do {
-            $0.configuration = verifyNewLocalButtonConfiguration
-            $0.contentHorizontalAlignment = .leading
-            $0.backgroundColor = .gray700
-            $0.roundedButton(cornerRadius: 4, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor(resource: .gray800).cgColor
-//            $0.setImage(.icRadio, for: .normal)
-            $0.setImage(.icRadioPressed, for: .normal)
-            $0.setPartialTitle(fullText: StringLiterals.LocalVerification.new + StringLiterals.LocalVerification.verifyLocal,
-                               textStyles: [(StringLiterals.LocalVerification.new, .t5SB, .primaryDefault), (StringLiterals.LocalVerification.verifyLocal, .t5SB, .acWhite)])
-            $0.isUserInteractionEnabled = false
+        descriptionLabel.do {
+            $0.setLabel(text: StringLiterals.LocalVerification.description,
+                        style: .b1R,
+                        color: .gray50)
         }
         
-        nextButton.do {
-            $0.setAttributedTitle(text: StringLiterals.LocalVerification.next,
-                                   style: .h8,
-                                  color: .acWhite,
-                                  for: .normal)
-            $0.backgroundColor = .gray500
-            $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
+        oneSecondLabel.do {
+            $0.setLabel(text: StringLiterals.LocalVerification.oneSecond,
+                        style: .b1R,
+                        color: .gray500)
         }
     }
     

@@ -23,7 +23,6 @@ final class OnboardingView: BaseView {
     
     let lightImageView: UIImageView = UIImageView()
     
-    // TODO: - cornerradius 12 좀 작아보임, 30은 돼야 하나
     var startButton: ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_12_t4SB), title: StringLiterals.Onboarding.start)
     
     private let dislikeFoodCollectionViewFlowLayout: UICollectionViewFlowLayout = {
