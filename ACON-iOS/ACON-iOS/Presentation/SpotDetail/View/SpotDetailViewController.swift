@@ -90,8 +90,12 @@ class SpotDetailViewController: BaseNavViewController {
 
     private func addTarget() {
         spotDetailView.findCourseButton.addTarget(self,
-                                                  action: #selector(findCourseButtonTapped),
+                                                  action: #selector(tappedFindCourseButton),
                                                   for: .touchUpInside)
+        
+        spotDetailView.menuButton.button.addTarget(self,
+                                                   action: #selector(tappedMenuButton),
+                                                   for: .touchUpInside)
     }
 
 }
@@ -130,7 +134,7 @@ private extension SpotDetailViewController {
 private extension SpotDetailViewController {
 
     @objc
-    func findCourseButtonTapped() {
+    func tappedFindCourseButton() {
         viewModel.postGuidedSpot()
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_navigation?": true])
         
@@ -145,6 +149,13 @@ private extension SpotDetailViewController {
             $0.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         }
         present(alertController, animated: true)
+    }
+
+    @objc
+    func tappedMenuButton() {
+        let vc = MenuImageSlideViewController(viewModel.imageURLs)
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true)
     }
 
 }
