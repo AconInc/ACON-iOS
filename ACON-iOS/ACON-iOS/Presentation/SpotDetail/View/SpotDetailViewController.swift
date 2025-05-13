@@ -85,7 +85,7 @@ class SpotDetailViewController: BaseNavViewController {
 
     func setDelegate() {
         spotDetailView.collectionView.dataSource = self
-        spotDetailView.collectionView.register(PinchableImageCollectionViewCell.self, forCellWithReuseIdentifier: PinchableImageCollectionViewCell.cellIdentifier)
+        spotDetailView.collectionView.register(SpotDetailImageCollectionViewCell.self, forCellWithReuseIdentifier: SpotDetailImageCollectionViewCell.cellIdentifier)
     }
 
     private func addTarget() {
@@ -159,8 +159,8 @@ extension SpotDetailViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: PinchableImageCollectionViewCell.cellIdentifier, for: indexPath) as? PinchableImageCollectionViewCell else { return UICollectionViewCell() }
-        item.setImage(imageURL: viewModel.imageURLs[indexPath.item], isPinchable: false)
+        guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: SpotDetailImageCollectionViewCell.cellIdentifier, for: indexPath) as? SpotDetailImageCollectionViewCell else { return UICollectionViewCell() }
+        item.setImage(imageURL: viewModel.imageURLs[indexPath.item])
         return item
     }
 

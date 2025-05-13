@@ -1,5 +1,5 @@
 //
-//  PinchableImageCollectionViewCell.swift
+//  SpotDetailImageCollectionViewCell.swift
 //  ACON-iOS
 //
 //  Created by 김유림 on 5/13/25.
@@ -9,7 +9,7 @@ import UIKit
 
 import Kingfisher
 
-class PinchableImageCollectionViewCell: BaseCollectionViewCell {
+class SpotDetailImageCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - Properties
 
@@ -59,7 +59,7 @@ class PinchableImageCollectionViewCell: BaseCollectionViewCell {
 
 // MARK: - @objc function
 
-private extension PinchableImageCollectionViewCell {
+private extension SpotDetailImageCollectionViewCell {
 
     @objc
     private func zooming(_ gesture: UIPinchGestureRecognizer) {
@@ -77,9 +77,9 @@ private extension PinchableImageCollectionViewCell {
 
 // MARK: - Internal Methods
 
-extension PinchableImageCollectionViewCell {
+extension SpotDetailImageCollectionViewCell {
 
-    func setImage(imageURL: String, isPinchable: Bool) {
+    func setImage(imageURL: String) {
         imageView.kf.setImage(
             with: URL(string: imageURL),
             placeholder: UIImage.imgSkeletonBg,
@@ -95,19 +95,6 @@ extension PinchableImageCollectionViewCell {
                 }
             }
         )
-        
-        if isPinchable {
-            setPinchGesture()
-        }
-    }
-
-    func setPinchGesture() {
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zooming))
-
-        imageView.do {
-            $0.isUserInteractionEnabled = true
-            $0.addGestureRecognizer(pinchGesture)
-        }
     }
 
 }
