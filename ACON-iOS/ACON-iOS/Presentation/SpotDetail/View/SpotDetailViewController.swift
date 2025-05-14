@@ -27,8 +27,8 @@ class SpotDetailViewController: BaseNavViewController {
 
     init(_ spotID: Int64) {
         self.viewModel = SpotDetailViewModel(spotID: spotID)
+
         super.init(nibName: nil, bundle: nil)
-        
     }
 
     @MainActor required init?(coder: NSCoder) {
@@ -56,7 +56,7 @@ class SpotDetailViewController: BaseNavViewController {
     override func viewWillDisappear(_ animated: Bool) {
         timer?.invalidate()
         timer = nil
-        
+
         if let startTime = startTime {
             let timeInterval = Date().timeIntervalSince(startTime)
             AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["place_detail_duration": timeInterval])
@@ -79,7 +79,7 @@ class SpotDetailViewController: BaseNavViewController {
     
     override func setStyle() {
         super.setStyle()
-        
+
         self.setBackButton(completion: backCompletion)
     }
 
@@ -94,10 +94,9 @@ class SpotDetailViewController: BaseNavViewController {
         spotDetailView.findCourseButton.addTarget(self,
                                                   action: #selector(tappedFindCourseButton),
                                                   for: .touchUpInside)
-        
-        spotDetailView.menuButton.button.addTarget(self,
-                                                   action: #selector(tappedMenuButton),
-                                                   for: .touchUpInside)
+
+        let menuTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedMenuButton))
+        spotDetailView.menuButton.addGestureRecognizer(menuTapGesture)
     }
 
 }
@@ -117,7 +116,7 @@ private extension SpotDetailViewController {
                 self?.showDefaultAlert(title: "장소 정보 로드 실패", message: "장소 정보 로드에 실패했습니다.")
             }
         }
-        
+
         self.viewModel.onSuccessGetSpotMenu.bind { [weak self] onSuccess in
             guard let onSuccess else { return }
             if onSuccess {
@@ -139,7 +138,7 @@ private extension SpotDetailViewController {
     func tappedFindCourseButton() {
         viewModel.postGuidedSpot()
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_navigation?": true])
-        
+
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.do {
             $0.addAction(UIAlertAction(title: "네이버 지도", style: .default, handler: { _ in
@@ -170,7 +169,7 @@ extension SpotDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.imageURLs.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: SpotDetailImageCollectionViewCell.cellIdentifier, for: indexPath) as? SpotDetailImageCollectionViewCell else { return UICollectionViewCell() }
         item.setImage(imageURL: viewModel.imageURLs[indexPath.item])

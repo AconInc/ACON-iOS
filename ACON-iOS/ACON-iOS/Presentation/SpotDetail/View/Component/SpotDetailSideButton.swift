@@ -9,36 +9,12 @@ import UIKit
 
 class SpotDetailSideButton: UIView {
 
-    // MARK: - enum
-
-    enum SideButtonType {
-        case menu, share, more
-
-        var text: String {
-            switch self {
-            case .menu: return "메뉴판"
-            case .share: return "공유"
-            case .more: return "더보기"
-            }
-        }
-
-        var image: UIImage {
-            switch self {
-            case .menu: return .icMenu
-            case .share: return .icShare
-            case .more: return .icEllipsis
-            }
-        }
-    }
-
-
     // MARK: - Property & Initializer
 
     let type: SideButtonType
 
     private let imageView = UIImageView()
     private let label = UILabel()
-    let button = UIButton()
 
     init(_ buttonType: SideButtonType) {
         self.type = buttonType
@@ -62,9 +38,9 @@ class SpotDetailSideButton: UIView {
 extension SpotDetailSideButton {
 
     func setHierarchy() {
-        self.addSubviews(imageView, label, button)
+        self.addSubviews(imageView, label)
     }
-    
+
     func setLayout() {
         self.snp.makeConstraints {
             $0.width.equalTo(36)
@@ -80,10 +56,6 @@ extension SpotDetailSideButton {
             $0.top.equalTo(imageView.snp.bottom).offset(4)
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview()
-        }
-
-        button.snp.makeConstraints {
-            $0.edges.equalToSuperview()
         }
     }
 
@@ -112,6 +84,33 @@ extension SpotDetailSideButton {
             
             $0.attributedText = mutable
             $0.textAlignment = .center
+        }
+    }
+
+}
+
+
+// MARK: - enum
+
+extension SpotDetailSideButton {
+
+    enum SideButtonType {
+        case menu, share, more
+
+        var text: String {
+            switch self {
+            case .menu: return "메뉴판"
+            case .share: return "공유"
+            case .more: return "더보기"
+            }
+        }
+
+        var image: UIImage {
+            switch self {
+            case .menu: return .icMenu
+            case .share: return .icShare
+            case .more: return .icEllipsis
+            }
         }
     }
 

@@ -28,14 +28,14 @@ final class SpotDetailView: BaseView {
 
     private let pageControl = UIPageControl()
 
-    private let horizontalEdges: CGFloat = 20
+    private let horizontalEdges: CGFloat = 20 * ScreenUtils.widthRatio
 
 
     // MARK: - Initializing
 
     override func setHierarchy() {
         super.setHierarchy()
-        
+
         self.addSubviews(collectionView,
                          dimImageView,
                          titleLabel,
@@ -63,40 +63,40 @@ final class SpotDetailView: BaseView {
             $0.top.equalTo(safeAreaLayoutGuide).offset(ScreenUtils.heightRatio*56)
             $0.leading.equalToSuperview().offset(horizontalEdges)
         }
-        
+
         tagStackView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(8)
             $0.leading.equalToSuperview().offset(horizontalEdges)
         }
-        
+
         acornCountButton.snp.makeConstraints {
             $0.top.equalTo(titleLabel).offset(1)
             $0.trailing.equalToSuperview().inset(horizontalEdges)
         }
-        
+
         findCourseButton.snp.makeConstraints {
             $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-13)
             $0.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(16)
             $0.height.equalTo(54)
         }
-        
+
         pageControl.snp.makeConstraints {
             $0.bottom.equalTo(findCourseButton.snp.top).offset(-12)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(6)
             $0.width.equalTo(120)
         }
-        
+
         moreButton.snp.makeConstraints {
             $0.bottom.equalTo(findCourseButton.snp.top).offset(-34)
             $0.trailing.equalToSuperview().inset(horizontalEdges)
         }
-        
+
         shareButton.snp.makeConstraints {
             $0.bottom.equalTo(moreButton.snp.top).offset(-36)
             $0.trailing.equalToSuperview().inset(horizontalEdges)
         }
-        
+
         menuButton.snp.makeConstraints {
             $0.bottom.equalTo(shareButton.snp.top).offset(-36)
             $0.trailing.equalToSuperview().inset(horizontalEdges)
@@ -135,7 +135,6 @@ final class SpotDetailView: BaseView {
             config.contentInsets = .zero
             $0.configuration = config
         }
-
     }
 
 }
@@ -144,29 +143,29 @@ final class SpotDetailView: BaseView {
 // MARK: - Internal Methods
 
 extension SpotDetailView {
-    
+
     func bindData(_ spotDetail: SpotDetailInfoModel) {
         titleLabel.setLabel(text: spotDetail.name, style: .t4SB)
-        
+
         // TODO: API 나오면 실제 데이터로 바꾸기
         if let acornCount = (1...10000).randomElement() {
             let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
             acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
         }
-        
+
         // TODO: API 나오면 실제 데이터로 바꾸기 (tempTags -> Tags)
         let tempTags: [SpotTagType] = [.new, .local, .top(number: 1)]
         tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         tempTags.forEach { tag in
             tagStackView.addArrangedSubview(SpotTagButton(tag))
         }
-        
+
         // TODO: API 나오면 실제 데이터로 바꾸기
         let walk: String = StringLiterals.SpotList.walk
         let findCourse: String = StringLiterals.SpotList.minuteFindCourse
         let courseTitle: String = walk + "9" + findCourse
         findCourseButton.setAttributedTitle(text: courseTitle, style: .t4SB)
-        
+
         // TODO: API 나오면 실제 데이터로 바꾸기
         setPageControl(10)
     }
@@ -241,7 +240,7 @@ private extension SpotDetailView {
         return stackView
     }
 
-    private func setPageControl(_ numberOfPages: Int) {
+    func setPageControl(_ numberOfPages: Int) {
         pageControl.do {
             $0.numberOfPages = numberOfPages
             $0.currentPage = 0

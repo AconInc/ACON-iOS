@@ -62,7 +62,7 @@ class SpotDetailImageCollectionViewCell: BaseCollectionViewCell {
 private extension SpotDetailImageCollectionViewCell {
 
     @objc
-    private func zooming(_ gesture: UIPinchGestureRecognizer) {
+    func zooming(_ gesture: UIPinchGestureRecognizer) {
         if gesture.state == .ended {
             gesture.scale = 1.0
             imageView.clipsToBounds = true

@@ -40,9 +40,6 @@ class MenuImageSlideViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setHierarchy()
-        setLayout()
-        setStyle()
         setDelegate()
         addTarget()
     }
@@ -129,11 +126,11 @@ class MenuImageSlideViewController: BaseViewController {
 
 private extension MenuImageSlideViewController {
 
-    @objc private func tappedLeftButton() {
+    @objc func tappedLeftButton() {
         scrollCollectionView(by: -1)
     }
 
-    @objc private func tappedRightButton() {
+    @objc func tappedRightButton() {
         scrollCollectionView(by: 1)
     }
 
@@ -182,7 +179,7 @@ extension MenuImageSlideViewController: UICollectionViewDelegate {
 
 private extension MenuImageSlideViewController {
 
-    private func scrollCollectionView(by offset: Int) {
+    func scrollCollectionView(by offset: Int) {
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
 
@@ -197,7 +194,7 @@ private extension MenuImageSlideViewController {
 
     }
 
-    private func updateArrowButtonsVisibility() {
+    func updateArrowButtonsVisibility() {
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         
@@ -208,7 +205,7 @@ private extension MenuImageSlideViewController {
         rightButton.isHidden = currentIndex == imageURLs.count - 1
     }
 
-    private func hideArrowButtons() {
+    func hideArrowButtons() {
         [leftButton, rightButton].forEach { $0.isHidden = true }
     }
 

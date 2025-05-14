@@ -79,7 +79,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
 private extension MenuCollectionViewCell {
 
     @objc
-    private func zooming(_ gesture: UIPinchGestureRecognizer) {
+    func zooming(_ gesture: UIPinchGestureRecognizer) {
         switch gesture.state {
         case .ended:
             gesture.scale = 1.0
@@ -95,7 +95,7 @@ private extension MenuCollectionViewCell {
     }
 
     @objc
-    private func tappedBackground(_ sender: UITapGestureRecognizer) {
+    func tappedBackground(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: self)
         if imageView.frame.contains(location) { return }
 
