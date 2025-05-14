@@ -234,6 +234,7 @@
 		74DDBA8D2DC45E4500BF9824 /* ACButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DDBA8C2DC45E4300BF9824 /* ACButton.swift */; };
 		74E38D342D69B46F009449D4 /* LocationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E38D332D69B468009449D4 /* LocationUtils.swift */; };
 		74FA77812DD434C9006846C9 /* splashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 74FA77802DD434C9006846C9 /* splashLottie.json */; };
+		74FA77842DD43709006846C9 /* SplashBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 74FA77832DD43709006846C9 /* SplashBGM.mp3 */; };
 		D61917E92D3E4410001BF0EE /* OnboardingTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917E82D3E4410001BF0EE /* OnboardingTargetType.swift */; };
 		D61917EC2D3E484A001BF0EE /* OnboardingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917EB2D3E484A001BF0EE /* OnboardingRequest.swift */; };
 		D6232C952D3A294C003FF208 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6232C942D3A294C003FF208 /* AlertHandler.swift */; };
@@ -479,6 +480,7 @@
 		74DDBA8C2DC45E4300BF9824 /* ACButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButton.swift; sourceTree = "<group>"; };
 		74E38D332D69B468009449D4 /* LocationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUtils.swift; sourceTree = "<group>"; };
 		74FA77802DD434C9006846C9 /* splashLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = splashLottie.json; sourceTree = "<group>"; };
+		74FA77832DD43709006846C9 /* SplashBGM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SplashBGM.mp3; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB785B4E26FA7C11BB85A55D /* Pods-ACON-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D61917E82D3E4410001BF0EE /* OnboardingTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTargetType.swift; sourceTree = "<group>"; };
@@ -1136,6 +1138,7 @@
 		748D6F762D2BCAB3007690B4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				74FA77822DD436E4006846C9 /* Music */,
 				74BF921A2D3972C500B923E3 /* Lottie */,
 				748D6F772D2BCB90007690B4 /* Fonts */,
 				748D6F622D2BCA1C007690B4 /* Assets.xcassets */,
@@ -1473,6 +1476,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		74FA77822DD436E4006846C9 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				74FA77832DD43709006846C9 /* SplashBGM.mp3 */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
 		D61917EA2D3E483E001BF0EE /* DTO */ = {
 			isa = PBXGroup;
 			children = (
@@ -1657,6 +1668,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74FA77842DD43709006846C9 /* SplashBGM.mp3 in Resources */,
 				15BFF8B92D665BAD00909C4F /* Debug.xcconfig in Resources */,
 				15BFF8BA2D665BAD00909C4F /* Release.xcconfig in Resources */,
 				748D6F6C2D2BCA1C007690B4 /* Assets.xcassets in Resources */,
