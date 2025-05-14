@@ -53,7 +53,7 @@ class SplashView: BaseView {
         
         shadowImageView.do {
             $0.image = .imgSplashShadow
-            $0.alpha = 0.1
+            $0.alpha = 0.05
             $0.contentMode = .scaleAspectFit
         }
     }
@@ -66,14 +66,17 @@ class SplashView: BaseView {
 extension SplashView {
     
     func fadeShadowImage() {
-        UIView.animate(withDuration: 2.0, animations: {
-            self.shadowImageView.alpha = 1.0
-        })
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            UIView.animate(withDuration: 0.1) {
+                self.shadowImageView.alpha = 1.0
+            }
+        }
     }
     
     func playSplashBGM() {
         if let path = Bundle.main.path(forResource: "SplashBGM", ofType: "mp3") {
             player = try? AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+            player?.volume = 0.8
             player?.play()
         }
     }

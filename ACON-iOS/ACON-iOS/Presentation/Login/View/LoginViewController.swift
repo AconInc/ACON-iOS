@@ -33,6 +33,24 @@ class LoginViewController: BaseNavViewController {
         self.setSkipButton()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loginView.loginContentView.alpha = 0
+        self.rightButton.alpha = 0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            UIView.animate(withDuration: 0.4) {
+                self.loginView.loginContentView.alpha = 1.0
+                self.rightButton.alpha = 1.0
+            }
+        }
+    }
+    
     override func setHierarchy() {
         super.setHierarchy()
         

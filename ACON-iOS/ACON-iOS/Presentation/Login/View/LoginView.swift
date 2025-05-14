@@ -14,11 +14,11 @@ final class LoginView: BaseView {
     
     // MARK: - UI Properties
     
-    private let brandingLabel : UILabel = UILabel()
-    
     private let logoImageView : UIImageView = UIImageView()
     
     private let shadowImageView: UIImageView = UIImageView()
+    
+    let loginContentView: UIView = UIView()
     
     var googleLoginButton: UIButton = UIButton()
     
@@ -48,18 +48,22 @@ final class LoginView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(brandingLabel,
+        self.addSubviews(loginContentView,
                          logoImageView,
-                         shadowImageView,
-                         googleLoginButton,
-                         appleLoginButton,
-                         proceedLoginLabel,
-                         termsOfUseLabel,
-                         privacyPolicyLabel)
+                         shadowImageView)
+        loginContentView.addSubviews(googleLoginButton,
+                                     appleLoginButton,
+                                     proceedLoginLabel,
+                                     termsOfUseLabel,
+                                     privacyPolicyLabel)
     }
     
     override func setLayout() {
         super.setLayout()
+        
+        loginContentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         
         logoImageView.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*416)
@@ -103,6 +107,10 @@ final class LoginView: BaseView {
     
     override func setStyle() {
         super.setStyle()
+        
+        loginContentView.do {
+            $0.backgroundColor = .clear
+        }
         
         logoImageView.do {
             $0.image = .imgSplash
