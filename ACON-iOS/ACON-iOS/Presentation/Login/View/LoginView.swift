@@ -18,9 +18,11 @@ final class LoginView: BaseView {
     
     private let logoImageView : UIImageView = UIImageView()
     
+    private let shadowImageView: UIImageView = UIImageView()
+    
     var googleLoginButton: UIButton = UIButton()
     
-    var appleLoginButton: UIButton = UIButton()
+    var appleLoginButton: ACButton = ACButton(style: GlassConfigButton(buttonType: .line_12_b1SB))
     
     private let proceedLoginLabel: UILabel = UILabel()
     
@@ -31,10 +33,10 @@ final class LoginView: BaseView {
     lazy var socialLoginButtonConfiguration: UIButton.Configuration = {
         var configuration = UIButton.Configuration.plain()
         configuration.imagePlacement = .leading
-        configuration.imagePadding = 60
+        configuration.imagePadding = 60*ScreenUtils.widthRatio
         configuration.titleAlignment = .center
         configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 24)
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 24, bottom: 15, trailing: 24)
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: ScreenUtils.widthRatio*24, bottom: 15, trailing: ScreenUtils.widthRatio*24)
         return configuration
     }()
     
@@ -48,6 +50,7 @@ final class LoginView: BaseView {
         
         self.addSubviews(brandingLabel,
                          logoImageView,
+                         shadowImageView,
                          googleLoginButton,
                          appleLoginButton,
                          proceedLoginLabel,
@@ -59,37 +62,42 @@ final class LoginView: BaseView {
         super.setLayout()
         
         logoImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(ScreenUtils.heightRatio*145)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*416)
+            $0.width.equalTo(ScreenUtils.widthRatio*240)
+            $0.height.equalTo(ScreenUtils.heightRatio*120)
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.heightRatio*91)
-            $0.width.equalTo(ScreenUtils.widthRatio*261)
+        }
+        
+        shadowImageView.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*340)
+            $0.centerX.equalToSuperview()
         }
         
         googleLoginButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*172)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*177)
             $0.height.equalTo(loginButtonHeight)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
         }
         
         appleLoginButton.snp.makeConstraints {
-            $0.top.equalTo(googleLoginButton.snp.bottom).offset(8)
+            $0.top.equalTo(googleLoginButton.snp.bottom).offset(16)
             $0.height.equalTo(loginButtonHeight)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
         }
         
         proceedLoginLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*60)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*65)
             $0.centerX.equalToSuperview()
         }
         
         termsOfUseLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*36)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*111.5)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*45)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*111)
         }
         
         privacyPolicyLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*36)
-            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*111.5)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*45)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*111)
         }
     }
     
@@ -97,7 +105,12 @@ final class LoginView: BaseView {
         super.setStyle()
         
         logoImageView.do {
-            $0.image = .icWordLogoSplashOrg
+            $0.image = .imgSplash
+            $0.contentMode = .scaleAspectFit
+        }
+        
+        shadowImageView.do {
+            $0.image = .imgSplashShadow
             $0.contentMode = .scaleAspectFit
         }
         
@@ -116,13 +129,11 @@ final class LoginView: BaseView {
             $0.configuration = socialLoginButtonConfiguration
             $0.contentHorizontalAlignment = .leading
             $0.layer.cornerRadius = loginButtonHeight / 2
-            $0.backgroundColor = .acBlack
+            $0.backgroundColor = .gray700
             $0.setImage(.icApple, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
                                   style: .t4SB,
                                   color: .acWhite)
-            $0.layer.borderColor = UIColor.gray500.cgColor
-            $0.layer.borderWidth = 1
         }
         
         proceedLoginLabel.do {
