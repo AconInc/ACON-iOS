@@ -1,5 +1,5 @@
 //
-//  MenuCollectionViewCell.swift
+//  SpotDetailImageCollectionViewCell.swift
 //  ACON-iOS
 //
 //  Created by 김유림 on 5/13/25.
@@ -9,19 +9,13 @@ import UIKit
 
 import Kingfisher
 
-final class MenuCollectionViewCell: BaseCollectionViewCell {
+class SpotDetailImageCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - Properties
 
-    var onBackgroundTapped: (() -> Void)?
-    var onZooming: ((Bool) -> Void)?
+    let imageView = UIImageView()
 
-    private let imageView = UIImageView()
-
-    private let noImageErrorView = SpotListErrorView(.imageTitle)
-
-    private let imageWidth: CGFloat = 230 * ScreenUtils.widthRatio
-    private let imageHeight: CGFloat = 325 * ScreenUtils.heightRatio
+    let noImageErrorView = SpotListErrorView(.imageTitle)
 
 
     // MARK: - Initializing
@@ -36,9 +30,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         super.setLayout()
 
         imageView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.equalTo(imageWidth)
-            $0.height.equalTo(imageHeight)
+            $0.edges.equalToSuperview()
         }
         
         noImageErrorView.snp.makeConstraints {
@@ -49,18 +41,9 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     override func setStyle() {
         super.setStyle()
 
-        self.do {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedBackground))
-            $0.backgroundColor = .clear
-            $0.addGestureRecognizer(tapGesture)
-        }
-
         imageView.do {
-            let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zooming))
             $0.contentMode = .scaleAspectFill
             $0.clipsToBounds = true
-            $0.isUserInteractionEnabled = true
-            $0.addGestureRecognizer(pinchGesture)
         }
         
         noImageErrorView.do {
@@ -76,30 +59,17 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
 
 // MARK: - @objc function
 
-private extension MenuCollectionViewCell {
+private extension SpotDetailImageCollectionViewCell {
 
     @objc
     func zooming(_ gesture: UIPinchGestureRecognizer) {
-        switch gesture.state {
-        case .ended:
+        if gesture.state == .ended {
             gesture.scale = 1.0
             imageView.clipsToBounds = true
-            onZooming?(false)
-        case .changed:
+        } else if gesture.state == .changed {
             imageView.clipsToBounds = false
-            onZooming?(true)
-        default: break
         }
-
         imageView.transform = CGAffineTransform(scaleX: gesture.scale, y: gesture.scale)
-    }
-
-    @objc
-    func tappedBackground(_ sender: UITapGestureRecognizer) {
-        let location = sender.location(in: self)
-        if imageView.frame.contains(location) { return }
-
-        onBackgroundTapped?()
     }
 
 }
@@ -107,9 +77,9 @@ private extension MenuCollectionViewCell {
 
 // MARK: - Internal Methods
 
-extension MenuCollectionViewCell {
+extension SpotDetailImageCollectionViewCell {
 
-    func setImage(imageURL: String, isPinchable: Bool) {
+    func setImage(imageURL: String) {
         imageView.kf.setImage(
             with: URL(string: imageURL),
             placeholder: UIImage.imgSkeletonBg,
