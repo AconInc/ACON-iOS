@@ -7,6 +7,8 @@
 
 import UIKit
 
+import AVFAudio
+
 class SplashViewController: BaseViewController {
     
     // MARK: - UI Properties
@@ -16,14 +18,27 @@ class SplashViewController: BaseViewController {
     
     // MARK: - LifeCycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+        } catch {
+            print("오디오 세션 설정 오류: \(error)")
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         
-        splashView.splashLottieView.do {
-            $0.play()
+        splashView.do {
+            $0.splashLottieView.play()
+            $0.fadeShadowImage()
+            $0.playSplashBGM()
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.4) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.goToNextVC()
         }
     }
