@@ -12,11 +12,9 @@ import AVFAudio
 
 class SplashView: BaseView {
     
-    var player: AVAudioPlayer?
-    
     let splashLottieView = LottieAnimationView(name: "splashLottie")
     
-    private let shadowImageView: UIImageView = UIImageView()
+    let shadowImageView: UIImageView = UIImageView()
     
     override func setHierarchy() {
         super.setHierarchy()
@@ -55,29 +53,6 @@ class SplashView: BaseView {
             $0.image = .imgSplashShadow
             $0.alpha = 0.05
             $0.contentMode = .scaleAspectFit
-        }
-    }
-    
-}
-
-
-// MARK: - Splash Animation
-
-extension SplashView {
-    
-    func fadeShadowImage() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            UIView.animate(withDuration: 0.1) {
-                self.shadowImageView.alpha = 1.0
-            }
-        }
-    }
-    
-    func playSplashBGM() {
-        if let path = Bundle.main.path(forResource: "SplashBGM", ofType: "mp3") {
-            player = try? AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
-            player?.volume = 0.8
-            player?.play()
         }
     }
     
