@@ -7,23 +7,35 @@
 
 import UIKit
 
+import AVFAudio
+
 class SplashViewController: BaseViewController {
     
     // MARK: - UI Properties
     
     private let splashView = SplashView()
     
+    private var player: AVAudioPlayer?
     
     // MARK: - LifeCycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+        } catch {
+            print("오디오 세션 설정 오류: \(error)")
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         
-        splashView.splashLottieView.do {
-            $0.play()
-        }
+        playSplashAnimation()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.4) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.goToNextVC()
         }
     }
@@ -80,6 +92,37 @@ private extension SplashViewController {
         }
         
         sceneDelegate?.window?.rootViewController = rootVC
+    }
+    
+}
+
+
+// MARK: - Splash Animation
+
+private extension SplashViewController {
+    
+    func playSplashAnimation() {
+        splashView.do {
+            $0.splashLottieView.play()
+        }
+        fadeShadowImage()
+        playSplashBGM()
+    }
+    
+    func fadeShadowImage() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            UIView.animate(withDuration: 0.1) {
+                self.splashView.shadowImageView.alpha = 1.0
+            }
+        }
+    }
+    
+    func playSplashBGM() {
+        if let path = Bundle.main.path(forResource: "SplashBGM", ofType: "mp3") {
+            player = try? AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+            player?.volume = 0.8
+            player?.play()
+        }
     }
     
 }
