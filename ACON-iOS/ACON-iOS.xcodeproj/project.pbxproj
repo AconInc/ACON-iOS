@@ -194,6 +194,7 @@
 		748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748ECA702D31A72500BBC981 /* LoginViewModel.swift */; };
 		7492349A2D687B140025F700 /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749234992D687B0D0025F700 /* AmplitudeManager.swift */; };
 		749A01032D3A6E0100CD7A90 /* ACDebouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */; };
+		749C90E82DD4D37100455211 /* splashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 749C90E72DD4D37100455211 /* splashLottie.json */; };
 		74A13D622DCBB97E007FFFC3 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A13D612DCBB978007FFFC3 /* OnboardingViewController.swift */; };
 		74A13D642DCBBAB9007FFFC3 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A13D632DCBBAB4007FFFC3 /* OnboardingView.swift */; };
 		74A13D672DCBC2BD007FFFC3 /* DislikeFoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A13D662DCBC2B0007FFFC3 /* DislikeFoodCollectionViewCell.swift */; };
@@ -233,7 +234,6 @@
 		74DDBA8B2DC45E3B00BF9824 /* ACButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DDBA8A2DC45E3400BF9824 /* ACButtonType.swift */; };
 		74DDBA8D2DC45E4500BF9824 /* ACButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DDBA8C2DC45E4300BF9824 /* ACButton.swift */; };
 		74E38D342D69B46F009449D4 /* LocationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E38D332D69B468009449D4 /* LocationUtils.swift */; };
-		74FA77812DD434C9006846C9 /* splashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 74FA77802DD434C9006846C9 /* splashLottie.json */; };
 		74FA77842DD43709006846C9 /* SplashBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 74FA77832DD43709006846C9 /* SplashBGM.mp3 */; };
 		D61917E92D3E4410001BF0EE /* OnboardingTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917E82D3E4410001BF0EE /* OnboardingTargetType.swift */; };
 		D61917EC2D3E484A001BF0EE /* OnboardingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917EB2D3E484A001BF0EE /* OnboardingRequest.swift */; };
@@ -439,6 +439,7 @@
 		749234992D687B0D0025F700 /* AmplitudeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeManager.swift; sourceTree = "<group>"; };
 		7496EC1A2DACF3E500508EA8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACDebouncer.swift; sourceTree = "<group>"; };
+		749C90E72DD4D37100455211 /* splashLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = splashLottie.json; sourceTree = "<group>"; };
 		74A13D612DCBB978007FFFC3 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		74A13D632DCBBAB4007FFFC3 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		74A13D662DCBC2B0007FFFC3 /* DislikeFoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeFoodCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -479,7 +480,6 @@
 		74DDBA8A2DC45E3400BF9824 /* ACButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButtonType.swift; sourceTree = "<group>"; };
 		74DDBA8C2DC45E4300BF9824 /* ACButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButton.swift; sourceTree = "<group>"; };
 		74E38D332D69B468009449D4 /* LocationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUtils.swift; sourceTree = "<group>"; };
-		74FA77802DD434C9006846C9 /* splashLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = splashLottie.json; sourceTree = "<group>"; };
 		74FA77832DD43709006846C9 /* SplashBGM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SplashBGM.mp3; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB785B4E26FA7C11BB85A55D /* Pods-ACON-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1396,7 +1396,7 @@
 				15C0ED692D42CDA300C9ED83 /* loadingWhite.json */,
 				745000D52D403F0200262CBE /* checkLottie.json */,
 				745000D62D403F0200262CBE /* lodingLottie.json */,
-				74FA77802DD434C9006846C9 /* splashLottie.json */,
+				749C90E72DD4D37100455211 /* splashLottie.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -1673,7 +1673,6 @@
 				15BFF8BA2D665BAD00909C4F /* Release.xcconfig in Resources */,
 				748D6F6C2D2BCA1C007690B4 /* Assets.xcassets in Resources */,
 				74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */,
-				74FA77812DD434C9006846C9 /* splashLottie.json in Resources */,
 				15C0ED642D42CD8800C9ED83 /* drop1Acorn.json in Resources */,
 				15C0ED652D42CD8800C9ED83 /* drop5Acorn.json in Resources */,
 				15C0ED662D42CD8800C9ED83 /* drop4Acorn.json in Resources */,
@@ -1686,6 +1685,7 @@
 				15C0ED6A2D42CDA300C9ED83 /* loadingWhite.json in Resources */,
 				748D6F6E2D2BCA1C007690B4 /* LaunchScreen.storyboard in Resources */,
 				746AA0352DAD0EFF00E28B66 /* GoogleService-Info.plist in Resources */,
+				749C90E82DD4D37100455211 /* splashLottie.json in Resources */,
 				747F4FC12D3DC80B003DECBF /* finishedUpload.json in Resources */,
 				748D6F9D2D2BD641007690B4 /* Pretendard-SemiBold.otf in Resources */,
 			);
