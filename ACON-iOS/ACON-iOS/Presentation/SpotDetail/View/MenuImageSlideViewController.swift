@@ -171,11 +171,7 @@ extension MenuImageSlideViewController: UICollectionViewDataSource {
 
 extension MenuImageSlideViewController: UICollectionViewDelegate {
 
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        updateArrowButtonsVisibility()
-    }
-
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         updateArrowButtonsVisibility()
     }
 
