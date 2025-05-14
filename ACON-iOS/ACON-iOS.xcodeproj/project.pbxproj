@@ -118,7 +118,6 @@
 		743900912DC50926002F91B1 /* UIVisualEffectView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900902DC50918002F91B1 /* UIVisualEffectView+.swift */; };
 		743900932DC75451002F91B1 /* GlassmorphismType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900922DC7544C002F91B1 /* GlassmorphismType.swift */; };
 		743900972DC8696A002F91B1 /* GlassButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900962DC86966002F91B1 /* GlassButtonType.swift */; };
-		7439FAF22D421A8000864AD0 /* splashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 7439FAF12D421A8000864AD0 /* splashLottie.json */; };
 		745000D72D403F0200262CBE /* lodingLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D62D403F0200262CBE /* lodingLottie.json */; };
 		745000D82D403F0200262CBE /* checkLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D52D403F0200262CBE /* checkLottie.json */; };
 		745A81CC2D3E429300E28002 /* LocalVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A81CB2D3E428B00E28002 /* LocalVerificationViewModel.swift */; };
@@ -234,6 +233,7 @@
 		74DDBA8B2DC45E3B00BF9824 /* ACButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DDBA8A2DC45E3400BF9824 /* ACButtonType.swift */; };
 		74DDBA8D2DC45E4500BF9824 /* ACButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DDBA8C2DC45E4300BF9824 /* ACButton.swift */; };
 		74E38D342D69B46F009449D4 /* LocationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E38D332D69B468009449D4 /* LocationUtils.swift */; };
+		74FA77812DD434C9006846C9 /* splashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 74FA77802DD434C9006846C9 /* splashLottie.json */; };
 		D61917E92D3E4410001BF0EE /* OnboardingTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917E82D3E4410001BF0EE /* OnboardingTargetType.swift */; };
 		D61917EC2D3E484A001BF0EE /* OnboardingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917EB2D3E484A001BF0EE /* OnboardingRequest.swift */; };
 		D6232C952D3A294C003FF208 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6232C942D3A294C003FF208 /* AlertHandler.swift */; };
@@ -368,7 +368,6 @@
 		743900902DC50918002F91B1 /* UIVisualEffectView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVisualEffectView+.swift"; sourceTree = "<group>"; };
 		743900922DC7544C002F91B1 /* GlassmorphismType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismType.swift; sourceTree = "<group>"; };
 		743900962DC86966002F91B1 /* GlassButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonType.swift; sourceTree = "<group>"; };
-		7439FAF12D421A8000864AD0 /* splashLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = splashLottie.json; sourceTree = "<group>"; };
 		745000D52D403F0200262CBE /* checkLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = checkLottie.json; sourceTree = "<group>"; };
 		745000D62D403F0200262CBE /* lodingLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lodingLottie.json; sourceTree = "<group>"; };
 		745A81CB2D3E428B00E28002 /* LocalVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationViewModel.swift; sourceTree = "<group>"; };
@@ -479,6 +478,7 @@
 		74DDBA8A2DC45E3400BF9824 /* ACButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButtonType.swift; sourceTree = "<group>"; };
 		74DDBA8C2DC45E4300BF9824 /* ACButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButton.swift; sourceTree = "<group>"; };
 		74E38D332D69B468009449D4 /* LocationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUtils.swift; sourceTree = "<group>"; };
+		74FA77802DD434C9006846C9 /* splashLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = splashLottie.json; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB785B4E26FA7C11BB85A55D /* Pods-ACON-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D61917E82D3E4410001BF0EE /* OnboardingTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTargetType.swift; sourceTree = "<group>"; };
@@ -1393,7 +1393,7 @@
 				15C0ED692D42CDA300C9ED83 /* loadingWhite.json */,
 				745000D52D403F0200262CBE /* checkLottie.json */,
 				745000D62D403F0200262CBE /* lodingLottie.json */,
-				7439FAF12D421A8000864AD0 /* splashLottie.json */,
+				74FA77802DD434C9006846C9 /* splashLottie.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -1661,6 +1661,7 @@
 				15BFF8BA2D665BAD00909C4F /* Release.xcconfig in Resources */,
 				748D6F6C2D2BCA1C007690B4 /* Assets.xcassets in Resources */,
 				74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */,
+				74FA77812DD434C9006846C9 /* splashLottie.json in Resources */,
 				15C0ED642D42CD8800C9ED83 /* drop1Acorn.json in Resources */,
 				15C0ED652D42CD8800C9ED83 /* drop5Acorn.json in Resources */,
 				15C0ED662D42CD8800C9ED83 /* drop4Acorn.json in Resources */,
@@ -1668,7 +1669,6 @@
 				15C0ED682D42CD8800C9ED83 /* drop3Acorn.json in Resources */,
 				748D6FA12D2BD65D007690B4 /* Pretendard-Regular.otf in Resources */,
 				15F15E832DBFD17A002F81E2 /* Pretendard-Light.otf in Resources */,
-				7439FAF22D421A8000864AD0 /* splashLottie.json in Resources */,
 				745000D72D403F0200262CBE /* lodingLottie.json in Resources */,
 				745000D82D403F0200262CBE /* checkLottie.json in Resources */,
 				15C0ED6A2D42CDA300C9ED83 /* loadingWhite.json in Resources */,
