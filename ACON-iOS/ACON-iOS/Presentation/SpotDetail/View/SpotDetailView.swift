@@ -26,7 +26,10 @@ final class SpotDetailView: BaseView {
 
     let findCourseButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
 
+    private let pageControl = UIPageControl()
+
     private let horizontalEdges: CGFloat = 16
+
 
     // MARK: - Initializing
 
@@ -39,6 +42,7 @@ final class SpotDetailView: BaseView {
                          acornCountButton,
                          tagStackView,
                          findCourseButton,
+                         pageControl,
                          menuButton,
                          shareButton,
                          moreButton)
@@ -74,6 +78,13 @@ final class SpotDetailView: BaseView {
             $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-13)
             $0.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(horizontalEdges)
             $0.height.equalTo(54)
+        }
+        
+        pageControl.snp.makeConstraints {
+            $0.bottom.equalTo(findCourseButton.snp.top).offset(-12)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(6)
+            $0.width.equalTo(120)
         }
         
         moreButton.snp.makeConstraints {
@@ -124,12 +135,13 @@ final class SpotDetailView: BaseView {
             config.contentInsets = .zero
             $0.configuration = config
         }
+
     }
 
 }
 
 
-// MARK: - Binding
+// MARK: - Internal Methods
 
 extension SpotDetailView {
     
@@ -154,6 +166,9 @@ extension SpotDetailView {
         let findCourse: String = StringLiterals.SpotList.minuteFindCourse
         let courseTitle: String = walk + "9" + findCourse
         findCourseButton.setAttributedTitle(text: courseTitle, style: .t4SB)
+        
+        // TODO: API 나오면 실제 데이터로 바꾸기
+        setPageControl(10)
     }
 
     func makeMainMenuSection(_ menus: [SpotMenuModel]) {
@@ -179,7 +194,19 @@ extension SpotDetailView {
             $0.bottom.equalTo(menuStack.snp.top).offset(-12)
         }
     }
-    
+
+    func updatePageControl() {
+        let page = Int(round(collectionView.contentOffset.x / collectionView.bounds.width))
+        pageControl.currentPage = page
+    }
+
+}
+
+
+// MARK: - Helper
+
+private extension SpotDetailView {
+
     func makeMenuStackView(_ menus: [SpotMenuModel]) -> UIStackView {
         let stackView = UIStackView()
 
@@ -212,6 +239,16 @@ extension SpotDetailView {
         }
 
         return stackView
+    }
+
+    private func setPageControl(_ numberOfPages: Int) {
+        pageControl.do {
+            $0.numberOfPages = numberOfPages
+            $0.currentPage = 0
+            $0.currentPageIndicatorTintColor = .acWhite
+            $0.pageIndicatorTintColor = .gray300
+            $0.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+        }
     }
 
 }

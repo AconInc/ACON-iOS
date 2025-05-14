@@ -85,6 +85,8 @@ class SpotDetailViewController: BaseNavViewController {
 
     func setDelegate() {
         spotDetailView.collectionView.dataSource = self
+        spotDetailView.collectionView.delegate = self
+
         spotDetailView.collectionView.register(SpotDetailImageCollectionViewCell.self, forCellWithReuseIdentifier: SpotDetailImageCollectionViewCell.cellIdentifier)
     }
 
@@ -153,7 +155,7 @@ private extension SpotDetailViewController {
 
     @objc
     func tappedMenuButton() {
-        let vc = MenuImageSlideViewController(viewModel.imageURLs)
+        let vc = MenuImageSlideViewController(viewModel.menuImageURLs)
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true)
     }
@@ -173,6 +175,17 @@ extension SpotDetailViewController: UICollectionViewDataSource {
         guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: SpotDetailImageCollectionViewCell.cellIdentifier, for: indexPath) as? SpotDetailImageCollectionViewCell else { return UICollectionViewCell() }
         item.setImage(imageURL: viewModel.imageURLs[indexPath.item])
         return item
+    }
+
+}
+
+
+// MARK: - CollectionView Delegate
+
+extension SpotDetailViewController: UICollectionViewDelegate {
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        spotDetailView.updatePageControl()
     }
 
 }
