@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-class LocalVerificationViewController: BaseNavViewController {
+class LocalVerificationViewController: BaseViewController {
     
     // MARK: - UI Properties
     
@@ -45,7 +45,7 @@ class LocalVerificationViewController: BaseNavViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.contentView.addSubview(localVerificationView)
+        self.view.addSubview(localVerificationView)
     }
     
     override func setLayout() {
@@ -56,18 +56,7 @@ class LocalVerificationViewController: BaseNavViewController {
         }
     }
     
-    override func setStyle() {
-        super.setStyle()
-        
-        if localVerificationViewModel.flowType == .adding || localVerificationViewModel.flowType == .switching {
-            self.setBackButton()
-        }
-    }
-    
     func addTarget() {
-        localVerificationView.verifyNewLocalButton.addTarget(self,
-                                                             action: #selector(verifyLocationButtonTapped),
-                                                             for: .touchUpInside)
         localVerificationView.nextButton.addTarget(self,
                                   action: #selector(nextButtonTapped),
                                   for: .touchUpInside)
@@ -116,15 +105,6 @@ private extension LocalVerificationViewController {
 // MARK: - @objc functions
 
 private extension LocalVerificationViewController {
-    
-    @objc
-    func verifyLocationButtonTapped() {
-        localVerificationView.verifyNewLocalButton.isSelected.toggle()
-        let isSelected = localVerificationView.verifyNewLocalButton.isSelected
-        localVerificationView.verifyNewLocalButton.configuration?.baseBackgroundColor = isSelected ? .gray700 : .gray900
-//        localVerificationView.nextButton.isEnabled = isSelected
-        localVerificationView.nextButton.backgroundColor = isSelected ? .gray500 : .gray800
-    }
     
     @objc
     func nextButtonTapped() {

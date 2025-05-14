@@ -12,6 +12,12 @@
 		151003EE2D5FC48B00409DF4 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003ED2D5FC48B00409DF4 /* ProfileService.swift */; };
 		151003F02D5FC4C600409DF4 /* ProfileTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003EF2D5FC4C600409DF4 /* ProfileTargetType.swift */; };
 		1517FD7F2D3961A800638173 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517FD7E2D3961A800638173 /* CustomSlider.swift */; };
+		151AB6902DD367BF00D01DE8 /* SpotDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151AB68F2DD367BF00D01DE8 /* SpotDetailView.swift */; };
+		151AB6C32DD384C100D01DE8 /* SpotDetailImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151AB6C22DD384C100D01DE8 /* SpotDetailImageCollectionViewCell.swift */; };
+		151AB6C52DD3874100D01DE8 /* SpotDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151AB6C42DD3874100D01DE8 /* SpotDetailViewController.swift */; };
+		151AB6C72DD3BEDE00D01DE8 /* SpotDetailSideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151AB6C62DD3BEDE00D01DE8 /* SpotDetailSideButton.swift */; };
+		151AB6C92DD3E64600D01DE8 /* MenuImageSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151AB6C82DD3E64600D01DE8 /* MenuImageSlideViewController.swift */; };
+		151AB6CB2DD3ED3F00D01DE8 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151AB6CA2DD3ED3F00D01DE8 /* MenuCollectionViewCell.swift */; };
 		151BD9532D6332A5005E657F /* VerifiedAreasEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151BD9522D6332A5005E657F /* VerifiedAreasEditView.swift */; };
 		151BD9552D63375D005E657F /* VerifiedAreasEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151BD9542D63375D005E657F /* VerifiedAreasEditViewController.swift */; };
 		151BD9572D633C37005E657F /* LocalVerificationEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151BD9562D633C37005E657F /* LocalVerificationEditViewModel.swift */; };
@@ -205,15 +211,10 @@
 		74B817F32D3A7C8000C1D516 /* SpotReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B817F22D3A7C7900C1D516 /* SpotReviewViewModel.swift */; };
 		74BBADF62D611B6B003AB16C /* PostReissueResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BBADF52D611B63003AB16C /* PostReissueResponse.swift */; };
 		74BBADFC2D6130E6003AB16C /* PostReissueRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BBADFB2D6130DF003AB16C /* PostReissueRequest.swift */; };
-		74BF91FA2D38164400B923E3 /* SpotDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF91F92D38163F00B923E3 /* SpotDetailView.swift */; };
 		74BF91FD2D381FF800B923E3 /* SpotDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF91FC2D381FF400B923E3 /* SpotDetailModel.swift */; };
-		74BF92022D385D8700B923E3 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92012D385D8100B923E3 /* MenuCollectionViewCell.swift */; };
-		74BF92042D3861A600B923E3 /* SpotDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92032D38619E00B923E3 /* SpotDetailViewController.swift */; };
 		74BF92072D38622B00B923E3 /* SpotDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92062D38622600B923E3 /* SpotDetailViewModel.swift */; };
-		74BF92102D391FFE00B923E3 /* LocalVerificationFinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920A2D391FFE00B923E3 /* LocalVerificationFinishedView.swift */; };
 		74BF92112D391FFE00B923E3 /* LocalVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920D2D391FFE00B923E3 /* LocalVerificationViewController.swift */; };
 		74BF92122D391FFE00B923E3 /* LocalMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92092D391FFE00B923E3 /* LocalMapViewController.swift */; };
-		74BF92132D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920B2D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift */; };
 		74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92082D391FFE00B923E3 /* LocalMapView.swift */; };
 		74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920C2D391FFE00B923E3 /* LocalVerificationView.swift */; };
 		74BF92172D393B4A00B923E3 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92162D393B4700B923E3 /* Int+.swift */; };
@@ -263,6 +264,12 @@
 		151003ED2D5FC48B00409DF4 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		151003EF2D5FC4C600409DF4 /* ProfileTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTargetType.swift; sourceTree = "<group>"; };
 		1517FD7E2D3961A800638173 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
+		151AB68F2DD367BF00D01DE8 /* SpotDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailView.swift; sourceTree = "<group>"; };
+		151AB6C22DD384C100D01DE8 /* SpotDetailImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		151AB6C42DD3874100D01DE8 /* SpotDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailViewController.swift; sourceTree = "<group>"; };
+		151AB6C62DD3BEDE00D01DE8 /* SpotDetailSideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailSideButton.swift; sourceTree = "<group>"; };
+		151AB6C82DD3E64600D01DE8 /* MenuImageSlideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuImageSlideViewController.swift; sourceTree = "<group>"; };
+		151AB6CA2DD3ED3F00D01DE8 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		151BD9522D6332A5005E657F /* VerifiedAreasEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiedAreasEditView.swift; sourceTree = "<group>"; };
 		151BD9542D63375D005E657F /* VerifiedAreasEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiedAreasEditViewController.swift; sourceTree = "<group>"; };
 		151BD9562D633C37005E657F /* LocalVerificationEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationEditViewModel.swift; sourceTree = "<group>"; };
@@ -452,15 +459,10 @@
 		74B817F22D3A7C7900C1D516 /* SpotReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotReviewViewModel.swift; sourceTree = "<group>"; };
 		74BBADF52D611B63003AB16C /* PostReissueResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReissueResponse.swift; sourceTree = "<group>"; };
 		74BBADFB2D6130DF003AB16C /* PostReissueRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReissueRequest.swift; sourceTree = "<group>"; };
-		74BF91F92D38163F00B923E3 /* SpotDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailView.swift; sourceTree = "<group>"; };
 		74BF91FC2D381FF400B923E3 /* SpotDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailModel.swift; sourceTree = "<group>"; };
-		74BF92012D385D8100B923E3 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
-		74BF92032D38619E00B923E3 /* SpotDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailViewController.swift; sourceTree = "<group>"; };
 		74BF92062D38622600B923E3 /* SpotDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailViewModel.swift; sourceTree = "<group>"; };
 		74BF92082D391FFE00B923E3 /* LocalMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMapView.swift; sourceTree = "<group>"; };
 		74BF92092D391FFE00B923E3 /* LocalMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMapViewController.swift; sourceTree = "<group>"; };
-		74BF920A2D391FFE00B923E3 /* LocalVerificationFinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFinishedView.swift; sourceTree = "<group>"; };
-		74BF920B2D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFinishedViewController.swift; sourceTree = "<group>"; };
 		74BF920C2D391FFE00B923E3 /* LocalVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationView.swift; sourceTree = "<group>"; };
 		74BF920D2D391FFE00B923E3 /* LocalVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationViewController.swift; sourceTree = "<group>"; };
 		74BF92162D393B4700B923E3 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
@@ -1329,8 +1331,9 @@
 			children = (
 				74BF92252D39956400B923E3 /* Component */,
 				74BF92002D385D7C00B923E3 /* Cell */,
-				74BF92032D38619E00B923E3 /* SpotDetailViewController.swift */,
-				74BF91F92D38163F00B923E3 /* SpotDetailView.swift */,
+				151AB68F2DD367BF00D01DE8 /* SpotDetailView.swift */,
+				151AB6C42DD3874100D01DE8 /* SpotDetailViewController.swift */,
+				151AB6C82DD3E64600D01DE8 /* MenuImageSlideViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1346,7 +1349,8 @@
 		74BF92002D385D7C00B923E3 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				74BF92012D385D8100B923E3 /* MenuCollectionViewCell.swift */,
+				151AB6CA2DD3ED3F00D01DE8 /* MenuCollectionViewCell.swift */,
+				151AB6C22DD384C100D01DE8 /* SpotDetailImageCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1364,8 +1368,6 @@
 			children = (
 				74BF92082D391FFE00B923E3 /* LocalMapView.swift */,
 				74BF92092D391FFE00B923E3 /* LocalMapViewController.swift */,
-				74BF920A2D391FFE00B923E3 /* LocalVerificationFinishedView.swift */,
-				74BF920B2D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift */,
 				74BF920C2D391FFE00B923E3 /* LocalVerificationView.swift */,
 				74BF920D2D391FFE00B923E3 /* LocalVerificationViewController.swift */,
 				151BD9522D6332A5005E657F /* VerifiedAreasEditView.swift */,
@@ -1405,6 +1407,7 @@
 			isa = PBXGroup;
 			children = (
 				74BF92262D39956F00B923E3 /* StickyHeaderView.swift */,
+				151AB6C62DD3BEDE00D01DE8 /* SpotDetailSideButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1772,6 +1775,7 @@
 				15A48BFA2D574BA5003C2421 /* ProfileEditView.swift in Sources */,
 				74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */,
 				151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */,
+				151AB6C92DD3E64600D01DE8 /* MenuImageSlideViewController.swift in Sources */,
 				746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */,
 				157C0BE82DC897EE000B04AF /* SpotToggleButtonView.swift in Sources */,
 				746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */,
@@ -1781,6 +1785,7 @@
 				746261852D3FA0A400A4E84F /* PostGuidedSpotRequest.swift in Sources */,
 				741E68982D3D3D8E00DF99EF /* ErrorResponse.swift in Sources */,
 				748D6F822D2BCDB3007690B4 /* ScreenUtils.swift in Sources */,
+				151AB6C52DD3874100D01DE8 /* SpotDetailViewController.swift in Sources */,
 				741E68AC2D3D6DA800DF99EF /* HeaderType.swift in Sources */,
 				151BD9532D6332A5005E657F /* VerifiedAreasEditView.swift in Sources */,
 				D6232C952D3A294C003FF208 /* AlertHandler.swift in Sources */,
@@ -1824,7 +1829,7 @@
 				748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */,
 				15A48BF82D574B88003C2421 /* ProfileModel.swift in Sources */,
 				745B19B02D4010F300BDBDA4 /* AuthTargetType.swift in Sources */,
-				74BF91FA2D38164400B923E3 /* SpotDetailView.swift in Sources */,
+				151AB6C72DD3BEDE00D01DE8 /* SpotDetailSideButton.swift in Sources */,
 				748D6F872D2BD247007690B4 /* UIView+.swift in Sources */,
 				15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */,
 				1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */,
@@ -1855,13 +1860,13 @@
 				1547A6F22D33AD4500E96616 /* SpotModel.swift in Sources */,
 				746261732D3EA78700A4E84F /* GetReiviewVerificationRequest.swift in Sources */,
 				743900912DC50926002F91B1 /* UIVisualEffectView+.swift in Sources */,
-				74BF92022D385D8700B923E3 /* MenuCollectionViewCell.swift in Sources */,
 				74220DD42D34363B000684BF /* SpotUploadViewController.swift in Sources */,
 				741A07592D355F1400778219 /* ReviewFinishedViewController.swift in Sources */,
 				15A3F6AC2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift in Sources */,
 				74D297F62D63456400DDEE31 /* GetPresignedURLRequest.swift in Sources */,
 				748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */,
 				741429672D5D550C00B69528 /* AppVersionManager.swift in Sources */,
+				151AB6C32DD384C100D01DE8 /* SpotDetailImageCollectionViewCell.swift in Sources */,
 				74205D2F2D40351700D11557 /* SocialType.swift in Sources */,
 				745C7E042D3599DF0074DBDB /* SpotSearchViewController.swift in Sources */,
 				74B25C2C2D2FEE8E008BDCB7 /* Config.swift in Sources */,
@@ -1877,6 +1882,7 @@
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
 				747F4FBD2D3D9477003DECBF /* SplashViewController.swift in Sources */,
 				15CD25822D40364400320006 /* LoginModalViewController.swift in Sources */,
+				151AB6CB2DD3ED3F00D01DE8 /* MenuCollectionViewCell.swift in Sources */,
 				745ECBA12D615B9F005129B0 /* AlbumTableViewCell.swift in Sources */,
 				746F39822D342523003F8498 /* ACSheetDetentType.swift in Sources */,
 				74D297F42D6343E300DDEE31 /* ImageTargetType.swift in Sources */,
@@ -1891,7 +1897,6 @@
 				748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */,
 				74BF92192D395FE800B923E3 /* ACToastController.swift in Sources */,
 				1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */,
-				74BF92102D391FFE00B923E3 /* LocalVerificationFinishedView.swift in Sources */,
 				74BF92112D391FFE00B923E3 /* LocalVerificationViewController.swift in Sources */,
 				74BF92122D391FFE00B923E3 /* LocalMapViewController.swift in Sources */,
 				D6E8168E2D6228F5001E4EBF /* WithdrawalViewController.swift in Sources */,
@@ -1900,7 +1905,6 @@
 				746261692D3EA33300A4E84F /* PostReviewRequest.swift in Sources */,
 				15CD257E2D3FF4F200320006 /* SpotListTargetType.swift in Sources */,
 				156D925C2D6536CF0037F8F1 /* CustomAlertTitleAndButtonsView.swift in Sources */,
-				74BF92132D391FFE00B923E3 /* LocalVerificationFinishedViewController.swift in Sources */,
 				15AA6D152D68AC09008021C6 /* GetDongRequest.swift in Sources */,
 				74DDBA8D2DC45E4500BF9824 /* ACButton.swift in Sources */,
 				74A13D6B2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
@@ -1909,6 +1913,7 @@
 				D696F1B22D3A7E3400CCD5FF /* CustomAlertView.swift in Sources */,
 				743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */,
 				15F15E852DBFD206002F81E2 /* LanguageType.swift in Sources */,
+				151AB6902DD367BF00D01DE8 /* SpotDetailView.swift in Sources */,
 				15A48BFC2D574BB9003C2421 /* ProfileEditViewController.swift in Sources */,
 				741B58752D5ED21C0061CBF7 /* PhotoCollectionViewSizeType.swift in Sources */,
 				7462D0252D4262F300580464 /* AuthManager.swift in Sources */,
@@ -1917,7 +1922,6 @@
 				151FBFBA2DBD2F1B005F4D0D /* ACFontType.swift in Sources */,
 				15AA6D1A2D68C4AD008021C6 /* ReviewVerificationErrorType.swift in Sources */,
 				741429652D5D470200B69528 /* SettingViewModel.swift in Sources */,
-				74BF92042D3861A600B923E3 /* SpotDetailViewController.swift in Sources */,
 				15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */,
 				1547A8732D34157700E96616 /* SpotListViewModel.swift in Sources */,
 				D6E8169C2D622937001E4EBF /* WithdrawalViewModel.swift in Sources */,

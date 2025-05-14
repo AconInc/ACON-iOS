@@ -42,4 +42,8 @@ struct ScreenUtils {
         return ScreenUtils.heightRatio * 56
     }
     
+    static var safeAreaTopHeight: CGFloat {
+        return UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
+    }
+    
 }

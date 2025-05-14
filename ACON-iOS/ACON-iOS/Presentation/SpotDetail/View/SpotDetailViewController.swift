@@ -2,83 +2,73 @@
 //  SpotDetailViewController.swift
 //  ACON-iOS
 //
-//  Created by 이수민 on 1/16/25.
+//  Created by 김유림 on 5/13/25.
 //
 
 import UIKit
 
-import SnapKit
-import Then
+class SpotDetailViewController: BaseNavViewController {
 
-class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate {
-    
     // MARK: - UI Properties
-    
-//    private let glassMorphismView = GlassmorphismView()
-    
+
     private let spotDetailView = SpotDetailView()
 
-    
+
     // MARK: - Properties
-    
-    // TODO: - 이거 spotID 전 화면에서 넘겨받는 것으로 변경
-    private let spotDetailViewModel: SpotDetailViewModel
-    
-    private let spotDetailName: String = "가게명가게명"
-    
-    private let spotDetailType: String = "음식점"
-    
+
+    private let viewModel: SpotDetailViewModel
+
     private var startTime: Date?
-    
+
     private var timer: Timer?
-    
+
+
     // MARK: - LifeCycle
-    
+
     init(_ spotID: Int64) {
-        self.spotDetailViewModel = SpotDetailViewModel(spotID: spotID)
+        self.viewModel = SpotDetailViewModel(spotID: spotID)
+
         super.init(nibName: nil, bundle: nil)
-        
     }
-    
+
     @MainActor required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        addTarget()
-        registerCell()
+
         setDelegate()
+        addTarget()
         bindViewModel()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = true
-        spotDetailViewModel.getSpotDetail()
-        spotDetailViewModel.getSpotMenu()
-        
+
+        viewModel.getSpotDetail()
+        viewModel.getSpotMenu()
         startTime = Date()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         timer?.invalidate()
         timer = nil
-        
+
         if let startTime = startTime {
             let timeInterval = Date().timeIntervalSince(startTime)
             AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["place_detail_duration": timeInterval])
         }
     }
-    
+
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.contentView.addSubview(spotDetailView)
+        view.insertSubview(spotDetailView, at: 1) // NOTE: interaction이 가능하도록 contentView 위에 삽입
     }
-    
+
     override func setLayout() {
         super.setLayout()
 
@@ -89,174 +79,112 @@ class SpotDetailViewController: BaseNavViewController, UICollectionViewDelegate 
     
     override func setStyle() {
         super.setStyle()
-        
+
         self.setBackButton(completion: backCompletion)
-        self.setGlassMorphism()
     }
-    
+
+    func setDelegate() {
+        spotDetailView.collectionView.dataSource = self
+        spotDetailView.collectionView.delegate = self
+
+        spotDetailView.collectionView.register(SpotDetailImageCollectionViewCell.self, forCellWithReuseIdentifier: SpotDetailImageCollectionViewCell.cellIdentifier)
+    }
+
     private func addTarget() {
         spotDetailView.findCourseButton.addTarget(self,
-                                                  action: #selector(findCourseButtonTapped),
+                                                  action: #selector(tappedFindCourseButton),
                                                   for: .touchUpInside)
-        
-        spotDetailView.gotoTopButton.addTarget(self,
-                                               action: #selector(scrollToTopButtonTapped), for: .touchUpInside)
+
+        let menuTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedMenuButton))
+        spotDetailView.menuButton.addGestureRecognizer(menuTapGesture)
     }
 
 }
-
+ 
 
 // MARK: - bindViewModel
 
 private extension SpotDetailViewController {
-    
+
     func bindViewModel() {
-        self.spotDetailViewModel.onSuccessGetSpotDetail.bind { [weak self] onSuccess in
-            guard let onSuccess, let data = self?.spotDetailViewModel.spotDetail.value else { return }
+        self.viewModel.onSuccessGetSpotDetail.bind { [weak self] onSuccess in
+            guard let onSuccess,
+                  let data = self?.viewModel.spotDetail.value else { return }
             if onSuccess {
-                self?.bindNavBar(data: data)
-                self?.spotDetailView.bindData(data: data)
+                self?.spotDetailView.bindData(data)
             } else {
                 self?.showDefaultAlert(title: "장소 정보 로드 실패", message: "장소 정보 로드에 실패했습니다.")
             }
         }
-        
-        self.spotDetailViewModel.onSuccessGetSpotMenu.bind { [weak self] onSuccess in
+
+        self.viewModel.onSuccessGetSpotMenu.bind { [weak self] onSuccess in
             guard let onSuccess else { return }
             if onSuccess {
-                self?.spotDetailView.menuCollectionView.reloadData()
-                self?.updateCollectionViewHeight()
+                self?.spotDetailView.makeMainMenuSection(self?.viewModel.spotMenu.value ?? [])
             } else {
                 self?.showDefaultAlert(title: "장소 메뉴 로드 실패", message: "장소 메뉴 로드에 실패했습니다.")
             }
         }
     }
-    
+
 }
 
 
 // MARK: - @objc methods
 
 private extension SpotDetailViewController {
-    
+
     @objc
-    func findCourseButtonTapped() {
-        spotDetailViewModel.postGuidedSpot()
+    func tappedFindCourseButton() {
+        viewModel.postGuidedSpot()
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_navigation?": true])
-        
+
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.do {
             $0.addAction(UIAlertAction(title: "네이버 지도", style: .default, handler: { _ in
-                self.spotDetailViewModel.redirectToNaverMap()
+                self.viewModel.redirectToNaverMap()
             }))
             $0.addAction(UIAlertAction(title: "Apple 지도", style: .default, handler: { _ in
-                self.spotDetailViewModel.redirectToAppleMap()
+                self.viewModel.redirectToAppleMap()
             }))
             $0.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         }
         present(alertController, animated: true)
     }
-    
+
     @objc
-    private func scrollToTopButtonTapped() {
-        spotDetailView.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+    func tappedMenuButton() {
+        let vc = MenuImageSlideViewController(viewModel.menuImageURLs)
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true)
     }
-    
-}
 
-
-// MARK: - setUI
-
-private extension SpotDetailViewController {
-    
-    func bindNavBar(data: SpotDetailInfoModel) {
-        self.secondTitleLabel.do {
-            $0.textAlignment = .left
-            $0.isHidden = false
-            
-            let fullText = NSMutableAttributedString()
-            fullText.append(data.name.ACStyle(OldACFontStyleType.t2))
-            fullText.append(" ".ACStyle(OldACFontStyleType.t2))
-            fullText.append(data.spotType.ACStyle(OldACFontStyleType.b2))
-
-            $0.attributedText = fullText
-        }
-    }
-    
-}
-
-// MARK: - CollectionView Setting Methods
-
-private extension SpotDetailViewController {
-    
-    func registerCell() {
-        spotDetailView.menuCollectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.cellIdentifier)
-    }
-    
-    func setDelegate() {
-        spotDetailView.menuCollectionView.delegate = self
-        spotDetailView.menuCollectionView.dataSource = self
-        spotDetailView.scrollView.delegate = self
-    }
-    
-    func updateCollectionViewHeight() {
-        let numberOfItems = spotDetailViewModel.spotMenu.value?.count
-        let itemHeight = SpotDetailView.menuCollectionViewFlowLayout.itemSize.height
-        let totalHeight = itemHeight * CGFloat(numberOfItems ?? 0)
-        
-        spotDetailView.menuCollectionView.snp.updateConstraints {
-            $0.height.equalTo(totalHeight)
-        }
-        
-        spotDetailView.scrollContentView.layoutIfNeeded()
-    }
-    
 }
 
 
 // MARK: - CollectionView DataSource
 
 extension SpotDetailViewController: UICollectionViewDataSource {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return spotDetailViewModel.spotMenu.value?.count ?? 0
+        viewModel.imageURLs.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let data = spotDetailViewModel.spotMenu.value?[indexPath.item] else { return UICollectionViewCell() }
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.cellIdentifier, for: indexPath) as? MenuCollectionViewCell else {
-            return UICollectionViewCell() }
-        cell.dataBind(data, indexPath.item)
-        return cell
+        guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: SpotDetailImageCollectionViewCell.cellIdentifier, for: indexPath) as? SpotDetailImageCollectionViewCell else { return UICollectionViewCell() }
+        item.setImage(imageURL: viewModel.imageURLs[indexPath.item])
+        return item
     }
-    
+
 }
 
 
-// MARK: - Enable Sticky Header
+// MARK: - CollectionView Delegate
 
-extension SpotDetailViewController: UIScrollViewDelegate {
-    
+extension SpotDetailViewController: UICollectionViewDelegate {
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset.y
-        
-        //NOTE: - 내 맘대로 -68 함 (높이 36이라 72 해야할 것 같은데 아무튼 추후수정)
-        let stickyPosition = ScreenUtils.heightRatio*400 + ScreenUtils.navViewHeight - 68
-        let shouldShowSticky = offset >= stickyPosition
-        spotDetailView.stickyView.isHidden = !shouldShowSticky
-        spotDetailView.stickyHeaderView.isHidden = shouldShowSticky
-        
-        if offset > 0 {
-            [topInsetView, navigationBarView].forEach {
-                $0.backgroundColor = .clear
-            }
-            self.glassMorphismView.isHidden = false
-        } else {
-            [topInsetView, navigationBarView].forEach {
-                $0.backgroundColor = .gray900
-            }
-            self.glassMorphismView.isHidden = true
-        }
+        spotDetailView.updatePageControl()
     }
-    
+
 }

@@ -17,6 +17,12 @@ class SpotDetailViewModel: Serviceable {
     let onSuccessGetSpotDetail: ObservablePattern<Bool> = ObservablePattern(nil)
         
     var spotDetail: ObservablePattern<SpotDetailInfoModel> = ObservablePattern(nil)
+
+    // TODO: DTO 수정 후 삭제
+    let imageURLs: [String] = ["https://www.ledr.com/colours/white.jpg","https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg","https://images.immediate.co.uk/production/volatile/sites/30/2022/03/Pancake-grazing-board-bc15106.jpg?quality=90&resize=556,505","https://natashaskitchen.com/wp-content/uploads/2020/03/Pan-Seared-Steak-4.jpg","https://i.namu.wiki/i/oFHlYDjoEh8f-cc3lNK9jAemRkbXxNGwUg7XiW5LGS6DF1P2x8GCeNQxbQhVIwtUS1u53YPw-uoyqpmLtrGNJA.webp","https://i.namu.wiki/i/dgjXU86ae29hDSCza-L0GZlFt3T9lRx1Ug9cKtqWSzMzs7Cd0CN2SzyLFEJcHVFviKcxAlIwxcllT9s2sck0RA.jpg","https://www.bhc.co.kr/upload/bhc/menu/%EC%96%91%EB%85%90%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_410x271.jpg","https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg","https://images.immediate.co.uk/production/volatile/sites/30/2022/03/Pancake-grazing-board-bc15106.jpg?quality=90&resize=556,505","https://natashaskitchen.com/wp-content/uploads/2020/03/Pan-Seared-Steak-4.jpg"]
+    let menuImageURLs: [String] = ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTriTWtuRKLT48PiNsFnViIxL2ZiZZ4f3Aig&s", "https://marketplace.canva.com/EAGEDq-_tZQ/1/0/1035w/canva-grey-and-beige-minimalist-restaurant-menu-hb5BNMWcQS4.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_afmmWy7JhYJNGi3igyJ3tb0VSwFO58h4XA&s","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmR-HwbkD_gFMN5Mv3fKRikt-IeJpYbayxAQ&s","https://t3.ftcdn.net/jpg/01/75/06/34/360_F_175063465_nPAUPd3x4uoqbmKyGqDLRDsIvMejnraQ.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3fjP3BWKbK_YDzsVBsI3EXKr7q0JCYMZWKQ&s"
+        
+    ]
     
     let onSuccessGetSpotMenu: ObservablePattern<Bool> = ObservablePattern(nil)
         

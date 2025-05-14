@@ -2,293 +2,252 @@
 //  SpotDetailView.swift
 //  ACON-iOS
 //
-//  Created by 이수민 on 1/16/25.
+//  Created by 김유림 on 5/13/25.
 //
 
 import UIKit
 
-import Kingfisher
-import SnapKit
-import Then
-
 final class SpotDetailView: BaseView {
 
-    // MARK: - UI Properties
-    
-    var stickyView: StickyHeaderView = StickyHeaderView()
-    
-    let scrollView: UIScrollView = UIScrollView()
-    
-    var scrollContentView: UIView = UIView()
-    
-    private let spotDetailImageView: UIImageView = UIImageView()
-    
-    var openStatusButton: FilterTagButton = FilterTagButton()
-    
-    var addressImageView: UIImageView = UIImageView()
-    
-    var addressLabel: UILabel = UILabel()
-    
-    let stickyHeaderView: StickyHeaderView = StickyHeaderView()
-    
-    var menuCollectionView: UICollectionView = UICollectionView(
-        frame: .zero,
-        collectionViewLayout: menuCollectionViewFlowLayout
-    )
-    
-    let footerGlassMorphismView = GlassmorphismView(.buttonGlassDisabled)
+    // MARK: - UI Components
 
-    let footerView: UIView = UIView()
-    
-    private let localAcornImageView: UIImageView = UIImageView()
-    
-    var localAcornCountLabel: UILabel = UILabel()
-    
-    private let plainAcornImageView: UIImageView = UIImageView()
-    
-    var plainAcornCountLabel: UILabel = UILabel()
-    
-    var findCourseButton: UIButton = UIButton()
-    
-    var gotoTopButton: UIButton = UIButton()
-    
-    static var menuCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().then {
-        $0.minimumLineSpacing = 0
-        $0.itemSize = CGSize(width: ScreenUtils.widthRatio*320, height: ScreenUtils.heightRatio*110)
-    }
-    
-    let navViewHeight = ScreenUtils.navViewHeight
-    
-    // MARK: - Lifecycle
-    
+    private let layout = UICollectionViewFlowLayout()
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+
+    private let dimImageView = UIImageView()
+
+    private let titleLabel = UILabel()
+    private let acornCountButton = UIButton()
+    private let tagStackView = UIStackView()
+
+    let menuButton = SpotDetailSideButton(.menu)
+    let shareButton = SpotDetailSideButton(.share)
+    let moreButton = SpotDetailSideButton(.more)
+
+    let findCourseButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
+
+    private let pageControl = UIPageControl()
+
+    private let horizontalEdges: CGFloat = 20 * ScreenUtils.widthRatio
+
+
+    // MARK: - Initializing
+
     override func setHierarchy() {
         super.setHierarchy()
-        
-        self.addSubviews(scrollView,
-                         stickyView,
-                         footerGlassMorphismView,
-                         footerView,
-                         gotoTopButton)
-        scrollView.addSubviews(scrollContentView)
-        scrollContentView.addSubviews(spotDetailImageView,
-                                      openStatusButton,
-                                      addressImageView,
-                                      addressLabel,
-                                      stickyHeaderView,
-                                      menuCollectionView)
-        footerView.addSubviews(localAcornImageView,
-                               localAcornCountLabel,
-                               plainAcornImageView,
-                               plainAcornCountLabel,
-                               findCourseButton)
+
+        self.addSubviews(collectionView,
+                         dimImageView,
+                         titleLabel,
+                         acornCountButton,
+                         tagStackView,
+                         findCourseButton,
+                         pageControl,
+                         menuButton,
+                         shareButton,
+                         moreButton)
     }
-    
+
     override func setLayout() {
         super.setLayout()
-        
-        gotoTopButton.snp.makeConstraints{
-            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
-            $0.bottom.equalTo(footerView.snp.top).offset(-ScreenUtils.heightRatio * 16)
-            $0.size.equalTo(ScreenUtils.widthRatio * 44)
+
+        collectionView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
-        
-        stickyView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio * 20)
-            $0.height.equalTo(36)
+
+        dimImageView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
-        
-        scrollView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(-navViewHeight)
-            $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(84)
+
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide).offset(ScreenUtils.heightRatio*56)
+            $0.leading.equalToSuperview().offset(horizontalEdges)
         }
-        
-        scrollContentView.snp.makeConstraints {
-//            $0.top.equalTo(scrollView.contentLayoutGuide).offset(-navViewHeight)
-//            $0.horizontalEdges.bottom.equalTo(scrollView.contentLayoutGuide)
-            $0.edges.equalTo(scrollView.contentLayoutGuide)
-            $0.width.equalTo(scrollView.frameLayoutGuide)
+
+        tagStackView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(8)
+            $0.leading.equalToSuperview().offset(horizontalEdges)
         }
-        
-        footerGlassMorphismView.snp.makeConstraints {
-            $0.bottom.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.heightRatio*84)
+
+        acornCountButton.snp.makeConstraints {
+            $0.top.equalTo(titleLabel).offset(1)
+            $0.trailing.equalToSuperview().inset(horizontalEdges)
         }
-        
-        footerView.snp.makeConstraints {
-            $0.bottom.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.heightRatio*84)
-        }
-        
-        spotDetailImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(navViewHeight)
-            $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.heightRatio*296)
-        }
-        
-        openStatusButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*312 + navViewHeight)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.width.equalTo(ScreenUtils.widthRatio*51)
-            $0.height.equalTo(ScreenUtils.heightRatio*22)
-        }
-        
-        addressImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*342 + navViewHeight)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.width.height.equalTo(16)
-        }
-        
-        addressLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*342 + navViewHeight)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*38)
-            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.height.equalTo(18)
-        }
-        
-        stickyHeaderView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*400 + navViewHeight)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.height.equalTo(36)
-        }
-        
-        menuCollectionView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*453 + navViewHeight)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.height.equalTo(0)
-            $0.bottom.lessThanOrEqualToSuperview().inset(ScreenUtils.heightRatio*76)
-        }
-        
-        localAcornImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*18)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.width.height.equalTo(24)
-        }
-        
-        localAcornCountLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*21)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*46)
-            $0.width.equalTo(30)
-            $0.height.equalTo(18)
-        }
-        
-        plainAcornImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*18)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*82)
-            $0.width.height.equalTo(24)
-        }
-        
-        plainAcornCountLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*21)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*108)
-            $0.width.equalTo(30)
-            $0.height.equalTo(18)
-        }
-        
+
         findCourseButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*8)
-            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.width.equalTo(ScreenUtils.widthRatio*180)
-            $0.height.equalTo(ScreenUtils.heightRatio*44)
+            $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-13)
+            $0.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(16)
+            $0.height.equalTo(54)
+        }
+
+        pageControl.snp.makeConstraints {
+            $0.bottom.equalTo(findCourseButton.snp.top).offset(-12)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(6)
+            $0.width.equalTo(120)
+        }
+
+        moreButton.snp.makeConstraints {
+            $0.bottom.equalTo(findCourseButton.snp.top).offset(-34)
+            $0.trailing.equalToSuperview().inset(horizontalEdges)
+        }
+
+        shareButton.snp.makeConstraints {
+            $0.bottom.equalTo(moreButton.snp.top).offset(-36)
+            $0.trailing.equalToSuperview().inset(horizontalEdges)
+        }
+
+        menuButton.snp.makeConstraints {
+            $0.bottom.equalTo(shareButton.snp.top).offset(-36)
+            $0.trailing.equalToSuperview().inset(horizontalEdges)
         }
     }
-    
+
     override func setStyle() {
         super.setStyle()
-        
-        self.backgroundColor = .clear
-        gotoTopButton.do {
-            $0.backgroundColor = .gray700
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.gray600.cgColor
-            $0.layer.cornerRadius = ScreenUtils.widthRatio * 44 / 2
+
+        layout.do {
+            $0.scrollDirection = .horizontal
+            $0.itemSize = .init(width: ScreenUtils.width, height: ScreenUtils.height)
+            $0.minimumLineSpacing = 0
+        }
+
+        collectionView.do {
+            $0.backgroundColor = .gray900
+            $0.isPagingEnabled = true
+        }
+
+        dimImageView.do {
             $0.clipsToBounds = true
-            $0.setImage(.icArrowUp, for: .normal)
+            $0.image = .imgGra2
         }
-        
-        stickyView.do {
-            $0.isHidden = true
+
+        tagStackView.do {
+            $0.spacing = 4
         }
-        
-        scrollView.do {
-            $0.showsVerticalScrollIndicator = false
-            $0.bounces = false
+
+        acornCountButton.do {
+            var config = UIButton.Configuration.plain()
+            let acorn: UIImage = .icAcornLine.resize(to: .init(width: 24, height: 24))
+            config.image = acorn
+            config.imagePadding = 2
+            config.titleAlignment = .leading
+            config.contentInsets = .zero
+            $0.configuration = config
         }
-        
-        spotDetailImageView.do {
-            $0.backgroundColor = .gray700
-        }
-        
-        openStatusButton.do {
-            $0.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 2,
-                                                                    leading: 10,
-                                                                    bottom: 2,
-                                                                    trailing: 10)
-            $0.setAttributedTitle(text: StringLiterals.SpotDetail.isOpen, style: .c1SB)
-            
-            $0.configuration?.background.strokeWidth = 0
-            $0.isUserInteractionEnabled = false
-        }
-        
-        addressImageView.do {
-            $0.image = .icLocationGray
-            $0.contentMode = .scaleAspectFill
-        }
-        
-        menuCollectionView.do {
-            $0.backgroundColor = .clear
-            $0.isScrollEnabled = false
-            $0.showsVerticalScrollIndicator = false
-        }
-        
-        footerView.do {
-            $0.backgroundColor = .clear
-        }
-        
-        localAcornImageView.do {
-            $0.image = .icLocal
-            $0.contentMode = .scaleAspectFit
-        }
-        
-        plainAcornImageView.do {
-            $0.image = .icVisitor
-            $0.contentMode = .scaleAspectFit
-        }
-        
-        findCourseButton.do {
-            $0.backgroundColor = .primaryDefault
-            $0.roundedButton(cornerRadius: 10, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner])
-            $0.setAttributedTitle(text: StringLiterals.SpotDetail.findCourse, style: .t4SB)
-        }
-        
     }
-    
+
 }
 
 
+// MARK: - Internal Methods
+
 extension SpotDetailView {
-    
-    func bindData(data: SpotDetailInfoModel) {
-        self.spotDetailImageView.do {
-            $0.kf.setImage(with: URL(string: data.firstImageURL), options: [.transition(.none), .cacheOriginalImage])
+
+    func bindData(_ spotDetail: SpotDetailInfoModel) {
+        titleLabel.setLabel(text: spotDetail.name, style: .t4SB)
+
+        // TODO: API 나오면 실제 데이터로 바꾸기
+        if let acornCount = (1...10000).randomElement() {
+            let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
+            acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
         }
-        let openStatus = data.openStatus
-        self.openStatusButton.isSelected = openStatus
-        self.openStatusButton.setAttributedTitle(
-            text: openStatus ? StringLiterals.SpotDetail.isOpen : StringLiterals.SpotDetail.isNotOpen,
-            style: .b4
-        )
-        self.addressLabel.setLabel(text: data.address,
-                                             style: .b2,
-                                             color: .gray400)
-        self.localAcornCountLabel.setLabel(text: String(data.localAcornCount),
-                                                     style: .s1,
-                                                     alignment: .left)
-        self.plainAcornCountLabel.setLabel(text: String(data.basicAcornCount),
-                                           style: .s1,
-                                           alignment: .left)
-        
+
+        // TODO: API 나오면 실제 데이터로 바꾸기 (tempTags -> Tags)
+        let tempTags: [SpotTagType] = [.new, .local, .top(number: 1)]
+        tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        tempTags.forEach { tag in
+            tagStackView.addArrangedSubview(SpotTagButton(tag))
+        }
+
+        // TODO: API 나오면 실제 데이터로 바꾸기
+        let walk: String = StringLiterals.SpotList.walk
+        let findCourse: String = StringLiterals.SpotList.minuteFindCourse
+        let courseTitle: String = walk + "9" + findCourse
+        findCourseButton.setAttributedTitle(text: courseTitle, style: .t4SB)
+
+        // TODO: API 나오면 실제 데이터로 바꾸기
+        setPageControl(10)
     }
-    
+
+    func makeMainMenuSection(_ menus: [SpotMenuModel]) {
+        guard menus.count > 0 else { return }
+
+        var menus = menus
+        if menus.count > 3 {
+            menus = Array(menus[0...2])
+        }
+
+        let sectionTitle = UILabel()
+        let menuStack = makeMenuStackView(menus)
+
+        self.addSubviews(sectionTitle, menuStack)
+
+        menuStack.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(horizontalEdges)
+            $0.bottom.equalTo(findCourseButton.snp.top).offset(-34)
+        }
+        
+        sectionTitle.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(horizontalEdges)
+            $0.bottom.equalTo(menuStack.snp.top).offset(-12)
+        }
+    }
+
+    func updatePageControl() {
+        let page = Int(round(collectionView.contentOffset.x / collectionView.bounds.width))
+        pageControl.currentPage = page
+    }
+
+}
+
+
+// MARK: - Helper
+
+private extension SpotDetailView {
+
+    func makeMenuStackView(_ menus: [SpotMenuModel]) -> UIStackView {
+        let stackView = UIStackView()
+
+        for menu in menus {
+            let view = UIView()
+            let nameLabel = UILabel()
+            let priceLabel = UILabel()
+            
+            stackView.addArrangedSubview(view)
+            view.addSubviews(nameLabel, priceLabel)
+            
+            nameLabel.snp.makeConstraints {
+                $0.verticalEdges.leading.equalToSuperview()
+                $0.width.equalTo(100)
+            }
+            priceLabel.snp.makeConstraints {
+                $0.verticalEdges.equalToSuperview()
+                $0.leading.equalTo(nameLabel.snp.trailing).offset(8)
+                $0.width.equalTo(55)
+            }
+            
+            nameLabel.setLabel(text: menu.name, style: .b1R, numberOfLines: 1)
+            priceLabel.setLabel(text: menu.price.formattedWithSeparator, style: .b1SB, numberOfLines: 1)
+            [nameLabel, priceLabel].forEach { $0.lineBreakMode = .byTruncatingTail }
+        }
+
+        stackView.do {
+            $0.axis = .vertical
+            $0.spacing = 4
+        }
+
+        return stackView
+    }
+
+    func setPageControl(_ numberOfPages: Int) {
+        pageControl.do {
+            $0.numberOfPages = numberOfPages
+            $0.currentPage = 0
+            $0.currentPageIndicatorTintColor = .acWhite
+            $0.pageIndicatorTintColor = .gray300
+            $0.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+        }
+    }
+
 }

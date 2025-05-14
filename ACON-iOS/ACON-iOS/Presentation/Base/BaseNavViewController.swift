@@ -14,6 +14,8 @@ class BaseNavViewController: UIViewController {
     
     // MARK: - UI Properties
     
+    var glassmorphismNavBarView: GlassmorphismView = GlassmorphismView(.gradientGlass)
+    
     var topInsetView: UIView = UIView()
     
     var navigationBarView: UIView = UIView()
@@ -30,8 +32,7 @@ class BaseNavViewController: UIViewController {
     
     var centerTitleLabel: UILabel = UILabel()
     
-    // 🍇 TODO: 글모 Type 확인
-    let glassMorphismView = GlassmorphismView(.buttonGlassDisabled)
+    let glassMorphismView = GlassmorphismView(.gradientGlass)
     
     var backCompletion: (() -> Void)?
     
@@ -182,10 +183,15 @@ extension BaseNavViewController {
     func setGlassMorphism() {
         self.view.insertSubview(glassMorphismView,
                                 aboveSubview: contentView)
-        glassMorphismView.snp.makeConstraints {
-            $0.top.equalTo(topInsetView)
-            $0.bottom.horizontalEdges.equalTo(navigationBarView)
+        [topInsetView, navigationBarView].forEach {
+            $0.backgroundColor = .clear
         }
+        glassMorphismView.snp.makeConstraints {
+            $0.top.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.safeAreaTopHeight + ScreenUtils.navViewHeight)
+        }
+        self.view.layoutIfNeeded()
+        glassMorphismView.setGradient()
     }
     
 }
