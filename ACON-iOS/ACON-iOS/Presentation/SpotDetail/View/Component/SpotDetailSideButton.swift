@@ -92,7 +92,7 @@ extension SpotDetailSideButton {
             $0.image = type.image
             $0.contentMode = .scaleAspectFit
             $0.layer.shadowColor = UIColor.acBlack.cgColor
-            $0.layer.shadowOpacity = 0.5
+            $0.layer.shadowOpacity = 0.16
             $0.layer.shadowOffset = CGSize(width: 0, height: 4)
             $0.layer.shadowRadius = 4
             $0.layer.masksToBounds = false

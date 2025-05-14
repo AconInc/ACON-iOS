@@ -28,7 +28,7 @@ final class SpotDetailView: BaseView {
 
     private let pageControl = UIPageControl()
 
-    private let horizontalEdges: CGFloat = 16
+    private let horizontalEdges: CGFloat = 20
 
 
     // MARK: - Initializing
@@ -76,7 +76,7 @@ final class SpotDetailView: BaseView {
         
         findCourseButton.snp.makeConstraints {
             $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-13)
-            $0.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(horizontalEdges)
+            $0.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(16)
             $0.height.equalTo(54)
         }
         
