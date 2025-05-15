@@ -109,7 +109,7 @@ extension ACTabBarController: UITabBarControllerDelegate {
                 presentLoginModal(AmplitudeLiterals.EventName.placeUpload)
                 return false
             }
-            let uploadVC = SpotUploadViewController()
+            let uploadVC = SpotSearchViewController()
             uploadVC.modalPresentationStyle = .fullScreen
             present(uploadVC, animated: true)
             return false

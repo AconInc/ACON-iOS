@@ -96,9 +96,6 @@ private extension DropAcornViewController {
     
     @objc
     func dropAcornBackButtonTapped() {
-        if let spotUploadVC = presentingViewController as? SpotUploadViewController {
-            spotUploadVC.isInDismissProcess = false
-        }
         dismiss(animated: false)
     }
     
