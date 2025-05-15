@@ -120,7 +120,6 @@ private extension SpotSearchViewController {
         spotSearchView.searchTextField.observableText.bind { [weak self] text in
             if let text = text {
                 self?.emptyStateView.isHidden = text.isEmpty
-                self?.spotSearchView.searchSuggestionStackView.isHidden = !text.isEmpty
                 self?.spotSearchView.searchKeywordCollectionView.isHidden = text.isEmpty
                 
                 self?.acDebouncer.call { [weak self] in
@@ -135,8 +134,7 @@ private extension SpotSearchViewController {
             guard let onSuccess else { return }
             if onSuccess {
                 guard let data = self?.spotSearchViewModel.searchSuggestionData.value else { return }
-                self?.spotSearchView.bindData(data)
-                self?.addActionToSearchKeywordButton()
+                self?.spotSearchView.searchSuggestionCollectionView.reloadData()
             } else {
                 let errorType = self?.spotSearchViewModel.reviewVerificationErrorType
                 let alertHandler = AlertHandler()
@@ -223,10 +221,15 @@ private extension SpotSearchViewController {
 private extension SpotSearchViewController {
     
     func registerCell() {
+        spotSearchView.searchSuggestionCollectionView.register(SearchSuggestionCollectionViewCell.self, forCellWithReuseIdentifier: SearchSuggestionCollectionViewCell.cellIdentifier)
+        
         spotSearchView.searchKeywordCollectionView.register(SearchKeywordCollectionViewCell.self, forCellWithReuseIdentifier: SearchKeywordCollectionViewCell.cellIdentifier)
     }
     
     func setDelegate() {
+        spotSearchView.searchSuggestionCollectionView.delegate = self
+        spotSearchView.searchSuggestionCollectionView.dataSource = self
+        
         spotSearchView.searchKeywordCollectionView.delegate = self
         spotSearchView.searchKeywordCollectionView.dataSource = self
     }
@@ -239,19 +242,21 @@ private extension SpotSearchViewController {
 extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return SpotSearchView.relatedSearchCollectionViewFlowLayout.itemSize
+        return collectionView == spotSearchView.searchSuggestionCollectionView ? spotSearchView.searchSuggestionCollectionViewFlowLayout.itemSize : spotSearchView.searchKeywordCollectionViewFlowLayout.itemSize
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: ScreenUtils.width * 0.112, bottom: 0, right: ScreenUtils.width * 0.112)
+        return UIEdgeInsets(top: 0, left: ScreenUtils.widthRatio*16, bottom: 0, right: ScreenUtils.widthRatio*16)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedSpotId = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotID ?? 1
-        selectedSpotName = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotName ?? ""
+        selectedSpotID = spotSearchViewModel.searchSuggestionData.value?[indexPath.item].spotID ?? 1
+        selectedSpotName = spotSearchViewModel.searchSuggestionData.value?[indexPath.item].spotName ?? ""
         spotSearchView.searchTextField.text = selectedSpotName
-        self.dismissKeyboard()
-        spotSearchViewModel.getReviewVerification(spotId: selectedSpotId)
+        if collectionView == spotSearchView.searchKeywordCollectionView {
+            self.dismissKeyboard()
+        }
+        spotSearchViewModel.getReviewVerification(spotId: selectedSpotID)
     }
     
 }
@@ -266,11 +271,19 @@ extension SpotSearchViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let data = spotSearchViewModel.searchKeywordData.value?[indexPath.item]
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchKeywordCollectionViewCell.cellIdentifier, for: indexPath) as? SearchKeywordCollectionViewCell else {
-            return UICollectionViewCell() }
-        cell.bindData(data, indexPath.item)
-        return cell
+        if collectionView == spotSearchView.searchSuggestionCollectionView {
+            let data = spotSearchViewModel.searchSuggestionData.value?[indexPath.item]
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchSuggestionCollectionViewCell.cellIdentifier, for: indexPath) as? SearchSuggestionCollectionViewCell else {
+                return UICollectionViewCell() }
+            cell.bindData(data?.spotName, indexPath.item)
+            return cell
+        } else {
+            let data = spotSearchViewModel.searchKeywordData.value?[indexPath.item]
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchKeywordCollectionViewCell.cellIdentifier, for: indexPath) as? SearchKeywordCollectionViewCell else {
+                return UICollectionViewCell() }
+            cell.bindData(data, indexPath.item)
+            return cell
+        }
     }
     
 }

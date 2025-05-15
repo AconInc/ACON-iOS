@@ -18,11 +18,9 @@ final class SpotSearchView: GlassmorphismView {
 
     var searchTextField = ACTextField(icon: .icSearch, borderColor: .gray500)
 
-    var searchSuggestionScrollView: UIScrollView = UIScrollView()
+    lazy var searchSuggestionCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: searchSuggestionCollectionViewFlowLayout)
 
-    var searchSuggestionStackView: UIStackView = UIStackView()
-
-    var searchKeywordCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: relatedSearchCollectionViewFlowLayout)
+    lazy var searchKeywordCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: searchKeywordCollectionViewFlowLayout)
 
     let emptyView: UIView = UIView()
 
@@ -33,7 +31,19 @@ final class SpotSearchView: GlassmorphismView {
 
     // MARK: - Properties
     
-    static var relatedSearchCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().then {
+    let searchSuggestionCollectionViewFlowLayout: UICollectionViewFlowLayout = {
+        let layout = LeftAlignedCollectionViewFlowLayout()
+        layout.do {
+            $0.scrollDirection = .vertical
+            $0.minimumInteritemSpacing = 8
+            $0.minimumLineSpacing = 8
+            $0.sectionInset = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
+            $0.estimatedItemSize = CGSize(width: 100, height: 38)
+        }
+        return layout
+    }()
+    
+   let searchKeywordCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .vertical
         $0.minimumLineSpacing = 0
         $0.itemSize = CGSize(width: ScreenUtils.widthRatio*320, height: ScreenUtils.heightRatio*52)
@@ -56,10 +66,10 @@ final class SpotSearchView: GlassmorphismView {
         
         self.addSubviews(spotUploadLabel,
                          searchTextField,
-                         searchSuggestionScrollView,
+                         searchSuggestionCollectionView,
                          searchKeywordCollectionView,
                          emptyView)
-        searchSuggestionScrollView.addSubview(searchSuggestionStackView)
+        
         emptyView.addSubviews(emptyImageView, emptyLabel)
     }
     
@@ -80,7 +90,7 @@ final class SpotSearchView: GlassmorphismView {
             $0.width.equalTo(ScreenUtils.widthRatio*320)
         }
         
-        searchSuggestionScrollView.snp.makeConstraints {
+        searchSuggestionCollectionView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*158)
             $0.height.equalTo(ScreenUtils.heightRatio*28)
             $0.trailing.equalToSuperview()
@@ -100,38 +110,18 @@ final class SpotSearchView: GlassmorphismView {
             $0.width.equalTo(ScreenUtils.widthRatio*146)
             $0.height.equalTo(ScreenUtils.heightRatio*116)
         }
-        
-        searchSuggestionStackView.snp.makeConstraints {
-            $0.edges.equalTo(searchSuggestionScrollView.contentLayoutGuide)
-            $0.height.equalTo(searchSuggestionScrollView.frameLayoutGuide.snp.height)
-        }
     }
     
     override func setStyle() {
         super.setStyle()
         
-        self.setHandlerImageView()
-        
-        spotUploadLabel.do {
-            $0.setLabel(text: StringLiterals.Upload.spotUpload2,
-                        style: .h8,
-                        color: .acWhite,
-                        alignment: .center)
-        }
-        
         searchTextField.do {
             $0.setPlaceholder(as: StringLiterals.Upload.searchSpot)
         }
         
-        searchSuggestionScrollView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.showsHorizontalScrollIndicator = false
-        }
-        
-        searchSuggestionStackView.do {
-            $0.spacing = 8
-            $0.distribution = .fill
-            $0.alignment = .center
+        searchSuggestionCollectionView.do {
+            $0.backgroundColor = .clear
+            $0.isScrollEnabled = false
         }
         
         searchKeywordCollectionView.do {
@@ -140,61 +130,6 @@ final class SpotSearchView: GlassmorphismView {
             $0.isHidden = true
             // TODO: - 기획 측에 이거 질문
             $0.showsVerticalScrollIndicator = false
-        }
-    }
-    
-}
-
-
-// MARK: - Make RecommendedSpotButton
-
-extension SpotSearchView {
-    
-    func makeRecommendedSpotButton(_ data: SearchSuggestionModel) -> UIButton {
-        let button = UIButton()
-        let recommendedSpotButtonConfiguration: UIButton.Configuration = {
-            var configuration = UIButton.Configuration.plain()
-            configuration.titleAlignment = .center
-            configuration.contentInsets = NSDirectionalEdgeInsets(top: 4,
-                                                                  leading: 12,
-                                                                  bottom: 4,
-                                                                  trailing: 12)
-            return configuration
-        }()
-        button.snp.makeConstraints {
-            $0.height.equalTo(28)
-        }
-        button.do {
-            $0.backgroundColor = .gray800
-            $0.layer.cornerRadius = 14
-            $0.configuration = recommendedSpotButtonConfiguration
-            $0.setAttributedTitle(text: data.spotName,
-                                  style: .b2,
-                                  color: .acWhite)
-            $0.titleLabel?.numberOfLines = 1
-            $0.setContentHuggingPriority(.required, for: .horizontal)
-            $0.setContentCompressionResistancePriority(.required, for: .horizontal)
-            $0.spotID = data.spotId
-        }
-        return button
-    }
-    
-}
-
-
-// MARK: - Make RecommendedSpotButton
-
-extension SpotSearchView {
-    
-    func bindData(_ data: [SearchSuggestionModel]) {
-        searchSuggestionStackView.arrangedSubviews.forEach {
-            $0.removeFromSuperview()
-        }
-        if data.count != 0 {
-            for i in 0...(data.count-1) {
-                let button = makeRecommendedSpotButton(data[i])
-                searchSuggestionStackView.addArrangedSubview(button)
-            }
         }
     }
     
