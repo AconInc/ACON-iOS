@@ -9,9 +9,9 @@ import Foundation
 
 class SpotSearchViewModel: Serviceable {
     
-    var longitude: Double
+    var longitude: Double = 0
     
-    var latitude: Double
+    var latitude: Double = 0
     
     let onSuccessGetSearchSuggestion: ObservablePattern<Bool> = ObservablePattern(nil)
     
@@ -27,10 +27,6 @@ class SpotSearchViewModel: Serviceable {
     
     var reviewVerificationErrorType: ReviewVerificationErrorType? = nil
     
-    init(latitude: Double, longitude: Double) {
-        self.latitude = latitude
-        self.longitude = longitude
-    }
     
     func getSearchKeyword(keyword: String) {
         let parameter = GetSearchKeywordRequest(keyword: keyword)
@@ -67,7 +63,7 @@ class SpotSearchViewModel: Serviceable {
             switch response {
             case .success(let data):
                 let searchSuggestionData = data.suggestionList.map { suggestion in
-                    return SearchSuggestionModel(spotId: suggestion.spotId,
+                    return SearchSuggestionModel(spotID: suggestion.spotId,
                                                  spotName: suggestion.spotName)
                 }
                 self?.searchSuggestionData.value = searchSuggestionData
@@ -119,6 +115,11 @@ class SpotSearchViewModel: Serviceable {
                 return
             }
         }
+    }
+    
+    func setCoordinates(_ latitude: Double, _ longitude: Double) {
+        self.latitude = latitude
+        self.longitude = longitude
     }
     
 }

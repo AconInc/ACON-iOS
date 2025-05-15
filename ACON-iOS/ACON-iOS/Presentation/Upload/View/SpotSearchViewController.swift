@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 import SnapKit
 import Then
@@ -21,28 +22,39 @@ class SpotSearchViewController: BaseViewController {
     
     private var hasCompletedSelection = false
     
-    private var spotSearchViewModel: SpotSearchViewModel
+    private var spotSearchViewModel = SpotSearchViewModel()
     
     private let acDebouncer = ACDebouncer(delay: 0.3)
     
     var completionHandler: ((Int64, String) -> Void)?
     
-    private var selectedSpotId: Int64 = 0
+    private var selectedSpotID: Int64 = -1
     
     private var selectedSpotName: String = ""
       
     private let emptyStateView: SearchEmptyView = SearchEmptyView()
     
+    var dismissCompletion: (() -> Void)?
+    
+    var latitude: Double = 0
+    
+    var longitude: Double = 0
+
+    
     // MARK: - LifeCycle
     
-    init(spotSearchViewModel: SpotSearchViewModel) {
-        self.spotSearchViewModel = spotSearchViewModel
-        
+    init() {
         super.init(nibName: nil, bundle: nil)
+        
+        ACLocationManager.shared.addDelegate(self)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+       ACLocationManager.shared.removeDelegate(self)
     }
     
     override func viewDidLoad() {
@@ -59,11 +71,16 @@ class SpotSearchViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         // TODO: - getSearchSuggestion 서버통신
-        spotSearchViewModel.getSearchSuggestion()
+        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
+        DispatchQueue.main.async {
+            self.spotSearchViewModel.setCoordinates(self.latitude, self.longitude)
+            self.spotSearchViewModel.getSearchSuggestion()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         spotSearchView.searchTextField.resignFirstResponder()
     }
     
