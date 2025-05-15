@@ -8,10 +8,7 @@
 import UIKit
 import CoreLocation
 
-import SnapKit
-import Then
-
-class SpotSearchViewController: BaseViewController {
+class SpotSearchViewController: BaseNavViewController {
     
     // MARK: - UI Properties
     
@@ -60,14 +57,18 @@ class SpotSearchViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setXButton()
+        self.setNextButton()
+        self.setCenterTitleLabelStyle(title: StringLiterals.Upload.upload)
+        self.rightButton.isEnabled = false
+        
+        addTarget()
         self.hideKeyboard()
         registerCell()
         setDelegate()
         bindTextField()
         bindViewModel()
     }
-    
-    var dismissCompletion: (() -> Void)?
 
     override func viewWillAppear(_ animated: Bool) {
         // TODO: - getSearchSuggestion 서버통신
@@ -84,22 +85,13 @@ class SpotSearchViewController: BaseViewController {
         spotSearchView.searchTextField.resignFirstResponder()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        if isBeingDismissed {
-            if hasCompletedSelection {
-                completionHandler?(selectedSpotId, selectedSpotName)
-            }
-            dismissCompletion?()
-            hasCompletedSelection = false
-        }
-    }
+    
+    // MARK: - UI Setting Methods
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.view.addSubviews(spotSearchView, emptyStateView)
+        self.contentView.addSubviews(spotSearchView, emptyStateView)
     }
     
     override func setLayout() {
@@ -124,6 +116,16 @@ class SpotSearchViewController: BaseViewController {
         emptyStateView.do {
             $0.isHidden = true
         }
+    }
+    
+    func addTarget() {
+        self.leftButton.addTarget(self,
+                                  action: #selector(xButtonTapped),
+                                  for: .touchUpInside)
+
+        self.rightButton.addTarget(self,
+                                   action: #selector(nextButtonTapped),
+                                    for: .touchUpInside)
     }
 
 }
@@ -208,26 +210,37 @@ private extension SpotSearchViewController {
 }
 
 
-// MARK: - 추천 검색어 클릭 로직
+// MARK: - @objc functions
 
 private extension SpotSearchViewController {
     
-    func addActionToSearchKeywordButton() {
-        spotSearchView.searchSuggestionStackView.arrangedSubviews.forEach { view in
-            if let button = view as? UIButton {
-                button.addTarget(self,
-                                 action: #selector(searchKeywordButtonTapped(_:)),
-                                 for: .touchUpInside)
-            }
-        }
+    @objc
+    func nextButtonTapped() {
+        let vc = DropAcornViewController(spotID: selectedSpotID)
+        vc.modalPresentationStyle = .fullScreen
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.placeUpload, properties: ["click_review_next?": true])
+        present(vc, animated: false)
     }
     
     @objc
-    func searchKeywordButtonTapped(_ sender: UIButton) {
-        guard let spotName = sender.currentAttributedTitle?.string else { return }
-        selectedSpotId = sender.spotID
-        selectedSpotName = spotName
-        spotSearchViewModel.getReviewVerification(spotId: selectedSpotId)
+    func xButtonTapped() {
+        let alertHandler = AlertHandler()
+        alertHandler.showUploadExitAlert(from: self)
+    }
+    
+}
+
+extension SpotSearchViewController: ACLocationManagerDelegate {
+    
+    func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
+
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            print("성공 - 위도: \(coordinate.latitude), 경도: \(coordinate.longitude)")
+            self.latitude = coordinate.latitude
+            self.longitude = coordinate.longitude
+        }
     }
     
 }
