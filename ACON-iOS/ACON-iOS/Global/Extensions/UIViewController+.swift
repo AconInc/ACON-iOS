@@ -61,7 +61,7 @@ extension UIViewController {
     
     // MARK: - 바텀시트 내려가게
     
-    func setSheetLayout(detent: ACSheetDetent) {
+    func setSheetLayout(detent: ACSheetDetentType) {
         self.modalPresentationStyle = .pageSheet
         
         if let sheet = self.sheetPresentationController {
@@ -99,7 +99,7 @@ extension UIViewController {
     
     func presentLoginModal(_ presentedModalType: String) {
         let vc = LoginModalViewController(presentedModalType)
-        vc.setSheetLayout(detent: .short)
+        vc.setSheetLayout(detent: .middle)
         
         self.present(vc, animated: true)
     }
