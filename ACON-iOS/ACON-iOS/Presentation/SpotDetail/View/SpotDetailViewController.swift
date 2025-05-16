@@ -39,6 +39,7 @@ class SpotDetailViewController: BaseNavViewController {
         super.viewDidLoad()
 
         setDelegate()
+        registerCell()
         addTarget()
         bindViewModel()
     }
@@ -83,10 +84,12 @@ class SpotDetailViewController: BaseNavViewController {
         self.setBackButton(completion: backCompletion)
     }
 
-    func setDelegate() {
+    private func setDelegate() {
         spotDetailView.collectionView.dataSource = self
         spotDetailView.collectionView.delegate = self
+    }
 
+    private func registerCell() {
         spotDetailView.collectionView.register(SpotDetailImageCollectionViewCell.self, forCellWithReuseIdentifier: SpotDetailImageCollectionViewCell.cellIdentifier)
     }
 

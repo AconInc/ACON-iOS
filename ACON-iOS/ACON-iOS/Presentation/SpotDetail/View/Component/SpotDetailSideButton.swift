@@ -63,25 +63,28 @@ extension SpotDetailSideButton {
         imageView.do {
             $0.image = type.image
             $0.contentMode = .scaleAspectFit
-            $0.layer.shadowColor = UIColor.acBlack.cgColor
-            $0.layer.shadowOpacity = 0.16
-            $0.layer.shadowOffset = CGSize(width: 0, height: 4)
-            $0.layer.shadowRadius = 4
-            $0.layer.masksToBounds = false
+
+            $0.layer.do {
+                $0.shadowColor = UIColor.acBlack.cgColor
+                $0.shadowOpacity = 0.16
+                $0.shadowOffset = CGSize(width: 0, height: 4)
+                $0.shadowRadius = 4
+                $0.masksToBounds = false
+            }
         }
 
         label.do {
             let attrText = type.text.attributedString(.c1SB)
             let mutable = NSMutableAttributedString(attributedString: attrText)
-            
+
             // shadow 추가
             let shadow = NSShadow()
             shadow.shadowColor = UIColor.acBlack.withAlphaComponent(0.16)
             shadow.shadowOffset = CGSize(width: 0, height: 4)
             shadow.shadowBlurRadius = 4
-            
+
             mutable.addAttribute(.shadow, value: shadow, range: NSRange(location: 0, length: mutable.length))
-            
+
             $0.attributedText = mutable
             $0.textAlignment = .center
         }
