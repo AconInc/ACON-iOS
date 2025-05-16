@@ -44,16 +44,15 @@ extension SpotDetailSideButton {
     func setLayout() {
         self.snp.makeConstraints {
             $0.width.equalTo(36)
-            $0.height.equalTo(58)
         }
 
         imageView.snp.makeConstraints {
-            $0.size.equalTo(36)
+            $0.size.equalTo(36 * ScreenUtils.heightRatio)
             $0.top.centerX.equalToSuperview()
         }
 
         label.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).offset(4)
+            $0.top.equalTo(imageView.snp.bottom).offset(min(4, 4 * ScreenUtils.heightRatio))
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview()
         }

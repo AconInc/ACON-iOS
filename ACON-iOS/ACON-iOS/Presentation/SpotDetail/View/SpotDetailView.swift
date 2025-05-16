@@ -88,17 +88,17 @@ final class SpotDetailView: BaseView {
         }
 
         moreButton.snp.makeConstraints {
-            $0.bottom.equalTo(findCourseButton.snp.top).offset(-34)
+            $0.bottom.equalTo(findCourseButton.snp.top).offset(max(-34, -34 * ScreenUtils.heightRatio))
             $0.trailing.equalToSuperview().inset(horizontalEdges)
         }
 
         shareButton.snp.makeConstraints {
-            $0.bottom.equalTo(moreButton.snp.top).offset(-36)
+            $0.bottom.equalTo(moreButton.snp.top).offset(max(-36, -36 * ScreenUtils.heightRatio))
             $0.trailing.equalToSuperview().inset(horizontalEdges)
         }
 
         menuButton.snp.makeConstraints {
-            $0.bottom.equalTo(shareButton.snp.top).offset(-36)
+            $0.bottom.equalTo(shareButton.snp.top).offset(max(-36, -36 * ScreenUtils.heightRatio))
             $0.trailing.equalToSuperview().inset(horizontalEdges)
         }
     }

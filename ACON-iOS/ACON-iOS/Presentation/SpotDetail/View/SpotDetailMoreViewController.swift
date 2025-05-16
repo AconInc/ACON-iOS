@@ -78,7 +78,7 @@ class SpotDetailMoreViewController: BaseViewController {
 
             $0.configuration = config
             $0.contentHorizontalAlignment = .leading
-            $0.setAttributedTitle(text: StringLiterals.SpotDetail.reportInfoError, style: .t4SB)
+            $0.setAttributedTitle(text: StringLiterals.SpotDetail.reportInfoError, style: .t4R)
         }
     }
 
