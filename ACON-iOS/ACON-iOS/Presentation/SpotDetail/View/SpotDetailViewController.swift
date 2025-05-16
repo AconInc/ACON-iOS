@@ -100,6 +100,9 @@ class SpotDetailViewController: BaseNavViewController {
 
         let menuTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedMenuButton))
         spotDetailView.menuButton.addGestureRecognizer(menuTapGesture)
+
+        let moreTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedMoreButton))
+        spotDetailView.moreButton.addGestureRecognizer(moreTapGesture)
     }
 
 }
@@ -159,6 +162,13 @@ private extension SpotDetailViewController {
     func tappedMenuButton() {
         let vc = MenuImageSlideViewController(viewModel.menuImageURLs)
         vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true)
+    }
+
+    @objc
+    func tappedMoreButton() {
+        let vc = SpotDetailMoreViewController()
+        vc.setSheetLayout(detent: .short)
         self.present(vc, animated: true)
     }
 
