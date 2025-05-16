@@ -26,16 +26,16 @@ extension UIView {
 
 
     // MARK: - 바텀시트 핸들 이미지 추가
-    
+
     func setHandlerImageView() {
         let handlerImageView: UIImageView = UIImageView()
         self.addSubview(handlerImageView)
 
         handlerImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*14)
+            $0.top.equalToSuperview().inset(14 * ScreenUtils.heightRatio)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.heightRatio*36)
-            $0.height.equalTo(ScreenUtils.heightRatio*5)
+            $0.width.equalTo(36 * ScreenUtils.widthRatio)
+            $0.height.equalTo(5 * ScreenUtils.heightRatio)
         }
 
         handlerImageView.do {
