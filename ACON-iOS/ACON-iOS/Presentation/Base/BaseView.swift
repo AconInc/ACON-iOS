@@ -12,9 +12,6 @@ import Then
 
 class BaseView: UIView {
 
-    private let handlerImageView: UIImageView = UIImageView()
-    
-    
     // MARK: - Initializer
 
     override init(frame: CGRect) {
@@ -35,28 +32,6 @@ class BaseView: UIView {
     
     func setStyle() {
         self.backgroundColor = .gray900
-    }
-
-}
-
-// MARK: setHandlerImage for Modal
-
-extension BaseView {
-
-    func setHandlerImageView() {
-        self.addSubview(handlerImageView)
-
-        handlerImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*4)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.heightRatio*36)
-            $0.height.equalTo(ScreenUtils.heightRatio*5)
-        }
-
-        handlerImageView.do {
-            $0.image = .btnBottomsheetBar
-            $0.contentMode = .scaleAspectFit
-        }
     }
 
 }
