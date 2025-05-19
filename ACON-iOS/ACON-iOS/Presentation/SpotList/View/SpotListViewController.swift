@@ -161,7 +161,15 @@ extension SpotListViewController {
                     }
                 }
             } else {
-                print("🥑추천장소리스트 Post 실패")
+                // TODO: 네트워크 에러뷰로 교체, 버튼에 postSpotList() 액션 설정
+                spotListView.errorView.setStyle(
+                    errorMessage: StringLiterals.Error.networkErrorOccurred,
+                    buttonTitle: StringLiterals.Error.tryAgain
+                )
+                spotListView.hideSkeletonView(isHidden: true)
+                
+                // TODO: Post 하는동안 로딩스켈레톤
+                
             }
             
             viewModel.onSuccessPostSpotList.value = nil
@@ -170,6 +178,9 @@ extension SpotListViewController {
             filterButton.isSelected = !viewModel.filterList.isEmpty
             
             viewModel.onFinishRefreshingSpotList.value = true
+            
+            // NOTE: 에러뷰 숨김 여부 처리
+            spotListView.errorView.isHidden = isSuccess
         }
     }
     
