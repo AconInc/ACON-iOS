@@ -8,8 +8,6 @@
 import UIKit
 
 import Lottie
-import SnapKit
-import Then
 
 class DropAcornViewController: BaseNavViewController {
     
@@ -23,9 +21,9 @@ class DropAcornViewController: BaseNavViewController {
     
     // MARK: - Properties
     
-    var spotReviewViewModel = SpotReviewViewModel()
+    private var spotReviewViewModel = SpotReviewViewModel()
     
-    var spotID: Int64 = 0
+    private var spotID: Int64 = 0
     
     private var spotName: String = ""
     
@@ -49,12 +47,6 @@ class DropAcornViewController: BaseNavViewController {
         bindViewModel()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
-
-        spotReviewViewModel.getAcornCount()
-    }
-    
     override func setHierarchy() {
         super.setHierarchy()
         
@@ -74,7 +66,8 @@ class DropAcornViewController: BaseNavViewController {
         
         self.setButtonStyle(button: leftButton, image: .icArrowLeft)
         self.setButtonAction(button: leftButton, target: self, action: #selector(dropAcornBackButtonTapped))
-        self.dropAcornView.leaveReviewButton.isEnabled = false
+        self.setCenterTitleLabelStyle(title: StringLiterals.Upload.upload)
+        self.dropAcornView.spotNameLabel.setLabel(text: self.spotName, style: .t3SB, alignment: .center)
     }
     
     func addTarget() {
@@ -135,17 +128,6 @@ private extension DropAcornViewController {
 private extension DropAcornViewController {
     
     func bindViewModel() {
-        self.spotReviewViewModel.onSuccessGetAcornCount.bind { [weak self] onSuccess in
-            guard let onSuccess, let data = self?.spotReviewViewModel.acornCount.value else { return }
-            if onSuccess {
-                self?.possessAcornCount = data
-                self?.dropAcornView.bindData(data)
-            } else {
-                // TODO: - 👠 이건 없애는 게 UI에 좋을 듯
-                self?.showDefaultAlert(title: "도토리 개수 로드 실패", message: "도토리 개수 로드에 실패했습니다.")
-            }
-        }
-        
         self.spotReviewViewModel.onSuccessPostReview.bind { [weak self] onSuccess in
             guard let onSuccess else { return }
             if onSuccess {
@@ -165,38 +147,10 @@ private extension DropAcornViewController {
 private extension DropAcornViewController {
     
     func checkAcorn(_ dropAcorn: Int) {
-        if dropAcorn > possessAcornCount {
-            ACToastController.show(StringLiterals.Upload.noAcorn, bottomInset: 112, delayTime: 1)
-            { return }
-            dropAcornView.dropAcornLottieView.isHidden = true
-            disableLeaveReviewButton()
-        } else {
-            dropAcornView.dropAcornLottieView.isHidden = false
-            toggleLottie(dropAcorn: dropAcorn)
-            enableLeaveReviewButton()
-        }
-    }
-    
-}
-
-
-// MARK: - 버튼
-
-private extension DropAcornViewController {
-    
-    // TODO: - 나중에 전부 buttonConfiguration에 넣고 enable만 toggle
-    func enableLeaveReviewButton() {
-        dropAcornView.leaveReviewButton.do {
-            $0.isEnabled = true
-            $0.backgroundColor = .primaryDefault
-        }
-    }
-    
-    func disableLeaveReviewButton() {
-        dropAcornView.leaveReviewButton.do {
-            $0.isEnabled = false
-            $0.backgroundColor = .gray500
-        }
+        dropAcornView.dropAcornLottieView.isHidden = false
+        toggleLottie(dropAcorn: dropAcorn)
+        dropAcornView.leaveReviewButton.updateGlassButtonState(state: .default)
+        dropAcornView.lightImageView.isHidden = false
     }
     
 }
