@@ -74,7 +74,11 @@ class ReviewFinishedViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
-        self.setXButton()
+        reviewFinishedView.finishedReviewLabel.do {
+            $0.setLabel(text: spotName.abbreviatedString(9) + StringLiterals.Upload.finishedReview,
+                        style: .t2SB,
+                        alignment: .center)
+        }
     }
     
     func addTarget() {
