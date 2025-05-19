@@ -229,6 +229,10 @@ enum StringLiterals {
         
         static let findCourse = "길 찾기"
         
+        static let seeMore = "더보기"
+        
+        static let reportInfoError = "정보 오류 신고하기"
+        
     }
     
     
@@ -241,6 +245,8 @@ enum StringLiterals {
         static let privacyPolicyLink = "https://bit.ly/acon개인정보처리방침"
         
         static let termsOfUseLink = "https://bit.ly/acon서비스이용약관"
+        
+        static let spotInfoErrorReportLink = "https://walla.my/survey/ekYLYwpJv2d0Eznnijla"
         
     }
     

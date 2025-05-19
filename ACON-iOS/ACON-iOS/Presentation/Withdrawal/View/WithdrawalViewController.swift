@@ -144,7 +144,7 @@ extension WithdrawalViewController {
     private func presentWithdrawalSheet() {
         let sheetVC = WithdrawalConfirmationViewController()
         sheetVC.viewModel = viewModel
-        sheetVC.setSheetLayout(detent: .short)
+        sheetVC.setSheetLayout(detent: .middle)
         sheetVC.isModalInPresentation = true
         
         DispatchQueue.main.async {

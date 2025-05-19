@@ -41,6 +41,7 @@ class MenuImageSlideViewController: BaseViewController {
         super.viewDidLoad()
 
         setDelegate()
+        registerCell()
         addTarget()
     }
 
@@ -110,7 +111,9 @@ class MenuImageSlideViewController: BaseViewController {
     private func setDelegate() {
         collectionView.dataSource = self
         collectionView.delegate = self
+    }
 
+    private func registerCell() {
         collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.cellIdentifier)
     }
 
