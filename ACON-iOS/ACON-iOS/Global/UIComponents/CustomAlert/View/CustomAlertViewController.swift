@@ -2,24 +2,46 @@
 //  CustomAlertViewController.swift
 //  ACON-iOS
 //
-//  Created by Jaehyun Ahn on 1/16/25.
+//  Created by 이수민 on 5/20/25.
 
 import UIKit
 
-import SnapKit
-import Then
-
 final class CustomAlertViewController: BaseViewController {
     
-    private let customAlertView = CustomAlertView()
-    var onClose: (() -> Void)?
-    var onSettings: (() -> Void)?
+    // MARK: - UI Properties
+    
+    let customAlertView: CustomAlertView = CustomAlertView()
+    
+    
+    // MARK: - Properties
+    
+    var customAlertType: CustomAlertType
+    
+    var onLongButtonTapped: (() -> Void)?
+    
+    var onLeftButtonTapped: (() -> Void)?
+    
+    var onRightButtonTapped: (() -> Void)?
+    
+    
+    // MARK: - LifeCycle
+    
+    init(_ customAlertType: CustomAlertType) {
+        self.customAlertType = customAlertType
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        setActions()
+        configure(with: customAlertType)
+        addTarget()
     }
     
     override func setHierarchy() {
@@ -32,31 +54,49 @@ final class CustomAlertViewController: BaseViewController {
 }
 
 
-extension CustomAlertViewController {
+// MARK: - Setting methods
+
+private extension CustomAlertViewController {
     
-    private func setActions() {
-        customAlertView.closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
-        customAlertView.settingsButton.addTarget(self, action: #selector(actionTapped), for: .touchUpInside)
+    func addTarget() {
+        customAlertView.longButton.addTarget(self, action: #selector(longButtonTapped), for: .touchUpInside)
+        customAlertView.leftButton.addTarget(self, action: #selector(leftButtonTapped), for: .touchUpInside)
+        customAlertView.rightButton.addTarget(self, action: #selector(rightButtonTapped), for: .touchUpInside)
     }
     
-    func configure(with alertType: AlertType) {
-        customAlertView.configure(
-            title: alertType.title,
-            message: alertType.content,
-            leftButton: alertType.buttons[0],
-            rightButton: alertType.buttons[1]
-        )
+    func configure(with alertType: CustomAlertType) {
+        customAlertView.configure(title: alertType.title,
+                                  description: alertType.description,
+                                  longButtonTitle: alertType.longButtonTitle,
+                                  leftButtonTitle: alertType.leftButtonTitle,
+                                  rightButtonTitle: alertType.rightButtonTitle)
     }
     
-    @objc private func closeTapped() {
+}
+
+
+// MARK: - @objc functions
+
+private extension CustomAlertViewController {
+    
+    @objc
+    func longButtonTapped() {
         dismiss(animated: true) {
-            self.onClose?()
+            self.onLongButtonTapped?()
         }
     }
     
-    @objc private func actionTapped() {
+    @objc
+    func leftButtonTapped() {
         dismiss(animated: true) {
-            self.onSettings?()
+            self.onLeftButtonTapped?()
+        }
+    }
+    
+    @objc
+    func rightButtonTapped() {
+        dismiss(animated: true) {
+            self.onRightButtonTapped?()
         }
     }
     
