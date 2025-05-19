@@ -93,32 +93,32 @@ extension SpotListViewModel {
     
     func postSpotList() {
         let filterListDTO = filterList.map { filter in
-            return SpotFilter(category: filter.category.serverKey,
+            return SpotFilterDTO(category: filter.category.serverKey,
                                        optionList: filter.optionList)
         }
         
         let requestBody = PostSpotListRequest(
             latitude: userCoordinate.latitude,
             longitude: userCoordinate.longitude,
-            condition: SpotCondition(
+            condition: SpotConditionDTO(
                 spotType: spotType.serverKey,
-                filterList: filterList.isEmpty ? nil : filterListDTO,
-                walkingTime: nil,
-                priceRange: nil
+                filterList: filterList.isEmpty ? nil : filterListDTO
             )
         )
         
         ACService.shared.spotListService.postSpotList(requestBody: requestBody) { [weak self] response in
             switch response {
             case .success(let data):
-                let spotList: [SpotModel] = data.spotList.map { data in
+                let spotList: [SpotModel] = data.spotList.map {
                     let spot = SpotModel(
-                        id: data.id,
-                        imageURL: data.image,
-                        matchingRate: data.matchingRate,
-                        type: data.type,
-                        name: data.name,
-                        walkingTime: data.walkingTime
+                        id: $0.id,
+                        imageURL: $0.image,
+                        name: $0.name,
+                        acornCount: $0.acornCount,
+                        tagList: $0.tagList,
+                        eta: $0.eta,
+                        latitude: $0.latitude,
+                        longitude: $0.longitude
                     )
                     return spot
                 }

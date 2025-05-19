@@ -144,7 +144,7 @@ extension SpotListCollectionViewCell {
 
     func bind(spot: SpotModel, matchingRateBgColor: MatchingRateBgColorType) {
         bgImage.kf.setImage(
-            with: URL(string: spot.imageURL),
+            with: URL(string: spot.imageURL ?? ""),
             placeholder: UIImage.imgSkeletonBg,
             options: [.transition(.none), .cacheOriginalImage],
             completionHandler: { result in
@@ -161,11 +161,9 @@ extension SpotListCollectionViewCell {
 
         titleLabel.setLabel(text: spot.name, style: .t4SB)
 
-        // TODO: API 나오면 실제 데이터로 바꾸기 (matchingRate -> acornCount)
-        if let acornCount = spot.matchingRate {
-            let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
-            acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
-        }
+        let acornCount: Int = spot.acornCount
+        let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
+        acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
 
         if let tagList = spot.tagList {
             let tempTags: [SpotTagType] = tagList.map { SpotTagType(rawValue: $0) }
@@ -177,7 +175,7 @@ extension SpotListCollectionViewCell {
 
         let walk: String = StringLiterals.SpotList.walk
         let findCourse: String = StringLiterals.SpotList.minuteFindCourse
-        let courseTitle: String = walk + String(spot.walkingTime) + findCourse
+        let courseTitle: String = walk + String(spot.eta) + findCourse
         findCourseButton.setAttributedTitle(text: courseTitle, style: .b1SB)
     }
 
