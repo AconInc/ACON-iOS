@@ -7,16 +7,14 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
-class ReviewFinishedViewController: BaseNavViewController {
+class ReviewFinishedViewController: BaseViewController {
     
     // MARK: - UI Properties
     
     private let reviewFinishedView = ReviewFinishedView()
     
     private var spotName: String = ""
+    
     
     // MARK: - LifeCycle
     
@@ -33,7 +31,6 @@ class ReviewFinishedViewController: BaseNavViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setXButton()
         addTarget()
     }
     
@@ -41,26 +38,12 @@ class ReviewFinishedViewController: BaseNavViewController {
         super.viewDidAppear(false)
         
         self.reviewFinishedView.finishedReviewLottieView.play()
-        var timeLeftToClose = 5
-        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            self.reviewFinishedView.closeViewLabel.do {
-                $0.setLabel(text: "\(timeLeftToClose)"+StringLiterals.Upload.closeAfter,
-                            style: .b3,
-                            color: .gray300)
-            }
-            timeLeftToClose -= 1
-            if timeLeftToClose < 0 {
-                timer.invalidate()
-                self.closeView()
-            }
-        }
-        timer.fire()
     }
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.contentView.addSubview(reviewFinishedView)
+        self.view.addSubview(reviewFinishedView)
     }
     
     override func setLayout() {
@@ -82,11 +65,8 @@ class ReviewFinishedViewController: BaseNavViewController {
     }
     
     func addTarget() {
-        self.leftButton.addTarget(self,
-                                  action: #selector(xButtonTapped),
-                                  for: .touchUpInside)
-        reviewFinishedView.okButton.addTarget(self,
-                                              action: #selector(okButtonTapped),
+        reviewFinishedView.doneButton.addTarget(self,
+                                              action: #selector(doneButtonTapped),
                                               for: .touchUpInside)
     }
 
@@ -98,12 +78,7 @@ class ReviewFinishedViewController: BaseNavViewController {
 private extension ReviewFinishedViewController {
     
     @objc
-    func xButtonTapped() {
-        closeView()
-    }
-    
-    @objc
-    func okButtonTapped() {
+    func doneButtonTapped() {
         closeView()
     }
     
@@ -116,17 +91,8 @@ private extension ReviewFinishedViewController {
     
     @objc
     func closeView() {
-        var topController: UIViewController = self
-        while let presenting = topController.presentingViewController {
-            topController = presenting
-        }
-        
-        topController.dismiss(animated: true) {
-            if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-               let sceneDelegate = scene.delegate as? SceneDelegate,
-               let tabBarController = sceneDelegate.window?.rootViewController as? ACTabBarController {
-                tabBarController.selectedIndex = 0
-            }
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = ACTabBarController()
         }
     }
     

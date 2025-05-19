@@ -113,9 +113,9 @@ enum StringLiterals {
         
         static let reviewWithAcornsHere = "도토리로 리뷰남기기"
         
-        static let finishedReview = "가게명에 대한\n리뷰 작성을 완료했어요!"
+        static let finishedReview = "에 대한\n리뷰 작성을 완료했어요!"
         
-        static let wishYouPreference = "당신의 취향이 가득 담긴 장소였길 바라요."
+        static let wishYouPreference = "당신의 취향이 가득 담긴 장소였길 바라요"
         
         static let closeAfterFiveSeconds = "5초 후 탭이 자동으로 닫힙니다."
         
