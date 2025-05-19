@@ -2,136 +2,184 @@
 //  CustomAlertView.swift
 //  ACON-iOS
 //
-//  Created by Jaehyun Ahn on 1/17/25.
+//  Created by 이수민 on 5/20/25.
 //
 
 import UIKit
 
-import SnapKit
-import Then
-
 final class CustomAlertView: BaseView {
     
-    private let alertContainer = UIView()
-    private let messageLabel = UILabel()
+    // MARK: - UI Properties
+    
+    private let alertContainerView = GlassmorphismView(.alertGlass)
+    
     private let titleLabel = UILabel()
-    let closeButton = UIButton()
-    let settingsButton = UIButton()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func setStyle() {
-        super.setStyle()
-        
-        self.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        
-        alertContainer.do {
-            $0.backgroundColor = .gray800
-            $0.layer.cornerRadius = 8
-            $0.clipsToBounds = true
-        }
+    private let descriptionLabel = UILabel()
 
-        closeButton.do {
-            $0.layer.cornerRadius = 8
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.gray500.cgColor
-        }
-        
-        settingsButton.do {
-            $0.layer.cornerRadius = 8
-            $0.backgroundColor = .gray500
-        }
-        
-    }
+    private let horizontalLineView: UIView = UIView()
+    
+    let longButton = UIButton()
+    
+    private let verticalLineView: UIView = UIView()
+    
+    let leftButton = UIButton()
+    
+    let rightButton = UIButton()
+    
+    
+    // MARK: - Lifecycle
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        addSubview(alertContainer)
-        alertContainer.addSubviews(messageLabel, titleLabel, closeButton, settingsButton)
+        self.addSubview(alertContainerView)
+        alertContainerView.addSubviews(titleLabel,
+                                       descriptionLabel,
+                                       horizontalLineView,
+                                       longButton,
+                                       leftButton,
+                                       verticalLineView,
+                                       rightButton)
     }
     
     override func setLayout() {
         super.setLayout()
         
-        alertContainer.snp.makeConstraints {
+        alertContainerView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.widthRatio * 279)
-            $0.height.greaterThanOrEqualTo(ScreenUtils.widthRatio * 279 * 0.5)
+            $0.width.equalTo(ScreenUtils.widthRatio * 270)
+            $0.height.greaterThanOrEqualTo(ScreenUtils.heightRatio * 114)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.centerX.equalTo(alertContainer)
-            $0.top.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.widthRatio * 24)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*24)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio * 16)
         }
         
-        messageLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
-            $0.horizontalEdges.equalTo(alertContainer).inset(ScreenUtils.widthRatio * 24)
-            $0.centerX.equalTo(alertContainer)
+        descriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(ScreenUtils.heightRatio * 8)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio * 16)
         }
         
-        closeButton.snp.makeConstraints {
-            $0.top.equalTo(messageLabel.snp.bottom).offset(20)
-            $0.trailing.equalTo(alertContainer.snp.centerX).offset(-4)
-            $0.width.equalTo(ScreenUtils.widthRatio * 112)
-            $0.height.equalTo(ScreenUtils.widthRatio * 44)
+        horizontalLineView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(ScreenUtils.heightRatio * 20)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(1)
         }
         
-        settingsButton.snp.makeConstraints {
-            $0.top.equalTo(messageLabel.snp.bottom).offset(20)
-            $0.leading.equalTo(alertContainer.snp.centerX).offset(4)
-            $0.width.equalTo(ScreenUtils.widthRatio * 112)
-            $0.height.equalTo(ScreenUtils.widthRatio * 44)
-            $0.bottom.equalTo(alertContainer.snp.bottom).inset(ScreenUtils.widthRatio * 24)
+        longButton.snp.makeConstraints {
+            $0.top.equalTo(horizontalLineView.snp.bottom)
+            $0.bottom.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.heightRatio * 43)
+        }
+        
+        leftButton.snp.makeConstraints {
+            $0.top.equalTo(horizontalLineView.snp.bottom)
+            $0.leading.bottom.equalToSuperview()
+            $0.width.equalTo((ScreenUtils.widthRatio * 270 - 1)/2)
+            $0.height.equalTo(ScreenUtils.heightRatio * 43)
+        }
+        
+        verticalLineView.snp.makeConstraints {
+            $0.top.equalTo(horizontalLineView.snp.bottom)
+            $0.bottom.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.heightRatio * 43)
+            $0.width.equalTo(1)
+        }
+        
+        rightButton.snp.makeConstraints {
+            $0.top.equalTo(horizontalLineView.snp.bottom)
+            $0.trailing.bottom.equalToSuperview()
+            $0.width.equalTo((ScreenUtils.widthRatio * 270 - 1)/2)
+            $0.height.equalTo(ScreenUtils.heightRatio * 43)
         }
     }
     
-    func configure(title: String, message: String, leftButton: String, rightButton: String) {
+    override func setStyle() {
+        super.setStyle()
         
-        /* NOTE: 여기에 style 적용한 이유 -> 상단에서 적용후 text만 따로 넣으니 컬러 및 폰트 적용 x
-        alertcustomiamgeview도 같은 이유
-         */
-                 
-        titleLabel.do {
-            $0.setLabel(
-                text: title,
-                style: OldACFont.h8,
-                color: .acWhite,
-                alignment: .center,
-                numberOfLines: 2
-            )
+        self.backgroundColor = .dimDefault
+        
+        alertContainerView.do {
+            $0.layer.cornerRadius = 14
+            $0.clipsToBounds = true
         }
         
-        messageLabel.do {
-            $0.setLabel(
-                text: message,
-                style: OldACFont.b2,
-                color: .gray300,
-                alignment: .center,
-                numberOfLines: 2
-            )
+        [horizontalLineView, verticalLineView].forEach {
+            $0.backgroundColor = .gray100.withAlphaComponent(0.2)
         }
+        
+        [descriptionLabel,
+         longButton,
+         leftButton,
+         rightButton,
+         verticalLineView].forEach {
+            $0.isHidden = true
+        }
+    }
+    
+}
 
-        closeButton.setAttributedTitle(
-            text: leftButton,
-            style: OldACFont.s2,
-            color: .gray300,
-            for: .normal
-        )
+
+// MARK: - Configuration
+
+extension CustomAlertView {
+    
+    func configure(title: String,
+                   description: String?,
+                   longButtonTitle: String?,
+                   leftButtonTitle: String?,
+                   rightButtonTitle: String?,
+                   isDangerButton: Bool = false) {
         
-        settingsButton.setAttributedTitle(
-            text: rightButton,
-            style: OldACFont.s2,
-            color: .acWhite,
-            for: .normal
-        )
+        titleLabel.setLabel(text: title,
+                            style: .t4SB,
+                            alignment: .center,
+                            numberOfLines: 0)
+        
+        if let description = description {
+            descriptionLabel.isHidden = false
+            
+            descriptionLabel.setLabel(text: description,
+                                      style: .b1R,
+                                      color: .gray200,
+                                      alignment: .center,
+                                      numberOfLines: 0)
+            
+            horizontalLineView.snp.remakeConstraints {
+                $0.top.equalTo(descriptionLabel.snp.bottom).offset(ScreenUtils.heightRatio * 20)
+                $0.horizontalEdges.equalToSuperview()
+                $0.height.equalTo(1)
+            }
+        }
+        
+        if let longButtonTitle = longButtonTitle {
+            longButton.isHidden = false
+            
+            longButton.setAttributedTitle(text: longButtonTitle,
+                                          style: .t4SB,
+                                          color: .labelAction)
+        }
+        
+        if let leftButtonTitle = leftButtonTitle,
+           let rightButtonTitle = rightButtonTitle {
+            
+            [leftButton, rightButton, verticalLineView].forEach { $0.isHidden = false }
+            
+            leftButton.setAttributedTitle(text: leftButtonTitle,
+                                          style: .t4R,
+                                          color: isDangerButton ? .labelAction : .acWhite)
+            
+            rightButton.setAttributedTitle(text: rightButtonTitle,
+                                          style: .t4SB,
+                                           color: isDangerButton ? .labelDanger : .labelAction)
+        }
+        
+        self.alertContainerView.setNeedsUpdateConstraints()
+        self.alertContainerView.updateConstraintsIfNeeded()
     }
     
 }
