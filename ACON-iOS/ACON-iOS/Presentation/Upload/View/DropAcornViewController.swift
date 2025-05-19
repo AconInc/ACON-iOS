@@ -27,8 +27,12 @@ class DropAcornViewController: BaseNavViewController {
     
     var spotID: Int64 = 0
     
-    init(spotID: Int64) {
+    private var spotName: String = ""
+    
+    init(spotID: Int64, spotName: String) {
         self.spotID = spotID
+        self.spotName = spotName
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -145,8 +149,7 @@ private extension DropAcornViewController {
         self.spotReviewViewModel.onSuccessPostReview.bind { [weak self] onSuccess in
             guard let onSuccess else { return }
             if onSuccess {
-                let vc = ReviewFinishedViewController()
-                vc.modalPresentationStyle = .fullScreen
+                let vc = ReviewFinishedViewController(spotName: self?.spotName ?? "")
                 self?.present(vc, animated: false)
             } else {
                 self?.showDefaultAlert(title: "리뷰 포스트 실패", message: "도토리 개수 로드에 실패했습니다.")

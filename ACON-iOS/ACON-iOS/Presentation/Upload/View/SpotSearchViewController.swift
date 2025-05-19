@@ -199,7 +199,7 @@ private extension SpotSearchViewController {
     
     @objc
     func nextButtonTapped() {
-        let vc = DropAcornViewController(spotID: selectedSpotID)
+        let vc = DropAcornViewController(spotID: selectedSpotID, spotName: selectedSpotName)
         vc.modalPresentationStyle = .fullScreen
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.placeUpload, properties: ["click_review_next?": true])
         present(vc, animated: false)
