@@ -27,17 +27,13 @@ final class SpotSearchView: BaseView {
     
     // MARK: - Properties
     
-    let searchSuggestionCollectionViewFlowLayout: UICollectionViewFlowLayout = {
-        let layout = LeftAlignedCollectionViewFlowLayout()
-        layout.do {
-            $0.scrollDirection = .vertical
-            $0.minimumInteritemSpacing = 8
-            $0.minimumLineSpacing = 8
-            $0.sectionInset = UIEdgeInsets(top: 10, left: ScreenUtils.widthRatio*16, bottom: 10, right: ScreenUtils.widthRatio*16)
-            $0.estimatedItemSize = CGSize(width: 100, height: 38)
-        }
-        return layout
-    }()
+    let searchSuggestionCollectionViewFlowLayout: UICollectionViewFlowLayout = LeftAlignedCollectionViewFlowLayout().then {
+        $0.scrollDirection = .vertical
+        $0.minimumInteritemSpacing = 8
+        $0.minimumLineSpacing = 8
+        $0.sectionInset = UIEdgeInsets(top: 10, left: ScreenUtils.widthRatio*16, bottom: 10, right: ScreenUtils.widthRatio*16)
+        $0.estimatedItemSize = CGSize(width: 100, height: 38)
+    }
     
    let searchKeywordCollectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .vertical

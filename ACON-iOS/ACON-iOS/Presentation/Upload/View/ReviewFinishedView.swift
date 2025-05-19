@@ -13,7 +13,7 @@ final class ReviewFinishedView: BaseView {
 
     // MARK: - UI Properties
     
-    var finishedReviewLabel: UILabel = UILabel()
+    let finishedReviewLabel: UILabel = UILabel()
     
     private let wishYouPreferenceLabel: UILabel = UILabel()
     
@@ -48,6 +48,7 @@ final class ReviewFinishedView: BaseView {
             $0.height.equalTo(20)
         }
         
+        
         finishedReviewLottieView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*279)
@@ -77,7 +78,6 @@ final class ReviewFinishedView: BaseView {
         finishedReviewLottieView.do {
             $0.animation = LottieAnimation.named("finishedUpload")
             $0.contentMode = .scaleAspectFit
-            // TODO: 디자인에게 반복재생 물어보기
         }
         
     }
