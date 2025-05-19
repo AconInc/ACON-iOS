@@ -21,9 +21,11 @@ enum StringLiterals {
     
     enum Error {
         
-        static let checkInternet = "인터넷 연결을 확인해주세요"
+        static let networkErrorOccurred = "네트워크 연결에 문제가 발생했습니다"
         
-        static let reload = "다시 불러오기"
+        static let checkInternetAndTryAgain = "네트워크 연결상태를 확인하고\n다시 시도해주세요"
+        
+        static let tryAgain = "다시 시도하기"
         
     }
     
