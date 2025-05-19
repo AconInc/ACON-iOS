@@ -101,5 +101,12 @@ extension String {
 
         return hasKoreanChars ? .korean : .other
     }
+    
+    
+    // MARK: - 말줄임표
+    
+    func abbreviatedString(_ maxLength: Int) -> String {
+         return self.count <= maxLength ? self : "\(self.prefix(maxLength))..."
+     }
 
 }

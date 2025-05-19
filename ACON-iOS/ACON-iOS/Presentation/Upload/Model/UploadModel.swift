@@ -31,12 +31,12 @@ struct SearchKeywordModel: Equatable {
 
 struct SearchSuggestionModel: Equatable {
     
-    let spotId: Int64
+    let spotID: Int64
     
     let spotName: String
     
-    init(spotId: Int64, spotName: String) {
-        self.spotId = spotId
+    init(spotID: Int64, spotName: String) {
+        self.spotID = spotID
         self.spotName = spotName
     }
     

@@ -8,8 +8,6 @@
 import UIKit
 
 import Lottie
-import SnapKit
-import Then
 
 class DropAcornViewController: BaseNavViewController {
     
@@ -23,12 +21,16 @@ class DropAcornViewController: BaseNavViewController {
     
     // MARK: - Properties
     
-    var spotReviewViewModel = SpotReviewViewModel()
+    private var spotReviewViewModel = SpotReviewViewModel()
     
-    var spotID: Int64 = 0
+    private var spotID: Int64 = 0
     
-    init(spotID: Int64) {
+    private var spotName: String = ""
+    
+    init(spotID: Int64, spotName: String) {
         self.spotID = spotID
+        self.spotName = spotName
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -43,12 +45,6 @@ class DropAcornViewController: BaseNavViewController {
         
         addTarget()
         bindViewModel()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
-
-        spotReviewViewModel.getAcornCount()
     }
     
     override func setHierarchy() {
@@ -70,7 +66,8 @@ class DropAcornViewController: BaseNavViewController {
         
         self.setButtonStyle(button: leftButton, image: .icArrowLeft)
         self.setButtonAction(button: leftButton, target: self, action: #selector(dropAcornBackButtonTapped))
-        self.dropAcornView.leaveReviewButton.isEnabled = false
+        self.setCenterTitleLabelStyle(title: StringLiterals.Upload.upload)
+        self.dropAcornView.spotNameLabel.setLabel(text: self.spotName.abbreviatedString(9), style: .t3SB, alignment: .center)
     }
     
     func addTarget() {
@@ -96,9 +93,6 @@ private extension DropAcornViewController {
     
     @objc
     func dropAcornBackButtonTapped() {
-        if let spotUploadVC = presentingViewController as? SpotUploadViewController {
-            spotUploadVC.isInDismissProcess = false
-        }
         dismiss(animated: false)
     }
     
@@ -134,21 +128,10 @@ private extension DropAcornViewController {
 private extension DropAcornViewController {
     
     func bindViewModel() {
-        self.spotReviewViewModel.onSuccessGetAcornCount.bind { [weak self] onSuccess in
-            guard let onSuccess, let data = self?.spotReviewViewModel.acornCount.value else { return }
-            if onSuccess {
-                self?.possessAcornCount = data
-                self?.dropAcornView.bindData(data)
-            } else {
-                // TODO: - 👠 이건 없애는 게 UI에 좋을 듯
-                self?.showDefaultAlert(title: "도토리 개수 로드 실패", message: "도토리 개수 로드에 실패했습니다.")
-            }
-        }
-        
         self.spotReviewViewModel.onSuccessPostReview.bind { [weak self] onSuccess in
             guard let onSuccess else { return }
             if onSuccess {
-                let vc = ReviewFinishedViewController()
+                let vc = ReviewFinishedViewController(spotName: self?.spotName ?? "")
                 vc.modalPresentationStyle = .fullScreen
                 self?.present(vc, animated: false)
             } else {
@@ -165,38 +148,10 @@ private extension DropAcornViewController {
 private extension DropAcornViewController {
     
     func checkAcorn(_ dropAcorn: Int) {
-        if dropAcorn > possessAcornCount {
-            ACToastController.show(StringLiterals.Upload.noAcorn, bottomInset: 112, delayTime: 1)
-            { return }
-            dropAcornView.dropAcornLottieView.isHidden = true
-            disableLeaveReviewButton()
-        } else {
-            dropAcornView.dropAcornLottieView.isHidden = false
-            toggleLottie(dropAcorn: dropAcorn)
-            enableLeaveReviewButton()
-        }
-    }
-    
-}
-
-
-// MARK: - 버튼
-
-private extension DropAcornViewController {
-    
-    // TODO: - 나중에 전부 buttonConfiguration에 넣고 enable만 toggle
-    func enableLeaveReviewButton() {
-        dropAcornView.leaveReviewButton.do {
-            $0.isEnabled = true
-            $0.backgroundColor = .primaryDefault
-        }
-    }
-    
-    func disableLeaveReviewButton() {
-        dropAcornView.leaveReviewButton.do {
-            $0.isEnabled = false
-            $0.backgroundColor = .gray500
-        }
+        dropAcornView.dropAcornLottieView.isHidden = false
+        toggleLottie(dropAcorn: dropAcorn)
+        dropAcornView.leaveReviewButton.updateGlassButtonState(state: .default)
+        dropAcornView.lightImageView.isHidden = false
     }
     
 }

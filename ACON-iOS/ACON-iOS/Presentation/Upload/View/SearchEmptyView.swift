@@ -14,41 +14,72 @@ class SearchEmptyView: BaseView {
     
     // MARK: - UI Components
     
-    private let imageView: UIImageView = UIImageView()
-    private let textLabel: UILabel = UILabel()
-
-    override func setStyle() {
-        super.setStyle()
-        
-        imageView.do {
-            $0.image = .icError1
-            $0.contentMode = .scaleAspectFit
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
-        textLabel.do {
-            $0.setLabel(text: "앗! 일치하는 장소가 없어요.", style: .s1, color: .gray400, alignment: .center)
-        }
-        
-    }
+    private let emptyLabel: UILabel = UILabel()
+    
+    private let addPlaceTitleLabel: UILabel = UILabel()
+    
+    private let addPlaceDescriptionLabel: UILabel = UILabel()
+    
+    let addPlaceButton: UIButton = UIButton()
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(imageView,textLabel)
+        self.addSubviews(emptyLabel,
+                         addPlaceTitleLabel,
+                         addPlaceDescriptionLabel,
+                         addPlaceButton)
     }
     
     override func setLayout() {
         super.setLayout()
         
-        imageView.snp.makeConstraints{
-            $0.center.equalToSuperview()
-            $0.size.equalTo(104)
+        emptyLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(20*ScreenUtils.heightRatio)
+            $0.centerX.equalToSuperview()
         }
         
-        textLabel.snp.makeConstraints{
-            $0.top.equalTo(imageView.snp.bottom).offset(18)
+        addPlaceTitleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(100*ScreenUtils.heightRatio)
             $0.centerX.equalToSuperview()
+        }
+        
+        addPlaceDescriptionLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(124*ScreenUtils.heightRatio)
+            $0.centerX.equalToSuperview()
+        }
+        
+        addPlaceButton.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(156*ScreenUtils.heightRatio)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(36)
+            $0.width.equalTo(137)
+        }
+    }
+    
+    override func setStyle() {
+        super.setStyle()
+        
+        self.backgroundColor = .clear
+        
+        emptyLabel.do {
+            $0.setLabel(text: StringLiterals.Upload.noMatchingSpots, style: .b1SB)
+        }
+        
+        addPlaceTitleLabel.do {
+            $0.setLabel(text: StringLiterals.Upload.addPlaceTitle, style: .b1SB)
+        }
+        
+        addPlaceDescriptionLabel.do {
+            $0.setLabel(text: StringLiterals.Upload.addPlaceDescriptuon,
+                        style: .b1R,
+                        color: .gray500)
+        }
+        
+        addPlaceButton.do {
+            $0.setAttributedTitle(text: StringLiterals.Upload.addPlaceButton,
+                                  style: .b1SB,
+                                  color: .labelAction)
         }
     }
     

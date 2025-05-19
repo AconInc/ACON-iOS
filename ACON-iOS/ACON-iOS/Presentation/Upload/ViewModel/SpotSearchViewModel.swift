@@ -6,12 +6,17 @@
 //
 
 import Foundation
+import CoreLocation
 
 class SpotSearchViewModel: Serviceable {
     
-    var longitude: Double
+    // MARK: - Properties
     
-    var latitude: Double
+    var longitude: Double = 0
+    
+    var latitude: Double = 0
+    
+    let isLocationReady: ObservablePattern<Bool> = ObservablePattern(nil)
     
     let onSuccessGetSearchSuggestion: ObservablePattern<Bool> = ObservablePattern(nil)
     
@@ -27,9 +32,15 @@ class SpotSearchViewModel: Serviceable {
     
     var reviewVerificationErrorType: ReviewVerificationErrorType? = nil
     
-    init(latitude: Double, longitude: Double) {
-        self.latitude = latitude
-        self.longitude = longitude
+    
+    // MARK: - LifeCycle
+    
+    init() {
+        ACLocationManager.shared.addDelegate(self)
+    }
+    
+    deinit {
+       ACLocationManager.shared.removeDelegate(self)
     }
     
     func getSearchKeyword(keyword: String) {
@@ -67,7 +78,7 @@ class SpotSearchViewModel: Serviceable {
             switch response {
             case .success(let data):
                 let searchSuggestionData = data.suggestionList.map { suggestion in
-                    return SearchSuggestionModel(spotId: suggestion.spotId,
+                    return SearchSuggestionModel(spotID: suggestion.spotId,
                                                  spotName: suggestion.spotName)
                 }
                 self?.searchSuggestionData.value = searchSuggestionData
@@ -118,6 +129,28 @@ class SpotSearchViewModel: Serviceable {
                 self?.onSuccessGetReviewVerification.value = false
                 return
             }
+        }
+    }
+    
+    func checkLocation() {
+        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
+    }
+    
+}
+
+// MARK: - ACLocationManagerDelegate
+
+extension SpotSearchViewModel: ACLocationManagerDelegate {
+    
+    func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
+
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            print("성공 - 위도: \(coordinate.latitude), 경도: \(coordinate.longitude)")
+            self.latitude = coordinate.latitude
+            self.longitude = coordinate.longitude
+            self.isLocationReady.value = true
         }
     }
     
