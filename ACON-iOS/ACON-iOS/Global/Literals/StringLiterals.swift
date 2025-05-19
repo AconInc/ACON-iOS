@@ -127,7 +127,13 @@ enum StringLiterals {
         
         static let searchSpot = "가게명을 검색해주세요"
         
-        static let noMatchingSpots = "앗! 일치하는 장소가 없어요."
+        static let noMatchingSpots = "앗... 검색결과가 없어요"
+        
+        static let addPlaceTitle = "현재 장소를 바로 등록할 수 있어요"
+        
+        static let addPlaceDescriptuon = "더욱 더 정확하게 추천이 가능해요"
+        
+        static let addPlaceButton = "5초만에 등록하러 가기"
         
         static let clickAcorn = "도토리를 터치해보세요"
         
