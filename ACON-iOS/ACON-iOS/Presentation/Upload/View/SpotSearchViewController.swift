@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import CoreLocation
 
-class SpotSearchViewController: BaseNavViewController {
+class SpotSearchViewController: BaseNavViewController{
     
     // MARK: - UI Properties
     
@@ -31,26 +30,8 @@ class SpotSearchViewController: BaseNavViewController {
     
     var dismissCompletion: (() -> Void)?
     
-    var latitude: Double = 0
-    
-    var longitude: Double = 0
-
     
     // MARK: - LifeCycle
-    
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        
-        ACLocationManager.shared.addDelegate(self)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-       ACLocationManager.shared.removeDelegate(self)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,11 +50,9 @@ class SpotSearchViewController: BaseNavViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
-        // TODO: - 임시방편으로 asyncAfter, 타이밍 문제 고치기
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.05) {
-            self.spotSearchViewModel.getSearchSuggestion()
-        }
+        super.viewWillAppear(animated)
+        
+        self.spotSearchViewModel.checkLocation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -133,6 +112,14 @@ private extension SpotSearchViewController {
     }
 
     func bindViewModel() {
+        self.spotSearchViewModel.isLocationReady.bind { [weak self] isReady in
+            guard let isReady else { return }
+            if isReady {
+                self?.spotSearchViewModel.getSearchSuggestion()
+            }
+            self?.spotSearchViewModel.isLocationReady.value = nil
+        }
+        
         self.spotSearchViewModel.onSuccessGetSearchSuggestion.bind { [weak self] onSuccess in
             guard let onSuccess else { return }
             if onSuccess {
@@ -209,25 +196,6 @@ private extension SpotSearchViewController {
     func xButtonTapped() {
         let alertHandler = AlertHandler()
         alertHandler.showUploadExitAlert(from: self)
-    }
-    
-}
-
-
-// MARK: - ACLocationManagerDelegate
-
-extension SpotSearchViewController: ACLocationManagerDelegate {
-    
-    func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
-
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            
-            print("성공 - 위도: \(coordinate.latitude), 경도: \(coordinate.longitude)")
-            self.latitude = coordinate.latitude
-            self.longitude = coordinate.longitude
-            self.spotSearchViewModel.setCoordinates(self.latitude, self.longitude)
-        }
     }
     
 }
