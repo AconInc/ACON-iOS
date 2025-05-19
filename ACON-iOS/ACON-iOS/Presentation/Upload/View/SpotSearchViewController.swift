@@ -79,10 +79,6 @@ class SpotSearchViewController: BaseNavViewController{
     }
     
     func addTarget() {
-        self.leftButton.addTarget(self,
-                                  action: #selector(xButtonTapped),
-                                  for: .touchUpInside)
-
         self.rightButton.addTarget(self,
                                    action: #selector(nextButtonTapped),
                                     for: .touchUpInside)
@@ -127,9 +123,8 @@ private extension SpotSearchViewController {
                 self?.spotSearchView.searchSuggestionCollectionView.reloadData()
             } else {
                 let errorType = self?.spotSearchViewModel.reviewVerificationErrorType
-                let alertHandler = AlertHandler()
                 if errorType == .unsupportedRegion {
-                    alertHandler.showUnsupportedRegionImageAlert(from: self!)
+                    self?.presentCustomAlert(.locationAccessFail)
                 } // TODO: errorType == 존재하지 않는 장소일 때 Alert 필요 (40403 에러)
                 self?.showDefaultAlert(title: "추천 검색어 로드 실패", message: "추천 검색어 로드에 실패했습니다.")
             }
@@ -162,15 +157,13 @@ private extension SpotSearchViewController {
                 if data {
                     self?.rightButton.isEnabled = true
                 } else {
-                    let alertHandler = AlertHandler()
-                    alertHandler.showLocationAccessFailImageAlert(from: self!)
+                    self?.presentCustomAlert(.reviewLocationFail)
                     self?.rightButton.isEnabled = false
                 }
             } else {
                 let errorType = self?.spotSearchViewModel.reviewVerificationErrorType
-                let alertHandler = AlertHandler()
                 if errorType == .unsupportedRegion {
-                    alertHandler.showUnsupportedRegionImageAlert(from: self!)
+                    self?.presentCustomAlert(.locationAccessFail)
                 } // TODO: errorType == 존재하지 않는 장소일 때 Alert 필요 (40403 에러)
                 self?.showDefaultAlert(title: "연관 검색어 로드 실패", message: "연관 검색어 로드에 실패했습니다.")
                 self?.rightButton.isEnabled = false
@@ -192,12 +185,6 @@ private extension SpotSearchViewController {
         vc.modalPresentationStyle = .fullScreen
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.placeUpload, properties: ["click_review_next?": true])
         present(vc, animated: false)
-    }
-    
-    @objc
-    func xButtonTapped() {
-        let alertHandler = AlertHandler()
-        alertHandler.showUploadExitAlert(from: self)
     }
     
 }
