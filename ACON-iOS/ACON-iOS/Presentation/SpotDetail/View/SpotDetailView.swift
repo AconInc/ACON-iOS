@@ -26,7 +26,7 @@ final class SpotDetailView: BaseView {
 
     let findCourseButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
 
-    private let pageControl = UIPageControl()
+    private let imagePageControl = UIPageControl()
 
     private let horizontalEdges: CGFloat = 20 * ScreenUtils.widthRatio
 
@@ -42,7 +42,7 @@ final class SpotDetailView: BaseView {
                          acornCountButton,
                          tagStackView,
                          findCourseButton,
-                         pageControl,
+                         imagePageControl,
                          menuButton,
                          shareButton,
                          moreButton)
@@ -80,7 +80,7 @@ final class SpotDetailView: BaseView {
             $0.height.equalTo(54)
         }
 
-        pageControl.snp.makeConstraints {
+        imagePageControl.snp.makeConstraints {
             $0.bottom.equalTo(findCourseButton.snp.top).offset(-12)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(6)
@@ -147,16 +147,12 @@ extension SpotDetailView {
     func bindData(_ spotDetail: SpotDetailInfoModel) {
         titleLabel.setLabel(text: spotDetail.name, style: .t4SB)
 
-        // TODO: API 나오면 실제 데이터로 바꾸기
-        if let acornCount = (1...10000).randomElement() {
-            let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
-            acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
-        }
+        let acornCount = spotDetail.acornCount
+        let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
+        acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
 
-        // TODO: API 나오면 실제 데이터로 바꾸기 (tempTags -> Tags)
-        let tempTags: [SpotTagType] = [.new, .local, .top(number: 1)]
         tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        tempTags.forEach { tag in
+        spotDetail.tagList.forEach { tag in
             tagStackView.addArrangedSubview(SpotTagButton(tag))
         }
 
@@ -166,11 +162,10 @@ extension SpotDetailView {
         let courseTitle: String = walk + "9" + findCourse
         findCourseButton.setAttributedTitle(text: courseTitle, style: .t4SB)
 
-        // TODO: API 나오면 실제 데이터로 바꾸기
-        setPageControl(10)
+        setImagePageControl(spotDetail.imageURLs.count)
     }
 
-    func makeMainMenuSection(_ menus: [SpotMenuModel]) {
+    func makeSignatureMenuSection(_ menus: [SignatureMenuModel]) {
         guard menus.count > 0 else { return }
 
         var menus = menus
@@ -196,7 +191,7 @@ extension SpotDetailView {
 
     func updatePageControl() {
         let page = Int(round(collectionView.contentOffset.x / collectionView.bounds.width))
-        pageControl.currentPage = page
+        imagePageControl.currentPage = page
     }
 
 }
@@ -206,7 +201,7 @@ extension SpotDetailView {
 
 private extension SpotDetailView {
 
-    func makeMenuStackView(_ menus: [SpotMenuModel]) -> UIStackView {
+    func makeMenuStackView(_ menus: [SignatureMenuModel]) -> UIStackView {
         let stackView = UIStackView()
 
         for menu in menus {
@@ -224,7 +219,7 @@ private extension SpotDetailView {
             priceLabel.snp.makeConstraints {
                 $0.verticalEdges.equalToSuperview()
                 $0.leading.equalTo(nameLabel.snp.trailing).offset(8)
-                $0.width.equalTo(55)
+                $0.width.equalTo(58)
             }
             
             nameLabel.setLabel(text: menu.name, style: .b1R, numberOfLines: 1)
@@ -240,8 +235,8 @@ private extension SpotDetailView {
         return stackView
     }
 
-    func setPageControl(_ numberOfPages: Int) {
-        pageControl.do {
+    func setImagePageControl(_ numberOfPages: Int) {
+        imagePageControl.do {
             $0.numberOfPages = numberOfPages
             $0.currentPage = 0
             $0.currentPageIndicatorTintColor = .acWhite
