@@ -27,7 +27,7 @@ enum GlassmorphismType {
     
     var blurEffectStyle: UIBlurEffect.Style {
         switch self {
-        case .buttonGlassDefault, .actionSheetGlass, .alertGlass, .noImageErrorGlass:
+        case .buttonGlassDefault, .actionSheetGlass, .noImageErrorGlass:
             return .systemThinMaterialLight
         case .buttonGlassPressed:
             return .systemThickMaterialLight
@@ -35,7 +35,7 @@ enum GlassmorphismType {
             return .systemMaterialLight
         case .buttonGlassDisabled, .bottomSheetGlass:
             return .systemUltraThinMaterialLight
-        case .toastGlass, .needLoginErrorGlass:
+        case .toastGlass, .needLoginErrorGlass, .alertGlass:
             return .systemThinMaterialDark
         case .gradientGlass:
             return .systemUltraThinMaterialDark
