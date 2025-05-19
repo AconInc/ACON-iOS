@@ -54,6 +54,8 @@ final class ACTextField: UIView {
 
     private let animationView = LottieAnimationView(name: "loadingWhite")
 
+    private var glassmorphismView: GlassmorphismView?
+    
 
     // MARK: - Initializer
 
@@ -267,6 +269,22 @@ extension ACTextField {
                 self.animationView.stop()
             }
         })
+    }
+    
+    func setGlassmorphism(_ glassmorphismType: GlassmorphismType) {
+        self.backgroundColor = .clear
+        [textField, clearButton, animationView].forEach {
+            $0.backgroundColor = .clear
+        }
+        
+        glassmorphismView = GlassmorphismView(glassmorphismType).then {
+            self.insertSubview($0, at: 0)
+            $0.isUserInteractionEnabled = false
+        }
+
+        glassmorphismView?.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
 
 }
