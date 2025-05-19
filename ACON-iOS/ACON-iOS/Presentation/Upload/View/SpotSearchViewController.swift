@@ -154,7 +154,7 @@ private extension SpotSearchViewController {
         self.spotSearchViewModel.searchKeywordData.bind { [weak self] data in
             guard let data = data else { return }
             
-            // TODO: - 동시에 보여질 때 있음, 타이밍 문제
+            // TODO: - 🆘 동시에 보여질 때 있음, 타이밍 문제
             DispatchQueue.main.async {
                 if data.isEmpty {
                     self?.spotSearchView.searchEmptyView.isHidden = self?.spotSearchView.searchTextField.text == ""

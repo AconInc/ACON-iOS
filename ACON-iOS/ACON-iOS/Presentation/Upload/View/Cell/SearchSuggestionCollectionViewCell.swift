@@ -7,6 +7,7 @@
 
 import UIKit
 // TODO: - DislikeCollectionViewCell과 bindData 제외 같음, 구조 고민해보기
+// TODO: - 🆘 chipButton이 하얗게 있다가 default로 세팅되는 게 보임. 타이밍 고민
 final class SearchSuggestionCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - UI Properties
