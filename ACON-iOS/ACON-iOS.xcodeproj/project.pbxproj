@@ -166,7 +166,7 @@
 		747BB6CE2DCA66F000352874 /* GlassButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */; };
 		747F4FBD2D3D9477003DECBF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F4FBC2D3D9470003DECBF /* SplashViewController.swift */; };
 		747F4FBF2D3D9D44003DECBF /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F4FBE2D3D9D40003DECBF /* SplashView.swift */; };
-		747F4FC12D3DC80B003DECBF /* finishedUpload.json in Resources */ = {isa = PBXBuildFile; fileRef = 747F4FC02D3DC80B003DECBF /* finishedUpload.json */; };
+		747FB9002DDB95980027F252 /* finishedUpload.json in Resources */ = {isa = PBXBuildFile; fileRef = 747FB8FF2DDB95980027F252 /* finishedUpload.json */; };
 		748D6F412D2BC482007690B4 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F402D2BC482007690B4 /* Moya */; };
 		748D6F442D2BC509007690B4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F432D2BC509007690B4 /* SnapKit */; };
 		748D6F472D2BC519007690B4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F462D2BC519007690B4 /* Then */; };
@@ -415,7 +415,7 @@
 		747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonState.swift; sourceTree = "<group>"; };
 		747F4FBC2D3D9470003DECBF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		747F4FBE2D3D9D40003DECBF /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		747F4FC02D3DC80B003DECBF /* finishedUpload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = finishedUpload.json; sourceTree = "<group>"; };
+		747FB8FF2DDB95980027F252 /* finishedUpload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = finishedUpload.json; sourceTree = "<group>"; };
 		748D6F612D2BCA1C007690B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		748D6F622D2BCA1C007690B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		748D6F632D2BCA1C007690B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1386,7 +1386,6 @@
 		74BF921A2D3972C500B923E3 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
-				747F4FC02D3DC80B003DECBF /* finishedUpload.json */,
 				15C0ED5F2D42CD8800C9ED83 /* drop1Acorn.json */,
 				15C0ED602D42CD8800C9ED83 /* drop2Acorn.json */,
 				15C0ED612D42CD8800C9ED83 /* drop3Acorn.json */,
@@ -1396,6 +1395,7 @@
 				745000D52D403F0200262CBE /* checkLottie.json */,
 				745000D62D403F0200262CBE /* lodingLottie.json */,
 				749C90E72DD4D37100455211 /* splashLottie.json */,
+				747FB8FF2DDB95980027F252 /* finishedUpload.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -1670,6 +1670,7 @@
 			files = (
 				74FA77842DD43709006846C9 /* SplashBGM.mp3 in Resources */,
 				15BFF8B92D665BAD00909C4F /* Debug.xcconfig in Resources */,
+				747FB9002DDB95980027F252 /* finishedUpload.json in Resources */,
 				15BFF8BA2D665BAD00909C4F /* Release.xcconfig in Resources */,
 				748D6F6C2D2BCA1C007690B4 /* Assets.xcassets in Resources */,
 				74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */,
@@ -1686,7 +1687,6 @@
 				748D6F6E2D2BCA1C007690B4 /* LaunchScreen.storyboard in Resources */,
 				746AA0352DAD0EFF00E28B66 /* GoogleService-Info.plist in Resources */,
 				749C90E82DD4D37100455211 /* splashLottie.json in Resources */,
-				747F4FC12D3DC80B003DECBF /* finishedUpload.json in Resources */,
 				748D6F9D2D2BD641007690B4 /* Pretendard-SemiBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
