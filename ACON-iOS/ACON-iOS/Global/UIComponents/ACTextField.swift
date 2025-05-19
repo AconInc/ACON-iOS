@@ -65,7 +65,8 @@ final class ACTextField: UIView {
         borderColor: UIColor = .gray600,
         borderWidth: CGFloat = 1,
         cornerRadius: CGFloat = 4,
-        fontStyle: ACFontType = .t4R
+        fontStyle: ACFontType = .t4R,
+        doneButton: Bool = true
     ) {
         self.icon = icon
         self.bgColor = backgroundColor
@@ -80,7 +81,7 @@ final class ACTextField: UIView {
         setLayout()
         setStyle()
         addTarget()
-        addDoneButtonToKeyboard()
+        if doneButton { addDoneButtonToKeyboard() }
     }
 
     required init?(coder: NSCoder) {
@@ -273,9 +274,6 @@ extension ACTextField {
     
     func setGlassmorphism(_ glassmorphismType: GlassmorphismType) {
         self.backgroundColor = .clear
-        [textField, clearButton, animationView].forEach {
-            $0.backgroundColor = .clear
-        }
         
         glassmorphismView = GlassmorphismView(glassmorphismType).then {
             self.insertSubview($0, at: 0)
