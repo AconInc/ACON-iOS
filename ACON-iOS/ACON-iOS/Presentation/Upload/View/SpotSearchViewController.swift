@@ -164,6 +164,7 @@ private extension SpotSearchViewController {
                 } else {
                     let alertHandler = AlertHandler()
                     alertHandler.showLocationAccessFailImageAlert(from: self!)
+                    self?.rightButton.isEnabled = false
                 }
             } else {
                 let errorType = self?.spotSearchViewModel.reviewVerificationErrorType
@@ -172,6 +173,7 @@ private extension SpotSearchViewController {
                     alertHandler.showUnsupportedRegionImageAlert(from: self!)
                 } // TODO: errorType == 존재하지 않는 장소일 때 Alert 필요 (40403 에러)
                 self?.showDefaultAlert(title: "연관 검색어 로드 실패", message: "연관 검색어 로드에 실패했습니다.")
+                self?.rightButton.isEnabled = false
             }
             self?.spotSearchViewModel.reviewVerification.value = nil
         }
