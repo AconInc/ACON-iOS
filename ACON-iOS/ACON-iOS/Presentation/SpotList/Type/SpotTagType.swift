@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SpotTagType {
+enum SpotTagType: Equatable {
     case new
     case local
     case top(number: Int)

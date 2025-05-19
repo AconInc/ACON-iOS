@@ -5,71 +5,68 @@
 //  Created by 이수민 on 1/16/25.
 //
 
+
 import Foundation
 import UIKit
 
 struct SpotDetailInfoModel: Equatable {
-    
+
     let spotID: Int64
-    
+
+    let imageURLs: [String]
+
     let name: String
-    
-    let spotType: String
-    
-    let firstImageURL: String
-    
-    let openStatus: Bool
-    
-    let address: String
-    
-    let localAcornCount: Int
-    
-    let basicAcornCount: Int
-    
+
+    let acornCount: Int
+
+    let hasMenuboardImage: Bool
+
+    let signatureMenuList: [SignatureMenuModel]
+
     let latitude: Double
-    
+
     let longitude: Double
-    
-    init(spotID: Int64,
-         name: String,
-         spotType: String,
-         firstImageURL: String,
-         openStatus: Bool,
-         address: String,
-         localAcornCount: Int,
-         basicAcornCount: Int,
-         latitude: Double,
-         longitude: Double) {
-        self.spotID = spotID
-        self.name = name
-        self.spotType = spotType
-        self.firstImageURL = firstImageURL
-        self.openStatus = openStatus
-        self.address = address
-        self.localAcornCount = localAcornCount
-        self.basicAcornCount = basicAcornCount
-        self.latitude = latitude
-        self.longitude = longitude
-    }
-    
+
+    let tagList: [SpotTagType]
+
+}
+
+struct SignatureMenuModel: Equatable {
+
+    let name: String
+
+    let price: Int
+
 }
 
 
-struct SpotMenuModel: Equatable {
-    
-    let menuID: Int64
-    
-    let name: String
-    
-    let price: Int
-    
-    let imageURL: String?
-    
-    init(menuID: Int64, name: String, price: Int, imageURL: String?) {
-        self.menuID = menuID
-        self.name = name
-        self.price = price
-        self.imageURL = imageURL
+// MARK: - Init from DTO (+ tagList)
+
+extension SpotDetailInfoModel {
+
+    init(from dto: GetSpotDetailResponse, tagList: [SpotTagType]) {
+        self.spotID = dto.id
+        self.imageURLs = dto.imageList
+        self.name = dto.name
+        self.acornCount = dto.acornCount
+        self.hasMenuboardImage = dto.hasMenuboardImage
+
+        let menuList = dto.signatureMenuList ?? []
+        self.signatureMenuList = menuList.map { SignatureMenuModel(from: $0) }
+
+        self.latitude = dto.latitude
+        self.longitude = dto.longitude
+
+        self.tagList = tagList
     }
-    
+
+}
+
+extension SignatureMenuModel {
+
+    init(from dto: SignatureMenuDTO) {
+        self.name = dto.name
+        self.price = dto.price
+    }
+
 }

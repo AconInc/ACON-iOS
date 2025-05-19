@@ -47,16 +47,7 @@ extension SpotDetailViewModel {
         ACService.shared.spotDetailService.getSpotDetail(spotID: spotID) { [weak self] response in
             switch response {
             case .success(let data):
-                let spotDetailData = SpotDetailInfoModel(spotID: data.id,
-                                                         name: data.name,
-                                                         spotType: data.spotType.koreanText,
-                                                         firstImageURL: data.imageList[0],
-                                                         openStatus: data.openStatus,
-                                                         address: data.address,
-                                                         localAcornCount: data.localAcornCount,
-                                                         basicAcornCount: data.basicAcornCount,
-                                                         latitude: data.latitude,
-                                                         longitude: data.longitude)
+                let spotDetailData = SpotDetailInfoModel(from: data, tagList: self?.tagList ?? [])
                 self?.spotDetail.value = spotDetailData
                 self?.onSuccessGetSpotDetail.value = true
             case .reIssueJWT:

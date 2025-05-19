@@ -109,19 +109,7 @@ extension SpotListViewModel {
         ACService.shared.spotListService.postSpotList(requestBody: requestBody) { [weak self] response in
             switch response {
             case .success(let data):
-                let spotList: [SpotModel] = data.spotList.map {
-                    let spot = SpotModel(
-                        id: $0.id,
-                        imageURL: $0.image,
-                        name: $0.name,
-                        acornCount: $0.acornCount,
-                        tagList: $0.tagList,
-                        eta: $0.eta,
-                        latitude: $0.latitude,
-                        longitude: $0.longitude
-                    )
-                    return spot
-                }
+                let spotList: [SpotModel] = data.spotList.map { SpotModel(from: $0) }
 
                 if self?.spotType == .restaurant {
                     self?.restaurantList = spotList

@@ -165,12 +165,9 @@ extension SpotListCollectionViewCell {
         let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
         acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
 
-        if let tagList = spot.tagList {
-            let tempTags: [SpotTagType] = tagList.map { SpotTagType(rawValue: $0) }
-            tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-            tempTags.forEach { tag in
-                tagStackView.addArrangedSubview(SpotTagButton(tag))
-            }
+        tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        spot.tagList.forEach { tag in
+            tagStackView.addArrangedSubview(SpotTagButton(tag))
         }
 
         let walk: String = StringLiterals.SpotList.walk

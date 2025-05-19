@@ -19,7 +19,7 @@ struct SpotModel: Equatable {
 
     let acornCount: Int
 
-    let tagList: [String]?
+    let tagList: [SpotTagType]
 
     let eta: Int
 
@@ -27,4 +27,25 @@ struct SpotModel: Equatable {
 
     let longitude: Double
 
+}
+
+
+// MARK: - Init from DTO
+
+extension SpotModel {
+    
+    init(from dto: SpotDTO) {
+        self.id = dto.id
+        self.imageURL = dto.image
+        self.name = dto.name
+        self.acornCount = dto.acornCount
+
+        let tagList = dto.tagList ?? []
+        self.tagList = tagList.map { SpotTagType(rawValue: $0) }
+
+        self.eta = dto.eta
+        self.latitude = dto.latitude
+        self.longitude = dto.longitude
+    }
+    
 }
