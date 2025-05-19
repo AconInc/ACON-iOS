@@ -44,7 +44,7 @@ extension SpotTagButton {
         var config = UIButton.Configuration.filled()
         config.baseForegroundColor = .acWhite
         config.contentInsets = .init(top: 3, leading: 3, bottom: 3, trailing: 3)
-        config.attributedTitle = AttributedString(tagType.text.attributedString(.c1SB))
+        config.attributedTitle = AttributedString(tagType.rawValue.attributedString(.c1SB))
 
         switch tagType {
         case .new:
@@ -53,6 +53,8 @@ extension SpotTagButton {
             config.baseBackgroundColor = .tagLocal
         case .top:
             config.baseBackgroundColor = .gray900
+        case .unknown:
+            self.isHidden = true
         }
 
         self.configuration = config

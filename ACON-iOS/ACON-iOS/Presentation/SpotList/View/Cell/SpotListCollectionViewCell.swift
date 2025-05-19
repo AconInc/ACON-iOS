@@ -167,11 +167,12 @@ extension SpotListCollectionViewCell {
             acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
         }
 
-        // TODO: API 나오면 실제 데이터로 바꾸기 (tempTags -> Tags)
-        let tempTags: [SpotTagType] = [.new, .local, .top(number: 1)]
-        tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        tempTags.forEach { tag in
-            tagStackView.addArrangedSubview(SpotTagButton(tag))
+        if let tagList = spot.tagList {
+            let tempTags: [SpotTagType] = tagList.map { SpotTagType(rawValue: $0) }
+            tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+            tempTags.forEach { tag in
+                tagStackView.addArrangedSubview(SpotTagButton(tag))
+            }
         }
 
         let walk: String = StringLiterals.SpotList.walk
