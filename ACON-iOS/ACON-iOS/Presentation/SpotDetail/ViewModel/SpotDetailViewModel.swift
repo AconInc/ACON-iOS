@@ -13,6 +13,7 @@ import MapKit
 class SpotDetailViewModel: Serviceable {
     
     let spotID: Int64
+    let tagList: [SpotTagType]
     
     let onSuccessGetSpotDetail: ObservablePattern<Bool> = ObservablePattern(nil)
         
@@ -23,18 +24,15 @@ class SpotDetailViewModel: Serviceable {
     let menuImageURLs: [String] = ["https://marketplace.canva.com/EAGEDq-_tZQ/1/0/1035w/canva-grey-and-beige-minimalist-restaurant-menu-hb5BNMWcQS4.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmR-HwbkD_gFMN5Mv3fKRikt-IeJpYbayxAQ&s","https://t3.ftcdn.net/jpg/01/75/06/34/360_F_175063465_nPAUPd3x4uoqbmKyGqDLRDsIvMejnraQ.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3fjP3BWKbK_YDzsVBsI3EXKr7q0JCYMZWKQ&s"
     ]
     
-    let onSuccessGetSpotMenu: ObservablePattern<Bool> = ObservablePattern(nil)
-        
-    var spotMenu: ObservablePattern<[SpotMenuModel]> = ObservablePattern(nil)
-    
     let onSuccessPostGuidedSpotRequest: ObservablePattern<Bool> = ObservablePattern(nil)
     
     var mapType: String = "APPLE"
     
     let sname = "내 위치"
     
-    init(spotID: Int64) {
+    init(_ spotID: Int64, _ tagList: [SpotTagType]) {
         self.spotID = spotID
+        self.tagList = tagList
     }
 
 }
@@ -57,30 +55,6 @@ extension SpotDetailViewModel {
             default:
                 print("VM - Failed To getSpotDetail")
                 self?.onSuccessGetSpotDetail.value = false
-                return
-            }
-        }
-    }
-    
-    func getSpotMenu() {
-        ACService.shared.spotDetailService.getSpotMenu(spotID: spotID) { [weak self] response in
-            switch response {
-            case .success(let data):
-                let spotMenuData = data.menuList.map { menu in
-                    return SpotMenuModel(menuID: menu.id,
-                                         name: menu.name,
-                                         price: menu.price,
-                                         imageURL: menu.image)
-                    }
-                    self?.spotMenu.value = spotMenuData
-                    self?.onSuccessGetSpotMenu.value = true
-            case .reIssueJWT:
-                self?.handleReissue { [weak self] in
-                    self?.getSpotMenu()
-                }
-            default:
-                print("VM - Failed To getSpotMenu")
-                self?.onSuccessGetSpotMenu.value = false
                 return
             }
         }

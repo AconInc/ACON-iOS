@@ -383,7 +383,7 @@ extension SpotListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = viewModel.spotType == .restaurant ? viewModel.restaurantList[indexPath.item] : viewModel.cafeList[indexPath.item]
-        let vc = SpotDetailViewController(item.id)
+        let vc = SpotDetailViewController(item.id, item.tagList)
         
         ACLocationManager.shared.removeDelegate(viewModel)
         vc.backCompletion = { [weak self] in

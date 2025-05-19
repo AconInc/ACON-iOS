@@ -25,8 +25,8 @@ class SpotDetailViewController: BaseNavViewController {
 
     // MARK: - LifeCycle
 
-    init(_ spotID: Int64) {
-        self.viewModel = SpotDetailViewModel(spotID: spotID)
+    init(_ spotID: Int64, _ tagList: [SpotTagType]) {
+        self.viewModel = SpotDetailViewModel(spotID, tagList)
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -50,7 +50,6 @@ class SpotDetailViewController: BaseNavViewController {
         self.tabBarController?.tabBar.isHidden = true
 
         viewModel.getSpotDetail()
-        viewModel.getSpotMenu()
         startTime = Date()
     }
 
@@ -118,17 +117,9 @@ private extension SpotDetailViewController {
                   let data = self?.viewModel.spotDetail.value else { return }
             if onSuccess {
                 self?.spotDetailView.bindData(data)
+                self?.spotDetailView.makeSignatureMenuSection(data.signatureMenuList)
             } else {
                 self?.showDefaultAlert(title: "장소 정보 로드 실패", message: "장소 정보 로드에 실패했습니다.")
-            }
-        }
-
-        self.viewModel.onSuccessGetSpotMenu.bind { [weak self] onSuccess in
-            guard let onSuccess else { return }
-            if onSuccess {
-                self?.spotDetailView.makeMainMenuSection(self?.viewModel.spotMenu.value ?? [])
-            } else {
-                self?.showDefaultAlert(title: "장소 메뉴 로드 실패", message: "장소 메뉴 로드에 실패했습니다.")
             }
         }
     }
