@@ -124,6 +124,7 @@
 		743900972DC8696A002F91B1 /* GlassButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900962DC86966002F91B1 /* GlassButtonType.swift */; };
 		745000D72D403F0200262CBE /* lodingLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D62D403F0200262CBE /* lodingLottie.json */; };
 		745000D82D403F0200262CBE /* checkLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D52D403F0200262CBE /* checkLottie.json */; };
+		745862702DDBC3CD0075A854 /* CustomAlertActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7458626F2DDBC3C60075A854 /* CustomAlertActionType.swift */; };
 		745A81CC2D3E429300E28002 /* LocalVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A81CB2D3E428B00E28002 /* LocalVerificationViewModel.swift */; };
 		745B19AC2D40021E00BDBDA4 /* PostLoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B19AB2D40021700BDBDA4 /* PostLoginRequest.swift */; };
 		745B19AE2D4002A100BDBDA4 /* PostLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B19AD2D40029A00BDBDA4 /* PostLoginResponse.swift */; };
@@ -371,6 +372,7 @@
 		743900962DC86966002F91B1 /* GlassButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonType.swift; sourceTree = "<group>"; };
 		745000D52D403F0200262CBE /* checkLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = checkLottie.json; sourceTree = "<group>"; };
 		745000D62D403F0200262CBE /* lodingLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lodingLottie.json; sourceTree = "<group>"; };
+		7458626F2DDBC3C60075A854 /* CustomAlertActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertActionType.swift; sourceTree = "<group>"; };
 		745A81CB2D3E428B00E28002 /* LocalVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationViewModel.swift; sourceTree = "<group>"; };
 		745B19AB2D40021700BDBDA4 /* PostLoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLoginRequest.swift; sourceTree = "<group>"; };
 		745B19AD2D40029A00BDBDA4 /* PostLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLoginResponse.swift; sourceTree = "<group>"; };
@@ -1517,6 +1519,7 @@
 			isa = PBXGroup;
 			children = (
 				D6E34C3D2D398B6000CEFA04 /* CustomAlertType.swift */,
+				7458626F2DDBC3C60075A854 /* CustomAlertActionType.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -1861,6 +1864,7 @@
 				743900932DC75451002F91B1 /* GlassmorphismType.swift in Sources */,
 				1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */,
 				74BBADF62D611B6B003AB16C /* PostReissueResponse.swift in Sources */,
+				745862702DDBC3CD0075A854 /* CustomAlertActionType.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
 				747F4FBD2D3D9477003DECBF /* SplashViewController.swift in Sources */,
 				15CD25822D40364400320006 /* LoginModalViewController.swift in Sources */,
