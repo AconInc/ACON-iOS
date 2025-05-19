@@ -8,43 +8,37 @@
 import Foundation
 
 struct PostSpotListRequest: Encodable {
-    
+
     let latitude: Double
-    
+
     let longitude: Double
-    
-    let condition: SpotCondition
-    
+
+    let condition: SpotConditionDTO
+
 }
 
-struct SpotCondition: Encodable {
-    
-    let spotType: String?
-    
-    let filterList: [SpotFilter]?
-    
-    let walkingTime: Int?
-    
-    let priceRange: Int?
-    
+struct SpotConditionDTO: Encodable {
+
+    let spotType: String
+
+    let filterList: [SpotFilterDTO]?
+
     enum CodingKeys: CodingKey {
         case spotType, filterList, walkingTime, priceRange
     }
-    
+
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(self.spotType, forKey: .spotType)
+        try container.encode(self.spotType, forKey: .spotType)
         try container.encodeIfPresent(self.filterList, forKey: .filterList)
-        try container.encodeIfPresent(self.walkingTime, forKey: .walkingTime)
-        try container.encodeIfPresent(self.priceRange, forKey: .priceRange)
     }
-    
+
 }
 
-struct SpotFilter: Encodable {
-    
+struct SpotFilterDTO: Encodable {
+
     let category: String
-    
+
     let optionList: [String]
-    
+
 }

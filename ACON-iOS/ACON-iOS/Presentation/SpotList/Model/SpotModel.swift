@@ -10,17 +10,21 @@ import UIKit
 // MARK: - Spot
 
 struct SpotModel: Equatable {
-    
+
     let id: Int64
-    
-    let imageURL: String
-    
-    let matchingRate: Int?
-    
-    let type: SpotCategoryType
-    
+
+    let imageURL: String?
+
     let name: String
-    
-    let walkingTime: Int
-    
+
+    let acornCount: Int
+
+    let tagList: [String]?
+
+    let eta: Int
+
+    let latitude: Double
+
+    let longitude: Double
+
 }
