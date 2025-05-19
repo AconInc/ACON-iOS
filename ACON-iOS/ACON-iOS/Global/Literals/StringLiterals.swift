@@ -105,7 +105,7 @@ enum StringLiterals {
         
         static let next = "다음"
         
-        static let shallWeDropAcorns = "도토리를 떨어트려\n리뷰를 남겨 볼까요?"
+        static let shallWeDropAcorns = "도토리를 떨어트려 리뷰를 남겨볼까요?"
         
         static let useAcornToReview = "도토리를 사용해 리뷰를 남겨주세요."
         
@@ -135,7 +135,7 @@ enum StringLiterals {
         
         static let addPlaceButton = "5초만에 등록하러 가기"
         
-        static let clickAcorn = "도토리를 터치해보세요"
+        static let clickAcorn = "도토리를 선택해보세요"
         
         static let noAcorn = "도토리가 부족해요!"
         
