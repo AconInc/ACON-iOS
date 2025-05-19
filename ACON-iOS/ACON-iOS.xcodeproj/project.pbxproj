@@ -242,7 +242,6 @@
 		D696F1B22D3A7E3400CCD5FF /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696F1B12D3A7E3400CCD5FF /* CustomAlertView.swift */; };
 		D6978F542D37B29100523A25 /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F532D37B29100523A25 /* OnboardingService.swift */; };
 		D6E34C462D398B6000CEFA04 /* CustomAlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E34C3D2D398B6000CEFA04 /* CustomAlertType.swift */; };
-		D6E34C462D398B6000CEFA04 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E34C3D2D398B6000CEFA04 /* AlertType.swift */; };
 		D6E34C472D398B6000CEFA04 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E34C3E2D398B6000CEFA04 /* CustomAlertViewController.swift */; };
 		D6E452932D3AA47500CBED02 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E452902D3AA47500CBED02 /* ProfileView.swift */; };
 		D6E452942D3AA47500CBED02 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E452912D3AA47500CBED02 /* ProfileViewController.swift */; };
@@ -486,7 +485,7 @@
 		D652597F2D6291A800B8176E /* WithdrawalConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalConfirmationView.swift; sourceTree = "<group>"; };
 		D696F1B12D3A7E3400CCD5FF /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		D6978F532D37B29100523A25 /* OnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingService.swift; sourceTree = "<group>"; };
-		D6E34C3D2D398B6000CEFA04 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
+		D6E34C3D2D398B6000CEFA04 /* CustomAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertType.swift; sourceTree = "<group>"; };
 		D6E34C3E2D398B6000CEFA04 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		D6E452902D3AA47500CBED02 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		D6E452912D3AA47500CBED02 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -1517,7 +1516,7 @@
 		D6E34C492D398B9B00CEFA04 /* Type */ = {
 			isa = PBXGroup;
 			children = (
-				D6E34C3D2D398B6000CEFA04 /* AlertType.swift */,
+				D6E34C3D2D398B6000CEFA04 /* CustomAlertType.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -1945,7 +1944,7 @@
 				15AA6D172D68B4EF008021C6 /* SpotListErrorType.swift in Sources */,
 				741E68952D3D38BC00DF99EF /* BaseService.swift in Sources */,
 				746F15BB2D3E2167003EA031 /* LocalVerificationTargetType.swift in Sources */,
-				D6E34C462D398B6000CEFA04 /* AlertType.swift in Sources */,
+				D6E34C462D398B6000CEFA04 /* CustomAlertType.swift in Sources */,
 				D6E34C472D398B6000CEFA04 /* CustomAlertViewController.swift in Sources */,
 				151BD9572D633C37005E657F /* LocalVerificationEditViewModel.swift in Sources */,
 				745C7E022D358E900074DBDB /* SpotSearchView.swift in Sources */,
