@@ -227,7 +227,9 @@ extension BaseNavViewController {
         rightButton.do {
             $0.isHidden = false
             $0.setAttributedTitle(text: "건너뛰기", style: .t4SB)
-            setButtonAction(button: rightButton, target: self, action: #selector(skipButtonTapped))
+            setButtonAction(button: rightButton,
+                            target: self,
+                            action: #selector(skipButtonTapped))
         }
     }
     
@@ -242,7 +244,9 @@ extension BaseNavViewController {
     
     func setSettingButton() {
         setButtonStyle(button: rightButton, image: .icSettingW)
-        setButtonAction(button: rightButton, target: self, action: #selector(settingButtonTapped))
+        setButtonAction(button: rightButton,
+                        target: self,
+                        action: #selector(settingButtonTapped))
     }
     
     @objc
@@ -305,10 +309,19 @@ extension BaseNavViewController {
         }
     }
     
+    
     // MARK: - X 버튼
     
     func setXButton() {
         setButtonStyle(button: leftButton, image: .icDismiss)
+        setButtonAction(button: leftButton,
+                        target: self,
+                        action: #selector(xButtonTapped))
+    }
+    
+    @objc
+    func xButtonTapped() {
+        self.dismiss(animated: true)
     }
     
 }

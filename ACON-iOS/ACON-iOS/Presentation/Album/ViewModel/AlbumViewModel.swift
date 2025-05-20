@@ -32,8 +32,15 @@ class AlbumViewModel: NSObject, PHPhotoLibraryChangeObserver {
                     print("Album: 권한 거부")
                     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                        let rootViewController = windowScene.windows.first?.rootViewController {
-                        let alertHandler = AlertHandler()
-                        alertHandler.showLibraryAccessFailAlert(from: rootViewController)
+                        let action = { if let tabBarController = rootViewController as? ACTabBarController,
+                                           let navController = tabBarController.selectedViewController as? UINavigationController,
+                                           let profileEditVC = navController.viewControllers.first(where: { $0 is ProfileEditViewController }) as? ProfileEditViewController {
+                                            navController.popToViewController(profileEditVC, animated: true)
+                                            }
+                                     }
+                        rootViewController.presentACAlert(.libraryAccessDenied,
+                                                              leftAction: action,
+                                                              rightAction: ACAlertActionType.openSettings)
                     }
                     completion(false)
                 @unknown default:
