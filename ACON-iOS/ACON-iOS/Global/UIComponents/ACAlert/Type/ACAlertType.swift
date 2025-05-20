@@ -9,20 +9,20 @@ import Foundation
 
 enum ACAlertType: CaseIterable {
     
-    case essentialUpdate
-    case plainUpdate
+    case essentialUpdate // NOTE: 강제업데이트
+    case plainUpdate // NOTE: 일반업데이트
     
-    case locationAccessDenied // 위치 권한 X
-    case locationAccessFail // 위치 인식 실패 - 외국, GPS 지원 공간 X
+    case locationAccessDenied // NOTE: 위치 권한 X
+    case locationAccessFail // NOTE: 위치 인식 실패 - 외국, GPS 지원 공간 X
     
-    case reviewLocationFail // 리뷰 위치 인증 실패
+    case reviewLocationFail // NOTE: 리뷰 위치 인증 실패
     
-    case libraryAccessDenied // 사진 권한 X
-    case changeNotSaved // 프로필 변경사항 저장 X
+    case libraryAccessDenied // NOTE: 사진 권한 X
+    case changeNotSaved // NOTE: 프로필 변경사항 저장 X
     
-    case changeVerifiedArea // 지역인증 변경 (지역 1개)
+    case changeVerifiedArea // NOTE: 지역인증 변경 (지역 1개)
     
-    case logout // TODO : 로그아웃 알럿 포함인지 기디측에 문의함. 현재 없음
+    case logout // NOTE: 로그아웃
     
     var title: String {
         switch self {
@@ -60,8 +60,6 @@ enum ACAlertType: CaseIterable {
             return "설정에서 권한을 켤 수 있습니다."
         case .changeVerifiedArea:
             return "지역은 최소 1개 이상을 등록해야 해요.\n현재 설정된 지역을 변경할까요?"
-//        case .logout:
-//            return "현재 계정으로 다시 로그인하면\n데이터를 불러올 수 있어요"
         default:
             return nil
         }
