@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomAlertActionType {
+class ACAlertActionType {
     
     // NOTE: - 알럿에 자주 사용되는 액션 클로저
     

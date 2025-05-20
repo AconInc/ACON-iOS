@@ -6,16 +6,16 @@
 
 import UIKit
 
-final class CustomAlertViewController: BaseViewController {
+final class ACAlertViewController: BaseViewController {
     
     // MARK: - UI Properties
     
-    let customAlertView: CustomAlertView = CustomAlertView()
+    let customAlertView: ACAlertView = ACAlertView()
     
     
     // MARK: - Properties
     
-    var customAlertType: CustomAlertType
+    var customAlertType: ACAlertType
     
     var onLongButtonTapped: (() -> Void)?
     
@@ -26,7 +26,7 @@ final class CustomAlertViewController: BaseViewController {
     
     // MARK: - LifeCycle
     
-    init(_ customAlertType: CustomAlertType) {
+    init(_ customAlertType: ACAlertType) {
         self.customAlertType = customAlertType
         
         super.init(nibName: nil, bundle: nil)
@@ -56,7 +56,7 @@ final class CustomAlertViewController: BaseViewController {
 
 // MARK: - Setting methods
 
-private extension CustomAlertViewController {
+private extension ACAlertViewController {
     
     func addTarget() {
         customAlertView.longButton.addTarget(self, action: #selector(longButtonTapped), for: .touchUpInside)
@@ -64,7 +64,7 @@ private extension CustomAlertViewController {
         customAlertView.rightButton.addTarget(self, action: #selector(rightButtonTapped), for: .touchUpInside)
     }
     
-    func configure(with alertType: CustomAlertType) {
+    func configure(with alertType: ACAlertType) {
         customAlertView.configure(title: alertType.title,
                                   description: alertType.description,
                                   longButtonTitle: alertType.longButtonTitle,
@@ -77,7 +77,7 @@ private extension CustomAlertViewController {
 
 // MARK: - @objc functions
 
-private extension CustomAlertViewController {
+private extension ACAlertViewController {
     
     @objc
     func longButtonTapped() {

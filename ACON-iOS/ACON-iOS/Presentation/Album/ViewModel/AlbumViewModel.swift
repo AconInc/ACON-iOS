@@ -38,9 +38,9 @@ class AlbumViewModel: NSObject, PHPhotoLibraryChangeObserver {
                                             navController.popToViewController(profileEditVC, animated: true)
                                             }
                                      }
-                        rootViewController.presentCustomAlert(.libraryAccessDenied,
+                        rootViewController.presentACAlert(.libraryAccessDenied,
                                                               leftAction: action,
-                                                              rightAction: CustomAlertActionType.openSettings)
+                                                              rightAction: ACAlertActionType.openSettings)
                     }
                     completion(false)
                 @unknown default:

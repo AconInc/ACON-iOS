@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CustomAlertType: CaseIterable {
+enum ACAlertType: CaseIterable {
     
     case essentialUpdate
     case plainUpdate

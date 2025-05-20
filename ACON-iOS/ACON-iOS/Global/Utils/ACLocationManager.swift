@@ -99,8 +99,8 @@ class ACLocationManager: NSObject {
             let windowScene = scenes.first as? UIWindowScene
             let window = windowScene?.windows.first
             let vc = (window?.rootViewController)!
-            vc.presentCustomAlert(.locationAccessDenied,
-                                  longAction: CustomAlertActionType.openSettings)
+            vc.presentACAlert(.locationAccessDenied,
+                                  longAction: ACAlertActionType.openSettings)
         case .authorizedWhenInUse, .authorizedAlways:
             guard !isRequestingLocation else { return }
             isRequestingLocation = true

@@ -107,12 +107,12 @@ extension UIViewController {
     
     // MARK: - 커스텀 알럿
     
-    func presentCustomAlert(_ customAlertType: CustomAlertType,
+    func presentACAlert(_ customAlertType: ACAlertType,
                             longAction: (() -> Void)? = nil,
                             leftAction: (() -> Void)? = nil,
                             rightAction: (() -> Void)? = nil,
                             from vc: UIViewController? = nil) {
-        let alertVC = CustomAlertViewController(customAlertType)
+        let alertVC = ACAlertViewController(customAlertType)
         
         alertVC.do {
             $0.onLongButtonTapped = longAction

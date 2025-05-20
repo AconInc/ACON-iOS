@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CustomAlertView: BaseView {
+final class ACAlertView: BaseView {
     
     // MARK: - UI Properties
     
@@ -126,7 +126,7 @@ final class CustomAlertView: BaseView {
 
 // MARK: - Configuration
 
-extension CustomAlertView {
+extension ACAlertView {
     
     func configure(title: String,
                    description: String?,

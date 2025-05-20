@@ -124,7 +124,7 @@
 		743900972DC8696A002F91B1 /* GlassButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900962DC86966002F91B1 /* GlassButtonType.swift */; };
 		745000D72D403F0200262CBE /* lodingLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D62D403F0200262CBE /* lodingLottie.json */; };
 		745000D82D403F0200262CBE /* checkLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D52D403F0200262CBE /* checkLottie.json */; };
-		745862702DDBC3CD0075A854 /* CustomAlertActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7458626F2DDBC3C60075A854 /* CustomAlertActionType.swift */; };
+		745862702DDBC3CD0075A854 /* ACAlertActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7458626F2DDBC3C60075A854 /* ACAlertActionType.swift */; };
 		745A81CC2D3E429300E28002 /* LocalVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A81CB2D3E428B00E28002 /* LocalVerificationViewModel.swift */; };
 		745B19AC2D40021E00BDBDA4 /* PostLoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B19AB2D40021700BDBDA4 /* PostLoginRequest.swift */; };
 		745B19AE2D4002A100BDBDA4 /* PostLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B19AD2D40029A00BDBDA4 /* PostLoginResponse.swift */; };
@@ -240,10 +240,10 @@
 		D652597C2D62775C00B8176E /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597B2D62775C00B8176E /* CustomTextFieldView.swift */; };
 		D652597E2D628EB000B8176E /* WithdrawalConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597D2D628EB000B8176E /* WithdrawalConfirmationViewController.swift */; };
 		D65259802D6291A800B8176E /* WithdrawalConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597F2D6291A800B8176E /* WithdrawalConfirmationView.swift */; };
-		D696F1B22D3A7E3400CCD5FF /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696F1B12D3A7E3400CCD5FF /* CustomAlertView.swift */; };
+		D696F1B22D3A7E3400CCD5FF /* ACAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696F1B12D3A7E3400CCD5FF /* ACAlertView.swift */; };
 		D6978F542D37B29100523A25 /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F532D37B29100523A25 /* OnboardingService.swift */; };
-		D6E34C462D398B6000CEFA04 /* CustomAlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E34C3D2D398B6000CEFA04 /* CustomAlertType.swift */; };
-		D6E34C472D398B6000CEFA04 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E34C3E2D398B6000CEFA04 /* CustomAlertViewController.swift */; };
+		D6E34C462D398B6000CEFA04 /* ACAlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E34C3D2D398B6000CEFA04 /* ACAlertType.swift */; };
+		D6E34C472D398B6000CEFA04 /* ACAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E34C3E2D398B6000CEFA04 /* ACAlertViewController.swift */; };
 		D6E452932D3AA47500CBED02 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E452902D3AA47500CBED02 /* ProfileView.swift */; };
 		D6E452942D3AA47500CBED02 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E452912D3AA47500CBED02 /* ProfileViewController.swift */; };
 		D6E8168E2D6228F5001E4EBF /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E8168D2D6228F5001E4EBF /* WithdrawalViewController.swift */; };
@@ -372,7 +372,7 @@
 		743900962DC86966002F91B1 /* GlassButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonType.swift; sourceTree = "<group>"; };
 		745000D52D403F0200262CBE /* checkLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = checkLottie.json; sourceTree = "<group>"; };
 		745000D62D403F0200262CBE /* lodingLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lodingLottie.json; sourceTree = "<group>"; };
-		7458626F2DDBC3C60075A854 /* CustomAlertActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertActionType.swift; sourceTree = "<group>"; };
+		7458626F2DDBC3C60075A854 /* ACAlertActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAlertActionType.swift; sourceTree = "<group>"; };
 		745A81CB2D3E428B00E28002 /* LocalVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationViewModel.swift; sourceTree = "<group>"; };
 		745B19AB2D40021700BDBDA4 /* PostLoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLoginRequest.swift; sourceTree = "<group>"; };
 		745B19AD2D40029A00BDBDA4 /* PostLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLoginResponse.swift; sourceTree = "<group>"; };
@@ -485,10 +485,10 @@
 		D652597B2D62775C00B8176E /* CustomTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
 		D652597D2D628EB000B8176E /* WithdrawalConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalConfirmationViewController.swift; sourceTree = "<group>"; };
 		D652597F2D6291A800B8176E /* WithdrawalConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalConfirmationView.swift; sourceTree = "<group>"; };
-		D696F1B12D3A7E3400CCD5FF /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		D696F1B12D3A7E3400CCD5FF /* ACAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAlertView.swift; sourceTree = "<group>"; };
 		D6978F532D37B29100523A25 /* OnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingService.swift; sourceTree = "<group>"; };
-		D6E34C3D2D398B6000CEFA04 /* CustomAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertType.swift; sourceTree = "<group>"; };
-		D6E34C3E2D398B6000CEFA04 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
+		D6E34C3D2D398B6000CEFA04 /* ACAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAlertType.swift; sourceTree = "<group>"; };
+		D6E34C3E2D398B6000CEFA04 /* ACAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAlertViewController.swift; sourceTree = "<group>"; };
 		D6E452902D3AA47500CBED02 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		D6E452912D3AA47500CBED02 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D6E8168D2D6228F5001E4EBF /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
@@ -1184,7 +1184,7 @@
 				15CD256A2D3D61F500320006 /* GlassmorphismView.swift */,
 				15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */,
 				15CD257F2D40361600320006 /* LoginModal */,
-				D6E34C422D398B6000CEFA04 /* CustomAlert */,
+				D6E34C422D398B6000CEFA04 /* ACAlert */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -1497,20 +1497,20 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		D6E34C422D398B6000CEFA04 /* CustomAlert */ = {
+		D6E34C422D398B6000CEFA04 /* ACAlert */ = {
 			isa = PBXGroup;
 			children = (
 				D6E34C492D398B9B00CEFA04 /* Type */,
 				D6E34C482D398B9700CEFA04 /* View */,
 			);
-			path = CustomAlert;
+			path = ACAlert;
 			sourceTree = "<group>";
 		};
 		D6E34C482D398B9700CEFA04 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D6E34C3E2D398B6000CEFA04 /* CustomAlertViewController.swift */,
-				D696F1B12D3A7E3400CCD5FF /* CustomAlertView.swift */,
+				D6E34C3E2D398B6000CEFA04 /* ACAlertViewController.swift */,
+				D696F1B12D3A7E3400CCD5FF /* ACAlertView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1518,8 +1518,8 @@
 		D6E34C492D398B9B00CEFA04 /* Type */ = {
 			isa = PBXGroup;
 			children = (
-				D6E34C3D2D398B6000CEFA04 /* CustomAlertType.swift */,
-				7458626F2DDBC3C60075A854 /* CustomAlertActionType.swift */,
+				D6E34C3D2D398B6000CEFA04 /* ACAlertType.swift */,
+				7458626F2DDBC3C60075A854 /* ACAlertActionType.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -1864,7 +1864,7 @@
 				743900932DC75451002F91B1 /* GlassmorphismType.swift in Sources */,
 				1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */,
 				74BBADF62D611B6B003AB16C /* PostReissueResponse.swift in Sources */,
-				745862702DDBC3CD0075A854 /* CustomAlertActionType.swift in Sources */,
+				745862702DDBC3CD0075A854 /* ACAlertActionType.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
 				747F4FBD2D3D9477003DECBF /* SplashViewController.swift in Sources */,
 				15CD25822D40364400320006 /* LoginModalViewController.swift in Sources */,
@@ -1895,7 +1895,7 @@
 				74A13D6B2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				746F15B72D3E2083003EA031 /* PostLocalAreaRequest.swift in Sources */,
 				74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */,
-				D696F1B22D3A7E3400CCD5FF /* CustomAlertView.swift in Sources */,
+				D696F1B22D3A7E3400CCD5FF /* ACAlertView.swift in Sources */,
 				743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */,
 				15F15E852DBFD206002F81E2 /* LanguageType.swift in Sources */,
 				151AB6902DD367BF00D01DE8 /* SpotDetailView.swift in Sources */,
@@ -1948,8 +1948,8 @@
 				15AA6D172D68B4EF008021C6 /* SpotListErrorType.swift in Sources */,
 				741E68952D3D38BC00DF99EF /* BaseService.swift in Sources */,
 				746F15BB2D3E2167003EA031 /* LocalVerificationTargetType.swift in Sources */,
-				D6E34C462D398B6000CEFA04 /* CustomAlertType.swift in Sources */,
-				D6E34C472D398B6000CEFA04 /* CustomAlertViewController.swift in Sources */,
+				D6E34C462D398B6000CEFA04 /* ACAlertType.swift in Sources */,
+				D6E34C472D398B6000CEFA04 /* ACAlertViewController.swift in Sources */,
 				151BD9572D633C37005E657F /* LocalVerificationEditViewModel.swift in Sources */,
 				745C7E022D358E900074DBDB /* SpotSearchView.swift in Sources */,
 				745A81CC2D3E429300E28002 /* LocalVerificationViewModel.swift in Sources */,

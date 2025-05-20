@@ -163,7 +163,7 @@ extension VerifiedAreasEditViewController: VerifiedAreasEditViewDelegate {
                 let vc = LocalVerificationViewController(viewModel: self.localVerificationVMSwitching)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            self.presentCustomAlert(.changeVerifiedArea, rightAction: action)
+            self.presentACAlert(.changeVerifiedArea, rightAction: action)
         }
         // TODO: 동네 인증 후 일주일 지나면 삭제 못한다는 알럿 기획과 논의중
         else {

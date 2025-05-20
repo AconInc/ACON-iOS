@@ -203,7 +203,7 @@ extension ProfileSettingViewController: UITableViewDataSource {
                     AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceLogout, properties: ["click_logout?": true])
                     self?.settingViewModel.logout()
                 }
-                self.presentCustomAlert(.logout, rightAction: action)
+                self.presentACAlert(.logout, rightAction: action)
                 return
             case .withdrawal:
                 AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceWithdraw, properties: ["click_exit_service?": true])
