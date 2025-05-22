@@ -158,21 +158,16 @@ extension VerifiedAreasEditViewController: VerifiedAreasEditViewDelegate {
     func didTapAreaDeleteButton(_ verifiedArea: VerifiedAreaModel) {
         // NOTE: 동네가 1개 남은 상황에서 삭제버튼 누른 경우 -> Alert -> 동네인증
         if viewModel.verifiedAreaList.count == 1 {
-            AlertHandler.shared.showWillYouChangeVerifiedAreaAlert(from: self) { [weak self] in
+            let action: () -> Void = { [weak self] in
                 guard let self = self else { return }
-                let vc = LocalVerificationViewController(viewModel: localVerificationVMSwitching)
+                let vc = LocalVerificationViewController(viewModel: self.localVerificationVMSwitching)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+            self.presentACAlert(.changeVerifiedArea, rightAction: action)
         }
-        
-        // NOTE: 동네가 여러개 남은 상황에서 삭제버튼 누른 경우 -> Alert -> 삭제
+        // TODO: 동네 인증 후 일주일 지나면 삭제 못한다는 알럿 기획과 논의중
         else {
-            AlertHandler.shared.showWillYouDeleteVerifiedAreaAlert(
-                from: self,
-                areaName: verifiedArea.name) { [weak self] in
-                guard let self = self else { return }
-                viewModel.postDeleteVerifiedArea(verifiedArea)
-            }
+            viewModel.postDeleteVerifiedArea(verifiedArea)
         }
     }
     

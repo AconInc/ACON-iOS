@@ -35,23 +35,24 @@ final class SearchKeywordCollectionViewCell: BaseCollectionViewCell {
         super.setLayout()
         
         spotNameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*7)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.height.equalTo(20)
-            $0.width.equalTo(ScreenUtils.widthRatio*250)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*12)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*16)
+            $0.height.equalTo(24)
+            $0.width.equalTo(ScreenUtils.widthRatio*256)
         }
         
         spotAddressLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*7)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.height.equalTo(14)
-            $0.width.equalTo(ScreenUtils.widthRatio*250)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*12)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*16)
+            $0.height.equalTo(24)
+            $0.width.equalTo(ScreenUtils.widthRatio*256)
         }
         
         spotTypeLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.height.equalTo(14)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*12)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*16)
+            $0.height.equalTo(20)
+            $0.width.equalTo(ScreenUtils.widthRatio*40)
         }
     }
     
@@ -67,14 +68,13 @@ extension SearchKeywordCollectionViewCell {
     
     func bindData(_ relatedSearchData: SearchKeywordModel?, _ indexRow: Int) {
         spotNameLabel.setLabel(text: relatedSearchData?.spotName ?? "",
-                               style: .s2,
-                               color: .acWhite)
+                               style: .t4R)
         spotAddressLabel.setLabel(text: relatedSearchData?.spotAddress ?? "",
-                               style: .c1,
-                               color: .gray400)
+                                  style: .b1R,
+                                  color: .gray500)
         spotTypeLabel.setLabel(text: relatedSearchData?.spotType ?? "",
-                               style: .c1,
-                               color: .gray400,
+                              style: .b1R,
+                               color: .gray500,
                                alignment: .right)
     }
     

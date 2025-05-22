@@ -8,22 +8,18 @@
 import UIKit
 
 import Lottie
-import SnapKit
-import Then
 
 final class ReviewFinishedView: BaseView {
 
     // MARK: - UI Properties
     
-    private let finishedReviewLabel: UILabel = UILabel()
+    let finishedReviewLabel: UILabel = UILabel()
     
     private let wishYouPreferenceLabel: UILabel = UILabel()
     
     let finishedReviewLottieView: LottieAnimationView = LottieAnimationView()
-    
-    var closeViewLabel: UILabel = UILabel()
-    
-    var okButton: UIButton = UIButton()
+
+    let doneButton: ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDisabled, buttonType: .full_12_t4SB), title: StringLiterals.Upload.done)
     
     
     // MARK: - Lifecycle
@@ -34,43 +30,37 @@ final class ReviewFinishedView: BaseView {
         self.addSubviews(finishedReviewLabel,
                          wishYouPreferenceLabel,
                          finishedReviewLottieView,
-                         closeViewLabel,
-                         okButton)
+                         doneButton)
     }
     
     override func setLayout() {
         super.setLayout()
         
         finishedReviewLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*40)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*127)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*88.5)
             $0.height.equalTo(56)
         }
         
         wishYouPreferenceLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*104)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
-            $0.height.equalTo(18)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*195)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*72)
+            $0.height.equalTo(20)
         }
+        
         
         finishedReviewLottieView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*162)
-            // TODO: 디자인에게 사이즈 물어보기
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*279)
             $0.width.equalTo(246)
             $0.height.equalTo(320)
         }
         
-        closeViewLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*100)
+        doneButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(21+ScreenUtils.heightRatio*16)
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(18)
-        }
-        
-        okButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*40)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*16)
-            $0.height.equalTo(ScreenUtils.heightRatio*52)
+            $0.height.equalTo(54)
+            $0.width.equalTo(ScreenUtils.widthRatio*328)
         }
         
     }
@@ -78,38 +68,18 @@ final class ReviewFinishedView: BaseView {
     override func setStyle() {
         super.setStyle()
         
-        finishedReviewLabel.do {
-            $0.setLabel(text: StringLiterals.Upload.finishedReview,
-                        style: .h6,
-                        color: .acWhite)
-        }
-        
         wishYouPreferenceLabel.do {
             $0.setLabel(text: StringLiterals.Upload.wishYouPreference,
-                        style: .b3,
-                        color: .gray300)
+                        style: .b1R,
+                        color: .gray500,
+                        alignment: .center)
         }
         
         finishedReviewLottieView.do {
             $0.animation = LottieAnimation.named("finishedUpload")
             $0.contentMode = .scaleAspectFit
-            // TODO: 디자인에게 반복재생 물어보기
         }
         
-        closeViewLabel.do {
-            $0.setLabel(text: StringLiterals.Upload.closeAfterFiveSeconds,
-                        style: .b3,
-                        color: .gray300)
-        }
-        
-        okButton.do {
-            $0.setAttributedTitle(text: StringLiterals.Upload.ok,
-                                  style: .h8,
-                                  color: .acWhite,
-                                  for: .normal)
-            $0.backgroundColor = .gray500
-            $0.roundedButton(cornerRadius: 6, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
-        }
     }
     
 }

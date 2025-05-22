@@ -15,7 +15,7 @@ enum ACTabBarItemType: CaseIterable {
         // TODO: ViewController 인스턴스 수정
         switch self {
         case .spotList: return SpotListViewController()
-        case .upload: return SpotUploadViewController()
+        case .upload: return SpotSearchViewController()
         case .profile: return ProfileViewController()
         }
     }

@@ -104,4 +104,30 @@ extension UIViewController {
         self.present(vc, animated: true)
     }
     
+    
+    // MARK: - 커스텀 알럿
+    
+    func presentACAlert(_ customAlertType: ACAlertType,
+                            longAction: (() -> Void)? = nil,
+                            leftAction: (() -> Void)? = nil,
+                            rightAction: (() -> Void)? = nil,
+                            from vc: UIViewController? = nil) {
+        let alertVC = ACAlertViewController(customAlertType)
+        
+        alertVC.do {
+            $0.onLongButtonTapped = longAction
+            $0.onLeftButtonTapped = leftAction
+            $0.onRightButtonTapped = rightAction
+            
+            $0.modalPresentationStyle = .overFullScreen
+            $0.modalTransitionStyle = .crossDissolve
+        }
+
+        if let vc = vc {
+            vc.present(alertVC, animated: true)
+        } else {
+            self.present(alertVC, animated: true)
+        }
+    }
+    
 }

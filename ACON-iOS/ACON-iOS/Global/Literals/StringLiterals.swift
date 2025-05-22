@@ -107,7 +107,7 @@ enum StringLiterals {
         
         static let next = "다음"
         
-        static let shallWeDropAcorns = "도토리를 떨어트려\n리뷰를 남겨 볼까요?"
+        static let shallWeDropAcorns = "도토리를 떨어트려 리뷰를 남겨볼까요?"
         
         static let useAcornToReview = "도토리를 사용해 리뷰를 남겨주세요."
         
@@ -115,9 +115,9 @@ enum StringLiterals {
         
         static let reviewWithAcornsHere = "도토리로 리뷰남기기"
         
-        static let finishedReview = "가게명에 대한\n리뷰 작성을 완료했어요!"
+        static let finishedReview = "에 대한\n리뷰 작성을 완료했어요!"
         
-        static let wishYouPreference = "당신의 취향이 가득 담긴 장소였길 바라요."
+        static let wishYouPreference = "당신의 취향이 가득 담긴 장소였길 바라요"
         
         static let closeAfterFiveSeconds = "5초 후 탭이 자동으로 닫힙니다."
         
@@ -129,9 +129,15 @@ enum StringLiterals {
         
         static let searchSpot = "가게명을 검색해주세요"
         
-        static let noMatchingSpots = "앗! 일치하는 장소가 없어요."
+        static let noMatchingSpots = "앗... 검색결과가 없어요"
         
-        static let clickAcorn = "도토리를 터치해보세요"
+        static let addPlaceTitle = "현재 장소를 바로 등록할 수 있어요"
+        
+        static let addPlaceDescriptuon = "더욱 더 정확하게 추천이 가능해요"
+        
+        static let addPlaceButton = "5초만에 등록하러 가기"
+        
+        static let clickAcorn = "도토리를 선택해보세요"
         
         static let noAcorn = "도토리가 부족해요!"
         

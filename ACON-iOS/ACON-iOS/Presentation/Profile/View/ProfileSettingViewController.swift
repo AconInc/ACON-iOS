@@ -199,11 +199,11 @@ extension ProfileSettingViewController: UITableViewDataSource {
             let items = SettingType.allSections[3] as! [SettingType.Account]
             switch items[indexPath.row] {
             case .logout:
-                let alertHandler = AlertHandler()
-                alertHandler.showLogoutAlert(from: self) { [weak self] in
+                let action = { [weak self] in
                     AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceLogout, properties: ["click_logout?": true])
                     self?.settingViewModel.logout()
                 }
+                self.presentACAlert(.logout, rightAction: action)
                 return
             case .withdrawal:
                 AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceWithdraw, properties: ["click_exit_service?": true])

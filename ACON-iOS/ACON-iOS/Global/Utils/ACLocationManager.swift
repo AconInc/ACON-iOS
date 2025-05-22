@@ -98,8 +98,9 @@ class ACLocationManager: NSObject {
             let scenes = UIApplication.shared.connectedScenes
             let windowScene = scenes.first as? UIWindowScene
             let window = windowScene?.windows.first
-            let alertHandler = AlertHandler()
-            alertHandler.showLocationAccessFailAlert(from: (window?.rootViewController)!)
+            let vc = (window?.rootViewController)!
+            vc.presentACAlert(.locationAccessDenied,
+                                  longAction: ACAlertActionType.openSettings)
         case .authorizedWhenInUse, .authorizedAlways:
             guard !isRequestingLocation else { return }
             isRequestingLocation = true

@@ -39,7 +39,7 @@ struct ScreenUtils {
     // MARK: - navBarView Height
     
     static var navViewHeight: CGFloat {
-        return ScreenUtils.heightRatio * 56
+        return ScreenUtils.heightRatio * 54
     }
     
     static var safeAreaTopHeight: CGFloat {
