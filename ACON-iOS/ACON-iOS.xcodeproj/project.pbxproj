@@ -121,7 +121,6 @@
 		74205D2F2D40351700D11557 /* SocialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74205D2E2D40351400D11557 /* SocialType.swift */; };
 		74220DD42D34363B000684BF /* SpotUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74220DD32D343633000684BF /* SpotUploadViewController.swift */; };
 		74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74220DD52D3436BE000684BF /* SpotUploadView.swift */; };
-		742544062D413CCD004F950F /* SpotListCollectionViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742544052D413CC6004F950F /* SpotListCollectionViewFooter.swift */; };
 		743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743069882D3D2F540033178C /* NetworkResult.swift */; };
 		743900912DC50926002F91B1 /* UIVisualEffectView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900902DC50918002F91B1 /* UIVisualEffectView+.swift */; };
 		743900932DC75451002F91B1 /* GlassmorphismType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900922DC7544C002F91B1 /* GlassmorphismType.swift */; };
@@ -375,7 +374,6 @@
 		74205D2E2D40351400D11557 /* SocialType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialType.swift; sourceTree = "<group>"; };
 		74220DD32D343633000684BF /* SpotUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadViewController.swift; sourceTree = "<group>"; };
 		74220DD52D3436BE000684BF /* SpotUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadView.swift; sourceTree = "<group>"; };
-		742544052D413CC6004F950F /* SpotListCollectionViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewFooter.swift; sourceTree = "<group>"; };
 		743069882D3D2F540033178C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		743900902DC50918002F91B1 /* UIVisualEffectView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVisualEffectView+.swift"; sourceTree = "<group>"; };
 		743900922DC7544C002F91B1 /* GlassmorphismType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismType.swift; sourceTree = "<group>"; };
@@ -589,7 +587,6 @@
 			children = (
 				1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */,
 				15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */,
-				742544052D413CC6004F950F /* SpotListCollectionViewFooter.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1856,7 +1853,6 @@
 				746261772D3EA88700A4E84F /* GetAcornCountResponse.swift in Sources */,
 				745ECB9D2D614183005129B0 /* PhotoSelectionViewController.swift in Sources */,
 				D61917E92D3E4410001BF0EE /* OnboardingTargetType.swift in Sources */,
-				742544062D413CCD004F950F /* SpotListCollectionViewFooter.swift in Sources */,
 				1547A8822D358E3000E96616 /* SpotListFilterViewController.swift in Sources */,
 				15CF62C52D579F2D0000A10F /* ProfileViewModel.swift in Sources */,
 				748D6FAA2D2C3FF1007690B4 /* BaseCollectionViewCell.swift in Sources */,

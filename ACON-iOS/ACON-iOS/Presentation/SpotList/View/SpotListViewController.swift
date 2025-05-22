@@ -357,10 +357,9 @@ extension SpotListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView,
-                       viewForSupplementaryElementOfKind kind: String,
-                       at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
             guard let header = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: SpotListCollectionViewHeader.identifier,
@@ -368,17 +367,8 @@ extension SpotListViewController: UICollectionViewDataSource {
                 fatalError("Cannot dequeue header view")
             }
             return header
-        case UICollectionView.elementKindSectionFooter:
-            guard let footer = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: SpotListCollectionViewFooter.identifier,
-                for: indexPath) as? SpotListCollectionViewFooter else {
-                fatalError("Cannot dequeue footer view")
-            }
-            return footer
-        default:
-            fatalError("Unexpected supplementary view kind")
         }
+        return UICollectionReusableView()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -457,14 +447,6 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
         let itemWidth: CGFloat = SpotListItemSizeType.itemMaxWidth.value
         let itemHeight: CGFloat = SpotListItemSizeType.headerHeight.value
-        return CGSize(width: itemWidth, height: itemHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        referenceSizeForFooterInSection section: Int) -> CGSize {
-        let itemWidth: CGFloat = SpotListItemSizeType.itemMaxWidth.value
-        let itemHeight: CGFloat = SpotListItemSizeType.footerHeight.value
         return CGSize(width: itemWidth, height: itemHeight)
     }
 
