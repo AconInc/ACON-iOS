@@ -17,7 +17,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     private let dimImage = UIImageView()
 
     private let noImageContentView = SpotNoImageContentView()
-    private let loginErrorView = SpotListErrorView(.imageTitleButton)
+    private let loginErrorView = LoginLockOverlayView()
 
     private let titleLabel = UILabel()
     private let acornCountButton = UIButton()
@@ -119,10 +119,6 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.isHidden = true
             $0.clipsToBounds = true
             $0.layer.cornerRadius = cornerRadius
-            $0.setStyle(errorImage: .icLock,
-                        errorMessage: StringLiterals.SpotList.needLoginToSeeMore,
-                        buttonTitle: StringLiterals.SpotList.loginInThreeSeconds,
-                        glassMorphismtype: .needLoginErrorGlass)
         }
     }
 
