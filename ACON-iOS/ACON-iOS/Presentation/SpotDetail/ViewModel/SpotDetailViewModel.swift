@@ -21,9 +21,9 @@ class SpotDetailViewModel: Serviceable {
 
     // TODO: DTO 수정 후 삭제
     private lazy var spotDetailDummy = SpotDetailInfoModel(
-        spotID: 1,
-        imageURLs: imageURLs,
-        name: "장소상세 더미",
+        spotID: spotID,
+        imageURLs: self.spotID == 1 ? [] : imageURLs,
+        name: self.spotID == 1 ? "이미지없는 식당" : "장소상세 더미",
         acornCount: 10000,
         hasMenuboardImage: true,
         signatureMenuList: [
