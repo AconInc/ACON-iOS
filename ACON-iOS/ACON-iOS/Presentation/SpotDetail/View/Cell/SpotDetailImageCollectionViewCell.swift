@@ -15,7 +15,7 @@ class SpotDetailImageCollectionViewCell: BaseCollectionViewCell {
 
     let imageView = UIImageView()
 
-    let noImageErrorView = SpotListErrorView(.imageTitle)
+    let imageErrorView = TempSpotListErrorView(.imageTitle) // TODO: 디자인 요청함
 
 
     // MARK: - Initializing
@@ -23,7 +23,7 @@ class SpotDetailImageCollectionViewCell: BaseCollectionViewCell {
     override func setHierarchy() {
         super.setHierarchy()
 
-        self.addSubviews(imageView, noImageErrorView)
+        self.addSubviews(imageView, imageErrorView)
     }
 
     override func setLayout() {
@@ -33,7 +33,7 @@ class SpotDetailImageCollectionViewCell: BaseCollectionViewCell {
             $0.edges.equalToSuperview()
         }
         
-        noImageErrorView.snp.makeConstraints {
+        imageErrorView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
@@ -46,7 +46,7 @@ class SpotDetailImageCollectionViewCell: BaseCollectionViewCell {
             $0.clipsToBounds = true
         }
         
-        noImageErrorView.do {
+        imageErrorView.do {
             $0.isHidden = true
             $0.setStyle(errorImage: .icAcornGlass,
                         errorMessage: StringLiterals.SpotList.preparingImages,
@@ -87,11 +87,11 @@ extension SpotDetailImageCollectionViewCell {
             completionHandler: { result in
                 switch result {
                 case .success:
-                    self.noImageErrorView.isHidden = true
+                    self.imageErrorView.isHidden = true
                 case .failure(let error):
                     print("😢 이미지 로드 실패: \(error)")
                     self.imageView.image = nil
-                    self.noImageErrorView.isHidden = false
+                    self.imageErrorView.isHidden = false
                 }
             }
         )

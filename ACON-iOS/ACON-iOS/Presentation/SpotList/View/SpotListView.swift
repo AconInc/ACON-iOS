@@ -22,7 +22,7 @@ class SpotListView: BaseView {
 
     private let skeletonView = SkeletonView()
 
-    let errorView = SpotListErrorView(.imageTitleButton)
+    let errorView = TempSpotListErrorView(.imageTitleButton) // TODO: 수정
 
 
     // MARK: - LifeCycles
