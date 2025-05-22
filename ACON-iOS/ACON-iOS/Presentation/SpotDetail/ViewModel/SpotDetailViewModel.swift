@@ -20,7 +20,22 @@ class SpotDetailViewModel: Serviceable {
     var spotDetail: ObservablePattern<SpotDetailInfoModel> = ObservablePattern(nil)
 
     // TODO: DTO 수정 후 삭제
-    let imageURLs: [String] = ["https://www.ledr.com/colours/white.jpg","https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg","https://images.immediate.co.uk/production/volatile/sites/30/2022/03/Pancake-grazing-board-bc15106.jpg?quality=90&resize=556,505","https://natashaskitchen.com/wp-content/uploads/2020/03/Pan-Seared-Steak-4.jpg","https://i.namu.wiki/i/oFHlYDjoEh8f-cc3lNK9jAemRkbXxNGwUg7XiW5LGS6DF1P2x8GCeNQxbQhVIwtUS1u53YPw-uoyqpmLtrGNJA.webp","https://i.namu.wiki/i/dgjXU86ae29hDSCza-L0GZlFt3T9lRx1Ug9cKtqWSzMzs7Cd0CN2SzyLFEJcHVFviKcxAlIwxcllT9s2sck0RA.jpg","https://www.bhc.co.kr/upload/bhc/menu/%EC%96%91%EB%85%90%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_410x271.jpg","https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"]
+    private lazy var spotDetailDummy = SpotDetailInfoModel(
+        spotID: 1,
+        imageURLs: imageURLs,
+        name: "장소상세 더미",
+        acornCount: 10000,
+        hasMenuboardImage: true,
+        signatureMenuList: [
+            SignatureMenuModel(name: "맛있는메뉴1", price: 13000),
+            SignatureMenuModel(name: "Very long name", price: 999999)
+        ],
+        latitude: 35.785834,
+        longitude: 128.25,
+        tagList: tagList
+    )
+    
+    let imageURLs: [String] = ["https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg","https://images.immediate.co.uk/production/volatile/sites/30/2022/03/Pancake-grazing-board-bc15106.jpg?quality=90&resize=556,505","https://natashaskitchen.com/wp-content/uploads/2020/03/Pan-Seared-Steak-4.jpg","https://i.namu.wiki/i/oFHlYDjoEh8f-cc3lNK9jAemRkbXxNGwUg7XiW5LGS6DF1P2x8GCeNQxbQhVIwtUS1u53YPw-uoyqpmLtrGNJA.webp","https://i.namu.wiki/i/dgjXU86ae29hDSCza-L0GZlFt3T9lRx1Ug9cKtqWSzMzs7Cd0CN2SzyLFEJcHVFviKcxAlIwxcllT9s2sck0RA.jpg","https://www.bhc.co.kr/upload/bhc/menu/%EC%96%91%EB%85%90%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_410x271.jpg","https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"]
     let menuImageURLs: [String] = ["https://marketplace.canva.com/EAGEDq-_tZQ/1/0/1035w/canva-grey-and-beige-minimalist-restaurant-menu-hb5BNMWcQS4.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmR-HwbkD_gFMN5Mv3fKRikt-IeJpYbayxAQ&s","https://t3.ftcdn.net/jpg/01/75/06/34/360_F_175063465_nPAUPd3x4uoqbmKyGqDLRDsIvMejnraQ.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3fjP3BWKbK_YDzsVBsI3EXKr7q0JCYMZWKQ&s"
     ]
     
@@ -54,6 +69,12 @@ extension SpotDetailViewModel {
                 }
             default:
                 print("VM - Failed To getSpotDetail")
+#if DEBUG
+                // TODO: 삭제
+                self?.spotDetail.value = self?.spotDetailDummy
+                self?.onSuccessGetSpotDetail.value = true
+                return
+#endif
                 self?.onSuccessGetSpotDetail.value = false
                 return
             }
