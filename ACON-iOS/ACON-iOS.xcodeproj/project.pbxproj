@@ -1325,8 +1325,8 @@
 			isa = PBXGroup;
 			children = (
 				74BF91FB2D381EF100B923E3 /* Model */,
-				74BF92052D38622100B923E3 /* ViewModel */,
 				74BF91F82D38162900B923E3 /* View */,
+				74BF92052D38622100B923E3 /* ViewModel */,
 			);
 			path = SpotDetail;
 			sourceTree = "<group>";

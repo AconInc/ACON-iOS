@@ -15,6 +15,8 @@ final class SpotDetailView: BaseView {
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 
     private let dimImageView = UIImageView()
+    private let noImageBgImageView = UIImageView()
+    private let noImageContentView = SpotNoImageContentView()
 
     private let titleLabel = UILabel()
     private let acornCountButton = UIButton()
@@ -38,6 +40,8 @@ final class SpotDetailView: BaseView {
 
         self.addSubviews(collectionView,
                          dimImageView,
+                         noImageBgImageView,
+                         noImageContentView,
                          titleLabel,
                          acornCountButton,
                          tagStackView,
@@ -57,6 +61,15 @@ final class SpotDetailView: BaseView {
 
         dimImageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+
+        noImageBgImageView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
+        noImageContentView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().offset(258 * ScreenUtils.heightRatio)
         }
 
         titleLabel.snp.makeConstraints {
@@ -122,6 +135,15 @@ final class SpotDetailView: BaseView {
             $0.image = .imgGra2
         }
 
+        noImageBgImageView.do {
+            $0.clipsToBounds = true
+            $0.contentMode = .scaleAspectFill
+            $0.image = .imgSpotNoImageBackground
+            $0.isHidden = true
+        }
+
+        noImageContentView.isHidden = true
+
         tagStackView.do {
             $0.spacing = 4
         }
@@ -161,6 +183,11 @@ extension SpotDetailView {
         let findCourse: String = StringLiterals.SpotList.minuteFindCourse
         let courseTitle: String = walk + "9" + findCourse
         findCourseButton.setAttributedTitle(text: courseTitle, style: .t4SB)
+
+        if spotDetail.imageURLs.count == 0 {
+            noImageBgImageView.isHidden = false
+            noImageContentView.isHidden = false
+        }
 
         setImagePageControl(spotDetail.imageURLs.count)
     }

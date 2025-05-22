@@ -143,7 +143,7 @@ extension SpotListCollectionViewCell {
                 case .success:
                     self.noImageContentView.isHidden = true
                     self.dimImage.isHidden = false
-                case .failure(let error):
+                case .failure:
                     self.bgImage.image = .imgSpotNoImageBackground
                     self.noImageContentView.isHidden = false
                     self.dimImage.isHidden = true
