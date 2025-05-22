@@ -16,7 +16,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     private let bgImage = UIImageView()
     private let dimImage = UIImageView()
 
-    private let noImageErrorView = SpotListErrorView(.imageTitle)
+    private let noImageContentView = SpotNoImageContentView()
     private let loginErrorView = SpotListErrorView(.imageTitleButton)
 
     private let titleLabel = UILabel()
@@ -34,7 +34,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
         self.addSubviews(bgImage,
                          dimImage,
-                         noImageErrorView,
+                         noImageContentView,
                          titleLabel,
                          acornCountButton,
                          tagStackView,
@@ -55,8 +55,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.edges.equalTo(bgImage)
         }
 
-        noImageErrorView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        noImageContentView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
 
         titleLabel.snp.makeConstraints {
@@ -101,15 +101,6 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.layer.cornerRadius = cornerRadius
         }
 
-        noImageErrorView.do {
-            $0.isHidden = true
-            $0.clipsToBounds = true
-            $0.layer.cornerRadius = cornerRadius
-            $0.setStyle(errorImage: .icAcornGlass,
-                        errorMessage: StringLiterals.SpotList.preparingImages,
-                        glassMorphismtype: .noImageErrorGlass)
-        }
-
         acornCountButton.do {
             var config = UIButton.Configuration.plain()
             let acorn: UIImage = .icAcornLine.resize(to: .init(width: 24, height: 24))
@@ -150,11 +141,12 @@ extension SpotListCollectionViewCell {
             completionHandler: { result in
                 switch result {
                 case .success:
-                    self.noImageErrorView.isHidden = true
+                    self.noImageContentView.isHidden = true
+                    self.dimImage.isHidden = false
                 case .failure(let error):
-                    print("😢 이미지 로드 실패: \(error)")
-                    self.bgImage.image = nil
-                    self.noImageErrorView.isHidden = false
+                    self.bgImage.image = .imgSpotNoImageBackground
+                    self.noImageContentView.isHidden = false
+                    self.dimImage.isHidden = true
                 }
             }
         )
