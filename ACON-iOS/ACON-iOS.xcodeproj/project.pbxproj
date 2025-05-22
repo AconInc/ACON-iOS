@@ -23,6 +23,7 @@
 		151BD9572D633C37005E657F /* LocalVerificationEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151BD9562D633C37005E657F /* LocalVerificationEditViewModel.swift */; };
 		151FBFBA2DBD2F1B005F4D0D /* ACFontType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151FBFB92DBD2F1B005F4D0D /* ACFontType.swift */; };
 		151FC0C92DBD5DA0005F4D0D /* Character+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151FC0C82DBD5DA0005F4D0D /* Character+.swift */; };
+		1530CC792DDFC0D100EB4AEC /* SpotNoImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */; };
 		1533FCD12D55EE2600F985A0 /* ProfileBoxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */; };
 		1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EA2D337F4100E96616 /* SpotListView.swift */; };
 		1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */; };
@@ -276,6 +277,7 @@
 		151BD9562D633C37005E657F /* LocalVerificationEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationEditViewModel.swift; sourceTree = "<group>"; };
 		151FBFB92DBD2F1B005F4D0D /* ACFontType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACFontType.swift; sourceTree = "<group>"; };
 		151FC0C82DBD5DA0005F4D0D /* Character+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+.swift"; sourceTree = "<group>"; };
+		1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotNoImageContentView.swift; sourceTree = "<group>"; };
 		1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBoxComponent.swift; sourceTree = "<group>"; };
 		1547A6EA2D337F4100E96616 /* SpotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListView.swift; sourceTree = "<group>"; };
 		1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -731,6 +733,7 @@
 				15C0ED512D429F7400C9ED83 /* SkeletonView.swift */,
 				157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */,
 				157C06202DC5EBB4000B04AF /* SpotTagButton.swift */,
+				1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1974,6 +1977,7 @@
 				151BD9572D633C37005E657F /* LocalVerificationEditViewModel.swift in Sources */,
 				745C7E022D358E900074DBDB /* SpotSearchView.swift in Sources */,
 				745A81CC2D3E429300E28002 /* LocalVerificationViewModel.swift in Sources */,
+				1530CC792DDFC0D100EB4AEC /* SpotNoImageContentView.swift in Sources */,
 				15CD257C2D3FF13F00320006 /* PostSpotListResponse.swift in Sources */,
 				157C061F2DC5E7CE000B04AF /* SpotTagType.swift in Sources */,
 				15F45F862D66877200BD6B9C /* LoadingAnimatedButton.swift in Sources */,
