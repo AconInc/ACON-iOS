@@ -303,11 +303,6 @@ private extension SpotListViewController {
             SpotListCollectionViewHeader.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: SpotListCollectionViewHeader.identifier)
-        
-        spotListView.collectionView.register(
-            SpotListCollectionViewFooter.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-            withReuseIdentifier: SpotListCollectionViewFooter.identifier)
     }
     
     func setRefreshControl() {
