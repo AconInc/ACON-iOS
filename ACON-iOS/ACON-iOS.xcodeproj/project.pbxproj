@@ -25,7 +25,6 @@
 		151FC0C92DBD5DA0005F4D0D /* Character+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151FC0C82DBD5DA0005F4D0D /* Character+.swift */; };
 		1530CC792DDFC0D100EB4AEC /* SpotNoImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */; };
 		1530CC7B2DDFD36900EB4AEC /* TempSpotListErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530CC7A2DDFD36900EB4AEC /* TempSpotListErrorView.swift */; };
-		1533FCD12D55EE2600F985A0 /* ProfileBoxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */; };
 		1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EA2D337F4100E96616 /* SpotListView.swift */; };
 		1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */; };
 		1547A6F22D33AD4500E96616 /* SpotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6F12D33AD4500E96616 /* SpotModel.swift */; };
@@ -277,7 +276,6 @@
 		151FC0C82DBD5DA0005F4D0D /* Character+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+.swift"; sourceTree = "<group>"; };
 		1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotNoImageContentView.swift; sourceTree = "<group>"; };
 		1530CC7A2DDFD36900EB4AEC /* TempSpotListErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempSpotListErrorView.swift; sourceTree = "<group>"; };
-		1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBoxComponent.swift; sourceTree = "<group>"; };
 		1547A6EA2D337F4100E96616 /* SpotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListView.swift; sourceTree = "<group>"; };
 		1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewCell.swift; sourceTree = "<group>"; };
 		1547A6F12D33AD4500E96616 /* SpotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotModel.swift; sourceTree = "<group>"; };
@@ -551,7 +549,6 @@
 		1533FCCF2D55EDD200F985A0 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				1533FCD02D55EE2600F985A0 /* ProfileBoxComponent.swift */,
 				15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */,
 				15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */,
 				15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */,
@@ -1961,7 +1958,6 @@
 				746F5BEC2DE009450081569B /* ACToastView.swift in Sources */,
 				74A13D672DCBC2BD007FFFC3 /* DislikeFoodCollectionViewCell.swift in Sources */,
 				D652597C2D62775C00B8176E /* CustomTextFieldView.swift in Sources */,
-				1533FCD12D55EE2600F985A0 /* ProfileBoxComponent.swift in Sources */,
 				741429602D5D391000B69528 /* SettingType.swift in Sources */,
 				746261832D3F9FD900A4E84F /* GetSpotMenuResponse.swift in Sources */,
 				15CD25842D40364F00320006 /* LoginModalView.swift in Sources */,
