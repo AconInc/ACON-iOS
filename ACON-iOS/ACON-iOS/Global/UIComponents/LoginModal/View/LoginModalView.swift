@@ -77,7 +77,7 @@ class LoginModalView: GlassmorphismView {
         
         exitButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(ScreenUtils.heightRatio * 21)
-            $0.trailing.equalToSuperview().offset(-ScreenUtils.widthRatio * 16)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.horizontalInset)
         }
         
         titleLabel.snp.makeConstraints {

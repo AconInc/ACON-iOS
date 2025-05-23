@@ -48,12 +48,10 @@ final class ReviewFinishedView: BaseView {
             $0.height.equalTo(20)
         }
         
-        
         finishedReviewLottieView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*279)
-            $0.width.equalTo(246)
-            $0.height.equalTo(320)
+            $0.top.equalTo(wishYouPreferenceLabel.snp.bottom).offset(56*ScreenUtils.heightRatio)
+            $0.width.equalTo(ScreenUtils.width * 0.8)
         }
         
         doneButton.snp.makeConstraints {

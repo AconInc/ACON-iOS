@@ -7,21 +7,31 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 final class WithdrawalViewController: BaseNavViewController {
     
-    var viewModel = WithdrawalViewModel()
-    private let otherReasonTextFieldView = CustomTextFieldView()
+    // MARK: - UI Properties
     
-    private let reasonTitleLabel = UILabel()
-    private let reasonDescriptionLabel = UILabel()
-    private let optionsTableView = WithdrawalTableView()
-    private let submitButton = UIButton()
     private let containerView = UIView()
     
+    private let reasonTitleLabel = UILabel()
+    
+    private let reasonDescriptionLabel = UILabel()
+    
+    private let optionsTableView = WithdrawalTableView()
+    
+    private let submitButton: ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_12_t4SB), title: StringLiterals.Withdrawal.submit)
+    
+    private let otherReasonTextFieldView = CustomTextFieldView()
+    
+    
+    // MARK: - Properties
+    
+    var viewModel = WithdrawalViewModel()
+
     private var shouldEnableSubmitButton: Bool = false
+    
+    
+    // MARK: - Life Cycle
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -32,53 +42,33 @@ final class WithdrawalViewController: BaseNavViewController {
         
         setBinding()
         setKeyboardHandling()
-        
     }
     
     override func setStyle() {
         super.setStyle()
         
         self.setBackButton()
-        self.setCenterTitleLabelStyle(title: "서비스 탈퇴")
-        self.setGlassMorphism()
+        self.setCenterTitleLabelStyle(title: StringLiterals.Withdrawal.title)
         
-        glassMorphismView.alpha = 0
+        reasonTitleLabel.setLabel(text: StringLiterals.Withdrawal.reasonTitle,
+                                  style: .h4SB)
         
-        reasonTitleLabel.do {
-            $0.setLabel(text: StringLiterals.Withdrawal.reasonTitle, style: .h5, color: .acWhite, alignment: .left, numberOfLines: 0)
-        }
-        
-        reasonDescriptionLabel.do {
-            $0.setLabel(text: StringLiterals.Withdrawal.reasonDescription, style: .s2, color: .gray500, alignment: .left, numberOfLines: 2)
-        }
+        reasonDescriptionLabel.setLabel(text: StringLiterals.Withdrawal.reasonDescription,
+                                        style: .b1R,
+                                        color: .gray500)
         
         submitButton.do {
-            $0.backgroundColor = .gray700
-            $0.layer.cornerRadius = 8
-            $0.isEnabled = false
+            $0.updateGlassButtonState(state: .disabled)
             $0.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
-            $0.setTitle("제출하기", for: .normal)
-            $0.titleLabel?.font = OldACFontStyleType.h7.font
-            $0.setTitleColor(.gray500, for: .normal)
         }
         
         otherReasonTextFieldView.isHidden = true
-
-        
-        func backButtonTapped() {
-            if let navigationController = navigationController {
-                navigationController.popViewController(animated: true)
-            } else {
-                dismiss(animated: true)
-            }
-        }
     }
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        contentView.addSubviews(containerView,
-                         glassMorphismView)
+        self.contentView.addSubview(containerView)
         
         containerView.addSubviews(
             reasonTitleLabel,
@@ -93,41 +83,45 @@ final class WithdrawalViewController: BaseNavViewController {
         super.setLayout()
         
         containerView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(10)
-            $0.horizontalEdges.bottom.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
         
         reasonTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(40)
-            $0.leading.equalToSuperview().offset(20)
+            $0.top.equalToSuperview().offset(40*ScreenUtils.heightRatio)
+            $0.leading.equalToSuperview().offset(ScreenUtils.horizontalInset)
+            $0.width.equalTo(256)
         }
         
         reasonDescriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(reasonTitleLabel.snp.bottom).offset(16)
+            $0.top.equalToSuperview().offset(104*ScreenUtils.heightRatio)
             $0.leading.equalTo(reasonTitleLabel)
-            $0.trailing.equalToSuperview().offset(-20)
+            $0.width.equalTo(271)
+            $0.height.equalTo(60)
         }
         
         optionsTableView.snp.makeConstraints {
-            $0.top.equalTo(reasonDescriptionLabel.snp.bottom).offset(32)
-            $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.height.equalTo(180)
+            $0.top.equalTo(reasonDescriptionLabel.snp.bottom).offset(40*ScreenUtils.heightRatio)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
+            $0.height.equalTo(128*ScreenUtils.heightRatio)
         }
         
         otherReasonTextFieldView.snp.makeConstraints{
-            $0.top.equalTo(optionsTableView.snp.bottom).offset(5)
-            $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.height.equalTo(120)
+            $0.top.equalTo(optionsTableView.snp.bottom).offset(12*ScreenUtils.heightRatio)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
+            $0.height.equalTo(86*ScreenUtils.heightRatio)
         }
         
         submitButton.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview().inset(16)
-            $0.bottom.equalTo(containerView.snp.bottom).offset(-40)
-            $0.height.equalTo(52)
+            $0.bottom.equalToSuperview().inset(21+ScreenUtils.heightRatio*16)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
+            $0.height.equalTo(54)
         }
     }
     
 }
+
+
+// MARK: - @objc funtions
 
 extension WithdrawalViewController {
     
@@ -141,12 +135,15 @@ extension WithdrawalViewController {
         presentWithdrawalSheet()
     }
     
+}
+
+extension WithdrawalViewController {
+    
     private func presentWithdrawalSheet() {
         let sheetVC = WithdrawalConfirmationViewController()
         sheetVC.viewModel = viewModel
-        sheetVC.setSheetLayout(detent: .middle)
-        sheetVC.isModalInPresentation = true
-        
+        sheetVC.setSheetLayout(detent: .semiShort)
+
         DispatchQueue.main.async {
             self.otherReasonTextFieldView.isHidden = (self.viewModel.selectedOption.value != StringLiterals.Withdrawal.optionOthers)
         }
@@ -155,7 +152,7 @@ extension WithdrawalViewController {
     
     private func setBinding() {
         optionsTableView.viewModel = viewModel
-        self.buttonState()
+        self.updateButtonState()
         
         viewModel.selectedOption.bind { [weak self] selectedOption in
             guard let self = self else { return }
@@ -175,11 +172,11 @@ extension WithdrawalViewController {
         
         viewModel.inputText.bind { [weak self] text in
             guard let self = self else { return }
-            self.buttonState()
+            self.updateButtonState()
         }
         
         viewModel.ectOption.bind { [weak self] _ in
-            self?.buttonState()
+            self?.updateButtonState()
         }
         
         otherReasonTextFieldView.onTextChanged = { [weak self] text in
@@ -193,23 +190,23 @@ extension WithdrawalViewController {
         }
     }
     
-    func buttonState() {
+    func updateButtonState() {
         shouldEnableSubmitButton = viewModel.ectOption.value ?? true
-        submitButton.isEnabled = shouldEnableSubmitButton
-        submitButton.backgroundColor = shouldEnableSubmitButton ? .gray600 : .gray700
-        
-        let textColor = shouldEnableSubmitButton ? UIColor.acWhite : UIColor.gray500
-        
-        submitButton.setTitleColor(textColor, for: .normal)
+        if shouldEnableSubmitButton {
+            submitButton.updateGlassButtonState(state: .default)
+        } else {
+            submitButton.updateGlassButtonState(state: .disabled)
+        }
     }
     
 }
 
+
 // MARK: - Keyboard Handling
+
 extension WithdrawalViewController {
     
     func setKeyboardHandling() {
-        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow),

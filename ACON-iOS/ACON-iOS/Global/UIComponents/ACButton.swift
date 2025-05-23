@@ -166,22 +166,6 @@ extension ACButton {
 
 // MARK: - GlassButton 관련 메소드 -
 
-struct GlassBorderAttributes {
-    
-    let width: CGFloat
-    
-    let cornerRadius: CGFloat
-    
-    let glassmorphismType: GlassmorphismType
-    
-    init(width: CGFloat, cornerRadius: CGFloat, glassmorphismType: GlassmorphismType) {
-        self.width = width
-        self.cornerRadius = cornerRadius
-        self.glassmorphismType = glassmorphismType
-    }
-    
-}
-
 
 // MARK: - Set Glassmorphism / Glassmorphism Border
 
@@ -218,6 +202,8 @@ extension ACButton {
         
         if let glassmorphismView = glassmorphismView {
             self.insertSubview(glassmorphismView, at: 0)
+            glassmorphismView.isUserInteractionEnabled = false
+            
             glassmorphismView.snp.makeConstraints {
                 $0.edges.equalToSuperview()
             }
@@ -317,6 +303,23 @@ extension ACButton {
             } else {
                 self.layer.borderWidth = 0
             }
+        }
+    }
+    
+}
+
+// MARK: - Refresh Glassbutton BlurEffect
+
+extension ACButton {
+    
+    // NOTE: 정상적인 버튼 글라스모피즘 적용을 위해 Cell prepareForReuse에서 호출
+    func refreshBlurEffect() {
+        if let glassmorphismView = glassmorphismView {
+            glassmorphismView.refreshBlurEffect()
+        }
+        
+        if let borderGlassmorphismView = borderGlassmorphismView {
+            borderGlassmorphismView.refreshBlurEffect()
         }
     }
     
