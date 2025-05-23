@@ -114,12 +114,22 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         tagStackView.do {
             $0.spacing = 4
         }
+        
+        findCourseButton.do {
+            $0.updateGlassButtonState(state: .default)
+        }
 
         loginErrorView.do {
             $0.isHidden = true
             $0.clipsToBounds = true
             $0.layer.cornerRadius = cornerRadius
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        findCourseButton.refreshBlurEffect()
     }
 
 }

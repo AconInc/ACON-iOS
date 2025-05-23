@@ -60,12 +60,7 @@ class GlassmorphismView: BaseView {
         
         // NOTE: 뷰 등장 시 기존 효과를 완전히 제거하고 다시 설정
         if window != nil {
-            blurEffectView.effect = nil
-            vibrancyEffectView.effect = nil
-            
-            DispatchQueue.main.async {
-                self.setGlassMorphism(self.glassMorphismType)
-            }
+            refreshBlurEffect()
         }
     }
 }
@@ -109,6 +104,22 @@ extension GlassmorphismView {
             $0.endPoint = CGPoint(x: 0.5, y: 1.0)
         }
         layer.insertSublayer(gradient, at: 0)
+    }
+    
+}
+
+
+// MARK: - Refresh Blur Effect
+
+extension GlassmorphismView {
+    
+    func refreshBlurEffect() {
+        blurEffectView.effect = nil
+        vibrancyEffectView.effect = nil
+        
+        DispatchQueue.main.async {
+            self.setGlassMorphism(self.glassMorphismType)
+        }
     }
     
 }
