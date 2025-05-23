@@ -101,7 +101,8 @@ final class ProfileEditViewController: BaseNavViewController {
         super.setStyle()
 
         self.setCenterTitleLabelStyle(title: StringLiterals.Profile.profileEditPageTitle)
-        self.setBackButton()
+        self.setButtonStyle(button: leftButton, image: .icArrowLeft)
+        self.setButtonAction(button: leftButton, target: self, action: #selector(profileBackButtonTapped))
     }
 
     private func setDelegate() {
@@ -292,6 +293,16 @@ private extension ProfileEditViewController {
 
 private extension ProfileEditViewController {
 
+    @objc
+    func profileBackButtonTapped() {
+        let rightAction = {
+            if let navigationController = self.navigationController {
+                navigationController.popViewController(animated: true)
+            }
+        }
+        self.presentACAlert(.changeNotSaved, rightAction: rightAction)
+    }
+    
     // NOTE: 스크롤뷰의 contentInset을 조정하여 텍스트필드가 키보드에 가려지지 않도록 함
     @objc
     func keyboardWillShow(_ notification: Notification) {

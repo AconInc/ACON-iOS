@@ -243,7 +243,7 @@ extension BaseNavViewController {
     // MARK: - 설정 버튼
     
     func setSettingButton() {
-        setButtonStyle(button: rightButton, image: .icSettingW)
+        setButtonStyle(button: rightButton, image: .icSetting)
         setButtonAction(button: rightButton,
                         target: self,
                         action: #selector(settingButtonTapped))
