@@ -23,8 +23,8 @@ final class SpotDetailView: BaseView {
     private let tagStackView = UIStackView()
 
     let menuButton = SpotDetailSideButton(.menu)
+    let bookmarkButton = SpotDetailSideButton(.bookmark)
     let shareButton = SpotDetailSideButton(.share)
-    let moreButton = SpotDetailSideButton(.more)
 
     let findCourseButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
 
@@ -48,8 +48,8 @@ final class SpotDetailView: BaseView {
                          findCourseButton,
                          imagePageControl,
                          menuButton,
-                         shareButton,
-                         moreButton)
+                         bookmarkButton,
+                         shareButton)
     }
 
     override func setLayout() {
@@ -100,18 +100,18 @@ final class SpotDetailView: BaseView {
             $0.width.equalTo(120)
         }
 
-        moreButton.snp.makeConstraints {
+        shareButton.snp.makeConstraints {
             $0.bottom.equalTo(findCourseButton.snp.top).offset(max(-34, -34 * ScreenUtils.heightRatio))
             $0.trailing.equalToSuperview().inset(horizontalEdges)
         }
 
-        shareButton.snp.makeConstraints {
-            $0.bottom.equalTo(moreButton.snp.top).offset(max(-36, -36 * ScreenUtils.heightRatio))
+        bookmarkButton.snp.makeConstraints {
+            $0.bottom.equalTo(shareButton.snp.top).offset(ScreenUtils.height < 700 ? -24 : -36)
             $0.trailing.equalToSuperview().inset(horizontalEdges)
         }
 
         menuButton.snp.makeConstraints {
-            $0.bottom.equalTo(shareButton.snp.top).offset(max(-36, -36 * ScreenUtils.heightRatio))
+            $0.bottom.equalTo(bookmarkButton.snp.top).offset(ScreenUtils.height < 700 ? -24 : -36)
             $0.trailing.equalToSuperview().inset(horizontalEdges)
         }
     }
@@ -132,6 +132,7 @@ final class SpotDetailView: BaseView {
 
         dimImageView.do {
             $0.clipsToBounds = true
+            $0.contentMode = .scaleToFill
             $0.image = .imgGra2
         }
 
@@ -188,6 +189,9 @@ extension SpotDetailView {
             [noImageBgImageView, noImageContentView].forEach { $0.isHidden = false }
         }
 
+        // TODO: API 명세 나오면 실제 데이터로 바꾸기
+        bookmarkButton.isSelected = false
+        
         setImagePageControl(spotDetail.imageURLs.count)
     }
 
