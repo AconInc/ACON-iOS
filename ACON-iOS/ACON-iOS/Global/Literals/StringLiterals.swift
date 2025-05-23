@@ -367,7 +367,7 @@ enum StringLiterals {
         
         static let description = "지금 탈퇴를 진행하면 취향정보, 리뷰 등\n모든 데이터는 영구적으로 삭제되며 복구할 수 없어요."
         
-        static let cancelButtonTitle = "취소하기"
+        static let cancelButtonTitle = "취소"
         
         static let confirmButtonTitle = "아쉽지만 탈퇴하기"
     }
