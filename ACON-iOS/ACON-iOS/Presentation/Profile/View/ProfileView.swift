@@ -15,13 +15,9 @@ final class ProfileView: BaseView {
 
     // MARK: - Helpers
 
-    private let horizontalInset: CGFloat = 20
+    private let horizontalInset: CGFloat = ScreenUtils.widthRatio*16
 
     private let profileImageSize: CGFloat = 60
-
-    private let boxStackSpacing: CGFloat = 8
-
-    private let totalAcornCount: Int = 25
 
 
     // MARK: - UI Properties
@@ -33,19 +29,13 @@ final class ProfileView: BaseView {
     let profileEditButton = UIButton()
 
     let needLoginButton = UIButton()
-
-    private let boxStackView = UIStackView()
-
-    private let acornCountBox = ProfileBoxComponent()
-
-    private let verifiedAreaBox = ProfileBoxComponent()
-
+    
 
     // MARK: - UI Setting Methods
 
     override func setStyle() {
         super.setStyle()
-
+        
         profileImageView.do {
             $0.backgroundColor = .gray700 // NOTE: Skeleton
             $0.layer.cornerRadius = profileImageSize / 2
@@ -57,7 +47,7 @@ final class ProfileView: BaseView {
         profileEditButton.do {
             var config = UIButton.Configuration.plain()
             config.contentInsets = .zero
-            config.attributedTitle = AttributedString(StringLiterals.Profile.profileEditButton.ACStyle(.s2, .gray400))
+            config.attributedTitle = AttributedString(StringLiterals.Profile.profileEditButton.attributedString(.b1R, .gray500))
             config.image = .icEditG
             config.imagePlacement = .trailing
             config.imagePadding = 4
@@ -67,42 +57,12 @@ final class ProfileView: BaseView {
         needLoginButton.do {
             var config = UIButton.Configuration.plain()
             config.contentInsets = .init(top: 15, leading: 0, bottom: 15, trailing: 15)
-            config.attributedTitle = AttributedString(StringLiterals.Profile.needLogin.ACStyle(.h5))
+            config.attributedTitle = AttributedString(StringLiterals.Profile.needLogin.attributedString(.h4SB))
             config.image = .icArrowRight
             config.imagePlacement = .trailing
             config.imagePadding = 2
             config.background.backgroundColor = .gray900
             $0.configuration = config
-        }
-
-        boxStackView.do {
-            $0.axis = .horizontal
-            $0.spacing = boxStackSpacing
-        }
-
-        acornCountBox.do {
-            $0.setStyle(
-                title: StringLiterals.Profile.acornPossession,
-                icon: .icLocalAconG
-            )
-
-            let notVerifiedLabel = makeCountLabels(
-                StringLiterals.Profile.doubleQuestionMarks,
-                String(totalAcornCount))
-            $0.setSecondaryContentView(to: notVerifiedLabel)
-        }
-
-        verifiedAreaBox.do {
-            $0.setStyle(
-                title: StringLiterals.Profile.myVerifiedArea,
-                icon: .icHometownG
-            )
-
-            let notVerifiedLabel = UILabel()
-            notVerifiedLabel.setLabel(text: StringLiterals.Profile.notVerified,
-                           style: .t2,
-                           color: .gray500)
-            $0.setSecondaryContentView(to: notVerifiedLabel)
         }
     }
 
@@ -113,13 +73,7 @@ final class ProfileView: BaseView {
             profileImageView,
             nicknameLabel,
             profileEditButton,
-            needLoginButton,
-            boxStackView
-        )
-
-        boxStackView.addArrangedSubviews(
-            acornCountBox,
-            verifiedAreaBox
+            needLoginButton
         )
     }
 
@@ -127,7 +81,7 @@ final class ProfileView: BaseView {
         super.setLayout()
 
         profileImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(32)
+            $0.top.equalToSuperview().offset(40*ScreenUtils.heightRatio)
             $0.leading.equalToSuperview().offset(horizontalInset)
             $0.size.equalTo(profileImageSize)
         }
@@ -135,7 +89,7 @@ final class ProfileView: BaseView {
         nicknameLabel.snp.makeConstraints {
             $0.top.equalTo(profileImageView).offset(4)
             $0.leading.equalTo(profileImageView.snp.trailing).offset(16)
-            $0.trailing.equalToSuperview().offset(-horizontalInset)
+            $0.trailing.equalToSuperview().inset(horizontalInset)
         }
 
         profileEditButton.snp.makeConstraints {
@@ -147,61 +101,6 @@ final class ProfileView: BaseView {
             $0.leading.equalTo(nicknameLabel)
             $0.centerY.equalTo(profileImageView)
         }
-
-        boxStackView.snp.makeConstraints {
-            $0.top.equalTo(profileImageView.snp.bottom).offset(32)
-            $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
-        }
-
-        acornCountBox.snp.makeConstraints {
-            $0.width.equalTo(
-                (ScreenUtils.width - horizontalInset * 2 - boxStackSpacing) / 2
-            )
-            $0.height.equalTo(94)
-        }
-
-        verifiedAreaBox.snp.makeConstraints {
-            $0.width.equalTo(
-                (ScreenUtils.width - horizontalInset * 2 - boxStackSpacing) / 2
-            )
-            $0.height.equalTo(94)
-        }
-    }
-
-}
-
-
-// MARK: - Helpers
-
-private extension ProfileView {
-
-    func makeCountLabels(_ currentString: String, _ totalString: String) -> UIView {
-        let contentView = UIView()
-        let labelStack = UIStackView()
-        let currentLabel = UILabel()
-        let totalLabel = UILabel()
-
-        labelStack.do {
-            $0.axis = .horizontal
-            $0.alignment = .center
-            $0.spacing = 2
-        }
-        currentLabel.setLabel(text: currentString, style: .t2, color: .primaryDefault)
-        totalLabel.setLabel(text: "/" + String(totalString), style: .s2, color: .gray500)
-
-        contentView.addSubview(labelStack)
-        labelStack.addArrangedSubviews(currentLabel, totalLabel)
-        
-        labelStack.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
-
-        // TODO: contentView - Width and horizontal position are ambiguous
-        contentView.snp.makeConstraints {
-            $0.width.height.greaterThanOrEqualTo(labelStack)
-        }
-
-        return contentView
     }
 
 }
@@ -221,30 +120,5 @@ extension ProfileView {
     func setNicknameLabel(_ text: String) {
         nicknameLabel.setLabel(text: text, style: .h5)
     }
-
-    func setAcornCountBox(_ currentCount: Int) {
-        let currentString = currentCount == 0 ? "00" : String(currentCount)
-        let totalString = String(totalAcornCount)
-        let countLabelStack = makeCountLabels(currentString, totalString)
-
-        acornCountBox.setContentView(to: countLabelStack)
-    }
-
-    func setAcornCountBox(onLoginSuccess: Bool) {
-        acornCountBox.switchContentView(toSecondary: !onLoginSuccess)
-    }
     
-    func setVerifiedAreaBox(areaName: String) {
-        let label = UILabel()
-        label.setLabel(text: areaName,
-                       style: .t2,
-                       color: .primaryDefault,
-                       alignment: .center)
-        verifiedAreaBox.setContentView(to: label)
-    }
-
-    func setVerifiedAreaBox(onLoginSuccess: Bool) {
-        verifiedAreaBox.switchContentView(toSecondary: !onLoginSuccess)
-    }
-
 }
