@@ -27,8 +27,9 @@ class SpotDetailViewModel: Serviceable {
         acornCount: 10000,
         hasMenuboardImage: true,
         signatureMenuList: [
+            SignatureMenuModel(name: "Free", price: 0),
             SignatureMenuModel(name: "맛있는메뉴1", price: 13000),
-            SignatureMenuModel(name: "Very long name", price: 999999)
+            SignatureMenuModel(name: "Very loooong name", price: 999999)
         ],
         latitude: 35.785834,
         longitude: 128.25,

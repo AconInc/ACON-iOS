@@ -212,8 +212,10 @@ extension SpotDetailView {
         
         sectionTitle.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(horizontalEdges)
-            $0.bottom.equalTo(menuStack.snp.top).offset(-12)
+            $0.bottom.equalTo(menuStack.snp.top).offset(-8)
         }
+
+        sectionTitle.setLabel(text: StringLiterals.SpotDetail.signatureMenu, style: .t4SB)
     }
 
     func updatePageControl() {

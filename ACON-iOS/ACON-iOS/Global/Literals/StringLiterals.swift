@@ -250,6 +250,8 @@ enum StringLiterals {
         
         static let reportInfoError = "정보 오류 신고하기"
         
+        static let signatureMenu = "대표메뉴"
+        
     }
     
     
