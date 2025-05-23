@@ -66,11 +66,6 @@
 		15BFF8B92D665BAD00909C4F /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15BFF8B52D665A5B00909C4F /* Debug.xcconfig */; };
 		15BFF8BA2D665BAD00909C4F /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15BFF8B62D665A5B00909C4F /* Release.xcconfig */; };
 		15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C0ED512D429F7400C9ED83 /* SkeletonView.swift */; };
-		15C0ED642D42CD8800C9ED83 /* drop1Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED5F2D42CD8800C9ED83 /* drop1Acorn.json */; };
-		15C0ED652D42CD8800C9ED83 /* drop5Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED632D42CD8800C9ED83 /* drop5Acorn.json */; };
-		15C0ED662D42CD8800C9ED83 /* drop4Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED622D42CD8800C9ED83 /* drop4Acorn.json */; };
-		15C0ED672D42CD8800C9ED83 /* drop2Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED602D42CD8800C9ED83 /* drop2Acorn.json */; };
-		15C0ED682D42CD8800C9ED83 /* drop3Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED612D42CD8800C9ED83 /* drop3Acorn.json */; };
 		15C0ED6A2D42CDA300C9ED83 /* loadingWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED692D42CDA300C9ED83 /* loadingWhite.json */; };
 		15C93D0E2DBD9B4E002862DF /* OldACFontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C93D0D2DBD9B4E002862DF /* OldACFontStyle.swift */; };
 		15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256A2D3D61F500320006 /* GlassmorphismView.swift */; };
@@ -119,8 +114,6 @@
 		741E68A22D3D5FA200DF99EF /* ACService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E68A12D3D5F9700DF99EF /* ACService.swift */; };
 		741E68AC2D3D6DA800DF99EF /* HeaderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E68AB2D3D6DA400DF99EF /* HeaderType.swift */; };
 		74205D2F2D40351700D11557 /* SocialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74205D2E2D40351400D11557 /* SocialType.swift */; };
-		74220DD42D34363B000684BF /* SpotUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74220DD32D343633000684BF /* SpotUploadViewController.swift */; };
-		74220DD62D3436C2000684BF /* SpotUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74220DD52D3436BE000684BF /* SpotUploadView.swift */; };
 		743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743069882D3D2F540033178C /* NetworkResult.swift */; };
 		743900912DC50926002F91B1 /* UIVisualEffectView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900902DC50918002F91B1 /* UIVisualEffectView+.swift */; };
 		743900932DC75451002F91B1 /* GlassmorphismType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900922DC7544C002F91B1 /* GlassmorphismType.swift */; };
@@ -203,6 +196,11 @@
 		748ECA6B2D31918D00BBC981 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748ECA6A2D31918900BBC981 /* LoginView.swift */; };
 		748ECA6E2D3196F100BBC981 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748ECA6D2D3196ED00BBC981 /* LoginViewController.swift */; };
 		748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748ECA702D31A72500BBC981 /* LoginViewModel.swift */; };
+		748F6A592DE0CCA60073CA9E /* drop1Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 748F6A582DE0CCA60073CA9E /* drop1Acorn.json */; };
+		748F6A5E2DE0CCC30073CA9E /* drop3Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 748F6A5B2DE0CCC30073CA9E /* drop3Acorn.json */; };
+		748F6A5F2DE0CCC30073CA9E /* drop5Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 748F6A5D2DE0CCC30073CA9E /* drop5Acorn.json */; };
+		748F6A602DE0CCC30073CA9E /* drop4Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 748F6A5C2DE0CCC30073CA9E /* drop4Acorn.json */; };
+		748F6A612DE0CCC30073CA9E /* drop2Acorn.json in Resources */ = {isa = PBXBuildFile; fileRef = 748F6A5A2DE0CCC30073CA9E /* drop2Acorn.json */; };
 		7492349A2D687B140025F700 /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749234992D687B0D0025F700 /* AmplitudeManager.swift */; };
 		749A01032D3A6E0100CD7A90 /* ACDebouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */; };
 		749C90E82DD4D37100455211 /* splashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 749C90E72DD4D37100455211 /* splashLottie.json */; };
@@ -320,11 +318,6 @@
 		15BFF8B52D665A5B00909C4F /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		15BFF8B62D665A5B00909C4F /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		15C0ED512D429F7400C9ED83 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
-		15C0ED5F2D42CD8800C9ED83 /* drop1Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop1Acorn.json; sourceTree = "<group>"; };
-		15C0ED602D42CD8800C9ED83 /* drop2Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop2Acorn.json; sourceTree = "<group>"; };
-		15C0ED612D42CD8800C9ED83 /* drop3Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop3Acorn.json; sourceTree = "<group>"; };
-		15C0ED622D42CD8800C9ED83 /* drop4Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop4Acorn.json; sourceTree = "<group>"; };
-		15C0ED632D42CD8800C9ED83 /* drop5Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop5Acorn.json; sourceTree = "<group>"; };
 		15C0ED692D42CDA300C9ED83 /* loadingWhite.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loadingWhite.json; sourceTree = "<group>"; };
 		15C93D0D2DBD9B4E002862DF /* OldACFontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldACFontStyle.swift; sourceTree = "<group>"; };
 		15CD256A2D3D61F500320006 /* GlassmorphismView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismView.swift; sourceTree = "<group>"; };
@@ -373,8 +366,6 @@
 		741E68A12D3D5F9700DF99EF /* ACService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACService.swift; sourceTree = "<group>"; };
 		741E68AB2D3D6DA400DF99EF /* HeaderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderType.swift; sourceTree = "<group>"; };
 		74205D2E2D40351400D11557 /* SocialType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialType.swift; sourceTree = "<group>"; };
-		74220DD32D343633000684BF /* SpotUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadViewController.swift; sourceTree = "<group>"; };
-		74220DD52D3436BE000684BF /* SpotUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadView.swift; sourceTree = "<group>"; };
 		743069882D3D2F540033178C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		743900902DC50918002F91B1 /* UIVisualEffectView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVisualEffectView+.swift"; sourceTree = "<group>"; };
 		743900922DC7544C002F91B1 /* GlassmorphismType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismType.swift; sourceTree = "<group>"; };
@@ -450,6 +441,11 @@
 		748ECA6A2D31918900BBC981 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		748ECA6D2D3196ED00BBC981 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		748ECA702D31A72500BBC981 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		748F6A582DE0CCA60073CA9E /* drop1Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop1Acorn.json; sourceTree = "<group>"; };
+		748F6A5A2DE0CCC30073CA9E /* drop2Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop2Acorn.json; sourceTree = "<group>"; };
+		748F6A5B2DE0CCC30073CA9E /* drop3Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop3Acorn.json; sourceTree = "<group>"; };
+		748F6A5C2DE0CCC30073CA9E /* drop4Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop4Acorn.json; sourceTree = "<group>"; };
+		748F6A5D2DE0CCC30073CA9E /* drop5Acorn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = drop5Acorn.json; sourceTree = "<group>"; };
 		749234992D687B0D0025F700 /* AmplitudeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeManager.swift; sourceTree = "<group>"; };
 		7496EC1A2DACF3E500508EA8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACDebouncer.swift; sourceTree = "<group>"; };
@@ -1421,16 +1417,16 @@
 		74BF921A2D3972C500B923E3 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
-				15C0ED5F2D42CD8800C9ED83 /* drop1Acorn.json */,
-				15C0ED602D42CD8800C9ED83 /* drop2Acorn.json */,
-				15C0ED612D42CD8800C9ED83 /* drop3Acorn.json */,
-				15C0ED622D42CD8800C9ED83 /* drop4Acorn.json */,
-				15C0ED632D42CD8800C9ED83 /* drop5Acorn.json */,
 				15C0ED692D42CDA300C9ED83 /* loadingWhite.json */,
 				745000D52D403F0200262CBE /* checkLottie.json */,
 				745000D62D403F0200262CBE /* lodingLottie.json */,
 				749C90E72DD4D37100455211 /* splashLottie.json */,
 				747FB8FF2DDB95980027F252 /* finishedUpload.json */,
+				748F6A582DE0CCA60073CA9E /* drop1Acorn.json */,
+				748F6A5A2DE0CCC30073CA9E /* drop2Acorn.json */,
+				748F6A5B2DE0CCC30073CA9E /* drop3Acorn.json */,
+				748F6A5C2DE0CCC30073CA9E /* drop4Acorn.json */,
+				748F6A5D2DE0CCC30073CA9E /* drop5Acorn.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -1704,14 +1700,14 @@
 				747FB9002DDB95980027F252 /* finishedUpload.json in Resources */,
 				15BFF8BA2D665BAD00909C4F /* Release.xcconfig in Resources */,
 				748D6F6C2D2BCA1C007690B4 /* Assets.xcassets in Resources */,
+				748F6A5E2DE0CCC30073CA9E /* drop3Acorn.json in Resources */,
+				748F6A5F2DE0CCC30073CA9E /* drop5Acorn.json in Resources */,
+				748F6A602DE0CCC30073CA9E /* drop4Acorn.json in Resources */,
+				748F6A612DE0CCC30073CA9E /* drop2Acorn.json in Resources */,
 				74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */,
-				15C0ED642D42CD8800C9ED83 /* drop1Acorn.json in Resources */,
-				15C0ED652D42CD8800C9ED83 /* drop5Acorn.json in Resources */,
-				15C0ED662D42CD8800C9ED83 /* drop4Acorn.json in Resources */,
-				15C0ED672D42CD8800C9ED83 /* drop2Acorn.json in Resources */,
-				15C0ED682D42CD8800C9ED83 /* drop3Acorn.json in Resources */,
 				748D6FA12D2BD65D007690B4 /* Pretendard-Regular.otf in Resources */,
 				15F15E832DBFD17A002F81E2 /* Pretendard-Light.otf in Resources */,
+				748F6A592DE0CCA60073CA9E /* drop1Acorn.json in Resources */,
 				745000D72D403F0200262CBE /* lodingLottie.json in Resources */,
 				745000D82D403F0200262CBE /* checkLottie.json in Resources */,
 				15C0ED6A2D42CDA300C9ED83 /* loadingWhite.json in Resources */,
