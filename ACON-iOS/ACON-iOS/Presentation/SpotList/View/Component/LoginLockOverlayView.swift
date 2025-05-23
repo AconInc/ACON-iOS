@@ -7,11 +7,9 @@
 
 import UIKit
 
-class LoginLockOverlayView: BaseView {
+class LoginLockOverlayView: GlassmorphismView {
 
     // MARK: - UI Properties
-
-    private let glassView = GlassmorphismView(.needLoginErrorGlass)
 
     private let contentView = UIView()
 
@@ -22,12 +20,23 @@ class LoginLockOverlayView: BaseView {
     private let actionLabel = UILabel()
 
 
+    // MARK: - Init
+
+    init() {
+        super.init(.needLoginErrorGlass)
+    }
+
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+
     // MARK: - UI Setting Methods
 
     override func setHierarchy() {
         super.setHierarchy()
 
-        self.addSubviews(glassView, contentView)
+        self.addSubviews(contentView)
 
         contentView.addSubviews(
             iconImageView,
@@ -38,10 +47,6 @@ class LoginLockOverlayView: BaseView {
 
     override func setLayout() {
         super.setLayout()
-
-        glassView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
 
         contentView.snp.makeConstraints {
             $0.center.equalToSuperview()
@@ -65,7 +70,7 @@ class LoginLockOverlayView: BaseView {
     }
 
     override func setStyle() {
-        self.backgroundColor = .clear
+        super.setStyle()
 
         iconImageView.do {
             $0.image = .icLock
