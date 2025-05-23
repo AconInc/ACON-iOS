@@ -185,8 +185,7 @@ extension SpotDetailView {
         findCourseButton.setAttributedTitle(text: courseTitle, style: .t4SB)
 
         if spotDetail.imageURLs.count == 0 {
-            noImageBgImageView.isHidden = false
-            noImageContentView.isHidden = false
+            [noImageBgImageView, noImageContentView].forEach { $0.isHidden = false }
         }
 
         setImagePageControl(spotDetail.imageURLs.count)
