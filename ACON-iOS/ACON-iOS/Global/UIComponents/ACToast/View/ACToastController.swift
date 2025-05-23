@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class ACToastController: UIControl {
+final class ACToastController {
     
     static func show(_ acToastType: ACToastType,
                      bottomInset: Int = 92,
