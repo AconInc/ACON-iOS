@@ -74,7 +74,7 @@ extension ACTabBarController {
             rootViewController: viewController
         )
         
-        let tabBarTitleAttributes: [NSAttributedString.Key : Any] = title.ACStyle(.b4)
+        let tabBarTitleAttributes: [NSAttributedString.Key : Any] = title.attributedString(.c1SB, .gray50)
             .attributes(
                 at: 0,
                 effectiveRange: nil
