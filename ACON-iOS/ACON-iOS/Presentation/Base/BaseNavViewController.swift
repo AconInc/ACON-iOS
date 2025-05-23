@@ -77,23 +77,23 @@ class BaseNavViewController: UIViewController {
         
         leftButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(ScreenUtils.widthRatio*20)
+            $0.leading.equalToSuperview().inset(ScreenUtils.horizontalInset)
         }
         
         rightButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*20)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.horizontalInset)
         }
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*20)
+            $0.leading.equalToSuperview().inset(ScreenUtils.horizontalInset)
         }
         
         secondTitleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*52)
-            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*20)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.horizontalInset)
         }
         
         centerTitleLabel.snp.makeConstraints {
