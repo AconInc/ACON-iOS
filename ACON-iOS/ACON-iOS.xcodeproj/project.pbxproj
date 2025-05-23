@@ -163,6 +163,7 @@
 		746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15BC2D3E2258003EA031 /* LocalVerificationService.swift */; };
 		746F39822D342523003F8498 /* ACSheetDetentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* ACSheetDetentType.swift */; };
 		746F5BEC2DE009450081569B /* ACToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F5BEB2DE009450081569B /* ACToastView.swift */; };
+		746F5BF02DE009820081569B /* ACToastType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F5BEF2DE0097B0081569B /* ACToastType.swift */; };
 		746F5BF22DE00CE90081569B /* GlassBorderAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F5BF12DE00CE90081569B /* GlassBorderAttributes.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
 		747BB6CE2DCA66F000352874 /* GlassButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */; };
@@ -411,6 +412,7 @@
 		746F15BC2D3E2258003EA031 /* LocalVerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationService.swift; sourceTree = "<group>"; };
 		746F39812D342520003F8498 /* ACSheetDetentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACSheetDetentType.swift; sourceTree = "<group>"; };
 		746F5BEB2DE009450081569B /* ACToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACToastView.swift; sourceTree = "<group>"; };
+		746F5BEF2DE0097B0081569B /* ACToastType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACToastType.swift; sourceTree = "<group>"; };
 		746F5BF12DE00CE90081569B /* GlassBorderAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassBorderAttributes.swift; sourceTree = "<group>"; };
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
 		747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonState.swift; sourceTree = "<group>"; };
@@ -1023,6 +1025,7 @@
 		746F5BEA2DE0091B0081569B /* ACToast */ = {
 			isa = PBXGroup;
 			children = (
+				746F5BEE2DE009740081569B /* Type */,
 				746F5BED2DE0095A0081569B /* View */,
 			);
 			path = ACToast;
@@ -1035,6 +1038,14 @@
 				74BF92182D395FE400B923E3 /* ACToastController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		746F5BEE2DE009740081569B /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				746F5BEF2DE0097B0081569B /* ACToastType.swift */,
+			);
+			path = Type;
 			sourceTree = "<group>";
 		};
 		747F4FB82D3D944A003DECBF /* Splash */ = {
@@ -1900,6 +1911,7 @@
 				1547A8802D358E2700E96616 /* SpotListFilterView.swift in Sources */,
 				7414295D2D5D313200B69528 /* UITableViewCell+.swift in Sources */,
 				15CD25892D42099100320006 /* WideTouchView.swift in Sources */,
+				746F5BF02DE009820081569B /* ACToastType.swift in Sources */,
 				74BBADFC2D6130E6003AB16C /* PostReissueRequest.swift in Sources */,
 				15A3F7A12D38C71900577E16 /* PriorityLowEmptyView.swift in Sources */,
 				74B817F32D3A7C8000C1D516 /* SpotReviewViewModel.swift in Sources */,

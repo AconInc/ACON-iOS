@@ -328,6 +328,8 @@ enum StringLiterals {
         
         static let save = "저장"
         
+        static let doneSave = "프로필이 저장되었습니다"
+        
     }
     
     enum Album {
