@@ -44,13 +44,16 @@ extension ACTabBarController {
         tabBar.frame.size.height = ScreenUtils.heightRatio * 76
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
-        
-        // 🍇 TODO: 글모 Type 확인
-        let glassView = GlassmorphismView(.bottomSheetGlass)
+
+        let glassView = GlassmorphismView(.gradientGlass)
         tabBar.addSubview(glassView)
         glassView.snp.makeConstraints {
-            $0.edges.equalTo(tabBar)
+            $0.top.horizontalEdges.equalTo(tabBar)
+            $0.height.equalTo(21 + ScreenUtils.heightRatio * 76)
         }
+        
+        self.view.layoutIfNeeded()
+        glassView.setGradient(topColor: .gray900.withAlphaComponent(0.1), bottomColor: .gray900.withAlphaComponent(1))
     }
     
     private func setNavViewControllers() {
