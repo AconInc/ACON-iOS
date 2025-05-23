@@ -344,13 +344,13 @@ enum StringLiterals {
         
         static let title = "서비스 탈퇴"
         
-        static let reasonTitle = "이별의 순간이 왔어요...\n떠나시려는 이유가 있을까요?"
+        static let reasonTitle = "이별의 순간이 왔네요...\n떠나시려는 이유가 있을까요?"
         
-        static let reasonDescription = "어떤 부분이 마음에 들지 않았는지 알려주시면,\n더 좋은 acon을 만드는데 도움이 됩니다."
+        static let reasonDescription = "지금까지 저희 서비스를 사용해주셔서 감사해요.\n마음에 들지 않았던 서비스에 대해 알려주시면\n더 성장해서 찾아올게요."
         
-        static let optionLackOfRestaurants = "등록된 맛집이 너무 적어요"
+        static let optionLackOfRestaurants = "다양한 맛집이 없어요"
         
-        static let optionUnsatisfiedRecommendation = "추천 결과가 만족스럽지 않아요"
+        static let optionUnsatisfiedRecommendation = "추천결과가 만족스럽지 않아요"
         
         static let optionFakeReviews = "거짓 리뷰를 봤어요"
         
