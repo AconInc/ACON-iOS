@@ -15,8 +15,6 @@ final class ProfileView: BaseView {
 
     // MARK: - Helpers
 
-    private let horizontalInset: CGFloat = ScreenUtils.widthRatio*16
-
     private let profileImageSize: CGFloat = 60
 
 
@@ -82,14 +80,14 @@ final class ProfileView: BaseView {
 
         profileImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(40*ScreenUtils.heightRatio)
-            $0.leading.equalToSuperview().offset(horizontalInset)
+            $0.leading.equalToSuperview().offset(ScreenUtils.horizontalInset)
             $0.size.equalTo(profileImageSize)
         }
 
         nicknameLabel.snp.makeConstraints {
             $0.top.equalTo(profileImageView).offset(4)
             $0.leading.equalTo(profileImageView.snp.trailing).offset(16)
-            $0.trailing.equalToSuperview().inset(horizontalInset)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.horizontalInset)
         }
 
         profileEditButton.snp.makeConstraints {

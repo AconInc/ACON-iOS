@@ -31,7 +31,7 @@ final class SpotSearchView: BaseView {
         $0.scrollDirection = .vertical
         $0.minimumInteritemSpacing = 8
         $0.minimumLineSpacing = 8
-        $0.sectionInset = UIEdgeInsets(top: 10, left: ScreenUtils.widthRatio*16, bottom: 10, right: ScreenUtils.widthRatio*16)
+        $0.sectionInset = UIEdgeInsets(top: 10, left: ScreenUtils.horizontalInset, bottom: 10, right: ScreenUtils.horizontalInset)
         $0.estimatedItemSize = CGSize(width: 100, height: 38)
     }
     
@@ -61,7 +61,7 @@ final class SpotSearchView: BaseView {
         searchTextField.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.height.equalTo(ScreenUtils.heightRatio*38)
-            $0.horizontalEdges.equalToSuperview().inset(16*ScreenUtils.widthRatio)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
         }
         
         searchSuggestionCollectionView.snp.makeConstraints {

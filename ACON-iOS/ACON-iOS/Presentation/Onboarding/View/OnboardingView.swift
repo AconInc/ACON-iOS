@@ -57,19 +57,19 @@ final class OnboardingView: BaseView {
         
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*140)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*16)
+            $0.leading.equalToSuperview().inset(ScreenUtils.horizontalInset)
             $0.height.equalTo(68)
         }
         
         descriptionLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*218)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*16)
+            $0.leading.equalToSuperview().inset(ScreenUtils.horizontalInset)
             $0.height.equalTo(21)
         }
         
         noDislikeFoodButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*279)
-            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*16)
+            $0.leading.equalToSuperview().inset(ScreenUtils.horizontalInset)
             $0.height.equalTo(38)
             $0.width.equalTo(48)
         }
@@ -94,7 +94,7 @@ final class OnboardingView: BaseView {
 
         startButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(21+ScreenUtils.heightRatio*16)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*16)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
             $0.height.equalTo(54)
         }
         

@@ -25,8 +25,6 @@ class VerifiedAreasEditView: BaseView {
 
     // MARK: - Sizes
     
-    private let horizontalInset: CGFloat = 20
-    
     private let verticalSpacing: CGFloat = 12
     
     
@@ -55,19 +53,19 @@ class VerifiedAreasEditView: BaseView {
         
         verifiedAreaTitleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(32)
-            $0.leading.equalToSuperview().offset(horizontalInset)
+            $0.leading.equalToSuperview().offset(ScreenUtils.horizontalInset)
         }
         
         verifiedAreaAddButton.snp.makeConstraints {
             $0.top.equalTo(verifiedAreaTitleLabel.snp.bottom).offset(verticalSpacing)
-            $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
             $0.height.equalTo(48)
         }
         
         verifiedAreaStackView.snp.makeConstraints {
             $0.top.equalTo(verifiedAreaAddButton.snp.bottom).offset(verticalSpacing)
-            $0.leading.equalToSuperview().offset(horizontalInset)
-            $0.width.equalTo((ScreenUtils.width - horizontalInset * 2) / 2)
+            $0.leading.equalToSuperview().offset(ScreenUtils.horizontalInset)
+            $0.width.equalTo((ScreenUtils.width - ScreenUtils.horizontalInset * 2) / 2)
         }
         
     }

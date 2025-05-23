@@ -99,7 +99,7 @@ final class WithdrawalViewController: BaseNavViewController {
         
         reasonTitleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(40)
-            $0.leading.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(ScreenUtils.horizontalInset)
         }
         
         reasonDescriptionLabel.snp.makeConstraints {
