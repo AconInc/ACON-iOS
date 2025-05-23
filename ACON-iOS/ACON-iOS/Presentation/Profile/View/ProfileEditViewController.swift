@@ -482,7 +482,11 @@ private extension ProfileEditViewController {
 
     func checkSaveAvailability() {
         let canSave: Bool = isNicknameAvailable && isBirthDateAvailable
-        profileEditView.saveButton.isEnabled = canSave
+        if canSave {
+            profileEditView.saveButton.updateGlassButtonState(state: .default)
+        } else {
+            profileEditView.saveButton.updateGlassButtonState(state: .disabled)
+        }
     }
 
 

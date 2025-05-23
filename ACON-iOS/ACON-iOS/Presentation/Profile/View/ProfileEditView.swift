@@ -42,7 +42,7 @@ final class ProfileEditView: BaseView {
     
     private let birthDateValidMessageView = ProfileEditValidMessageView()
 
-    let saveButton = UIButton()
+    let saveButton: ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_12_t4SB), title: StringLiterals.Profile.save)
 
 
     // MARK: - UI Setting Methods
@@ -62,7 +62,7 @@ final class ProfileEditView: BaseView {
             $0.setPlaceholder(as: StringLiterals.Profile.nicknamePlaceholder)
         }
 
-        birthDateTitleLabel.setLabel(text: StringLiterals.Profile.birthDate, style: .h8)
+        birthDateTitleLabel.setLabel(text: StringLiterals.Profile.birthDate, style: .t4SB)
 
         birthDateTextField.do {
             $0.setPlaceholder(as: StringLiterals.Profile.birthDatePlaceholder)
@@ -71,18 +71,7 @@ final class ProfileEditView: BaseView {
         }
 
         saveButton.do {
-            var config = UIButton.Configuration.filled()
-            config.attributedTitle = AttributedString(StringLiterals.Profile.save.ACStyle(.h7, .gray500))
-            config.baseBackgroundColor = .gray700
-            $0.configuration = config
-        }
-
-        saveButton.configurationUpdateHandler = {
-            guard var config = $0.configuration else { return }
-            config.attributedTitle = AttributedString(
-                StringLiterals.Profile.save.ACStyle(.h7, $0.isEnabled ? .acWhite : .gray500)
-            )
-            $0.configuration = config
+            $0.updateGlassButtonState(state: .disabled)
         }
     }
 
@@ -122,9 +111,9 @@ final class ProfileEditView: BaseView {
 
         saveButton.snp.makeConstraints {
             $0.top.equalTo(scrollView.snp.bottom).offset(12) // TODO: 디자인 확인
-            $0.bottom.equalToSuperview().offset(-39)
+            $0.bottom.equalToSuperview().inset(21+ScreenUtils.heightRatio*16)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
-            $0.height.equalTo(52)
+            $0.height.equalTo(54)
         }
 
         profileImageEditButton.snp.makeConstraints {
