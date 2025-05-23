@@ -162,6 +162,7 @@
 		746F15BB2D3E2167003EA031 /* LocalVerificationTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15BA2D3E215C003EA031 /* LocalVerificationTargetType.swift */; };
 		746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15BC2D3E2258003EA031 /* LocalVerificationService.swift */; };
 		746F39822D342523003F8498 /* ACSheetDetentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* ACSheetDetentType.swift */; };
+		746F5BEC2DE009450081569B /* ACToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F5BEB2DE009450081569B /* ACToastView.swift */; };
 		746F5BF22DE00CE90081569B /* GlassBorderAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F5BF12DE00CE90081569B /* GlassBorderAttributes.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
 		747BB6CE2DCA66F000352874 /* GlassButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */; };
@@ -409,6 +410,7 @@
 		746F15BA2D3E215C003EA031 /* LocalVerificationTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationTargetType.swift; sourceTree = "<group>"; };
 		746F15BC2D3E2258003EA031 /* LocalVerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationService.swift; sourceTree = "<group>"; };
 		746F39812D342520003F8498 /* ACSheetDetentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACSheetDetentType.swift; sourceTree = "<group>"; };
+		746F5BEB2DE009450081569B /* ACToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACToastView.swift; sourceTree = "<group>"; };
 		746F5BF12DE00CE90081569B /* GlassBorderAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassBorderAttributes.swift; sourceTree = "<group>"; };
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
 		747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonState.swift; sourceTree = "<group>"; };
@@ -1018,6 +1020,23 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
+		746F5BEA2DE0091B0081569B /* ACToast */ = {
+			isa = PBXGroup;
+			children = (
+				746F5BED2DE0095A0081569B /* View */,
+			);
+			path = ACToast;
+			sourceTree = "<group>";
+		};
+		746F5BED2DE0095A0081569B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				746F5BEB2DE009450081569B /* ACToastView.swift */,
+				74BF92182D395FE400B923E3 /* ACToastController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		747F4FB82D3D944A003DECBF /* Splash */ = {
 			isa = PBXGroup;
 			children = (
@@ -1178,12 +1197,12 @@
 		748D6F7A2D2BCCF4007690B4 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				746F5BEA2DE0091B0081569B /* ACToast */,
 				74A13D6A2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift */,
 				74DDBA8C2DC45E4300BF9824 /* ACButton.swift */,
 				746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */,
 				749A01022D3A6DFC00CD7A90 /* ACDebouncer.swift */,
 				150A105B2DA28F2600B0BC9A /* ACTextField.swift */,
-				74BF92182D395FE400B923E3 /* ACToastController.swift */,
 				15CD256A2D3D61F500320006 /* GlassmorphismView.swift */,
 				15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */,
 				15CD257F2D40361600320006 /* LoginModal */,
@@ -1924,6 +1943,7 @@
 				746261632D3EA1D500A4E84F /* GetSearchSuggestionResponse.swift in Sources */,
 				D61917EC2D3E484A001BF0EE /* OnboardingRequest.swift in Sources */,
 				15D6901E2DD723FA0009278D /* SpotDetailMoreViewController.swift in Sources */,
+				746F5BEC2DE009450081569B /* ACToastView.swift in Sources */,
 				74A13D672DCBC2BD007FFFC3 /* DislikeFoodCollectionViewCell.swift in Sources */,
 				D652597C2D62775C00B8176E /* CustomTextFieldView.swift in Sources */,
 				1533FCD12D55EE2600F985A0 /* ProfileBoxComponent.swift in Sources */,
