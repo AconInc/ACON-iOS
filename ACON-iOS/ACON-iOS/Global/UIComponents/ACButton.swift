@@ -202,6 +202,8 @@ extension ACButton {
         
         if let glassmorphismView = glassmorphismView {
             self.insertSubview(glassmorphismView, at: 0)
+            glassmorphismView.isUserInteractionEnabled = false
+            
             glassmorphismView.snp.makeConstraints {
                 $0.edges.equalToSuperview()
             }
