@@ -59,6 +59,7 @@ final class WithdrawalViewController: BaseNavViewController {
         
         submitButton.do {
             $0.updateGlassButtonState(state: .disabled)
+            $0.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
         }
         
         otherReasonTextFieldView.isHidden = true
@@ -83,8 +84,6 @@ final class WithdrawalViewController: BaseNavViewController {
         
         containerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-//            $0.top.equalToSuperview().inset(10)
-//            $0.horizontalEdges.bottom.equalToSuperview()
         }
         
         reasonTitleLabel.snp.makeConstraints {
@@ -122,6 +121,8 @@ final class WithdrawalViewController: BaseNavViewController {
 }
 
 
+// MARK: - @objc funtions
+
 extension WithdrawalViewController {
     
     @objc func submitButtonTapped() {
@@ -134,12 +135,15 @@ extension WithdrawalViewController {
         presentWithdrawalSheet()
     }
     
+}
+
+extension WithdrawalViewController {
+    
     private func presentWithdrawalSheet() {
         let sheetVC = WithdrawalConfirmationViewController()
         sheetVC.viewModel = viewModel
-        sheetVC.setSheetLayout(detent: .middle)
-        sheetVC.isModalInPresentation = true
-        
+        sheetVC.setSheetLayout(detent: .semiShort)
+
         DispatchQueue.main.async {
             self.otherReasonTextFieldView.isHidden = (self.viewModel.selectedOption.value != StringLiterals.Withdrawal.optionOthers)
         }
@@ -148,7 +152,7 @@ extension WithdrawalViewController {
     
     private func setBinding() {
         optionsTableView.viewModel = viewModel
-        self.buttonState()
+        self.updateButtonState()
         
         viewModel.selectedOption.bind { [weak self] selectedOption in
             guard let self = self else { return }
@@ -168,11 +172,11 @@ extension WithdrawalViewController {
         
         viewModel.inputText.bind { [weak self] text in
             guard let self = self else { return }
-            self.buttonState()
+            self.updateButtonState()
         }
         
         viewModel.ectOption.bind { [weak self] _ in
-            self?.buttonState()
+            self?.updateButtonState()
         }
         
         otherReasonTextFieldView.onTextChanged = { [weak self] text in
@@ -186,14 +190,13 @@ extension WithdrawalViewController {
         }
     }
     
-    func buttonState() {
+    func updateButtonState() {
         shouldEnableSubmitButton = viewModel.ectOption.value ?? true
-        submitButton.isEnabled = shouldEnableSubmitButton
-        submitButton.backgroundColor = shouldEnableSubmitButton ? .gray600 : .gray700
-        
-        let textColor = shouldEnableSubmitButton ? UIColor.acWhite : UIColor.gray500
-        
-        submitButton.setTitleColor(textColor, for: .normal)
+        if shouldEnableSubmitButton {
+            submitButton.updateGlassButtonState(state: .default)
+        } else {
+            submitButton.updateGlassButtonState(state: .disabled)
+        }
     }
     
 }

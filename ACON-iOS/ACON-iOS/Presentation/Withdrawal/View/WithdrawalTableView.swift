@@ -56,7 +56,7 @@ final class WithdrawalTableView: UITableView {
         selectedOption = option
         viewModel?.updateSelectedOption(selectedOption)
         
-        (superview?.superview as? WithdrawalViewController)?.buttonState()
+        (superview?.superview as? WithdrawalViewController)?.updateButtonState()
     }
     
 }
