@@ -81,6 +81,7 @@ class SpotDetailViewController: BaseNavViewController {
         super.setStyle()
 
         self.setBackButton(completion: backCompletion)
+        self.setMoreButton()
     }
 
     private func setDelegate() {

@@ -310,6 +310,23 @@ extension BaseNavViewController {
     }
     
     
+    // MARK: - 더보기 버튼
+    
+    func setMoreButton() {
+        setButtonStyle(button: rightButton, image: .icEllipsis)
+        setButtonAction(button: rightButton,
+                        target: self,
+                        action: #selector(tappedMoreButton))
+    }
+    
+    @objc
+    private func tappedMoreButton() {
+        let vc = SpotDetailMoreViewController()
+        vc.setSheetLayout(detent: .short)
+        self.present(vc, animated: true)
+    }
+    
+    
     // MARK: - X 버튼
     
     func setXButton() {
