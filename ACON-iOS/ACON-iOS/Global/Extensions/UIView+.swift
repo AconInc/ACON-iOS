@@ -43,5 +43,32 @@ extension UIView {
             $0.contentMode = .scaleAspectFit
         }
     }
+    
+    
+    //MARK: - add GlassBorder (주의 - bound가 0이면 적용 안 됨)
+    
+    func addGlassBorder(_ attributes: GlassBorderAttributes) {
+        self.layer.borderWidth = 0
+        
+        let outerPath = UIBezierPath(roundedRect: bounds, cornerRadius: attributes.cornerRadius)
+        let innerRect = bounds.insetBy(dx: attributes.width, dy: attributes.width)
+        let innerPath = UIBezierPath(roundedRect: innerRect, cornerRadius: max(0, attributes.cornerRadius - attributes.width/2))
+        outerPath.append(innerPath.reversing())
+        
+        let glassmorphismView = GlassmorphismView(attributes.glassmorphismType)
+        
+        self.addSubview(glassmorphismView)
+        glassmorphismView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = outerPath.cgPath
+        maskLayer.fillRule = .evenOdd
+        
+        let maskView = UIView(frame: bounds)
+        maskView.layer.addSublayer(maskLayer)
+        glassmorphismView.mask = maskView
+    }
 
 }
