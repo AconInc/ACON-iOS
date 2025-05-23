@@ -18,7 +18,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
 
     private let imageView = UIImageView()
 
-    private let noImageErrorView = SpotListErrorView(.imageTitle)
+    private let imageErrorView = TempSpotListErrorView(.imageTitle) // TODO: 디자인 요청함
 
     private let imageWidth: CGFloat = 230 * ScreenUtils.widthRatio
     private let imageHeight: CGFloat = 325 * ScreenUtils.heightRatio
@@ -29,7 +29,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     override func setHierarchy() {
         super.setHierarchy()
 
-        self.addSubviews(imageView, noImageErrorView)
+        self.addSubviews(imageView, imageErrorView)
     }
 
     override func setLayout() {
@@ -41,7 +41,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.height.equalTo(imageHeight)
         }
         
-        noImageErrorView.snp.makeConstraints {
+        imageErrorView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
@@ -63,7 +63,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.addGestureRecognizer(pinchGesture)
         }
         
-        noImageErrorView.do {
+        imageErrorView.do {
             $0.isHidden = true
             $0.setStyle(errorImage: .icAcornGlass,
                         errorMessage: StringLiterals.SpotList.preparingImages,
@@ -117,11 +117,11 @@ extension MenuCollectionViewCell {
             completionHandler: { result in
                 switch result {
                 case .success:
-                    self.noImageErrorView.isHidden = true
+                    self.imageErrorView.isHidden = true
                 case .failure(let error):
                     print("😢 이미지 로드 실패: \(error)")
                     self.imageView.image = nil
-                    self.noImageErrorView.isHidden = false
+                    self.imageErrorView.isHidden = false
                 }
             }
         )

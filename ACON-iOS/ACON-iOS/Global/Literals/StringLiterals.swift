@@ -21,9 +21,11 @@ enum StringLiterals {
     
     enum Error {
         
-        static let checkInternet = "인터넷 연결을 확인해주세요"
+        static let networkErrorOccurred = "네트워크 연결에 문제가 발생했습니다"
         
-        static let reload = "다시 불러오기"
+        static let checkInternetAndTryAgain = "네트워크 연결상태를 확인하고\n다시 시도해주세요"
+        
+        static let tryAgain = "다시 시도하기"
         
     }
     
@@ -169,6 +171,15 @@ enum StringLiterals {
         
         static let loginInThreeSeconds = "3초 만에 로그인 하러 가기"
         
+        
+        // NOTE: no image descriptions
+        
+        static let noImageButAconGuarantees = "등록된 사진은 없지만\n맛집임을 아콘이 보장해요"
+        
+        static let mysteryPlaceNoImage = "쉿! 비밀스러운 곳인가 봐요\n아직 등록된 사진이 없어요"
+        
+        static let exploreToDiscover = "직접 가봐야 알 수 있는 장소네요\n설레임을 안고 떠나볼까요?"
+        
     }
     
     enum LocalVerification {
@@ -238,6 +249,8 @@ enum StringLiterals {
         static let seeMore = "더보기"
         
         static let reportInfoError = "정보 오류 신고하기"
+        
+        static let signatureMenu = "대표메뉴"
         
     }
     

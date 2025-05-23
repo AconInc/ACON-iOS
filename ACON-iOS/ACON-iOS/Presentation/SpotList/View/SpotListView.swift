@@ -22,7 +22,7 @@ class SpotListView: BaseView {
 
     private let skeletonView = SkeletonView()
 
-    let errorView = SpotListErrorView(.imageTitleButton)
+    let errorView = TempSpotListErrorView(.imageTitleButton) // TODO: 수정
 
 
     // MARK: - LifeCycles
@@ -59,7 +59,6 @@ class SpotListView: BaseView {
 
         setCollectionView()
         // TODO: 배경 블러
-        // TODO: 커스텀 토글
     }
 
 }
@@ -78,6 +77,7 @@ private extension SpotListView {
 
         collectionView.do {
             $0.backgroundColor = .clear
+            $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: SpotListItemSizeType.itemMaxHeight.value/2 - self.bounds.height/2, right: 0)
             $0.setCollectionViewLayout(flowLayout, animated: true)
             $0.decelerationRate = .fast
         }

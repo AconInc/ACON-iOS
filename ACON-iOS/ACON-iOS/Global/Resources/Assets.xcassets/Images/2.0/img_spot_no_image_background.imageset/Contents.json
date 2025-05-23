@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "img_spot_no_image_background.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

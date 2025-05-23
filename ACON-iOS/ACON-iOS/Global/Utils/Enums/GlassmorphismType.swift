@@ -33,13 +33,13 @@ enum GlassmorphismType {
             return .systemThickMaterialLight
         case .buttonGlassSelected:
             return .systemMaterialLight
-        case .buttonGlassDisabled, .bottomSheetGlass:
+        case .buttonGlassDisabled:
             return .systemUltraThinMaterialLight
         case .toastGlass, .needLoginErrorGlass, .alertGlass:
             return .systemThinMaterialDark
         case .gradientGlass:
             return .systemUltraThinMaterialDark
-        case .backgroundGlass:
+        case .backgroundGlass, .bottomSheetGlass:
             return .systemThinMaterialDark
         }
     }

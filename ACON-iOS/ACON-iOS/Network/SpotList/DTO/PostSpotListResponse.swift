@@ -7,19 +7,30 @@
 
 import Foundation
 
-struct PostSpotListResponse: Codable {
+struct PostSpotListResponse: Decodable {
 
-    let spotList: [Spot]
+    let transportMode: String
+
+    let spotList: [SpotDTO]
 
 }
 
-struct Spot: Codable {
-    
+struct SpotDTO: Decodable {
+
     let id: Int64
-    let image: String
-    let matchingRate: Int?
-    let type: SpotCategoryType
+
+    let image: String?
+
     let name: String
-    let walkingTime: Int
-    
+
+    let acornCount: Int
+
+    let tagList: [String]?
+
+    let eta: Int
+
+    let latitude: Double
+
+    let longitude: Double
+
 }

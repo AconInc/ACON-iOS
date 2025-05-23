@@ -2,18 +2,19 @@
 //  SpotListErrorView.swift
 //  ACON-iOS
 //
-//  Created by 김유림 on 2/20/25.
+//  Created by 김유림 on 5/23/25.
 //
 
 import UIKit
 
-enum SpotListErrorStyleType {
+// TODO: 디자인 나오면 삭제 예정
+class TempSpotListErrorView: BaseView {
+    
+    enum SpotListErrorStyleType {
 
-    case imageTitle, imageTitleButton
+        case imageTitle, imageTitleButton
 
-}
-
-class SpotListErrorView: BaseView {
+    }
 
     // MARK: - UI Properties
 
@@ -102,7 +103,7 @@ class SpotListErrorView: BaseView {
 
 // MARK: - Internal Methods
 
-extension SpotListErrorView {
+extension TempSpotListErrorView {
 
     func setStyle(errorImage: UIImage = .icError1,
                   errorMessage: String? = nil,
