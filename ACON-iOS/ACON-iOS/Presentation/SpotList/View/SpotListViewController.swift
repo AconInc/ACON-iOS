@@ -239,12 +239,6 @@ private extension SpotListViewController {
         vc.isModalInPresentation = true
         
         present(vc, animated: true)
-        
-        // NOTE: 앰플리튜드
-        AmplitudeManager.shared.trackEventWithProperties(
-            AmplitudeLiterals.EventName.filter,
-            properties: ["click_filter?" : true]
-        )
     }
 
     @objc
@@ -381,34 +375,6 @@ extension SpotListViewController: UICollectionViewDataSource {
         } else {
             presentLoginModal(AmplitudeLiterals.EventName.tappedSpotCell)
         }
-        
-        // NOTE: 앰플리튜드
-        if indexPath.item == 0 {
-            AmplitudeManager.shared.trackEventWithProperties(
-                AmplitudeLiterals.EventName.mainMenu,
-                properties: ["click_main_first?": true])
-        } else if indexPath.item == 1 {
-            AmplitudeManager.shared.trackEventWithProperties(
-                AmplitudeLiterals.EventName.mainMenu,
-                properties: ["click_main_second??": true])
-        } else if indexPath.item == 2 {
-            AmplitudeManager.shared.trackEventWithProperties(
-                AmplitudeLiterals.EventName.mainMenu,
-                properties: ["click_main_third?": true])
-        } else if indexPath.item == 3 {
-            AmplitudeManager.shared.trackEventWithProperties(
-                AmplitudeLiterals.EventName.mainMenu,
-                properties: ["click_main_fourth?": true])
-        } else if indexPath.item == 4 {
-            AmplitudeManager.shared.trackEventWithProperties(
-                AmplitudeLiterals.EventName.mainMenu,
-                properties: ["click_main_fifth?": true])
-        } else if indexPath.item == 5 {
-            AmplitudeManager.shared.trackEventWithProperties(
-                AmplitudeLiterals.EventName.mainMenu,
-                properties: ["click_main_sixth?": true])
-        }
-        
     }
     
     
