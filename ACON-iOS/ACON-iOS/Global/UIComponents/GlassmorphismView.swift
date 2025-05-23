@@ -55,6 +55,19 @@ class GlassmorphismView: BaseView {
         setGlassMorphism(glassMorphismType)
     }
     
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        
+        // NOTE: 뷰 등장 시 기존 효과를 완전히 제거하고 다시 설정
+        if window != nil {
+            blurEffectView.effect = nil
+            vibrancyEffectView.effect = nil
+            
+            DispatchQueue.main.async {
+                self.setGlassMorphism(self.glassMorphismType)
+            }
+        }
+    }
 }
 
 
