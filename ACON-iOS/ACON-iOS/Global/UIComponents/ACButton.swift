@@ -166,22 +166,6 @@ extension ACButton {
 
 // MARK: - GlassButton 관련 메소드 -
 
-struct GlassBorderAttributes {
-    
-    let width: CGFloat
-    
-    let cornerRadius: CGFloat
-    
-    let glassmorphismType: GlassmorphismType
-    
-    init(width: CGFloat, cornerRadius: CGFloat, glassmorphismType: GlassmorphismType) {
-        self.width = width
-        self.cornerRadius = cornerRadius
-        self.glassmorphismType = glassmorphismType
-    }
-    
-}
-
 
 // MARK: - Set Glassmorphism / Glassmorphism Border
 
