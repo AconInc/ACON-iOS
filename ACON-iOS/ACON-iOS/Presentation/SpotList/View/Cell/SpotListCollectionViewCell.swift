@@ -16,8 +16,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     private let bgImage = UIImageView()
     private let dimImage = UIImageView()
 
-    private let noImageErrorView = SpotListErrorView(.imageTitle)
-    private let loginErrorView = SpotListErrorView(.imageTitleButton)
+    private let noImageContentView = SpotNoImageContentView()
+    private let loginErrorView = LoginLockOverlayView()
 
     private let titleLabel = UILabel()
     private let acornCountButton = UIButton()
@@ -34,7 +34,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
         self.addSubviews(bgImage,
                          dimImage,
-                         noImageErrorView,
+                         noImageContentView,
                          titleLabel,
                          acornCountButton,
                          tagStackView,
@@ -55,8 +55,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.edges.equalTo(bgImage)
         }
 
-        noImageErrorView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        noImageContentView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
 
         titleLabel.snp.makeConstraints {
@@ -101,15 +101,6 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.layer.cornerRadius = cornerRadius
         }
 
-        noImageErrorView.do {
-            $0.isHidden = true
-            $0.clipsToBounds = true
-            $0.layer.cornerRadius = cornerRadius
-            $0.setStyle(errorImage: .icAcornGlass,
-                        errorMessage: StringLiterals.SpotList.preparingImages,
-                        glassMorphismtype: .noImageErrorGlass)
-        }
-
         acornCountButton.do {
             var config = UIButton.Configuration.plain()
             let acorn: UIImage = .icAcornLine.resize(to: .init(width: 24, height: 24))
@@ -128,10 +119,6 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.isHidden = true
             $0.clipsToBounds = true
             $0.layer.cornerRadius = cornerRadius
-            $0.setStyle(errorImage: .icLock,
-                        errorMessage: StringLiterals.SpotList.needLoginToSeeMore,
-                        buttonTitle: StringLiterals.SpotList.loginInThreeSeconds,
-                        glassMorphismtype: .needLoginErrorGlass)
         }
     }
 
@@ -144,39 +131,36 @@ extension SpotListCollectionViewCell {
 
     func bind(spot: SpotModel, matchingRateBgColor: MatchingRateBgColorType) {
         bgImage.kf.setImage(
-            with: URL(string: spot.imageURL),
+            with: URL(string: spot.imageURL ?? ""),
             placeholder: UIImage.imgSkeletonBg,
             options: [.transition(.none), .cacheOriginalImage],
             completionHandler: { result in
                 switch result {
                 case .success:
-                    self.noImageErrorView.isHidden = true
-                case .failure(let error):
-                    print("😢 이미지 로드 실패: \(error)")
-                    self.bgImage.image = nil
-                    self.noImageErrorView.isHidden = false
+                    self.noImageContentView.isHidden = true
+                    self.dimImage.isHidden = false
+                case .failure:
+                    self.bgImage.image = .imgSpotNoImageBackground
+                    self.noImageContentView.isHidden = false
+                    self.dimImage.isHidden = true
                 }
             }
         )
 
         titleLabel.setLabel(text: spot.name, style: .t4SB)
 
-        // TODO: API 나오면 실제 데이터로 바꾸기 (matchingRate -> acornCount)
-        if let acornCount = spot.matchingRate {
-            let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
-            acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
-        }
+        let acornCount: Int = spot.acornCount
+        let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
+        acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
 
-        // TODO: API 나오면 실제 데이터로 바꾸기 (tempTags -> Tags)
-        let tempTags: [SpotTagType] = [.new, .local, .top(number: 1)]
         tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        tempTags.forEach { tag in
+        spot.tagList.forEach { tag in
             tagStackView.addArrangedSubview(SpotTagButton(tag))
         }
 
         let walk: String = StringLiterals.SpotList.walk
         let findCourse: String = StringLiterals.SpotList.minuteFindCourse
-        let courseTitle: String = walk + String(spot.walkingTime) + findCourse
+        let courseTitle: String = walk + String(spot.eta) + findCourse
         findCourseButton.setAttributedTitle(text: courseTitle, style: .b1SB)
     }
 

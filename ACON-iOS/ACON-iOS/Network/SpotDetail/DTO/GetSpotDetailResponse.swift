@@ -7,26 +7,31 @@
 
 import Foundation
 
-struct GetSpotDetailResponse: Codable {
+struct GetSpotDetailResponse: Decodable {
     
     let id: Int64
     
-    let name: String
-    
-    let spotType: SpotCategoryType
-    
     let imageList: [String]
     
-    let openStatus: Bool
+    let name: String
     
-    let address: String
-
-    let localAcornCount: Int
+    let acornCount: Int
     
-    let basicAcornCount: Int
+    let hasMenuboardImage: Bool
+    
+    let signatureMenuList: [SignatureMenuDTO]?
     
     let latitude: Double
     
     let longitude: Double
     
+}
+
+
+struct SignatureMenuDTO: Decodable {
+
+    let name: String
+
+    let price: Int
+
 }

@@ -161,7 +161,15 @@ extension SpotListViewController {
                     }
                 }
             } else {
-                print("🥑추천장소리스트 Post 실패")
+                // TODO: 네트워크 에러뷰로 교체, 버튼에 postSpotList() 액션 설정
+                spotListView.errorView.setStyle(
+                    errorMessage: StringLiterals.Error.networkErrorOccurred,
+                    buttonTitle: StringLiterals.Error.tryAgain
+                )
+                spotListView.hideSkeletonView(isHidden: true)
+                
+                // TODO: Post 하는동안 로딩스켈레톤
+                
             }
             
             viewModel.onSuccessPostSpotList.value = nil
@@ -170,6 +178,9 @@ extension SpotListViewController {
             filterButton.isSelected = !viewModel.filterList.isEmpty
             
             viewModel.onFinishRefreshingSpotList.value = true
+            
+            // NOTE: 에러뷰 숨김 여부 처리
+            spotListView.errorView.isHidden = isSuccess
         }
     }
     
@@ -228,12 +239,6 @@ private extension SpotListViewController {
         vc.isModalInPresentation = true
         
         present(vc, animated: true)
-        
-        // NOTE: 앰플리튜드
-        AmplitudeManager.shared.trackEventWithProperties(
-            AmplitudeLiterals.EventName.filter,
-            properties: ["click_filter?" : true]
-        )
     }
 
     @objc
@@ -292,11 +297,6 @@ private extension SpotListViewController {
             SpotListCollectionViewHeader.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: SpotListCollectionViewHeader.identifier)
-        
-        spotListView.collectionView.register(
-            SpotListCollectionViewFooter.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-            withReuseIdentifier: SpotListCollectionViewFooter.identifier)
     }
     
     func setRefreshControl() {
@@ -346,10 +346,9 @@ extension SpotListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView,
-                       viewForSupplementaryElementOfKind kind: String,
-                       at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
             guard let header = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: SpotListCollectionViewHeader.identifier,
@@ -357,22 +356,13 @@ extension SpotListViewController: UICollectionViewDataSource {
                 fatalError("Cannot dequeue header view")
             }
             return header
-        case UICollectionView.elementKindSectionFooter:
-            guard let footer = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: SpotListCollectionViewFooter.identifier,
-                for: indexPath) as? SpotListCollectionViewFooter else {
-                fatalError("Cannot dequeue footer view")
-            }
-            return footer
-        default:
-            fatalError("Unexpected supplementary view kind")
         }
+        return UICollectionReusableView()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = viewModel.spotType == .restaurant ? viewModel.restaurantList[indexPath.item] : viewModel.cafeList[indexPath.item]
-        let vc = SpotDetailViewController(item.id)
+        let vc = SpotDetailViewController(item.id, item.tagList)
         
         ACLocationManager.shared.removeDelegate(viewModel)
         vc.backCompletion = { [weak self] in
@@ -385,34 +375,6 @@ extension SpotListViewController: UICollectionViewDataSource {
         } else {
             presentLoginModal(AmplitudeLiterals.EventName.tappedSpotCell)
         }
-        
-        // NOTE: 앰플리튜드
-        if indexPath.item == 0 {
-            AmplitudeManager.shared.trackEventWithProperties(
-                AmplitudeLiterals.EventName.mainMenu,
-                properties: ["click_main_first?": true])
-        } else if indexPath.item == 1 {
-            AmplitudeManager.shared.trackEventWithProperties(
-                AmplitudeLiterals.EventName.mainMenu,
-                properties: ["click_main_second??": true])
-        } else if indexPath.item == 2 {
-            AmplitudeManager.shared.trackEventWithProperties(
-                AmplitudeLiterals.EventName.mainMenu,
-                properties: ["click_main_third?": true])
-        } else if indexPath.item == 3 {
-            AmplitudeManager.shared.trackEventWithProperties(
-                AmplitudeLiterals.EventName.mainMenu,
-                properties: ["click_main_fourth?": true])
-        } else if indexPath.item == 4 {
-            AmplitudeManager.shared.trackEventWithProperties(
-                AmplitudeLiterals.EventName.mainMenu,
-                properties: ["click_main_fifth?": true])
-        } else if indexPath.item == 5 {
-            AmplitudeManager.shared.trackEventWithProperties(
-                AmplitudeLiterals.EventName.mainMenu,
-                properties: ["click_main_sixth?": true])
-        }
-        
     }
     
     
@@ -446,14 +408,6 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
         let itemWidth: CGFloat = SpotListItemSizeType.itemMaxWidth.value
         let itemHeight: CGFloat = SpotListItemSizeType.headerHeight.value
-        return CGSize(width: itemWidth, height: itemHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        referenceSizeForFooterInSection section: Int) -> CGSize {
-        let itemWidth: CGFloat = SpotListItemSizeType.itemMaxWidth.value
-        let itemHeight: CGFloat = SpotListItemSizeType.footerHeight.value
         return CGSize(width: itemWidth, height: itemHeight)
     }
 
