@@ -12,6 +12,11 @@ class SpotDetailSideButton: UIView {
     // MARK: - Property & Initializer
 
     let type: SideButtonType
+    var isSelected: Bool = false {
+        didSet {
+            imageView.image = isSelected ? type.selectedImage : type.defaultImage
+        }
+    }
 
     private let imageView = UIImageView()
     private let label = UILabel()
@@ -24,6 +29,7 @@ class SpotDetailSideButton: UIView {
         setHierarchy()
         setLayout()
         setStyle()
+        setGesture()
     }
 
     required init?(coder: NSCoder) {
@@ -35,7 +41,7 @@ class SpotDetailSideButton: UIView {
 
 // MARK: - UI Setting Methods
 
-extension SpotDetailSideButton {
+private extension SpotDetailSideButton {
 
     func setHierarchy() {
         self.addSubviews(imageView, label)
@@ -60,7 +66,7 @@ extension SpotDetailSideButton {
 
     func setStyle() {
         imageView.do {
-            $0.image = type.image
+            $0.image = isSelected ? type.selectedImage : type.defaultImage
             $0.contentMode = .scaleAspectFit
 
             $0.layer.do {
@@ -92,26 +98,52 @@ extension SpotDetailSideButton {
 }
 
 
-// MARK: - enum
+// MARK: - Gesture Setting Methods
+
+private extension SpotDetailSideButton {
+
+    func setGesture() {
+        let menuTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedSelf))
+        self.addGestureRecognizer(menuTapGesture)
+    }
+
+    @objc
+    func tappedSelf() {
+        isSelected.toggle()
+        print("isSelected: \(isSelected)")
+    }
+
+}
+
+
+// MARK: - SideButtonType
 
 extension SpotDetailSideButton {
 
     enum SideButtonType {
-        case menu, share, more
+        case menu, bookmark, share
 
         var text: String {
             switch self {
             case .menu: return "메뉴판"
+            case .bookmark: return "북마크"
             case .share: return "공유"
-            case .more: return "더보기"
             }
         }
 
-        var image: UIImage {
+        var defaultImage: UIImage {
             switch self {
             case .menu: return .icMenu
+            case .bookmark: return .icBookmarkLine
             case .share: return .icShare
-            case .more: return .icEllipsis
+            }
+        }
+
+        var selectedImage: UIImage {
+            switch self {
+            case .menu: return .icMenu
+            case .bookmark: return .icBookmarkFill
+            case .share: return .icShare
             }
         }
     }
