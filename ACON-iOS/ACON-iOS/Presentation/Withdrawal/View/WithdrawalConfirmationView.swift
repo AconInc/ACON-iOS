@@ -7,20 +7,22 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 final class WithdrawalConfirmationView: GlassmorphismView {
     
-    let iconImageView = UIImageView()
-    let titleLabel = UILabel()
-    let descriptionLabel = UILabel()
-    let cancelButton = UIButton(type: .system)
-    let confirmButton = UIButton(type: .system)
-    let closeButton = UIButton(type: .system)
+    // MARK: - UI Properties
+    
+    private let titleLabel = UILabel()
+    
+    private let descriptionLabel = UILabel()
+    
+    let cancelButton = ACButton(style: GlassButton(borderGlassmorphismType: .buttonGlassDefault, buttonType: .line_22_b1SB), title: StringLiterals.WithdrawalConfirmation.cancelButtonTitle)
+
+    let confirmButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_22_b1SB), title: StringLiterals.WithdrawalConfirmation.confirmButtonTitle)
+    
+    
+    // MARK: - LifeCycle
     
     init() {
-        // 🍇 TODO: 글모 Type 확인
         super.init(.bottomSheetGlass)
     }
 
@@ -32,97 +34,56 @@ final class WithdrawalConfirmationView: GlassmorphismView {
         super.setStyle()
         
         self.setHandlerImageView()
+
+        titleLabel.setLabel(text: StringLiterals.WithdrawalConfirmation.title,
+                            style: .h4SB,
+                            alignment: .center)
         
-        iconImageView.do {
-            $0.image = .icError1
-            $0.contentMode = .scaleAspectFit
-        }
+        descriptionLabel.setLabel(text: StringLiterals.WithdrawalConfirmation.description,
+                                  style: .b1R,
+                                  color: .gray300,
+                                  alignment: .center)
         
-        titleLabel.do {
-            $0.setLabel(text: StringLiterals.WithdrawalConfirmation.title,
-                        style: .h5,
-                        color: .acWhite,
-                        alignment: .left,
-                        numberOfLines: 0)
-        }
-        
-        descriptionLabel.do {
-            $0.setLabel(text: StringLiterals.WithdrawalConfirmation.description,
-                        style: .s1,
-                        color: .gray300,
-                        alignment: .left,
-                        numberOfLines: 2)
-        }
-        
-        cancelButton.do {
-            $0.backgroundColor = .gray500
-            $0.setAttributedTitle(text: StringLiterals.WithdrawalConfirmation.cancelButtonTitle, style: .h7)
-            $0.layer.cornerRadius = 6
-        }
-        
-        confirmButton.do {
-            $0.backgroundColor = .primaryDefault
-            $0.setAttributedTitle(text: StringLiterals.WithdrawalConfirmation.confirmButtonTitle, style: .h7)
-            $0.layer.cornerRadius = 6
-        }
-        
-        closeButton.do {
-            $0.setImage(.icDismiss, for: .normal)
-            $0.tintColor = .acWhite
+        [cancelButton, confirmButton].forEach {
+            $0.isUserInteractionEnabled = true
         }
     }
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        addSubviews(iconImageView,
-                    titleLabel,
+        addSubviews(titleLabel,
                     descriptionLabel,
                     cancelButton,
-                    confirmButton,
-                    closeButton)
+                    confirmButton)
     }
     
     override func setLayout() {
         super.setLayout()
         
-        closeButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().inset(16)
-            $0.size.equalTo(28)
-        }
-        
-        cancelButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(42)
-            $0.leading.equalToSuperview().inset(16)
-            $0.width.equalTo(ScreenUtils.widthRatio*102)
-            $0.height.equalTo(ScreenUtils.heightRatio*52)
-            
-        }
-        
-        confirmButton.snp.makeConstraints{
-            $0.top.equalTo(cancelButton.snp.top)
-            $0.leading.equalTo(cancelButton.snp.trailing).offset(8)
-            $0.trailing.equalToSuperview().inset(20)
-            $0.width.equalTo(ScreenUtils.widthRatio*214)
-            $0.height.equalTo(ScreenUtils.heightRatio*52)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(57*ScreenUtils.heightRatio)
+            $0.horizontalEdges.equalToSuperview().inset(39*ScreenUtils.widthRatio)
         }
         
         descriptionLabel.snp.makeConstraints {
-            $0.bottom.equalTo(cancelButton.snp.top).offset(-42)
-            $0.leading.equalToSuperview().inset(16)
+            $0.top.equalToSuperview().inset(93*ScreenUtils.heightRatio)
+            $0.horizontalEdges.equalToSuperview().inset(39*ScreenUtils.widthRatio)
         }
         
-        titleLabel.snp.makeConstraints {
-            $0.bottom.equalTo(descriptionLabel.snp.top).offset(-8)
-            $0.leading.equalToSuperview().inset(16)
+        cancelButton.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(219*ScreenUtils.heightRatio)
+            $0.leading.equalToSuperview().inset(ScreenUtils.horizontalInset)
+            $0.width.equalTo(ScreenUtils.widthRatio*120)
+            $0.height.equalTo(ScreenUtils.heightRatio*44)
         }
         
-        iconImageView.snp.makeConstraints {
-            $0.bottom.equalTo(titleLabel.snp.top).offset(-32)
-            $0.centerX.equalToSuperview()
-            $0.width.height.equalTo(ScreenUtils.widthRatio*140)
+        confirmButton.snp.makeConstraints{
+            $0.top.equalToSuperview().inset(219*ScreenUtils.heightRatio)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.horizontalInset)
+            $0.width.equalTo(ScreenUtils.widthRatio*200)
+            $0.height.equalTo(ScreenUtils.heightRatio*44)
         }
     }
-    
+
 }

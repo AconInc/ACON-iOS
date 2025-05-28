@@ -7,9 +7,6 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 final class WithdrawalConfirmationViewController: BaseViewController {
     
     private let confirmationView = WithdrawalConfirmationView()
@@ -55,25 +52,22 @@ extension WithdrawalConfirmationViewController {
 
 // MARK: - setAction
 
-extension WithdrawalConfirmationViewController {
+private extension WithdrawalConfirmationViewController {
     
-    private func setAction() {
+    func setAction() {
         confirmationView.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         confirmationView.confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
-        confirmationView.closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
     }
     
-    @objc private func cancelButtonTapped() {
+    @objc
+    func cancelButtonTapped() {
         dismiss(animated: true)
     }
     
-    @objc private func confirmButtonTapped() {
+    @objc
+    func confirmButtonTapped() {
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceWithdraw, properties: ["delete_id": true])
         viewModel?.withdrawalAPI()
-    }
-    
-    @objc private func closeButtonTapped() {
-        dismiss(animated: true)
     }
     
 }

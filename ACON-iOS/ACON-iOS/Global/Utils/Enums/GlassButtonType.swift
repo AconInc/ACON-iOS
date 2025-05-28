@@ -17,13 +17,15 @@ enum GlassButtonType {
     
     case full_22_b1SB
     
+    case line_22_b1SB
+    
     case full_19_b1R
     
     case both_20_labelAction_t4R
     
     var cornerRadius: CGFloat {
         switch self {
-        case .full_22_b1SB:
+        case .full_22_b1SB, .line_22_b1SB:
             return 22
         case .full_19_b1R:
             return 19
@@ -40,7 +42,7 @@ enum GlassButtonType {
         switch self {
         case .full_12_t4SB:
             return .init(top: 15, leading: 15, bottom: 15, trailing: 15)
-        case .line_12_b1SB, .full_22_b1SB:
+        case .line_12_b1SB, .full_22_b1SB, .line_22_b1SB:
             return .init(top: 12, leading: 12, bottom: 12, trailing: 12)
         case .full_19_b1R:
             return .init(top: 9, leading: 12, bottom: 9, trailing: 12)
@@ -53,7 +55,7 @@ enum GlassButtonType {
     
     var textStyle: ACFontType {
         switch self {
-        case .full_22_b1SB, .line_12_b1SB, .full_10_b1SB:
+        case .full_22_b1SB, .line_12_b1SB, .full_10_b1SB, .line_22_b1SB:
             return .b1SB
         case .both_20_labelAction_t4R:
             return .t4R
@@ -66,7 +68,7 @@ enum GlassButtonType {
     
     var borderWidth: CGFloat {
         switch self {
-        case .line_12_b1SB, .both_20_labelAction_t4R:
+        case .line_12_b1SB, .line_22_b1SB, .both_20_labelAction_t4R:
             return 1
         default:
             return 0

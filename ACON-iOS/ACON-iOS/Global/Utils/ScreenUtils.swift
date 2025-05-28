@@ -45,5 +45,12 @@ struct ScreenUtils {
     static var safeAreaTopHeight: CGFloat {
         return UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
     }
+
+    
+    // MARK: - horizontal inset
+    
+    static var horizontalInset: CGFloat {
+        return ScreenUtils.widthRatio * 16
+    }
     
 }

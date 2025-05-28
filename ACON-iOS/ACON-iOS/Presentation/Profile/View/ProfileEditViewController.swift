@@ -38,7 +38,7 @@ final class ProfileEditViewController: BaseNavViewController {
 
     private var isDefaultImage: Bool? = nil
 
-
+    
     // MARK: - Life Cycles
 
     init(_ viewModel: ProfileViewModel) {
@@ -101,7 +101,8 @@ final class ProfileEditViewController: BaseNavViewController {
         super.setStyle()
 
         self.setCenterTitleLabelStyle(title: StringLiterals.Profile.profileEditPageTitle)
-        self.setBackButton()
+        self.setButtonStyle(button: leftButton, image: .icArrowLeft)
+        self.setButtonAction(button: leftButton, target: self, action: #selector(profileBackButtonTapped))
     }
 
     private func setDelegate() {
@@ -204,6 +205,11 @@ private extension ProfileEditViewController {
                   let onSuccess = onSuccess else { return }
             if onSuccess {
                 self.navigationController?.popViewController(animated: true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    ACToastController.show(.profileSaved,
+                                           bottomInset: 93,
+                                           delayTime: 1)
+                }
             } else {
                 self.showDefaultAlert(title: "프로필 수정 실패", message: "프로필 수정에 실패하였습니다.")
             }
@@ -292,6 +298,16 @@ private extension ProfileEditViewController {
 
 private extension ProfileEditViewController {
 
+    @objc
+    func profileBackButtonTapped() {
+        let rightAction = {
+            if let navigationController = self.navigationController {
+                navigationController.popViewController(animated: true)
+            }
+        }
+        self.presentACAlert(.changeNotSaved, rightAction: rightAction)
+    }
+    
     // NOTE: 스크롤뷰의 contentInset을 조정하여 텍스트필드가 키보드에 가려지지 않도록 함
     @objc
     func keyboardWillShow(_ notification: Notification) {
@@ -466,7 +482,11 @@ private extension ProfileEditViewController {
 
     func checkSaveAvailability() {
         let canSave: Bool = isNicknameAvailable && isBirthDateAvailable
-        profileEditView.saveButton.isEnabled = canSave
+        if canSave {
+            profileEditView.saveButton.updateGlassButtonState(state: .default)
+        } else {
+            profileEditView.saveButton.updateGlassButtonState(state: .disabled)
+        }
     }
 
 

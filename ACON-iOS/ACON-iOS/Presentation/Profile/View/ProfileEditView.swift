@@ -11,8 +11,6 @@ final class ProfileEditView: BaseView {
 
     // MARK: - Helpers
 
-    private let horizontalInset: CGFloat = 20
-
     private let textFieldHeight: CGFloat = 48
 
     private let sectionOffset: CGFloat = 160
@@ -44,7 +42,7 @@ final class ProfileEditView: BaseView {
     
     private let birthDateValidMessageView = ProfileEditValidMessageView()
 
-    let saveButton = UIButton()
+    let saveButton: ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_12_t4SB), title: StringLiterals.Profile.save)
 
 
     // MARK: - UI Setting Methods
@@ -64,7 +62,7 @@ final class ProfileEditView: BaseView {
             $0.setPlaceholder(as: StringLiterals.Profile.nicknamePlaceholder)
         }
 
-        birthDateTitleLabel.setLabel(text: StringLiterals.Profile.birthDate, style: .h8)
+        birthDateTitleLabel.setLabel(text: StringLiterals.Profile.birthDate, style: .t4SB)
 
         birthDateTextField.do {
             $0.setPlaceholder(as: StringLiterals.Profile.birthDatePlaceholder)
@@ -73,18 +71,7 @@ final class ProfileEditView: BaseView {
         }
 
         saveButton.do {
-            var config = UIButton.Configuration.filled()
-            config.attributedTitle = AttributedString(StringLiterals.Profile.save.ACStyle(.h7, .gray500))
-            config.baseBackgroundColor = .gray700
-            $0.configuration = config
-        }
-
-        saveButton.configurationUpdateHandler = {
-            guard var config = $0.configuration else { return }
-            config.attributedTitle = AttributedString(
-                StringLiterals.Profile.save.ACStyle(.h7, $0.isEnabled ? .acWhite : .gray500)
-            )
-            $0.configuration = config
+            $0.updateGlassButtonState(state: .disabled)
         }
     }
 
@@ -124,9 +111,9 @@ final class ProfileEditView: BaseView {
 
         saveButton.snp.makeConstraints {
             $0.top.equalTo(scrollView.snp.bottom).offset(12) // TODO: 디자인 확인
-            $0.bottom.equalToSuperview().offset(-39)
-            $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
-            $0.height.equalTo(52)
+            $0.bottom.equalToSuperview().inset(21+ScreenUtils.heightRatio*16)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
+            $0.height.equalTo(54)
         }
 
         profileImageEditButton.snp.makeConstraints {
@@ -136,18 +123,18 @@ final class ProfileEditView: BaseView {
 
         nicknameTitleLabel.snp.makeConstraints {
             $0.top.equalTo(profileImageEditButton.snp.bottom).offset(32)
-            $0.leading.equalToSuperview().offset(horizontalInset)
+            $0.leading.equalToSuperview().offset(ScreenUtils.horizontalInset)
         }
 
         nicknameTextField.snp.makeConstraints {
             $0.top.equalTo(nicknameTitleLabel.snp.bottom).offset(textFieldOffset)
-            $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
             $0.height.greaterThanOrEqualTo(textFieldHeight)
         }
 
         nicknameValidMessageView.snp.makeConstraints {
             $0.top.equalTo(nicknameTextField.snp.bottom).offset(validMessageOffset)
-            $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
             $0.height.greaterThanOrEqualTo(44)
         }
 
@@ -158,18 +145,18 @@ final class ProfileEditView: BaseView {
 
         birthDateTitleLabel.snp.makeConstraints {
             $0.top.equalTo(nicknameTitleLabel).offset(sectionOffset)
-            $0.leading.equalToSuperview().offset(horizontalInset)
+            $0.leading.equalToSuperview().offset(ScreenUtils.horizontalInset)
         }
 
         birthDateTextField.snp.makeConstraints {
             $0.top.equalTo(birthDateTitleLabel.snp.bottom).offset(textFieldOffset)
-            $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
             $0.height.greaterThanOrEqualTo(textFieldHeight)
         }
 
         birthDateValidMessageView.snp.makeConstraints {
             $0.top.equalTo(birthDateTextField.snp.bottom).offset(validMessageOffset)
-            $0.horizontalEdges.equalToSuperview().inset(horizontalInset)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
             $0.height.greaterThanOrEqualTo(20)
         }
     }

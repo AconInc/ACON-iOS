@@ -54,12 +54,12 @@ final class ACAlertView: BaseView {
         
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*24)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio * 16)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
         }
         
         descriptionLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(ScreenUtils.heightRatio * 8)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio * 16)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
         }
         
         horizontalLineView.snp.makeConstraints {

@@ -85,8 +85,6 @@ private extension ProfileViewController {
 
             self.profileView.do {
                 $0.needLoginButton.isHidden = onLoginSuccess
-                $0.setAcornCountBox(onLoginSuccess: onLoginSuccess)
-                $0.setVerifiedAreaBox(onLoginSuccess: onLoginSuccess)
             }
         }
 
@@ -100,8 +98,6 @@ private extension ProfileViewController {
                 profileView.do {
                     $0.setProfileImage(self.viewModel.userInfo.profileImage)
                     $0.setNicknameLabel(self.viewModel.userInfo.nickname)
-                    $0.setAcornCountBox(self.viewModel.userInfo.possessingAcorns)
-                    $0.setVerifiedAreaBox(areaName: firstAreaName)
                 }
             } else {
                 self.showDefaultAlert(title: "프로필 로드 실패", message: "프로필 정보 로드에 실패했습니다.")

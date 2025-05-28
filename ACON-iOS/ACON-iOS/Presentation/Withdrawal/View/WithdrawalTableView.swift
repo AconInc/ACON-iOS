@@ -39,7 +39,7 @@ final class WithdrawalTableView: UITableView {
     }
     
     private func setStyle() {
-        backgroundColor = .gray900
+        backgroundColor = .clear
         separatorStyle = .none
         showsVerticalScrollIndicator = false
         isScrollEnabled = false
@@ -56,7 +56,7 @@ final class WithdrawalTableView: UITableView {
         selectedOption = option
         viewModel?.updateSelectedOption(selectedOption)
         
-        (superview?.superview as? WithdrawalViewController)?.buttonState()
+        (superview?.superview as? WithdrawalViewController)?.updateButtonState()
     }
     
 }
@@ -65,6 +65,10 @@ extension WithdrawalTableView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 36*ScreenUtils.heightRatio
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

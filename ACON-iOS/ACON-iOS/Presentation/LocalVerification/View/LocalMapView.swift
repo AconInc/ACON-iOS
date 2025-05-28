@@ -63,7 +63,7 @@ final class LocalMapView: BaseView {
                 $0.maxZoomLevel = 18
                 $0.customStyleId = Config.nmfCustomStyleID
                 $0.logoAlign = .rightTop
-                $0.logoMargin = ConstraintInsets(top: ScreenUtils.safeAreaTopHeight+ScreenUtils.heightRatio*80, left: 0, bottom: 0, right: ScreenUtils.widthRatio*16)
+                $0.logoMargin = ConstraintInsets(top: ScreenUtils.safeAreaTopHeight+ScreenUtils.heightRatio*80, left: 0, bottom: 0, right: ScreenUtils.horizontalInset)
             }
         }
 

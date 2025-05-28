@@ -10,6 +10,7 @@ import UIKit
 enum ACSheetDetentType: String {
 
     case short
+    case semiShort
     case middle
     case long
 
@@ -20,6 +21,7 @@ enum ACSheetDetentType: String {
     var height: CGFloat {
         switch self {
         case .short: return 204
+        case .semiShort: return 300
         case .middle: return 518
         case .long: return 680
         }
@@ -41,6 +43,10 @@ extension ACSheetDetentType {
         return short.detent
     }
 
+    static var semiShortDetent: UISheetPresentationController.Detent {
+        return semiShort.detent
+    }
+    
     static var middleDetent: UISheetPresentationController.Detent {
         return middle.detent
     }

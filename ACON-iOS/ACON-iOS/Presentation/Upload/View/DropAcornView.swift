@@ -50,7 +50,7 @@ final class DropAcornView: BaseView {
         
         spotNameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*37)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*16)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
             $0.height.equalTo(26)
         }
         

@@ -7,17 +7,28 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
-final class CustomTextFieldView: BaseView, UITextViewDelegate {
-
+final class CustomTextFieldView: BaseView {
+    
+    // MARK: - UI Propeties
+    
     private let scrollView = UIScrollView()
+    
+    private var glassBorderView = UIView()
+    
     private let textView = UITextView()
+    
     private let characterCountLabel = UILabel()
+    
+    private let maxCharacterLabel = UILabel()
+    
     private let placeholderLabel = UILabel()
-
+    
+    // MARK: - Properties
+    
     var onTextChanged: ((String) -> Void)?
+    
+    
+    // MARK: - LifeCycle
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,37 +50,32 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
         
         textView.do {
             $0.backgroundColor = .clear
-            $0.textColor = .white
-            $0.font = .systemFont(ofSize: 16)
-            $0.layer.borderColor = UIColor.gray600.cgColor
-            $0.layer.borderWidth = 1.0
-            $0.layer.cornerRadius = 4.0
+            $0.textColor = .acWhite
+            $0.font = ACFontType.b1R.fontStyle.font
             $0.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             $0.delegate = self
             $0.isScrollEnabled = false
         }
 
-        placeholderLabel.do {
-            $0.text = StringLiterals.Withdrawal.withdrawalReason
-            $0.font = .systemFont(ofSize: 16)
-            $0.textColor = .lightGray
-            $0.isHidden = false
-        }
+        placeholderLabel.setLabel(text: StringLiterals.Withdrawal.withdrawalReason,
+                                  style: .b1R,
+                                  color: .gray500)
+        
+        characterCountLabel.setLabel(text: "00", style: .c1R)
 
-        characterCountLabel.do {
-            $0.text = "0 / 50"
-            $0.font = .systemFont(ofSize: 12)
-            $0.textColor = .gray
-            $0.textAlignment = .right
-        }
+        maxCharacterLabel.setLabel(text: "/50",
+                                   style: .c1R,
+                                   color: .gray500)
     }
 
     override func setHierarchy() {
         super.setHierarchy()
 
         addSubview(scrollView)
-        scrollView.addSubview(textView)
-        addSubviews(placeholderLabel, characterCountLabel)
+        scrollView.addSubviews(glassBorderView, textView)
+        addSubviews(placeholderLabel,
+                    characterCountLabel,
+                    maxCharacterLabel)
     }
 
 
@@ -81,26 +87,68 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
             $0.bottom.equalTo(characterCountLabel.snp.top).offset(-4)
         }
         
-        textView.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview()
-            $0.leading.trailing.equalTo(self)
-            $0.width.equalTo(self)
-            $0.height.greaterThanOrEqualTo(100).priority(.required)
+        glassBorderView.snp.makeConstraints {
+            $0.top.centerX.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.widthRatio*328)
+            $0.height.greaterThanOrEqualTo(60).priority(.required)
         }
-
+        
+        textView.snp.makeConstraints {
+            $0.edges.equalTo(glassBorderView.snp.edges).inset(1)
+        }
 
         placeholderLabel.snp.makeConstraints {
-            $0.top.equalTo(textView).offset(10)
-            $0.leading.equalTo(textView).offset(15)
-            $0.trailing.equalTo(textView).offset(-10)
+            $0.top.horizontalEdges.equalTo(textView).inset(10)
         }
-
+        
+        maxCharacterLabel.snp.makeConstraints {
+            $0.trailing.bottom.equalToSuperview()
+            $0.width.equalTo(19)
+        }
+        
         characterCountLabel.snp.makeConstraints {
-            $0.trailing.equalTo(textView.snp.trailing)
+            $0.trailing.equalToSuperview().inset(20*ScreenUtils.widthRatio)
             $0.bottom.equalToSuperview()
+            $0.width.equalTo(18)
         }
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        glassBorderView.layoutIfNeeded()
+        
+        glassBorderView.addGlassBorder(GlassBorderAttributes(width: 1, cornerRadius: 8, glassmorphismType: .buttonGlassDefault))
+    }
+
+    func updateCharacterCount(_ count: Int) {
+        characterCountLabel.text = count < 10 ? "0\(count)" :"\(count)"
+    }
+
+    private func scrollToCaret() {
+        guard let selectedTextRange = textView.selectedTextRange else { return }
+
+        let caretRect = textView.caretRect(for: selectedTextRange.start)
+        let caretRectInScrollView = textView.convert(caretRect, to: scrollView)
+           
+        var contentOffset = scrollView.contentOffset
+
+        if caretRectInScrollView.maxY > (scrollView.bounds.height + contentOffset.y) {
+            contentOffset.y = caretRectInScrollView.maxY - scrollView.bounds.height
+            scrollView.setContentOffset(contentOffset, animated: true)
+
+        } else if caretRectInScrollView.minY < contentOffset.y {
+             contentOffset.y = caretRectInScrollView.minY
+             scrollView.setContentOffset(contentOffset, animated: true)
+        }
+    }
+}
+
+
+// MARK: - UITextViewDelegate
+
+extension CustomTextFieldView: UITextViewDelegate  {
+    
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = !textView.text.isEmpty
 
@@ -126,27 +174,5 @@ final class CustomTextFieldView: BaseView, UITextViewDelegate {
 
         return updatedText.count <= 50
     }
-
-    func updateCharacterCount(_ count: Int) {
-        characterCountLabel.text = "\(count) / 50"
-    }
-
-    private func scrollToCaret() {
-        guard let selectedTextRange = textView.selectedTextRange else { return }
-
-        let caretRect = textView.caretRect(for: selectedTextRange.start)
-        let caretRectInScrollView = textView.convert(caretRect, to: scrollView)
-           
-        var contentOffset = scrollView.contentOffset
-        let textViewHeight = textView.bounds.height
-
-        if caretRectInScrollView.maxY > (scrollView.bounds.height + contentOffset.y) {
-            contentOffset.y = caretRectInScrollView.maxY - scrollView.bounds.height
-            scrollView.setContentOffset(contentOffset, animated: true)
-
-        } else if caretRectInScrollView.minY < contentOffset.y {
-             contentOffset.y = caretRectInScrollView.minY
-             scrollView.setContentOffset(contentOffset, animated: true)
-        }
-    }
+    
 }

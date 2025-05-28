@@ -66,7 +66,7 @@ final class LocalVerificationView: BaseView {
         
         nextButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(21+ScreenUtils.heightRatio*16)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*16)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
             $0.height.equalTo(54)
         }
         
