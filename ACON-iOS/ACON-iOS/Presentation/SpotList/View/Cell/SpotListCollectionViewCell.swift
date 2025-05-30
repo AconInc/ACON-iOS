@@ -17,7 +17,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     private let dimImage = UIImageView()
 
     private let noImageContentView = SpotNoImageContentView()
-    private let loginErrorView = LoginLockOverlayView()
+    private let loginlockOverlayView = LoginLockOverlayView()
 
     private let titleLabel = UILabel()
     private let acornCountButton = UIButton()
@@ -39,7 +39,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
                          acornCountButton,
                          tagStackView,
                          findCourseButton,
-                         loginErrorView)
+                         loginlockOverlayView)
     }
 
     override func setLayout() {
@@ -80,7 +80,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.height.equalTo(36)
         }
 
-        loginErrorView.snp.makeConstraints {
+        loginlockOverlayView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
 
@@ -119,7 +119,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.updateGlassButtonState(state: .default)
         }
 
-        loginErrorView.do {
+        loginlockOverlayView.do {
             $0.isHidden = true
             $0.clipsToBounds = true
             $0.layer.cornerRadius = cornerRadius
@@ -174,8 +174,8 @@ extension SpotListCollectionViewCell: SpotListCellConfigurable {
         findCourseButton.setAttributedTitle(text: courseTitle, style: .b1SB)
     }
 
-    func showLoginCell(_ show: Bool) {
-        loginErrorView.isHidden = !show
+    func overlayLoginLock(_ show: Bool) {
+        loginlockOverlayView.isHidden = !show
     }
 
 }

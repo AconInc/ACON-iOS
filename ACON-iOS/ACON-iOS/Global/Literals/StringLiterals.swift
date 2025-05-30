@@ -163,9 +163,11 @@ enum StringLiterals {
         
         static let walk = "도보 "
         
+        static let bike = "자전거로 "
+        
         static let minuteFindCourse = "분 길찾기"
         
-        static let preparingImages = "장소 이미지를\n준비하고 있어요"
+        static let imageLoadingFailed = "이미지 로딩에 실패했어요"
         
         static let needLoginToSeeMore = "더 많은 장소를 보기 위해\n로그인이 필요해요"
         
@@ -180,6 +182,20 @@ enum StringLiterals {
         
         static let exploreToDiscover = "직접 가봐야 알 수 있는 장소네요\n설레임을 안고 떠나볼까요?"
         
+        static let preparingImage = "장소 사진을 준비하고 있어요"
+        
+        
+        // NOTE: no matching spots
+        
+        static let noMatchingSpot = "이런...\n딱 맞는 장소가 없어요"
+        
+        static let sorryForNotShowing = "원하시는 결과를 보여드리지 못해 죄송해요."
+        
+        static let willSuggestNextTime = "다음에 들어오실 땐,\n꼭 찾아서 추천해드릴게요"
+        
+        static let requestToAddSpot = "장소 등록 신청하기"
+        
+        static let howAboutTheseInstead = "대신 여기는 어떠세요?"
     }
     
     enum LocalVerification {

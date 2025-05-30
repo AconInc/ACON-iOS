@@ -455,11 +455,11 @@ private extension SpotListViewController {
             return UICollectionViewCell()
         }
 
-        let showLoginCell = !AuthManager.shared.hasToken && indexPath.item > 4
+        let lockCell = !AuthManager.shared.hasToken && indexPath.item > 4
 
         cell.bind(spot: spotList.spotList[indexPath.item])
-        cell.showLoginCell(showLoginCell)
-        
+        cell.overlayLoginLock(lockCell)
+
         return cell
     }
 

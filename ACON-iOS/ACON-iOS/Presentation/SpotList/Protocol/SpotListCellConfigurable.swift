@@ -10,6 +10,6 @@ import Foundation
 protocol SpotListCellConfigurable {
 
     func bind(spot: SpotModel)
-    func showLoginCell(_ show: Bool)
+    func overlayLoginLock(_ show: Bool)
 
 }
