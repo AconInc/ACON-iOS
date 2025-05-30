@@ -29,7 +29,6 @@
 		1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */; };
 		1547A6F22D33AD4500E96616 /* SpotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6F12D33AD4500E96616 /* SpotModel.swift */; };
 		1547A8732D34157700E96616 /* SpotListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A8722D34157700E96616 /* SpotListViewModel.swift */; };
-		1547A8782D3550D900E96616 /* MatchingRateBgColorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A8772D3550D900E96616 /* MatchingRateBgColorType.swift */; };
 		1547A8802D358E2700E96616 /* SpotListFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A87F2D358E2700E96616 /* SpotListFilterView.swift */; };
 		1547A8822D358E3000E96616 /* SpotListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A8812D358E3000E96616 /* SpotListFilterViewController.swift */; };
 		1547A8852D3595B600E96616 /* SpotListFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A8842D3595B600E96616 /* SpotListFilterModel.swift */; };
@@ -280,7 +279,6 @@
 		1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewCell.swift; sourceTree = "<group>"; };
 		1547A6F12D33AD4500E96616 /* SpotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotModel.swift; sourceTree = "<group>"; };
 		1547A8722D34157700E96616 /* SpotListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewModel.swift; sourceTree = "<group>"; };
-		1547A8772D3550D900E96616 /* MatchingRateBgColorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingRateBgColorType.swift; sourceTree = "<group>"; };
 		1547A87F2D358E2700E96616 /* SpotListFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListFilterView.swift; sourceTree = "<group>"; };
 		1547A8812D358E3000E96616 /* SpotListFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListFilterViewController.swift; sourceTree = "<group>"; };
 		1547A8842D3595B600E96616 /* SpotListFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListFilterModel.swift; sourceTree = "<group>"; };
@@ -604,7 +602,6 @@
 		1547A8742D354E2900E96616 /* Type */ = {
 			isa = PBXGroup;
 			children = (
-				1547A8772D3550D900E96616 /* MatchingRateBgColorType.swift */,
 				15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */,
 				15AA6D162D68B4EF008021C6 /* SpotListErrorType.swift */,
 				157C061E2DC5E7CE000B04AF /* SpotTagType.swift */,
@@ -1906,7 +1903,6 @@
 				745ECBA12D615B9F005129B0 /* AlbumTableViewCell.swift in Sources */,
 				746F39822D342523003F8498 /* ACSheetDetentType.swift in Sources */,
 				74D297F42D6343E300DDEE31 /* ImageTargetType.swift in Sources */,
-				1547A8782D3550D900E96616 /* MatchingRateBgColorType.swift in Sources */,
 				1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */,
 				1547A8802D358E2700E96616 /* SpotListFilterView.swift in Sources */,
 				7414295D2D5D313200B69528 /* UITableViewCell+.swift in Sources */,
