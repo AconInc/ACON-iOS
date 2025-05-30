@@ -8,12 +8,7 @@
 import UIKit
 
 class SpotListCollectionViewHeader: UICollectionReusableView {
-    
-    // MARK: - Properties
-    
-    static let identifier: String = String(describing: SpotListCollectionViewHeader.self)
-    
-    
+
     // MARK: - UI Properties
     
     private let titleLabel = UILabel()
