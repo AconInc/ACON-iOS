@@ -82,16 +82,13 @@ extension SpotListView {
     func updateCollectionViewLayout(type: TransportModeType?) {
         if type == .walking {
             collectionView.do {
-                $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: SpotListItemSizeType.itemMaxHeight.value/2 - self.bounds.height/2, right: 0)
+                $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: self.bounds.height/2 - SpotListItemSizeType.itemMaxHeight.value/2, right: 0)
                 $0.setCollectionViewLayout(walkingFlowLayout, animated: false)
-                $0.decelerationRate = .fast
             }
         } else {
             collectionView.do {
-                $0.backgroundColor = .clear
                 $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                 $0.setCollectionViewLayout(bikingFlowLayout, animated: false)
-                $0.decelerationRate = .fast
             }
         }
     }

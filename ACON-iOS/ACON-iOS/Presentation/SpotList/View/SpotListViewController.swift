@@ -101,7 +101,7 @@ class SpotListViewController: BaseNavViewController {
 }
 
 
-// MARK: - Bind ViewModel
+// MARK: - Bind VM, Observable
 
 extension SpotListViewController {
     
@@ -138,13 +138,12 @@ extension SpotListViewController {
                 DispatchQueue.main.async {
                     self.spotListView.updateCollectionViewLayout(type: spotList.transportMode)
                     self.spotListView.collectionView.reloadData()
+                    self.spotListView.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
                 }
                 
                 // NOTE: 스켈레톤 최소 0.5초 유지
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-                    guard let self = self else { return }
-
-                    spotListView.hideSkeletonView(isHidden: true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.spotListView.hideSkeletonView(isHidden: true)
                 }
             } else {
                 // TODO: 네트워크 에러뷰, 버튼에 postSpotList() 액션 설정
@@ -168,10 +167,8 @@ extension SpotListViewController {
         spotToggleButton.selectedType.bind { [weak self] spotType in
             guard let self = self,
                   let spotType = spotType else { return }
+
             viewModel.spotType = spotType
-            
-            spotListView.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-            spotListView.collectionView.reloadData()
             viewModel.filterList = []
             viewModel.postSpotList()
         }
