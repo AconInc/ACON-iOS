@@ -143,7 +143,8 @@ extension SpotListViewController {
         viewModel.onSuccessPostSpotList.bind { [weak self] isSuccess in
             guard let self = self,
                   let isSuccess = isSuccess else { return }
-            let spotList = viewModel.spotType == .restaurant ? viewModel.restaurantList : viewModel.cafeList
+
+            let spotList = viewModel.spotList
             if isSuccess {
                 DispatchQueue.main.async {
                     self.spotListView.errorView.isHidden = true
@@ -154,10 +155,10 @@ extension SpotListViewController {
                 // NOTE: 스켈레톤 최소 0.5초 유지
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
                     guard let self = self else { return }
+
                     spotListView.hideSkeletonView(isHidden: true)
-                    let isRestaurantEmpty: Bool = viewModel.spotType == .restaurant && viewModel.restaurantList.spotList.isEmpty
-                    let isCafeEmpty: Bool = viewModel.spotType == .cafe && viewModel.cafeList.spotList.isEmpty
-                    if isRestaurantEmpty || isCafeEmpty {
+
+                    if viewModel.spotList.spotList.isEmpty {
                         spotListView.errorView.setStyle(
                             errorMessage: viewModel.errorType?.errorMessage,
                             buttonTitle: nil
@@ -317,12 +318,12 @@ extension SpotListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return viewModel.spotType == .restaurant ? viewModel.restaurantList.spotList.count : viewModel.cafeList.spotList.count
+        return viewModel.spotList.spotList.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let spotList = viewModel.spotType == .restaurant ? viewModel.restaurantList : viewModel.cafeList
+        let spotList = viewModel.spotList
 
         switch spotList.transportMode {
         case .walking:
@@ -347,7 +348,7 @@ extension SpotListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
-        let spotList = viewModel.spotType == .restaurant ? viewModel.restaurantList : viewModel.cafeList
+        let spotList = viewModel.spotList
 
         switch kind {
         case UICollectionView.elementKindSectionHeader:
@@ -376,7 +377,7 @@ extension SpotListViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = viewModel.spotType == .restaurant ? viewModel.restaurantList.spotList[indexPath.item] : viewModel.cafeList.spotList[indexPath.item]
+        let item = viewModel.spotList.spotList[indexPath.item]
         let vc = SpotDetailViewController(item.id, item.tagList)
 
         ACLocationManager.shared.removeDelegate(viewModel)
@@ -402,7 +403,7 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let spotList = viewModel.spotType == .restaurant ? viewModel.restaurantList : viewModel.cafeList
+        let spotList = viewModel.spotList
         if spotList.transportMode == .walking {
             return CGSize(width: SpotListItemSizeType.itemMaxWidth.value,
                           height: SpotListItemSizeType.headerHeight.value)
@@ -425,7 +426,7 @@ extension SpotListViewController: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView,
                                    withVelocity velocity: CGPoint,
                                    targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if viewModel.restaurantList.transportMode == .walking {
+        if viewModel.spotList.transportMode == .walking {
             let cellHeight = SpotListItemSizeType.itemMaxHeight.value + SpotListItemSizeType.minimumLineSpacing.value
             let targetY = targetContentOffset.pointee.y
             
