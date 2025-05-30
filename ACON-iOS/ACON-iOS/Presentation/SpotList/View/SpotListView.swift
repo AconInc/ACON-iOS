@@ -23,7 +23,7 @@ class SpotListView: BaseView {
         collectionViewLayout: UICollectionViewFlowLayout()
     )
 
-    private let skeletonView = SkeletonView()
+    let skeletonView = SkeletonView()
 
     let regionErrorView = RegionErrorView()
 
@@ -65,6 +65,8 @@ class SpotListView: BaseView {
             $0.decelerationRate = .fast
         }
 
+        skeletonView.isHidden = true
+
         // TODO: 배경 블러
     }
 
@@ -74,10 +76,6 @@ class SpotListView: BaseView {
 // MARK: - Internal Methods
 
 extension SpotListView {
-
-    func hideSkeletonView(isHidden: Bool) {
-        skeletonView.isHidden = isHidden
-    }
 
     func updateCollectionViewLayout(type: TransportModeType?) {
         if type == .walking {

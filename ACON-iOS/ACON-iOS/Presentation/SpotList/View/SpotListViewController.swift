@@ -114,6 +114,7 @@ extension SpotListViewController {
             if onSuccess {
                 viewModel.postSpotList()
                 spotListView.regionErrorView.isHidden = true
+                spotListView.skeletonView.isHidden = false
             }
             
             // NOTE: 법정동 조회 실패 (서비스불가지역)
@@ -143,12 +144,12 @@ extension SpotListViewController {
                 
                 // NOTE: 스켈레톤 최소 0.5초 유지
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.spotListView.hideSkeletonView(isHidden: true)
+                    self.spotListView.skeletonView.isHidden = true
                 }
             } else {
                 // TODO: 네트워크 에러뷰, 버튼에 postSpotList() 액션 설정
 
-                spotListView.hideSkeletonView(isHidden: true)
+                spotListView.skeletonView.isHidden = true
                 
                 // TODO: Post 하는동안 로딩스켈레톤
                 
@@ -200,7 +201,7 @@ private extension SpotListViewController {
             }) { [weak self] _ in
                 
                 self?.viewModel.requestLocation()
-                self?.spotListView.hideSkeletonView(isHidden: false)
+                self?.spotListView.skeletonView.isHidden = false
             }
         }
     }
@@ -220,12 +221,11 @@ private extension SpotListViewController {
 
     @objc
     func tappedReloadButton() {
-        spotListView.hideSkeletonView(isHidden: false)
+        spotListView.skeletonView.isHidden = false
         guard AuthManager.shared.hasToken else {
             presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
             return
         }
-        spotListView.hideSkeletonView(isHidden: false)
         viewModel.requestLocation()
     }
     

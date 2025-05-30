@@ -18,11 +18,15 @@ class RegionErrorView: BaseView {
     // MARK: - UI Setting Methods
 
     override func setHierarchy() {
+        super.setHierarchy()
+
         self.addSubviews(titleLabel,
                          descriptionLabel)
     }
 
     override func setLayout() {
+        super.setLayout()
+
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(24 + ScreenUtils.navViewHeight)
             $0.centerX.equalToSuperview()
@@ -35,7 +39,7 @@ class RegionErrorView: BaseView {
     }
 
     override func setStyle() {
-        backgroundColor = .clear
+        super.setStyle()
 
         titleLabel.setLabel(text: StringLiterals.SpotList.unsupportedRegion, style: .t2SB, alignment: .center)
 
