@@ -1,15 +1,13 @@
 //
-//  SpotListCollectionViewCell.swift
+//  NoMatchingSpotListCollectionViewCell.swift
 //  ACON-iOS
 //
-//  Created by 김유림 on 1/12/25.
+//  Created by 김유림 on 5/29/25.
 //
 
 import UIKit
 
-import Kingfisher
-
-class SpotListCollectionViewCell: BaseCollectionViewCell {
+class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - UI Properties
 
@@ -45,7 +43,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     override func setLayout() {
         super.setLayout()
 
-        let edge = ScreenUtils.widthRatio * 20
+        let edge = ScreenUtils.widthRatio * 16
 
         bgImage.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -83,7 +81,6 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         loginErrorView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-
     }
 
     override func setStyle() {
@@ -125,7 +122,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.layer.cornerRadius = cornerRadius
         }
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -137,7 +134,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
 // MARK: - Binding
 
-extension SpotListCollectionViewCell: SpotListCellConfigurable {
+extension NoMatchingSpotListCollectionViewCell: SpotListCellConfigurable {
 
     func bind(spot: SpotModel) {
         bgImage.kf.setImage(
