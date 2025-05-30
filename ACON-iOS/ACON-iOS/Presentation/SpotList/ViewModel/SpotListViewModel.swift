@@ -20,8 +20,9 @@ class SpotListViewModel: Serviceable {
     
     var errorType: SpotListErrorType? = nil
     
-    var restaurantList: [SpotModel] = []
-    var cafeList: [SpotModel] = []
+//    var spotList = SpotListModel() // TODO: 그냥 spotList로 합치기
+    var restaurantList: SpotListModel = SpotListModel()
+    var cafeList: SpotListModel = SpotListModel(transportMode: .biking, spotList: [SpotModel(id: 1, imageURL: nil, name: "이미지없는 식당", acornCount: 50, tagList: [.new, .local, .top(number: 1)], eta: 1, latitude: 35.785834, longitude: 128.25)])
     
     // TODO: 삭제
     private var restaurantDummy: [SpotModel] = [
@@ -119,7 +120,7 @@ extension SpotListViewModel {
         ACService.shared.spotListService.postSpotList(requestBody: requestBody) { [weak self] response in
             switch response {
             case .success(let data):
-                let spotList: [SpotModel] = data.spotList.map { SpotModel(from: $0) }
+                let spotList: SpotListModel = SpotListModel(from: data)
 
                 if self?.spotType == .restaurant {
                     self?.restaurantList = spotList
@@ -127,7 +128,7 @@ extension SpotListViewModel {
                     self?.cafeList = spotList
                 }
 
-                if spotList.isEmpty { self?.errorType = .emptyList }
+                if spotList.spotList.isEmpty { self?.errorType = .emptyList }
                 self?.onSuccessPostSpotList.value = true
 
             case .reIssueJWT:
@@ -148,7 +149,8 @@ extension SpotListViewModel {
                 print("🥑Failed To Post")
 #if DEBUG
                 // TODO: 삭제
-                self?.restaurantList = self?.restaurantDummy ?? []
+                self?.restaurantList = SpotListModel(transportMode: .walking,
+                                                     spotList: self?.restaurantDummy ?? [])
                 self?.onSuccessPostSpotList.value = true
                 return
 #endif

@@ -14,6 +14,14 @@ class SpotListCollectionViewFlowLayout: UICollectionViewFlowLayout {
     private let minCellSize  = CGSize(width: SpotListItemSizeType.itemMinWidth.value,
                                       height: SpotListItemSizeType.itemMinHeight.value)
 
+    override func prepare() {
+        super.prepare()
+
+        itemSize = maxCellSize
+        minimumLineSpacing = SpotListItemSizeType.minimumLineSpacing.value
+        scrollDirection = .vertical
+    }
+
     // NOTE: 셀이 센터에서 멀어질수록 작고 흐려지게 합니다.
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let attributes = super.layoutAttributesForElements(in: rect)?.map({ $0.copy() }) as? [UICollectionViewLayoutAttributes],

@@ -11,14 +11,17 @@ class SpotListView: BaseView {
 
     // MARK: - UI Properties
 
+    let walkingFlowLayout = SpotListCollectionViewFlowLayout()
+    let bikingFlowLayout = UICollectionViewFlowLayout().then {
+        $0.itemSize = CGSize(width: NoMatchingSpotListItemSizeType.itemWidth.value,
+                             height: NoMatchingSpotListItemSizeType.itemHeight.value)
+        $0.minimumLineSpacing = NoMatchingSpotListItemSizeType.minimumLineSpacing.value
+    }
+
     let collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
-
-    private let noAcornImageView = UIImageView()
-
-    private let noAcornLabel = UILabel()
 
     private let skeletonView = SkeletonView()
 
@@ -69,16 +72,9 @@ class SpotListView: BaseView {
 private extension SpotListView {
 
     func setCollectionView() {
-        let flowLayout = SpotListCollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: SpotListItemSizeType.itemMaxWidth.value,
-                                     height: SpotListItemSizeType.itemMaxHeight.value)
-        flowLayout.minimumLineSpacing = SpotListItemSizeType.minimumLineSpacing.value
-        flowLayout.scrollDirection = .vertical
-
         collectionView.do {
             $0.backgroundColor = .clear
             $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: SpotListItemSizeType.itemMaxHeight.value/2 - self.bounds.height/2, right: 0)
-            $0.setCollectionViewLayout(flowLayout, animated: true)
             $0.decelerationRate = .fast
         }
     }
@@ -94,4 +90,20 @@ extension SpotListView {
         skeletonView.isHidden = isHidden
     }
 
+    func updateCollectionViewLayout(type: TransportModeType?) {
+        if type == .walking {
+            collectionView.do {
+                $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: SpotListItemSizeType.itemMaxHeight.value/2 - self.bounds.height/2, right: 0)
+                $0.setCollectionViewLayout(walkingFlowLayout, animated: false)
+                $0.decelerationRate = .fast
+            }
+        } else {
+            collectionView.do {
+                $0.backgroundColor = .clear
+                $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                $0.setCollectionViewLayout(bikingFlowLayout, animated: false)
+                $0.decelerationRate = .fast
+            }
+        }
+    }
 }
