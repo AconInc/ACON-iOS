@@ -25,7 +25,7 @@ class SpotListView: BaseView {
 
     private let skeletonView = SkeletonView()
 
-    let errorView = TempSpotListErrorView(.imageTitleButton) // TODO: 수정
+    let regionErrorView = RegionErrorView()
 
 
     // MARK: - LifeCycles
@@ -36,7 +36,7 @@ class SpotListView: BaseView {
         self.addSubviews(
             collectionView,
             skeletonView,
-            errorView)
+            regionErrorView)
     }
 
     override func setLayout() {
@@ -52,7 +52,7 @@ class SpotListView: BaseView {
             $0.horizontalEdges.top.equalTo(self.safeAreaLayoutGuide)
         }
 
-        errorView.snp.makeConstraints {
+        regionErrorView.snp.makeConstraints {
             $0.edges.equalTo(collectionView)
         }
     }
@@ -60,23 +60,12 @@ class SpotListView: BaseView {
     override func setStyle() {
         super.setStyle()
 
-        setCollectionView()
-        // TODO: 배경 블러
-    }
-
-}
-
-
-// MARK: - UI Settings
-
-private extension SpotListView {
-
-    func setCollectionView() {
         collectionView.do {
             $0.backgroundColor = .clear
-            $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: SpotListItemSizeType.itemMaxHeight.value/2 - self.bounds.height/2, right: 0)
             $0.decelerationRate = .fast
         }
+
+        // TODO: 배경 블러
     }
 
 }

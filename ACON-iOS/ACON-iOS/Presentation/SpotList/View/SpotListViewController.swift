@@ -69,7 +69,6 @@ class SpotListViewController: BaseNavViewController {
         super.setStyle()
         
         setGlassMorphism()
-        spotListView.errorView.isHidden = true
         
         filterButton.do {
             var config = UIButton.Configuration.filled()
@@ -97,12 +96,6 @@ class SpotListViewController: BaseNavViewController {
             action: #selector(tappedFilterButton),
             for: .touchUpInside
         )
-        
-        spotListView.errorView.confirmButton.addTarget(
-            self,
-            action: #selector(tappedReloadButton),
-            for: .touchUpInside
-        )
     }
     
 }
@@ -117,37 +110,32 @@ extension SpotListViewController {
             guard let self = self,
                   let onSuccess = onSuccess else { return }
             
-            // NOTE: 법정동 조회 성공 -> 네비게이션타이틀
+            // NOTE: 법정동 조회 성공 -> 장소 조회
             if onSuccess {
                 viewModel.postSpotList()
+                spotListView.regionErrorView.isHidden = true
             }
             
-            // NOTE: 법정동 조회 실패 (서비스불가지역) -> 에러 뷰, 네비게이션타이틀
+            // NOTE: 법정동 조회 실패 (서비스불가지역)
             else if viewModel.errorType == .unsupportedRegion {
-                spotListView.errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
-                                   buttonTitle: "새로고침 하기")
+                spotListView.regionErrorView.isHidden = false
             }
             
-            // NOTE: 법정동 조회 실패 (기타 에러) -> 에러뷰, 네비게이션타이틀
+            // NOTE: 기타 네트워크 에러
             else {
-                spotListView.errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
-                                   buttonTitle: "새로고침 하기")
+                // TODO: 네트워크 에러뷰, 버튼에 getDong() 액션 설정
             }
-            
-            // NOTE: 에러뷰 숨김 여부 처리
-            spotListView.errorView.isHidden = onSuccess
             
             viewModel.onSuccessGetDong.value = nil
         }
         
-        viewModel.onSuccessPostSpotList.bind { [weak self] isSuccess in
+        viewModel.onSuccessPostSpotList.bind { [weak self] onSuccess in
             guard let self = self,
-                  let isSuccess = isSuccess else { return }
+                  let onSuccess = onSuccess else { return }
 
             let spotList = viewModel.spotList
-            if isSuccess {
+            if onSuccess {
                 DispatchQueue.main.async {
-                    self.spotListView.errorView.isHidden = true
                     self.spotListView.updateCollectionViewLayout(type: spotList.transportMode)
                     self.spotListView.collectionView.reloadData()
                 }
@@ -157,21 +145,10 @@ extension SpotListViewController {
                     guard let self = self else { return }
 
                     spotListView.hideSkeletonView(isHidden: true)
-
-                    if viewModel.spotList.spotList.isEmpty {
-                        spotListView.errorView.setStyle(
-                            errorMessage: viewModel.errorType?.errorMessage,
-                            buttonTitle: nil
-                        )
-                        spotListView.errorView.isHidden = false
-                    }
                 }
             } else {
-                // TODO: 네트워크 에러뷰로 교체, 버튼에 postSpotList() 액션 설정
-                spotListView.errorView.setStyle(
-                    errorMessage: StringLiterals.Error.networkErrorOccurred,
-                    buttonTitle: StringLiterals.Error.tryAgain
-                )
+                // TODO: 네트워크 에러뷰, 버튼에 postSpotList() 액션 설정
+
                 spotListView.hideSkeletonView(isHidden: true)
                 
                 // TODO: Post 하는동안 로딩스켈레톤
@@ -184,9 +161,6 @@ extension SpotListViewController {
             filterButton.isSelected = !viewModel.filterList.isEmpty
             
             viewModel.onFinishRefreshingSpotList.value = true
-            
-            // NOTE: 에러뷰 숨김 여부 처리
-            spotListView.errorView.isHidden = isSuccess
         }
     }
     

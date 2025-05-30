@@ -157,9 +157,9 @@ enum StringLiterals {
         
         static let emptySpotListErrorMessage = "앗! 일치하는 도토리 맛집이 없어요"
         
-        static let unsupportedRegion = "서비스 불가지역"
+        static let unsupportedRegion = "서비스 불가지역이에요"
         
-        static let unsupportedRegionErrorMessage = "앗! 서비스 지원이 불가능한 지역에 있어요"
+        static let unsupportedRegionPleaseRetry = "서비스 지원이 불가능한 지역에 있어요.\n지역을 옮기신 후 다시 시도해주세요."
         
         static let walk = "도보 "
         

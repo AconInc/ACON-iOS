@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1502D71B2DE9B7ED00A21D81 /* UICollectionReusableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1502D71A2DE9B7ED00A21D81 /* UICollectionReusableView+.swift */; };
+		1502D71D2DE9D44100A21D81 /* RegionErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1502D71C2DE9D44100A21D81 /* RegionErrorView.swift */; };
 		150A105C2DA28F2600B0BC9A /* ACTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150A105B2DA28F2600B0BC9A /* ACTextField.swift */; };
 		151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003EB2D5FBF7200409DF4 /* GetProfileResponse.swift */; };
 		151003EE2D5FC48B00409DF4 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003ED2D5FC48B00409DF4 /* ProfileService.swift */; };
@@ -265,6 +266,7 @@
 
 /* Begin PBXFileReference section */
 		1502D71A2DE9B7ED00A21D81 /* UICollectionReusableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+.swift"; sourceTree = "<group>"; };
+		1502D71C2DE9D44100A21D81 /* RegionErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionErrorView.swift; sourceTree = "<group>"; };
 		150A105B2DA28F2600B0BC9A /* ACTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTextField.swift; sourceTree = "<group>"; };
 		151003EB2D5FBF7200409DF4 /* GetProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileResponse.swift; sourceTree = "<group>"; };
 		151003ED2D5FC48B00409DF4 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
@@ -746,6 +748,7 @@
 			isa = PBXGroup;
 			children = (
 				15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */,
+				1502D71C2DE9D44100A21D81 /* RegionErrorView.swift */,
 				15C0ED512D429F7400C9ED83 /* SkeletonView.swift */,
 				157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */,
 				157C06202DC5EBB4000B04AF /* SpotTagButton.swift */,
@@ -1911,6 +1914,7 @@
 				743900912DC50926002F91B1 /* UIVisualEffectView+.swift in Sources */,
 				741A07592D355F1400778219 /* ReviewFinishedViewController.swift in Sources */,
 				15A3F6AC2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift in Sources */,
+				1502D71D2DE9D44100A21D81 /* RegionErrorView.swift in Sources */,
 				74D297F62D63456400DDEE31 /* GetPresignedURLRequest.swift in Sources */,
 				748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */,
 				741429672D5D550C00B69528 /* AppVersionManager.swift in Sources */,
