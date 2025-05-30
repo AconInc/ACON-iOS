@@ -9,7 +9,7 @@ import Foundation
 
 struct PostSpotListResponse: Decodable {
 
-    let transportMode: String
+    let transportMode: String?
 
     let spotList: [SpotDTO]
 

@@ -7,7 +7,15 @@
 
 import UIKit
 
-// MARK: - Spot
+// MARK: - Model
+
+struct SpotListModel {
+
+    let transportMode: TransportModeType?
+
+    let spotList: [SpotModel]
+
+}
 
 struct SpotModel: Equatable {
 
@@ -30,10 +38,31 @@ struct SpotModel: Equatable {
 }
 
 
-// MARK: - Init from DTO
+// MARK: - init
+
+extension SpotListModel {
+
+    init() {
+        self.transportMode = nil
+        self.spotList = []
+    }
+
+}
+
+
+// MARK: - init from DTO
+
+extension SpotListModel {
+
+    init(from dto: PostSpotListResponse) {
+        self.transportMode = TransportModeType(dto.transportMode)
+        self.spotList = dto.spotList.map { SpotModel(from: $0) }
+    }
+
+}
 
 extension SpotModel {
-    
+
     init(from dto: SpotDTO) {
         self.id = dto.id
         self.imageURL = dto.image
@@ -47,5 +76,5 @@ extension SpotModel {
         self.latitude = dto.latitude
         self.longitude = dto.longitude
     }
-    
+
 }
