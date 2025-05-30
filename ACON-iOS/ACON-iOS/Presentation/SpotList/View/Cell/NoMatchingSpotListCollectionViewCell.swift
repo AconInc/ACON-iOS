@@ -14,7 +14,7 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
     private let bgImage = UIImageView()
     private let dimImage = UIImageView()
 
-    private let noImageContentView = SpotNoImageContentView()
+    private let noImageContentView = SpotNoImageContentView(.descriptionOnly)
     private let loginLockOverlayView = LoginLockOverlayView()
 
     private let titleLabel = UILabel()
@@ -54,7 +54,8 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
         }
 
         noImageContentView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().offset(76)
         }
 
         titleLabel.snp.makeConstraints {
@@ -165,9 +166,9 @@ extension NoMatchingSpotListCollectionViewCell: SpotListCellConfigurable {
             tagStackView.addArrangedSubview(SpotTagButton(tag))
         }
 
-        let walk: String = StringLiterals.SpotList.walk
+        let bike: String = StringLiterals.SpotList.bike
         let findCourse: String = StringLiterals.SpotList.minuteFindCourse
-        let courseTitle: String = walk + String(spot.eta) + findCourse
+        let courseTitle: String = bike + String(spot.eta) + findCourse
         findCourseButton.setAttributedTitle(text: courseTitle, style: .b1SB)
     }
 

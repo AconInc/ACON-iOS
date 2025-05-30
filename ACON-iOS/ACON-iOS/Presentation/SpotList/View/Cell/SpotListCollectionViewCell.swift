@@ -16,7 +16,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     private let bgImage = UIImageView()
     private let dimImage = UIImageView()
 
-    private let noImageContentView = SpotNoImageContentView()
+    private let noImageContentView = SpotNoImageContentView(.iconAndDescription)
     private let loginlockOverlayView = LoginLockOverlayView()
 
     private let titleLabel = UILabel()
