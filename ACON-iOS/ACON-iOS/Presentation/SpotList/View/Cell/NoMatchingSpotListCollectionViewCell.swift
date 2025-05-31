@@ -43,7 +43,7 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
     override func setLayout() {
         super.setLayout()
 
-        let edge = ScreenUtils.widthRatio * 16
+        let edge = ScreenUtils.horizontalInset
 
         bgImage.snp.makeConstraints {
             $0.edges.equalToSuperview()

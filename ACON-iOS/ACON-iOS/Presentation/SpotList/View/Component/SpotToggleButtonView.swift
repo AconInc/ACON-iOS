@@ -53,9 +53,7 @@ class SpotToggleButtonView: GlassmorphismView {
 
         selectorView.snp.makeConstraints {
             $0.width.equalTo(selectorWidth)
-            $0.height.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.centerY.equalToSuperview()
+            $0.height.leading.centerY.equalToSuperview()
         }
 
         restaurantButton.snp.makeConstraints {
