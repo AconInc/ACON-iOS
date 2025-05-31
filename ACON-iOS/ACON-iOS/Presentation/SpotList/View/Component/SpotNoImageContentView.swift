@@ -11,14 +11,15 @@ class SpotNoImageContentView: BaseView {
 
     // MARK: - Properties
 
-    let contentType: ContentType
-    let descriptions: Set<String> = [StringLiterals.SpotList.noImageButAconGuarantees,
+    private let contentType: ContentType
+
+    private let descriptions: Set<String> = [StringLiterals.SpotList.noImageButAconGuarantees,
                                   StringLiterals.SpotList.mysteryPlaceNoImage,
                                   StringLiterals.SpotList.exploreToDiscover]
-    let oneLineDescription: String = StringLiterals.SpotList.preparingImage
+    private let oneLineDescription: String = StringLiterals.SpotList.preparingImage
 
-    let iconImageView = UIImageView()
-    let descriptionLabel = UILabel()
+    private let iconImageView = UIImageView()
+    private let descriptionLabel = UILabel()
 
 
     // MARK: - init

@@ -161,9 +161,15 @@ extension NoMatchingSpotListCollectionViewCell: SpotListCellConfigurable {
         let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
         acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
 
-        tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        spot.tagList.forEach { tag in
-            tagStackView.addArrangedSubview(SpotTagButton(tag))
+        if !spot.tagList.isEmpty {
+            tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+            spot.tagList.forEach { tag in
+                tagStackView.addArrangedSubview(SpotTagButton(tag))
+            }
+            
+            noImageContentView.snp.updateConstraints {
+                $0.top.equalToSuperview().offset(88)
+            }
         }
 
         let bike: String = StringLiterals.SpotList.bike
