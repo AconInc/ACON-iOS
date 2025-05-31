@@ -17,6 +17,7 @@ class SpotToggleButtonView: GlassmorphismView {
 
     private let width: CGFloat = 150
     private let height: CGFloat = 36
+    private let buttonWidth: CGFloat = 45
     private let selectorWidth: CGFloat = 77
     private let horizontalPadding: CGFloat = 16
     private let spacing: CGFloat = 28
@@ -52,13 +53,14 @@ class SpotToggleButtonView: GlassmorphismView {
 
         selectorView.snp.makeConstraints {
             $0.width.equalTo(selectorWidth)
-            $0.height.equalToSuperview()
+            $0.height.leading.centerY.equalToSuperview()
         }
 
         restaurantButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(horizontalPadding)
             $0.centerY.equalToSuperview()
             $0.height.equalTo(height)
+            $0.width.equalTo(buttonWidth)
         }
 
         cafeButton.snp.makeConstraints {
@@ -66,6 +68,7 @@ class SpotToggleButtonView: GlassmorphismView {
             $0.trailing.equalToSuperview().inset(horizontalPadding)
             $0.centerY.equalToSuperview()
             $0.height.equalTo(height)
+            $0.width.equalTo(buttonWidth)
         }
     }
 

@@ -11,18 +11,21 @@ class SpotListView: BaseView {
 
     // MARK: - UI Properties
 
+    let walkingFlowLayout = SpotListCollectionViewFlowLayout()
+    let bikingFlowLayout = UICollectionViewFlowLayout().then {
+        $0.itemSize = CGSize(width: NoMatchingSpotListItemSizeType.itemWidth.value,
+                             height: NoMatchingSpotListItemSizeType.itemHeight.value)
+        $0.minimumLineSpacing = NoMatchingSpotListItemSizeType.minimumLineSpacing.value
+    }
+
     let collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
 
-    private let noAcornImageView = UIImageView()
+    let skeletonView = SkeletonView()
 
-    private let noAcornLabel = UILabel()
-
-    private let skeletonView = SkeletonView()
-
-    let errorView = TempSpotListErrorView(.imageTitleButton) // TODO: 수정
+    let regionErrorView = RegionErrorView()
 
 
     // MARK: - LifeCycles
@@ -33,7 +36,7 @@ class SpotListView: BaseView {
         self.addSubviews(
             collectionView,
             skeletonView,
-            errorView)
+            regionErrorView)
     }
 
     override func setLayout() {
@@ -49,7 +52,7 @@ class SpotListView: BaseView {
             $0.horizontalEdges.top.equalTo(self.safeAreaLayoutGuide)
         }
 
-        errorView.snp.makeConstraints {
+        regionErrorView.snp.makeConstraints {
             $0.edges.equalTo(collectionView)
         }
     }
@@ -57,30 +60,14 @@ class SpotListView: BaseView {
     override func setStyle() {
         super.setStyle()
 
-        setCollectionView()
-        // TODO: 배경 블러
-    }
-
-}
-
-
-// MARK: - UI Settings
-
-private extension SpotListView {
-
-    func setCollectionView() {
-        let flowLayout = SpotListCollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: SpotListItemSizeType.itemMaxWidth.value,
-                                     height: SpotListItemSizeType.itemMaxHeight.value)
-        flowLayout.minimumLineSpacing = SpotListItemSizeType.minimumLineSpacing.value
-        flowLayout.scrollDirection = .vertical
-
         collectionView.do {
             $0.backgroundColor = .clear
-            $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: SpotListItemSizeType.itemMaxHeight.value/2 - self.bounds.height/2, right: 0)
-            $0.setCollectionViewLayout(flowLayout, animated: true)
             $0.decelerationRate = .fast
         }
+
+        skeletonView.isHidden = true
+
+        // TODO: 배경 블러
     }
 
 }
@@ -90,8 +77,17 @@ private extension SpotListView {
 
 extension SpotListView {
 
-    func hideSkeletonView(isHidden: Bool) {
-        skeletonView.isHidden = isHidden
+    func updateCollectionViewLayout(type: TransportModeType?) {
+        if type == .walking {
+            collectionView.do {
+                $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: self.bounds.height/2 - SpotListItemSizeType.itemMaxHeight.value/2, right: 0)
+                $0.setCollectionViewLayout(walkingFlowLayout, animated: false)
+            }
+        } else {
+            collectionView.do {
+                $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                $0.setCollectionViewLayout(bikingFlowLayout, animated: false)
+            }
+        }
     }
-
 }

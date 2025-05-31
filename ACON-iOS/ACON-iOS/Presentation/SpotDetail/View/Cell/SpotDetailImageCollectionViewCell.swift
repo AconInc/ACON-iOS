@@ -49,7 +49,7 @@ class SpotDetailImageCollectionViewCell: BaseCollectionViewCell {
         imageErrorView.do {
             $0.isHidden = true
             $0.setStyle(errorImage: .icAcornGlass,
-                        errorMessage: StringLiterals.SpotList.preparingImages,
+                        errorMessage: StringLiterals.SpotList.imageLoadingFailed,
                         glassMorphismtype: .noImageErrorGlass)
         }
     }

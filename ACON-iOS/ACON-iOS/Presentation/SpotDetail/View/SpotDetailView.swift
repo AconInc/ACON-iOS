@@ -16,7 +16,7 @@ final class SpotDetailView: BaseView {
 
     private let dimImageView = UIImageView()
     private let noImageBgImageView = UIImageView()
-    private let noImageContentView = SpotNoImageContentView()
+    private let noImageContentView = SpotNoImageContentView(.iconAndDescription)
 
     private let titleLabel = UILabel()
     private let acornCountButton = UIButton()

@@ -1,23 +1,21 @@
 //
-//  SpotListCollectionViewCell.swift
+//  NoMatchingSpotListCollectionViewCell.swift
 //  ACON-iOS
 //
-//  Created by 김유림 on 1/12/25.
+//  Created by 김유림 on 5/29/25.
 //
 
 import UIKit
 
-import Kingfisher
-
-class SpotListCollectionViewCell: BaseCollectionViewCell {
+class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - UI Properties
 
     private let bgImage = UIImageView()
     private let dimImage = UIImageView()
 
-    private let noImageContentView = SpotNoImageContentView(.iconAndDescription)
-    private let loginlockOverlayView = LoginLockOverlayView()
+    private let noImageContentView = SpotNoImageContentView(.descriptionOnly)
+    private let loginLockOverlayView = LoginLockOverlayView()
 
     private let titleLabel = UILabel()
     private let acornCountButton = UIButton()
@@ -39,13 +37,13 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
                          acornCountButton,
                          tagStackView,
                          findCourseButton,
-                         loginlockOverlayView)
+                         loginLockOverlayView)
     }
 
     override func setLayout() {
         super.setLayout()
 
-        let edge = ScreenUtils.widthRatio * 20
+        let edge = ScreenUtils.horizontalInset
 
         bgImage.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -56,7 +54,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         }
 
         noImageContentView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().offset(76)
         }
 
         titleLabel.snp.makeConstraints {
@@ -80,10 +79,9 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.height.equalTo(36)
         }
 
-        loginlockOverlayView.snp.makeConstraints {
+        loginLockOverlayView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-
     }
 
     override func setStyle() {
@@ -119,13 +117,13 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.updateGlassButtonState(state: .default)
         }
 
-        loginlockOverlayView.do {
+        loginLockOverlayView.do {
             $0.isHidden = true
             $0.clipsToBounds = true
             $0.layer.cornerRadius = cornerRadius
         }
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -137,7 +135,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
 // MARK: - Binding
 
-extension SpotListCollectionViewCell: SpotListCellConfigurable {
+extension NoMatchingSpotListCollectionViewCell: SpotListCellConfigurable {
 
     func bind(spot: SpotModel) {
         bgImage.kf.setImage(
@@ -163,19 +161,25 @@ extension SpotListCollectionViewCell: SpotListCellConfigurable {
         let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
         acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
 
-        tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        spot.tagList.forEach { tag in
-            tagStackView.addArrangedSubview(SpotTagButton(tag))
+        if !spot.tagList.isEmpty {
+            tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+            spot.tagList.forEach { tag in
+                tagStackView.addArrangedSubview(SpotTagButton(tag))
+            }
+            
+            noImageContentView.snp.updateConstraints {
+                $0.top.equalToSuperview().offset(88)
+            }
         }
 
-        let walk: String = StringLiterals.SpotList.walk
+        let bike: String = StringLiterals.SpotList.bike
         let findCourse: String = StringLiterals.SpotList.minuteFindCourse
-        let courseTitle: String = walk + String(spot.eta) + findCourse
+        let courseTitle: String = bike + String(spot.eta) + findCourse
         findCourseButton.setAttributedTitle(text: courseTitle, style: .b1SB)
     }
 
     func overlayLoginLock(_ show: Bool) {
-        loginlockOverlayView.isHidden = !show
+        loginLockOverlayView.isHidden = !show
     }
 
 }

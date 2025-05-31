@@ -19,6 +19,8 @@ class SpotListViewController: BaseNavViewController {
     
     private let filterButton = UIButton()
     
+    private var isViewInitialRender = true
+    
     
     // MARK: - LifeCycle
     
@@ -67,7 +69,6 @@ class SpotListViewController: BaseNavViewController {
         super.setStyle()
         
         setGlassMorphism()
-        spotListView.errorView.isHidden = true
         
         filterButton.do {
             var config = UIButton.Configuration.filled()
@@ -95,18 +96,12 @@ class SpotListViewController: BaseNavViewController {
             action: #selector(tappedFilterButton),
             for: .touchUpInside
         )
-        
-        spotListView.errorView.confirmButton.addTarget(
-            self,
-            action: #selector(tappedReloadButton),
-            for: .touchUpInside
-        )
     }
     
 }
 
 
-// MARK: - Bind ViewModel
+// MARK: - Bind VM, Observable
 
 extension SpotListViewController {
     
@@ -115,58 +110,46 @@ extension SpotListViewController {
             guard let self = self,
                   let onSuccess = onSuccess else { return }
             
-            // NOTE: 법정동 조회 성공 -> 네비게이션타이틀
+            // NOTE: 법정동 조회 성공 -> 장소 조회
             if onSuccess {
                 viewModel.postSpotList()
+                spotListView.regionErrorView.isHidden = true
+                spotListView.skeletonView.isHidden = false
             }
             
-            // NOTE: 법정동 조회 실패 (서비스불가지역) -> 에러 뷰, 네비게이션타이틀
+            // NOTE: 법정동 조회 실패 (서비스불가지역)
             else if viewModel.errorType == .unsupportedRegion {
-                spotListView.errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
-                                   buttonTitle: "새로고침 하기")
+                spotListView.regionErrorView.isHidden = false
             }
             
-            // NOTE: 법정동 조회 실패 (기타 에러) -> 에러뷰, 네비게이션타이틀
+            // NOTE: 기타 네트워크 에러
             else {
-                spotListView.errorView.setStyle(errorMessage: viewModel.errorType?.errorMessage,
-                                   buttonTitle: "새로고침 하기")
+                // TODO: 네트워크 에러뷰, 버튼에 getDong() 액션 설정
             }
-            
-            // NOTE: 에러뷰 숨김 여부 처리
-            spotListView.errorView.isHidden = onSuccess
             
             viewModel.onSuccessGetDong.value = nil
         }
         
-        viewModel.onSuccessPostSpotList.bind { [weak self] isSuccess in
+        viewModel.onSuccessPostSpotList.bind { [weak self] onSuccess in
             guard let self = self,
-                  let isSuccess = isSuccess else { return }
-            if isSuccess {
-                spotListView.errorView.isHidden = true
-                spotListView.collectionView.reloadData()
+                  let onSuccess = onSuccess else { return }
+
+            let spotList = viewModel.spotList
+            if onSuccess {
+                DispatchQueue.main.async {
+                    self.spotListView.updateCollectionViewLayout(type: spotList.transportMode)
+                    self.spotListView.collectionView.reloadData()
+                    self.spotListView.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                }
                 
                 // NOTE: 스켈레톤 최소 0.5초 유지
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-                    guard let self = self else { return }
-                    spotListView.hideSkeletonView(isHidden: true)
-                    
-                    let isRestaurantEmpty: Bool = viewModel.spotType == .restaurant && viewModel.restaurantList.isEmpty
-                    let isCafeEmpty: Bool = viewModel.spotType == .cafe && viewModel.cafeList.isEmpty
-                    if isRestaurantEmpty || isCafeEmpty {
-                        spotListView.errorView.setStyle(
-                            errorMessage: viewModel.errorType?.errorMessage,
-                            buttonTitle: nil
-                        )
-                        spotListView.errorView.isHidden = false
-                    }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.spotListView.skeletonView.isHidden = true
                 }
             } else {
-                // TODO: 네트워크 에러뷰로 교체, 버튼에 postSpotList() 액션 설정
-                spotListView.errorView.setStyle(
-                    errorMessage: StringLiterals.Error.networkErrorOccurred,
-                    buttonTitle: StringLiterals.Error.tryAgain
-                )
-                spotListView.hideSkeletonView(isHidden: true)
+                // TODO: 네트워크 에러뷰, 버튼에 postSpotList() 액션 설정
+
+                spotListView.skeletonView.isHidden = true
                 
                 // TODO: Post 하는동안 로딩스켈레톤
                 
@@ -178,9 +161,6 @@ extension SpotListViewController {
             filterButton.isSelected = !viewModel.filterList.isEmpty
             
             viewModel.onFinishRefreshingSpotList.value = true
-            
-            // NOTE: 에러뷰 숨김 여부 처리
-            spotListView.errorView.isHidden = isSuccess
         }
     }
     
@@ -188,10 +168,8 @@ extension SpotListViewController {
         spotToggleButton.selectedType.bind { [weak self] spotType in
             guard let self = self,
                   let spotType = spotType else { return }
+
             viewModel.spotType = spotType
-            
-            spotListView.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-            spotListView.collectionView.reloadData()
             viewModel.filterList = []
             viewModel.postSpotList()
         }
@@ -223,7 +201,7 @@ private extension SpotListViewController {
             }) { [weak self] _ in
                 
                 self?.viewModel.requestLocation()
-                self?.spotListView.hideSkeletonView(isHidden: false)
+                self?.spotListView.skeletonView.isHidden = false
             }
         }
     }
@@ -243,30 +221,12 @@ private extension SpotListViewController {
 
     @objc
     func tappedReloadButton() {
-        spotListView.hideSkeletonView(isHidden: false)
+        spotListView.skeletonView.isHidden = false
         guard AuthManager.shared.hasToken else {
             presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
             return
         }
-        spotListView.hideSkeletonView(isHidden: false)
         viewModel.requestLocation()
-    }
-    
-}
-
-
-// MARK: - CollectionView Reload animation
-
-private extension SpotListViewController {
-    
-    func endRefreshingAndTransparancy() {
-        UIView.animate(withDuration: 0.1, delay: 0) {
-            self.spotListView.collectionView.contentInset.top = 0
-            self.spotListView.collectionView.setContentOffset(.zero, animated: true)
-            self.spotListView.collectionView.alpha = 1.0 // NOTE: 투명도 복원
-        } completion: { _ in
-            self.spotListView.collectionView.refreshControl?.endRefreshing()
-        }
     }
     
 }
@@ -294,9 +254,21 @@ private extension SpotListViewController {
         )
         
         spotListView.collectionView.register(
+            NoMatchingSpotListCollectionViewCell.self,
+            forCellWithReuseIdentifier: NoMatchingSpotListCollectionViewCell.cellIdentifier
+        )
+        
+        spotListView.collectionView.register(
             SpotListCollectionViewHeader.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: SpotListCollectionViewHeader.identifier)
+            withReuseIdentifier: SpotListCollectionViewHeader.identifier
+        )
+
+        spotListView.collectionView.register(
+            NoMatchingSpotHeader.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: NoMatchingSpotHeader.identifier
+        )
     }
     
     func setRefreshControl() {
@@ -317,82 +289,78 @@ extension SpotListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return viewModel.spotType == .restaurant ? viewModel.restaurantList.count : viewModel.cafeList.count
+        return viewModel.spotList.spotList.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let item = collectionView.dequeueReusableCell(
-                withReuseIdentifier: SpotListCollectionViewCell.cellIdentifier,
-                for: indexPath
-              ) as? SpotListCollectionViewCell
-        else { return UICollectionViewCell() }
-        
-        let bgColor: MatchingRateBgColorType = indexPath.item == 0 ? .dark : .light
-        
-        switch viewModel.spotType {
-        case .restaurant:
-            item.bind(spot: viewModel.restaurantList[indexPath.item],
-                      matchingRateBgColor: bgColor)
-        case .cafe:
-            item.bind(spot: viewModel.cafeList[indexPath.item],
-                      matchingRateBgColor: bgColor)
+        let spotList = viewModel.spotList
+
+        switch spotList.transportMode {
+        case .walking:
+            return dequeueAndConfigureCell(
+                collectionView: collectionView,
+                cellType: SpotListCollectionViewCell.self,
+                at: indexPath,
+                with: spotList
+            )
+        case .biking:
+            return dequeueAndConfigureCell(
+                collectionView: collectionView,
+                cellType: NoMatchingSpotListCollectionViewCell.self,
+                at: indexPath,
+                with: spotList
+            )
+        default:
+            return UICollectionViewCell()
         }
-        
-        let showLoginCell = !AuthManager.shared.hasToken && indexPath.item > 4
-        item.showLoginCell(showLoginCell)
-        
-        return item
     }
-    
+
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            guard let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: SpotListCollectionViewHeader.identifier,
-                for: indexPath) as? SpotListCollectionViewHeader else {
-                fatalError("Cannot dequeue header view")
+        let spotList = viewModel.spotList
+
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            switch spotList.transportMode {
+            case .walking:
+                guard let header = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: SpotListCollectionViewHeader.identifier,
+                    for: indexPath) as? SpotListCollectionViewHeader else {
+                    fatalError("Cannot dequeue header view")
+                }
+                return header
+            default:
+                guard let header = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: NoMatchingSpotHeader.identifier,
+                    for: indexPath) as? NoMatchingSpotHeader else {
+                    fatalError("Cannot dequeue header view")
+                }
+                header.setHeader(spotList.spotList.isEmpty ? .noSuggestion : .withSuggestion)
+                return header
             }
-            return header
+        default:
+            return UICollectionReusableView()
         }
-        return UICollectionReusableView()
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = viewModel.spotType == .restaurant ? viewModel.restaurantList[indexPath.item] : viewModel.cafeList[indexPath.item]
+        let item = viewModel.spotList.spotList[indexPath.item]
         let vc = SpotDetailViewController(item.id, item.tagList)
-        
+
         ACLocationManager.shared.removeDelegate(viewModel)
         vc.backCompletion = { [weak self] in
             guard let self = self else { return }
             ACLocationManager.shared.addDelegate(self.viewModel)
         }
-        
+
         if AuthManager.shared.hasToken {
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             presentLoginModal(AmplitudeLiterals.EventName.tappedSpotCell)
-        }
-    }
-    
-    
-    // MARK: - 글라스모피즘 스크롤 시 선택
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset.y
-           
-        if offset > 0 {
-            [topInsetView, navigationBarView].forEach {
-                $0.backgroundColor = .clear
-            }
-            self.glassMorphismView.isHidden = false
-        } else {
-            [topInsetView, navigationBarView].forEach {
-                $0.backgroundColor = .gray900
-            }
-            self.glassMorphismView.isHidden = true
         }
     }
 
@@ -406,9 +374,17 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let itemWidth: CGFloat = SpotListItemSizeType.itemMaxWidth.value
-        let itemHeight: CGFloat = SpotListItemSizeType.headerHeight.value
-        return CGSize(width: itemWidth, height: itemHeight)
+        let spotList = viewModel.spotList
+        if spotList.transportMode == .walking {
+            return CGSize(width: SpotListItemSizeType.itemMaxWidth.value,
+                          height: SpotListItemSizeType.headerHeight.value)
+        } else if spotList.transportMode == .biking {
+            return CGSize(width: NoMatchingSpotListItemSizeType.itemWidth.value,
+                          height: NoMatchingSpotListItemSizeType.withSuggestionHeaderHeight.value)
+        } else {
+            return CGSize(width: NoMatchingSpotListItemSizeType.itemWidth.value,
+                          height: NoMatchingSpotListItemSizeType.noSuggestionHeaderHeight.value)
+        }
     }
 
 }
@@ -421,12 +397,53 @@ extension SpotListViewController: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView,
                                    withVelocity velocity: CGPoint,
                                    targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let cellHeight = SpotListItemSizeType.itemMaxHeight.value + SpotListItemSizeType.minimumLineSpacing.value
-        let targetY = targetContentOffset.pointee.y
-        
-        // NOTE: 화면 중앙과 가장 가까운 셀을 찾아 화면 중앙으로 이동
-        let newTargetY = round(targetY / cellHeight) * cellHeight + SpotListItemSizeType.minimumLineSpacing.value / 2
-        targetContentOffset.pointee = CGPoint(x: 0, y: newTargetY)
+        if viewModel.spotList.transportMode == .walking {
+            let cellHeight = SpotListItemSizeType.itemMaxHeight.value + SpotListItemSizeType.minimumLineSpacing.value
+            let targetY = targetContentOffset.pointee.y
+            
+            // NOTE: 화면 중앙과 가장 가까운 셀을 찾아 화면 중앙으로 이동
+            let newTargetY = round(targetY / cellHeight) * cellHeight + SpotListItemSizeType.minimumLineSpacing.value / 2
+            targetContentOffset.pointee = CGPoint(x: 0, y: newTargetY)
+        }
+    }
+
+}
+
+
+// MARK: - CollectionView Helper
+
+private extension SpotListViewController {
+
+    private func dequeueAndConfigureCell<T: UICollectionViewCell & SpotListCellConfigurable>(
+        collectionView: UICollectionView,
+        cellType: T.Type,
+        at indexPath: IndexPath,
+        with spotList: SpotListModel
+    ) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: cellType.cellIdentifier,
+            for: indexPath
+        ) as? T else {
+            return UICollectionViewCell()
+        }
+
+        let lockCell = !AuthManager.shared.hasToken && indexPath.item > 4
+
+        cell.bind(spot: spotList.spotList[indexPath.item])
+        cell.overlayLoginLock(lockCell)
+
+        return cell
+    }
+
+    // NOTE: CollectionView Reload animation
+    func endRefreshingAndTransparancy() {
+        UIView.animate(withDuration: 0.1, delay: 0) {
+            self.spotListView.collectionView.contentInset.top = 0
+            self.spotListView.collectionView.setContentOffset(.zero, animated: true)
+            self.spotListView.collectionView.alpha = 1.0 // NOTE: 투명도 복원
+        } completion: { _ in
+            self.spotListView.collectionView.refreshControl?.endRefreshing()
+        }
     }
 
 }
