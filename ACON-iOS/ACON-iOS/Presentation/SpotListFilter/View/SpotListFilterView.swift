@@ -120,7 +120,7 @@ class SpotListFilterView: GlassmorphismView {
         }
         
         
-        // [Operating hours section]
+        // [Opening hours section]
         openingHoursSectionView.addSubviews(
             openingHoursSectionTitleLabel,
             openingHoursButton
@@ -309,7 +309,7 @@ private extension SpotListFilterView {
     }
 
 
-    // MARK: - (Operating hours section)
+    // MARK: - (Opening hours section)
     
     func setOpeningHoursSectionUI() {
         let option: SpotFilterType.OpeningHoursOptionType = spotType == .restaurant ? .overMidnight : .overTenPM

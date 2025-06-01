@@ -70,10 +70,10 @@ class SpotListFilterViewController: BaseViewController {
 }
 
 
-// MARK: - Bindings
+// MARK: - Bind VM
 
 private extension SpotListFilterViewController {
-    
+
     func bindViewModel() {
         viewModel.onFinishRefreshingSpotList.bind { [weak self] onFinish in
             guard let onFinish = onFinish else { return }
@@ -86,34 +86,34 @@ private extension SpotListFilterViewController {
             self?.viewModel.onFinishRefreshingSpotList.value = nil
         }
     }
-    
+
 }
 
 
 // MARK: - Add Target
 
 private extension SpotListFilterViewController {
-    
+
     func addTargets() {
         spotListFilterView.exitButton.addTarget(
             self,
             action: #selector(didTapExitButton),
             for: .touchUpInside
         )
-        
+
         spotListFilterView.conductButton.addTarget(
             self,
             action: #selector(didTapConductButton),
             for: .touchUpInside
         )
-        
+
         spotListFilterView.resetButton.addTarget(
             self,
             action: #selector(didTapResetButton),
             for: .touchUpInside
         )
     }
-    
+
 }
 
 

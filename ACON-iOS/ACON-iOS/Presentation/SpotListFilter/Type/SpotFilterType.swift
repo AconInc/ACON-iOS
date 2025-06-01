@@ -30,7 +30,7 @@ enum SpotFilterType {
 extension SpotFilterType {
 
     // MARK: - Restaurant
-    
+
     enum RestaurantOptionType: CaseIterable {
 
         case korean, chinese, japanese, western, asian, fusion, koreanStreet, buffet, bar, excludeFranchise
@@ -72,18 +72,18 @@ extension SpotFilterType {
 
     enum CafeOptionType: CaseIterable {
 
-        case goodForWork, excludeFranchise
+        case workFriendly, excludeFranchise
 
         var text: String {
             switch self {
-            case .goodForWork: return "작업하기 좋은 곳"
+            case .workFriendly: return "작업하기 좋은 곳"
             case .excludeFranchise: return "프랜차이즈 제외"
             }
         }
 
         var serverKey: String {
             switch self {
-            case .goodForWork: return "WORK_FRIENDLY"
+            case .workFriendly: return "WORK_FRIENDLY"
             case .excludeFranchise: return "EXCLUDE_FRANCHISE"
             }
         }
@@ -131,6 +131,7 @@ extension SpotFilterType {
             case .goodPrice: return "VALUE_FOR_MONEY"
             }
         }
+
     }
 
 }

@@ -36,7 +36,6 @@
 		1547A8852D3595B600E96616 /* SpotListFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A8842D3595B600E96616 /* SpotListFilterModel.swift */; };
 		1547A88B2D3596B600E96616 /* SpotFilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A88A2D3596B600E96616 /* SpotFilterType.swift */; };
 		1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A88D2D35B13700E96616 /* FilterTagButton.swift */; };
-		1547A8902D35B30C00E96616 /* FilterTagButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A88F2D35B30C00E96616 /* FilterTagButtonType.swift */; };
 		1549976D2DEC51C80040242F /* SpotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549976C2DEC51C80040242F /* SpotType.swift */; };
 		1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */; };
 		1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */; };
@@ -58,7 +57,6 @@
 		15A2461A2DE7A9E500469272 /* NoMatchingSpotListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A246192DE7A9E500469272 /* NoMatchingSpotListCollectionViewCell.swift */; };
 		15A2461D2DE7B8AA00469272 /* SpotListCellConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A2461C2DE7B8AA00469272 /* SpotListCellConfigurable.swift */; };
 		15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */; };
-		15A3F6A82D36D5B900577E16 /* FilterTagButtonStackLineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6A72D36D5B900577E16 /* FilterTagButtonStackLineType.swift */; };
 		15A3F6AC2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */; };
 		15A3F7A12D38C71900577E16 /* PriorityLowEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */; };
 		15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */; };
@@ -295,7 +293,6 @@
 		1547A8842D3595B600E96616 /* SpotListFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListFilterModel.swift; sourceTree = "<group>"; };
 		1547A88A2D3596B600E96616 /* SpotFilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotFilterType.swift; sourceTree = "<group>"; };
 		1547A88D2D35B13700E96616 /* FilterTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagButton.swift; sourceTree = "<group>"; };
-		1547A88F2D35B30C00E96616 /* FilterTagButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagButtonType.swift; sourceTree = "<group>"; };
 		1549976C2DEC51C80040242F /* SpotType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotType.swift; sourceTree = "<group>"; };
 		1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarController.swift; sourceTree = "<group>"; };
 		1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarItemType.swift; sourceTree = "<group>"; };
@@ -317,7 +314,6 @@
 		15A246192DE7A9E500469272 /* NoMatchingSpotListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMatchingSpotListCollectionViewCell.swift; sourceTree = "<group>"; };
 		15A2461C2DE7B8AA00469272 /* SpotListCellConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCellConfigurable.swift; sourceTree = "<group>"; };
 		15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListItemSizeType.swift; sourceTree = "<group>"; };
-		15A3F6A72D36D5B900577E16 /* FilterTagButtonStackLineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagButtonStackLineType.swift; sourceTree = "<group>"; };
 		15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewHeader.swift; sourceTree = "<group>"; };
 		15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityLowEmptyView.swift; sourceTree = "<group>"; };
 		15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotFilterTagStackView.swift; sourceTree = "<group>"; };
@@ -665,8 +661,6 @@
 			isa = PBXGroup;
 			children = (
 				1547A88A2D3596B600E96616 /* SpotFilterType.swift */,
-				1547A88F2D35B30C00E96616 /* FilterTagButtonType.swift */,
-				15A3F6A72D36D5B900577E16 /* FilterTagButtonStackLineType.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -1880,7 +1874,6 @@
 				74D297F82D63467900DDEE31 /* ImageService.swift in Sources */,
 				15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */,
 				D6E816AA2D624DDB001E4EBF /* BaseTabelViewCell.swift in Sources */,
-				1547A8902D35B30C00E96616 /* FilterTagButtonType.swift in Sources */,
 				156D92602D6570A90037F8F1 /* PatchProfileRequest.swift in Sources */,
 				74D31C7C2D5BF90300B4B2B4 /* AlbumModel.swift in Sources */,
 				74D31C802D5C025900B4B2B4 /* PhotoCollectionViewCell.swift in Sources */,
@@ -2048,7 +2041,6 @@
 				D6E452942D3AA47500CBED02 /* ProfileViewController.swift in Sources */,
 				151BD9552D63375D005E657F /* VerifiedAreasEditViewController.swift in Sources */,
 				748D6F6B2D2BCA1C007690B4 /* ViewController.swift in Sources */,
-				15A3F6A82D36D5B900577E16 /* FilterTagButtonStackLineType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

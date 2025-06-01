@@ -8,21 +8,21 @@
 import Foundation
 
 struct SpotConditionModel: Equatable {
-    
+
     let spotType: SpotType?
-    
+
     let filterList: [SpotFilterModel]?
-    
+
     let walkingTime: Int?
-    
+
     let priceRange: Int?
-    
+
 }
 
 struct SpotFilterModel: Equatable {
-    
+
     let category: SpotFilterType
-    
+
     let optionList: [String]
-    
+
 }
