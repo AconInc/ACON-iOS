@@ -9,7 +9,14 @@ import UIKit
 
 class FilterTagButton: ACButton {
 
-    var isTagged: Bool = false
+    var isTagged: Bool = false {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                updateGlassButtonState(state: isTagged ? .selected : .default)
+            }
+        }
+    }
 
     init() {
         super.init(style: GlassConfigButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_19_b1R))
@@ -20,6 +27,8 @@ class FilterTagButton: ACButton {
 
         self.addTarget(self, action: #selector(toggleSelf), for: .touchUpInside)
         self.addTarget(self, action: #selector(touchDownSelf), for: .touchDown)
+        self.addTarget(self, action: #selector(touchUpOutsideSelf), for: .touchUpOutside)
+        self.addTarget(self, action: #selector(touchCancelSelf), for: .touchCancel)
     }
 
     @MainActor required init?(coder: NSCoder) {
@@ -29,12 +38,21 @@ class FilterTagButton: ACButton {
     @objc
     func toggleSelf(_ sender: UIButton) {
         isTagged.toggle()
-        updateGlassButtonState(state: isTagged ? .selected : .default)
     }
 
     @objc
     func touchDownSelf(_ sender: UIButton) {
         updateGlassButtonState(state: .pressed)
+    }
+    
+    @objc
+    func touchUpOutsideSelf(_ sender: UIButton) {
+        updateGlassButtonState(state: .default)
+    }
+
+    @objc
+    func touchCancelSelf(_ sender: UIButton) {
+        updateGlassButtonState(state: .default)
     }
 
 }
