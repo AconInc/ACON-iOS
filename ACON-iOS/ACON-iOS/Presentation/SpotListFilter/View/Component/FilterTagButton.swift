@@ -67,12 +67,12 @@ private extension FilterTagButton {
     
     @objc
     func touchUpOutsideSelf(_ sender: UIButton) {
-        updateGlassButtonState(state: .default)
+        updateGlassButtonState(state: isTagged ? .selected : .default)
     }
 
     @objc
     func touchCancelSelf(_ sender: UIButton) {
-        updateGlassButtonState(state: .default)
+        updateGlassButtonState(state: isTagged ? .selected : .default)
     }
 
 }
