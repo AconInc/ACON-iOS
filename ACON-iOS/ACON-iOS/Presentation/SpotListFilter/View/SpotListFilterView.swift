@@ -50,7 +50,7 @@ class SpotListFilterView: GlassmorphismView {
     
     private let openingHoursSectionTitleLabel = UILabel()
     
-    private let openingHoursButton = FilterTagButton()
+    let openingHoursButton = FilterTagButton()
     
     
     // [Price range]: 가격대 (restaurant, cafe)
@@ -59,7 +59,7 @@ class SpotListFilterView: GlassmorphismView {
     
     private let priceSectionTitleLabel = UILabel()
     
-    private let goodPriceButton = FilterTagButton()
+    let goodPriceButton = FilterTagButton()
     
     
     // MARK: - Size
@@ -290,8 +290,8 @@ private extension SpotListFilterView {
         case .restaurant:
             let options: [String] = SpotFilterType.RestaurantOptionType.allCases.map { return $0.text }
             let firstLine: [String] = Array(options[0..<spotType.firstLineCount])
-            let secondLine: [String] = Array(options[spotType.firstLineCount..<spotType.secondLineCount])
-            let thirdLine: [String] = Array(options[spotType.secondLineCount...])
+            let secondLine: [String] = Array(options[spotType.firstLineCount..<spotType.firstLineCount + spotType.secondLineCount])
+            let thirdLine: [String] = Array(options[(spotType.firstLineCount + spotType.secondLineCount)...])
 
             firstLineSpotTagStackView.addTagButtons(titles: firstLine)
             secondLineSpotTagStackView.addTagButtons(titles: secondLine)
@@ -299,6 +299,7 @@ private extension SpotListFilterView {
 
         case .cafe:
             let options: [String] = SpotFilterType.CafeOptionType.allCases.map { return $0.text }
+
             firstLineSpotTagStackView.addTagButtons(titles: options)
         }
     }
@@ -307,11 +308,10 @@ private extension SpotListFilterView {
     // MARK: - (Operating hours section)
     
     func setOpeningHoursSectionUI() {
-        openingHoursSectionTitleLabel.setLabel(text: StringLiterals.SpotListFilter.openingHours, style: .t5SB)
-        
-        let openingHoursOption: SpotFilterType.OpeningHoursOptionType = spotType == .restaurant ? .overMidnight : .overTenPM
+        let option: SpotFilterType.OpeningHoursOptionType = spotType == .restaurant ? .overMidnight : .overTenPM
 
-        openingHoursButton.updateButtonTitle(openingHoursOption.text)
+        openingHoursSectionTitleLabel.setLabel(text: StringLiterals.SpotListFilter.openingHours, style: .t5SB)
+        openingHoursButton.updateButtonTitle(option.text)
     }
 
 
@@ -336,15 +336,6 @@ private extension SpotListFilterView {
 // MARK: - Internal Methods (Update UI)
 
 extension SpotListFilterView {
-
-    func resetAllTagSelection() {
-        [openingHoursButton, goodPriceButton].forEach { $0.isSelected = false }
-        [firstLineSpotTagStackView,
-         secondLineSpotTagStackView,
-         thirdLineSpotTagStackView].forEach {
-            $0.resetTagSelection()
-        }
-    }
 
     func enableFooterButtons(_ isEnabled: Bool) {
         [resetButton, conductButton].forEach { $0.isEnabled = isEnabled }

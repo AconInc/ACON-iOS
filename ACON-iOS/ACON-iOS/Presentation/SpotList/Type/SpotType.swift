@@ -34,8 +34,8 @@ enum SpotType {
 
     var secondLineCount: Int {
         switch self {
-        case .restaurant: return 4 + firstLineCount
-        case .cafe: return 0 + firstLineCount
+        case .restaurant: return 4
+        case .cafe: return 0
         }
     }
 

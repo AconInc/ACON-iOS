@@ -9,11 +9,16 @@ import UIKit
 
 class SpotFilterTagStackView: UIStackView {
 
+    // MARK: - Properties
+
+    var tags: [FilterTagButton] = []
+
+
     // MARK: - LifeCycles
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         setStyle()
     }
 
@@ -29,33 +34,29 @@ class SpotFilterTagStackView: UIStackView {
 }
 
 
-// MARK: - StackView Control Methods
+// MARK: - Internal Methods
 
 extension SpotFilterTagStackView {
-
-    // MARK: - Internal Methods
 
     func addTagButtons(titles: [String]) {
         for title in titles {
             let button = FilterTagButton()
             button.updateButtonTitle(title)
             self.addArrangedSubview(button)
+            self.tags.append(button)
         }
         
         addEmptyView()
     }
 
-    func resetTagSelection() {
-        self.arrangedSubviews.forEach { view in
-            let button = view as? FilterTagButton ?? UIButton()
-            button.isSelected = false
-        }
-    }
+}
 
 
-    // MARK: - Private Methods
+// MARK: - Helper
 
-    private func addEmptyView() {
+private extension SpotFilterTagStackView {
+
+    func addEmptyView() {
         self.addArrangedSubview(PriorityLowEmptyView())
     }
 
