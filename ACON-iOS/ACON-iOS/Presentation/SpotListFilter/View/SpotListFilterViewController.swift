@@ -195,6 +195,8 @@ private extension SpotListFilterViewController {
                 applySpotConditionToUI(
                     spotType: spotType,
                     optionList: filterList.optionList)
+            case .openingHours: return // TODO: 수정
+            case .price: return // TODO: 수정
             }
         }
     }
@@ -202,14 +204,14 @@ private extension SpotListFilterViewController {
 }
 
 
-// MARK: - Assisting method
+// MARK: - Helper
 
-extension SpotListFilterViewController {
+private extension SpotListFilterViewController {
     
     // MARK: - UI -> VM
     
     func extractRestaurantFilter() -> SpotFilterModel {
-        let restaurantFeatures = SpotType.RestaurantFeatureType.allCases
+        let restaurantFeatures = SpotFilterType.RestaurantOptionType.allCases
         var restaurantFeatureOptionList: [String] = []
         
         for (i, button) in spotListFilterView.firstLineSpotTagStackView.arrangedSubviews.enumerated() {
@@ -227,7 +229,7 @@ extension SpotListFilterViewController {
         }
         
         let restaurantFilterList = SpotFilterModel(
-            category: SpotType.FilterCategoryType.restaurantFeature,
+            category: SpotFilterType.restaurantFeature,
             optionList: restaurantFeatureOptionList
         )
         
@@ -235,7 +237,7 @@ extension SpotListFilterViewController {
     }
     
     func extractCafeFilter() -> SpotFilterModel {
-        let cafeFeatures = SpotType.CafeFeatureType.allCases
+        let cafeFeatures = SpotFilterType.CafeOptionType.allCases
         var cafeFeatureOptionList: [String] = []
         for (i, button) in spotListFilterView.firstLineSpotTagStackView.arrangedSubviews.enumerated() {
             let tagButton = button as? FilterTagButton ?? UIButton()
@@ -252,7 +254,7 @@ extension SpotListFilterViewController {
         }
         
         let cafeFilterList = SpotFilterModel(
-            category: SpotType.FilterCategoryType.cafeFeature,
+            category: SpotFilterType.cafeFeature,
             optionList: cafeFeatureOptionList
         )
         
@@ -266,9 +268,9 @@ extension SpotListFilterViewController {
         let tagKeys: [String] = {
             switch spotType {
             case .restaurant:
-                return SpotType.RestaurantFeatureType.allCases.map { return $0.serverKey }
+                return SpotFilterType.RestaurantOptionType.allCases.map { return $0.serverKey }
             case .cafe:
-                return SpotType.CafeFeatureType.allCases.map { return $0.serverKey }
+                return SpotFilterType.CafeOptionType.allCases.map { return $0.serverKey }
             }
         }()
         
