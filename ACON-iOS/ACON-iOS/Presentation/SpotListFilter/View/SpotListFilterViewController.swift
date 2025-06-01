@@ -176,8 +176,7 @@ private extension SpotListFilterViewController {
         guard let spotType = spotType else { return }
         
         spotListFilterView.do {
-            // NOTE: spot tag 바꾸기
-            $0.switchSpotTagStack(spotType)
+            $0.switchOptionTags(spotType)
             $0.resetAllTagSelection()
         }
     }
