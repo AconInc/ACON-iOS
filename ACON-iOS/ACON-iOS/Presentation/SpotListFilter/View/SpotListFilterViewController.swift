@@ -11,7 +11,7 @@ class SpotListFilterViewController: BaseViewController {
     
     // MARK: - Properties
     
-    private let spotListFilterView = SpotListFilterView()
+    private let spotListFilterView: SpotListFilterView
     
     private let viewModel: SpotListViewModel
     
@@ -20,6 +20,7 @@ class SpotListFilterViewController: BaseViewController {
     
     init(viewModel: SpotListViewModel) {
         self.viewModel = viewModel
+        self.spotListFilterView = SpotListFilterView(spotType: viewModel.spotType)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -176,7 +177,6 @@ private extension SpotListFilterViewController {
         guard let spotType = spotType else { return }
         
         spotListFilterView.do {
-            $0.switchOptionTags(spotType)
             $0.resetAllTagSelection()
         }
     }
