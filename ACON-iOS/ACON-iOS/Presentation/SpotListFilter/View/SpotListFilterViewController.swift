@@ -8,34 +8,42 @@
 import UIKit
 
 class SpotListFilterViewController: BaseViewController {
-    
+
     // MARK: - Properties
-    
+
     private let spotListFilterView: SpotListFilterView
-    
+
     private let viewModel: SpotListViewModel
-    
-    
+
+    private var taggedFilterButtons: Set<FilterTagButton> = [] {
+        didSet {
+            let hasTaggedFilters = !taggedFilterButtons.isEmpty
+            spotListFilterView.enableFooterButtons(hasTaggedFilters)
+        }
+    }
+
+
     // MARK: - LifeCycles
-    
+
     init(viewModel: SpotListViewModel) {
         self.viewModel = viewModel
         self.spotListFilterView = SpotListFilterView(spotType: viewModel.spotType)
         
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     @MainActor required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         bindViewModel()
         addTargets()
+        setupFilterButtonCallbacks()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -44,13 +52,13 @@ class SpotListFilterViewController: BaseViewController {
             filterLists: viewModel.filterList
         )
     }
-    
+
     override func setHierarchy() {
         super.setHierarchy()
         
         view.addSubview(spotListFilterView)
     }
-    
+
     override func setLayout() {
         super.setLayout()
         
@@ -304,6 +312,34 @@ private extension SpotListFilterViewController {
 
     func applyPriceOptionToUI(isTagged: Bool) {
         spotListFilterView.goodPriceButton.isTagged = isTagged
+    }
+
+}
+
+
+// MARK: - FilterTagButton call back 설정
+
+private extension SpotListFilterViewController {
+
+    private func setupFilterButtonCallbacks() {
+        let allFilterButtons: [FilterTagButton] = spotListFilterView.firstLineSpotTagStackView.tags +
+        spotListFilterView.secondLineSpotTagStackView.tags +
+        spotListFilterView.thirdLineSpotTagStackView.tags +
+        [spotListFilterView.openingHoursButton, spotListFilterView.goodPriceButton]
+        
+        allFilterButtons.forEach { button in
+            button.onStateChanged = { [weak self] isTagged in
+                self?.handleFilterButtonStateChange(button, isTagged)
+            }
+        }
+    }
+
+    private func handleFilterButtonStateChange(_ button: FilterTagButton, _ isTagged: Bool) {
+        if isTagged {
+            taggedFilterButtons.insert(button)
+        } else {
+            taggedFilterButtons.remove(button)
+        }
     }
 
 }

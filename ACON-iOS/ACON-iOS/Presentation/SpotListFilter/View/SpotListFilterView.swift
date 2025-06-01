@@ -234,6 +234,8 @@ private extension SpotListFilterView {
             config.background.strokeWidth = 1
             $0.configuration = config
 
+            $0.isEnabled = false
+
             // NOTE: 상태 변경에 따라 UI 업데이트
             $0.configurationUpdateHandler = { button in
                 switch button.state {
@@ -251,6 +253,8 @@ private extension SpotListFilterView {
             var config = UIButton.Configuration.filled()
             config.cornerStyle = .capsule
             $0.configuration = config
+
+            $0.isEnabled = false
 
             // NOTE: 상태 변경에 따라 UI 업데이트
             $0.configurationUpdateHandler = { button in
