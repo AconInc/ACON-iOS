@@ -154,9 +154,13 @@ private extension VerifiedAreasEditViewController {
                let area = viewModel.deletingVerifiedArea,
                let index = viewModel.verifiedAreaList.firstIndex(of: area) {
                 viewModel.verifiedAreaList.remove(at: index)
-                verifiedAreasEditView.removeVerifiedArea(verifiedArea: area)
+                verifiedAreasEditView.verifiedAreaCollectionView.reloadData()
             } else {
-                self.showDefaultAlert(title: "인증 동네 삭제 실패", message: "인증 동네 삭제에 실패했습니다.")
+                if viewModel.timeoutFromVerification {
+                    self.presentACAlert(.timeoutFromVerification)
+                } else {
+                    self.showDefaultAlert(title: "인증 동네 삭제 실패", message: "인증 동네 삭제에 실패했습니다.")
+                }
             }
         }
         
@@ -213,7 +217,6 @@ extension VerifiedAreasEditViewController {
             }
             self.presentACAlert(.changeVerifiedArea, rightAction: action)
         }
-        // TODO: 동네 인증 후 일주일 지나면 삭제 못한다는 알럿 기획과 논의중
         else {
             let index = sender.tag
             let verifiedArea = viewModel.verifiedAreaList[index]

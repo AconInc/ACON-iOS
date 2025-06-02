@@ -24,6 +24,8 @@ class LocalVerificationEditViewModel: Serviceable {
     
     var deletingVerifiedArea: VerifiedAreaModel?
     
+    var timeoutFromVerification: Bool = false
+    
     
     // MARK: - Networking
     
@@ -58,6 +60,11 @@ class LocalVerificationEditViewModel: Serviceable {
             switch response {
             case .success:
                 self?.onDeleteVerifiedAreaSuccess.value = true
+            case .requestErr(let error):
+                if error.code == 40055 {
+                    self?.timeoutFromVerification = true
+                }
+                self?.onDeleteVerifiedAreaSuccess.value = false
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
                     self?.postDeleteVerifiedArea(area)

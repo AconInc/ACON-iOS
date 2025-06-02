@@ -21,6 +21,7 @@ enum ACAlertType: CaseIterable {
     case changeNotSaved // NOTE: 프로필 변경사항 저장 X
     
     case changeVerifiedArea // NOTE: 지역인증 변경 (지역 1개)
+    case timeoutFromVerification // NOTE: 지역인증 변경 (인증 1주일 - 3개월)
     
     case logout // NOTE: 로그아웃
     
@@ -40,7 +41,7 @@ enum ACAlertType: CaseIterable {
         case .changeNotSaved:
             return "변경사항이 저장되지 않았습니다."
             
-        case .changeVerifiedArea:
+        case .changeVerifiedArea, .timeoutFromVerification:
             return "지역 삭제 불가"
         
         case .logout:
@@ -60,6 +61,8 @@ enum ACAlertType: CaseIterable {
             return "설정에서 권한을 켤 수 있습니다."
         case .changeVerifiedArea:
             return "지역은 최소 1개 이상을 등록해야 해요.\n현재 설정된 지역을 변경할까요?"
+        case .timeoutFromVerification:
+            return "인증한 지 1주일이 지난 지역은\n3개월 간 삭제가 불가능해요."
         default:
             return nil
         }
@@ -71,7 +74,7 @@ enum ACAlertType: CaseIterable {
             return "업데이트"
         case .locationAccessDenied:
             return "설정으로 가기"
-        case .changeVerifiedArea, .locationAccessFail, .reviewLocationFail:
+        case .locationAccessFail, .reviewLocationFail, .timeoutFromVerification:
             return "확인"
         default:
             return nil
