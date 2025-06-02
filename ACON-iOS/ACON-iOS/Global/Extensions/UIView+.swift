@@ -55,10 +55,11 @@ extension UIView {
         let innerPath = UIBezierPath(roundedRect: innerRect, cornerRadius: max(0, attributes.cornerRadius - attributes.width/2))
         outerPath.append(innerPath.reversing())
         
-        let glassmorphismView = GlassmorphismView(attributes.glassmorphismType)
+        let glassBorderView = GlassmorphismView(attributes.glassmorphismType)
+        glassBorderView.tag = 250603
         
-        self.addSubview(glassmorphismView)
-        glassmorphismView.snp.makeConstraints {
+        self.addSubview(glassBorderView)
+        glassBorderView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
@@ -68,7 +69,11 @@ extension UIView {
         
         let maskView = UIView(frame: bounds)
         maskView.layer.addSublayer(maskLayer)
-        glassmorphismView.mask = maskView
+        glassBorderView.mask = maskView
+    }
+    
+    func removeGlassBorder() {
+        self.viewWithTag(250603)?.removeFromSuperview()
     }
 
 }
