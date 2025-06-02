@@ -23,6 +23,8 @@ enum ACAlertType: CaseIterable {
     case changeVerifiedArea // NOTE: 지역인증 변경 (지역 1개)
     case timeoutFromVerification // NOTE: 지역인증 변경 (인증 1주일 - 3개월)
     
+    case quitOnboarding // NOTE: 취향탐색 그만두기
+    
     case logout // NOTE: 로그아웃
     
     var title: String {
@@ -44,6 +46,9 @@ enum ACAlertType: CaseIterable {
         case .changeVerifiedArea, .timeoutFromVerification:
             return "지역 삭제 불가"
         
+        case .quitOnboarding:
+            return "취향탐색을 그만둘까요?"
+            
         case .logout:
             return "로그아웃 하시겠어요?"
         }
@@ -87,6 +92,8 @@ enum ACAlertType: CaseIterable {
             return "취소"
         case .changeNotSaved:
             return "계속 작성"
+        case .quitOnboarding:
+            return "계속하기"
         default:
             return nil
         }
@@ -102,6 +109,8 @@ enum ACAlertType: CaseIterable {
             return "나가기"
         case .changeVerifiedArea:
             return "변경하기"
+        case .quitOnboarding:
+            return "그만두기"
         case .logout:
             return "로그아웃"
         default:

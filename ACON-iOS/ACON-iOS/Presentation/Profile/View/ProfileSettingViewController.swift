@@ -190,11 +190,9 @@ extension ProfileSettingViewController: UITableViewDataSource {
             let items = SettingType.allSections[2] as! [SettingType.PersonalSetting]
             switch items[indexPath.row] {
             case .onboarding:
-                if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                    sceneDelegate.window?.rootViewController = OnboardingViewController()
-                    // TODO: - 어떤 경로인지 알려주는 플래그 필요
-                    AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["retry_onboarding?": true])
-                }
+                let vc = OnboardingViewController(flowType: .setting)
+                self.navigationController?.pushViewController(vc, animated: true)
+                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["retry_onboarding?": true])
             case .localVerification:
                 let vc = VerifiedAreasEditViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
