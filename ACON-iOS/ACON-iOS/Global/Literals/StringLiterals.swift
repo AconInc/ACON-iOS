@@ -240,7 +240,7 @@ enum StringLiterals {
         
         static let kind = "종류"
         
-        static let operatingHours = "운영시간"
+        static let openingHours = "운영시간"
         
         static let priceSection = "가격"
         
