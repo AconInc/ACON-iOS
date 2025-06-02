@@ -34,64 +34,43 @@ enum SettingType {
 // MARK: - SettingCellModel Info
 
 extension SettingType.Info {
-    var cellModel: SettingCellModel {
+    var title: String {
         switch self {
         case .version:
-            return SettingCellModel(
-                image: .icProfileVersion,
-                title: "현재 버전"
-            )
+            return "현재 버전"
         }
     }
 }
 
 extension SettingType.Policy {
-    var cellModel: SettingCellModel {
+    var title: String {
         switch self {
         case .termsOfUse:
-            return SettingCellModel(
-                image: UIImage.icProfileTermsofuse,
-                title: "이용약관"
-            )
+            return "이용약관"
         case .privacyPolicy:
-            return SettingCellModel(
-                image: UIImage.icProfilePrivacypolicy,
-                title: "개인정보처리방침"
-            )
+            return "개인정보처리방침"
         }
     }
 }
 
 extension SettingType.PersonalSetting {
-    var cellModel: SettingCellModel {
+    var title: String {
         switch self {
         case .onboarding:
-            return SettingCellModel(
-                image: .icProfileGoOnboarding,
-                title: "취향탐색 다시하기"
-            )
+            return "취향탐색 다시하기"
         case .localVerification:
-            return SettingCellModel(
-                image: .icTownSignUp,
-                title: "동네 인증하기"
-            )
+            return "동네 인증하기"
         }
     }
 }
 
 extension SettingType.Account {
-    var cellModel: SettingCellModel {
+    var title: String {
         switch self {
         case .logout:
-            return SettingCellModel(
-                image: .icProfileLoginInfo,
-                title: "로그아웃하기"
-            )
+            return "로그아웃하기"
         case .withdrawal:
-            return SettingCellModel(
-                image: .icProfileWithdraw,
-                title: "서비스 탈퇴"
-            )
+            return "서비스 탈퇴"
         }
     }
 }

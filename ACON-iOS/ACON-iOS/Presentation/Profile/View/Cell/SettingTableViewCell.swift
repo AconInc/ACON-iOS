@@ -46,18 +46,16 @@ final class SettingTableViewCell: UITableViewCell {
     // MARK: - UI Setting Methods
 
     func setHierarchy() {
-        self.contentView.addSubviews(settingImageView, titleLabel, arrowImageView, updateLabel, versionLabel)
+        self.contentView.addSubviews(titleLabel,
+                                     arrowImageView,
+                                     updateLabel,
+                                     versionLabel)
     }
 
     func setLayout() {
-        settingImageView.snp.makeConstraints {
-            $0.leading.verticalEdges.equalToSuperview()
-            $0.size.equalTo(32)
-        }
-        
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(40)
+            $0.leading.equalToSuperview()
         }
         
         versionLabel.snp.makeConstraints {
@@ -87,22 +85,22 @@ final class SettingTableViewCell: UITableViewCell {
         versionLabel.do {
             $0.isHidden = true
             $0.setLabel(text: "최신버전",
-                        style: .s2,
-                        color: .gray400,
+                        style: .b1R,
+                        color: .gray500,
                         alignment: .right)
         }
         
         updateLabel.do {
             $0.isHidden = true
             $0.setLabel(text: "업데이트하러 가기",
-                        style: .s2,
-                        color: .gray400,
+                        style: .b1R,
+                        color: .labelAction,
                         alignment: .right)
         }
         
         arrowImageView.do {
             $0.contentMode = .scaleAspectFit
-            $0.image = .icArrowRightG
+            $0.image = .icForward
         }
     }
 
@@ -113,9 +111,11 @@ final class SettingTableViewCell: UITableViewCell {
 
 extension SettingTableViewCell {
 
-    func configure(with data: SettingCellModel) {
-        settingImageView.image = data.image
-        titleLabel.setLabel(text: data.title, style: .s1)
+    func configure(with data: String) {
+        titleLabel.setLabel(text: data, style: .t4R)
+        if data == "서비스 탈퇴" {
+            titleLabel.textColor = .labelDanger
+        }
     }
 
     func bindVersionData() {
