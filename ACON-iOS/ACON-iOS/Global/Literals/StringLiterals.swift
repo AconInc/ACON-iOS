@@ -198,7 +198,7 @@ enum StringLiterals {
         
         static let letsStart = "완료"
         
-        static let locateOnMap = "지도에서 위치 확인하기"
+        static let locateOnMap = "지역 인증"
         
         static let now = "이제 "
         
@@ -331,7 +331,7 @@ enum StringLiterals {
         
         static let birthDate = "생년월일"
         
-        static let verifiedArea = "인증 동네"
+        static let verifiedArea = "인증 지역"
         
         static let verifiedAreaDescription = "등록한 지 1주일 이내 지역은 수정이 가능하며 이후 3개월 동안\n변경이 불가해요."
         
@@ -339,7 +339,7 @@ enum StringLiterals {
         
         static let birthDatePlaceholder = "ex) 2025.01.01"
         
-        static let addVerifiedArea = "동네 추가하기"
+        static let addVerifiedArea = "지역 추가하기"
         
         static let save = "저장"
         
