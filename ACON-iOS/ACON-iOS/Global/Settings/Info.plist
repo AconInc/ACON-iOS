@@ -57,6 +57,10 @@
 	<string>${NMF_NCP_KEY_ID}</string>
 	<key>NMFCustomStyleID</key>
 	<string>${NMF_CUSTOM_STYLE_ID}</string>
+	<key>GADApplicationIdentifier</key>
+	<string>${GAD_APPLICATION_IDENTIFIER}</string>
+	<key>GAD_AD_UNIT_ID</key>
+	<string>${GAD_AD_UNIT_ID}</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
