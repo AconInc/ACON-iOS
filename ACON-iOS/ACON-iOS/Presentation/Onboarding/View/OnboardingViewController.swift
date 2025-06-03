@@ -13,8 +13,16 @@ class OnboardingViewController: BaseViewController {
     
     private let onboardingView = OnboardingView()
     
+    private let backButton = UIButton()
+    
+    private lazy var backCompletion: (() -> Void)? = {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     
     // MARK: - Properties
+    
+    private let flowType: OnboardingFlowType
     
     let categories = ["새우", "게", "조개", "굴", "회", "생선", "해산물", "육회/육사시미", "선지", "순대", "곱창/대창/막창", "닭발", "닭똥집", "양고기", "돼지/소 특수부위", "채소"]
     
@@ -22,6 +30,16 @@ class OnboardingViewController: BaseViewController {
     
     
     // MARK: - LifeCycle
+    
+    init(flowType: OnboardingFlowType) {
+        self.flowType = flowType
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,14 +53,29 @@ class OnboardingViewController: BaseViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.view.addSubview(onboardingView)
+        self.view.addSubviews(onboardingView, backButton)
     }
     
     override func setLayout() {
         super.setLayout()
-
+        
         onboardingView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+        
+        backButton.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(ScreenUtils.heightRatio*28 - 10)
+            $0.leading.equalToSuperview().inset(ScreenUtils.horizontalInset)
+        }
+    }
+    
+    override func setStyle() {
+        super.setStyle()
+        
+        backButton.do {
+            $0.setImage(.icArrowLeft, for: .normal)
+            $0.clipsToBounds = true
+            $0.isHidden = flowType == .login ? true : false
         }
     }
     
@@ -53,6 +86,8 @@ class OnboardingViewController: BaseViewController {
         onboardingView.startButton.addTarget(self,
                                              action: #selector(startButtonTapped),
                                              for: .touchUpInside)
+        
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
     private func bindSelectedFood() {
@@ -186,6 +221,12 @@ private extension OnboardingViewController {
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
             sceneDelegate.window?.rootViewController = ACTabBarController()
         }
+    }
+    
+    @objc
+    func backButtonTapped() {
+        self.presentACAlert(.quitOnboarding,
+                            rightAction: backCompletion)
     }
     
 }

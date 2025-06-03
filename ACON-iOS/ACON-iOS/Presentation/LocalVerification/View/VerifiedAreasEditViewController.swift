@@ -9,9 +9,14 @@ import UIKit
 
 class VerifiedAreasEditViewController: BaseNavViewController {
     
-    // MARK: - Properties (View, ViewModels)
+    // MARK: - UI Properties
     
     private let verifiedAreasEditView = VerifiedAreasEditView()
+    
+    private lazy var tappedAddVerifiedAreaGesture = UITapGestureRecognizer(target: self, action: #selector(tappedAddVerifiedArea))
+
+    
+    // MARK: - Properties
     
     private let viewModel = LocalVerificationEditViewModel()
     
@@ -25,15 +30,15 @@ class VerifiedAreasEditViewController: BaseNavViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addTarget()
-        setDelegate()
         bindViewModel()
-        viewModel.getVerifiedAreaList()
+        registerCell()
+        setDelegate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
 
+        viewModel.getVerifiedAreaList()
         self.tabBarController?.tabBar.isHidden = true
     }
     
@@ -55,19 +60,68 @@ class VerifiedAreasEditViewController: BaseNavViewController {
         super.setStyle()
 
         self.setBackButton()
-        self.setSecondTitleLabelStyle(title: StringLiterals.LocalVerification.locateOnMap)
+        self.setCenterTitleLabelStyle(title: StringLiterals.LocalVerification.locateOnMap)
     }
     
-    private func addTarget() {
-        verifiedAreasEditView.verifiedAreaAddButton.addTarget(
-            self,
-            action: #selector(tappedVerifiedAreaAddButton),
-            for: .touchUpInside
-        )
+}
+
+// MARK: - CollectionView Setting Methods
+
+private extension VerifiedAreasEditViewController {
+    
+    func registerCell() {
+        verifiedAreasEditView.verifiedAreaCollectionView.register(VerifiedAreasCollectionViewCell.self, forCellWithReuseIdentifier: VerifiedAreasCollectionViewCell.cellIdentifier)
     }
     
-    private func setDelegate() {
-        verifiedAreasEditView.delegate = self
+    func setDelegate() {
+        verifiedAreasEditView.verifiedAreaCollectionView.delegate = self
+        verifiedAreasEditView.verifiedAreaCollectionView.dataSource = self
+    }
+    
+}
+
+
+// MARK: - CollectionView Delegate
+
+extension VerifiedAreasEditViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: ScreenUtils.horizontalInset, bottom: 0, right: ScreenUtils.horizontalInset)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if viewModel.verifiedAreaList.count != 3 &&
+            indexPath.item == viewModel.verifiedAreaList.count { return true }
+        else { return false }
+    }
+
+}
+
+
+// MARK: - CollectionView DataSource
+
+extension VerifiedAreasEditViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.verifiedAreaList.count + 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VerifiedAreasCollectionViewCell.cellIdentifier, for: indexPath) as? VerifiedAreasCollectionViewCell else {
+            return UICollectionViewCell() }
+        
+        if viewModel.verifiedAreaList.count != 3 &&
+            indexPath.item == viewModel.verifiedAreaList.count {
+            cell.setAddButton()
+            cell.addGestureRecognizer(tappedAddVerifiedAreaGesture)
+        } else {
+            if !viewModel.verifiedAreaList.isEmpty {
+                cell.bindData(viewModel.verifiedAreaList[indexPath.item].name, indexPath.item)
+            }
+            cell.deleteButton.tag = indexPath.item
+            cell.deleteButton.addTarget(self, action: #selector(tappedAreaDeleteButton(_:)), for: .touchUpInside)
+        }
+        return cell
     }
     
 }
@@ -84,20 +138,13 @@ private extension VerifiedAreasEditViewController {
             
             print("🥑onGetVerifiedAreaListSuccess: \(onSuccess)")
             
-            verifiedAreasEditView.removeAllVerifiedAreas()
-            
-            if onSuccess && viewModel.isAppendingVerifiedAreaList == false {
-                viewModel.isAppendingVerifiedAreaList = true
-                 
-                for area in viewModel.verifiedAreaList {
-                    verifiedAreasEditView.addVerifiedArea(area)
+            DispatchQueue.main.async {
+                if onSuccess && !self.viewModel.verifiedAreaList.isEmpty {
+                    self.verifiedAreasEditView.verifiedAreaCollectionView.reloadData()
+                } else {
+                    self.showDefaultAlert(title: "인증 동네 로드 실패", message: "인증 동네 로드에 실패했습니다.")
                 }
-                
-                viewModel.isAppendingVerifiedAreaList = false
-            } else {
-                self.showDefaultAlert(title: "인증 동네 로드 실패", message: "인증 동네 로드에 실패했습니다.")
             }
-            
         }
         
         viewModel.onDeleteVerifiedAreaSuccess.bind { [weak self] onSuccess in
@@ -107,9 +154,13 @@ private extension VerifiedAreasEditViewController {
                let area = viewModel.deletingVerifiedArea,
                let index = viewModel.verifiedAreaList.firstIndex(of: area) {
                 viewModel.verifiedAreaList.remove(at: index)
-                verifiedAreasEditView.removeVerifiedArea(verifiedArea: area)
+                verifiedAreasEditView.verifiedAreaCollectionView.reloadData()
             } else {
-                self.showDefaultAlert(title: "인증 동네 삭제 실패", message: "인증 동네 삭제에 실패했습니다.")
+                if viewModel.timeoutFromVerification {
+                    self.presentACAlert(.timeoutFromVerification)
+                } else {
+                    self.showDefaultAlert(title: "인증 동네 삭제 실패", message: "인증 동네 삭제에 실패했습니다.")
+                }
             }
         }
         
@@ -127,7 +178,7 @@ private extension VerifiedAreasEditViewController {
             // NOTE: 새로 인증한 동네와 기존 동네가 다른 경우 -> 새 동네 append
             if !isExistingArea {
                 viewModel.verifiedAreaList.append(newVerifiedArea)
-                verifiedAreasEditView.addVerifiedArea(newVerifiedArea)
+                verifiedAreasEditView.verifiedAreaCollectionView.reloadData()
             }
         }
         
@@ -143,7 +194,7 @@ private extension VerifiedAreasEditViewController {
             if !isExistingArea {
                 viewModel.postDeleteVerifiedArea(viewModel.verifiedAreaList[0])
                 viewModel.verifiedAreaList.append(newVerifiedArea)
-                verifiedAreasEditView.addVerifiedArea(newVerifiedArea)
+                verifiedAreasEditView.verifiedAreaCollectionView.reloadData()
             }
         }
     }
@@ -153,9 +204,10 @@ private extension VerifiedAreasEditViewController {
 
 // MARK: - Delegate
 
-extension VerifiedAreasEditViewController: VerifiedAreasEditViewDelegate {
+extension VerifiedAreasEditViewController {
     
-    func didTapAreaDeleteButton(_ verifiedArea: VerifiedAreaModel) {
+    @objc
+    func tappedAreaDeleteButton(_ sender: UIButton) {
         // NOTE: 동네가 1개 남은 상황에서 삭제버튼 누른 경우 -> Alert -> 동네인증
         if viewModel.verifiedAreaList.count == 1 {
             let action: () -> Void = { [weak self] in
@@ -165,8 +217,9 @@ extension VerifiedAreasEditViewController: VerifiedAreasEditViewDelegate {
             }
             self.presentACAlert(.changeVerifiedArea, rightAction: action)
         }
-        // TODO: 동네 인증 후 일주일 지나면 삭제 못한다는 알럿 기획과 논의중
         else {
+            let index = sender.tag
+            let verifiedArea = viewModel.verifiedAreaList[index]
             viewModel.postDeleteVerifiedArea(verifiedArea)
         }
     }
@@ -179,7 +232,7 @@ extension VerifiedAreasEditViewController: VerifiedAreasEditViewDelegate {
 private extension VerifiedAreasEditViewController {
     
     @objc
-    func tappedVerifiedAreaAddButton() {
+    func tappedAddVerifiedArea() {
         let vc = LocalVerificationViewController(viewModel: localVerificationVMAdding)
         self.navigationController?.pushViewController(vc, animated: true)
     }

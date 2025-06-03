@@ -40,6 +40,11 @@ class SplashViewController: BaseViewController {
         }
     }
     
+    deinit {
+        player?.stop()
+        player = nil
+    }
+    
     override func setHierarchy() {
         super.setHierarchy()
         

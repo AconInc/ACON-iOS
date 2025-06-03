@@ -214,7 +214,7 @@ enum StringLiterals {
         
         static let letsStart = "완료"
         
-        static let locateOnMap = "지도에서 위치 확인하기"
+        static let locateOnMap = "지역 인증"
         
         static let now = "이제 "
         
@@ -347,17 +347,49 @@ enum StringLiterals {
         
         static let birthDate = "생년월일"
         
-        static let verifiedArea = "인증 동네"
+        static let verifiedArea = "인증 지역"
+        
+        static let verifiedAreaDescription = "등록한 지 1주일 이내 지역은 수정이 가능하며 이후 3개월 동안\n변경이 불가해요."
         
         static let nicknamePlaceholder = "16자 이내 영문, 한글, 숫자, . , _ 만 사용가능"
         
         static let birthDatePlaceholder = "ex) 2025.01.01"
         
-        static let addVerifiedArea = "동네 추가하기"
+        static let addVerifiedArea = "지역 추가하기"
         
         static let save = "저장"
         
         static let doneSave = "프로필이 저장되었습니다"
+        
+    }
+    
+    enum Setting {
+        
+        static let version = "현재 버전"
+        
+        static let termsOfUse = "이용약관"
+        
+        static let privacyPolicy = "개인정보처리방침"
+        
+        static let onboarding = "취향탐색 다시하기"
+        
+        static let localVerification = "동네 인증하기"
+        
+        static let logout = "로그아웃하기"
+        
+        static let withdrawal = "서비스 탈퇴"
+        
+        static let versionInfo = "버전 정보"
+        
+        static let policy = "약관 및 정책"
+        
+        static let serviceSettings = "서비스 설정"
+        
+        static let accountManagement = "로그아웃 / 탈퇴"
+        
+        static let latestVersion = "최신버전"
+        
+        static let needUpdate = "업데이트하러 가기"
         
     }
     

@@ -70,7 +70,7 @@ class LocalMapViewController: BaseNavViewController {
 
         self.setGlassMorphism()
         self.setBackButton()
-        self.setSecondTitleLabelStyle(title: StringLiterals.LocalVerification.locateOnMap)
+        self.setCenterTitleLabelStyle(title: StringLiterals.LocalVerification.locateOnMap)
     }
     
     func addTarget() {
@@ -143,7 +143,7 @@ private extension LocalMapViewController {
 
     func navigateToOnboarding() {
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = OnboardingViewController()
+            sceneDelegate.window?.rootViewController = OnboardingViewController(flowType: .login)
         }
     }
     
