@@ -347,6 +347,36 @@ enum StringLiterals {
         
     }
     
+    enum Setting {
+        
+        static let version = "현재 버전"
+        
+        static let termsOfUse = "이용약관"
+        
+        static let privacyPolicy = "개인정보처리방침"
+        
+        static let onboarding = "취향탐색 다시하기"
+        
+        static let localVerification = "동네 인증하기"
+        
+        static let logout = "로그아웃하기"
+        
+        static let withdrawal = "서비스 탈퇴"
+        
+        static let versionInfo = "버전 정보"
+        
+        static let policy = "약관 및 정책"
+        
+        static let serviceSettings = "서비스 설정"
+        
+        static let accountManagement = "로그아웃 / 탈퇴"
+        
+        static let latestVersion = "최신버전"
+        
+        static let needUpdate = "업데이트하러 가기"
+        
+    }
+    
     enum Album {
         
         static let choose = "선택"

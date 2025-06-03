@@ -113,10 +113,7 @@ extension VerifiedAreasCollectionViewCell {
         }
         label.setLabel(text: StringLiterals.Profile.addVerifiedArea,
                        style: .b1R,
-                       color: .labelAction,
-                       alignment: .center)
-        label.sizeToFit()
-
+                       color: .labelAction)
         DispatchQueue.main.async {
             self.setNeedsLayout()
             self.layoutIfNeeded()

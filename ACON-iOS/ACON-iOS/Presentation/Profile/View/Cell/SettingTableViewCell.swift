@@ -84,7 +84,7 @@ final class SettingTableViewCell: UITableViewCell {
         
         versionLabel.do {
             $0.isHidden = true
-            $0.setLabel(text: "최신버전",
+            $0.setLabel(text: StringLiterals.Setting.latestVersion,
                         style: .b1R,
                         color: .gray500,
                         alignment: .right)
@@ -92,7 +92,7 @@ final class SettingTableViewCell: UITableViewCell {
         
         updateLabel.do {
             $0.isHidden = true
-            $0.setLabel(text: "업데이트하러 가기",
+            $0.setLabel(text: StringLiterals.Setting.needUpdate,
                         style: .b1R,
                         color: .labelAction,
                         alignment: .right)
@@ -113,7 +113,7 @@ extension SettingTableViewCell {
 
     func configure(with data: String) {
         titleLabel.setLabel(text: data, style: .t4R)
-        if data == "서비스 탈퇴" {
+        if data == SettingType.Account.withdrawal.title {
             titleLabel.textColor = .labelDanger
         }
     }

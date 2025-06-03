@@ -22,7 +22,7 @@ class OnboardingViewController: BaseViewController {
     
     // MARK: - Properties
     
-    private var flowType: OnboardingFlowType
+    private let flowType: OnboardingFlowType
     
     let categories = ["새우", "게", "조개", "굴", "회", "생선", "해산물", "육회/육사시미", "선지", "순대", "곱창/대창/막창", "닭발", "닭똥집", "양고기", "돼지/소 특수부위", "채소"]
     

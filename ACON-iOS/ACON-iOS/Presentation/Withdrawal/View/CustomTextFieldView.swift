@@ -13,7 +13,7 @@ final class CustomTextFieldView: BaseView {
     
     private let scrollView = UIScrollView()
     
-    private var glassBorderView = UIView()
+    private var glassBorderBackgroundView = UIView()
     
     private let textView = UITextView()
     
@@ -72,7 +72,7 @@ final class CustomTextFieldView: BaseView {
         super.setHierarchy()
 
         addSubview(scrollView)
-        scrollView.addSubviews(glassBorderView, textView)
+        scrollView.addSubviews(glassBorderBackgroundView, textView)
         addSubviews(placeholderLabel,
                     characterCountLabel,
                     maxCharacterLabel)
@@ -87,14 +87,14 @@ final class CustomTextFieldView: BaseView {
             $0.bottom.equalTo(characterCountLabel.snp.top).offset(-4)
         }
         
-        glassBorderView.snp.makeConstraints {
+        glassBorderBackgroundView.snp.makeConstraints {
             $0.top.centerX.equalToSuperview()
             $0.width.equalTo(ScreenUtils.widthRatio*328)
             $0.height.greaterThanOrEqualTo(60).priority(.required)
         }
         
         textView.snp.makeConstraints {
-            $0.edges.equalTo(glassBorderView.snp.edges).inset(1)
+            $0.edges.equalTo(glassBorderBackgroundView.snp.edges).inset(1)
         }
 
         placeholderLabel.snp.makeConstraints {
@@ -116,9 +116,9 @@ final class CustomTextFieldView: BaseView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        glassBorderView.layoutIfNeeded()
+        glassBorderBackgroundView.layoutIfNeeded()
         
-        glassBorderView.addGlassBorder(GlassBorderAttributes(width: 1, cornerRadius: 8, glassmorphismType: .buttonGlassDefault))
+        glassBorderBackgroundView.addGlassBorder(GlassBorderAttributes(width: 1, cornerRadius: 8, glassmorphismType: .buttonGlassDefault))
     }
 
     func updateCharacterCount(_ count: Int) {

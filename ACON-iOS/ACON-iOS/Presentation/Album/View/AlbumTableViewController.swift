@@ -83,11 +83,11 @@ extension AlbumTableViewController {
             }
         }
         
-        // 개별 업데이트는 데이터가 이미 로드된 후에만
+        // NOTE: 개별 업데이트는 데이터가 이미 로드된 후에만
         self.albumViewModel.fetchedAlbumIndex.bind { [weak self] index in
             guard let index = index else { return }
             
-            // 테이블뷰에 충분한 데이터가 있을 때만 개별 업데이트
+            // NOTE: 테이블뷰에 충분한 데이터가 있을 때만 개별 업데이트
             if let tableView = self?.albumTableView,
                tableView.numberOfRows(inSection: 0) > index {
                 let indexPath = IndexPath(row: index, section: 0)
