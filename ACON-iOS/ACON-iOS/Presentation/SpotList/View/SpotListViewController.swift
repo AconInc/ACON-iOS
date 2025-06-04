@@ -141,7 +141,6 @@ extension SpotListViewController {
                     self.spotListView.collectionView.reloadData()
                     self.spotListView.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
                 }
-                
                 // NOTE: 스켈레톤 최소 0.5초 유지
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     self.spotListView.skeletonView.isHidden = true
@@ -400,9 +399,9 @@ extension SpotListViewController: UIScrollViewDelegate {
         if viewModel.spotList.transportMode == .walking {
             let cellHeight = SpotListItemSizeType.itemMaxHeight.value + SpotListItemSizeType.minimumLineSpacing.value
             let targetY = targetContentOffset.pointee.y
+            let newTargetY = round(targetY / cellHeight) * cellHeight + SpotListItemSizeType.minimumLineSpacing.value / 2
             
             // NOTE: 화면 중앙과 가장 가까운 셀을 찾아 화면 중앙으로 이동
-            let newTargetY = round(targetY / cellHeight) * cellHeight + SpotListItemSizeType.minimumLineSpacing.value / 2
             targetContentOffset.pointee = CGPoint(x: 0, y: newTargetY)
         }
     }
