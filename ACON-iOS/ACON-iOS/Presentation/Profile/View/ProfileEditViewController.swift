@@ -140,11 +140,9 @@ extension ProfileEditViewController {
 }
 
 
-// MARK: - Binding & Observing
+// MARK: - Initial Data
 
 private extension ProfileEditViewController {
-
-    // MARK: - Initial Data
 
     func bindData() {
         profileEditView.do {
@@ -157,6 +155,12 @@ private extension ProfileEditViewController {
         }
     }
 
+}
+
+
+// MARK: - Observing
+
+private extension ProfileEditViewController {
 
     // MARK: - ViewModel Observing
 
@@ -219,6 +223,7 @@ private extension ProfileEditViewController {
             viewModel.onPatchProfileSuccess.value = nil
         }
     }
+
 
     // MARK: - User Input Observing
 

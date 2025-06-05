@@ -30,7 +30,7 @@ final class ProfileEditView: BaseView {
 
     private let nicknameTitleLabel = UILabel()
     
-    let nicknameTextField = ACTextField(borderWidth: 1, cornerRadius: 8, fontStyle: .b1R, borderGlassType: .buttonGlassDefault)
+    let nicknameTextField = ACTextField(cornerRadius: 8, fontStyle: .b1R, borderGlassType: .buttonGlassDefault)
     
     private let nicknameValidMessageView = ProfileEditValidMessageView()
 
@@ -38,7 +38,7 @@ final class ProfileEditView: BaseView {
 
     private let birthDateTitleLabel = UILabel()
     
-    let birthDateTextField = ACTextField(borderWidth: 1, cornerRadius: 8, fontStyle: .b1R, borderGlassType: .buttonGlassDefault)
+    let birthDateTextField = ACTextField(cornerRadius: 8, fontStyle: .b1R, borderGlassType: .buttonGlassDefault)
     
     private let birthDateValidMessageView = ProfileEditValidMessageView()
 
