@@ -136,7 +136,9 @@ extension SpotListViewController {
                 spotListView.skeletonView.isHidden = true
             }
 
+            viewModel.errorType = nil
             viewModel.onSuccessPostSpotList.value = nil
+
             endRefreshingAndTransparancy()
             
             filterButton.isSelected = !viewModel.filterList.isEmpty
