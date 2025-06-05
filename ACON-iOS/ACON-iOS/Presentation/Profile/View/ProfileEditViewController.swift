@@ -21,6 +21,8 @@ final class ProfileEditViewController: BaseNavViewController {
     private var keyboardWillShowObserver: NSObjectProtocol?
     private var keyboardWillHideObserver: NSObjectProtocol?
 
+    private var isInitialLoad: Bool = true
+
     private var isNicknameAvailable: Bool = true {
         didSet {
             // NOTE: 검증이 완료되었으므로 로딩 로띠 종료
@@ -38,7 +40,7 @@ final class ProfileEditViewController: BaseNavViewController {
 
     private var isDefaultImage: Bool? = nil
 
-    
+
     // MARK: - Life Cycles
 
     init(_ viewModel: ProfileViewModel) {
@@ -67,8 +69,9 @@ final class ProfileEditViewController: BaseNavViewController {
         setDelegate()
         addTarget()
         bindData()
-        bindViewModel()
-        bindObservable()
+        observeViewModel()
+        observeUserInputs()
+        isInitialLoad = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -140,12 +143,13 @@ extension ProfileEditViewController {
 }
 
 
-// MARK: - Bindings
+// MARK: - Binding & Observing
 
 private extension ProfileEditViewController {
 
+    // MARK: - Initial Data
+
     func bindData() {
-        // NOTE: 기본 데이터 바인딩
         profileEditView.do {
             $0.setProfileImageURL(viewModel.userInfo.profileImage)
             $0.nicknameTextField.text = viewModel.userInfo.nickname
@@ -156,7 +160,10 @@ private extension ProfileEditViewController {
         }
     }
 
-    func bindViewModel() {
+
+    // MARK: - ViewModel Observing
+
+    func observeViewModel() {
         viewModel.onGetNicknameValiditySuccess.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
@@ -215,7 +222,9 @@ private extension ProfileEditViewController {
         }
     }
 
-    func bindObservable() {
+    // MARK: - User Input Observing
+
+    func observeUserInputs() {
         keyboardWillShowObserver = NotificationCenter.default.addObserver(
             forName: UIResponder.keyboardWillShowNotification,
             object: nil,
@@ -393,7 +402,7 @@ private extension ProfileEditViewController {
         profileEditView.nicknameTextField.observableText.bind { [weak self] text in
             guard let self = self,
                   let text = text else { return }
-            
+
             // NOTE: 닉네임 필드 값이 변하면 일단 저장 막고 유효성 메시지 숨김
             isNicknameAvailable = false
             profileEditView.setNicknameValidMessage(.none)
@@ -401,7 +410,9 @@ private extension ProfileEditViewController {
             // NOTE: 글자 수 카운터 업데이트
             profileEditView.setNicknameLengthLabel(text.count,
                                                    viewModel.maxNicknameLength)
-            
+
+            if isInitialLoad { return }
+
             // MARK: 글자 수, 문자 확인
 
             guard text.count > 0 else {
