@@ -71,6 +71,9 @@ extension UIView {
         let maskView = UIView(frame: bounds)
         maskView.layer.addSublayer(maskLayer)
         UIView.glassBorderView.mask = maskView
+        
+        UIView.glassBorderView.isUserInteractionEnabled = false
+
     }
     
     func removeGlassBorder() {
