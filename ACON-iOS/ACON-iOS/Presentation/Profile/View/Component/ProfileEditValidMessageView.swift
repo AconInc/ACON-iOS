@@ -38,11 +38,6 @@ final class ProfileEditValidMessageView: BaseView {
         self.isHidden = true
     }
 
-    private func hideFirstLine(_ isHidden: Bool) {
-        [icon, label].forEach {
-            $0.isHidden = isHidden
-        }
-    }
 
 
     // MARK: - Internal Methods

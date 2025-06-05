@@ -135,7 +135,7 @@ final class ProfileEditView: BaseView {
 
         nicknameValidMessageView.snp.makeConstraints {
             $0.top.equalTo(nicknameTextField.snp.bottom).offset(validMessageOffset)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
+            $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
             $0.height.greaterThanOrEqualTo(44)
         }
 
@@ -157,7 +157,7 @@ final class ProfileEditView: BaseView {
 
         birthDateValidMessageView.snp.makeConstraints {
             $0.top.equalTo(birthDateTextField.snp.bottom).offset(validMessageOffset)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
+            $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
             $0.height.greaterThanOrEqualTo(20)
         }
     }
