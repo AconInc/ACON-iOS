@@ -8,22 +8,22 @@
 import UIKit
 
 class SpotListViewController: BaseNavViewController {
-    
+
     // MARK: - Properties
-    
+
     private let spotListView = SpotListView()
-    
+
     private let viewModel = SpotListViewModel()
-    
+
     private let spotToggleButton = SpotToggleButtonView()
-    
+
     private let filterButton = UIButton()
-    
+
     private var isViewInitialRender = true
-    
-    
+
+
     // MARK: - LifeCycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,43 +33,43 @@ class SpotListViewController: BaseNavViewController {
         addTarget()
         viewModel.requestLocation()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
-        
+
         self.tabBarController?.tabBar.isHidden = false
     }
-    
+
     override func setHierarchy() {
         super.setHierarchy()
-        
+
         contentView.addSubview(spotListView)
         navigationBarView.addSubviews(spotToggleButton, filterButton)
     }
-    
+
     override func setLayout() {
         super.setLayout()
-        
+
         spotListView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
+
         spotToggleButton.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
-        
+
         filterButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(16)
             $0.size.equalTo(36)
         }
     }
-    
+
     override func setStyle() {
         super.setStyle()
-        
+
         setGlassMorphism()
-        
+
         filterButton.do {
             var config = UIButton.Configuration.filled()
             config.image = .icFilter
@@ -89,7 +89,7 @@ class SpotListViewController: BaseNavViewController {
             }
         }
     }
-            
+
     private func addTarget() {
         filterButton.addTarget(
             self,
@@ -97,63 +97,45 @@ class SpotListViewController: BaseNavViewController {
             for: .touchUpInside
         )
     }
-    
+
 }
 
 
 // MARK: - Bind VM, Observable
 
 extension SpotListViewController {
-    
+
     func bindViewModel() {
-        viewModel.onSuccessGetDong.bind { [weak self] onSuccess in
-            guard let self = self,
-                  let onSuccess = onSuccess else { return }
-            
-            // NOTE: 법정동 조회 성공 -> 장소 조회
-            if onSuccess {
-                viewModel.postSpotList()
-                spotListView.regionErrorView.isHidden = true
-                spotListView.skeletonView.isHidden = false
-            }
-            
-            // NOTE: 법정동 조회 실패 (서비스불가지역)
-            else if viewModel.errorType == .unsupportedRegion {
-                spotListView.regionErrorView.isHidden = false
-            }
-            
-            // NOTE: 기타 네트워크 에러
-            else {
-                // TODO: 네트워크 에러뷰, 버튼에 getDong() 액션 설정
-            }
-            
-            viewModel.onSuccessGetDong.value = nil
-        }
-        
         viewModel.onSuccessPostSpotList.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
 
             let spotList = viewModel.spotList
+
             if onSuccess {
                 DispatchQueue.main.async {
+                    self.spotListView.regionErrorView.isHidden = true
                     self.spotListView.updateCollectionViewLayout(type: spotList.transportMode)
                     self.spotListView.collectionView.reloadData()
                     self.spotListView.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
                 }
                 // NOTE: 스켈레톤 최소 0.5초 유지
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.spotListView.skeletonView.isHidden = true
+                    self.spotListView.skeletonView.isHidden = true // TODO: 스켈레톤 애니메이션으로 수정
                 }
-            } else {
+            }
+
+            // NOTE: 법정동 조회 실패 (서비스불가지역)
+            else if viewModel.errorType == .unsupportedRegion {
+                spotListView.regionErrorView.isHidden = false
+            }
+
+            else {
                 // TODO: 네트워크 에러뷰, 버튼에 postSpotList() 액션 설정
 
                 spotListView.skeletonView.isHidden = true
-                
-                // TODO: Post 하는동안 로딩스켈레톤
-                
             }
-            
+
             viewModel.onSuccessPostSpotList.value = nil
             endRefreshingAndTransparancy()
             
@@ -162,7 +144,7 @@ extension SpotListViewController {
             viewModel.onFinishRefreshingSpotList.value = true
         }
     }
-    
+
     func bindObservable() {
         spotToggleButton.selectedType.bind { [weak self] spotType in
             guard let self = self,
@@ -173,14 +155,14 @@ extension SpotListViewController {
             viewModel.postSpotList()
         }
     }
-    
+
 }
 
 
 // MARK: - @objc functions
 
 private extension SpotListViewController {
-    
+
     @objc
     func handleRefreshControl() {
         guard AuthManager.shared.hasToken else {
@@ -193,18 +175,16 @@ private extension SpotListViewController {
         }
         viewModel.requestLocation()
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
             // NOTE: 데이터 리로드 전 애니메이션
             UIView.animate(withDuration: 0.25, animations: {
-                self.spotListView.collectionView.alpha = 0.5
+                self?.spotListView.collectionView.alpha = 0.5
             }) { [weak self] _ in
-                
-                self?.viewModel.requestLocation()
                 self?.spotListView.skeletonView.isHidden = false
             }
         }
     }
-    
+
     @objc
     func tappedFilterButton() {
         guard AuthManager.shared.hasToken else {
@@ -218,16 +198,6 @@ private extension SpotListViewController {
         present(vc, animated: true)
     }
 
-    @objc
-    func tappedReloadButton() {
-        spotListView.skeletonView.isHidden = false
-        guard AuthManager.shared.hasToken else {
-            presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
-            return
-        }
-        viewModel.requestLocation()
-    }
-    
 }
 
 
