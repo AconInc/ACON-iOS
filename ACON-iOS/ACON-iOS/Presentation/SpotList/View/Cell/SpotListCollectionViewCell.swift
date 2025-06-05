@@ -13,8 +13,11 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - UI Properties
 
+    private var currentImageURL: String? // NOTE: 셀 재사용 이슈 방지 목적
+
     private let bgImage = UIImageView()
     private let dimImage = UIImageView()
+    private let bgImageShadowView = UIView()
 
     private let noImageContentView = SpotNoImageContentView(.iconAndDescription)
     private let loginlockOverlayView = LoginLockOverlayView()
@@ -32,7 +35,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     override func setHierarchy() {
         super.setHierarchy()
 
-        self.addSubviews(bgImage,
+        self.addSubviews(bgImageShadowView,
                          dimImage,
                          noImageContentView,
                          titleLabel,
@@ -40,12 +43,18 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
                          tagStackView,
                          findCourseButton,
                          loginlockOverlayView)
+
+        bgImageShadowView.addSubview(bgImage)
     }
 
     override func setLayout() {
         super.setLayout()
 
         let edge = ScreenUtils.widthRatio * 20
+
+        bgImageShadowView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
 
         bgImage.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -89,6 +98,10 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     override func setStyle() {
         backgroundColor = .clear
 
+        bgImageShadowView.do {
+            $0.clipsToBounds = false
+        }
+
         bgImage.do {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
@@ -128,8 +141,14 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+
         findCourseButton.refreshBlurEffect()
+
+        currentImageURL = nil
+        bgImage.kf.cancelDownloadTask()
+        bgImage.image = nil
+
+        bgImageShadowView.layer.shadowColor = UIColor.clear.cgColor
     }
 
 }
@@ -140,42 +159,108 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 extension SpotListCollectionViewCell: SpotListCellConfigurable {
 
     func bind(spot: SpotModel) {
-        bgImage.kf.setImage(
-            with: URL(string: spot.imageURL ?? ""),
-            placeholder: UIImage.imgSkeletonBg,
-            options: [.transition(.none), .cacheOriginalImage],
-            completionHandler: { result in
-                switch result {
-                case .success:
-                    self.noImageContentView.isHidden = true
-                    self.dimImage.isHidden = false
-                case .failure:
-                    self.bgImage.image = .imgSpotNoImageBackground
-                    self.noImageContentView.isHidden = false
-                    self.dimImage.isHidden = true
-                }
-            }
-        )
+        let imageURL = spot.imageURL ?? ""
+        currentImageURL = imageURL
+
+        setBgImageAndShadow(from: imageURL)
 
         titleLabel.setLabel(text: spot.name, style: .t4SB)
 
-        let acornCount: Int = spot.acornCount
-        let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
-        acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
+        setAcornCountButton(to: spot.acornCount)
 
         tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         spot.tagList.forEach { tag in
             tagStackView.addArrangedSubview(SpotTagButton(tag))
         }
 
-        let walk: String = StringLiterals.SpotList.walk
-        let findCourse: String = StringLiterals.SpotList.minuteFindCourse
-        let courseTitle: String = walk + String(spot.eta) + findCourse
-        findCourseButton.setAttributedTitle(text: courseTitle, style: .b1SB)
+        setFindCourseButton(to: spot.eta)
     }
 
     func overlayLoginLock(_ show: Bool) {
         loginlockOverlayView.isHidden = !show
+    }
+
+}
+
+
+// MARK: - Helper
+
+private extension SpotListCollectionViewCell {
+
+    func setBgImageAndShadow(from imageURL: String) {
+        bgImage.kf.setImage(
+            with: URL(string: imageURL),
+            placeholder: UIImage.imgSkeletonBg,
+            options: [
+                .transition(.none),
+                .cacheOriginalImage,
+                .scaleFactor(UIScreen.main.scale)
+            ],
+            completionHandler: { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result {
+                case .success(let value):
+                    self.noImageContentView.isHidden = true
+                    self.dimImage.isHidden = false
+                    self.extractAndApplyShadowColor(from: value.image, for: imageURL)
+
+                case .failure:
+                    self.bgImage.image = .imgSpotNoImageBackground
+                    self.noImageContentView.isHidden = false
+                    self.dimImage.isHidden = true
+                    self.extractAndApplyShadowColor(from: .imgSpotNoImageBackground, for: ShadowColorCache.noImageKey)
+                }
+            }
+        )
+    }
+
+    func setAcornCountButton(to acornCount: Int) {
+        let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
+        acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
+    }
+
+    func setFindCourseButton(to eta: Int) {
+        let walk: String = StringLiterals.SpotList.walk
+        let findCourse: String = StringLiterals.SpotList.minuteFindCourse
+        let courseTitle: String = walk + String(eta) + findCourse
+        findCourseButton.setAttributedTitle(text: courseTitle, style: .b1SB)
+    }
+
+    func extractAndApplyShadowColor(from image: UIImage, for key: String) {
+        // NOTE: 캐시 확인 및 적용
+        if let cachedColor = ShadowColorCache.shared.color(for: key) {
+            applyShadowColor(cachedColor)
+            return
+        }
+
+        // NOTE: 색상 추출 및 적용
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let dominantColor = image.mostFrequentBorderColor()
+
+            if let color = dominantColor {
+                ShadowColorCache.shared.setColor(color, for: key)
+                
+                DispatchQueue.main.async {
+                    guard self?.shouldApplyShadow(for: key) == true else { return }
+                    self?.applyShadowColor(color)
+                }
+            }
+        }
+    }
+
+    func applyShadowColor(_ color: UIColor) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            bgImageShadowView.layer.shadowOpacity = 0.7
+            bgImageShadowView.layer.shadowRadius = 60
+            bgImageShadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
+            bgImageShadowView.layer.shadowColor = color.cgColor
+        }
+    }
+
+    func shouldApplyShadow(for key: String) -> Bool {
+        return currentImageURL == key || key == ShadowColorCache.noImageKey
     }
 
 }

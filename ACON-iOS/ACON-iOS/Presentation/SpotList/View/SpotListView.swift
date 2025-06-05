@@ -23,7 +23,7 @@ class SpotListView: BaseView {
         collectionViewLayout: UICollectionViewFlowLayout()
     )
 
-    let skeletonView = SkeletonView()
+    let skeletonView = SkeletonView() // TODO: 삭제
 
     let regionErrorView = RegionErrorView()
 
@@ -66,8 +66,6 @@ class SpotListView: BaseView {
         }
 
         skeletonView.isHidden = true
-
-        // TODO: 배경 블러
     }
 
 }
@@ -90,4 +88,5 @@ extension SpotListView {
             }
         }
     }
+
 }

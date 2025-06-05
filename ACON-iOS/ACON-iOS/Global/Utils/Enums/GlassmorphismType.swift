@@ -18,8 +18,10 @@ enum GlassmorphismType {
         switch self {
         case .buttonGlassDefault, .buttonGlassPressed, .buttonGlassSelected, .buttonGlassDisabled, .toastGlass, .gradientGlass, .noImageErrorGlass:
             return 0.2
-        case .bottomSheetGlass, .alertGlass, .actionSheetGlass, .needLoginErrorGlass:
+        case .alertGlass, .actionSheetGlass, .needLoginErrorGlass:
             return 0.4
+        case .bottomSheetGlass:
+            return 0.6
         case .backgroundGlass:
             return 1
         }
@@ -27,19 +29,17 @@ enum GlassmorphismType {
     
     var blurEffectStyle: UIBlurEffect.Style {
         switch self {
-        case .buttonGlassDefault, .actionSheetGlass, .noImageErrorGlass:
-            return .systemThinMaterialLight
-        case .buttonGlassPressed:
-            return .systemThickMaterialLight
-        case .buttonGlassSelected:
-            return .systemMaterialLight
         case .buttonGlassDisabled:
             return .systemUltraThinMaterialLight
-        case .toastGlass, .needLoginErrorGlass, .alertGlass:
-            return .systemThinMaterialDark
+        case .buttonGlassDefault, .actionSheetGlass, .noImageErrorGlass:
+            return .systemThinMaterialLight
+        case .buttonGlassSelected:
+            return .systemMaterialLight
+        case .buttonGlassPressed:
+            return .systemThickMaterialLight
         case .gradientGlass:
             return .systemUltraThinMaterialDark
-        case .backgroundGlass, .bottomSheetGlass:
+        case .toastGlass, .needLoginErrorGlass, .alertGlass, .backgroundGlass, .bottomSheetGlass:
             return .systemThinMaterialDark
         }
     }
