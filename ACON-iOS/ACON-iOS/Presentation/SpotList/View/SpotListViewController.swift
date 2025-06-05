@@ -137,6 +137,7 @@ extension SpotListViewController {
             let spotList = viewModel.spotList
             if onSuccess {
                 DispatchQueue.main.async {
+                    self.spotListView.regionErrorView.isHidden = true
                     self.spotListView.updateCollectionViewLayout(type: spotList.transportMode)
                     self.spotListView.collectionView.reloadData()
                     self.spotListView.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
