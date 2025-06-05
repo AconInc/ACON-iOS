@@ -12,8 +12,6 @@ import Moya
 enum SpotListTargetType {
 
     case postSpotList(_ requestBody: PostSpotListRequest)
-    
-    case getDong(_ query: GetDongRequest)
 
 }
 
@@ -23,8 +21,6 @@ extension SpotListTargetType: TargetType {
         switch self {
         case .postSpotList:
             return .post
-        case .getDong:
-            return .get
         }
     }
 
@@ -32,16 +28,11 @@ extension SpotListTargetType: TargetType {
         switch self {
         case .postSpotList:
             return utilPath + "spots"
-        case .getDong:
-            return utilPath + "area"
         }
     }
     
     var parameter: [String : Any]?  {
         switch self {
-        case .getDong(let parameter):
-            return ["latitude": parameter.latitude,
-                    "longitude": parameter.longitude]
         default:
             return .none
         }
@@ -51,12 +42,6 @@ extension SpotListTargetType: TargetType {
         switch self {
         case .postSpotList(let requestBody):
             return .requestJSONEncodable(requestBody)
-        case .getDong:
-            if let parameter = parameter {
-                return .requestParameters(parameters: parameter, encoding: URLEncoding.default)
-            } else {
-                return .requestPlain
-            }
         }
     }
 
@@ -64,8 +49,6 @@ extension SpotListTargetType: TargetType {
         switch self {
         case .postSpotList:
             return HeaderType.headerWithToken()
-        case .getDong:
-            return HeaderType.tokenOnly()
         }
     }
 
