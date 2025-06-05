@@ -135,16 +135,17 @@ private extension SpotDetailViewController {
 
     @objc
     func tappedFindCourseButton() {
-        viewModel.postGuidedSpot()
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_navigation?": true])
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alertController.do {
+        alertController.do { [weak self] in
             $0.addAction(UIAlertAction(title: "네이버 지도", style: .default, handler: { _ in
-                self.viewModel.redirectToNaverMap()
+                self?.viewModel.redirectToNaverMap()
+                self?.viewModel.postGuidedSpot()
             }))
             $0.addAction(UIAlertAction(title: "Apple 지도", style: .default, handler: { _ in
-                self.viewModel.redirectToAppleMap()
+                self?.viewModel.redirectToAppleMap()
+                self?.viewModel.postGuidedSpot()
             }))
             $0.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         }
