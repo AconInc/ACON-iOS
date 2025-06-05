@@ -39,11 +39,3 @@ struct VerifiedAreaModel: Equatable {
     var name: String
     
 }
-
-struct SettingCellModel: Equatable {
-    
-    let image: UIImage?
-    
-    let title: String
-    
-}

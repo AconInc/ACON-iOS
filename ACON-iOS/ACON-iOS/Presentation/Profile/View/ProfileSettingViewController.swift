@@ -81,6 +81,9 @@ extension ProfileSettingViewController {
 
 }
 
+
+// MARK: - UITableViewDelegate
+
 extension ProfileSettingViewController: UITableViewDelegate {
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -106,7 +109,7 @@ extension ProfileSettingViewController: UITableViewDelegate {
         return 40
     }
 
-    // 빈 footer로 마지막 셀 아래 여백 추가
+    /// 빈 footer로 마지막 셀 아래 여백 추가
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 40
     }
@@ -122,12 +125,15 @@ extension ProfileSettingViewController: UITableViewDelegate {
             $0.leading.centerY.equalToSuperview()
         }
         titleLabel.setLabel(text: SettingType.sectionTitles[section],
-                           style: .s2,
-                           color: .gray500)
+                            style: .b1R,
+                            color: .gray500)
         return headerView
     }
 
 }
+
+
+// MARK: - UITableViewDataSource
 
 extension ProfileSettingViewController: UITableViewDataSource {
     
@@ -135,27 +141,25 @@ extension ProfileSettingViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.cellIdentifier, for: indexPath) as? SettingTableViewCell
         else { return UITableViewCell() }
 
-        let cellModel: SettingCellModel
-
         switch indexPath.section {
         case 0:
             let items = SettingType.allSections[0] as! [SettingType.Info]
-            cellModel = items[indexPath.row].cellModel
+            title = items[indexPath.row].title
             cell.bindVersionData()
         case 1:
             let items = SettingType.allSections[1] as! [SettingType.Policy]
-            cellModel = items[indexPath.row].cellModel
+            title = items[indexPath.row].title
         case 2:
             let items = SettingType.allSections[2] as! [SettingType.PersonalSetting]
-            cellModel = items[indexPath.row].cellModel
+            title = items[indexPath.row].title
         case 3:
             let items = SettingType.allSections[3] as! [SettingType.Account]
-            cellModel = items[indexPath.row].cellModel
+            title = items[indexPath.row].title
         default:
             return cell
         }
 
-        cell.configure(with: cellModel)
+        cell.configure(with: title ?? "")
         return cell
     }
 
@@ -186,11 +190,9 @@ extension ProfileSettingViewController: UITableViewDataSource {
             let items = SettingType.allSections[2] as! [SettingType.PersonalSetting]
             switch items[indexPath.row] {
             case .onboarding:
-                if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                    sceneDelegate.window?.rootViewController = OnboardingViewController()
-                    // TODO: - 어떤 경로인지 알려주는 플래그 필요
-                    AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["retry_onboarding?": true])
-                }
+                let vc = OnboardingViewController(flowType: .setting)
+                self.navigationController?.pushViewController(vc, animated: true)
+                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["retry_onboarding?": true])
             case .localVerification:
                 let vc = VerifiedAreasEditViewController()
                 self.navigationController?.pushViewController(vc, animated: true)

@@ -34,64 +34,43 @@ enum SettingType {
 // MARK: - SettingCellModel Info
 
 extension SettingType.Info {
-    var cellModel: SettingCellModel {
+    var title: String {
         switch self {
         case .version:
-            return SettingCellModel(
-                image: .icProfileVersion,
-                title: "현재 버전"
-            )
+            return StringLiterals.Setting.version
         }
     }
 }
 
 extension SettingType.Policy {
-    var cellModel: SettingCellModel {
+    var title: String {
         switch self {
         case .termsOfUse:
-            return SettingCellModel(
-                image: UIImage.icProfileTermsofuse,
-                title: "이용약관"
-            )
+            return StringLiterals.Setting.termsOfUse
         case .privacyPolicy:
-            return SettingCellModel(
-                image: UIImage.icProfilePrivacypolicy,
-                title: "개인정보처리방침"
-            )
+            return StringLiterals.Setting.privacyPolicy
         }
     }
 }
 
 extension SettingType.PersonalSetting {
-    var cellModel: SettingCellModel {
+    var title: String {
         switch self {
         case .onboarding:
-            return SettingCellModel(
-                image: .icProfileGoOnboarding,
-                title: "취향탐색 다시하기"
-            )
+            return StringLiterals.Setting.onboarding
         case .localVerification:
-            return SettingCellModel(
-                image: .icTownSignUp,
-                title: "동네 인증하기"
-            )
+            return StringLiterals.Setting.localVerification
         }
     }
 }
 
 extension SettingType.Account {
-    var cellModel: SettingCellModel {
+    var title: String {
         switch self {
         case .logout:
-            return SettingCellModel(
-                image: .icProfileLoginInfo,
-                title: "로그아웃하기"
-            )
+            return StringLiterals.Setting.logout
         case .withdrawal:
-            return SettingCellModel(
-                image: .icProfileWithdraw,
-                title: "서비스 탈퇴"
-            )
+            return StringLiterals.Setting.withdrawal
         }
     }
 }
@@ -102,10 +81,10 @@ extension SettingType.Account {
 extension SettingType {
     
     static let sectionTitles: [String] = [
-        "버전 정보",
-        "약관 및 정책",
-        "서비스 설정",
-        "로그아웃 / 탈퇴"
+        StringLiterals.Setting.versionInfo,
+        StringLiterals.Setting.policy,
+        StringLiterals.Setting.serviceSettings,
+        StringLiterals.Setting.accountManagement
     ]
     
     static var allSections: [Int: Any] = [

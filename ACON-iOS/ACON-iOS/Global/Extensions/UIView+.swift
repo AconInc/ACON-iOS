@@ -47,6 +47,8 @@ extension UIView {
     
     //MARK: - add GlassBorder (주의 - bound가 0이면 적용 안 됨)
     
+    static var glassBorderView = GlassmorphismView(.buttonGlassDefault)
+    
     func addGlassBorder(_ attributes: GlassBorderAttributes) {
         self.layer.borderWidth = 0
         
@@ -55,10 +57,10 @@ extension UIView {
         let innerPath = UIBezierPath(roundedRect: innerRect, cornerRadius: max(0, attributes.cornerRadius - attributes.width/2))
         outerPath.append(innerPath.reversing())
         
-        let glassmorphismView = GlassmorphismView(attributes.glassmorphismType)
+        UIView.glassBorderView = GlassmorphismView(attributes.glassmorphismType)
         
-        self.addSubview(glassmorphismView)
-        glassmorphismView.snp.makeConstraints {
+        self.addSubview(UIView.glassBorderView)
+        UIView.glassBorderView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
@@ -68,7 +70,11 @@ extension UIView {
         
         let maskView = UIView(frame: bounds)
         maskView.layer.addSublayer(maskLayer)
-        glassmorphismView.mask = maskView
+        UIView.glassBorderView.mask = maskView
+    }
+    
+    func removeGlassBorder() {
+        UIView.glassBorderView.removeFromSuperview()
     }
 
 }
