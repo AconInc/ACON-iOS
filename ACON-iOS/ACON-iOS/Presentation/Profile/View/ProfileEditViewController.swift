@@ -249,6 +249,65 @@ private extension ProfileEditViewController {
         observeBirthdateTextField()
     }
 
+    func observeNicknameTextField() {
+        profileEditView.nicknameTextField.observableText.bind { [weak self] text in
+            guard let self = self,
+                  let text = text else { return }
+
+            // NOTE: 닉네임 필드 값이 변하면 일단 저장 막고 유효성 메시지 숨김
+            isNicknameAvailable = false
+            profileEditView.setNicknameValidMessage(.none)
+            
+            // NOTE: 글자 수 카운터 업데이트
+            profileEditView.setNicknameLengthLabel(text.count,
+                                                   viewModel.maxNicknameLength)
+
+
+            // MARK: 글자 수, 문자 확인
+
+            guard text.count > 0 else {
+                profileEditView.setNicknameValidMessage(.nicknameMissing)
+                profileEditView.nicknameTextField.hideClearButton(isHidden: text.isEmpty)
+                return
+            }
+
+            guard isNicknameCharValid(text: text) else {
+                profileEditView.setNicknameValidMessage(.invalidChar)
+                return
+            }
+
+            guard text.count < viewModel.maxNicknameLength else {
+                profileEditView.nicknameTextField.text?.removeLast()
+                return
+            }
+
+
+            // MARK: 닉네임 중복 확인 (서버 통신)
+
+            profileEditView.nicknameTextField.startCheckingAnimation()
+
+            validityTestDebouncer.call { [weak self] in
+                guard let self = self,
+                      text.count > 0 && isNicknameCharValid(text: text) else { return }
+                viewModel.getNicknameValidity(nickname: text)
+            }
+        }
+    }
+
+    func observeBirthdateTextField() {
+        profileEditView.birthDateTextField.observableText.bind { [weak self] text in
+            guard let self = self else { return }
+            let bindedText = text ?? ""
+
+            profileEditView.birthDateTextField.hideClearButton(isHidden: bindedText.isEmpty)
+
+            if bindedText.isEmpty {
+                profileEditView.setBirthdateValidMessage(.none)
+                isBirthDateAvailable = true
+            }
+        }
+    }
+
 }
 
 
@@ -392,72 +451,6 @@ private extension ProfileEditViewController {
         }
 
         return newRawString.count > 8 ? false : true
-    }
-
-}
-
-
-// MARK: - Observation Helper
-
-private extension ProfileEditViewController {
-
-    func observeNicknameTextField() {
-        profileEditView.nicknameTextField.observableText.bind { [weak self] text in
-            guard let self = self,
-                  let text = text else { return }
-
-            // NOTE: 닉네임 필드 값이 변하면 일단 저장 막고 유효성 메시지 숨김
-            isNicknameAvailable = false
-            profileEditView.setNicknameValidMessage(.none)
-            
-            // NOTE: 글자 수 카운터 업데이트
-            profileEditView.setNicknameLengthLabel(text.count,
-                                                   viewModel.maxNicknameLength)
-
-
-            // MARK: 글자 수, 문자 확인
-
-            guard text.count > 0 else {
-                profileEditView.setNicknameValidMessage(.nicknameMissing)
-                profileEditView.nicknameTextField.hideClearButton(isHidden: text.isEmpty)
-                return
-            }
-
-            guard isNicknameCharValid(text: text) else {
-                profileEditView.setNicknameValidMessage(.invalidChar)
-                return
-            }
-
-            guard text.count < viewModel.maxNicknameLength else {
-                profileEditView.nicknameTextField.text?.removeLast()
-                return
-            }
-
-
-            // MARK: 닉네임 중복 확인 (서버 통신)
-
-            profileEditView.nicknameTextField.startCheckingAnimation()
-
-            validityTestDebouncer.call { [weak self] in
-                guard let self = self,
-                      text.count > 0 && isNicknameCharValid(text: text) else { return }
-                viewModel.getNicknameValidity(nickname: text)
-            }
-        }
-    }
-
-    func observeBirthdateTextField() {
-        profileEditView.birthDateTextField.observableText.bind { [weak self] text in
-            guard let self = self else { return }
-            let bindedText = text ?? ""
-
-            profileEditView.birthDateTextField.hideClearButton(isHidden: bindedText.isEmpty)
-
-            if bindedText.isEmpty {
-                profileEditView.setBirthdateValidMessage(.none)
-                isBirthDateAvailable = true
-            }
-        }
     }
 
 }
