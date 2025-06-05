@@ -139,13 +139,19 @@ private extension SpotDetailViewController {
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.do { [weak self] in
+            guard let self = self,
+                  let spot = viewModel.spotDetail.value else { return }
             $0.addAction(UIAlertAction(title: "네이버 지도", style: .default, handler: { _ in
-                self?.viewModel.redirectToNaverMap()
-                self?.viewModel.postGuidedSpot()
+                MapRedirectManager.shared.redirect(
+                    to: DestinationModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
+                    using: .naver)
+                self.viewModel.postGuidedSpot()
             }))
             $0.addAction(UIAlertAction(title: "Apple 지도", style: .default, handler: { _ in
-                self?.viewModel.redirectToAppleMap()
-                self?.viewModel.postGuidedSpot()
+                MapRedirectManager.shared.redirect(
+                    to: DestinationModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
+                    using: .apple)
+                self.viewModel.postGuidedSpot()
             }))
             $0.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         }

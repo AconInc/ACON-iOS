@@ -31,8 +31,8 @@ class SpotDetailViewModel: Serviceable {
             SignatureMenuModel(name: "맛있는메뉴1", price: 13000),
             SignatureMenuModel(name: "Very loooong name", price: 999999)
         ],
-        latitude: 35.785834,
-        longitude: 128.25,
+        latitude: 37.587038,
+        longitude: 127.0310,
         tagList: tagList
     )
     
@@ -97,71 +97,3 @@ extension SpotDetailViewModel {
     }
     
 }
-
-
-// MARK: - 네이버지도 Redirect
-
-extension SpotDetailViewModel {
-    
-    func redirectToNaverMap() {
-        ACLocationManager.shared.addDelegate(self)
-        self.mapType = "NAVER"
-        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
-    }
-    
-    func redirectToAppleMap() {
-        ACLocationManager.shared.addDelegate(self)
-        self.mapType = "APPLE"
-        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
-    }
-    
-    func openNMaps(startCoordinate: CLLocationCoordinate2D) {
-        guard let appName = Bundle.main.bundleIdentifier else { return }
-        let urlString = "nmap://route/walk?slat=\(startCoordinate.latitude)&slng=\(startCoordinate.longitude)&sname=\(sname)&dlat=\(spotDetail.value?.latitude ?? 0)&dlng=\(spotDetail.value?.longitude ?? 0)&dname=\(spotDetail.value?.name ?? "")&appname=\(appName)"
-        guard let encodedStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-        
-        guard let url = URL(string: encodedStr) else { return }
-        guard let appStoreURL = URL(string: "itms-apps://itunes.apple.com/app/id311867728?mt=8") else { return }
-        
-        if UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        } else {
-            UIApplication.shared.open(appStoreURL)
-        }
-    }
-    
-    func openAppleMaps(startCoordinate: CLLocationCoordinate2D) {
-        let start = MKMapItem(placemark: MKPlacemark(coordinate: startCoordinate))
-        start.name = self.sname
-        let destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: spotDetail.value?.latitude ?? 0, longitude: spotDetail.value?.longitude ?? 0)))
-        destination.name = spotDetail.value?.name ?? ""
-        
-        let launchOptions = [
-            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking
-        ]
-        
-        MKMapItem.openMaps(
-            with: [start, destination],
-            launchOptions: launchOptions
-        )
-    }
-    
-}
-
-
-// MARK: - 위치
-
-extension SpotDetailViewModel: ACLocationManagerDelegate {
-    
-    func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
-        ACLocationManager.shared.removeDelegate(self)
-        
-        if mapType == "NAVER" {
-            openNMaps(startCoordinate: coordinate)
-        } else if mapType == "APPLE" {
-            openAppleMaps(startCoordinate: coordinate)
-        }
-    }
-    
-}
-
