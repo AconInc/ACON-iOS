@@ -348,12 +348,9 @@ extension ProfileEditViewController: UITextFieldDelegate {
 private extension ProfileEditViewController {
 
     // NOTE: 닉네임
-    func nicknameTextFieldChange(_ textField: UITextField,
-                                 shouldChangeCharactersIn range: NSRange,
-                                 replacementString string: String) -> Bool {
+    func nicknameTextFieldChange(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return true
     }
-
 
     // NOTE: 생년월일
     func birthDateTextFieldChange(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -376,7 +373,6 @@ private extension ProfileEditViewController {
         // NOTE: 길이 0인 경우 ObservableBinding에서 .none처리
         if newRawString.count < 8 {
             profileEditView.setBirthdateValidMessage(.invalidDate)
-            profileEditView.birthDateTextField.changeBorderColor(to: .labelDanger)
             isBirthDateAvailable = false
         } else if newRawString.count == 8 {
             // NOTE: Validity 체크
@@ -446,7 +442,6 @@ private extension ProfileEditViewController {
 
             if bindedText.isEmpty {
                 profileEditView.setBirthdateValidMessage(.none)
-                profileEditView.birthDateTextField.changeBorderColor(to: .gray600)
                 isBirthDateAvailable = true
             }
         }
@@ -493,13 +488,11 @@ private extension ProfileEditViewController {
               isBeforeToday(date: date)
         else {
             profileEditView.setBirthdateValidMessage(.invalidDate)
-            profileEditView.birthDateTextField.changeBorderColor(to: .labelDanger)
             isBirthDateAvailable = false
             return
         }
 
         profileEditView.setBirthdateValidMessage(.none)
-        profileEditView.birthDateTextField.changeBorderColor(to: .gray600)
         isBirthDateAvailable = true
     }
 
