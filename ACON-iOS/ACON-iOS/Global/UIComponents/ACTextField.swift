@@ -187,7 +187,7 @@ final class ACTextField: UIView {
         textField.do {
             $0.autocorrectionType = .no
             $0.defaultTextAttributes = [
-                .font: ACFontType.t4SB.fontStyle.font,
+                .font: fontStyle.fontStyle.font,
                 .kern: fontStyle.kerning(isKorean: false),
                 .foregroundColor: UIColor.acWhite
             ]
