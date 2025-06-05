@@ -107,18 +107,18 @@ final class ProfileEditView: BaseView {
 
         contentView.snp.makeConstraints {
             $0.edges.width.equalTo(scrollView)
-            $0.height.greaterThanOrEqualTo(600) // TODO: 디자인 확인
+            $0.height.greaterThanOrEqualTo(380)
         }
 
         saveButton.snp.makeConstraints {
-            $0.top.equalTo(scrollView.snp.bottom).offset(12) // TODO: 디자인 확인
-            $0.bottom.equalToSuperview().inset(21+ScreenUtils.heightRatio*16)
+            $0.top.equalTo(scrollView.snp.bottom).offset(ScreenUtils.horizontalInset)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).inset(ScreenUtils.horizontalInset)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
             $0.height.equalTo(54)
         }
 
         profileImageEditButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(32)
+            $0.top.equalToSuperview().offset(19)
             $0.centerX.equalToSuperview()
         }
 
@@ -141,7 +141,7 @@ final class ProfileEditView: BaseView {
 
         nicknameLengthLabel.snp.makeConstraints {
             $0.top.equalTo(nicknameValidMessageView)
-            $0.trailing.equalTo(nicknameValidMessageView)
+            $0.trailing.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
         }
 
         birthDateTitleLabel.snp.makeConstraints {
@@ -184,14 +184,7 @@ final class ProfileEditView: BaseView {
     func setNicknameLengthLabel(_ currentLen: Int, _ maxLen: Int) {
         let currentStr = String(currentLen)
         let slashMaxStr = "/\(String(maxLen))"
-        nicknameLengthLabel
-            .setPartialText(
-                fullText: currentStr + slashMaxStr,
-                textStyles: [
-                    (text: currentStr, style: .t5R, color: .acWhite),
-                    (text: slashMaxStr, style: .t5R, color: .gray500)
-                ]
-            )
+        nicknameLengthLabel.setLabel(text: currentStr + slashMaxStr, style: .c1R, color: .gray500)
     }
 
 }
