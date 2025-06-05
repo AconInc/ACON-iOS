@@ -21,8 +21,6 @@ final class ProfileEditViewController: BaseNavViewController {
     private var keyboardWillShowObserver: NSObjectProtocol?
     private var keyboardWillHideObserver: NSObjectProtocol?
 
-    private var isInitialLoad: Bool = true
-
     private var isNicknameAvailable: Bool = true {
         didSet {
             // NOTE: 검증이 완료되었으므로 로딩 로띠 종료
@@ -71,7 +69,6 @@ final class ProfileEditViewController: BaseNavViewController {
         bindData()
         observeViewModel()
         observeUserInputs()
-        isInitialLoad = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -175,6 +172,7 @@ private extension ProfileEditViewController {
                 profileEditView.setNicknameValidMessage(viewModel.nicknameValidityMessageType)
                 isNicknameAvailable = false
             }
+            viewModel.onGetNicknameValiditySuccess.value = nil
         }
 
         viewModel.onSuccessGetPresignedURL.bind { [weak self] onSuccess in
@@ -411,7 +409,6 @@ private extension ProfileEditViewController {
             profileEditView.setNicknameLengthLabel(text.count,
                                                    viewModel.maxNicknameLength)
 
-            if isInitialLoad { return }
 
             // MARK: 글자 수, 문자 확인
 
@@ -430,8 +427,8 @@ private extension ProfileEditViewController {
                 profileEditView.nicknameTextField.text?.removeLast()
                 return
             }
-            
-            
+
+
             // MARK: 닉네임 중복 확인 (서버 통신)
 
             profileEditView.nicknameTextField.startCheckingAnimation()
