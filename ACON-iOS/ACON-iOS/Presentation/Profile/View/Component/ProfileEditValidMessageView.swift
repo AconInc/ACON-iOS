@@ -24,7 +24,7 @@ final class ProfileEditValidMessageView: BaseView {
 
     override func setLayout() {
         icon.snp.makeConstraints {
-            $0.top.leading.equalToSuperview()
+            $0.leading.centerY.equalToSuperview()
             $0.size.equalTo(18)
         }
 

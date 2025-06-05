@@ -12,11 +12,10 @@ final class ProfileEditView: BaseView {
     // MARK: - Helpers
 
     private let textFieldHeight: CGFloat = 48
+    private let validMessageHeight: CGFloat = 20
 
     private let sectionOffset: CGFloat = 160
-
     private let textFieldOffset: CGFloat = 12
-
     private let validMessageOffset: CGFloat = 8
 
 
@@ -107,7 +106,6 @@ final class ProfileEditView: BaseView {
 
         contentView.snp.makeConstraints {
             $0.edges.width.equalTo(scrollView)
-            $0.height.greaterThanOrEqualTo(380)
         }
 
         saveButton.snp.makeConstraints {
@@ -130,13 +128,13 @@ final class ProfileEditView: BaseView {
         nicknameTextField.snp.makeConstraints {
             $0.top.equalTo(nicknameTitleLabel.snp.bottom).offset(textFieldOffset)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
-            $0.height.greaterThanOrEqualTo(textFieldHeight)
+            $0.height.equalTo(textFieldHeight)
         }
 
         nicknameValidMessageView.snp.makeConstraints {
             $0.top.equalTo(nicknameTextField.snp.bottom).offset(validMessageOffset)
             $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
-            $0.height.greaterThanOrEqualTo(44)
+            $0.height.equalTo(validMessageHeight)
         }
 
         nicknameLengthLabel.snp.makeConstraints {
@@ -152,13 +150,14 @@ final class ProfileEditView: BaseView {
         birthDateTextField.snp.makeConstraints {
             $0.top.equalTo(birthDateTitleLabel.snp.bottom).offset(textFieldOffset)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
-            $0.height.greaterThanOrEqualTo(textFieldHeight)
+            $0.height.equalTo(textFieldHeight)
+            $0.bottom.equalToSuperview().inset(validMessageHeight)
         }
 
         birthDateValidMessageView.snp.makeConstraints {
             $0.top.equalTo(birthDateTextField.snp.bottom).offset(validMessageOffset)
             $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
-            $0.height.greaterThanOrEqualTo(20)
+            $0.height.equalTo(validMessageHeight)
         }
     }
 
