@@ -11,5 +11,6 @@ protocol SpotListCellConfigurable {
 
     func bind(spot: SpotModel)
     func overlayLoginLock(_ show: Bool)
+    func setFindCourseDelegate(_ delegate: SpotListCellDelegate?)
 
 }

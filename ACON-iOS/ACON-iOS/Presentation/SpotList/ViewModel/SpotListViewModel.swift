@@ -157,7 +157,23 @@ extension SpotListViewModel {
             }
         }
     }
-    
+
+    func postGuidedSpot(spotID: Int64) {
+        ACService.shared.spotDetailService.postGuidedSpot(spotID: spotID){ [weak self] response in
+            switch response {
+            case .success:
+                return
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.postGuidedSpot(spotID: spotID)
+                }
+            default:
+                print("VM - Failed To postGuidedSpot")
+                return
+            }
+        }
+    }
+
 }
 
 

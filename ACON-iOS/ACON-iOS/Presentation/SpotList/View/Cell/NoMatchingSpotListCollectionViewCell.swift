@@ -9,6 +9,13 @@ import UIKit
 
 class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
 
+    // MARK: - Properties
+
+    var spot: SpotModel?
+
+    var findCourseDelegate: SpotListCellDelegate?
+
+
     // MARK: - UI Properties
 
     private let bgImage = UIImageView()
@@ -25,7 +32,18 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
     private let cornerRadius: CGFloat = 20
 
 
-    // MARK: - Life Cycle
+    // MARK: - init
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        addTarget()
+    }
+
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
 
     override func setHierarchy() {
         super.setHierarchy()
@@ -129,6 +147,10 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
         
         findCourseButton.refreshBlurEffect()
     }
+    
+    private func addTarget() {
+        findCourseButton.addTarget(self, action: #selector(tappedFindCourseButton), for: .touchUpInside)
+    }
 
 }
 
@@ -138,6 +160,8 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
 extension NoMatchingSpotListCollectionViewCell: SpotListCellConfigurable {
 
     func bind(spot: SpotModel) {
+        self.spot = spot
+
         bgImage.kf.setImage(
             with: URL(string: spot.imageURL ?? ""),
             placeholder: UIImage.imgSkeletonBg,
@@ -180,6 +204,22 @@ extension NoMatchingSpotListCollectionViewCell: SpotListCellConfigurable {
 
     func overlayLoginLock(_ show: Bool) {
         loginLockOverlayView.isHidden = !show
+    }
+
+    func setFindCourseDelegate(_ delegate: (any SpotListCellDelegate)?) {
+        self.findCourseDelegate = delegate
+    }
+
+}
+
+
+// MARK: - @objc functions
+
+private extension NoMatchingSpotListCollectionViewCell {
+
+    @objc func tappedFindCourseButton() {
+        guard let spot = spot else { return }
+        findCourseDelegate?.tappedFindCourseButton(spot: spot)
     }
 
 }

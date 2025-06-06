@@ -69,6 +69,8 @@ enum StringLiterals {
         
         static let ok = "확인"
         
+        static let cancel = "취소"
+        
         static let notLocatedTitle = "위치 인식 실패"
         
         static let notLocatedMessage = "문제가 발생했습니다.\n나중에 다시 시도해주세요."
@@ -432,5 +434,12 @@ enum StringLiterals {
         
         static let confirmButtonTitle = "아쉽지만 탈퇴하기"
     }
-    
+
+    enum Map {
+
+        static let appleMap = "Apple 지도"
+
+        static let naverMap = "네이버 지도"
+
+    }
 }

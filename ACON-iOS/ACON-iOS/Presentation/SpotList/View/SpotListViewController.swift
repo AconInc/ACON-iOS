@@ -431,6 +431,7 @@ private extension SpotListViewController {
 
         cell.bind(spot: spotList.spotList[indexPath.item])
         cell.overlayLoginLock(lockCell)
+        cell.setFindCourseDelegate(self)
 
         return cell
     }
@@ -444,6 +445,36 @@ private extension SpotListViewController {
         } completion: { _ in
             self.spotListView.collectionView.refreshControl?.endRefreshing()
         }
+    }
+
+}
+
+
+// MARK: - Delegate
+
+extension SpotListViewController: SpotListCellDelegate {
+
+    func tappedFindCourseButton(spot: SpotModel) {
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_home_navigation?": true])
+
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.do { [weak self] in
+            guard let self = self else { return }
+            $0.addAction(UIAlertAction(title: StringLiterals.Map.naverMap, style: .default, handler: { _ in
+                MapRedirectManager.shared.redirect(
+                    to: DestinationModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
+                    using: .naver)
+                self.viewModel.postGuidedSpot(spotID: spot.id)
+            }))
+            $0.addAction(UIAlertAction(title: StringLiterals.Map.appleMap, style: .default, handler: { _ in
+                MapRedirectManager.shared.redirect(
+                    to: DestinationModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
+                    using: .apple)
+                self.viewModel.postGuidedSpot(spotID: spot.id)
+            }))
+            $0.addAction(UIAlertAction(title: StringLiterals.Alert.cancel, style: .cancel, handler: nil))
+        }
+        present(alertController, animated: true)
     }
 
 }
