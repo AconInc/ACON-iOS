@@ -11,12 +11,11 @@ import UIKit
 
 final class NaverMapService: MapServiceProtocol {
 
-    private let currentLocationName = StringLiterals.Map.myLocation
     private let naverMapAppStoreURL = URL(string: "itms-apps://itunes.apple.com/app/id311867728?mt=8")
 
-    func openMap(from startCoordinate: CLLocationCoordinate2D, to destination: DestinationModel) {
+    func openMap(from startPoint: MapRedirectModel, to destination: MapRedirectModel) {
         do {
-            let url = try buildNaverMapURL(from: startCoordinate, to: destination)
+            let url = try buildNaverMapURL(from: startPoint, to: destination)
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url)
             } else {
@@ -27,13 +26,13 @@ final class NaverMapService: MapServiceProtocol {
         }
     }
 
-    private func buildNaverMapURL(from startCoordinate: CLLocationCoordinate2D,
-                                  to destination: DestinationModel) throws -> URL {
+    private func buildNaverMapURL(from startPoint: MapRedirectModel,
+                                  to destination: MapRedirectModel) throws -> URL {
         guard let appName = Bundle.main.bundleIdentifier else {
             throw MapServiceError.bundleIdentifierFailed
         }
 
-        let urlString = "nmap://route/walk?slat=\(startCoordinate.latitude)&slng=\(startCoordinate.longitude)&sname=\(currentLocationName)&dlat=\(destination.latitude)&dlng=\(destination.longitude)&dname=\(destination.name)&appname=\(appName)"
+        let urlString = "nmap://route/walk?slat=\(startPoint.latitude)&slng=\(startPoint.longitude)&sname=\(startPoint.name)&dlat=\(destination.latitude)&dlng=\(destination.longitude)&dname=\(destination.name)&appname=\(appName)"
         
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let url = URL(string: encodedString) else {

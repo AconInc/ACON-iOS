@@ -143,13 +143,13 @@ private extension SpotDetailViewController {
                   let spot = viewModel.spotDetail.value else { return }
             $0.addAction(UIAlertAction(title: StringLiterals.Map.naverMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
-                    to: DestinationModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
+                    to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
                     using: .naver)
                 self.viewModel.postGuidedSpot()
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Map.appleMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
-                    to: DestinationModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
+                    to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
                     using: .apple)
                 self.viewModel.postGuidedSpot()
             }))

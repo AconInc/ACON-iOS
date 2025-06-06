@@ -11,14 +11,9 @@ import MapKit
 
 final class AppleMapService: MapServiceProtocol {
 
-    private let currentLocationName = StringLiterals.Map.myLocation
-
-    func openMap(from startCoordinate: CLLocationCoordinate2D, to destination: DestinationModel) {
-        let startItem = createMapItem(coordinate: startCoordinate, name: currentLocationName)
-        let destinationItem = createMapItem(
-            coordinate: CLLocationCoordinate2D(latitude: destination.latitude, longitude: destination.longitude),
-            name: destination.name
-        )
+    func openMap(from startPoint: MapRedirectModel, to destination: MapRedirectModel) {
+        let startItem = createMapItem(for: startPoint)
+        let destinationItem = createMapItem(for: destination)
 
         let launchOptions = [
             MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking
@@ -30,9 +25,9 @@ final class AppleMapService: MapServiceProtocol {
         )
     }
 
-    private func createMapItem(coordinate: CLLocationCoordinate2D, name: String) -> MKMapItem {
-        let item = MKMapItem(placemark: MKPlacemark(coordinate: coordinate))
-        item.name = name
+    private func createMapItem(for place: MapRedirectModel) -> MKMapItem {
+        let item = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)))
+        item.name = place.name
         return item
     }
 

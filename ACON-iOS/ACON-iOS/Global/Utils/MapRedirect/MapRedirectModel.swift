@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DestinationModel {
+struct MapRedirectModel {
 
     let name: String
 

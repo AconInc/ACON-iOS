@@ -18,12 +18,12 @@ final class MapRedirectManager {
 
     private var mapType: MapType?
 
-    private var destination: DestinationModel?
+    private var destination: MapRedirectModel?
 
 
     // MARK: - Redirect
     
-    func redirect(to destination: DestinationModel, using mapType: MapType) {
+    func redirect(to destination: MapRedirectModel, using mapType: MapType) {
         ACLocationManager.shared.addDelegate(self)
         self.destination = destination
         self.mapType = mapType
@@ -33,9 +33,8 @@ final class MapRedirectManager {
 
     // MARK: - Helper
 
-    private func openMap(type: MapType, from startCoordinate: CLLocationCoordinate2D, to destination: DestinationModel) {
-        let mapService = MapServiceFactory.createService(for: type)
-        mapService.openMap(from: startCoordinate, to: destination)
+    private func openMap(type: MapType, from startPoint: MapRedirectModel, to destination: MapRedirectModel) {
+        type.service.openMap(from: startPoint, to: destination)
     }
 
 }
@@ -50,7 +49,13 @@ extension MapRedirectManager: ACLocationManagerDelegate {
 
         if let mapType = mapType,
            let destination = destination {
-            self.openMap(type: mapType, from: coordinate, to: destination)
+            let startPoint = MapRedirectModel(
+                name: StringLiterals.Map.myLocation,
+                latitude: coordinate.latitude,
+                longitude: coordinate.longitude
+            )
+
+            self.openMap(type: mapType, from: startPoint, to: destination)
         }
 
         mapType = nil

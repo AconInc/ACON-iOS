@@ -26,12 +26,11 @@
 		151FBFBA2DBD2F1B005F4D0D /* ACFontType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151FBFB92DBD2F1B005F4D0D /* ACFontType.swift */; };
 		151FC0C92DBD5DA0005F4D0D /* Character+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151FC0C82DBD5DA0005F4D0D /* Character+.swift */; };
 		152F8D152DF23F7D0064022B /* MapRedirectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D142DF23F7D0064022B /* MapRedirectManager.swift */; };
-		152F8D182DF2526C0064022B /* DestinationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D172DF2526C0064022B /* DestinationModel.swift */; };
+		152F8D182DF2526C0064022B /* MapRedirectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D172DF2526C0064022B /* MapRedirectModel.swift */; };
 		152F8D1A2DF252C20064022B /* MapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D192DF252C20064022B /* MapType.swift */; };
 		152F8D1C2DF253840064022B /* MapServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D1B2DF253840064022B /* MapServiceProtocol.swift */; };
 		152F8D1E2DF253B80064022B /* NaverMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D1D2DF253B80064022B /* NaverMapService.swift */; };
 		152F8D202DF253FE0064022B /* AppleMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D1F2DF253FE0064022B /* AppleMapService.swift */; };
-		152F8D222DF254800064022B /* MapServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D212DF254800064022B /* MapServiceFactory.swift */; };
 		152F8D242DF268FA0064022B /* SpotListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D232DF268FA0064022B /* SpotListCellDelegate.swift */; };
 		1530CC792DDFC0D100EB4AEC /* SpotNoImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */; };
 		1530CC7B2DDFD36900EB4AEC /* TempSpotListErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530CC7A2DDFD36900EB4AEC /* TempSpotListErrorView.swift */; };
@@ -293,12 +292,11 @@
 		151FBFB92DBD2F1B005F4D0D /* ACFontType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACFontType.swift; sourceTree = "<group>"; };
 		151FC0C82DBD5DA0005F4D0D /* Character+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+.swift"; sourceTree = "<group>"; };
 		152F8D142DF23F7D0064022B /* MapRedirectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRedirectManager.swift; sourceTree = "<group>"; };
-		152F8D172DF2526C0064022B /* DestinationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationModel.swift; sourceTree = "<group>"; };
+		152F8D172DF2526C0064022B /* MapRedirectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRedirectModel.swift; sourceTree = "<group>"; };
 		152F8D192DF252C20064022B /* MapType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapType.swift; sourceTree = "<group>"; };
 		152F8D1B2DF253840064022B /* MapServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapServiceProtocol.swift; sourceTree = "<group>"; };
 		152F8D1D2DF253B80064022B /* NaverMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMapService.swift; sourceTree = "<group>"; };
 		152F8D1F2DF253FE0064022B /* AppleMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapService.swift; sourceTree = "<group>"; };
-		152F8D212DF254800064022B /* MapServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapServiceFactory.swift; sourceTree = "<group>"; };
 		152F8D232DF268FA0064022B /* SpotListCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCellDelegate.swift; sourceTree = "<group>"; };
 		1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotNoImageContentView.swift; sourceTree = "<group>"; };
 		1530CC7A2DDFD36900EB4AEC /* TempSpotListErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempSpotListErrorView.swift; sourceTree = "<group>"; };
@@ -583,11 +581,10 @@
 			children = (
 				152F8D142DF23F7D0064022B /* MapRedirectManager.swift */,
 				152F8D1B2DF253840064022B /* MapServiceProtocol.swift */,
-				152F8D212DF254800064022B /* MapServiceFactory.swift */,
 				152F8D1D2DF253B80064022B /* NaverMapService.swift */,
 				152F8D1F2DF253FE0064022B /* AppleMapService.swift */,
 				152F8D192DF252C20064022B /* MapType.swift */,
-				152F8D172DF2526C0064022B /* DestinationModel.swift */,
+				152F8D172DF2526C0064022B /* MapRedirectModel.swift */,
 			);
 			path = MapRedirect;
 			sourceTree = "<group>";
@@ -1917,7 +1914,7 @@
 				741A06C82D3532E500778219 /* DropAcornView.swift in Sources */,
 				15D122292D58BD0200E79866 /* DayOfMonthType.swift in Sources */,
 				746261752D3EA7FD00A4E84F /* GetReviewVerificationResponse.swift in Sources */,
-				152F8D182DF2526C0064022B /* DestinationModel.swift in Sources */,
+				152F8D182DF2526C0064022B /* MapRedirectModel.swift in Sources */,
 				748D6FA82D2C3F93007690B4 /* BaseViewController.swift in Sources */,
 				157135B12DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift in Sources */,
 				746261712D3EA50A00A4E84F /* SpotCategoryType.swift in Sources */,
@@ -2025,7 +2022,6 @@
 				74DDBA8D2DC45E4500BF9824 /* ACButton.swift in Sources */,
 				74A13D6B2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				746F15B72D3E2083003EA031 /* PostLocalAreaRequest.swift in Sources */,
-				152F8D222DF254800064022B /* MapServiceFactory.swift in Sources */,
 				74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */,
 				D696F1B22D3A7E3400CCD5FF /* ACAlertView.swift in Sources */,
 				743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */,
