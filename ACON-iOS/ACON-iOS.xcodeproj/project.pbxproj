@@ -125,6 +125,7 @@
 		743900912DC50926002F91B1 /* UIVisualEffectView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900902DC50918002F91B1 /* UIVisualEffectView+.swift */; };
 		743900932DC75451002F91B1 /* GlassmorphismType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900922DC7544C002F91B1 /* GlassmorphismType.swift */; };
 		743900972DC8696A002F91B1 /* GlassButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900962DC86966002F91B1 /* GlassButtonType.swift */; };
+		74403B6D2DEF900B00B7B832 /* SpotListGoogleAdCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74403B6C2DEF900B00B7B832 /* SpotListGoogleAdCollectionViewCell.swift */; };
 		74403B6F2DF1D6DD00B7B832 /* GoogleAdsErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74403B6E2DF1D6D600B7B832 /* GoogleAdsErrorType.swift */; };
 		745000D72D403F0200262CBE /* lodingLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D62D403F0200262CBE /* lodingLottie.json */; };
 		745000D82D403F0200262CBE /* checkLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D52D403F0200262CBE /* checkLottie.json */; };
@@ -388,6 +389,7 @@
 		743900902DC50918002F91B1 /* UIVisualEffectView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVisualEffectView+.swift"; sourceTree = "<group>"; };
 		743900922DC7544C002F91B1 /* GlassmorphismType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismType.swift; sourceTree = "<group>"; };
 		743900962DC86966002F91B1 /* GlassButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonType.swift; sourceTree = "<group>"; };
+		74403B6C2DEF900B00B7B832 /* SpotListGoogleAdCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListGoogleAdCollectionViewCell.swift; sourceTree = "<group>"; };
 		74403B6E2DF1D6D600B7B832 /* GoogleAdsErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdsErrorType.swift; sourceTree = "<group>"; };
 		745000D52D403F0200262CBE /* checkLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = checkLottie.json; sourceTree = "<group>"; };
 		745000D62D403F0200262CBE /* lodingLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lodingLottie.json; sourceTree = "<group>"; };
@@ -603,6 +605,7 @@
 		1547A6ED2D33850600E96616 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				74403B6C2DEF900B00B7B832 /* SpotListGoogleAdCollectionViewCell.swift */,
 				1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */,
 				15A246192DE7A9E500469272 /* NoMatchingSpotListCollectionViewCell.swift */,
 				15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */,
@@ -1975,6 +1978,7 @@
 				745862702DDBC3CD0075A854 /* ACAlertActionType.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
 				747F4FBD2D3D9477003DECBF /* SplashViewController.swift in Sources */,
+				74403B6D2DEF900B00B7B832 /* SpotListGoogleAdCollectionViewCell.swift in Sources */,
 				15CD25822D40364400320006 /* LoginModalViewController.swift in Sources */,
 				151AB6CB2DD3ED3F00D01DE8 /* MenuCollectionViewCell.swift in Sources */,
 				745ECBA12D615B9F005129B0 /* AlbumTableViewCell.swift in Sources */,
