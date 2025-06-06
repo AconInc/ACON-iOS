@@ -61,6 +61,8 @@
 	<string>${GAD_APPLICATION_IDENTIFIER}</string>
 	<key>GAD_AD_UNIT_ID</key>
 	<string>${GAD_AD_UNIT_ID}</string>
+	<key>GAD_AD_UNIT_ID_IMAGE_ONLY</key>
+	<string>${GAD_AD_UNIT_ID_IMAGE_ONLY}</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
