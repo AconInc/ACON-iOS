@@ -144,13 +144,13 @@ private extension SpotListFilterViewController {
 
         viewModel.filterList = filterList
 
-        viewModel.requestLocation()
+        viewModel.updateLocationAndPostSpotList()
         spotListFilterView.conductButton.startLoadingAnimation()
     }
 
     @objc func didTapResetButton() {
         viewModel.resetConditions()
-        viewModel.requestLocation()
+        viewModel.updateLocationAndPostSpotList()
         self.dismiss(animated: true)
     }
 

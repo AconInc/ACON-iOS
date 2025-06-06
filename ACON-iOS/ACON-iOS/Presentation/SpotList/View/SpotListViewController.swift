@@ -31,7 +31,7 @@ class SpotListViewController: BaseNavViewController {
         bindObservable()
         setCollectionView()
         addTarget()
-        viewModel.requestLocation()
+        viewModel.updateLocationAndPostSpotList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -155,6 +155,7 @@ extension SpotListViewController {
                 
             }
             
+            viewModel.errorType = nil
             viewModel.onSuccessPostSpotList.value = nil
             endRefreshingAndTransparancy()
             
@@ -192,43 +193,33 @@ private extension SpotListViewController {
             }
             return
         }
-        viewModel.requestLocation()
+
+        viewModel.updateLocationAndPostSpotList()
         
         DispatchQueue.main.async {
             // NOTE: 데이터 리로드 전 애니메이션
             UIView.animate(withDuration: 0.25, animations: {
                 self.spotListView.collectionView.alpha = 0.5
             }) { [weak self] _ in
-                
-                self?.viewModel.requestLocation()
                 self?.spotListView.skeletonView.isHidden = false
             }
         }
     }
-    
+
     @objc
     func tappedFilterButton() {
         guard AuthManager.shared.hasToken else {
             presentLoginModal(AmplitudeLiterals.EventName.filter)
             return
         }
+
         let vc = SpotListFilterViewController(viewModel: viewModel)
         vc.setSheetLayout(detent: .long)
         vc.isModalInPresentation = true
-        
+
         present(vc, animated: true)
     }
 
-    @objc
-    func tappedReloadButton() {
-        spotListView.skeletonView.isHidden = false
-        guard AuthManager.shared.hasToken else {
-            presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
-            return
-        }
-        viewModel.requestLocation()
-    }
-    
 }
 
 
@@ -350,12 +341,6 @@ extension SpotListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = viewModel.spotList.spotList[indexPath.item]
         let vc = SpotDetailViewController(item.id, item.tagList)
-
-        ACLocationManager.shared.removeDelegate(viewModel)
-        vc.backCompletion = { [weak self] in
-            guard let self = self else { return }
-            ACLocationManager.shared.addDelegate(self.viewModel)
-        }
 
         if AuthManager.shared.hasToken {
             self.navigationController?.pushViewController(vc, animated: true)
