@@ -66,6 +66,7 @@ class SpotListView: BaseView {
         }
 
         skeletonView.isHidden = true
+        regionErrorView.isHidden = true
     }
 
 }

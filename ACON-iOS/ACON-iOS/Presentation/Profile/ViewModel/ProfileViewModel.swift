@@ -36,7 +36,7 @@ final class ProfileViewModel: Serviceable {
             possessingAcorns: 0
     )
 
-    let maxNicknameLength: Int = 16
+    let maxNicknameLength: Int = 14
 
 
     // MARK: - Methods
@@ -92,7 +92,7 @@ final class ProfileViewModel: Serviceable {
                 if error.code == 40901 {
                     self?.nicknameValidityMessageType = .nicknameTaken
                 } else if error.code == 40051 {
-                    self?.nicknameValidityMessageType = .invalidSymbolAndLang
+                    self?.nicknameValidityMessageType = .invalidChar
                 }
                 self?.onGetNicknameValiditySuccess.value = false
             default:
@@ -138,7 +138,7 @@ final class ProfileViewModel: Serviceable {
 
     func patchProfile() {
         let requestBody = PatchProfileRequest(
-            profileImage: userInfo.profileImage,
+            profileImage: userInfo.profileImage.isEmpty ? nil : userInfo.profileImage,
             nickname: userInfo.nickname,
             birthDate: userInfo.birthDate
         )

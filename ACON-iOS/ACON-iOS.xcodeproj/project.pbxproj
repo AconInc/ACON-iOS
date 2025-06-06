@@ -72,8 +72,6 @@
 		15A48BFA2D574BA5003C2421 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BF92D574BA5003C2421 /* ProfileEditView.swift */; };
 		15A48BFC2D574BB9003C2421 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BFB2D574BB9003C2421 /* ProfileEditViewController.swift */; };
 		15A48BFE2D57546A003C2421 /* ProfileImageEditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */; };
-		15AA6D132D68AAB1008021C6 /* GetDongResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA6D122D68AAB1008021C6 /* GetDongResponse.swift */; };
-		15AA6D152D68AC09008021C6 /* GetDongRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA6D142D68AC09008021C6 /* GetDongRequest.swift */; };
 		15AA6D172D68B4EF008021C6 /* SpotListErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA6D162D68B4EF008021C6 /* SpotListErrorType.swift */; };
 		15AA6D1A2D68C4AD008021C6 /* ReviewVerificationErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA6D192D68C4AD008021C6 /* ReviewVerificationErrorType.swift */; };
 		15BFF8B92D665BAD00909C4F /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15BFF8B52D665A5B00909C4F /* Debug.xcconfig */; };
@@ -338,8 +336,6 @@
 		15A48BF92D574BA5003C2421 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		15A48BFB2D574BB9003C2421 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageEditButton.swift; sourceTree = "<group>"; };
-		15AA6D122D68AAB1008021C6 /* GetDongResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDongResponse.swift; sourceTree = "<group>"; };
-		15AA6D142D68AC09008021C6 /* GetDongRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDongRequest.swift; sourceTree = "<group>"; };
 		15AA6D162D68B4EF008021C6 /* SpotListErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListErrorType.swift; sourceTree = "<group>"; };
 		15AA6D192D68C4AD008021C6 /* ReviewVerificationErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewVerificationErrorType.swift; sourceTree = "<group>"; };
 		15BFF8B52D665A5B00909C4F /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -803,8 +799,6 @@
 			children = (
 				15CD25772D3FE31400320006 /* PostSpotListRequest.swift */,
 				15CD257B2D3FF13F00320006 /* PostSpotListResponse.swift */,
-				15AA6D142D68AC09008021C6 /* GetDongRequest.swift */,
-				15AA6D122D68AAB1008021C6 /* GetDongResponse.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -2014,11 +2008,9 @@
 				D6E8168E2D6228F5001E4EBF /* WithdrawalViewController.swift in Sources */,
 				740968B72DEC3CA700AFF624 /* VerifiedAreasCollectionViewCell.swift in Sources */,
 				15F45F842D6664C900BD6B9C /* LoginLockOverlayView.swift in Sources */,
-				15AA6D132D68AAB1008021C6 /* GetDongResponse.swift in Sources */,
 				746261692D3EA33300A4E84F /* PostReviewRequest.swift in Sources */,
 				15CD257E2D3FF4F200320006 /* SpotListTargetType.swift in Sources */,
 				15A246142DE79D7E00469272 /* NoMatchingSpotType.swift in Sources */,
-				15AA6D152D68AC09008021C6 /* GetDongRequest.swift in Sources */,
 				74DDBA8D2DC45E4500BF9824 /* ACButton.swift in Sources */,
 				74A13D6B2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				746F15B72D3E2083003EA031 /* PostLocalAreaRequest.swift in Sources */,

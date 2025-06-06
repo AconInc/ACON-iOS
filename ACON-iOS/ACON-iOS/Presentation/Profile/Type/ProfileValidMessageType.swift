@@ -8,25 +8,20 @@
 import Foundation
 
 enum ProfileValidMessageType {
-    
+
     case none
-    case nicknameMissing, invalidSymbolAndLang, invalidSymbol, invalidLanguage ,nicknameTaken, nicknameOK
+    case nicknameMissing, invalidChar, nicknameTaken, nicknameOK
     case invalidDate
-    case areaMissing
-    
-    var texts: [String] {
+
+    var text: String {
         switch self {
-        case .none: return [""]
-        case .nicknameMissing: return ["닉네임을 입력해주세요"]
-        case .invalidSymbolAndLang: return ["._ 이외의 특수기호는 사용할 수 없어요",
-                                            "한국어, 영어 이외의 언어는 사용할 수 없어요"]
-        case .invalidSymbol: return ["._ 이외의 특수기호는 사용할 수 없어요"]
-        case .invalidLanguage: return ["한국어, 영어 이외의 언어는 사용할 수 없어요"]
-        case .nicknameTaken: return ["이미 사용중인 닉네임이에요"]
-        case .nicknameOK: return ["사용할 수 있는 닉네임이에요"]
-        case .invalidDate: return ["정확한 생년월일을 적어주세요"]
-        case .areaMissing: return ["로컬도토리를 위해 최소 1개의 동네를 인증해주세요"]
+        case .none: return ""
+        case .nicknameMissing: return "닉네임을 입력해주세요."
+        case .invalidChar: return "영어, 숫자, 밑줄 및 마침표만 사용 가능해요."
+        case .nicknameTaken: return "이미 사용중인 닉네임이에요."
+        case .nicknameOK: return "사용할 수 있는 닉네임이에요."
+        case .invalidDate: return "정확한 생년월일을 입력해주세요."
         }
     }
-    
+
 }

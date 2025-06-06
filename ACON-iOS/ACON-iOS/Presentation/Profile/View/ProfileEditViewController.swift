@@ -38,7 +38,7 @@ final class ProfileEditViewController: BaseNavViewController {
 
     private var isDefaultImage: Bool? = nil
 
-    
+
     // MARK: - Life Cycles
 
     init(_ viewModel: ProfileViewModel) {
@@ -67,8 +67,8 @@ final class ProfileEditViewController: BaseNavViewController {
         setDelegate()
         addTarget()
         bindData()
-        bindViewModel()
-        bindObservable()
+        observeViewModel()
+        observeUserInputs()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -140,36 +140,43 @@ extension ProfileEditViewController {
 }
 
 
-// MARK: - Bindings
+// MARK: - Initial Data
 
 private extension ProfileEditViewController {
 
     func bindData() {
-        // NOTE: 기본 데이터 바인딩
         profileEditView.do {
             $0.setProfileImageURL(viewModel.userInfo.profileImage)
             $0.nicknameTextField.text = viewModel.userInfo.nickname
-            $0.setNicknameLengthLabel(countByte(text: viewModel.userInfo.nickname),
+            $0.setNicknameLengthLabel(viewModel.userInfo.nickname.count,
                                       viewModel.maxNicknameLength
             )
             $0.birthDateTextField.text = viewModel.userInfo.birthDate
         }
     }
 
-    func bindViewModel() {
+}
+
+
+// MARK: - Observing
+
+private extension ProfileEditViewController {
+
+    // MARK: - ViewModel Observing
+
+    func observeViewModel() {
         viewModel.onGetNicknameValiditySuccess.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
 
             if onSuccess {
                 profileEditView.setNicknameValidMessage(.nicknameOK)
-                profileEditView.nicknameTextField.changeBorderColor(to: .gray600)
                 isNicknameAvailable = true
             } else {
                 profileEditView.setNicknameValidMessage(viewModel.nicknameValidityMessageType)
-                profileEditView.nicknameTextField.changeBorderColor(to: .labelDanger)
                 isNicknameAvailable = false
             }
+            viewModel.onGetNicknameValiditySuccess.value = nil
         }
 
         viewModel.onSuccessGetPresignedURL.bind { [weak self] onSuccess in
@@ -217,10 +224,10 @@ private extension ProfileEditViewController {
         }
     }
 
-    func bindObservable() {
 
-        // MARK: - Keyboard
+    // MARK: - User Input Observing
 
+    func observeUserInputs() {
         keyboardWillShowObserver = NotificationCenter.default.addObserver(
             forName: UIResponder.keyboardWillShowNotification,
             object: nil,
@@ -237,46 +244,57 @@ private extension ProfileEditViewController {
             self?.keyboardWillHide(notification)
         }
 
+        observeNicknameTextField()
 
-        // MARK: - 닉네임 TextField
+        observeBirthdateTextField()
+    }
 
-        // NOTE: 글자 수, 중복 확인(서버)
+    func observeNicknameTextField() {
         profileEditView.nicknameTextField.observableText.bind { [weak self] text in
             guard let self = self,
                   let text = text else { return }
-            // NOTE: 닉네임 필드 값이 변하면 일단 저장 막기 (유효성검사를 0.5초 뒤에 하기 때문에)
+
+            // NOTE: 닉네임 필드 값이 변하면 일단 저장 막고 유효성 메시지 숨김
             isNicknameAvailable = false
-
-            // NOTE: clear버튼 숨기고 로딩 로띠 실행
-            profileEditView.nicknameTextField.hideClearButton(isHidden: text.isEmpty)
-            profileEditView.nicknameTextField.startCheckingAnimation()
-
-            // NOTE: 텍스트 변하면 유효성 메시지 숨김, 텍스트필드 UI 변경
             profileEditView.setNicknameValidMessage(.none)
-            profileEditView.nicknameTextField.changeBorderColor(to: .gray600)
-
-            // NOTE: 텍스트 변하면 byte 검사, 넘으면 자르기
-            if countByte(text: text) > viewModel.maxNicknameLength {
-                profileEditView.nicknameTextField.text?.popLast()
-                // NOTE: observableText가 set되면서 다시 처음으로 실행될 것임
-            }
-
-            let byte = countByte(text: profileEditView.nicknameTextField.text ?? text)
-
-            // NOTE: UI 업데이트 - 글자 수 label
-            profileEditView.setNicknameLengthLabel(byte,
+            
+            // NOTE: 글자 수 카운터 업데이트
+            profileEditView.setNicknameLengthLabel(text.count,
                                                    viewModel.maxNicknameLength)
 
-            // NOTE: 0.5초 뒤 유효성 검사
+
+            // MARK: 글자 수, 문자 확인
+
+            guard text.count > 0 else {
+                profileEditView.setNicknameValidMessage(.nicknameMissing)
+                profileEditView.nicknameTextField.hideClearButton(isHidden: text.isEmpty)
+                return
+            }
+
+            guard isNicknameCharValid(text: text) else {
+                profileEditView.setNicknameValidMessage(.invalidChar)
+                return
+            }
+
+            guard text.count < viewModel.maxNicknameLength else {
+                profileEditView.nicknameTextField.text?.removeLast()
+                return
+            }
+
+
+            // MARK: 닉네임 중복 확인 (서버 통신)
+
+            profileEditView.nicknameTextField.startCheckingAnimation()
+
             validityTestDebouncer.call { [weak self] in
-                guard let self = self else { return }
-                checkNicknameValidity()
+                guard let self = self,
+                      text.count > 0 && isNicknameCharValid(text: text) else { return }
+                viewModel.getNicknameValidity(nickname: text)
             }
         }
+    }
 
-
-        // MARK: - 생년월일 TextField
-
+    func observeBirthdateTextField() {
         profileEditView.birthDateTextField.observableText.bind { [weak self] text in
             guard let self = self else { return }
             let bindedText = text ?? ""
@@ -285,7 +303,6 @@ private extension ProfileEditViewController {
 
             if bindedText.isEmpty {
                 profileEditView.setBirthdateValidMessage(.none)
-                profileEditView.birthDateTextField.changeBorderColor(to: .gray600)
                 isBirthDateAvailable = true
             }
         }
@@ -401,46 +418,12 @@ extension ProfileEditViewController: UITextFieldDelegate {
 
 private extension ProfileEditViewController {
 
-    // MARK: - 닉네임 (입력마스크, 글자 수 넘기면 입력 막기)
-
-    func nicknameTextFieldChange(_ textField: UITextField,
-                                 shouldChangeCharactersIn range: NSRange,
-                                 replacementString string: String) -> Bool {
-        let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string
-        let koreanDeleted = isKoreanChar(textField.text?.last ?? " ") && range.length == 1
-        let finalString: String = koreanDeleted ? textField.text ?? "" : newString
-
-        // NOTE: 문자 유효성 체크 (입력마스크)
-        let regex = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ._]*$"
-        let isValid = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: finalString)
-        let byte = countByte(text: finalString)
-
-        if isValid {
-            // NOTE: PASS -> 글자 수 체크(음소), max 넘으면 입력 X
-            return true
-            return byte + 2 > viewModel.maxNicknameLength ? false : true // TODO: 한글 입력을 위해 + 2
-        } else {
-            // NOTE: FAIL -> 입력 X
-            if byte <= viewModel.maxNicknameLength {
-                // NOTE: 언어인지 특수문자인지 판별
-                if string.unicodeScalars.allSatisfy({ $0.properties.isAlphabetic }) {
-                    profileEditView.setNicknameValidMessage(.invalidLanguage)
-                } else {
-                    profileEditView.setNicknameValidMessage(.invalidSymbol)
-                }
-                textField.layer.borderColor = UIColor.labelDanger.cgColor
-                validMsgHideDebouncer.call { [weak self] in
-                    guard let self = self else { return }
-                    self.checkNicknameValidity()
-                }
-            }
-            return false
-        }
+    // NOTE: 닉네임
+    func nicknameTextFieldChange(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
     }
 
-
-    // MARK: - 생년월일
-
+    // NOTE: 생년월일
     func birthDateTextFieldChange(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let currentString = textField.text else { return true }
         let newString = (currentString as NSString).replacingCharacters(in: range, with: string)
@@ -461,7 +444,6 @@ private extension ProfileEditViewController {
         // NOTE: 길이 0인 경우 ObservableBinding에서 .none처리
         if newRawString.count < 8 {
             profileEditView.setBirthdateValidMessage(.invalidDate)
-            profileEditView.birthDateTextField.changeBorderColor(to: .labelDanger)
             isBirthDateAvailable = false
         } else if newRawString.count == 8 {
             // NOTE: Validity 체크
@@ -492,34 +474,10 @@ private extension ProfileEditViewController {
 
     // MARK: - 닉네임
 
-    func checkNicknameValidity() {
-        let text = profileEditView.nicknameTextField.text ?? ""
-        let byte = countByte(text: text)
-
-        // NOTE: 닉네임을 입력해주세요.
-        if byte == 0 {
-            profileEditView.setNicknameValidMessage(.nicknameMissing)
-            profileEditView.nicknameTextField.changeBorderColor(to: .labelDanger)
-            isNicknameAvailable = false
-        }
-
-        // NOTE: 중복된 닉네임 OR 사용할 수 있는 닉네임(서버 확인)
-        else {
-            viewModel.getNicknameValidity(nickname: text)
-        }
-    }
-
-    // NOTE: 한글인지 확인하는 함수
-    func isKorean(_ char: Character) -> Bool {
-        return String(char).range(of: "[가-힣ㄱ-ㅎㅏ-ㅣ]", options: .regularExpression) != nil
-    }
-
-    func isKoreanChar(_ char: Character) -> Bool {
-        return String(char).range(of: "[가-힣]", options: .regularExpression) != nil
-    }
-
-    func countByte(text: String) -> Int {
-        return text.reduce(0) { $0 + (isKorean($1) ? 2 : 1) }
+    func isNicknameCharValid(text: String) -> Bool {
+        let regex = "^[a-zA-Z0-9._]*$"
+        let isValid = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: text)
+        return isValid
     }
 
 
@@ -536,13 +494,11 @@ private extension ProfileEditViewController {
               isBeforeToday(date: date)
         else {
             profileEditView.setBirthdateValidMessage(.invalidDate)
-            profileEditView.birthDateTextField.changeBorderColor(to: .labelDanger)
             isBirthDateAvailable = false
             return
         }
 
         profileEditView.setBirthdateValidMessage(.none)
-        profileEditView.birthDateTextField.changeBorderColor(to: .gray600)
         isBirthDateAvailable = true
     }
 
