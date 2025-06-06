@@ -10,11 +10,12 @@ import UIKit
 final class SpotSearchView: BaseView {
 
     // MARK: - UI Properties
-    
+
     var searchTextField = ACTextField(icon: .icSearch,
                                       borderWidth: 0,
                                       cornerRadius: 10,
-                                      doneButton: false)
+                                      doneButton: false,
+                                      backgroundGlassType: .toastGlass)
 
     lazy var searchSuggestionCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: searchSuggestionCollectionViewFlowLayout)
 
@@ -91,7 +92,6 @@ final class SpotSearchView: BaseView {
         
         searchTextField.do {
             $0.setPlaceholder(as: StringLiterals.Upload.searchSpot)
-            $0.setGlassmorphism(.toastGlass)
             $0.hideClearButton(isHidden: true)
         }
         

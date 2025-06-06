@@ -351,9 +351,9 @@ enum StringLiterals {
         
         static let verifiedAreaDescription = "등록한 지 1주일 이내 지역은 수정이 가능하며 이후 3개월 동안\n변경이 불가해요."
         
-        static let nicknamePlaceholder = "16자 이내 영문, 한글, 숫자, . , _ 만 사용가능"
+        static let nicknamePlaceholder = "닉네임을 입력해주세요"
         
-        static let birthDatePlaceholder = "ex) 2025.01.01"
+        static let birthDatePlaceholder = "2025.01.01"
         
         static let addVerifiedArea = "지역 추가하기"
         

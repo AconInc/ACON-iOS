@@ -11,7 +11,7 @@ import Lottie
 
 final class ACTextField: UIView {
     
-    // MARK: - Internal Property
+    // MARK: - Public Interface
 
     var observableText: ObservablePattern<String> = ObservablePattern(nil)
 
@@ -26,6 +26,11 @@ final class ACTextField: UIView {
     }
 
 
+    // MARK: - Internal State
+
+    private var isInitialLoad: Bool = true
+
+
     // MARK: - UI Property
 
     private let horizontalInset: CGFloat = 12
@@ -36,11 +41,11 @@ final class ACTextField: UIView {
 
     private var icon: UIImage?
 
-    private var bgColor: UIColor
+    private var bgColor: UIColor?
 
-    private var borderColor: UIColor
+    private var borderColor: UIColor?
 
-    private var borderWidth: CGFloat
+    private var borderWidth: CGFloat?
 
     private var cornerRadius: CGFloat
 
@@ -55,10 +60,13 @@ final class ACTextField: UIView {
     private let animationView = LottieAnimationView(name: "loadingWhite")
 
     private var glassmorphismView: GlassmorphismView?
-    
+
+    private var glassBorderAttribute: GlassBorderAttributes?
+
 
     // MARK: - Initializer
 
+    /// 일반 ACTextField
     init(
         icon: UIImage? = nil,
         backgroundColor: UIColor = .gray800,
@@ -84,8 +92,60 @@ final class ACTextField: UIView {
         if doneButton { addDoneButtonToKeyboard() }
     }
 
+    /// Glassmorphism이 적용된 ACTextField
+    init(
+        icon: UIImage? = nil,
+        borderWidth: CGFloat = 1,
+        cornerRadius: CGFloat = 4,
+        fontStyle: ACFontType = .t4R,
+        doneButton: Bool = true,
+        backgroundGlassType: GlassmorphismType? = nil,
+        borderGlassType: GlassmorphismType? = nil
+    ) {
+        self.icon = icon
+        self.cornerRadius = cornerRadius
+        self.fontStyle = fontStyle
+
+        super.init(frame: .zero)
+
+        setHierarchy()
+        setLayout()
+        setStyle()
+        addTarget()
+        if doneButton { addDoneButtonToKeyboard() }
+
+        if let backgroundGlassType = backgroundGlassType {
+            setGlassmorphism(backgroundGlassType)
+        }
+
+        if let borderGlassType = borderGlassType {
+            self.glassBorderAttribute = GlassBorderAttributes(
+                width: borderWidth,
+                cornerRadius: cornerRadius,
+                glassmorphismType: borderGlassType
+            )
+        }
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        if let glassBorderAttribute = glassBorderAttribute {
+            if isInitialLoad {
+                self.addGlassBorder(glassBorderAttribute)
+                isInitialLoad = false
+            } else {
+                self.refreshGlassBorder()
+            }
+        }
+
+        if glassmorphismView != nil {
+            glassmorphismView?.refreshBlurEffect()
+        }
     }
 
 
@@ -106,7 +166,7 @@ final class ACTextField: UIView {
                 $0.size.equalTo(iconSize)
             }
         }
-        
+
         textField.snp.makeConstraints {
             let leadingAnchor = icon == nil ? self.snp.leading : iconImageView.snp.trailing
             let leadingOffset = icon == nil ? horizontalInset : horizontalSpacing
@@ -115,13 +175,13 @@ final class ACTextField: UIView {
             $0.trailing.equalTo(clearButton.snp.leading).offset(-horizontalSpacing)
             $0.centerY.equalToSuperview()
         }
-        
+
         clearButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-horizontalInset)
             $0.centerY.equalToSuperview()
             $0.size.equalTo(iconSize)
         }
-        
+
         animationView.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-horizontalInset)
             $0.centerY.equalToSuperview()
@@ -133,20 +193,20 @@ final class ACTextField: UIView {
         self.do {
             $0.backgroundColor = bgColor
             $0.clipsToBounds = true
-            $0.layer.borderColor = borderColor.cgColor
-            $0.layer.borderWidth = borderWidth
+            $0.layer.borderColor = borderColor?.cgColor
+            $0.layer.borderWidth = borderWidth ?? 0.0
             $0.layer.cornerRadius = cornerRadius
         }
-        
+
         textField.do {
             $0.autocorrectionType = .no
             $0.defaultTextAttributes = [
-                .font: ACFontType.t4SB.fontStyle.font,
+                .font: fontStyle.fontStyle.font,
                 .kern: fontStyle.kerning(isKorean: false),
                 .foregroundColor: UIColor.acWhite
             ]
         }
-        
+
         animationView.do {
             $0.isHidden = true
         }
@@ -154,7 +214,7 @@ final class ACTextField: UIView {
         clearButton.do {
             $0.setImage(.icClear, for: .normal)
         }
-        
+
         if icon != nil {
             iconImageView.do {
                 $0.image = icon
@@ -169,7 +229,7 @@ final class ACTextField: UIView {
             action: #selector(tappedClearButton),
             for: .touchUpInside
         )
-        
+
         textField.addTarget(
             self,
             action: #selector(updateObservableText),
@@ -271,7 +331,7 @@ extension ACTextField {
             }
         })
     }
-    
+
     func setGlassmorphism(_ glassmorphismType: GlassmorphismType) {
         self.backgroundColor = .clear
         
