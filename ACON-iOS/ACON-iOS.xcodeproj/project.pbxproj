@@ -169,6 +169,7 @@
 		746F5BF02DE009820081569B /* ACToastType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F5BEF2DE0097B0081569B /* ACToastType.swift */; };
 		746F5BF22DE00CE90081569B /* GlassBorderAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F5BF12DE00CE90081569B /* GlassBorderAttributes.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
+		74770C192DF1DA97005D4165 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 74770C182DF1DA97005D4165 /* GoogleMobileAds */; };
 		747BB6CE2DCA66F000352874 /* GlassButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */; };
 		747F4FBD2D3D9477003DECBF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F4FBC2D3D9470003DECBF /* SplashViewController.swift */; };
 		747F4FBF2D3D9D44003DECBF /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F4FBE2D3D9D40003DECBF /* SplashView.swift */; };
@@ -531,6 +532,7 @@
 				74B25C252D2FD30A008BDCB7 /* Lottie in Frameworks */,
 				748D6F4A2D2BC52B007690B4 /* Kingfisher in Frameworks */,
 				746AA0342DAD0EE300E28B66 /* FirebaseCrashlytics in Frameworks */,
+				74770C192DF1DA97005D4165 /* GoogleMobileAds in Frameworks */,
 				748D6F412D2BC482007690B4 /* Moya in Frameworks */,
 				748D6F4F2D2BC76C007690B4 /* GoogleSignInSwift in Frameworks */,
 				748D6F472D2BC519007690B4 /* Then in Frameworks */,
@@ -1686,6 +1688,7 @@
 				74B25C242D2FD30A008BDCB7 /* Lottie */,
 				74D831912D6878A5003384C6 /* AmplitudeSwift */,
 				746AA0332DAD0EE300E28B66 /* FirebaseCrashlytics */,
+				74770C182DF1DA97005D4165 /* GoogleMobileAds */,
 			);
 			productName = "ACON-iOS";
 			productReference = 74AB6EB02D2796D30094F873 /* ACON-iOS.app */;
@@ -2397,6 +2400,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 746AA0302DAD0EE300E28B66 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		74770C182DF1DA97005D4165 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 74C1934B2DEF8909005FB3C7 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 		748D6F402D2BC482007690B4 /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
