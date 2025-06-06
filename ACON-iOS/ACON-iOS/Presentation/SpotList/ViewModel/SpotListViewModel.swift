@@ -63,37 +63,7 @@ class SpotListViewModel: Serviceable {
 // MARK: - Networking
 
 extension SpotListViewModel {
-    
-    func getDong() {
-        let requestQuery = GetDongRequest(latitude: userCoordinate.latitude,
-                                               longitude: userCoordinate.longitude)
-        
-        ACService.shared.spotListService.getDong(
-            query: requestQuery) { [weak self] response in
-                switch response {
-                case .success(let data):
-                    self?.currentDong = data.area
-                    self?.onSuccessGetDong.value = true
-                case .reIssueJWT:
-                    self?.handleReissue { [weak self] in
-                        self?.getDong()
-                    }
-                case .requestErr(let error):
-                    print("🥑getDong requestErr: \(error)")
-                    if error.code == 40405 {
-                        self?.errorType = .unsupportedRegion
-                    } else {
-                        self?.errorType = .serverRequestFail // TODO: 에러 뷰 또는 Alert 띄우기
-                    }
-                    self?.onSuccessGetDong.value = false
-                default:
-                    print("🥑vm - Failed to get dong")
-                    self?.onSuccessGetDong.value = false
-                    return
-                }
-            }
-    }
-    
+
     func postSpotList() {
         let filterListDTO = filterList.map { filter in
             return SpotFilterDTO(category: filter.category.serverKey,
@@ -178,7 +148,7 @@ extension SpotListViewModel: ACLocationManagerDelegate {
                          didUpdateLocation coordinate: CLLocationCoordinate2D) {
         ACLocationManager.shared.removeDelegate(self)
         userCoordinate = coordinate
-        getDong()
+        postSpotList()
     }
     
 }

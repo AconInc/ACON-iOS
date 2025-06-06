@@ -106,30 +106,6 @@ class SpotListViewController: BaseNavViewController {
 extension SpotListViewController {
     
     func bindViewModel() {
-        viewModel.onSuccessGetDong.bind { [weak self] onSuccess in
-            guard let self = self,
-                  let onSuccess = onSuccess else { return }
-            
-            // NOTE: 법정동 조회 성공 -> 장소 조회
-            if onSuccess {
-                viewModel.postSpotList()
-                spotListView.regionErrorView.isHidden = true
-                spotListView.skeletonView.isHidden = false
-            }
-            
-            // NOTE: 법정동 조회 실패 (서비스불가지역)
-            else if viewModel.errorType == .unsupportedRegion {
-                spotListView.regionErrorView.isHidden = false
-            }
-            
-            // NOTE: 기타 네트워크 에러
-            else {
-                // TODO: 네트워크 에러뷰, 버튼에 getDong() 액션 설정
-            }
-            
-            viewModel.onSuccessGetDong.value = nil
-        }
-        
         viewModel.onSuccessPostSpotList.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
@@ -146,7 +122,14 @@ extension SpotListViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     self.spotListView.skeletonView.isHidden = true
                 }
-            } else {
+            }
+
+            // NOTE: 법정동 조회 실패 (서비스불가지역)
+            else if viewModel.errorType == .unsupportedRegion {
+                spotListView.regionErrorView.isHidden = false
+            }
+
+            else {
                 // TODO: 네트워크 에러뷰, 버튼에 postSpotList() 액션 설정
 
                 spotListView.skeletonView.isHidden = true
