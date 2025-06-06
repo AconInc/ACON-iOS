@@ -11,7 +11,7 @@ import UIKit
 
 final class NaverMapService: MapServiceProtocol {
 
-    private let currentLocationName = "내 위치"
+    private let currentLocationName = StringLiterals.Map.myLocation
     private let naverMapAppStoreURL = URL(string: "itms-apps://itunes.apple.com/app/id311867728?mt=8")
 
     func openMap(from startCoordinate: CLLocationCoordinate2D, to destination: DestinationModel) {

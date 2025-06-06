@@ -441,5 +441,8 @@ enum StringLiterals {
 
         static let naverMap = "네이버 지도"
 
+        static let myLocation = "내 위치"
+
     }
+
 }

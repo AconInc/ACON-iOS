@@ -11,7 +11,7 @@ import MapKit
 
 final class AppleMapService: MapServiceProtocol {
 
-    private let currentLocationName = "내 위치"
+    private let currentLocationName = StringLiterals.Map.myLocation
 
     func openMap(from startCoordinate: CLLocationCoordinate2D, to destination: DestinationModel) {
         let startItem = createMapItem(coordinate: startCoordinate, name: currentLocationName)
