@@ -125,6 +125,7 @@
 		743900912DC50926002F91B1 /* UIVisualEffectView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900902DC50918002F91B1 /* UIVisualEffectView+.swift */; };
 		743900932DC75451002F91B1 /* GlassmorphismType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900922DC7544C002F91B1 /* GlassmorphismType.swift */; };
 		743900972DC8696A002F91B1 /* GlassButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900962DC86966002F91B1 /* GlassButtonType.swift */; };
+		74403B6F2DF1D6DD00B7B832 /* GoogleAdsErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74403B6E2DF1D6D600B7B832 /* GoogleAdsErrorType.swift */; };
 		745000D72D403F0200262CBE /* lodingLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D62D403F0200262CBE /* lodingLottie.json */; };
 		745000D82D403F0200262CBE /* checkLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D52D403F0200262CBE /* checkLottie.json */; };
 		745862702DDBC3CD0075A854 /* ACAlertActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7458626F2DDBC3C60075A854 /* ACAlertActionType.swift */; };
@@ -386,6 +387,7 @@
 		743900902DC50918002F91B1 /* UIVisualEffectView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVisualEffectView+.swift"; sourceTree = "<group>"; };
 		743900922DC7544C002F91B1 /* GlassmorphismType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismType.swift; sourceTree = "<group>"; };
 		743900962DC86966002F91B1 /* GlassButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonType.swift; sourceTree = "<group>"; };
+		74403B6E2DF1D6D600B7B832 /* GoogleAdsErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdsErrorType.swift; sourceTree = "<group>"; };
 		745000D52D403F0200262CBE /* checkLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = checkLottie.json; sourceTree = "<group>"; };
 		745000D62D403F0200262CBE /* lodingLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lodingLottie.json; sourceTree = "<group>"; };
 		7458626F2DDBC3C60075A854 /* ACAlertActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAlertActionType.swift; sourceTree = "<group>"; };
@@ -1276,6 +1278,7 @@
 			isa = PBXGroup;
 			children = (
 				74770C1C2DF36DA2005D4165 /* GoogleAdsType.swift */,
+				74403B6E2DF1D6D600B7B832 /* GoogleAdsErrorType.swift */,
 				747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */,
 				743900962DC86966002F91B1 /* GlassButtonType.swift */,
 				743900922DC7544C002F91B1 /* GlassmorphismType.swift */,
@@ -1915,6 +1918,7 @@
 				15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */,
 				1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */,
 				1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */,
+				74403B6F2DF1D6DD00B7B832 /* GoogleAdsErrorType.swift in Sources */,
 				15CD25782D3FE31400320006 /* PostSpotListRequest.swift in Sources */,
 				7462617B2D3EB06100A4E84F /* UploadService.swift in Sources */,
 				4C6B2F332D65A15D0089BCB6 /* WithdrawalTargetType.swift in Sources */,
