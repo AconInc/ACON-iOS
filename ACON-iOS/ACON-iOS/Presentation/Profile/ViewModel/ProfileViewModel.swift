@@ -138,7 +138,7 @@ final class ProfileViewModel: Serviceable {
 
     func patchProfile() {
         let requestBody = PatchProfileRequest(
-            profileImage: userInfo.profileImage,
+            profileImage: userInfo.profileImage.isEmpty ? nil : userInfo.profileImage,
             nickname: userInfo.nickname,
             birthDate: userInfo.birthDate
         )
