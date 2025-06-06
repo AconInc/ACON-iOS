@@ -13,14 +13,11 @@ protocol SpotListServiceProtocol {
 
     func postSpotList(requestBody: PostSpotListRequest,
                       completion: @escaping (NetworkResult<PostSpotListResponse>) -> Void)
-    
-    func getDong(query: GetDongRequest,
-                 completion: @escaping (NetworkResult<GetDongResponse>) -> Void)
 
 }
 
 final class SpotListService: BaseService<SpotListTargetType>, SpotListServiceProtocol{
-    
+
     func postSpotList(requestBody: PostSpotListRequest,
                       completion: @escaping (NetworkResult<PostSpotListResponse>) -> Void) {
         self.provider.request(.postSpotList(requestBody)) { result in
@@ -37,22 +34,5 @@ final class SpotListService: BaseService<SpotListTargetType>, SpotListServicePro
             }
         }
     }
-    
-    func getDong(query: GetDongRequest,
-                 completion: @escaping (NetworkResult<GetDongResponse>) -> Void) {
-        self.provider.request(.getDong(query)) { result in
-            switch result {
-            case .success(let response):
-                let networkResult: NetworkResult<GetDongResponse> = self.judgeStatus(
-                    statusCode: response.statusCode,
-                    data: response.data,
-                    type: GetDongResponse.self
-                )
-                completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
-            }
-        }
-    }
-    
+
 }

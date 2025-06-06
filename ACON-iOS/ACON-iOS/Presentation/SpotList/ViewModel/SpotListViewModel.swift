@@ -11,15 +11,13 @@ import UIKit
 class SpotListViewModel: Serviceable {
     
     // MARK: - Properties
-    
-    var onSuccessGetDong: ObservablePattern<Bool> = ObservablePattern(nil)
-    
+
     var onSuccessPostSpotList: ObservablePattern<Bool> = ObservablePattern(nil)
-    
+
     var onFinishRefreshingSpotList: ObservablePattern<Bool> = ObservablePattern(nil)
-    
+
     var errorType: SpotListErrorType? = nil
-    
+
     var spotList = SpotListModel()
 
     // TODO: 삭제
@@ -32,12 +30,10 @@ class SpotListViewModel: Serviceable {
         SpotModel(id: 5, imageURL: "https://i.namu.wiki/i/oFHlYDjoEh8f-cc3lNK9jAemRkbXxNGwUg7XiW5LGS6DF1P2x8GCeNQxbQhVIwtUS1u53YPw-uoyqpmLtrGNJA.webp", name: "아콘삼겹살", acornCount: 1000, tagList: [.new, .top(number: 5)], eta: 6, latitude: 35.785834, longitude: 128.25),
         SpotModel(id: 6, imageURL: "https://i.namu.wiki/i/dgjXU86ae29hDSCza-L0GZlFt3T9lRx1Ug9cKtqWSzMzs7Cd0CN2SzyLFEJcHVFviKcxAlIwxcllT9s2sck0RA.jpg", name: "아콘비빔밥", acornCount: 3, tagList: [.new], eta: 6, latitude: 35.785834, longitude: 128.25)
     ]
-    
-    var currentDong: String = ""
-    
+
     var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-    
-    
+
+
     // MARK: - Filter
     
     var spotType: SpotType = .restaurant
@@ -70,37 +66,7 @@ class SpotListViewModel: Serviceable {
 // MARK: - Networking
 
 extension SpotListViewModel {
-    
-    func getDong() {
-        let requestQuery = GetDongRequest(latitude: userCoordinate.latitude,
-                                               longitude: userCoordinate.longitude)
-        
-        ACService.shared.spotListService.getDong(
-            query: requestQuery) { [weak self] response in
-                switch response {
-                case .success(let data):
-                    self?.currentDong = data.area
-                    self?.onSuccessGetDong.value = true
-                case .reIssueJWT:
-                    self?.handleReissue { [weak self] in
-                        self?.getDong()
-                    }
-                case .requestErr(let error):
-                    print("🥑getDong requestErr: \(error)")
-                    if error.code == 40405 {
-                        self?.errorType = .unsupportedRegion
-                    } else {
-                        self?.errorType = .serverRequestFail // TODO: 에러 뷰 또는 Alert 띄우기
-                    }
-                    self?.onSuccessGetDong.value = false
-                default:
-                    print("🥑vm - Failed to get dong")
-                    self?.onSuccessGetDong.value = false
-                    return
-                }
-            }
-    }
-    
+
     func postSpotList() {
         let filterListDTO = filterList.map { filter in
             return SpotFilterDTO(category: filter.category.serverKey,
@@ -115,7 +81,7 @@ extension SpotListViewModel {
                 filterList: filterList.isEmpty ? nil : filterListDTO
             )
         )
-        
+
         ACService.shared.spotListService.postSpotList(requestBody: requestBody) { [weak self] response in
             switch response {
             case .success(let data):
@@ -157,20 +123,20 @@ extension SpotListViewModel {
             }
         }
     }
-    
+
 }
 
 
 // MARK: - ACLocationManagerDelegate
 
 extension SpotListViewModel: ACLocationManagerDelegate {
-    
+
     func locationManager(_ manager: ACLocationManager,
                          didUpdateLocation coordinate: CLLocationCoordinate2D) {
         print("🛠️ coordinate: \(coordinate)")
-        
+
         userCoordinate = coordinate
-        getDong()
+        postSpotList()
     }
-    
+
 }
