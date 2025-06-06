@@ -5,9 +5,7 @@
 //  Created by 김유림 on 6/6/25.
 //
 
-import Foundation
 import CoreLocation
-import MapKit
 
 final class MapRedirectManager {
 
