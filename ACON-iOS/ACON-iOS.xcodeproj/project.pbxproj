@@ -170,6 +170,7 @@
 		746F5BF22DE00CE90081569B /* GlassBorderAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F5BF12DE00CE90081569B /* GlassBorderAttributes.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
 		74770C192DF1DA97005D4165 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 74770C182DF1DA97005D4165 /* GoogleMobileAds */; };
+		74770C1D2DF36DAB005D4165 /* GoogleAdsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74770C1C2DF36DA2005D4165 /* GoogleAdsType.swift */; };
 		747BB6CE2DCA66F000352874 /* GlassButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */; };
 		747F4FBD2D3D9477003DECBF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F4FBC2D3D9470003DECBF /* SplashViewController.swift */; };
 		747F4FBF2D3D9D44003DECBF /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F4FBE2D3D9D40003DECBF /* SplashView.swift */; };
@@ -427,6 +428,7 @@
 		746F5BEF2DE0097B0081569B /* ACToastType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACToastType.swift; sourceTree = "<group>"; };
 		746F5BF12DE00CE90081569B /* GlassBorderAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassBorderAttributes.swift; sourceTree = "<group>"; };
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
+		74770C1C2DF36DA2005D4165 /* GoogleAdsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdsType.swift; sourceTree = "<group>"; };
 		747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonState.swift; sourceTree = "<group>"; };
 		747F4FBC2D3D9470003DECBF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		747F4FBE2D3D9D40003DECBF /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -1273,6 +1275,7 @@
 		748D6F7B2D2BCCFF007690B4 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				74770C1C2DF36DA2005D4165 /* GoogleAdsType.swift */,
 				747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */,
 				743900962DC86966002F91B1 /* GlassButtonType.swift */,
 				743900922DC7544C002F91B1 /* GlassmorphismType.swift */,
@@ -1873,6 +1876,7 @@
 				745B19B22D40240900BDBDA4 /* AuthService.swift in Sources */,
 				748D6F692D2BCA1C007690B4 /* AppDelegate.swift in Sources */,
 				74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */,
+				74770C1D2DF36DAB005D4165 /* GoogleAdsType.swift in Sources */,
 				749A01032D3A6E0100CD7A90 /* ACDebouncer.swift in Sources */,
 				7462617F2D3F9F1400A4E84F /* GetSpotDetailResponse.swift in Sources */,
 				15A1471E2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift in Sources */,
