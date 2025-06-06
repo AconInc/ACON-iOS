@@ -11,26 +11,26 @@ final class ProfileEditValidMessageView: BaseView {
 
     // MARK: - UI Properties
 
-    private let icon = UIImageView()
+    private let iconImageView = UIImageView()
 
-    private let label = UILabel()
+    private let validMessageLabel = UILabel()
 
 
     // MARK: - UI Setting Methods
 
     override func setHierarchy() {
-        self.addSubviews(icon, label)
+        self.addSubviews(iconImageView, validMessageLabel)
     }
 
     override func setLayout() {
-        icon.snp.makeConstraints {
+        iconImageView.snp.makeConstraints {
             $0.leading.centerY.equalToSuperview()
             $0.size.equalTo(18)
         }
 
-        label.snp.makeConstraints {
-            $0.leading.equalTo(icon.snp.trailing).offset(4)
-            $0.centerY.equalTo(icon)
+        validMessageLabel.snp.makeConstraints {
+            $0.leading.equalTo(iconImageView.snp.trailing).offset(4)
+            $0.centerY.equalTo(iconImageView)
         }
     }
 
@@ -49,13 +49,13 @@ final class ProfileEditValidMessageView: BaseView {
 
         case .nicknameMissing, .nicknameTaken, .invalidDate, .invalidChar:
             self.isHidden = false
-            icon.image = .icExclamationMark
-            label.setLabel(text: type.text, style: .b1R, color: .labelDanger)
+            iconImageView.image = .icExclamationMark
+            validMessageLabel.setLabel(text: type.text, style: .b1R, color: .labelDanger)
 
         case .nicknameOK:
             self.isHidden = false
-            icon.image = .icSuccess
-            label.setLabel(text: type.text, style: .b1R, color: .labelSuccess)
+            iconImageView.image = .icSuccess
+            validMessageLabel.setLabel(text: type.text, style: .b1R, color: .labelSuccess)
         }
     }
 
