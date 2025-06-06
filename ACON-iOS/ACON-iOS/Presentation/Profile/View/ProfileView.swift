@@ -28,7 +28,9 @@ final class ProfileView: BaseView {
 
     let needLoginButton = UIButton()
     
-
+    let googleAdView = ProfileGoogleAdView()
+    
+    
     // MARK: - UI Setting Methods
 
     override func setStyle() {
@@ -71,7 +73,8 @@ final class ProfileView: BaseView {
             profileImageView,
             nicknameLabel,
             profileEditButton,
-            needLoginButton
+            needLoginButton,
+            googleAdView
         )
     }
 
@@ -98,6 +101,12 @@ final class ProfileView: BaseView {
         needLoginButton.snp.makeConstraints {
             $0.leading.equalTo(nicknameLabel)
             $0.centerY.equalTo(profileImageView)
+        }
+        
+        googleAdView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(423*ScreenUtils.heightRatio)
+            $0.horizontalEdges.equalToSuperview().inset(20*ScreenUtils.widthRatio)
+            $0.height.equalTo(125*ScreenUtils.heightRatio)
         }
     }
 
