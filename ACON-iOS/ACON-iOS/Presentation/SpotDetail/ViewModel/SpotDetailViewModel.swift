@@ -31,17 +31,15 @@ class SpotDetailViewModel: Serviceable {
             SignatureMenuModel(name: "맛있는메뉴1", price: 13000),
             SignatureMenuModel(name: "Very loooong name", price: 999999)
         ],
-        latitude: 35.785834,
-        longitude: 128.25,
+        latitude: 37.587038,
+        longitude: 127.0310,
         tagList: tagList
     )
     
     let imageURLs: [String] = ["https://i.pinimg.com/originals/05/b4/fb/05b4fbc3f169175e6deb97b3977175b6.jpg","https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg","https://images.immediate.co.uk/production/volatile/sites/30/2022/03/Pancake-grazing-board-bc15106.jpg?quality=90&resize=556,505","https://natashaskitchen.com/wp-content/uploads/2020/03/Pan-Seared-Steak-4.jpg","https://i.namu.wiki/i/oFHlYDjoEh8f-cc3lNK9jAemRkbXxNGwUg7XiW5LGS6DF1P2x8GCeNQxbQhVIwtUS1u53YPw-uoyqpmLtrGNJA.webp","https://i.namu.wiki/i/dgjXU86ae29hDSCza-L0GZlFt3T9lRx1Ug9cKtqWSzMzs7Cd0CN2SzyLFEJcHVFviKcxAlIwxcllT9s2sck0RA.jpg","https://www.bhc.co.kr/upload/bhc/menu/%EC%96%91%EB%85%90%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_410x271.jpg","https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"]
     let menuImageURLs: [String] = ["https://marketplace.canva.com/EAGEDq-_tZQ/1/0/1035w/canva-grey-and-beige-minimalist-restaurant-menu-hb5BNMWcQS4.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmR-HwbkD_gFMN5Mv3fKRikt-IeJpYbayxAQ&s","https://t3.ftcdn.net/jpg/01/75/06/34/360_F_175063465_nPAUPd3x4uoqbmKyGqDLRDsIvMejnraQ.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3fjP3BWKbK_YDzsVBsI3EXKr7q0JCYMZWKQ&s"
     ]
-    
-    let onSuccessPostGuidedSpotRequest: ObservablePattern<Bool> = ObservablePattern(nil)
-    
+
     var mapType: String = "APPLE"
     
     let sname = "내 위치"
@@ -81,91 +79,21 @@ extension SpotDetailViewModel {
             }
         }
     }
-    
-    // TODO: - 추후 PostGuidedSpotRequest 그냥 삭제?
+
     func postGuidedSpot() {
-        ACService.shared.spotDetailService.postGuidedSpot(requestBody: PostGuidedSpotRequest(spotId: self.spotID)){ [weak self] response in
+        ACService.shared.spotDetailService.postGuidedSpot(spotID: spotID){ [weak self] response in
             switch response {
             case .success:
-                self?.onSuccessPostGuidedSpotRequest.value = true
+                return
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
                     self?.postGuidedSpot()
                 }
             default:
                 print("VM - Failed To postGuidedSpot")
-                self?.onSuccessPostGuidedSpotRequest.value = false
                 return
             }
         }
     }
     
 }
-
-
-// MARK: - 네이버지도 Redirect
-
-extension SpotDetailViewModel {
-    
-    func redirectToNaverMap() {
-        ACLocationManager.shared.addDelegate(self)
-        self.mapType = "NAVER"
-        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
-    }
-    
-    func redirectToAppleMap() {
-        ACLocationManager.shared.addDelegate(self)
-        self.mapType = "APPLE"
-        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
-    }
-    
-    func openNMaps(startCoordinate: CLLocationCoordinate2D) {
-        guard let appName = Bundle.main.bundleIdentifier else { return }
-        let urlString = "nmap://route/walk?slat=\(startCoordinate.latitude)&slng=\(startCoordinate.longitude)&sname=\(sname)&dlat=\(spotDetail.value?.latitude ?? 0)&dlng=\(spotDetail.value?.longitude ?? 0)&dname=\(spotDetail.value?.name ?? "")&appname=\(appName)"
-        guard let encodedStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-        
-        guard let url = URL(string: encodedStr) else { return }
-        guard let appStoreURL = URL(string: "itms-apps://itunes.apple.com/app/id311867728?mt=8") else { return }
-        
-        if UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        } else {
-            UIApplication.shared.open(appStoreURL)
-        }
-    }
-    
-    func openAppleMaps(startCoordinate: CLLocationCoordinate2D) {
-        let start = MKMapItem(placemark: MKPlacemark(coordinate: startCoordinate))
-        start.name = self.sname
-        let destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: spotDetail.value?.latitude ?? 0, longitude: spotDetail.value?.longitude ?? 0)))
-        destination.name = spotDetail.value?.name ?? ""
-        
-        let launchOptions = [
-            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking
-        ]
-        
-        MKMapItem.openMaps(
-            with: [start, destination],
-            launchOptions: launchOptions
-        )
-    }
-    
-}
-
-
-// MARK: - 위치
-
-extension SpotDetailViewModel: ACLocationManagerDelegate {
-    
-    func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
-        ACLocationManager.shared.removeDelegate(self)
-        
-        if mapType == "NAVER" {
-            openNMaps(startCoordinate: coordinate)
-        } else if mapType == "APPLE" {
-            openAppleMaps(startCoordinate: coordinate)
-        }
-    }
-    
-}
-

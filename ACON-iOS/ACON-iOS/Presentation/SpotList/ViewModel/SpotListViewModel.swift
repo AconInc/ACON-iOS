@@ -35,24 +35,17 @@ class SpotListViewModel: Serviceable {
 
 
     // MARK: - Filter
-    
+
     var spotType: SpotType = .restaurant
-    
+
     var filterList: [SpotFilterModel] = []
-    
-    
+
+
     // MARK: - Methods
-    
-    init() {
-        ACLocationManager.shared.addDelegate(self)
-    }
-    
-    deinit {
-        ACLocationManager.shared.removeDelegate(self)
-    }
-    
-    func requestLocation() {
+
+    func updateLocationAndPostSpotList() {
         // 위치 권한 확인 및 업데이트 시작
+        ACLocationManager.shared.addDelegate(self)
         ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
     }
     
@@ -124,6 +117,22 @@ extension SpotListViewModel {
         }
     }
 
+    func postGuidedSpot(spotID: Int64) {
+        ACService.shared.spotDetailService.postGuidedSpot(spotID: spotID){ [weak self] response in
+            switch response {
+            case .success:
+                return
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.postGuidedSpot(spotID: spotID)
+                }
+            default:
+                print("VM - Failed To postGuidedSpot")
+                return
+            }
+        }
+    }
+
 }
 
 
@@ -133,8 +142,7 @@ extension SpotListViewModel: ACLocationManagerDelegate {
 
     func locationManager(_ manager: ACLocationManager,
                          didUpdateLocation coordinate: CLLocationCoordinate2D) {
-        print("🛠️ coordinate: \(coordinate)")
-
+        ACLocationManager.shared.removeDelegate(self)
         userCoordinate = coordinate
         postSpotList()
     }

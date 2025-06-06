@@ -11,6 +11,13 @@ import Kingfisher
 
 class SpotListCollectionViewCell: BaseCollectionViewCell {
 
+    // MARK: - Properties
+
+    var spot: SpotModel?
+
+    var findCourseDelegate: SpotListCellDelegate?
+
+
     // MARK: - UI Properties
 
     private var currentImageURL: String? // NOTE: 셀 재사용 이슈 방지 목적
@@ -25,12 +32,22 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     private let titleLabel = UILabel()
     private let acornCountButton = UIButton()
     private let tagStackView = UIStackView()
-    private let findCourseButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
+    let findCourseButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
 
     private let cornerRadius: CGFloat = 20
 
 
-    // MARK: - Life Cycle
+    // MARK: - init
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        addTarget()
+    }
+
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func setHierarchy() {
         super.setHierarchy()
@@ -151,6 +168,9 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         bgImageShadowView.layer.shadowColor = UIColor.clear.cgColor
     }
 
+    private func addTarget() {
+        findCourseButton.addTarget(self, action: #selector(tappedFindCourseButton), for: .touchUpInside)
+    }
 }
 
 
@@ -159,6 +179,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 extension SpotListCollectionViewCell: SpotListCellConfigurable {
 
     func bind(spot: SpotModel) {
+        self.spot = spot
+
         let imageURL = spot.imageURL ?? ""
         currentImageURL = imageURL
 
@@ -178,6 +200,10 @@ extension SpotListCollectionViewCell: SpotListCellConfigurable {
 
     func overlayLoginLock(_ show: Bool) {
         loginlockOverlayView.isHidden = !show
+    }
+
+    func setFindCourseDelegate(_ delegate: (any SpotListCellDelegate)?) {
+        self.findCourseDelegate = delegate
     }
 
 }
@@ -261,6 +287,18 @@ private extension SpotListCollectionViewCell {
 
     func shouldApplyShadow(for key: String) -> Bool {
         return currentImageURL == key || key == ShadowColorCache.noImageKey
+    }
+
+}
+
+
+// MARK: - @objc functions
+
+private extension SpotListCollectionViewCell {
+
+    @objc func tappedFindCourseButton() {
+        guard let spot = spot else { return }
+        findCourseDelegate?.tappedFindCourseButton(spot: spot)
     }
 
 }

@@ -15,7 +15,7 @@ protocol SpotDetailServiceProtocol {
                        completion: @escaping (NetworkResult<GetSpotDetailResponse>) -> Void)
     func getSpotMenu(spotID: Int64,
                      completion: @escaping (NetworkResult<GetSpotMenuResponse>) -> Void)
-    func postGuidedSpot(requestBody: PostGuidedSpotRequest,
+    func postGuidedSpot(spotID: Int64,
                         completion: @escaping (NetworkResult<EmptyResponse>) -> Void)
     
 }
@@ -48,9 +48,9 @@ final class SpotDetailService: BaseService<SpotDetailTargetType>,
         }
     }
 
-    func postGuidedSpot(requestBody: PostGuidedSpotRequest,
+    func postGuidedSpot(spotID: Int64,
                         completion: @escaping (NetworkResult<EmptyResponse>) -> Void) {
-        self.provider.request(.postGuidedSpot(requestBody)) { result in
+        self.provider.request(.postGuidedSpot(spotID: spotID)) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<EmptyResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: EmptyResponse.self)

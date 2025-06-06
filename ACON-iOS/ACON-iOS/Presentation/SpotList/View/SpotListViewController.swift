@@ -31,7 +31,7 @@ class SpotListViewController: BaseNavViewController {
         bindObservable()
         setCollectionView()
         addTarget()
-        viewModel.requestLocation()
+        viewModel.updateLocationAndPostSpotList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -135,7 +135,7 @@ extension SpotListViewController {
 
                 spotListView.skeletonView.isHidden = true
             }
-
+            
             viewModel.errorType = nil
             viewModel.onSuccessPostSpotList.value = nil
 
@@ -175,7 +175,8 @@ private extension SpotListViewController {
             }
             return
         }
-        viewModel.requestLocation()
+
+        viewModel.updateLocationAndPostSpotList()
         
         DispatchQueue.main.async { [weak self] in
             // NOTE: 데이터 리로드 전 애니메이션
@@ -193,10 +194,11 @@ private extension SpotListViewController {
             presentLoginModal(AmplitudeLiterals.EventName.filter)
             return
         }
+
         let vc = SpotListFilterViewController(viewModel: viewModel)
         vc.setSheetLayout(detent: .long)
         vc.isModalInPresentation = true
-        
+
         present(vc, animated: true)
     }
 
@@ -322,12 +324,6 @@ extension SpotListViewController: UICollectionViewDataSource {
         let item = viewModel.spotList.spotList[indexPath.item]
         let vc = SpotDetailViewController(item.id, item.tagList)
 
-        ACLocationManager.shared.removeDelegate(viewModel)
-        vc.backCompletion = { [weak self] in
-            guard let self = self else { return }
-            ACLocationManager.shared.addDelegate(self.viewModel)
-        }
-
         if AuthManager.shared.hasToken {
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -402,6 +398,7 @@ private extension SpotListViewController {
 
         cell.bind(spot: spotList.spotList[indexPath.item])
         cell.overlayLoginLock(lockCell)
+        cell.setFindCourseDelegate(self)
 
         return cell
     }
@@ -415,6 +412,36 @@ private extension SpotListViewController {
         } completion: { _ in
             self.spotListView.collectionView.refreshControl?.endRefreshing()
         }
+    }
+
+}
+
+
+// MARK: - Delegate
+
+extension SpotListViewController: SpotListCellDelegate {
+
+    func tappedFindCourseButton(spot: SpotModel) {
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_home_navigation?": true])
+
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.do { [weak self] in
+            guard let self = self else { return }
+            $0.addAction(UIAlertAction(title: StringLiterals.Map.naverMap, style: .default, handler: { _ in
+                MapRedirectManager.shared.redirect(
+                    to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
+                    using: .naver)
+                self.viewModel.postGuidedSpot(spotID: spot.id)
+            }))
+            $0.addAction(UIAlertAction(title: StringLiterals.Map.appleMap, style: .default, handler: { _ in
+                MapRedirectManager.shared.redirect(
+                    to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
+                    using: .apple)
+                self.viewModel.postGuidedSpot(spotID: spot.id)
+            }))
+            $0.addAction(UIAlertAction(title: StringLiterals.Alert.cancel, style: .cancel, handler: nil))
+        }
+        present(alertController, animated: true)
     }
 
 }
