@@ -43,41 +43,64 @@ extension UIView {
             $0.contentMode = .scaleAspectFit
         }
     }
-    
-    
-    //MARK: - add GlassBorder (주의 - bound가 0이면 적용 안 됨)
-    
-    static var glassBorderView = GlassmorphismView(.buttonGlassDefault)
-    
+
+}
+
+
+//MARK: - GlassBorder 설정
+
+extension UIView {
+
+    private struct AssociatedKeys {
+        static var glassBorderView: UInt8 = 0
+    }
+
+    private var glassBorderView: GlassmorphismView? {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKeys.glassBorderView) as? GlassmorphismView
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.glassBorderView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+
+    /// 주의: bounds가 0이면 적용 안 됨
     func addGlassBorder(_ attributes: GlassBorderAttributes) {
         self.layer.borderWidth = 0
+
+        glassBorderView?.removeFromSuperview()
         
         let outerPath = UIBezierPath(roundedRect: bounds, cornerRadius: attributes.cornerRadius)
         let innerRect = bounds.insetBy(dx: attributes.width, dy: attributes.width)
         let innerPath = UIBezierPath(roundedRect: innerRect, cornerRadius: max(0, attributes.cornerRadius - attributes.width/2))
         outerPath.append(innerPath.reversing())
-        
-        UIView.glassBorderView = GlassmorphismView(attributes.glassmorphismType)
-        
-        self.addSubview(UIView.glassBorderView)
-        UIView.glassBorderView.snp.makeConstraints {
+
+        let newGlassBorderView = GlassmorphismView(attributes.glassmorphismType)
+        self.glassBorderView = newGlassBorderView
+
+        self.addSubview(newGlassBorderView)
+
+        newGlassBorderView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
+
         let maskLayer = CAShapeLayer()
         maskLayer.path = outerPath.cgPath
         maskLayer.fillRule = .evenOdd
-        
+
         let maskView = UIView(frame: bounds)
         maskView.layer.addSublayer(maskLayer)
-        UIView.glassBorderView.mask = maskView
-        
-        UIView.glassBorderView.isUserInteractionEnabled = false
+        newGlassBorderView.mask = maskView
 
+        newGlassBorderView.isUserInteractionEnabled = false
     }
-    
+
+    func refreshGlassBorder() {
+        glassBorderView?.refreshBlurEffect()
+    }
+
     func removeGlassBorder() {
-        UIView.glassBorderView.removeFromSuperview()
+        glassBorderView?.removeFromSuperview()
     }
 
 }

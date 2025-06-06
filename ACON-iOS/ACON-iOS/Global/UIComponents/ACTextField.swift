@@ -11,7 +11,7 @@ import Lottie
 
 final class ACTextField: UIView {
     
-    // MARK: - Internal Property
+    // MARK: - Public Interface
 
     var observableText: ObservablePattern<String> = ObservablePattern(nil)
 
@@ -24,6 +24,11 @@ final class ACTextField: UIView {
         get { textField.delegate }
         set { textField.delegate = newValue }
     }
+
+
+    // MARK: - Internal State
+
+    private var isInitialLoad: Bool = true
 
 
     // MARK: - UI Property
@@ -128,9 +133,18 @@ final class ACTextField: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         if let glassBorderAttribute = glassBorderAttribute {
-            self.addGlassBorder(glassBorderAttribute)
+            if isInitialLoad {
+                self.addGlassBorder(glassBorderAttribute)
+                isInitialLoad = false
+            } else {
+                self.refreshGlassBorder()
+            }
+        }
+
+        if glassmorphismView != nil {
+            glassmorphismView?.refreshBlurEffect()
         }
     }
 
