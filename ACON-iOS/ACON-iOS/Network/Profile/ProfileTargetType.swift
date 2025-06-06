@@ -37,7 +37,7 @@ extension ProfileTargetType: TargetType {
         case .getProfile:
             return utilPath + "members/me"
         case .getNicknameValidity:
-            return utilPath + "members/nickname/validate"
+            return utilPath + "nickname/validate"
         case .patchProfile(_):
             return utilPath + "members/me"
         }
