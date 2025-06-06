@@ -233,6 +233,7 @@
 		74BF92172D393B4A00B923E3 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92162D393B4700B923E3 /* Int+.swift */; };
 		74BF92192D395FE800B923E3 /* ACToastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92182D395FE400B923E3 /* ACToastController.swift */; };
 		74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92262D39956F00B923E3 /* StickyHeaderView.swift */; };
+		74C1934A2DEF87E1005FB3C7 /* GoogleAdsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C193492DEF87E1005FB3C7 /* GoogleAdsManager.swift */; };
 		74C914D12D64DBBB00BC13E1 /* ImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C914D02D64DBAF00BC13E1 /* ImageType.swift */; };
 		74C914D32D64E01C00BC13E1 /* PutImageToPresignedURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C914D22D64E01000BC13E1 /* PutImageToPresignedURLRequest.swift */; };
 		74CDCE562D310B1600E3A21A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE552D310B1300E3A21A /* String+.swift */; };
@@ -490,6 +491,7 @@
 		74BF92162D393B4700B923E3 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		74BF92182D395FE400B923E3 /* ACToastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACToastController.swift; sourceTree = "<group>"; };
 		74BF92262D39956F00B923E3 /* StickyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyHeaderView.swift; sourceTree = "<group>"; };
+		74C193492DEF87E1005FB3C7 /* GoogleAdsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdsManager.swift; sourceTree = "<group>"; };
 		74C914D02D64DBAF00BC13E1 /* ImageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageType.swift; sourceTree = "<group>"; };
 		74C914D22D64E01000BC13E1 /* PutImageToPresignedURLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutImageToPresignedURLRequest.swift; sourceTree = "<group>"; };
 		74CDCE552D310B1300E3A21A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -1046,6 +1048,7 @@
 		7462D0232D4262EA00580464 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				74C193492DEF87E1005FB3C7 /* GoogleAdsManager.swift */,
 				749234992D687B0D0025F700 /* AmplitudeManager.swift */,
 				741429662D5D550400B69528 /* AppVersionManager.swift */,
 				7462D0242D4262EF00580464 /* AuthManager.swift */,
@@ -1884,6 +1887,7 @@
 				7462617F2D3F9F1400A4E84F /* GetSpotDetailResponse.swift in Sources */,
 				15A1471E2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift in Sources */,
 				743900972DC8696A002F91B1 /* GlassButtonType.swift in Sources */,
+				74C1934A2DEF87E1005FB3C7 /* GoogleAdsManager.swift in Sources */,
 				745C7E0D2D35A04A0074DBDB /* SearchKeywordCollectionViewCell.swift in Sources */,
 				748D6FA62D2C3F44007690B4 /* BaseView.swift in Sources */,
 				15CD25702D3F86E700320006 /* CustomRefreshControl.swift in Sources */,
