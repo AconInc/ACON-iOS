@@ -16,13 +16,13 @@ final class GoogleAdsManager: NSObject {
     
     static let shared = GoogleAdsManager()
     
-    private var adLoader: AdLoader?
+    private var adLoaders: [GoogleAdsType: AdLoader] = [:]
     
     private var cachedAd: [GoogleAdsType: NativeAd] = [:]
     
-    private var loadCompletion: ((NativeAd?, Error?) -> Void)?
+    private var loadCompletions: [GoogleAdsType: (NativeAd?, Error?) -> Void] = [:]
     
-    private var isLoading = false
+    private var loadingAds: Set<GoogleAdsType> = []
     
     private var isNetworkConnected = false
     
@@ -37,6 +37,7 @@ final class GoogleAdsManager: NSObject {
         MobileAds.shared.start(completionHandler: nil)
         
         periodicNetworkCheck()
+        
         preloadNativeAd(.imageOnly)
         preloadNativeAd(.both)
     }
@@ -44,7 +45,7 @@ final class GoogleAdsManager: NSObject {
     func getNativeAd(_ adType: GoogleAdsType) -> NativeAd? {
         guard let ad = cachedAd[adType] else {
             print("🥐 캐시된 광고 없음 - 즉시 로드 시작")
-            if !isLoading {
+            if !loadingAds.contains(adType) {
                 preloadNativeAd(adType)
             }
             return nil
@@ -57,7 +58,7 @@ final class GoogleAdsManager: NSObject {
     }
     
     func preloadNativeAd(_ adType: GoogleAdsType) {
-        guard cachedAd[adType] == nil && !isLoading else { return }
+        guard cachedAd[adType] == nil && !loadingAds.contains(adType) else { return }
 
         self.loadNativeAd(adType) { [weak self] ad, error in
             if let ad = ad {
@@ -73,13 +74,13 @@ final class GoogleAdsManager: NSObject {
     
     private func loadNativeAd(_ adType: GoogleAdsType,
                               completion: @escaping ((NativeAd?, Error?) -> Void)) {
-        guard !isLoading else {
+        guard (adLoaders[adType] == nil) else {
             completion(nil, GoogleAdsManagerError.alreadyLoading)
             return
         }
         
-        isLoading = true
-        loadCompletion = completion
+        loadingAds.insert(adType)
+        loadCompletions[adType] = completion
         
         DispatchQueue.main.async {
             guard let windowScene = UIApplication.shared.connectedScenes
@@ -89,7 +90,9 @@ final class GoogleAdsManager: NSObject {
                 return
             }
             
-            DispatchQueue.global().async {
+            DispatchQueue.global().async { [weak self] in
+                guard let self = self else { return }
+                
                 let adUnitID = adType == .both ? Config.GADAdUnitID : Config.GADAdUnitIDImageOnly
                 let request = Request()
                 
@@ -98,7 +101,7 @@ final class GoogleAdsManager: NSObject {
                     $0.shouldRequestMultipleImages = false
                 }
                 
-                self.adLoader = AdLoader(
+                let adLoader = AdLoader(
                     adUnitID: adUnitID,
                     rootViewController: rootViewController,
                     adTypes: [.native],
@@ -107,7 +110,8 @@ final class GoogleAdsManager: NSObject {
                     $0.delegate = self
                 }
                 
-                self.adLoader?.load(request)
+                self.adLoaders[adType] = adLoader
+                adLoader.load(request)
             }
         }
     }
@@ -120,15 +124,34 @@ final class GoogleAdsManager: NSObject {
 extension GoogleAdsManager: NativeAdLoaderDelegate {
     
     func adLoader(_ adLoader: AdLoader, didReceive nativeAd: NativeAd) {
-        loadCompletion?(nativeAd, nil)
-        loadCompletion = nil
-        isLoading = false
+        guard let adType = findAdType(for: adLoader) else { return }
+        
+        loadCompletions[adType]?(nativeAd, nil)
+        cleanup(adType)
     }
     
     func adLoader(_ adLoader: AdLoader, didFailToReceiveAdWithError error: Error) {
-        loadCompletion?(nil, error)
-        loadCompletion = nil
-        isLoading = false
+        guard let adType = findAdType(for: adLoader) else { return }
+        
+        loadCompletions[adType]?(nil, error)
+        cleanup(adType)
+    }
+    
+}
+
+
+// MARK: - Helper
+
+private extension GoogleAdsManager {
+    
+    func findAdType(for adLoader: AdLoader) -> GoogleAdsType? {
+        return adLoaders.first { $1 === adLoader }?.key
+    }
+    
+    func cleanup(_ adType: GoogleAdsType) {
+        loadingAds.remove(adType)
+        loadCompletions.removeValue(forKey: adType)
+        adLoaders.removeValue(forKey: adType)
     }
     
 }
@@ -141,7 +164,10 @@ extension GoogleAdsManager {
     // NOTE: 광고 객체 초기화
     func resetAdState() {
         cachedAd.removeAll()
-        isLoading = false
+        loadingAds.removeAll()
+        loadCompletions.removeAll()
+        adLoaders.removeAll()
+        
         isNetworkConnected = false
         needsAdReloadOnNetworkRecovery = false
     }
