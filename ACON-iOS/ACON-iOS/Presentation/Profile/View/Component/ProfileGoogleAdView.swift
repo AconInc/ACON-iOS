@@ -75,7 +75,7 @@ class ProfileGoogleAdView: BaseView {
         
         headlineLabel.snp.makeConstraints {
             $0.top.leading.equalTo(ScreenUtils.horizontalInset)
-            $0.width.equalTo(150)
+            $0.width.equalTo(210)
             $0.height.equalTo(24)
         }
 
@@ -177,11 +177,11 @@ extension ProfileGoogleAdView: NativeAdDelegate {
     
     // TODO: - 광고 관련 기록 -> 추후 엠플 사용?
     func nativeAdDidRecordClick(_ nativeAd: NativeAd) {
-        print("광고 클릭됨")
+        print("Profile 광고 클릭됨")
     }
     
     func nativeAdDidRecordImpression(_ nativeAd: NativeAd) {
-        print("광고 인식됨")
+        print("Profile 광고 인식됨")
     }
     
 }
