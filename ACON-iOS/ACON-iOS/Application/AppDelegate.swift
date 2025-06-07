@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(true)
         
         /// 구글 애즈 초기화
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             GoogleAdsManager.shared.initialize()
         }
         
