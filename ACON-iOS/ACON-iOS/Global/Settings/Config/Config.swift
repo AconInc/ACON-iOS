@@ -27,6 +27,12 @@ enum Config {
             
             static let nmfCustomStyleID = "NMFCustomStyleID"
             
+            static let GADApplicationIdentifier = "GADApplicationIdentifier"
+            
+            static let GADAdUnitIDImageOnly = "GAD_AD_UNIT_ID_IMAGE_ONLY"
+            
+            static let GADAdUnitID = "GAD_AD_UNIT_ID"
+            
         }
         
     }
@@ -91,5 +97,27 @@ extension Config {
         }
         return key
     }()
+    
+    static let GADApplicationIdentifier: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.GADApplicationIdentifier] as? String else {
+            fatalError("GADApplicationIdentifier is not set in plist for this configuration")
+        }
+        return key
+    }()
+    
+    static let GADAdUnitID: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.GADAdUnitID] as? String else {
+            fatalError("GADAddUnitID is not set in plist for this configuration")
+        }
+        return key
+    }()
+    
+    static let GADAdUnitIDImageOnly: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.GADAdUnitIDImageOnly] as? String else {
+            fatalError("GADAddUnitIDImageOnly is not set in plist for this configuration")
+        }
+        return key
+    }()
+    
     
 }

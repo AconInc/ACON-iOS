@@ -232,6 +232,11 @@ private extension SpotListViewController {
         )
         
         spotListView.collectionView.register(
+            SpotListGoogleAdCollectionViewCell.self,
+            forCellWithReuseIdentifier: SpotListGoogleAdCollectionViewCell.cellIdentifier
+        )
+        
+        spotListView.collectionView.register(
             SpotListCollectionViewHeader.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: SpotListCollectionViewHeader.identifier
@@ -271,12 +276,23 @@ extension SpotListViewController: UICollectionViewDataSource {
 
         switch spotList.transportMode {
         case .walking:
-            return dequeueAndConfigureCell(
-                collectionView: collectionView,
-                cellType: SpotListCollectionViewCell.self,
-                at: indexPath,
-                with: spotList
-            )
+            if indexPath.item % 5 == 0 && indexPath.item > 0 {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpotListGoogleAdCollectionViewCell.cellIdentifier, for: indexPath) as? SpotListGoogleAdCollectionViewCell else {
+                    return UICollectionViewCell() }
+                if let nativeAd = GoogleAdsManager.shared.getNativeAd(.imageOnly) {
+                    cell.configure(with: nativeAd)
+                } else {
+                    cell.showSkeleton()
+                }
+                return cell
+            } else {
+                return dequeueAndConfigureCell(
+                    collectionView: collectionView,
+                    cellType: SpotListCollectionViewCell.self,
+                    at: indexPath,
+                    with: spotList
+                )
+            }
         case .biking:
             return dequeueAndConfigureCell(
                 collectionView: collectionView,
