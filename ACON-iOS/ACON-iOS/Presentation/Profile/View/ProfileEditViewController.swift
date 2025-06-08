@@ -36,6 +36,8 @@ final class ProfileEditViewController: BaseNavViewController {
 
     private var profileImage: UIImage = .imgProfileBasic
 
+    private var hasValueChanged: Bool = false
+    private var isInitialSetting: Bool = true
     private var isDefaultImage: Bool? = nil
 
 
@@ -67,7 +69,7 @@ final class ProfileEditViewController: BaseNavViewController {
         hideKeyboard()
         setDelegate()
         addTarget()
-        bindData()
+        bindInitialData()
         observeViewModel()
         observeUserInputs()
     }
@@ -80,8 +82,6 @@ final class ProfileEditViewController: BaseNavViewController {
         // NOTE: 생일 필드는 옵셔널이기 때문에, 데이터가 텍스트필드에 바인딩된 후 clearButton configure를 해줘야 합니다
         let birthDateTF = profileEditView.birthDateTextField
         birthDateTF.hideClearButton(isHidden: (birthDateTF.text ?? "").isEmpty)
-
-        checkSaveAvailability()
     }
 
     override func setHierarchy() {
@@ -136,6 +136,7 @@ extension ProfileEditViewController {
         profileImage = image
         isDefaultImage = isDefault
         profileEditView.setProfileImage(profileImage)
+        hasValueChanged = true
     }
 
 }
@@ -145,7 +146,7 @@ extension ProfileEditViewController {
 
 private extension ProfileEditViewController {
 
-    func bindData() {
+    func bindInitialData() {
         profileEditView.do {
             $0.setProfileImageURL(viewModel.userInfo.profileImage)
             $0.nicknameTextField.text = viewModel.userInfo.nickname
@@ -153,6 +154,10 @@ private extension ProfileEditViewController {
                                       viewModel.maxNicknameLength
             )
             $0.birthDateTextField.text = viewModel.userInfo.birthDate
+        }
+
+        DispatchQueue.main.async {
+            self.isInitialSetting = false
         }
     }
 
@@ -253,7 +258,10 @@ private extension ProfileEditViewController {
     func observeNicknameTextField() {
         profileEditView.nicknameTextField.observableText.bind { [weak self] text in
             guard let self = self,
-                  let text = text else { return }
+                  let text = text,
+                  !isInitialSetting else { return }
+
+            hasValueChanged = true
 
             // NOTE: 닉네임 필드 값이 변하면 일단 저장 막고 유효성 메시지 숨김
             isNicknameAvailable = false
@@ -297,8 +305,11 @@ private extension ProfileEditViewController {
 
     func observeBirthdateTextField() {
         profileEditView.birthDateTextField.observableText.bind { [weak self] text in
-            guard let self = self else { return }
+            guard let self = self,
+                  !isInitialSetting else { return }
             let bindedText = text ?? ""
+
+            hasValueChanged = true
 
             profileEditView.birthDateTextField.hideClearButton(isHidden: bindedText.isEmpty)
 
@@ -318,12 +329,16 @@ private extension ProfileEditViewController {
 
     @objc
     func profileBackButtonTapped() {
-        let rightAction = {
-            if let navigationController = self.navigationController {
-                navigationController.popViewController(animated: true)
+        if !hasValueChanged {
+            navigationController?.popViewController(animated: true)
+        } else {
+            let rightAction = {
+                if let navigationController = self.navigationController {
+                    navigationController.popViewController(animated: true)
+                }
             }
+            self.presentACAlert(.changeNotSaved, rightAction: rightAction)
         }
-        self.presentACAlert(.changeNotSaved, rightAction: rightAction)
     }
     
     // NOTE: 스크롤뷰의 contentInset을 조정하여 텍스트필드가 키보드에 가려지지 않도록 함
@@ -476,6 +491,7 @@ private extension ProfileEditViewController {
     // MARK: - 저장 가능 여부
 
     func checkSaveAvailability() {
+        guard hasValueChanged else { return }
         let canSave: Bool = isNicknameAvailable && isBirthDateAvailable
         if canSave {
             profileEditView.saveButton.updateGlassButtonState(state: .default)
