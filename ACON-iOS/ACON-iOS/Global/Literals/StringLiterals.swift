@@ -169,6 +169,10 @@ enum StringLiterals {
         
         static let minuteFindCourse = "분 길찾기"
         
+        static let businessStart = "영업시작"
+        
+        static let businessEnd = "영업종료"
+        
         static let imageLoadingFailed = "이미지 로딩에 실패했어요"
         
         static let needLoginToSeeMore = "더 많은 장소를 보기 위해\n로그인이 필요해요"

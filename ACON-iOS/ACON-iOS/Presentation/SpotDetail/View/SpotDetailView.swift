@@ -193,6 +193,8 @@ extension SpotDetailView {
         bookmarkButton.isSelected = false
         
         setImagePageControl(spotDetail.imageURLs.count)
+
+        setOpeningTimeView(withTags: !spotDetail.tagList.isEmpty)
     }
 
     func makeSignatureMenuSection(_ menus: [SignatureMenuModel]) {
@@ -274,6 +276,24 @@ private extension SpotDetailView {
             $0.currentPageIndicatorTintColor = .acWhite
             $0.pageIndicatorTintColor = .gray300
             $0.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+        }
+    }
+
+    func setOpeningTimeView(withTags: Bool) {
+        let openingTimeView = OpeningTimeView(endTime: "22:00", withDot: true) //TODO: 명세 나오면 수정
+
+        self.addSubview(openingTimeView)
+
+        if withTags {
+            openingTimeView.snp.makeConstraints {
+                $0.top.equalTo(tagStackView.snp.bottom).offset(7)
+                $0.leading.equalToSuperview().offset(horizontalEdges)
+            }
+        } else {
+            openingTimeView.snp.makeConstraints {
+                $0.top.equalTo(titleLabel.snp.bottom).offset(7)
+                $0.leading.equalToSuperview().offset(horizontalEdges)
+            }
         }
     }
 
