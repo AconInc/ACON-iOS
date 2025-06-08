@@ -90,6 +90,7 @@ final class ProfileView: BaseView {
         
         savedSpotScrollView.do {
             $0.showsHorizontalScrollIndicator = false
+            $0.showsVerticalScrollIndicator = false
             $0.backgroundColor = .clear
             $0.contentInset = UIEdgeInsets(top: 0, left: ScreenUtils.horizontalInset, bottom: 0, right: 0)
         }
@@ -197,26 +198,39 @@ extension ProfileView {
         nicknameLabel.setLabel(text: text, style: .h4SB)
     }
     
-    func resetUI() {
+    func setSavedSpotUI(_ hasSavedSpot: Bool) {
         googleAdView.snp.updateConstraints {
-            $0.top.equalToSuperview().offset(423*ScreenUtils.heightRatio)
+            if hasSavedSpot {
+                $0.top.equalToSuperview().offset(423*ScreenUtils.heightRatio)
+            } else {
+                $0.top.equalToSuperview().offset(234*ScreenUtils.heightRatio)
+            }
         }
         
-        noSavedSpotsLabel.isHidden = true
+        noSavedSpotsLabel.isHidden = hasSavedSpot
         [savedSpotButton, savedSpotScrollView].forEach {
-            $0.isHidden = false
+            $0.isHidden = !hasSavedSpot
         }
     }
     
-    func setNoSavedSpotUI() {
-        googleAdView.snp.updateConstraints {
-            $0.top.equalToSuperview().offset(234*ScreenUtils.heightRatio)
+    func setGuestUI(_ isGuest: Bool) {
+        needLoginButton.isHidden = !isGuest
+        [savedSpotLabel,
+         savedSpotButton,
+         savedSpotScrollView].forEach {
+            $0.isHidden = isGuest
         }
-        
-        noSavedSpotsLabel.isHidden = false
-        [savedSpotButton, savedSpotScrollView].forEach {
-            $0.isHidden = true
-        }
+    }
+    
+}
+
+
+// MARK: - 스크롤 막기
+
+extension ProfileView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollView.contentOffset.y = 0
     }
     
 }

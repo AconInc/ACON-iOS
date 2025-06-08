@@ -5,6 +5,7 @@ GEM
       base64
       nkf
       rexml
+    abbrev (0.1.2)
     activesupport (7.2.2.1)
       base64
       benchmark (>= 0.3)
@@ -315,6 +316,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  abbrev
   cocoapods
   fastlane
 

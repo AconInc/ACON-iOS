@@ -95,7 +95,7 @@ private extension ProfileViewController {
             else { return }
 
             self.profileView.do {
-                $0.needLoginButton.isHidden = onLoginSuccess
+                $0.setGuestUI(!onLoginSuccess)
             }
         }
 
@@ -107,9 +107,7 @@ private extension ProfileViewController {
                 profileView.do {
                     $0.setProfileImage(self.viewModel.userInfo.profileImage)
                     $0.setNicknameLabel(self.viewModel.userInfo.nickname)
-                    if self.viewModel.userInfo.savedSpotList!.isEmpty {
-                        $0.setNoSavedSpotUI()
-                    } else { $0.resetUI() }
+                    $0.setSavedSpotUI(!self.viewModel.userInfo.savedSpotList!.isEmpty)
                 }
                 updateSavedSpots(self.viewModel.userInfo.savedSpotList ?? [])
             }

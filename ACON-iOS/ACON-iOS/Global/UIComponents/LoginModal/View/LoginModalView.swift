@@ -11,8 +11,6 @@ class LoginModalView: GlassmorphismView {
     
     // MARK: - UI Properties
     
-    let exitButton = UIButton()
-    
     private let titleLabel = UILabel()
     
     private var subTitleLabel  = UILabel()
@@ -21,21 +19,19 @@ class LoginModalView: GlassmorphismView {
     
     var appleLoginButton = UIButton()
     
-    private let youAgreedLabel = UILabel()
-    
-    private let termsStackView = UIStackView()
+    private let proceedLoginLabel = UILabel()
     
     var termsOfUseLabel = UILabel()
     
     var privacyPolicyLabel = UILabel()
     
-    var socialLoginButtonConfiguration: UIButton.Configuration = {
+    lazy var socialLoginButtonConfiguration: UIButton.Configuration = {
         var configuration = UIButton.Configuration.plain()
         configuration.imagePlacement = .leading
-        configuration.imagePadding = 60
+        configuration.imagePadding = 60*ScreenUtils.widthRatio
         configuration.titleAlignment = .center
         configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 24)
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 24, bottom: 15, trailing: 24)
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: ScreenUtils.widthRatio*24, bottom: 15, trailing: ScreenUtils.widthRatio*24)
         return configuration
     }()
     
@@ -57,16 +53,11 @@ class LoginModalView: GlassmorphismView {
         super.setHierarchy()
         
         self.addSubviews(
-            exitButton,
             titleLabel,
             subTitleLabel,
             googleLoginButton,
             appleLoginButton,
-            youAgreedLabel,
-            termsStackView
-        )
-        
-        termsStackView.addArrangedSubviews(
+            proceedLoginLabel,
             termsOfUseLabel,
             privacyPolicyLabel
         )
@@ -75,48 +66,40 @@ class LoginModalView: GlassmorphismView {
     override func setLayout() {
         super.setLayout()
         
-        exitButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(ScreenUtils.heightRatio * 21)
-            $0.trailing.equalToSuperview().inset(ScreenUtils.horizontalInset)
-        }
-        
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(ScreenUtils.heightRatio * 86)
+            $0.top.equalToSuperview().offset(ScreenUtils.heightRatio * 57)
             $0.centerX.equalToSuperview()
         }
         
         subTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(8)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(8*ScreenUtils.heightRatio)
             $0.centerX.equalToSuperview()
         }
         
         googleLoginButton.snp.makeConstraints {
-            $0.top.equalTo(subTitleLabel.snp.bottom).offset(ScreenUtils.heightRatio * 64)
-            $0.height.equalTo(ScreenUtils.heightRatio * 48)
+            $0.top.equalTo(subTitleLabel.snp.bottom).offset(ScreenUtils.heightRatio * 120)
+            $0.height.equalTo(loginButtonHeight)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
         }
         
         appleLoginButton.snp.makeConstraints {
-            $0.top.equalTo(googleLoginButton.snp.bottom).offset(8)
+            $0.top.equalTo(googleLoginButton.snp.bottom).offset(16 * ScreenUtils.heightRatio)
             $0.height.horizontalEdges.equalTo(googleLoginButton)
         }
         
-        youAgreedLabel.snp.makeConstraints {
-            $0.top.equalTo(appleLoginButton.snp.bottom).offset(ScreenUtils.heightRatio * 16)
+        proceedLoginLabel.snp.makeConstraints {
+            $0.top.equalTo(appleLoginButton.snp.bottom).offset(ScreenUtils.heightRatio * 24)
             $0.centerX.equalToSuperview()
         }
-        
-        termsStackView.snp.makeConstraints {
-            $0.top.equalTo(youAgreedLabel.snp.bottom).offset(ScreenUtils.heightRatio * 4)
-            $0.centerX.equalToSuperview()
-        }
-        
+
         termsOfUseLabel.snp.makeConstraints {
-            $0.width.equalTo(48)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*46)
+            $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*111)
         }
         
         privacyPolicyLabel.snp.makeConstraints {
-            $0.width.equalTo(95)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*46)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*111)
         }
     }
     
@@ -125,8 +108,6 @@ class LoginModalView: GlassmorphismView {
         
         self.setHandlerImageView()
         
-        exitButton.setImage(.icDismiss, for: .normal)
-        
         titleLabel.setLabel(text: StringLiterals.LoginModal.title,
                             style: .h4SB,
                             color: .acWhite,
@@ -134,10 +115,10 @@ class LoginModalView: GlassmorphismView {
                             numberOfLines: 1)
         
         subTitleLabel.setLabel(text: StringLiterals.LoginModal.subTitle,
-                               style: .b1,
+                               style: .b1R,
                                color: .gray200,
                                alignment: .center,
-                        numberOfLines: 2)
+                               numberOfLines: 2)
         
         googleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
@@ -163,36 +144,28 @@ class LoginModalView: GlassmorphismView {
             $0.layer.borderWidth = 1
         }
         
-        youAgreedLabel.do {
+        proceedLoginLabel.do {
             $0.setLabel(text: StringLiterals.Login.youAgreed,
-                        style: .c1,
-                        color: .gray300,
-                        alignment: .center,
-                        numberOfLines: 2)
-        }
-        
-        termsStackView.do {
-            $0.axis = .horizontal
-            $0.spacing = 16
+                        style: .c1R,
+                        color: .acWhite,
+                        alignment: .center)
         }
         
         termsOfUseLabel.do {
             $0.setLabel(text: StringLiterals.Login.termsOfUse,
-                        style: .c1,
-                        color: .gray500)
-            $0.setUnderline(
-                range: NSRange(location: 0,
-                               length: termsOfUseLabel.text?.count ?? 4))
+                        style: .c1SB,
+                        color: .acWhite,
+                        alignment: .center)
+            $0.setUnderline(range: NSRange(location: 0, length: termsOfUseLabel.text?.count ?? 4))
             $0.isUserInteractionEnabled = true
         }
         
         privacyPolicyLabel.do {
             $0.setLabel(text: StringLiterals.Login.privacyPolicy,
-                        style: .c1,
-                        color: .gray500)
-            $0.setUnderline(
-                range: NSRange(location: 0,
-                               length: privacyPolicyLabel.text?.count ?? 8))
+                        style: .c1SB,
+                        color: .acWhite,
+                        alignment: .center)
+            $0.setUnderline(range: NSRange(location: 0, length: privacyPolicyLabel.text?.count ?? 8))
             $0.isUserInteractionEnabled = true
         }
     }

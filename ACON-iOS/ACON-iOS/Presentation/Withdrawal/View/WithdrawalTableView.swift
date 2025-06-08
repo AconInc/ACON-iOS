@@ -83,4 +83,11 @@ extension WithdrawalTableView: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? WithdrawalTableViewCell {
+            cell.selectButtonTapped()
+            self.handleSelection(at: indexPath)
+        }
+    }
+    
 }

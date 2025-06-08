@@ -78,47 +78,54 @@ extension SpotListViewModel {
                 filterList: filterList.isEmpty ? nil : filterListDTO
             )
         )
+        
+        self.spotList = SpotListModel(
+            transportMode: self.spotType == .restaurant ? .walking : .biking,
+            spotList: self.restaurantDummy
+        )
+        self.onSuccessPostSpotList.value = true
+        return
 
-        ACService.shared.spotListService.postSpotList(requestBody: requestBody) { [weak self] response in
-            switch response {
-            case .success(let data):
-                let spotList: SpotListModel = SpotListModel(from: data)
-
-                self?.spotList = spotList
-
-                if spotList.spotList.isEmpty { self?.errorType = .emptyList }
-                self?.onSuccessPostSpotList.value = true
-
-            case .reIssueJWT:
-                self?.handleReissue { [weak self] in
-                    self?.postSpotList()
-                }
-
-            case .requestErr(let error):
-                print("🥑post spotList requestErr: \(error)")
-                if error.code == 40405 {
-                    self?.errorType = .unsupportedRegion
-                } else {
-                    self?.errorType = .serverRequestFail // TODO: 에러 뷰 또는 Alert 띄우기
-                }
-                self?.onSuccessPostSpotList.value = false
-
-            default:
-                print("🥑Failed To Post")
-// #if DEBUG
-                // TODO: 삭제
-                self?.spotList = SpotListModel(
-                    transportMode: self?.spotType == .restaurant ? .walking : .biking,
-                    spotList: self?.restaurantDummy ?? []
-                )
-                self?.onSuccessPostSpotList.value = true
-                return
-// #endif
-                // TODO: 주석 해제
+//        ACService.shared.spotListService.postSpotList(requestBody: requestBody) { [weak self] response in
+//            switch response {
+//            case .success(let data):
+//                let spotList: SpotListModel = SpotListModel(from: data)
+//
+//                self?.spotList = spotList
+//
+//                if spotList.spotList.isEmpty { self?.errorType = .emptyList }
+//                self?.onSuccessPostSpotList.value = true
+//
+//            case .reIssueJWT:
+//                self?.handleReissue { [weak self] in
+//                    self?.postSpotList()
+//                }
+//
+//            case .requestErr(let error):
+//                print("🥑post spotList requestErr: \(error)")
+//                if error.code == 40405 {
+//                    self?.errorType = .unsupportedRegion
+//                } else {
+//                    self?.errorType = .serverRequestFail // TODO: 에러 뷰 또는 Alert 띄우기
+//                }
 //                self?.onSuccessPostSpotList.value = false
+//
+//            default:
+//                print("🥑Failed To Post")
+//// #if DEBUG
+//                // TODO: 삭제
+//                self?.spotList = SpotListModel(
+//                    transportMode: self?.spotType == .restaurant ? .walking : .biking,
+//                    spotList: self?.restaurantDummy ?? []
+//                )
+//                self?.onSuccessPostSpotList.value = true
 //                return
-            }
-        }
+//// #endif
+//                // TODO: 주석 해제
+////                self?.onSuccessPostSpotList.value = false
+////                return
+//            }
+//        }
     }
 
     func postGuidedSpot(spotID: Int64) {

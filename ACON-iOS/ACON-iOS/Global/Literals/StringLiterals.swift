@@ -47,7 +47,7 @@ enum StringLiterals {
     
     enum LoginModal {
         
-        static let title = "acon에 로그인"
+        static let title = "Acon에 로그인"
         
         static let subTitle = "지금 당신의 위치에서\n가장 최고의 맛집을 추천받아보세요"
         
@@ -129,7 +129,7 @@ enum StringLiterals {
         
         static let done = "완료"
         
-        static let searchSpot = "가게명을 검색해주세요"
+        static let searchSpot = "장소를 입력해주세요."
         
         static let noMatchingSpots = "앗... 검색결과가 없어요"
         
@@ -283,11 +283,13 @@ enum StringLiterals {
         
         static let cantFindWebPage = "웹페이지를 찾을 수 없습니다."
         
-        static let privacyPolicyLink = "https://bit.ly/acon개인정보처리방침"
+        static let privacyPolicyLink = "https://stripe-shoemaker-907.notion.site/1e1856d5371b8017b22bd1a0dad59228?pvs=4"
         
-        static let termsOfUseLink = "https://bit.ly/acon서비스이용약관"
+        static let termsOfUseLink = "https://stripe-shoemaker-907.notion.site/1e1856d5371b8014aaf5eec52d0442f3?pvs=4"
         
         static let spotInfoErrorReportLink = "https://walla.my/survey/ekYLYwpJv2d0Eznnijla"
+        
+        static let addPlaceLink = "https://walla.my/survey/1HrYdj6WIp5rFhkdfRj9"
         
     }
     
