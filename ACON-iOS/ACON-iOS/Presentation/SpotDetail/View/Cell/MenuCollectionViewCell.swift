@@ -13,7 +13,6 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - Properties
 
-    var onBackgroundTapped: (() -> Void)?
     var onZooming: ((Bool) -> Void)?
 
     private let imageView = UIImageView()
@@ -49,11 +48,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     override func setStyle() {
         super.setStyle()
 
-        self.do {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedBackground))
-            $0.backgroundColor = .clear
-            $0.addGestureRecognizer(tapGesture)
-        }
+        self.backgroundColor = .clear
 
         imageView.do {
             let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zooming))
@@ -92,14 +87,6 @@ private extension MenuCollectionViewCell {
         }
 
         imageView.transform = CGAffineTransform(scaleX: gesture.scale, y: gesture.scale)
-    }
-
-    @objc
-    func tappedBackground(_ sender: UITapGestureRecognizer) {
-        let location = sender.location(in: self)
-        if imageView.frame.contains(location) { return }
-
-        onBackgroundTapped?()
     }
 
 }
