@@ -45,7 +45,7 @@ final class ProfileViewModel: Serviceable {
     
     // TODO: - 🍉 삭제
     var savedSpotDummy = [SavedSpotModel(id: 1, name: "식당이름딱아홉글자", image: nil),
-                          SavedSpotModel(id: 1, name: "엽떡에허니콤보치즈추가", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 1, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 1, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 1, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 1, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 1, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg") ]
+                          SavedSpotModel(id: 2, name: "엽떡에허니콤보치즈추가", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 3, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 4, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 5, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 6, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 7, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg") ]
 
     
     // MARK: - Methods
