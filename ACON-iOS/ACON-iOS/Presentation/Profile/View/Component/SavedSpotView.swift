@@ -102,7 +102,7 @@ extension SavedSpotView {
         skeletonView.isHidden = false
         preparingImageLabel.isHidden = true
         
-        spotNameLabel.setLabel(text: data.name.abbreviatedStringWithExepction(9), style: .t5SB)
+        spotNameLabel.setLabel(text: data.name.abbreviatedStringWithException(9), style: .t5SB)
         
         if let imageURL = data.image {
             spotImageView.kf.setImage(
