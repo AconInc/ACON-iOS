@@ -17,4 +17,11 @@ extension UIStackView {
         }
     }
     
+    func removeAllArrangedSubviews() {
+        arrangedSubviews.forEach { subview in
+            removeArrangedSubview(subview)
+            subview.removeFromSuperview()
+        }
+    }
+    
 }
