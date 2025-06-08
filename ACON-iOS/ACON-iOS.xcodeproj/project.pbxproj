@@ -257,6 +257,7 @@
 		74DDBA8B2DC45E3B00BF9824 /* ACButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DDBA8A2DC45E3400BF9824 /* ACButtonType.swift */; };
 		74DDBA8D2DC45E4500BF9824 /* ACButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DDBA8C2DC45E4300BF9824 /* ACButton.swift */; };
 		74E38D342D69B46F009449D4 /* LocationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E38D332D69B468009449D4 /* LocationUtils.swift */; };
+		74EC5A282DF4C51E00E176A8 /* SavedSpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC5A272DF4C50E00E176A8 /* SavedSpotsViewController.swift */; };
 		74EC5A2C2DF4CB2300E176A8 /* SavedSpotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC5A2B2DF4CB1F00E176A8 /* SavedSpotView.swift */; };
 		74FA77842DD43709006846C9 /* SplashBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 74FA77832DD43709006846C9 /* SplashBGM.mp3 */; };
 		D61917E92D3E4410001BF0EE /* OnboardingTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917E82D3E4410001BF0EE /* OnboardingTargetType.swift */; };
@@ -523,6 +524,7 @@
 		74DDBA8A2DC45E3400BF9824 /* ACButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButtonType.swift; sourceTree = "<group>"; };
 		74DDBA8C2DC45E4300BF9824 /* ACButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButton.swift; sourceTree = "<group>"; };
 		74E38D332D69B468009449D4 /* LocationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUtils.swift; sourceTree = "<group>"; };
+		74EC5A272DF4C50E00E176A8 /* SavedSpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotsViewController.swift; sourceTree = "<group>"; };
 		74EC5A2B2DF4CB1F00E176A8 /* SavedSpotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotView.swift; sourceTree = "<group>"; };
 		74FA77832DD43709006846C9 /* SplashBGM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SplashBGM.mp3; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1659,6 +1661,7 @@
 				D6E452902D3AA47500CBED02 /* ProfileView.swift */,
 				D6E452912D3AA47500CBED02 /* ProfileViewController.swift */,
 				15A48BF92D574BA5003C2421 /* ProfileEditView.swift */,
+				74EC5A272DF4C50E00E176A8 /* SavedSpotsViewController.swift */,
 				15A48BFB2D574BB9003C2421 /* ProfileEditViewController.swift */,
 				7414295A2D5D2FBA00B69528 /* ProfileSettingViewController.swift */,
 			);
@@ -1961,6 +1964,7 @@
 				748D6F872D2BD247007690B4 /* UIView+.swift in Sources */,
 				15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */,
 				1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */,
+				74EC5A282DF4C51E00E176A8 /* SavedSpotsViewController.swift in Sources */,
 				1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */,
 				74403B6F2DF1D6DD00B7B832 /* GoogleAdsErrorType.swift in Sources */,
 				15CD25782D3FE31400320006 /* PostSpotListRequest.swift in Sources */,
