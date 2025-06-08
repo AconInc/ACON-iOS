@@ -285,6 +285,8 @@ enum StringLiterals {
         
         static let spotInfoErrorReportLink = "https://walla.my/survey/ekYLYwpJv2d0Eznnijla"
         
+        static let addPlaceLink = "https://walla.my/survey/1HrYdj6WIp5rFhkdfRj9"
+        
     }
     
     enum Network {

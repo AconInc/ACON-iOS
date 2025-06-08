@@ -82,6 +82,10 @@ class SpotSearchViewController: BaseNavViewController{
         self.rightButton.addTarget(self,
                                    action: #selector(nextButtonTapped),
                                     for: .touchUpInside)
+        
+        spotSearchView.searchEmptyView.addPlaceButton.addTarget(self,
+                                                                action: #selector(addPlaceButtonTapped),
+                                                                for: .touchUpInside)
     }
 
 }
@@ -185,6 +189,12 @@ private extension SpotSearchViewController {
         vc.modalPresentationStyle = .fullScreen
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.placeUpload, properties: ["click_review_next?": true])
         present(vc, animated: false)
+    }
+    
+    @objc
+    func addPlaceButtonTapped() {
+        let addPlaceVC = DRWebViewController(urlString: StringLiterals.WebView.addPlaceLink)
+        self.present(addPlaceVC, animated: true)
     }
     
 }
