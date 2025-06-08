@@ -15,7 +15,9 @@ final class ProfileViewController: BaseNavViewController {
 
     private let viewModel = ProfileViewModel()
 
-
+    var onSavedSpotViewTapped: ((Int) -> Void)?
+    
+    
     // MARK: - Life Cycles
 
     override func viewDidLoad() {
@@ -74,9 +76,13 @@ final class ProfileViewController: BaseNavViewController {
             action: #selector(tappedEditProfileButton),
             for: .touchUpInside
         )
-
+        
+        profileView.savedSpotButton.addTarget(
+            self,
+            action: #selector(tappedSavedSpotButton),
+            for: .touchUpInside
+        )
     }
-
 }
 
 
@@ -99,16 +105,14 @@ private extension ProfileViewController {
             guard let self = self,
                   let onSuccess = onSuccess else { return }
             // TODO: onSuccess 분기처리
-            // TODO: 인증동네 추후 여러개로 수정(Sprint3)
-            let firstAreaName: String = self.viewModel.userInfo.verifiedAreaList.first?.name ?? "???"
             if onSuccess {
                 profileView.do {
                     $0.setProfileImage(self.viewModel.userInfo.profileImage)
                     $0.setNicknameLabel(self.viewModel.userInfo.nickname)
                 }
-            } else {
-                self.showDefaultAlert(title: "프로필 로드 실패", message: "프로필 정보 로드에 실패했습니다.")
+                updateSavedSpots(self.viewModel.userInfo.savedSpotList ?? [])
             }
+            viewModel.onGetProfileSuccess.value = nil
         }
     }
 
@@ -136,5 +140,62 @@ private extension ProfileViewController {
         let vc = ProfileEditViewController(viewModel)
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @objc
+    func tappedSavedSpotButton() {
+        let vc = SavedSpotsViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc
+    func savedSpotViewTapped(_ gesture: UITapGestureRecognizer) {
+        guard let view = gesture.view else { return }
 
+        guard let selectedSpotID = viewModel.userInfo.savedSpotList?[view.tag].id else { return }
+        let vc = SpotDetailViewController(selectedSpotID, [])
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
+
+
+// MARK: - StackView 업데이트
+
+private extension ProfileViewController {
+    
+    func updateSavedSpots(_ dataList: [SavedSpotModel]) {
+        profileView.savedSpotStackView.removeAllArrangedSubviews()
+        
+        for (index, data) in dataList.enumerated() {
+            let savedSpotView = makeSavedSpotView(data, index)
+            profileView.savedSpotStackView.addArrangedSubview(savedSpotView)
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.profileView.savedSpotScrollView.layoutIfNeeded()
+        }
+    }
+    
+    
+    func makeSavedSpotView(_ data: SavedSpotModel, _ index: Int) -> SavedSpotView {
+        let savedSpotView = SavedSpotView()
+        
+        savedSpotView.snp.makeConstraints {
+            $0.width.equalTo(150*ScreenUtils.widthRatio)
+            $0.height.equalTo(217*ScreenUtils.heightRatio)
+        }
+        
+        let tapGesture = UITapGestureRecognizer(target: self,
+                                                action: #selector(savedSpotViewTapped(_:)))
+        
+        savedSpotView.do {
+            $0.addGestureRecognizer(tapGesture)
+            $0.tag = index
+            $0.isUserInteractionEnabled = true
+            $0.bindData(data)
+        }
+        
+        return savedSpotView
+    }
+    
 }
