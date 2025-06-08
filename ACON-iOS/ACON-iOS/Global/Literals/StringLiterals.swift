@@ -47,7 +47,7 @@ enum StringLiterals {
     
     enum LoginModal {
         
-        static let title = "acon에 로그인"
+        static let title = "Acon에 로그인"
         
         static let subTitle = "지금 당신의 위치에서\n가장 최고의 맛집을 추천받아보세요"
         

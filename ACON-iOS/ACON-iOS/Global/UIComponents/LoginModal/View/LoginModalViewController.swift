@@ -58,9 +58,6 @@ class LoginModalViewController: BaseViewController {
     }
     
     func addTarget() {
-        loginModalView.exitButton.addTarget(self,
-                                            action: #selector(exitButtonTapped),
-                                            for: .touchUpInside)
         loginModalView.googleLoginButton.addTarget(self,
                                                    action: #selector(googleLoginButtonTapped),
                                                    for: .touchUpInside)
