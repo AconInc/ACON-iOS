@@ -107,6 +107,9 @@ private extension ProfileViewController {
                 profileView.do {
                     $0.setProfileImage(self.viewModel.userInfo.profileImage)
                     $0.setNicknameLabel(self.viewModel.userInfo.nickname)
+                    if self.viewModel.userInfo.savedSpotList!.isEmpty {
+                        $0.setNoSavedSpotUI()
+                    } else { $0.resetUI() }
                 }
                 updateSavedSpots(self.viewModel.userInfo.savedSpotList ?? [])
             }

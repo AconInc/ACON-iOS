@@ -32,6 +32,8 @@ final class ProfileView: BaseView {
     
     let savedSpotButton = UIButton()
     
+    private let noSavedSpotsLabel = UILabel()
+    
     let savedSpotScrollView = UIScrollView()
         
     let savedSpotStackView = UIStackView()
@@ -81,6 +83,11 @@ final class ProfileView: BaseView {
                                   color: .labelAction)
         }
         
+        noSavedSpotsLabel.do {
+            $0.setLabel(text: "저장한 장소가 없어요.", style: .b1R, color: .gray500)
+            $0.isHidden = true
+        }
+        
         savedSpotScrollView.do {
             $0.showsHorizontalScrollIndicator = false
             $0.backgroundColor = .clear
@@ -105,6 +112,7 @@ final class ProfileView: BaseView {
             needLoginButton,
             savedSpotLabel,
             savedSpotButton,
+            noSavedSpotsLabel,
             savedSpotScrollView,
             googleAdView
         )
@@ -149,6 +157,11 @@ final class ProfileView: BaseView {
             $0.height.equalTo(36)
         }
         
+        noSavedSpotsLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(174*ScreenUtils.heightRatio)
+            $0.leading.equalToSuperview().inset(ScreenUtils.horizontalInset)
+        }
+        
         savedSpotScrollView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(217*ScreenUtils.heightRatio)
@@ -181,7 +194,29 @@ extension ProfileView {
     }
 
     func setNicknameLabel(_ text: String) {
-        nicknameLabel.setLabel(text: text, style: .h5)
+        nicknameLabel.setLabel(text: text, style: .h4SB)
+    }
+    
+    func resetUI() {
+        googleAdView.snp.updateConstraints {
+            $0.top.equalToSuperview().offset(423*ScreenUtils.heightRatio)
+        }
+        
+        noSavedSpotsLabel.isHidden = true
+        [savedSpotButton, savedSpotScrollView].forEach {
+            $0.isHidden = false
+        }
+    }
+    
+    func setNoSavedSpotUI() {
+        googleAdView.snp.updateConstraints {
+            $0.top.equalToSuperview().offset(234*ScreenUtils.heightRatio)
+        }
+        
+        noSavedSpotsLabel.isHidden = false
+        [savedSpotButton, savedSpotScrollView].forEach {
+            $0.isHidden = true
+        }
     }
     
 }
