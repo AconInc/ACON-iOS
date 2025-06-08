@@ -11,7 +11,7 @@ final class ACAlertView: BaseView {
     
     // MARK: - UI Properties
     
-    private let alertContainerView = GlassmorphismView(.alertGlass)
+    private let alertContainerView = UIView()
     
     private let titleLabel = UILabel()
     
@@ -104,6 +104,7 @@ final class ACAlertView: BaseView {
         self.backgroundColor = .dimDefault
         
         alertContainerView.do {
+            $0.backgroundColor = .alertGray
             $0.layer.cornerRadius = 14
             $0.clipsToBounds = true
         }
@@ -177,9 +178,6 @@ extension ACAlertView {
                                           style: .t4SB,
                                            color: isDangerButton ? .labelDanger : .labelAction)
         }
-        
-        self.alertContainerView.setNeedsUpdateConstraints()
-        self.alertContainerView.updateConstraintsIfNeeded()
     }
     
 }
