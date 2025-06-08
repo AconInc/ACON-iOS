@@ -445,7 +445,12 @@ private extension SpotListViewController {
 extension SpotListViewController: SpotListCellDelegate {
 
     func tappedFindCourseButton(spot: SpotModel) {
-        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_home_navigation?": true])
+        guard AuthManager.shared.hasToken else {
+            presentLoginModal(AmplitudeLiterals.EventName.tappedSpotCell)
+            return
+        }
+
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_home_navigation?": true]) // TODO: guard문 위로 올릴지 기획 문의중
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.do { [weak self] in
