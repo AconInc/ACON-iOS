@@ -57,7 +57,10 @@ final class GoogleAdsManager: NSObject {
         return ad
     }
     
-    func preloadNativeAd(_ adType: GoogleAdsType) {
+    
+    // MARK: - Private Methods
+    
+    private func preloadNativeAd(_ adType: GoogleAdsType) {
         guard cachedAd[adType] == nil && !loadingAds.contains(adType) else { return }
 
         self.loadNativeAd(adType) { [weak self] ad, error in
@@ -68,9 +71,6 @@ final class GoogleAdsManager: NSObject {
             }
         }
     }
-    
-    
-    // MARK: - Private Methods
     
     private func loadNativeAd(_ adType: GoogleAdsType,
                               completion: @escaping ((NativeAd?, Error?) -> Void)) {
@@ -127,14 +127,14 @@ extension GoogleAdsManager: NativeAdLoaderDelegate {
         guard let adType = findAdType(for: adLoader) else { return }
         
         loadCompletions[adType]?(nativeAd, nil)
-        cleanup(adType)
+        cleanAdType(adType)
     }
     
     func adLoader(_ adLoader: AdLoader, didFailToReceiveAdWithError error: Error) {
         guard let adType = findAdType(for: adLoader) else { return }
         
         loadCompletions[adType]?(nil, error)
-        cleanup(adType)
+        cleanAdType(adType)
     }
     
 }
@@ -148,7 +148,7 @@ private extension GoogleAdsManager {
         return adLoaders.first { $1 === adLoader }?.key
     }
     
-    func cleanup(_ adType: GoogleAdsType) {
+    func cleanAdType(_ adType: GoogleAdsType) {
         loadingAds.remove(adType)
         loadCompletions.removeValue(forKey: adType)
         adLoaders.removeValue(forKey: adType)

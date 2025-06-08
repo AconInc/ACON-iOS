@@ -102,6 +102,7 @@
 		4C6B2F342D65A15D0089BCB6 /* WithdrawalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B2F302D65A15D0089BCB6 /* WithdrawalService.swift */; };
 		4C6B2F352D65A15D0089BCB6 /* WithdrawalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B2F2E2D65A15D0089BCB6 /* WithdrawalRequest.swift */; };
 		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
+		74020C4C2DF46E75009E90AE /* SavedSpotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74020C4B2DF46E62009E90AE /* SavedSpotCollectionViewCell.swift */; };
 		74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */; };
 		74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */; };
 		740968B72DEC3CA700AFF624 /* VerifiedAreasCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740968B62DEC3C9000AFF624 /* VerifiedAreasCollectionViewCell.swift */; };
@@ -256,6 +257,9 @@
 		74DDBA8B2DC45E3B00BF9824 /* ACButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DDBA8A2DC45E3400BF9824 /* ACButtonType.swift */; };
 		74DDBA8D2DC45E4500BF9824 /* ACButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DDBA8C2DC45E4300BF9824 /* ACButton.swift */; };
 		74E38D342D69B46F009449D4 /* LocationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E38D332D69B468009449D4 /* LocationUtils.swift */; };
+		74EC5A282DF4C51E00E176A8 /* SavedSpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC5A272DF4C50E00E176A8 /* SavedSpotsViewController.swift */; };
+		74EC5A2A2DF4C72200E176A8 /* GetSavedSpotsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC5A292DF4C71B00E176A8 /* GetSavedSpotsResponse.swift */; };
+		74EC5A2C2DF4CB2300E176A8 /* SavedSpotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC5A2B2DF4CB1F00E176A8 /* SavedSpotView.swift */; };
 		74FA77842DD43709006846C9 /* SplashBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 74FA77832DD43709006846C9 /* SplashBGM.mp3 */; };
 		D61917E92D3E4410001BF0EE /* OnboardingTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917E82D3E4410001BF0EE /* OnboardingTargetType.swift */; };
 		D61917EC2D3E484A001BF0EE /* OnboardingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917EB2D3E484A001BF0EE /* OnboardingRequest.swift */; };
@@ -372,6 +376,7 @@
 		4C6B2F302D65A15D0089BCB6 /* WithdrawalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalService.swift; sourceTree = "<group>"; };
 		4C6B2F312D65A15D0089BCB6 /* WithdrawalTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalTargetType.swift; sourceTree = "<group>"; };
 		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		74020C4B2DF46E62009E90AE /* SavedSpotCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotCollectionViewCell.swift; sourceTree = "<group>"; };
 		74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultitaskDelegate.swift; sourceTree = "<group>"; };
 		74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLocationManager.swift; sourceTree = "<group>"; };
 		740968B62DEC3C9000AFF624 /* VerifiedAreasCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiedAreasCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -520,6 +525,9 @@
 		74DDBA8A2DC45E3400BF9824 /* ACButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButtonType.swift; sourceTree = "<group>"; };
 		74DDBA8C2DC45E4300BF9824 /* ACButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButton.swift; sourceTree = "<group>"; };
 		74E38D332D69B468009449D4 /* LocationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUtils.swift; sourceTree = "<group>"; };
+		74EC5A272DF4C50E00E176A8 /* SavedSpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotsViewController.swift; sourceTree = "<group>"; };
+		74EC5A292DF4C71B00E176A8 /* GetSavedSpotsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSavedSpotsResponse.swift; sourceTree = "<group>"; };
+		74EC5A2B2DF4CB1F00E176A8 /* SavedSpotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotView.swift; sourceTree = "<group>"; };
 		74FA77832DD43709006846C9 /* SplashBGM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SplashBGM.mp3; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB785B4E26FA7C11BB85A55D /* Pods-ACON-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -577,6 +585,7 @@
 		151003E82D5FBEF900409DF4 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				74EC5A292DF4C71B00E176A8 /* GetSavedSpotsResponse.swift */,
 				151003EB2D5FBF7200409DF4 /* GetProfileResponse.swift */,
 				156AA7292D6510E1005B8DCE /* GetNicknameValidityRequest.swift */,
 				156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */,
@@ -600,6 +609,7 @@
 		1533FCCF2D55EDD200F985A0 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				74EC5A2B2DF4CB1F00E176A8 /* SavedSpotView.swift */,
 				15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */,
 				15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */,
 				15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */,
@@ -899,6 +909,7 @@
 		741429612D5D3CDF00B69528 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				74020C4B2DF46E62009E90AE /* SavedSpotCollectionViewCell.swift */,
 				741429622D5D3CE900B69528 /* SettingTableViewCell.swift */,
 			);
 			path = Cell;
@@ -1653,6 +1664,7 @@
 				D6E452902D3AA47500CBED02 /* ProfileView.swift */,
 				D6E452912D3AA47500CBED02 /* ProfileViewController.swift */,
 				15A48BF92D574BA5003C2421 /* ProfileEditView.swift */,
+				74EC5A272DF4C50E00E176A8 /* SavedSpotsViewController.swift */,
 				15A48BFB2D574BB9003C2421 /* ProfileEditViewController.swift */,
 				7414295A2D5D2FBA00B69528 /* ProfileSettingViewController.swift */,
 			);
@@ -1933,6 +1945,7 @@
 				748D6FA82D2C3F93007690B4 /* BaseViewController.swift in Sources */,
 				157135B12DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift in Sources */,
 				746261712D3EA50A00A4E84F /* SpotCategoryType.swift in Sources */,
+				74020C4C2DF46E75009E90AE /* SavedSpotCollectionViewCell.swift in Sources */,
 				7414295B2D5D2FC400B69528 /* ProfileSettingViewController.swift in Sources */,
 				74A13D622DCBB97E007FFFC3 /* OnboardingViewController.swift in Sources */,
 				748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */,
@@ -1954,6 +1967,7 @@
 				748D6F872D2BD247007690B4 /* UIView+.swift in Sources */,
 				15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */,
 				1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */,
+				74EC5A282DF4C51E00E176A8 /* SavedSpotsViewController.swift in Sources */,
 				1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */,
 				74403B6F2DF1D6DD00B7B832 /* GoogleAdsErrorType.swift in Sources */,
 				15CD25782D3FE31400320006 /* PostSpotListRequest.swift in Sources */,
@@ -2060,6 +2074,7 @@
 				156AA7242D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift in Sources */,
 				74770C1B2DF35848005D4165 /* ProfileGoogleAdView.swift in Sources */,
 				74E38D342D69B46F009449D4 /* LocationUtils.swift in Sources */,
+				74EC5A2A2DF4C72200E176A8 /* GetSavedSpotsResponse.swift in Sources */,
 				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,
 				152F8D1C2DF253840064022B /* MapServiceProtocol.swift in Sources */,
 				D6978F542D37B29100523A25 /* OnboardingService.swift in Sources */,
@@ -2104,6 +2119,7 @@
 				15CD257C2D3FF13F00320006 /* PostSpotListResponse.swift in Sources */,
 				157C061F2DC5E7CE000B04AF /* SpotTagType.swift in Sources */,
 				15F45F862D66877200BD6B9C /* LoadingAnimatedButton.swift in Sources */,
+				74EC5A2C2DF4CB2300E176A8 /* SavedSpotView.swift in Sources */,
 				15C93D0E2DBD9B4E002862DF /* OldACFontStyle.swift in Sources */,
 				74BF92072D38622B00B923E3 /* SpotDetailViewModel.swift in Sources */,
 				151003EE2D5FC48B00409DF4 /* ProfileService.swift in Sources */,
