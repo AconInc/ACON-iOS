@@ -13,6 +13,8 @@ enum ProfileTargetType {
     
     case getProfile
     
+    case getSavedSpots
+    
     case getNicknameValidity(_ parameter: GetNicknameValidityRequest)
     
     case patchProfile(_ requestBody: PatchProfileRequest)
@@ -23,7 +25,7 @@ extension ProfileTargetType: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .getProfile:
+        case .getProfile, .getSavedSpots:
             return .get
         case .getNicknameValidity:
             return .get
@@ -36,6 +38,8 @@ extension ProfileTargetType: TargetType {
         switch self {
         case .getProfile:
             return utilPath + "members/me"
+        case .getSavedSpots:
+            return utilPath + "saved-spots"
         case .getNicknameValidity:
             return utilPath + "nickname/validate"
         case .patchProfile(_):
@@ -69,7 +73,7 @@ extension ProfileTargetType: TargetType {
 
     var headers: [String : String]? {
         switch self {
-        case .getProfile:
+        case .getProfile, .getSavedSpots:
             return HeaderType.tokenOnly()
         case .getNicknameValidity:
             return HeaderType.tokenOnly()

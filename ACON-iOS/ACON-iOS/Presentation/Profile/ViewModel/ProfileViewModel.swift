@@ -14,6 +14,8 @@ final class ProfileViewModel: Serviceable {
     var onLoginSuccess: ObservablePattern<Bool> = ObservablePattern(AuthManager.shared.hasToken)
 
     var onGetProfileSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
+    
+    var onGetSavedSpotsSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
 
     var onGetNicknameValiditySuccess: ObservablePattern<Bool> = ObservablePattern(nil)
 
@@ -32,13 +34,20 @@ final class ProfileViewModel: Serviceable {
             profileImage: "",
             nickname: "",
             birthDate: nil,
+            savedSpotList: [],
             verifiedAreaList: [VerifiedAreaModel(id: 1, name: "")],
             possessingAcorns: 0
     )
 
     let maxNicknameLength: Int = 14
 
+    var savedSpotList: [SavedSpotModel] = []
+    
+    // TODO: - 🍉 삭제
+    var savedSpotDummy = [SavedSpotModel(id: 1, name: "식당이름딱아홉글자", image: nil),
+                          SavedSpotModel(id: 1, name: "엽떡에허니콤보치즈추가", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 1, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 1, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 1, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 1, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 1, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg") ]
 
+    
     // MARK: - Methods
 
     func updateUserInfo(nickname: String, birthDate: String?) {
@@ -59,11 +68,8 @@ final class ProfileViewModel: Serviceable {
                     profileImage: data.image,
                     nickname: data.nickname,
                     birthDate: data.birthDate,
-                    verifiedAreaList: data.verifiedAreaList.map {
-                        return VerifiedAreaModel(id: $0.id, name: $0.name)
-                    },
-                    possessingAcorns: data.leftAcornCount
-                )
+                    // 🍉 TODO: data.로 바꾸기
+                    savedSpotList: savedSpotDummy)
                 userInfo = newUserInfo
                 onGetProfileSuccess.value = true
             case .reIssueJWT:
@@ -72,6 +78,32 @@ final class ProfileViewModel: Serviceable {
                 }
             default:
                 onGetProfileSuccess.value = false
+            }
+        }
+    }
+    
+    func getSavedSpots() {
+        ACService.shared.profileService.getSavedSpots { [weak self] response in
+            guard let self = self else { return }
+
+            switch response {
+            case .success(let data):
+                let newSavedSpotList: [SavedSpotModel] = data.savedSpotList.map {
+                    SavedSpotModel(id: $0.id,
+                                   name: $0.name,
+                                   image: $0.image)
+                }
+                savedSpotList = newSavedSpotList
+                onGetSavedSpotsSuccess.value = true
+            case .reIssueJWT:
+                self.handleReissue {
+                    self.getSavedSpots()
+                }
+            default:
+//                onGetSavedSpotsSuccess.value = false
+                // 🍉 TODO: 삭제
+                savedSpotList = savedSpotDummy
+                onGetSavedSpotsSuccess.value = true
             }
         }
     }

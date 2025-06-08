@@ -109,4 +109,9 @@ extension String {
          return self.count <= maxLength ? self : "\(self.prefix(maxLength))..."
      }
 
+    func abbreviatedStringWithException(_ maxLength: Int) -> String {
+        if self.count == maxLength { return self }
+        return self.count < maxLength-1 ? self : "\(self.prefix(maxLength-1))..."
+    }
+    
 }

@@ -101,14 +101,9 @@ class ProfileGoogleAdView: BaseView {
         }
 
         adButton.do {
-            $0.updateGlassButtonState(state: .default)
             $0.isUserInteractionEnabled = false
         }
         
-        glassmorphismView.do {
-            $0.setGradient(bottomColor: .gray900.withAlphaComponent(0),
-                           endPoint: CGPoint(x: 0.5, y: 0.5))
-        }
     }
     
     override func layoutSubviews() {
@@ -122,6 +117,7 @@ class ProfileGoogleAdView: BaseView {
                                        endPoint: CGPoint(x: 0.5, y: 0.5))
         adButton.updateGlassButtonState(state: .default)
     }
+    
 }
 
 
