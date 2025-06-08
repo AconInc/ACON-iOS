@@ -58,7 +58,6 @@ final class ProfileEditView: BaseView {
         )
 
         nicknameTextField.do {
-            $0.setPlaceholder(as: StringLiterals.Profile.nicknamePlaceholder)
             $0.textField.autocapitalizationType = .none
         }
 
