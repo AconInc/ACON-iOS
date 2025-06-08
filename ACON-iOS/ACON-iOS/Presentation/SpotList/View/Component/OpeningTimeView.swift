@@ -11,8 +11,8 @@ class OpeningTimeView: BaseView {
 
     // MARK: - Data
 
-    private var startTime: String? = nil
-    private var endTime: String? = nil
+    private let timeType: OpeningTimeType
+    private var time: String
     private let withDot: Bool
 
 
@@ -27,15 +27,9 @@ class OpeningTimeView: BaseView {
 
     // MARK: - Initializer
 
-    init(startTime: String, withDot: Bool) {
-        self.startTime = startTime
-        self.withDot = withDot
-
-        super.init(frame: .zero)
-    }
-
-    init(endTime: String, withDot: Bool) {
-        self.endTime = endTime
+    init(type: OpeningTimeType, time: String, withDot: Bool) {
+        self.timeType = type
+        self.time = time
         self.withDot = withDot
 
         super.init(frame: .zero)
@@ -87,19 +81,38 @@ class OpeningTimeView: BaseView {
     override func setStyle() {
         self.backgroundColor = .clear
 
-        if let startTime = startTime {
-            dotImageView.do {
-                $0.image = .icGraylight
-                $0.contentMode = .scaleAspectFit
-            }
-            timeLabel.setLabel(text: startTime, style: .b1SB, color: .gray200)
-            descriptionLabel.setLabel(text: StringLiterals.SpotList.businessStart, style: .b1R, color: .gray200)
+        dotImageView.do {
+            $0.image = timeType.dotImage
+            $0.contentMode = .scaleAspectFit
         }
 
-        else if let endTime = endTime {
-            dotImageView.image = .icGreenlight
-            timeLabel.setLabel(text: endTime, style: .b1SB, color: .gray200)
-            descriptionLabel.setLabel(text: StringLiterals.SpotList.businessEnd, style: .b1R, color: .gray200)
+        timeLabel.setLabel(text: time, style: .b1SB, color: .gray200)
+
+        descriptionLabel.setLabel(text: timeType.description, style: .b1R, color: .gray200)
+    }
+
+}
+
+
+// MARK: - enum
+
+extension OpeningTimeView {
+
+    enum OpeningTimeType {
+        case start, end
+
+        var dotImage: UIImage {
+            switch self {
+            case .start: return .icGraylight
+            case .end: return .icGreenlight
+            }
+        }
+
+        var description: String {
+            switch self {
+            case .start: return StringLiterals.SpotList.businessStart
+            case .end: return StringLiterals.SpotList.businessEnd
+            }
         }
     }
 

@@ -280,7 +280,7 @@ private extension SpotDetailView {
     }
 
     func setOpeningTimeView(withTags: Bool) {
-        let openingTimeView = OpeningTimeView(endTime: "22:00", withDot: true) //TODO: 명세 나오면 수정
+        let openingTimeView = OpeningTimeView(type: .end, time: "22:00", withDot: true) //TODO: 명세 나오면 수정
 
         self.addSubview(openingTimeView)
 
