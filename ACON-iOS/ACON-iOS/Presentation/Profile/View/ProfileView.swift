@@ -90,6 +90,7 @@ final class ProfileView: BaseView {
         
         savedSpotScrollView.do {
             $0.showsHorizontalScrollIndicator = false
+            $0.showsVerticalScrollIndicator = false
             $0.backgroundColor = .clear
             $0.contentInset = UIEdgeInsets(top: 0, left: ScreenUtils.horizontalInset, bottom: 0, right: 0)
         }
@@ -219,6 +220,17 @@ extension ProfileView {
          savedSpotScrollView].forEach {
             $0.isHidden = isGuest
         }
+    }
+    
+}
+
+
+// MARK: - 스크롤 막기
+
+extension ProfileView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollView.contentOffset.y = 0
     }
     
 }
