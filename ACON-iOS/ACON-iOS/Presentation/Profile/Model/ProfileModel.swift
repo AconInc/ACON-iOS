@@ -21,6 +21,18 @@ struct UserInfoModel: Equatable {
     
 }
 
+
+struct SavedSpotModel: Equatable {
+    
+    let id: Int64
+    
+    var name: String
+    
+    var image: String?
+    
+}
+
+
 struct UserInfoEditModel {
     
     var profileImage: String?
