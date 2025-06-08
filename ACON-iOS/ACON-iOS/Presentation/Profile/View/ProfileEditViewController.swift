@@ -64,6 +64,7 @@ final class ProfileEditViewController: BaseNavViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        hideKeyboard()
         setDelegate()
         addTarget()
         bindData()
