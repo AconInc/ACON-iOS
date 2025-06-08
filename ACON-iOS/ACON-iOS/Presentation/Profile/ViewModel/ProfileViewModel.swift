@@ -68,11 +68,8 @@ final class ProfileViewModel: Serviceable {
                     profileImage: data.image,
                     nickname: data.nickname,
                     birthDate: data.birthDate,
-                    verifiedAreaList: data.verifiedAreaList.map {
-                        return VerifiedAreaModel(id: $0.id, name: $0.name)
-                    },
-                    possessingAcorns: data.leftAcornCount
-                )
+                    // 🍉 TODO: data.로 바꾸기
+                    savedSpotList: savedSpotDummy)
                 userInfo = newUserInfo
                 onGetProfileSuccess.value = true
             case .reIssueJWT:

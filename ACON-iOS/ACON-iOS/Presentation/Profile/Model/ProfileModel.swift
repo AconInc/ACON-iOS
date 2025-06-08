@@ -15,12 +15,15 @@ struct UserInfoModel: Equatable {
     
     var birthDate: String?
     
-    var verifiedAreaList: [VerifiedAreaModel]
+    // 🍉 TODO: - 옵셔널 제거
+    var savedSpotList: [SavedSpotModel]?
     
-    var possessingAcorns: Int
+    // 🍉 TODO: - 삭제
+    var verifiedAreaList: [VerifiedAreaModel]?
+    
+    var possessingAcorns: Int?
     
 }
-
 
 struct SavedSpotModel: Equatable {
     
