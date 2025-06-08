@@ -115,7 +115,7 @@ extension SavedSpotView {
                 }
             }
         } else {
-            spotImageView.image = .imgBookmarkNoImageSpot
+            spotImageView.image = .imgSpotNoImageBackground
             preparingImageLabel.isHidden = false
             skeletonView.isHidden = true
         }
