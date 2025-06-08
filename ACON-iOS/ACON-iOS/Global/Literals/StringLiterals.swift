@@ -129,7 +129,7 @@ enum StringLiterals {
         
         static let done = "완료"
         
-        static let searchSpot = "가게명을 검색해주세요"
+        static let searchSpot = "장소를 입력해주세요."
         
         static let noMatchingSpots = "앗... 검색결과가 없어요"
         
