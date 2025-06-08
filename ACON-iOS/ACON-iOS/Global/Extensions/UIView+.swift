@@ -102,5 +102,28 @@ extension UIView {
     func removeGlassBorder() {
         glassBorderView?.removeFromSuperview()
     }
+    
+    
+    // MARK: - Set Gradient
+        
+    func setGradient(topColor: UIColor = .gray900.withAlphaComponent(1),
+                     bottomColor: UIColor = .gray900.withAlphaComponent(0.1),
+                     startPoint: CGPoint = CGPoint(x: 0.5, y: 0.0),
+                     endPoint: CGPoint = CGPoint(x: 0.5, y: 1.0)) {
+        layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer()
+        }
+        
+        let gradient = CAGradientLayer()
+        gradient.do {
+            $0.frame = bounds
+            $0.colors = [topColor.cgColor, bottomColor.cgColor]
+            $0.startPoint = startPoint
+            $0.endPoint = endPoint
+        }
+//        layer.insertSublayer(gradient, at: 0)
+        layer.addSublayer(gradient)
+        // TODO: - 그라 밑 글모? 글모 밑 그라? -> 디자인에게 물어보기
+        // blurEffectView.contentView.layer.insertSublayer(gradient, at: 0)
+    }
 
 }
