@@ -421,6 +421,18 @@ private extension ProfileEditViewController {
 
     // NOTE: 닉네임
     func nicknameTextFieldChange(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // NOTE: 대문자 -> 소문자로 변환
+        let regex = "^[A-Z]*$"
+        let isCapital = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: string)
+        if isCapital {
+            let lowerCased = string.lowercased()
+            if let text = textField.text,
+               let textRange = Range(range, in: text) {
+                let updatedText = text.replacingCharacters(in: textRange, with: lowerCased)
+                profileEditView.nicknameTextField.text = updatedText
+                return false
+            }
+        }
         return true
     }
 
@@ -476,7 +488,7 @@ private extension ProfileEditViewController {
     // MARK: - 닉네임
 
     func isNicknameCharValid(text: String) -> Bool {
-        let regex = "^[a-zA-Z0-9._]*$"
+        let regex = "^[a-z0-9._]*$"
         let isValid = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: text)
         return isValid
     }
