@@ -63,7 +63,8 @@ class OpeningTimeView: BaseView {
 
         if withDot {
             dotImageView.snp.makeConstraints {
-                $0.leading.centerY.equalToSuperview()
+                $0.leading.equalToSuperview().offset(-6)
+                $0.centerY.equalToSuperview()
                 $0.size.equalTo(24)
             }
             
