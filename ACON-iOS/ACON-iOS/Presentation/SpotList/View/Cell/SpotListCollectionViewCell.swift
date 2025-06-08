@@ -186,7 +186,10 @@ extension SpotListCollectionViewCell: SpotListCellConfigurable {
 
         setBgImageAndShadow(from: imageURL)
 
-        titleLabel.setLabel(text: spot.name, style: .t4SB)
+        titleLabel.do {
+            $0.setLabel(text: spot.name, style: .t4SB, numberOfLines: 1)
+            $0.lineBreakMode = .byTruncatingTail
+        }
 
         setAcornCountButton(to: spot.acornCount)
 

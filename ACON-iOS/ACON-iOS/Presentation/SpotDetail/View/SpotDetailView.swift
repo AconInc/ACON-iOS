@@ -75,6 +75,7 @@ final class SpotDetailView: BaseView {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide).offset(ScreenUtils.heightRatio*56)
             $0.leading.equalToSuperview().offset(horizontalEdges)
+            $0.width.equalTo(210 * ScreenUtils.widthRatio)
         }
 
         tagStackView.snp.makeConstraints {
@@ -168,7 +169,10 @@ final class SpotDetailView: BaseView {
 extension SpotDetailView {
 
     func bindData(_ spotDetail: SpotDetailInfoModel) {
-        titleLabel.setLabel(text: spotDetail.name, style: .t4SB)
+        titleLabel.do {
+            $0.setLabel(text: spotDetail.name, style: .t4SB, numberOfLines: 1)
+            $0.lineBreakMode = .byTruncatingTail
+        }
 
         let acornCount = spotDetail.acornCount
         let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
@@ -193,6 +197,8 @@ extension SpotDetailView {
         bookmarkButton.isSelected = false
         
         setImagePageControl(spotDetail.imageURLs.count)
+
+        setOpeningTimeView(withTags: !spotDetail.tagList.isEmpty)
     }
 
     func makeSignatureMenuSection(_ menus: [SignatureMenuModel]) {
@@ -274,6 +280,24 @@ private extension SpotDetailView {
             $0.currentPageIndicatorTintColor = .acWhite
             $0.pageIndicatorTintColor = .gray300
             $0.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+        }
+    }
+
+    func setOpeningTimeView(withTags: Bool) {
+        let openingTimeView = OpeningTimeView(type: .end, time: "22:00", withDot: true) //TODO: 명세 나오면 수정
+
+        self.addSubview(openingTimeView)
+
+        if withTags {
+            openingTimeView.snp.makeConstraints {
+                $0.top.equalTo(tagStackView.snp.bottom).offset(7)
+                $0.leading.equalToSuperview().offset(horizontalEdges)
+            }
+        } else {
+            openingTimeView.snp.makeConstraints {
+                $0.top.equalTo(titleLabel.snp.bottom).offset(7)
+                $0.leading.equalToSuperview().offset(horizontalEdges)
+            }
         }
     }
 
