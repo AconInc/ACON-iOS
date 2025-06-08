@@ -279,9 +279,9 @@ enum StringLiterals {
         
         static let cantFindWebPage = "웹페이지를 찾을 수 없습니다."
         
-        static let privacyPolicyLink = "https://bit.ly/acon개인정보처리방침"
+        static let privacyPolicyLink = "https://stripe-shoemaker-907.notion.site/1e1856d5371b8017b22bd1a0dad59228?pvs=4"
         
-        static let termsOfUseLink = "https://bit.ly/acon서비스이용약관"
+        static let termsOfUseLink = "https://stripe-shoemaker-907.notion.site/1e1856d5371b8014aaf5eec52d0442f3?pvs=4"
         
         static let spotInfoErrorReportLink = "https://walla.my/survey/ekYLYwpJv2d0Eznnijla"
         
