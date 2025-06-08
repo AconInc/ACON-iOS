@@ -42,7 +42,6 @@ final class WithdrawalTableViewCell: BaseTableViewCell {
             $0.backgroundColor = .clear
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
-            $0.addTarget(self, action: #selector(imageTapped), for: .touchUpInside)
         }
     }
     
@@ -71,12 +70,8 @@ final class WithdrawalTableViewCell: BaseTableViewCell {
         selectButton.isSelected = isSelected
     }
     
-    @objc private func imageTapped() {
-        guard let tableView = superview as? UITableView else { return }
-        guard let indexPath = tableView.indexPath(for: self) else { return }
-        
+    func selectButtonTapped() {
         selectButton.isSelected.toggle()
-        (tableView as? WithdrawalTableView)?.handleSelection(at: indexPath)
     }
     
 }

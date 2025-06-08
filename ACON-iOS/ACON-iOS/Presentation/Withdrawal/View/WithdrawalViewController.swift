@@ -101,7 +101,8 @@ final class WithdrawalViewController: BaseNavViewController {
         
         optionsTableView.snp.makeConstraints {
             $0.top.equalTo(reasonDescriptionLabel.snp.bottom).offset(40*ScreenUtils.heightRatio)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
+            $0.leading.equalToSuperview().inset(ScreenUtils.horizontalInset)
+            $0.width.equalTo(262*ScreenUtils.widthRatio)
             $0.height.equalTo(128*ScreenUtils.heightRatio)
         }
         
