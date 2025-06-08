@@ -23,7 +23,7 @@ class SpotDetailViewModel: Serviceable {
     private lazy var spotDetailDummy = SpotDetailInfoModel(
         spotID: spotID,
         imageURLs: self.spotID == 1 ? [] : imageURLs,
-        name: self.spotID == 1 ? "이미지없는 식당" : "장소상세 더미",
+        name: self.spotID == 1 ? "이미지없는 식당" : "장소상세더미장소상세더미장소상세더미장소상세더미장소상세더미장소상세더미장소상세더미",
         acornCount: 10000,
         hasMenuboardImage: true,
         signatureMenuList: [

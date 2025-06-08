@@ -117,6 +117,11 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
             $0.layer.cornerRadius = cornerRadius
         }
 
+        titleLabel.do {
+            $0.numberOfLines = 1
+            $0.lineBreakMode = .byTruncatingTail
+        }
+
         acornCountButton.do {
             var config = UIButton.Configuration.plain()
             let acorn: UIImage = .icAcornLine.resize(to: .init(width: 24, height: 24))
@@ -179,7 +184,10 @@ extension NoMatchingSpotListCollectionViewCell: SpotListCellConfigurable {
             }
         )
 
-        titleLabel.setLabel(text: spot.name, style: .t4SB)
+        titleLabel.do {
+            $0.setLabel(text: spot.name, style: .t4SB, numberOfLines: 1)
+            $0.lineBreakMode = .byTruncatingTail
+        }
 
         let acornCount: Int = spot.acornCount
         let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
