@@ -53,8 +53,8 @@ final class SavedSpotCollectionViewCell: BaseCollectionViewCell {
 
 extension SavedSpotCollectionViewCell {
     
-    func bindData(_ data: SavedSpotModel, _ indexRow: Int) {
-        savedSpotView.bindData(data, indexRow)
+    func bindData(_ data: SavedSpotModel) {
+        savedSpotView.bindData(data)
     }
     
 }

@@ -123,7 +123,7 @@ extension SavedSpotsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let selectedSpotID = viewModel.userInfo.savedSpotList?[indexPath.item].id else { return }
+        let selectedSpotID = viewModel.savedSpotList[indexPath.item].id
         let vc = SpotDetailViewController(selectedSpotID, [])
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -144,7 +144,7 @@ extension SavedSpotsViewController: UICollectionViewDataSource {
             return UICollectionViewCell() }
         
         let data = viewModel.savedSpotList[indexPath.item]
-        cell.bindData(data, indexPath.item)
+        cell.bindData(data)
 
         return cell
     }

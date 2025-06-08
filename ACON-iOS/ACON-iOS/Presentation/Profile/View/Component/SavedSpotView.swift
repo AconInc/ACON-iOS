@@ -98,7 +98,7 @@ final class SavedSpotView: BaseView {
 
 extension SavedSpotView {
     
-    func bindData(_ data: SavedSpotModel, _ indexRow: Int) {
+    func bindData(_ data: SavedSpotModel) {
         skeletonView.isHidden = false
         preparingImageLabel.isHidden = true
         

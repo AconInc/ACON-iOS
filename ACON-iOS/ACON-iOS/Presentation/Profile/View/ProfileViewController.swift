@@ -14,8 +14,6 @@ final class ProfileViewController: BaseNavViewController {
     private let profileView = ProfileView()
 
     private let viewModel = ProfileViewModel()
-
-    var onSavedSpotViewTapped: ((Int) -> Void)?
     
     
     // MARK: - Life Cycles
