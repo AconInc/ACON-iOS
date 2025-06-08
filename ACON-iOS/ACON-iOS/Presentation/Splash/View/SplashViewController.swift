@@ -23,7 +23,7 @@ class SplashViewController: BaseViewController {
         super.viewDidLoad()
         
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
             print("오디오 세션 설정 오류: \(error)")
@@ -123,6 +123,12 @@ private extension SplashViewController {
     }
     
     func playSplashBGM() {
+        let audioSession = AVAudioSession.sharedInstance()
+            
+        if audioSession.secondaryAudioShouldBeSilencedHint {
+            return
+        }
+        
         if let path = Bundle.main.path(forResource: "SplashBGM", ofType: "mp3") {
             player = try? AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
             player?.volume = 0.8
