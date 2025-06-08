@@ -75,6 +75,7 @@ final class SpotDetailView: BaseView {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide).offset(ScreenUtils.heightRatio*56)
             $0.leading.equalToSuperview().offset(horizontalEdges)
+            $0.width.equalTo(210 * ScreenUtils.widthRatio)
         }
 
         tagStackView.snp.makeConstraints {
@@ -168,7 +169,10 @@ final class SpotDetailView: BaseView {
 extension SpotDetailView {
 
     func bindData(_ spotDetail: SpotDetailInfoModel) {
-        titleLabel.setLabel(text: spotDetail.name, style: .t4SB)
+        titleLabel.do {
+            $0.setLabel(text: spotDetail.name, style: .t4SB, numberOfLines: 1)
+            $0.lineBreakMode = .byTruncatingTail
+        }
 
         let acornCount = spotDetail.acornCount
         let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
