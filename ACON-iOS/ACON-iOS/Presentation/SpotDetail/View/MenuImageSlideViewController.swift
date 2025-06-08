@@ -16,6 +16,7 @@ class MenuImageSlideViewController: BaseViewController {
     private let layout = UICollectionViewFlowLayout()
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 
+    private let xButton = UIButton()
     private let leftButton = UIButton()
     private let rightButton = UIButton()
 
@@ -60,7 +61,7 @@ class MenuImageSlideViewController: BaseViewController {
     override func setHierarchy() {
         super.setHierarchy()
 
-        view.addSubviews(collectionView, leftButton, rightButton)
+        view.addSubviews(collectionView, xButton, leftButton, rightButton)
     }
 
     override func setLayout() {
@@ -68,6 +69,12 @@ class MenuImageSlideViewController: BaseViewController {
 
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+
+        xButton.snp.makeConstraints {
+            $0.centerY.equalTo(view.safeAreaLayoutGuide.snp.top).offset(28 * ScreenUtils.heightRatio)
+            $0.leading.equalTo(20 * ScreenUtils.widthRatio)
+            $0.size.equalTo(24)
         }
 
         leftButton.snp.makeConstraints {
@@ -99,6 +106,10 @@ class MenuImageSlideViewController: BaseViewController {
             $0.isPagingEnabled = true
         }
 
+        xButton.do {
+            $0.setImage(.icXmark, for: .normal)
+        }
+
         leftButton.do {
             $0.setImage(.icLeft, for: .normal)
         }
@@ -118,6 +129,7 @@ class MenuImageSlideViewController: BaseViewController {
     }
 
     private func addTarget() {
+        xButton.addTarget(self, action: #selector(tappedXButton), for: .touchUpInside)
         leftButton.addTarget(self, action: #selector(tappedLeftButton), for: .touchUpInside)
         rightButton.addTarget(self, action: #selector(tappedRightButton), for: .touchUpInside)
     }
@@ -128,6 +140,10 @@ class MenuImageSlideViewController: BaseViewController {
 // MARK: - @objc functions
 
 private extension MenuImageSlideViewController {
+
+    @objc func tappedXButton() {
+        self.dismiss(animated: true)
+    }
 
     @objc func tappedLeftButton() {
         scrollCollectionView(by: -1)
@@ -158,10 +174,6 @@ extension MenuImageSlideViewController: UICollectionViewDataSource {
             } else {
                 self?.updateArrowButtonsVisibility()
             }
-        }
-
-        item.onBackgroundTapped = { [weak self] in
-            self?.dismiss(animated: true)
         }
 
         return item
