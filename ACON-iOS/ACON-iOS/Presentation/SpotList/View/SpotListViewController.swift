@@ -384,9 +384,16 @@ extension SpotListViewController: UIScrollViewDelegate {
             let cellHeight = SpotListItemSizeType.itemMaxHeight.value + SpotListItemSizeType.minimumLineSpacing.value
             let targetY = targetContentOffset.pointee.y
             let newTargetY = round(targetY / cellHeight) * cellHeight + SpotListItemSizeType.minimumLineSpacing.value / 2
-            
+
             // NOTE: 화면 중앙과 가장 가까운 셀을 찾아 화면 중앙으로 이동
             targetContentOffset.pointee = CGPoint(x: 0, y: newTargetY)
+        }
+
+        // NOTE: 네비게이션 바 글라스모피즘 On/Off
+        if targetContentOffset.pointee.y > 0 {
+            setGlassMorphism()
+        } else {
+            glassMorphismView.removeFromSuperview()
         }
     }
 
