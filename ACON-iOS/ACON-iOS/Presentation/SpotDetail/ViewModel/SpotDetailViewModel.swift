@@ -68,14 +68,15 @@ extension SpotDetailViewModel {
                 }
             default:
                 print("VM - Failed To getSpotDetail")
-#if DEBUG
+//#if DEBUG
                 // TODO: 삭제
                 self?.spotDetail.value = self?.spotDetailDummy
                 self?.onSuccessGetSpotDetail.value = true
                 return
-#endif
-                self?.onSuccessGetSpotDetail.value = false
-                return
+//#endif
+                // TODO: 주석 해제
+//                self?.onSuccessGetSpotDetail.value = false
+//                return
             }
         }
     }
