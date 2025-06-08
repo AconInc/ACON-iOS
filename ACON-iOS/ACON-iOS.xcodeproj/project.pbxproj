@@ -256,6 +256,7 @@
 		74DDBA8B2DC45E3B00BF9824 /* ACButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DDBA8A2DC45E3400BF9824 /* ACButtonType.swift */; };
 		74DDBA8D2DC45E4500BF9824 /* ACButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DDBA8C2DC45E4300BF9824 /* ACButton.swift */; };
 		74E38D342D69B46F009449D4 /* LocationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E38D332D69B468009449D4 /* LocationUtils.swift */; };
+		74EC5A2C2DF4CB2300E176A8 /* SavedSpotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC5A2B2DF4CB1F00E176A8 /* SavedSpotView.swift */; };
 		74FA77842DD43709006846C9 /* SplashBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 74FA77832DD43709006846C9 /* SplashBGM.mp3 */; };
 		D61917E92D3E4410001BF0EE /* OnboardingTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917E82D3E4410001BF0EE /* OnboardingTargetType.swift */; };
 		D61917EC2D3E484A001BF0EE /* OnboardingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917EB2D3E484A001BF0EE /* OnboardingRequest.swift */; };
@@ -520,6 +521,7 @@
 		74DDBA8A2DC45E3400BF9824 /* ACButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButtonType.swift; sourceTree = "<group>"; };
 		74DDBA8C2DC45E4300BF9824 /* ACButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButton.swift; sourceTree = "<group>"; };
 		74E38D332D69B468009449D4 /* LocationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUtils.swift; sourceTree = "<group>"; };
+		74EC5A2B2DF4CB1F00E176A8 /* SavedSpotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotView.swift; sourceTree = "<group>"; };
 		74FA77832DD43709006846C9 /* SplashBGM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SplashBGM.mp3; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB785B4E26FA7C11BB85A55D /* Pods-ACON-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -600,6 +602,7 @@
 		1533FCCF2D55EDD200F985A0 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				74EC5A2B2DF4CB1F00E176A8 /* SavedSpotView.swift */,
 				15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */,
 				15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */,
 				15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */,
@@ -2104,6 +2107,7 @@
 				15CD257C2D3FF13F00320006 /* PostSpotListResponse.swift in Sources */,
 				157C061F2DC5E7CE000B04AF /* SpotTagType.swift in Sources */,
 				15F45F862D66877200BD6B9C /* LoadingAnimatedButton.swift in Sources */,
+				74EC5A2C2DF4CB2300E176A8 /* SavedSpotView.swift in Sources */,
 				15C93D0E2DBD9B4E002862DF /* OldACFontStyle.swift in Sources */,
 				74BF92072D38622B00B923E3 /* SpotDetailViewModel.swift in Sources */,
 				151003EE2D5FC48B00409DF4 /* ProfileService.swift in Sources */,
