@@ -56,29 +56,31 @@ class SpotDetailViewModel: Serviceable {
 extension SpotDetailViewModel {
     
     func getSpotDetail() {
-        ACService.shared.spotDetailService.getSpotDetail(spotID: spotID) { [weak self] response in
-            switch response {
-            case .success(let data):
-                let spotDetailData = SpotDetailInfoModel(from: data, tagList: self?.tagList ?? [])
-                self?.spotDetail.value = spotDetailData
-                self?.onSuccessGetSpotDetail.value = true
-            case .reIssueJWT:
-                self?.handleReissue { [weak self] in
-                    self?.getSpotDetail()
-                }
-            default:
-                print("VM - Failed To getSpotDetail")
-//#if DEBUG
-                // TODO: 삭제
-                self?.spotDetail.value = self?.spotDetailDummy
-                self?.onSuccessGetSpotDetail.value = true
-                return
-//#endif
-                // TODO: 주석 해제
-//                self?.onSuccessGetSpotDetail.value = false
+        self.spotDetail.value = spotDetailDummy
+        self.onSuccessGetSpotDetail.value = true
+//        ACService.shared.spotDetailService.getSpotDetail(spotID: spotID) { [weak self] response in
+//            switch response {
+//            case .success(let data):
+//                let spotDetailData = SpotDetailInfoModel(from: data, tagList: self?.tagList ?? [])
+//                self?.spotDetail.value = spotDetailData
+//                self?.onSuccessGetSpotDetail.value = true
+//            case .reIssueJWT:
+//                self?.handleReissue { [weak self] in
+//                    self?.getSpotDetail()
+//                }
+//            default:
+//                print("VM - Failed To getSpotDetail")
+////#if DEBUG
+//                // TODO: 삭제
+//                self?.spotDetail.value = self?.spotDetailDummy
+//                self?.onSuccessGetSpotDetail.value = true
 //                return
-            }
-        }
+////#endif
+//                // TODO: 주석 해제
+////                self?.onSuccessGetSpotDetail.value = false
+////                return
+//            }
+//        }
     }
 
     func postGuidedSpot() {
