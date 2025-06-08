@@ -13,6 +13,8 @@ protocol ProfileServiceProtocol {
 
     func getProfile(completion: @escaping (NetworkResult<GetProfileResponse>) -> Void)
     
+    func getSavedSpots(completion: @escaping (NetworkResult<GetSavedSpotsResponse>) -> Void)
+    
     func getNicknameValidity(parameter: GetNicknameValidityRequest,
                              completion: @escaping (NetworkResult<EmptyResponse>) -> Void)
     
@@ -31,6 +33,22 @@ final class ProfileService: BaseService<ProfileTargetType>, ProfileServiceProtoc
                     statusCode: response.statusCode,
                     data: response.data,
                     type: GetProfileResponse.self
+                )
+                completion(networkResult)
+            case .failure(let errorResponse):
+                print(errorResponse)
+            }
+        }
+    }
+    
+    func getSavedSpots(completion: @escaping (NetworkResult<GetSavedSpotsResponse>) -> Void) {
+        self.provider.request(.getSavedSpots) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<GetSavedSpotsResponse> = self.judgeStatus(
+                    statusCode: response.statusCode,
+                    data: response.data,
+                    type: GetSavedSpotsResponse.self
                 )
                 completion(networkResult)
             case .failure(let errorResponse):
