@@ -49,6 +49,7 @@ final class WithdrawalViewController: BaseNavViewController {
         
         self.setBackButton()
         self.setCenterTitleLabelStyle(title: StringLiterals.Withdrawal.title)
+        self.setGlassMorphism()
         
         reasonTitleLabel.setLabel(text: StringLiterals.Withdrawal.reasonTitle,
                                   style: .h4SB)

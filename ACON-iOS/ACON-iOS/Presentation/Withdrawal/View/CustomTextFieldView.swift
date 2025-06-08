@@ -98,7 +98,8 @@ final class CustomTextFieldView: BaseView {
         }
 
         placeholderLabel.snp.makeConstraints {
-            $0.top.horizontalEdges.equalTo(textView).inset(10)
+            $0.top.equalTo(textView).inset(10)
+            $0.horizontalEdges.equalTo(textView).inset(13)
         }
         
         maxCharacterLabel.snp.makeConstraints {
@@ -158,7 +159,7 @@ extension CustomTextFieldView: UITextViewDelegate  {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-         scrollToCaret()
+        scrollToCaret()
     }
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
