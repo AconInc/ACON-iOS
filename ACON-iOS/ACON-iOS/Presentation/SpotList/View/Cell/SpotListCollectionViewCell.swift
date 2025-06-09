@@ -87,14 +87,14 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
         titleLabel.snp.makeConstraints {
             $0.top.leading.equalToSuperview().offset(edge)
-            $0.width.equalTo(210 * ScreenUtils.widthRatio)
+            $0.trailing.lessThanOrEqualTo(acornCountButton.snp.leading).offset(-8)
         }
 
         acornCountButton.snp.makeConstraints {
             $0.top.equalTo(titleLabel)
             $0.trailing.equalToSuperview().inset(edge)
         }
-        
+
         tagStackView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(8)
             $0.leading.equalTo(titleLabel)
@@ -137,6 +137,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.layer.cornerRadius = cornerRadius
         }
 
+        titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
         acornCountButton.do {
             var config = UIButton.Configuration.plain()
             let acorn: UIImage = .icAcornLine.resize(to: .init(width: 24, height: 24))
@@ -145,6 +147,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             config.titleAlignment = .leading
             config.contentInsets = .zero
             $0.configuration = config
+            $0.setContentCompressionResistancePriority(.required, for: .horizontal)
         }
 
         tagStackView.do {
@@ -222,8 +225,10 @@ extension SpotListCollectionViewCell: SpotListCellConfigurable {
         }
 
         titleLabel.do {
-            $0.setLabel(text: spot.name, style: .t4SB, numberOfLines: 1)
-            $0.lineBreakMode = .byTruncatingTail
+            $0.setLabel(text: spot.name,
+                        style: .t4SB,
+                        numberOfLines: 1,
+                        lineBreakMode: .byTruncatingTail)
         }
 
         setAcornCountButton(with: spot.acornCount)

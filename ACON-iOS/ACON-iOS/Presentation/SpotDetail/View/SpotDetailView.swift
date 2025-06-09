@@ -75,7 +75,7 @@ final class SpotDetailView: BaseView {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide).offset(ScreenUtils.heightRatio*56)
             $0.leading.equalToSuperview().offset(horizontalEdges)
-            $0.width.equalTo(242 * ScreenUtils.widthRatio)
+            $0.trailing.equalTo(acornCountButton.snp.leading).offset(-8)
         }
 
         tagStackView.snp.makeConstraints {
@@ -146,6 +146,8 @@ final class SpotDetailView: BaseView {
 
         noImageContentView.isHidden = true
 
+        titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
         tagStackView.do {
             $0.spacing = 4
         }
@@ -158,6 +160,7 @@ final class SpotDetailView: BaseView {
             config.titleAlignment = .leading
             config.contentInsets = .zero
             $0.configuration = config
+            $0.setContentCompressionResistancePriority(.required, for: .horizontal)
         }
     }
 
