@@ -212,24 +212,11 @@ extension NoMatchingSpotListCollectionViewCell: SpotListCellConfigurable {
             $0.lineBreakMode = .byTruncatingTail
         }
 
-        let acornCount: Int = spot.acornCount
-        let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
-        acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
+        setAcornCountButton(with: spot.acornCount)
 
-        if !spot.tagList.isEmpty {
-            spot.tagList.forEach { tag in
-                tagStackView.addArrangedSubview(SpotTagButton(tag))
-            }
+        setTagStackView(with: spot.tagList)
 
-            noImageContentView.snp.updateConstraints {
-                $0.top.equalToSuperview().offset(88)
-            }
-        }
-
-        let bike: String = StringLiterals.SpotList.bike
-        let findCourse: String = StringLiterals.SpotList.minuteFindCourse
-        let courseTitle: String = bike + String(spot.eta) + findCourse
-        findCourseButton.setAttributedTitle(text: courseTitle, style: .b1SB)
+        setFindCourseButton(with: spot.eta)
     }
 
     func overlayLoginLock(_ show: Bool) {
@@ -265,6 +252,30 @@ private extension NoMatchingSpotListCollectionViewCell {
                 }
             }
         )
+    }
+
+    func setAcornCountButton(with acornCount: Int) {
+        let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
+        acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
+    }
+
+    func setTagStackView(with tags: [SpotTagType]) {
+        if !tags.isEmpty {
+            tags.forEach { tag in
+                tagStackView.addArrangedSubview(SpotTagButton(tag))
+            }
+
+            noImageContentView.snp.updateConstraints {
+                $0.top.equalToSuperview().offset(88)
+            }
+        }
+    }
+
+    func setFindCourseButton(with eta: Int) {
+        let bike: String = StringLiterals.SpotList.bike
+        let findCourse: String = StringLiterals.SpotList.minuteFindCourse
+        let courseTitle: String = bike + String(eta) + findCourse
+        findCourseButton.setAttributedTitle(text: courseTitle, style: .b1SB)
     }
 
     func updateUI(with status: SpotImageStatusType) {

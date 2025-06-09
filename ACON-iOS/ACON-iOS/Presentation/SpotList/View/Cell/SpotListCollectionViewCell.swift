@@ -226,13 +226,13 @@ extension SpotListCollectionViewCell: SpotListCellConfigurable {
             $0.lineBreakMode = .byTruncatingTail
         }
 
-        setAcornCountButton(to: spot.acornCount)
+        setAcornCountButton(with: spot.acornCount)
 
         spot.tagList.forEach { tag in
             tagStackView.addArrangedSubview(SpotTagButton(tag))
         }
 
-        setFindCourseButton(to: spot.eta)
+        setFindCourseButton(with: spot.eta)
     }
 
     func overlayLoginLock(_ show: Bool) {
@@ -274,12 +274,12 @@ private extension SpotListCollectionViewCell {
         )
     }
 
-    func setAcornCountButton(to acornCount: Int) {
+    func setAcornCountButton(with acornCount: Int) {
         let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
         acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
     }
 
-    func setFindCourseButton(to eta: Int) {
+    func setFindCourseButton(with eta: Int) {
         let walk: String = StringLiterals.SpotList.walk
         let findCourse: String = StringLiterals.SpotList.minuteFindCourse
         let courseTitle: String = walk + String(eta) + findCourse
