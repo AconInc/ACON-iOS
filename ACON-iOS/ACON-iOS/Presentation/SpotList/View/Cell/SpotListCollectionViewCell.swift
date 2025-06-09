@@ -22,9 +22,10 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
     private var currentImageURL: String? // NOTE: 셀 재사용 이슈 방지 목적
 
-    private let bgImage = UIImageView()
-    private let dimImage = UIImageView()
+    private let bgImageView = UIImageView()
+    private let gradientImageView = UIImageView()
     private let bgImageShadowView = UIView()
+    private let glassBgView = GlassmorphismView(.noImageErrorGlass)
 
     private let noImageContentView = SpotNoImageContentView(.iconAndDescription)
     private let loginlockOverlayView = LoginLockOverlayView()
@@ -53,7 +54,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         super.setHierarchy()
 
         self.addSubviews(bgImageShadowView,
-                         dimImage,
+                         glassBgView,
+                         gradientImageView,
                          noImageContentView,
                          titleLabel,
                          acornCountButton,
@@ -61,7 +63,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
                          findCourseButton,
                          loginlockOverlayView)
 
-        bgImageShadowView.addSubview(bgImage)
+        bgImageShadowView.addSubview(bgImageView)
     }
 
     override func setLayout() {
@@ -69,16 +71,14 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
         let edge = ScreenUtils.widthRatio * 20
 
-        bgImageShadowView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        [bgImageShadowView, glassBgView, bgImageView].forEach {
+            $0.snp.makeConstraints {
+                $0.edges.equalToSuperview()
+            }
         }
 
-        bgImage.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-
-        dimImage.snp.makeConstraints {
-            $0.edges.equalTo(bgImage)
+        gradientImageView.snp.makeConstraints {
+            $0.edges.equalTo(bgImageView)
         }
 
         noImageContentView.snp.makeConstraints {
@@ -119,13 +119,19 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.clipsToBounds = false
         }
 
-        bgImage.do {
+        glassBgView.do {
+            $0.clipsToBounds = true
+            $0.isHidden = true
+            $0.layer.cornerRadius = cornerRadius
+        }
+
+        bgImageView.do {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
             $0.layer.cornerRadius = cornerRadius
         }
 
-        dimImage.do {
+        gradientImageView.do {
             $0.clipsToBounds = true
             $0.image = .imgGra1
             $0.layer.cornerRadius = cornerRadius
@@ -159,18 +165,44 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        findCourseButton.refreshBlurEffect()
-
         currentImageURL = nil
-        bgImage.kf.cancelDownloadTask()
-        bgImage.image = nil
+
+        bgImageView.do {
+            $0.kf.cancelDownloadTask()
+            $0.image = nil
+        }
+
+        gradientImageView.do {
+            $0.image = nil
+            $0.removeGradient()
+        }
+
+        tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
         bgImageShadowView.layer.shadowColor = UIColor.clear.cgColor
+
+        DispatchQueue.main.async { [weak self] in // NOTE: 블러 렌더링 타이밍 이슈때문에 사용
+            self?.glassBgView.refreshBlurEffect()
+            self?.findCourseButton.refreshBlurEffect()
+        }
     }
 
     private func addTarget() {
         findCourseButton.addTarget(self, action: #selector(tappedFindCourseButton), for: .touchUpInside)
     }
+
+}
+
+
+// MARK: - @objc functions
+
+private extension SpotListCollectionViewCell {
+
+    @objc func tappedFindCourseButton() {
+        guard let spot = spot else { return }
+        findCourseDelegate?.tappedFindCourseButton(spot: spot)
+    }
+
 }
 
 
@@ -181,10 +213,13 @@ extension SpotListCollectionViewCell: SpotListCellConfigurable {
     func bind(spot: SpotModel) {
         self.spot = spot
 
-        let imageURL = spot.imageURL ?? ""
-        currentImageURL = imageURL
-
-        setBgImageAndShadow(from: imageURL)
+        if let imageURL = spot.imageURL {
+            currentImageURL = imageURL
+            setBgImageAndShadow(from: imageURL, noImageDescriptionID: Int(spot.id))
+        } else {
+            updateUI(with: .noImageDynamic(id: Int(spot.id)))
+            extractAndApplyShadowColor(from: .imgSpotNoImageBackground, for: ShadowColorCache.noImageKey)
+        }
 
         titleLabel.do {
             $0.setLabel(text: spot.name, style: .t4SB, numberOfLines: 1)
@@ -193,7 +228,6 @@ extension SpotListCollectionViewCell: SpotListCellConfigurable {
 
         setAcornCountButton(to: spot.acornCount)
 
-        tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         spot.tagList.forEach { tag in
             tagStackView.addArrangedSubview(SpotTagButton(tag))
         }
@@ -216,8 +250,8 @@ extension SpotListCollectionViewCell: SpotListCellConfigurable {
 
 private extension SpotListCollectionViewCell {
 
-    func setBgImageAndShadow(from imageURL: String) {
-        bgImage.kf.setImage(
+    func setBgImageAndShadow(from imageURL: String, noImageDescriptionID: Int) {
+        bgImageView.kf.setImage(
             with: URL(string: imageURL),
             placeholder: UIImage.imgSkeletonBg,
             options: [
@@ -230,15 +264,11 @@ private extension SpotListCollectionViewCell {
                 
                 switch result {
                 case .success(let value):
-                    self.noImageContentView.isHidden = true
-                    self.dimImage.isHidden = false
-                    self.extractAndApplyShadowColor(from: value.image, for: imageURL)
+                    updateUI(with: .loaded)
+                    extractAndApplyShadowColor(from: value.image, for: imageURL)
 
                 case .failure:
-                    self.bgImage.image = .imgSpotNoImageBackground
-                    self.noImageContentView.isHidden = false
-                    self.dimImage.isHidden = true
-                    self.extractAndApplyShadowColor(from: .imgSpotNoImageBackground, for: ShadowColorCache.noImageKey)
+                    updateUI(with: .loadFailed)
                 }
             }
         )
@@ -292,16 +322,49 @@ private extension SpotListCollectionViewCell {
         return currentImageURL == key || key == ShadowColorCache.noImageKey
     }
 
-}
+    func updateUI(with status: SpotImageStatusType) {
+        switch status {
+        case .loaded:
+            [glassBgView, noImageContentView].forEach { $0.isHidden = true }
 
+            gradientImageView.do {
+                $0.image = .imgGra1
+                $0.isHidden = false
+                $0.removeGradient()
+            }
 
-// MARK: - @objc functions
+        case .loadFailed:
+            glassBgView.isHidden = false
 
-private extension SpotListCollectionViewCell {
+            gradientImageView.do {
+                $0.image = nil
+                $0.isHidden = false
+                $0.setTripleGradient()
+            }
 
-    @objc func tappedFindCourseButton() {
-        guard let spot = spot else { return }
-        findCourseDelegate?.tappedFindCourseButton(spot: spot)
+            noImageContentView.do {
+                $0.isHidden = false
+                $0.setDescription(status)
+            }
+
+        case .noImageDynamic:
+            bgImageView.image = .imgSpotNoImageBackground
+            glassBgView.isHidden = true
+
+            gradientImageView.do {
+                $0.image = nil
+                $0.isHidden = true
+                $0.removeGradient()
+            }
+            
+            noImageContentView.do {
+                $0.isHidden = false
+                $0.setDescription(status)
+            }
+
+        case .noImageStatic: // NOTE: not for this view
+            return
+        }
     }
 
 }

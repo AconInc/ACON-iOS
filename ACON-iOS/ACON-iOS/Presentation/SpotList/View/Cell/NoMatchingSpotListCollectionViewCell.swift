@@ -18,8 +18,9 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - UI Properties
 
-    private let bgImage = UIImageView()
-    private let dimImage = UIImageView()
+    private let glassBgView = GlassmorphismView(.noImageErrorGlass)
+    private let bgImageView = UIImageView()
+    private let gradientImageView = UIImageView()
 
     private let noImageContentView = SpotNoImageContentView(.descriptionOnly)
     private let loginLockOverlayView = LoginLockOverlayView()
@@ -48,8 +49,9 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
     override func setHierarchy() {
         super.setHierarchy()
 
-        self.addSubviews(bgImage,
-                         dimImage,
+        self.addSubviews(glassBgView,
+                         bgImageView,
+                         gradientImageView,
                          noImageContentView,
                          titleLabel,
                          acornCountButton,
@@ -63,12 +65,16 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
 
         let edge = ScreenUtils.horizontalInset
 
-        bgImage.snp.makeConstraints {
+        glassBgView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
 
-        dimImage.snp.makeConstraints {
-            $0.edges.equalTo(bgImage)
+        bgImageView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
+        gradientImageView.snp.makeConstraints {
+            $0.edges.equalTo(bgImageView)
         }
 
         noImageContentView.snp.makeConstraints {
@@ -105,13 +111,19 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
     override func setStyle() {
         backgroundColor = .clear
 
-        bgImage.do {
+        bgImageView.do {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
             $0.layer.cornerRadius = cornerRadius
         }
 
-        dimImage.do {
+        glassBgView.do {
+            $0.isHidden = true
+            $0.clipsToBounds = true
+            $0.layer.cornerRadius = cornerRadius
+        }
+
+        gradientImageView.do {
             $0.clipsToBounds = true
             $0.image = .imgGra1
             $0.layer.cornerRadius = cornerRadius
@@ -149,12 +161,34 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        
-        findCourseButton.refreshBlurEffect()
+
+        gradientImageView.do {
+            $0.image = nil
+            $0.removeGradient()
+        }
+
+        tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
+        DispatchQueue.main.async { [weak self] in // NOTE: 블러 렌더링 타이밍 이슈때문에 사용
+            self?.glassBgView.refreshBlurEffect()
+            self?.findCourseButton.refreshBlurEffect()
+        }
     }
-    
+
     private func addTarget() {
         findCourseButton.addTarget(self, action: #selector(tappedFindCourseButton), for: .touchUpInside)
+    }
+
+}
+
+
+// MARK: - @objc functions
+
+private extension NoMatchingSpotListCollectionViewCell {
+
+    @objc func tappedFindCourseButton() {
+        guard let spot = spot else { return }
+        findCourseDelegate?.tappedFindCourseButton(spot: spot)
     }
 
 }
@@ -167,22 +201,11 @@ extension NoMatchingSpotListCollectionViewCell: SpotListCellConfigurable {
     func bind(spot: SpotModel) {
         self.spot = spot
 
-        bgImage.kf.setImage(
-            with: URL(string: spot.imageURL ?? ""),
-            placeholder: UIImage.imgSkeletonBg,
-            options: [.transition(.none), .cacheOriginalImage],
-            completionHandler: { result in
-                switch result {
-                case .success:
-                    self.noImageContentView.isHidden = true
-                    self.dimImage.isHidden = false
-                case .failure:
-                    self.bgImage.image = .imgSpotNoImageBackground
-                    self.noImageContentView.isHidden = false
-                    self.dimImage.isHidden = true
-                }
-            }
-        )
+        if let imageURL = spot.imageURL {
+            setBgImage(from: imageURL)
+        } else {
+            updateUI(with: .noImageStatic)
+        }
 
         titleLabel.do {
             $0.setLabel(text: spot.name, style: .t4SB, numberOfLines: 1)
@@ -194,11 +217,10 @@ extension NoMatchingSpotListCollectionViewCell: SpotListCellConfigurable {
         acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
 
         if !spot.tagList.isEmpty {
-            tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
             spot.tagList.forEach { tag in
                 tagStackView.addArrangedSubview(SpotTagButton(tag))
             }
-            
+
             noImageContentView.snp.updateConstraints {
                 $0.top.equalToSuperview().offset(88)
             }
@@ -221,13 +243,74 @@ extension NoMatchingSpotListCollectionViewCell: SpotListCellConfigurable {
 }
 
 
-// MARK: - @objc functions
+// MARK: - Helper
 
 private extension NoMatchingSpotListCollectionViewCell {
 
-    @objc func tappedFindCourseButton() {
-        guard let spot = spot else { return }
-        findCourseDelegate?.tappedFindCourseButton(spot: spot)
+    func setBgImage(from imageURL: String) {
+        bgImageView.kf.setImage(
+            with: URL(string: imageURL),
+            placeholder: UIImage.imgSkeletonBg,
+            options: [
+                .transition(.none),
+                .cacheOriginalImage,
+                .scaleFactor(UIScreen.main.scale)
+            ],
+            completionHandler: { [weak self] result in
+                guard let self = self else { return }
+
+                switch result {
+                case .success: updateUI(with: .loaded)
+                case .failure: updateUI(with: .loadFailed)
+                }
+            }
+        )
+    }
+
+    func updateUI(with status: SpotImageStatusType) {
+        switch status {
+        case .loaded:
+            [glassBgView, noImageContentView].forEach { $0.isHidden = true }
+
+            gradientImageView.do {
+                $0.image = .imgGra1
+                $0.isHidden = false
+                $0.removeGradient()
+            }
+
+        case .loadFailed:
+            glassBgView.isHidden = false
+
+            gradientImageView.do {
+                $0.image = nil
+                $0.isHidden = false
+                $0.setTripleGradient()
+            }
+
+            noImageContentView.do {
+                $0.isHidden = false
+                $0.setDescription(status)
+            }
+
+        case .noImageStatic:
+            glassBgView.isHidden = true
+
+            bgImageView.image = .imgSpotNoImageBackground
+
+            gradientImageView.do {
+                $0.image = nil
+                $0.isHidden = true
+                $0.removeGradient()
+            }
+
+            noImageContentView.do {
+                $0.isHidden = false
+                $0.setDescription(status)
+            }
+
+        case .noImageDynamic: // NOTE: not for this view
+            return
+        }
     }
 
 }
