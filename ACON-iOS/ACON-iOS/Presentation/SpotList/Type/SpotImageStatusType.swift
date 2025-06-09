@@ -23,7 +23,7 @@ enum SpotImageStatusType {
                     StringLiterals.SpotList.mysteryPlaceNoImage,
                     StringLiterals.SpotList.exploreToDiscover][id % 3]
         case .loadFailed:
-            return StringLiterals.SpotList.imageLoadFailed
+            return StringLiterals.SpotList.imageLoadingFailed
         case .loaded:
             return ""
         }
