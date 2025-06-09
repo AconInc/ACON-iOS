@@ -17,8 +17,12 @@ extension UILabel {
         self.attributedText = text?.ACStyle(style, color)
     }
 
-    func setText(_ style: ACFontType, _ color: UIColor = .acWhite) {
-        self.attributedText = text?.attributedString(style, color)
+    func setText(
+        _ style: ACFontType,
+        _ color: UIColor = .acWhite,
+        _ lineBreakMode: NSLineBreakMode? = nil
+    ) {
+        self.attributedText = text?.attributedString(style, color, lineBreakMode)
     }
 
 
@@ -44,10 +48,11 @@ extension UILabel {
         style: ACFontType,
         color: UIColor = .acWhite,
         alignment: NSTextAlignment = .left,
-        numberOfLines: Int = 0
+        numberOfLines: Int = 0,
+        lineBreakMode: NSLineBreakMode? = nil
     ) {
         self.text = text
-        setText(style, color)
+        setText(style, color, lineBreakMode)
         self.textAlignment = alignment
         self.numberOfLines = numberOfLines
     }
