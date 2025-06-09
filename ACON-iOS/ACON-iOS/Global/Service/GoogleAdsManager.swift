@@ -101,17 +101,22 @@ final class GoogleAdsManager: NSObject {
                     $0.shouldRequestMultipleImages = false
                 }
                 
-                let adLoader = AdLoader(
-                    adUnitID: adUnitID,
-                    rootViewController: rootViewController,
-                    adTypes: [.native],
-                    options: [options]
-                ).then {
-                    $0.delegate = self
+                DispatchQueue.main.async {
+                    let adLoader = AdLoader(
+                        adUnitID: adUnitID,
+                        rootViewController: rootViewController,
+                        adTypes: [.native],
+                        options: [options]
+                    )
+                    
+                    adLoader.delegate = self
+
+                    self.adLoaders[adType] = adLoader
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        adLoader.load(request)
+                    }
                 }
-                
-                self.adLoaders[adType] = adLoader
-                adLoader.load(request)
             }
         }
     }
@@ -149,6 +154,9 @@ private extension GoogleAdsManager {
     }
     
     func cleanAdType(_ adType: GoogleAdsType) {
+        if let adLoader = self.adLoaders[adType] {
+            adLoader.delegate = nil
+        }
         loadingAds.remove(adType)
         loadCompletions.removeValue(forKey: adType)
         adLoaders.removeValue(forKey: adType)
@@ -192,7 +200,8 @@ extension GoogleAdsManager {
                 if isConnected && !previousState && self.needsAdReloadOnNetworkRecovery {
                     print("🥐 periodicNetworkCheck - 네트워크 복구 감지")
                     
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
                         self.needsAdReloadOnNetworkRecovery = false
                         
                         self.resetAdState()
