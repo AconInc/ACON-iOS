@@ -190,6 +190,7 @@ enum StringLiterals {
         
         static let preparingImage = "장소 사진을 준비하고 있어요"
         
+        static let imageLoadFailed = "이미지로딩에 실패했어요"
         
         // NOTE: no matching spots
         

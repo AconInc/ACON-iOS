@@ -191,6 +191,7 @@ extension SpotDetailView {
 
         if spotDetail.imageURLs.count == 0 {
             [noImageBgImageView, noImageContentView].forEach { $0.isHidden = false }
+            noImageContentView.setDescription(.noImageDynamic(id: Int(spotDetail.spotID)))
         }
 
         // TODO: API 명세 나오면 실제 데이터로 바꾸기
