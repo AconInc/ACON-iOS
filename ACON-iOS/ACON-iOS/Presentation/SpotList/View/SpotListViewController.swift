@@ -21,7 +21,7 @@ class SpotListViewController: BaseNavViewController {
 
     private var isViewInitialRender = true
 
-
+    private var lastScrollOffset: CGFloat = 0
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
@@ -279,11 +279,11 @@ extension SpotListViewController: UICollectionViewDataSource {
             if indexPath.item % 5 == 0 && indexPath.item > 0 {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpotListGoogleAdCollectionViewCell.cellIdentifier, for: indexPath) as? SpotListGoogleAdCollectionViewCell else {
                     return UICollectionViewCell() }
-                if let nativeAd = GoogleAdsManager.shared.getNativeAd(.imageOnly) {
-                    cell.configure(with: nativeAd)
-                } else {
-                    cell.showSkeleton()
-                }
+//                if let nativeAd = GoogleAdsManager.shared.getNativeAd(.imageOnly) {
+//                    cell.configure(with: nativeAd)
+//                } else {
+//                    cell.showSkeleton()
+//                }
                 return cell
             } else {
                 return dequeueAndConfigureCell(
@@ -387,6 +387,10 @@ extension SpotListViewController: UIScrollViewDelegate {
 
             // NOTE: 화면 중앙과 가장 가까운 셀을 찾아 화면 중앙으로 이동
             targetContentOffset.pointee = CGPoint(x: 0, y: newTargetY)
+            
+            DispatchQueue.main.async {
+                self.handleCenterCellChange()
+            }
         }
 
         // NOTE: 네비게이션 바 글라스모피즘 On/Off
@@ -396,7 +400,10 @@ extension SpotListViewController: UIScrollViewDelegate {
             glassMorphismView.removeFromSuperview()
         }
     }
-
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        handleCenterCellChange()
+    }
 }
 
 
@@ -472,4 +479,40 @@ extension SpotListViewController: SpotListCellDelegate {
         present(alertController, animated: true)
     }
 
+}
+
+
+// MARK: - 하단 경고 해결 시도
+//<Google> <Google:HTML> Not all asset views lie inside the native ad view. This indicates an integration problem. Such implementations will not be supported in the future. Please make sure that all native ad assets are rendered inside the native ad view.
+// 지금까지 해본 것: 컬렉션뷰에서 광고 셀이 중앙에 왔을 때만 광고 셀 레이아웃 로드 (광고 뷰와 셀 분리를 통해 처음 register될 때에는 광고 레이아웃 X) / 셀 뷰에 문제 안 뜨는 프로필 광고 뷰 넣고 돌려보기 / 모든 에셋 레이아웃 정수로 맞추기 / 마이너스 inset 주기 (NativeAdView.snp.{$0.edges.equalToSuperview.inset(-5)})
+
+extension SpotListViewController {
+    
+    private func getCenterCellIndexPath() -> IndexPath? {
+        let collectionView = spotListView.collectionView
+        
+        // NOTE: 컬렉션뷰의 중앙 지점 계산
+        let centerPoint = CGPoint(
+            x: collectionView.frame.width / 2,
+            y: collectionView.contentOffset.y + collectionView.frame.height / 2
+        )
+        
+        return collectionView.indexPathForItem(at: centerPoint)
+    }
+
+    private func handleCenterCellChange() {
+        guard let centerIndexPath = getCenterCellIndexPath() else { return }
+        print("💗 \(centerIndexPath)")
+        let centerIndex = centerIndexPath.item
+        
+        if centerIndex == 5 || centerIndex == 10 {
+            if let adCell = spotListView.collectionView.cellForItem(at: centerIndexPath) as? SpotListGoogleAdCollectionViewCell {
+                print("💗 \(centerIndex)번째 광고 셀이 중앙에 위치 - 활성화")
+                if let nativeAd = GoogleAdsManager.shared.getNativeAd(.both) {
+                    adCell.activate(with: nativeAd)
+                }
+            }
+        }
+    }
+    
 }
