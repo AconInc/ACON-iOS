@@ -128,6 +128,7 @@
 		741E68A22D3D5FA200DF99EF /* ACService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E68A12D3D5F9700DF99EF /* ACService.swift */; };
 		741E68AC2D3D6DA800DF99EF /* HeaderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E68AB2D3D6DA400DF99EF /* HeaderType.swift */; };
 		74205D2F2D40351700D11557 /* SocialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74205D2E2D40351400D11557 /* SocialType.swift */; };
+		742954382DF7F84E0067AC33 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742954372DF7F8490067AC33 /* HapticManager.swift */; };
 		743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743069882D3D2F540033178C /* NetworkResult.swift */; };
 		7436352C2DEE2C70009B0035 /* OnboardingFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7436352B2DEE2C6A009B0035 /* OnboardingFlowType.swift */; };
 		743900912DC50926002F91B1 /* UIVisualEffectView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900902DC50918002F91B1 /* UIVisualEffectView+.swift */; };
@@ -403,6 +404,7 @@
 		741E68A12D3D5F9700DF99EF /* ACService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACService.swift; sourceTree = "<group>"; };
 		741E68AB2D3D6DA400DF99EF /* HeaderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderType.swift; sourceTree = "<group>"; };
 		74205D2E2D40351400D11557 /* SocialType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialType.swift; sourceTree = "<group>"; };
+		742954372DF7F8490067AC33 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		743069882D3D2F540033178C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		7436352B2DEE2C6A009B0035 /* OnboardingFlowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowType.swift; sourceTree = "<group>"; };
 		743900902DC50918002F91B1 /* UIVisualEffectView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVisualEffectView+.swift"; sourceTree = "<group>"; };
@@ -1089,6 +1091,7 @@
 		7462D0232D4262EA00580464 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				742954372DF7F8490067AC33 /* HapticManager.swift */,
 				74C193492DEF87E1005FB3C7 /* GoogleAdsManager.swift */,
 				749234992D687B0D0025F700 /* AmplitudeManager.swift */,
 				741429662D5D550400B69528 /* AppVersionManager.swift */,
@@ -2076,6 +2079,7 @@
 				74EC5A2A2DF4C72200E176A8 /* GetSavedSpotsResponse.swift in Sources */,
 				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,
 				152F8D1C2DF253840064022B /* MapServiceProtocol.swift in Sources */,
+				742954382DF7F84E0067AC33 /* HapticManager.swift in Sources */,
 				D6978F542D37B29100523A25 /* OnboardingService.swift in Sources */,
 				74D31C7A2D5841EA00B4B2B4 /* PhotoCollectionViewController.swift in Sources */,
 				746261632D3EA1D500A4E84F /* GetSearchSuggestionResponse.swift in Sources */,
