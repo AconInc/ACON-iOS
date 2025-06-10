@@ -11,12 +11,7 @@ class SpotNoImageContentView: BaseView {
 
     // MARK: - Properties
 
-    private let contentType: ContentType
-
-    private let descriptions: Set<String> = [StringLiterals.SpotList.noImageButAconGuarantees,
-                                  StringLiterals.SpotList.mysteryPlaceNoImage,
-                                  StringLiterals.SpotList.exploreToDiscover]
-    private let oneLineDescription: String = StringLiterals.SpotList.preparingImage
+    private let contentStyle: ContentStyleType
 
     private let iconImageView = UIImageView()
     private let descriptionLabel = UILabel()
@@ -24,8 +19,8 @@ class SpotNoImageContentView: BaseView {
 
     // MARK: - init
 
-    init(_ contentType: ContentType) {
-        self.contentType = contentType
+    init(_ contentStyle: ContentStyleType) {
+        self.contentStyle = contentStyle
 
         super.init(frame: .zero)
     }
@@ -46,7 +41,7 @@ class SpotNoImageContentView: BaseView {
     override func setLayout() {
         super.setLayout()
 
-        switch contentType {
+        switch contentStyle {
         case .descriptionOnly:
             descriptionLabel.snp.makeConstraints {
                 $0.edges.equalToSuperview()
@@ -69,21 +64,19 @@ class SpotNoImageContentView: BaseView {
     override func setStyle() {
         self.backgroundColor = .clear
 
-        iconImageView.do {
-            $0.image = .icAcornGlass
-            $0.contentMode = .scaleAspectFit
+        if contentStyle == .iconAndDescription {
+            iconImageView.do {
+                $0.image = .icAcornGlass
+                $0.contentMode = .scaleAspectFit
+            }
         }
+    }
 
-        switch contentType {
-        case .descriptionOnly:
-            descriptionLabel.do {
-                $0.setLabel(text: oneLineDescription, style: .b1SB, color: .gray100)
-            }
-        case .iconAndDescription:
-            descriptionLabel.do {
-                $0.setLabel(text: descriptions.randomElement() ?? "", style: .b1SB, color: .gray50)
-            }
-        }
+
+    // MARK: - Internal Method
+    
+    func setDescription(_ spotImageStatusType: SpotImageStatusType) {
+        descriptionLabel.setLabel(text: spotImageStatusType.description, style: .b1SB, color: .gray50)
     }
 
 }
@@ -93,11 +86,9 @@ class SpotNoImageContentView: BaseView {
 
 extension SpotNoImageContentView {
 
-    enum ContentType {
-
+    enum ContentStyleType {
         case descriptionOnly
         case iconAndDescription
-
     }
 
 }

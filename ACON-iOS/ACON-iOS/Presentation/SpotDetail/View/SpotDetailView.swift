@@ -14,7 +14,6 @@ final class SpotDetailView: BaseView {
     private let layout = UICollectionViewFlowLayout()
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 
-    private let dimImageView = UIImageView()
     private let noImageBgImageView = UIImageView()
     private let noImageContentView = SpotNoImageContentView(.iconAndDescription)
 
@@ -39,7 +38,6 @@ final class SpotDetailView: BaseView {
         super.setHierarchy()
 
         self.addSubviews(collectionView,
-                         dimImageView,
                          noImageBgImageView,
                          noImageContentView,
                          titleLabel,
@@ -59,10 +57,6 @@ final class SpotDetailView: BaseView {
             $0.edges.equalToSuperview()
         }
 
-        dimImageView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-
         noImageBgImageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -75,7 +69,7 @@ final class SpotDetailView: BaseView {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide).offset(ScreenUtils.heightRatio*56)
             $0.leading.equalToSuperview().offset(horizontalEdges)
-            $0.width.equalTo(242 * ScreenUtils.widthRatio)
+            $0.trailing.equalTo(acornCountButton.snp.leading).offset(-8)
         }
 
         tagStackView.snp.makeConstraints {
@@ -131,12 +125,6 @@ final class SpotDetailView: BaseView {
             $0.isPagingEnabled = true
         }
 
-        dimImageView.do {
-            $0.clipsToBounds = true
-            $0.contentMode = .scaleToFill
-            $0.image = .imgGra2
-        }
-
         noImageBgImageView.do {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
@@ -145,6 +133,8 @@ final class SpotDetailView: BaseView {
         }
 
         noImageContentView.isHidden = true
+
+        titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
         tagStackView.do {
             $0.spacing = 4
@@ -158,6 +148,7 @@ final class SpotDetailView: BaseView {
             config.titleAlignment = .leading
             config.contentInsets = .zero
             $0.configuration = config
+            $0.setContentCompressionResistancePriority(.required, for: .horizontal)
         }
     }
 
@@ -174,23 +165,19 @@ extension SpotDetailView {
             $0.lineBreakMode = .byTruncatingTail
         }
 
-        let acornCount = spotDetail.acornCount
-        let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
-        acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
+        setAcornCountButton(with: spotDetail.acornCount)
 
         tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         spotDetail.tagList.forEach { tag in
             tagStackView.addArrangedSubview(SpotTagButton(tag))
         }
 
-        // TODO: API 나오면 실제 데이터로 바꾸기
-        let walk: String = StringLiterals.SpotList.walk
-        let findCourse: String = StringLiterals.SpotList.minuteFindCourse
-        let courseTitle: String = walk + "9" + findCourse
-        findCourseButton.setAttributedTitle(text: courseTitle, style: .t4SB)
+        // TODO: 바인딩 수정 - 이전 뷰에서 넘겨받기
+        findCourseButton.setAttributedTitle(text: "도보 9분 길찾기", style: .t4SB)
 
         if spotDetail.imageURLs.count == 0 {
             [noImageBgImageView, noImageContentView].forEach { $0.isHidden = false }
+            noImageContentView.setDescription(.noImageDynamic(id: Int(spotDetail.spotID)))
         }
 
         // TODO: API 명세 나오면 실제 데이터로 바꾸기
@@ -299,6 +286,11 @@ private extension SpotDetailView {
                 $0.leading.equalToSuperview().offset(horizontalEdges)
             }
         }
+    }
+
+    func setAcornCountButton(with acornCount: Int) {
+        let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
+        acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
     }
 
 }

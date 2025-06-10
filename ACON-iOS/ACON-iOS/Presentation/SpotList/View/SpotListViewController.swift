@@ -26,7 +26,7 @@ class SpotListViewController: BaseNavViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         bindViewModel()
         bindObservable()
         setCollectionView()
@@ -96,6 +96,12 @@ class SpotListViewController: BaseNavViewController {
             action: #selector(tappedFilterButton),
             for: .touchUpInside
         )
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        spotToggleButton.refreshBlurEffect()
     }
 
 }

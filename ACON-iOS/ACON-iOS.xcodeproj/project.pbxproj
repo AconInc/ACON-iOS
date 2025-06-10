@@ -33,7 +33,6 @@
 		152F8D202DF253FE0064022B /* AppleMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D1F2DF253FE0064022B /* AppleMapService.swift */; };
 		152F8D242DF268FA0064022B /* SpotListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D232DF268FA0064022B /* SpotListCellDelegate.swift */; };
 		1530CC792DDFC0D100EB4AEC /* SpotNoImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */; };
-		1530CC7B2DDFD36900EB4AEC /* TempSpotListErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530CC7A2DDFD36900EB4AEC /* TempSpotListErrorView.swift */; };
 		1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EA2D337F4100E96616 /* SpotListView.swift */; };
 		1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */; };
 		1547A6F22D33AD4500E96616 /* SpotListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6F12D33AD4500E96616 /* SpotListModel.swift */; };
@@ -74,6 +73,7 @@
 		15A48BFE2D57546A003C2421 /* ProfileImageEditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */; };
 		15AA6D172D68B4EF008021C6 /* SpotListErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA6D162D68B4EF008021C6 /* SpotListErrorType.swift */; };
 		15AA6D1A2D68C4AD008021C6 /* ReviewVerificationErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA6D192D68C4AD008021C6 /* ReviewVerificationErrorType.swift */; };
+		15ABCBFC2DF775E8000269F7 /* SpotImageStatusType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ABCBFB2DF775E8000269F7 /* SpotImageStatusType.swift */; };
 		15BFF8B92D665BAD00909C4F /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15BFF8B52D665A5B00909C4F /* Debug.xcconfig */; };
 		15BFF8BA2D665BAD00909C4F /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15BFF8B62D665A5B00909C4F /* Release.xcconfig */; };
 		15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C0ED512D429F7400C9ED83 /* SkeletonView.swift */; };
@@ -308,7 +308,6 @@
 		152F8D1F2DF253FE0064022B /* AppleMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapService.swift; sourceTree = "<group>"; };
 		152F8D232DF268FA0064022B /* SpotListCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCellDelegate.swift; sourceTree = "<group>"; };
 		1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotNoImageContentView.swift; sourceTree = "<group>"; };
-		1530CC7A2DDFD36900EB4AEC /* TempSpotListErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempSpotListErrorView.swift; sourceTree = "<group>"; };
 		1547A6EA2D337F4100E96616 /* SpotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListView.swift; sourceTree = "<group>"; };
 		1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewCell.swift; sourceTree = "<group>"; };
 		1547A6F12D33AD4500E96616 /* SpotListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListModel.swift; sourceTree = "<group>"; };
@@ -349,6 +348,7 @@
 		15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageEditButton.swift; sourceTree = "<group>"; };
 		15AA6D162D68B4EF008021C6 /* SpotListErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListErrorType.swift; sourceTree = "<group>"; };
 		15AA6D192D68C4AD008021C6 /* ReviewVerificationErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewVerificationErrorType.swift; sourceTree = "<group>"; };
+		15ABCBFB2DF775E8000269F7 /* SpotImageStatusType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotImageStatusType.swift; sourceTree = "<group>"; };
 		15BFF8B52D665A5B00909C4F /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		15BFF8B62D665A5B00909C4F /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		15C0ED512D429F7400C9ED83 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
@@ -672,6 +672,7 @@
 			isa = PBXGroup;
 			children = (
 				1549976C2DEC51C80040242F /* SpotType.swift */,
+				15ABCBFB2DF775E8000269F7 /* SpotImageStatusType.swift */,
 				15A3F6A52D36C49F00577E16 /* SpotListItemSizeType.swift */,
 				15A246132DE79D7E00469272 /* NoMatchingSpotType.swift */,
 				156AE6782DE0F1D300AE800D /* NoMatchingSpotListItemSizeType.swift */,
@@ -806,7 +807,6 @@
 				157C06202DC5EBB4000B04AF /* SpotTagButton.swift */,
 				1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */,
 				15F45F832D6664C900BD6B9C /* LoginLockOverlayView.swift */,
-				1530CC7A2DDFD36900EB4AEC /* TempSpotListErrorView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1903,7 +1903,6 @@
 				151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */,
 				1549976D2DEC51C80040242F /* SpotType.swift in Sources */,
 				151AB6C92DD3E64600D01DE8 /* MenuImageSlideViewController.swift in Sources */,
-				1530CC7B2DDFD36900EB4AEC /* TempSpotListErrorView.swift in Sources */,
 				746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */,
 				157C0BE82DC897EE000B04AF /* SpotToggleButtonView.swift in Sources */,
 				746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */,
@@ -2075,6 +2074,7 @@
 				74E38D342D69B46F009449D4 /* LocationUtils.swift in Sources */,
 				74EC5A2A2DF4C72200E176A8 /* GetSavedSpotsResponse.swift in Sources */,
 				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,
+				15ABCBFC2DF775E8000269F7 /* SpotImageStatusType.swift in Sources */,
 				152F8D1C2DF253840064022B /* MapServiceProtocol.swift in Sources */,
 				D6978F542D37B29100523A25 /* OnboardingService.swift in Sources */,
 				74D31C7A2D5841EA00B4B2B4 /* PhotoCollectionViewController.swift in Sources */,
