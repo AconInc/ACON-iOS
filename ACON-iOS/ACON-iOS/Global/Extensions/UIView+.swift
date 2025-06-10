@@ -127,7 +127,7 @@ extension UIView {
     }
 
     func setTripleGradient(topColor: UIColor = .acBlack.withAlphaComponent(0.6),
-                           middleColor: UIColor = .gray200.withAlphaComponent(0.5),
+                           middleColor: UIColor = .gray300.withAlphaComponent(0.5),
                            bottomColor: UIColor = .acBlack.withAlphaComponent(0.6),
                            locations: [NSNumber]? = [0.0, 0.5, 1.0],
                            startPoint: CGPoint = CGPoint(x: 0.5, y: 0.0),
