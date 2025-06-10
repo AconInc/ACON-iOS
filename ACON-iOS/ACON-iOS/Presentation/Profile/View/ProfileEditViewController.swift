@@ -35,9 +35,9 @@ final class ProfileEditViewController: BaseNavViewController {
     }
 
     private var profileImage: UIImage = .imgProfileBasic
-
-    private var hasValueChanged: Bool = false
-    private var isInitialSetting: Bool = true
+    
+    private var didFinishInitialSetup: Bool = false
+    private var hasInitialValueChanged: Bool = false
     private var isDefaultImage: Bool? = nil
 
 
@@ -136,7 +136,8 @@ extension ProfileEditViewController {
         profileImage = image
         isDefaultImage = isDefault
         profileEditView.setProfileImage(profileImage)
-        hasValueChanged = true
+        hasInitialValueChanged = true
+        checkSaveAvailability()
     }
 
 }
@@ -157,7 +158,7 @@ private extension ProfileEditViewController {
         }
 
         DispatchQueue.main.async {
-            self.isInitialSetting = false
+            self.didFinishInitialSetup = true
         }
     }
 
@@ -259,9 +260,9 @@ private extension ProfileEditViewController {
         profileEditView.nicknameTextField.observableText.bind { [weak self] text in
             guard let self = self,
                   let text = text,
-                  !isInitialSetting else { return }
+                  didFinishInitialSetup else { return }
 
-            hasValueChanged = true
+            hasInitialValueChanged = true
 
             // NOTE: 닉네임 필드 값이 변하면 일단 저장 막고 유효성 메시지 숨김
             isNicknameAvailable = false
@@ -306,10 +307,10 @@ private extension ProfileEditViewController {
     func observeBirthdateTextField() {
         profileEditView.birthDateTextField.observableText.bind { [weak self] text in
             guard let self = self,
-                  !isInitialSetting else { return }
+                  didFinishInitialSetup else { return }
             let bindedText = text ?? ""
 
-            hasValueChanged = true
+            hasInitialValueChanged = true
 
             profileEditView.birthDateTextField.hideClearButton(isHidden: bindedText.isEmpty)
 
@@ -329,7 +330,7 @@ private extension ProfileEditViewController {
 
     @objc
     func profileBackButtonTapped() {
-        if !hasValueChanged {
+        if !hasInitialValueChanged {
             navigationController?.popViewController(animated: true)
         } else {
             let rightAction = {
@@ -492,7 +493,10 @@ private extension ProfileEditViewController {
     // MARK: - 저장 가능 여부
 
     func checkSaveAvailability() {
-        guard hasValueChanged else { return }
+        guard hasInitialValueChanged else {
+            profileEditView.saveButton.updateGlassButtonState(state: .disabled)
+            return
+        }
         let canSave: Bool = isNicknameAvailable && isBirthDateAvailable
         if canSave {
             profileEditView.saveButton.updateGlassButtonState(state: .default)
