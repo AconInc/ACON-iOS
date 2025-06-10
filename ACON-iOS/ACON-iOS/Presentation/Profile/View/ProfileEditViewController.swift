@@ -35,9 +35,9 @@ final class ProfileEditViewController: BaseNavViewController {
     }
 
     private var profileImage: UIImage = .imgProfileBasic
-
-    private var hasValueChanged: Bool = false
-    private var isInitialSetting: Bool = true
+    
+    private var didFinishInitialSetup: Bool = false
+    private var hasInitialValueChanged: Bool = false
     private var isDefaultImage: Bool? = nil
 
 
@@ -136,7 +136,8 @@ extension ProfileEditViewController {
         profileImage = image
         isDefaultImage = isDefault
         profileEditView.setProfileImage(profileImage)
-        hasValueChanged = true
+        hasInitialValueChanged = true
+        checkSaveAvailability()
     }
 
 }
@@ -157,7 +158,7 @@ private extension ProfileEditViewController {
         }
 
         DispatchQueue.main.async {
-            self.isInitialSetting = false
+            self.didFinishInitialSetup = true
         }
     }
 
@@ -176,8 +177,15 @@ private extension ProfileEditViewController {
                   let onSuccess = onSuccess else { return }
 
             if onSuccess {
+                guard let nickname = profileEditView.nicknameTextField.text else { return }
+
+                guard isNicknameEntered(text: nickname) else { return }
+
+                guard isNicknameCharValid(text: nickname) else { return }
+                
                 profileEditView.setNicknameValidMessage(.nicknameOK)
                 isNicknameAvailable = true
+
             } else {
                 profileEditView.setNicknameValidMessage(viewModel.nicknameValidityMessageType)
                 isNicknameAvailable = false
@@ -259,9 +267,9 @@ private extension ProfileEditViewController {
         profileEditView.nicknameTextField.observableText.bind { [weak self] text in
             guard let self = self,
                   let text = text,
-                  !isInitialSetting else { return }
+                  didFinishInitialSetup else { return }
 
-            hasValueChanged = true
+            hasInitialValueChanged = true
 
             // NOTE: 닉네임 필드 값이 변하면 일단 저장 막고 유효성 메시지 숨김
             isNicknameAvailable = false
@@ -274,16 +282,9 @@ private extension ProfileEditViewController {
 
             // MARK: 글자 수, 문자 확인
 
-            guard text.count > 0 else {
-                profileEditView.setNicknameValidMessage(.nicknameMissing)
-                profileEditView.nicknameTextField.hideClearButton(isHidden: text.isEmpty)
-                return
-            }
+            guard isNicknameEntered(text: text) else { return }
 
-            guard isNicknameCharValid(text: text) else {
-                profileEditView.setNicknameValidMessage(.invalidChar)
-                return
-            }
+            guard isNicknameCharValid(text: text) else { return }
 
             guard text.count < viewModel.maxNicknameLength else {
                 profileEditView.nicknameTextField.text?.removeLast()
@@ -296,9 +297,7 @@ private extension ProfileEditViewController {
             profileEditView.nicknameTextField.startCheckingAnimation()
 
             validityTestDebouncer.call { [weak self] in
-                guard let self = self,
-                      text.count > 0 && isNicknameCharValid(text: text) else { return }
-                viewModel.getNicknameValidity(nickname: text)
+                self?.viewModel.getNicknameValidity(nickname: text)
             }
         }
     }
@@ -306,10 +305,10 @@ private extension ProfileEditViewController {
     func observeBirthdateTextField() {
         profileEditView.birthDateTextField.observableText.bind { [weak self] text in
             guard let self = self,
-                  !isInitialSetting else { return }
+                  didFinishInitialSetup else { return }
             let bindedText = text ?? ""
 
-            hasValueChanged = true
+            hasInitialValueChanged = true
 
             profileEditView.birthDateTextField.hideClearButton(isHidden: bindedText.isEmpty)
 
@@ -329,7 +328,7 @@ private extension ProfileEditViewController {
 
     @objc
     func profileBackButtonTapped() {
-        if !hasValueChanged {
+        if !hasInitialValueChanged {
             navigationController?.popViewController(animated: true)
         } else {
             let rightAction = {
@@ -444,7 +443,8 @@ private extension ProfileEditViewController {
             if let text = textField.text,
                let textRange = Range(range, in: text) {
                 let updatedText = text.replacingCharacters(in: textRange, with: lowerCased)
-                profileEditView.nicknameTextField.text = updatedText
+                textField.text = updatedText
+                profileEditView.nicknameTextField.textField.sendActions(for: .editingChanged)
                 return false
             }
         }
@@ -475,7 +475,7 @@ private extension ProfileEditViewController {
             isBirthDateAvailable = false
         } else if newRawString.count == 8 {
             // NOTE: Validity 체크
-            checkBirthDateValidity(dateString: newRawString)
+            validateBirthDate(dateString: newRawString)
         }
 
         return newRawString.count > 8 ? false : true
@@ -488,10 +488,13 @@ private extension ProfileEditViewController {
 
 private extension ProfileEditViewController {
 
-    // MARK: - 저장 가능 여부
+    // MARK: - 저장 가능 여부 확인
 
     func checkSaveAvailability() {
-        guard hasValueChanged else { return }
+        guard hasInitialValueChanged else {
+            profileEditView.saveButton.updateGlassButtonState(state: .disabled)
+            return
+        }
         let canSave: Bool = isNicknameAvailable && isBirthDateAvailable
         if canSave {
             profileEditView.saveButton.updateGlassButtonState(state: .default)
@@ -501,19 +504,28 @@ private extension ProfileEditViewController {
     }
 
 
-    // MARK: - 닉네임
+    // MARK: - 닉네임 유효성 검사
+
+    func isNicknameEntered(text: String) -> Bool {
+        let isEntered: Bool = text.count > 0
+        if !isEntered {
+            profileEditView.setNicknameValidMessage(.nicknameMissing)
+            profileEditView.nicknameTextField.hideClearButton(isHidden: true)
+        }
+        return isEntered
+    }
 
     func isNicknameCharValid(text: String) -> Bool {
         let regex = "^[a-z0-9._]*$"
         let isValid = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: text)
+        if !isValid { profileEditView.setNicknameValidMessage(.invalidChar) }
         return isValid
     }
 
 
-    // MARK: - 생년월일
+    // MARK: - 생년월일 유효성 검사
 
-    // NOTE: 생년월일 유효성 검사
-    func checkBirthDateValidity(dateString: String) {
+    func validateBirthDate(dateString: String) {
         guard dateString.count == 8,
               let year = Int(String(Array(dateString)[0..<4])),
               let month = Int(String(Array(dateString)[4..<6])),
