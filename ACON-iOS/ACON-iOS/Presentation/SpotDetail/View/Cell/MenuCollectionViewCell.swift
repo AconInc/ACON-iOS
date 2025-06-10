@@ -78,11 +78,14 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         imageView.image = nil
 
         imageLoadErrorLabel.isHidden = true
-
-        DispatchQueue.main.async { [weak self] in
-            self?.glassBgView.refreshBlurEffect()
-        }
     }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        glassBgView.refreshBlurEffect()
+    }
+
 }
 
 

@@ -166,11 +166,13 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
         }
 
         tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
 
-        DispatchQueue.main.async { [weak self] in // NOTE: 블러 렌더링 타이밍 이슈때문에 사용
-            self?.glassBgView.refreshBlurEffect()
-            self?.findCourseButton.refreshBlurEffect()
-        }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        glassBgView.refreshBlurEffect()
+        findCourseButton.refreshBlurEffect()
     }
 
     private func addTarget() {
