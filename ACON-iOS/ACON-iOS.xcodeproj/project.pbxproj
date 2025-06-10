@@ -33,7 +33,6 @@
 		152F8D202DF253FE0064022B /* AppleMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D1F2DF253FE0064022B /* AppleMapService.swift */; };
 		152F8D242DF268FA0064022B /* SpotListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D232DF268FA0064022B /* SpotListCellDelegate.swift */; };
 		1530CC792DDFC0D100EB4AEC /* SpotNoImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */; };
-		1530CC7B2DDFD36900EB4AEC /* TempSpotListErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530CC7A2DDFD36900EB4AEC /* TempSpotListErrorView.swift */; };
 		1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EA2D337F4100E96616 /* SpotListView.swift */; };
 		1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */; };
 		1547A6F22D33AD4500E96616 /* SpotListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6F12D33AD4500E96616 /* SpotListModel.swift */; };
@@ -309,7 +308,6 @@
 		152F8D1F2DF253FE0064022B /* AppleMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapService.swift; sourceTree = "<group>"; };
 		152F8D232DF268FA0064022B /* SpotListCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCellDelegate.swift; sourceTree = "<group>"; };
 		1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotNoImageContentView.swift; sourceTree = "<group>"; };
-		1530CC7A2DDFD36900EB4AEC /* TempSpotListErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempSpotListErrorView.swift; sourceTree = "<group>"; };
 		1547A6EA2D337F4100E96616 /* SpotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListView.swift; sourceTree = "<group>"; };
 		1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewCell.swift; sourceTree = "<group>"; };
 		1547A6F12D33AD4500E96616 /* SpotListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListModel.swift; sourceTree = "<group>"; };
@@ -809,7 +807,6 @@
 				157C06202DC5EBB4000B04AF /* SpotTagButton.swift */,
 				1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */,
 				15F45F832D6664C900BD6B9C /* LoginLockOverlayView.swift */,
-				1530CC7A2DDFD36900EB4AEC /* TempSpotListErrorView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1906,7 +1903,6 @@
 				151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */,
 				1549976D2DEC51C80040242F /* SpotType.swift in Sources */,
 				151AB6C92DD3E64600D01DE8 /* MenuImageSlideViewController.swift in Sources */,
-				1530CC7B2DDFD36900EB4AEC /* TempSpotListErrorView.swift in Sources */,
 				746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */,
 				157C0BE82DC897EE000B04AF /* SpotToggleButtonView.swift in Sources */,
 				746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */,
