@@ -74,11 +74,11 @@ Dependencies/
 # For more information about the recommended setup visit:
 # https://docs.fastlane.tools/best-practices/source-control/#source-control
 
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots/**/*.png
-fastlane/test_output
-fastlane/README.md
+ACON-iOS/fastlane/report.xml
+ACON-iOS/fastlane/Preview.html
+ACON-iOS/fastlane/screenshots/**/*.png
+ACON-iOS/fastlane/test_output
+ACON-iOS/fastlane/README.md
 
 # 환경변수
 .env
