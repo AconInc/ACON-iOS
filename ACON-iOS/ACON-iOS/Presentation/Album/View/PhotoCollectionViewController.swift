@@ -26,7 +26,7 @@ class PhotoCollectionViewController: BaseNavViewController {
 
     private var isDataLoaded = false
     
-    var selectedIndexPath: IndexPath?
+    var selectedIndexPath: ObservablePattern<IndexPath> = ObservablePattern(nil)
     
     private var isLoading = false
     
@@ -48,6 +48,7 @@ class PhotoCollectionViewController: BaseNavViewController {
         addTarget()
         registerCell()
         bindViewModel()
+        bindSelectedIndexPath()
         setDelegate()
     }
     
@@ -100,7 +101,7 @@ private extension PhotoCollectionViewController {
     
     @objc
     func goToPhotoSelectionVC() {
-        albumViewModel.getHighQualityImage(index: selectedIndexPath?.item ?? 0) { [weak self] image in
+        albumViewModel.getHighQualityImage(index: selectedIndexPath.value?.item ?? 0) { [weak self] image in
             let vc = PhotoSelectionViewController(image)
             DispatchQueue.main.async {
                 self?.navigationController?.pushViewController(vc, animated: true)
@@ -121,6 +122,12 @@ private extension PhotoCollectionViewController {
                 self?.photoCollectionView.reloadData()
                 self?.albumViewModel.onSuccessLoadImages.value = false
             }
+        }
+    }
+    
+    func bindSelectedIndexPath() {
+        self.selectedIndexPath.bind { [weak self] selectedIndexPath in
+            self?.rightButton.isEnabled = (selectedIndexPath == nil) ? false : true
         }
     }
     
@@ -166,14 +173,15 @@ extension PhotoCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let previousIndexPath = selectedIndexPath {
+        if let previousIndexPath = selectedIndexPath.value {
             // NOTE: deselectItem 메소드 사용 시 가끔 오류
             if let cell = collectionView.cellForItem(at: previousIndexPath) as? PhotoCollectionViewCell {
                 cell.isSelected = false
+                selectedIndexPath.value = nil
             }
         }
         
-        selectedIndexPath = indexPath
+        selectedIndexPath.value = indexPath
         if let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell {
             cell.isSelected = true
         }

@@ -86,18 +86,20 @@ class SpotListGoogleAdCollectionViewCell: BaseCollectionViewCell {
         
         headlineLabel.snp.makeConstraints {
             $0.top.leading.equalTo(edge)
-            $0.width.equalTo(210)
+            $0.width.equalTo(250)
             $0.height.equalTo(24)
         }
         
         bodyLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(76*ScreenUtils.heightRatio)
             $0.horizontalEdges.equalToSuperview().inset(edge)
-            $0.height.equalTo(40)
+            $0.height.equalTo(60)
         }
         
         mediaView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalToSuperview().inset(104*ScreenUtils.heightRatio)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(212*ScreenUtils.heightRatio)
         }
         
         callToActionButton.snp.makeConstraints {

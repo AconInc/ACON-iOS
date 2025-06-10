@@ -20,11 +20,7 @@ class ProfileGoogleAdView: BaseView {
     private let adButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_14_b1R), title: "광고")
     
     private let headlineLabel = UILabel()
-    
-    private let bodyLabel = UILabel()
-    
-    private let iconImageView = UIImageView()
-    
+
     private let mediaView = MediaView()
 
     private let callToActionButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
@@ -68,19 +64,22 @@ class ProfileGoogleAdView: BaseView {
         }
         
         adButton.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview().inset(ScreenUtils.horizontalInset)
+            $0.top.leading.equalToSuperview().inset(10)
             $0.width.equalTo(48)
             $0.height.equalTo(28)
         }
         
         headlineLabel.snp.makeConstraints {
-            $0.top.leading.equalTo(ScreenUtils.horizontalInset)
-            $0.width.equalTo(210)
-            $0.height.equalTo(24)
+            $0.top.equalToSuperview().inset(46)
+            $0.leading.equalToSuperview().inset(10)
+            $0.width.equalTo(158)
+            $0.height.equalTo(48)
         }
 
         mediaView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.verticalEdges.trailing.equalToSuperview().inset(10)
+            $0.height.equalTo(120)
+            $0.width.equalTo(140*ScreenUtils.widthRatio)
         }
     }
     
@@ -96,7 +95,6 @@ class ProfileGoogleAdView: BaseView {
         skeletonView.isHidden = true
         
         mediaView.do {
-            $0.layer.cornerRadius = 8
             $0.clipsToBounds = true
         }
 
@@ -140,7 +138,7 @@ extension ProfileGoogleAdView {
         skeletonView.isHidden = true
         
         if let headline = nativeAd.headline {
-            headlineLabel.setLabel(text: headline, style: .t4SB)
+            headlineLabel.setLabel(text: headline, style: .t4SB, numberOfLines: 0)
             headlineLabel.isHidden = false
         } else {
             headlineLabel.isHidden = true
