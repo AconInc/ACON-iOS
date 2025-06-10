@@ -138,7 +138,7 @@ extension UIView {
         gradient.do {
             $0.frame = bounds
             $0.colors = [topColor.cgColor, middleColor.cgColor, bottomColor.cgColor]
-            $0.locations = [0.0, 0.5, 1.0]
+            $0.locations = locations
             $0.startPoint = startPoint
             $0.endPoint = endPoint
         }
