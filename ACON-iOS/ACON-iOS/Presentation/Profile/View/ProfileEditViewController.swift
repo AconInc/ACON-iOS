@@ -177,8 +177,15 @@ private extension ProfileEditViewController {
                   let onSuccess = onSuccess else { return }
 
             if onSuccess {
+                guard let nickname = profileEditView.nicknameTextField.text else { return }
+
+                guard isNicknameEntered(text: nickname) else { return }
+
+                guard isNicknameCharValid(text: nickname) else { return }
+                
                 profileEditView.setNicknameValidMessage(.nicknameOK)
                 isNicknameAvailable = true
+
             } else {
                 profileEditView.setNicknameValidMessage(viewModel.nicknameValidityMessageType)
                 isNicknameAvailable = false
@@ -275,16 +282,9 @@ private extension ProfileEditViewController {
 
             // MARK: 글자 수, 문자 확인
 
-            guard text.count > 0 else {
-                profileEditView.setNicknameValidMessage(.nicknameMissing)
-                profileEditView.nicknameTextField.hideClearButton(isHidden: text.isEmpty)
-                return
-            }
+            guard isNicknameEntered(text: text) else { return }
 
-            guard isNicknameCharValid(text: text) else {
-                profileEditView.setNicknameValidMessage(.invalidChar)
-                return
-            }
+            guard isNicknameCharValid(text: text) else { return }
 
             guard text.count < viewModel.maxNicknameLength else {
                 profileEditView.nicknameTextField.text?.removeLast()
@@ -297,9 +297,7 @@ private extension ProfileEditViewController {
             profileEditView.nicknameTextField.startCheckingAnimation()
 
             validityTestDebouncer.call { [weak self] in
-                guard let self = self,
-                      text.count > 0 && isNicknameCharValid(text: text) else { return }
-                viewModel.getNicknameValidity(nickname: text)
+                self?.viewModel.getNicknameValidity(nickname: text)
             }
         }
     }
@@ -477,7 +475,7 @@ private extension ProfileEditViewController {
             isBirthDateAvailable = false
         } else if newRawString.count == 8 {
             // NOTE: Validity 체크
-            checkBirthDateValidity(dateString: newRawString)
+            validateBirthDate(dateString: newRawString)
         }
 
         return newRawString.count > 8 ? false : true
@@ -490,7 +488,7 @@ private extension ProfileEditViewController {
 
 private extension ProfileEditViewController {
 
-    // MARK: - 저장 가능 여부
+    // MARK: - 저장 가능 여부 확인
 
     func checkSaveAvailability() {
         guard hasInitialValueChanged else {
@@ -506,19 +504,28 @@ private extension ProfileEditViewController {
     }
 
 
-    // MARK: - 닉네임
+    // MARK: - 닉네임 유효성 검사
+
+    func isNicknameEntered(text: String) -> Bool {
+        let isEntered: Bool = text.count > 0
+        if !isEntered {
+            profileEditView.setNicknameValidMessage(.nicknameMissing)
+            profileEditView.nicknameTextField.hideClearButton(isHidden: true)
+        }
+        return isEntered
+    }
 
     func isNicknameCharValid(text: String) -> Bool {
         let regex = "^[a-z0-9._]*$"
         let isValid = NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: text)
+        if !isValid { profileEditView.setNicknameValidMessage(.invalidChar) }
         return isValid
     }
 
 
-    // MARK: - 생년월일
+    // MARK: - 생년월일 유효성 검사
 
-    // NOTE: 생년월일 유효성 검사
-    func checkBirthDateValidity(dateString: String) {
+    func validateBirthDate(dateString: String) {
         guard dateString.count == 8,
               let year = Int(String(Array(dateString)[0..<4])),
               let month = Int(String(Array(dateString)[4..<6])),
