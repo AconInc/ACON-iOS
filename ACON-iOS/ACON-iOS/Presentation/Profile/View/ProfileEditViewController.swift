@@ -444,7 +444,8 @@ private extension ProfileEditViewController {
             if let text = textField.text,
                let textRange = Range(range, in: text) {
                 let updatedText = text.replacingCharacters(in: textRange, with: lowerCased)
-                profileEditView.nicknameTextField.text = updatedText
+                textField.text = updatedText
+                profileEditView.nicknameTextField.textField.sendActions(for: .editingChanged)
                 return false
             }
         }
