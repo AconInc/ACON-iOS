@@ -319,8 +319,7 @@ private extension NoMatchingSpotListCollectionViewCell {
                 $0.setDescription(status)
             }
 
-        case .noImageDynamic: // NOTE: not for this view
-            return
+        default: return
         }
     }
 

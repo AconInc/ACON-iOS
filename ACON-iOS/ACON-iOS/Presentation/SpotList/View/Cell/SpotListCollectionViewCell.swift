@@ -369,8 +369,7 @@ private extension SpotListCollectionViewCell {
                 $0.setDescription(status)
             }
 
-        case .noImageStatic: // NOTE: not for this view
-            return
+        default: return
         }
     }
 
