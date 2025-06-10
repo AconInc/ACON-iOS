@@ -74,6 +74,7 @@
 		15AA6D172D68B4EF008021C6 /* SpotListErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA6D162D68B4EF008021C6 /* SpotListErrorType.swift */; };
 		15AA6D1A2D68C4AD008021C6 /* ReviewVerificationErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA6D192D68C4AD008021C6 /* ReviewVerificationErrorType.swift */; };
 		15ABCBFC2DF775E8000269F7 /* SpotImageStatusType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ABCBFB2DF775E8000269F7 /* SpotImageStatusType.swift */; };
+		15AD50982DF8725200166D9D /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 15AD50972DF8725200166D9D /* SkeletonView */; };
 		15BFF8B92D665BAD00909C4F /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15BFF8B52D665A5B00909C4F /* Debug.xcconfig */; };
 		15BFF8BA2D665BAD00909C4F /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15BFF8B62D665A5B00909C4F /* Release.xcconfig */; };
 		15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C0ED512D429F7400C9ED83 /* SkeletonView.swift */; };
@@ -561,6 +562,7 @@
 				748D6F4D2D2BC76C007690B4 /* GoogleSignIn in Frameworks */,
 				74B25C252D2FD30A008BDCB7 /* Lottie in Frameworks */,
 				748D6F4A2D2BC52B007690B4 /* Kingfisher in Frameworks */,
+				15AD50982DF8725200166D9D /* SkeletonView in Frameworks */,
 				746AA0342DAD0EE300E28B66 /* FirebaseCrashlytics in Frameworks */,
 				74770C192DF1DA97005D4165 /* GoogleMobileAds in Frameworks */,
 				748D6F412D2BC482007690B4 /* Moya in Frameworks */,
@@ -1742,6 +1744,7 @@
 				74D831912D6878A5003384C6 /* AmplitudeSwift */,
 				746AA0332DAD0EE300E28B66 /* FirebaseCrashlytics */,
 				74770C182DF1DA97005D4165 /* GoogleMobileAds */,
+				15AD50972DF8725200166D9D /* SkeletonView */,
 			);
 			productName = "ACON-iOS";
 			productReference = 74AB6EB02D2796D30094F873 /* ACON-iOS.app */;
@@ -1781,6 +1784,7 @@
 				74D831902D6878A5003384C6 /* XCRemoteSwiftPackageReference "Amplitude-Swift" */,
 				746AA0302DAD0EE300E28B66 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				74C1934B2DEF8909005FB3C7 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				15AD50962DF8725200166D9D /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 74AB6EB12D2796D30094F873 /* Products */;
@@ -2385,6 +2389,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		15AD50962DF8725200166D9D /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.31.0;
+			};
+		};
 		746AA0302DAD0EE300E28B66 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -2460,6 +2472,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		15AD50972DF8725200166D9D /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 15AD50962DF8725200166D9D /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
+		};
 		746AA0332DAD0EE300E28B66 /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 746AA0302DAD0EE300E28B66 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
