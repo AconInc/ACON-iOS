@@ -58,7 +58,7 @@ class ReviewFinishedViewController: BaseViewController {
         super.setStyle()
         
         reviewFinishedView.finishedReviewLabel.do {
-            $0.setLabel(text: spotName.abbreviatedString(9) + StringLiterals.Upload.finishedReview,
+            $0.setLabel(text: spotName.abbreviatedString(19) + StringLiterals.Upload.finishedReview,
                         style: .t2SB,
                         alignment: .center)
         }
