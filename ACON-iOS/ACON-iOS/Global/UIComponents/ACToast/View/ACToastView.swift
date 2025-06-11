@@ -41,7 +41,7 @@ final class ACToastView: GlassmorphismView {
         super.setLayout()
         
         self.snp.makeConstraints {
-            $0.height.equalTo(ScreenUtils.heightRatio*56)
+            $0.height.equalTo(acToastType.height)
             $0.width.equalTo(ScreenUtils.widthRatio*328)
         }
         
@@ -78,6 +78,7 @@ private extension ACToastView {
     @objc
     func handleTapAction() {
         tapAction?()
+        self.removeFromSuperview()
     }
     
     func addTapAction() {

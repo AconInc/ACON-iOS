@@ -14,12 +14,12 @@ final class ACToastController {
     
     static func show(_ acToastType: ACToastType,
                      bottomInset: Int = 92,
-                     delayTime: Double = 2.0,
+                     delayTime: Double = -1,
                      tapAction: (() -> Void)? = nil) {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = windowScene.windows.first else { return }
         
-        let toastView = ACToastView(.profileSaved, tapAction)
+        let toastView = ACToastView(acToastType, tapAction)
         
         window.addSubview(toastView)
         
@@ -28,11 +28,13 @@ final class ACToastController {
             $0.centerX.equalToSuperview()
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + delayTime) {
-            UIView.animate(withDuration: delayTime) {
-                toastView.alpha = 0
-            } completion: { _ in
-                toastView.removeFromSuperview()
+        if delayTime > 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delayTime) {
+                UIView.animate(withDuration: delayTime) {
+                    toastView.alpha = 0
+                } completion: { _ in
+                    toastView.removeFromSuperview()
+                }
             }
         }
     }
