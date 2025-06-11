@@ -65,7 +65,7 @@ final class ProfileViewModel: Serviceable {
             switch response {
             case .success(let data):
                 let newUserInfo = UserInfoModel(
-                    profileImage: data.image,
+                    profileImage: data.profileImage,
                     nickname: data.nickname,
                     birthDate: data.birthDate,
                     // 🍉 TODO: data.로 바꾸기
@@ -89,7 +89,7 @@ final class ProfileViewModel: Serviceable {
             switch response {
             case .success(let data):
                 let newSavedSpotList: [SavedSpotModel] = data.savedSpotList.map {
-                    SavedSpotModel(id: $0.id,
+                    SavedSpotModel(id: $0.spotId,
                                    name: $0.name,
                                    image: $0.image)
                 }

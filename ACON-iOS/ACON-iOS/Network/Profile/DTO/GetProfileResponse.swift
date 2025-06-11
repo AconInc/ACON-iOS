@@ -9,7 +9,7 @@ import Foundation
 
 struct GetProfileResponse: Decodable {
     
-    let image: String
+    let profileImage: String
     
     let nickname: String
     
@@ -17,13 +17,13 @@ struct GetProfileResponse: Decodable {
     
     let birthDate: String?
     
-    let verifiedAreaList: [VerifiedArea]
+    let savedSpotList: [SavedSpotDTO]
     
 }
 
-struct VerifiedArea: Decodable {
+struct VerifiedAreaDTO: Decodable {
     
-    let id: Int64
+    let verifiedAreaId: Int64
     
     let name: String
     

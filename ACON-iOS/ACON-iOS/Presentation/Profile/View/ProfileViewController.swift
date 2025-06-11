@@ -110,6 +110,8 @@ private extension ProfileViewController {
                     $0.setSavedSpotUI(!self.viewModel.userInfo.savedSpotList!.isEmpty)
                 }
                 updateSavedSpots(self.viewModel.userInfo.savedSpotList ?? [])
+            } else {
+                profileView.setSavedSpotUI(false)
             }
             viewModel.onGetProfileSuccess.value = nil
         }
