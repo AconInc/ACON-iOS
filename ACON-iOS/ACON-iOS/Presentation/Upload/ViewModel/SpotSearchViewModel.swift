@@ -79,7 +79,7 @@ class SpotSearchViewModel: Serviceable {
             case .success(let data):
                 let searchSuggestionData = data.suggestionList.map { suggestion in
                     return SearchSuggestionModel(spotID: suggestion.spotId,
-                                                 spotName: suggestion.spotName)
+                                                 spotName: suggestion.name)
                 }
                 self?.searchSuggestionData.value = searchSuggestionData
                 self?.onSuccessGetSearchSuggestion.value = true
