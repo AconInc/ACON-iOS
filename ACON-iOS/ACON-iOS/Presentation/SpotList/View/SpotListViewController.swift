@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SkeletonView
+
 class SpotListViewController: BaseNavViewController {
 
     // MARK: - Properties
@@ -19,7 +21,7 @@ class SpotListViewController: BaseNavViewController {
 
     private let filterButton = UIButton()
 
-    private var isViewInitialRender = true
+    private var isLoading: Bool = true
 
 
     // MARK: - LifeCycle
@@ -116,6 +118,13 @@ extension SpotListViewController {
             guard let self = self,
                   let onSuccess = onSuccess else { return }
 
+
+            // NOTE: 스켈레톤 최소 1초 유지
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.isLoading = false
+                self.endSkeletonAnimation()
+            }
+
             let spotList = viewModel.spotList
 
             if onSuccess {
@@ -124,10 +133,6 @@ extension SpotListViewController {
                     self.spotListView.updateCollectionViewLayout(type: spotList.transportMode)
                     self.spotListView.collectionView.reloadData()
                     self.spotListView.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-                }
-                // NOTE: 스켈레톤 최소 0.5초 유지
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.spotListView.skeletonView.isHidden = true // TODO: 스켈레톤 애니메이션으로 수정
                 }
             }
 
@@ -139,7 +144,6 @@ extension SpotListViewController {
             else {
                 // TODO: 네트워크 에러뷰, 버튼에 postSpotList() 액션 설정
 
-                spotListView.skeletonView.isHidden = true
             }
             
             viewModel.errorType = nil
@@ -182,16 +186,12 @@ private extension SpotListViewController {
             return
         }
 
+        isLoading = true
+        viewModel.spotList = SpotListModel()
+        spotListView.collectionView.reloadData()
+
+        startSkeletonAnimation()
         viewModel.updateLocationAndPostSpotList()
-        
-        DispatchQueue.main.async { [weak self] in
-            // NOTE: 데이터 리로드 전 애니메이션
-            UIView.animate(withDuration: 0.25, animations: {
-                self?.spotListView.collectionView.alpha = 0.5
-            }) { [weak self] _ in
-                self?.spotListView.skeletonView.isHidden = false
-            }
-        }
     }
 
     @objc
@@ -219,6 +219,7 @@ private extension SpotListViewController {
         setDelegate()
         registerCells()
         setRefreshControl()
+        startSkeletonAnimation()
     }
     
     func setDelegate() {
@@ -241,7 +242,13 @@ private extension SpotListViewController {
             SpotListGoogleAdCollectionViewCell.self,
             forCellWithReuseIdentifier: SpotListGoogleAdCollectionViewCell.cellIdentifier
         )
-        
+
+        spotListView.collectionView.register(
+            SpotListSkeletonHeader.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: SpotListSkeletonHeader.identifier
+        )
+
         spotListView.collectionView.register(
             SpotListCollectionViewHeader.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -264,6 +271,15 @@ private extension SpotListViewController {
         )
     }
     
+    func startSkeletonAnimation() {
+        let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
+        spotListView.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.5), .acWhite.withAlphaComponent(0.2)]), animation: skeletonAnimation)
+    }
+    
+    func endSkeletonAnimation() {
+        spotListView.hideSkeleton()
+    }
+
 }
 
 
@@ -314,6 +330,17 @@ extension SpotListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
+        guard !isLoading else {
+            guard let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: SpotListSkeletonHeader.identifier,
+                for: indexPath) as? SpotListSkeletonHeader else {
+                fatalError("Cannot dequeue header view")
+            }
+            header.isSkeletonable = true
+            return header
+        }
+        
         let spotList = viewModel.spotList
 
         switch kind {
@@ -363,6 +390,10 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
+        guard !isLoading else {
+            return CGSize(width: SpotListItemSizeType.itemMaxWidth.value,
+                          height: SpotListItemSizeType.headerHeight.value)
+        }
         let spotList = viewModel.spotList
         if spotList.transportMode == .walking {
             return CGSize(width: SpotListItemSizeType.itemMaxWidth.value,
@@ -428,6 +459,7 @@ private extension SpotListViewController {
         cell.bind(spot: spotList.spotList[indexPath.item])
         cell.overlayLoginLock(lockCell)
         cell.setFindCourseDelegate(self)
+        cell.isSkeletonable = true
 
         return cell
     }
@@ -476,6 +508,63 @@ extension SpotListViewController: SpotListCellDelegate {
             $0.addAction(UIAlertAction(title: StringLiterals.Alert.cancel, style: .cancel, handler: nil))
         }
         present(alertController, animated: true)
+    }
+
+}
+
+
+// MARK: - SkeletonCollectionViewDataSource
+
+extension SpotListViewController: SkeletonCollectionViewDataSource {
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView,
+                                numberOfItemsInSection section: Int) -> Int {
+        return UICollectionView.automaticNumberOfSkeletonItems
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView,
+                                skeletonCellForItemAt indexPath: IndexPath) -> UICollectionViewCell? {
+        let spotList = viewModel.spotList
+        switch spotList.transportMode {
+        case .walking:
+            if indexPath.item % 5 == 0 && indexPath.item > 0 {
+                return skeletonView.dequeueReusableCell(
+                    withReuseIdentifier: SpotListGoogleAdCollectionViewCell.cellIdentifier,
+                    for: indexPath
+                )
+            } else {
+                return skeletonView.dequeueReusableCell(
+                    withReuseIdentifier: SpotListCollectionViewCell.cellIdentifier,
+                    for: indexPath
+                )
+            }
+        case .biking:
+            return skeletonView.dequeueReusableCell(
+                withReuseIdentifier: NoMatchingSpotListCollectionViewCell.cellIdentifier,
+                for: indexPath
+            )
+        default:
+            return skeletonView.dequeueReusableCell(
+                withReuseIdentifier: NoMatchingSpotListCollectionViewCell.cellIdentifier,
+                for: indexPath
+            )
+        }
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView,
+                                cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        let spotList = viewModel.spotList
+        switch spotList.transportMode {
+        case .walking:
+            if indexPath.item % 5 == 0 && indexPath.item > 0 {
+                return SpotListGoogleAdCollectionViewCell.cellIdentifier
+            } else {
+                return SpotListCollectionViewCell.identifier
+            }
+        case .biking:
+            return NoMatchingSpotListCollectionViewCell.cellIdentifier
+        default: return ""
+        }
     }
 
 }
