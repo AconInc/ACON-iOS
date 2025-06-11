@@ -147,7 +147,7 @@ extension SpotSearchViewModel: ACLocationManagerDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
-            print("성공 - 위도: \(coordinate.latitude), 경도: \(coordinate.longitude)")
+            print("성공 - 위도: \(location.coordinate.latitude), 경도: \(location.coordinate.longitude)")
             self.latitude = location.coordinate.latitude
             self.longitude = location.coordinate.longitude
             self.isLocationReady.value = true

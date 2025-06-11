@@ -54,6 +54,11 @@ final class ACToastView: GlassmorphismView {
     override func setStyle() {
         super.setStyle()
         
+        self.do {
+            $0.layer.cornerRadius = acToastType.glassBorderAttributes.cornerRadius
+            $0.clipsToBounds = true
+        }
+        
         messageLabel.setLabel(text: acToastType.title,
                               style: acToastType.titleFont,
                               color: acToastType.titleColor,
@@ -66,6 +71,7 @@ final class ACToastView: GlassmorphismView {
         super.layoutSubviews()
 
         self.addGlassBorder(acToastType.glassBorderAttributes)
+        self.refreshBlurEffect()
     }
 
 }
