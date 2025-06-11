@@ -120,7 +120,7 @@ extension SpotListViewController {
 
 
             // NOTE: 스켈레톤 최소 1초 유지
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.isLoading = false
                 self.endSkeletonAnimation()
             }
@@ -132,7 +132,7 @@ extension SpotListViewController {
                     self.spotListView.regionErrorView.isHidden = true
                     self.spotListView.updateCollectionViewLayout(type: spotList.transportMode)
                     self.spotListView.collectionView.reloadData()
-                    self.spotListView.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                    self.endRefreshingAndTransparancy()
                 }
             }
 
@@ -148,8 +148,6 @@ extension SpotListViewController {
             
             viewModel.errorType = nil
             viewModel.onSuccessPostSpotList.value = nil
-
-            endRefreshingAndTransparancy()
             
             filterButton.isSelected = !viewModel.filterList.isEmpty
             
@@ -273,7 +271,7 @@ private extension SpotListViewController {
     
     func startSkeletonAnimation() {
         let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
-        spotListView.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.5), .acWhite.withAlphaComponent(0.2)]), animation: skeletonAnimation)
+        spotListView.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.5), .acWhite.withAlphaComponent(0)]), animation: skeletonAnimation)
     }
     
     func endSkeletonAnimation() {
@@ -394,7 +392,9 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: SpotListItemSizeType.itemMaxWidth.value,
                           height: SpotListItemSizeType.headerHeight.value)
         }
+
         let spotList = viewModel.spotList
+
         if spotList.transportMode == .walking {
             return CGSize(width: SpotListItemSizeType.itemMaxWidth.value,
                           height: SpotListItemSizeType.headerHeight.value)
@@ -469,7 +469,6 @@ private extension SpotListViewController {
         UIView.animate(withDuration: 0.1, delay: 0) {
             self.spotListView.collectionView.contentInset.top = 0
             self.spotListView.collectionView.setContentOffset(.zero, animated: true)
-            self.spotListView.collectionView.alpha = 1.0 // NOTE: 투명도 복원
         } completion: { _ in
             self.spotListView.collectionView.refreshControl?.endRefreshing()
         }
