@@ -393,6 +393,7 @@ extension SpotListViewController: UIScrollViewDelegate {
 
             // NOTE: 화면 중앙과 가장 가까운 셀을 찾아 화면 중앙으로 이동
             targetContentOffset.pointee = CGPoint(x: 0, y: newTargetY)
+            HapticManager.shared.hapticSelection()
         }
 
         // NOTE: 네비게이션 바 글라스모피즘 On/Off
