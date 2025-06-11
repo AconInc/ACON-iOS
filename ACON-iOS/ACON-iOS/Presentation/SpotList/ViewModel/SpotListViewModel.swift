@@ -19,7 +19,10 @@ class SpotListViewModel: Serviceable {
     var errorType: SpotListErrorType? = nil
 
     var spotList = SpotListModel()
-
+    
+    var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    
+    private var userLocation: CLLocation = CLLocation(latitude: 0, longitude: 0)
     // TODO: 삭제
     private var restaurantDummy: [SpotModel] = [
         SpotModel(id: 1, imageURL: nil, name: "이미지없는 식당", acornCount: 50, tagList: [.new, .local, .top(number: 1)], eta: 1, latitude: 35.785834, longitude: 128.25),
@@ -34,8 +37,6 @@ class SpotListViewModel: Serviceable {
         SpotModel(id: 6, imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbCQpNp_DERSX-HITj7_CIsqSqic4Mg1Z6GQ&s", name: "아콘떡국", acornCount: 3, tagList: [], eta: 6, latitude: 35.785834, longitude: 128.25),
         SpotModel(id: 6, imageURL: "https://sm.ign.com/ign_kr/game/k/kirby-and-/kirby-and-the-forgotten-land_pk1v.jpg", name: "팟팅커비~!~!~!", acornCount: 3, tagList: [], eta: 6, latitude: 35.785834, longitude: 128.25)
     ]
-
-    var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
 
 
     // MARK: - Filter
@@ -150,11 +151,11 @@ extension SpotListViewModel {
 // MARK: - ACLocationManagerDelegate
 
 extension SpotListViewModel: ACLocationManagerDelegate {
-
-    func locationManager(_ manager: ACLocationManager,
-                         didUpdateLocation coordinate: CLLocationCoordinate2D) {
+    
+    func locationManager(_ manager: ACLocationManager, didUpdateLocation location: CLLocation) {
         ACLocationManager.shared.removeDelegate(self)
-        userCoordinate = coordinate
+        userLocation = location
+        userCoordinate = location.coordinate
         postSpotList()
     }
 
