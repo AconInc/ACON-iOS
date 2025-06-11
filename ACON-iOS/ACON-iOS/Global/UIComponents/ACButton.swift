@@ -270,16 +270,7 @@ extension ACButton {
         }
         
         // NOTE: 글모 적용
-        setGlassmorphism(glassType)
-        
-        if let attributes = glassBorderAttributes {
-            let updatedAttributes = GlassBorderAttributes(
-                width: attributes.width,
-                cornerRadius: attributes.cornerRadius,
-                glassmorphismType: glassType
-            )
-            applyGlassBorder(updatedAttributes)
-        }
+        self.refreshButtonBlurEffect(glassType)
         
         // NOTE: 로딩 이미지 추가/해제
         if state == .loading {
@@ -313,13 +304,16 @@ extension ACButton {
 extension ACButton {
     
     // NOTE: 정상적인 버튼 글라스모피즘 적용을 위해 Cell prepareForReuse에서 호출
-    func refreshBlurEffect() {
-        if let glassmorphismView = glassmorphismView {
-            glassmorphismView.refreshBlurEffect()
-        }
+    func refreshButtonBlurEffect(_ glassType: GlassmorphismType) {
+        setGlassmorphism(glassType)
         
-        if let borderGlassmorphismView = borderGlassmorphismView {
-            borderGlassmorphismView.refreshBlurEffect()
+        if let attributes = glassBorderAttributes {
+            let updatedAttributes = GlassBorderAttributes(
+                width: attributes.width,
+                cornerRadius: attributes.cornerRadius,
+                glassmorphismType: glassType
+            )
+            applyGlassBorder(updatedAttributes)
         }
     }
     

@@ -19,6 +19,18 @@ class SpotListViewModel: Serviceable {
     var errorType: SpotListErrorType? = nil
 
     var spotList = SpotListModel()
+    
+    var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    
+    private var lastNetworkLocation: CLLocation?
+    
+    private let locationDistanceThreshold: Double = 1300
+    
+    private var userLocation: CLLocation = CLLocation(latitude: 0, longitude: 0)
+
+    private var periodicLocationCheckTimer: Timer?
+    
+    var needToShowToast: ObservablePattern<Bool> = ObservablePattern(nil)
 
     // TODO: 삭제
     private var restaurantDummy: [SpotModel] = [
@@ -34,8 +46,6 @@ class SpotListViewModel: Serviceable {
         SpotModel(id: 6, imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbCQpNp_DERSX-HITj7_CIsqSqic4Mg1Z6GQ&s", name: "아콘떡국", acornCount: 3, tagList: [], eta: 6, latitude: 35.785834, longitude: 128.25),
         SpotModel(id: 6, imageURL: "https://sm.ign.com/ign_kr/game/k/kirby-and-/kirby-and-the-forgotten-land_pk1v.jpg", name: "팟팅커비~!~!~!", acornCount: 3, tagList: [], eta: 6, latitude: 35.785834, longitude: 128.25)
     ]
-
-    var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
 
 
     // MARK: - Filter
@@ -84,6 +94,12 @@ extension SpotListViewModel {
             spotList: self.restaurantDummy
         )
         self.onSuccessPostSpotList.value = true
+
+        // TODO: - 주석 해제 (실제 로직)
+        // self.lastNetworkLocation = userLocation
+        // TODO: - 삭제 (테스트용)
+        self.lastNetworkLocation = CLLocation(latitude: 37.0, longitude: 127.00)
+        
         return
 
 //        ACService.shared.spotListService.postSpotList(requestBody: requestBody) { [weak self] response in
@@ -150,12 +166,51 @@ extension SpotListViewModel {
 // MARK: - ACLocationManagerDelegate
 
 extension SpotListViewModel: ACLocationManagerDelegate {
-
-    func locationManager(_ manager: ACLocationManager,
-                         didUpdateLocation coordinate: CLLocationCoordinate2D) {
+    
+    func locationManager(_ manager: ACLocationManager, didUpdateLocation location: CLLocation) {
         ACLocationManager.shared.removeDelegate(self)
-        userCoordinate = coordinate
+        userLocation = location
+        userCoordinate = location.coordinate
         postSpotList()
     }
 
+}
+
+
+// MARK: - 주기적 위치 체크
+
+extension SpotListViewModel {
+    
+    func startPeriodicLocationCheck() {
+        checkLocationChange()
+        stopPeriodicLocationCheck()
+        
+        periodicLocationCheckTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            
+            checkLocationChange()
+        }
+    }
+    
+    func stopPeriodicLocationCheck() {
+        periodicLocationCheckTimer?.invalidate()
+        periodicLocationCheckTimer = nil
+    }
+    
+    func checkLocationChange() {
+        guard let lastLocation = lastNetworkLocation else { return }
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else { return }
+        let hasToast = window.subviews.contains { $0 is ACToastView }
+        guard !hasToast else { return }
+        
+        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
+        guard let distance = lastNetworkLocation?.distance(from: userLocation) else { return }
+        print("🧇 \(distance)")
+        if distance >= locationDistanceThreshold {
+            print("🧇 위치 변화 감지: \(distance)m")
+            needToShowToast.value = true
+        }
+    }
+    
 }

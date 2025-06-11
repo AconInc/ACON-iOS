@@ -42,15 +42,15 @@ final class MapRedirectManager {
 
 extension MapRedirectManager: ACLocationManagerDelegate {
 
-    func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
+    func locationManager(_ manager: ACLocationManager, didUpdateLocation location: CLLocation) {
         ACLocationManager.shared.removeDelegate(self)
 
         if let mapType = mapType,
            let destination = destination {
             let startPoint = MapRedirectModel(
                 name: StringLiterals.Map.myLocation,
-                latitude: coordinate.latitude,
-                longitude: coordinate.longitude
+                latitude: location.coordinate.latitude,
+                longitude: location.coordinate.longitude
             )
 
             self.openMap(type: mapType, from: startPoint, to: destination)

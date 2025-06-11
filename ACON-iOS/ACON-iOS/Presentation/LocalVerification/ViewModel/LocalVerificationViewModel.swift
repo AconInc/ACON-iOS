@@ -66,9 +66,9 @@ class LocalVerificationViewModel: Serviceable {
 
 extension LocalVerificationViewModel: ACLocationManagerDelegate {
     
-    func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D) {
-        self.userCoordinate = coordinate
-        self.isLocationKorea = LocationUtils.isKorea(coordinate.latitude, coordinate.longitude)
+    func locationManager(_ manager: ACLocationManager, didUpdateLocation location: CLLocation) {
+        self.userCoordinate = location.coordinate
+        self.isLocationKorea = LocationUtils.isKorea(location.coordinate.latitude, location.coordinate.longitude)
         isLocationChecked.value = true
     }
     
