@@ -34,6 +34,7 @@ class SpotListViewController: BaseNavViewController {
         setCollectionView()
         addTarget()
         viewModel.updateLocationAndPostSpotList()
+        startSkeletonAnimation()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -217,7 +218,6 @@ private extension SpotListViewController {
         setDelegate()
         registerCells()
         setRefreshControl()
-        startSkeletonAnimation()
     }
     
     func setDelegate() {
@@ -268,12 +268,19 @@ private extension SpotListViewController {
             for: .valueChanged
         )
     }
-    
+
+}
+
+
+// MARK: - Skeleton Controls
+
+private extension SpotListViewController {
+
     func startSkeletonAnimation() {
         let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
         spotListView.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.5), .acWhite.withAlphaComponent(0)]), animation: skeletonAnimation)
     }
-    
+
     func endSkeletonAnimation() {
         spotListView.hideSkeleton()
     }
@@ -281,15 +288,19 @@ private extension SpotListViewController {
 }
 
 
-// MARK: - CollectionViewDataSource
+// MARK: - CollectionView DataSource
 
 extension SpotListViewController: UICollectionViewDataSource {
-    
+
+    // MARK: number of items
+
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         return viewModel.spotList.spotList.count
     }
-    
+
+    // MARK: cellForItemAt
+
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let spotList = viewModel.spotList
@@ -324,6 +335,8 @@ extension SpotListViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
     }
+
+    // MARK: Supplementary View
 
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
@@ -367,6 +380,8 @@ extension SpotListViewController: UICollectionViewDataSource {
         }
     }
 
+    // MARK: DidSelectItemAt
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = viewModel.spotList.spotList[indexPath.item]
         let vc = SpotDetailViewController(item.id, item.tagList)
@@ -381,7 +396,7 @@ extension SpotListViewController: UICollectionViewDataSource {
 }
 
 
-// MARK: - CollectionViewDelegateFlowLayout
+// MARK: - CollectionView FlowLayout
 
 extension SpotListViewController: UICollectionViewDelegateFlowLayout {
 
@@ -410,7 +425,7 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
-// MARK: - UIScrollViewDelegate
+// MARK: - UIScrollView Delegate
 
 extension SpotListViewController: UIScrollViewDelegate {
 
@@ -437,47 +452,86 @@ extension SpotListViewController: UIScrollViewDelegate {
 }
 
 
-// MARK: - CollectionView Helper
+// MARK: - Skeleton CollectionView DataSource
 
-private extension SpotListViewController {
+extension SpotListViewController: SkeletonCollectionViewDataSource {
 
-    private func dequeueAndConfigureCell<T: UICollectionViewCell & SpotListCellConfigurable>(
-        collectionView: UICollectionView,
-        cellType: T.Type,
-        at indexPath: IndexPath,
-        with spotList: SpotListModel
-    ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: cellType.cellIdentifier,
-            for: indexPath
-        ) as? T else {
-            return UICollectionViewCell()
-        }
-
-        let lockCell = !AuthManager.shared.hasToken && indexPath.item > 4
-
-        cell.bind(spot: spotList.spotList[indexPath.item])
-        cell.overlayLoginLock(lockCell)
-        cell.setFindCourseDelegate(self)
-        cell.isSkeletonable = true
-
-        return cell
+    func collectionSkeletonView(_ skeletonView: UICollectionView,
+                                numberOfItemsInSection section: Int) -> Int {
+        return UICollectionView.automaticNumberOfSkeletonItems
     }
 
-    // NOTE: CollectionView Reload animation
-    func endRefreshingAndTransparancy() {
-        UIView.animate(withDuration: 0.1, delay: 0) {
-            self.spotListView.collectionView.contentInset.top = 0
-            self.spotListView.collectionView.setContentOffset(.zero, animated: true)
-        } completion: { _ in
-            self.spotListView.collectionView.refreshControl?.endRefreshing()
+    func collectionSkeletonView(_ skeletonView: UICollectionView,
+                                skeletonCellForItemAt indexPath: IndexPath) -> UICollectionViewCell? {
+        let spotList = viewModel.spotList
+        switch spotList.transportMode {
+        case .walking:
+            if indexPath.item % 5 == 0 && indexPath.item > 0 {
+                return skeletonView.dequeueReusableCell(
+                    withReuseIdentifier: SpotListGoogleAdCollectionViewCell.cellIdentifier,
+                    for: indexPath
+                )
+            } else {
+                return skeletonView.dequeueReusableCell(
+                    withReuseIdentifier: SpotListCollectionViewCell.cellIdentifier,
+                    for: indexPath
+                )
+            }
+        case .biking:
+            return skeletonView.dequeueReusableCell(
+                withReuseIdentifier: NoMatchingSpotListCollectionViewCell.cellIdentifier,
+                for: indexPath
+            )
+        default:
+            return skeletonView.dequeueReusableCell(
+                withReuseIdentifier: NoMatchingSpotListCollectionViewCell.cellIdentifier,
+                for: indexPath
+            )
+        }
+    }
+
+    func collectionSkeletonView(_ skeletonView: UICollectionView,
+                                cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        let spotList = viewModel.spotList
+        switch spotList.transportMode {
+        case .walking:
+            if indexPath.item % 5 == 0 && indexPath.item > 0 {
+                return SpotListGoogleAdCollectionViewCell.cellIdentifier
+            } else {
+                return SpotListCollectionViewCell.identifier
+            }
+        case .biking:
+            return NoMatchingSpotListCollectionViewCell.cellIdentifier
+        default: return ""
+        }
+    }
+
+    func collectionSkeletonView(_ skeletonView: UICollectionView,
+                                supplementaryViewIdentifierOfKind: String,
+                                at indexPath: IndexPath) -> ReusableCellIdentifier? {
+        guard !isLoading else {
+            return SpotListSkeletonHeader.identifier
+        }
+        
+        let spotList = viewModel.spotList
+
+        switch supplementaryViewIdentifierOfKind {
+        case UICollectionView.elementKindSectionHeader:
+            switch spotList.transportMode {
+            case .walking:
+                return SpotListCollectionViewHeader.identifier
+            default:
+                return NoMatchingSpotHeader.identifier
+            }
+        default:
+            return ""
         }
     }
 
 }
 
 
-// MARK: - Delegate
+// MARK: - SpotListCell Delegate
 
 extension SpotListViewController: SpotListCellDelegate {
 
@@ -512,57 +566,40 @@ extension SpotListViewController: SpotListCellDelegate {
 }
 
 
-// MARK: - SkeletonCollectionViewDataSource
+// MARK: - CollectionView Helper
 
-extension SpotListViewController: SkeletonCollectionViewDataSource {
-    
-    func collectionSkeletonView(_ skeletonView: UICollectionView,
-                                numberOfItemsInSection section: Int) -> Int {
-        return UICollectionView.automaticNumberOfSkeletonItems
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UICollectionView,
-                                skeletonCellForItemAt indexPath: IndexPath) -> UICollectionViewCell? {
-        let spotList = viewModel.spotList
-        switch spotList.transportMode {
-        case .walking:
-            if indexPath.item % 5 == 0 && indexPath.item > 0 {
-                return skeletonView.dequeueReusableCell(
-                    withReuseIdentifier: SpotListGoogleAdCollectionViewCell.cellIdentifier,
-                    for: indexPath
-                )
-            } else {
-                return skeletonView.dequeueReusableCell(
-                    withReuseIdentifier: SpotListCollectionViewCell.cellIdentifier,
-                    for: indexPath
-                )
-            }
-        case .biking:
-            return skeletonView.dequeueReusableCell(
-                withReuseIdentifier: NoMatchingSpotListCollectionViewCell.cellIdentifier,
-                for: indexPath
-            )
-        default:
-            return skeletonView.dequeueReusableCell(
-                withReuseIdentifier: NoMatchingSpotListCollectionViewCell.cellIdentifier,
-                for: indexPath
-            )
+private extension SpotListViewController {
+
+    private func dequeueAndConfigureCell<T: UICollectionViewCell & SpotListCellConfigurable>(
+        collectionView: UICollectionView,
+        cellType: T.Type,
+        at indexPath: IndexPath,
+        with spotList: SpotListModel
+    ) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: cellType.cellIdentifier,
+            for: indexPath
+        ) as? T else {
+            return UICollectionViewCell()
         }
+
+        let lockCell = !AuthManager.shared.hasToken && indexPath.item > 4
+
+        cell.bind(spot: spotList.spotList[indexPath.item])
+        cell.overlayLoginLock(lockCell)
+        cell.setFindCourseDelegate(self)
+        cell.isSkeletonable = true
+
+        return cell
     }
-    
-    func collectionSkeletonView(_ skeletonView: UICollectionView,
-                                cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        let spotList = viewModel.spotList
-        switch spotList.transportMode {
-        case .walking:
-            if indexPath.item % 5 == 0 && indexPath.item > 0 {
-                return SpotListGoogleAdCollectionViewCell.cellIdentifier
-            } else {
-                return SpotListCollectionViewCell.identifier
-            }
-        case .biking:
-            return NoMatchingSpotListCollectionViewCell.cellIdentifier
-        default: return ""
+
+    // NOTE: CollectionView Reload animation
+    func endRefreshingAndTransparancy() {
+        UIView.animate(withDuration: 0.1, delay: 0) { [weak self] in
+            self?.spotListView.collectionView.contentInset.top = 0
+            self?.spotListView.collectionView.setContentOffset(.zero, animated: true)
+        } completion: { [weak self] _ in
+            self?.spotListView.collectionView.refreshControl?.endRefreshing()
         }
     }
 
