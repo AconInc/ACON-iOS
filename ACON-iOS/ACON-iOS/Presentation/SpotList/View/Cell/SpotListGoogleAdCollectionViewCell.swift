@@ -153,8 +153,8 @@ class SpotListGoogleAdCollectionViewCell: BaseCollectionViewCell {
         glassmorphismView.clipsToBounds = true
         
         glassmorphismView.refreshBlurEffect()
-        adButton.updateGlassButtonState(state: .default)
-        callToActionButton.updateGlassButtonState(state: .default)
+        adButton.refreshButtonBlurEffect(.buttonGlassDefault)
+        callToActionButton.refreshButtonBlurEffect(.buttonGlassDefault)
     }
 }
 

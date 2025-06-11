@@ -189,7 +189,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         super.layoutSubviews()
 
         glassBgView.refreshBlurEffect()
-        findCourseButton.refreshBlurEffect()
+        findCourseButton.refreshButtonBlurEffect(.buttonGlassDefault)
     }
 
     private func addTarget() {
