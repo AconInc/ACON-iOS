@@ -173,8 +173,6 @@ enum StringLiterals {
         
         static let businessEnd = "영업종료"
         
-        static let imageLoadingFailed = "이미지 로딩에 실패했어요"
-        
         static let needLoginToSeeMore = "더 많은 장소를 보기 위해\n로그인이 필요해요"
         
         static let loginInThreeSeconds = "3초 만에 로그인 하러 가기"
@@ -190,6 +188,7 @@ enum StringLiterals {
         
         static let preparingImage = "장소 사진을 준비하고 있어요"
         
+        static let imageLoadingFailed = "이미지로딩에 실패했어요"
         
         // NOTE: no matching spots
         

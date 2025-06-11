@@ -126,4 +126,27 @@ extension UIView {
         // blurEffectView.contentView.layer.insertSublayer(gradient, at: 0)
     }
 
+    func setTripleGradient(topColor: UIColor = .acBlack.withAlphaComponent(0.6),
+                           middleColor: UIColor = .gray300.withAlphaComponent(0.5),
+                           bottomColor: UIColor = .acBlack.withAlphaComponent(0.6),
+                           locations: [NSNumber]? = [0.0, 0.5, 1.0],
+                           startPoint: CGPoint = CGPoint(x: 0.5, y: 0.0),
+                           endPoint: CGPoint = CGPoint(x: 0.5, y: 1.0)) {
+        layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
+        
+        let gradient = CAGradientLayer()
+        gradient.do {
+            $0.frame = bounds
+            $0.colors = [topColor.cgColor, middleColor.cgColor, bottomColor.cgColor]
+            $0.locations = locations
+            $0.startPoint = startPoint
+            $0.endPoint = endPoint
+        }
+        layer.addSublayer(gradient)
+    }
+
+    func removeGradient() {
+        layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
+    }
+
 }

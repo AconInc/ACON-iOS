@@ -174,9 +174,9 @@ final class ProfileView: BaseView {
         }
         
         googleAdView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(423*ScreenUtils.heightRatio)
-            $0.horizontalEdges.equalToSuperview().inset(20*ScreenUtils.widthRatio)
-            $0.height.equalTo(125*ScreenUtils.heightRatio)
+            $0.top.equalToSuperview().offset(431*ScreenUtils.heightRatio)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
+            $0.height.equalTo(140*ScreenUtils.heightRatio)
         }
     }
 

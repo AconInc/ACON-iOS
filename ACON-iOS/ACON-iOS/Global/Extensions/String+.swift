@@ -29,7 +29,11 @@ extension String {
     }
 
     /// kerning(한글: -2.5%, 그 외: 0%),  lineHeight, color가 적용된 스트링입니다.
-    func attributedString(_ style: ACFontType, _ color: UIColor = .acWhite) -> NSAttributedString {
+    func attributedString(
+        _ style: ACFontType,
+        _ color: UIColor = .acWhite,
+        _ lineBreakMode: NSLineBreakMode? = nil
+    ) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: self)
 
         // NOTE: 언어별로 kerning 다르게 적용(한글은 -2.5%, 그 외는 0%)
@@ -63,6 +67,9 @@ extension String {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.minimumLineHeight = style.fontStyle.lineHeight
         paragraphStyle.maximumLineHeight = style.fontStyle.lineHeight
+        if let lineBreakMode = lineBreakMode {
+            paragraphStyle.lineBreakMode = lineBreakMode
+        }
         let baseLineOffset = NSNumber(value: (style.fontStyle.lineHeight - style.fontStyle.font.lineHeight) / 2)
         let attributes: [NSAttributedString.Key: Any] = [
             .font: style.fontStyle.font,

@@ -5,7 +5,7 @@
 //  Created by 이수민 on 6/7/25.
 //
 
-enum GoogleAdsType: String {
+enum GoogleAdsType: String, CaseIterable, Hashable {
     
     case imageOnly
     

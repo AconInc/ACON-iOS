@@ -23,7 +23,7 @@ class SpotListViewModel: Serviceable {
     // TODO: 삭제
     private var restaurantDummy: [SpotModel] = [
         SpotModel(id: 1, imageURL: nil, name: "이미지없는 식당", acornCount: 50, tagList: [.new, .local, .top(number: 1)], eta: 1, latitude: 35.785834, longitude: 128.25),
-        SpotModel(id: 1, imageURL: nil, name: "이미지없는 식당2", acornCount: 50, tagList: [.top(number: 2)], eta: 1, latitude: 35.785834, longitude: 128.25),
+        SpotModel(id: 2, imageURL: "wrongAddress", name: "이미지에러", acornCount: 50, tagList: [.top(number: 2)], eta: 1, latitude: 35.785834, longitude: 128.25),
         SpotModel(id: 2, imageURL: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg", name: "도토리 완전 많은 뷔페", acornCount: 102938, tagList: [.local, .top(number: 3)], eta: 6, latitude: 35.785834, longitude: 128.25),
         SpotModel(id: 3, imageURL: "https://images.immediate.co.uk/production/volatile/sites/30/2022/03/Pancake-grazing-board-bc15106.jpg?quality=90&resize=556,505", name: "팬케익맛집", acornCount: 938, tagList: [.top(number: 4)], eta: 13, latitude: 35.785834, longitude: 128.25),
         SpotModel(id: 4, imageURL: "https://natashaskitchen.com/wp-content/uploads/2020/03/Pan-Seared-Steak-4.jpg", name: "영웅스테이크", acornCount: 102938, tagList: [.local, .top(number: 5)], eta: 14, latitude: 35.785834, longitude: 128.25),

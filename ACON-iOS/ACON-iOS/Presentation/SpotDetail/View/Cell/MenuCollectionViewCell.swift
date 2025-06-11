@@ -15,9 +15,11 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
 
     var onZooming: ((Bool) -> Void)?
 
+    private let glassBgView = GlassmorphismView(.noImageErrorGlass)
+
     private let imageView = UIImageView()
 
-    private let imageErrorView = TempSpotListErrorView(.imageTitle) // TODO: 디자인 요청함
+    private let imageLoadErrorLabel = UILabel()
 
     private let imageWidth: CGFloat = 230 * ScreenUtils.widthRatio
     private let imageHeight: CGFloat = 325 * ScreenUtils.heightRatio
@@ -28,11 +30,17 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     override func setHierarchy() {
         super.setHierarchy()
 
-        self.addSubviews(imageView, imageErrorView)
+        self.addSubviews(glassBgView, imageView, imageLoadErrorLabel)
     }
 
     override func setLayout() {
         super.setLayout()
+
+        glassBgView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.equalTo(imageWidth)
+            $0.height.equalTo(imageHeight)
+        }
 
         imageView.snp.makeConstraints {
             $0.center.equalToSuperview()
@@ -40,8 +48,8 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.height.equalTo(imageHeight)
         }
         
-        imageErrorView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        imageLoadErrorLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
 
@@ -58,12 +66,24 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.addGestureRecognizer(pinchGesture)
         }
         
-        imageErrorView.do {
+        imageLoadErrorLabel.do {
             $0.isHidden = true
-            $0.setStyle(errorImage: .icAcornGlass,
-                        errorMessage: StringLiterals.SpotList.imageLoadingFailed,
-                        glassMorphismtype: .noImageErrorGlass)
+            $0.setLabel(text: StringLiterals.SpotList.imageLoadingFailed, style: .t5SB, color: .gray50)
         }
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        imageView.image = nil
+
+        imageLoadErrorLabel.isHidden = true
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        glassBgView.refreshBlurEffect()
     }
 
 }
@@ -104,11 +124,10 @@ extension MenuCollectionViewCell {
             completionHandler: { result in
                 switch result {
                 case .success:
-                    self.imageErrorView.isHidden = true
-                case .failure(let error):
-                    print("😢 이미지 로드 실패: \(error)")
+                    self.imageLoadErrorLabel.isHidden = true
+                case .failure:
                     self.imageView.image = nil
-                    self.imageErrorView.isHidden = false
+                    self.imageLoadErrorLabel.isHidden = false
                 }
             }
         )
