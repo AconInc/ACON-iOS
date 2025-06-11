@@ -171,7 +171,6 @@
 		746AA0342DAD0EE300E28B66 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 746AA0332DAD0EE300E28B66 /* FirebaseCrashlytics */; };
 		746AA0352DAD0EFF00E28B66 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7496EC1A2DACF3E500508EA8 /* GoogleService-Info.plist */; };
 		746F15B72D3E2083003EA031 /* PostLocalAreaRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15B62D3E2079003EA031 /* PostLocalAreaRequest.swift */; };
-		746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15B82D3E2125003EA031 /* PostLocalAreaResponse.swift */; };
 		746F15BB2D3E2167003EA031 /* LocalVerificationTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15BA2D3E215C003EA031 /* LocalVerificationTargetType.swift */; };
 		746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15BC2D3E2258003EA031 /* LocalVerificationService.swift */; };
 		746F39822D342523003F8498 /* ACSheetDetentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F39812D342520003F8498 /* ACSheetDetentType.swift */; };
@@ -228,6 +227,8 @@
 		74A13D642DCBBAB9007FFFC3 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A13D632DCBBAB4007FFFC3 /* OnboardingView.swift */; };
 		74A13D672DCBC2BD007FFFC3 /* DislikeFoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A13D662DCBC2B0007FFFC3 /* DislikeFoodCollectionViewCell.swift */; };
 		74A13D6B2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A13D6A2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift */; };
+		74AB75A62DF9EE3500F96A4A /* LocalVerificationErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AB75A52DF9EE2D00F96A4A /* LocalVerificationErrorType.swift */; };
+		74AB75A82DF9F92C00F96A4A /* PostRepaceLocalAreaRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AB75A72DF9F92300F96A4A /* PostRepaceLocalAreaRequest.swift */; };
 		74B25C252D2FD30A008BDCB7 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 74B25C242D2FD30A008BDCB7 /* Lottie */; };
 		74B25C2C2D2FEE8E008BDCB7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B25C2B2D2FEE8C008BDCB7 /* Config.swift */; };
 		74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C312D2FF022008BDCB7 /* Shared.xcconfig */; };
@@ -445,7 +446,6 @@
 		7462618A2D3FA4A200A4E84F /* SpotDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailService.swift; sourceTree = "<group>"; };
 		7462D0242D4262EF00580464 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		746F15B62D3E2079003EA031 /* PostLocalAreaRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocalAreaRequest.swift; sourceTree = "<group>"; };
-		746F15B82D3E2125003EA031 /* PostLocalAreaResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocalAreaResponse.swift; sourceTree = "<group>"; };
 		746F15BA2D3E215C003EA031 /* LocalVerificationTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationTargetType.swift; sourceTree = "<group>"; };
 		746F15BC2D3E2258003EA031 /* LocalVerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationService.swift; sourceTree = "<group>"; };
 		746F39812D342520003F8498 /* ACSheetDetentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACSheetDetentType.swift; sourceTree = "<group>"; };
@@ -499,6 +499,8 @@
 		74A13D6A2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		74A8E7AF2D42C42300677408 /* ACON-iOSRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ACON-iOSRelease.entitlements"; sourceTree = "<group>"; };
 		74AB6EB02D2796D30094F873 /* ACON-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ACON-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74AB75A52DF9EE2D00F96A4A /* LocalVerificationErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationErrorType.swift; sourceTree = "<group>"; };
+		74AB75A72DF9F92300F96A4A /* PostRepaceLocalAreaRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepaceLocalAreaRequest.swift; sourceTree = "<group>"; };
 		74B25C2A2D2FEE3E008BDCB7 /* ACON-iOSDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ACON-iOSDebug.entitlements"; sourceTree = "<group>"; };
 		74B25C2B2D2FEE8C008BDCB7 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		74B25C312D2FF022008BDCB7 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
@@ -768,6 +770,7 @@
 		15A1471F2D5B2561003793EE /* Type */ = {
 			isa = PBXGroup;
 			children = (
+				74AB75A52DF9EE2D00F96A4A /* LocalVerificationErrorType.swift */,
 				15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */,
 			);
 			path = Type;
@@ -1113,7 +1116,7 @@
 		746F15B52D3E2073003EA031 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				746F15B82D3E2125003EA031 /* PostLocalAreaResponse.swift */,
+				74AB75A72DF9F92300F96A4A /* PostRepaceLocalAreaRequest.swift */,
 				746F15B62D3E2079003EA031 /* PostLocalAreaRequest.swift */,
 				156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */,
 			);
@@ -1902,11 +1905,11 @@
 				15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */,
 				157C0AC12DC689E7000B04AF /* UIImage+.swift in Sources */,
 				15A48BFA2D574BA5003C2421 /* ProfileEditView.swift in Sources */,
+				74AB75A82DF9F92C00F96A4A /* PostRepaceLocalAreaRequest.swift in Sources */,
 				74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */,
 				151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */,
 				1549976D2DEC51C80040242F /* SpotType.swift in Sources */,
 				151AB6C92DD3E64600D01DE8 /* MenuImageSlideViewController.swift in Sources */,
-				746F15B92D3E212D003EA031 /* PostLocalAreaResponse.swift in Sources */,
 				157C0BE82DC897EE000B04AF /* SpotToggleButtonView.swift in Sources */,
 				746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */,
 				151FC0C92DBD5DA0005F4D0D /* Character+.swift in Sources */,
@@ -1973,6 +1976,7 @@
 				74403B6F2DF1D6DD00B7B832 /* GoogleAdsErrorType.swift in Sources */,
 				15CD25782D3FE31400320006 /* PostSpotListRequest.swift in Sources */,
 				7462617B2D3EB06100A4E84F /* UploadService.swift in Sources */,
+				74AB75A62DF9EE3500F96A4A /* LocalVerificationErrorType.swift in Sources */,
 				4C6B2F332D65A15D0089BCB6 /* WithdrawalTargetType.swift in Sources */,
 				157C06212DC5EBB4000B04AF /* SpotTagButton.swift in Sources */,
 				4C6B2F342D65A15D0089BCB6 /* WithdrawalService.swift in Sources */,

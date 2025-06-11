@@ -9,6 +9,6 @@ import Foundation
 
 struct GetVerifiedAreaListResponse: Decodable {
     
-    let verifiedAreaList: [VerifiedArea]
+    let verifiedAreaList: [VerifiedAreaDTO]
     
 }
