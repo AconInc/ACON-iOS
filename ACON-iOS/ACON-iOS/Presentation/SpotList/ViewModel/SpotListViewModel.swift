@@ -22,7 +22,16 @@ class SpotListViewModel: Serviceable {
     
     var userCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
+    private var lastNetworkLocation: CLLocation?
+    
+    private let locationDistanceThreshold: Double = 1300
+    
     private var userLocation: CLLocation = CLLocation(latitude: 0, longitude: 0)
+
+    private var periodicLocationCheckTimer: Timer?
+    
+    var needToShowToast: ObservablePattern<Bool> = ObservablePattern(nil)
+
     // TODO: 삭제
     private var restaurantDummy: [SpotModel] = [
         SpotModel(id: 1, imageURL: nil, name: "이미지없는 식당", acornCount: 50, tagList: [.new, .local, .top(number: 1)], eta: 1, latitude: 35.785834, longitude: 128.25),
@@ -85,6 +94,12 @@ extension SpotListViewModel {
             spotList: self.restaurantDummy
         )
         self.onSuccessPostSpotList.value = true
+
+        // TODO: - 주석 해제 (실제 로직)
+        // self.lastNetworkLocation = userLocation
+        // TODO: - 삭제 (테스트용)
+        self.lastNetworkLocation = CLLocation(latitude: 37.0, longitude: 127.00)
+        
         return
 
 //        ACService.shared.spotListService.postSpotList(requestBody: requestBody) { [weak self] response in
@@ -159,4 +174,43 @@ extension SpotListViewModel: ACLocationManagerDelegate {
         postSpotList()
     }
 
+}
+
+
+// MARK: - 주기적 위치 체크
+
+extension SpotListViewModel {
+    
+    func startPeriodicLocationCheck() {
+        checkLocationChange()
+        stopPeriodicLocationCheck()
+        
+        periodicLocationCheckTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            
+            checkLocationChange()
+        }
+    }
+    
+    func stopPeriodicLocationCheck() {
+        periodicLocationCheckTimer?.invalidate()
+        periodicLocationCheckTimer = nil
+    }
+    
+    func checkLocationChange() {
+        guard let lastLocation = lastNetworkLocation else { return }
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else { return }
+        let hasToast = window.subviews.contains { $0 is ACToastView }
+        guard !hasToast else { return }
+        
+        ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
+        guard let distance = lastNetworkLocation?.distance(from: userLocation) else { return }
+        print("🧇 \(distance)")
+        if distance >= locationDistanceThreshold {
+            print("🧇 위치 변화 감지: \(distance)m")
+            needToShowToast.value = true
+        }
+    }
+    
 }
