@@ -39,4 +39,13 @@ final class ACToastController {
         }
     }
     
+    static func hide() {
+        DispatchQueue.main.async {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let window = windowScene.windows.first else { return }
+            
+            window.subviews.filter { $0 is ACToastView }.forEach { $0.removeFromSuperview() }
+        }
+    }
+    
 }
