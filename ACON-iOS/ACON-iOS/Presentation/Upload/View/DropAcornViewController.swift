@@ -67,7 +67,7 @@ class DropAcornViewController: BaseNavViewController {
         self.setButtonStyle(button: leftButton, image: .icArrowLeft)
         self.setButtonAction(button: leftButton, target: self, action: #selector(dropAcornBackButtonTapped))
         self.setCenterTitleLabelStyle(title: StringLiterals.Upload.upload)
-        self.dropAcornView.spotNameLabel.setLabel(text: self.spotName.abbreviatedString(9), style: .t3SB, alignment: .center)
+        self.dropAcornView.spotNameLabel.setLabel(text: self.spotName.abbreviatedString(20), style: .t3SB, alignment: .center)
     }
     
     func addTarget() {
@@ -143,6 +143,13 @@ private extension DropAcornViewController {
         toggleLottie(dropAcorn: dropAcorn)
         dropAcornView.leaveReviewButton.updateGlassButtonState(state: .default)
         dropAcornView.lightImageView.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            for i in 1...dropAcorn {
+                DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.2) {
+                    HapticManager.shared.hapticImpact(style: .soft)
+                }
+            }
+        }
     }
     
 }
