@@ -112,7 +112,7 @@ class SpotListViewController: BaseNavViewController {
         spotToggleButton.refreshBlurEffect()
         for cell in spotListView.collectionView.visibleCells {
             if let cell = cell as? SpotListCollectionViewCell {
-                cell.layoutSubviews()
+                cell.setNeedsLayout()
            }
        }
     }

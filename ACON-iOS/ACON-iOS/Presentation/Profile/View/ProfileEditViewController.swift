@@ -229,7 +229,7 @@ private extension ProfileEditViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     ACToastController.show(.profileSaved,
                                            bottomInset: 93,
-                                           delayTime: 1)
+                                           duration: 1)
                 }
             } else {
                 self.showDefaultAlert(title: "프로필 수정 실패", message: "프로필 수정에 실패하였습니다.")

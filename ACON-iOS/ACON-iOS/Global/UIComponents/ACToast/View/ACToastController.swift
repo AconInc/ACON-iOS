@@ -14,7 +14,7 @@ final class ACToastController {
     
     static func show(_ acToastType: ACToastType,
                      bottomInset: Int = 92,
-                     delayTime: Double = -1,
+                     duration: Double = -1,
                      tapAction: (() -> Void)? = nil) {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = windowScene.windows.first else { return }
@@ -28,9 +28,9 @@ final class ACToastController {
             $0.centerX.equalToSuperview()
         }
         
-        if delayTime > 0 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + delayTime) {
-                UIView.animate(withDuration: delayTime) {
+        if duration > 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                UIView.animate(withDuration: duration) {
                     toastView.alpha = 0
                 } completion: { _ in
                     toastView.removeFromSuperview()
