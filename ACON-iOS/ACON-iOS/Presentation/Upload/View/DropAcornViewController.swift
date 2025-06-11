@@ -143,6 +143,13 @@ private extension DropAcornViewController {
         toggleLottie(dropAcorn: dropAcorn)
         dropAcornView.leaveReviewButton.updateGlassButtonState(state: .default)
         dropAcornView.lightImageView.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            for i in 1...dropAcorn {
+                DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.2) {
+                    HapticManager.shared.hapticImpact(style: .soft)
+                }
+            }
+        }
     }
     
 }
