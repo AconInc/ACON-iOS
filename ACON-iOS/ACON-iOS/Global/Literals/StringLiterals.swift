@@ -201,6 +201,9 @@ enum StringLiterals {
         static let requestToAddSpot = "장소 등록 신청하기"
         
         static let howAboutTheseInstead = "대신 여기는 어떠세요?"
+
+        static let locationChangedToast = "지금 위치 기준으로 다시 추천 받기"
+        
     }
     
     enum LocalVerification {
