@@ -118,6 +118,8 @@ class SpotListGoogleAdCollectionViewCell: BaseCollectionViewCell {
             $0.backgroundColor = .clear
         }
         
+        headlineLabel.linesCornerRadius = 8
+        
         iconImageView.do {
             $0.contentMode = .scaleAspectFill
             $0.layer.cornerRadius = 8

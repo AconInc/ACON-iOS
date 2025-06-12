@@ -161,13 +161,15 @@ extension UIView {
     func startACSkeletonAnimation(direction: GradientDirection = .topLeftBottomRight,
                                   duration: CFTimeInterval = 1.5,
                                   autoreverses: Bool = true) {
-        let diagonalAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: direction, duration: duration, autoreverses: autoreverses)
-        
-        self.showAnimatedGradientSkeleton(
-            usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.3),
-                                          .acWhite.withAlphaComponent(0.1)]),
-            animation: diagonalAnimation
-        )
+        DispatchQueue.main.async {
+            let diagonalAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: direction, duration: duration, autoreverses: autoreverses)
+
+            self.showAnimatedGradientSkeleton(
+                usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.3),
+                                              .acWhite.withAlphaComponent(0.1)]),
+                animation: diagonalAnimation
+            )
+        }
     }
 
 }

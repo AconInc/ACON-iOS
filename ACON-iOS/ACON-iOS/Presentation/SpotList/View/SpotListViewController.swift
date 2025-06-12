@@ -21,7 +21,8 @@ class SpotListViewController: BaseNavViewController {
 
     private let filterButton = UIButton()
 
-    private var isLoading: Bool = true
+    private var isSkeletonShowing: Bool = true
+    private var isDataLoading: Bool = true
 
 
     // MARK: - LifeCycle
@@ -133,29 +134,37 @@ extension SpotListViewController {
             guard let self = self,
                   let onSuccess = onSuccess else { return }
 
-            // NOTE: 스켈레톤 최소 1초 유지
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.endSkeletonAnimation()
-            }
-
             let spotList = viewModel.spotList
 
             if onSuccess {
                 DispatchQueue.main.async {
+                    self.isDataLoading = false
                     self.spotListView.regionErrorView.isHidden = true
                     self.spotListView.updateCollectionViewLayout(type: spotList.transportMode)
                     self.spotListView.collectionView.reloadData()
                     self.spotListView.collectionView.refreshControl?.endRefreshing()
                     self.spotListView.collectionView.setContentOffset(.zero, animated: true)
                 }
+
+                // NOTE: 스켈레톤 최소 1초 유지
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.isSkeletonShowing = false
+                    self.endSkeletonAnimation()
+                }
             }
 
             // NOTE: 법정동 조회 실패 (서비스불가지역)
             else if viewModel.errorType == .unsupportedRegion {
+                isSkeletonShowing = false
+                isDataLoading = false
+                endSkeletonAnimation()
                 spotListView.regionErrorView.isHidden = false
             }
 
             else {
+                isSkeletonShowing = false
+                isDataLoading = false
+                endSkeletonAnimation()
                 // TODO: 네트워크 에러뷰, 버튼에 postSpotList() 액션 설정
 
             }
@@ -314,12 +323,15 @@ private extension SpotListViewController {
     }
 
     func startSkeletonAnimation() {
-        spotListView.collectionView.startACSkeletonAnimation(direction: .leftRight, duration: 1)
-        isLoading = true
+        DispatchQueue.main.async { [weak self] in
+            self?.spotListView.collectionView.startACSkeletonAnimation(direction: .leftRight, duration: 1)
+            self?.isSkeletonShowing = true
+            self?.isDataLoading = true
+        }
     }
 
     func endSkeletonAnimation() {
-        isLoading = false
+        isSkeletonShowing = false
         spotListView.hideSkeleton()
     }
 
@@ -385,6 +397,17 @@ extension SpotListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
+        guard !isDataLoading else {
+            guard let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: SpotListSkeletonHeader.identifier,
+                for: indexPath) as? SpotListSkeletonHeader else {
+                fatalError("Cannot dequeue skeleton header view")
+            }
+            return header
+        }
+        
+        
         let spotList = viewModel.spotList
 
         switch kind {
@@ -437,7 +460,7 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
-        guard !isLoading else {
+        guard !isDataLoading else {
             return CGSize(width: SpotListItemSizeType.itemMaxWidth.value,
                           height: SpotListItemSizeType.headerHeight.value)
         }
@@ -466,7 +489,7 @@ extension SpotListViewController: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView,
                                    withVelocity velocity: CGPoint,
                                    targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        guard !isLoading else { return }
+        guard !isDataLoading else { return }
 
         if viewModel.spotList.transportMode == .walking {
             let cellHeight = SpotListItemSizeType.itemMaxHeight.value + SpotListItemSizeType.minimumLineSpacing.value
