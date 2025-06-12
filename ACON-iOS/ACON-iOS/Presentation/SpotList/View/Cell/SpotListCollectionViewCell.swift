@@ -38,6 +38,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
     private let titleSkeletonView = UIView()
     private let acornCountSkeletonView = UIView()
+    private let findCourseSkeletonView = UIView()
 
     private let cornerRadius: CGFloat = 20
 
@@ -63,10 +64,11 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
                                 noImageContentView,
                                 titleLabel,
                                 acornCountButton,
-                                titleSkeletonView,
-                                acornCountSkeletonView,
                                 tagStackView,
                                 findCourseButton,
+                                titleSkeletonView,
+                                acornCountSkeletonView,
+                                findCourseSkeletonView,
                                 loginlockOverlayView)
 
         bgImageShadowView.addSubview(bgImageView)
@@ -101,6 +103,17 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.trailing.equalToSuperview().inset(edge)
         }
 
+        tagStackView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(8)
+            $0.leading.equalTo(titleLabel)
+        }
+
+        findCourseButton.snp.makeConstraints {
+            $0.bottom.trailing.equalToSuperview().inset(edge)
+            $0.width.equalTo(140)
+            $0.height.equalTo(36)
+        }
+
         titleSkeletonView.snp.makeConstraints {
             $0.top.leading.equalTo(titleLabel)
             $0.width.equalTo(218 * ScreenUtils.widthRatio)
@@ -113,15 +126,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.height.equalTo(26)
         }
 
-        tagStackView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(8)
-            $0.leading.equalTo(titleLabel)
-        }
-
-        findCourseButton.snp.makeConstraints {
-            $0.bottom.trailing.equalToSuperview().inset(edge)
-            $0.width.equalTo(140)
-            $0.height.equalTo(36)
+        findCourseSkeletonView.snp.makeConstraints {
+            $0.edges.equalTo(findCourseButton)
         }
 
         loginlockOverlayView.snp.makeConstraints {
@@ -131,9 +137,10 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     }
 
     override func setStyle() {
-        backgroundColor = .clear
-
-        self.isSkeletonable = true
+        self.do {
+            $0.backgroundColor = .clear
+            $0.isSkeletonable = true
+        }
 
         bgImageShadowView.do {
             $0.clipsToBounds = false
@@ -163,11 +170,6 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
         titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
-        titleSkeletonView.do {
-            $0.isSkeletonable = true
-            $0.skeletonCornerRadius = 8
-        }
-
         acornCountButton.do {
             var config = UIButton.Configuration.plain()
             let acorn: UIImage = .icAcornLine.resize(to: .init(width: 24, height: 24))
@@ -180,17 +182,17 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.isHidden = true
         }
 
-        acornCountSkeletonView.do {
-            $0.isSkeletonable = true
-            $0.skeletonCornerRadius = 8
-        }
-
         tagStackView.do {
             $0.spacing = 4
         }
         
         findCourseButton.do {
             $0.updateGlassButtonState(state: .default)
+            $0.isSkeletonable = true
+            $0.skeletonCornerRadius = 8
+        }
+
+        [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach {
             $0.isSkeletonable = true
             $0.skeletonCornerRadius = 8
         }
@@ -312,15 +314,20 @@ private extension SpotListCollectionViewCell {
 
     func setAcornCountButton(with acornCount: Int) {
         let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
-        acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
-        acornCountButton.isHidden = false
+        acornCountButton.do {
+            $0.setAttributedTitle(text: String(acornString), style: .b1R)
+            $0.isHidden = false
+        }
     }
 
     func setFindCourseButton(with eta: Int) {
         let walk: String = StringLiterals.SpotList.walk
         let findCourse: String = StringLiterals.SpotList.minuteFindCourse
         let courseTitle: String = walk + String(eta) + findCourse
-        findCourseButton.setAttributedTitle(text: courseTitle, style: .b1SB)
+        findCourseButton.do {
+            $0.setAttributedTitle(text: courseTitle, style: .b1SB)
+            $0.isHidden = false
+        }
     }
 
     func extractAndApplyShadowColor(from image: UIImage, for key: String) {
@@ -363,8 +370,8 @@ private extension SpotListCollectionViewCell {
         print("updateUI with: \(status)")
         switch status {
         case .loading:
-            [titleSkeletonView, acornCountSkeletonView].forEach { $0.isHidden = false }
-            [glassBgView, noImageContentView, gradientImageView, acornCountButton].forEach { $0.isHidden = true }
+            [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach { $0.isHidden = false }
+            [glassBgView, noImageContentView, gradientImageView, acornCountButton, findCourseButton].forEach { $0.isHidden = true }
 
             titleLabel.text = nil
             findCourseButton.setAttributedTitle(text: "", style: .b1SB)

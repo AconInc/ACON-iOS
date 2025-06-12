@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SkeletonView
+
 class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - Properties
@@ -30,6 +32,10 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
     private let tagStackView = UIStackView()
     private let findCourseButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
 
+    private let titleSkeletonView = UIView()
+    private let acornCountSkeletonView = UIView()
+    private let findCourseSkeletonView = UIView()
+
     private let cornerRadius: CGFloat = 20
 
 
@@ -49,15 +55,18 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
     override func setHierarchy() {
         super.setHierarchy()
 
-        self.addSubviews(glassBgView,
-                         bgImageView,
-                         gradientImageView,
-                         noImageContentView,
-                         titleLabel,
-                         acornCountButton,
-                         tagStackView,
-                         findCourseButton,
-                         loginLockOverlayView)
+        contentView.addSubviews(glassBgView,
+                                bgImageView,
+                                gradientImageView,
+                                noImageContentView,
+                                titleLabel,
+                                acornCountButton,
+                                tagStackView,
+                                findCourseButton,
+                                titleSkeletonView,
+                                acornCountSkeletonView,
+                                findCourseSkeletonView,
+                                loginLockOverlayView)
     }
 
     override func setLayout() {
@@ -91,10 +100,28 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
             $0.top.equalTo(titleLabel)
             $0.trailing.equalToSuperview().inset(edge)
         }
-        
+
         tagStackView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(8)
             $0.leading.equalTo(titleLabel)
+        }
+
+        findCourseButton.snp.makeConstraints {
+            $0.bottom.trailing.equalToSuperview().inset(edge)
+            $0.width.equalTo(140)
+            $0.height.equalTo(36)
+        }
+
+        titleSkeletonView.snp.makeConstraints {
+            $0.top.leading.equalTo(titleLabel)
+            $0.width.equalTo(218 * ScreenUtils.widthRatio)
+            $0.height.equalTo(26)
+        }
+
+        acornCountSkeletonView.snp.makeConstraints {
+            $0.top.trailing.equalTo(acornCountButton)
+            $0.leading.equalTo(titleSkeletonView.snp.trailing).offset(10)
+            $0.height.equalTo(26)
         }
 
         findCourseButton.snp.makeConstraints {
@@ -109,24 +136,31 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
     }
 
     override func setStyle() {
-        backgroundColor = .clear
+        self.do {
+            $0.backgroundColor = .clear
+            $0.isSkeletonable = true
+        }
 
         bgImageView.do {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
             $0.layer.cornerRadius = cornerRadius
+            $0.image = .imgSkeletonBg
         }
 
         glassBgView.do {
-            $0.isHidden = true
             $0.clipsToBounds = true
             $0.layer.cornerRadius = cornerRadius
+            $0.isHidden = true
         }
+
+        noImageContentView.isHidden = true
 
         gradientImageView.do {
             $0.clipsToBounds = true
             $0.image = .imgGra1
             $0.layer.cornerRadius = cornerRadius
+            $0.isHidden = true
         }
 
         titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -140,14 +174,20 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
             config.contentInsets = .zero
             $0.configuration = config
             $0.setContentCompressionResistancePriority(.required, for: .horizontal)
+            $0.isHidden = true
         }
 
         tagStackView.do {
             $0.spacing = 4
         }
-        
+
         findCourseButton.do {
             $0.updateGlassButtonState(state: .default)
+        }
+
+        [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach {
+            $0.isSkeletonable = true
+            $0.skeletonCornerRadius = 8
         }
 
         loginLockOverlayView.do {
@@ -160,10 +200,7 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        gradientImageView.do {
-            $0.image = nil
-            $0.removeGradient()
-        }
+        updateUI(with: .loading)
 
         tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
@@ -256,7 +293,10 @@ private extension NoMatchingSpotListCollectionViewCell {
 
     func setAcornCountButton(with acornCount: Int) {
         let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
-        acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
+        acornCountButton.do {
+            $0.setAttributedTitle(text: String(acornString), style: .b1R)
+            $0.isHidden = false
+        }
     }
 
     func setTagStackView(with tags: [SpotTagType]) {
@@ -275,11 +315,30 @@ private extension NoMatchingSpotListCollectionViewCell {
         let bike: String = StringLiterals.SpotList.bike
         let findCourse: String = StringLiterals.SpotList.minuteFindCourse
         let courseTitle: String = bike + String(eta) + findCourse
-        findCourseButton.setAttributedTitle(text: courseTitle, style: .b1SB)
+        findCourseButton.do {
+            $0.setAttributedTitle(text: courseTitle, style: .b1SB)
+            $0.isHidden = false
+        }
     }
 
     func updateUI(with status: SpotImageStatusType) {
         switch status {
+        case .loading:
+            [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach { $0.isHidden = false }
+            [glassBgView, noImageContentView, gradientImageView, acornCountButton, findCourseButton].forEach { $0.isHidden = true }
+
+            titleLabel.text = nil
+            
+            bgImageView.do {
+                $0.kf.cancelDownloadTask()
+                $0.image = .imgSkeletonBg
+            }
+
+            gradientImageView.do {
+                $0.image = nil
+                $0.removeGradient()
+            }
+
         case .loaded:
             [glassBgView, noImageContentView].forEach { $0.isHidden = true }
 
@@ -290,32 +349,31 @@ private extension NoMatchingSpotListCollectionViewCell {
             }
 
         case .loadFailed:
-            glassBgView.isHidden = false
+            [glassBgView, gradientImageView, noImageContentView].forEach { $0.isHidden = false }
+
+            bgImageView.image = nil
 
             gradientImageView.do {
                 $0.image = nil
-                $0.isHidden = false
                 $0.setTripleGradient()
             }
 
             noImageContentView.do {
-                $0.isHidden = false
                 $0.setDescription(status)
             }
 
         case .noImageStatic:
-            glassBgView.isHidden = true
+            [glassBgView, gradientImageView].forEach { $0.isHidden = true }
+            noImageContentView.isHidden = false
 
             bgImageView.image = .imgSpotNoImageBackground
 
             gradientImageView.do {
                 $0.image = nil
-                $0.isHidden = true
                 $0.removeGradient()
             }
 
             noImageContentView.do {
-                $0.isHidden = false
                 $0.setDescription(status)
             }
 
