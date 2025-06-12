@@ -118,7 +118,8 @@ final class SavedSpotView: BaseView {
 extension SavedSpotView {
 
     func bindData(_ data: SavedSpotModel) {
-        startSkeletonAnimation()
+        startACSkeletonAnimation()
+        spotNameLabel.isHidden = true
 
         preparingImageLabel.isHidden = true
 
@@ -158,19 +159,6 @@ extension SavedSpotView {
             $0.skeletonView.isHidden = false
             $0.preparingImageLabel.isHidden = true
             $0.spotNameLabel.text = nil
-        }
-    }
-
-    private func startSkeletonAnimation() {
-        let diagonalAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .topLeftBottomRight, duration: 1.5, autoreverses: true)
-
-        DispatchQueue.main.async { [weak self] in
-            self?.showAnimatedGradientSkeleton(
-                usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.3),
-                                              .acWhite.withAlphaComponent(0.1)]),
-                animation: diagonalAnimation
-            )
-            self?.spotNameLabel.isHidden = true
         }
     }
 

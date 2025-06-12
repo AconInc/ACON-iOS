@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SkeletonView
+
 extension UIView {
 
     // MARK: - UIView 여러 개 한 번에 addSubview
@@ -147,6 +149,25 @@ extension UIView {
 
     func removeGradient() {
         layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
+    }
+
+}
+
+
+// MARK: - Skeleton 설정
+
+extension UIView {
+
+    func startACSkeletonAnimation(direction: GradientDirection = .topLeftBottomRight,
+                                  duration: CFTimeInterval = 1.5,
+                                  autoreverses: Bool = true) {
+        let diagonalAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: direction, duration: duration, autoreverses: autoreverses)
+        
+        self.showAnimatedGradientSkeleton(
+            usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.3),
+                                          .acWhite.withAlphaComponent(0.1)]),
+            animation: diagonalAnimation
+        )
     }
 
 }

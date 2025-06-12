@@ -309,23 +309,13 @@ private extension SpotListViewController {
 private extension SpotListViewController {
 
     func setSkeleton() {
-        spotListView.collectionView.prepareSkeleton { isDone in
-            print("🥑prepareSkeleton: \(isDone)")
+        spotListView.collectionView.prepareSkeleton { _ in
         }
     }
 
     func startSkeletonAnimation() {
-        let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight, duration: 1, autoreverses: true)
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            isLoading = true
-            spotListView.collectionView.setContentOffset(.zero, animated: true)
-            spotListView.collectionView.showAnimatedGradientSkeleton(
-                usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.3),
-                                              .acWhite.withAlphaComponent(0.1)]),
-                animation: skeletonAnimation
-            )
-        }
+        spotListView.collectionView.startACSkeletonAnimation(direction: .leftRight, duration: 1)
+        isLoading = true
     }
 
     func endSkeletonAnimation() {
@@ -360,12 +350,12 @@ extension SpotListViewController: UICollectionViewDataSource {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpotListGoogleAdCollectionViewCell.cellIdentifier, for: indexPath) as? SpotListGoogleAdCollectionViewCell else {
                     return UICollectionViewCell() }
 
-                // TODO: 주석 해제 (실제 코드)
+                // TODO: 🍇 주석 해제 (실제 코드)
 //                if let nativeAd = GoogleAdsManager.shared.getNativeAd(.imageOnly) {
 //                    cell.configure(with: nativeAd)
 //                } else {
                     cell.isSkeletonable = true
-                    cell.startSkeletonAnimation()
+                    cell.startACSkeletonAnimation()
 //                }
                 
                 return cell

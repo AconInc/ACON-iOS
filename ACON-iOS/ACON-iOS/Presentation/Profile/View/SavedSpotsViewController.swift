@@ -42,7 +42,6 @@ final class SavedSpotsViewController: BaseNavViewController {
         registerCell()
         setDelegate()
         setSkeleton()
-        startSkeletonAnimation()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +50,7 @@ final class SavedSpotsViewController: BaseNavViewController {
         self.tabBarController?.tabBar.isHidden = true
         if AuthManager.shared.hasToken {
             viewModel.getSavedSpots()
+            savedSpotCollectionView.startACSkeletonAnimation()
         }
 
     }
@@ -101,7 +101,7 @@ private extension SavedSpotsViewController {
             
             // NOTE: 최소 1초 스켈레톤 유지
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.endSkeletonAnimation()
+                self.savedSpotCollectionView.hideSkeleton()
             }
         }
     }
@@ -125,6 +125,8 @@ private extension SavedSpotsViewController {
 }
 
 
+// MARK: - Skeleton Controls
+
 private extension SavedSpotsViewController {
 
     func setSkeleton() {
@@ -132,24 +134,8 @@ private extension SavedSpotsViewController {
         }
     }
 
-    func startSkeletonAnimation() {
-        let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight, duration: 1, autoreverses: true)
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            savedSpotCollectionView.setContentOffset(.zero, animated: true)
-            savedSpotCollectionView.showAnimatedGradientSkeleton(
-                usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.3),
-                                              .acWhite.withAlphaComponent(0.1)]),
-                animation: skeletonAnimation
-            )
-        }
-    }
-
-    func endSkeletonAnimation() {
-        savedSpotCollectionView.hideSkeleton()
-    }
-
 }
+
 
 // MARK: - CollectionView Delegate
 

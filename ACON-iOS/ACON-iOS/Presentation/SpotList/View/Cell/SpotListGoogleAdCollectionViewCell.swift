@@ -142,7 +142,7 @@ class SpotListGoogleAdCollectionViewCell: BaseCollectionViewCell {
         super.prepareForReuse()
         
         nativeAdView.nativeAd = nil
-        endSkeletonAnimation()
+        hideSkeleton()
     }
     
     override func layoutSubviews() {
@@ -177,7 +177,7 @@ extension SpotListGoogleAdCollectionViewCell {
         
         nativeAdView.isHidden = false
         
-        // TODO: 주석 해제
+        // TODO: 🍇 주석 해제
 //        endSkeletonAnimation()
         
         if let headline = nativeAd.headline {
@@ -211,27 +211,6 @@ extension SpotListGoogleAdCollectionViewCell {
         mediaView.mediaContent = mediaContent
         
         nativeAdView.nativeAd = nativeAd
-    }
-    
-}
-
-
-// MARK: - Skeleton Control
-
-extension SpotListGoogleAdCollectionViewCell {
-    
-    func startSkeletonAnimation() {
-        let diagonalAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .topLeftBottomRight, duration: 1.5, autoreverses: true)
-
-        self.showAnimatedGradientSkeleton(
-            usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.3),
-                                          .acWhite.withAlphaComponent(0.1)]),
-            animation: diagonalAnimation
-        )
-    }
-
-    private func endSkeletonAnimation() {
-        self.hideSkeleton()
     }
     
 }
