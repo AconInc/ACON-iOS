@@ -7,23 +7,27 @@
 
 import UIKit
 
+import SkeletonView
+
 final class SavedSpotView: BaseView {
 
     // MARK: - UI Properties
-    
+
     private let skeletonView: UIView = UIView()
-    
+
     private let gradientView: UIView = UIView()
-    
+
     private let spotImageView: UIImageView = UIImageView()
-    
+
     private let spotNameLabel: UILabel = UILabel()
-    
+
     private let preparingImageLabel: UILabel = UILabel()
 
-    
+    private let spotNameSkeletonView = UIView()
+
+
     // MARK: - Lifecycle
-    
+
     override func setHierarchy() {
         super.setHierarchy()
         
@@ -31,59 +35,73 @@ final class SavedSpotView: BaseView {
                          spotImageView,
                          gradientView,
                          spotNameLabel,
-                         preparingImageLabel)
+                         preparingImageLabel,
+                         spotNameSkeletonView)
     }
-    
+
     override func setLayout() {
         super.setLayout()
-        
+
         skeletonView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
+
         gradientView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
             $0.height.equalToSuperview().dividedBy(4)
         }
-        
+
         spotImageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
+
         spotNameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*12)
-            $0.horizontalEdges.equalToSuperview().inset(20*ScreenUtils.widthRatio)
+            $0.top.horizontalEdges.equalToSuperview().inset(20 * ScreenUtils.heightRatio)
             $0.height.equalTo(20)
         }
-        
+
         preparingImageLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
+        }
+
+        spotNameSkeletonView.snp.makeConstraints {
+            $0.top.horizontalEdges.equalTo(spotNameLabel)
+            $0.height.equalTo(26)
         }
     }
     
     override func setStyle() {
         super.setStyle()
-        
+
         self.do {
             $0.backgroundColor = .clear
             $0.layer.cornerRadius = 8
             $0.clipsToBounds = true
         }
 
+        skeletonView.do {
+            $0.layer.cornerRadius = 8
+        }
+
         spotImageView.do {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
         }
-        
+
         preparingImageLabel.do {
             $0.isHidden = true
             $0.setLabel(text: "이미지 준비중", style: .c1R)
         }
+
+        [self, skeletonView, spotNameSkeletonView].forEach {
+            $0.isSkeletonable = true
+            $0.skeletonCornerRadius = 8
+        }
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.gradientView.setGradient(
@@ -91,17 +109,19 @@ final class SavedSpotView: BaseView {
             )
         }
     }
+
 }
 
 
 // MARK: - Bind Data
 
 extension SavedSpotView {
-    
+
     func bindData(_ data: SavedSpotModel) {
-        skeletonView.isHidden = false
+        startSkeletonAnimation()
+
         preparingImageLabel.isHidden = true
-        
+
         spotNameLabel.setLabel(text: data.name.abbreviatedStringWithException(9), style: .t5SB)
         
         if let imageURL = data.image {
@@ -111,16 +131,19 @@ extension SavedSpotView {
             ) { [weak self] result in
                 DispatchQueue.main.async {
                     self?.preparingImageLabel.isHidden = true
-                    self?.skeletonView.isHidden = true
+                    self?.endSkeletonAnimation()
                 }
             }
         } else {
             spotImageView.image = .imgSpotNoImageBackground
             preparingImageLabel.isHidden = false
-            skeletonView.isHidden = true
+
+            DispatchQueue.main.async { [weak self] in
+                self?.endSkeletonAnimation()
+            }
         }
     }
-    
+
 }
 
 
@@ -137,5 +160,25 @@ extension SavedSpotView {
             $0.spotNameLabel.text = nil
         }
     }
-    
+
+    private func startSkeletonAnimation() {
+        let diagonalAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .topLeftBottomRight, duration: 1.5, autoreverses: true)
+
+        DispatchQueue.main.async { [weak self] in
+            self?.showAnimatedGradientSkeleton(
+                usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.3),
+                                              .acWhite.withAlphaComponent(0.1)]),
+                animation: diagonalAnimation
+            )
+            self?.spotNameLabel.isHidden = true
+        }
+    }
+
+    private func endSkeletonAnimation() {
+        hideSkeleton()
+
+        spotNameLabel.isHidden = false
+        [skeletonView, spotNameSkeletonView].forEach { $0.isHidden = true}
+    }
+
 }

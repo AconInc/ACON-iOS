@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SkeletonView
+
 final class SavedSpotsViewController: BaseNavViewController {
 
     // MARK: - UI Properties
@@ -39,6 +41,8 @@ final class SavedSpotsViewController: BaseNavViewController {
         bindViewModel()
         registerCell()
         setDelegate()
+        setSkeleton()
+        startSkeletonAnimation()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +52,7 @@ final class SavedSpotsViewController: BaseNavViewController {
         if AuthManager.shared.hasToken {
             viewModel.getSavedSpots()
         }
+
     }
 
     
@@ -60,6 +65,7 @@ final class SavedSpotsViewController: BaseNavViewController {
         setCenterTitleLabelStyle(title: "저장한 장소")
         savedSpotCollectionView.do {
             $0.backgroundColor = .clear
+            $0.isSkeletonable = true
         }
     }
 
@@ -92,6 +98,11 @@ private extension SavedSpotsViewController {
                 savedSpotCollectionView.reloadData()
             }
             viewModel.onGetSavedSpotsSuccess.value = nil
+            
+            // NOTE: 최소 1초 스켈레톤 유지
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.endSkeletonAnimation()
+            }
         }
     }
 
@@ -113,6 +124,32 @@ private extension SavedSpotsViewController {
     
 }
 
+
+private extension SavedSpotsViewController {
+
+    func setSkeleton() {
+        savedSpotCollectionView.prepareSkeleton { _ in
+        }
+    }
+
+    func startSkeletonAnimation() {
+        let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight, duration: 1, autoreverses: true)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            savedSpotCollectionView.setContentOffset(.zero, animated: true)
+            savedSpotCollectionView.showAnimatedGradientSkeleton(
+                usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.3),
+                                              .acWhite.withAlphaComponent(0.1)]),
+                animation: skeletonAnimation
+            )
+        }
+    }
+
+    func endSkeletonAnimation() {
+        savedSpotCollectionView.hideSkeleton()
+    }
+
+}
 
 // MARK: - CollectionView Delegate
 
@@ -145,8 +182,34 @@ extension SavedSpotsViewController: UICollectionViewDataSource {
         
         let data = viewModel.savedSpotList[indexPath.item]
         cell.bindData(data)
+        cell.isSkeletonable = true
 
         return cell
+    }
+    
+}
+
+
+// MARK: - Skeleton CollectionView DataSource
+
+extension SavedSpotsViewController: SkeletonCollectionViewDataSource {
+
+    func collectionSkeletonView(_ skeletonView: UICollectionView,
+                                numberOfItemsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView,
+                                skeletonCellForItemAt indexPath: IndexPath) -> UICollectionViewCell? {
+        return skeletonView.dequeueReusableCell(
+            withReuseIdentifier: SavedSpotCollectionViewCell.cellIdentifier,
+            for: indexPath
+        )
+    }
+
+    func collectionSkeletonView(_ skeletonView: UICollectionView,
+                                cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return SavedSpotCollectionViewCell.identifier
     }
     
 }
