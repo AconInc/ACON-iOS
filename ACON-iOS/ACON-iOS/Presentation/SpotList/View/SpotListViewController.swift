@@ -176,9 +176,14 @@ extension SpotListViewController {
             
             if isNeeded {
                 DispatchQueue.main.async { [weak self] in
-                    ACToastController.show(.locationChanged,
-                                           bottomInset: 85,
-                                           tapAction: { self?.viewModel.postSpotList() })
+                    ACToastController.show(
+                        .locationChanged,
+                        bottomInset: 85,
+                        tapAction: {
+                            self?.viewModel.postSpotList()
+                            self?.startSkeletonAnimation()
+                        }
+                    )
                 }
                 spotListView.setNeedsLayout()
                 spotListView.layoutIfNeeded()
@@ -191,8 +196,6 @@ extension SpotListViewController {
         spotToggleButton.selectedType.bind { [weak self] spotType in
             guard let self = self,
                   let spotType = spotType else { return }
-            
-            isLoading = true
 
             spotListView.collectionView.setContentOffset(.zero, animated: true)
             viewModel.spotType = spotType
@@ -220,7 +223,6 @@ private extension SpotListViewController {
             return
         }
 
-        isLoading = true
         viewModel.updateLocationAndPostSpotList()
         startSkeletonAnimation()
     }
@@ -245,29 +247,29 @@ private extension SpotListViewController {
 // MARK: - CollectionView Settings
 
 private extension SpotListViewController {
-    
+
     func setCollectionView() {
         setDelegate()
         registerCells()
         setRefreshControl()
     }
-    
+
     func setDelegate() {
         spotListView.collectionView.dataSource = self
         spotListView.collectionView.delegate = self
     }
-    
+
     func registerCells() {
         spotListView.collectionView.register(
             SpotListCollectionViewCell.self,
             forCellWithReuseIdentifier: SpotListCollectionViewCell.cellIdentifier
         )
-        
+
         spotListView.collectionView.register(
             NoMatchingSpotListCollectionViewCell.self,
             forCellWithReuseIdentifier: NoMatchingSpotListCollectionViewCell.cellIdentifier
         )
-        
+
         spotListView.collectionView.register(
             SpotListGoogleAdCollectionViewCell.self,
             forCellWithReuseIdentifier: SpotListGoogleAdCollectionViewCell.cellIdentifier
@@ -316,9 +318,8 @@ private extension SpotListViewController {
 
     func startSkeletonAnimation() {
         let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
-
+        isLoading = true
         spotListView.collectionView.setContentOffset(.zero, animated: true)
-
         spotListView.collectionView.showAnimatedGradientSkeleton(
             usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.5),
                                           .acWhite.withAlphaComponent(0)]),
