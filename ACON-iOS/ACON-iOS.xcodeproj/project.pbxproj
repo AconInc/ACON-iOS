@@ -53,6 +53,7 @@
 		156AE67B2DE0F37100AE800D /* NoMatchingSpotHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AE67A2DE0F37100AE800D /* NoMatchingSpotHeader.swift */; };
 		156D92602D6570A90037F8F1 /* PatchProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */; };
 		157135B12DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157135B02DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift */; };
+		1576806E2DFA06A70079B255 /* SpotListSkeletonHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1576806D2DFA06A70079B255 /* SpotListSkeletonHeader.swift */; };
 		157C061F2DC5E7CE000B04AF /* SpotTagType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C061E2DC5E7CE000B04AF /* SpotTagType.swift */; };
 		157C06212DC5EBB4000B04AF /* SpotTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C06202DC5EBB4000B04AF /* SpotTagButton.swift */; };
 		157C0AC12DC689E7000B04AF /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C0AC02DC689E7000B04AF /* UIImage+.swift */; };
@@ -329,6 +330,7 @@
 		156AE67A2DE0F37100AE800D /* NoMatchingSpotHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMatchingSpotHeader.swift; sourceTree = "<group>"; };
 		156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchProfileRequest.swift; sourceTree = "<group>"; };
 		157135B02DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		1576806D2DFA06A70079B255 /* SpotListSkeletonHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListSkeletonHeader.swift; sourceTree = "<group>"; };
 		157C061E2DC5E7CE000B04AF /* SpotTagType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTagType.swift; sourceTree = "<group>"; };
 		157C06202DC5EBB4000B04AF /* SpotTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTagButton.swift; sourceTree = "<group>"; };
 		157C0AC02DC689E7000B04AF /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
@@ -649,6 +651,7 @@
 				1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */,
 				15A246192DE7A9E500469272 /* NoMatchingSpotListCollectionViewCell.swift */,
 				15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */,
+				1576806D2DFA06A70079B255 /* SpotListSkeletonHeader.swift */,
 				156AE67A2DE0F37100AE800D /* NoMatchingSpotHeader.swift */,
 			);
 			path = Cell;
@@ -2043,6 +2046,7 @@
 				74BF92192D395FE800B923E3 /* ACToastController.swift in Sources */,
 				1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */,
 				74BF92112D391FFE00B923E3 /* LocalVerificationViewController.swift in Sources */,
+				1576806E2DFA06A70079B255 /* SpotListSkeletonHeader.swift in Sources */,
 				74BF92122D391FFE00B923E3 /* LocalMapViewController.swift in Sources */,
 				D6E8168E2D6228F5001E4EBF /* WithdrawalViewController.swift in Sources */,
 				740968B72DEC3CA700AFF624 /* VerifiedAreasCollectionViewCell.swift in Sources */,
