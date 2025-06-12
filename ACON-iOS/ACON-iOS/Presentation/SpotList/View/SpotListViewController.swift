@@ -35,7 +35,6 @@ class SpotListViewController: BaseNavViewController {
         addTarget()
         viewModel.updateLocationAndPostSpotList()
         setSkeleton()
-        startSkeletonAnimation()
     }
 
     override func viewWillAppear(_ animated: Bool) {

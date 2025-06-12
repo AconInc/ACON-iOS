@@ -216,7 +216,7 @@ extension SpotListGoogleAdCollectionViewCell {
 }
 
 
-// MARK: - Empty Cell
+// MARK: - Skeleton Control
 
 extension SpotListGoogleAdCollectionViewCell {
     
