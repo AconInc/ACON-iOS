@@ -12,7 +12,7 @@ enum ACSheetDetentType: String {
     case short
     case semiShort
     case middle
-    case long
+    case semiLong
 
     var identifier: UISheetPresentationController.Detent.Identifier {
         return UISheetPresentationController.Detent.Identifier(rawValue)
@@ -23,7 +23,7 @@ enum ACSheetDetentType: String {
         case .short: return 204
         case .semiShort: return 300
         case .middle: return 518
-        case .long: return 680
+        case .semiLong: return 592
         }
     }
 
@@ -52,7 +52,7 @@ extension ACSheetDetentType {
     }
 
     static var longDetent: UISheetPresentationController.Detent {
-        return long.detent
+        return semiLong.detent
     }
 
 }

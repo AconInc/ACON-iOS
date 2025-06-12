@@ -95,12 +95,6 @@ private extension SpotListFilterViewController {
 private extension SpotListFilterViewController {
 
     func addTargets() {
-        spotListFilterView.exitButton.addTarget(
-            self,
-            action: #selector(didTapExitButton),
-            for: .touchUpInside
-        )
-
         spotListFilterView.conductButton.addTarget(
             self,
             action: #selector(didTapConductButton),
@@ -120,11 +114,6 @@ private extension SpotListFilterViewController {
 // MARK: - @objc functions
 
 private extension SpotListFilterViewController {
-
-    @objc
-    func didTapExitButton() {
-        self.dismiss(animated: true)
-    }
 
     @objc
     func didTapConductButton() {

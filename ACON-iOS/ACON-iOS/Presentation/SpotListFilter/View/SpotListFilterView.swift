@@ -18,8 +18,6 @@ class SpotListFilterView: GlassmorphismView {
 
     private let pageTitleLabel = UILabel()
     
-    let exitButton = UIButton()
-    
     private let scrollView = UIScrollView()
     
     private let stackView = UIStackView()
@@ -86,7 +84,6 @@ class SpotListFilterView: GlassmorphismView {
         
         self.addSubviews(
             pageTitleLabel,
-            exitButton,
             scrollView,
             resetButton,
             conductButton
@@ -141,11 +138,6 @@ class SpotListFilterView: GlassmorphismView {
         pageTitleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(33)
             $0.centerX.equalToSuperview()
-        }
-        
-        exitButton.snp.makeConstraints {
-            $0.centerY.equalTo(pageTitleLabel)
-            $0.trailing.equalToSuperview().offset(-horizontalEdge)
         }
         
         scrollView.snp.makeConstraints {
@@ -204,8 +196,6 @@ class SpotListFilterView: GlassmorphismView {
         pageTitleLabel.setLabel(
             text: StringLiterals.SpotListFilter.pageTitle,
             style: .t3SB)
-        
-        exitButton.setImage(.icDismiss, for: .normal)
         
         stackView.do {
             $0.axis = .vertical
