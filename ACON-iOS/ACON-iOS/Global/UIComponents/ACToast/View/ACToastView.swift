@@ -41,7 +41,7 @@ final class ACToastView: GlassmorphismView {
         super.setLayout()
         
         self.snp.makeConstraints {
-            $0.height.equalTo(ScreenUtils.heightRatio*56)
+            $0.height.equalTo(acToastType.height)
             $0.width.equalTo(ScreenUtils.widthRatio*328)
         }
         
@@ -53,6 +53,11 @@ final class ACToastView: GlassmorphismView {
     
     override func setStyle() {
         super.setStyle()
+        
+        self.do {
+            $0.layer.cornerRadius = acToastType.glassBorderAttributes.cornerRadius
+            $0.clipsToBounds = true
+        }
         
         messageLabel.setLabel(text: acToastType.title,
                               style: acToastType.titleFont,
@@ -66,6 +71,7 @@ final class ACToastView: GlassmorphismView {
         super.layoutSubviews()
 
         self.addGlassBorder(acToastType.glassBorderAttributes)
+        self.refreshBlurEffect()
     }
 
 }
@@ -78,6 +84,7 @@ private extension ACToastView {
     @objc
     func handleTapAction() {
         tapAction?()
+        self.removeFromSuperview()
     }
     
     func addTapAction() {

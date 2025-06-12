@@ -10,7 +10,7 @@ import CoreLocation
 
 protocol ACLocationManagerDelegate: AnyObject {
     
-    func locationManager(_ manager: ACLocationManager, didUpdateLocation coordinate: CLLocationCoordinate2D)
+    func locationManager(_ manager: ACLocationManager, didUpdateLocation location: CLLocation)
     func locationManager(_ manager: ACLocationManager, didFailWithError error: Error, vc: UIViewController?)
     func locationManagerDidChangeAuthorization(_ manager: ACLocationManager)
     
@@ -115,14 +115,14 @@ class ACLocationManager: NSObject {
 extension ACLocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard isRequestingLocation, let coordinate = locations.last?.coordinate else {
+        guard isRequestingLocation, let location = locations.last else {
             return
         }
         isRequestingLocation = false
         stopUpdatingLocation()
         
         multicastDelegate.invoke { delegate in
-            delegate.locationManager(self, didUpdateLocation: coordinate)
+            delegate.locationManager(self, didUpdateLocation: location)
         }
     }
     

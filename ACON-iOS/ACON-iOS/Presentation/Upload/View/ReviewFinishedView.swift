@@ -38,7 +38,7 @@ final class ReviewFinishedView: BaseView {
         
         finishedReviewLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*127)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*88.5)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
             $0.height.equalTo(56)
         }
         

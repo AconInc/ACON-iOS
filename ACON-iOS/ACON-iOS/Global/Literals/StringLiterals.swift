@@ -117,7 +117,7 @@ enum StringLiterals {
         
         static let reviewWithAcornsHere = "도토리로 리뷰남기기"
         
-        static let finishedReview = "에 대한\n리뷰 작성을 완료했어요!"
+        static let finishedReview = "의\n리뷰 작성을 완료했어요!"
         
         static let wishYouPreference = "당신의 취향이 가득 담긴 장소였길 바라요"
         
@@ -201,6 +201,9 @@ enum StringLiterals {
         static let requestToAddSpot = "장소 등록 신청하기"
         
         static let howAboutTheseInstead = "대신 여기는 어떠세요?"
+
+        static let locationChangedToast = "지금 위치 기준으로 다시 추천 받기"
+        
     }
     
     enum LocalVerification {

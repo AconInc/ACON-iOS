@@ -239,11 +239,13 @@ extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == spotSearchView.searchSuggestionCollectionView {
             selectedSpotID = spotSearchViewModel.searchSuggestionData.value?[indexPath.item].spotID ?? 1
             selectedSpotName = spotSearchViewModel.searchSuggestionData.value?[indexPath.item].spotName ?? ""
+            spotSearchView.searchTextField.text = selectedSpotName
+            updateSearchKeyword(selectedSpotName)
         } else {
             selectedSpotID = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotID ?? 1
             selectedSpotName = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotName ?? ""
+            spotSearchView.searchTextField.text = selectedSpotName
         }
-        spotSearchView.searchTextField.text = selectedSpotName
         if collectionView == spotSearchView.searchKeywordCollectionView {
             self.dismissKeyboard()
         }

@@ -42,8 +42,16 @@ class SpotListViewController: BaseNavViewController {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = false
+        viewModel.startPeriodicLocationCheck()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        ACToastController.hide()
+        viewModel.stopPeriodicLocationCheck()
+    }
+    
     override func setHierarchy() {
         super.setHierarchy()
 
@@ -106,6 +114,11 @@ class SpotListViewController: BaseNavViewController {
         super.viewDidLayoutSubviews()
 
         spotToggleButton.refreshBlurEffect()
+        for cell in spotListView.collectionView.visibleCells {
+            if let cell = cell as? SpotListCollectionViewCell {
+                cell.setNeedsLayout()
+           }
+       }
         spotListView.layoutSkeletonIfNeeded()
     }
 
@@ -155,6 +168,22 @@ extension SpotListViewController {
             filterButton.isSelected = !viewModel.filterList.isEmpty
             
             viewModel.onFinishRefreshingSpotList.value = true
+        }
+        
+        viewModel.needToShowToast.bind { [weak self] isNeeded in
+            guard let self = self,
+                  let isNeeded = isNeeded else { return }
+            
+            if isNeeded {
+                DispatchQueue.main.async { [weak self] in
+                    ACToastController.show(.locationChanged,
+                                           bottomInset: 85,
+                                           tapAction: { self?.viewModel.postSpotList() })
+                }
+                spotListView.setNeedsLayout()
+                spotListView.layoutIfNeeded()
+            }
+            viewModel.needToShowToast.value = nil
         }
     }
 
@@ -449,6 +478,7 @@ extension SpotListViewController: UIScrollViewDelegate {
 
             // NOTE: 화면 중앙과 가장 가까운 셀을 찾아 화면 중앙으로 이동
             targetContentOffset.pointee = CGPoint(x: 0, y: newTargetY)
+            HapticManager.shared.hapticSelection()
         }
 
         // NOTE: 네비게이션 바 글라스모피즘 On/Off

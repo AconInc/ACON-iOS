@@ -113,7 +113,7 @@ class ProfileGoogleAdView: BaseView {
         glassmorphismView.refreshBlurEffect()
         glassmorphismView.setGradient(bottomColor: .gray900.withAlphaComponent(0),
                                        endPoint: CGPoint(x: 0.5, y: 0.5))
-        adButton.updateGlassButtonState(state: .default)
+        adButton.refreshButtonBlurEffect(.buttonGlassDefault)
     }
     
 }
