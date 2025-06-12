@@ -15,7 +15,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
 
     var onZooming: ((Bool) -> Void)?
 
-    private let glassBgView = GlassmorphismView(.noImageErrorGlass)
+    private let imageLoadErrorGlassBgView = GlassmorphismView(.noImageErrorGlass)
 
     private let imageView = UIImageView()
 
@@ -30,13 +30,13 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     override func setHierarchy() {
         super.setHierarchy()
 
-        self.addSubviews(glassBgView, imageView, imageLoadErrorLabel)
+        contentView.addSubviews(imageLoadErrorGlassBgView, imageView, imageLoadErrorLabel)
     }
 
     override func setLayout() {
         super.setLayout()
 
-        glassBgView.snp.makeConstraints {
+        imageLoadErrorGlassBgView.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.equalTo(imageWidth)
             $0.height.equalTo(imageHeight)
@@ -58,14 +58,17 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
 
         self.backgroundColor = .clear
 
-        imageView.do {
+        contentView.do {
             let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zooming))
-            $0.contentMode = .scaleAspectFill
-            $0.clipsToBounds = true
             $0.isUserInteractionEnabled = true
             $0.addGestureRecognizer(pinchGesture)
         }
-        
+
+        imageView.do {
+            $0.contentMode = .scaleAspectFill
+            $0.clipsToBounds = true
+        }
+
         imageLoadErrorLabel.do {
             $0.isHidden = true
             $0.setLabel(text: StringLiterals.SpotList.imageLoadingFailed, style: .t5SB, color: .gray50)
@@ -83,7 +86,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        glassBgView.refreshBlurEffect()
+        imageLoadErrorGlassBgView.refreshBlurEffect()
     }
 
 }
