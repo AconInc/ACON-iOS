@@ -302,7 +302,7 @@ private extension SpotListFilterView {
     // MARK: - (Opening hours section)
     
     func setOpeningHoursSectionUI() {
-        let option: SpotFilterType.OpeningHoursOptionType = spotType == .restaurant ? .overMidnight : .overTenPM
+        let option: SpotFilterType.OpeningHoursOptionType = .overTenPM
 
         openingHoursSectionTitleLabel.setLabel(text: StringLiterals.SpotListFilter.openingHours, style: .t5SB)
         openingHoursButton.updateButtonTitle(option.text)

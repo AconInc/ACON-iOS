@@ -201,9 +201,7 @@ private extension SpotListFilterViewController {
         if spotListFilterView.openingHoursButton.isTagged {
             return SpotFilterModel(
                 category: .openingHours,
-                optionList: spotType == .restaurant
-                ? [SpotFilterType.OpeningHoursOptionType.overMidnight.serverKey]
-                : [SpotFilterType.OpeningHoursOptionType.overTenPM.serverKey]
+                optionList: [SpotFilterType.OpeningHoursOptionType.overTenPM.serverKey]
             )
         }
         return nil
