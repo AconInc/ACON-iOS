@@ -21,6 +21,7 @@ class SpotListViewModel: Serviceable {
     var spotList = SpotListModel()
 
     // TODO: 삭제
+    private let dummyDebouncer = ACDebouncer(delay: 2)
     private var restaurantDummy: [SpotModel] = [
         SpotModel(id: 1, imageURL: nil, name: "이미지없는 식당", acornCount: 50, tagList: [.new, .local, .top(number: 1)], eta: 1, latitude: 35.785834, longitude: 128.25),
         SpotModel(id: 2, imageURL: "wrongAddress", name: "이미지에러", acornCount: 50, tagList: [.top(number: 2)], eta: 1, latitude: 35.785834, longitude: 128.25),
@@ -65,26 +66,30 @@ class SpotListViewModel: Serviceable {
 extension SpotListViewModel {
 
     func postSpotList() {
-        let filterListDTO = filterList.map { filter in
-            return SpotFilterDTO(category: filter.category.serverKey,
-                                       optionList: filter.optionList)
-        }
-        
-        let requestBody = PostSpotListRequest(
-            latitude: userCoordinate.latitude,
-            longitude: userCoordinate.longitude,
-            condition: SpotConditionDTO(
-                spotType: spotType.serverKey,
-                filterList: filterList.isEmpty ? nil : filterListDTO
+        // TODO: 삭제
+        dummyDebouncer.call {
+            self.spotList = SpotListModel(
+                transportMode: self.spotType == .restaurant ? .walking : .biking,
+                spotList: self.restaurantDummy
             )
-        )
-        
-        self.spotList = SpotListModel(
-            transportMode: self.spotType == .restaurant ? .walking : .biking,
-            spotList: self.restaurantDummy
-        )
-        self.onSuccessPostSpotList.value = true
-        return
+            self.onSuccessPostSpotList.value = true
+            return
+        }
+
+        // TODO: 주석해제
+//        let filterListDTO = filterList.map { filter in
+//            return SpotFilterDTO(category: filter.category.serverKey,
+//                                       optionList: filter.optionList)
+//        }
+//        
+//        let requestBody = PostSpotListRequest(
+//            latitude: userCoordinate.latitude,
+//            longitude: userCoordinate.longitude,
+//            condition: SpotConditionDTO(
+//                spotType: spotType.serverKey,
+//                filterList: filterList.isEmpty ? nil : filterListDTO
+//            )
+//        )
 
 //        ACService.shared.spotListService.postSpotList(requestBody: requestBody) { [weak self] response in
 //            switch response {
@@ -112,18 +117,8 @@ extension SpotListViewModel {
 //
 //            default:
 //                print("🥑Failed To Post")
-//// #if DEBUG
-//                // TODO: 삭제
-//                self?.spotList = SpotListModel(
-//                    transportMode: self?.spotType == .restaurant ? .walking : .biking,
-//                    spotList: self?.restaurantDummy ?? []
-//                )
-//                self?.onSuccessPostSpotList.value = true
+//                self?.onSuccessPostSpotList.value = false
 //                return
-//// #endif
-//                // TODO: 주석 해제
-////                self?.onSuccessPostSpotList.value = false
-////                return
 //            }
 //        }
     }

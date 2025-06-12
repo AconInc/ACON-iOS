@@ -286,16 +286,15 @@ private extension SpotListViewController {
     }
 
     func startSkeletonAnimation() {
-        spotListView.collectionView.isSkeletonable = true
-        
         let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
-        
-        spotListView.collectionView.reloadData()
+
         spotListView.collectionView.setContentOffset(.zero, animated: true)
-        
+
         spotListView.collectionView.showAnimatedGradientSkeleton(
-            usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.5), .acWhite.withAlphaComponent(0)]),
-            animation: skeletonAnimation)
+            usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.5),
+                                          .acWhite.withAlphaComponent(0)]),
+            animation: skeletonAnimation
+        )
     }
 
     func endSkeletonAnimation() {
