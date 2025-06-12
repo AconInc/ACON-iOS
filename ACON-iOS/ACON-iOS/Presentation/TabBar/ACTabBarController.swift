@@ -111,7 +111,7 @@ extension ACTabBarController: UITabBarControllerDelegate {
             return
         }
 
-        spotListVC.refreshSpotList()
+        spotListVC.goToTop()
     }
 
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {

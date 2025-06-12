@@ -132,8 +132,8 @@ class SpotListViewController: BaseNavViewController {
 extension SpotListViewController {
 
     // NOTE: '장소' 탭 선택 시 호출
-    func refreshSpotList() {
-        handleRefreshControl()
+    func goToTop() {
+        spotListView.collectionView.setContentOffset(.zero, animated: true)
     }
 
 }
