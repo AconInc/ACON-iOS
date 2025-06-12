@@ -34,7 +34,6 @@ class SpotListViewController: BaseNavViewController {
         bindObservable()
         setCollectionView()
         addTarget()
-        viewModel.updateLocationAndPostSpotList()
         setSkeleton()
     }
 
