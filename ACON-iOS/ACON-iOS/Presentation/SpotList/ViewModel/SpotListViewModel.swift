@@ -33,7 +33,7 @@ class SpotListViewModel: Serviceable {
     var needToShowToast: ObservablePattern<Bool> = ObservablePattern(nil)
 
     // TODO: 삭제
-    private let dummyDebouncer = ACDebouncer(delay: 2)
+    private let dummyDebouncer = ACDebouncer(delay: 1)
     private var restaurantDummy: [SpotModel] = [
         SpotModel(id: 1, imageURL: nil, name: "이미지없는 식당", acornCount: 50, tagList: [.new, .local, .top(number: 1)], eta: 1, latitude: 35.785834, longitude: 128.25),
         SpotModel(id: 2, imageURL: "wrongAddress", name: "이미지에러", acornCount: 50, tagList: [.top(number: 2)], eta: 1, latitude: 35.785834, longitude: 128.25),

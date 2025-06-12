@@ -13,7 +13,7 @@ class SpotListSkeletonHeader: UICollectionReusableView {
 
     // MARK: - UI Properties
 
-    private let skeletonView = UIView()
+    private let skeletonView = GlassmorphismView(.noImageErrorGlass)
 
 
     // MARK: - Life Cycle
@@ -50,6 +50,7 @@ class SpotListSkeletonHeader: UICollectionReusableView {
         }
 
         skeletonView.do {
+            $0.layer.cornerRadius = 8
             $0.isSkeletonable = true
             $0.skeletonCornerRadius = 8
         }

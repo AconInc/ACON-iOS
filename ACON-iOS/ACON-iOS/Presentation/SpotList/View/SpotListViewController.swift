@@ -114,12 +114,12 @@ class SpotListViewController: BaseNavViewController {
         super.viewDidLayoutSubviews()
 
         spotToggleButton.refreshBlurEffect()
+
         for cell in spotListView.collectionView.visibleCells {
             if let cell = cell as? SpotListCollectionViewCell {
                 cell.setNeedsLayout()
            }
        }
-        spotListView.layoutSkeletonIfNeeded()
     }
 
 }
@@ -136,7 +136,6 @@ extension SpotListViewController {
 
             // NOTE: 스켈레톤 최소 1초 유지
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.isLoading = false
                 self.endSkeletonAnimation()
             }
 
@@ -317,17 +316,21 @@ private extension SpotListViewController {
     }
 
     func startSkeletonAnimation() {
-        let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
-        isLoading = true
-        spotListView.collectionView.setContentOffset(.zero, animated: true)
-        spotListView.collectionView.showAnimatedGradientSkeleton(
-            usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.5),
-                                          .acWhite.withAlphaComponent(0)]),
-            animation: skeletonAnimation
-        )
+        let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight, duration: 1, autoreverses: true)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            isLoading = true
+            spotListView.collectionView.setContentOffset(.zero, animated: true)
+            spotListView.collectionView.showAnimatedGradientSkeleton(
+                usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.3),
+                                              .acWhite.withAlphaComponent(0.1)]),
+                animation: skeletonAnimation
+            )
+        }
     }
 
     func endSkeletonAnimation() {
+        isLoading = false
         spotListView.hideSkeleton()
     }
 

@@ -146,6 +146,8 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
             $0.contentMode = .scaleAspectFill
             $0.layer.cornerRadius = cornerRadius
             $0.image = .imgSkeletonBg
+            $0.isSkeletonable = true
+            $0.skeletonCornerRadius = Float(cornerRadius)
         }
 
         glassBgView.do {

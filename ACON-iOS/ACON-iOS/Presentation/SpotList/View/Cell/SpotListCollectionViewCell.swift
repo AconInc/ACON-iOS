@@ -144,6 +144,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
         bgImageShadowView.do {
             $0.clipsToBounds = false
+            $0.isSkeletonable = true
+            $0.skeletonCornerRadius = Float(cornerRadius)
         }
 
         glassBgView.do {
@@ -188,8 +190,6 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         
         findCourseButton.do {
             $0.updateGlassButtonState(state: .default)
-            $0.isSkeletonable = true
-            $0.skeletonCornerRadius = 8
         }
 
         [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach {
