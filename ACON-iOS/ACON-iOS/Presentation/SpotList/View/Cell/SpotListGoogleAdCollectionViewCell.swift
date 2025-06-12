@@ -8,6 +8,7 @@
 import UIKit
 
 import GoogleMobileAds
+import SkeletonView
 
 class SpotListGoogleAdCollectionViewCell: BaseCollectionViewCell {
     
@@ -28,9 +29,7 @@ class SpotListGoogleAdCollectionViewCell: BaseCollectionViewCell {
     private let mediaView = MediaView()
 
     private let callToActionButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
-    
-    private let skeletonView = SkeletonView()
-    
+
     
     // MARK: - Lifecycle
     
@@ -67,10 +66,6 @@ class SpotListGoogleAdCollectionViewCell: BaseCollectionViewCell {
         nativeAdView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-//        
-//        skeletonView.snp.makeConstraints {
-//            $0.edges.equalToSuperview()
-//        }
         
         adButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(52*ScreenUtils.heightRatio)
@@ -110,6 +105,11 @@ class SpotListGoogleAdCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func setStyle() {
+        [glassmorphismView, nativeAdView, iconImageView, headlineLabel, callToActionButton].forEach {
+            $0.isSkeletonable = true
+            $0.skeletonCornerRadius = 8
+        }
+        
         contentView.do {
             $0.layer.cornerRadius = 12
             $0.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -118,15 +118,13 @@ class SpotListGoogleAdCollectionViewCell: BaseCollectionViewCell {
             $0.backgroundColor = .clear
         }
         
-        skeletonView.isHidden = true
-        
         iconImageView.do {
             $0.contentMode = .scaleAspectFill
             $0.layer.cornerRadius = 8
             $0.clipsToBounds = true
             $0.backgroundColor = .systemGray6
         }
-        
+
         mediaView.do {
             $0.layer.cornerRadius = 8
             $0.clipsToBounds = true
@@ -144,6 +142,7 @@ class SpotListGoogleAdCollectionViewCell: BaseCollectionViewCell {
         super.prepareForReuse()
         
         nativeAdView.nativeAd = nil
+        endSkeletonAnimation()
     }
     
     override func layoutSubviews() {
@@ -177,7 +176,9 @@ extension SpotListGoogleAdCollectionViewCell {
         nativeAd.delegate = self
         
         nativeAdView.isHidden = false
-        skeletonView.isHidden = true
+        
+        // TODO: 주석 해제
+//        endSkeletonAnimation()
         
         if let headline = nativeAd.headline {
             headlineLabel.setLabel(text: headline, style: .t4SB)
@@ -219,9 +220,18 @@ extension SpotListGoogleAdCollectionViewCell {
 
 extension SpotListGoogleAdCollectionViewCell {
     
-    func showSkeleton() {
-        nativeAdView.isHidden = true
-        // TODO: - 스켈레톤 애니메이션 적용
+    func startSkeletonAnimation() {
+        let diagonalAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .topLeftBottomRight, duration: 1.5, autoreverses: true)
+
+        self.showAnimatedGradientSkeleton(
+            usingGradient: .init(colors: [.acWhite.withAlphaComponent(0.3),
+                                          .acWhite.withAlphaComponent(0.1)]),
+            animation: diagonalAnimation
+        )
+    }
+
+    private func endSkeletonAnimation() {
+        self.hideSkeleton()
     }
     
 }
