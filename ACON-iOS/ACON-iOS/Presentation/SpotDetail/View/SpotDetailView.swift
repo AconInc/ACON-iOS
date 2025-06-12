@@ -149,6 +149,7 @@ final class SpotDetailView: BaseView {
             config.contentInsets = .zero
             $0.configuration = config
             $0.setContentCompressionResistancePriority(.required, for: .horizontal)
+            $0.isHidden = true
         }
     }
 
@@ -289,8 +290,11 @@ private extension SpotDetailView {
     }
 
     func setAcornCountButton(with acornCount: Int) {
-        let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
-        acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
+        if acornCount > 0 {
+            let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
+            acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
+            acornCountButton.isHidden = false
+        }
     }
 
 }

@@ -33,11 +33,12 @@ class SpotListViewModel: Serviceable {
     var needToShowToast: ObservablePattern<Bool> = ObservablePattern(nil)
 
     // TODO: 삭제
+    private let dummyDebouncer = ACDebouncer(delay: 0.5)
     private var restaurantDummy: [SpotModel] = [
         SpotModel(id: 1, imageURL: nil, name: "이미지없는 식당", acornCount: 50, tagList: [.new, .local, .top(number: 1)], eta: 1, latitude: 35.785834, longitude: 128.25),
         SpotModel(id: 2, imageURL: "wrongAddress", name: "이미지에러", acornCount: 50, tagList: [.top(number: 2)], eta: 1, latitude: 35.785834, longitude: 128.25),
         SpotModel(id: 2, imageURL: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg", name: "도토리 완전 많은 뷔페", acornCount: 102938, tagList: [.local, .top(number: 3)], eta: 6, latitude: 35.785834, longitude: 128.25),
-        SpotModel(id: 3, imageURL: "https://images.immediate.co.uk/production/volatile/sites/30/2022/03/Pancake-grazing-board-bc15106.jpg?quality=90&resize=556,505", name: "팬케익맛집", acornCount: 938, tagList: [.top(number: 4)], eta: 13, latitude: 35.785834, longitude: 128.25),
+        SpotModel(id: 3, imageURL: "https://images.immediate.co.uk/production/volatile/sites/30/2022/03/Pancake-grazing-board-bc15106.jpg?quality=90&resize=556,505", name: "도토리 없는 팬케익집", acornCount: 0, tagList: [.top(number: 4)], eta: 13, latitude: 35.785834, longitude: 128.25),
         SpotModel(id: 4, imageURL: "https://natashaskitchen.com/wp-content/uploads/2020/03/Pan-Seared-Steak-4.jpg", name: "영웅스테이크", acornCount: 102938, tagList: [.local, .top(number: 5)], eta: 14, latitude: 35.785834, longitude: 128.25),
         SpotModel(id: 5, imageURL: "https://i.namu.wiki/i/oFHlYDjoEh8f-cc3lNK9jAemRkbXxNGwUg7XiW5LGS6DF1P2x8GCeNQxbQhVIwtUS1u53YPw-uoyqpmLtrGNJA.webp", name: "아콘삼겹살", acornCount: 1000, tagList: [.new], eta: 6, latitude: 35.785834, longitude: 128.25),
         SpotModel(id: 6, imageURL: "https://i.namu.wiki/i/dgjXU86ae29hDSCza-L0GZlFt3T9lRx1Ug9cKtqWSzMzs7Cd0CN2SzyLFEJcHVFviKcxAlIwxcllT9s2sck0RA.jpg", name: "아콘비빔밥", acornCount: 3, tagList: [], eta: 6, latitude: 35.785834, longitude: 128.25),
@@ -75,32 +76,41 @@ class SpotListViewModel: Serviceable {
 extension SpotListViewModel {
 
     func postSpotList() {
-        let filterListDTO = filterList.map { filter in
-            return SpotFilterDTO(category: filter.category.serverKey,
-                                       optionList: filter.optionList)
-        }
-        
-        let requestBody = PostSpotListRequest(
-            latitude: userCoordinate.latitude,
-            longitude: userCoordinate.longitude,
-            condition: SpotConditionDTO(
-                spotType: spotType.serverKey,
-                filterList: filterList.isEmpty ? nil : filterListDTO
-            )
-        )
-        
-        self.spotList = SpotListModel(
-            transportMode: self.spotType == .restaurant ? .walking : .biking,
-            spotList: self.restaurantDummy
-        )
-        self.onSuccessPostSpotList.value = true
-
         // TODO: - 주석 해제 (실제 로직)
+        // self.spotList = SpotListModel(
+        //     transportMode: self.spotType == .restaurant ? .walking : .biking,
+        //     spotList: self.restaurantDummy
+        // )
+        // self.onSuccessPostSpotList.value = true
         // self.lastNetworkLocation = userLocation
+
         // TODO: - 삭제 (테스트용)
+        dummyDebouncer.call {
+            self.spotList = SpotListModel(
+                transportMode: self.spotType == .restaurant ? .walking : .biking,
+                spotList: self.restaurantDummy
+            )
+            self.onSuccessPostSpotList.value = true
+            return
+        }
         self.lastNetworkLocation = CLLocation(latitude: 37.0, longitude: 127.00)
         
         return
+
+        // TODO: 주석해제
+//        let filterListDTO = filterList.map { filter in
+//            return SpotFilterDTO(category: filter.category.serverKey,
+//                                       optionList: filter.optionList)
+//        }
+//        
+//        let requestBody = PostSpotListRequest(
+//            latitude: userCoordinate.latitude,
+//            longitude: userCoordinate.longitude,
+//            condition: SpotConditionDTO(
+//                spotType: spotType.serverKey,
+//                filterList: filterList.isEmpty ? nil : filterListDTO
+//            )
+//        )
 
 //        ACService.shared.spotListService.postSpotList(requestBody: requestBody) { [weak self] response in
 //            switch response {
@@ -128,18 +138,8 @@ extension SpotListViewModel {
 //
 //            default:
 //                print("🥑Failed To Post")
-//// #if DEBUG
-//                // TODO: 삭제
-//                self?.spotList = SpotListModel(
-//                    transportMode: self?.spotType == .restaurant ? .walking : .biking,
-//                    spotList: self?.restaurantDummy ?? []
-//                )
-//                self?.onSuccessPostSpotList.value = true
+//                self?.onSuccessPostSpotList.value = false
 //                return
-//// #endif
-//                // TODO: 주석 해제
-////                self?.onSuccessPostSpotList.value = false
-////                return
 //            }
 //        }
     }

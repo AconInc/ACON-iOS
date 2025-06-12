@@ -7,23 +7,23 @@
 
 import UIKit
 
+import SkeletonView
+
 class SpotListView: BaseView {
 
     // MARK: - UI Properties
 
-    let walkingFlowLayout = SpotListCollectionViewFlowLayout()
-    let bikingFlowLayout = UICollectionViewFlowLayout().then {
+    private let walkingFlowLayout = SpotListCollectionViewFlowLayout()
+    private let bikingFlowLayout = UICollectionViewFlowLayout().then {
         $0.itemSize = CGSize(width: NoMatchingSpotListItemSizeType.itemWidth.value,
                              height: NoMatchingSpotListItemSizeType.itemHeight.value)
         $0.minimumLineSpacing = NoMatchingSpotListItemSizeType.minimumLineSpacing.value
     }
 
-    let collectionView = UICollectionView(
+    lazy var collectionView = UICollectionView(
         frame: .zero,
-        collectionViewLayout: UICollectionViewFlowLayout()
+        collectionViewLayout: walkingFlowLayout
     )
-
-    let skeletonView = SkeletonView() // TODO: 삭제
 
     let regionErrorView = RegionErrorView()
 
@@ -35,7 +35,6 @@ class SpotListView: BaseView {
 
         self.addSubviews(
             collectionView,
-            skeletonView,
             regionErrorView)
     }
 
@@ -48,10 +47,6 @@ class SpotListView: BaseView {
             $0.bottom.equalToSuperview()
         }
 
-        skeletonView.snp.makeConstraints {
-            $0.horizontalEdges.top.equalTo(self.safeAreaLayoutGuide)
-        }
-
         regionErrorView.snp.makeConstraints {
             $0.edges.equalTo(collectionView)
         }
@@ -60,13 +55,16 @@ class SpotListView: BaseView {
     override func setStyle() {
         super.setStyle()
 
+        self.isSkeletonable = true
+
         collectionView.do {
             $0.backgroundColor = .clear
             $0.decelerationRate = .fast
+            $0.isSkeletonable = true
         }
 
-        skeletonView.isHidden = true
         regionErrorView.isHidden = true
+        
     }
 
 }
