@@ -30,6 +30,12 @@ class SpotListSkeletonHeader: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        skeletonView.refreshBlurEffect()
+    }
+
     private func setHierarchy() {
         self.addSubview(skeletonView)
     }
