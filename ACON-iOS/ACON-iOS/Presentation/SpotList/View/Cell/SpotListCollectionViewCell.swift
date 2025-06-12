@@ -313,10 +313,12 @@ private extension SpotListCollectionViewCell {
     }
 
     func setAcornCountButton(with acornCount: Int) {
-        let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
-        acornCountButton.do {
-            $0.setAttributedTitle(text: String(acornString), style: .b1R)
-            $0.isHidden = false
+        if acornCount > 0 {
+            let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
+            acornCountButton.do {
+                $0.setAttributedTitle(text: String(acornString), style: .b1R)
+                $0.isHidden = false
+            }
         }
     }
 
