@@ -25,8 +25,9 @@ class SpotDetailViewController: BaseNavViewController {
 
     // MARK: - LifeCycle
 
-    init(_ spotID: Int64, _ tagList: [SpotTagType]) {
+    init(_ spotID: Int64, _ tagList: [SpotTagType], _ transportMode: TransportModeType? = nil) {
         self.viewModel = SpotDetailViewModel(spotID, tagList)
+        self.viewModel.transportMode = transportMode
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -144,13 +145,15 @@ private extension SpotDetailViewController {
             $0.addAction(UIAlertAction(title: StringLiterals.Map.naverMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
                     to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
-                    using: .naver)
+                    mapType: .naver,
+                    transportMode: self.viewModel.transportMode)
                 self.viewModel.postGuidedSpot()
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Map.appleMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
                     to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
-                    using: .apple)
+                    mapType: .apple,
+                    transportMode: .walking)
                 self.viewModel.postGuidedSpot()
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Alert.cancel, style: .cancel, handler: nil))

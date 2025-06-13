@@ -14,6 +14,7 @@ class SpotDetailViewModel: Serviceable {
     
     let spotID: Int64
     let tagList: [SpotTagType]
+    var transportMode: TransportModeType? = nil
     
     let onSuccessGetSpotDetail: ObservablePattern<Bool> = ObservablePattern(nil)
         

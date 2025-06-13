@@ -18,6 +18,12 @@ enum TransportModeType {
         }
     }
 
+    var naverMapKey: String {
+        switch self {
+        case .walking: return "walk"
+        case .biking: return "bicycle"
+        }
+    }
 }
 
 

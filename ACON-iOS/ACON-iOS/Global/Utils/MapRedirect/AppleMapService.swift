@@ -9,7 +9,9 @@ import MapKit
 
 final class AppleMapService: MapServiceProtocol {
 
-    func openMap(from startPoint: MapRedirectModel, to destination: MapRedirectModel) {
+    func openMap(from startPoint: MapRedirectModel,
+                 to destination: MapRedirectModel,
+                 transportMode: TransportModeType) {
         let startItem = createMapItem(for: startPoint)
         let destinationItem = createMapItem(for: destination)
 

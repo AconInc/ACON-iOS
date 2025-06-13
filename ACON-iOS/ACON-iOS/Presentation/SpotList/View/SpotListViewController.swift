@@ -454,7 +454,8 @@ extension SpotListViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = viewModel.spotList.spotList[indexPath.item]
-        let vc = SpotDetailViewController(item.id, item.tagList)
+        let transportMode = viewModel.spotList.transportMode
+        let vc = SpotDetailViewController(item.id, item.tagList, transportMode)
 
         if AuthManager.shared.hasToken {
             self.navigationController?.pushViewController(vc, animated: true)
@@ -572,13 +573,15 @@ extension SpotListViewController: SpotListCellDelegate {
             $0.addAction(UIAlertAction(title: StringLiterals.Map.naverMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
                     to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
-                    using: .naver)
+                    mapType: .naver,
+                    transportMode: self.viewModel.spotList.transportMode)
                 self.viewModel.postGuidedSpot(spotID: spot.id)
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Map.appleMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
                     to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
-                    using: .apple)
+                    mapType: .apple,
+                    transportMode: .biking)
                 self.viewModel.postGuidedSpot(spotID: spot.id)
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Alert.cancel, style: .cancel, handler: nil))
