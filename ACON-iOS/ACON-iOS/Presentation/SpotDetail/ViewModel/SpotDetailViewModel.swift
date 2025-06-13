@@ -16,6 +16,8 @@ class SpotDetailViewModel: Serviceable {
     let tagList: [SpotTagType]
     
     let onSuccessGetSpotDetail: ObservablePattern<Bool> = ObservablePattern(nil)
+    var onSuccessPostSavedSpot: ObservablePattern<Bool> = ObservablePattern(nil)
+    var onSuccessDeleteSavedSpot: ObservablePattern<Bool> = ObservablePattern(nil)
         
     var spotDetail: ObservablePattern<SpotDetailInfoModel> = ObservablePattern(nil)
 
@@ -93,10 +95,43 @@ extension SpotDetailViewModel {
                     self?.postGuidedSpot()
                 }
             default:
-                print("VM - Failed To postGuidedSpot")
                 return
             }
         }
     }
-    
+
+    func postSavedSpot() {
+        ACService.shared.spotDetailService.postSavedSpot(spotID: spotID){ [weak self] response in
+            switch response {
+            case .success:
+                self?.onSuccessPostSavedSpot.value = true
+                return
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.postGuidedSpot()
+                }
+            default:
+                self?.onSuccessPostSavedSpot.value = false
+                return
+            }
+        }
+    }
+
+    func deleteSavedSpot() {
+        ACService.shared.spotDetailService.postSavedSpot(spotID: spotID){ [weak self] response in
+            switch response {
+            case .success:
+                self?.onSuccessDeleteSavedSpot.value = true
+                return
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.postGuidedSpot()
+                }
+            default:
+                self?.onSuccessDeleteSavedSpot.value = false
+                return
+            }
+        }
+    }
+
 }

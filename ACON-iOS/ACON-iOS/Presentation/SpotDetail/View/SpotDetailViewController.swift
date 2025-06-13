@@ -100,6 +100,9 @@ class SpotDetailViewController: BaseNavViewController {
 
         let menuTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedMenuButton))
         spotDetailView.menuButton.addGestureRecognizer(menuTapGesture)
+
+        let bookmarkTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedBookmarkButton))
+        spotDetailView.bookmarkButton.addGestureRecognizer(bookmarkTapGesture)
     }
 
 }
@@ -120,9 +123,24 @@ private extension SpotDetailViewController {
             } else {
                 self?.showDefaultAlert(title: "장소 정보 로드 실패", message: "장소 정보 로드에 실패했습니다.")
             }
+            self?.viewModel.onSuccessGetSpotDetail.value = nil
 #if DEBUG
             self?.spotDetailView.collectionView.reloadData() // TODO: 삭제하고 다른 UI 설정
 #endif
+        }
+
+        self.viewModel.onSuccessPostSavedSpot.bind { [weak self] onSuccess in
+            guard let onSuccess,
+                  let self = self else { return }
+            spotDetailView.menuButton.isSelected = onSuccess
+            viewModel.onSuccessPostSavedSpot.value = nil
+        }
+
+        self.viewModel.onSuccessDeleteSavedSpot.bind { [weak self] onSuccess in
+            guard let onSuccess,
+                  let self = self else { return }
+            spotDetailView.menuButton.isSelected = !onSuccess
+            viewModel.onSuccessPostSavedSpot.value = nil
         }
     }
 
@@ -163,6 +181,11 @@ private extension SpotDetailViewController {
         let vc = MenuImageSlideViewController(viewModel.menuImageURLs)
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true)
+    }
+
+    @objc
+    func tappedBookmarkButton() {
+        spotDetailView.bookmarkButton.isSelected ? viewModel.deleteSavedSpot() : viewModel.postSavedSpot()
     }
 
 }
