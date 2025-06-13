@@ -101,7 +101,19 @@ extension ACTabBarController {
 // MARK: - UITabBarControllerDelegate
 
 extension ACTabBarController: UITabBarControllerDelegate {
-    
+
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        guard let viewControllers = viewControllers,
+              let index = viewControllers.firstIndex(of: viewController),
+              index == ACTabBarItemType.allCases.firstIndex(of: .spotList),
+              let nav = viewController as? UINavigationController,
+              let spotListVC = nav.viewControllers.first as? SpotListViewController else {
+            return
+        }
+
+        spotListVC.goToTop()
+    }
+
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         guard let viewControllers = viewControllers else { return true }
         guard let index = viewControllers.firstIndex(of: viewController) else { return true }
@@ -119,5 +131,5 @@ extension ACTabBarController: UITabBarControllerDelegate {
         }
         return true
     }
-    
+
 }

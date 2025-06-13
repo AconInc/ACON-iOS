@@ -34,7 +34,6 @@ class SpotListViewController: BaseNavViewController {
         bindObservable()
         setCollectionView()
         addTarget()
-        viewModel.updateLocationAndPostSpotList()
         setSkeleton()
     }
 
@@ -51,7 +50,22 @@ class SpotListViewController: BaseNavViewController {
         ACToastController.hide()
         viewModel.stopPeriodicLocationCheck()
     }
-    
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        spotToggleButton.refreshBlurEffect()
+
+        for cell in spotListView.collectionView.visibleCells {
+            if let cell = cell as? SpotListCollectionViewCell {
+                cell.setNeedsLayout()
+           }
+       }
+    }
+
+
+    // MARK: - UI Settings
+
     override func setHierarchy() {
         super.setHierarchy()
 
@@ -110,16 +124,16 @@ class SpotListViewController: BaseNavViewController {
         )
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+}
 
-        spotToggleButton.refreshBlurEffect()
 
-        for cell in spotListView.collectionView.visibleCells {
-            if let cell = cell as? SpotListCollectionViewCell {
-                cell.setNeedsLayout()
-           }
-       }
+// MARK: - Internal Methods
+
+extension SpotListViewController {
+
+    // NOTE: '장소' 탭 선택 시 호출
+    func goToTop() {
+        spotListView.collectionView.setContentOffset(.zero, animated: true)
     }
 
 }
@@ -242,8 +256,7 @@ private extension SpotListViewController {
         }
 
         let vc = SpotListFilterViewController(viewModel: viewModel)
-        vc.setSheetLayout(detent: .long)
-        vc.isModalInPresentation = true
+        vc.setSheetLayout(detent: .semiLong)
 
         present(vc, animated: true)
     }

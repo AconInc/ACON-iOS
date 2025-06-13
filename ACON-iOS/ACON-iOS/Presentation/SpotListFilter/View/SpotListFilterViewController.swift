@@ -18,7 +18,7 @@ class SpotListFilterViewController: BaseViewController {
     private var taggedFilterButtons: Set<FilterTagButton> = [] {
         didSet {
             let hasTaggedFilters = !taggedFilterButtons.isEmpty
-            spotListFilterView.enableFooterButtons(hasTaggedFilters)
+            spotListFilterView.conductButton.isEnabled = hasTaggedFilters
         }
     }
 
@@ -95,12 +95,6 @@ private extension SpotListFilterViewController {
 private extension SpotListFilterViewController {
 
     func addTargets() {
-        spotListFilterView.exitButton.addTarget(
-            self,
-            action: #selector(didTapExitButton),
-            for: .touchUpInside
-        )
-
         spotListFilterView.conductButton.addTarget(
             self,
             action: #selector(didTapConductButton),
@@ -120,11 +114,6 @@ private extension SpotListFilterViewController {
 // MARK: - @objc functions
 
 private extension SpotListFilterViewController {
-
-    @objc
-    func didTapExitButton() {
-        self.dismiss(animated: true)
-    }
 
     @objc
     func didTapConductButton() {
@@ -212,9 +201,7 @@ private extension SpotListFilterViewController {
         if spotListFilterView.openingHoursButton.isTagged {
             return SpotFilterModel(
                 category: .openingHours,
-                optionList: spotType == .restaurant
-                ? [SpotFilterType.OpeningHoursOptionType.overMidnight.serverKey]
-                : [SpotFilterType.OpeningHoursOptionType.overTenPM.serverKey]
+                optionList: [SpotFilterType.OpeningHoursOptionType.overTenPM.serverKey]
             )
         }
         return nil
