@@ -18,7 +18,7 @@ class SpotListFilterViewController: BaseViewController {
     private var taggedFilterButtons: Set<FilterTagButton> = [] {
         didSet {
             let hasTaggedFilters = !taggedFilterButtons.isEmpty
-            spotListFilterView.enableFooterButtons(hasTaggedFilters)
+            spotListFilterView.conductButton.isEnabled = hasTaggedFilters
         }
     }
 
