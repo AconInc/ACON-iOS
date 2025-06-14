@@ -56,6 +56,7 @@ class SpotListSkeletonHeader: UICollectionReusableView {
         }
 
         skeletonView.do {
+            $0.clipsToBounds = true
             $0.layer.cornerRadius = 8
             $0.isSkeletonable = true
             $0.skeletonCornerRadius = 8
