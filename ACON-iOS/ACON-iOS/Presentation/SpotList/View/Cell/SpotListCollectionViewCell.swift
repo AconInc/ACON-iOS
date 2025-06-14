@@ -251,9 +251,9 @@ extension SpotListCollectionViewCell: SpotListCellConfigurable {
 
         if let imageURL = spot.imageURL {
             currentImageURL = imageURL
-            setBgImageAndShadow(from: imageURL, noImageDescriptionID: Int(spot.id))
+            setBgImageAndShadow(from: imageURL, noImageDescriptionID: Int(spot.spotId))
         } else {
-            updateUI(with: .noImageDynamic(id: Int(spot.id)))
+            updateUI(with: .noImageDynamic(id: Int(spot.spotId)))
             extractAndApplyShadowColor(from: .imgSpotNoImageBackground, for: ShadowColorCache.noImageKey)
         }
 

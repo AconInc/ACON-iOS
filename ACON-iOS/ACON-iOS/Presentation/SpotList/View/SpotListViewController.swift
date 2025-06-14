@@ -442,7 +442,7 @@ extension SpotListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let spot = viewModel.spotList.spotList[indexPath.item]
         let topTag: SpotTagType? = indexPath.item < 5 ? SpotTagType.top(number: indexPath.item + 1) : nil
-        let vc = SpotDetailViewController(spot.id, topTag)
+        let vc = SpotDetailViewController(spot.spotId, topTag)
 
         if AuthManager.shared.hasToken {
             self.navigationController?.pushViewController(vc, animated: true)
@@ -561,13 +561,13 @@ extension SpotListViewController: SpotListCellDelegate {
                 MapRedirectManager.shared.redirect(
                     to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
                     using: .naver)
-                self.viewModel.postGuidedSpot(spotID: spot.id)
+                self.viewModel.postGuidedSpot(spotID: spot.spotId)
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Map.appleMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
                     to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
                     using: .apple)
-                self.viewModel.postGuidedSpot(spotID: spot.id)
+                self.viewModel.postGuidedSpot(spotID: spot.spotId)
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Alert.cancel, style: .cancel, handler: nil))
         }

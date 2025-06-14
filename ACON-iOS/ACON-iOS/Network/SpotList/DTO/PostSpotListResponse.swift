@@ -17,7 +17,7 @@ struct PostSpotListResponse: Decodable {
 
 struct SpotDTO: Decodable {
 
-    let id: Int64
+    let spotId: Int64
 
     let image: String?
 
@@ -26,6 +26,12 @@ struct SpotDTO: Decodable {
     let acornCount: Int
 
     let tagList: [String]?
+
+    let isOpen: Bool
+
+    let closingTime: String
+
+    let nextOpening: String
 
     let eta: Int
 
