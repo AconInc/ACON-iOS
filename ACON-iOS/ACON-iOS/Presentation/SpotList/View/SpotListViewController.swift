@@ -455,11 +455,13 @@ extension SpotListViewController: UICollectionViewDataSource {
     // MARK: DidSelectItemAt
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = viewModel.spotList.spotList[indexPath.item]
-        let transportMode = viewModel.spotList.transportMode
+        let item: SpotModel = viewModel.spotList.spotList[indexPath.item]
+        let transportMode: TransportModeType? = viewModel.spotList.transportMode
+        let isAd: Bool = transportMode == .walking && indexPath.item % 5 == 0 && indexPath.item > 0
         let vc = SpotDetailViewController(item.id, item.tagList, transportMode)
 
         if AuthManager.shared.hasToken {
+            if isAd { return }
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             presentLoginModal(AmplitudeLiterals.EventName.tappedSpotCell)
