@@ -593,10 +593,14 @@ private extension SpotListViewController {
         ) as? T else {
             return UICollectionViewCell()
         }
-
+        var tags: [SpotTagType] = []
         let lockCell = !AuthManager.shared.hasToken && indexPath.item > 4
 
+        if indexPath.item < 5 { tags.append(SpotTagType.top(number: indexPath.item + 1)) }
+        tags.append(contentsOf: spotList.spotList[indexPath.item].tagList)
+
         cell.bind(spot: spotList.spotList[indexPath.item])
+        cell.setTags(tags: tags)
         cell.overlayLoginLock(lockCell)
         cell.setFindCourseDelegate(self)
         cell.isSkeletonable = true

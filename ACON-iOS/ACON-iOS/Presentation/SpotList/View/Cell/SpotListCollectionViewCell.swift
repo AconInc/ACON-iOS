@@ -266,11 +266,14 @@ extension SpotListCollectionViewCell: SpotListCellConfigurable {
 
         setAcornCountButton(with: spot.acornCount)
 
-        spot.tagList.forEach { tag in
+        setFindCourseButton(with: spot.eta)
+    }
+
+    func setTags(tags: [SpotTagType]) {
+        tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        tags.forEach { tag in
             tagStackView.addArrangedSubview(SpotTagButton(tag))
         }
-
-        setFindCourseButton(with: spot.eta)
     }
 
     func overlayLoginLock(_ show: Bool) {

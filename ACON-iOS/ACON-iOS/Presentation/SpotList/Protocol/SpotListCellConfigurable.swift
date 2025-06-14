@@ -10,6 +10,7 @@ import Foundation
 protocol SpotListCellConfigurable {
 
     func bind(spot: SpotModel)
+    func setTags(tags: [SpotTagType])
     func overlayLoginLock(_ show: Bool)
     func setFindCourseDelegate(_ delegate: SpotListCellDelegate?)
 
