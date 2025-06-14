@@ -50,6 +50,7 @@ class SpotDetailViewController: BaseNavViewController {
         self.tabBarController?.tabBar.isHidden = true
 
         viewModel.getSpotDetail()
+        viewModel.getMenuboardImageList()
         startTime = Date()
     }
 
@@ -135,17 +136,29 @@ private extension SpotDetailViewController {
 #endif
         }
 
+        self.viewModel.onSuccessGetMenuboardImageList.bind { [weak self] onSuccess in
+            guard let onSuccess,
+                  let self = self else { return }
+            
+            if onSuccess {
+                spotDetailView.menuButton.isEnabled = !viewModel.menuImageURLs.isEmpty
+            } else {
+                spotDetailView.menuButton.isEnabled = false
+            }
+            
+        }
+
         self.viewModel.onSuccessPostSavedSpot.bind { [weak self] onSuccess in
             guard let onSuccess,
                   let self = self else { return }
-            spotDetailView.menuButton.isSelected = onSuccess
+            spotDetailView.bookmarkButton.isSelected = onSuccess
             viewModel.onSuccessPostSavedSpot.value = nil
         }
 
         self.viewModel.onSuccessDeleteSavedSpot.bind { [weak self] onSuccess in
             guard let onSuccess,
                   let self = self else { return }
-            spotDetailView.menuButton.isSelected = !onSuccess
+            spotDetailView.bookmarkButton.isSelected = !onSuccess
             viewModel.onSuccessPostSavedSpot.value = nil
         }
     }

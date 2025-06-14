@@ -14,9 +14,17 @@ class SpotDetailSideButton: UIView {
     var onTap: ((Bool) -> Void)?
 
     let type: SideButtonType
+
     var isSelected: Bool = false {
         didSet {
             imageView.image = isSelected ? type.selectedImage : type.defaultImage
+        }
+    }
+
+    var isEnabled: Bool = true {
+        didSet {
+            imageView.tintColor = isEnabled ? .acWhite : .gray300
+            label.textColor = isEnabled ? .acWhite : .gray300
         }
     }
 
@@ -69,6 +77,7 @@ private extension SpotDetailSideButton {
     func setStyle() {
         imageView.do {
             $0.image = isSelected ? type.selectedImage : type.defaultImage
+            $0.tintColor = .acWhite
             $0.contentMode = .scaleAspectFit
 
             $0.layer.do {
@@ -111,6 +120,7 @@ private extension SpotDetailSideButton {
 
     @objc
     func tappedSelf() {
+        guard isEnabled else { return }
         isSelected.toggle()
         onTap?(isSelected)
     }
