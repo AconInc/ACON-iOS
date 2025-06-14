@@ -359,7 +359,9 @@ extension SpotListViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return viewModel.spotList.spotList.count
+        let dataCount = viewModel.spotList.spotList.count
+        let adCount = dataCount / 5
+        return viewModel.spotList.transportMode == .walking ? dataCount + adCount : dataCount
     }
 
 
@@ -609,9 +611,11 @@ private extension SpotListViewController {
             return UICollectionViewCell()
         }
 
+        let adAboveCount = indexPath.item / 5
+        let dataIndex = spotList.transportMode == .walking ? indexPath.item - adAboveCount : indexPath.item
         let lockCell = !AuthManager.shared.hasToken && indexPath.item > 4
 
-        cell.bind(spot: spotList.spotList[indexPath.item])
+        cell.bind(spot: spotList.spotList[dataIndex])
         cell.overlayLoginLock(lockCell)
         cell.setFindCourseDelegate(self)
         cell.isSkeletonable = true
