@@ -585,7 +585,7 @@ extension SpotListViewController: SpotListCellDelegate {
                 MapRedirectManager.shared.redirect(
                     to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
                     mapType: .apple,
-                    transportMode: .biking)
+                    transportMode: self.viewModel.spotList.transportMode)
                 self.viewModel.postGuidedSpot(spotID: spot.id)
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Alert.cancel, style: .cancel, handler: nil))

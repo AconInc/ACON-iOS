@@ -153,7 +153,7 @@ private extension SpotDetailViewController {
                 MapRedirectManager.shared.redirect(
                     to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
                     mapType: .apple,
-                    transportMode: .walking)
+                    transportMode: self.viewModel.transportMode)
                 self.viewModel.postGuidedSpot()
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Alert.cancel, style: .cancel, handler: nil))
