@@ -45,6 +45,15 @@ class SpotListViewController: BaseNavViewController {
         viewModel.startPeriodicLocationCheck()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        // NOTE: 조작 문제로 무한 skeleton 되는 문제 방지
+        if !viewModel.spotList.spotList.isEmpty {
+            endSkeletonAnimation()
+        }
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -153,7 +162,7 @@ extension SpotListViewController {
                 }
             }
 
-            // NOTE: 법정동 조회 실패 (서비스불가지역)
+            // NOTE: 서비스불가지역
             else if viewModel.errorType == .unsupportedRegion {
                 isSkeletonShowing = false
                 isDataLoading = false
