@@ -9,24 +9,27 @@ import UIKit
 
 class SpotDetailViewController: BaseNavViewController {
 
-    // MARK: - UI Properties
-
-    private let spotDetailView = SpotDetailView()
-
-
     // MARK: - Properties
 
     private let viewModel: SpotDetailViewModel
+
+    private var topTag: SpotTagType?
 
     private var startTime: Date?
 
     private var timer: Timer?
 
 
+    // MARK: - UI Properties
+
+    private let spotDetailView = SpotDetailView()
+
+
     // MARK: - LifeCycle
 
-    init(_ spotID: Int64, _ tagList: [SpotTagType]) {
-        self.viewModel = SpotDetailViewModel(spotID, tagList)
+    init(_ spotID: Int64, _ topTag: SpotTagType? = nil) {
+        self.viewModel = SpotDetailViewModel(spotID)
+        self.topTag = topTag
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -63,6 +66,9 @@ class SpotDetailViewController: BaseNavViewController {
             AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["place_detail_duration": timeInterval])
         }
     }
+
+
+    // MARK: - UI Settings
 
     override func setHierarchy() {
         super.setHierarchy()
@@ -113,7 +119,7 @@ class SpotDetailViewController: BaseNavViewController {
     }
 
 }
- 
+
 
 // MARK: - bindViewModel
 
@@ -122,18 +128,24 @@ private extension SpotDetailViewController {
     func bindViewModel() {
         self.viewModel.onSuccessGetSpotDetail.bind { [weak self] onSuccess in
             guard let onSuccess,
-                  let data = self?.viewModel.spotDetail.value else { return }
+                  let self = self,
+                  let data = viewModel.spotDetail.value else { return }
             if onSuccess {
-                self?.spotDetailView.bindData(data)
-                self?.spotDetailView.makeSignatureMenuSection(data.signatureMenuList)
-                self?.spotDetailView.collectionView.reloadData()
+                var tagList: [SpotTagType] = []
+                if let topTag { tagList.append(topTag) }
+                if let tags = data.tagList { tagList.append(contentsOf: tags) }
+                
+                spotDetailView.bindData(data)
+                setTagsAndOpeningTime(tags: tagList,
+                                      isOpen: data.isOpen,
+                                      closingTime: data.closingTime,
+                                      nextOpening: data.nextOpening)
+                spotDetailView.makeSignatureMenuSection(data.signatureMenuList)
+                spotDetailView.collectionView.reloadData()
             } else {
-                self?.showDefaultAlert(title: "장소 정보 로드 실패", message: "장소 정보 로드에 실패했습니다.")
+                showDefaultAlert(title: "장소 정보 로드 실패", message: "장소 정보 로드에 실패했습니다.")
             }
-            self?.viewModel.onSuccessGetSpotDetail.value = nil
-#if DEBUG
-            self?.spotDetailView.collectionView.reloadData() // TODO: 삭제하고 다른 UI 설정
-#endif
+            viewModel.onSuccessGetSpotDetail.value = nil
         }
 
         self.viewModel.onSuccessGetMenuboardImageList.bind { [weak self] onSuccess in
@@ -165,6 +177,21 @@ private extension SpotDetailViewController {
 
 }
 
+
+// MARK: - Helper
+
+private extension SpotDetailViewController {
+
+    func setTagsAndOpeningTime(tags: [SpotTagType], isOpen: Bool, closingTime: String, nextOpening: String) {
+        let time: String = isOpen ? closingTime : nextOpening
+        let description = isOpen ? StringLiterals.SpotList.businessEnd : StringLiterals.SpotList.businessStart
+
+        spotDetailView.setTagStackView(tags: tags)
+        spotDetailView.setOpeningTimeView(isOpen: isOpen, time: time, description: description, hasTags: !tags.isEmpty)
+    }
+
+}
+ 
 
 // MARK: - @objc methods
 
@@ -203,7 +230,7 @@ private extension SpotDetailViewController {
 extension SpotDetailViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.spotDetail.value?.imageURLs.count ?? 0
+        return viewModel.spotDetail.value?.imageURLs?.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

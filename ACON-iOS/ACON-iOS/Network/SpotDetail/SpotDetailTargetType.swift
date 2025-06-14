@@ -62,13 +62,11 @@ extension SpotDetailTargetType: TargetType {
     var headers: [String : String]? {
         var headers = HeaderType.noHeader
         switch self {
-        case .getSpotDetail:
-            headers = HeaderType.basicHeader
         case .getSpotMenu, .getMenuboardImageList:
             headers = HeaderType.noHeader
         case .postGuidedSpot, .postSavedSpot:
             headers = HeaderType.headerWithToken()
-        case .deleteSavedSpot:
+        case .getSpotDetail, .deleteSavedSpot:
             headers = HeaderType.tokenOnly()
         }
         return headers

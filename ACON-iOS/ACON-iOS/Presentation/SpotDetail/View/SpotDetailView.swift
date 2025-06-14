@@ -168,25 +168,43 @@ extension SpotDetailView {
 
         setAcornCountButton(with: spotDetail.acornCount)
 
-        tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        spotDetail.tagList.forEach { tag in
-            tagStackView.addArrangedSubview(SpotTagButton(tag))
-        }
-
         // TODO: 바인딩 수정 - 이전 뷰에서 넘겨받기
         findCourseButton.setAttributedTitle(text: "도보 9분 길찾기", style: .t4SB)
 
-        if spotDetail.imageURLs.count == 0 {
+        if spotDetail.imageURLs?.count == 0 {
             [noImageBgImageView, noImageContentView].forEach { $0.isHidden = false }
             noImageContentView.setDescription(.noImageDynamic(id: Int(spotDetail.spotID)))
         }
 
         // TODO: API 명세 나오면 실제 데이터로 바꾸기
-        bookmarkButton.isSelected = false
+        bookmarkButton.isSelected = spotDetail.isSaved
         
-        setImagePageControl(spotDetail.imageURLs.count)
+        setImagePageControl(spotDetail.imageURLs?.count)
+    }
 
-        setOpeningTimeView(withTags: !spotDetail.tagList.isEmpty)
+    func setTagStackView(tags: [SpotTagType]) {
+        tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        tags.forEach { tag in
+            tagStackView.addArrangedSubview(SpotTagButton(tag))
+        }
+    }
+
+    func setOpeningTimeView(isOpen: Bool, time: String, description: String, hasTags: Bool) {
+        let openingTimeView = OpeningTimeView(isOpen: isOpen, time: time, description: description)
+
+        self.addSubview(openingTimeView)
+
+        if hasTags {
+            openingTimeView.snp.makeConstraints {
+                $0.top.equalTo(tagStackView.snp.bottom).offset(7)
+                $0.leading.equalToSuperview().offset(horizontalEdges)
+            }
+        } else {
+            openingTimeView.snp.makeConstraints {
+                $0.top.equalTo(titleLabel.snp.bottom).offset(7)
+                $0.leading.equalToSuperview().offset(horizontalEdges)
+            }
+        }
     }
 
     func makeSignatureMenuSection(_ menus: [SignatureMenuModel]) {
@@ -261,31 +279,18 @@ private extension SpotDetailView {
         return stackView
     }
 
-    func setImagePageControl(_ numberOfPages: Int) {
+    func setImagePageControl(_ numberOfPages: Int?) {
+        guard let numberOfPages = numberOfPages else {
+            imagePageControl.removeFromSuperview()
+            return
+        }
+
         imagePageControl.do {
             $0.numberOfPages = numberOfPages
             $0.currentPage = 0
             $0.currentPageIndicatorTintColor = .acWhite
             $0.pageIndicatorTintColor = .gray300
             $0.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
-        }
-    }
-
-    func setOpeningTimeView(withTags: Bool) {
-        let openingTimeView = OpeningTimeView(type: .end, time: "22:00", withDot: true) //TODO: 명세 나오면 수정
-
-        self.addSubview(openingTimeView)
-
-        if withTags {
-            openingTimeView.snp.makeConstraints {
-                $0.top.equalTo(tagStackView.snp.bottom).offset(7)
-                $0.leading.equalToSuperview().offset(horizontalEdges)
-            }
-        } else {
-            openingTimeView.snp.makeConstraints {
-                $0.top.equalTo(titleLabel.snp.bottom).offset(7)
-                $0.leading.equalToSuperview().offset(horizontalEdges)
-            }
         }
     }
 

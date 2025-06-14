@@ -440,8 +440,9 @@ extension SpotListViewController: UICollectionViewDataSource {
     // MARK: DidSelectItemAt
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = viewModel.spotList.spotList[indexPath.item]
-        let vc = SpotDetailViewController(item.id, item.tagList)
+        let spot = viewModel.spotList.spotList[indexPath.item]
+        let topTag: SpotTagType? = indexPath.item < 5 ? SpotTagType.top(number: indexPath.item + 1) : nil
+        let vc = SpotDetailViewController(spot.id, topTag)
 
         if AuthManager.shared.hasToken {
             self.navigationController?.pushViewController(vc, animated: true)
