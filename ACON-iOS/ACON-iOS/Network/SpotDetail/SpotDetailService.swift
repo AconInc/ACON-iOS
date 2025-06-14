@@ -78,7 +78,7 @@ final class SpotDetailService: BaseService<SpotDetailTargetType>,
     }
 
     func deleteSavedSpot(spotID: Int64, completion: @escaping (NetworkResult<EmptyResponse>) -> Void) {
-        self.provider.request(.postSavedSpot(spotID: spotID)) { result in
+        self.provider.request(.deleteSavedSpot(spotID: spotID)) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<EmptyResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: EmptyResponse.self)

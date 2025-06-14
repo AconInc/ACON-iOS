@@ -40,7 +40,7 @@ class SpotDetailViewController: BaseNavViewController {
 
         setDelegate()
         registerCell()
-        addTarget()
+        setButtonAction()
         bindViewModel()
     }
 
@@ -93,7 +93,7 @@ class SpotDetailViewController: BaseNavViewController {
         spotDetailView.collectionView.register(SpotDetailImageCollectionViewCell.self, forCellWithReuseIdentifier: SpotDetailImageCollectionViewCell.cellIdentifier)
     }
 
-    private func addTarget() {
+    private func setButtonAction() {
         spotDetailView.findCourseButton.addTarget(self,
                                                   action: #selector(tappedFindCourseButton),
                                                   for: .touchUpInside)
@@ -101,8 +101,10 @@ class SpotDetailViewController: BaseNavViewController {
         let menuTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedMenuButton))
         spotDetailView.menuButton.addGestureRecognizer(menuTapGesture)
 
-        let bookmarkTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedBookmarkButton))
-        spotDetailView.bookmarkButton.addGestureRecognizer(bookmarkTapGesture)
+        spotDetailView.bookmarkButton.onTap = { [weak self] isSelected in
+            guard let self = self else { return }
+            isSelected ? viewModel.postSavedSpot() : viewModel.deleteSavedSpot()
+        }
     }
 
 }
@@ -181,11 +183,6 @@ private extension SpotDetailViewController {
         let vc = MenuImageSlideViewController(viewModel.menuImageURLs)
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true)
-    }
-
-    @objc
-    func tappedBookmarkButton() {
-        spotDetailView.bookmarkButton.isSelected ? viewModel.deleteSavedSpot() : viewModel.postSavedSpot()
     }
 
 }

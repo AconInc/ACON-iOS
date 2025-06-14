@@ -118,7 +118,7 @@ extension SpotDetailViewModel {
     }
 
     func deleteSavedSpot() {
-        ACService.shared.spotDetailService.postSavedSpot(spotID: spotID){ [weak self] response in
+        ACService.shared.spotDetailService.deleteSavedSpot(spotID: spotID){ [weak self] response in
             switch response {
             case .success:
                 self?.onSuccessDeleteSavedSpot.value = true

@@ -11,6 +11,8 @@ class SpotDetailSideButton: UIView {
 
     // MARK: - Property & Initializer
 
+    var onTap: ((Bool) -> Void)?
+
     let type: SideButtonType
     var isSelected: Bool = false {
         didSet {
@@ -110,7 +112,7 @@ private extension SpotDetailSideButton {
     @objc
     func tappedSelf() {
         isSelected.toggle()
-        print("isSelected: \(isSelected)")
+        onTap?(isSelected)
     }
 
 }
