@@ -60,7 +60,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
 
         imageView.do {
             let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zooming))
-            $0.contentMode = .scaleAspectFill
+            $0.contentMode = .scaleAspectFit
             $0.clipsToBounds = true
             $0.isUserInteractionEnabled = true
             $0.addGestureRecognizer(pinchGesture)
@@ -76,7 +76,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         super.prepareForReuse()
 
         imageView.image = nil
-
+        glassBgView.isHidden = true
         imageLoadErrorLabel.isHidden = true
     }
 
@@ -124,9 +124,11 @@ extension MenuCollectionViewCell {
             completionHandler: { result in
                 switch result {
                 case .success:
+                    self.glassBgView.isHidden = true
                     self.imageLoadErrorLabel.isHidden = true
                 case .failure:
                     self.imageView.image = nil
+                    self.glassBgView.isHidden = false
                     self.imageLoadErrorLabel.isHidden = false
                 }
             }
