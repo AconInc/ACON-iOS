@@ -16,6 +16,7 @@ class SpotDetailViewModel: Serviceable {
     let tagList: [SpotTagType]
     
     let onSuccessGetSpotDetail: ObservablePattern<Bool> = ObservablePattern(nil)
+    let onSuccessGetMenuboardImageList: ObservablePattern<Bool> = ObservablePattern(nil)
     var onSuccessPostSavedSpot: ObservablePattern<Bool> = ObservablePattern(nil)
     var onSuccessDeleteSavedSpot: ObservablePattern<Bool> = ObservablePattern(nil)
         
@@ -83,6 +84,23 @@ extension SpotDetailViewModel {
 ////                return
 //            }
 //        }
+    }
+
+    func getMenuboardImageList() {
+        ACService.shared.spotDetailService.getSpotMenuboardImageList(spotID: spotID) { [weak self] response in
+            switch response {
+            case .success(let data):
+                self?.menuImageURLs = data.menuboardImageList
+                self?.onSuccessGetMenuboardImageList.value = true
+            case .reIssueJWT:
+                self?.handleReissue { [weak self] in
+                    self?.getMenuboardImageList()
+                }
+            default:
+                self?.onSuccessGetMenuboardImageList.value = false
+                return
+            }
+        }
     }
 
     func postGuidedSpot() {

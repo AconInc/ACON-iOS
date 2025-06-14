@@ -13,6 +13,7 @@ enum SpotDetailTargetType {
     
     case getSpotDetail(spotID: Int64)
     case getSpotMenu(spotID: Int64)
+    case getMenuboardImageList(spotID: Int64)
     case postGuidedSpot(spotID: Int64)
     case postSavedSpot(spotID: Int64)
     case deleteSavedSpot(spotID: Int64)
@@ -38,6 +39,8 @@ extension SpotDetailTargetType: TargetType {
             return utilPath + "spots/\(spotID)"
         case .getSpotMenu(let spotID):
             return utilPath + "spots/\(spotID)/menus"
+        case .getMenuboardImageList(let spotID):
+            return utilPath + "spots/\(spotID)/menuboards"
         case .postGuidedSpot:
             return utilPath + "guided-spots"
         case .postSavedSpot:
@@ -61,7 +64,7 @@ extension SpotDetailTargetType: TargetType {
         switch self {
         case .getSpotDetail:
             headers = HeaderType.basicHeader
-        case .getSpotMenu:
+        case .getSpotMenu, .getMenuboardImageList:
             headers = HeaderType.noHeader
         case .postGuidedSpot, .postSavedSpot:
             headers = HeaderType.headerWithToken()
