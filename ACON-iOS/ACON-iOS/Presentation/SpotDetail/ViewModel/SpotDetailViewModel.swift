@@ -19,7 +19,7 @@ class SpotDetailViewModel: Serviceable {
     var onSuccessPostSavedSpot: ObservablePattern<Bool> = ObservablePattern(nil)
     var onSuccessDeleteSavedSpot: ObservablePattern<Bool> = ObservablePattern(nil)
 
-    var spotDetail: ObservablePattern<SpotDetailInfoModel> = ObservablePattern(nil)
+    var spotDetail: SpotDetailInfoModel? = nil
 
     var menuImageURLs: [String] = []
 
@@ -38,7 +38,7 @@ extension SpotDetailViewModel {
             switch response {
             case .success(let data):
                 let spotDetailData = SpotDetailInfoModel(from: data)
-                self?.spotDetail.value = spotDetailData
+                self?.spotDetail = spotDetailData
                 self?.onSuccessGetSpotDetail.value = true
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in

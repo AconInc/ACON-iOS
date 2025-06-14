@@ -107,7 +107,11 @@ class SpotDetailViewController: BaseNavViewController {
 
         spotDetailView.menuButton.onTap = { [weak self] _ in
             guard let self = self else { return }
-            let vc = MenuImageSlideViewController(viewModel.menuImageURLs)
+            let vc = MenuImageSlideViewController(viewModel)
+
+            if viewModel.menuImageURLs.isEmpty {
+                viewModel.getMenuboardImageList()
+            }
             vc.modalPresentationStyle = .overFullScreen
             self.present(vc, animated: true)
         }
@@ -129,7 +133,7 @@ private extension SpotDetailViewController {
         self.viewModel.onSuccessGetSpotDetail.bind { [weak self] onSuccess in
             guard let onSuccess,
                   let self = self,
-                  let data = viewModel.spotDetail.value else { return }
+                  let data = viewModel.spotDetail else { return }
             if onSuccess {
                 var tagList: [SpotTagType] = []
                 if let topTag { tagList.append(topTag) }
@@ -141,23 +145,12 @@ private extension SpotDetailViewController {
                                       closingTime: data.closingTime,
                                       nextOpening: data.nextOpening)
                 spotDetailView.makeSignatureMenuSection(data.signatureMenuList)
+                spotDetailView.menuButton.isEnabled = data.hasMenuboardImage
                 spotDetailView.collectionView.reloadData()
             } else {
                 showDefaultAlert(title: "장소 정보 로드 실패", message: "장소 정보 로드에 실패했습니다.")
             }
             viewModel.onSuccessGetSpotDetail.value = nil
-        }
-
-        self.viewModel.onSuccessGetMenuboardImageList.bind { [weak self] onSuccess in
-            guard let onSuccess,
-                  let self = self else { return }
-            
-            if onSuccess {
-                spotDetailView.menuButton.isEnabled = !viewModel.menuImageURLs.isEmpty
-            } else {
-                spotDetailView.menuButton.isEnabled = false
-            }
-            
         }
 
         self.viewModel.onSuccessPostSavedSpot.bind { [weak self] onSuccess in
@@ -204,7 +197,7 @@ private extension SpotDetailViewController {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.do { [weak self] in
             guard let self = self,
-                  let spot = viewModel.spotDetail.value else { return }
+                  let spot = viewModel.spotDetail else { return }
             $0.addAction(UIAlertAction(title: StringLiterals.Map.naverMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
                     to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
@@ -230,12 +223,12 @@ private extension SpotDetailViewController {
 extension SpotDetailViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.spotDetail.value?.imageURLs?.count ?? 0
+        return viewModel.spotDetail?.imageURLs?.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: SpotDetailImageCollectionViewCell.cellIdentifier, for: indexPath) as? SpotDetailImageCollectionViewCell else { return UICollectionViewCell() }
-        if let imageURLs = viewModel.spotDetail.value?.imageURLs {
+        if let imageURLs = viewModel.spotDetail?.imageURLs {
             item.setImage(imageURL: imageURLs[indexPath.item])
         }
         return item
