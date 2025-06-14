@@ -98,8 +98,12 @@ class SpotDetailViewController: BaseNavViewController {
                                                   action: #selector(tappedFindCourseButton),
                                                   for: .touchUpInside)
 
-        let menuTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedMenuButton))
-        spotDetailView.menuButton.addGestureRecognizer(menuTapGesture)
+        spotDetailView.menuButton.onTap = { [weak self] _ in
+            guard let self = self else { return }
+            let vc = MenuImageSlideViewController(viewModel.menuImageURLs)
+            vc.modalPresentationStyle = .overFullScreen
+            self.present(vc, animated: true)
+        }
 
         spotDetailView.bookmarkButton.onTap = { [weak self] isSelected in
             guard let self = self else { return }
@@ -176,13 +180,6 @@ private extension SpotDetailViewController {
             $0.addAction(UIAlertAction(title: StringLiterals.Alert.cancel, style: .cancel, handler: nil))
         }
         present(alertController, animated: true)
-    }
-
-    @objc
-    func tappedMenuButton() {
-        let vc = MenuImageSlideViewController(viewModel.menuImageURLs)
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true)
     }
 
 }
