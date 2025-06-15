@@ -16,7 +16,7 @@ final class AppleMapService: MapServiceProtocol {
         let destinationItem = createMapItem(for: destination)
 
         let launchOptions = [
-            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking
+            MKLaunchOptionsDirectionsModeKey: transportMode.appleMapLaunchOption
         ]
 
         MKMapItem.openMaps(
