@@ -9,6 +9,8 @@ import UIKit
 
 class SpotToggleButtonView: GlassmorphismView {
 
+    var onTap: (() -> Void)?
+
     var selectedType: ObservablePattern<SpotType> = ObservablePattern(.restaurant)
 
     private let selectorView = UIView()
@@ -133,6 +135,10 @@ class SpotToggleButtonView: GlassmorphismView {
 private extension SpotToggleButtonView {
 
     @objc func buttonTapped(_ sender: UIButton) {
+        onTap?()
+
+        guard AuthManager.shared.hasToken else { return }
+
         let isRestaurantButtonSelected = sender == restaurantButton
 
         selectedType.value = isRestaurantButtonSelected ? .restaurant : .cafe

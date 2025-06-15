@@ -234,6 +234,15 @@ extension NoMatchingSpotListCollectionViewCell: SpotListCellConfigurable {
         setFindCourseButton(with: spot.eta)
     }
 
+    func setTags(tags: [SpotTagType]) {
+        tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        setTagStackView(with: tags)
+    }
+
+    func setOpeningTimeView(isOpen: Bool, time: String, description: String, hasTags: Bool) {
+        return
+    }
+
     func overlayLoginLock(_ show: Bool) {
         loginLockOverlayView.isHidden = !show
     }

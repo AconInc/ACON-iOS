@@ -147,7 +147,7 @@ extension SavedSpotsViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedSpotID = viewModel.savedSpotList[indexPath.item].id
-        let vc = SpotDetailViewController(selectedSpotID, [])
+        let vc = SpotDetailViewController(selectedSpotID)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

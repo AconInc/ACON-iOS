@@ -13,7 +13,10 @@ enum SpotDetailTargetType {
     
     case getSpotDetail(spotID: Int64)
     case getSpotMenu(spotID: Int64)
+    case getMenuboardImageList(spotID: Int64)
     case postGuidedSpot(spotID: Int64)
+    case postSavedSpot(spotID: Int64)
+    case deleteSavedSpot(spotID: Int64)
     
 }
 
@@ -21,8 +24,10 @@ extension SpotDetailTargetType: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .postGuidedSpot:
+        case .postGuidedSpot, .postSavedSpot:
             return .post
+        case .deleteSavedSpot:
+            return .delete
         default:
             return .get
         }
@@ -34,14 +39,20 @@ extension SpotDetailTargetType: TargetType {
             return utilPath + "spots/\(spotID)"
         case .getSpotMenu(let spotID):
             return utilPath + "spots/\(spotID)/menus"
+        case .getMenuboardImageList(let spotID):
+            return utilPath + "spots/\(spotID)/menuboards"
         case .postGuidedSpot:
             return utilPath + "guided-spots"
+        case .postSavedSpot:
+            return utilPath + "saved-spots"
+        case .deleteSavedSpot(let spotID):
+            return utilPath + "saved-spots/\(spotID)"
         }
     }
     
     var task: Task {
         switch self {
-        case .postGuidedSpot(let spotID):
+        case .postGuidedSpot(let spotID), .postSavedSpot(let spotID):
             return .requestParameters(parameters: ["spotId": spotID], encoding: JSONEncoding.default)
         default:
             return .requestPlain
@@ -51,12 +62,12 @@ extension SpotDetailTargetType: TargetType {
     var headers: [String : String]? {
         var headers = HeaderType.noHeader
         switch self {
-        case .getSpotDetail:
-            headers = HeaderType.basicHeader
-        case .getSpotMenu:
+        case .getSpotMenu, .getMenuboardImageList:
             headers = HeaderType.noHeader
-        case .postGuidedSpot:
+        case .postGuidedSpot, .postSavedSpot:
             headers = HeaderType.headerWithToken()
+        case .getSpotDetail, .deleteSavedSpot:
+            headers = HeaderType.tokenOnly()
         }
         return headers
     }

@@ -23,7 +23,7 @@ final class MapRedirectManager {
 
     // MARK: - Redirect
     
-    func redirect(to destination: MapRedirectModel, mapType: MapType, transportMode: TransportModeType?) {
+    func redirect(to destination: MapRedirectModel, mapType: MapType, transportMode: TransportModeType) {
         ACLocationManager.shared.addDelegate(self)
         self.destination = destination
         self.mapType = mapType

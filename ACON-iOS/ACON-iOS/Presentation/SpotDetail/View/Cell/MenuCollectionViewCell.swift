@@ -65,7 +65,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         }
 
         imageView.do {
-            $0.contentMode = .scaleAspectFill
+            $0.contentMode = .scaleAspectFit
             $0.clipsToBounds = true
         }
 
@@ -79,7 +79,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         super.prepareForReuse()
 
         imageView.image = nil
-
+        imageLoadErrorGlassBgView.isHidden = true
         imageLoadErrorLabel.isHidden = true
     }
 
@@ -124,13 +124,14 @@ extension MenuCollectionViewCell {
             with: URL(string: imageURL),
             placeholder: UIImage.imgSkeletonBg,
             options: [.transition(.none), .cacheOriginalImage],
-            completionHandler: { result in
+            completionHandler: { [weak self] result in
+                guard let self = self else { return }
                 switch result {
                 case .success:
-                    self.imageLoadErrorLabel.isHidden = true
+                    [imageLoadErrorGlassBgView, imageLoadErrorLabel].forEach { $0.isHidden = true }
                 case .failure:
-                    self.imageView.image = nil
-                    self.imageLoadErrorLabel.isHidden = false
+                    imageView.image = nil
+                    [imageLoadErrorGlassBgView, imageLoadErrorLabel].forEach { $0.isHidden = false }
                 }
             }
         )
