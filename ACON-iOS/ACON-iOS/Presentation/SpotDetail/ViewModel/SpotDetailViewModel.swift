@@ -13,7 +13,7 @@ import MapKit
 class SpotDetailViewModel: Serviceable {
 
     let spotID: Int64
-
+    
     let onSuccessGetSpotDetail: ObservablePattern<Bool> = ObservablePattern(nil)
     let onSuccessGetMenuboardImageList: ObservablePattern<Bool> = ObservablePattern(nil)
     var onSuccessPostSavedSpot: ObservablePattern<Bool> = ObservablePattern(nil)

@@ -11,9 +11,11 @@ final class NaverMapService: MapServiceProtocol {
 
     private let naverMapAppStoreURL = URL(string: "itms-apps://itunes.apple.com/app/id311867728?mt=8")
 
-    func openMap(from startPoint: MapRedirectModel, to destination: MapRedirectModel) {
+    func openMap(from startPoint: MapRedirectModel,
+                 to destination: MapRedirectModel,
+                 transportMode: TransportModeType) {
         do {
-            let url = try buildNaverMapURL(from: startPoint, to: destination)
+            let url = try buildNaverMapURL(from: startPoint, to: destination, transportMode: transportMode)
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url)
             } else {
@@ -25,13 +27,13 @@ final class NaverMapService: MapServiceProtocol {
     }
 
     private func buildNaverMapURL(from startPoint: MapRedirectModel,
-                                  to destination: MapRedirectModel) throws -> URL {
+                                  to destination: MapRedirectModel,
+                                  transportMode: TransportModeType) throws -> URL {
         guard let appName = Bundle.main.bundleIdentifier else {
             throw MapServiceError.bundleIdentifierFailed
         }
 
-        let urlString = "nmap://route/walk?slat=\(startPoint.latitude)&slng=\(startPoint.longitude)&sname=\(startPoint.name)&dlat=\(destination.latitude)&dlng=\(destination.longitude)&dname=\(destination.name)&appname=\(appName)"
-        
+        let urlString = "nmap://route/\(transportMode.naverMapKey)?slat=\(startPoint.latitude)&slng=\(startPoint.longitude)&sname=\(startPoint.name)&dlat=\(destination.latitude)&dlng=\(destination.longitude)&dname=\(destination.name)&appname=\(appName)"
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let url = URL(string: encodedString) else {
             throw MapServiceError.invalidURL

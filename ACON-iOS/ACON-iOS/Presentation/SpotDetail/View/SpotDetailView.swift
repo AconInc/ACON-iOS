@@ -225,6 +225,10 @@ extension SpotDetailView {
             findCourseButton.do {
                 $0.setAttributedTitle(text: courseTitle, style: .b1SB)
             }
+        default:
+            findCourseButton.do {
+                $0.setAttributedTitle(text: "길찾기", style: .b1SB)
+            }
         }
     }
 

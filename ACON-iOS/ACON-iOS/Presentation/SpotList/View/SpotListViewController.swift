@@ -34,7 +34,6 @@ class SpotListViewController: BaseNavViewController {
         bindObservable()
         setCollectionView()
         addTarget()
-        viewModel.updateLocationAndPostSpotList()
         setSkeleton()
     }
 
@@ -60,7 +59,22 @@ class SpotListViewController: BaseNavViewController {
         ACToastController.hide()
         viewModel.stopPeriodicLocationCheck()
     }
-    
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        spotToggleButton.refreshBlurEffect()
+
+        for cell in spotListView.collectionView.visibleCells {
+            if let cell = cell as? SpotListCollectionViewCell {
+                cell.setNeedsLayout()
+           }
+       }
+    }
+
+
+    // MARK: - UI Settings
+
     override func setHierarchy() {
         super.setHierarchy()
 
@@ -119,16 +133,16 @@ class SpotListViewController: BaseNavViewController {
         )
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+}
 
-        spotToggleButton.refreshBlurEffect()
 
-        for cell in spotListView.collectionView.visibleCells {
-            if let cell = cell as? SpotListCollectionViewCell {
-                cell.setNeedsLayout()
-           }
-       }
+// MARK: - Internal Methods
+
+extension SpotListViewController {
+
+    // NOTE: '장소' 탭 선택 시 호출
+    func goToTop() {
+        spotListView.collectionView.setContentOffset(.zero, animated: true)
     }
 
 }
@@ -251,8 +265,7 @@ private extension SpotListViewController {
         }
 
         let vc = SpotListFilterViewController(viewModel: viewModel)
-        vc.setSheetLayout(detent: .long)
-        vc.isModalInPresentation = true
+        vc.setSheetLayout(detent: .semiLong)
 
         present(vc, animated: true)
     }
@@ -355,7 +368,9 @@ extension SpotListViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return viewModel.spotList.spotList.count
+        let dataCount = viewModel.spotList.spotList.count
+        let adCount = dataCount / 5
+        return viewModel.spotList.transportMode == .walking ? dataCount + adCount : dataCount
     }
 
 
@@ -451,9 +466,12 @@ extension SpotListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let spot = viewModel.spotList.spotList[indexPath.item]
         let topTag: SpotTagType? = indexPath.item < 5 ? SpotTagType.top(number: indexPath.item + 1) : nil
-        let vc = SpotDetailViewController(spot.spotId, topTag, viewModel.spotList.transportMode, spot.eta)
+        let transportMode: TransportModeType? = viewModel.spotList.transportMode
+        let isAd: Bool = transportMode == .walking && indexPath.item % 5 == 0 && indexPath.item > 0
+        let vc = SpotDetailViewController(spot.spotId, topTag, transportMode, spot.eta)
 
         if AuthManager.shared.hasToken {
+            if isAd { return }
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             presentLoginModal(AmplitudeLiterals.EventName.tappedSpotCell)
@@ -569,13 +587,15 @@ extension SpotListViewController: SpotListCellDelegate {
             $0.addAction(UIAlertAction(title: StringLiterals.Map.naverMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
                     to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
-                    using: .naver)
+                    mapType: .naver,
+                    transportMode: self.viewModel.spotList.transportMode ?? .publicTransit)
                 self.viewModel.postGuidedSpot(spotID: spot.spotId)
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Map.appleMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
                     to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
-                    using: .apple)
+                    mapType: .apple,
+                    transportMode: self.viewModel.spotList.transportMode ?? .publicTransit)
                 self.viewModel.postGuidedSpot(spotID: spot.spotId)
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Alert.cancel, style: .cancel, handler: nil))
@@ -602,13 +622,16 @@ private extension SpotListViewController {
         ) as? T else {
             return UICollectionViewCell()
         }
+
+        let adAboveCount = indexPath.item / 5
+        let dataIndex = spotList.transportMode == .walking ? indexPath.item - adAboveCount : indexPath.item
         var tags: [SpotTagType] = []
         let lockCell = !AuthManager.shared.hasToken && indexPath.item > 4
 
         if indexPath.item < 5 { tags.append(SpotTagType.top(number: indexPath.item + 1)) }
-        tags.append(contentsOf: spotList.spotList[indexPath.item].tagList)
+        tags.append(contentsOf: spotList.spotList[dataIndex].tagList)
 
-        cell.bind(spot: spotList.spotList[indexPath.item])
+        cell.bind(spot: spotList.spotList[dataIndex])
         cell.setTags(tags: tags)
         cell.overlayLoginLock(lockCell)
         cell.setFindCourseDelegate(self)

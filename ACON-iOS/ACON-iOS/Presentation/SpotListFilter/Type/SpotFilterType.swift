@@ -95,18 +95,16 @@ extension SpotFilterType {
 
     enum OpeningHoursOptionType: CaseIterable {
 
-        case overMidnight, overTenPM
+        case overTenPM
         
         var text: String {
             switch self {
-            case .overMidnight: return "밤 12시 이후"
             case .overTenPM: return "밤 10시 이후"
             }
         }
 
         var serverKey: String {
             switch self {
-            case .overMidnight: return "OPEN_AFTER_MIDNIGHT"
             case .overTenPM: return "OPEN_AFTER_10PM"
             }
         }

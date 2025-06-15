@@ -18,21 +18,27 @@ final class MapRedirectManager {
 
     private var destination: MapRedirectModel?
 
+    private var transportMode: TransportModeType?
+
 
     // MARK: - Redirect
     
-    func redirect(to destination: MapRedirectModel, using mapType: MapType) {
+    func redirect(to destination: MapRedirectModel, mapType: MapType, transportMode: TransportModeType) {
         ACLocationManager.shared.addDelegate(self)
         self.destination = destination
         self.mapType = mapType
+        self.transportMode = transportMode
         ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
     }
 
 
     // MARK: - Helper
 
-    private func openMap(type: MapType, from startPoint: MapRedirectModel, to destination: MapRedirectModel) {
-        type.service.openMap(from: startPoint, to: destination)
+    private func openMap(map: MapType,
+                         from startPoint: MapRedirectModel,
+                         to destination: MapRedirectModel,
+                         transportMode: TransportModeType) {
+        map.service.openMap(from: startPoint, to: destination, transportMode: transportMode)
     }
 
 }
@@ -46,18 +52,22 @@ extension MapRedirectManager: ACLocationManagerDelegate {
         ACLocationManager.shared.removeDelegate(self)
 
         if let mapType = mapType,
-           let destination = destination {
+           let destination = destination,
+           let transportMode = transportMode {
             let startPoint = MapRedirectModel(
                 name: StringLiterals.Map.myLocation,
                 latitude: location.coordinate.latitude,
                 longitude: location.coordinate.longitude
             )
 
-            self.openMap(type: mapType, from: startPoint, to: destination)
+            self.openMap(map: mapType, from: startPoint, to: destination, transportMode: transportMode)
+        } else {
+            print("❌ Redirect Optional binding Failed")
         }
 
         mapType = nil
         destination = nil
+        transportMode = nil
     }
 
 }

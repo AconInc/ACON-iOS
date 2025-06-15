@@ -15,7 +15,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
 
     var onZooming: ((Bool) -> Void)?
 
-    private let glassBgView = GlassmorphismView(.noImageErrorGlass)
+    private let imageLoadErrorGlassBgView = GlassmorphismView(.noImageErrorGlass)
 
     private let imageView = UIImageView()
 
@@ -30,13 +30,13 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     override func setHierarchy() {
         super.setHierarchy()
 
-        self.addSubviews(glassBgView, imageView, imageLoadErrorLabel)
+        contentView.addSubviews(imageLoadErrorGlassBgView, imageView, imageLoadErrorLabel)
     }
 
     override func setLayout() {
         super.setLayout()
 
-        glassBgView.snp.makeConstraints {
+        imageLoadErrorGlassBgView.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.equalTo(imageWidth)
             $0.height.equalTo(imageHeight)
@@ -58,14 +58,17 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
 
         self.backgroundColor = .clear
 
-        imageView.do {
+        contentView.do {
             let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zooming))
-            $0.contentMode = .scaleAspectFit
-            $0.clipsToBounds = true
             $0.isUserInteractionEnabled = true
             $0.addGestureRecognizer(pinchGesture)
         }
-        
+
+        imageView.do {
+            $0.contentMode = .scaleAspectFit
+            $0.clipsToBounds = true
+        }
+
         imageLoadErrorLabel.do {
             $0.isHidden = true
             $0.setLabel(text: StringLiterals.SpotList.imageLoadingFailed, style: .t5SB, color: .gray50)
@@ -76,14 +79,14 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         super.prepareForReuse()
 
         imageView.image = nil
-        glassBgView.isHidden = true
+        imageLoadErrorGlassBgView.isHidden = true
         imageLoadErrorLabel.isHidden = true
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        glassBgView.refreshBlurEffect()
+        imageLoadErrorGlassBgView.refreshBlurEffect()
     }
 
 }
@@ -121,15 +124,14 @@ extension MenuCollectionViewCell {
             with: URL(string: imageURL),
             placeholder: UIImage.imgSkeletonBg,
             options: [.transition(.none), .cacheOriginalImage],
-            completionHandler: { result in
+            completionHandler: { [weak self] result in
+                guard let self = self else { return }
                 switch result {
                 case .success:
-                    self.glassBgView.isHidden = true
-                    self.imageLoadErrorLabel.isHidden = true
+                    [imageLoadErrorGlassBgView, imageLoadErrorLabel].forEach { $0.isHidden = true }
                 case .failure:
-                    self.imageView.image = nil
-                    self.glassBgView.isHidden = false
-                    self.imageLoadErrorLabel.isHidden = false
+                    imageView.image = nil
+                    [imageLoadErrorGlassBgView, imageLoadErrorLabel].forEach { $0.isHidden = false }
                 }
             }
         )
