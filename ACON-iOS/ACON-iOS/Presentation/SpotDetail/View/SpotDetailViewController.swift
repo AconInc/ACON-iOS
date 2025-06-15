@@ -14,6 +14,8 @@ class SpotDetailViewController: BaseNavViewController {
     private let viewModel: SpotDetailViewModel
 
     private var topTag: SpotTagType?
+    private var transportMode: TransportModeType?
+    private var eta: Int?
 
     private var startTime: Date?
 
@@ -27,9 +29,16 @@ class SpotDetailViewController: BaseNavViewController {
 
     // MARK: - LifeCycle
 
-    init(_ spotID: Int64, _ topTag: SpotTagType? = nil) {
+    init(
+        _ spotID: Int64,
+        _ topTag: SpotTagType? = nil,
+        _ transportMode: TransportModeType? = nil,
+        _ eta: Int? = nil
+    ) {
         self.viewModel = SpotDetailViewModel(spotID)
         self.topTag = topTag
+        self.transportMode = transportMode
+        self.eta = eta
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -144,6 +153,7 @@ private extension SpotDetailViewController {
                                       isOpen: data.isOpen,
                                       closingTime: data.closingTime,
                                       nextOpening: data.nextOpening)
+                spotDetailView.setFindCourseButton(transportMode, eta)
                 spotDetailView.makeSignatureMenuSection(data.signatureMenuList)
                 spotDetailView.menuButton.isEnabled = data.hasMenuboardImage
                 spotDetailView.collectionView.reloadData()

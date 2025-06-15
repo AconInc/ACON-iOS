@@ -168,15 +168,11 @@ extension SpotDetailView {
 
         setAcornCountButton(with: spotDetail.acornCount)
 
-        // TODO: 바인딩 수정 - 이전 뷰에서 넘겨받기
-        findCourseButton.setAttributedTitle(text: "도보 9분 길찾기", style: .t4SB)
-
         if spotDetail.imageURLs?.count == 0 {
             [noImageBgImageView, noImageContentView].forEach { $0.isHidden = false }
             noImageContentView.setDescription(.noImageDynamic(id: Int(spotDetail.spotID)))
         }
 
-        // TODO: API 명세 나오면 실제 데이터로 바꾸기
         bookmarkButton.isSelected = spotDetail.isSaved
         
         setImagePageControl(spotDetail.imageURLs?.count)
@@ -203,6 +199,31 @@ extension SpotDetailView {
             openingTimeView.snp.makeConstraints {
                 $0.top.equalTo(titleLabel.snp.bottom).offset(7)
                 $0.leading.equalToSuperview().offset(horizontalEdges)
+            }
+        }
+    }
+
+    func setFindCourseButton(_ transportMode: TransportModeType?, _ eta: Int?) {
+        guard let transportMode,
+              let eta else {
+            findCourseButton.setAttributedTitle(text: "길찾기", style: .t4SB)
+            return
+        }
+
+        let findCourse: String = StringLiterals.SpotList.minuteFindCourse
+
+        switch transportMode {
+        case .walking:
+            let walk: String = StringLiterals.SpotList.walk
+            let courseTitle: String = walk + String(eta) + findCourse
+            findCourseButton.do {
+                $0.setAttributedTitle(text: courseTitle, style: .b1SB)
+            }
+        case .biking:
+            let bike: String = StringLiterals.SpotList.bike
+            let courseTitle: String = bike + String(eta) + findCourse
+            findCourseButton.do {
+                $0.setAttributedTitle(text: courseTitle, style: .b1SB)
             }
         }
     }

@@ -48,7 +48,7 @@ class SpotListViewController: BaseNavViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        // NOTE: 조작 문제로 무한 skeleton 되는 문제 방지
+        // NOTE: life cycle 문제로 무한 skeleton 되는 문제 방지
         if !viewModel.spotList.spotList.isEmpty {
             endSkeletonAnimation()
         }
@@ -451,7 +451,7 @@ extension SpotListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let spot = viewModel.spotList.spotList[indexPath.item]
         let topTag: SpotTagType? = indexPath.item < 5 ? SpotTagType.top(number: indexPath.item + 1) : nil
-        let vc = SpotDetailViewController(spot.spotId, topTag)
+        let vc = SpotDetailViewController(spot.spotId, topTag, viewModel.spotList.transportMode, spot.eta)
 
         if AuthManager.shared.hasToken {
             self.navigationController?.pushViewController(vc, animated: true)
