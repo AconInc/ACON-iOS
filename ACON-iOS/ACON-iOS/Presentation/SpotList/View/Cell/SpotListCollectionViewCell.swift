@@ -195,6 +195,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach {
             $0.isSkeletonable = true
             $0.skeletonCornerRadius = 8
+            $0.isUserInteractionEnabled = false
         }
 
         loginlockOverlayView.do {
@@ -390,6 +391,7 @@ private extension SpotListCollectionViewCell {
 
         case .loaded:
             [glassBgView, noImageContentView].forEach { $0.isHidden = true }
+            [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach { $0.isHidden = true }
 
             gradientImageView.do {
                 $0.image = .imgGra1
@@ -399,6 +401,7 @@ private extension SpotListCollectionViewCell {
 
         case .loadFailed:
             [glassBgView, gradientImageView, noImageContentView].forEach { $0.isHidden = false }
+            [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach { $0.isHidden = true }
 
             bgImageView.image = nil
 
@@ -413,6 +416,7 @@ private extension SpotListCollectionViewCell {
 
         case .noImageDynamic:
             [glassBgView, gradientImageView].forEach { $0.isHidden = true }
+            [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach { $0.isHidden = true }
             noImageContentView.isHidden = false
 
             bgImageView.image = .imgSpotNoImageBackground

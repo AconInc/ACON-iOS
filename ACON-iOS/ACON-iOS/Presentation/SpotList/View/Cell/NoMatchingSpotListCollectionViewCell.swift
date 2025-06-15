@@ -32,10 +32,6 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
     private let tagStackView = UIStackView()
     private let findCourseButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
 
-    private let titleSkeletonView = UIView()
-    private let acornCountSkeletonView = UIView()
-    private let findCourseSkeletonView = UIView()
-
     private let cornerRadius: CGFloat = 20
 
 
@@ -63,9 +59,6 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
                                 acornCountButton,
                                 tagStackView,
                                 findCourseButton,
-                                titleSkeletonView,
-                                acornCountSkeletonView,
-                                findCourseSkeletonView,
                                 loginLockOverlayView)
     }
 
@@ -110,18 +103,6 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
             $0.bottom.trailing.equalToSuperview().inset(edge)
             $0.width.equalTo(140)
             $0.height.equalTo(36)
-        }
-
-        titleSkeletonView.snp.makeConstraints {
-            $0.top.leading.equalTo(titleLabel)
-            $0.width.equalTo(218 * ScreenUtils.widthRatio)
-            $0.height.equalTo(26)
-        }
-
-        acornCountSkeletonView.snp.makeConstraints {
-            $0.top.trailing.equalTo(acornCountButton)
-            $0.leading.equalTo(titleSkeletonView.snp.trailing).offset(10)
-            $0.height.equalTo(26)
         }
 
         findCourseButton.snp.makeConstraints {
@@ -185,11 +166,6 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
 
         findCourseButton.do {
             $0.updateGlassButtonState(state: .default)
-        }
-
-        [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach {
-            $0.isSkeletonable = true
-            $0.skeletonCornerRadius = 8
         }
 
         loginLockOverlayView.do {
@@ -328,7 +304,6 @@ private extension NoMatchingSpotListCollectionViewCell {
     func updateUI(with status: SpotImageStatusType) {
         switch status {
         case .loading:
-            [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach { $0.isHidden = false }
             [glassBgView, noImageContentView, gradientImageView, acornCountButton, findCourseButton].forEach { $0.isHidden = true }
 
             titleLabel.text = nil
