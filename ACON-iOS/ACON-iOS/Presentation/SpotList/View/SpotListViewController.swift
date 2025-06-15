@@ -635,14 +635,19 @@ private extension SpotListViewController {
 
         let adAboveCount = indexPath.item / 5
         let dataIndex = spotList.transportMode == .walking ? indexPath.item - adAboveCount : indexPath.item
-        var tags: [SpotTagType] = []
+        let spot = spotList.spotList[dataIndex]
         let lockCell = !AuthManager.shared.hasToken && indexPath.item > 4
 
+        let time: String = spot.isOpen ? spot.closingTime : spot.nextOpening
+        let description = spot.isOpen ? StringLiterals.SpotList.businessEnd : StringLiterals.SpotList.businessStart
+
+        var tags: [SpotTagType] = []
         if indexPath.item < 5 { tags.append(SpotTagType.top(number: indexPath.item + 1)) }
         tags.append(contentsOf: spotList.spotList[dataIndex].tagList)
 
-        cell.bind(spot: spotList.spotList[dataIndex])
+        cell.bind(spot: spot)
         cell.setTags(tags: tags)
+        cell.setOpeningTimeView(isOpen: spot.isOpen, time: time, description: description, hasTags: !tags.isEmpty)
         cell.overlayLoginLock(lockCell)
         cell.setFindCourseDelegate(self)
         cell.isSkeletonable = true

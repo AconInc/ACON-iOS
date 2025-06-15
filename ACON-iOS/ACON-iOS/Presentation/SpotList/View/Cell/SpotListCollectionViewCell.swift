@@ -34,6 +34,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     private let titleLabel = UILabel()
     private let acornCountButton = UIButton()
     private let tagStackView = UIStackView()
+    private var openingTimeView = OpeningTimeView(isOpen: false, time: "", description: "")
     let findCourseButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
 
     private let titleSkeletonView = UIView()
@@ -65,6 +66,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
                                 titleLabel,
                                 acornCountButton,
                                 tagStackView,
+                                openingTimeView,
                                 findCourseButton,
                                 titleSkeletonView,
                                 acornCountSkeletonView,
@@ -106,6 +108,11 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         tagStackView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(8)
             $0.leading.equalTo(titleLabel)
+        }
+
+        openingTimeView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(7)
+            $0.leading.equalToSuperview().offset(edge)
         }
 
         findCourseButton.snp.makeConstraints {
@@ -172,6 +179,8 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
 
         titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
+        openingTimeView.isHidden = true
+
         acornCountButton.do {
             var config = UIButton.Configuration.plain()
             let acorn: UIImage = .icAcornLine.resize(to: .init(width: 24, height: 24))
@@ -209,6 +218,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         super.prepareForReuse()
 
         currentImageURL = nil
+        openingTimeView.isHidden = true
 
         updateUI(with: .loading)
 
@@ -274,6 +284,19 @@ extension SpotListCollectionViewCell: SpotListCellConfigurable {
         tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         tags.forEach { tag in
             tagStackView.addArrangedSubview(SpotTagButton(tag))
+        }
+    }
+
+    func setOpeningTimeView(isOpen: Bool, time: String, description: String, hasTags: Bool) {
+        openingTimeView.do {
+            $0.updateUI(isOpen: isOpen, time: time, description: description)
+            $0.isHidden = false
+        }
+
+        if hasTags {
+            openingTimeView.snp.updateConstraints {
+                $0.top.equalTo(titleLabel.snp.bottom).offset(40)
+            }
         }
     }
 

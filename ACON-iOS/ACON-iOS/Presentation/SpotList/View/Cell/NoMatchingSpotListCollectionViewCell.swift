@@ -239,6 +239,10 @@ extension NoMatchingSpotListCollectionViewCell: SpotListCellConfigurable {
         setTagStackView(with: tags)
     }
 
+    func setOpeningTimeView(isOpen: Bool, time: String, description: String, hasTags: Bool) {
+        return
+    }
+
     func overlayLoginLock(_ show: Bool) {
         loginLockOverlayView.isHidden = !show
     }

@@ -87,4 +87,14 @@ class OpeningTimeView: BaseView {
         descriptionLabel.setLabel(text: openingDescription, style: .b1R, color: .gray200)
     }
 
+    func updateUI(isOpen: Bool, time: String, description: String) {
+        dotImageView.do {
+            $0.image = isOpen ? .icGreenlight : .icGraylight
+        }
+
+        timeLabel.setLabel(text: time, style: .b1SB, color: .gray200)
+
+        descriptionLabel.setLabel(text: openingDescription, style: .b1R, color: .gray200)
+    }
+
 }
