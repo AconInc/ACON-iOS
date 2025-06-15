@@ -386,13 +386,12 @@ extension SpotListViewController: UICollectionViewDataSource {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpotListGoogleAdCollectionViewCell.cellIdentifier, for: indexPath) as? SpotListGoogleAdCollectionViewCell else {
                     return UICollectionViewCell() }
 
-                // TODO: 🍇 주석 해제 (실제 코드)
-//                if let nativeAd = GoogleAdsManager.shared.getNativeAd(.imageOnly) {
-//                    cell.configure(with: nativeAd)
-//                } else {
+                if let nativeAd = GoogleAdsManager.shared.getNativeAd(.imageOnly) {
+                    cell.configure(with: nativeAd)
+                } else {
                     cell.isSkeletonable = true
                     cell.startACSkeletonAnimation()
-//                }
+                }
                 
                 return cell
             } else {
@@ -464,10 +463,14 @@ extension SpotListViewController: UICollectionViewDataSource {
     // MARK: DidSelectItemAt
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let spot = viewModel.spotList.spotList[indexPath.item]
-        let topTag: SpotTagType? = indexPath.item < 5 ? SpotTagType.top(number: indexPath.item + 1) : nil
         let transportMode: TransportModeType? = viewModel.spotList.transportMode
         let isAd: Bool = transportMode == .walking && indexPath.item % 5 == 0 && indexPath.item > 0
+        let adAboveCount: Int = indexPath.item / 5
+        let dataIndex: Int = transportMode == .walking ? indexPath.item - adAboveCount : indexPath.item
+
+        let spot: SpotModel = viewModel.spotList.spotList[dataIndex]
+        let topTag: SpotTagType? = dataIndex < 5 ? SpotTagType.top(number: dataIndex + 1) : nil
+
         let vc = SpotDetailViewController(spot.spotId, topTag, transportMode, spot.eta)
 
         if AuthManager.shared.hasToken {
