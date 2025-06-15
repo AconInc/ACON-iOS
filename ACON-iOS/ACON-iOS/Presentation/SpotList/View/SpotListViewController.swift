@@ -33,7 +33,7 @@ class SpotListViewController: BaseNavViewController {
         bindViewModel()
         bindObservable()
         setCollectionView()
-        addTarget()
+        setButtonAction()
         setSkeleton()
     }
 
@@ -125,12 +125,19 @@ class SpotListViewController: BaseNavViewController {
         }
     }
 
-    private func addTarget() {
+    private func setButtonAction() {
         filterButton.addTarget(
             self,
             action: #selector(tappedFilterButton),
             for: .touchUpInside
         )
+
+        spotToggleButton.onTap = { [weak self] in
+            guard let self = self else { return }
+            if !AuthManager.shared.hasToken {
+                presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
+            }
+        }
     }
 
 }
