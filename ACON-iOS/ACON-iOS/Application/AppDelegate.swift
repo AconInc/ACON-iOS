@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseCrashlytics
+import BranchSDK
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,6 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             GoogleAdsManager.shared.initialize()
         }
+        
+        /// Branch io 초기화
+        /// This version of `initSession` includes the source UIScene in the callback
+        BranchScene.shared().initSession(launchOptions: launchOptions, registerDeepLinkHandler: { (params, error, scene) in
+            
+        })
         
         return true
     }

@@ -52,6 +52,11 @@
 		156AE6792DE0F1D300AE800D /* NoMatchingSpotListItemSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AE6782DE0F1D300AE800D /* NoMatchingSpotListItemSizeType.swift */; };
 		156AE67B2DE0F37100AE800D /* NoMatchingSpotHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AE67A2DE0F37100AE800D /* NoMatchingSpotHeader.swift */; };
 		156D92602D6570A90037F8F1 /* PatchProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */; };
+		156E80152DFED61A0080FA34 /* BranchSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 156E80142DFED61A0080FA34 /* BranchSDK */; };
+		156E817B2DFF103C0080FA34 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156E81792DFF0DD50080FA34 /* CoreServices.framework */; };
+		156E817D2DFF10440080FA34 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156E817C2DFF10440080FA34 /* SystemConfiguration.framework */; };
+		156E817F2DFF104B0080FA34 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156E817E2DFF104B0080FA34 /* WebKit.framework */; };
+		156E81812DFF10570080FA34 /* CoreSpotlight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156E81802DFF10570080FA34 /* CoreSpotlight.framework */; };
 		157135B12DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157135B02DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift */; };
 		1576806E2DFA06A70079B255 /* SpotListSkeletonHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1576806D2DFA06A70079B255 /* SpotListSkeletonHeader.swift */; };
 		157C061F2DC5E7CE000B04AF /* SpotTagType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C061E2DC5E7CE000B04AF /* SpotTagType.swift */; };
@@ -330,6 +335,10 @@
 		156AE6782DE0F1D300AE800D /* NoMatchingSpotListItemSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMatchingSpotListItemSizeType.swift; sourceTree = "<group>"; };
 		156AE67A2DE0F37100AE800D /* NoMatchingSpotHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMatchingSpotHeader.swift; sourceTree = "<group>"; };
 		156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchProfileRequest.swift; sourceTree = "<group>"; };
+		156E81792DFF0DD50080FA34 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		156E817C2DFF10440080FA34 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		156E817E2DFF104B0080FA34 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		156E81802DFF10570080FA34 /* CoreSpotlight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreSpotlight.framework; path = System/Library/Frameworks/CoreSpotlight.framework; sourceTree = SDKROOT; };
 		157135B02DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		1576806D2DFA06A70079B255 /* SpotListSkeletonHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListSkeletonHeader.swift; sourceTree = "<group>"; };
 		157C061E2DC5E7CE000B04AF /* SpotTagType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTagType.swift; sourceTree = "<group>"; };
@@ -562,9 +571,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				156E81812DFF10570080FA34 /* CoreSpotlight.framework in Frameworks */,
+				156E817F2DFF104B0080FA34 /* WebKit.framework in Frameworks */,
+				156E817D2DFF10440080FA34 /* SystemConfiguration.framework in Frameworks */,
+				156E817B2DFF103C0080FA34 /* CoreServices.framework in Frameworks */,
 				74D831922D6878A5003384C6 /* AmplitudeSwift in Frameworks */,
 				748D6F4D2D2BC76C007690B4 /* GoogleSignIn in Frameworks */,
 				74B25C252D2FD30A008BDCB7 /* Lottie in Frameworks */,
+				156E80152DFED61A0080FA34 /* BranchSDK in Frameworks */,
 				748D6F4A2D2BC52B007690B4 /* Kingfisher in Frameworks */,
 				15AD50982DF8725200166D9D /* SkeletonView in Frameworks */,
 				746AA0342DAD0EE300E28B66 /* FirebaseCrashlytics in Frameworks */,
@@ -876,6 +890,10 @@
 		35A4AFEF7860C30E103669B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				156E81802DFF10570080FA34 /* CoreSpotlight.framework */,
+				156E817E2DFF104B0080FA34 /* WebKit.framework */,
+				156E817C2DFF10440080FA34 /* SystemConfiguration.framework */,
+				156E81792DFF0DD50080FA34 /* CoreServices.framework */,
 				B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */,
 			);
 			name = Frameworks;
@@ -1751,6 +1769,7 @@
 				746AA0332DAD0EE300E28B66 /* FirebaseCrashlytics */,
 				74770C182DF1DA97005D4165 /* GoogleMobileAds */,
 				15AD50972DF8725200166D9D /* SkeletonView */,
+				156E80142DFED61A0080FA34 /* BranchSDK */,
 			);
 			productName = "ACON-iOS";
 			productReference = 74AB6EB02D2796D30094F873 /* ACON-iOS.app */;
@@ -1791,6 +1810,7 @@
 				746AA0302DAD0EE300E28B66 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				74C1934B2DEF8909005FB3C7 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 				15AD50962DF8725200166D9D /* XCRemoteSwiftPackageReference "SkeletonView" */,
+				156E80132DFED61A0080FA34 /* XCRemoteSwiftPackageReference "ios-branch-deep-linking-attribution" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 74AB6EB12D2796D30094F873 /* Products */;
@@ -2397,6 +2417,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		156E80132DFED61A0080FA34 /* XCRemoteSwiftPackageReference "ios-branch-deep-linking-attribution" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BranchMetrics/ios-branch-deep-linking-attribution.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.12.1;
+			};
+		};
 		15AD50962DF8725200166D9D /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
@@ -2480,6 +2508,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		156E80142DFED61A0080FA34 /* BranchSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 156E80132DFED61A0080FA34 /* XCRemoteSwiftPackageReference "ios-branch-deep-linking-attribution" */;
+			productName = BranchSDK;
+		};
 		15AD50972DF8725200166D9D /* SkeletonView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 15AD50962DF8725200166D9D /* XCRemoteSwiftPackageReference "SkeletonView" */;

@@ -2,6 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>branch_key</key>
+	<dict/>
+	<key>live</key>
+	<string>key_live_cDCiDd2bLNg1qe2kxMieVkhgFAcVwsJm</string>
+	<key>test</key>
+	<string>key_test_cswnDh0jUQf5FoYowQpcLdfoFucIFxHy</string>
+	<key>branch_universal_link_domains</key>
+	<array/>
+	<key>item 0</key>
+	<string>aconpage.app.link</string>
+	<key>item 1</key>
+	<string>aconpage-alternate.app.link</string>
+	<key>item 2</key>
+	<string>aconpage.test-app.link</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>AMPLITUDE_KEY</key>
@@ -30,6 +44,16 @@
 	<string>2.0.0</string>
 	<key>CFBundleURLTypes</key>
 	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>branchsters</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>io.Branch.Branchsters</string>
+		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>

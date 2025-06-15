@@ -6,17 +6,26 @@
 //
 
 import UIKit
+import BranchSDK
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connections: UIScene.ConnectionOptions) {
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
         
         self.window?.rootViewController = SplashViewController()
         self.window?.makeKeyAndVisible()
+
+        // NOTE:
+        // Workaround for SceneDelegate `continueUserActivity` not getting called on cold start:
+        if let userActivity = connectionOptions.userActivities.first {
+            BranchScene.shared().scene(scene, continue: userActivity)
+        } else if !connectionOptions.urlContexts.isEmpty {
+            BranchScene.shared().scene(scene, openURLContexts: connectionOptions.urlContexts)
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -67,6 +76,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 }
             }
         }
+    }
+
+    func scene(_ scene: UIScene, willContinueUserActivityWithType userActivityType: String) {
+        scene.userActivity = NSUserActivity(activityType: userActivityType)
+        scene.delegate = self
+    }
+
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        BranchScene.shared().scene(scene, continue: userActivity)
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        BranchScene.shared().scene(scene, openURLContexts: URLContexts)
     }
 
 }
