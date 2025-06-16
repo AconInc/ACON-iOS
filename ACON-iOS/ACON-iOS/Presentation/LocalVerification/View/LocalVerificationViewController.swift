@@ -18,6 +18,7 @@ class LocalVerificationViewController: BaseViewController {
     
     private let localVerificationViewModel: LocalVerificationViewModel
     
+    
     // MARK: - LifeCycle
     
     init(viewModel: LocalVerificationViewModel) {
