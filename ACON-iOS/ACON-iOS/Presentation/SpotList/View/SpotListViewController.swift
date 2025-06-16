@@ -33,7 +33,7 @@ class SpotListViewController: BaseNavViewController {
         bindViewModel()
         bindObservable()
         setCollectionView()
-        addTarget()
+        setButtonAction()
         setSkeleton()
     }
 
@@ -42,6 +42,15 @@ class SpotListViewController: BaseNavViewController {
 
         self.tabBarController?.tabBar.isHidden = false
         viewModel.startPeriodicLocationCheck()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        // NOTE: life cycle 문제로 무한 skeleton 되는 문제 방지
+        if !viewModel.spotList.spotList.isEmpty {
+            endSkeletonAnimation()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -116,12 +125,19 @@ class SpotListViewController: BaseNavViewController {
         }
     }
 
-    private func addTarget() {
+    private func setButtonAction() {
         filterButton.addTarget(
             self,
             action: #selector(tappedFilterButton),
             for: .touchUpInside
         )
+
+        spotToggleButton.onTap = { [weak self] in
+            guard let self = self else { return }
+            if !AuthManager.shared.hasToken {
+                presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
+            }
+        }
     }
 
 }
@@ -167,7 +183,7 @@ extension SpotListViewController {
                 }
             }
 
-            // NOTE: 법정동 조회 실패 (서비스불가지역)
+            // NOTE: 서비스불가지역
             else if viewModel.errorType == .unsupportedRegion {
                 isSkeletonShowing = false
                 isDataLoading = false
@@ -359,7 +375,9 @@ extension SpotListViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return viewModel.spotList.spotList.count
+        let dataCount = viewModel.spotList.spotList.count
+        let adCount = dataCount / 5
+        return viewModel.spotList.transportMode == .walking ? dataCount + adCount : dataCount
     }
 
 
@@ -375,13 +393,12 @@ extension SpotListViewController: UICollectionViewDataSource {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpotListGoogleAdCollectionViewCell.cellIdentifier, for: indexPath) as? SpotListGoogleAdCollectionViewCell else {
                     return UICollectionViewCell() }
 
-                // TODO: 🍇 주석 해제 (실제 코드)
-//                if let nativeAd = GoogleAdsManager.shared.getNativeAd(.imageOnly) {
-//                    cell.configure(with: nativeAd)
-//                } else {
+                if let nativeAd = GoogleAdsManager.shared.getNativeAd(.imageOnly) {
+                    cell.configure(with: nativeAd)
+                } else {
                     cell.isSkeletonable = true
                     cell.startACSkeletonAnimation()
-//                }
+                }
                 
                 return cell
             } else {
@@ -453,10 +470,18 @@ extension SpotListViewController: UICollectionViewDataSource {
     // MARK: DidSelectItemAt
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = viewModel.spotList.spotList[indexPath.item]
-        let vc = SpotDetailViewController(item.id, item.tagList)
+        let transportMode: TransportModeType? = viewModel.spotList.transportMode
+        let isAd: Bool = transportMode == .walking && indexPath.item % 5 == 0 && indexPath.item > 0
+        let adAboveCount: Int = indexPath.item / 5
+        let dataIndex: Int = transportMode == .walking ? indexPath.item - adAboveCount : indexPath.item
+
+        let spot: SpotModel = viewModel.spotList.spotList[dataIndex]
+        let topTag: SpotTagType? = dataIndex < 5 ? SpotTagType.top(number: dataIndex + 1) : nil
+
+        let vc = SpotDetailViewController(spot.spotId, topTag, transportMode, spot.eta)
 
         if AuthManager.shared.hasToken {
+            if isAd { return }
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             presentLoginModal(AmplitudeLiterals.EventName.tappedSpotCell)
@@ -572,14 +597,16 @@ extension SpotListViewController: SpotListCellDelegate {
             $0.addAction(UIAlertAction(title: StringLiterals.Map.naverMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
                     to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
-                    using: .naver)
-                self.viewModel.postGuidedSpot(spotID: spot.id)
+                    mapType: .naver,
+                    transportMode: self.viewModel.spotList.transportMode ?? .publicTransit)
+                self.viewModel.postGuidedSpot(spotID: spot.spotId)
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Map.appleMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
                     to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
-                    using: .apple)
-                self.viewModel.postGuidedSpot(spotID: spot.id)
+                    mapType: .apple,
+                    transportMode: self.viewModel.spotList.transportMode ?? .publicTransit)
+                self.viewModel.postGuidedSpot(spotID: spot.spotId)
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Alert.cancel, style: .cancel, handler: nil))
         }
@@ -606,9 +633,21 @@ private extension SpotListViewController {
             return UICollectionViewCell()
         }
 
+        let adAboveCount = indexPath.item / 5
+        let dataIndex = spotList.transportMode == .walking ? indexPath.item - adAboveCount : indexPath.item
+        let spot = spotList.spotList[dataIndex]
         let lockCell = !AuthManager.shared.hasToken && indexPath.item > 4
 
-        cell.bind(spot: spotList.spotList[indexPath.item])
+        let time: String = spot.isOpen ? spot.closingTime : spot.nextOpening
+        let description = spot.isOpen ? StringLiterals.SpotList.businessEnd : StringLiterals.SpotList.businessStart
+
+        var tags: [SpotTagType] = []
+        if indexPath.item < 5 { tags.append(SpotTagType.top(number: indexPath.item + 1)) }
+        tags.append(contentsOf: spotList.spotList[dataIndex].tagList)
+
+        cell.bind(spot: spot)
+        cell.setTags(tags: tags)
+        cell.setOpeningTimeView(isOpen: spot.isOpen, time: time, description: description, hasTags: !tags.isEmpty)
         cell.overlayLoginLock(lockCell)
         cell.setFindCourseDelegate(self)
         cell.isSkeletonable = true

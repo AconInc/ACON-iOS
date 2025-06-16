@@ -9,24 +9,36 @@ import UIKit
 
 class SpotDetailViewController: BaseNavViewController {
 
-    // MARK: - UI Properties
-
-    private let spotDetailView = SpotDetailView()
-
-
     // MARK: - Properties
 
     private let viewModel: SpotDetailViewModel
+
+    private var topTag: SpotTagType?
+    private var transportMode: TransportModeType?
+    private var eta: Int?
 
     private var startTime: Date?
 
     private var timer: Timer?
 
 
+    // MARK: - UI Properties
+
+    private let spotDetailView = SpotDetailView()
+
+
     // MARK: - LifeCycle
 
-    init(_ spotID: Int64, _ tagList: [SpotTagType]) {
-        self.viewModel = SpotDetailViewModel(spotID, tagList)
+    init(
+        _ spotID: Int64,
+        _ topTag: SpotTagType? = nil,
+        _ transportMode: TransportModeType? = nil,
+        _ eta: Int? = nil
+    ) {
+        self.viewModel = SpotDetailViewModel(spotID)
+        self.topTag = topTag
+        self.transportMode = transportMode
+        self.eta = eta
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -40,7 +52,7 @@ class SpotDetailViewController: BaseNavViewController {
 
         setDelegate()
         registerCell()
-        addTarget()
+        setButtonAction()
         bindViewModel()
     }
 
@@ -50,6 +62,7 @@ class SpotDetailViewController: BaseNavViewController {
         self.tabBarController?.tabBar.isHidden = true
 
         viewModel.getSpotDetail()
+        viewModel.getMenuboardImageList()
         startTime = Date()
     }
 
@@ -62,6 +75,9 @@ class SpotDetailViewController: BaseNavViewController {
             AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["place_detail_duration": timeInterval])
         }
     }
+
+
+    // MARK: - UI Settings
 
     override func setHierarchy() {
         super.setHierarchy()
@@ -93,17 +109,30 @@ class SpotDetailViewController: BaseNavViewController {
         spotDetailView.collectionView.register(SpotDetailImageCollectionViewCell.self, forCellWithReuseIdentifier: SpotDetailImageCollectionViewCell.cellIdentifier)
     }
 
-    private func addTarget() {
+    private func setButtonAction() {
         spotDetailView.findCourseButton.addTarget(self,
                                                   action: #selector(tappedFindCourseButton),
                                                   for: .touchUpInside)
 
-        let menuTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedMenuButton))
-        spotDetailView.menuButton.addGestureRecognizer(menuTapGesture)
+        spotDetailView.menuButton.onTap = { [weak self] _ in
+            guard let self = self else { return }
+            let vc = MenuImageSlideViewController(viewModel)
+
+            if viewModel.menuImageURLs.isEmpty {
+                viewModel.getMenuboardImageList()
+            }
+            vc.modalPresentationStyle = .overFullScreen
+            self.present(vc, animated: true)
+        }
+
+        spotDetailView.bookmarkButton.onTap = { [weak self] isSelected in
+            guard let self = self else { return }
+            isSelected ? viewModel.postSavedSpot() : viewModel.deleteSavedSpot()
+        }
     }
 
 }
- 
+
 
 // MARK: - bindViewModel
 
@@ -112,22 +141,60 @@ private extension SpotDetailViewController {
     func bindViewModel() {
         self.viewModel.onSuccessGetSpotDetail.bind { [weak self] onSuccess in
             guard let onSuccess,
-                  let data = self?.viewModel.spotDetail.value else { return }
+                  let self = self,
+                  let data = viewModel.spotDetail else { return }
             if onSuccess {
-                self?.spotDetailView.bindData(data)
-                self?.spotDetailView.makeSignatureMenuSection(data.signatureMenuList)
-                self?.spotDetailView.collectionView.reloadData()
+                var tagList: [SpotTagType] = []
+                if let topTag { tagList.append(topTag) }
+                if let tags = data.tagList { tagList.append(contentsOf: tags) }
+                
+                spotDetailView.bindData(data)
+                setTagsAndOpeningTime(tags: tagList,
+                                      isOpen: data.isOpen,
+                                      closingTime: data.closingTime,
+                                      nextOpening: data.nextOpening)
+                spotDetailView.setFindCourseButton(transportMode, eta)
+                spotDetailView.makeSignatureMenuSection(data.signatureMenuList)
+                spotDetailView.menuButton.isEnabled = data.hasMenuboardImage
+                spotDetailView.collectionView.reloadData()
             } else {
-                self?.showDefaultAlert(title: "장소 정보 로드 실패", message: "장소 정보 로드에 실패했습니다.")
+                showDefaultAlert(title: "장소 정보 로드 실패", message: "장소 정보 로드에 실패했습니다.")
             }
-#if DEBUG
-            self?.spotDetailView.collectionView.reloadData() // TODO: 삭제하고 다른 UI 설정
-#endif
+            viewModel.onSuccessGetSpotDetail.value = nil
+        }
+
+        self.viewModel.onSuccessPostSavedSpot.bind { [weak self] onSuccess in
+            guard let onSuccess,
+                  let self = self else { return }
+            spotDetailView.bookmarkButton.isSelected = onSuccess
+            viewModel.onSuccessPostSavedSpot.value = nil
+        }
+
+        self.viewModel.onSuccessDeleteSavedSpot.bind { [weak self] onSuccess in
+            guard let onSuccess,
+                  let self = self else { return }
+            spotDetailView.bookmarkButton.isSelected = !onSuccess
+            viewModel.onSuccessPostSavedSpot.value = nil
         }
     }
 
 }
 
+
+// MARK: - Helper
+
+private extension SpotDetailViewController {
+
+    func setTagsAndOpeningTime(tags: [SpotTagType], isOpen: Bool, closingTime: String, nextOpening: String) {
+        let time: String = isOpen ? closingTime : nextOpening
+        let description = isOpen ? StringLiterals.SpotList.businessEnd : StringLiterals.SpotList.businessStart
+
+        spotDetailView.setTagStackView(tags: tags)
+        spotDetailView.setOpeningTimeView(isOpen: isOpen, time: time, description: description, hasTags: !tags.isEmpty)
+    }
+
+}
+ 
 
 // MARK: - @objc methods
 
@@ -140,29 +207,24 @@ private extension SpotDetailViewController {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.do { [weak self] in
             guard let self = self,
-                  let spot = viewModel.spotDetail.value else { return }
+                  let spot = viewModel.spotDetail else { return }
             $0.addAction(UIAlertAction(title: StringLiterals.Map.naverMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
                     to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
-                    using: .naver)
+                    mapType: .naver,
+                    transportMode: self.transportMode ?? .publicTransit)
                 self.viewModel.postGuidedSpot()
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Map.appleMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
                     to: MapRedirectModel(name: spot.name, latitude: spot.latitude, longitude: spot.longitude),
-                    using: .apple)
+                    mapType: .apple,
+                    transportMode: self.transportMode ?? .publicTransit)
                 self.viewModel.postGuidedSpot()
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Alert.cancel, style: .cancel, handler: nil))
         }
         present(alertController, animated: true)
-    }
-
-    @objc
-    func tappedMenuButton() {
-        let vc = MenuImageSlideViewController(viewModel.menuImageURLs)
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true)
     }
 
 }
@@ -173,12 +235,12 @@ private extension SpotDetailViewController {
 extension SpotDetailViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.spotDetail.value?.imageURLs.count ?? 0
+        return viewModel.spotDetail?.imageURLs?.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: SpotDetailImageCollectionViewCell.cellIdentifier, for: indexPath) as? SpotDetailImageCollectionViewCell else { return UICollectionViewCell() }
-        if let imageURLs = viewModel.spotDetail.value?.imageURLs {
+        if let imageURLs = viewModel.spotDetail?.imageURLs {
             item.setImage(imageURL: imageURLs[indexPath.item])
         }
         return item

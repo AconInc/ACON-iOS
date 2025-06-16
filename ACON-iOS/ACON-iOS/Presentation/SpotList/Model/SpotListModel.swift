@@ -19,7 +19,7 @@ struct SpotListModel {
 
 struct SpotModel: Equatable {
 
-    let id: Int64
+    let spotId: Int64
 
     let imageURL: String?
 
@@ -28,6 +28,12 @@ struct SpotModel: Equatable {
     let acornCount: Int
 
     let tagList: [SpotTagType]
+
+    let isOpen: Bool
+
+    let closingTime: String
+
+    let nextOpening: String
 
     let eta: Int
 
@@ -64,13 +70,17 @@ extension SpotListModel {
 extension SpotModel {
 
     init(from dto: SpotDTO) {
-        self.id = dto.id
+        self.spotId = dto.spotId
         self.imageURL = dto.image
         self.name = dto.name
         self.acornCount = dto.acornCount
 
         let tagList = dto.tagList ?? []
         self.tagList = tagList.map { SpotTagType(rawValue: $0) }
+
+        self.isOpen = dto.isOpen
+        self.closingTime = dto.closingTime
+        self.nextOpening = dto.nextOpening
 
         self.eta = dto.eta
         self.latitude = dto.latitude
