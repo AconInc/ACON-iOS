@@ -18,7 +18,7 @@ protocol LocalVerificationServiceProtocol {
     func deleteVerifiedArea(verifiedAreaID: String,
                             completion: @escaping (NetworkResult<EmptyResponse>) -> Void)
     
-    func postReplaceLocalArea(requestBody: PostReplaceLocalAreaRequest, completion: @escaping (NetworkResult<EmptyResponse>) -> Void)
+    func postReplaceVerifiedArea(requestBody: PostReplaceVerifiedAreaRequest, completion: @escaping (NetworkResult<EmptyResponse>) -> Void)
 }
 
 final class LocalVerificationService: BaseService<LocalVerificationTargetType>, LocalVerificationServiceProtocol {
@@ -69,7 +69,7 @@ final class LocalVerificationService: BaseService<LocalVerificationTargetType>, 
         }
     }
     
-    func postReplaceLocalArea(requestBody: PostReplaceLocalAreaRequest, completion: @escaping (NetworkResult<EmptyResponse>) -> Void) {
+    func postReplaceVerifiedArea(requestBody: PostReplaceVerifiedAreaRequest, completion: @escaping (NetworkResult<EmptyResponse>) -> Void) {
         self.provider.request(.postReplaceLocalArea(requestBody)) { result in
             switch result {
             case .success(let response):

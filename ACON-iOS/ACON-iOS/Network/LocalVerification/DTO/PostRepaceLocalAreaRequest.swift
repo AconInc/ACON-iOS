@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PostReplaceLocalAreaRequest: Codable {
+struct PostReplaceVerifiedAreaRequest: Codable {
     
     let previousVerifiedAreaId: Int64
     

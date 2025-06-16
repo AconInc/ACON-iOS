@@ -17,7 +17,7 @@ enum LocalVerificationTargetType {
     
     case deleteLocalArea(_ verifiedAreaID: String)
     
-    case postReplaceLocalArea(_ requestBody: PostReplaceLocalAreaRequest)
+    case postReplaceLocalArea(_ requestBody: PostReplaceVerifiedAreaRequest)
     
 }
 
@@ -29,7 +29,7 @@ extension LocalVerificationTargetType: TargetType {
             return .post
         case .getLocalAreaList:
             return .get
-        case .deleteLocalArea(_):
+        case .deleteLocalArea:
             return .delete
         }
     }
