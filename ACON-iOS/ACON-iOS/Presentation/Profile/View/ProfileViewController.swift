@@ -107,7 +107,7 @@ private extension ProfileViewController {
                 profileView.do {
                     $0.setProfileImage(self.viewModel.userInfo.profileImage)
                     $0.setNicknameLabel(self.viewModel.userInfo.nickname)
-                    $0.setSavedSpotUI(!self.viewModel.userInfo.savedSpotList!.isEmpty)
+                    $0.setSavedSpotUI(!self.viewModel.userInfo.savedSpotList.isEmpty)
                 }
                 updateSavedSpots(self.viewModel.userInfo.savedSpotList ?? [])
             } else {
@@ -152,7 +152,7 @@ private extension ProfileViewController {
     func savedSpotViewTapped(_ gesture: UITapGestureRecognizer) {
         guard let view = gesture.view else { return }
 
-        guard let selectedSpotID = viewModel.userInfo.savedSpotList?[view.tag].id else { return }
+        let selectedSpotID = viewModel.userInfo.savedSpotList[view.tag].id
         let vc = SpotDetailViewController(selectedSpotID)
         self.navigationController?.pushViewController(vc, animated: true)
     }
