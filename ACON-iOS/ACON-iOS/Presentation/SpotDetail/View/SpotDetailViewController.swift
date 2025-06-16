@@ -129,6 +129,11 @@ class SpotDetailViewController: BaseNavViewController {
             guard let self = self else { return }
             isSelected ? viewModel.postSavedSpot() : viewModel.deleteSavedSpot()
         }
+
+        spotDetailView.shareButton.onTap = { [weak self] _ in
+            guard let self = self else { return }
+            viewModel.createBranchDeepLink()
+        }
     }
 
 }

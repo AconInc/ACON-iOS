@@ -6,9 +6,10 @@
 //
 
 import UIKit
-
 import CoreLocation
 import MapKit
+
+import BranchSDK
 
 class SpotDetailViewModel: Serviceable {
 
@@ -115,6 +116,49 @@ extension SpotDetailViewModel {
                 return
             }
         }
+    }
+
+}
+
+
+// MARK: - 딥링크 메소드
+
+extension SpotDetailViewModel {
+
+    func createBranchDeepLink() {
+        guard let buo: BranchUniversalObject = makeBranchUniversalObject() else { return }
+        let lp: BranchLinkProperties = makeBranchLinkProperties()
+        buo.getShortUrl(with: lp) { url, error in
+            if let error {
+                print("🔗❌ 딥링크 생성 실패: \(error.localizedDescription)")
+                return
+            }
+
+            guard let url = url else {
+                print("🔗❓ 딥링크 생성은 성공했으나 URL == nil")
+                return
+            }
+
+            print("🔗✅ deeplink 생성 성공: \(url)")
+        }
+    }
+
+    private func makeBranchUniversalObject() -> BranchUniversalObject? {
+        guard let spot = spotDetail else { return nil }
+        let buo: BranchUniversalObject = BranchUniversalObject(canonicalIdentifier: "item/12345")
+        buo.title = "[Acon] \(spot.name)"
+        buo.contentDescription = "앱에서 가게 정보를 확인해보세요!"
+        buo.imageUrl = "https://picsum.photos/200"
+        buo.contentMetadata.customMetadata["spotId"] = spot.spotID
+        return buo
+    }
+
+    private func makeBranchLinkProperties() -> BranchLinkProperties {
+        let lp: BranchLinkProperties = BranchLinkProperties()
+        lp.channel = "share" // NOTE: 링크 유입 경로 -> 대시보드에서 볼 수 있음
+        lp.feature = "spot_detail_share" // NOTE: 생성된 링크의 목적/기능 -> 대시보드에서 볼 수 있음
+        lp.addControlParam("$deeplink_path", withValue: "spot/\(spotID)") // NOTE: 딥링크 클릭 시 앱의 URI Scheme으로 이동
+        return lp
     }
 
 }
