@@ -168,6 +168,11 @@
 		746261892D3FA29C00A4E84F /* SpotDetailTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261882D3FA29400A4E84F /* SpotDetailTargetType.swift */; };
 		7462618B2D3FA4A800A4E84F /* SpotDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462618A2D3FA4A200A4E84F /* SpotDetailService.swift */; };
 		7462D0252D4262F300580464 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462D0242D4262EF00580464 /* AuthManager.swift */; };
+		746A13B62E00545B0097DA25 /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746A13B52E0054550097DA25 /* OnboardingService.swift */; };
+		746A13B82E00549E0097DA25 /* OnboardingTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746A13B72E0054970097DA25 /* OnboardingTargetType.swift */; };
+		746A13BB2E0055120097DA25 /* PutOnboardingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746A13BA2E0054D20097DA25 /* PutOnboardingRequest.swift */; };
+		746A13BE2E00571D0097DA25 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746A13BD2E0057180097DA25 /* OnboardingViewModel.swift */; };
+		746A13C12E0065660097DA25 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746A13C02E0065620097DA25 /* OnboardingModel.swift */; };
 		746AA0342DAD0EE300E28B66 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 746AA0332DAD0EE300E28B66 /* FirebaseCrashlytics */; };
 		746AA0352DAD0EFF00E28B66 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7496EC1A2DACF3E500508EA8 /* GoogleService-Info.plist */; };
 		746F15B72D3E2083003EA031 /* PostLocalAreaRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F15B62D3E2079003EA031 /* PostLocalAreaRequest.swift */; };
@@ -264,13 +269,10 @@
 		74EC5A2A2DF4C72200E176A8 /* GetSavedSpotsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC5A292DF4C71B00E176A8 /* GetSavedSpotsResponse.swift */; };
 		74EC5A2C2DF4CB2300E176A8 /* SavedSpotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC5A2B2DF4CB1F00E176A8 /* SavedSpotView.swift */; };
 		74FA77842DD43709006846C9 /* SplashBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 74FA77832DD43709006846C9 /* SplashBGM.mp3 */; };
-		D61917E92D3E4410001BF0EE /* OnboardingTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917E82D3E4410001BF0EE /* OnboardingTargetType.swift */; };
-		D61917EC2D3E484A001BF0EE /* OnboardingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61917EB2D3E484A001BF0EE /* OnboardingRequest.swift */; };
 		D652597C2D62775C00B8176E /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597B2D62775C00B8176E /* CustomTextFieldView.swift */; };
 		D652597E2D628EB000B8176E /* WithdrawalConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597D2D628EB000B8176E /* WithdrawalConfirmationViewController.swift */; };
 		D65259802D6291A800B8176E /* WithdrawalConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597F2D6291A800B8176E /* WithdrawalConfirmationView.swift */; };
 		D696F1B22D3A7E3400CCD5FF /* ACAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696F1B12D3A7E3400CCD5FF /* ACAlertView.swift */; };
-		D6978F542D37B29100523A25 /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6978F532D37B29100523A25 /* OnboardingService.swift */; };
 		D6E34C462D398B6000CEFA04 /* ACAlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E34C3D2D398B6000CEFA04 /* ACAlertType.swift */; };
 		D6E34C472D398B6000CEFA04 /* ACAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E34C3E2D398B6000CEFA04 /* ACAlertViewController.swift */; };
 		D6E452932D3AA47500CBED02 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E452902D3AA47500CBED02 /* ProfileView.swift */; };
@@ -445,6 +447,11 @@
 		746261882D3FA29400A4E84F /* SpotDetailTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailTargetType.swift; sourceTree = "<group>"; };
 		7462618A2D3FA4A200A4E84F /* SpotDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailService.swift; sourceTree = "<group>"; };
 		7462D0242D4262EF00580464 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		746A13B52E0054550097DA25 /* OnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingService.swift; sourceTree = "<group>"; };
+		746A13B72E0054970097DA25 /* OnboardingTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTargetType.swift; sourceTree = "<group>"; };
+		746A13BA2E0054D20097DA25 /* PutOnboardingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutOnboardingRequest.swift; sourceTree = "<group>"; };
+		746A13BD2E0057180097DA25 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		746A13C02E0065620097DA25 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		746F15B62D3E2079003EA031 /* PostLocalAreaRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocalAreaRequest.swift; sourceTree = "<group>"; };
 		746F15BA2D3E215C003EA031 /* LocalVerificationTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationTargetType.swift; sourceTree = "<group>"; };
 		746F15BC2D3E2258003EA031 /* LocalVerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationService.swift; sourceTree = "<group>"; };
@@ -537,13 +544,10 @@
 		74FA77832DD43709006846C9 /* SplashBGM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SplashBGM.mp3; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB785B4E26FA7C11BB85A55D /* Pods-ACON-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		D61917E82D3E4410001BF0EE /* OnboardingTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTargetType.swift; sourceTree = "<group>"; };
-		D61917EB2D3E484A001BF0EE /* OnboardingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRequest.swift; sourceTree = "<group>"; };
 		D652597B2D62775C00B8176E /* CustomTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
 		D652597D2D628EB000B8176E /* WithdrawalConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalConfirmationViewController.swift; sourceTree = "<group>"; };
 		D652597F2D6291A800B8176E /* WithdrawalConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalConfirmationView.swift; sourceTree = "<group>"; };
 		D696F1B12D3A7E3400CCD5FF /* ACAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAlertView.swift; sourceTree = "<group>"; };
-		D6978F532D37B29100523A25 /* OnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingService.swift; sourceTree = "<group>"; };
 		D6E34C3D2D398B6000CEFA04 /* ACAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAlertType.swift; sourceTree = "<group>"; };
 		D6E34C3E2D398B6000CEFA04 /* ACAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAlertViewController.swift; sourceTree = "<group>"; };
 		D6E452902D3AA47500CBED02 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -1103,6 +1107,30 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		746A13B92E0054AE0097DA25 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				746A13BA2E0054D20097DA25 /* PutOnboardingRequest.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		746A13BC2E0057120097DA25 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				746A13BD2E0057180097DA25 /* OnboardingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		746A13BF2E0065590097DA25 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				746A13C02E0065620097DA25 /* OnboardingModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		746F15B42D3E2041003EA031 /* LocalVerification */ = {
 			isa = PBXGroup;
 			children = (
@@ -1405,6 +1433,8 @@
 		74A13D5F2DCBB960007FFFC3 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				746A13BF2E0065590097DA25 /* Model */,
+				746A13BC2E0057120097DA25 /* ViewModel */,
 				7436352A2DEE2C62009B0035 /* Type */,
 				74A13D602DCBB96D007FFFC3 /* View */,
 			);
@@ -1620,20 +1650,12 @@
 			path = Music;
 			sourceTree = "<group>";
 		};
-		D61917EA2D3E483E001BF0EE /* DTO */ = {
-			isa = PBXGroup;
-			children = (
-				D61917EB2D3E484A001BF0EE /* OnboardingRequest.swift */,
-			);
-			path = DTO;
-			sourceTree = "<group>";
-		};
 		D6AF15612D3E8A3700289683 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				D61917EA2D3E483E001BF0EE /* DTO */,
-				D6978F532D37B29100523A25 /* OnboardingService.swift */,
-				D61917E82D3E4410001BF0EE /* OnboardingTargetType.swift */,
+				746A13B92E0054AE0097DA25 /* DTO */,
+				746A13B72E0054970097DA25 /* OnboardingTargetType.swift */,
+				746A13B52E0054550097DA25 /* OnboardingService.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1903,6 +1925,7 @@
 				741E68912D3D385A00DF99EF /* ACPlugin.swift in Sources */,
 				745B19AE2D4002A100BDBDA4 /* PostLoginResponse.swift in Sources */,
 				15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */,
+				746A13BE2E00571D0097DA25 /* OnboardingViewModel.swift in Sources */,
 				157C0AC12DC689E7000B04AF /* UIImage+.swift in Sources */,
 				15A48BFA2D574BA5003C2421 /* ProfileEditView.swift in Sources */,
 				74AB75A82DF9F92C00F96A4A /* PostRepaceLocalAreaRequest.swift in Sources */,
@@ -1947,6 +1970,7 @@
 				746261752D3EA7FD00A4E84F /* GetReviewVerificationResponse.swift in Sources */,
 				152F8D182DF2526C0064022B /* MapRedirectModel.swift in Sources */,
 				748D6FA82D2C3F93007690B4 /* BaseViewController.swift in Sources */,
+				746A13C12E0065660097DA25 /* OnboardingModel.swift in Sources */,
 				157135B12DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift in Sources */,
 				746261712D3EA50A00A4E84F /* SpotCategoryType.swift in Sources */,
 				74020C4C2DF46E75009E90AE /* SavedSpotCollectionViewCell.swift in Sources */,
@@ -1992,7 +2016,6 @@
 				745ECB9D2D614183005129B0 /* PhotoSelectionViewController.swift in Sources */,
 				156AE6792DE0F1D300AE800D /* NoMatchingSpotListItemSizeType.swift in Sources */,
 				15A2461A2DE7A9E500469272 /* NoMatchingSpotListCollectionViewCell.swift in Sources */,
-				D61917E92D3E4410001BF0EE /* OnboardingTargetType.swift in Sources */,
 				1547A8822D358E3000E96616 /* SpotListFilterViewController.swift in Sources */,
 				15CF62C52D579F2D0000A10F /* ProfileViewModel.swift in Sources */,
 				746F5BF22DE00CE90081569B /* GlassBorderAttributes.swift in Sources */,
@@ -2000,6 +2023,7 @@
 				748ECA6B2D31918D00BBC981 /* LoginView.swift in Sources */,
 				D6EA38152D42B88F002B68B9 /* SearchEmptyView.swift in Sources */,
 				74D31C712D5832D000B4B2B4 /* AlbumViewModel.swift in Sources */,
+				746A13B82E00549E0097DA25 /* OnboardingTargetType.swift in Sources */,
 				1547A6F22D33AD4500E96616 /* SpotListModel.swift in Sources */,
 				746261732D3EA78700A4E84F /* GetReiviewVerificationRequest.swift in Sources */,
 				743900912DC50926002F91B1 /* UIVisualEffectView+.swift in Sources */,
@@ -2084,17 +2108,17 @@
 				15ABCBFC2DF775E8000269F7 /* SpotImageStatusType.swift in Sources */,
 				152F8D1C2DF253840064022B /* MapServiceProtocol.swift in Sources */,
 				742954382DF7F84E0067AC33 /* HapticManager.swift in Sources */,
-				D6978F542D37B29100523A25 /* OnboardingService.swift in Sources */,
 				74D31C7A2D5841EA00B4B2B4 /* PhotoCollectionViewController.swift in Sources */,
 				746261632D3EA1D500A4E84F /* GetSearchSuggestionResponse.swift in Sources */,
-				D61917EC2D3E484A001BF0EE /* OnboardingRequest.swift in Sources */,
 				15D6901E2DD723FA0009278D /* SpotDetailMoreViewController.swift in Sources */,
 				746F5BEC2DE009450081569B /* ACToastView.swift in Sources */,
 				74A13D672DCBC2BD007FFFC3 /* DislikeFoodCollectionViewCell.swift in Sources */,
 				D652597C2D62775C00B8176E /* CustomTextFieldView.swift in Sources */,
 				741429602D5D391000B69528 /* SettingType.swift in Sources */,
 				746261832D3F9FD900A4E84F /* GetSpotMenuResponse.swift in Sources */,
+				746A13BB2E0055120097DA25 /* PutOnboardingRequest.swift in Sources */,
 				15CD25842D40364F00320006 /* LoginModalView.swift in Sources */,
+				746A13B62E00545B0097DA25 /* OnboardingService.swift in Sources */,
 				741E689A2D3D43FF00DF99EF /* EmptyResponse.swift in Sources */,
 				745B19AC2D40021E00BDBDA4 /* PostLoginRequest.swift in Sources */,
 				741A06CA2D35415800778219 /* DropAcornViewController.swift in Sources */,
