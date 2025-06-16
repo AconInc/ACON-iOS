@@ -35,7 +35,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     private let acornCountButton = UIButton()
     private let tagStackView = UIStackView()
     private var openingTimeView = OpeningTimeView(isOpen: false, time: "", description: "")
-    let findCourseButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
+    let findCourseButton = UIButton()
 
     private let titleSkeletonView = UIView()
     private let acornCountSkeletonView = UIView()
@@ -116,9 +116,9 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         }
 
         findCourseButton.snp.makeConstraints {
-            $0.bottom.trailing.equalToSuperview().inset(edge)
-            $0.width.equalTo(140)
-            $0.height.equalTo(36)
+            $0.bottom.equalToSuperview().inset(edge)
+            $0.horizontalEdges.equalToSuperview().inset(52 * ScreenUtils.widthRatio)
+            $0.height.equalTo(48)
         }
 
         titleSkeletonView.snp.makeConstraints {
@@ -198,7 +198,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         }
         
         findCourseButton.do {
-            $0.updateGlassButtonState(state: .default)
+            $0.setBackgroundImage(.imgFindcourse224, for: .normal)
         }
 
         [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach {
@@ -231,7 +231,6 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         super.layoutSubviews()
 
         glassBgView.refreshBlurEffect()
-        findCourseButton.refreshButtonBlurEffect(.buttonGlassDefault)
     }
 
     private func addTarget() {

@@ -25,7 +25,7 @@ final class SpotDetailView: BaseView {
     let bookmarkButton = SpotDetailSideButton(.bookmark)
     let shareButton = SpotDetailSideButton(.share)
 
-    let findCourseButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
+    let findCourseButton = UIButton()
 
     private let imagePageControl = UIPageControl()
 
@@ -85,7 +85,7 @@ final class SpotDetailView: BaseView {
         findCourseButton.snp.makeConstraints {
             $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-13)
             $0.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(16)
-            $0.height.equalTo(54)
+            $0.height.equalTo(48)
         }
 
         imagePageControl.snp.makeConstraints {
@@ -151,6 +151,8 @@ final class SpotDetailView: BaseView {
             $0.setContentCompressionResistancePriority(.required, for: .horizontal)
             $0.isHidden = true
         }
+
+        findCourseButton.setBackgroundImage(.imgFindcourse328, for: .normal)
     }
 
 }
