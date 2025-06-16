@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /// Branch io 초기화
         /// This version of `initSession` includes the source UIScene in the callback
         BranchScene.shared().initSession(launchOptions: launchOptions, registerDeepLinkHandler: { (params, error, scene) in
-            
+            print("🔗 Branch 딥링크 데이터:", params ?? [:])
         })
         
         return true
