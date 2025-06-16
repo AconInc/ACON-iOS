@@ -159,26 +159,6 @@ private extension VerifiedAreasEditViewController {
                 viewModel.onDeleteVerifiedAreaSuccess.value = nil
             }
         }
-        
-//        viewModel.onPostLocalAreaSuccess.bind { [weak self] onSuccess in
-//            guard let self = self,
-//                  let onSuccess = onSuccess else { return }
-//            if onSuccess {
-//                viewModel.getVerifiedAreaList()
-//            } else {
-//                switch viewModel.deleteVerifiedAreaErrorType {
-//                case .unsupportedRegion:
-//                    self.presentACAlert(.locationAccessFail)
-//                case .timeOut:
-//                    self.presentACAlert(.timeoutFromVerification)
-//                default:
-//                    self.showServerErrorAlert()
-//                }
-//                viewModel.deleteVerifiedAreaErrorType = nil
-//            }
-//            viewModel.onDeleteVerifiedAreaSuccess.value = nil
-//        }
-        
     }
     
 }
