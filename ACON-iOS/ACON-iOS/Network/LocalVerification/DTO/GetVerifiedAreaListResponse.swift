@@ -12,3 +12,12 @@ struct GetVerifiedAreaListResponse: Decodable {
     let verifiedAreaList: [VerifiedAreaDTO]
     
 }
+
+struct VerifiedAreaDTO: Decodable {
+    
+    let verifiedAreaId: Int64
+    
+    let name: String
+    
+}
+
