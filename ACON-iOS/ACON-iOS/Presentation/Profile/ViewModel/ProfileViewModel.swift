@@ -44,6 +44,15 @@ final class ProfileViewModel: Serviceable {
     var savedSpotList: [SavedSpotModel] = []
     
     // TODO: - 🍉 삭제
+    let networkDebouncer = ACDebouncer(delay: 0.5)
+    var profileDummy = UserInfoModel(
+        profileImage: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg",
+        nickname: "유림",
+        birthDate: nil,
+        savedSpotList: [],
+        verifiedAreaList: [VerifiedAreaModel(id: 1, name: "ㄹㄹㄹ")],
+        possessingAcorns: 0
+)
     var savedSpotDummy = [SavedSpotModel(id: 1, name: "식당이름딱아홉글자", image: nil),
                           SavedSpotModel(id: 2, name: "엽떡에허니콤보치즈추가", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 3, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 4, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 5, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 6, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 7, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg") ]
 
@@ -59,6 +68,15 @@ final class ProfileViewModel: Serviceable {
     // MARK: - Networking
 
     func getProfile() {
+        // TODO: 삭제
+        networkDebouncer.call { [weak self] in
+            guard let self = self else { return }
+            profileDummy.savedSpotList = savedSpotDummy
+            userInfo = profileDummy
+            onGetProfileSuccess.value = true
+            return
+        }
+        
         ACService.shared.profileService.getProfile { [weak self] response in
             guard let self = self else { return }
 

@@ -11,7 +11,7 @@ class MenuImageSlideViewController: BaseViewController {
 
     // MARK: - Properties
 
-    let imageURLs: [String]
+    let viewModel: SpotDetailViewModel
 
     private let layout = UICollectionViewFlowLayout()
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -25,8 +25,8 @@ class MenuImageSlideViewController: BaseViewController {
 
     private var hasUpdatedArrowButtons = false
 
-    init(_ imageURLs: [String]) {
-        self.imageURLs = imageURLs
+    init(_ viewModel: SpotDetailViewModel) {
+        self.viewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -44,6 +44,7 @@ class MenuImageSlideViewController: BaseViewController {
         setDelegate()
         registerCell()
         addTarget()
+        bindViewModel()
     }
 
     override func viewDidLayoutSubviews() {
@@ -134,6 +135,22 @@ class MenuImageSlideViewController: BaseViewController {
         rightButton.addTarget(self, action: #selector(tappedRightButton), for: .touchUpInside)
     }
 
+    private func bindViewModel() {
+        self.viewModel.onSuccessGetMenuboardImageList.bind { [weak self] onSuccess in
+            guard let onSuccess,
+                  let self = self else { return }
+
+            if onSuccess {
+                collectionView.reloadData()
+            } else {
+                // TODO: 네트워크 통신 실패 UI
+                self.dismiss(animated: true)
+            }
+
+            viewModel.onSuccessGetMenuboardImageList.value = nil
+        }
+    }
+
 }
 
 
@@ -161,12 +178,15 @@ private extension MenuImageSlideViewController {
 extension MenuImageSlideViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        imageURLs.count
+        return viewModel.menuImageURLs.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.cellIdentifier, for: indexPath) as? MenuCollectionViewCell else { return UICollectionViewCell() }
-        item.setImage(imageURL: imageURLs[indexPath.item], isPinchable: true)
+
+        let imageURL = viewModel.menuImageURLs[indexPath.item]
+
+        item.setImage(imageURL: imageURL, isPinchable: true)
 
         item.onZooming = { [weak self] isZooming in
             if isZooming {
@@ -199,6 +219,7 @@ private extension MenuImageSlideViewController {
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
 
         if let indexPath = collectionView.indexPathForItem(at: visiblePoint) {
+            let imageURLs = viewModel.menuImageURLs
             var newIndex = indexPath.item + offset
             newIndex = max(0, min(imageURLs.count - 1, newIndex))
 
@@ -214,8 +235,9 @@ private extension MenuImageSlideViewController {
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         
         guard let indexPath = collectionView.indexPathForItem(at: visiblePoint) else { return }
-
         let currentIndex = indexPath.item
+        let imageURLs = viewModel.menuImageURLs
+
         leftButton.isHidden = currentIndex == 0
         rightButton.isHidden = currentIndex == imageURLs.count - 1
     }

@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SkeletonView
+
 final class SavedSpotCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - UI Properties
@@ -19,7 +21,7 @@ final class SavedSpotCollectionViewCell: BaseCollectionViewCell {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(savedSpotView)
+        contentView.addSubviews(savedSpotView)
     }
     
     override func setLayout() {
@@ -37,6 +39,7 @@ final class SavedSpotCollectionViewCell: BaseCollectionViewCell {
             $0.backgroundColor = .clear
             $0.layer.cornerRadius = 8
             $0.clipsToBounds = true
+            $0.isSkeletonable = true
         }
     }
     

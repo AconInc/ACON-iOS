@@ -18,8 +18,6 @@ class SpotListFilterView: GlassmorphismView {
 
     private let pageTitleLabel = UILabel()
     
-    let exitButton = UIButton()
-    
     private let scrollView = UIScrollView()
     
     private let stackView = UIStackView()
@@ -86,7 +84,6 @@ class SpotListFilterView: GlassmorphismView {
         
         self.addSubviews(
             pageTitleLabel,
-            exitButton,
             scrollView,
             resetButton,
             conductButton
@@ -141,11 +138,6 @@ class SpotListFilterView: GlassmorphismView {
         pageTitleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(33)
             $0.centerX.equalToSuperview()
-        }
-        
-        exitButton.snp.makeConstraints {
-            $0.centerY.equalTo(pageTitleLabel)
-            $0.trailing.equalToSuperview().offset(-horizontalEdge)
         }
         
         scrollView.snp.makeConstraints {
@@ -205,8 +197,6 @@ class SpotListFilterView: GlassmorphismView {
             text: StringLiterals.SpotListFilter.pageTitle,
             style: .t3SB)
         
-        exitButton.setImage(.icDismiss, for: .normal)
-        
         stackView.do {
             $0.axis = .vertical
             $0.spacing = sectionSpacing
@@ -233,8 +223,6 @@ private extension SpotListFilterView {
             config.cornerStyle = .capsule
             config.background.strokeWidth = 1
             $0.configuration = config
-
-            $0.isEnabled = false
 
             // NOTE: 상태 변경에 따라 UI 업데이트
             $0.configurationUpdateHandler = { button in
@@ -312,7 +300,7 @@ private extension SpotListFilterView {
     // MARK: - (Opening hours section)
     
     func setOpeningHoursSectionUI() {
-        let option: SpotFilterType.OpeningHoursOptionType = spotType == .restaurant ? .overMidnight : .overTenPM
+        let option: SpotFilterType.OpeningHoursOptionType = .overTenPM
 
         openingHoursSectionTitleLabel.setLabel(text: StringLiterals.SpotListFilter.openingHours, style: .t5SB)
         openingHoursButton.updateButtonTitle(option.text)
@@ -332,17 +320,6 @@ private extension SpotListFilterView {
         case .cafe:
             priceSectionView.isHidden = true
         }
-    }
-
-}
-
-
-// MARK: - Internal Methods (Update UI)
-
-extension SpotListFilterView {
-
-    func enableFooterButtons(_ isEnabled: Bool) {
-        [resetButton, conductButton].forEach { $0.isEnabled = isEnabled }
     }
 
 }

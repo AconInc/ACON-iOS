@@ -153,7 +153,7 @@ private extension ProfileViewController {
         guard let view = gesture.view else { return }
 
         guard let selectedSpotID = viewModel.userInfo.savedSpotList?[view.tag].id else { return }
-        let vc = SpotDetailViewController(selectedSpotID, [])
+        let vc = SpotDetailViewController(selectedSpotID)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

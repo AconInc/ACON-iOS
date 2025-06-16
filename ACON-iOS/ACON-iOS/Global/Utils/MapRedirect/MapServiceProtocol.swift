@@ -10,7 +10,9 @@ import CoreLocation
 
 protocol MapServiceProtocol {
 
-    func openMap(from startPoint: MapRedirectModel, to destination: MapRedirectModel)
+    func openMap(from startPoint: MapRedirectModel,
+                 to destination: MapRedirectModel,
+                 transportMode: TransportModeType)
 
 }
 

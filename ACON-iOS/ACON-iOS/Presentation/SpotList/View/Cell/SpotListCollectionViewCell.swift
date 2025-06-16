@@ -8,6 +8,7 @@
 import UIKit
 
 import Kingfisher
+import SkeletonView
 
 class SpotListCollectionViewCell: BaseCollectionViewCell {
 
@@ -33,7 +34,12 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     private let titleLabel = UILabel()
     private let acornCountButton = UIButton()
     private let tagStackView = UIStackView()
+    private var openingTimeView = OpeningTimeView(isOpen: false, time: "", description: "")
     let findCourseButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
+
+    private let titleSkeletonView = UIView()
+    private let acornCountSkeletonView = UIView()
+    private let findCourseSkeletonView = UIView()
 
     private let cornerRadius: CGFloat = 20
 
@@ -53,15 +59,19 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     override func setHierarchy() {
         super.setHierarchy()
 
-        self.addSubviews(bgImageShadowView,
-                         glassBgView,
-                         gradientImageView,
-                         noImageContentView,
-                         titleLabel,
-                         acornCountButton,
-                         tagStackView,
-                         findCourseButton,
-                         loginlockOverlayView)
+        contentView.addSubviews(bgImageShadowView,
+                                glassBgView,
+                                gradientImageView,
+                                noImageContentView,
+                                titleLabel,
+                                acornCountButton,
+                                tagStackView,
+                                openingTimeView,
+                                findCourseButton,
+                                titleSkeletonView,
+                                acornCountSkeletonView,
+                                findCourseSkeletonView,
+                                loginlockOverlayView)
 
         bgImageShadowView.addSubview(bgImageView)
     }
@@ -100,10 +110,31 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             $0.leading.equalTo(titleLabel)
         }
 
+        openingTimeView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(7)
+            $0.leading.equalToSuperview().offset(edge)
+        }
+
         findCourseButton.snp.makeConstraints {
             $0.bottom.trailing.equalToSuperview().inset(edge)
             $0.width.equalTo(140)
             $0.height.equalTo(36)
+        }
+
+        titleSkeletonView.snp.makeConstraints {
+            $0.top.leading.equalTo(titleLabel)
+            $0.width.equalTo(218 * ScreenUtils.widthRatio)
+            $0.height.equalTo(26)
+        }
+
+        acornCountSkeletonView.snp.makeConstraints {
+            $0.top.trailing.equalTo(acornCountButton)
+            $0.leading.equalTo(titleSkeletonView.snp.trailing).offset(10)
+            $0.height.equalTo(26)
+        }
+
+        findCourseSkeletonView.snp.makeConstraints {
+            $0.edges.equalTo(findCourseButton)
         }
 
         loginlockOverlayView.snp.makeConstraints {
@@ -113,31 +144,42 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
     }
 
     override func setStyle() {
-        backgroundColor = .clear
+        self.do {
+            $0.backgroundColor = .clear
+            $0.isSkeletonable = true
+        }
 
         bgImageShadowView.do {
             $0.clipsToBounds = false
+            $0.isSkeletonable = true
+            $0.skeletonCornerRadius = Float(cornerRadius)
         }
 
         glassBgView.do {
             $0.clipsToBounds = true
-            $0.isHidden = true
             $0.layer.cornerRadius = cornerRadius
+            $0.isHidden = true
         }
 
         bgImageView.do {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
             $0.layer.cornerRadius = cornerRadius
+            $0.image = .imgSkeletonBg
         }
 
         gradientImageView.do {
             $0.clipsToBounds = true
             $0.image = .imgGra1
             $0.layer.cornerRadius = cornerRadius
+            $0.isHidden = true
         }
 
+        noImageContentView.isHidden = true
+
         titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
+        openingTimeView.isHidden = true
 
         acornCountButton.do {
             var config = UIButton.Configuration.plain()
@@ -148,6 +190,7 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
             config.contentInsets = .zero
             $0.configuration = config
             $0.setContentCompressionResistancePriority(.required, for: .horizontal)
+            $0.isHidden = true
         }
 
         tagStackView.do {
@@ -156,6 +199,12 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         
         findCourseButton.do {
             $0.updateGlassButtonState(state: .default)
+        }
+
+        [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach {
+            $0.isSkeletonable = true
+            $0.skeletonCornerRadius = 8
+            $0.isUserInteractionEnabled = false
         }
 
         loginlockOverlayView.do {
@@ -169,16 +218,9 @@ class SpotListCollectionViewCell: BaseCollectionViewCell {
         super.prepareForReuse()
 
         currentImageURL = nil
+        openingTimeView.isHidden = true
 
-        bgImageView.do {
-            $0.kf.cancelDownloadTask()
-            $0.image = nil
-        }
-
-        gradientImageView.do {
-            $0.image = nil
-            $0.removeGradient()
-        }
+        updateUI(with: .loading)
 
         tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
@@ -220,9 +262,9 @@ extension SpotListCollectionViewCell: SpotListCellConfigurable {
 
         if let imageURL = spot.imageURL {
             currentImageURL = imageURL
-            setBgImageAndShadow(from: imageURL, noImageDescriptionID: Int(spot.id))
+            setBgImageAndShadow(from: imageURL, noImageDescriptionID: Int(spot.spotId))
         } else {
-            updateUI(with: .noImageDynamic(id: Int(spot.id)))
+            updateUI(with: .noImageDynamic(id: Int(spot.spotId)))
             extractAndApplyShadowColor(from: .imgSpotNoImageBackground, for: ShadowColorCache.noImageKey)
         }
 
@@ -235,11 +277,27 @@ extension SpotListCollectionViewCell: SpotListCellConfigurable {
 
         setAcornCountButton(with: spot.acornCount)
 
-        spot.tagList.forEach { tag in
+        setFindCourseButton(with: spot.eta)
+    }
+
+    func setTags(tags: [SpotTagType]) {
+        tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        tags.forEach { tag in
             tagStackView.addArrangedSubview(SpotTagButton(tag))
         }
+    }
 
-        setFindCourseButton(with: spot.eta)
+    func setOpeningTimeView(isOpen: Bool, time: String, description: String, hasTags: Bool) {
+        openingTimeView.do {
+            $0.updateUI(isOpen: isOpen, time: time, description: description)
+            $0.isHidden = false
+        }
+
+        if hasTags {
+            openingTimeView.snp.updateConstraints {
+                $0.top.equalTo(titleLabel.snp.bottom).offset(40)
+            }
+        }
     }
 
     func overlayLoginLock(_ show: Bool) {
@@ -282,15 +340,23 @@ private extension SpotListCollectionViewCell {
     }
 
     func setAcornCountButton(with acornCount: Int) {
-        let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
-        acornCountButton.setAttributedTitle(text: String(acornString), style: .b1R)
+        if acornCount > 0 {
+            let acornString: String = acornCount > 9999 ? "+9999" : String(acornCount)
+            acornCountButton.do {
+                $0.setAttributedTitle(text: String(acornString), style: .b1R)
+                $0.isHidden = false
+            }
+        }
     }
 
     func setFindCourseButton(with eta: Int) {
         let walk: String = StringLiterals.SpotList.walk
         let findCourse: String = StringLiterals.SpotList.minuteFindCourse
         let courseTitle: String = walk + String(eta) + findCourse
-        findCourseButton.setAttributedTitle(text: courseTitle, style: .b1SB)
+        findCourseButton.do {
+            $0.setAttributedTitle(text: courseTitle, style: .b1SB)
+            $0.isHidden = false
+        }
     }
 
     func extractAndApplyShadowColor(from image: UIImage, for key: String) {
@@ -331,8 +397,26 @@ private extension SpotListCollectionViewCell {
 
     func updateUI(with status: SpotImageStatusType) {
         switch status {
+        case .loading:
+            [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach { $0.isHidden = false }
+            [glassBgView, noImageContentView, gradientImageView, acornCountButton, findCourseButton].forEach { $0.isHidden = true }
+
+            titleLabel.text = nil
+            findCourseButton.setAttributedTitle(text: "", style: .b1SB)
+            
+            bgImageView.do {
+                $0.kf.cancelDownloadTask()
+                $0.image = .imgSkeletonBg
+            }
+
+            gradientImageView.do {
+                $0.image = nil
+                $0.removeGradient()
+            }
+
         case .loaded:
             [glassBgView, noImageContentView].forEach { $0.isHidden = true }
+            [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach { $0.isHidden = true }
 
             gradientImageView.do {
                 $0.image = .imgGra1
@@ -341,31 +425,33 @@ private extension SpotListCollectionViewCell {
             }
 
         case .loadFailed:
-            glassBgView.isHidden = false
+            [glassBgView, gradientImageView, noImageContentView].forEach { $0.isHidden = false }
+            [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach { $0.isHidden = true }
+
+            bgImageView.image = nil
 
             gradientImageView.do {
                 $0.image = nil
-                $0.isHidden = false
                 $0.setTripleGradient()
             }
 
             noImageContentView.do {
-                $0.isHidden = false
                 $0.setDescription(status)
             }
 
         case .noImageDynamic:
-            bgImageView.image = .imgSpotNoImageBackground
-            glassBgView.isHidden = true
+            [glassBgView, gradientImageView].forEach { $0.isHidden = true }
+            [titleSkeletonView, acornCountSkeletonView, findCourseSkeletonView].forEach { $0.isHidden = true }
+            noImageContentView.isHidden = false
 
+            bgImageView.image = .imgSpotNoImageBackground
+            
             gradientImageView.do {
                 $0.image = nil
-                $0.isHidden = true
                 $0.removeGradient()
             }
             
             noImageContentView.do {
-                $0.isHidden = false
                 $0.setDescription(status)
             }
 

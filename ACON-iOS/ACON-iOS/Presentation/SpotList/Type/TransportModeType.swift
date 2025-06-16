@@ -6,18 +6,26 @@
 //
 
 import Foundation
+import MapKit
 
 enum TransportModeType {
 
-    case walking, biking
+    case walking, biking, publicTransit
 
-    var serverKey: String {
+    var naverMapKey: String {
         switch self {
-        case .walking: return "WALKING"
-        case .biking: return "BIKING"
+        case .walking: return "walk"
+        case .biking: return "bicycle"
+        case .publicTransit: return "public"
         }
     }
 
+    var appleMapLaunchOption: String {
+        switch self {
+        case .walking, .biking: return MKLaunchOptionsDirectionsModeWalking
+        case .publicTransit: return MKLaunchOptionsDirectionsModeDriving
+        }
+    }
 }
 
 

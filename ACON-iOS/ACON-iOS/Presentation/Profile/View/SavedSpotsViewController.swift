@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SkeletonView
+
 final class SavedSpotsViewController: BaseNavViewController {
 
     // MARK: - UI Properties
@@ -39,6 +41,7 @@ final class SavedSpotsViewController: BaseNavViewController {
         bindViewModel()
         registerCell()
         setDelegate()
+        setSkeleton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -47,7 +50,9 @@ final class SavedSpotsViewController: BaseNavViewController {
         self.tabBarController?.tabBar.isHidden = true
         if AuthManager.shared.hasToken {
             viewModel.getSavedSpots()
+            savedSpotCollectionView.startACSkeletonAnimation()
         }
+
     }
 
     
@@ -60,6 +65,7 @@ final class SavedSpotsViewController: BaseNavViewController {
         setCenterTitleLabelStyle(title: "저장한 장소")
         savedSpotCollectionView.do {
             $0.backgroundColor = .clear
+            $0.isSkeletonable = true
         }
     }
 
@@ -92,6 +98,11 @@ private extension SavedSpotsViewController {
                 savedSpotCollectionView.reloadData()
             }
             viewModel.onGetSavedSpotsSuccess.value = nil
+            
+            // NOTE: 최소 1초 스켈레톤 유지
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.savedSpotCollectionView.hideSkeleton()
+            }
         }
     }
 
@@ -114,6 +125,18 @@ private extension SavedSpotsViewController {
 }
 
 
+// MARK: - Skeleton Controls
+
+private extension SavedSpotsViewController {
+
+    func setSkeleton() {
+        savedSpotCollectionView.prepareSkeleton { _ in
+        }
+    }
+
+}
+
+
 // MARK: - CollectionView Delegate
 
 extension SavedSpotsViewController: UICollectionViewDelegateFlowLayout {
@@ -124,7 +147,7 @@ extension SavedSpotsViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedSpotID = viewModel.savedSpotList[indexPath.item].id
-        let vc = SpotDetailViewController(selectedSpotID, [])
+        let vc = SpotDetailViewController(selectedSpotID)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -145,8 +168,34 @@ extension SavedSpotsViewController: UICollectionViewDataSource {
         
         let data = viewModel.savedSpotList[indexPath.item]
         cell.bindData(data)
+        cell.isSkeletonable = true
 
         return cell
+    }
+    
+}
+
+
+// MARK: - Skeleton CollectionView DataSource
+
+extension SavedSpotsViewController: SkeletonCollectionViewDataSource {
+
+    func collectionSkeletonView(_ skeletonView: UICollectionView,
+                                numberOfItemsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView,
+                                skeletonCellForItemAt indexPath: IndexPath) -> UICollectionViewCell? {
+        return skeletonView.dequeueReusableCell(
+            withReuseIdentifier: SavedSpotCollectionViewCell.cellIdentifier,
+            for: indexPath
+        )
+    }
+
+    func collectionSkeletonView(_ skeletonView: UICollectionView,
+                                cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return SavedSpotCollectionViewCell.identifier
     }
     
 }

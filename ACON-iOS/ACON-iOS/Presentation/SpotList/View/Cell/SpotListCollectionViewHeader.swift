@@ -10,39 +10,39 @@ import UIKit
 class SpotListCollectionViewHeader: UICollectionReusableView {
 
     // MARK: - UI Properties
-    
+
     private let titleLabel = UILabel()
-    
-    
+
+
     // MARK: - Life Cycle
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         setHierarchy()
         setLayout()
         setStyle()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func setHierarchy() {
+
+    private func setHierarchy() {
         self.addSubview(titleLabel)
     }
-    
-    func setLayout() {
+
+    private func setLayout() {
         titleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().inset(8)
         }
     }
-    
-    func setStyle() {
+
+    private func setStyle() {
         backgroundColor = .clear
         let title = StringLiterals.SpotList.bestChoice
         titleLabel.setLabel(text: title, style: .t2SB)
     }
-    
+
 }
