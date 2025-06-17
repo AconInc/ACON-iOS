@@ -15,7 +15,7 @@ final class SpotSearchView: BaseView {
                                       borderWidth: 0,
                                       cornerRadius: 10,
                                       doneButton: false,
-                                      backgroundGlassType: .toastGlass)
+                                      backgroundGlassType: .textfieldGlass)
 
     lazy var searchSuggestionCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: searchSuggestionCollectionViewFlowLayout)
 
