@@ -69,6 +69,7 @@ class OpeningTimeView: BaseView {
         }
         
         descriptionLabel.snp.makeConstraints {
+            $0.centerY.equalTo(timeLabel)
             $0.leading.equalTo(timeLabel.snp.trailing).offset(4)
             $0.trailing.equalToSuperview()
         }
@@ -92,8 +93,9 @@ class OpeningTimeView: BaseView {
             $0.image = isOpen ? .icGreenlight : .icGraylight
         }
 
+        self.openingDescription = description
+        
         timeLabel.setLabel(text: time, style: .b1SB, color: .gray200)
-
         descriptionLabel.setLabel(text: openingDescription, style: .b1R, color: .gray200)
     }
 
