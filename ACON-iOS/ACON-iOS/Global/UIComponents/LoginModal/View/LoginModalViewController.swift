@@ -139,7 +139,7 @@ extension LoginModalViewController {
                     if authStatus == .denied || authStatus == .restricted {
                         navigateToLocalVerificationVC()
                     } else {
-                        switchRootToTabBar()
+                        NavigationUtils.navigateToTabBar()
                     }
                 } else {
                     print("🥑onSuccess && !hasVerifiedArea")
@@ -151,13 +151,7 @@ extension LoginModalViewController {
             }
         }
     }
-    
-    func switchRootToTabBar() {
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = ACTabBarController()
-        }
-    }
-    
+
     func navigateToLocalVerificationVC() {
         let vm = LocalVerificationViewModel(flowType: .onboarding)
         let vc = LocalVerificationViewController(viewModel: vm)

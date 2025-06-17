@@ -126,9 +126,7 @@ private extension OnboardingViewController {
             guard let self = self,
                   let onSuccess = onSuccess else { return }
             if onSuccess {
-                if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                    sceneDelegate.window?.rootViewController = ACTabBarController()
-                }
+                NavigationUtils.navigateToTabBar()
             } else {
                 self.showDefaultAlert(title: "서버 통신 오류", message: "잠시 후 시도해주세요.")
             }

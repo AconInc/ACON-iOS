@@ -34,15 +34,9 @@ extension Serviceable {
                     for key in UserDefaults.standard.dictionaryRepresentation().keys {
                         UserDefaults.standard.removeObject(forKey: key.description)
                     }
-                    self.navigateToSplash()
+                    NavigationUtils.navigateToSplash()
                 }
             }
-        }
-    }
-    
-    private func navigateToSplash() {
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = SplashViewController()
         }
     }
     
