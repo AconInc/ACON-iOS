@@ -132,6 +132,7 @@
 		74205D2F2D40351700D11557 /* SocialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74205D2E2D40351400D11557 /* SocialType.swift */; };
 		742954382DF7F84E0067AC33 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742954372DF7F8490067AC33 /* HapticManager.swift */; };
 		742B1B982E00AE350036876A /* NetworkErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742B1B972E00AE300036876A /* NetworkErrorView.swift */; };
+		742B1B9A2E00B1E10036876A /* Serviceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742B1B992E00B1E10036876A /* Serviceable.swift */; };
 		743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743069882D3D2F540033178C /* NetworkResult.swift */; };
 		7436352C2DEE2C70009B0035 /* OnboardingFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7436352B2DEE2C6A009B0035 /* OnboardingFlowType.swift */; };
 		743900912DC50926002F91B1 /* UIVisualEffectView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900902DC50918002F91B1 /* UIVisualEffectView+.swift */; };
@@ -413,6 +414,7 @@
 		74205D2E2D40351400D11557 /* SocialType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialType.swift; sourceTree = "<group>"; };
 		742954372DF7F8490067AC33 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		742B1B972E00AE300036876A /* NetworkErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorView.swift; sourceTree = "<group>"; };
+		742B1B992E00B1E10036876A /* Serviceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serviceable.swift; sourceTree = "<group>"; };
 		743069882D3D2F540033178C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		7436352B2DEE2C6A009B0035 /* OnboardingFlowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowType.swift; sourceTree = "<group>"; };
 		743900902DC50918002F91B1 /* UIVisualEffectView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVisualEffectView+.swift"; sourceTree = "<group>"; };
@@ -1394,6 +1396,7 @@
 		748D6F832D2BCDE8007690B4 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				742B1B992E00B1E10036876A /* Serviceable.swift */,
 				74DDBA8A2DC45E3400BF9824 /* ACButtonType.swift */,
 				748D6F982D2BD549007690B4 /* DummyProtocol.swift */,
 			);
@@ -2009,6 +2012,7 @@
 				1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */,
 				74403B6F2DF1D6DD00B7B832 /* GoogleAdsErrorType.swift in Sources */,
 				742B1B982E00AE350036876A /* NetworkErrorView.swift in Sources */,
+				742B1B9A2E00B1E10036876A /* Serviceable.swift in Sources */,
 				15CD25782D3FE31400320006 /* PostSpotListRequest.swift in Sources */,
 				7462617B2D3EB06100A4E84F /* UploadService.swift in Sources */,
 				74AB75A62DF9EE3500F96A4A /* LocalVerificationErrorType.swift in Sources */,
