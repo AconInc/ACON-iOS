@@ -551,8 +551,16 @@ private extension ProfileEditViewController {
     }
 
     func isBeforeToday(date: Date) -> Bool {
+        var calendar = Calendar.current
+        if let koreaTimeZone = TimeZone(identifier: "Asia/Seoul") {
+            calendar.timeZone = koreaTimeZone
+        }
+        
         let today = Date()
-        return date < today
+        let dateOnly = calendar.startOfDay(for: date)
+        let todayOnly = calendar.startOfDay(for: today)
+        
+        return dateOnly < todayOnly
     }
 
 }
