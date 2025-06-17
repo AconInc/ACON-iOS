@@ -283,7 +283,7 @@ private extension SpotDetailView {
             
             nameLabel.snp.makeConstraints {
                 $0.verticalEdges.leading.equalToSuperview()
-                $0.width.equalTo(100)
+                $0.width.equalTo(160)
             }
             priceLabel.snp.makeConstraints {
                 $0.verticalEdges.equalToSuperview()
