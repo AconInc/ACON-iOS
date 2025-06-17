@@ -24,8 +24,9 @@ final class AuthManager {
     }
     
     func removeToken() {
-        UserDefaults.standard.removeObject(forKey: StringLiterals.UserDefaults.accessToken)
-        UserDefaults.standard.removeObject(forKey: StringLiterals.UserDefaults.refreshToken)
+        [StringLiterals.UserDefaults.accessToken,
+         StringLiterals.UserDefaults.refreshToken].forEach { UserDefaults.standard.removeObject(forKey: $0)
+        }
     }
 
     func handleTokenRefresh() async throws -> Bool {
