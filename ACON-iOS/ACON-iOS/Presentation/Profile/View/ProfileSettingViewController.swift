@@ -197,10 +197,10 @@ extension ProfileSettingViewController: UITableViewDataSource {
             let items = SettingType.allSections[1] as! [SettingType.Policy]
             switch items[indexPath.row] {
             case .termsOfUse:
-                let termsOfUseVC = DRWebViewController(urlString: StringLiterals.WebView.termsOfUseLink)
+                let termsOfUseVC = ACWebViewController(urlString: StringLiterals.WebView.termsOfUseLink)
                 self.present(termsOfUseVC, animated: true)
             case .privacyPolicy:
-                let privacyPolicyVC = DRWebViewController(urlString: StringLiterals.WebView.privacyPolicyLink)
+                let privacyPolicyVC = ACWebViewController(urlString: StringLiterals.WebView.privacyPolicyLink)
                 self.present(privacyPolicyVC, animated: true)
             }
         case 2:
