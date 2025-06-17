@@ -276,13 +276,12 @@ private extension ProfileEditViewController {
 
             guard isNicknameEntered(text: text) else { return }
 
-            guard isNicknameCharValid(text: text) else { return }
-
             guard text.count < viewModel.maxNicknameLength else {
                 profileEditView.nicknameTextField.text?.removeLast()
                 return
             }
 
+            guard isNicknameCharValid(text: text) else { return }
 
             // MARK: 닉네임 중복 확인 (서버 통신)
 
