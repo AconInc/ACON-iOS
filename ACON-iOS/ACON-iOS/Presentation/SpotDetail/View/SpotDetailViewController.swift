@@ -33,9 +33,10 @@ class SpotDetailViewController: BaseNavViewController {
         _ spotID: Int64,
         _ topTag: SpotTagType? = nil,
         _ transportMode: TransportModeType? = nil,
-        _ eta: Int? = nil
+        _ eta: Int? = nil,
+        isDeepLink: Bool = false
     ) {
-        self.viewModel = SpotDetailViewModel(spotID)
+        self.viewModel = SpotDetailViewModel(spotID, isDeepLink: isDeepLink)
         self.topTag = topTag
         self.transportMode = transportMode
         self.eta = eta
@@ -128,6 +129,16 @@ class SpotDetailViewController: BaseNavViewController {
             guard let self = self else { return }
             isSelected ? viewModel.postSavedSpot() : viewModel.deleteSavedSpot()
         }
+
+        spotDetailView.shareButton.onTap = { [weak self] _ in
+            self?.viewModel.createBranchDeepLink() { [weak self] description, url in
+                guard let self = self else { return }
+                
+                let itemsToShare: [Any] = [description, url]
+                let activityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+                self.present(activityVC, animated: true, completion: nil)
+            }
+        }
     }
 
 }
@@ -142,11 +153,12 @@ private extension SpotDetailViewController {
             guard let onSuccess,
                   let self = self,
                   let data = viewModel.spotDetail else { return }
+
             if onSuccess {
                 var tagList: [SpotTagType] = []
                 if let topTag { tagList.append(topTag) }
                 if let tags = data.tagList { tagList.append(contentsOf: tags) }
-                
+
                 spotDetailView.bindData(data)
                 setTagsAndOpeningTime(tags: tagList,
                                       isOpen: data.isOpen,

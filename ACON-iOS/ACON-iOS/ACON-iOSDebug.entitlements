@@ -6,5 +6,10 @@
 	<array>
 		<string>Default</string>
 	</array>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:aconpage.app.link</string>
+		<string>applinks:aconpage-alternate.app.link</string>
+	</array>
 </dict>
 </plist>
