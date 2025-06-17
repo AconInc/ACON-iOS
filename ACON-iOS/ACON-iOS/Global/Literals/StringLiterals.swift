@@ -455,9 +455,9 @@ enum StringLiterals {
 
     enum DeepLink {
         
-        static let atAcon = "Acon에서 "
+        static let atAcon = "💌 Acon에서 "
         
-        static let checkOut = " 확인해 보세요!"
+        static let checkOut = " 확인해 보세요."
         
         static let deepLinkTitleAcon = "[Acon]"
         
