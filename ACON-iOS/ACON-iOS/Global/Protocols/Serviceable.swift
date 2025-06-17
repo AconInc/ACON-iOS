@@ -47,3 +47,35 @@ extension Serviceable {
     }
     
 }
+
+
+// MARK: - Network Error
+
+extension Serviceable {
+    
+    func handleNetworkError(retryAction: @escaping () -> Void) {
+        Task {
+            do {
+                showNetworkErrorView(retryAction)
+            }
+        }
+    }
+    
+    private func showNetworkErrorView(_ retryAction: @escaping () -> Void) {
+        DispatchQueue.main.async {
+            // NOTE: - 키보드 내리기
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                            to: nil, from: nil, for: nil)
+            
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            let networkErrorView = NetworkErrorView(retryAction)
+            window.addSubview(networkErrorView)
+            
+            networkErrorView.snp.makeConstraints {
+                $0.edges.equalToSuperview()
+            }
+        }
+    }
+    
+}

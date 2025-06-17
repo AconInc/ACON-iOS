@@ -95,6 +95,31 @@ final class NetworkErrorView: GlassmorphismView {
             $0.setAttributedTitle(text: StringLiterals.Error.tryAgain,
                                   style: .b1SB,
                                   color: .labelAction)
+            $0.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
+        }
+    }
+    
+}
+
+
+// MARK: - 네트워크뷰 표시 로직
+
+private extension NetworkErrorView {
+    
+    func hideNetworkErrorView() {
+        DispatchQueue.main.async {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let window = windowScene.windows.first else { return }
+            
+            window.subviews.filter { $0 is NetworkErrorView }.forEach { $0.removeFromSuperview() }
+        }
+    }
+    
+    @objc
+    func retryButtonTapped() {
+        DispatchQueue.main.async {
+            self.hideNetworkErrorView()
+            self.retryAction?()
         }
     }
     
