@@ -32,27 +32,26 @@ extension UIViewController {
                           completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         // TODO: - 추후 배경색 및 폰트색도 변경
-        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .gray800
+//        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .alertGray
         let titleAttributes = [NSAttributedString.Key.foregroundColor: UIColor.acWhite]
-        let messageAttributes = [NSAttributedString.Key.foregroundColor: UIColor.acWhite]
+        let messageAttributes = [NSAttributedString.Key.foregroundColor: UIColor.acWhite, NSAttributedString.Key.font: ACFontType.b1R.fontStyle.font]
         
         let titleString = NSAttributedString(string: title, attributes: titleAttributes)
         let messageString = NSAttributedString(string: message, attributes: messageAttributes)
         
         alert.setValue(titleString, forKey: "attributedTitle")
         alert.setValue(messageString, forKey: "attributedMessage")
-            
         
         let okAction = UIAlertAction(title: okText, style: .default) { _ in
             completion?()
         }
         alert.addAction(okAction)
-        okAction.setValue(UIColor.primaryLight, forKey: "titleTextColor")
+        okAction.setValue(UIColor.labelAction, forKey: "titleTextColor")
         
         if isCancelAvailable {
             let cancelAction = UIAlertAction(title: cancelText, style: .cancel)
             alert.addAction(cancelAction)
-            cancelAction.setValue(UIColor.gray500, forKey: "titleTextColor")
+            cancelAction.setValue(UIColor.acWhite, forKey: "titleTextColor")
         }
         
         present(alert, animated: true)
