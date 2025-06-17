@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseCrashlytics
+import BranchSDK
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,6 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             GoogleAdsManager.shared.initialize()
         }
+        
+        /// Branch io 초기화
+        BranchScene.shared().initSession(launchOptions: launchOptions, registerDeepLinkHandler: { (params, error, scene) in
+            if let params = params as? [String: AnyObject], error == nil {
+                DeepLinkManager.shared.deepLinkParams = params
+            }
+        })
         
         return true
     }

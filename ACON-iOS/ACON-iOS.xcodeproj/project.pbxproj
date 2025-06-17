@@ -14,6 +14,7 @@
 		151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003EB2D5FBF7200409DF4 /* GetProfileResponse.swift */; };
 		151003EE2D5FC48B00409DF4 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003ED2D5FC48B00409DF4 /* ProfileService.swift */; };
 		151003F02D5FC4C600409DF4 /* ProfileTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003EF2D5FC4C600409DF4 /* ProfileTargetType.swift */; };
+		1515CE0D2E00823B00A559A2 /* DeepLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1515CE0C2E00823B00A559A2 /* DeepLinkManager.swift */; };
 		1517FD7F2D3961A800638173 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517FD7E2D3961A800638173 /* CustomSlider.swift */; };
 		151AB6902DD367BF00D01DE8 /* SpotDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151AB68F2DD367BF00D01DE8 /* SpotDetailView.swift */; };
 		151AB6C32DD384C100D01DE8 /* SpotDetailImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151AB6C22DD384C100D01DE8 /* SpotDetailImageCollectionViewCell.swift */; };
@@ -52,6 +53,11 @@
 		156AE6792DE0F1D300AE800D /* NoMatchingSpotListItemSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AE6782DE0F1D300AE800D /* NoMatchingSpotListItemSizeType.swift */; };
 		156AE67B2DE0F37100AE800D /* NoMatchingSpotHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AE67A2DE0F37100AE800D /* NoMatchingSpotHeader.swift */; };
 		156D92602D6570A90037F8F1 /* PatchProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */; };
+		156E80152DFED61A0080FA34 /* BranchSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 156E80142DFED61A0080FA34 /* BranchSDK */; };
+		156E817B2DFF103C0080FA34 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156E81792DFF0DD50080FA34 /* CoreServices.framework */; };
+		156E817D2DFF10440080FA34 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156E817C2DFF10440080FA34 /* SystemConfiguration.framework */; };
+		156E817F2DFF104B0080FA34 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156E817E2DFF104B0080FA34 /* WebKit.framework */; };
+		156E81812DFF10570080FA34 /* CoreSpotlight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156E81802DFF10570080FA34 /* CoreSpotlight.framework */; };
 		157135B12DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157135B02DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift */; };
 		1576806E2DFA06A70079B255 /* SpotListSkeletonHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1576806D2DFA06A70079B255 /* SpotListSkeletonHeader.swift */; };
 		157C061F2DC5E7CE000B04AF /* SpotTagType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C061E2DC5E7CE000B04AF /* SpotTagType.swift */; };
@@ -297,6 +303,7 @@
 		151003EB2D5FBF7200409DF4 /* GetProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileResponse.swift; sourceTree = "<group>"; };
 		151003ED2D5FC48B00409DF4 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		151003EF2D5FC4C600409DF4 /* ProfileTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTargetType.swift; sourceTree = "<group>"; };
+		1515CE0C2E00823B00A559A2 /* DeepLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkManager.swift; sourceTree = "<group>"; };
 		1517FD7E2D3961A800638173 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		151AB68F2DD367BF00D01DE8 /* SpotDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailView.swift; sourceTree = "<group>"; };
 		151AB6C22DD384C100D01DE8 /* SpotDetailImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -335,6 +342,10 @@
 		156AE6782DE0F1D300AE800D /* NoMatchingSpotListItemSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMatchingSpotListItemSizeType.swift; sourceTree = "<group>"; };
 		156AE67A2DE0F37100AE800D /* NoMatchingSpotHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMatchingSpotHeader.swift; sourceTree = "<group>"; };
 		156D925F2D6570A90037F8F1 /* PatchProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchProfileRequest.swift; sourceTree = "<group>"; };
+		156E81792DFF0DD50080FA34 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		156E817C2DFF10440080FA34 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		156E817E2DFF104B0080FA34 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		156E81802DFF10570080FA34 /* CoreSpotlight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreSpotlight.framework; path = System/Library/Frameworks/CoreSpotlight.framework; sourceTree = SDKROOT; };
 		157135B02DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		1576806D2DFA06A70079B255 /* SpotListSkeletonHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListSkeletonHeader.swift; sourceTree = "<group>"; };
 		157C061E2DC5E7CE000B04AF /* SpotTagType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTagType.swift; sourceTree = "<group>"; };
@@ -572,9 +583,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				156E81812DFF10570080FA34 /* CoreSpotlight.framework in Frameworks */,
+				156E817F2DFF104B0080FA34 /* WebKit.framework in Frameworks */,
+				156E817D2DFF10440080FA34 /* SystemConfiguration.framework in Frameworks */,
+				156E817B2DFF103C0080FA34 /* CoreServices.framework in Frameworks */,
 				74D831922D6878A5003384C6 /* AmplitudeSwift in Frameworks */,
 				748D6F4D2D2BC76C007690B4 /* GoogleSignIn in Frameworks */,
 				74B25C252D2FD30A008BDCB7 /* Lottie in Frameworks */,
+				156E80152DFED61A0080FA34 /* BranchSDK in Frameworks */,
 				748D6F4A2D2BC52B007690B4 /* Kingfisher in Frameworks */,
 				15AD50982DF8725200166D9D /* SkeletonView in Frameworks */,
 				746AA0342DAD0EE300E28B66 /* FirebaseCrashlytics in Frameworks */,
@@ -887,6 +903,10 @@
 		35A4AFEF7860C30E103669B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				156E81802DFF10570080FA34 /* CoreSpotlight.framework */,
+				156E817E2DFF104B0080FA34 /* WebKit.framework */,
+				156E817C2DFF10440080FA34 /* SystemConfiguration.framework */,
+				156E81792DFF0DD50080FA34 /* CoreServices.framework */,
 				B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */,
 			);
 			name = Frameworks;
@@ -1112,6 +1132,7 @@
 				749234992D687B0D0025F700 /* AmplitudeManager.swift */,
 				741429662D5D550400B69528 /* AppVersionManager.swift */,
 				7462D0242D4262EF00580464 /* AuthManager.swift */,
+				1515CE0C2E00823B00A559A2 /* DeepLinkManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1782,6 +1803,7 @@
 				746AA0332DAD0EE300E28B66 /* FirebaseCrashlytics */,
 				74770C182DF1DA97005D4165 /* GoogleMobileAds */,
 				15AD50972DF8725200166D9D /* SkeletonView */,
+				156E80142DFED61A0080FA34 /* BranchSDK */,
 			);
 			productName = "ACON-iOS";
 			productReference = 74AB6EB02D2796D30094F873 /* ACON-iOS.app */;
@@ -1822,6 +1844,7 @@
 				746AA0302DAD0EE300E28B66 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				74C1934B2DEF8909005FB3C7 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 				15AD50962DF8725200166D9D /* XCRemoteSwiftPackageReference "SkeletonView" */,
+				156E80132DFED61A0080FA34 /* XCRemoteSwiftPackageReference "ios-branch-deep-linking-attribution" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 74AB6EB12D2796D30094F873 /* Products */;
@@ -2172,6 +2195,7 @@
 				74BF92072D38622B00B923E3 /* SpotDetailViewModel.swift in Sources */,
 				151003EE2D5FC48B00409DF4 /* ProfileService.swift in Sources */,
 				151003F02D5FC4C600409DF4 /* ProfileTargetType.swift in Sources */,
+				1515CE0D2E00823B00A559A2 /* DeepLinkManager.swift in Sources */,
 				156AE67B2DE0F37100AE800D /* NoMatchingSpotHeader.swift in Sources */,
 				745C7E152D35AEC10074DBDB /* SpotSearchViewModel.swift in Sources */,
 				741368002DD516680075D06A /* SearchSuggestionCollectionViewCell.swift in Sources */,
@@ -2208,7 +2232,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2025.0613.0425;
+				CURRENT_PROJECT_VERSION = 2025.0618.0310;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = KX5Q77JSUF;
@@ -2252,7 +2276,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2025.0613.0425;
+				CURRENT_PROJECT_VERSION = 2025.0618.0310;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = KX5Q77JSUF;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -2433,6 +2457,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		156E80132DFED61A0080FA34 /* XCRemoteSwiftPackageReference "ios-branch-deep-linking-attribution" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BranchMetrics/ios-branch-deep-linking-attribution.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.12.1;
+			};
+		};
 		15AD50962DF8725200166D9D /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
@@ -2516,6 +2548,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		156E80142DFED61A0080FA34 /* BranchSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 156E80132DFED61A0080FA34 /* XCRemoteSwiftPackageReference "ios-branch-deep-linking-attribution" */;
+			productName = BranchSDK;
+		};
 		15AD50972DF8725200166D9D /* SkeletonView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 15AD50962DF8725200166D9D /* XCRemoteSwiftPackageReference "SkeletonView" */;
