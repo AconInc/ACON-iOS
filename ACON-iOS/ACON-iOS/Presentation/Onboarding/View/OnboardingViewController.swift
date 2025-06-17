@@ -137,7 +137,11 @@ private extension OnboardingViewController {
             guard let self = self,
                   let onSuccess = onSuccess else { return }
             if onSuccess {
-                NavigationUtils.navigateToTabBar()
+                if flowType == .login {
+                    NavigationUtils.navigateToTabBar()
+                } else {
+                    NavigationUtils.popToParentVC(from: self, targetVCType: ProfileSettingViewController.self)
+                }
             } else {
                 self.showServerErrorAlert()
             }

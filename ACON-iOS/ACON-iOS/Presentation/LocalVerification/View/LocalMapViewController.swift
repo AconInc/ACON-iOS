@@ -94,39 +94,40 @@ private extension LocalMapViewController {
 
     func bindViewModel() {
         viewModel.onPostLocalAreaSuccess.bind { [weak self] onSuccess in
-            guard let onSuccess,
-                  let flowType = self?.viewModel.flowType
-            else { return }
+            guard let self = self,
+                  let onSuccess else { return }
+            
+            let flowType = viewModel.flowType
             
             UserDefaults.standard.set(onSuccess,
                                       forKey: StringLiterals.UserDefaults.hasVerifiedArea)
             if onSuccess {
                 switch flowType {
                 case .onboarding:
-                    self?.navigateToOnboarding()
+                    self.navigateToOnboarding()
                 case .setting:
-                    self?.navigateToSetting()
+                    NavigationUtils.popToParentVC(from: self, targetVCType: VerifiedAreasEditViewController.self)
                 }
             } else {
-                let errorType = self?.viewModel.postLocalAreaErrorType
+                let errorType = self.viewModel.postLocalAreaErrorType
                 switch errorType {
                 case .unsupportedRegion:
-                    self?.presentACAlert(.locationAccessFail)
+                    self.presentACAlert(.locationAccessFail)
                 case .outOfRange:
-                    self?.presentACAlert(.timeoutFromVerification)
+                    self.presentACAlert(.timeoutFromVerification)
                 default:
-                    self?.showServerErrorAlert()
+                    self.showServerErrorAlert()
                 }
-                self?.viewModel.postLocalAreaErrorType = nil
+                self.viewModel.postLocalAreaErrorType = nil
             }
-            self?.viewModel.onPostLocalAreaSuccess.value = nil
+            self.viewModel.onPostLocalAreaSuccess.value = nil
         }
         
         viewModel.onPostReplaceVerifiedAreaSuccess.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
             if onSuccess {
-                self.navigateToSetting()
+                NavigationUtils.popToParentVC(from: self, targetVCType: VerifiedAreasEditViewController.self)
             } else {
                 switch viewModel.postReplaceVerifiedAreaErrorType {
                 case .unsupportedRegion:
@@ -170,15 +171,6 @@ private extension LocalMapViewController {
     func navigateToOnboarding() {
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
             sceneDelegate.window?.rootViewController = OnboardingViewController(flowType: .login)
-        }
-    }
-    
-    func navigateToSetting() {
-        guard let vcStack = self.navigationController?.viewControllers else { return }
-        for vc in vcStack {
-            if let verifiedAreaEditVC = vc as? VerifiedAreasEditViewController {
-                self.navigationController?.popToViewController(verifiedAreaEditVC.self, animated: true)
-            }
         }
     }
     
