@@ -128,7 +128,7 @@ private extension OnboardingViewController {
             if onSuccess {
                 NavigationUtils.navigateToTabBar()
             } else {
-                self.showDefaultAlert(title: "서버 통신 오류", message: "잠시 후 시도해주세요.")
+                self.showServerErrorAlert()
             }
             onboardingViewModel.onPutOnboardingSuccess.value = nil
         }

@@ -32,7 +32,7 @@ final class WithdrawalConfirmationViewController: BaseViewController {
 extension WithdrawalConfirmationViewController {
     
     func bindViewModel() {
-        viewModel?.onSuccessWithdrawal.bind { [weak self] onSuccess in
+        viewModel?.onSuccessPostWithdrawal.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
             
@@ -40,8 +40,9 @@ extension WithdrawalConfirmationViewController {
                 NavigationUtils.navigateToSplash()
                 AmplitudeManager.shared.reset()
             } else {
-                self.showDefaultAlert(title: "탈퇴 실패", message: "탈퇴에 실패했습니다.")
+                self.showServerErrorAlert()
             }
+            viewModel?.onSuccessPostWithdrawal.value = nil
         }
     }
     
@@ -65,7 +66,7 @@ private extension WithdrawalConfirmationViewController {
     @objc
     func confirmButtonTapped() {
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceWithdraw, properties: ["delete_id": true])
-        viewModel?.withdrawalAPI()
+        viewModel?.postWithdrawal()
     }
     
 }

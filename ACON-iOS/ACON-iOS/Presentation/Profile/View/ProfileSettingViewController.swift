@@ -16,7 +16,7 @@ final class ProfileSettingViewController: BaseNavViewController {
 
     // MARK: - Properties
 
-    private let settingViewModel: SettingViewModel = SettingViewModel()
+    private let viewModel: SettingViewModel = SettingViewModel()
 
 
     // MARK: - LifeCycles
@@ -63,6 +63,25 @@ final class ProfileSettingViewController: BaseNavViewController {
         }
     }
 
+}
+
+extension ProfileSettingViewController {
+    
+    func bindViewModel() {
+        viewModel.onPostLogoutSuccess.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess
+            else { return }
+            
+            if onSuccess {
+                NavigationUtils.navigateToSplash()
+            } else {
+                self.showServerErrorAlert()
+            }
+            viewModel.onPostLogoutSuccess.value = nil
+        }
+    }
+    
 }
 
 
@@ -203,7 +222,7 @@ extension ProfileSettingViewController: UITableViewDataSource {
             case .logout:
                 let action = { [weak self] in
                     AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceLogout, properties: ["click_logout?": true])
-                    self?.settingViewModel.logout()
+                    self?.viewModel.postLogout()
                 }
                 self.presentACAlert(.logout, rightAction: action)
                 return

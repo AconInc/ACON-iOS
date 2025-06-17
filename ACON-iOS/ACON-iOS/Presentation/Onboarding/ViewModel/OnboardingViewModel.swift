@@ -26,6 +26,10 @@ class OnboardingViewModel: Serviceable {
                 self.handleReissue {
                     self.putOnboarding(dislikeFoodList)
                 }
+            case .networkFail:
+                self.handleNetworkError {
+                    self.putOnboarding(dislikeFoodList)
+                }
             default:
                 onPutOnboardingSuccess.value = false
             }

@@ -78,6 +78,10 @@ class LocalVerificationViewModel: Serviceable {
                 self?.handleReissue { [weak self] in
                     self?.postLocalArea()
                 }
+            case .networkFail:
+                self?.handleNetworkError { [weak self] in
+                    self?.postLocalArea()
+                }
             default:
                 self?.onPostLocalAreaSuccess.value = false
             }
