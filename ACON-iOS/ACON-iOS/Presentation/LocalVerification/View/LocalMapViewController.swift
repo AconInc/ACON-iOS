@@ -19,15 +19,13 @@ class LocalMapViewController: BaseNavViewController {
     
     private var viewBlurEffect: UIVisualEffectView = UIVisualEffectView()
     
-    private var localArea: String = ""
-    
-    private let localVerificationViewModel: LocalVerificationViewModel
+    private let viewModel: LocalVerificationViewModel
     
     
     // MARK: - LifeCycle
 
     init(viewModel: LocalVerificationViewModel) {
-        self.localVerificationViewModel = viewModel
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -46,8 +44,8 @@ class LocalMapViewController: BaseNavViewController {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = true
-        moveCameraToLocation(latitude: localVerificationViewModel.userCoordinate?.latitude ?? 0,
-                             longitude: localVerificationViewModel.userCoordinate?.longitude ?? 0)
+        moveCameraToLocation(latitude: viewModel.userCoordinate?.latitude ?? 0,
+                             longitude: viewModel.userCoordinate?.longitude ?? 0)
     }
     
     override func setHierarchy() {
@@ -87,37 +85,52 @@ class LocalMapViewController: BaseNavViewController {
 private extension LocalMapViewController {
 
     func bindViewModel() {
-        self.localVerificationViewModel.onSuccessPostLocalArea.bind { [weak self] onSuccess in
+        viewModel.onPostLocalAreaSuccess.bind { [weak self] onSuccess in
             guard let onSuccess,
-                  let flowType = self?.localVerificationViewModel.flowType
+                  let flowType = self?.viewModel.flowType
             else { return }
             
-            let areaName: String = self?.localVerificationViewModel.localAreaName.value ?? ""
-            
-            print("onSuccessPostLocalArea: \(onSuccess)")
             UserDefaults.standard.set(onSuccess,
                                       forKey: StringLiterals.UserDefaults.hasVerifiedArea)
             if onSuccess {
                 switch flowType {
                 case .onboarding:
-                    self?.localArea = areaName
                     self?.navigateToOnboarding()
-                case .adding, .switching:
-                    guard let vcStack = self?.navigationController?.viewControllers else { return }
-                    self?.localArea = areaName
-                    for vc in vcStack {
-                        if let verifiedAreaEditVC = vc as? VerifiedAreasEditViewController {
-                            self?.navigationController?.popToViewController(verifiedAreaEditVC.self, animated: true)
-                        }
-                    }
+                case .setting:
+                    self?.navigateToSetting()
                 }
+            } else {
+                let errorType = self?.viewModel.postLocalAreaErrorType
+                switch errorType {
+                case .unsupportedRegion:
+                    self?.presentACAlert(.locationAccessFail)
+                case .outOfRange:
+                    self?.presentACAlert(.timeoutFromVerification)
+                default:
+                    self?.showServerErrorAlert()
+                }
+                self?.viewModel.postLocalAreaErrorType = nil
             }
-            // TODO: 에러코드별 액션 분기처리 (이후 스프린트)
-            else {
-                self?.showDefaultAlert(title: "알림", message: "동네 인증을 완료할 수 없습니다. 앱을 재실행해주시기 바랍니다.")
+            self?.viewModel.onPostLocalAreaSuccess.value = nil
+        }
+        
+        viewModel.onPostReplaceVerifiedAreaSuccess.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
+            if onSuccess {
+                self.navigateToSetting()
+            } else {
+                switch viewModel.postReplaceVerifiedAreaErrorType {
+                case .unsupportedRegion:
+                    self.presentACAlert(.locationAccessFail)
+                case .timeOut:
+                    self.presentACAlert(.timeoutFromVerification)
+                default:
+                    self.showServerErrorAlert()
+                }
+                viewModel.postReplaceVerifiedAreaErrorType = nil
             }
-            
-            self?.localVerificationViewModel.onSuccessPostLocalArea.value = nil
+            viewModel.onPostReplaceVerifiedAreaSuccess.value = nil
         }
     }
     
@@ -131,7 +144,12 @@ private extension LocalMapViewController {
     @objc
     func finishVerificationButtonTapped() {
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.areaVerified, properties: ["complete_area?": true])
-        self.localVerificationViewModel.postLocalArea()
+        
+        if self.viewModel.flowType == .setting && self.viewModel.isSwitching {
+            self.viewModel.postReplaceVerifiedArea()
+        } else {
+            self.viewModel.postLocalArea()
+        }
     }
     
 }
@@ -144,6 +162,15 @@ private extension LocalMapViewController {
     func navigateToOnboarding() {
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
             sceneDelegate.window?.rootViewController = OnboardingViewController(flowType: .login)
+        }
+    }
+    
+    func navigateToSetting() {
+        guard let vcStack = self.navigationController?.viewControllers else { return }
+        for vc in vcStack {
+            if let verifiedAreaEditVC = vc as? VerifiedAreasEditViewController {
+                self.navigationController?.popToViewController(verifiedAreaEditVC.self, animated: true)
+            }
         }
     }
     

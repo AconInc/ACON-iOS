@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct PostLocalAreaRequest: Codable {
     
     let latitude: Double

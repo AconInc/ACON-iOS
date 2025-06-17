@@ -58,6 +58,9 @@ extension UIViewController {
         present(alert, animated: true)
     }
     
+    func showServerErrorAlert() {
+        self.showDefaultAlert(title: "서비스에 연결할 수 없습니다.", message: "잠시 후 다시 시도해주세요.")
+    }
     
     // MARK: - 바텀시트 내려가게
     

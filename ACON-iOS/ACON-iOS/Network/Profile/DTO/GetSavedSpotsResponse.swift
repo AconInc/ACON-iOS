@@ -15,7 +15,7 @@ struct GetSavedSpotsResponse: Decodable {
 
 struct SavedSpotDTO: Decodable {
     
-    let id: Int64
+    let spotId: Int64
     
     let image: String?
     

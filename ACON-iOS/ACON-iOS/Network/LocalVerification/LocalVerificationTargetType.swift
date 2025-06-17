@@ -17,17 +17,19 @@ enum LocalVerificationTargetType {
     
     case deleteLocalArea(_ verifiedAreaID: String)
     
+    case postReplaceLocalArea(_ requestBody: PostReplaceVerifiedAreaRequest)
+    
 }
 
 extension LocalVerificationTargetType: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .postLocalArea:
+        case .postLocalArea, .postReplaceLocalArea:
             return .post
         case .getLocalAreaList:
             return .get
-        case .deleteLocalArea(_):
+        case .deleteLocalArea:
             return .delete
         }
     }
@@ -35,11 +37,13 @@ extension LocalVerificationTargetType: TargetType {
     var path: String {
         switch self {
         case .postLocalArea:
-            return utilPath + "members/verified-areas"
+            return utilPath + "verified-areas"
         case .getLocalAreaList:
-            return utilPath + "members/verified-areas"
+            return utilPath + "verified-areas"
         case .deleteLocalArea(let verifiedAreaID):
-            return utilPath + "members/verified-areas/" + verifiedAreaID
+            return utilPath + "verified-areas/" + verifiedAreaID
+        case .postReplaceLocalArea:
+            return utilPath + "verified-areas/replacement"
         }
     }
     
@@ -51,6 +55,8 @@ extension LocalVerificationTargetType: TargetType {
             return .requestPlain
         case .deleteLocalArea:
             return .requestPlain
+        case .postReplaceLocalArea(let requestBody):
+            return .requestJSONEncodable(requestBody)
         }
     }
     
