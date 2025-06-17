@@ -106,16 +106,22 @@ private extension SplashViewController {
     func goToSpotDetailVC(with spotID: Int64) {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
 
-        let tabBarController = ACTabBarController()
-        sceneDelegate?.window?.rootViewController = tabBarController
-        sceneDelegate?.window?.makeKeyAndVisible()
+        let rootVC: UIViewController = {
+            if AuthManager.shared.hasVerifiedArea {
+                return ACTabBarController()
+            } else {
+                let vm = LocalVerificationViewModel(flowType: .onboarding)
+                return UINavigationController(
+                    rootViewController: LocalVerificationViewController(viewModel: vm)
+                )
+            }
+        }()
 
-        if let spotListVC = tabBarController.selectedViewController as? UINavigationController {
-            let spotDetailVC = SpotDetailViewController(spotID)
-            spotListVC.pushViewController(spotDetailVC, animated: true)
-        } else {
-            print("❗️Selected view controller is not a navigation controller.")
-        }
+        sceneDelegate?.window?.rootViewController = rootVC
+
+        let spotDetailVC = SpotDetailViewController(spotID)
+        spotDetailVC.modalPresentationStyle = .fullScreen
+        rootVC.present(spotDetailVC, animated: true)
     }
 
 }
