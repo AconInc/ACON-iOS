@@ -108,11 +108,13 @@ extension LocalVerificationViewModel {
                 verifiedAreaList = newVerifiedAreaList
                 onGetVerifiedAreaListSuccess.value = true
             case .reIssueJWT:
-                self.handleReissue {
-                    self.getVerifiedAreaList()
+                self.handleReissue { [weak self] in
+                    self?.getVerifiedAreaList()
                 }
             default:
-                onGetVerifiedAreaListSuccess.value = false
+                self.handleNetworkError { [weak self] in
+                    self?.getVerifiedAreaList()
+                }
             }
         }
     }
@@ -129,6 +131,10 @@ extension LocalVerificationViewModel {
                     self?.deleteVerifiedAreaErrorType = .onlyOne
                 } else if error.code == 40055 {
                     self?.deleteVerifiedAreaErrorType = .timeOut
+                } else {
+                    self?.handleNetworkError { [weak self] in
+                        self?.deleteVerifiedArea(area)
+                    }
                 }
                 self?.onDeleteVerifiedAreaSuccess.value = false
             case .reIssueJWT:
@@ -136,7 +142,9 @@ extension LocalVerificationViewModel {
                     self?.deleteVerifiedArea(area)
                 }
             default:
-                self?.onDeleteVerifiedAreaSuccess.value = false
+                self?.handleNetworkError { [weak self] in
+                    self?.deleteVerifiedArea(area)
+                }
             }
         }
     }
@@ -159,13 +167,19 @@ extension LocalVerificationViewModel {
                     self?.postReplaceVerifiedAreaErrorType = .timeOut
                 } else if error.code == 40056 {
                     self?.postReplaceVerifiedAreaErrorType = .notUniqueVerifiedArea
+                } else {
+                    self?.handleNetworkError { [weak self] in
+                        self?.postReplaceVerifiedArea()
+                    }
                 }
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
                     self?.postReplaceVerifiedArea()
                 }
             default:
-                self?.onPostReplaceVerifiedAreaSuccess.value = false
+                self?.handleNetworkError { [weak self] in
+                    self?.postReplaceVerifiedArea()
+                }
             }
         }
     }

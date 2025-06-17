@@ -70,11 +70,13 @@ final class ProfileViewModel: Serviceable {
                 userInfo = newUserInfo
                 onGetProfileSuccess.value = true
             case .reIssueJWT:
-                self.handleReissue {
-                    self.getProfile()
+                self.handleReissue { [weak self] in
+                    self?.getProfile()
                 }
             default:
-                onGetProfileSuccess.value = false
+                self.handleNetworkError { [weak self] in
+                    self?.getProfile()
+                }
             }
         }
     }
@@ -93,11 +95,13 @@ final class ProfileViewModel: Serviceable {
                 savedSpotList = newSavedSpotList
                 onGetSavedSpotsSuccess.value = true
             case .reIssueJWT:
-                self.handleReissue {
-                    self.getSavedSpots()
+                self.handleReissue { [weak self] in
+                    self?.getSavedSpots()
                 }
             default:
-                onGetSavedSpotsSuccess.value = false
+                self.handleNetworkError { [weak self] in
+                    self?.getSavedSpots()
+                }
             }
         }
     }
@@ -114,17 +118,20 @@ final class ProfileViewModel: Serviceable {
                     self?.getNicknameValidity(nickname: nickname)
                 }
             case .requestErr(let error):
-                print("🥑nickname requestErr: \(error)")
                 if error.code == 40901 {
                     self?.nicknameValidityMessageType = .nicknameTaken
                 } else if error.code == 40051 {
                     self?.nicknameValidityMessageType = .invalidChar
+                } else {
+                    self?.handleNetworkError { [weak self] in
+                        self?.getNicknameValidity(nickname: nickname)
+                    }
                 }
                 self?.onGetNicknameValiditySuccess.value = false
             default:
-                print("🥑 VM - Fail to getNicknameValidity")
-                self?.onGetNicknameValiditySuccess.value = false
-                return
+                self?.handleNetworkError { [weak self] in
+                    self?.getNicknameValidity(nickname: nickname)
+                }
             }
         }
     }
@@ -146,18 +153,29 @@ final class ProfileViewModel: Serviceable {
                     self.getProfilePresignedURL()
                 }
             default:
-                onSuccessGetPresignedURL.value = false
+                self.handleNetworkError {
+                    self.getProfilePresignedURL()
+                }
             }
         }
     }
 
     func putProfileImageToPresignedURL(imageData: Data) {
-        ACService.shared.imageService.putImageToPresignedURL(requestBody: PutImageToPresignedURLRequest(presignedURL: presignedURLInfo.presignedURL, imageData: imageData)) { [weak self] isSuccess in
+        ACService.shared.imageService.putImageToPresignedURL(requestBody: PutImageToPresignedURLRequest(presignedURL: presignedURLInfo.presignedURL, imageData: imageData)) { [weak self] response in
+            
             guard let self = self else { return }
-            if isSuccess {
+            
+            switch response {
+            case .success(let data):
                 onSuccessPutProfileImageToPresignedURL.value = true
-            } else {
-                onSuccessPutProfileImageToPresignedURL.value = false
+            case .reIssueJWT:
+                self.handleReissue {
+                    self.putProfileImageToPresignedURL(imageData: imageData)
+                }
+            default:
+                self.handleNetworkError {
+                    self.putProfileImageToPresignedURL(imageData: imageData)
+                }
             }
         }
     }
@@ -179,8 +197,9 @@ final class ProfileViewModel: Serviceable {
                     self.patchProfile()
                 }
             default:
-                onPatchProfileSuccess.value = false
-                return
+                self.handleNetworkError {
+                    self.patchProfile()
+                }
             }
         }
     }

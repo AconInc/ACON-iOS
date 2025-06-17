@@ -135,10 +135,9 @@ private extension VerifiedAreasEditViewController {
             DispatchQueue.main.async {
                 if onSuccess && !self.viewModel.verifiedAreaList.isEmpty {
                     self.verifiedAreasEditView.verifiedAreaCollectionView.reloadData()
-                } else {
-                    self.showServerErrorAlert()
                 }
             }
+            viewModel.onGetVerifiedAreaListSuccess.value = nil
         }
         
         viewModel.onDeleteVerifiedAreaSuccess.bind { [weak self] onSuccess in
@@ -153,11 +152,11 @@ private extension VerifiedAreasEditViewController {
                 case .timeOut:
                     self.presentACAlert(.timeoutFromVerification)
                 default:
-                    self.showServerErrorAlert()
-                    viewModel.deleteVerifiedAreaErrorType = nil
+                    return
                 }
-                viewModel.onDeleteVerifiedAreaSuccess.value = nil
+                viewModel.deleteVerifiedAreaErrorType = nil
             }
+            viewModel.onDeleteVerifiedAreaSuccess.value = nil
         }
     }
     
