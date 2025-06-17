@@ -652,9 +652,9 @@ private extension SpotListViewController {
         let description = spot.isOpen ? StringLiterals.SpotList.businessEnd : StringLiterals.SpotList.businessStart
 
         var tags: [SpotTagType] = []
-        if indexPath.item < 5 { tags.append(SpotTagType.top(number: indexPath.item + 1)) }
         tags.append(contentsOf: spotList.spotList[dataIndex].tagList)
-
+        if indexPath.item < 5 { tags.append(SpotTagType.top(number: indexPath.item + 1)) }
+        
         cell.bind(spot: spot)
         cell.setTags(tags: tags)
         cell.setOpeningTimeView(isOpen: spot.isOpen, time: time, description: description, hasTags: !tags.isEmpty)
