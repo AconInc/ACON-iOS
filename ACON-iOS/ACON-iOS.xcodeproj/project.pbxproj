@@ -254,6 +254,7 @@
 		74BF92192D395FE800B923E3 /* ACToastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92182D395FE400B923E3 /* ACToastController.swift */; };
 		74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92262D39956F00B923E3 /* StickyHeaderView.swift */; };
 		74C1934A2DEF87E1005FB3C7 /* GoogleAdsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C193492DEF87E1005FB3C7 /* GoogleAdsManager.swift */; };
+		74C782192E01504F0053AA86 /* NavigatonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C782182E01504B0053AA86 /* NavigatonUtils.swift */; };
 		74C914D12D64DBBB00BC13E1 /* ImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C914D02D64DBAF00BC13E1 /* ImageType.swift */; };
 		74C914D32D64E01C00BC13E1 /* PutImageToPresignedURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C914D22D64E01000BC13E1 /* PutImageToPresignedURLRequest.swift */; };
 		74CDCE562D310B1600E3A21A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CDCE552D310B1300E3A21A /* String+.swift */; };
@@ -531,6 +532,7 @@
 		74BF92182D395FE400B923E3 /* ACToastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACToastController.swift; sourceTree = "<group>"; };
 		74BF92262D39956F00B923E3 /* StickyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyHeaderView.swift; sourceTree = "<group>"; };
 		74C193492DEF87E1005FB3C7 /* GoogleAdsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdsManager.swift; sourceTree = "<group>"; };
+		74C782182E01504B0053AA86 /* NavigatonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatonUtils.swift; sourceTree = "<group>"; };
 		74C914D02D64DBAF00BC13E1 /* ImageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageType.swift; sourceTree = "<group>"; };
 		74C914D22D64E01000BC13E1 /* PutImageToPresignedURLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutImageToPresignedURLRequest.swift; sourceTree = "<group>"; };
 		74CDCE552D310B1300E3A21A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -1333,6 +1335,7 @@
 		748D6F792D2BCCEF007690B4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				74C782182E01504B0053AA86 /* NavigatonUtils.swift */,
 				152F8D162DF252560064022B /* MapRedirect */,
 				746F5BF12DE00CE90081569B /* GlassBorderAttributes.swift */,
 				74E38D332D69B468009449D4 /* LocationUtils.swift */,
@@ -2061,6 +2064,7 @@
 				15A2461D2DE7B8AA00469272 /* SpotListCellConfigurable.swift in Sources */,
 				746261792D3EA8DF00A4E84F /* UploadTargetType.swift in Sources */,
 				D6E816A22D623E0E001E4EBF /* WithdrawalTableViewCell.swift in Sources */,
+				74C782192E01504F0053AA86 /* NavigatonUtils.swift in Sources */,
 				741A07572D3558FE00778219 /* ReviewFinishedView.swift in Sources */,
 				743900932DC75451002F91B1 /* GlassmorphismType.swift in Sources */,
 				1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */,
