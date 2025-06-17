@@ -27,8 +27,8 @@ final class ImageService: BaseService<ImageTargetType>, ImageServiceProtocol {
             case .success(let response):
                 let networkResult: NetworkResult<GetPresignedURLResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetPresignedURLResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }

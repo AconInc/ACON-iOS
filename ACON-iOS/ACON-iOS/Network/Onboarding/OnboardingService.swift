@@ -22,10 +22,14 @@ final class OnboardingService: BaseService<OnboardingTargetType>, OnboardingServ
         self.provider.request(.putOnboarding(requestBody)) { result in
             switch result {
             case .success(let response):
-                let networkResult: NetworkResult<EmptyResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: EmptyResponse.self)
+                let networkResult = self.judgeStatus(
+                    statusCode: response.statusCode,
+                    data: response.data,
+                    type: EmptyResponse.self
+                )
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
