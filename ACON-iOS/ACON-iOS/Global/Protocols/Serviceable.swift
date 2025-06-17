@@ -26,7 +26,7 @@ extension Serviceable {
                         for key in UserDefaults.standard.dictionaryRepresentation().keys {
                             UserDefaults.standard.removeObject(forKey: key.description)
                         }
-                        self.navigateToSplash()
+                        NavigationUtils.navigateToSplash()
                     }
                 }
             } catch {

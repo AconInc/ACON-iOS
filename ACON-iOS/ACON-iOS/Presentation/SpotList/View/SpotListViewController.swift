@@ -189,13 +189,6 @@ extension SpotListViewController {
                     endSkeletonAnimation()
                     spotListView.regionErrorView.isHidden = false
                 }
-                // NOTE: 나머지 에러 + 네트워크 에러 (네트워크 에러뷰 뜬 상태)
-                // TODO: - @유림언니 얘네가 네트워크 에러뷰가 떠졌을 때도 필요한 애들인가요?????
-                else {
-                    isSkeletonShowing = false
-                    isDataLoading = false
-                    endSkeletonAnimation()
-                }
                 viewModel.errorType = nil
             }
             viewModel.onSuccessPostSpotList.value = nil

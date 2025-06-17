@@ -62,7 +62,6 @@ class SpotDetailViewController: BaseNavViewController {
         self.tabBarController?.tabBar.isHidden = true
 
         viewModel.getSpotDetail()
-        viewModel.getMenuboardImageList()
         startTime = Date()
     }
 

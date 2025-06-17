@@ -103,7 +103,6 @@ extension SpotListViewModel {
                 self?.handleNetworkError { [weak self] in
                     self?.postSpotList()
                 }
-                self?.onSuccessPostSpotList.value = false
             }
         }
     }
