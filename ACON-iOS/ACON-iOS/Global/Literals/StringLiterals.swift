@@ -276,6 +276,10 @@ enum StringLiterals {
         
         static let signatureMenu = "대표메뉴"
         
+        static let atAcon = "Acon에서 "
+        
+        static let checkOut = " 확인해 보세요!"
+        
     }
     
     
