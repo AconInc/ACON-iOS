@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 import BranchSDK
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
