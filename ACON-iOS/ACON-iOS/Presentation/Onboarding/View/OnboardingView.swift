@@ -139,6 +139,18 @@ final class OnboardingView: BaseView {
         
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        startButton.refreshButtonBlurEffect(.buttonGlassDefault)
+        noDislikeFoodButton.refreshButtonBlurEffect(.buttonGlassDefault)
+        for cell in dislikeFoodCollectionView.visibleCells {
+            if let cell = cell as? DislikeFoodCollectionViewCell {
+                cell.setNeedsLayout()
+           }
+        }
+    }
+    
 }
 
 
