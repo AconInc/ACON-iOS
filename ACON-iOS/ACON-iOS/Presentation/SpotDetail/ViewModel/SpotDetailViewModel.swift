@@ -140,7 +140,7 @@ extension SpotDetailViewModel {
             }
 
             let spotName = self?.spotDetail?.name ?? ""
-            let deepLinkString = StringLiterals.SpotDetail.atAcon + spotName + StringLiterals.SpotDetail.checkOut + "\n\(url)"
+            let deepLinkString = StringLiterals.DeepLink.atAcon + spotName + StringLiterals.DeepLink.checkOut + "\n\(url)"
             completion(deepLinkString)
             print("🔗✅ deeplink 생성 성공: \(url)")
         }
@@ -148,19 +148,18 @@ extension SpotDetailViewModel {
 
     private func makeBranchUniversalObject() -> BranchUniversalObject? {
         guard let spot = spotDetail else { return nil }
-        let buo: BranchUniversalObject = BranchUniversalObject(canonicalIdentifier: "item/12345")
-        buo.title = "[Acon] \(spot.name)"
-        buo.contentDescription = "앱에서 가게 정보를 확인해보세요!"
-        buo.imageUrl = "https://picsum.photos/200"
+        let buo: BranchUniversalObject = BranchUniversalObject(canonicalIdentifier: "spot/\(spot.spotID)")
+        buo.title = StringLiterals.DeepLink.deepLinkTitleAcon + " " + spot.name
+        buo.contentDescription = StringLiterals.DeepLink.deepLinkDescription
         buo.contentMetadata.customMetadata["spotId"] = spot.spotID
         return buo
     }
 
     private func makeBranchLinkProperties() -> BranchLinkProperties {
         let lp: BranchLinkProperties = BranchLinkProperties()
-        lp.channel = "share" // NOTE: 링크 유입 경로 -> 대시보드에서 볼 수 있음
-        lp.feature = "spot_detail_share" // NOTE: 생성된 링크의 목적/기능 -> 대시보드에서 볼 수 있음
-        lp.addControlParam("$deeplink_path", withValue: "spot/\(spotID)") // NOTE: 딥링크 클릭 시 앱의 URI Scheme으로 이동
+        lp.channel = StringLiterals.DeepLink.branchLinkChannel
+        lp.feature = StringLiterals.DeepLink.branchLinkFeature
+        lp.addControlParam(StringLiterals.DeepLink.branchDeepLinkPathParamName, withValue: "spot/\(spotID)")
         return lp
     }
 
