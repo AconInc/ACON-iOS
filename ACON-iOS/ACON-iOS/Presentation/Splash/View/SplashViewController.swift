@@ -107,19 +107,22 @@ private extension SplashViewController {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
 
         let rootVC: UIViewController = {
-            if AuthManager.shared.hasVerifiedArea {
-                return ACTabBarController()
-            } else {
+            // NOTE: 자동로그인O && 지역인증X -> rootVC = 지역인증VC
+            if AuthManager.shared.hasToken && !AuthManager.shared.hasVerifiedArea {
                 let vm = LocalVerificationViewModel(flowType: .onboarding)
                 return UINavigationController(
                     rootViewController: LocalVerificationViewController(viewModel: vm)
                 )
+            } else {
+                // NOTE: 그 외 -> rootVC = TabBar
+                return ACTabBarController()
             }
         }()
 
         sceneDelegate?.window?.rootViewController = rootVC
+        sceneDelegate?.window?.makeKeyAndVisible()
 
-        let spotDetailVC = SpotDetailViewController(spotID)
+        let spotDetailVC = SpotDetailViewController(spotID, isDeepLink: true)
         spotDetailVC.modalPresentationStyle = .fullScreen
         rootVC.present(spotDetailVC, animated: true)
     }

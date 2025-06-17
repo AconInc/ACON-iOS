@@ -14,6 +14,7 @@ import BranchSDK
 class SpotDetailViewModel: Serviceable {
 
     let spotID: Int64
+    var isDeepLink: Bool
     
     let onSuccessGetSpotDetail: ObservablePattern<Bool> = ObservablePattern(nil)
     let onSuccessGetMenuboardImageList: ObservablePattern<Bool> = ObservablePattern(nil)
@@ -24,8 +25,9 @@ class SpotDetailViewModel: Serviceable {
 
     var menuImageURLs: [String] = []
 
-    init(_ spotID: Int64) {
+    init(_ spotID: Int64, isDeepLink: Bool = false) {
         self.spotID = spotID
+        self.isDeepLink = isDeepLink
     }
 
 }
@@ -36,17 +38,19 @@ extension SpotDetailViewModel {
     
     func getSpotDetail() {
         ACService.shared.spotDetailService.getSpotDetail(spotID: spotID) { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success(let data):
                 let spotDetailData = SpotDetailInfoModel(from: data)
-                self?.spotDetail = spotDetailData
-                self?.onSuccessGetSpotDetail.value = true
+                spotDetail = spotDetailData
+                onSuccessGetSpotDetail.value = true
             case .reIssueJWT:
-                self?.handleReissue { [weak self] in
+                guard !isDeepLink else { return }
+                handleReissue { [weak self] in
                     self?.getSpotDetail()
                 }
             default:
-                self?.handleNetworkError { [weak self] in
+                handleNetworkError { [weak self] in
                     self?.getSpotDetail()
                 }
             }

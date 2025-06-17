@@ -235,8 +235,7 @@ extension BaseNavViewController {
     
     @objc
     func skipButtonTapped() {
-        let vc = ACTabBarController()
-        navigationController?.pushViewController(vc, animated: false)
+        NavigationUtils.navigateToTabBar()
     }
     
     
