@@ -126,7 +126,7 @@ private extension LocalMapViewController {
                 case .timeOut:
                     self.presentACAlert(.timeoutFromVerification)
                 default:
-                    self.showServerErrorAlert()
+                    return
                 }
                 viewModel.postReplaceVerifiedAreaErrorType = nil
             }

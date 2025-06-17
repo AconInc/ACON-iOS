@@ -32,8 +32,8 @@ final class UploadService: BaseService<UploadTargetType>, UploadServiceProtocol 
             case .success(let response):
                 let networkResult: NetworkResult<GetSearchSuggestionResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetSearchSuggestionResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -44,8 +44,8 @@ final class UploadService: BaseService<UploadTargetType>, UploadServiceProtocol 
             case .success(let response):
                 let networkResult: NetworkResult<EmptyResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: EmptyResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -56,8 +56,8 @@ final class UploadService: BaseService<UploadTargetType>, UploadServiceProtocol 
             case .success(let response):
                 let networkResult: NetworkResult<GetSearchKeywordResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetSearchKeywordResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -68,8 +68,8 @@ final class UploadService: BaseService<UploadTargetType>, UploadServiceProtocol 
             case .success(let response):
                 let networkResult: NetworkResult<GetReviewVerificationResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetReviewVerificationResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -80,8 +80,8 @@ final class UploadService: BaseService<UploadTargetType>, UploadServiceProtocol 
             case .success(let response):
                 let networkResult: NetworkResult<GetAcornCountResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetAcornCountResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }

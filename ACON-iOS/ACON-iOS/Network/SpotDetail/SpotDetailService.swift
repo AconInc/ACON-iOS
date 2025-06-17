@@ -35,8 +35,8 @@ final class SpotDetailService: BaseService<SpotDetailTargetType>,
             case .success(let response):
                 let networkResult: NetworkResult<GetSpotDetailResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetSpotDetailResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -48,8 +48,8 @@ final class SpotDetailService: BaseService<SpotDetailTargetType>,
             case .success(let response):
                 let networkResult: NetworkResult<GetSpotMenuResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetSpotMenuResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -61,8 +61,8 @@ final class SpotDetailService: BaseService<SpotDetailTargetType>,
             case .success(let response):
                 let networkResult: NetworkResult<GetMenuboardImageListResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetMenuboardImageListResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -74,8 +74,8 @@ final class SpotDetailService: BaseService<SpotDetailTargetType>,
             case .success(let response):
                 let networkResult: NetworkResult<EmptyResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: EmptyResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -86,8 +86,8 @@ final class SpotDetailService: BaseService<SpotDetailTargetType>,
             case .success(let response):
                 let networkResult: NetworkResult<EmptyResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: EmptyResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -98,8 +98,8 @@ final class SpotDetailService: BaseService<SpotDetailTargetType>,
             case .success(let response):
                 let networkResult: NetworkResult<EmptyResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: EmptyResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }

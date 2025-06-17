@@ -129,8 +129,7 @@ private extension SpotSearchViewController {
                 let errorType = self?.spotSearchViewModel.reviewVerificationErrorType
                 if errorType == .unsupportedRegion {
                     self?.presentACAlert(.locationAccessFail)
-                } // TODO: errorType == 존재하지 않는 장소일 때 Alert 필요 (40403 에러)
-                self?.showDefaultAlert(title: "추천 검색어 로드 실패", message: "추천 검색어 로드에 실패했습니다.")
+                }
             }
             self?.spotSearchViewModel.onSuccessGetSearchSuggestion.value = nil
         }
@@ -168,8 +167,7 @@ private extension SpotSearchViewController {
                 let errorType = self?.spotSearchViewModel.reviewVerificationErrorType
                 if errorType == .unsupportedRegion {
                     self?.presentACAlert(.locationAccessFail)
-                } // TODO: errorType == 존재하지 않는 장소일 때 Alert 필요 (40403 에러)
-                self?.showDefaultAlert(title: "연관 검색어 로드 실패", message: "연관 검색어 로드에 실패했습니다.")
+                }
                 self?.rightButton.isEnabled = false
             }
             self?.spotSearchViewModel.reviewVerification.value = nil

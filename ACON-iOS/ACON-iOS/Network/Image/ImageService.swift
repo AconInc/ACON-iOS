@@ -15,7 +15,7 @@ protocol ImageServiceProtocol {
                          completion: @escaping (NetworkResult<GetPresignedURLResponse>) -> Void)
     
     func putImageToPresignedURL(requestBody: PutImageToPresignedURLRequest,
-                                completion: @escaping (Bool) -> Void)
+                                completion: @escaping (NetworkResult<EmptyResponse>) -> Void)
     
 }
 
@@ -27,19 +27,20 @@ final class ImageService: BaseService<ImageTargetType>, ImageServiceProtocol {
             case .success(let response):
                 let networkResult: NetworkResult<GetPresignedURLResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetPresignedURLResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
     
-    func putImageToPresignedURL(requestBody: PutImageToPresignedURLRequest, completion: @escaping (Bool) -> Void) {
+    func putImageToPresignedURL(requestBody: PutImageToPresignedURLRequest, completion: @escaping (NetworkResult<EmptyResponse>) -> Void) {
         self.provider.request(.putImageToPresignedURL(requestBody)) { result in
             switch result {
             case .success(let response):
-                completion(response.statusCode == 200)
+                let networkResult: NetworkResult<EmptyResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: EmptyResponse.self)
+                completion(networkResult)
             case .failure:
-                completion(false)
+                completion(.networkFail)
             }
         }
     }

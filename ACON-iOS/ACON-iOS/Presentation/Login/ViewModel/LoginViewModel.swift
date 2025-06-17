@@ -67,10 +67,12 @@ class LoginViewModel: Serviceable {
                 self?.handleReissue { [weak self] in
                     self?.postLogin(socialType: socialType, idToken: idToken)
                 }
+            case .networkFail:
+                self?.handleNetworkError { [weak self] in
+                    self?.postLogin(socialType: socialType, idToken: idToken)
+                }
             default:
-                print("VM - Failed To postLogin")
                 self?.onSuccessLogin.value = false
-                return
             }
         }
     }

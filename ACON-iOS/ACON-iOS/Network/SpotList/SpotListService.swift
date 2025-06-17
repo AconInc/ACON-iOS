@@ -29,8 +29,8 @@ final class SpotListService: BaseService<SpotListTargetType>, SpotListServicePro
                     type: PostSpotListResponse.self
                 )
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }

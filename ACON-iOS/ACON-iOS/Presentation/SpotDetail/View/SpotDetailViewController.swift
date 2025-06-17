@@ -62,7 +62,6 @@ class SpotDetailViewController: BaseNavViewController {
         self.tabBarController?.tabBar.isHidden = true
 
         viewModel.getSpotDetail()
-        viewModel.getMenuboardImageList()
         startTime = Date()
     }
 
@@ -157,8 +156,6 @@ private extension SpotDetailViewController {
                 spotDetailView.makeSignatureMenuSection(data.signatureMenuList)
                 spotDetailView.menuButton.isEnabled = data.hasMenuboardImage
                 spotDetailView.collectionView.reloadData()
-            } else {
-                showDefaultAlert(title: "장소 정보 로드 실패", message: "장소 정보 로드에 실패했습니다.")
             }
             viewModel.onSuccessGetSpotDetail.value = nil
         }

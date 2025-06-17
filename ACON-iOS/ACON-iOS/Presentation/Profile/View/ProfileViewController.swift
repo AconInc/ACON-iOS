@@ -102,14 +102,13 @@ private extension ProfileViewController {
         viewModel.onGetProfileSuccess.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
-            // TODO: onSuccess 분기처리
             if onSuccess {
                 profileView.do {
                     $0.setProfileImage(self.viewModel.userInfo.profileImage)
                     $0.setNicknameLabel(self.viewModel.userInfo.nickname)
                     $0.setSavedSpotUI(!self.viewModel.userInfo.savedSpotList.isEmpty)
                 }
-                updateSavedSpots(self.viewModel.userInfo.savedSpotList ?? [])
+                updateSavedSpots(self.viewModel.userInfo.savedSpotList)
             } else {
                 profileView.setSavedSpotUI(false)
             }

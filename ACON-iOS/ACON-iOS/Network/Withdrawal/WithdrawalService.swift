@@ -28,18 +28,15 @@ final class WithdrawalService: BaseService<WithdrawalTargetType>, WithdrawalProt
         self.provider.request(.postWithdrawal(requestBody: requestBody)) { result in
             switch result {
             case .success(let response):
-                print("⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️")
                 let networkResult = self.judgeStatus(
                     statusCode: response.statusCode,
                     data: response.data,
                     type: EmptyResponse.self
                 )
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print("⭐️")
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
-            
         }
         
     }

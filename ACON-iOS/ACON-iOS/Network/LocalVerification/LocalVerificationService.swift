@@ -30,8 +30,8 @@ final class LocalVerificationService: BaseService<LocalVerificationTargetType>, 
             case .success(let response):
                 let networkResult: NetworkResult<EmptyResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: EmptyResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -46,8 +46,8 @@ final class LocalVerificationService: BaseService<LocalVerificationTargetType>, 
                     type: GetVerifiedAreaListResponse.self
                 )
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -63,8 +63,8 @@ final class LocalVerificationService: BaseService<LocalVerificationTargetType>, 
                     type: EmptyResponse.self
                 )
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -79,8 +79,8 @@ final class LocalVerificationService: BaseService<LocalVerificationTargetType>, 
                     type: EmptyResponse.self
                 )
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
