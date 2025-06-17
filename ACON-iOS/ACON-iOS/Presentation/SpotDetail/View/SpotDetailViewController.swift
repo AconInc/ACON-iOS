@@ -130,10 +130,10 @@ class SpotDetailViewController: BaseNavViewController {
         }
 
         spotDetailView.shareButton.onTap = { [weak self] _ in
-            self?.viewModel.createBranchDeepLink() { [weak self] deepLinkString in
+            self?.viewModel.createBranchDeepLink() { [weak self] description, url in
                 guard let self = self else { return }
                 
-                let itemsToShare: [Any] = [deepLinkString]
+                let itemsToShare: [Any] = [description, url]
                 let activityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
                 self.present(activityVC, animated: true, completion: nil)
             }
