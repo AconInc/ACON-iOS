@@ -35,8 +35,8 @@ final class ProfileService: BaseService<ProfileTargetType>, ProfileServiceProtoc
                     type: GetProfileResponse.self
                 )
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -51,8 +51,8 @@ final class ProfileService: BaseService<ProfileTargetType>, ProfileServiceProtoc
                     type: GetSavedSpotsResponse.self
                 )
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -68,8 +68,8 @@ final class ProfileService: BaseService<ProfileTargetType>, ProfileServiceProtoc
                     type: EmptyResponse.self
                 )
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -85,8 +85,8 @@ final class ProfileService: BaseService<ProfileTargetType>, ProfileServiceProtoc
                     type: EmptyResponse.self
                 )
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }

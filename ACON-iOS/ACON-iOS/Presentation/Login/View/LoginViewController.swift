@@ -122,7 +122,7 @@ extension LoginViewController {
             let hasVerifiedArea = loginViewModel.hasVerifiedArea
             if onSuccess {
                 AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.login, properties: ["did_login?": true])
-                hasVerifiedArea ? switchRootToTabBar() : navigateToLocalVerificationVC()
+                hasVerifiedArea ? NavigationUtils.navigateToTabBar() : navigateToLocalVerificationVC()
             } else {
                 showLoginFailAlert()
             }
@@ -133,12 +133,6 @@ extension LoginViewController {
         let vm = LocalVerificationViewModel(flowType: .onboarding)
         let vc = LocalVerificationViewController(viewModel: vm)
         self.navigationController?.pushViewController(vc, animated: false)
-    }
-    
-    func switchRootToTabBar() {
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = ACTabBarController()
-        }
     }
     
     func showLoginFailAlert() {
