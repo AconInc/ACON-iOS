@@ -56,8 +56,7 @@ class SpotListViewController: BaseNavViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        ACToastController.hide()
-        viewModel.stopPeriodicLocationCheck()
+        stopPeriodicLocationCheck()
     }
 
     override func viewDidLayoutSubviews() {
@@ -138,6 +137,11 @@ class SpotListViewController: BaseNavViewController {
                 presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
             }
         }
+    }
+    
+    private func stopPeriodicLocationCheck() {
+        ACToastController.hide()
+        viewModel.stopPeriodicLocationCheck()
     }
 
 }
@@ -257,14 +261,21 @@ private extension SpotListViewController {
 
     @objc
     func tappedFilterButton() {
+        stopPeriodicLocationCheck()
+        
         guard AuthManager.shared.hasToken else {
-            presentLoginModal(AmplitudeLiterals.EventName.filter)
+            let vc = LoginModalViewController(AmplitudeLiterals.EventName.filter)
+            vc.setSheetLayout(detent: .middle)
+            vc.presentationController?.delegate = self
+            
+            self.present(vc, animated: true)
             return
         }
 
         let vc = SpotListFilterViewController(viewModel: viewModel)
         vc.setSheetLayout(detent: .semiLong)
-
+        vc.presentationController?.delegate = self
+        
         present(vc, animated: true)
     }
 
@@ -646,4 +657,15 @@ private extension SpotListViewController {
         return cell
     }
 
+}
+
+
+// MARK: - Present된 모달 dismiss 후 돌아오는 타이밍
+
+extension SpotListViewController: UIAdaptivePresentationControllerDelegate {
+    
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        viewModel.startPeriodicLocationCheck()
+    }
+    
 }
