@@ -305,7 +305,7 @@ private extension SpotDetailView {
     }
 
     func setImagePageControl(_ numberOfPages: Int?) {
-        guard let numberOfPages = numberOfPages else {
+        guard let numberOfPages = numberOfPages, numberOfPages > 1 else {
             imagePageControl.removeFromSuperview()
             return
         }
