@@ -65,7 +65,7 @@ final class SettingTableViewCell: UITableViewCell {
         
         updateLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalTo(arrowImageView.snp.leading).offset(-4)
+            $0.trailing.equalToSuperview()
         }
         
         arrowImageView.snp.makeConstraints {
@@ -123,7 +123,7 @@ extension SettingTableViewCell {
             let isLatestVersion = await AppVersionManager.shared.checkExactVersion()
             
             DispatchQueue.main.async {
-                self.arrowImageView.isHidden = isLatestVersion
+                self.arrowImageView.isHidden = true
                 self.versionLabel.isHidden = !isLatestVersion
                 self.updateLabel.isHidden = isLatestVersion
             }

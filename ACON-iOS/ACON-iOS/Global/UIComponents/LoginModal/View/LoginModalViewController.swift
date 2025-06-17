@@ -78,21 +78,16 @@ class LoginModalViewController: BaseViewController {
 // MARK: - @objc functions
 
 extension LoginModalViewController {
-
-    @objc
-    func exitButtonTapped() {
-        self.dismiss(animated: true)
-    }
     
     @objc
     func privacyPolicyLabelTapped() {
-        let privacyPolicyVC = DRWebViewController(urlString: StringLiterals.WebView.privacyPolicyLink)
+        let privacyPolicyVC = ACWebViewController(urlString: StringLiterals.WebView.privacyPolicyLink)
         self.present(privacyPolicyVC, animated: true)
     }
     
     @objc
     func termsOfUseLabelTapped() {
-        let termsOfUseVC = DRWebViewController(urlString: StringLiterals.WebView.termsOfUseLink)
+        let termsOfUseVC = ACWebViewController(urlString: StringLiterals.WebView.termsOfUseLink)
         self.present(termsOfUseVC, animated: true)
     }
     

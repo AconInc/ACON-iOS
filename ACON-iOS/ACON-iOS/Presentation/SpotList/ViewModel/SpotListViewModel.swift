@@ -83,7 +83,7 @@ extension SpotListViewModel {
 
                 if spotList.spotList.isEmpty { self?.errorType = .emptyList }
                 self?.onSuccessPostSpotList.value = true
-
+                self?.lastNetworkLocation = self?.userLocation
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
                     self?.postSpotList()
@@ -167,7 +167,7 @@ extension SpotListViewModel {
         guard !hasToast else { return }
         
         ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
-        guard let distance = lastNetworkLocation?.distance(from: userLocation) else { return }
+        let distance = lastLocation.distance(from: userLocation)
         print("🧇 \(distance)")
         if distance >= locationDistanceThreshold {
             print("🧇 위치 변화 감지: \(distance)m")

@@ -83,6 +83,12 @@ final class DislikeFoodCollectionViewCell: BaseCollectionViewCell {
         chipButton.isUserInteractionEnabled = false
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        chipButton.refreshButtonBlurEffect(.buttonGlassDefault)
+    }
+    
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         let width = chipButton.intrinsicContentSize.width + 24
         

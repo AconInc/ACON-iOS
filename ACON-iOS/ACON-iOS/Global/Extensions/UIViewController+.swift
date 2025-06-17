@@ -31,35 +31,34 @@ extension UIViewController {
                           cancelText: String = "취소",
                           completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        // TODO: - 추후 배경색 및 폰트색도 변경
-        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .gray800
         let titleAttributes = [NSAttributedString.Key.foregroundColor: UIColor.acWhite]
-        let messageAttributes = [NSAttributedString.Key.foregroundColor: UIColor.acWhite]
+        let messageAttributes = [NSAttributedString.Key.foregroundColor: UIColor.acWhite, NSAttributedString.Key.font: ACFontType.b1R.fontStyle.font]
         
         let titleString = NSAttributedString(string: title, attributes: titleAttributes)
         let messageString = NSAttributedString(string: message, attributes: messageAttributes)
         
         alert.setValue(titleString, forKey: "attributedTitle")
         alert.setValue(messageString, forKey: "attributedMessage")
-            
         
         let okAction = UIAlertAction(title: okText, style: .default) { _ in
             completion?()
         }
         alert.addAction(okAction)
-        okAction.setValue(UIColor.primaryLight, forKey: "titleTextColor")
+        okAction.setValue(UIColor.labelAction, forKey: "titleTextColor")
         
         if isCancelAvailable {
             let cancelAction = UIAlertAction(title: cancelText, style: .cancel)
             alert.addAction(cancelAction)
-            cancelAction.setValue(UIColor.gray500, forKey: "titleTextColor")
+            cancelAction.setValue(UIColor.acWhite, forKey: "titleTextColor")
         }
         
         present(alert, animated: true)
     }
     
-    func showServerErrorAlert() {
-        self.showDefaultAlert(title: "서비스에 연결할 수 없습니다.", message: "잠시 후 다시 시도해주세요.")
+    func showServerErrorAlert(_ action: (() -> Void)? = nil) {
+        self.showDefaultAlert(title: "알림",
+                              message: "서비스에 연결할 수 없습니다.\n잠시 후 다시 시도해주세요.",
+                              completion: action)
     }
     
     // MARK: - 바텀시트 내려가게

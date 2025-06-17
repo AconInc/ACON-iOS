@@ -191,7 +191,7 @@ private extension SpotSearchViewController {
     
     @objc
     func addPlaceButtonTapped() {
-        let addPlaceVC = DRWebViewController(urlString: StringLiterals.WebView.addPlaceLink)
+        let addPlaceVC = ACWebViewController(urlString: StringLiterals.WebView.addPlaceLink)
         self.present(addPlaceVC, animated: true)
     }
     

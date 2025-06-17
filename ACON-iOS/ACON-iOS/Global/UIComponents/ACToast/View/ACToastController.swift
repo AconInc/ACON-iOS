@@ -24,7 +24,7 @@ final class ACToastController {
         window.addSubview(toastView)
         
         toastView.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(Int(ScreenUtils.height)*bottomInset/780)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*Double(bottomInset))
             $0.centerX.equalToSuperview()
         }
         

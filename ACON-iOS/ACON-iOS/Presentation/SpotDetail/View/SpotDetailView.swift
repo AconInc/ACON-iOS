@@ -283,7 +283,7 @@ private extension SpotDetailView {
             
             nameLabel.snp.makeConstraints {
                 $0.verticalEdges.leading.equalToSuperview()
-                $0.width.equalTo(100)
+                $0.width.equalTo(160)
             }
             priceLabel.snp.makeConstraints {
                 $0.verticalEdges.equalToSuperview()
@@ -305,7 +305,7 @@ private extension SpotDetailView {
     }
 
     func setImagePageControl(_ numberOfPages: Int?) {
-        guard let numberOfPages = numberOfPages else {
+        guard let numberOfPages = numberOfPages, numberOfPages > 1 else {
             imagePageControl.removeFromSuperview()
             return
         }

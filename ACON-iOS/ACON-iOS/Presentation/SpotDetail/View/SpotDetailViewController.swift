@@ -156,9 +156,9 @@ private extension SpotDetailViewController {
 
             if onSuccess {
                 var tagList: [SpotTagType] = []
-                if let topTag { tagList.append(topTag) }
                 if let tags = data.tagList { tagList.append(contentsOf: tags) }
-
+                if let topTag { tagList.append(topTag) }
+                
                 spotDetailView.bindData(data)
                 setTagsAndOpeningTime(tags: tagList,
                                       isOpen: data.isOpen,

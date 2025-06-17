@@ -43,7 +43,7 @@ class RegionErrorView: BaseView {
 
         titleLabel.setLabel(text: StringLiterals.SpotList.unsupportedRegion, style: .t2SB, alignment: .center)
 
-        descriptionLabel.setLabel(text: StringLiterals.SpotList.unsupportedRegionPleaseRetry, style: .b1R, color: .gray500)
+        descriptionLabel.setLabel(text: StringLiterals.SpotList.unsupportedRegionPleaseRetry, style: .b1R, color: .gray500, alignment: .center)
     }
 
 }
