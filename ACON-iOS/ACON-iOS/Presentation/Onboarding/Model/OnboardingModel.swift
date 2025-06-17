@@ -18,7 +18,7 @@ struct DislikeFood {
     static let engValue = [
         "SHRIMP", "CRAB", "CLAM", "OYSTER", "SASHIMI", "FISH", "SEAFOOD",
         "YUKHOE_YUKSASHIMI", "SEONJI", "SUNDAE", "GOPCHANG_DAECHANG_MAKCHANG",
-        "DAKBAL", "DAKTTONGIP", "LAMB", "OFFAL", "VEGETABLE"
+        "DAKBAL", "DAKTTONGJIP", "LAMB", "OFFAL", "VEGETABLE"
     ]
 
 }
