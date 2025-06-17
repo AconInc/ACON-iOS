@@ -45,8 +45,9 @@ extension SpotDetailViewModel {
                     self?.getSpotDetail()
                 }
             default:
-                self?.onSuccessGetSpotDetail.value = false
-                return
+                self?.handleNetworkError { [weak self] in
+                    self?.getSpotDetail()
+                }
             }
         }
     }
@@ -62,8 +63,9 @@ extension SpotDetailViewModel {
                     self?.getMenuboardImageList()
                 }
             default:
-                self?.onSuccessGetMenuboardImageList.value = false
-                return
+                self?.handleNetworkError { [weak self] in
+                    self?.getMenuboardImageList()
+                }
             }
         }
     }
@@ -88,14 +90,14 @@ extension SpotDetailViewModel {
             switch response {
             case .success:
                 self?.onSuccessPostSavedSpot.value = true
-                return
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
                     self?.postGuidedSpot()
                 }
             default:
-                self?.onSuccessPostSavedSpot.value = false
-                return
+                self?.handleNetworkError { [weak self] in
+                    self?.postGuidedSpot()
+                }
             }
         }
     }
@@ -105,14 +107,14 @@ extension SpotDetailViewModel {
             switch response {
             case .success:
                 self?.onSuccessDeleteSavedSpot.value = true
-                return
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
-                    self?.postGuidedSpot()
+                    self?.deleteSavedSpot()
                 }
             default:
-                self?.onSuccessDeleteSavedSpot.value = false
-                return
+                self?.handleNetworkError { [weak self] in
+                    self?.deleteSavedSpot()
+                }
             }
         }
     }

@@ -181,25 +181,23 @@ extension SpotListViewController {
                     self.isSkeletonShowing = false
                     self.endSkeletonAnimation()
                 }
+            } else {
+                // NOTE: 서비스불가지역
+                if viewModel.errorType == .unsupportedRegion {
+                    isSkeletonShowing = false
+                    isDataLoading = false
+                    endSkeletonAnimation()
+                    spotListView.regionErrorView.isHidden = false
+                }
+                // NOTE: 나머지 에러 + 네트워크 에러 (네트워크 에러뷰 뜬 상태)
+                // TODO: - @유림언니 얘네가 네트워크 에러뷰가 떠졌을 때도 필요한 애들인가요?????
+                else {
+                    isSkeletonShowing = false
+                    isDataLoading = false
+                    endSkeletonAnimation()
+                }
+                viewModel.errorType = nil
             }
-
-            // NOTE: 서비스불가지역
-            else if viewModel.errorType == .unsupportedRegion {
-                isSkeletonShowing = false
-                isDataLoading = false
-                endSkeletonAnimation()
-                spotListView.regionErrorView.isHidden = false
-            }
-
-            else {
-                isSkeletonShowing = false
-                isDataLoading = false
-                endSkeletonAnimation()
-                // TODO: 네트워크 에러뷰, 버튼에 postSpotList() 액션 설정
-
-            }
-            
-            viewModel.errorType = nil
             viewModel.onSuccessPostSpotList.value = nil
             
             filterButton.isSelected = !viewModel.filterList.isEmpty

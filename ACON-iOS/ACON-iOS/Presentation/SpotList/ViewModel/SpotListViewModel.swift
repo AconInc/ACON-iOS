@@ -93,13 +93,17 @@ extension SpotListViewModel {
                 if error.code == 40405 {
                     self?.errorType = .unsupportedRegion
                 } else {
-                    self?.errorType = .serverRequestFail // TODO: 에러 뷰 또는 Alert 띄우기
+                    self?.handleNetworkError { [weak self] in
+                        self?.postSpotList()
+                    }
                 }
                 self?.onSuccessPostSpotList.value = false
 
             default:
+                self?.handleNetworkError { [weak self] in
+                    self?.postSpotList()
+                }
                 self?.onSuccessPostSpotList.value = false
-                return
             }
         }
     }
@@ -114,7 +118,6 @@ extension SpotListViewModel {
                     self?.postGuidedSpot(spotID: spotID)
                 }
             default:
-                print("VM - Failed To postGuidedSpot")
                 return
             }
         }
