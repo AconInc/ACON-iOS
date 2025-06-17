@@ -236,6 +236,8 @@ enum StringLiterals {
         
         static let willYouDeleteThis = "을 삭제할까요?"
         
+        static let canChangeLocalVerification = "인증 지역은 프로필에서 수정 가능합니다."
+        
     }
     
     enum SpotListFilter {

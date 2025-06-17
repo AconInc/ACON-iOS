@@ -46,6 +46,14 @@ class LocalMapViewController: BaseNavViewController {
         self.tabBarController?.tabBar.isHidden = true
         moveCameraToLocation(latitude: viewModel.userCoordinate?.latitude ?? 0,
                              longitude: viewModel.userCoordinate?.longitude ?? 0)
+        if viewModel.flowType == .onboarding {
+            DispatchQueue.main.async {
+                ACToastController.show(
+                    .canChangeLocalVerification,
+                    bottomInset: 591
+                )
+            }
+        }
     }
     
     override func setHierarchy() {

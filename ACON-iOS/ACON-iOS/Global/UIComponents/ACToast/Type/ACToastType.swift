@@ -13,6 +13,8 @@ enum ACToastType {
     
     case locationChanged
     
+    case canChangeLocalVerification
+    
 }
 
 extension ACToastType {
@@ -23,6 +25,8 @@ extension ACToastType {
             return StringLiterals.Profile.doneSave
         case .locationChanged:
             return StringLiterals.SpotList.locationChangedToast
+        case .canChangeLocalVerification:
+            return StringLiterals.LocalVerification.canChangeLocalVerification
         }
     }
     
@@ -39,6 +43,8 @@ extension ACToastType {
         switch self {
         case .profileSaved, .locationChanged:
             return .t4R
+        case .canChangeLocalVerification:
+            return .b1R
         }
     }
     
@@ -48,6 +54,8 @@ extension ACToastType {
             return GlassBorderAttributes(width: 1, cornerRadius: 20, glassmorphismType: .buttonGlassDefault)
         case .profileSaved:
             return GlassBorderAttributes(width: 1, cornerRadius: 8, glassmorphismType: .buttonGlassDefault)
+        case .canChangeLocalVerification:
+            return GlassBorderAttributes(width: 1, cornerRadius: 20, glassmorphismType: .buttonGlassPressed)
         }
     }
     
@@ -57,6 +65,8 @@ extension ACToastType {
             return 56
         case .locationChanged:
             return 48
+        case .canChangeLocalVerification:
+            return 40
         }
     }
     
