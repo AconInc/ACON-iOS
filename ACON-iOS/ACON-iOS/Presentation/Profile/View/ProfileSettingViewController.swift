@@ -26,6 +26,7 @@ final class ProfileSettingViewController: BaseNavViewController {
 
         registerCell()
         setDelegate()
+        bindViewModel()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -69,16 +70,13 @@ extension ProfileSettingViewController {
     
     func bindViewModel() {
         viewModel.onPostLogoutSuccess.bind { [weak self] onSuccess in
-            guard let self = self,
-                  let onSuccess = onSuccess
-            else { return }
-            
+            guard let onSuccess = onSuccess else { return }
             if onSuccess {
                 NavigationUtils.navigateToSplash()
             } else {
-                self.showServerErrorAlert()
+                self?.showServerErrorAlert()
             }
-            viewModel.onPostLogoutSuccess.value = nil
+            self?.viewModel.onPostLogoutSuccess.value = nil
         }
     }
     
