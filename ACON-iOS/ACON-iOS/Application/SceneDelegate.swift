@@ -85,6 +85,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         BranchScene.shared().scene(scene, continue: userActivity)
+
+        // NOTE: scene이 딥링크 클로저보다 먼저 불리기때문에 0.5초 지연
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DeepLinkManager.shared.presentSpotDetail()
+        }
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

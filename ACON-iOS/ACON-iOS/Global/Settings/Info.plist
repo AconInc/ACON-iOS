@@ -5,9 +5,9 @@
 	<key>branch_key</key>
 	<dict>
 		<key>test</key>
-		<string>key_test_cswnDh0jUQf5FoYowQpcLdfoFucIFxHy</string>
+		<string>${BRANCH_TEST_KEY}</string>
 		<key>live</key>
-		<string>key_live_cDCiDd2bLNg1qe2kxMieVkhgFAcVwsJm</string>
+		<string>${BRANCH_LIVE_KEY}</string>
 	</dict>
 	<key>branch_universal_link_domains</key>
 	<array>

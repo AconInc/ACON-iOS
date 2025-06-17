@@ -36,7 +36,12 @@ class SplashViewController: BaseViewController {
         playSplashAnimation()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.goToNextVC()
+            if let spotID = DeepLinkManager.shared.getSpotID() {
+                self.goToSpotDetailVC(with: spotID)
+                DeepLinkManager.shared.deepLinkParams = nil
+            } else {
+                self.goToNextVC()
+            }
         }
     }
     
@@ -65,8 +70,7 @@ class SplashViewController: BaseViewController {
 // MARK: - GoToLoginVC
 
 private extension SplashViewController {
-    
-    @objc
+
     func goToNextVC() {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         
@@ -98,7 +102,22 @@ private extension SplashViewController {
         
         sceneDelegate?.window?.rootViewController = rootVC
     }
-    
+
+    func goToSpotDetailVC(with spotID: Int64) {
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+
+        let tabBarController = ACTabBarController()
+        sceneDelegate?.window?.rootViewController = tabBarController
+        sceneDelegate?.window?.makeKeyAndVisible()
+
+        if let spotListVC = tabBarController.selectedViewController as? UINavigationController {
+            let spotDetailVC = SpotDetailViewController(spotID)
+            spotListVC.pushViewController(spotDetailVC, animated: true)
+        } else {
+            print("❗️Selected view controller is not a navigation controller.")
+        }
+    }
+
 }
 
 
