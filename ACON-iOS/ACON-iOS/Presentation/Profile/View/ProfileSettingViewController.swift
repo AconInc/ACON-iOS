@@ -74,7 +74,10 @@ extension ProfileSettingViewController {
             if onSuccess {
                 NavigationUtils.navigateToSplash()
             } else {
-                self?.showServerErrorAlert()
+                self?.showServerErrorAlert {
+                    AuthManager.shared.removeToken()
+                    NavigationUtils.navigateToSplash()
+                }
             }
             self?.viewModel.onPostLogoutSuccess.value = nil
         }

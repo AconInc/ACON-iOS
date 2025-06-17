@@ -22,6 +22,11 @@ final class AuthManager {
             UserDefaults.standard.bool(forKey: StringLiterals.UserDefaults.hasVerifiedArea)
         }
     }
+    
+    func removeToken() {
+        UserDefaults.standard.removeObject(forKey: StringLiterals.UserDefaults.accessToken)
+        UserDefaults.standard.removeObject(forKey: StringLiterals.UserDefaults.refreshToken)
+    }
 
     func handleTokenRefresh() async throws -> Bool {
         let refreshToken = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.refreshToken) ?? ""
@@ -33,6 +38,11 @@ final class AuthManager {
                     UserDefaults.standard.set(data.accessToken, forKey: StringLiterals.UserDefaults.accessToken)
                     UserDefaults.standard.set(data.refreshToken, forKey: StringLiterals.UserDefaults.refreshToken)
                     continuation.resume(returning: true)
+                case .requestErr(let error):
+                    if error.code == 40088 {
+                        self.removeToken()
+                        NavigationUtils.navigateToSplash()
+                    }
                 default:
                     continuation.resume(returning: false)
                 }
