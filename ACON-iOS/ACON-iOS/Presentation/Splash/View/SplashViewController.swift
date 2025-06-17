@@ -103,6 +103,7 @@ private extension SplashViewController {
         sceneDelegate?.window?.rootViewController = rootVC
     }
 
+    // NOTE: 딥링크 진입 시 호출
     func goToSpotDetailVC(with spotID: Int64) {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
 
