@@ -401,7 +401,7 @@ enum StringLiterals {
         
         static let latestVersion = "최신버전"
         
-        static let needUpdate = "업데이트하러 가기"
+        static let needUpdate = "업데이트 하기"
         
     }
     
