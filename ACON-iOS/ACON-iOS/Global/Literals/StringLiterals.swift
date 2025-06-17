@@ -453,4 +453,22 @@ enum StringLiterals {
 
     }
 
+    enum DeepLink {
+        
+        static let atAcon = "💌 Acon에서 "
+        
+        static let checkOut = " 확인해 보세요."
+        
+        static let deepLinkTitleAcon = "[Acon]"
+        
+        static let deepLinkDescription = "앱에서 가게 정보를 확인해보세요!"
+        
+        static let branchLinkChannel = "share"
+        
+        static let branchLinkFeature = "spot_detail_share"
+        
+        static let branchDeepLinkPathParamName = "$deeplink_path"
+        
+    }
+
 }

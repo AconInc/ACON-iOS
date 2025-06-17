@@ -36,7 +36,12 @@ class SplashViewController: BaseViewController {
         playSplashAnimation()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.goToNextVC()
+            if let spotID = DeepLinkManager.shared.getSpotID() {
+                self.goToSpotDetailVC(with: spotID)
+                DeepLinkManager.shared.deepLinkParams = nil
+            } else {
+                self.goToNextVC()
+            }
         }
     }
     
@@ -65,8 +70,7 @@ class SplashViewController: BaseViewController {
 // MARK: - GoToLoginVC
 
 private extension SplashViewController {
-    
-    @objc
+
     func goToNextVC() {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         
@@ -98,7 +102,32 @@ private extension SplashViewController {
         
         sceneDelegate?.window?.rootViewController = rootVC
     }
-    
+
+    // NOTE: 딥링크 진입 시 호출
+    func goToSpotDetailVC(with spotID: Int64) {
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+
+        let rootVC: UIViewController = {
+            // NOTE: 자동로그인O && 지역인증X -> rootVC = 지역인증VC
+            if AuthManager.shared.hasToken && !AuthManager.shared.hasVerifiedArea {
+                let vm = LocalVerificationViewModel(flowType: .onboarding)
+                return UINavigationController(
+                    rootViewController: LocalVerificationViewController(viewModel: vm)
+                )
+            } else {
+                // NOTE: 그 외 -> rootVC = TabBar
+                return ACTabBarController()
+            }
+        }()
+
+        sceneDelegate?.window?.rootViewController = rootVC
+        sceneDelegate?.window?.makeKeyAndVisible()
+
+        let spotDetailVC = SpotDetailViewController(spotID, isDeepLink: true)
+        spotDetailVC.modalPresentationStyle = .fullScreen
+        rootVC.present(spotDetailVC, animated: true)
+    }
+
 }
 
 

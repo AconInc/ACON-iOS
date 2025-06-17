@@ -1,45 +1,57 @@
 //
-//  tp.swift
+//  OnboardingTargetType.swift
 //  ACON-iOS
 //
-//  Created by Jaehyun Ahn on 1/20/25.
+//  Created by 이수민 on 6/16/25.
 //
 
 import Foundation
+
 import Moya
 
 enum OnboardingTargetType {
     
-    case postOnboarding(requestBody: OnboardingRequest)
+    case putOnboarding(_ requestBody: PutOnboardingRequest)
     
 }
 
-
 extension OnboardingTargetType: TargetType {
-    
-    var path: String {
+
+    var method: Moya.Method {
         switch self {
-        case .postOnboarding:
-            return utilPath + "members/preference"
+        case .putOnboarding:
+            return .put
         }
     }
     
-    var method: Moya.Method {
+    var path: String {
         switch self {
-        case .postOnboarding:
-            return .put
+        case .putOnboarding:
+            return utilPath + "preference"
+        }
+    }
+    
+    var parameter: [String : Any]?  {
+        switch self {
+        case .putOnboarding:
+            return .none
         }
     }
     
     var task: Task {
         switch self {
-        case .postOnboarding(let data):
-            return .requestJSONEncodable(data)
+        case .putOnboarding(let requestBody):
+            return .requestJSONEncodable(requestBody)
         }
     }
     
-    var headers: [String: String]? {
-        let headers = HeaderType.headerWithToken()
+    var headers: [String : String]? {
+        var headers = HeaderType.noHeader
+        switch self {
+        case .putOnboarding:
+            headers = HeaderType.headerWithToken()
+        }
         return headers
     }
+    
 }

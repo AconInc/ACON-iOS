@@ -22,9 +22,9 @@ class OnboardingViewController: BaseViewController {
     
     // MARK: - Properties
     
-    private let flowType: OnboardingFlowType
+    private let onboardingViewModel = OnboardingViewModel()
     
-    let categories = ["새우", "게", "조개", "굴", "회", "생선", "해산물", "육회/육사시미", "선지", "순대", "곱창/대창/막창", "닭발", "닭똥집", "양고기", "돼지/소 특수부위", "채소"]
+    private let flowType: OnboardingFlowType
     
     let selectedFood: ObservablePattern<[String]> = ObservablePattern(nil)
     
@@ -48,6 +48,7 @@ class OnboardingViewController: BaseViewController {
         setDelegate()
         addTarget()
         bindSelectedFood()
+        bindViewModel()
     }
     
     override func setHierarchy() {
@@ -116,6 +117,26 @@ class OnboardingViewController: BaseViewController {
 }
 
 
+// MARK: - Bind VM
+
+private extension OnboardingViewController {
+    
+    func bindViewModel() {
+        onboardingViewModel.onPutOnboardingSuccess.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
+            if onSuccess {
+                NavigationUtils.navigateToTabBar()
+            } else {
+                self.showServerErrorAlert()
+            }
+            onboardingViewModel.onPutOnboardingSuccess.value = nil
+        }
+    }
+    
+}
+
+
 // MARK: - CollectionView Setting Methods
 
 private extension OnboardingViewController {
@@ -151,21 +172,21 @@ extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
                         let seafoodIndexPath = IndexPath(item: i, section: indexPath.section)
                         if let otherCell = collectionView.cellForItem(at: seafoodIndexPath) as? DislikeFoodCollectionViewCell, !otherCell.isChipSelected {
                             otherCell.isChipSelected = true
-                            if !(selectedFood.value?.contains(categories[indexPath.item]) ?? false) {
-                                selectedFood.value?.append(categories[i])
+                            if !(selectedFood.value?.contains(DislikeFood.engValue[indexPath.item]) ?? false) {
+                                selectedFood.value?.append(DislikeFood.engValue[i])
                             }
                         }
                     }
                 }
-                if !(selectedFood.value?.contains(categories[indexPath.item]) ?? false) {
+                if !(selectedFood.value?.contains(DislikeFood.engValue[indexPath.item]) ?? false) {
                     if selectedFood.value == nil {
                         selectedFood.value = []
                         onboardingView.noDislikeFoodButton.updateGlassButtonState(state: .disabled)
                     }
-                    selectedFood.value?.append(categories[indexPath.item])
+                    selectedFood.value?.append(DislikeFood.engValue[indexPath.item])
                 }
             } else {
-                if let index = selectedFood.value?.firstIndex(of: categories[indexPath.item]) {
+                if let index = selectedFood.value?.firstIndex(of: DislikeFood.engValue[indexPath.item]) {
                     selectedFood.value?.remove(at: index)
                     if selectedFood.value == [] {
                         selectedFood.value = nil
@@ -184,11 +205,11 @@ extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
 extension OnboardingViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.categories.count
+        return DislikeFood.korValue.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let data = categories[indexPath.item]
+        let data = DislikeFood.korValue[indexPath.item]
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DislikeFoodCollectionViewCell.cellIdentifier, for: indexPath) as? DislikeFoodCollectionViewCell else {
             return UICollectionViewCell() }
         cell.bindData(data, indexPath.item)
@@ -218,9 +239,8 @@ private extension OnboardingViewController {
     
     @objc
     func startButtonTapped() {
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = ACTabBarController()
-        }
+        guard let dislikeFoodList = selectedFood.value else { return }
+        onboardingViewModel.putOnboarding(dislikeFoodList)
     }
     
     @objc

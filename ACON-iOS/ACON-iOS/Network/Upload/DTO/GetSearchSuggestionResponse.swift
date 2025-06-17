@@ -17,6 +17,6 @@ struct SearchSuggestionKeyword: Codable {
     
     let spotId: Int64
     
-    let spotName: String
+    let name: String
     
 }

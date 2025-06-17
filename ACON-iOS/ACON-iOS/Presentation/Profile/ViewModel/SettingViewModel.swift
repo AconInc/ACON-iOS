@@ -9,32 +9,31 @@ import UIKit
 
 final class SettingViewModel: Serviceable {
 
-    func logout() {
+    var onPostLogoutSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
+    
+    func postLogout() {
         let refreshToken = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.refreshToken) ?? ""
         ACService.shared.authService.postLogout(
             PostLogoutRequest(refreshToken: refreshToken)) { result in
                 switch result {
                 case .success:
-                    print("⚙️Successfully logged out")
                     for key in UserDefaults.standard.dictionaryRepresentation().keys {
                         UserDefaults.standard.removeObject(forKey: key.description)
                     }
                     AmplitudeManager.shared.reset()
-                    self.navigateToSplash()
+                    self.onPostLogoutSuccess.value = true
                 case .reIssueJWT:
                     self.handleReissue { [weak self] in
-                        self?.logout()
+                        self?.postLogout()
+                    }
+                case .networkFail:
+                    self.handleNetworkError { [weak self] in
+                        self?.postLogout()
                     }
                 default:
-                    print("⚙️Logout Failed")
+                    self.onPostLogoutSuccess.value = false
                 }
         }
     }
-
-    private func navigateToSplash() {
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = SplashViewController()
-        }
-    }
-
+    
 }

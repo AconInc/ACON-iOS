@@ -17,10 +17,4 @@ class ACAlertActionType {
         UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
     }
     
-    static let goToTabBar = {
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = ACTabBarController()
-        }
-    }
-    
 }

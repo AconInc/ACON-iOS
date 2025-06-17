@@ -34,28 +34,13 @@ final class ProfileViewModel: Serviceable {
             profileImage: "",
             nickname: "",
             birthDate: nil,
-            savedSpotList: [],
-            verifiedAreaList: [VerifiedAreaModel(id: 1, name: "")],
-            possessingAcorns: 0
+            savedSpotList: []
     )
 
     let maxNicknameLength: Int = 14
 
     var savedSpotList: [SavedSpotModel] = []
     
-    // TODO: - 🍉 삭제
-    let networkDebouncer = ACDebouncer(delay: 0.5)
-    var profileDummy = UserInfoModel(
-        profileImage: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg",
-        nickname: "유림",
-        birthDate: nil,
-        savedSpotList: [],
-        verifiedAreaList: [VerifiedAreaModel(id: 1, name: "ㄹㄹㄹ")],
-        possessingAcorns: 0
-)
-    var savedSpotDummy = [SavedSpotModel(id: 1, name: "식당이름딱아홉글자", image: nil),
-                          SavedSpotModel(id: 2, name: "엽떡에허니콤보치즈추가", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 3, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 4, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 5, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 6, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg"), SavedSpotModel(id: 7, name: "커비카페", image: "https://cdn.kmecnews.co.kr/news/photo/202311/32217_20955_828.jpg") ]
-
     
     // MARK: - Methods
 
@@ -64,72 +49,61 @@ final class ProfileViewModel: Serviceable {
         userInfo.birthDate = birthDate
     }
 
-
+    
     // MARK: - Networking
 
     func getProfile() {
-        // TODO: 삭제
-        networkDebouncer.call { [weak self] in
-            guard let self = self else { return }
-            profileDummy.savedSpotList = savedSpotDummy
-            userInfo = profileDummy
-            onGetProfileSuccess.value = true
-            return
-        }
-        
         ACService.shared.profileService.getProfile { [weak self] response in
             guard let self = self else { return }
 
             switch response {
             case .success(let data):
                 let newUserInfo = UserInfoModel(
-                    profileImage: data.image,
+                    profileImage: data.profileImage,
                     nickname: data.nickname,
                     birthDate: data.birthDate,
-                    // 🍉 TODO: data.로 바꾸기
-                    savedSpotList: savedSpotDummy)
+                    savedSpotList: data.savedSpotList.map {
+                        SavedSpotModel(id: $0.spotId,
+                                       name: $0.name,
+                                       image: $0.image)
+                    })
                 userInfo = newUserInfo
                 onGetProfileSuccess.value = true
             case .reIssueJWT:
-                self.handleReissue {
-                    self.getProfile()
+                self.handleReissue { [weak self] in
+                    self?.getProfile()
                 }
             default:
-                onGetProfileSuccess.value = false
+                self.handleNetworkError { [weak self] in
+                    self?.getProfile()
+                }
             }
         }
     }
     
     func getSavedSpots() {
-        // TODO: 삭제
-        savedSpotList = savedSpotDummy
-        onGetSavedSpotsSuccess.value = true
-        return
-        
-        // TODO: 주석 해제
-//        ACService.shared.profileService.getSavedSpots { [weak self] response in
-//            guard let self = self else { return }
-//
-//            switch response {
-//            case .success(let data):
-//                let newSavedSpotList: [SavedSpotModel] = data.savedSpotList.map {
-//                    SavedSpotModel(id: $0.id,
-//                                   name: $0.name,
-//                                   image: $0.image)
-//                }
-//                savedSpotList = newSavedSpotList
-//                onGetSavedSpotsSuccess.value = true
-//            case .reIssueJWT:
-//                self.handleReissue {
-//                    self.getSavedSpots()
-//                }
-//            default:
-////                onGetSavedSpotsSuccess.value = false
-//                // 🍉 TODO: 삭제
-//                savedSpotList = savedSpotDummy
-//                onGetSavedSpotsSuccess.value = true
-//            }
-//        }
+        ACService.shared.profileService.getSavedSpots { [weak self] response in
+            guard let self = self else { return }
+
+            switch response {
+            case .success(let data):
+                let newSavedSpotList: [SavedSpotModel] = data.savedSpotList.map {
+                    SavedSpotModel(id: $0.spotId,
+                                   name: $0.name,
+                                   image: $0.image)
+                }
+                savedSpotList = newSavedSpotList
+                onGetSavedSpotsSuccess.value = true
+            case .reIssueJWT:
+                self.handleReissue { [weak self] in
+                    self?.getSavedSpots()
+                }
+            default:
+                self.handleNetworkError { [weak self] in
+                    self?.getSavedSpots()
+                }
+            }
+        }
     }
 
     func getNicknameValidity(nickname: String) {
@@ -144,17 +118,20 @@ final class ProfileViewModel: Serviceable {
                     self?.getNicknameValidity(nickname: nickname)
                 }
             case .requestErr(let error):
-                print("🥑nickname requestErr: \(error)")
                 if error.code == 40901 {
                     self?.nicknameValidityMessageType = .nicknameTaken
                 } else if error.code == 40051 {
                     self?.nicknameValidityMessageType = .invalidChar
+                } else {
+                    self?.handleNetworkError { [weak self] in
+                        self?.getNicknameValidity(nickname: nickname)
+                    }
                 }
                 self?.onGetNicknameValiditySuccess.value = false
             default:
-                print("🥑 VM - Fail to getNicknameValidity")
-                self?.onGetNicknameValiditySuccess.value = false
-                return
+                self?.handleNetworkError { [weak self] in
+                    self?.getNicknameValidity(nickname: nickname)
+                }
             }
         }
     }
@@ -176,18 +153,29 @@ final class ProfileViewModel: Serviceable {
                     self.getProfilePresignedURL()
                 }
             default:
-                onSuccessGetPresignedURL.value = false
+                self.handleNetworkError {
+                    self.getProfilePresignedURL()
+                }
             }
         }
     }
 
     func putProfileImageToPresignedURL(imageData: Data) {
-        ACService.shared.imageService.putImageToPresignedURL(requestBody: PutImageToPresignedURLRequest(presignedURL: presignedURLInfo.presignedURL, imageData: imageData)) { [weak self] isSuccess in
+        ACService.shared.imageService.putImageToPresignedURL(requestBody: PutImageToPresignedURLRequest(presignedURL: presignedURLInfo.presignedURL, imageData: imageData)) { [weak self] response in
+            
             guard let self = self else { return }
-            if isSuccess {
+            
+            switch response {
+            case .success(let data):
                 onSuccessPutProfileImageToPresignedURL.value = true
-            } else {
-                onSuccessPutProfileImageToPresignedURL.value = false
+            case .reIssueJWT:
+                self.handleReissue {
+                    self.putProfileImageToPresignedURL(imageData: imageData)
+                }
+            default:
+                self.handleNetworkError {
+                    self.putProfileImageToPresignedURL(imageData: imageData)
+                }
             }
         }
     }
@@ -209,8 +197,9 @@ final class ProfileViewModel: Serviceable {
                     self.patchProfile()
                 }
             default:
-                onPatchProfileSuccess.value = false
-                return
+                self.handleNetworkError {
+                    self.patchProfile()
+                }
             }
         }
     }

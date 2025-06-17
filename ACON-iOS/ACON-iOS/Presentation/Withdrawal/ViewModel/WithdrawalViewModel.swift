@@ -14,7 +14,7 @@ final class WithdrawalViewModel: Serviceable {
     var shouldDismissKeyboard: ObservablePattern<Bool> = ObservablePattern(false)
     var ectOption: ObservablePattern<Bool> = ObservablePattern(false)
     
-    let onSuccessWithdrawal: ObservablePattern<Bool> = ObservablePattern(nil)
+    let onSuccessPostWithdrawal: ObservablePattern<Bool> = ObservablePattern(nil)
     
     func updateSelectedOption(_ option: String?) {
         selectedOption.value = option
@@ -41,13 +41,10 @@ final class WithdrawalViewModel: Serviceable {
         }
     }
     
-    func withdrawalAPI() {
+    func postWithdrawal() {
         let refreshToken = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.refreshToken) ?? ""
         
-        guard let reasonText = selectedOption.value else {
-            print("⚠️")
-            return
-        }
+        guard let reasonText = selectedOption.value else { return }
 
         ACService.shared.withdrawalService.postWithdrawal(
             WithdrawalRequest(reason: reasonText, refreshToken: refreshToken)) { result in
@@ -56,13 +53,17 @@ final class WithdrawalViewModel: Serviceable {
                 for key in UserDefaults.standard.dictionaryRepresentation().keys {
                     UserDefaults.standard.removeObject(forKey: key.description)
                 }
-                self.onSuccessWithdrawal.value = true
+                self.onSuccessPostWithdrawal.value = true
             case .reIssueJWT:
                 self.handleReissue { [weak self] in
-                    self?.withdrawalAPI()
+                    self?.postWithdrawal()
+                }
+            case .networkFail:
+                self.handleNetworkError { [weak self] in
+                    self?.postWithdrawal()
                 }
             default:
-                self.onSuccessWithdrawal.value = false
+                self.onSuccessPostWithdrawal.value = false
             }
         }
     }

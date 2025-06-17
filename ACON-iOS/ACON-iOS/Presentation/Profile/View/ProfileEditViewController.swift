@@ -201,12 +201,8 @@ private extension ProfileEditViewController {
             if onSuccess, !isDefaultImage {
                 if let imageData: Data = profileImage.jpegData(compressionQuality: 0.5) {
                     viewModel.putProfileImageToPresignedURL(imageData: imageData)
-                } else {
-                    self.showDefaultAlert(title: "이미지 업로드 실패", message: "이미지 업로드에 실패하였습니다.")
                 }
                 viewModel.onSuccessGetPresignedURL.value = nil
-            } else {
-                self.showDefaultAlert(title: "이미지 업로드 실패", message: "이미지 업로드에 실패하였습니다.")
             }
         }
 
@@ -215,8 +211,6 @@ private extension ProfileEditViewController {
                   let onSuccess = onSuccess else { return }
             if onSuccess {
                 viewModel.patchProfile()
-            } else {
-                self.showDefaultAlert(title: "이미지 업로드 실패", message: "이미지 업로드에 실패하였습니다.")
             }
             viewModel.onSuccessPutProfileImageToPresignedURL.value = nil
         }
@@ -231,8 +225,6 @@ private extension ProfileEditViewController {
                                            bottomInset: 93,
                                            duration: 1)
                 }
-            } else {
-                self.showDefaultAlert(title: "프로필 수정 실패", message: "프로필 수정에 실패하였습니다.")
             }
             viewModel.onPatchProfileSuccess.value = nil
         }

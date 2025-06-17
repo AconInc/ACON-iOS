@@ -11,26 +11,27 @@ import Moya
 
 protocol LocalVerificationServiceProtocol {
     
-    func postLocalArea(requestBody: PostLocalAreaRequest, completion: @escaping (NetworkResult<PostLocalAreaResponse>) -> Void)
+    func postLocalArea(requestBody: PostLocalAreaRequest, completion: @escaping (NetworkResult<EmptyResponse>) -> Void)
     
     func getVerifiedAreaList(completion: @escaping (NetworkResult<GetVerifiedAreaListResponse>) -> Void)
     
     func deleteVerifiedArea(verifiedAreaID: String,
                             completion: @escaping (NetworkResult<EmptyResponse>) -> Void)
     
+    func postReplaceVerifiedArea(requestBody: PostReplaceVerifiedAreaRequest, completion: @escaping (NetworkResult<EmptyResponse>) -> Void)
 }
 
 final class LocalVerificationService: BaseService<LocalVerificationTargetType>, LocalVerificationServiceProtocol {
 
     func postLocalArea(requestBody: PostLocalAreaRequest,
-                       completion: @escaping (NetworkResult<PostLocalAreaResponse>) -> Void) {
+                       completion: @escaping (NetworkResult<EmptyResponse>) -> Void) {
         self.provider.request(.postLocalArea(requestBody)) { result in
             switch result {
             case .success(let response):
-                let networkResult: NetworkResult<PostLocalAreaResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: PostLocalAreaResponse.self)
+                let networkResult: NetworkResult<EmptyResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: EmptyResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -45,8 +46,8 @@ final class LocalVerificationService: BaseService<LocalVerificationTargetType>, 
                     type: GetVerifiedAreaListResponse.self
                 )
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -62,10 +63,26 @@ final class LocalVerificationService: BaseService<LocalVerificationTargetType>, 
                     type: EmptyResponse.self
                 )
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
     
+    func postReplaceVerifiedArea(requestBody: PostReplaceVerifiedAreaRequest, completion: @escaping (NetworkResult<EmptyResponse>) -> Void) {
+        self.provider.request(.postReplaceLocalArea(requestBody)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<EmptyResponse> = self.judgeStatus(
+                    statusCode: response.statusCode,
+                    data: response.data,
+                    type: EmptyResponse.self
+                )
+                completion(networkResult)
+            case .failure:
+                completion(.networkFail)
+            }
+        }
+    }
+
 }

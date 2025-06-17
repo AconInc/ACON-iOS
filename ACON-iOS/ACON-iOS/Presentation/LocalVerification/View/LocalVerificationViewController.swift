@@ -18,6 +18,7 @@ class LocalVerificationViewController: BaseViewController {
     
     private let localVerificationViewModel: LocalVerificationViewModel
     
+    
     // MARK: - LifeCycle
     
     init(viewModel: LocalVerificationViewModel) {
@@ -86,10 +87,7 @@ private extension LocalVerificationViewController {
                         })
                     default:
                         self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "홈으로 이동", completion: {
-                            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                                sceneDelegate.window?.rootViewController = ACTabBarController()
-                            }
-                        })
+                            NavigationUtils.navigateToTabBar()})
                     }
                 }
             } else {

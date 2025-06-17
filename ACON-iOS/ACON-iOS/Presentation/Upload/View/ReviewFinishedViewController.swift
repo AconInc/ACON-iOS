@@ -91,9 +91,7 @@ private extension ReviewFinishedViewController {
     
     @objc
     func closeView() {
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = ACTabBarController()
-        }
+        NavigationUtils.navigateToTabBar()
     }
     
 }

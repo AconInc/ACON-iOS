@@ -64,9 +64,9 @@ class SpotSearchViewModel: Serviceable {
                     self?.getSearchKeyword(keyword: keyword)
                 }
             default:
-                print("VM - Fail to getSearchKeyword")
-                self?.onSuccessGetSearchKeyword.value = false
-                return
+                self?.handleNetworkError { [weak self] in
+                    self?.getSearchKeyword(keyword: keyword)
+                }
             }
         }
     }
@@ -79,7 +79,7 @@ class SpotSearchViewModel: Serviceable {
             case .success(let data):
                 let searchSuggestionData = data.suggestionList.map { suggestion in
                     return SearchSuggestionModel(spotID: suggestion.spotId,
-                                                 spotName: suggestion.spotName)
+                                                 spotName: suggestion.name)
                 }
                 self?.searchSuggestionData.value = searchSuggestionData
                 self?.onSuccessGetSearchSuggestion.value = true
@@ -88,17 +88,20 @@ class SpotSearchViewModel: Serviceable {
                     self?.getSearchSuggestion()
                 }
             case .requestErr(let error):
-                print("🥑getSearchSuggestion requestErr: \(error)")
                 if error.code == 40403 {
                     self?.reviewVerificationErrorType = .unknownSpot
                 } else if error.code == 40405 {
                     self?.reviewVerificationErrorType = .unsupportedRegion
+                } else {
+                    self?.handleNetworkError { [weak self] in
+                        self?.getSearchSuggestion()
+                    }
                 }
                 self?.onSuccessGetSearchSuggestion.value = false
             default:
-                print("VM - Fail to getSearchSuggestion")
-                self?.onSuccessGetSearchSuggestion.value = false
-                return
+                self?.handleNetworkError { [weak self] in
+                    self?.getSearchSuggestion()
+                }
             }
         }
     }
@@ -113,11 +116,14 @@ class SpotSearchViewModel: Serviceable {
                 self?.reviewVerification.value = data.success
                 self?.onSuccessGetReviewVerification.value = true
             case .requestErr(let error):
-                print("🥑get reviewVerification requestErr: \(error)")
                 if error.code == 40403 {
                     self?.reviewVerificationErrorType = .unknownSpot
                 } else if error.code == 40405 {
                     self?.reviewVerificationErrorType = .unsupportedRegion
+                } else {
+                    self?.handleNetworkError { [weak self] in
+                        self?.getReviewVerification(spotId: spotId)
+                    }
                 }
                 self?.onSuccessGetReviewVerification.value = false
             case .reIssueJWT:
@@ -125,9 +131,9 @@ class SpotSearchViewModel: Serviceable {
                     self?.getReviewVerification(spotId: spotId)
                 }
             default:
-                print("VM - Fail to get review verification")
-                self?.onSuccessGetReviewVerification.value = false
-                return
+                self?.handleNetworkError { [weak self] in
+                    self?.getReviewVerification(spotId: spotId)
+                }
             }
         }
     }
