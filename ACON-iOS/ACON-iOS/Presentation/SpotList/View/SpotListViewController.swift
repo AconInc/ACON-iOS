@@ -277,7 +277,6 @@ private extension SpotListViewController {
         present(vc, animated: true)
     }
 
-        
     @objc
     func onRequestToAddButtonTapped() {
         let vc = ACWebViewController(urlString: StringLiterals.WebView.addPlaceLink)
