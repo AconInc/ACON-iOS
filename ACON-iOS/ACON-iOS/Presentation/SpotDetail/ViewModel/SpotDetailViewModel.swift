@@ -37,7 +37,7 @@ class SpotDetailViewModel: Serviceable {
 extension SpotDetailViewModel {
     
     func getSpotDetail() {
-        ACService.shared.spotDetailService.getSpotDetail(spotID: spotID) { [weak self] response in
+        ACService.shared.spotDetailService.getSpotDetail(spotID: spotID, isDeepLink: isDeepLink) { [weak self] response in
             guard let self = self else { return }
             switch response {
             case .success(let data):

@@ -12,6 +12,7 @@ import Moya
 protocol SpotDetailServiceProtocol {
 
     func getSpotDetail(spotID: Int64,
+                       isDeepLink: Bool,
                        completion: @escaping (NetworkResult<GetSpotDetailResponse>) -> Void)
     func getSpotMenu(spotID: Int64,
                      completion: @escaping (NetworkResult<GetSpotMenuResponse>) -> Void)
@@ -29,8 +30,10 @@ protocol SpotDetailServiceProtocol {
 final class SpotDetailService: BaseService<SpotDetailTargetType>,
                                SpotDetailServiceProtocol {
 
-    func getSpotDetail(spotID: Int64, completion: @escaping (NetworkResult<GetSpotDetailResponse>) -> Void) {
-        self.provider.request(.getSpotDetail(spotID: spotID)) { result in
+    func getSpotDetail(spotID: Int64,
+                       isDeepLink: Bool,
+                       completion: @escaping (NetworkResult<GetSpotDetailResponse>) -> Void) {
+        self.provider.request(.getSpotDetail(spotID: spotID, isDeepLink: isDeepLink)) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<GetSpotDetailResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetSpotDetailResponse.self)
