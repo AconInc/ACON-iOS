@@ -35,6 +35,12 @@ final class ProfileSettingViewController: BaseNavViewController {
         self.tabBarController?.tabBar.isHidden = true
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setPopGesture()
+    }
+    
     override func setHierarchy() {
         super.setHierarchy()
 
@@ -61,6 +67,7 @@ final class ProfileSettingViewController: BaseNavViewController {
             $0.sectionHeaderTopPadding = 0
             $0.separatorInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
             $0.separatorStyle = .none
+            $0.isScrollEnabled = false
         }
     }
 

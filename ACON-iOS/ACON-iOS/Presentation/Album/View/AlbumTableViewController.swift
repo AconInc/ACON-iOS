@@ -32,6 +32,12 @@ class AlbumTableViewController: BaseNavViewController {
         albumViewModel.fetchAlbums()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setPopGesture()
+    }
+    
     override func setHierarchy() {
         super.setHierarchy()
         

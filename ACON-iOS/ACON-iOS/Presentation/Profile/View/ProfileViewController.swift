@@ -32,13 +32,6 @@ final class ProfileViewController: BaseNavViewController {
         if AuthManager.shared.hasToken {
             viewModel.getProfile()
         }
-        
-        profileView.googleAdView.layoutSubviews()
-        if let nativeAd = GoogleAdsManager.shared.getNativeAd(.both) {
-            profileView.googleAdView.configure(with: nativeAd)
-        } else {
-            profileView.googleAdView.showSkeleton()
-        }
     }
 
     override func setHierarchy() {

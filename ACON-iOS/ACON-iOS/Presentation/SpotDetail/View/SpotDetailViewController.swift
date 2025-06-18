@@ -66,6 +66,12 @@ class SpotDetailViewController: BaseNavViewController {
         startTime = Date()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setPopGesture()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         timer?.invalidate()
         timer = nil

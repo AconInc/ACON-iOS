@@ -9,6 +9,8 @@ import UIKit
 
 import GoogleMobileAds
 
+// TODO: - !! 이후에도 프로필 Native 광고 사용 안 할 경우 삭제 !!
+
 class ProfileGoogleAdView: BaseView {
     
     // MARK: - UI Properties

@@ -52,7 +52,12 @@ final class SavedSpotsViewController: BaseNavViewController {
             viewModel.getSavedSpots()
             savedSpotCollectionView.startACSkeletonAnimation()
         }
-
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setPopGesture()
     }
 
     
