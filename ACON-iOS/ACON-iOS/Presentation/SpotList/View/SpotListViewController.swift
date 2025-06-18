@@ -515,7 +515,7 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
         if spotList.transportMode == .walking {
             return CGSize(width: SpotListItemSizeType.itemMaxWidth.value,
                           height: SpotListItemSizeType.headerHeight.value)
-        } else if spotList.transportMode == .biking {
+        } else if spotList.transportMode == .biking && !spotList.spotList.isEmpty {
             return CGSize(width: NoMatchingSpotListItemSizeType.itemWidth.value,
                           height: NoMatchingSpotListItemSizeType.withSuggestionHeaderHeight.value)
         } else {

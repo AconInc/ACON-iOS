@@ -17,7 +17,7 @@ enum NoMatchingSpotListItemSizeType {
         case .itemWidth: return 328 * ScreenUtils.widthRatio
         case .itemHeight: return 180
         case .withSuggestionHeaderHeight: return 216 + ScreenUtils.navViewHeight
-        case .noSuggestionHeaderHeight: return 268 + ScreenUtils.navViewHeight
+        case .noSuggestionHeaderHeight: return 270 + ScreenUtils.navViewHeight
         }
     }
 
