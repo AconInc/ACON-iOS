@@ -37,9 +37,7 @@ final class ProfileView: BaseView {
     let savedSpotScrollView = UIScrollView()
         
     let savedSpotStackView = UIStackView()
-    
-    let googleAdView = ProfileGoogleAdView()
-    
+
     
     // MARK: - UI Setting Methods
 
@@ -114,8 +112,7 @@ final class ProfileView: BaseView {
             savedSpotLabel,
             savedSpotButton,
             noSavedSpotsLabel,
-            savedSpotScrollView,
-            googleAdView
+            savedSpotScrollView
         )
         
         savedSpotScrollView.addSubview(savedSpotStackView)
@@ -172,12 +169,7 @@ final class ProfileView: BaseView {
         savedSpotStackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
-        googleAdView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(431*ScreenUtils.heightRatio)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
-            $0.height.equalTo(140*ScreenUtils.heightRatio)
-        }
+
     }
 
 }
@@ -199,14 +191,6 @@ extension ProfileView {
     }
     
     func setSavedSpotUI(_ hasSavedSpot: Bool) {
-        googleAdView.snp.updateConstraints {
-            if hasSavedSpot {
-                $0.top.equalToSuperview().offset(423*ScreenUtils.heightRatio)
-            } else {
-                $0.top.equalToSuperview().offset(234*ScreenUtils.heightRatio)
-            }
-        }
-        
         noSavedSpotsLabel.isHidden = hasSavedSpot
         [savedSpotButton, savedSpotScrollView].forEach {
             $0.isHidden = !hasSavedSpot

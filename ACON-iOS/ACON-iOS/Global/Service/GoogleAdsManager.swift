@@ -39,7 +39,8 @@ final class GoogleAdsManager: NSObject {
         periodicNetworkCheck()
         
         preloadNativeAd(.imageOnly)
-        preloadNativeAd(.both)
+        // TODO: - ! 프로필 광고 (이미지 & 영상) 다시 사용할 경우 주석 해제
+//        preloadNativeAd(.both)
     }
     
     func getNativeAd(_ adType: GoogleAdsType) -> NativeAd? {
