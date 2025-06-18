@@ -123,7 +123,7 @@ private extension SpotSearchViewController {
         self.spotSearchViewModel.onSuccessGetSearchSuggestion.bind { [weak self] onSuccess in
             guard let onSuccess else { return }
             if onSuccess {
-                guard let data = self?.spotSearchViewModel.searchSuggestionData.value else { return }
+                guard (self?.spotSearchViewModel.searchSuggestionData.value) != nil else { return }
                 self?.spotSearchView.searchSuggestionCollectionView.reloadData()
             } else {
                 let errorType = self?.spotSearchViewModel.reviewVerificationErrorType
