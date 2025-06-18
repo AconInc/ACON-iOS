@@ -30,7 +30,7 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
     private let titleLabel = UILabel()
     private let acornCountButton = UIButton()
     private let tagStackView = UIStackView()
-    private let findCourseButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_10_b1SB))
+    private let findCourseButton = UIButton()
 
     private let cornerRadius: CGFloat = 20
 
@@ -100,15 +100,9 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
         }
 
         findCourseButton.snp.makeConstraints {
-            $0.bottom.trailing.equalToSuperview().inset(edge)
-            $0.width.equalTo(140)
-            $0.height.equalTo(36)
-        }
-
-        findCourseButton.snp.makeConstraints {
-            $0.bottom.trailing.equalToSuperview().inset(edge)
-            $0.width.equalTo(140)
-            $0.height.equalTo(36)
+            $0.bottom.equalToSuperview().inset(edge)
+            $0.horizontalEdges.equalToSuperview().inset(52 * ScreenUtils.widthRatio)
+            $0.height.equalTo(48)
         }
 
         loginLockOverlayView.snp.makeConstraints {
@@ -164,9 +158,7 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
             $0.spacing = 4
         }
 
-        findCourseButton.do {
-            $0.updateGlassButtonState(state: .default)
-        }
+        findCourseButton.setBackgroundImage(.imgFindcourse224, for: .normal)
 
         loginLockOverlayView.do {
             $0.isHidden = true
@@ -187,7 +179,6 @@ class NoMatchingSpotListCollectionViewCell: BaseCollectionViewCell {
         super.layoutSubviews()
 
         glassBgView.refreshBlurEffect()
-        findCourseButton.refreshButtonBlurEffect(.buttonGlassDefault)
     }
 
     private func addTarget() {
