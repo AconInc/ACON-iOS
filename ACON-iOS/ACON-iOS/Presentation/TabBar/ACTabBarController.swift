@@ -125,8 +125,10 @@ extension ACTabBarController: UITabBarControllerDelegate {
                 return false
             }
             let uploadVC = SpotSearchViewController()
-            uploadVC.modalPresentationStyle = .fullScreen
-            present(uploadVC, animated: true)
+            let navController = UINavigationController(rootViewController: uploadVC)
+            navController.modalPresentationStyle = .fullScreen
+            present(navController, animated: true)
+            
             return false
         }
         return true

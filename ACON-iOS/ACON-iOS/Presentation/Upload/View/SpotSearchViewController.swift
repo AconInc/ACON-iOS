@@ -36,7 +36,7 @@ class SpotSearchViewController: BaseNavViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setXButton()
+        self.setXButton(#selector(spotSearchXButtonTapped))
         self.setNextButton()
         self.setCenterTitleLabelStyle(title: StringLiterals.Upload.upload)
         self.rightButton.isEnabled = false
@@ -180,13 +180,17 @@ private extension SpotSearchViewController {
 // MARK: - @objc functions
 
 private extension SpotSearchViewController {
+                    
+    @objc
+    func spotSearchXButtonTapped() {
+        self.navigationController?.dismiss(animated: true)
+    }
     
     @objc
     func nextButtonTapped() {
-        let vc = DropAcornViewController(spotID: selectedSpotID, spotName: selectedSpotName)
-        vc.modalPresentationStyle = .fullScreen
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.placeUpload, properties: ["click_review_next?": true])
-        present(vc, animated: false)
+        let vc = DropAcornViewController(spotID: selectedSpotID, spotName: selectedSpotName)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     @objc

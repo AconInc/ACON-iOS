@@ -47,6 +47,12 @@ class DropAcornViewController: BaseNavViewController {
         bindViewModel()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setPopGesture()
+    }
+    
     override func setHierarchy() {
         super.setHierarchy()
         
