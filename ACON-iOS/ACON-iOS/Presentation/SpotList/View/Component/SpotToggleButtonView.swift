@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SpotToggleButtonView: GlassmorphismView {
+class SpotToggleButtonView: BaseView {
 
     var onTap: (() -> Void)?
 
@@ -25,7 +25,7 @@ class SpotToggleButtonView: GlassmorphismView {
     private let spacing: CGFloat = 28
 
     init() {
-        super.init(.buttonGlassDefault)
+        super.init(frame: .zero)
 
         addTarget()
     }
@@ -75,9 +75,8 @@ class SpotToggleButtonView: GlassmorphismView {
     }
 
     override func setStyle() {
-        super.setStyle()
-
         self.do {
+            $0.backgroundColor = .gray800
             $0.layer.cornerRadius = height / 2
             $0.clipsToBounds = true
         }

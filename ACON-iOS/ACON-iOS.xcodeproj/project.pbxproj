@@ -666,7 +666,6 @@
 				15CD256C2D3D794300320006 /* Component */,
 				1547A6ED2D33850600E96616 /* Cell */,
 				1547A6EA2D337F4100E96616 /* SpotListView.swift */,
-				157135B02DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift */,
 				1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */,
 			);
 			path = View;
@@ -841,6 +840,7 @@
 				157C06202DC5EBB4000B04AF /* SpotTagButton.swift */,
 				1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */,
 				15F45F832D6664C900BD6B9C /* LoginLockOverlayView.swift */,
+				157135B02DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
