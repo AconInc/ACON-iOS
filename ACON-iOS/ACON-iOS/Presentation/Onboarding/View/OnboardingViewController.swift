@@ -112,14 +112,17 @@ class OnboardingViewController: BaseViewController {
                                             color: .gray300)
                     $0.commentLabel.isHidden = false
                     $0.lightImageView.isHidden = false
-                    $0.startButton.updateGlassButtonState(state: .default)
+                    if $0.startButton.buttonState != .default {
+                        $0.startButton.updateGlassButtonState(state: .default)
+                    }
                 }
-
             } else {
                 self.onboardingView.do {
                     $0.commentLabel.isHidden = true
                     $0.lightImageView.isHidden = true
-                    $0.startButton.updateGlassButtonState(state: .disabled)
+                    if $0.startButton.buttonState != .disabled {
+                        $0.startButton.updateGlassButtonState(state: .disabled)
+                    }
                 }
             }
         }
