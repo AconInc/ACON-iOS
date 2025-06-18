@@ -675,8 +675,8 @@
 		1547A6ED2D33850600E96616 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				74403B6C2DEF900B00B7B832 /* SpotListGoogleAdCollectionViewCell.swift */,
 				1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */,
+				74403B6C2DEF900B00B7B832 /* SpotListGoogleAdCollectionViewCell.swift */,
 				15A246192DE7A9E500469272 /* NoMatchingSpotListCollectionViewCell.swift */,
 				15A3F6AB2D37AB7B00577E16 /* SpotListCollectionViewHeader.swift */,
 				1576806D2DFA06A70079B255 /* SpotListSkeletonHeader.swift */,
