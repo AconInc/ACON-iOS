@@ -341,3 +341,28 @@ extension BaseNavViewController {
     }
     
 }
+
+
+// MARK: - popGestrue
+
+extension BaseNavViewController: UIGestureRecognizerDelegate {
+    
+    func setPopGesture() {
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let navigationController = self.navigationController else { return false }
+        return navigationController.viewControllers.count > 1
+    }
+
+    // NOTE: - 다른 제스처와의 동시 인식 허용
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                          shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+}
+
+
