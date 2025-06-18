@@ -328,11 +328,17 @@ extension BaseNavViewController {
     
     // MARK: - X 버튼
     
-    func setXButton() {
+    func setXButton(_ action: Selector? = nil) {
         setButtonStyle(button: leftButton, image: .icDismiss)
+        guard let action else {
+            setButtonAction(button: leftButton,
+                            target: self,
+                            action: #selector(xButtonTapped))
+            return
+        }
         setButtonAction(button: leftButton,
                         target: self,
-                        action: #selector(xButtonTapped))
+                        action: action)
     }
     
     @objc
