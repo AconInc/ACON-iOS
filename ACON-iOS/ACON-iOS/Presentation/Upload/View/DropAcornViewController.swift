@@ -70,7 +70,7 @@ class DropAcornViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
         
-        self.setButtonStyle(button: leftButton, image: .icArrowLeft)
+        self.setButtonStyle(button: leftButton, image: .icLeft)
         self.setButtonAction(button: leftButton, target: self, action: #selector(dropAcornBackButtonTapped))
         self.setCenterTitleLabelStyle(title: StringLiterals.Upload.upload)
         self.dropAcornView.spotNameLabel.setLabel(text: self.spotName.abbreviatedString(20), style: .t3SB, alignment: .center)

@@ -78,7 +78,7 @@ class OnboardingViewController: BaseViewController {
         super.setStyle()
         
         backButton.do {
-            $0.setImage(.icArrowLeft, for: .normal)
+            $0.setImage(.icLeft, for: .normal)
             $0.clipsToBounds = true
             $0.isHidden = flowType == .login ? true : false
         }

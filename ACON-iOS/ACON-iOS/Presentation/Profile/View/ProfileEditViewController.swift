@@ -102,7 +102,7 @@ final class ProfileEditViewController: BaseNavViewController {
         super.setStyle()
 
         self.setCenterTitleLabelStyle(title: StringLiterals.Profile.profileEditPageTitle)
-        self.setButtonStyle(button: leftButton, image: .icArrowLeft)
+        self.setButtonStyle(button: leftButton, image: .icLeft)
         self.setButtonAction(button: leftButton, target: self, action: #selector(profileBackButtonTapped))
     }
 
