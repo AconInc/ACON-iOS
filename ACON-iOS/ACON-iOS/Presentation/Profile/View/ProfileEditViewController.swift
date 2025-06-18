@@ -362,9 +362,11 @@ private extension ProfileEditViewController {
                 let vc = AlbumTableViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }))
-            $0.addAction(UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { _ in
-                self.updateProfileImage(.imgProfileBasic, true)
-            }))
+            if isDefaultImage == false {
+                $0.addAction(UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { _ in
+                    self.updateProfileImage(.imgProfileBasic, true)
+                }))
+            }
             $0.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         }
         present(alertController, animated: true)
