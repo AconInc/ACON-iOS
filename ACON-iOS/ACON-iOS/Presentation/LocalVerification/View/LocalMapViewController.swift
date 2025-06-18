@@ -62,6 +62,14 @@ class LocalMapViewController: BaseNavViewController {
         setPopGesture()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if viewModel.flowType == .onboarding {
+            ACToastController.hide()
+        }
+    }
+    
     override func setHierarchy() {
         super.setHierarchy()
         
