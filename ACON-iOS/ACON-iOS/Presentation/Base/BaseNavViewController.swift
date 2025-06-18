@@ -370,5 +370,3 @@ extension BaseNavViewController: UIGestureRecognizerDelegate {
     }
     
 }
-
-
