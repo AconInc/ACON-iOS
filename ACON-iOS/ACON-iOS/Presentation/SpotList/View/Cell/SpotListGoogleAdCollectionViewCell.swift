@@ -1,5 +1,5 @@
 //
-//  NativeAdCell.swift
+//  SpotListGoogleAdCollectionViewCell.swift
 //  ACON-iOS
 //
 //  Created by 이수민 on 6/4/25.
@@ -175,8 +175,6 @@ extension SpotListGoogleAdCollectionViewCell {
     }
     
     func configure(with nativeAd: NativeAd) {
-        nativeAd.delegate = self
-        
         nativeAdView.isHidden = false
         
         // TODO: 🍇 주석 해제
@@ -213,22 +211,6 @@ extension SpotListGoogleAdCollectionViewCell {
         mediaView.mediaContent = mediaContent
         
         nativeAdView.nativeAd = nativeAd
-    }
-    
-}
-
-
-// MARK: - NativeAdDelegate
-
-extension SpotListGoogleAdCollectionViewCell: NativeAdDelegate {
-    
-    // TODO: - 광고 관련 기록 -> 추후 엠플 사용?
-    func nativeAdDidRecordClick(_ nativeAd: NativeAd) {
-        print("Spotlist 광고 클릭됨")
-    }
-    
-    func nativeAdDidRecordImpression(_ nativeAd: NativeAd) {
-        print("Spotlist 광고 인식됨")
     }
     
 }
