@@ -59,6 +59,12 @@ class PhotoCollectionViewController: BaseNavViewController {
         albumViewModel.resetPhotoPagination()
         self.loadPhotos()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setPopGesture()
+    }
 
     override func setHierarchy() {
         super.setHierarchy()
