@@ -15,7 +15,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
 
     var onZooming: ((Bool) -> Void)?
 
-    private let imageLoadErrorGlassBgView = GlassmorphismView(.noImageErrorGlass)
+    private let imageLoadErrorBgView = UIView()
 
     private let imageView = UIImageView()
 
@@ -30,13 +30,13 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     override func setHierarchy() {
         super.setHierarchy()
 
-        contentView.addSubviews(imageLoadErrorGlassBgView, imageView, imageLoadErrorLabel)
+        contentView.addSubviews(imageLoadErrorBgView, imageView, imageLoadErrorLabel)
     }
 
     override func setLayout() {
         super.setLayout()
 
-        imageLoadErrorGlassBgView.snp.makeConstraints {
+        imageLoadErrorBgView.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.equalTo(imageWidth)
             $0.height.equalTo(imageHeight)
@@ -69,6 +69,12 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.clipsToBounds = true
         }
 
+        imageLoadErrorBgView.do {
+            $0.backgroundColor = .gray900
+            $0.clipsToBounds = true
+            $0.layer.cornerRadius = 4
+        }
+
         imageLoadErrorLabel.do {
             $0.isHidden = true
             $0.setLabel(text: StringLiterals.SpotList.imageLoadingFailed, style: .t5SB, color: .gray50)
@@ -79,14 +85,8 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         super.prepareForReuse()
 
         imageView.image = nil
-        imageLoadErrorGlassBgView.isHidden = true
+        imageLoadErrorBgView.isHidden = true
         imageLoadErrorLabel.isHidden = true
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        imageLoadErrorGlassBgView.refreshBlurEffect()
     }
 
 }
@@ -128,10 +128,10 @@ extension MenuCollectionViewCell {
                 guard let self = self else { return }
                 switch result {
                 case .success:
-                    [imageLoadErrorGlassBgView, imageLoadErrorLabel].forEach { $0.isHidden = true }
+                    [imageLoadErrorBgView, imageLoadErrorLabel].forEach { $0.isHidden = true }
                 case .failure:
                     imageView.image = nil
-                    [imageLoadErrorGlassBgView, imageLoadErrorLabel].forEach { $0.isHidden = false }
+                    [imageLoadErrorBgView, imageLoadErrorLabel].forEach { $0.isHidden = false }
                 }
             }
         )

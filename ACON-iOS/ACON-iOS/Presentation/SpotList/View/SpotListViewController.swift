@@ -62,8 +62,6 @@ class SpotListViewController: BaseNavViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        spotToggleButton.refreshBlurEffect()
-
         for cell in spotListView.collectionView.visibleCells {
             if let cell = cell as? SpotListCollectionViewCell {
                 cell.setNeedsLayout()
