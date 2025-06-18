@@ -56,8 +56,7 @@ class SpotListViewController: BaseNavViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        ACToastController.hide()
-        viewModel.stopPeriodicLocationCheck()
+        stopPeriodicLocationCheck()
     }
 
     override func viewDidLayoutSubviews() {
@@ -138,6 +137,11 @@ class SpotListViewController: BaseNavViewController {
                 presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
             }
         }
+    }
+    
+    private func stopPeriodicLocationCheck() {
+        ACToastController.hide()
+        viewModel.stopPeriodicLocationCheck()
     }
 
 }
@@ -257,14 +261,28 @@ private extension SpotListViewController {
 
     @objc
     func tappedFilterButton() {
+        stopPeriodicLocationCheck()
+        
         guard AuthManager.shared.hasToken else {
-            presentLoginModal(AmplitudeLiterals.EventName.filter)
+            let vc = LoginModalViewController(AmplitudeLiterals.EventName.filter)
+            vc.setSheetLayout(detent: .middle)
+            vc.presentationController?.delegate = self
+            
+            self.present(vc, animated: true)
             return
         }
 
         let vc = SpotListFilterViewController(viewModel: viewModel)
         vc.setSheetLayout(detent: .semiLong)
+        vc.presentationController?.delegate = self
+        
+        present(vc, animated: true)
+    }
 
+        
+    @objc
+    func onRequestToAddButtonTapped() {
+        let vc = ACWebViewController(urlString: StringLiterals.WebView.addPlaceLink)
         present(vc, animated: true)
     }
 
@@ -450,6 +468,7 @@ extension SpotListViewController: UICollectionViewDataSource {
                     fatalError("Cannot dequeue header view")
                 }
                 header.setHeader(spotList.spotList.isEmpty ? .noSuggestion : .withSuggestion)
+                header.requestToAddButton.addTarget(self, action: #selector(onRequestToAddButtonTapped), for: .touchUpInside)
                 return header
             }
         default:
@@ -633,9 +652,9 @@ private extension SpotListViewController {
         let description = spot.isOpen ? StringLiterals.SpotList.businessEnd : StringLiterals.SpotList.businessStart
 
         var tags: [SpotTagType] = []
-        if indexPath.item < 5 { tags.append(SpotTagType.top(number: indexPath.item + 1)) }
         tags.append(contentsOf: spotList.spotList[dataIndex].tagList)
-
+        if indexPath.item < 5 { tags.append(SpotTagType.top(number: indexPath.item + 1)) }
+        
         cell.bind(spot: spot)
         cell.setTags(tags: tags)
         cell.setOpeningTimeView(isOpen: spot.isOpen, time: time, description: description, hasTags: !tags.isEmpty)
@@ -646,4 +665,15 @@ private extension SpotListViewController {
         return cell
     }
 
+}
+
+
+// MARK: - Present된 모달 dismiss 후 돌아오는 타이밍
+
+extension SpotListViewController: UIAdaptivePresentationControllerDelegate {
+    
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        viewModel.startPeriodicLocationCheck()
+    }
+    
 }

@@ -15,7 +15,7 @@ class NoMatchingSpotHeader: UICollectionReusableView {
     private let sorryLabel = UILabel()
 
     private let willSuggestNextTimeLabel = UILabel()
-    private let requestToAddButton = UIButton()
+    let requestToAddButton = UIButton()
 
     private let howAboutTheseLabel = UILabel()
 

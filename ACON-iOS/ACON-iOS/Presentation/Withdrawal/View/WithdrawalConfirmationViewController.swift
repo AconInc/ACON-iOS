@@ -40,7 +40,10 @@ extension WithdrawalConfirmationViewController {
                 NavigationUtils.navigateToSplash()
                 AmplitudeManager.shared.reset()
             } else {
-                self.showServerErrorAlert()
+                self.showServerErrorAlert {
+                    AuthManager.shared.removeToken()
+                    NavigationUtils.navigateToSplash()
+                }
             }
             viewModel?.onSuccessPostWithdrawal.value = nil
         }

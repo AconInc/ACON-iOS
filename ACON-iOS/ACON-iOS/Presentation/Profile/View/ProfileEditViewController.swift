@@ -276,13 +276,12 @@ private extension ProfileEditViewController {
 
             guard isNicknameEntered(text: text) else { return }
 
-            guard isNicknameCharValid(text: text) else { return }
-
             guard text.count < viewModel.maxNicknameLength else {
                 profileEditView.nicknameTextField.text?.removeLast()
                 return
             }
 
+            guard isNicknameCharValid(text: text) else { return }
 
             // MARK: 닉네임 중복 확인 (서버 통신)
 
@@ -551,8 +550,16 @@ private extension ProfileEditViewController {
     }
 
     func isBeforeToday(date: Date) -> Bool {
+        var calendar = Calendar.current
+        if let koreaTimeZone = TimeZone(identifier: "Asia/Seoul") {
+            calendar.timeZone = koreaTimeZone
+        }
+        
         let today = Date()
-        return date < today
+        let dateOnly = calendar.startOfDay(for: date)
+        let todayOnly = calendar.startOfDay(for: today)
+        
+        return dateOnly < todayOnly
     }
 
 }

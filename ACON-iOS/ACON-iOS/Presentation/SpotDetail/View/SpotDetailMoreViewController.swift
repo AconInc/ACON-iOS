@@ -95,7 +95,7 @@ private extension SpotDetailMoreViewController {
 
     @objc
     func tappedInfoErrorButton() {
-        let reportVC = DRWebViewController(urlString: StringLiterals.WebView.spotInfoErrorReportLink)
+        let reportVC = ACWebViewController(urlString: StringLiterals.WebView.spotInfoErrorReportLink)
         self.present(reportVC, animated: true)
     }
 

@@ -9,7 +9,7 @@ import UIKit
 
 import WebKit
 
-final class DRWebViewController: UIViewController {
+final class ACWebViewController: UIViewController {
     
     private var webView: WKWebView?
     
@@ -51,7 +51,7 @@ final class DRWebViewController: UIViewController {
     
 }
 
-extension DRWebViewController: WKNavigationDelegate {
+extension ACWebViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in

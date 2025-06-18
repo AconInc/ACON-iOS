@@ -41,6 +41,10 @@ class OnboardingViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+       
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,6 +93,13 @@ class OnboardingViewController: BaseViewController {
                                              for: .touchUpInside)
         
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
     }
     
     private func bindSelectedFood() {
@@ -126,7 +137,11 @@ private extension OnboardingViewController {
             guard let self = self,
                   let onSuccess = onSuccess else { return }
             if onSuccess {
-                NavigationUtils.navigateToTabBar()
+                if flowType == .login {
+                    NavigationUtils.navigateToTabBar()
+                } else {
+                    NavigationUtils.popToParentVC(from: self, targetVCType: ProfileSettingViewController.self)
+                }
             } else {
                 self.showServerErrorAlert()
             }
@@ -249,6 +264,10 @@ private extension OnboardingViewController {
                             rightAction: backCompletion)
     }
     
+    @objc
+    func appWillEnterForeground() {
+        onboardingView.setNeedsLayout()
+    }
 }
 
 

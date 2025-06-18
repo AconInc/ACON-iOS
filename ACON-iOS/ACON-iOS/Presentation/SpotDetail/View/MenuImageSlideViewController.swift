@@ -23,8 +23,6 @@ class MenuImageSlideViewController: BaseViewController {
     private let imageWidth: CGFloat = 230 * ScreenUtils.widthRatio
     private let imageHeight: CGFloat = 325 * ScreenUtils.heightRatio
 
-    private var hasUpdatedArrowButtons = false
-
     init(_ viewModel: SpotDetailViewModel) {
         self.viewModel = viewModel
 
@@ -37,7 +35,7 @@ class MenuImageSlideViewController: BaseViewController {
 
 
     // MARK: - Life Cycles
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,15 +43,6 @@ class MenuImageSlideViewController: BaseViewController {
         registerCell()
         addTarget()
         bindViewModel()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        if !hasUpdatedArrowButtons {
-            updateArrowButtonsVisibility()
-            hasUpdatedArrowButtons = true
-        }
     }
 
 
@@ -103,7 +92,7 @@ class MenuImageSlideViewController: BaseViewController {
         }
 
         collectionView.do {
-            $0.backgroundColor = .clear
+            $0.backgroundColor = .gray900
             $0.isPagingEnabled = true
         }
 
@@ -112,10 +101,12 @@ class MenuImageSlideViewController: BaseViewController {
         }
 
         leftButton.do {
+            $0.isHidden = true
             $0.setImage(.icLeft, for: .normal)
         }
 
         rightButton.do {
+            $0.isHidden = true
             $0.setImage(.icForward, for: .normal)
         }
     }
@@ -195,7 +186,9 @@ extension MenuImageSlideViewController: UICollectionViewDataSource {
                 self?.updateArrowButtonsVisibility()
             }
         }
-
+        
+        self.updateArrowButtonsVisibility()
+        
         return item
     }
  
@@ -238,8 +231,12 @@ private extension MenuImageSlideViewController {
         let currentIndex = indexPath.item
         let imageURLs = viewModel.menuImageURLs
 
-        leftButton.isHidden = currentIndex == 0
-        rightButton.isHidden = currentIndex == imageURLs.count - 1
+        if imageURLs.count == 1 {
+            hideArrowButtons()
+        } else {
+            leftButton.isHidden = currentIndex == 0
+            rightButton.isHidden = currentIndex == imageURLs.count - 1
+        }
     }
 
     func hideArrowButtons() {

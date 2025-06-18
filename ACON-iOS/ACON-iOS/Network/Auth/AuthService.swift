@@ -30,8 +30,8 @@ final class AuthService: BaseService<AuthTargetType>, AuthServiceProtocol {
             case .success(let response):
                 let networkResult: NetworkResult<PostLoginResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: PostLoginResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -46,8 +46,8 @@ final class AuthService: BaseService<AuthTargetType>, AuthServiceProtocol {
                     type: EmptyResponse.self
                 )
                 completion(networkResult)
-            case .failure(let response):
-                print("⚙️Logout post failed :( \nLogoutResponse: \(response)")
+            case .failure:
+                completion(.networkFail)
             }
         }
     }
@@ -58,8 +58,8 @@ final class AuthService: BaseService<AuthTargetType>, AuthServiceProtocol {
             case .success(let response):
                 let networkResult: NetworkResult<PostReissueResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: PostReissueResponse.self)
                 completion(networkResult)
-            case .failure(let errorResponse):
-                print(errorResponse)
+            case .failure:
+                completion(.networkFail)
             }
         }
     }

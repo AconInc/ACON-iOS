@@ -10,13 +10,13 @@ import UIKit
 enum GlassmorphismType {
     
     case buttonGlassDefault, buttonGlassPressed, buttonGlassSelected, buttonGlassDisabled
-    case bottomSheetGlass, actionSheetGlass, alertGlass, toastGlass, gradientGlass
+    case bottomSheetGlass, actionSheetGlass, alertGlass, textfieldGlass, gradientGlass, toastGlass
     case noImageErrorGlass, needLoginErrorGlass
     case backgroundGlass
     
     var blurIntensity: CGFloat {
         switch self {
-        case .buttonGlassDefault, .buttonGlassPressed, .buttonGlassSelected, .buttonGlassDisabled, .toastGlass, .gradientGlass, .noImageErrorGlass:
+        case .buttonGlassDefault, .buttonGlassPressed, .buttonGlassSelected, .buttonGlassDisabled, .textfieldGlass, .gradientGlass, .noImageErrorGlass, .toastGlass:
             return 0.2
         case .alertGlass, .actionSheetGlass, .needLoginErrorGlass:
             return 0.4
@@ -39,8 +39,10 @@ enum GlassmorphismType {
             return .systemThickMaterialLight
         case .gradientGlass:
             return .systemUltraThinMaterialDark
-        case .toastGlass, .needLoginErrorGlass, .alertGlass, .backgroundGlass, .bottomSheetGlass:
+        case .textfieldGlass, .needLoginErrorGlass, .alertGlass, .backgroundGlass, .bottomSheetGlass:
             return .systemThinMaterialDark
+        case .toastGlass:
+            return .systemThickMaterialDark
         }
     }
     

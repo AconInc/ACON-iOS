@@ -21,4 +21,16 @@ struct NavigationUtils {
         }
     }
 
+    static func popToParentVC(from currentVC: UIViewController, targetVCType: UIViewController.Type) {
+        guard let navigationController = currentVC.navigationController else { return }
+        let vcStack = navigationController.viewControllers
+            
+        for vc in vcStack {
+            if type(of: vc) == targetVCType {
+                navigationController.popToViewController(vc, animated: true)
+                return
+            }
+        }
+    }
+    
 }
