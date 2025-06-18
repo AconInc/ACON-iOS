@@ -190,6 +190,9 @@ extension SpotListViewController {
                     isDataLoading = false
                     endSkeletonAnimation()
                     spotListView.regionErrorView.isHidden = false
+                } else if viewModel.errorType == .needLoginToSeeMore {
+                    AuthManager.shared.removeToken()
+                    self.showNeedLoginAlert()
                 }
                 viewModel.errorType = nil
             }
