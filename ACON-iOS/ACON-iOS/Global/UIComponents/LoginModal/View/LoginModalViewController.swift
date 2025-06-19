@@ -126,13 +126,6 @@ extension LoginModalViewController {
             let hasVerifiedArea = loginViewModel.hasVerifiedArea
             if onSuccess {
                 if hasVerifiedArea {
-                    // TODO: - 왠진 모르겠으나 안 뜸, 기획에 물어보기
-//                    ACToastController.show(
-//                        StringLiterals.LoginModal.successLogin,
-//                        bottomInset: 112,
-//                        delayTime: 1
-//                    ) { return }
-//                    
                     let authStatus = ACLocationManager.shared.locationManager.authorizationStatus
                     if authStatus == .denied || authStatus == .restricted {
                         navigateToLocalVerificationVC()
