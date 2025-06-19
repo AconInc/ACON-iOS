@@ -9,25 +9,6 @@ import UIKit
 
 extension String {
 
-    /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
-    @available(*, deprecated, message: "Acon 2.0부터 더 이상 사용되지 않습니다. 대신 언어별로 kerning이 적용되는 `attributedString(_ style:, _ color:)`를 사용해주세요")
-    func ACStyle(_ style: OldACFontStyleType, _ color: UIColor = .acWhite) -> NSAttributedString {
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: style.font,
-            .kern: style.kerning,
-            .paragraphStyle: {
-                let paragraphStyle = NSMutableParagraphStyle()
-                paragraphStyle.minimumLineHeight = style.lineHeight
-                paragraphStyle.maximumLineHeight = style.lineHeight
-                return paragraphStyle
-            }(),
-            .foregroundColor: color,
-            .baselineOffset: (style.lineHeight - style.font.lineHeight) / 2
-        ]
-        
-        return NSAttributedString(string: self, attributes: attributes)
-    }
-
     /// kerning(한글: -2.5%, 그 외: 0%),  lineHeight, color가 적용된 스트링입니다.
     func attributedString(
         _ style: ACFontType,

@@ -33,6 +33,8 @@ enum Config {
             
             static let GADAdUnitID = "GAD_AD_UNIT_ID"
             
+            static let basicProfileImage = "BASIC_PROFILE_IMAGE"
+            
         }
         
     }
@@ -115,6 +117,13 @@ extension Config {
     static let GADAdUnitIDImageOnly: String = {
         guard let key = Config.infoDictionary[Keys.Plist.GADAdUnitIDImageOnly] as? String else {
             fatalError("GADAddUnitIDImageOnly is not set in plist for this configuration")
+        }
+        return key
+    }()
+    
+    static let basicProfileImage: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.basicProfileImage] as? String else {
+            fatalError("basicProfileImage is not set in plist for this configuration")
         }
         return key
     }()

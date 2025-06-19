@@ -66,7 +66,7 @@ final class ProfileView: BaseView {
             var config = UIButton.Configuration.plain()
             config.contentInsets = .init(top: 15, leading: 0, bottom: 15, trailing: 15)
             config.attributedTitle = AttributedString(StringLiterals.Profile.needLogin.attributedString(.h4SB))
-            config.image = .icArrowRight
+            config.image = .icForward
             config.imagePlacement = .trailing
             config.imagePadding = 2
             config.background.backgroundColor = .gray900

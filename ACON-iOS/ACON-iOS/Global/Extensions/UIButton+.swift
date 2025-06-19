@@ -22,18 +22,6 @@ extension UIButton {
 
     // MARK: - 단일 ACStyle 타이틀 설정
 
-    /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
-    @available(*, deprecated, message: "Acon 2.0부터 더 이상 사용되지 않습니다.")
-    func setAttributedTitle(
-        text: String,
-        style: OldACFontStyleType,
-        color: UIColor = .acWhite,
-        for state: UIControl.State = .normal
-    ) {
-        let attributedString = text.ACStyle(style, color)
-        self.setAttributedTitle(attributedString, for: state)
-    }
-
     func setAttributedTitle(
          text: String,
          style: ACFontType,
@@ -46,38 +34,6 @@ extension UIButton {
 
 
     // MARK: - 복수 ACStyle 타이틀 설정
-
-    /// - Warning: Acon 버전 2.0.0 이후에서 더 이상 사용되지 않으며, 모두 대체되면 삭제될 예정입니다.
-    @available(*, deprecated, message: "Acon 2.0부터 더 이상 사용되지 않습니다.")
-    func setPartialTitle(
-         fullText: String,
-         textStyles: [(text: String, style: OldACFontStyleType, color: UIColor)]
-     ) {
-         let attributedString = NSMutableAttributedString(string: fullText)
-
-         textStyles.forEach { textStyle in
-             if let range = fullText.range(of: textStyle.text) {
-                 let nsRange = NSRange(range, in: fullText)
-                 let attributes: [NSAttributedString.Key: Any] = [
-                     .font: textStyle.style.font,
-                     .kern: textStyle.style.kerning,
-                     .paragraphStyle: {
-                         let paragraphStyle = NSMutableParagraphStyle()
-                         paragraphStyle.minimumLineHeight = textStyle.style.lineHeight
-                         paragraphStyle.maximumLineHeight = textStyle.style.lineHeight
-                         return paragraphStyle
-                     }(),
-                     .foregroundColor: textStyle.color
-                 ]
-
-                 attributes.forEach { key, value in
-                     attributedString.addAttribute(key, value: value, range: nsRange)
-                 }
-             }
-         }
-
-         self.setAttributedTitle(attributedString, for: state)
-     }
 
      func setPartialTitle(
           fullText: String,

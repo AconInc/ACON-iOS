@@ -127,7 +127,7 @@ final class LoginView: BaseView {
             $0.contentHorizontalAlignment = .leading
             $0.layer.cornerRadius = loginButtonHeight / 2
             $0.backgroundColor = .gray100
-            $0.setImage(.icGoogle, for: .normal)
+            $0.setImage(.icGoogleLogo, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.googleLogin,
                                   style: .t4SB,
                                   color: .gray500)
@@ -138,7 +138,7 @@ final class LoginView: BaseView {
             $0.contentHorizontalAlignment = .leading
             $0.layer.cornerRadius = loginButtonHeight / 2
             $0.backgroundColor = .gray700
-            $0.setImage(.icApple, for: .normal)
+            $0.setImage(.icAppleLogo, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
                                   style: .t4SB,
                                   color: .acWhite)

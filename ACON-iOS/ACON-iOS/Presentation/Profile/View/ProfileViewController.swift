@@ -117,7 +117,8 @@ private extension ProfileViewController {
 
     @objc
     func tappedNeedLoginButton() {
-//        presentLoginModal() // TODO: 메소드 수정 고민해보기 (SpotListVC도 로그인 성공했을 때 reloadData 시켜야할 것 같기 때문)
+        presentLoginModal(nil)
+        // TODO: 메소드 수정 고민해보기 (SpotListVC도 로그인 성공했을 때 reloadData 시켜야할 것 같기 때문)
         let vc = LoginModalViewController("profile")
         vc.setSheetLayout(detent: .middle)
         vc.onSuccessLogin = { [weak self] onSuccess in

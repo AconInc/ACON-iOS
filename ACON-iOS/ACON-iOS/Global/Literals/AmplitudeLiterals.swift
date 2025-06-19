@@ -13,10 +13,6 @@ enum AmplitudeLiterals {
         
         static let login = "login"
         
-        static let areaVerified = "area_verified"
-        
-        static let onboarding = "onboarding"
-        
         static let mainMenu = "main_menu"
         
         static let detailPage = "detail_page"
@@ -27,11 +23,13 @@ enum AmplitudeLiterals {
         
         static let filterCafe = "filter_cafe"
         
-        static let placeUpload = "place_upload"
+        static let upload = "upload"
         
         static let serviceWithdraw = "service_withdraw"
         
-        static let serviceLogout = "service_logout"
+        static let logout = "logout"
+        
+        static let guest = "guest"
         
         static let loginInThreeSeconds = "login_in_three_seconds" // TODO: 앰플에 필드 정의 필요
         

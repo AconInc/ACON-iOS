@@ -166,7 +166,7 @@ final class ProfileViewModel: Serviceable {
             guard let self = self else { return }
             
             switch response {
-            case .success(let data):
+            case .success(_):
                 onSuccessPutProfileImageToPresignedURL.value = true
             case .reIssueJWT:
                 self.handleReissue {

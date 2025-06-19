@@ -22,13 +22,16 @@ class LoginModalViewController: BaseViewController {
     
     var onSuccessLogin: ((Bool) -> ())?
     
-    var presentedVCType: String
+    var presentedVCType: String?
     
     
     // MARK: - LifeCycle
     
-    init(_ presentedVCType: String) {
-        self.presentedVCType = presentedVCType
+    init(_ presentedVCType: String?) {
+        if let presentedVCType {
+            self.presentedVCType = presentedVCType
+        }
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -123,13 +126,6 @@ extension LoginModalViewController {
             let hasVerifiedArea = loginViewModel.hasVerifiedArea
             if onSuccess {
                 if hasVerifiedArea {
-                    // TODO: - 왠진 모르겠으나 안 뜸, 기획에 물어보기
-//                    ACToastController.show(
-//                        StringLiterals.LoginModal.successLogin,
-//                        bottomInset: 112,
-//                        delayTime: 1
-//                    ) { return }
-//                    
                     let authStatus = ACLocationManager.shared.locationManager.authorizationStatus
                     if authStatus == .denied || authStatus == .restricted {
                         navigateToLocalVerificationVC()
@@ -140,7 +136,9 @@ extension LoginModalViewController {
                     print("🥑onSuccess && !hasVerifiedArea")
                     navigateToLocalVerificationVC()
                 }
-                AmplitudeManager.shared.trackEventWithProperties(self.presentedVCType, properties: ["did_modal_login?": true])
+                if let presentedVCType = presentedVCType {
+                    AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.guest, properties: [presentedVCType: true])
+                }
             } else {
                 showLoginFailAlert()
             }

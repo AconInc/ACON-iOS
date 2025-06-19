@@ -62,6 +62,14 @@ class LocalMapViewController: BaseNavViewController {
         setPopGesture()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if viewModel.flowType == .onboarding {
+            ACToastController.hide()
+        }
+    }
+    
     override func setHierarchy() {
         super.setHierarchy()
         
@@ -158,8 +166,6 @@ private extension LocalMapViewController {
 
     @objc
     func finishVerificationButtonTapped() {
-        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.areaVerified, properties: ["complete_area?": true])
-        
         if self.viewModel.flowType == .setting && self.viewModel.isSwitching {
             self.viewModel.postReplaceVerifiedArea()
         } else {

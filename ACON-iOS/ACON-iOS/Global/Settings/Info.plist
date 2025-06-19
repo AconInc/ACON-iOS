@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BASIC_PROFILE_IMAGE</key>
+	<string>${BASIC_PROFILE_IMAGE}</string>
 	<key>branch_key</key>
 	<dict>
 		<key>test</key>
@@ -65,7 +67,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2025.0618.0310</string>
+	<string>2025.0619.1909</string>
 	<key>GIDClientID</key>
 	<string>${GOOGLE_CLIENT_ID}</string>
 	<key>GOOGLE_WEB_CLIENT_ID</key>
