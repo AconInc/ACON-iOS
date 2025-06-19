@@ -7,15 +7,10 @@
 
 import Foundation
 
+// NOTE: 지금은 에러타입이 1개밖에 없지만, 추후 고도화에 용이하도록 enum 유지하겠습니다.
+
 enum SpotListErrorType {
-    
-    case emptyList, unsupportedRegion
-    
-    var errorMessage: String {
-        switch self {
-        case .emptyList: return StringLiterals.SpotList.emptySpotListErrorMessage
-        case .unsupportedRegion: return StringLiterals.SpotList.unsupportedRegionPleaseRetry
-        }
-    }
-    
+
+    case unsupportedRegion
+
 }

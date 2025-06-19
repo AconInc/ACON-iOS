@@ -80,10 +80,9 @@ extension SpotListViewModel {
                 let spotList: SpotListModel = SpotListModel(from: data)
 
                 self?.spotList = spotList
-
-                if spotList.spotList.isEmpty { self?.errorType = .emptyList }
                 self?.onSuccessPostSpotList.value = true
                 self?.lastNetworkLocation = self?.userLocation
+
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
                     self?.postSpotList()
