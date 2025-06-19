@@ -97,6 +97,8 @@ private extension SpotDetailMoreViewController {
     func tappedInfoErrorButton() {
         let reportVC = ACWebViewController(urlString: StringLiterals.WebView.spotInfoErrorReportLink)
         self.present(reportVC, animated: true)
+
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.detailPage, properties: ["click_report_error?": true])
     }
 
 }
