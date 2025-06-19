@@ -35,6 +35,7 @@ class SpotListViewController: BaseNavViewController {
         setCollectionView()
         setButtonAction()
         setSkeleton()
+        addNotification()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +58,10 @@ class SpotListViewController: BaseNavViewController {
         super.viewWillDisappear(animated)
         
         stopPeriodicLocationCheck()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidLayoutSubviews() {
@@ -675,6 +680,39 @@ extension SpotListViewController: UIAdaptivePresentationControllerDelegate {
     
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         viewModel.startPeriodicLocationCheck()
+    }
+    
+}
+
+
+// MARK: - 앱 백그라운드로 갔을 때 로직
+
+private extension SpotListViewController {
+    
+    func addNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appDidEnterBackground),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil
+        )
+    }
+    
+    @objc
+    func appWillEnterForeground() {
+        viewModel.startPeriodicLocationCheck()
+    }
+    
+    @objc
+    func appDidEnterBackground() {
+        stopPeriodicLocationCheck()
     }
     
 }
