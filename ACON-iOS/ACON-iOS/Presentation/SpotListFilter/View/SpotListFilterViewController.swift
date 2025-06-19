@@ -117,18 +117,37 @@ private extension SpotListFilterViewController {
 
     @objc
     func didTapConductButton() {
+        let spotType = viewModel.spotType
         var filterList: [SpotFilterModel] = []
+        let eventName = spotType == .restaurant ? AmplitudeLiterals.EventName.filterRestaurant : AmplitudeLiterals.EventName.filterCafe
 
-        if let spotFilter: SpotFilterModel = viewModel.spotType == .restaurant ? extractRestaurantOptions() : extractCafeOptions() {
+        if let spotFilter: SpotFilterModel = spotType == .restaurant ? extractRestaurantOptions() : extractCafeOptions() {
             filterList.append(spotFilter)
+
+            // NOTE: Amplitude
+            let options = spotFilter.optionList
+            if !options.isEmpty {
+                let didClickOption: String = spotType == .restaurant ? "click_fliter_type_restaurant" : "click_filter_type_cafe"
+                let optionValue = optionTexts(for: spotType == .restaurant ? .restaurantFeature : .cafeFeature, serverKeys: options)
+                AmplitudeManager.shared.trackEventWithProperties(eventName, properties: [didClickOption: optionValue])
+            }
         }
 
-        if let openingHoursFilter: SpotFilterModel = extractOpeningHours(spotType: viewModel.spotType) {
+        if let openingHoursFilter: SpotFilterModel = extractOpeningHours(spotType: spotType) {
             filterList.append(openingHoursFilter)
+
+            // Amplitude
+            let didClickTime: String = spotType == .restaurant ? "click_filter_time_restaurant?" : "click_filter_time_cafe?"
+            let currentTime: String = spotType == .restaurant ? "record_filter_time_restaurant" : "record_filter_time_cafe"
+            AmplitudeManager.shared.trackEventWithProperties(eventName, properties: [didClickTime:true])
+            AmplitudeManager.shared.trackEventWithProperties(eventName, properties: [currentTime:getCurrentTime()])
         }
 
         if let priceFilter: SpotFilterModel = extractPrice(spotType: .restaurant) {
             filterList.append(priceFilter)
+
+            // Amplitude
+            AmplitudeManager.shared.trackEventWithProperties(eventName, properties: ["click_filter_price_restaurant?":true])
         }
 
         viewModel.filterList = filterList
@@ -327,6 +346,35 @@ private extension SpotListFilterViewController {
         } else {
             taggedFilterButtons.remove(button)
         }
+    }
+
+}
+
+
+// MARK: - Helper (앰플)
+
+private extension SpotListFilterViewController {
+
+    func optionTexts(for type: SpotFilterType, serverKeys: [String]) -> String {
+        var texts: [String] = []
+
+        switch type {
+        case .restaurantFeature:
+            texts = serverKeys.compactMap { SpotFilterType.RestaurantOptionType(serverKey: $0)?.text }
+        case .cafeFeature:
+            texts = serverKeys.compactMap { SpotFilterType.CafeOptionType(serverKey: $0)?.text }
+        default:
+            texts = []
+        }
+
+        return texts.joined(separator: ",")
+    }
+
+    func getCurrentTime() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter.string(from: Date())
     }
 
 }

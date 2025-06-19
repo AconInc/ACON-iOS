@@ -23,6 +23,10 @@ enum AmplitudeLiterals {
         
         static let filter = "filter"
         
+        static let filterRestaurant = "filter_restaurant"
+        
+        static let filterCafe = "filter_cafe"
+        
         static let placeUpload = "place_upload"
         
         static let serviceWithdraw = "service_withdraw"

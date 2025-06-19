@@ -65,6 +65,16 @@ extension SpotFilterType {
             }
         }
 
+        init?(serverKey: String) {
+            for option in SpotFilterType.RestaurantOptionType.allCases {
+                if option.serverKey == serverKey {
+                    self = option
+                    return
+                }
+            }
+            return nil
+        }
+
     }
 
 
@@ -86,6 +96,16 @@ extension SpotFilterType {
             case .workFriendly: return "WORK_FRIENDLY"
             case .excludeFranchise: return "EXCLUDE_FRANCHISE"
             }
+        }
+
+        init?(serverKey: String) {
+            for option in SpotFilterType.CafeOptionType.allCases {
+                if option.serverKey == serverKey {
+                    self = option
+                    return
+                }
+            }
+            return nil
         }
 
     }
