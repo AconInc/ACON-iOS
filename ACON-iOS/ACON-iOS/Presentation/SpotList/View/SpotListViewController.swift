@@ -131,6 +131,9 @@ class SpotListViewController: BaseNavViewController {
 
         spotToggleButton.onTap = { [weak self] in
             guard let self = self else { return }
+
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_toggle?": true])
+
             if !AuthManager.shared.hasToken {
                 presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
             }
@@ -259,6 +262,8 @@ private extension SpotListViewController {
 
     @objc
     func tappedFilterButton() {
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_filter?": true])
+
         stopPeriodicLocationCheck()
         
         guard AuthManager.shared.hasToken else {
@@ -493,6 +498,21 @@ extension SpotListViewController: UICollectionViewDataSource {
         } else {
             presentLoginModal(AmplitudeLiterals.EventName.tappedSpotCell)
         }
+
+        // NOTE: Amplitude
+        if topTag == nil && spot.tagList.isEmpty {
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_tag_none?": true])
+            return
+        }
+        if topTag != nil {
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_tag_rank?": true])
+        }
+        if spot.tagList.contains(.local) {
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_tag_local?": true])
+        }
+        if spot.tagList.contains(.new) {
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_tag_new?": true])
+        }
     }
 
 }
@@ -598,8 +618,6 @@ extension SpotListViewController: SpotListCellDelegate {
             return
         }
 
-        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_home_navigation?": true]) // TODO: guard문 위로 올릴지 기획 문의중
-
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.do { [weak self] in
             guard let self = self else { return }
@@ -609,6 +627,8 @@ extension SpotListViewController: SpotListCellDelegate {
                     mapType: .naver,
                     transportMode: self.viewModel.spotList.transportMode ?? .publicTransit)
                 self.viewModel.postGuidedSpot(spotID: spot.spotId)
+
+                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_home_navigation?": true])
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Map.appleMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
@@ -616,6 +636,8 @@ extension SpotListViewController: SpotListCellDelegate {
                     mapType: .apple,
                     transportMode: self.viewModel.spotList.transportMode ?? .publicTransit)
                 self.viewModel.postGuidedSpot(spotID: spot.spotId)
+
+                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_home_navigation?": true])
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Alert.cancel, style: .cancel, handler: nil))
         }
