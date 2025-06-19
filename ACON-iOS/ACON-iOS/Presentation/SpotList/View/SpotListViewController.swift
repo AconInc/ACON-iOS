@@ -24,6 +24,9 @@ class SpotListViewController: BaseNavViewController {
     private var isSkeletonShowing: Bool = true
     private var isDataLoading: Bool = true
 
+    private var startTime: Date?
+    private var timer: Timer?
+
 
     // MARK: - LifeCycle
 
@@ -140,7 +143,7 @@ class SpotListViewController: BaseNavViewController {
             AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_toggle?": true])
 
             if !AuthManager.shared.hasToken {
-                presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
+                presentLoginModal("click_toggle_guest?")
             }
         }
     }
@@ -253,7 +256,7 @@ private extension SpotListViewController {
     @objc
     func handleRefreshControl() {
         guard AuthManager.shared.hasToken else {
-            presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
+            presentLoginModal(nil)
             spotListView.collectionView.do {
                 $0.refreshControl?.endRefreshing()
                 $0.setContentOffset(.zero, animated: true)
@@ -502,7 +505,11 @@ extension SpotListViewController: UICollectionViewDataSource {
             if isAd { return }
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
-            presentLoginModal(AmplitudeLiterals.EventName.tappedSpotCell)
+            if dataIndex < 5 {
+                presentLoginModal("click_detail_guest?")
+            } else {
+                presentLoginModal("click_locked_detail_guest?")
+            }
         }
 
         // NOTE: Amplitude
@@ -620,7 +627,7 @@ extension SpotListViewController: SpotListCellDelegate {
 
     func tappedFindCourseButton(spot: SpotModel) {
         guard AuthManager.shared.hasToken else {
-            presentLoginModal(AmplitudeLiterals.EventName.tappedSpotCell)
+            presentLoginModal("click_home_navigation_guest?")
             return
         }
 
