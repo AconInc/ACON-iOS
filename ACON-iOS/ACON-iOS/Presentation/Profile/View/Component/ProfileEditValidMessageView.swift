@@ -49,7 +49,10 @@ final class ProfileEditValidMessageView: BaseView {
 
         case .nicknameMissing, .nicknameTaken, .invalidDate, .invalidChar:
             self.isHidden = false
-            iconImageView.image = .icExclamationMark
+            iconImageView.do {
+                $0.image = .icExclamationMark
+                $0.tintColor = .labelDanger
+            }
             validMessageLabel.setLabel(text: type.text, style: .b1R, color: .labelDanger)
 
         case .nicknameOK:
