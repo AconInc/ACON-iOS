@@ -404,6 +404,7 @@ extension SpotListViewController: UICollectionViewDataSource {
 
         switch spotList.transportMode {
         case .walking:
+            // TODO: - indexPath.item % 6이 맞는데, 제대로 셀 reuse가 안 돼서 같은 장소 두 번 뜸
             if indexPath.item % 5 == 0 && indexPath.item > 0 {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpotListGoogleAdCollectionViewCell.cellIdentifier, for: indexPath) as? SpotListGoogleAdCollectionViewCell else {
                     return UICollectionViewCell() }
