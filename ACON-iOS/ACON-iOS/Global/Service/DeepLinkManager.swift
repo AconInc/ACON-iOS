@@ -22,10 +22,12 @@ final class DeepLinkManager {
     func presentSpotDetail() {
         if let spotID = getSpotID() {
             DispatchQueue.main.async {
-                if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
+                   let window = sceneDelegate.window,
+                   let topVC = window.rootViewController?.getTopViewController() {
                     let spotDetailVC = SpotDetailViewController(spotID, isDeepLink: true)
                     spotDetailVC.modalPresentationStyle = .fullScreen
-                    sceneDelegate.window?.rootViewController?.present(spotDetailVC, animated: true)
+                    topVC.present(spotDetailVC, animated: true)
                 }
             }
         }
