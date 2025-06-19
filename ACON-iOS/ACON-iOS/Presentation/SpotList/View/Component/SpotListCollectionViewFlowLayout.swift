@@ -13,6 +13,8 @@ class SpotListCollectionViewFlowLayout: UICollectionViewFlowLayout {
                                      height: SpotListItemSizeType.itemMaxHeight.value)
     private let minCellSize  = CGSize(width: SpotListItemSizeType.itemMinWidth.value,
                                       height: SpotListItemSizeType.itemMinHeight.value)
+    private let adCellSize = CGSize(width: SpotListItemSizeType.adItemWidth.value,
+                                    height: SpotListItemSizeType.adItemHeight.value)
 
     override func prepare() {
         super.prepare()
@@ -39,8 +41,15 @@ class SpotListCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 let currentWidth = maxCellSize.width - (maxCellSize.width - minCellSize.width) * ratio
                 let scale = currentWidth / maxCellSize.width
                 
-                attribute.transform = CGAffineTransform(scaleX: scale, y: scale)
-                attribute.alpha = 1.0 - (0.2 * ratio)
+                // TODO: - indexPath.item % 6이 맞는데, 제대로 셀 reuse가 안 돼서 같은 장소 두 번 뜸
+                if attribute.indexPath.item % 5 == 0 && attribute.indexPath.item != 0 {
+                    attribute.size = adCellSize
+                    attribute.transform = CGAffineTransform.identity
+                    attribute.alpha = 1.0 - (0.5 * ratio)
+                } else {
+                    attribute.alpha = 1.0 - (0.2 * ratio)
+                    attribute.transform = CGAffineTransform(scaleX: scale, y: scale)
+               }
             }
         }
 

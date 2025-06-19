@@ -117,11 +117,10 @@ extension ACTabBarController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         guard let viewControllers = viewControllers else { return true }
         guard let index = viewControllers.firstIndex(of: viewController) else { return true }
-        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.placeUpload, properties: ["click_upload?": true])
         if index == ACTabBarItemType.allCases.firstIndex(of: .upload) {
             // TODO: - 리젝 사유 : 다른 탭에서 모달 뜸
             guard AuthManager.shared.hasToken else {
-                presentLoginModal(AmplitudeLiterals.EventName.placeUpload)
+                presentLoginModal("click_upload_guest?")
                 return false
             }
             let uploadVC = SpotSearchViewController()

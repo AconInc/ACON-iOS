@@ -35,6 +35,7 @@ class SpotListViewController: BaseNavViewController {
         setCollectionView()
         setButtonAction()
         setSkeleton()
+        addNotification()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +58,10 @@ class SpotListViewController: BaseNavViewController {
         super.viewWillDisappear(animated)
         
         stopPeriodicLocationCheck()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidLayoutSubviews() {
@@ -190,6 +195,9 @@ extension SpotListViewController {
                     isDataLoading = false
                     endSkeletonAnimation()
                     spotListView.regionErrorView.isHidden = false
+                } else if viewModel.errorType == .needLoginToSeeMore {
+                    AuthManager.shared.removeToken()
+                    self.showNeedLoginAlert()
                 }
                 viewModel.errorType = nil
             }
@@ -396,6 +404,7 @@ extension SpotListViewController: UICollectionViewDataSource {
 
         switch spotList.transportMode {
         case .walking:
+            // TODO: - indexPath.item % 6이 맞는데, 제대로 셀 reuse가 안 돼서 같은 장소 두 번 뜸
             if indexPath.item % 5 == 0 && indexPath.item > 0 {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpotListGoogleAdCollectionViewCell.cellIdentifier, for: indexPath) as? SpotListGoogleAdCollectionViewCell else {
                     return UICollectionViewCell() }
@@ -672,6 +681,39 @@ extension SpotListViewController: UIAdaptivePresentationControllerDelegate {
     
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         viewModel.startPeriodicLocationCheck()
+    }
+    
+}
+
+
+// MARK: - 앱 백그라운드로 갔을 때 로직
+
+private extension SpotListViewController {
+    
+    func addNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appDidEnterBackground),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil
+        )
+    }
+    
+    @objc
+    func appWillEnterForeground() {
+        viewModel.startPeriodicLocationCheck()
+    }
+    
+    @objc
+    func appDidEnterBackground() {
+        stopPeriodicLocationCheck()
     }
     
 }

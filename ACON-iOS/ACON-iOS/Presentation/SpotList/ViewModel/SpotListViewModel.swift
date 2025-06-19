@@ -92,6 +92,8 @@ extension SpotListViewModel {
             case .requestErr(let error):
                 if error.code == 40405 {
                     self?.errorType = .unsupportedRegion
+                } else if error.code == 40023 {
+                    self?.errorType = .needLoginToSeeMore
                 } else {
                     self?.handleNetworkError { [weak self] in
                         self?.postSpotList()

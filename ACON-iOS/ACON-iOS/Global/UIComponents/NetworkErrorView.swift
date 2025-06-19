@@ -11,6 +11,8 @@ final class NetworkErrorView: GlassmorphismView {
 
     // MARK: - UI Properties
     
+    private let backButton = UIButton()
+    
     private let wifiImageView: UIImageView = UIImageView()
     
     private let titleLabel: UILabel = UILabel()
@@ -37,7 +39,8 @@ final class NetworkErrorView: GlassmorphismView {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.addSubviews(wifiImageView,
+        self.addSubviews(backButton,
+                         wifiImageView,
                          titleLabel,
                          descriptionLabel,
                          retryButton)
@@ -45,6 +48,11 @@ final class NetworkErrorView: GlassmorphismView {
     
     override func setLayout() {
         super.setLayout()
+        
+        backButton.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(ScreenUtils.heightRatio*28 - 10)
+            $0.leading.equalToSuperview().inset(ScreenUtils.horizontalInset)
+        }
         
         wifiImageView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*259)
@@ -61,7 +69,7 @@ final class NetworkErrorView: GlassmorphismView {
         descriptionLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*365)
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(40)
+            $0.height.equalTo(20)
         }
         
         retryButton.snp.makeConstraints {
@@ -75,6 +83,12 @@ final class NetworkErrorView: GlassmorphismView {
     
     override func setStyle() {
         super.setStyle()
+        
+        backButton.do {
+            $0.setImage(.icLeft, for: .normal)
+            $0.clipsToBounds = true
+            $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        }
         
         wifiImageView.do {
             $0.image = .icNetwork
@@ -120,6 +134,13 @@ private extension NetworkErrorView {
         DispatchQueue.main.async {
             self.hideNetworkErrorView()
             self.retryAction?()
+        }
+    }
+    
+    @objc
+    func backButtonTapped() {
+        DispatchQueue.main.async {
+            self.hideNetworkErrorView()
         }
     }
     

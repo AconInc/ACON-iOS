@@ -9,12 +9,13 @@ import Foundation
 
 enum SpotListErrorType {
     
-    case emptyList, unsupportedRegion
+    case emptyList, unsupportedRegion, needLoginToSeeMore
     
     var errorMessage: String {
         switch self {
         case .emptyList: return StringLiterals.SpotList.emptySpotListErrorMessage
         case .unsupportedRegion: return StringLiterals.SpotList.unsupportedRegionPleaseRetry
+        case .needLoginToSeeMore: return StringLiterals.SpotList.needLoginToSeeMore
         }
     }
     

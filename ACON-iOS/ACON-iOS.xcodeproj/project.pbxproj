@@ -15,7 +15,6 @@
 		151003EE2D5FC48B00409DF4 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003ED2D5FC48B00409DF4 /* ProfileService.swift */; };
 		151003F02D5FC4C600409DF4 /* ProfileTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003EF2D5FC4C600409DF4 /* ProfileTargetType.swift */; };
 		1515CE0D2E00823B00A559A2 /* DeepLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1515CE0C2E00823B00A559A2 /* DeepLinkManager.swift */; };
-		1517FD7F2D3961A800638173 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517FD7E2D3961A800638173 /* CustomSlider.swift */; };
 		151AB6902DD367BF00D01DE8 /* SpotDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151AB68F2DD367BF00D01DE8 /* SpotDetailView.swift */; };
 		151AB6C32DD384C100D01DE8 /* SpotDetailImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151AB6C22DD384C100D01DE8 /* SpotDetailImageCollectionViewCell.swift */; };
 		151AB6C52DD3874100D01DE8 /* SpotDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151AB6C42DD3874100D01DE8 /* SpotDetailViewController.swift */; };
@@ -64,7 +63,6 @@
 		157C06212DC5EBB4000B04AF /* SpotTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C06202DC5EBB4000B04AF /* SpotTagButton.swift */; };
 		157C0AC12DC689E7000B04AF /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C0AC02DC689E7000B04AF /* UIImage+.swift */; };
 		157C0BE82DC897EE000B04AF /* SpotToggleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */; };
-		15A1471E2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */; };
 		15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */; };
 		15A246142DE79D7E00469272 /* NoMatchingSpotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A246132DE79D7E00469272 /* NoMatchingSpotType.swift */; };
 		15A246182DE7A75000469272 /* TransportModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A246172DE7A75000469272 /* TransportModeType.swift */; };
@@ -86,7 +84,6 @@
 		15BFF8BA2D665BAD00909C4F /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15BFF8B62D665A5B00909C4F /* Release.xcconfig */; };
 		15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C0ED512D429F7400C9ED83 /* SkeletonView.swift */; };
 		15C0ED6A2D42CDA300C9ED83 /* loadingWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED692D42CDA300C9ED83 /* loadingWhite.json */; };
-		15C93D0E2DBD9B4E002862DF /* OldACFontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C93D0D2DBD9B4E002862DF /* OldACFontStyle.swift */; };
 		15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256A2D3D61F500320006 /* GlassmorphismView.swift */; };
 		15CD25702D3F86E700320006 /* CustomRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */; };
 		15CD25782D3FE31400320006 /* PostSpotListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD25772D3FE31400320006 /* PostSpotListRequest.swift */; };
@@ -208,7 +205,6 @@
 		748D6F4F2D2BC76C007690B4 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 748D6F4E2D2BC76C007690B4 /* GoogleSignInSwift */; };
 		748D6F692D2BCA1C007690B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F612D2BCA1C007690B4 /* AppDelegate.swift */; };
 		748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F662D2BCA1C007690B4 /* SceneDelegate.swift */; };
-		748D6F6B2D2BCA1C007690B4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F672D2BCA1C007690B4 /* ViewController.swift */; };
 		748D6F6C2D2BCA1C007690B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 748D6F622D2BCA1C007690B4 /* Assets.xcassets */; };
 		748D6F6E2D2BCA1C007690B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 748D6F652D2BCA1C007690B4 /* LaunchScreen.storyboard */; };
 		748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6F7D2D2BCD6E007690B4 /* StringLiterals.swift */; };
@@ -257,7 +253,6 @@
 		74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF920C2D391FFE00B923E3 /* LocalVerificationView.swift */; };
 		74BF92172D393B4A00B923E3 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92162D393B4700B923E3 /* Int+.swift */; };
 		74BF92192D395FE800B923E3 /* ACToastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92182D395FE400B923E3 /* ACToastController.swift */; };
-		74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF92262D39956F00B923E3 /* StickyHeaderView.swift */; };
 		74C1934A2DEF87E1005FB3C7 /* GoogleAdsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C193492DEF87E1005FB3C7 /* GoogleAdsManager.swift */; };
 		74C782192E01504F0053AA86 /* NavigatonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C782182E01504B0053AA86 /* NavigatonUtils.swift */; };
 		74C914D12D64DBBB00BC13E1 /* ImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C914D02D64DBAF00BC13E1 /* ImageType.swift */; };
@@ -304,7 +299,6 @@
 		151003ED2D5FC48B00409DF4 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		151003EF2D5FC4C600409DF4 /* ProfileTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTargetType.swift; sourceTree = "<group>"; };
 		1515CE0C2E00823B00A559A2 /* DeepLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkManager.swift; sourceTree = "<group>"; };
-		1517FD7E2D3961A800638173 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		151AB68F2DD367BF00D01DE8 /* SpotDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailView.swift; sourceTree = "<group>"; };
 		151AB6C22DD384C100D01DE8 /* SpotDetailImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		151AB6C42DD3874100D01DE8 /* SpotDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailViewController.swift; sourceTree = "<group>"; };
@@ -352,7 +346,6 @@
 		157C06202DC5EBB4000B04AF /* SpotTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTagButton.swift; sourceTree = "<group>"; };
 		157C0AC02DC689E7000B04AF /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotToggleButtonView.swift; sourceTree = "<group>"; };
-		15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBoxWithDeletableButton.swift; sourceTree = "<group>"; };
 		15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFlowType.swift; sourceTree = "<group>"; };
 		15A246132DE79D7E00469272 /* NoMatchingSpotType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMatchingSpotType.swift; sourceTree = "<group>"; };
 		15A246172DE7A75000469272 /* TransportModeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportModeType.swift; sourceTree = "<group>"; };
@@ -373,7 +366,6 @@
 		15BFF8B62D665A5B00909C4F /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		15C0ED512D429F7400C9ED83 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		15C0ED692D42CDA300C9ED83 /* loadingWhite.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loadingWhite.json; sourceTree = "<group>"; };
-		15C93D0D2DBD9B4E002862DF /* OldACFontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldACFontStyle.swift; sourceTree = "<group>"; };
 		15CD256A2D3D61F500320006 /* GlassmorphismView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismView.swift; sourceTree = "<group>"; };
 		15CD256F2D3F86E700320006 /* CustomRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshControl.swift; sourceTree = "<group>"; };
 		15CD25772D3FE31400320006 /* PostSpotListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSpotListRequest.swift; sourceTree = "<group>"; };
@@ -489,7 +481,6 @@
 		748D6F632D2BCA1C007690B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		748D6F642D2BCA1C007690B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		748D6F662D2BCA1C007690B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		748D6F672D2BCA1C007690B4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		748D6F7D2D2BCD6E007690B4 /* StringLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLiterals.swift; sourceTree = "<group>"; };
 		748D6F7F2D2BCD8F007690B4 /* ObservablePattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservablePattern.swift; sourceTree = "<group>"; };
 		748D6F812D2BCDB0007690B4 /* ScreenUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenUtils.swift; sourceTree = "<group>"; };
@@ -539,7 +530,6 @@
 		74BF920D2D391FFE00B923E3 /* LocalVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationViewController.swift; sourceTree = "<group>"; };
 		74BF92162D393B4700B923E3 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		74BF92182D395FE400B923E3 /* ACToastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACToastController.swift; sourceTree = "<group>"; };
-		74BF92262D39956F00B923E3 /* StickyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyHeaderView.swift; sourceTree = "<group>"; };
 		74C193492DEF87E1005FB3C7 /* GoogleAdsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdsManager.swift; sourceTree = "<group>"; };
 		74C782182E01504B0053AA86 /* NavigatonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatonUtils.swift; sourceTree = "<group>"; };
 		74C914D02D64DBAF00BC13E1 /* ImageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageType.swift; sourceTree = "<group>"; };
@@ -646,7 +636,6 @@
 				74EC5A2B2DF4CB1F00E176A8 /* SavedSpotView.swift */,
 				15A48BFD2D57546A003C2421 /* ProfileImageEditButton.swift */,
 				15CF62BC2D575EC00000A10F /* ProfileEditValidMessageView.swift */,
-				15A1471D2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift */,
 				74770C1A2DF35848005D4165 /* ProfileGoogleAdView.swift */,
 			);
 			path = Component;
@@ -754,7 +743,6 @@
 		1547A88C2D35AE5C00E96616 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				1517FD7E2D3961A800638173 /* CustomSlider.swift */,
 				1547A88D2D35B13700E96616 /* FilterTagButton.swift */,
 				15A3F7A02D38C71900577E16 /* PriorityLowEmptyView.swift */,
 				15A3F7A22D38C7FF00577E16 /* SpotFilterTagStackView.swift */,
@@ -1263,7 +1251,6 @@
 				1558BA182D318FDB00ECDEF8 /* TabBar */,
 				748ECA692D31917A00BBC981 /* Login */,
 				748D6FA22D2C3C3D007690B4 /* Base */,
-				748D6F672D2BCA1C007690B4 /* ViewController.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -1400,7 +1387,6 @@
 				746261702D3EA50700A4E84F /* SpotCategoryType.swift */,
 				741E68AB2D3D6DA400DF99EF /* HeaderType.swift */,
 				151FBFB92DBD2F1B005F4D0D /* ACFontType.swift */,
-				15C93D0D2DBD9B4E002862DF /* OldACFontStyle.swift */,
 				15F15E842DBFD206002F81E2 /* LanguageType.swift */,
 			);
 			path = Enums;
@@ -1601,7 +1587,6 @@
 		74BF92252D39956400B923E3 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				74BF92262D39956F00B923E3 /* StickyHeaderView.swift */,
 				151AB6C62DD3BEDE00D01DE8 /* SpotDetailSideButton.swift */,
 			);
 			path = Component;
@@ -1965,7 +1950,6 @@
 				157C0AC12DC689E7000B04AF /* UIImage+.swift in Sources */,
 				15A48BFA2D574BA5003C2421 /* ProfileEditView.swift in Sources */,
 				74AB75A82DF9F92C00F96A4A /* PostRepaceLocalAreaRequest.swift in Sources */,
-				74BF92272D39957600B923E3 /* StickyHeaderView.swift in Sources */,
 				151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */,
 				1549976D2DEC51C80040242F /* SpotType.swift in Sources */,
 				151AB6C92DD3E64600D01DE8 /* MenuImageSlideViewController.swift in Sources */,
@@ -1974,7 +1958,6 @@
 				151FC0C92DBD5DA0005F4D0D /* Character+.swift in Sources */,
 				15DC053F2D623DD400B752DD /* PostLogoutRequest.swift in Sources */,
 				1502D71B2DE9B7ED00A21D81 /* UICollectionReusableView+.swift in Sources */,
-				1517FD7F2D3961A800638173 /* CustomSlider.swift in Sources */,
 				741E68982D3D3D8E00DF99EF /* ErrorResponse.swift in Sources */,
 				748D6F822D2BCDB3007690B4 /* ScreenUtils.swift in Sources */,
 				151AB6C52DD3874100D01DE8 /* SpotDetailViewController.swift in Sources */,
@@ -1990,7 +1973,6 @@
 				74770C1D2DF36DAB005D4165 /* GoogleAdsType.swift in Sources */,
 				749A01032D3A6E0100CD7A90 /* ACDebouncer.swift in Sources */,
 				7462617F2D3F9F1400A4E84F /* GetSpotDetailResponse.swift in Sources */,
-				15A1471E2D5A7F96003793EE /* LabelBoxWithDeletableButton.swift in Sources */,
 				743900972DC8696A002F91B1 /* GlassButtonType.swift in Sources */,
 				74C1934A2DEF87E1005FB3C7 /* GoogleAdsManager.swift in Sources */,
 				745C7E0D2D35A04A0074DBDB /* SearchKeywordCollectionViewCell.swift in Sources */,
@@ -2191,7 +2173,6 @@
 				157C061F2DC5E7CE000B04AF /* SpotTagType.swift in Sources */,
 				15F45F862D66877200BD6B9C /* LoadingAnimatedButton.swift in Sources */,
 				74EC5A2C2DF4CB2300E176A8 /* SavedSpotView.swift in Sources */,
-				15C93D0E2DBD9B4E002862DF /* OldACFontStyle.swift in Sources */,
 				74BF92072D38622B00B923E3 /* SpotDetailViewModel.swift in Sources */,
 				151003EE2D5FC48B00409DF4 /* ProfileService.swift in Sources */,
 				151003F02D5FC4C600409DF4 /* ProfileTargetType.swift in Sources */,
@@ -2204,7 +2185,6 @@
 				15A48BFE2D57546A003C2421 /* ProfileImageEditButton.swift in Sources */,
 				D6E452942D3AA47500CBED02 /* ProfileViewController.swift in Sources */,
 				151BD9552D63375D005E657F /* VerifiedAreasEditViewController.swift in Sources */,
-				748D6F6B2D2BCA1C007690B4 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2232,7 +2212,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2025.0618.0310;
+				CURRENT_PROJECT_VERSION = 2025.0618.2334;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = KX5Q77JSUF;
@@ -2276,7 +2256,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2025.0618.0310;
+				CURRENT_PROJECT_VERSION = 2025.0618.2334;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = KX5Q77JSUF;
 				GENERATE_INFOPLIST_FILE = NO;

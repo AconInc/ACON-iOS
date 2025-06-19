@@ -76,7 +76,10 @@ class SpotNoImageContentView: BaseView {
     // MARK: - Internal Method
     
     func setDescription(_ spotImageStatusType: SpotImageStatusType) {
-        descriptionLabel.setLabel(text: spotImageStatusType.description, style: .b1SB, color: .gray50)
+        descriptionLabel.setLabel(text: spotImageStatusType.description,
+                                  style: .b1SB,
+                                  color: .gray50,
+                                  alignment: .center)
     }
 
 }

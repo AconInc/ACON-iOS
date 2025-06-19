@@ -204,7 +204,7 @@ extension BaseNavViewController {
     // MARK: - 뒤로가기 버튼
     
     func setBackButton(completion: (() -> Void)? = nil) {
-        setButtonStyle(button: leftButton, image: .icArrowLeft)
+        setButtonStyle(button: leftButton, image: .icLeft)
         setButtonAction(button: leftButton, target: self, action: #selector(backButtonTapped))
         self.backCompletion = completion
     }
@@ -329,7 +329,7 @@ extension BaseNavViewController {
     // MARK: - X 버튼
     
     func setXButton(_ action: Selector? = nil) {
-        setButtonStyle(button: leftButton, image: .icDismiss)
+        setButtonStyle(button: leftButton, image: .icXmark)
         guard let action else {
             setButtonAction(button: leftButton,
                             target: self,

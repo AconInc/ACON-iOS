@@ -61,6 +61,14 @@ extension UIViewController {
                               completion: action)
     }
     
+    func showNeedLoginAlert() {
+        self.showDefaultAlert(title: "알림",
+                              message: "로그인이 필요한 서비스입니다.") {
+            NavigationUtils.navigateToSplash()
+        }
+    }
+    
+    
     // MARK: - 바텀시트 내려가게
     
     func setSheetLayout(detent: ACSheetDetentType) {
@@ -99,7 +107,7 @@ extension UIViewController {
     
     // MARK: - 로그인 안 했으면 모달시트 띄우기
     
-    func presentLoginModal(_ presentedModalType: String) {
+    func presentLoginModal(_ presentedModalType: String?) {
         let vc = LoginModalViewController(presentedModalType)
         vc.setSheetLayout(detent: .middle)
         

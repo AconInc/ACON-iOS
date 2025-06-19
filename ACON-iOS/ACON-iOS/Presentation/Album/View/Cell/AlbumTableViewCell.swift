@@ -90,14 +90,14 @@ extension AlbumTableViewCell {
     func configure(_ albumInfo: AlbumModel) {
         titleLabel.do {
             $0.setLabel(text: albumInfo.title,
-                        style: .s1,
+                        style: .t4R,
                         color: .acWhite)
         }
         countLabel.do {
             if albumInfo.count >= 0 {
                 $0.setLabel(text: "\(albumInfo.count)",
-                            style: .b2,
-                            color: .gray400)
+                            style: .b1R,
+                            color: .gray500)
             }
         }
         thumbnailImageView.image = albumInfo.thumbnailImage
