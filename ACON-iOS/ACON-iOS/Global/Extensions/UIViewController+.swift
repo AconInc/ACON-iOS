@@ -61,13 +61,6 @@ extension UIViewController {
                               completion: action)
     }
     
-    func showNeedLoginAlert() {
-        self.showDefaultAlert(title: "알림",
-                              message: "로그인이 필요한 서비스입니다.") {
-            NavigationUtils.navigateToSplash()
-        }
-    }
-    
     
     // MARK: - 바텀시트 내려가게
     

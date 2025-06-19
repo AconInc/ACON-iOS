@@ -80,10 +80,9 @@ extension SpotListViewModel {
                 let spotList: SpotListModel = SpotListModel(from: data)
 
                 self?.spotList = spotList
-
-                if spotList.spotList.isEmpty { self?.errorType = .emptyList }
                 self?.onSuccessPostSpotList.value = true
                 self?.lastNetworkLocation = self?.userLocation
+
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
                     self?.postSpotList()
@@ -92,8 +91,6 @@ extension SpotListViewModel {
             case .requestErr(let error):
                 if error.code == 40405 {
                     self?.errorType = .unsupportedRegion
-                } else if error.code == 40023 {
-                    self?.errorType = .needLoginToSeeMore
                 } else {
                     self?.handleNetworkError { [weak self] in
                         self?.postSpotList()

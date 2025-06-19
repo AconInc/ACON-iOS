@@ -24,6 +24,9 @@ class SpotListViewController: BaseNavViewController {
     private var isSkeletonShowing: Bool = true
     private var isDataLoading: Bool = true
 
+    private var startTime: Date?
+    private var timer: Timer?
+
 
     // MARK: - LifeCycle
 
@@ -136,8 +139,11 @@ class SpotListViewController: BaseNavViewController {
 
         spotToggleButton.onTap = { [weak self] in
             guard let self = self else { return }
+
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_toggle?": true])
+
             if !AuthManager.shared.hasToken {
-                presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
+                presentLoginModal("click_toggle_guest?")
             }
         }
     }
@@ -195,9 +201,6 @@ extension SpotListViewController {
                     isDataLoading = false
                     endSkeletonAnimation()
                     spotListView.regionErrorView.isHidden = false
-                } else if viewModel.errorType == .needLoginToSeeMore {
-                    AuthManager.shared.removeToken()
-                    self.showNeedLoginAlert()
                 }
                 viewModel.errorType = nil
             }
@@ -253,7 +256,7 @@ private extension SpotListViewController {
     @objc
     func handleRefreshControl() {
         guard AuthManager.shared.hasToken else {
-            presentLoginModal(AmplitudeLiterals.EventName.mainMenu)
+            presentLoginModal(nil)
             spotListView.collectionView.do {
                 $0.refreshControl?.endRefreshing()
                 $0.setContentOffset(.zero, animated: true)
@@ -267,6 +270,8 @@ private extension SpotListViewController {
 
     @objc
     func tappedFilterButton() {
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_filter?": true])
+
         stopPeriodicLocationCheck()
         
         guard AuthManager.shared.hasToken else {
@@ -285,7 +290,6 @@ private extension SpotListViewController {
         present(vc, animated: true)
     }
 
-        
     @objc
     func onRequestToAddButtonTapped() {
         let vc = ACWebViewController(urlString: StringLiterals.WebView.addPlaceLink)
@@ -501,7 +505,26 @@ extension SpotListViewController: UICollectionViewDataSource {
             if isAd { return }
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
-            presentLoginModal(AmplitudeLiterals.EventName.tappedSpotCell)
+            if dataIndex < 5 {
+                presentLoginModal("click_detail_guest?")
+            } else {
+                presentLoginModal("click_locked_detail_guest?")
+            }
+        }
+
+        // NOTE: Amplitude
+        if topTag == nil && spot.tagList.isEmpty {
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_tag_none?": true])
+            return
+        }
+        if topTag != nil {
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_tag_rank?": true])
+        }
+        if spot.tagList.contains(.local) {
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_tag_local?": true])
+        }
+        if spot.tagList.contains(.new) {
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_tag_new?": true])
         }
     }
 
@@ -525,7 +548,7 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
         if spotList.transportMode == .walking {
             return CGSize(width: SpotListItemSizeType.itemMaxWidth.value,
                           height: SpotListItemSizeType.headerHeight.value)
-        } else if spotList.transportMode == .biking {
+        } else if spotList.transportMode == .biking && !spotList.spotList.isEmpty {
             return CGSize(width: NoMatchingSpotListItemSizeType.itemWidth.value,
                           height: NoMatchingSpotListItemSizeType.withSuggestionHeaderHeight.value)
         } else {
@@ -541,6 +564,15 @@ extension SpotListViewController: UICollectionViewDelegateFlowLayout {
 
 extension SpotListViewController: UIScrollViewDelegate {
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // NOTE: 네비게이션 바 글라스모피즘 On/Off
+        if scrollView.contentOffset.y > 0 {
+            setGlassMorphism()
+        } else {
+            glassMorphismView.removeFromSuperview()
+        }
+    }
+
     func scrollViewWillEndDragging(_ scrollView: UIScrollView,
                                    withVelocity velocity: CGPoint,
                                    targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -554,13 +586,6 @@ extension SpotListViewController: UIScrollViewDelegate {
             // NOTE: 화면 중앙과 가장 가까운 셀을 찾아 화면 중앙으로 이동
             targetContentOffset.pointee = CGPoint(x: 0, y: newTargetY)
             HapticManager.shared.hapticSelection()
-        }
-
-        // NOTE: 네비게이션 바 글라스모피즘 On/Off
-        if targetContentOffset.pointee.y > 0 {
-            setGlassMorphism()
-        } else {
-            glassMorphismView.removeFromSuperview()
         }
     }
 
@@ -602,11 +627,9 @@ extension SpotListViewController: SpotListCellDelegate {
 
     func tappedFindCourseButton(spot: SpotModel) {
         guard AuthManager.shared.hasToken else {
-            presentLoginModal(AmplitudeLiterals.EventName.tappedSpotCell)
+            presentLoginModal("click_home_navigation_guest?")
             return
         }
-
-        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_home_navigation?": true]) // TODO: guard문 위로 올릴지 기획 문의중
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.do { [weak self] in
@@ -617,6 +640,8 @@ extension SpotListViewController: SpotListCellDelegate {
                     mapType: .naver,
                     transportMode: self.viewModel.spotList.transportMode ?? .publicTransit)
                 self.viewModel.postGuidedSpot(spotID: spot.spotId)
+
+                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_home_navigation?": true])
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Map.appleMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
@@ -624,6 +649,8 @@ extension SpotListViewController: SpotListCellDelegate {
                     mapType: .apple,
                     transportMode: self.viewModel.spotList.transportMode ?? .publicTransit)
                 self.viewModel.postGuidedSpot(spotID: spot.spotId)
+
+                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_home_navigation?": true])
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Alert.cancel, style: .cancel, handler: nil))
         }

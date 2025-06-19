@@ -80,7 +80,7 @@ class NoMatchingSpotHeader: UICollectionReusableView {
         
         willSuggestNextTimeLabel.setLabel(text: StringLiterals.SpotList.willSuggestNextTime, style: .t4SB, alignment: .center)
 
-        requestToAddButton.setAttributedTitle(text: StringLiterals.SpotList.requestToAddSpot, style: .b1R, color: .labelAction)
+        requestToAddButton.setAttributedTitle(text: StringLiterals.SpotList.requestToAddSpot, style: .b1SB, color: .labelAction)
 
         howAboutTheseLabel.setLabel(text: StringLiterals.SpotList.howAboutTheseInstead, style: .t4SB)
 

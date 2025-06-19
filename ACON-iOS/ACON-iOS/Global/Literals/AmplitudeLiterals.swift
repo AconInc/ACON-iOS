@@ -15,7 +15,13 @@ enum AmplitudeLiterals {
         
         static let mainMenu = "main_menu"
         
+        static let detailPage = "detail_page"
+        
         static let filter = "filter"
+        
+        static let filterRestaurant = "filter_restaurant"
+        
+        static let filterCafe = "filter_cafe"
         
         static let upload = "upload"
         

@@ -78,7 +78,7 @@ class SpotDetailViewController: BaseNavViewController {
 
         if let startTime = startTime {
             let timeInterval = Date().timeIntervalSince(startTime)
-            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["place_detail_duration": timeInterval])
+            AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.detailPage, properties: ["place_detail_duration": timeInterval])
         }
     }
 
@@ -143,6 +143,8 @@ class SpotDetailViewController: BaseNavViewController {
                 let itemsToShare: [Any] = [description, url]
                 let activityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
                 self.present(activityVC, animated: true, completion: nil)
+
+                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.detailPage, properties: ["click_share?": true])
             }
         }
     }
@@ -217,8 +219,6 @@ private extension SpotDetailViewController {
 
     @objc
     func tappedFindCourseButton() {
-        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_detail_navigation?": true])
-
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.do { [weak self] in
             guard let self = self,
@@ -229,6 +229,8 @@ private extension SpotDetailViewController {
                     mapType: .naver,
                     transportMode: self.transportMode ?? .publicTransit)
                 self.viewModel.postGuidedSpot()
+
+                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.detailPage, properties: ["click_detail_navigation?": true])
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Map.appleMap, style: .default, handler: { _ in
                 MapRedirectManager.shared.redirect(
@@ -236,6 +238,8 @@ private extension SpotDetailViewController {
                     mapType: .apple,
                     transportMode: self.transportMode ?? .publicTransit)
                 self.viewModel.postGuidedSpot()
+
+                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.detailPage, properties: ["click_detail_navigation?": true])
             }))
             $0.addAction(UIAlertAction(title: StringLiterals.Alert.cancel, style: .cancel, handler: nil))
         }

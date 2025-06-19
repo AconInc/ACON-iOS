@@ -85,13 +85,14 @@ final class NetworkErrorView: GlassmorphismView {
         super.setStyle()
         
         backButton.do {
-            $0.setImage(.icLeft, for: .normal)
+            $0.setImage(.icXmark, for: .normal)
             $0.clipsToBounds = true
             $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         }
         
         wifiImageView.do {
-            $0.image = .icNetwork
+            $0.image = .icExclamationMark
+            $0.tintColor = .acWhite
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFit
         }

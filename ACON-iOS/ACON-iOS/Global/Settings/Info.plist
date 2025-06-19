@@ -67,7 +67,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2025.0619.1909</string>
+	<string>2025.0619.2317</string>
 	<key>GIDClientID</key>
 	<string>${GOOGLE_CLIENT_ID}</string>
 	<key>GOOGLE_WEB_CLIENT_ID</key>
