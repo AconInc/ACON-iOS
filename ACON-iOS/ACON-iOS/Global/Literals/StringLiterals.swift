@@ -385,7 +385,7 @@ enum StringLiterals {
         
         static let onboarding = "취향탐색 다시하기"
         
-        static let localVerification = "동네 인증하기"
+        static let localVerification = "지역 인증하기"
         
         static let logout = "로그아웃하기"
         
