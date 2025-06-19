@@ -38,7 +38,7 @@ final class ProfileEditViewController: BaseNavViewController {
     
     private var didFinishInitialSetup: Bool = false
     private var hasInitialValueChanged: Bool = false
-    private var isDefaultImage: Bool? = nil
+    private var isDefaultImage: Bool = false
 
 
     // MARK: - Life Cycles
@@ -156,6 +156,8 @@ private extension ProfileEditViewController {
             )
             $0.birthDateTextField.text = viewModel.userInfo.birthDate
         }
+        isDefaultImage = viewModel.userInfo.profileImage == Config.basicProfileImage ? true : false
+        print("❤️", isDefaultImage, viewModel.userInfo.profileImage, Config.basicProfileImage)
 
         DispatchQueue.main.async {
             self.didFinishInitialSetup = true
@@ -195,8 +197,7 @@ private extension ProfileEditViewController {
 
         viewModel.onSuccessGetPresignedURL.bind { [weak self] onSuccess in
             guard let self = self,
-                  let onSuccess = onSuccess,
-                  let isDefaultImage = isDefaultImage else { return }
+                  let onSuccess = onSuccess else { return }
 
             if onSuccess, !isDefaultImage {
                 if let imageData: Data = profileImage.jpegData(compressionQuality: 0.5) {
@@ -380,15 +381,11 @@ private extension ProfileEditViewController {
         viewModel.updateUserInfo(nickname: nickname,
                                  birthDate: birthDateText?.isEmpty ?? true ? nil : birthDateText)
 
-        if let isDefaultImage {
-            viewModel.userInfo.profileImage = isDefaultImage ? "" : viewModel.presignedURLInfo.fileName
-            if isDefaultImage {
-                viewModel.patchProfile()
-            } else {
-                viewModel.getProfilePresignedURL()
-            }
-        } else {
+        viewModel.userInfo.profileImage = isDefaultImage ? "" : viewModel.presignedURLInfo.fileName
+        if isDefaultImage {
             viewModel.patchProfile()
+        } else {
+            viewModel.getProfilePresignedURL()
         }
     }
 
