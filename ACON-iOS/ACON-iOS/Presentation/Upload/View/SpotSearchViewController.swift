@@ -188,13 +188,14 @@ private extension SpotSearchViewController {
     
     @objc
     func nextButtonTapped() {
-        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.placeUpload, properties: ["click_review_next?": true])
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.upload, properties: ["click_review_next?": true])
         let vc = DropAcornViewController(spotID: selectedSpotID, spotName: selectedSpotName)
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
     @objc
     func addPlaceButtonTapped() {
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.upload, properties: ["click_register_form?": true])
         let addPlaceVC = ACWebViewController(urlString: StringLiterals.WebView.addPlaceLink)
         self.present(addPlaceVC, animated: true)
     }

@@ -219,7 +219,6 @@ extension ProfileSettingViewController: UITableViewDataSource {
             case .onboarding:
                 let vc = OnboardingViewController(flowType: .setting)
                 self.navigationController?.pushViewController(vc, animated: true)
-                AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.onboarding, properties: ["retry_onboarding?": true])
             case .localVerification:
                 let vc = VerifiedAreasEditViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
@@ -229,7 +228,7 @@ extension ProfileSettingViewController: UITableViewDataSource {
             switch items[indexPath.row] {
             case .logout:
                 let action = { [weak self] in
-                    AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceLogout, properties: ["click_logout?": true])
+                    AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.logout, properties: ["click_logout?": true])
                     self?.viewModel.postLogout()
                 }
                 self.presentACAlert(.logout, rightAction: action)

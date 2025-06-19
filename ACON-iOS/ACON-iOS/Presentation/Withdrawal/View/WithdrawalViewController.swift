@@ -132,8 +132,7 @@ extension WithdrawalViewController {
            let inputText = viewModel.inputText.value {
             viewModel.selectedOption.value = inputText
         }
-        AmplitudeManager.shared.setUserProperty(userProperties: ["exit_reason": self.viewModel.selectedOption.value ?? ""])
-        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceWithdraw, properties: ["complete_exit_service?": true])
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.serviceWithdraw, properties: ["exit_reason": self.viewModel.selectedOption.value ?? ""])
         presentWithdrawalSheet()
     }
     

@@ -166,8 +166,6 @@ private extension LocalMapViewController {
 
     @objc
     func finishVerificationButtonTapped() {
-        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.areaVerified, properties: ["complete_area?": true])
-        
         if self.viewModel.flowType == .setting && self.viewModel.isSwitching {
             self.viewModel.postReplaceVerifiedArea()
         } else {
