@@ -115,6 +115,7 @@
 		740968B72DEC3CA700AFF624 /* VerifiedAreasCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740968B62DEC3C9000AFF624 /* VerifiedAreasCollectionViewCell.swift */; };
 		740EE8282E059875007A5DCF /* GetAppUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740EE8272E059862007A5DCF /* GetAppUpdateRequest.swift */; };
 		740EE82A2E059881007A5DCF /* GetAppUpdateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740EE8292E05987A007A5DCF /* GetAppUpdateResponse.swift */; };
+		740EE82E2E059908007A5DCF /* AppTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740EE82D2E0598FF007A5DCF /* AppTargetType.swift */; };
 		741056172D6A4C4E002E8200 /* AmplitudeLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741056162D6A4C48002E8200 /* AmplitudeLiterals.swift */; };
 		741368002DD516680075D06A /* SearchSuggestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741367FF2DD516610075D06A /* SearchSuggestionCollectionViewCell.swift */; };
 		7414295B2D5D2FC400B69528 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7414295A2D5D2FBA00B69528 /* ProfileSettingViewController.swift */; };
@@ -400,6 +401,7 @@
 		740968B62DEC3C9000AFF624 /* VerifiedAreasCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiedAreasCollectionViewCell.swift; sourceTree = "<group>"; };
 		740EE8272E059862007A5DCF /* GetAppUpdateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAppUpdateRequest.swift; sourceTree = "<group>"; };
 		740EE8292E05987A007A5DCF /* GetAppUpdateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAppUpdateResponse.swift; sourceTree = "<group>"; };
+		740EE82D2E0598FF007A5DCF /* AppTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTargetType.swift; sourceTree = "<group>"; };
 		741056162D6A4C48002E8200 /* AmplitudeLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeLiterals.swift; sourceTree = "<group>"; };
 		741367FF2DD516610075D06A /* SearchSuggestionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionCollectionViewCell.swift; sourceTree = "<group>"; };
 		7414295A2D5D2FBA00B69528 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
@@ -944,6 +946,7 @@
 		740EE8252E05983F007A5DCF /* App */ = {
 			isa = PBXGroup;
 			children = (
+				740EE82D2E0598FF007A5DCF /* AppTargetType.swift */,
 				740EE8262E05984A007A5DCF /* DTO */,
 			);
 			path = App;
@@ -2134,6 +2137,7 @@
 				D696F1B22D3A7E3400CCD5FF /* ACAlertView.swift in Sources */,
 				743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */,
 				152F8D242DF268FA0064022B /* SpotListCellDelegate.swift in Sources */,
+				740EE82E2E059908007A5DCF /* AppTargetType.swift in Sources */,
 				15F15E852DBFD206002F81E2 /* LanguageType.swift in Sources */,
 				151AB6902DD367BF00D01DE8 /* SpotDetailView.swift in Sources */,
 				15A48BFC2D574BB9003C2421 /* ProfileEditViewController.swift in Sources */,
