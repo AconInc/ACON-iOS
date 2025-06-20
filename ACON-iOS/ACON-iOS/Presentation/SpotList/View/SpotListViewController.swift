@@ -401,7 +401,7 @@ extension SpotListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         let dataCount = viewModel.spotList.spotList.count
-        let adCount = dataCount / 5
+        let adCount = dataCount / 6
         return viewModel.spotList.transportMode == .walking ? dataCount + adCount : dataCount
     }
 
@@ -414,8 +414,7 @@ extension SpotListViewController: UICollectionViewDataSource {
 
         switch spotList.transportMode {
         case .walking:
-            // TODO: - indexPath.item % 6이 맞는데, 제대로 셀 reuse가 안 돼서 같은 장소 두 번 뜸
-            if indexPath.item % 5 == 0 && indexPath.item > 0 {
+            if indexPath.item % 6 == 5 {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpotListGoogleAdCollectionViewCell.cellIdentifier, for: indexPath) as? SpotListGoogleAdCollectionViewCell else {
                     return UICollectionViewCell() }
 
@@ -498,8 +497,8 @@ extension SpotListViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let transportMode: TransportModeType? = viewModel.spotList.transportMode
-        let isAd: Bool = transportMode == .walking && indexPath.item % 5 == 0 && indexPath.item > 0
-        let adAboveCount: Int = indexPath.item / 5
+        let isAd: Bool = transportMode == .walking && indexPath.item % 6 == 5
+        let adAboveCount: Int = indexPath.item / 6
         let dataIndex: Int = transportMode == .walking ? indexPath.item - adAboveCount : indexPath.item
 
         let spot: SpotModel = viewModel.spotList.spotList[dataIndex]
@@ -683,7 +682,7 @@ private extension SpotListViewController {
             return UICollectionViewCell()
         }
 
-        let adAboveCount = indexPath.item / 5
+        let adAboveCount = indexPath.item / 6
         let dataIndex = spotList.transportMode == .walking ? indexPath.item - adAboveCount : indexPath.item
         let spot = spotList.spotList[dataIndex]
         let lockCell = !AuthManager.shared.hasToken && indexPath.item > 4

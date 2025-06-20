@@ -40,9 +40,8 @@ class SpotListCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 let ratio = min(distanceFromCenter / transitionDistance, 1.0)
                 let currentWidth = maxCellSize.width - (maxCellSize.width - minCellSize.width) * ratio
                 let scale = currentWidth / maxCellSize.width
-                
-                // TODO: - indexPath.item % 6이 맞는데, 제대로 셀 reuse가 안 돼서 같은 장소 두 번 뜸
-                if attribute.indexPath.item % 5 == 0 && attribute.indexPath.item != 0 {
+
+                if attribute.indexPath.item % 6 == 5 {
                     attribute.size = adCellSize
                     attribute.transform = CGAffineTransform.identity
                     attribute.alpha = 1.0 - (0.5 * ratio)
