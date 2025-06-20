@@ -92,7 +92,7 @@ class MenuImageSlideViewController: BaseViewController {
         }
 
         collectionView.do {
-            $0.backgroundColor = .gray900
+            $0.backgroundColor = .clear
             $0.isPagingEnabled = true
             $0.showsHorizontalScrollIndicator = false
         }

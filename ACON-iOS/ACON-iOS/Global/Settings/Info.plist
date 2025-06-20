@@ -19,8 +19,10 @@
 	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
-	<key>AMPLITUDE_KEY</key>
-	<string>${AMPLITUDE_KEY}</string>
+	<key>AMPLITUDE_KEY_DEBUG</key>
+	<string>${AMPLITUDE_KEY_DEBUG}</string>
+	<key>AMPLITUDE_KEY_RELEASE</key>
+	<string>${AMPLITUDE_KEY_RELEASE}</string>
 	<key>BASE_URL</key>
 	<string>${BASE_URL}</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -67,7 +69,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2025.0619.2317</string>
+	<string>2025.0620.1937</string>
 	<key>GIDClientID</key>
 	<string>${GOOGLE_CLIENT_ID}</string>
 	<key>GOOGLE_WEB_CLIENT_ID</key>

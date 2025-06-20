@@ -132,5 +132,29 @@ extension UIViewController {
             self.present(alertVC, animated: true)
         }
     }
-    
+
+
+    // MARK: - 최상위 VC 접근하기
+
+    func getTopViewController() -> UIViewController? {
+        if let presentedVC = presentedViewController {
+            return presentedVC.getTopViewController()
+        }
+
+        if let navController = self as? UINavigationController {
+            return navController.visibleViewController?.getTopViewController()
+        }
+
+        if let tabController = self as? UITabBarController {
+            return tabController.selectedViewController?.getTopViewController()
+        }
+
+        if let pageViewController = self as? UIPageViewController,
+           let firstVC = pageViewController.viewControllers?.first {
+            return firstVC.getTopViewController()
+        }
+
+        return self
+    }
+
 }

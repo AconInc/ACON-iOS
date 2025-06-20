@@ -131,7 +131,7 @@ extension SpotDetailViewModel {
 
 extension SpotDetailViewModel {
 
-    func createBranchDeepLink(_ completion: @escaping (String, String) -> ()) {
+    func createBranchDeepLink(_ completion: @escaping (String) -> ()) {
         guard let buo: BranchUniversalObject = makeBranchUniversalObject() else { return }
         let lp: BranchLinkProperties = makeBranchLinkProperties()
         buo.getShortUrl(with: lp) { [weak self] url, error in
@@ -148,7 +148,9 @@ extension SpotDetailViewModel {
             let spotName = self?.spotDetail?.name ?? ""
             let description = StringLiterals.DeepLink.atAcon + spotName + StringLiterals.DeepLink.checkOut
 
-            completion(description, url)
+            let context: String = description + "\n" + url
+
+            completion(context)
             print("🔗✅ deeplink 생성 성공: \(url)")
         }
     }

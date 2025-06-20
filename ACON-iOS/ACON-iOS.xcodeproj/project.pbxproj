@@ -47,6 +47,7 @@
 		1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */; };
 		1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */; };
 		155BC2922DF09EB200E1744E /* ShadowColorCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155BC2912DF09EB200E1744E /* ShadowColorCache.swift */; };
+		155FE8312E05596F0091E9A4 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155FE8302E05596F0091E9A4 /* Bundle+.swift */; };
 		156AA7242D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */; };
 		156AA72A2D6510E1005B8DCE /* GetNicknameValidityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7292D6510E1005B8DCE /* GetNicknameValidityRequest.swift */; };
 		156AE6792DE0F1D300AE800D /* NoMatchingSpotListItemSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AE6782DE0F1D300AE800D /* NoMatchingSpotListItemSizeType.swift */; };
@@ -331,6 +332,7 @@
 		1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarItemType.swift; sourceTree = "<group>"; };
 		1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
 		155BC2912DF09EB200E1744E /* ShadowColorCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowColorCache.swift; sourceTree = "<group>"; };
+		155FE8302E05596F0091E9A4 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVerifiedAreaListResponse.swift; sourceTree = "<group>"; };
 		156AA7292D6510E1005B8DCE /* GetNicknameValidityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNicknameValidityRequest.swift; sourceTree = "<group>"; };
 		156AE6782DE0F1D300AE800D /* NoMatchingSpotListItemSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMatchingSpotListItemSizeType.swift; sourceTree = "<group>"; };
@@ -1290,6 +1292,7 @@
 		748D6F752D2BCAA8007690B4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				155FE8302E05596F0091E9A4 /* Bundle+.swift */,
 				743900902DC50918002F91B1 /* UIVisualEffectView+.swift */,
 				74BF92162D393B4700B923E3 /* Int+.swift */,
 				74CDCE552D310B1300E3A21A /* String+.swift */,
@@ -2145,6 +2148,7 @@
 				741E689A2D3D43FF00DF99EF /* EmptyResponse.swift in Sources */,
 				745B19AC2D40021E00BDBDA4 /* PostLoginRequest.swift in Sources */,
 				741A06CA2D35415800778219 /* DropAcornViewController.swift in Sources */,
+				155FE8312E05596F0091E9A4 /* Bundle+.swift in Sources */,
 				746261652D3EA26D00A4E84F /* GetSearchSuggestionRequest.swift in Sources */,
 				15CD257A2D3FEDBA00320006 /* SpotListService.swift in Sources */,
 				15A3F6A62D36C49F00577E16 /* SpotListItemSizeType.swift in Sources */,
@@ -2212,7 +2216,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2025.0619.2317;
+				CURRENT_PROJECT_VERSION = 2025.0620.1937;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = KX5Q77JSUF;
@@ -2256,7 +2260,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2025.0619.2317;
+				CURRENT_PROJECT_VERSION = 2025.0620.1937;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = KX5Q77JSUF;
 				GENERATE_INFOPLIST_FILE = NO;

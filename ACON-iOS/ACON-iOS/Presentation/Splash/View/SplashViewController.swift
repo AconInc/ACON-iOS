@@ -36,9 +36,9 @@ class SplashViewController: BaseViewController {
         playSplashAnimation()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            if let spotID = DeepLinkManager.shared.getSpotID() {
+            if DeepLinkManager.shared.isFreshDeepLink(),
+               let spotID = DeepLinkManager.shared.getSpotID() {
                 self.goToSpotDetailVC(with: spotID)
-                DeepLinkManager.shared.deepLinkParams = nil
             } else {
                 self.goToNextVC()
             }
