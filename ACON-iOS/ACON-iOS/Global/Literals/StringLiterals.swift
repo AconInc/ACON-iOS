@@ -471,6 +471,12 @@ enum StringLiterals {
         
         static let branchDeepLinkPathParamName = "$deeplink_path"
         
+        static let alwaysDeepLink = "$always_deeplink"
+        
+        static let iOSDeepView = "$ios_passive_deepview"
+        
+        static let iOSPassiveDeepView = "$ios_passive_deepview"
+        
     }
 
 }
