@@ -144,7 +144,6 @@ class SpotListGoogleAdCollectionViewCell: BaseCollectionViewCell {
         super.prepareForReuse()
         
         nativeAdView.nativeAd = nil
-        hideSkeleton()
     }
     
     override func layoutSubviews() {
