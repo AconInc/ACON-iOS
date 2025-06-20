@@ -104,8 +104,8 @@ private extension SavedSpotsViewController {
             }
             viewModel.onGetSavedSpotsSuccess.value = nil
             
-            // NOTE: 최소 1초 스켈레톤 유지
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            // NOTE: 최소 0.8초 스켈레톤 유지
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                 self.savedSpotCollectionView.hideSkeleton()
             }
         }

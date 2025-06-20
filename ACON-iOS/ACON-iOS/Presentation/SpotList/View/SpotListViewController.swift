@@ -51,7 +51,7 @@ class SpotListViewController: BaseNavViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        // NOTE: life cycle 문제로 무한 skeleton 되는 문제 방지
+        // NOTE: 무한 skeleton 되는 문제 방지
         if !viewModel.spotList.spotList.isEmpty {
             endSkeletonAnimation()
         }
@@ -75,6 +75,11 @@ class SpotListViewController: BaseNavViewController {
                 cell.setNeedsLayout()
            }
        }
+
+        // NOTE: 무한 skeleton 되는 문제 방지
+        if !viewModel.spotList.spotList.isEmpty {
+            endSkeletonAnimation()
+        }
     }
 
 
@@ -189,8 +194,8 @@ extension SpotListViewController {
                     self.spotListView.collectionView.setContentOffset(.zero, animated: true)
                 }
 
-                // NOTE: 스켈레톤 최소 1초 유지
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                // NOTE: 최소 0.8초 스켈레톤 유지
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                     self.isSkeletonShowing = false
                     self.endSkeletonAnimation()
                 }
