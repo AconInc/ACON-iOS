@@ -15,6 +15,8 @@ final class ACService {
     
     private init() {}
     
+    lazy var appService: AppService = AppService()
+    
     lazy var authService: AuthService = AuthService()
     
     lazy var spotDetailService: SpotDetailService = SpotDetailService()
