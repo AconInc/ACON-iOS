@@ -15,17 +15,31 @@ final class DeepLinkManager {
     var deepLinkParams: [String: AnyObject]?
 
     func getSpotID() -> Int64? {
-        let spotID = deepLinkParams?["spotId"] as? Int64
-        return spotID
+        // NOTE: 딥링크는 한 번만 사용되도록 초기화
+        defer { deepLinkParams = nil }
+
+        // NOTE: iOS 링크
+        if let spotIDInt64 = deepLinkParams?["spotId"] as? Int64 {
+            return spotIDInt64
+        }
+        // NOTE: Android 링크
+        else if let spotIDString = deepLinkParams?["spotId"] as? String,
+                  let spotIDInt64 = Int64(spotIDString) {
+            return spotIDInt64
+        } else {
+            return nil
+        }
     }
 
     func presentSpotDetail() {
         if let spotID = getSpotID() {
             DispatchQueue.main.async {
-                if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
+                   let window = sceneDelegate.window,
+                   let topVC = window.rootViewController?.getTopViewController() {
                     let spotDetailVC = SpotDetailViewController(spotID, isDeepLink: true)
                     spotDetailVC.modalPresentationStyle = .fullScreen
-                    sceneDelegate.window?.rootViewController?.present(spotDetailVC, animated: true)
+                    topVC.present(spotDetailVC, animated: true)
                 }
             }
         }

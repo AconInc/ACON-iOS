@@ -385,7 +385,7 @@ enum StringLiterals {
         
         static let onboarding = "취향탐색 다시하기"
         
-        static let localVerification = "동네 인증하기"
+        static let localVerification = "지역 인증하기"
         
         static let logout = "로그아웃하기"
         
@@ -470,6 +470,12 @@ enum StringLiterals {
         static let branchLinkFeature = "spot_detail_share"
         
         static let branchDeepLinkPathParamName = "$deeplink_path"
+        
+        static let alwaysDeepLink = "$always_deeplink"
+        
+        static let iOSDeepView = "$ios_passive_deepview"
+        
+        static let iOSPassiveDeepView = "$ios_passive_deepview"
         
     }
 

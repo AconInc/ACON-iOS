@@ -38,7 +38,6 @@ class SplashViewController: BaseViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             if let spotID = DeepLinkManager.shared.getSpotID() {
                 self.goToSpotDetailVC(with: spotID)
-                DeepLinkManager.shared.deepLinkParams = nil
             } else {
                 self.goToNextVC()
             }

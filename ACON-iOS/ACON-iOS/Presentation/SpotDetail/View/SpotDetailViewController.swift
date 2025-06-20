@@ -137,11 +137,10 @@ class SpotDetailViewController: BaseNavViewController {
         }
 
         spotDetailView.shareButton.onTap = { [weak self] _ in
-            self?.viewModel.createBranchDeepLink() { [weak self] description, url in
+            self?.viewModel.createBranchDeepLink() { [weak self] context in
                 guard let self = self else { return }
-                
-                let itemsToShare: [Any] = [description, url]
-                let activityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+
+                let activityVC = UIActivityViewController(activityItems: [context], applicationActivities: nil)
                 self.present(activityVC, animated: true, completion: nil)
 
                 AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.detailPage, properties: ["click_share?": true])

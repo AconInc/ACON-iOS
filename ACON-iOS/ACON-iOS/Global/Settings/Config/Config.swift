@@ -23,7 +23,9 @@ enum Config {
             
             static let nmfNcpKeyID = "NMFNcpKeyId"
             
-            static let amplitudeKey = "AMPLITUDE_KEY"
+            static let amplitudeKeyDebug = "AMPLITUDE_KEY_DEBUG"
+            
+            static let amplitudeKeyRelease = "AMPLITUDE_KEY_RELEASE"
             
             static let nmfCustomStyleID = "NMFCustomStyleID"
             
@@ -87,8 +89,16 @@ extension Config {
     }()
     
     static let amplitudeKey: String = {
-        guard let key = Config.infoDictionary[Keys.Plist.amplitudeKey] as? String else {
-            fatalError("amplitudeKey is not set in plist for this configuration")
+    #if DEBUG
+        let keyName = Keys.Plist.amplitudeKeyDebug
+    #else
+        let keyName = Bundle.main.isTestFlight
+            ? Keys.Plist.amplitudeKeyDebug
+            : Keys.Plist.amplitudeKeyRelease
+    #endif
+
+        guard let key = Config.infoDictionary[keyName] as? String else {
+            fatalError("Amplitude key '\(keyName)' is not set in plist for this configuration")
         }
         return key
     }()

@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /// Branch io 초기화
         BranchScene.shared().initSession(launchOptions: launchOptions, registerDeepLinkHandler: { (params, error, scene) in
             if let params = params as? [String: AnyObject], error == nil {
+                print("🔗 deepLink: \(params)")
                 DeepLinkManager.shared.deepLinkParams = params
             }
         })
