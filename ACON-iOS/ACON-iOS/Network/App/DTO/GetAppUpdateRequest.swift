@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GetAppUpdateRequest: Codable {
+struct GetAppUpdateRequest: Encodable {
     
     let platform: String = "ios"
     

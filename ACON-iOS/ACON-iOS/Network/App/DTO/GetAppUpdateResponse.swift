@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GetAppUpdateResponse: Codable {
+struct GetAppUpdateResponse: Decodable {
     
     let forceUpdateRequired: Bool
     
