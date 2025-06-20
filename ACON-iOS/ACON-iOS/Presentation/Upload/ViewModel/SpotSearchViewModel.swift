@@ -149,7 +149,7 @@ class SpotSearchViewModel: Serviceable {
 extension SpotSearchViewModel: ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager, didUpdateLocation location: CLLocation) {
-
+        ACLocationManager.shared.removeDelegate(self)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             

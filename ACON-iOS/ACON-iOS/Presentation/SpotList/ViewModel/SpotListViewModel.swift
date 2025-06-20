@@ -32,6 +32,8 @@ class SpotListViewModel: Serviceable {
     
     var needToShowToast: ObservablePattern<Bool> = ObservablePattern(nil)
 
+    private var isPeriodicLocationCheck = false
+    
 
     // MARK: - Filter
 
@@ -40,11 +42,30 @@ class SpotListViewModel: Serviceable {
     var filterList: [SpotFilterModel] = []
 
 
+    // MARK: - LifeCycle
+    
+    deinit {
+        ACLocationManager.shared.removeDelegate(self)
+    }
+    
+    
     // MARK: - Methods
 
-    func updateLocationAndPostSpotList() {
-        // 위치 권한 확인 및 업데이트 시작
+    // NOTE: - SpotListView 나타날 때
+    func startLocationTracking() {
         ACLocationManager.shared.addDelegate(self)
+        updateLocationAndPostSpotList()
+        startPeriodicLocationCheck()
+    }
+   
+    // NOTE: - SpotListView 사라질 때
+    func stopLocationTracking() {
+        ACLocationManager.shared.removeDelegate(self)
+        stopPeriodicLocationCheck()
+    }
+    
+    func updateLocationAndPostSpotList() {
+        isPeriodicLocationCheck = false
         ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
     }
     
@@ -129,10 +150,14 @@ extension SpotListViewModel {
 extension SpotListViewModel: ACLocationManagerDelegate {
     
     func locationManager(_ manager: ACLocationManager, didUpdateLocation location: CLLocation) {
-        ACLocationManager.shared.removeDelegate(self)
         userLocation = location
         userCoordinate = location.coordinate
-        postSpotList()
+        
+        if isPeriodicLocationCheck {
+            checkLocationChange()
+        } else {
+            postSpotList()
+        }
     }
 
 }
@@ -143,35 +168,45 @@ extension SpotListViewModel: ACLocationManagerDelegate {
 extension SpotListViewModel {
     
     func startPeriodicLocationCheck() {
-        checkLocationChange()
+        requestCurrentLocationForCheck()
         stopPeriodicLocationCheck()
         
         periodicLocationCheckTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self] _ in
             guard let self = self else { return }
-            
-            checkLocationChange()
+            self.requestCurrentLocationForCheck()
         }
     }
-    
+        
     func stopPeriodicLocationCheck() {
         periodicLocationCheckTimer?.invalidate()
         periodicLocationCheckTimer = nil
     }
-    
-    func checkLocationChange() {
+        
+    private func requestCurrentLocationForCheck() {
         guard let lastLocation = lastNetworkLocation else { return }
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = windowScene.windows.first else { return }
         let hasToast = window.subviews.contains { $0 is ACToastView }
-        guard !hasToast else { return }
         
+        guard !hasToast else {
+            return
+        }
+        
+        isPeriodicLocationCheck = true
         ACLocationManager.shared.checkUserDeviceLocationServiceAuthorization()
+    }
+        
+    private func checkLocationChange() {
+        guard let lastLocation = lastNetworkLocation else { return }
+        
         let distance = lastLocation.distance(from: userLocation)
-        print("🧇 \(distance)")
+        print("🧇 거리: \(distance)")
         if distance >= locationDistanceThreshold {
             print("🧇 위치 변화 감지: \(distance)m")
             needToShowToast.value = true
         }
+        
+        isPeriodicLocationCheck = false
     }
     
 }
