@@ -120,12 +120,12 @@ extension SettingTableViewCell {
 
     func bindVersionData() {
         Task {
-            let isLatestVersion = await AppVersionManager.shared.checkExactVersion()
+            let isUpdateAvailable = await AppVersionManager.shared.checkUpdateAvailable()
             
             DispatchQueue.main.async {
                 self.arrowImageView.isHidden = true
-                self.versionLabel.isHidden = !isLatestVersion
-                self.updateLabel.isHidden = isLatestVersion
+                self.versionLabel.isHidden = isUpdateAvailable
+                self.updateLabel.isHidden = !isUpdateAvailable
             }
         }
     }

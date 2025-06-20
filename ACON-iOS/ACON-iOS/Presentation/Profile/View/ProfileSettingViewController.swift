@@ -197,8 +197,8 @@ extension ProfileSettingViewController: UITableViewDataSource {
             switch items[indexPath.row] {
             case .version:
                 Task {
-                    let isLatestVersion = await AppVersionManager.shared.checkExactVersion()
-                    if !isLatestVersion {
+                    let isUpdateAvailable = await AppVersionManager.shared.checkUpdateAvailable()
+                    if isUpdateAvailable {
                         AppVersionManager.shared.openAppStore()
                     }
                 }
