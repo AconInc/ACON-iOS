@@ -113,6 +113,8 @@
 		74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */; };
 		74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */; };
 		740968B72DEC3CA700AFF624 /* VerifiedAreasCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740968B62DEC3C9000AFF624 /* VerifiedAreasCollectionViewCell.swift */; };
+		740EE8282E059875007A5DCF /* GetAppUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740EE8272E059862007A5DCF /* GetAppUpdateRequest.swift */; };
+		740EE82A2E059881007A5DCF /* GetAppUpdateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740EE8292E05987A007A5DCF /* GetAppUpdateResponse.swift */; };
 		741056172D6A4C4E002E8200 /* AmplitudeLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741056162D6A4C48002E8200 /* AmplitudeLiterals.swift */; };
 		741368002DD516680075D06A /* SearchSuggestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741367FF2DD516610075D06A /* SearchSuggestionCollectionViewCell.swift */; };
 		7414295B2D5D2FC400B69528 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7414295A2D5D2FBA00B69528 /* ProfileSettingViewController.swift */; };
@@ -396,6 +398,8 @@
 		74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultitaskDelegate.swift; sourceTree = "<group>"; };
 		74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLocationManager.swift; sourceTree = "<group>"; };
 		740968B62DEC3C9000AFF624 /* VerifiedAreasCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiedAreasCollectionViewCell.swift; sourceTree = "<group>"; };
+		740EE8272E059862007A5DCF /* GetAppUpdateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAppUpdateRequest.swift; sourceTree = "<group>"; };
+		740EE8292E05987A007A5DCF /* GetAppUpdateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAppUpdateResponse.swift; sourceTree = "<group>"; };
 		741056162D6A4C48002E8200 /* AmplitudeLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeLiterals.swift; sourceTree = "<group>"; };
 		741367FF2DD516610075D06A /* SearchSuggestionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionCollectionViewCell.swift; sourceTree = "<group>"; };
 		7414295A2D5D2FBA00B69528 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
@@ -937,6 +941,23 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		740EE8252E05983F007A5DCF /* App */ = {
+			isa = PBXGroup;
+			children = (
+				740EE8262E05984A007A5DCF /* DTO */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		740EE8262E05984A007A5DCF /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				740EE8292E05987A007A5DCF /* GetAppUpdateResponse.swift */,
+				740EE8272E059862007A5DCF /* GetAppUpdateRequest.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
 		741429612D5D3CDF00B69528 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1260,6 +1281,7 @@
 		748D6F712D2BCA7E007690B4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				740EE8252E05983F007A5DCF /* App */,
 				745B19A92D4001AD00BDBDA4 /* Auth */,
 				15CD25752D3FE2D800320006 /* SpotList */,
 				7462617C2D3F9E9400A4E84F /* SpotDetail */,
@@ -1959,6 +1981,7 @@
 				157C0BE82DC897EE000B04AF /* SpotToggleButtonView.swift in Sources */,
 				746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */,
 				151FC0C92DBD5DA0005F4D0D /* Character+.swift in Sources */,
+				740EE82A2E059881007A5DCF /* GetAppUpdateResponse.swift in Sources */,
 				15DC053F2D623DD400B752DD /* PostLogoutRequest.swift in Sources */,
 				1502D71B2DE9B7ED00A21D81 /* UICollectionReusableView+.swift in Sources */,
 				741E68982D3D3D8E00DF99EF /* ErrorResponse.swift in Sources */,
@@ -2099,6 +2122,7 @@
 				74BF92122D391FFE00B923E3 /* LocalMapViewController.swift in Sources */,
 				D6E8168E2D6228F5001E4EBF /* WithdrawalViewController.swift in Sources */,
 				740968B72DEC3CA700AFF624 /* VerifiedAreasCollectionViewCell.swift in Sources */,
+				740EE8282E059875007A5DCF /* GetAppUpdateRequest.swift in Sources */,
 				15F45F842D6664C900BD6B9C /* LoginLockOverlayView.swift in Sources */,
 				746261692D3EA33300A4E84F /* PostReviewRequest.swift in Sources */,
 				15CD257E2D3FF4F200320006 /* SpotListTargetType.swift in Sources */,
