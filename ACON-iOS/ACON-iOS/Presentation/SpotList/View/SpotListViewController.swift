@@ -45,7 +45,7 @@ class SpotListViewController: BaseNavViewController {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = false
-        viewModel.startPeriodicLocationCheck()
+        viewModel.startLocationTracking()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -60,7 +60,8 @@ class SpotListViewController: BaseNavViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        stopPeriodicLocationCheck()
+        viewModel.stopLocationTracking()
+        hideLocationCheckToast()
     }
     
     deinit {
@@ -148,9 +149,8 @@ class SpotListViewController: BaseNavViewController {
         }
     }
     
-    private func stopPeriodicLocationCheck() {
+    private func hideLocationCheckToast() {
         ACToastController.hide()
-        viewModel.stopPeriodicLocationCheck()
     }
 
 }
@@ -181,6 +181,7 @@ extension SpotListViewController {
 
             if onSuccess {
                 DispatchQueue.main.async {
+                    self.hideLocationCheckToast()
                     self.isDataLoading = false
                     self.spotListView.regionErrorView.isHidden = true
                     self.spotListView.updateCollectionViewLayout(type: spotList.transportMode)
@@ -272,7 +273,7 @@ private extension SpotListViewController {
     func tappedFilterButton() {
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.mainMenu, properties: ["click_filter?": true])
 
-        stopPeriodicLocationCheck()
+        hideLocationCheckToast()
         
         guard AuthManager.shared.hasToken else {
             let vc = LoginModalViewController(AmplitudeLiterals.EventName.filter)
@@ -735,12 +736,13 @@ private extension SpotListViewController {
     
     @objc
     func appWillEnterForeground() {
-        viewModel.startPeriodicLocationCheck()
+        viewModel.startLocationTracking()
     }
     
     @objc
     func appDidEnterBackground() {
-        stopPeriodicLocationCheck()
+        viewModel.stopLocationTracking()
+        hideLocationCheckToast()
     }
     
 }
