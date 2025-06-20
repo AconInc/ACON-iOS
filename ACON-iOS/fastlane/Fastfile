@@ -162,6 +162,7 @@ platform :ios do
      skip_metadata: false,
      skip_screenshots: true,
      submit_for_review: false,
+     precheck_include_in_app_purchases: false,
      api_key: api_key
    )
  end

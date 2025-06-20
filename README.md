@@ -9,7 +9,7 @@
 맛집 찾느라 고민 중인 당신을 위해. No more research, acon.
 
 
-  [Appstore](https://apps.apple.com/kr/app/acon/id6740120473) · [About us](https://stripe-shoemaker-907.notion.site/Hello-We-are-Team-Acon-1a0856d5371b8017b102c6f5cd436e2b) · [Previous Repository](https://github.com/SOPT-all/35-APPJAM-iOS-ACON)
+  [Appstore](https://apps.apple.com/kr/app/acon/id6740120473) · [About us](https://aconinc.netlify.app) · [Previous Repository](https://github.com/SOPT-all/35-APPJAM-iOS-ACON)
 
 
 <img src="https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=Apple&logoColor=white">

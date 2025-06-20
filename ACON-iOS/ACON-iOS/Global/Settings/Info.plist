@@ -2,29 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>BASIC_PROFILE_IMAGE</key>
-	<string>${BASIC_PROFILE_IMAGE}</string>
-	<key>branch_key</key>
-	<dict>
-		<key>test</key>
-		<string>${BRANCH_TEST_KEY}</string>
-		<key>live</key>
-		<string>${BRANCH_LIVE_KEY}</string>
-	</dict>
-	<key>branch_universal_link_domains</key>
-	<array>
-		<string>aconpage.app.link</string>
-		<string>aconpage-alternate.app.link</string>
-		<string>aconpage.test-app.link</string>
-	</array>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>AMPLITUDE_KEY_DEBUG</key>
 	<string>${AMPLITUDE_KEY_DEBUG}</string>
 	<key>AMPLITUDE_KEY_RELEASE</key>
 	<string>${AMPLITUDE_KEY_RELEASE}</string>
 	<key>BASE_URL</key>
 	<string>${BASE_URL}</string>
+	<key>BASIC_PROFILE_IMAGE</key>
+	<string>${BASIC_PROFILE_IMAGE}</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -50,12 +35,12 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>io.Branch.Branchsters</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>branchsters</string>
 			</array>
-			<key>CFBundleURLName</key>
-			<string>io.Branch.Branchsters</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
@@ -69,11 +54,19 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2025.0620.2028</string>
+	<string>2025.0621.0110</string>
+	<key>GADApplicationIdentifier</key>
+	<string>${GAD_APPLICATION_IDENTIFIER}</string>
+	<key>GAD_AD_UNIT_ID</key>
+	<string>${GAD_AD_UNIT_ID}</string>
+	<key>GAD_AD_UNIT_ID_IMAGE_ONLY</key>
+	<string>${GAD_AD_UNIT_ID_IMAGE_ONLY}</string>
 	<key>GIDClientID</key>
 	<string>${GOOGLE_CLIENT_ID}</string>
 	<key>GOOGLE_WEB_CLIENT_ID</key>
 	<string>${GOOGLE_WEB_CLIENT_ID}</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>nmap</string>
@@ -82,25 +75,19 @@
 	<true/>
 	<key>NMFClientId</key>
 	<string>${NMAP_CLIENT_KEY}</string>
-	<key>NMFNcpKeyId</key>
-	<string>${NMF_NCP_KEY_ID}</string>
 	<key>NMFCustomStyleID</key>
 	<string>${NMF_CUSTOM_STYLE_ID}</string>
-	<key>GADApplicationIdentifier</key>
-	<string>${GAD_APPLICATION_IDENTIFIER}</string>
-	<key>GAD_AD_UNIT_ID</key>
-	<string>${GAD_AD_UNIT_ID}</string>
-	<key>GAD_AD_UNIT_ID_IMAGE_ONLY</key>
-	<string>${GAD_AD_UNIT_ID_IMAGE_ONLY}</string>
+	<key>NMFNcpKeyId</key>
+	<string>${NMF_NCP_KEY_ID}</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>acon에서 회원님 기기의 GPS를 사용하여 현재 위치기반 장소추천을 위해 위치접근에 대한 권한을 사용합니다.</string>
+	<string>Acon에서 회원님 기기의 GPS를 사용하여 현재 위치기반 장소추천을 위해 위치접근에 대한 권한을 사용합니다.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>acon에서 회원님의 이미지 및 동영상을 공유할 수 있도록 지원하고 프로필 사진 변경, 후기 업로드 등의 목적으로 
+	<string>Acon에서 회원님의 이미지 및 동영상을 공유할 수 있도록 지원하고 프로필 사진 변경, 후기 업로드 등의 목적으로 
 회원님의 앨범 라이브러리에 대한 액세스 권한을 사용합니다.</string>
 	<key>UIAppFonts</key>
 	<array>
@@ -143,6 +130,19 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>branch_key</key>
+	<dict>
+		<key>live</key>
+		<string>${BRANCH_LIVE_KEY}</string>
+		<key>test</key>
+		<string>${BRANCH_TEST_KEY}</string>
+	</dict>
+	<key>branch_universal_link_domains</key>
+	<array>
+		<string>aconpage.app.link</string>
+		<string>aconpage-alternate.app.link</string>
+		<string>aconpage.test-app.link</string>
 	</array>
 </dict>
 </plist>
