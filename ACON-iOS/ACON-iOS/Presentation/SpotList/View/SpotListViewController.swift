@@ -400,7 +400,7 @@ extension SpotListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         let dataCount = viewModel.spotList.spotList.count
-        let adCount = dataCount / 5
+        let adCount = dataCount / 6
         return viewModel.spotList.transportMode == .walking ? dataCount + adCount : dataCount
     }
 
