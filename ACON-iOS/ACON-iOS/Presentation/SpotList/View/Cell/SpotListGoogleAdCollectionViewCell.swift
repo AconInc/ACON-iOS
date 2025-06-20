@@ -177,8 +177,7 @@ extension SpotListGoogleAdCollectionViewCell {
     func configure(with nativeAd: NativeAd) {
         nativeAdView.isHidden = false
         
-        // TODO: 🍇 주석 해제
-//        endSkeletonAnimation()
+        hideSkeleton()
         
         if let headline = nativeAd.headline {
             headlineLabel.setLabel(text: headline, style: .t4SB)
