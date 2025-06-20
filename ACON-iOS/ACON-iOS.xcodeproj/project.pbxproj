@@ -116,6 +116,7 @@
 		740EE8282E059875007A5DCF /* GetAppUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740EE8272E059862007A5DCF /* GetAppUpdateRequest.swift */; };
 		740EE82A2E059881007A5DCF /* GetAppUpdateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740EE8292E05987A007A5DCF /* GetAppUpdateResponse.swift */; };
 		740EE82E2E059908007A5DCF /* AppTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740EE82D2E0598FF007A5DCF /* AppTargetType.swift */; };
+		740EE8302E059A8C007A5DCF /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740EE82F2E059A89007A5DCF /* AppService.swift */; };
 		741056172D6A4C4E002E8200 /* AmplitudeLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741056162D6A4C48002E8200 /* AmplitudeLiterals.swift */; };
 		741368002DD516680075D06A /* SearchSuggestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741367FF2DD516610075D06A /* SearchSuggestionCollectionViewCell.swift */; };
 		7414295B2D5D2FC400B69528 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7414295A2D5D2FBA00B69528 /* ProfileSettingViewController.swift */; };
@@ -402,6 +403,7 @@
 		740EE8272E059862007A5DCF /* GetAppUpdateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAppUpdateRequest.swift; sourceTree = "<group>"; };
 		740EE8292E05987A007A5DCF /* GetAppUpdateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAppUpdateResponse.swift; sourceTree = "<group>"; };
 		740EE82D2E0598FF007A5DCF /* AppTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTargetType.swift; sourceTree = "<group>"; };
+		740EE82F2E059A89007A5DCF /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
 		741056162D6A4C48002E8200 /* AmplitudeLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeLiterals.swift; sourceTree = "<group>"; };
 		741367FF2DD516610075D06A /* SearchSuggestionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionCollectionViewCell.swift; sourceTree = "<group>"; };
 		7414295A2D5D2FBA00B69528 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
@@ -946,6 +948,7 @@
 		740EE8252E05983F007A5DCF /* App */ = {
 			isa = PBXGroup;
 			children = (
+				740EE82F2E059A89007A5DCF /* AppService.swift */,
 				740EE82D2E0598FF007A5DCF /* AppTargetType.swift */,
 				740EE8262E05984A007A5DCF /* DTO */,
 			);
@@ -2213,6 +2216,7 @@
 				745C7E152D35AEC10074DBDB /* SpotSearchViewModel.swift in Sources */,
 				741368002DD516680075D06A /* SearchSuggestionCollectionViewCell.swift in Sources */,
 				15CF62C22D577B600000A10F /* ProfileValidMessageType.swift in Sources */,
+				740EE8302E059A8C007A5DCF /* AppService.swift in Sources */,
 				D6E452932D3AA47500CBED02 /* ProfileView.swift in Sources */,
 				15A48BFE2D57546A003C2421 /* ProfileImageEditButton.swift in Sources */,
 				D6E452942D3AA47500CBED02 /* ProfileViewController.swift in Sources */,
