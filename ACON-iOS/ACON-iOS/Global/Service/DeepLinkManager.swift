@@ -15,8 +15,14 @@ final class DeepLinkManager {
     var deepLinkParams: [String: AnyObject]?
 
     func getSpotID() -> Int64? {
-        let spotID = deepLinkParams?["spotId"] as? Int64
-        return spotID
+        if let spotIDInt64 = deepLinkParams?["spotId"] as? Int64 {
+            return spotIDInt64
+        } else if let spotIDString = deepLinkParams?["spotId"] as? String,
+                  let spotIDInt64 = Int64(spotIDString) {
+            return spotIDInt64
+        } else {
+            return nil
+        }
     }
 
     func presentSpotDetail() {
