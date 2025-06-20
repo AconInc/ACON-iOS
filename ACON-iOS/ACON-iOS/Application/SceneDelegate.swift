@@ -64,15 +64,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func checkUpdate() {
         Task {
-            let updateAvailable = await AppVersionManager.shared.checkMajorMinorVersion() == false
+            let updateAvailable = await AppVersionManager.shared.checkUpdateAvailable()
+            
             if updateAvailable {
-                await MainActor.run {
-                    window?.rootViewController?.showDefaultAlert(title: "업데이트 알림",
-                                                                                    message: "지금 앱스토어에서 새로워진 acon을 만나보세요!",
-                                                                                    okText: "업데이트",
-                                                                                    isCancelAvailable: true,
-                                                                 cancelText: "나중에") {
-                        AppVersionManager.shared.openAppStore()
+                if await AppVersionManager.shared.getAppUpdate() {
+                    // NOTE: - 강제 업데이트
+                    await MainActor.run {
+                        window?.rootViewController?.presentACAlert(.essentialUpdate, longAction: {
+                            AppVersionManager.shared.openAppStore()
+                        })
+                    }
+                } else {
+                    // NOTE: - 24시간 체크
+                    let lastAlertTime = UserDefaults.standard.object(forKey: "lastUpdateAlertTime") as? Date
+                    let now = Date()
+                    
+                    if let lastTime = lastAlertTime {
+                        let timeDifference = now.timeIntervalSince(lastTime)
+                        let hourDifference = timeDifference / 3600
+                        
+                        // NOTE: - 24시간 이내에 이미 함
+                        if hourDifference < 24 { return }
+                    }
+                    
+                    // NOTE: - 일반 업데이트
+                    await MainActor.run {
+                        window?.rootViewController?.presentACAlert(.plainUpdate, rightAction: {
+                            AppVersionManager.shared.openAppStore()
+                        })
+                        UserDefaults.standard.set(now, forKey: "lastUpdateAlertTime")
                     }
                 }
             }
