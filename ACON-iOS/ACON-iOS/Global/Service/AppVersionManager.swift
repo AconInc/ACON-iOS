@@ -17,7 +17,7 @@ class AppVersionManager {
     
     private let appStoreURLString = "itms-apps://itunes.apple.com/app/apple-store/6740120473"
     
-    private let lookUpURLString = "https://itunes.apple.com/lookup?id=6740120473&country=kr"
+    private let lookUpURLString = "https://itunes.apple.com/lookup?id=6740120473"
     
     func getAppStoreVersion() async -> String? {
         guard let url = URL(string: lookUpURLString) else { return nil }
@@ -43,26 +43,36 @@ class AppVersionManager {
         }
     }
     
-    func checkExactVersion() async -> Bool {
-        guard let appStoreVersion = await getAppStoreVersion() else { return false }
-        return appStoreVersion == currentVersion
-    }
-    
-    func checkMajorMinorVersion() async -> Bool {
+    func checkUpdateAvailable() async -> Bool {
         guard let currentVersion = currentVersion,
-              let appStoreVersion = await getAppStoreVersion() else { return false }
-        
-        let splitAppStoreVersion = appStoreVersion.split(separator: ".").map { $0 }
-        let splitCurrentVersion = currentVersion.split(separator: ".").map { $0 }
-        
-        guard splitAppStoreVersion.count >= 2 && splitCurrentVersion.count >= 2 else { return true }
-        
-        if splitCurrentVersion[0].compare(splitAppStoreVersion[0], options: .numeric) == .orderedAscending {
-            return false
-        } else if splitCurrentVersion[1].compare(splitAppStoreVersion[1], options: .numeric) == .orderedAscending {
+              let appStoreVersion = await getAppStoreVersion() else {
             return false
         }
-        return true
+
+        return currentVersion.compare(appStoreVersion, options: .numeric) == .orderedAscending
+    }
+    
+}
+
+
+
+// MARK: - 강제 업데이트 로직
+
+extension AppVersionManager {
+    
+    func getAppUpdate() async -> Bool {
+        guard let currentVersion = currentVersion else { return false }
+        
+        return await withCheckedContinuation { continuation in
+            ACService.shared.appService.getAppUpdate(parameter: GetAppUpdateRequest(version: currentVersion)) { response in
+                switch response {
+                case .success(let data):
+                    continuation.resume(returning: data.forceUpdateRequired)
+                default:
+                    continuation.resume(returning: false)
+                }
+            }
+        }
     }
     
 }
