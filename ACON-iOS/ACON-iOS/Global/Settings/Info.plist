@@ -54,7 +54,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2025.0621.0110</string>
+	<string>2025.0621.1900</string>
 	<key>GADApplicationIdentifier</key>
 	<string>${GAD_APPLICATION_IDENTIFIER}</string>
 	<key>GAD_AD_UNIT_ID</key>
