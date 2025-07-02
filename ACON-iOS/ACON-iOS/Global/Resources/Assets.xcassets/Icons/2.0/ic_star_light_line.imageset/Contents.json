@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_star_light_line.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

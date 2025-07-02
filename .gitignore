@@ -40,13 +40,13 @@ playground.xcworkspace
 
 # Swift Package Manager
 # Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
-# Packages/
-# Package.pins
-# Package.resolved
+Packages/
+Package.pins
+Package.resolved
 # *.xcodeproj
 # Xcode automatically generates this directory with a .xcworkspacedata file and xcuserdata
 # hence it is not needed unless you have added a package configuration file to your project
-# .swiftpm
+.swiftpm
 
 .build/
 
@@ -54,7 +54,7 @@ playground.xcworkspace
 # We recommend against adding the Pods directory to your .gitignore. However
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-# Pods/
+Pods/
 # Add this line if you want to avoid checking in source code from the Xcode workspace
 # *.xcworkspace
 
@@ -74,10 +74,20 @@ Dependencies/
 # For more information about the recommended setup visit:
 # https://docs.fastlane.tools/best-practices/source-control/#source-control
 
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots/**/*.png
-fastlane/test_output
+ACON-iOS/fastlane/report.xml
+ACON-iOS/fastlane/Preview.html
+ACON-iOS/fastlane/screenshots/**/*.png
+ACON-iOS/fastlane/test_output
+ACON-iOS/fastlane/README.md
+
+# 환경변수
+.env
+.env.*
+!.env.example
+
+# Ruby/Bundler
+.bundle
+vendor/
 
 # Code Injection
 # After new code Injection tools there's a generated folder /iOSInjectionProject
@@ -88,7 +98,7 @@ iOSInjectionProject/
 ### SwiftPackageManager ###
 Packages
 xcuserdata
-*.xcodeproj
+# *.xcodeproj
 
 
 ### Xcode ###
@@ -106,3 +116,9 @@ xcuserdata
 *.xcconfig
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,swiftpackagemanager
+
+# macOS specific
+.DS_Store
+
+# Firebase Plist
+GoogleService-Info.plist

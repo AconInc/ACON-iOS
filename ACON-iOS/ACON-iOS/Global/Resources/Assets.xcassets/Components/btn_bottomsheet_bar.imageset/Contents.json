@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "btn_bottomsheet_bar.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

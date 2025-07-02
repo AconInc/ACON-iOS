@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "cmp_profile_selected img_layout.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
