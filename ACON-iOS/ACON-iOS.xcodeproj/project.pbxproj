@@ -53,6 +53,7 @@
 		155D45B12E26B2E3008C0316 /* SpotUploadSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45B02E26B2E3008C0316 /* SpotUploadSearchViewController.swift */; };
 		155D45B32E26B8CB008C0316 /* BaseUploadInquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45B22E26B8CB008C0316 /* BaseUploadInquiryView.swift */; };
 		155D45B62E26BB5F008C0316 /* RequirementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45B52E26BB5F008C0316 /* RequirementType.swift */; };
+		155D45B82E26CCBC008C0316 /* BaseUploadInquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45B72E26CCBC008C0316 /* BaseUploadInquiryViewController.swift */; };
 		155FE8312E05596F0091E9A4 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155FE8302E05596F0091E9A4 /* Bundle+.swift */; };
 		156AA7242D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */; };
 		156AA72A2D6510E1005B8DCE /* GetNicknameValidityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7292D6510E1005B8DCE /* GetNicknameValidityRequest.swift */; };
@@ -348,6 +349,7 @@
 		155D45B02E26B2E3008C0316 /* SpotUploadSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadSearchViewController.swift; sourceTree = "<group>"; };
 		155D45B22E26B8CB008C0316 /* BaseUploadInquiryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUploadInquiryView.swift; sourceTree = "<group>"; };
 		155D45B52E26BB5F008C0316 /* RequirementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequirementType.swift; sourceTree = "<group>"; };
+		155D45B72E26CCBC008C0316 /* BaseUploadInquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUploadInquiryViewController.swift; sourceTree = "<group>"; };
 		155FE8302E05596F0091E9A4 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVerifiedAreaListResponse.swift; sourceTree = "<group>"; };
 		156AA7292D6510E1005B8DCE /* GetNicknameValidityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNicknameValidityRequest.swift; sourceTree = "<group>"; };
@@ -820,6 +822,7 @@
 				155D45AC2E26A575008C0316 /* SpotUploadView.swift */,
 				155D456A2E26A538008C0316 /* SpotUploadViewController.swift */,
 				155D45B22E26B8CB008C0316 /* BaseUploadInquiryView.swift */,
+				155D45B72E26CCBC008C0316 /* BaseUploadInquiryViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2055,6 +2058,7 @@
 				746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */,
 				152F8D202DF253FE0064022B /* AppleMapService.swift in Sources */,
 				D65259802D6291A800B8176E /* WithdrawalConfirmationView.swift in Sources */,
+				155D45B82E26CCBC008C0316 /* BaseUploadInquiryViewController.swift in Sources */,
 				741A06C82D3532E500778219 /* DropAcornView.swift in Sources */,
 				15D122292D58BD0200E79866 /* DayOfMonthType.swift in Sources */,
 				746261752D3EA7FD00A4E84F /* GetReviewVerificationResponse.swift in Sources */,
