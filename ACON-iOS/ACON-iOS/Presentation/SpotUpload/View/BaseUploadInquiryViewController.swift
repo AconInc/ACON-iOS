@@ -10,7 +10,8 @@ import UIKit
 class BaseUploadInquiryViewController: BaseViewController {
 
     // MARK: - Properties
-
+    
+    let viewModel: SpotUploadViewModel
     let spotUploadInquiryView: BaseUploadInquiryView
 
     // 하위 뷰에서 override하여 설정
@@ -19,7 +20,8 @@ class BaseUploadInquiryViewController: BaseViewController {
 
     // MARK: - init
 
-    init(requirement: RequirementType, title: String, caption: String? = nil) {
+    init(viewModel: SpotUploadViewModel, requirement: RequirementType, title: String, caption: String? = nil) {
+        self.viewModel = viewModel
         self.spotUploadInquiryView = BaseUploadInquiryView(requirement: requirement, title: title, caption: caption)
 
         super.init(nibName: nil, bundle: nil)

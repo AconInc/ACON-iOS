@@ -27,8 +27,9 @@ class SpotTypeSelectionViewController: BaseUploadInquiryViewController {
 
     // MARK: - init
 
-    init() {
-        super.init(requirement: .required,
+    init(_ viewModel: SpotUploadViewModel) {
+        super.init(viewModel: viewModel,
+                   requirement: .required,
                    title: StringLiterals.SpotUpload.isThisRestaurantOrCafe,
                    caption: StringLiterals.SpotUpload.brunchIsCafe)
     }
@@ -39,6 +40,12 @@ class SpotTypeSelectionViewController: BaseUploadInquiryViewController {
 
 
     // MARK: - Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        addTarget()
+    }
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -65,5 +72,45 @@ class SpotTypeSelectionViewController: BaseUploadInquiryViewController {
         }
     }
 
+    override func setStyle() {
+        super.setStyle()
+
+        viewModel.isPreviousButtonEnabled.value = true
+
+        if viewModel.spotType != nil {
+            viewModel.isNextButtonEnabled.value = true
+        } else {
+            viewModel.isNextButtonEnabled.value = false
+        }
+    }
 }
 
+
+// MARK: - AddTarget
+
+private extension SpotTypeSelectionViewController {
+    
+    func addTarget() {
+        restaurantButton.addTarget(self, action: #selector(tappedRestaurantButton), for: .touchUpInside)
+        cafeButton.addTarget(self, action: #selector(tappedCafeButton), for: .touchUpInside)
+    }
+    
+}
+
+// MARK: - @objc functions
+
+private extension SpotTypeSelectionViewController {
+
+    @objc
+    func tappedRestaurantButton() {
+        viewModel.spotType = .restaurant
+        viewModel.isNextButtonEnabled.value = true
+    }
+
+    @objc
+    func tappedCafeButton() {
+        viewModel.spotType = .cafe
+        viewModel.isNextButtonEnabled.value = true
+    }
+
+}

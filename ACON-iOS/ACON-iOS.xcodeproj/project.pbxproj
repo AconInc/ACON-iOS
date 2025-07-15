@@ -54,6 +54,7 @@
 		155D45B32E26B8CB008C0316 /* BaseUploadInquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45B22E26B8CB008C0316 /* BaseUploadInquiryView.swift */; };
 		155D45B62E26BB5F008C0316 /* RequirementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45B52E26BB5F008C0316 /* RequirementType.swift */; };
 		155D45B82E26CCBC008C0316 /* BaseUploadInquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45B72E26CCBC008C0316 /* BaseUploadInquiryViewController.swift */; };
+		155D45BB2E26DE05008C0316 /* SpotUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45BA2E26DE05008C0316 /* SpotUploadViewModel.swift */; };
 		155FE8312E05596F0091E9A4 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155FE8302E05596F0091E9A4 /* Bundle+.swift */; };
 		156AA7242D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */; };
 		156AA72A2D6510E1005B8DCE /* GetNicknameValidityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7292D6510E1005B8DCE /* GetNicknameValidityRequest.swift */; };
@@ -350,6 +351,7 @@
 		155D45B22E26B8CB008C0316 /* BaseUploadInquiryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUploadInquiryView.swift; sourceTree = "<group>"; };
 		155D45B52E26BB5F008C0316 /* RequirementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequirementType.swift; sourceTree = "<group>"; };
 		155D45B72E26CCBC008C0316 /* BaseUploadInquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUploadInquiryViewController.swift; sourceTree = "<group>"; };
+		155D45BA2E26DE05008C0316 /* SpotUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadViewModel.swift; sourceTree = "<group>"; };
 		155FE8302E05596F0091E9A4 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVerifiedAreaListResponse.swift; sourceTree = "<group>"; };
 		156AA7292D6510E1005B8DCE /* GetNicknameValidityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNicknameValidityRequest.swift; sourceTree = "<group>"; };
@@ -812,6 +814,7 @@
 			children = (
 				155D45B42E26BB59008C0316 /* Type */,
 				155D45672E26A51C008C0316 /* View */,
+				155D45B92E26DDF0008C0316 /* ViewModel */,
 			);
 			path = SpotUpload;
 			sourceTree = "<group>";
@@ -823,8 +826,8 @@
 				155D456A2E26A538008C0316 /* SpotUploadViewController.swift */,
 				155D45B22E26B8CB008C0316 /* BaseUploadInquiryView.swift */,
 				155D45B72E26CCBC008C0316 /* BaseUploadInquiryViewController.swift */,
-				155D45AE2E26B04F008C0316 /* SpotTypeSelectionViewController.swift */,
 				155D45B02E26B2E3008C0316 /* SpotUploadSearchViewController.swift */,
+				155D45AE2E26B04F008C0316 /* SpotTypeSelectionViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -835,6 +838,14 @@
 				155D45B52E26BB5F008C0316 /* RequirementType.swift */,
 			);
 			path = Type;
+			sourceTree = "<group>";
+		};
+		155D45B92E26DDF0008C0316 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				155D45BA2E26DE05008C0316 /* SpotUploadViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		15A1471F2D5B2561003793EE /* Type */ = {
@@ -2031,6 +2042,7 @@
 				151AB6C92DD3E64600D01DE8 /* MenuImageSlideViewController.swift in Sources */,
 				157C0BE82DC897EE000B04AF /* SpotToggleButtonView.swift in Sources */,
 				746F15BD2D3E225E003EA031 /* LocalVerificationService.swift in Sources */,
+				155D45BB2E26DE05008C0316 /* SpotUploadViewModel.swift in Sources */,
 				151FC0C92DBD5DA0005F4D0D /* Character+.swift in Sources */,
 				740EE82A2E059881007A5DCF /* GetAppUpdateResponse.swift in Sources */,
 				15DC053F2D623DD400B752DD /* PostLogoutRequest.swift in Sources */,

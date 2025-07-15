@@ -27,12 +27,23 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
 
     // MARK: - init
 
-    init() {
-        super.init(requirement: .required, title: StringLiterals.SpotUpload.SearchThePlaceToRegister)
+    init(_ viewModel: SpotUploadViewModel) {
+        super.init(viewModel: viewModel,
+                   requirement: .required,
+                   title: StringLiterals.SpotUpload.SearchThePlaceToRegister)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+
+    // MARK: - Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        bindObservable()
     }
 
 
@@ -43,6 +54,35 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
             $0.top.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(16 * ScreenUtils.widthRatio)
             $0.height.equalTo(38)
+        }
+    }
+
+    override func setStyle() {
+        super.setStyle()
+
+        viewModel.isPreviousButtonEnabled.value = false
+
+        if let spotName = viewModel.spotName,
+           !spotName.isEmpty{
+            textField.text = spotName
+            viewModel.isNextButtonEnabled.value = true
+        } else {
+            viewModel.isNextButtonEnabled.value = false
+        }
+    }
+
+}
+
+
+// MARK: - bindings
+
+private extension SpotUploadSearchViewController {
+
+    func bindObservable() {
+        textField.observableText.bind { [weak self] text in
+            guard let text else { return }
+            self?.viewModel.spotName = text
+            self?.viewModel.isNextButtonEnabled.value = !text.isEmpty
         }
     }
 

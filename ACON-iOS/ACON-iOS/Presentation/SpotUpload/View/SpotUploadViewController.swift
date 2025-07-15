@@ -9,18 +9,20 @@ import UIKit
 
 final class SpotUploadViewController: BaseNavViewController {
 
+    // MARK: - Properties
+
+    private let viewModel = SpotUploadViewModel()
+
+    lazy var pages: [UIViewController] = [SpotUploadSearchViewController(viewModel), SpotTypeSelectionViewController(viewModel)]
+
+    private var currentIndex: Int = 0
+
+
     // MARK: - UI Properties
 
     private var pageVC = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .vertical)
 
     private let spotUploadView = SpotUploadView()
-
-
-    // MARK: - Properties
-
-    private var pages: [UIViewController] = [SpotTypeSelectionViewController(), SpotUploadSearchViewController()]
-
-    private var currentIndex: Int = 0
 
 
     // MARK: - LifeCycle
@@ -100,7 +102,17 @@ final class SpotUploadViewController: BaseNavViewController {
 private extension SpotUploadViewController {
 
     func bindViewModel() {
-        
+        viewModel.isPreviousButtonEnabled.bind { [weak self] isEnabled in
+            guard let isEnabled else { return }
+            self?.spotUploadView.previousButton.updateGlassButtonState(state: isEnabled ? .default : .disabled)
+            self?.viewModel.isPreviousButtonEnabled.value = nil
+        }
+
+        viewModel.isNextButtonEnabled.bind { [weak self] isEnabled in
+            guard let isEnabled else { return }
+            self?.spotUploadView.nextButton.updateGlassButtonState(state: isEnabled ? .default : .disabled)
+            self?.viewModel.isNextButtonEnabled.value = nil
+        }
     }
 
 }
