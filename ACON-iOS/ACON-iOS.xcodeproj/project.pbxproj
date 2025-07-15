@@ -824,6 +824,7 @@
 				155D45B22E26B8CB008C0316 /* BaseUploadInquiryView.swift */,
 				155D45B72E26CCBC008C0316 /* BaseUploadInquiryViewController.swift */,
 				155D45AE2E26B04F008C0316 /* SpotTypeSelectionViewController.swift */,
+				155D45B02E26B2E3008C0316 /* SpotUploadSearchViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2133,6 +2134,7 @@
 				748D6F892D2BD294007690B4 /* UIViewController+.swift in Sources */,
 				741429672D5D550C00B69528 /* AppVersionManager.swift in Sources */,
 				151AB6C32DD384C100D01DE8 /* SpotDetailImageCollectionViewCell.swift in Sources */,
+				155D45B12E26B2E3008C0316 /* SpotUploadSearchViewController.swift in Sources */,
 				15A246182DE7A75000469272 /* TransportModeType.swift in Sources */,
 				74205D2F2D40351700D11557 /* SocialType.swift in Sources */,
 				152F8D1A2DF252C20064022B /* MapType.swift in Sources */,
