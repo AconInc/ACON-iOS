@@ -18,7 +18,7 @@ final class SpotUploadViewController: BaseNavViewController {
 
     // MARK: - Properties
 
-    private var pages: [UIViewController] = [SpotTypeSelectionViewController(questionText: "1번", numberOfLines: 2), SpotSortSelectionViewController(questionText: "2번", numberOfLines: 10)]
+    private var pages: [UIViewController] = [SpotTypeSelectionViewController(), SpotSortSelectionViewController(questionText: "2번", numberOfLines: 10)]
 
     private var currentIndex: Int = 0
 

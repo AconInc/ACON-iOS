@@ -49,6 +49,10 @@
 		155BC2922DF09EB200E1744E /* ShadowColorCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155BC2912DF09EB200E1744E /* ShadowColorCache.swift */; };
 		155D456B2E26A538008C0316 /* SpotUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D456A2E26A538008C0316 /* SpotUploadViewController.swift */; };
 		155D45AD2E26A575008C0316 /* SpotUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45AC2E26A575008C0316 /* SpotUploadView.swift */; };
+		155D45AF2E26B04F008C0316 /* SpotTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45AE2E26B04F008C0316 /* SpotTypeSelectionViewController.swift */; };
+		155D45B12E26B2E3008C0316 /* SpotUploadSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45B02E26B2E3008C0316 /* SpotUploadSearchViewController.swift */; };
+		155D45B32E26B8CB008C0316 /* BaseUploadInquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45B22E26B8CB008C0316 /* BaseUploadInquiryView.swift */; };
+		155D45B62E26BB5F008C0316 /* RequirementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45B52E26BB5F008C0316 /* RequirementType.swift */; };
 		155FE8312E05596F0091E9A4 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155FE8302E05596F0091E9A4 /* Bundle+.swift */; };
 		156AA7242D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */; };
 		156AA72A2D6510E1005B8DCE /* GetNicknameValidityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7292D6510E1005B8DCE /* GetNicknameValidityRequest.swift */; };
@@ -340,6 +344,10 @@
 		155BC2912DF09EB200E1744E /* ShadowColorCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowColorCache.swift; sourceTree = "<group>"; };
 		155D456A2E26A538008C0316 /* SpotUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadViewController.swift; sourceTree = "<group>"; };
 		155D45AC2E26A575008C0316 /* SpotUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadView.swift; sourceTree = "<group>"; };
+		155D45AE2E26B04F008C0316 /* SpotTypeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTypeSelectionViewController.swift; sourceTree = "<group>"; };
+		155D45B02E26B2E3008C0316 /* SpotUploadSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadSearchViewController.swift; sourceTree = "<group>"; };
+		155D45B22E26B8CB008C0316 /* BaseUploadInquiryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUploadInquiryView.swift; sourceTree = "<group>"; };
+		155D45B52E26BB5F008C0316 /* RequirementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequirementType.swift; sourceTree = "<group>"; };
 		155FE8302E05596F0091E9A4 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVerifiedAreaListResponse.swift; sourceTree = "<group>"; };
 		156AA7292D6510E1005B8DCE /* GetNicknameValidityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNicknameValidityRequest.swift; sourceTree = "<group>"; };
@@ -800,6 +808,7 @@
 		155D45652E26A506008C0316 /* SpotUpload */ = {
 			isa = PBXGroup;
 			children = (
+				155D45B42E26BB59008C0316 /* Type */,
 				155D45672E26A51C008C0316 /* View */,
 			);
 			path = SpotUpload;
@@ -810,8 +819,17 @@
 			children = (
 				155D45AC2E26A575008C0316 /* SpotUploadView.swift */,
 				155D456A2E26A538008C0316 /* SpotUploadViewController.swift */,
+				155D45B22E26B8CB008C0316 /* BaseUploadInquiryView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		155D45B42E26BB59008C0316 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				155D45B52E26BB5F008C0316 /* RequirementType.swift */,
+			);
+			path = Type;
 			sourceTree = "<group>";
 		};
 		15A1471F2D5B2561003793EE /* Type */ = {
@@ -2082,6 +2100,7 @@
 				150A105C2DA28F2600B0BC9A /* ACTextField.swift in Sources */,
 				74CDCE562D310B1600E3A21A /* String+.swift in Sources */,
 				74BF91FD2D381FF800B923E3 /* SpotDetailModel.swift in Sources */,
+				155D45B32E26B8CB008C0316 /* BaseUploadInquiryView.swift in Sources */,
 				745ECB9F2D615B73005129B0 /* AlbumTableViewController.swift in Sources */,
 				1547A8852D3595B600E96616 /* SpotListFilterModel.swift in Sources */,
 				748D6F8B2D2BD31B007690B4 /* UIStackView+.swift in Sources */,
@@ -2200,6 +2219,7 @@
 				15CD25842D40364F00320006 /* LoginModalView.swift in Sources */,
 				746A13B62E00545B0097DA25 /* OnboardingService.swift in Sources */,
 				741E689A2D3D43FF00DF99EF /* EmptyResponse.swift in Sources */,
+				155D45B62E26BB5F008C0316 /* RequirementType.swift in Sources */,
 				745B19AC2D40021E00BDBDA4 /* PostLoginRequest.swift in Sources */,
 				741A06CA2D35415800778219 /* DropAcornViewController.swift in Sources */,
 				155FE8312E05596F0091E9A4 /* Bundle+.swift in Sources */,
