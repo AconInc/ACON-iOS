@@ -47,6 +47,8 @@
 		1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */; };
 		1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */; };
 		155BC2922DF09EB200E1744E /* ShadowColorCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155BC2912DF09EB200E1744E /* ShadowColorCache.swift */; };
+		155D456B2E26A538008C0316 /* SpotUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D456A2E26A538008C0316 /* SpotUploadViewController.swift */; };
+		155D45AD2E26A575008C0316 /* SpotUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45AC2E26A575008C0316 /* SpotUploadView.swift */; };
 		155FE8312E05596F0091E9A4 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155FE8302E05596F0091E9A4 /* Bundle+.swift */; };
 		156AA7242D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */; };
 		156AA72A2D6510E1005B8DCE /* GetNicknameValidityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156AA7292D6510E1005B8DCE /* GetNicknameValidityRequest.swift */; };
@@ -336,6 +338,8 @@
 		1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarItemType.swift; sourceTree = "<group>"; };
 		1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
 		155BC2912DF09EB200E1744E /* ShadowColorCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowColorCache.swift; sourceTree = "<group>"; };
+		155D456A2E26A538008C0316 /* SpotUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadViewController.swift; sourceTree = "<group>"; };
+		155D45AC2E26A575008C0316 /* SpotUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadView.swift; sourceTree = "<group>"; };
 		155FE8302E05596F0091E9A4 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		156AA7232D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVerifiedAreaListResponse.swift; sourceTree = "<group>"; };
 		156AA7292D6510E1005B8DCE /* GetNicknameValidityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNicknameValidityRequest.swift; sourceTree = "<group>"; };
@@ -791,6 +795,23 @@
 				15CF62C32D579F090000A10F /* ViewModel */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		155D45652E26A506008C0316 /* SpotUpload */ = {
+			isa = PBXGroup;
+			children = (
+				155D45672E26A51C008C0316 /* View */,
+			);
+			path = SpotUpload;
+			sourceTree = "<group>";
+		};
+		155D45672E26A51C008C0316 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				155D45AC2E26A575008C0316 /* SpotUploadView.swift */,
+				155D456A2E26A538008C0316 /* SpotUploadViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		15A1471F2D5B2561003793EE /* Type */ = {
@@ -1274,6 +1295,7 @@
 				74BF920F2D391FFE00B923E3 /* LocalVerification */,
 				74BF91F72D38138200B923E3 /* SpotDetail */,
 				74220DD12D34361E000684BF /* Upload */,
+				155D45652E26A506008C0316 /* SpotUpload */,
 				1558BADC2D31AB5100ECDEF8 /* SpotList */,
 				1547A87B2D358DBE00E96616 /* SpotListFilter */,
 				1558BADF2D31D41400ECDEF8 /* Profile */,
@@ -2160,6 +2182,7 @@
 				156AA7242D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift in Sources */,
 				74770C1B2DF35848005D4165 /* ProfileGoogleAdView.swift in Sources */,
 				74E38D342D69B46F009449D4 /* LocationUtils.swift in Sources */,
+				155D45AD2E26A575008C0316 /* SpotUploadView.swift in Sources */,
 				74EC5A2A2DF4C72200E176A8 /* GetSavedSpotsResponse.swift in Sources */,
 				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,
 				15ABCBFC2DF775E8000269F7 /* SpotImageStatusType.swift in Sources */,
@@ -2221,6 +2244,7 @@
 				15A48BFE2D57546A003C2421 /* ProfileImageEditButton.swift in Sources */,
 				D6E452942D3AA47500CBED02 /* ProfileViewController.swift in Sources */,
 				151BD9552D63375D005E657F /* VerifiedAreasEditViewController.swift in Sources */,
+				155D456B2E26A538008C0316 /* SpotUploadViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

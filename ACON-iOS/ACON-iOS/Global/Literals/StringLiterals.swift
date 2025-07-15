@@ -145,6 +145,16 @@ enum StringLiterals {
         
     }
     
+    enum SpotUpload {
+        
+        static let spotUpload = "장소 등록"
+        
+        static let goPrevious = "뒤로 가기"
+        
+        static let next = "다음"
+        
+    }
+    
     enum SpotList {
         
         static let restaurant = "식당"
