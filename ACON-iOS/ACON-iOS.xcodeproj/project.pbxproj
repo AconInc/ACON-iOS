@@ -822,12 +822,9 @@
 		155D45672E26A51C008C0316 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				155D45AC2E26A575008C0316 /* SpotUploadView.swift */,
-				155D456A2E26A538008C0316 /* SpotUploadViewController.swift */,
-				155D45B22E26B8CB008C0316 /* BaseUploadInquiryView.swift */,
-				155D45B72E26CCBC008C0316 /* BaseUploadInquiryViewController.swift */,
-				155D45B02E26B2E3008C0316 /* SpotUploadSearchViewController.swift */,
-				155D45AE2E26B04F008C0316 /* SpotTypeSelectionViewController.swift */,
+				1579F2F62E296071006B4DEE /* SpotUpload */,
+				1579F2F72E29607E006B4DEE /* BaseUploadInquiry */,
+				1579F2F82E296091006B4DEE /* InquiryPages */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -846,6 +843,33 @@
 				155D45BA2E26DE05008C0316 /* SpotUploadViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1579F2F62E296071006B4DEE /* SpotUpload */ = {
+			isa = PBXGroup;
+			children = (
+				155D45AC2E26A575008C0316 /* SpotUploadView.swift */,
+				155D456A2E26A538008C0316 /* SpotUploadViewController.swift */,
+			);
+			path = SpotUpload;
+			sourceTree = "<group>";
+		};
+		1579F2F72E29607E006B4DEE /* BaseUploadInquiry */ = {
+			isa = PBXGroup;
+			children = (
+				155D45B22E26B8CB008C0316 /* BaseUploadInquiryView.swift */,
+				155D45B72E26CCBC008C0316 /* BaseUploadInquiryViewController.swift */,
+			);
+			path = BaseUploadInquiry;
+			sourceTree = "<group>";
+		};
+		1579F2F82E296091006B4DEE /* InquiryPages */ = {
+			isa = PBXGroup;
+			children = (
+				155D45B02E26B2E3008C0316 /* SpotUploadSearchViewController.swift */,
+				155D45AE2E26B04F008C0316 /* SpotTypeSelectionViewController.swift */,
+			);
+			path = InquiryPages;
 			sourceTree = "<group>";
 		};
 		15A1471F2D5B2561003793EE /* Type */ = {
@@ -2012,9 +2036,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
