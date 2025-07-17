@@ -196,7 +196,8 @@ private extension SpotSearchViewController {
     @objc
     func addPlaceButtonTapped() {
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.upload, properties: ["click_register_form?": true])
-        let addPlaceVC = ACWebViewController(urlString: StringLiterals.WebView.addPlaceLink)
+        let addPlaceVC = SpotUploadViewController()
+        addPlaceVC.modalPresentationStyle = .fullScreen
         self.present(addPlaceVC, animated: true)
     }
     

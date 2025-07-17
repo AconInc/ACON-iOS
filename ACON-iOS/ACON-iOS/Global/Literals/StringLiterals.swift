@@ -145,6 +145,42 @@ enum StringLiterals {
         
     }
     
+    enum SpotUpload {
+        
+        static let spotUpload = "장소 등록"
+        
+        static let goPrevious = "뒤로 가기"
+        
+        static let next = "다음"
+        
+        static let required = "필수 입력"
+        
+        static let optional = "선택 입력"
+        
+        static let SearchThePlaceToRegister = "등록하고 싶은 장소를\n검색해주세요"
+        
+        static let isThisRestaurantOrCafe = "이곳은 식당인가요?\n카페인가요?"
+        
+        static let restaurant = "식당"
+        
+        static let cafe = "카페"
+        
+        static let brunchIsCafe = "브런치는 카페로 분류해요!"
+        
+        static let whatKindOfRestaurant = "여긴 어떤 식당인가요?"
+        
+        static let recommendMenuAndPrice = "추천하는 메뉴와\n가격을 알려주세요"
+        
+        static let whenIsTheBusinessClose = "몇시까지 영업하나요?"
+        
+        static let isThisGoodForPrice = "가성비는 어떤 편인가요?"
+        
+        static let youCanRegisterPhotos = "식당 사진을 등록할 수 있어요"
+        
+        static let newPlaceSaved = "새로운 장소가 저장되었어요!"
+        
+    }
+    
     enum SpotList {
         
         static let restaurant = "식당"
