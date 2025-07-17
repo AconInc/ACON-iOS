@@ -24,6 +24,10 @@ class SpotTypeSelectionViewController: BaseUploadInquiryViewController {
         [restaurantButton, cafeButton]
     }
 
+    override var canGoPrevious: Bool { true }
+
+    override var canGoNext: Bool { viewModel.spotType != nil }
+
 
     // MARK: - init
 
@@ -72,29 +76,18 @@ class SpotTypeSelectionViewController: BaseUploadInquiryViewController {
         }
     }
 
-    override func setStyle() {
-        super.setStyle()
-
-        viewModel.isPreviousButtonEnabled.value = true
-
-        if viewModel.spotType != nil {
-            viewModel.isNextButtonEnabled.value = true
-        } else {
-            viewModel.isNextButtonEnabled.value = false
-        }
-    }
 }
 
 
 // MARK: - AddTarget
 
 private extension SpotTypeSelectionViewController {
-    
+
     func addTarget() {
         restaurantButton.addTarget(self, action: #selector(tappedRestaurantButton), for: .touchUpInside)
         cafeButton.addTarget(self, action: #selector(tappedCafeButton), for: .touchUpInside)
     }
-    
+
 }
 
 // MARK: - @objc functions
@@ -104,13 +97,13 @@ private extension SpotTypeSelectionViewController {
     @objc
     func tappedRestaurantButton() {
         viewModel.spotType = .restaurant
-        viewModel.isNextButtonEnabled.value = true
+        updateButtonStates()
     }
 
     @objc
     func tappedCafeButton() {
         viewModel.spotType = .cafe
-        viewModel.isNextButtonEnabled.value = true
+        updateButtonStates()
     }
 
 }

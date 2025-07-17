@@ -14,8 +14,10 @@ class BaseUploadInquiryViewController: BaseViewController {
     let viewModel: SpotUploadViewModel
     let spotUploadInquiryView: BaseUploadInquiryView
 
-    // 하위 뷰에서 override하여 설정
+    // NOTE: 하위 뷰컨에서 override하여 설정
     var contentViews: [UIView] { [] }
+    var canGoPrevious: Bool { true }
+    var canGoNext: Bool { false }
 
 
     // MARK: - init
@@ -38,6 +40,12 @@ class BaseUploadInquiryViewController: BaseViewController {
         view = spotUploadInquiryView
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        updateButtonStates()
+    }
+
 
     // MARK: - Hierarchy
 
@@ -45,6 +53,14 @@ class BaseUploadInquiryViewController: BaseViewController {
         super.setHierarchy()
 
         contentViews.forEach { spotUploadInquiryView.contentView.addSubview($0) }
+    }
+
+
+    // MARK: - Helper
+
+    func updateButtonStates() {
+        viewModel.isPreviousButtonEnabled.value = canGoPrevious
+        viewModel.isNextButtonEnabled.value = canGoNext
     }
 
 }

@@ -24,6 +24,13 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
         [textField]
     }
 
+    override var canGoPrevious: Bool { false }
+
+    override var canGoNext: Bool {
+        guard let spotName = viewModel.spotName else { return false }
+        return !spotName.isEmpty
+    }
+
 
     // MARK: - init
 
@@ -60,14 +67,9 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
     override func setStyle() {
         super.setStyle()
 
-        viewModel.isPreviousButtonEnabled.value = false
-
         if let spotName = viewModel.spotName,
            !spotName.isEmpty{
             textField.text = spotName
-            viewModel.isNextButtonEnabled.value = true
-        } else {
-            viewModel.isNextButtonEnabled.value = false
         }
     }
 
@@ -82,7 +84,7 @@ private extension SpotUploadSearchViewController {
         textField.observableText.bind { [weak self] text in
             guard let text else { return }
             self?.viewModel.spotName = text
-            self?.viewModel.isNextButtonEnabled.value = !text.isEmpty
+            self?.updateButtonStates()
         }
     }
 
