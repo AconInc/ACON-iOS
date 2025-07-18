@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-class LocalVerificationViewController: BaseViewController {
+class LocalVerificationViewController: BaseNavViewController {
     
     // MARK: - UI Properties
     
@@ -35,6 +35,7 @@ class LocalVerificationViewController: BaseViewController {
         
         addTarget()
         bindViewModel()
+        self.setSkipButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +47,7 @@ class LocalVerificationViewController: BaseViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.view.addSubview(localVerificationView)
+        self.contentView.addSubview(localVerificationView)
     }
     
     override func setLayout() {

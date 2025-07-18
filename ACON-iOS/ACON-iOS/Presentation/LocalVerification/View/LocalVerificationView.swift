@@ -16,6 +16,8 @@ final class LocalVerificationView: BaseView {
     
     private let backgroundImageView: UIImageView = UIImageView()
     
+    private let warningLabel: UILabel = UILabel()
+    
     private let titleLabel: UILabel = UILabel()
     
     private let descriptionLabel: UILabel = UILabel()
@@ -31,6 +33,7 @@ final class LocalVerificationView: BaseView {
         super.setHierarchy()
         
         self.addSubviews(backgroundImageView,
+                         warningLabel,
                          titleLabel,
                          descriptionLabel,
                          oneSecondLabel,
@@ -43,23 +46,29 @@ final class LocalVerificationView: BaseView {
         backgroundImageView.snp.makeConstraints {
             $0.size.equalTo(ScreenUtils.heightRatio*480)
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*256)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*252)
+        }
+        
+        warningLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*67)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(20)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*455)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*401)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(68)
         }
         
         descriptionLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*535)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*481)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(20)
         }
         
         oneSecondLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*613)
+            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*559)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(20)
         }
@@ -77,6 +86,13 @@ final class LocalVerificationView: BaseView {
         
         backgroundImageView.do {
             $0.image = .imgBackgroundLocalCertification
+        }
+        
+        warningLabel.do {
+            $0.setLabel(text: StringLiterals.LocalVerification.warning,
+                        style: .b1R,
+                        color: .gray500,
+                        alignment: .center)
         }
         
         titleLabel.do {

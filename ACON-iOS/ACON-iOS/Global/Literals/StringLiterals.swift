@@ -244,9 +244,11 @@ enum StringLiterals {
     
     enum LocalVerification {
         
+        static let warning = "현재 내 지역에 안 계시면 건너뛰기를 해주세요"
+        
         static let title = "믿을 수 있는 리뷰를 위해\n지역인증이 필요해요"
         
-        static let description = "더 정확한 로컬맛집을 추천해드릴 수 있어요"
+        static let description = "내 지역에 남긴 리뷰는 추천 장소에 반영돼요."
         
         static let oneSecond = "1초만에 인증하기"
         
