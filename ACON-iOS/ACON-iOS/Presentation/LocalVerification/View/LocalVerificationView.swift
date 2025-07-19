@@ -7,9 +7,6 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 final class LocalVerificationView: BaseView {
 
     // MARK: - UI Properties
@@ -21,8 +18,6 @@ final class LocalVerificationView: BaseView {
     private let titleLabel: UILabel = UILabel()
     
     private let descriptionLabel: UILabel = UILabel()
-    
-    private let oneSecondLabel: UILabel = UILabel()
     
     var nextButton: ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_12_t4SB), title: StringLiterals.LocalVerification.next)
     
@@ -36,7 +31,6 @@ final class LocalVerificationView: BaseView {
                          warningLabel,
                          titleLabel,
                          descriptionLabel,
-                         oneSecondLabel,
                          nextButton)
     }
     
@@ -66,13 +60,7 @@ final class LocalVerificationView: BaseView {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(20)
         }
-        
-        oneSecondLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.heightRatio*559)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(20)
-        }
-        
+
         nextButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(21+ScreenUtils.heightRatio*16)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
@@ -107,11 +95,6 @@ final class LocalVerificationView: BaseView {
                         color: .gray50)
         }
         
-        oneSecondLabel.do {
-            $0.setLabel(text: StringLiterals.LocalVerification.oneSecond,
-                        style: .b1R,
-                        color: .gray500)
-        }
     }
     
 }

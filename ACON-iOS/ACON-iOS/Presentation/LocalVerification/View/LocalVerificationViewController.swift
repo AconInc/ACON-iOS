@@ -7,9 +7,6 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 class LocalVerificationViewController: BaseNavViewController {
     
     // MARK: - UI Properties
