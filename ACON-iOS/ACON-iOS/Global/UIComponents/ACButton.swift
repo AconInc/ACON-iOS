@@ -189,6 +189,8 @@ extension ACButton {
     
     /// Set Glassmorphism Border
     private func applyGlassBorder(_ attributes: GlassBorderAttributes) {
+        guard bounds.width > 0 && bounds.height > 0 else { return }
+        
         borderGlassmorphismView?.removeFromSuperview()
         borderLayer?.removeFromSuperlayer()
         self.layer.borderWidth = 0
@@ -198,9 +200,9 @@ extension ACButton {
         let innerPath = UIBezierPath(roundedRect: innerRect, cornerRadius: max(0, attributes.cornerRadius - attributes.width/2))
         outerPath.append(innerPath.reversing())
         
-        glassmorphismView = GlassmorphismView(attributes.glassmorphismType)
+        borderGlassmorphismView = GlassmorphismView(attributes.glassmorphismType)
         
-        if let glassmorphismView = glassmorphismView {
+        if let glassmorphismView = borderGlassmorphismView {
             self.insertSubview(glassmorphismView, at: 0)
             glassmorphismView.isUserInteractionEnabled = false
             
@@ -224,7 +226,15 @@ extension ACButton {
         glassmorphismView?.layer.cornerRadius = self.layer.cornerRadius
         glassmorphismView?.layer.masksToBounds = true
         
-        if let attributes = glassBorderAttributes, bounds.width > 0, bounds.height > 0 {
+        if let attributes = glassBorderAttributes,
+           bounds.width > 0, bounds.height > 0,
+            !bounds.width.isNaN, !bounds.height.isNaN {
+            if let existingView = borderGlassmorphismView {
+                if existingView.frame.size == bounds.size &&
+                    existingView.frame.width > 0 && existingView.frame.height > 0 {
+                    return
+                }
+            }
             applyGlassBorder(attributes)
         }
     }
@@ -305,7 +315,9 @@ extension ACButton {
     
     // NOTE: 정상적인 버튼 글라스모피즘 적용을 위해 Cell prepareForReuse에서 호출
     func refreshButtonBlurEffect(_ glassType: GlassmorphismType) {
-        setGlassmorphism(glassType)
+        if buttonStyleType.glassmorphismType != nil {
+            setGlassmorphism(glassType)
+        }
         
         if let attributes = glassBorderAttributes {
             let updatedAttributes = GlassBorderAttributes(
