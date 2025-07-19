@@ -203,6 +203,8 @@
 		746F5BF02DE009820081569B /* ACToastType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F5BEF2DE0097B0081569B /* ACToastType.swift */; };
 		746F5BF22DE00CE90081569B /* GlassBorderAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746F5BF12DE00CE90081569B /* GlassBorderAttributes.swift */; };
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
+		74721B4B2E2A07D100F0ACB9 /* SemiShortModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74721B4A2E2A07D100F0ACB9 /* SemiShortModalView.swift */; };
+		74721B4E2E2A08DC00F0ACB9 /* SemiShortModalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74721B4D2E2A08CE00F0ACB9 /* SemiShortModalType.swift */; };
 		74770C192DF1DA97005D4165 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 74770C182DF1DA97005D4165 /* GoogleMobileAds */; };
 		74770C1B2DF35848005D4165 /* ProfileGoogleAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74770C1A2DF35848005D4165 /* ProfileGoogleAdView.swift */; };
 		74770C1D2DF36DAB005D4165 /* GoogleAdsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74770C1C2DF36DA2005D4165 /* GoogleAdsType.swift */; };
@@ -289,7 +291,6 @@
 		74FA77842DD43709006846C9 /* SplashBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 74FA77832DD43709006846C9 /* SplashBGM.mp3 */; };
 		D652597C2D62775C00B8176E /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597B2D62775C00B8176E /* CustomTextFieldView.swift */; };
 		D652597E2D628EB000B8176E /* WithdrawalConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597D2D628EB000B8176E /* WithdrawalConfirmationViewController.swift */; };
-		D65259802D6291A800B8176E /* WithdrawalConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597F2D6291A800B8176E /* WithdrawalConfirmationView.swift */; };
 		D696F1B22D3A7E3400CCD5FF /* ACAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696F1B12D3A7E3400CCD5FF /* ACAlertView.swift */; };
 		D6E34C462D398B6000CEFA04 /* ACAlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E34C3D2D398B6000CEFA04 /* ACAlertType.swift */; };
 		D6E34C472D398B6000CEFA04 /* ACAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E34C3E2D398B6000CEFA04 /* ACAlertViewController.swift */; };
@@ -496,6 +497,8 @@
 		746F5BEF2DE0097B0081569B /* ACToastType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACToastType.swift; sourceTree = "<group>"; };
 		746F5BF12DE00CE90081569B /* GlassBorderAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassBorderAttributes.swift; sourceTree = "<group>"; };
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
+		74721B4A2E2A07D100F0ACB9 /* SemiShortModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiShortModalView.swift; sourceTree = "<group>"; };
+		74721B4D2E2A08CE00F0ACB9 /* SemiShortModalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiShortModalType.swift; sourceTree = "<group>"; };
 		74770C1A2DF35848005D4165 /* ProfileGoogleAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGoogleAdView.swift; sourceTree = "<group>"; };
 		74770C1C2DF36DA2005D4165 /* GoogleAdsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdsType.swift; sourceTree = "<group>"; };
 		747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonState.swift; sourceTree = "<group>"; };
@@ -580,7 +583,6 @@
 		BB785B4E26FA7C11BB85A55D /* Pods-ACON-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D652597B2D62775C00B8176E /* CustomTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
 		D652597D2D628EB000B8176E /* WithdrawalConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalConfirmationViewController.swift; sourceTree = "<group>"; };
-		D652597F2D6291A800B8176E /* WithdrawalConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalConfirmationView.swift; sourceTree = "<group>"; };
 		D696F1B12D3A7E3400CCD5FF /* ACAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAlertView.swift; sourceTree = "<group>"; };
 		D6E34C3D2D398B6000CEFA04 /* ACAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAlertType.swift; sourceTree = "<group>"; };
 		D6E34C3E2D398B6000CEFA04 /* ACAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAlertViewController.swift; sourceTree = "<group>"; };
@@ -1303,6 +1305,15 @@
 			path = Type;
 			sourceTree = "<group>";
 		};
+		74721B4C2E2A089800F0ACB9 /* SemiShortModal */ = {
+			isa = PBXGroup;
+			children = (
+				74721B4D2E2A08CE00F0ACB9 /* SemiShortModalType.swift */,
+				74721B4A2E2A07D100F0ACB9 /* SemiShortModalView.swift */,
+			);
+			path = SemiShortModal;
+			sourceTree = "<group>";
+		};
 		747F4FB82D3D944A003DECBF /* Splash */ = {
 			isa = PBXGroup;
 			children = (
@@ -1469,6 +1480,7 @@
 		748D6F7A2D2BCCF4007690B4 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				74721B4C2E2A089800F0ACB9 /* SemiShortModal */,
 				742B1B972E00AE300036876A /* NetworkErrorView.swift */,
 				746F5BEA2DE0091B0081569B /* ACToast */,
 				74A13D6A2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift */,
@@ -1664,6 +1676,7 @@
 				74BF920D2D391FFE00B923E3 /* LocalVerificationViewController.swift */,
 				151BD9522D6332A5005E657F /* VerifiedAreasEditView.swift */,
 				151BD9542D63375D005E657F /* VerifiedAreasEditViewController.swift */,
+				74721B4F2E2A0F7D00F0ACB9 /* VerificationReminderViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1844,7 +1857,6 @@
 			children = (
 				D6E8168D2D6228F5001E4EBF /* WithdrawalViewController.swift */,
 				D652597D2D628EB000B8176E /* WithdrawalConfirmationViewController.swift */,
-				D652597F2D6291A800B8176E /* WithdrawalConfirmationView.swift */,
 				D6E816A42D623FE5001E4EBF /* WithdrawalTableView.swift */,
 				D652597B2D62775C00B8176E /* CustomTextFieldView.swift */,
 				D6E816A32D623E11001E4EBF /* Cell */,
@@ -2099,7 +2111,6 @@
 				D652597E2D628EB000B8176E /* WithdrawalConfirmationViewController.swift in Sources */,
 				746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */,
 				152F8D202DF253FE0064022B /* AppleMapService.swift in Sources */,
-				D65259802D6291A800B8176E /* WithdrawalConfirmationView.swift in Sources */,
 				155D45B82E26CCBC008C0316 /* BaseUploadInquiryViewController.swift in Sources */,
 				741A06C82D3532E500778219 /* DropAcornView.swift in Sources */,
 				15D122292D58BD0200E79866 /* DayOfMonthType.swift in Sources */,
@@ -2162,6 +2173,7 @@
 				748ECA6B2D31918D00BBC981 /* LoginView.swift in Sources */,
 				D6EA38152D42B88F002B68B9 /* SearchEmptyView.swift in Sources */,
 				74D31C712D5832D000B4B2B4 /* AlbumViewModel.swift in Sources */,
+				74721B4B2E2A07D100F0ACB9 /* SemiShortModalView.swift in Sources */,
 				1503DBEB2DFD9CBB001FC3E5 /* GetMenuboardImageListResponse.swift in Sources */,
 				746A13B82E00549E0097DA25 /* OnboardingTargetType.swift in Sources */,
 				1547A6F22D33AD4500E96616 /* SpotListModel.swift in Sources */,
@@ -2290,6 +2302,7 @@
 				15AA6D172D68B4EF008021C6 /* SpotListErrorType.swift in Sources */,
 				741E68952D3D38BC00DF99EF /* BaseService.swift in Sources */,
 				746F15BB2D3E2167003EA031 /* LocalVerificationTargetType.swift in Sources */,
+				74721B4E2E2A08DC00F0ACB9 /* SemiShortModalType.swift in Sources */,
 				D6E34C462D398B6000CEFA04 /* ACAlertType.swift in Sources */,
 				D6E34C472D398B6000CEFA04 /* ACAlertViewController.swift in Sources */,
 				745C7E022D358E900074DBDB /* SpotSearchView.swift in Sources */,
