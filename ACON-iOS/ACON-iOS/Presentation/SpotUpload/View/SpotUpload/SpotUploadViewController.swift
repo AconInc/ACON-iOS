@@ -22,7 +22,11 @@ final class SpotUploadViewController: BaseNavViewController {
 
     private var pageVC = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .vertical)
 
-    private let spotUploadView = SpotUploadView()
+    let previousButton = ACButton(style: GlassButton(borderGlassmorphismType: .buttonGlassDefault, buttonType: .line_22_b1SB),
+                                  title: StringLiterals.SpotUpload.goPrevious)
+
+    let nextButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_22_b1SB),
+                              title: StringLiterals.SpotUpload.next)
 
 
     // MARK: - LifeCycle
@@ -45,25 +49,34 @@ final class SpotUploadViewController: BaseNavViewController {
 
     override func setHierarchy() {
         super.setHierarchy()
-
-        self.contentView.addSubview(spotUploadView)
+        
         self.addChild(pageVC)
 
-        spotUploadView.addSubview(pageVC.view)
+        self.contentView.addSubviews(previousButton, nextButton, pageVC.view)
 
         pageVC.didMove(toParent: self)
     }
 
     override func setLayout() {
         super.setLayout()
-
-        spotUploadView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        
+        previousButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(ScreenUtils.horizontalInset)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(44)
+            $0.width.equalTo(120 * ScreenUtils.widthRatio)
         }
         
+        nextButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(-ScreenUtils.horizontalInset)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(44)
+            $0.width.equalTo(200 * ScreenUtils.widthRatio)
+        }
+
         pageVC.view.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
-            $0.bottom.equalTo(spotUploadView.nextButton.snp.top).offset(-10)
+            $0.bottom.equalTo(nextButton.snp.top).offset(-10)
         }
     }
 
@@ -85,13 +98,13 @@ final class SpotUploadViewController: BaseNavViewController {
     }
 
     private func addTarget() {
-        spotUploadView.previousButton.addTarget(self,
-                                                action: #selector(goToPreviousPage),
-                                                for: .touchUpInside)
+        previousButton.addTarget(self,
+                                 action: #selector(goToPreviousPage),
+                                 for: .touchUpInside)
 
-        spotUploadView.nextButton.addTarget(self,
-                                            action: #selector(goToNextPage),
-                                            for: .touchUpInside)
+        nextButton.addTarget(self,
+                             action: #selector(goToNextPage),
+                             for: .touchUpInside)
     }
 
 }
@@ -104,13 +117,13 @@ private extension SpotUploadViewController {
     func bindViewModel() {
         viewModel.isPreviousButtonEnabled.bind { [weak self] isEnabled in
             guard let isEnabled else { return }
-            self?.spotUploadView.previousButton.updateGlassButtonState(state: isEnabled ? .default : .disabled)
+            self?.previousButton.updateGlassButtonState(state: isEnabled ? .default : .disabled)
             self?.viewModel.isPreviousButtonEnabled.value = nil
         }
 
         viewModel.isNextButtonEnabled.bind { [weak self] isEnabled in
             guard let isEnabled else { return }
-            self?.spotUploadView.nextButton.updateGlassButtonState(state: isEnabled ? .default : .disabled)
+            self?.nextButton.updateGlassButtonState(state: isEnabled ? .default : .disabled)
             self?.viewModel.isNextButtonEnabled.value = nil
         }
     }
