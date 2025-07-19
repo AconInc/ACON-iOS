@@ -42,7 +42,7 @@ final class LocalMapView: BaseView {
         
         finishVerificationButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*36)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.widthRatio*20)
+            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
             $0.height.equalTo(52)
         }
         
@@ -62,8 +62,8 @@ final class LocalMapView: BaseView {
                 $0.minZoomLevel = 14
                 $0.maxZoomLevel = 18
                 $0.customStyleId = Config.nmfCustomStyleID
-                $0.logoAlign = .rightTop
-                $0.logoMargin = ConstraintInsets(top: ScreenUtils.safeAreaTopHeight+ScreenUtils.heightRatio*80, left: 0, bottom: 0, right: ScreenUtils.horizontalInset)
+                $0.logoAlign = .leftBottom
+                $0.logoMargin = ConstraintInsets(top: 0, left: ScreenUtils.horizontalInset, bottom: ScreenUtils.heightRatio*66, right: 0)
             }
         }
 

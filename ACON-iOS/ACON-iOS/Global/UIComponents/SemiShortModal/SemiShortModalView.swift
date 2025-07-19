@@ -2,12 +2,12 @@
 //  WithdrawalConfirmationView.swift
 //  ACON-iOS
 //
-//  Created by Jaehyun Ahn on 2/17/25.
+//  Created by 이수민 on 7/18/25.
 //
 
 import UIKit
 
-final class WithdrawalConfirmationView: GlassmorphismView {
+final class SemiShortModalView: GlassmorphismView {
     
     // MARK: - UI Properties
     
@@ -15,38 +15,26 @@ final class WithdrawalConfirmationView: GlassmorphismView {
     
     private let descriptionLabel = UILabel()
     
-    let cancelButton = ACButton(style: GlassButton(borderGlassmorphismType: .buttonGlassDefault, buttonType: .line_22_b1SB), title: StringLiterals.WithdrawalConfirmation.cancelButtonTitle)
+    let cancelButton: ACButton
 
-    let confirmButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_22_b1SB), title: StringLiterals.WithdrawalConfirmation.confirmButtonTitle)
+    let confirmButton: ACButton
+    
+    private let semiShortModalType: SemiShortModalType
     
     
     // MARK: - LifeCycle
     
-    init() {
+    init(semiShortModalType: SemiShortModalType) {
+        self.semiShortModalType = semiShortModalType
+        
+        self.cancelButton = ACButton(style: GlassButton(borderGlassmorphismType: .buttonGlassDefault, buttonType: .line_22_b1SB), title: semiShortModalType.cancelButtonTitle)
+        self.confirmButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_22_b1SB), title: semiShortModalType.confirmButtonTitle)
+        
         super.init(.bottomSheetGlass)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func setStyle() {
-        super.setStyle()
-        
-        self.setHandlerImageView()
-
-        titleLabel.setLabel(text: StringLiterals.WithdrawalConfirmation.title,
-                            style: .h4SB,
-                            alignment: .center)
-        
-        descriptionLabel.setLabel(text: StringLiterals.WithdrawalConfirmation.description,
-                                  style: .b1R,
-                                  color: .gray300,
-                                  alignment: .center)
-        
-        [cancelButton, confirmButton].forEach {
-            $0.isUserInteractionEnabled = true
-        }
     }
     
     override func setHierarchy() {
@@ -86,4 +74,19 @@ final class WithdrawalConfirmationView: GlassmorphismView {
         }
     }
 
+    override func setStyle() {
+        super.setStyle()
+        
+        self.setHandlerImageView()
+
+        titleLabel.setLabel(text: semiShortModalType.title,
+                            style: .h4SB,
+                            alignment: .center)
+        
+        descriptionLabel.setLabel(text: semiShortModalType.description,
+                                  style: .b1R,
+                                  color: .gray300,
+                                  alignment: .center)
+    }
+    
 }

@@ -33,4 +33,12 @@ struct NavigationUtils {
         }
     }
     
+    static func navigateToOnboardingLocalVerification() {
+        let vm = LocalVerificationViewModel(flowType: .onboarding)
+        let vc = LocalVerificationViewController(viewModel: vm)
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = UINavigationController(rootViewController: vc)
+        }
+    }
+    
 }

@@ -45,6 +45,7 @@ class SpotListViewController: BaseNavViewController {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = false
+        presentVerificationReminderSheet()
         viewModel.startLocationTracking()
     }
 
@@ -747,6 +748,36 @@ private extension SpotListViewController {
     func appDidEnterBackground() {
         viewModel.stopLocationTracking()
         hideLocationCheckToast()
+    }
+    
+}
+
+
+// MARK: - 지역 인증 바텀시트
+
+private extension SpotListViewController {
+    
+    func presentVerificationReminderSheet() {
+        guard AuthManager.shared.hasToken else { return }
+        guard !AuthManager.shared.hasVerifiedArea else { return }
+        
+        let lastAlertTime = UserDefaults.standard.object(forKey: "lastLocalVerificationAlertTime") as? Date
+        let now = Date()
+        
+        if let lastTime = lastAlertTime {
+            let timeDifference = now.timeIntervalSince(lastTime)
+            let hourDifference = timeDifference / 3600
+            
+            if hourDifference < 24 { return }
+            //  TODO: - QA 때 보여주기용 (릴리즈 시 삭제)
+//            if timeDifference < 10 { return }
+        }
+        
+        let sheetVC = VerificationReminderViewController()
+        sheetVC.setSheetLayout(detent: .semiShort)
+        sheetVC.isModalInPresentation = true
+        
+        present(sheetVC, animated: true)
     }
     
 }

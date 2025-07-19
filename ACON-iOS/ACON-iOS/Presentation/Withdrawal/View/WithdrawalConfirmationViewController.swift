@@ -9,8 +9,10 @@ import UIKit
 
 final class WithdrawalConfirmationViewController: BaseViewController {
     
-    private let confirmationView = WithdrawalConfirmationView()
+    private let confirmationView = SemiShortModalView(semiShortModalType: .withdrawalConfirmation)
+    
     var viewModel: WithdrawalViewModel?
+    
     var selectedReason: String?
 
     override func loadView() {

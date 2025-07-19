@@ -7,10 +7,7 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
-class LocalVerificationViewController: BaseViewController {
+class LocalVerificationViewController: BaseNavViewController {
     
     // MARK: - UI Properties
     
@@ -35,6 +32,7 @@ class LocalVerificationViewController: BaseViewController {
         
         addTarget()
         bindViewModel()
+        self.setSkipButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +44,7 @@ class LocalVerificationViewController: BaseViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.view.addSubview(localVerificationView)
+        self.contentView.addSubview(localVerificationView)
     }
     
     override func setLayout() {
@@ -78,17 +76,8 @@ private extension LocalVerificationViewController {
                 if localVerificationViewModel.isLocationKorea {
                     pushToLocalMapVC()
                 } else {
-                    switch localVerificationViewModel.flowType {
-                    case .onboarding:
-                        self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "온보딩으로 이동", completion: {
-                            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                                sceneDelegate.window?.rootViewController = OnboardingViewController(flowType: .login)
-                            }
-                        })
-                    default:
-                        self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "홈으로 이동", completion: {
-                            NavigationUtils.navigateToTabBar()})
-                    }
+                    self.showDefaultAlert(title: "알림", message: "현재 지역인증이 불가능한 지역에 있어요", okText: "홈으로 이동", completion: {
+                        NavigationUtils.navigateToTabBar()})
                 }
             } else {
                 self.showDefaultAlert(title: "위치 확인 실패", message: "위치를 확인할 수 없습니다.")

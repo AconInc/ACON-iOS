@@ -50,6 +50,13 @@ struct ScreenUtils {
         return window.safeAreaInsets.top
     }
 
+    static var safeAreaBottomHeight: CGFloat {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else {
+            return 0
+        }
+        return window.safeAreaInsets.bottom
+    }
     
     // MARK: - horizontal inset
     
