@@ -128,13 +128,13 @@ extension LoginModalViewController {
                 if hasVerifiedArea {
                     let authStatus = ACLocationManager.shared.locationManager.authorizationStatus
                     if authStatus == .denied || authStatus == .restricted {
-                        navigateToLocalVerificationVC()
+                        NavigationUtils.navigateToOnboardingLocalVerification()
                     } else {
                         NavigationUtils.navigateToTabBar()
                     }
                 } else {
                     print("🥑onSuccess && !hasVerifiedArea")
-                    navigateToLocalVerificationVC()
+                    NavigationUtils.navigateToOnboardingLocalVerification()
                 }
                 if let presentedVCType = presentedVCType {
                     AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.guest, properties: [presentedVCType: true])
@@ -142,14 +142,6 @@ extension LoginModalViewController {
             } else {
                 showLoginFailAlert()
             }
-        }
-    }
-
-    func navigateToLocalVerificationVC() {
-        let vm = LocalVerificationViewModel(flowType: .onboarding)
-        let vc = LocalVerificationViewController(viewModel: vm)
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = UINavigationController(rootViewController: vc)
         }
     }
     
