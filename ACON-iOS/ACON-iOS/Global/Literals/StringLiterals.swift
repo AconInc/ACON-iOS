@@ -278,6 +278,18 @@ enum StringLiterals {
         
     }
     
+    enum LocalVerificationModal {
+        
+        static let title = "내 지역을 인증해 주세요!"
+        
+        static let description = "내 지역에 남긴 리뷰는 로컬리뷰로 인정되어\n더 많은 사람들에게 추천돼요."
+        
+        static let cancel = "다음에 하기"
+        
+        static let confirm = "지역 인증하러 하기"
+        
+    }
+    
     enum SpotListFilter {
         
         static let pageTitle = "상세조건"

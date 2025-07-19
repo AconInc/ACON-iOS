@@ -205,6 +205,7 @@
 		746FF3C02D3D8669001CDAAC /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */; };
 		74721B4B2E2A07D100F0ACB9 /* SemiShortModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74721B4A2E2A07D100F0ACB9 /* SemiShortModalView.swift */; };
 		74721B4E2E2A08DC00F0ACB9 /* SemiShortModalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74721B4D2E2A08CE00F0ACB9 /* SemiShortModalType.swift */; };
+		74721B502E2A0F9A00F0ACB9 /* VerificationReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74721B4F2E2A0F7D00F0ACB9 /* VerificationReminderViewController.swift */; };
 		74770C192DF1DA97005D4165 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 74770C182DF1DA97005D4165 /* GoogleMobileAds */; };
 		74770C1B2DF35848005D4165 /* ProfileGoogleAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74770C1A2DF35848005D4165 /* ProfileGoogleAdView.swift */; };
 		74770C1D2DF36DAB005D4165 /* GoogleAdsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74770C1C2DF36DA2005D4165 /* GoogleAdsType.swift */; };
@@ -499,6 +500,7 @@
 		746FF3BF2D3D8662001CDAAC /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
 		74721B4A2E2A07D100F0ACB9 /* SemiShortModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiShortModalView.swift; sourceTree = "<group>"; };
 		74721B4D2E2A08CE00F0ACB9 /* SemiShortModalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiShortModalType.swift; sourceTree = "<group>"; };
+		74721B4F2E2A0F7D00F0ACB9 /* VerificationReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationReminderViewController.swift; sourceTree = "<group>"; };
 		74770C1A2DF35848005D4165 /* ProfileGoogleAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGoogleAdView.swift; sourceTree = "<group>"; };
 		74770C1C2DF36DA2005D4165 /* GoogleAdsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdsType.swift; sourceTree = "<group>"; };
 		747BB6CD2DCA66EB00352874 /* GlassButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonState.swift; sourceTree = "<group>"; };
@@ -2238,6 +2240,7 @@
 				74A13D6B2DCC035F007FFFC3 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				746F15B72D3E2083003EA031 /* PostLocalAreaRequest.swift in Sources */,
 				74BF92142D391FFE00B923E3 /* LocalMapView.swift in Sources */,
+				74721B502E2A0F9A00F0ACB9 /* VerificationReminderViewController.swift in Sources */,
 				D696F1B22D3A7E3400CCD5FF /* ACAlertView.swift in Sources */,
 				743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */,
 				152F8D242DF268FA0064022B /* SpotListCellDelegate.swift in Sources */,
