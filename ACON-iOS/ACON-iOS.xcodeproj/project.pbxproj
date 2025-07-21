@@ -48,7 +48,6 @@
 		1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */; };
 		155BC2922DF09EB200E1744E /* ShadowColorCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155BC2912DF09EB200E1744E /* ShadowColorCache.swift */; };
 		155D456B2E26A538008C0316 /* SpotUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D456A2E26A538008C0316 /* SpotUploadViewController.swift */; };
-		155D45AD2E26A575008C0316 /* SpotUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45AC2E26A575008C0316 /* SpotUploadView.swift */; };
 		155D45AF2E26B04F008C0316 /* SpotTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45AE2E26B04F008C0316 /* SpotTypeSelectionViewController.swift */; };
 		155D45B12E26B2E3008C0316 /* SpotUploadSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45B02E26B2E3008C0316 /* SpotUploadSearchViewController.swift */; };
 		155D45B32E26B8CB008C0316 /* BaseUploadInquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D45B22E26B8CB008C0316 /* BaseUploadInquiryView.swift */; };
@@ -346,7 +345,6 @@
 		1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
 		155BC2912DF09EB200E1744E /* ShadowColorCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowColorCache.swift; sourceTree = "<group>"; };
 		155D456A2E26A538008C0316 /* SpotUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadViewController.swift; sourceTree = "<group>"; };
-		155D45AC2E26A575008C0316 /* SpotUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadView.swift; sourceTree = "<group>"; };
 		155D45AE2E26B04F008C0316 /* SpotTypeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTypeSelectionViewController.swift; sourceTree = "<group>"; };
 		155D45B02E26B2E3008C0316 /* SpotUploadSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadSearchViewController.swift; sourceTree = "<group>"; };
 		155D45B22E26B8CB008C0316 /* BaseUploadInquiryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUploadInquiryView.swift; sourceTree = "<group>"; };
@@ -851,7 +849,6 @@
 		1579F2F62E296071006B4DEE /* SpotUpload */ = {
 			isa = PBXGroup;
 			children = (
-				155D45AC2E26A575008C0316 /* SpotUploadView.swift */,
 				155D456A2E26A538008C0316 /* SpotUploadViewController.swift */,
 			);
 			path = SpotUpload;
@@ -2261,7 +2258,6 @@
 				156AA7242D6504F1005B8DCE /* GetVerifiedAreaListResponse.swift in Sources */,
 				74770C1B2DF35848005D4165 /* ProfileGoogleAdView.swift in Sources */,
 				74E38D342D69B46F009449D4 /* LocationUtils.swift in Sources */,
-				155D45AD2E26A575008C0316 /* SpotUploadView.swift in Sources */,
 				74EC5A2A2DF4C72200E176A8 /* GetSavedSpotsResponse.swift in Sources */,
 				1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */,
 				15ABCBFC2DF775E8000269F7 /* SpotImageStatusType.swift in Sources */,
