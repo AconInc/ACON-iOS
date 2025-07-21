@@ -31,7 +31,7 @@ enum GlassmorphismType {
         switch self {
         case .buttonGlassDisabled:
             return .systemUltraThinMaterialLight
-        case .buttonGlassDefault, .actionSheetGlass, .noImageErrorGlass:
+        case .buttonGlassDefault, .actionSheetGlass, .textfieldGlass, .noImageErrorGlass:
             return .systemThinMaterialLight
         case .buttonGlassSelected:
             return .systemMaterialLight
@@ -39,7 +39,7 @@ enum GlassmorphismType {
             return .systemThickMaterialLight
         case .gradientGlass:
             return .systemUltraThinMaterialDark
-        case .textfieldGlass, .needLoginErrorGlass, .alertGlass, .backgroundGlass, .bottomSheetGlass:
+        case .needLoginErrorGlass, .alertGlass, .backgroundGlass, .bottomSheetGlass:
             return .systemThinMaterialDark
         case .toastGlass:
             return .systemThickMaterialDark
