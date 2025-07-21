@@ -91,6 +91,7 @@
 		15AD50982DF8725200166D9D /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 15AD50972DF8725200166D9D /* SkeletonView */; };
 		15BFF8B92D665BAD00909C4F /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15BFF8B52D665A5B00909C4F /* Debug.xcconfig */; };
 		15BFF8BA2D665BAD00909C4F /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15BFF8B62D665A5B00909C4F /* Release.xcconfig */; };
+		15C019B32E2B906400B3CF0A /* SpotUploadOptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C019B22E2B906400B3CF0A /* SpotUploadOptionButton.swift */; };
 		15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C0ED512D429F7400C9ED83 /* SkeletonView.swift */; };
 		15C0ED6A2D42CDA300C9ED83 /* loadingWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = 15C0ED692D42CDA300C9ED83 /* loadingWhite.json */; };
 		15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD256A2D3D61F500320006 /* GlassmorphismView.swift */; };
@@ -386,6 +387,7 @@
 		15ABCBFB2DF775E8000269F7 /* SpotImageStatusType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotImageStatusType.swift; sourceTree = "<group>"; };
 		15BFF8B52D665A5B00909C4F /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		15BFF8B62D665A5B00909C4F /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		15C019B22E2B906400B3CF0A /* SpotUploadOptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadOptionButton.swift; sourceTree = "<group>"; };
 		15C0ED512D429F7400C9ED83 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		15C0ED692D42CDA300C9ED83 /* loadingWhite.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loadingWhite.json; sourceTree = "<group>"; };
 		15CD256A2D3D61F500320006 /* GlassmorphismView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismView.swift; sourceTree = "<group>"; };
@@ -822,6 +824,7 @@
 		155D45672E26A51C008C0316 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				15C019B12E2B8EB800B3CF0A /* Component */,
 				1579F2F62E296071006B4DEE /* SpotUpload */,
 				1579F2F72E29607E006B4DEE /* BaseUploadInquiry */,
 				1579F2F82E296091006B4DEE /* InquiryPages */,
@@ -904,6 +907,14 @@
 				15AA6D192D68C4AD008021C6 /* ReviewVerificationErrorType.swift */,
 			);
 			path = Type;
+			sourceTree = "<group>";
+		};
+		15C019B12E2B8EB800B3CF0A /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				15C019B22E2B906400B3CF0A /* SpotUploadOptionButton.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		15CD256C2D3D794300320006 /* Component */ = {
@@ -2111,6 +2122,7 @@
 				746261712D3EA50A00A4E84F /* SpotCategoryType.swift in Sources */,
 				74020C4C2DF46E75009E90AE /* SavedSpotCollectionViewCell.swift in Sources */,
 				7414295B2D5D2FC400B69528 /* ProfileSettingViewController.swift in Sources */,
+				15C019B32E2B906400B3CF0A /* SpotUploadOptionButton.swift in Sources */,
 				74A13D622DCBB97E007FFFC3 /* OnboardingViewController.swift in Sources */,
 				748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */,
 				747F4FBF2D3D9D44003DECBF /* SplashView.swift in Sources */,
