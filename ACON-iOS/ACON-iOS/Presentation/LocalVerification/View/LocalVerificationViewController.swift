@@ -39,6 +39,9 @@ class LocalVerificationViewController: BaseNavViewController {
         addTarget()
         bindViewModel()
         self.setSkipButton() {
+            let now = Date()
+            UserDefaults.standard.set(now, forKey: "lastLocalVerificationAlertTime")
+            
             NavigationUtils.naviateToLoginOnboarding()
         }
     }
