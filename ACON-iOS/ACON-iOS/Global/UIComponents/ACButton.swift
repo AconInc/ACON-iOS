@@ -205,7 +205,12 @@ extension ACButton {
         borderGlassmorphismView = GlassmorphismView(attributes.glassmorphismType)
         
         if let glassmorphismView = borderGlassmorphismView {
-            self.insertSubview(glassmorphismView, at: 0)
+            if let backgroundView = self.glassmorphismView {
+                self.insertSubview(glassmorphismView, aboveSubview: backgroundView)
+            } else {
+                self.insertSubview(glassmorphismView, at: 0)
+            }
+            
             glassmorphismView.isUserInteractionEnabled = false
             
             glassmorphismView.snp.makeConstraints {
