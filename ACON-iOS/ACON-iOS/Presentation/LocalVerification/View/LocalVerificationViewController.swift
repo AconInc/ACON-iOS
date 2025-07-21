@@ -38,7 +38,9 @@ class LocalVerificationViewController: BaseNavViewController {
         
         addTarget()
         bindViewModel()
-        self.setSkipButton()
+        self.setSkipButton() {
+            NavigationUtils.naviateToLoginOnboarding()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,8 +85,12 @@ private extension LocalVerificationViewController {
                 if localVerificationViewModel.isLocationKorea {
                     pushToLocalMapVC()
                 } else {
-                    self.showDefaultAlert(title: "알림", message: "현재 지역인증이 불가능한 지역에 있어요", okText: "홈으로 이동", completion: {
-                        NavigationUtils.navigateToTabBar()})
+                    switch localVerificationViewModel.flowType {
+                    case .onboarding:
+                        self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "온보딩으로 이동", completion: {NavigationUtils.naviateToLoginOnboarding()})
+                    default:
+                        self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "홈으로 이동", completion: {NavigationUtils.navigateToTabBar()})
+                    }
                 }
             } else {
                 self.showDefaultAlert(title: "위치 확인 실패", message: "위치를 확인할 수 없습니다.")
