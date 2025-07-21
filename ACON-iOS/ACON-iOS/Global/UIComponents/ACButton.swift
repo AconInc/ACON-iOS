@@ -227,8 +227,7 @@ extension ACButton {
         glassmorphismView?.layer.masksToBounds = true
         
         if let attributes = glassBorderAttributes,
-           bounds.width > 0, bounds.height > 0,
-            !bounds.width.isNaN, !bounds.height.isNaN {
+           bounds.width > 0, bounds.height > 0 {
             if let existingView = borderGlassmorphismView {
                 if existingView.frame.size == bounds.size &&
                     existingView.frame.width > 0 && existingView.frame.height > 0 {
