@@ -63,14 +63,14 @@ final class SemiShortModalView: GlassmorphismView {
             $0.top.equalToSuperview().inset(219*ScreenUtils.heightRatio)
             $0.leading.equalToSuperview().inset(ScreenUtils.horizontalInset)
             $0.width.equalTo(ScreenUtils.widthRatio*120)
-            $0.height.equalTo(ScreenUtils.heightRatio*44)
+            $0.height.equalTo(44)
         }
         
         confirmButton.snp.makeConstraints{
             $0.top.equalToSuperview().inset(219*ScreenUtils.heightRatio)
             $0.trailing.equalToSuperview().inset(ScreenUtils.horizontalInset)
             $0.width.equalTo(ScreenUtils.widthRatio*200)
-            $0.height.equalTo(ScreenUtils.heightRatio*44)
+            $0.height.equalTo(44)
         }
     }
 
