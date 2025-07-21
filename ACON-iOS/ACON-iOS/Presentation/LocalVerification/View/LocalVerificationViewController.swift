@@ -15,7 +15,9 @@ class LocalVerificationViewController: BaseNavViewController {
     
     private let localVerificationViewModel: LocalVerificationViewModel
     
-    
+    private var blinkTimer: Timer?
+
+
     // MARK: - LifeCycle
     
     init(viewModel: LocalVerificationViewModel) {
@@ -25,6 +27,10 @@ class LocalVerificationViewController: BaseNavViewController {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        stopBlinkingWarningLabel()
     }
     
     override func viewDidLoad() {
@@ -39,6 +45,7 @@ class LocalVerificationViewController: BaseNavViewController {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = true
+        startBlinkingWarningLabel()
     }
     
     override func setHierarchy() {
@@ -108,6 +115,29 @@ extension LocalVerificationViewController {
     func pushToLocalMapVC() {
         let vc = LocalMapViewController(viewModel: localVerificationViewModel)
         navigationController?.pushViewController(vc, animated: false)
+    }
+    
+}
+
+
+// MARK: - Warning Label Blinking Logic
+
+private extension LocalVerificationViewController {
+
+    func startBlinkingWarningLabel() {
+        stopBlinkingWarningLabel()
+        
+        blinkTimer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { _ in
+            UIView.animate(withDuration: 0.3) {
+                self.localVerificationView.warningLabel.alpha = self.localVerificationView.warningLabel.alpha == 1.0 ? 0.0 : 1.0
+            }
+        }
+    }
+
+    func stopBlinkingWarningLabel() {
+        blinkTimer?.invalidate()
+        blinkTimer = nil
+        localVerificationView.warningLabel.alpha = 1.0
     }
     
 }

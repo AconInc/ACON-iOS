@@ -13,7 +13,7 @@ final class LocalVerificationView: BaseView {
     
     private let backgroundImageView: UIImageView = UIImageView()
     
-    private let warningLabel: UILabel = UILabel()
+    let warningLabel: UILabel = UILabel()
     
     private let titleLabel: UILabel = UILabel()
     
