@@ -92,8 +92,10 @@ extension ACButton {
 
         config.imagePlacement = style.imagePlacement
         config.imagePadding = style.imagePadding
-        
+
         config.titleAlignment = style.titleAlignment
+        contentHorizontalAlignment = style.titleAlignment.toContentHorizontalAlignment
+
         config.contentInsets = style.contentInsets
         
         config.showsActivityIndicator = style.showsActivityIndicator
