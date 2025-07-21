@@ -7,10 +7,7 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
-class LocalVerificationViewController: BaseViewController {
+class LocalVerificationViewController: BaseNavViewController {
     
     // MARK: - UI Properties
     
@@ -18,7 +15,9 @@ class LocalVerificationViewController: BaseViewController {
     
     private let localVerificationViewModel: LocalVerificationViewModel
     
-    
+    private var blinkTimer: Timer?
+
+
     // MARK: - LifeCycle
     
     init(viewModel: LocalVerificationViewModel) {
@@ -30,23 +29,34 @@ class LocalVerificationViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        stopBlinkingWarningLabel()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addTarget()
         bindViewModel()
+        self.setSkipButton() {
+            let now = Date()
+            UserDefaults.standard.set(now, forKey: "lastLocalVerificationAlertTime")
+            
+            NavigationUtils.naviateToLoginOnboarding()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
 
         self.tabBarController?.tabBar.isHidden = true
+        startBlinkingWarningLabel()
     }
     
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.view.addSubview(localVerificationView)
+        self.contentView.addSubview(localVerificationView)
     }
     
     override func setLayout() {
@@ -80,14 +90,9 @@ private extension LocalVerificationViewController {
                 } else {
                     switch localVerificationViewModel.flowType {
                     case .onboarding:
-                        self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "온보딩으로 이동", completion: {
-                            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                                sceneDelegate.window?.rootViewController = OnboardingViewController(flowType: .login)
-                            }
-                        })
+                        self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "온보딩으로 이동", completion: {NavigationUtils.naviateToLoginOnboarding()})
                     default:
-                        self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "홈으로 이동", completion: {
-                            NavigationUtils.navigateToTabBar()})
+                        self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "홈으로 이동", completion: {NavigationUtils.navigateToTabBar()})
                     }
                 }
             } else {
@@ -119,6 +124,29 @@ extension LocalVerificationViewController {
     func pushToLocalMapVC() {
         let vc = LocalMapViewController(viewModel: localVerificationViewModel)
         navigationController?.pushViewController(vc, animated: false)
+    }
+    
+}
+
+
+// MARK: - Warning Label Blinking Logic
+
+private extension LocalVerificationViewController {
+
+    func startBlinkingWarningLabel() {
+        stopBlinkingWarningLabel()
+        
+        blinkTimer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { _ in
+            UIView.animate(withDuration: 0.3) {
+                self.localVerificationView.warningLabel.alpha = self.localVerificationView.warningLabel.alpha == 1.0 ? 0.0 : 1.0
+            }
+        }
+    }
+
+    func stopBlinkingWarningLabel() {
+        blinkTimer?.invalidate()
+        blinkTimer = nil
+        localVerificationView.warningLabel.alpha = 1.0
     }
     
 }
