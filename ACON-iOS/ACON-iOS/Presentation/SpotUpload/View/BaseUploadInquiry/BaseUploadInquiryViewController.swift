@@ -43,7 +43,7 @@ class BaseUploadInquiryViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        updateButtonStates()
+        updatePagingButtonStates()
     }
 
 
@@ -58,7 +58,7 @@ class BaseUploadInquiryViewController: BaseViewController {
 
     // MARK: - Helper
 
-    func updateButtonStates() {
+    func updatePagingButtonStates() {
         viewModel.isPreviousButtonEnabled.value = canGoPrevious
         viewModel.isNextButtonEnabled.value = canGoNext
     }

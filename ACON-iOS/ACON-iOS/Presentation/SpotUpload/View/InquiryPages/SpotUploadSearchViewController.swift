@@ -84,7 +84,7 @@ private extension SpotUploadSearchViewController {
         textField.observableText.bind { [weak self] text in
             guard let text else { return }
             self?.viewModel.spotName = text
-            self?.updateButtonStates()
+            self?.updatePagingButtonStates()
         }
     }
 

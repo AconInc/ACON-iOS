@@ -97,13 +97,13 @@ private extension SpotTypeSelectionViewController {
     @objc
     func tappedRestaurantButton() {
         viewModel.spotType = .restaurant
-        updateButtonStates()
+        updatePagingButtonStates()
     }
 
     @objc
     func tappedCafeButton() {
         viewModel.spotType = .cafe
-        updateButtonStates()
+        updatePagingButtonStates()
     }
 
 }
