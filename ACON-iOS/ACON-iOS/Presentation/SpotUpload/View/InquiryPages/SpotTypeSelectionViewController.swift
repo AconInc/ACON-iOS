@@ -11,11 +11,9 @@ class SpotTypeSelectionViewController: BaseUploadInquiryViewController {
 
     // MARK: - UI Properties
 
-    private let restaurantButton = ACButton(style: GlassConfigButton(glassmorphismType: .buttonGlassDefault, buttonType: .both_10_t4R),
-                                            title: StringLiterals.SpotUpload.restaurant)
+    private let restaurantButton = SpotUploadOptionButton(title: StringLiterals.SpotUpload.restaurant)
     
-    private let cafeButton = ACButton(style: GlassConfigButton(glassmorphismType: .buttonGlassDefault, buttonType: .both_10_t4R),
-                                      title: StringLiterals.SpotUpload.cafe)
+    private let cafeButton = SpotUploadOptionButton(title: StringLiterals.SpotUpload.cafe)
 
 
     // MARK: - Properties
@@ -97,12 +95,18 @@ private extension SpotTypeSelectionViewController {
     @objc
     func tappedRestaurantButton() {
         viewModel.spotType = .restaurant
+        restaurantButton.isButtonSelected = true
+        cafeButton.isButtonSelected = false
+
         updatePagingButtonStates()
     }
 
     @objc
     func tappedCafeButton() {
         viewModel.spotType = .cafe
+        restaurantButton.isButtonSelected = false
+        cafeButton.isButtonSelected = true
+
         updatePagingButtonStates()
     }
 
