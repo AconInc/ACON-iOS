@@ -49,14 +49,6 @@ class SpotTypeSelectionViewController: BaseUploadInquiryViewController {
         addTarget()
     }
 
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        [restaurantButton, cafeButton].forEach {
-            $0.refreshButtonBlurEffect(.buttonGlassDefault)
-        }
-    }
-
 
     // MARK: - UI Setting
 
@@ -95,8 +87,8 @@ private extension SpotTypeSelectionViewController {
     @objc
     func tappedRestaurantButton() {
         viewModel.spotType = .restaurant
-        restaurantButton.isButtonSelected = true
-        cafeButton.isButtonSelected = false
+        restaurantButton.isSelected = true
+        cafeButton.isSelected = false
 
         updatePagingButtonStates()
     }
@@ -104,8 +96,8 @@ private extension SpotTypeSelectionViewController {
     @objc
     func tappedCafeButton() {
         viewModel.spotType = .cafe
-        restaurantButton.isButtonSelected = false
-        cafeButton.isButtonSelected = true
+        restaurantButton.isSelected = false
+        cafeButton.isSelected = true
 
         updatePagingButtonStates()
     }

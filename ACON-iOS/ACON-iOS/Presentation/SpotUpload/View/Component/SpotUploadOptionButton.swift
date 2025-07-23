@@ -7,24 +7,11 @@
 
 import UIKit
 
-// TODO: ACButton.glassmorphismView가 업데이트 안 되는 문제 해결
-final class SpotUploadOptionButton: ACButton {
+final class SpotUploadOptionButton: UIButton {
 
     // MARK: - Properties
 
-    var onStateChanged: ((Bool) -> Void)?
-
-    var isButtonSelected: Bool = false {
-        didSet {
-            DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
-                
-                updateGlassButtonState(state: isButtonSelected ? .selected : .default)
-                checkImageView.tintColor  = isButtonSelected ? .acWhite : .gray700
-                isButtonSelected ? applyGlassBorder() : glassBorder.removeFromSuperview()
-            }
-        }
-    }
+    private let title: String
 
 
     // MARK: - UI Properties
@@ -39,11 +26,14 @@ final class SpotUploadOptionButton: ACButton {
     // MARK: - init
 
     init(title: String) {
-        super.init(style: GlassConfigButton(glassmorphismType: .buttonGlassDefault, buttonType: .both_10_t4R, titleAlignment: .leading), title: title)
+        self.title = title
+
+        super.init(frame: .zero)
 
         setHierarchy()
         setLayout()
         setStyle()
+        setConfigurationUpdateHandler()
     }
 
 
@@ -60,7 +50,8 @@ final class SpotUploadOptionButton: ACButton {
     private func setLayout() {
         checkImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(14)
-            $0.verticalEdges.equalToSuperview().inset(12)
+            $0.centerY.equalToSuperview().inset(12)
+            $0.size.equalTo(24)
         }
     }
 
@@ -70,45 +61,37 @@ final class SpotUploadOptionButton: ACButton {
             $0.contentMode = .scaleAspectFit
             $0.tintColor = isSelected ? .acWhite : .gray700
         }
+
+        var config = UIButton.Configuration.filled()
+        config.background.strokeWidth = 1
+        config.background.cornerRadius = 10
+        config.contentInsets = .init(top: 12, leading: 20, bottom: 12, trailing: 20)
+        config.attributedTitle = AttributedString(title.attributedString(.t4R))
+        config.titleAlignment = .leading
+
+        self.do {
+            $0.configuration = config
+            $0.contentHorizontalAlignment = .leading
+        }
     }
 
-}
+    private func setConfigurationUpdateHandler() {
+        let defaultBgColor = UIColor(red: 0.255, green: 0.255, blue: 0.255, alpha: 1)
+        let selectedBgColor = UIColor(red: 0.349, green: 0.349, blue: 0.349, alpha: 1)
+        let selectedBorderColor = UIColor(red: 0.545, green: 0.545, blue: 0.545, alpha: 1)
 
-
-// MARK: - Helper
-
-private extension SpotUploadOptionButton {
-
-    // MARK: - GlassBorder
-
-    func applyGlassBorder() {
-        guard bounds.width > 0 && bounds.height > 0 else { return }
-
-        glassBorder.removeFromSuperview()
-        self.layer.borderWidth = 0
-
-        let outerPath = UIBezierPath(roundedRect: bounds, cornerRadius: glassBorderAttributes.cornerRadius)
-        let innerRect = bounds.insetBy(dx: glassBorderAttributes.width, dy: glassBorderAttributes.width)
-        let innerPath = UIBezierPath(roundedRect: innerRect, cornerRadius: max(0, glassBorderAttributes.cornerRadius - glassBorderAttributes.width/2))
-        outerPath.append(innerPath.reversing())
-
-        glassBorder = GlassmorphismView(.buttonGlassSelected)
-
-        self.addSubview(glassBorder)
-
-        glassBorder.isUserInteractionEnabled = false
-
-        glassBorder.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        self.configurationUpdateHandler = { [weak self] button in
+            switch button.state {
+            case .selected:
+                button.configuration?.baseBackgroundColor = selectedBgColor
+                button.configuration?.background.strokeColor = selectedBorderColor
+                self?.checkImageView.tintColor = .acWhite
+            default:
+                button.configuration?.baseBackgroundColor = defaultBgColor
+                button.configuration?.background.strokeColor = .clear
+                self?.checkImageView.tintColor = .gray700
+            }
         }
-
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = outerPath.cgPath
-        maskLayer.fillRule = .evenOdd
-        
-        let maskView = UIView(frame: bounds)
-        maskView.layer.addSublayer(maskLayer)
-        glassBorder.mask = maskView
     }
 
 }
