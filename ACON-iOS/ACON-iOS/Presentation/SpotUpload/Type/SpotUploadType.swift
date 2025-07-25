@@ -76,39 +76,6 @@ extension SpotUploadType {
     }
 
 
-    // MARK: - Cafe
-
-    enum CafeOptionType: CaseIterable {
-
-        case workFriendly, excludeFranchise
-
-        var text: String {
-            switch self {
-            case .workFriendly: return "작업하기 좋은 곳"
-            case .excludeFranchise: return "프랜차이즈 제외"
-            }
-        }
-
-        var serverKey: String {
-            switch self {
-            case .workFriendly: return "WORK_FRIENDLY"
-            case .excludeFranchise: return "EXCLUDE_FRANCHISE"
-            }
-        }
-
-        init?(serverKey: String) {
-            for option in SpotUploadType.CafeOptionType.allCases {
-                if option.serverKey == serverKey {
-                    self = option
-                    return
-                }
-            }
-            return nil
-        }
-
-    }
-
-
     // MARK: - Price
 
     enum ValueRatingType: CaseIterable {
