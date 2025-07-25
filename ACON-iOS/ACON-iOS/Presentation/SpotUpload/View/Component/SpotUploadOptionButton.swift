@@ -11,7 +11,7 @@ final class SpotUploadOptionButton: UIButton {
 
     // MARK: - Properties
 
-    private let title: String
+    private var title: String?
 
 
     // MARK: - UI Properties
@@ -25,7 +25,7 @@ final class SpotUploadOptionButton: UIButton {
 
     // MARK: - init
 
-    init(title: String) {
+    init(title: String?) {
         self.title = title
 
         super.init(frame: .zero)
@@ -66,8 +66,8 @@ final class SpotUploadOptionButton: UIButton {
         config.background.strokeWidth = 1
         config.background.cornerRadius = 10
         config.contentInsets = .init(top: 12, leading: 20, bottom: 12, trailing: 20)
-        config.attributedTitle = AttributedString(title.attributedString(.t4R))
         config.titleAlignment = .leading
+        if let title { config.attributedTitle = AttributedString(title.attributedString(.t4R)) }
 
         self.do {
             $0.configuration = config
@@ -92,6 +92,18 @@ final class SpotUploadOptionButton: UIButton {
                 self?.checkImageView.tintColor = .gray700
             }
         }
+    }
+
+}
+
+
+// MARK: - Internal Methods
+
+extension SpotUploadOptionButton {
+
+    func updateTitle(_ title: String) {
+        self.title = title
+        self.configuration?.attributedTitle = AttributedString(title.attributedString(.t4R))
     }
 
 }
