@@ -36,6 +36,7 @@
 		15304FBA2E312A0700EFCDEF /* SpotUploadOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FB92E312A0700EFCDEF /* SpotUploadOptionCell.swift */; };
 		15304FBC2E3175D100EFCDEF /* SpotUploadType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FBB2E3175D100EFCDEF /* SpotUploadType.swift */; };
 		15304FBE2E33B7E400EFCDEF /* MenuRecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FBD2E33B7E400EFCDEF /* MenuRecommendationViewController.swift */; };
+		15304FC02E33BAA900EFCDEF /* ValueRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FBF2E33BAA900EFCDEF /* ValueRatingViewController.swift */; };
 		1530CC792DDFC0D100EB4AEC /* SpotNoImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */; };
 		1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EA2D337F4100E96616 /* SpotListView.swift */; };
 		1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */; };
@@ -337,6 +338,7 @@
 		15304FB92E312A0700EFCDEF /* SpotUploadOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadOptionCell.swift; sourceTree = "<group>"; };
 		15304FBB2E3175D100EFCDEF /* SpotUploadType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadType.swift; sourceTree = "<group>"; };
 		15304FBD2E33B7E400EFCDEF /* MenuRecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRecommendationViewController.swift; sourceTree = "<group>"; };
+		15304FBF2E33BAA900EFCDEF /* ValueRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueRatingViewController.swift; sourceTree = "<group>"; };
 		1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotNoImageContentView.swift; sourceTree = "<group>"; };
 		1547A6EA2D337F4100E96616 /* SpotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListView.swift; sourceTree = "<group>"; };
 		1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -888,6 +890,7 @@
 				155D45AE2E26B04F008C0316 /* SpotTypeSelectionViewController.swift */,
 				15304FB62E31226D00EFCDEF /* RestaurantFeatureSelectionViewController.swift */,
 				15304FBD2E33B7E400EFCDEF /* MenuRecommendationViewController.swift */,
+				15304FBF2E33BAA900EFCDEF /* ValueRatingViewController.swift */,
 			);
 			path = InquiryPages;
 			sourceTree = "<group>";
@@ -2249,6 +2252,7 @@
 				D6E8168E2D6228F5001E4EBF /* WithdrawalViewController.swift in Sources */,
 				740968B72DEC3CA700AFF624 /* VerifiedAreasCollectionViewCell.swift in Sources */,
 				740EE8282E059875007A5DCF /* GetAppUpdateRequest.swift in Sources */,
+				15304FC02E33BAA900EFCDEF /* ValueRatingViewController.swift in Sources */,
 				15F45F842D6664C900BD6B9C /* LoginLockOverlayView.swift in Sources */,
 				746261692D3EA33300A4E84F /* PostReviewRequest.swift in Sources */,
 				15CD257E2D3FF4F200320006 /* SpotListTargetType.swift in Sources */,

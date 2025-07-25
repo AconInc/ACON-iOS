@@ -17,6 +17,7 @@ final class SpotUploadViewController: BaseNavViewController {
                                           SpotTypeSelectionViewController(viewModel),
                                           RestaurantFeatureSelectionViewController(viewModel),
                                           MenuRecommendationViewController(viewModel),
+                                          ValueRatingViewController(viewModel)]
 
     private var currentIndex: Int = 0
 
