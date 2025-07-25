@@ -32,6 +32,7 @@
 		152F8D1E2DF253B80064022B /* NaverMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D1D2DF253B80064022B /* NaverMapService.swift */; };
 		152F8D202DF253FE0064022B /* AppleMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D1F2DF253FE0064022B /* AppleMapService.swift */; };
 		152F8D242DF268FA0064022B /* SpotListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D232DF268FA0064022B /* SpotListCellDelegate.swift */; };
+		15304FB72E31226D00EFCDEF /* RestaurantFeatureSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FB62E31226D00EFCDEF /* RestaurantFeatureSelectionViewController.swift */; };
 		15304FBA2E312A0700EFCDEF /* SpotUploadOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FB92E312A0700EFCDEF /* SpotUploadOptionCell.swift */; };
 		15304FBC2E3175D100EFCDEF /* SpotUploadType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FBB2E3175D100EFCDEF /* SpotUploadType.swift */; };
 		1530CC792DDFC0D100EB4AEC /* SpotNoImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */; };
@@ -331,6 +332,7 @@
 		152F8D1D2DF253B80064022B /* NaverMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMapService.swift; sourceTree = "<group>"; };
 		152F8D1F2DF253FE0064022B /* AppleMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapService.swift; sourceTree = "<group>"; };
 		152F8D232DF268FA0064022B /* SpotListCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCellDelegate.swift; sourceTree = "<group>"; };
+		15304FB62E31226D00EFCDEF /* RestaurantFeatureSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFeatureSelectionViewController.swift; sourceTree = "<group>"; };
 		15304FB92E312A0700EFCDEF /* SpotUploadOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadOptionCell.swift; sourceTree = "<group>"; };
 		15304FBB2E3175D100EFCDEF /* SpotUploadType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadType.swift; sourceTree = "<group>"; };
 		1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotNoImageContentView.swift; sourceTree = "<group>"; };
@@ -882,6 +884,7 @@
 			children = (
 				155D45B02E26B2E3008C0316 /* SpotUploadSearchViewController.swift */,
 				155D45AE2E26B04F008C0316 /* SpotTypeSelectionViewController.swift */,
+				15304FB62E31226D00EFCDEF /* RestaurantFeatureSelectionViewController.swift */,
 			);
 			path = InquiryPages;
 			sourceTree = "<group>";
@@ -2133,6 +2136,7 @@
 				746261712D3EA50A00A4E84F /* SpotCategoryType.swift in Sources */,
 				74020C4C2DF46E75009E90AE /* SavedSpotCollectionViewCell.swift in Sources */,
 				7414295B2D5D2FC400B69528 /* ProfileSettingViewController.swift in Sources */,
+				15304FB72E31226D00EFCDEF /* RestaurantFeatureSelectionViewController.swift in Sources */,
 				15C019B32E2B906400B3CF0A /* SpotUploadOptionButton.swift in Sources */,
 				74A13D622DCBB97E007FFFC3 /* OnboardingViewController.swift in Sources */,
 				748D6F6A2D2BCA1C007690B4 /* SceneDelegate.swift in Sources */,
