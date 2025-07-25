@@ -12,11 +12,11 @@ class RestaurantFeatureSelectionViewController: BaseUploadInquiryViewController 
     // MARK: - UI Properties
 
     private let collectionViewLayout = UICollectionViewFlowLayout().then {
-        let horizontalInset = 20 * ScreenUtils.widthRatio
-        $0.itemSize = CGSize(width: (ScreenUtils.width - horizontalInset * 2 - 8) / 2, height: 48)
-        $0.minimumLineSpacing = 10
-        $0.minimumInteritemSpacing = 8
-        $0.sectionInset = .init(top: 0, left: horizontalInset, bottom: 0, right: horizontalInset)
+        let sizeType = SpotUploadSizeType.ShortOptionButton.self
+        $0.itemSize = CGSize(width: sizeType.width, height: sizeType.height)
+        $0.minimumLineSpacing = sizeType.lineSpacing
+        $0.minimumInteritemSpacing = sizeType.itemInterSpacing
+        $0.sectionInset = .init(top: 0, left: sizeType.horizontalInset, bottom: 0, right: sizeType.horizontalInset)
     }
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
 

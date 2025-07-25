@@ -64,6 +64,7 @@ class BaseUploadInquiryViewController: BaseViewController {
     }
 
     func makeOptionButtonStack(_ buttons: [UIButton]) {
+        let sizeType = SpotUploadSizeType.LongOptionButton.self
         let stackView = UIStackView().then {
             $0.axis = .vertical
             $0.spacing = 12
@@ -73,14 +74,14 @@ class BaseUploadInquiryViewController: BaseViewController {
 
         stackView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
+            $0.horizontalEdges.equalToSuperview().inset(sizeType.horizontalInset)
         }
 
         for button in buttons {
             stackView.addArrangedSubview(button)
 
             button.snp.makeConstraints {
-                $0.height.equalTo(48)
+                $0.height.equalTo(sizeType.height)
             }
         }
     }

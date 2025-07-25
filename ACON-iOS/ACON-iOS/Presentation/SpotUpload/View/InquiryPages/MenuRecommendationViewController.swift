@@ -55,10 +55,11 @@ class MenuRecommendationViewController: BaseUploadInquiryViewController {
     override func setLayout() {
         super.setLayout()
 
+        let sizeType = SpotUploadSizeType.TextField.self
         textField.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(16 * ScreenUtils.widthRatio)
-            $0.height.equalTo(38)
+            $0.horizontalEdges.equalToSuperview().inset(sizeType.horizontalInset)
+            $0.height.equalTo(sizeType.height)
         }
     }
 
