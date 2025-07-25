@@ -13,11 +13,13 @@ final class SpotUploadViewController: BaseNavViewController {
 
     private let viewModel = SpotUploadViewModel()
 
+    // TODO: SpotTypeVC에서 분기처리
     lazy var pages: [UIViewController] = [SpotUploadSearchViewController(viewModel),
                                           SpotTypeSelectionViewController(viewModel),
                                           RestaurantFeatureSelectionViewController(viewModel),
                                           MenuRecommendationViewController(viewModel),
-                                          ValueRatingViewController(viewModel)]
+                                          ValueRatingViewController(viewModel),
+                                          CafeFeatureSelectionViewController(viewModel)]
 
     private var currentIndex: Int = 0
 

@@ -116,6 +116,8 @@ private extension ValueRatingViewController {
 }
 
 
+// MARK: - Helper
+
 private extension ValueRatingViewController {
 
     func updateOptionButtonStates() {

@@ -37,6 +37,7 @@
 		15304FBC2E3175D100EFCDEF /* SpotUploadType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FBB2E3175D100EFCDEF /* SpotUploadType.swift */; };
 		15304FBE2E33B7E400EFCDEF /* MenuRecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FBD2E33B7E400EFCDEF /* MenuRecommendationViewController.swift */; };
 		15304FC02E33BAA900EFCDEF /* ValueRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FBF2E33BAA900EFCDEF /* ValueRatingViewController.swift */; };
+		15304FC22E33C57A00EFCDEF /* CafeFeatureSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FC12E33C57A00EFCDEF /* CafeFeatureSelectionViewController.swift */; };
 		1530CC792DDFC0D100EB4AEC /* SpotNoImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */; };
 		1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EA2D337F4100E96616 /* SpotListView.swift */; };
 		1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */; };
@@ -339,6 +340,7 @@
 		15304FBB2E3175D100EFCDEF /* SpotUploadType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadType.swift; sourceTree = "<group>"; };
 		15304FBD2E33B7E400EFCDEF /* MenuRecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRecommendationViewController.swift; sourceTree = "<group>"; };
 		15304FBF2E33BAA900EFCDEF /* ValueRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueRatingViewController.swift; sourceTree = "<group>"; };
+		15304FC12E33C57A00EFCDEF /* CafeFeatureSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeFeatureSelectionViewController.swift; sourceTree = "<group>"; };
 		1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotNoImageContentView.swift; sourceTree = "<group>"; };
 		1547A6EA2D337F4100E96616 /* SpotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListView.swift; sourceTree = "<group>"; };
 		1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -889,6 +891,7 @@
 				155D45B02E26B2E3008C0316 /* SpotUploadSearchViewController.swift */,
 				155D45AE2E26B04F008C0316 /* SpotTypeSelectionViewController.swift */,
 				15304FB62E31226D00EFCDEF /* RestaurantFeatureSelectionViewController.swift */,
+				15304FC12E33C57A00EFCDEF /* CafeFeatureSelectionViewController.swift */,
 				15304FBD2E33B7E400EFCDEF /* MenuRecommendationViewController.swift */,
 				15304FBF2E33BAA900EFCDEF /* ValueRatingViewController.swift */,
 			);
@@ -2225,6 +2228,7 @@
 				741A07572D3558FE00778219 /* ReviewFinishedView.swift in Sources */,
 				743900932DC75451002F91B1 /* GlassmorphismType.swift in Sources */,
 				1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */,
+				15304FC22E33C57A00EFCDEF /* CafeFeatureSelectionViewController.swift in Sources */,
 				74BBADF62D611B6B003AB16C /* PostReissueResponse.swift in Sources */,
 				745862702DDBC3CD0075A854 /* ACAlertActionType.swift in Sources */,
 				748D6F7E2D2BCD72007690B4 /* StringLiterals.swift in Sources */,
