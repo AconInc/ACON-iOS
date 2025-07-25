@@ -38,7 +38,8 @@ class RestaurantFeatureSelectionViewController: BaseUploadInquiryViewController 
     init(_ viewModel: SpotUploadViewModel) {
         super.init(viewModel: viewModel,
                    requirement: .required,
-                   title: StringLiterals.SpotUpload.whatKindOfRestaurant)
+                   title: StringLiterals.SpotUpload.whatKindOfRestaurant,
+                   caption: StringLiterals.SpotUpload.multipleSelectionAllowed)
     }
 
     required init?(coder: NSCoder) {

@@ -33,8 +33,7 @@ class ValueRatingViewController: BaseUploadInquiryViewController {
     init(_ viewModel: SpotUploadViewModel) {
         super.init(viewModel: viewModel,
                    requirement: .required,
-                   title: StringLiterals.SpotUpload.isThisValueForMoney,
-                   caption: StringLiterals.SpotUpload.brunchIsCafe)
+                   title: StringLiterals.SpotUpload.isThisValueForMoney)
     }
 
     required init?(coder: NSCoder) {
