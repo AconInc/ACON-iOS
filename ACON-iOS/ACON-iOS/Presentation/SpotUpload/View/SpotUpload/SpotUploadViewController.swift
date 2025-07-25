@@ -15,7 +15,8 @@ final class SpotUploadViewController: BaseNavViewController {
 
     lazy var pages: [UIViewController] = [SpotUploadSearchViewController(viewModel),
                                           SpotTypeSelectionViewController(viewModel),
-                                          RestaurantFeatureSelectionViewController(viewModel)]
+                                          RestaurantFeatureSelectionViewController(viewModel),
+                                          MenuRecommendationViewController(viewModel),
 
     private var currentIndex: Int = 0
 

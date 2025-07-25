@@ -16,5 +16,6 @@ final class SpotUploadViewModel {
     var spotName: String? = nil
     var spotType: SpotType? = nil
     var restaurantFeature: Set<SpotUploadType.RestaurantOptionType> = []
+    var recommendedMenu: String? = nil
 
 }
