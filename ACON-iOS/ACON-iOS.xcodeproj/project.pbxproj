@@ -32,6 +32,7 @@
 		152F8D1E2DF253B80064022B /* NaverMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D1D2DF253B80064022B /* NaverMapService.swift */; };
 		152F8D202DF253FE0064022B /* AppleMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D1F2DF253FE0064022B /* AppleMapService.swift */; };
 		152F8D242DF268FA0064022B /* SpotListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D232DF268FA0064022B /* SpotListCellDelegate.swift */; };
+		15304FBA2E312A0700EFCDEF /* SpotUploadOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FB92E312A0700EFCDEF /* SpotUploadOptionCell.swift */; };
 		1530CC792DDFC0D100EB4AEC /* SpotNoImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */; };
 		1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EA2D337F4100E96616 /* SpotListView.swift */; };
 		1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */; };
@@ -329,6 +330,7 @@
 		152F8D1D2DF253B80064022B /* NaverMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMapService.swift; sourceTree = "<group>"; };
 		152F8D1F2DF253FE0064022B /* AppleMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapService.swift; sourceTree = "<group>"; };
 		152F8D232DF268FA0064022B /* SpotListCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCellDelegate.swift; sourceTree = "<group>"; };
+		15304FB92E312A0700EFCDEF /* SpotUploadOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadOptionCell.swift; sourceTree = "<group>"; };
 		1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotNoImageContentView.swift; sourceTree = "<group>"; };
 		1547A6EA2D337F4100E96616 /* SpotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListView.swift; sourceTree = "<group>"; };
 		1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -656,6 +658,14 @@
 			path = MapRedirect;
 			sourceTree = "<group>";
 		};
+		15304FB82E3129A000EFCDEF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				15304FB92E312A0700EFCDEF /* SpotUploadOptionCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		1533FCCF2D55EDD200F985A0 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -823,6 +833,7 @@
 			isa = PBXGroup;
 			children = (
 				15C019B12E2B8EB800B3CF0A /* Component */,
+				15304FB82E3129A000EFCDEF /* Cell */,
 				1579F2F62E296071006B4DEE /* SpotUpload */,
 				1579F2F72E29607E006B4DEE /* BaseUploadInquiry */,
 				1579F2F82E296091006B4DEE /* InquiryPages */,
@@ -2320,6 +2331,7 @@
 				15A48BFE2D57546A003C2421 /* ProfileImageEditButton.swift in Sources */,
 				D6E452942D3AA47500CBED02 /* ProfileViewController.swift in Sources */,
 				151BD9552D63375D005E657F /* VerifiedAreasEditViewController.swift in Sources */,
+				15304FBA2E312A0700EFCDEF /* SpotUploadOptionCell.swift in Sources */,
 				155D456B2E26A538008C0316 /* SpotUploadViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
