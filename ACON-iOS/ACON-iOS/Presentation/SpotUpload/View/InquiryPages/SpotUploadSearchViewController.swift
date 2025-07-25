@@ -14,7 +14,6 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
     private let textField = ACTextField(icon: .icSearch,
                                         borderWidth: 0,
                                         cornerRadius: 10,
-                                        doneButton: false,
                                         backgroundGlassType: .textfieldGlass)
 
 
@@ -57,6 +56,8 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
     // MARK: - UI Setting
 
     override func setLayout() {
+        super.setLayout()
+
         textField.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(16 * ScreenUtils.widthRatio)
@@ -66,6 +67,8 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
 
     override func setStyle() {
         super.setStyle()
+
+        self.hideKeyboard()
 
         if let spotName = viewModel.spotName,
            !spotName.isEmpty{

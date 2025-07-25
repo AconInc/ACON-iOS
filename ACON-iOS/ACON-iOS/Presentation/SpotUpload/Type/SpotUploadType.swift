@@ -10,14 +10,13 @@ import Foundation
 
 enum SpotUploadType {
 
-    case restaurantFeature, cafeFeature, price
+    case restaurantFeature, cafeFeature, priceValue
 
     var serverKey: String {
         switch self {
         case .restaurantFeature: return "RESTAURANT_FEATURE"
         case .cafeFeature: return "CAFE_FEATURE"
-        case .openingHours: return "OPENING_HOURS"
-        case .price: return "PRICE"
+        case .priceValue: return "PRICE"
         }
     }
 
@@ -112,19 +111,23 @@ extension SpotUploadType {
 
     // MARK: - Price
 
-    enum PriceOptionType: CaseIterable {
+    enum ValueRatingType: CaseIterable {
 
-        case goodPrice
+        case low, average, best
 
         var text: String {
             switch self {
-            case .goodPrice: return StringLiterals.SpotListFilter.goodPricePlace
+            case .low: return StringLiterals.SpotUpload.lowValue
+            case .average: return StringLiterals.SpotUpload.averageValue
+            case .best: return StringLiterals.SpotUpload.bestValue
             }
         }
 
         var serverKey: String {
             switch self {
-            case .goodPrice: return "VALUE_FOR_MONEY"
+            case .low: return "VALUE_FOR_MONEY"
+            case .average: return "AVERAGE"
+            case .best: return "VALUE_FOR_MONEY"
             }
         }
 

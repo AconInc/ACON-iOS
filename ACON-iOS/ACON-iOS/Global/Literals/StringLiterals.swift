@@ -169,11 +169,17 @@ enum StringLiterals {
         
         static let whatKindOfRestaurant = "여긴 어떤 식당인가요?"
         
-        static let recommendMenuAndPrice = "추천하는 메뉴와\n가격을 알려주세요"
+        static let recommendMenu = "추천하는 메뉴를 알려주세요"
         
         static let whenIsTheBusinessClose = "몇시까지 영업하나요?"
         
-        static let isThisGoodForPrice = "가성비는 어떤 편인가요?"
+        static let isThisValueForMoney = "가성비는 어떤 편인가요?"
+        
+        static let bestValue = "가성비 최고예요"
+        
+        static let averageValue = "보통이에요"
+        
+        static let lowValue = "가성비 별로예요"
         
         static let youCanRegisterPhotos = "식당 사진을 등록할 수 있어요"
         

@@ -23,7 +23,6 @@ class SpotTypeSelectionViewController: BaseUploadInquiryViewController {
     }
 
     override var canGoPrevious: Bool { true }
-
     override var canGoNext: Bool { viewModel.spotType != nil }
 
 
@@ -53,6 +52,8 @@ class SpotTypeSelectionViewController: BaseUploadInquiryViewController {
     // MARK: - UI Setting
 
     override func setLayout() {
+        super.setLayout()
+
         restaurantButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
