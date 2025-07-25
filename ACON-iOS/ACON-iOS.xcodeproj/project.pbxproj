@@ -33,6 +33,7 @@
 		152F8D202DF253FE0064022B /* AppleMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D1F2DF253FE0064022B /* AppleMapService.swift */; };
 		152F8D242DF268FA0064022B /* SpotListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D232DF268FA0064022B /* SpotListCellDelegate.swift */; };
 		15304FBA2E312A0700EFCDEF /* SpotUploadOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FB92E312A0700EFCDEF /* SpotUploadOptionCell.swift */; };
+		15304FBC2E3175D100EFCDEF /* SpotUploadType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FBB2E3175D100EFCDEF /* SpotUploadType.swift */; };
 		1530CC792DDFC0D100EB4AEC /* SpotNoImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */; };
 		1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EA2D337F4100E96616 /* SpotListView.swift */; };
 		1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */; };
@@ -331,6 +332,7 @@
 		152F8D1F2DF253FE0064022B /* AppleMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapService.swift; sourceTree = "<group>"; };
 		152F8D232DF268FA0064022B /* SpotListCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCellDelegate.swift; sourceTree = "<group>"; };
 		15304FB92E312A0700EFCDEF /* SpotUploadOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadOptionCell.swift; sourceTree = "<group>"; };
+		15304FBB2E3175D100EFCDEF /* SpotUploadType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadType.swift; sourceTree = "<group>"; };
 		1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotNoImageContentView.swift; sourceTree = "<group>"; };
 		1547A6EA2D337F4100E96616 /* SpotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListView.swift; sourceTree = "<group>"; };
 		1547A6EE2D33854B00E96616 /* SpotListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -845,6 +847,7 @@
 			isa = PBXGroup;
 			children = (
 				155D45B52E26BB5F008C0316 /* RequirementType.swift */,
+				15304FBB2E3175D100EFCDEF /* SpotUploadType.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -2142,6 +2145,7 @@
 				15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */,
 				D6E816AA2D624DDB001E4EBF /* BaseTabelViewCell.swift in Sources */,
 				156D92602D6570A90037F8F1 /* PatchProfileRequest.swift in Sources */,
+				15304FBC2E3175D100EFCDEF /* SpotUploadType.swift in Sources */,
 				74D31C7C2D5BF90300B4B2B4 /* AlbumModel.swift in Sources */,
 				74D31C802D5C025900B4B2B4 /* PhotoCollectionViewCell.swift in Sources */,
 				748ECA712D31A72A00BBC981 /* LoginViewModel.swift in Sources */,
