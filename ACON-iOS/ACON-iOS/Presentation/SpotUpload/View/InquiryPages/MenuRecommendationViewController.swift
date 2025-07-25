@@ -20,7 +20,7 @@ class MenuRecommendationViewController: BaseUploadInquiryViewController {
         [textField]
     }
 
-    override var canGoPrevious: Bool { false }
+    override var canGoPrevious: Bool { true }
 
     override var canGoNext: Bool {
         guard let spotName = viewModel.recommendedMenu else { return false }

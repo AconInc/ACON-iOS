@@ -13,7 +13,7 @@ class RestaurantFeatureSelectionViewController: BaseUploadInquiryViewController 
 
     private let collectionViewLayout = UICollectionViewFlowLayout().then {
         let horizontalInset = 20 * ScreenUtils.widthRatio
-        $0.itemSize = CGSize(width: (ScreenUtils.width - horizontalInset * 2 - 8) / 2, height: 40)
+        $0.itemSize = CGSize(width: (ScreenUtils.width - horizontalInset * 2 - 8) / 2, height: 48)
         $0.minimumLineSpacing = 10
         $0.minimumInteritemSpacing = 8
         $0.sectionInset = .init(top: 0, left: horizontalInset, bottom: 0, right: horizontalInset)

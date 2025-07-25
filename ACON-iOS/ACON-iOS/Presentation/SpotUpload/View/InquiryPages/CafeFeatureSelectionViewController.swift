@@ -12,15 +12,11 @@ class CafeFeatureSelectionViewController: BaseUploadInquiryViewController {
     // MARK: - UI Properties
 
     private let workFriendlyButton = SpotUploadOptionButton(title: StringLiterals.SpotUpload.workFriendly)
-    
+
     private let notWorkFriendlyButton = SpotUploadOptionButton(title: StringLiterals.SpotUpload.notWorkFriendly)
 
 
     // MARK: - Properties
-
-    override var contentViews: [UIView] {
-        [workFriendlyButton, notWorkFriendlyButton]
-    }
 
     override var canGoPrevious: Bool { true }
     override var canGoNext: Bool { viewModel.isWorkFriendly != nil }
@@ -45,25 +41,7 @@ class CafeFeatureSelectionViewController: BaseUploadInquiryViewController {
         super.viewDidLoad()
 
         addTarget()
-    }
-
-
-    // MARK: - UI Setting
-
-    override func setLayout() {
-        super.setLayout()
-
-        workFriendlyButton.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
-            $0.height.equalTo(48)
-        }
-        
-        notWorkFriendlyButton.snp.makeConstraints {
-            $0.top.equalTo(workFriendlyButton.snp.bottom).offset(12)
-            $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
-            $0.height.equalTo(48)
-        }
+        makeOptionButtonStack([workFriendlyButton, notWorkFriendlyButton])
     }
 
 }

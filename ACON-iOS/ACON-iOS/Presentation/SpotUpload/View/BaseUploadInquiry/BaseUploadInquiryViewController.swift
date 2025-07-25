@@ -63,4 +63,26 @@ class BaseUploadInquiryViewController: BaseViewController {
         viewModel.isNextButtonEnabled.value = canGoNext
     }
 
+    func makeOptionButtonStack(_ buttons: [UIButton]) {
+        let stackView = UIStackView().then {
+            $0.axis = .vertical
+            $0.spacing = 12
+        }
+
+        spotUploadInquiryView.contentView.addSubview(stackView)
+
+        stackView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
+        }
+
+        for button in buttons {
+            stackView.addArrangedSubview(button)
+
+            button.snp.makeConstraints {
+                $0.height.equalTo(48)
+            }
+        }
+    }
+
 }

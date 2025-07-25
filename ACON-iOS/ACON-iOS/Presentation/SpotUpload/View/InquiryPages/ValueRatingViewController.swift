@@ -20,10 +20,6 @@ class ValueRatingViewController: BaseUploadInquiryViewController {
 
     // MARK: - Properties
 
-    override var contentViews: [UIView] {
-        [bestValueButton, averageValueButton, lowValueButton]
-    }
-
     override var canGoPrevious: Bool { true }
     override var canGoNext: Bool { viewModel.valueRating != nil }
 
@@ -47,31 +43,7 @@ class ValueRatingViewController: BaseUploadInquiryViewController {
         super.viewDidLoad()
 
         addTarget()
-    }
-
-
-    // MARK: - UI Setting
-
-    override func setLayout() {
-        super.setLayout()
-
-        bestValueButton.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
-            $0.height.equalTo(48)
-        }
-        
-        averageValueButton.snp.makeConstraints {
-            $0.top.equalTo(bestValueButton.snp.bottom).offset(12)
-            $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
-            $0.height.equalTo(48)
-        }
-        
-        lowValueButton.snp.makeConstraints {
-            $0.top.equalTo(averageValueButton.snp.bottom).offset(12)
-            $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
-            $0.height.equalTo(48)
-        }
+        makeOptionButtonStack([bestValueButton, averageValueButton, lowValueButton])
     }
 
 }

@@ -18,10 +18,6 @@ class SpotTypeSelectionViewController: BaseUploadInquiryViewController {
 
     // MARK: - Properties
 
-    override var contentViews: [UIView] {
-        [restaurantButton, cafeButton]
-    }
-
     override var canGoPrevious: Bool { true }
     override var canGoNext: Bool { viewModel.spotType != nil }
 
@@ -46,25 +42,7 @@ class SpotTypeSelectionViewController: BaseUploadInquiryViewController {
         super.viewDidLoad()
 
         addTarget()
-    }
-
-
-    // MARK: - UI Setting
-
-    override func setLayout() {
-        super.setLayout()
-
-        restaurantButton.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
-            $0.height.equalTo(48)
-        }
-        
-        cafeButton.snp.makeConstraints {
-            $0.top.equalTo(restaurantButton.snp.bottom).offset(12)
-            $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
-            $0.height.equalTo(48)
-        }
+        makeOptionButtonStack([restaurantButton, cafeButton])
     }
 
 }
