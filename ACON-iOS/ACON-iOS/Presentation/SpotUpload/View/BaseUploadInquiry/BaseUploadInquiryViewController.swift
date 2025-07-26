@@ -43,7 +43,7 @@ class BaseUploadInquiryViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        updateButtonStates()
+        updatePagingButtonStates()
     }
 
 
@@ -58,9 +58,32 @@ class BaseUploadInquiryViewController: BaseViewController {
 
     // MARK: - Helper
 
-    func updateButtonStates() {
+    func updatePagingButtonStates() {
         viewModel.isPreviousButtonEnabled.value = canGoPrevious
         viewModel.isNextButtonEnabled.value = canGoNext
+    }
+
+    func makeOptionButtonStack(_ buttons: [UIButton]) {
+        let sizeType = SpotUploadSizeType.LongOptionButton.self
+        let stackView = UIStackView().then {
+            $0.axis = .vertical
+            $0.spacing = 12
+        }
+
+        spotUploadInquiryView.contentView.addSubview(stackView)
+
+        stackView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(sizeType.horizontalInset)
+        }
+
+        for button in buttons {
+            stackView.addArrangedSubview(button)
+
+            button.snp.makeConstraints {
+                $0.height.equalTo(sizeType.height)
+            }
+        }
     }
 
 }

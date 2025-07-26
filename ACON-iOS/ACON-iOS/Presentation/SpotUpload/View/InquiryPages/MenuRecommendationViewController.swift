@@ -1,20 +1,17 @@
 //
-//  SpotUploadSearchViewController.swift
+//  MenuRecommendationViewController.swift
 //  ACON-iOS
 //
-//  Created by 김유림 on 7/16/25.
+//  Created by 김유림 on 7/25/25.
 //
 
 import UIKit
 
-class SpotUploadSearchViewController: BaseUploadInquiryViewController {
+class MenuRecommendationViewController: BaseUploadInquiryViewController {
 
     // MARK: - UI Properties
 
-    private let textField = ACTextField(icon: .icSearch,
-                                        borderWidth: 0,
-                                        cornerRadius: 10,
-                                        backgroundGlassType: .textfieldGlass)
+    private let textField = ACTextField(cornerRadius: 8, fontStyle: .b1R, borderGlassType: .buttonGlassDefault)
 
 
     // MARK: - Properties
@@ -23,10 +20,10 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
         [textField]
     }
 
-    override var canGoPrevious: Bool { false }
+    override var canGoPrevious: Bool { true }
 
     override var canGoNext: Bool {
-        guard let spotName = viewModel.spotName else { return false }
+        guard let spotName = viewModel.recommendedMenu else { return false }
         return !spotName.isEmpty
     }
 
@@ -36,7 +33,7 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
     init(_ viewModel: SpotUploadViewModel) {
         super.init(viewModel: viewModel,
                    requirement: .required,
-                   title: StringLiterals.SpotUpload.SearchThePlaceToRegister)
+                   title: StringLiterals.SpotUpload.recommendMenu)
     }
 
     required init?(coder: NSCoder) {
@@ -71,9 +68,9 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
 
         self.hideKeyboard()
 
-        if let spotName = viewModel.spotName,
-           !spotName.isEmpty{
-            textField.text = spotName
+        if let recommendedMenu = viewModel.recommendedMenu,
+           !recommendedMenu.isEmpty{
+            textField.text = recommendedMenu
         }
     }
 
@@ -82,12 +79,12 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
 
 // MARK: - bindings
 
-private extension SpotUploadSearchViewController {
+private extension MenuRecommendationViewController {
 
     func bindObservable() {
         textField.observableText.bind { [weak self] text in
             guard let text else { return }
-            self?.viewModel.spotName = text
+            self?.viewModel.recommendedMenu = text
             self?.updatePagingButtonStates()
         }
     }

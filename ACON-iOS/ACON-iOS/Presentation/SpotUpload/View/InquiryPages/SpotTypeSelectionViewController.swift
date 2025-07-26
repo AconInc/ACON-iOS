@@ -11,21 +11,14 @@ class SpotTypeSelectionViewController: BaseUploadInquiryViewController {
 
     // MARK: - UI Properties
 
-    private let restaurantButton = ACButton(style: GlassConfigButton(glassmorphismType: .buttonGlassDefault, buttonType: .both_10_t4R),
-                                            title: StringLiterals.SpotUpload.restaurant)
+    private let restaurantButton = SpotUploadOptionButton(title: StringLiterals.SpotUpload.restaurant)
     
-    private let cafeButton = ACButton(style: GlassConfigButton(glassmorphismType: .buttonGlassDefault, buttonType: .both_10_t4R),
-                                      title: StringLiterals.SpotUpload.cafe)
+    private let cafeButton = SpotUploadOptionButton(title: StringLiterals.SpotUpload.cafe)
 
 
     // MARK: - Properties
 
-    override var contentViews: [UIView] {
-        [restaurantButton, cafeButton]
-    }
-
     override var canGoPrevious: Bool { true }
-
     override var canGoNext: Bool { viewModel.spotType != nil }
 
 
@@ -49,31 +42,7 @@ class SpotTypeSelectionViewController: BaseUploadInquiryViewController {
         super.viewDidLoad()
 
         addTarget()
-    }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        [restaurantButton, cafeButton].forEach {
-            $0.refreshButtonBlurEffect(.buttonGlassDefault)
-        }
-    }
-
-
-    // MARK: - UI Setting
-
-    override func setLayout() {
-        restaurantButton.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
-            $0.height.equalTo(48)
-        }
-        
-        cafeButton.snp.makeConstraints {
-            $0.top.equalTo(restaurantButton.snp.bottom).offset(12)
-            $0.horizontalEdges.equalToSuperview().inset(24 * ScreenUtils.widthRatio)
-            $0.height.equalTo(48)
-        }
+        makeOptionButtonStack([restaurantButton, cafeButton])
     }
 
 }
@@ -97,13 +66,19 @@ private extension SpotTypeSelectionViewController {
     @objc
     func tappedRestaurantButton() {
         viewModel.spotType = .restaurant
-        updateButtonStates()
+        restaurantButton.isSelected = true
+        cafeButton.isSelected = false
+
+        updatePagingButtonStates()
     }
 
     @objc
     func tappedCafeButton() {
         viewModel.spotType = .cafe
-        updateButtonStates()
+        restaurantButton.isSelected = false
+        cafeButton.isSelected = true
+
+        updatePagingButtonStates()
     }
 
 }

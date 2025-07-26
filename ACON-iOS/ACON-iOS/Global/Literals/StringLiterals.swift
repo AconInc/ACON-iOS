@@ -157,6 +157,8 @@ enum StringLiterals {
         
         static let optional = "선택 입력"
         
+        static let multipleSelectionAllowed = "중복 선택이 가능해요"
+        
         static let SearchThePlaceToRegister = "등록하고 싶은 장소를\n검색해주세요"
         
         static let isThisRestaurantOrCafe = "이곳은 식당인가요?\n카페인가요?"
@@ -169,11 +171,23 @@ enum StringLiterals {
         
         static let whatKindOfRestaurant = "여긴 어떤 식당인가요?"
         
-        static let recommendMenuAndPrice = "추천하는 메뉴와\n가격을 알려주세요"
+        static let recommendMenu = "추천하는 메뉴를 알려주세요"
         
         static let whenIsTheBusinessClose = "몇시까지 영업하나요?"
         
-        static let isThisGoodForPrice = "가성비는 어떤 편인가요?"
+        static let isThisValueForMoney = "가성비는 어떤 편인가요?"
+        
+        static let bestValue = "가성비 최고예요"
+        
+        static let averageValue = "보통이에요"
+        
+        static let lowValue = "가성비 별로예요"
+        
+        static let isWorkFriendly = "작업하기 좋은 카페인가요?"
+        
+        static let workFriendly = "네, 작업하기 좋아요"
+        
+        static let notWorkFriendly = "아니요, 그저 그래요"
         
         static let youCanRegisterPhotos = "식당 사진을 등록할 수 있어요"
         
