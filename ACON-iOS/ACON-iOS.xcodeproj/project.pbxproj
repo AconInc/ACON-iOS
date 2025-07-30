@@ -123,7 +123,6 @@
 		4C6B2F332D65A15D0089BCB6 /* WithdrawalTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B2F312D65A15D0089BCB6 /* WithdrawalTargetType.swift */; };
 		4C6B2F342D65A15D0089BCB6 /* WithdrawalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B2F302D65A15D0089BCB6 /* WithdrawalService.swift */; };
 		4C6B2F352D65A15D0089BCB6 /* WithdrawalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B2F2E2D65A15D0089BCB6 /* WithdrawalRequest.swift */; };
-		71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */; };
 		74020C4C2DF46E75009E90AE /* SavedSpotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74020C4B2DF46E62009E90AE /* SavedSpotCollectionViewCell.swift */; };
 		74054ECA2D32534200D1CDE4 /* MultitaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */; };
 		74054ECE2D32549F00D1CDE4 /* ACLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */; };
@@ -289,6 +288,7 @@
 		74D31C7A2D5841EA00B4B2B4 /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D31C792D5841D100B4B2B4 /* PhotoCollectionViewController.swift */; };
 		74D31C7C2D5BF90300B4B2B4 /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D31C7B2D5BF8FD00B4B2B4 /* AlbumModel.swift */; };
 		74D31C802D5C025900B4B2B4 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D31C7F2D5C025200B4B2B4 /* PhotoCollectionViewCell.swift */; };
+		74D6BE382E39FC270025DAD8 /* NMapsMap in Frameworks */ = {isa = PBXBuildFile; productRef = 74D6BE372E39FC270025DAD8 /* NMapsMap */; };
 		74D831922D6878A5003384C6 /* AmplitudeSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 74D831912D6878A5003384C6 /* AmplitudeSwift */; };
 		74DDBA8B2DC45E3B00BF9824 /* ACButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DDBA8A2DC45E3400BF9824 /* ACButtonType.swift */; };
 		74DDBA8D2DC45E4500BF9824 /* ACButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DDBA8C2DC45E4300BF9824 /* ACButton.swift */; };
@@ -427,7 +427,6 @@
 		4C6B2F2E2D65A15D0089BCB6 /* WithdrawalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalRequest.swift; sourceTree = "<group>"; };
 		4C6B2F302D65A15D0089BCB6 /* WithdrawalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalService.swift; sourceTree = "<group>"; };
 		4C6B2F312D65A15D0089BCB6 /* WithdrawalTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalTargetType.swift; sourceTree = "<group>"; };
-		50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.release.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		74020C4B2DF46E62009E90AE /* SavedSpotCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotCollectionViewCell.swift; sourceTree = "<group>"; };
 		74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultitaskDelegate.swift; sourceTree = "<group>"; };
 		74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLocationManager.swift; sourceTree = "<group>"; };
@@ -596,7 +595,6 @@
 		74EC5A2B2DF4CB1F00E176A8 /* SavedSpotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotView.swift; sourceTree = "<group>"; };
 		74FA77832DD43709006846C9 /* SplashBGM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SplashBGM.mp3; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB785B4E26FA7C11BB85A55D /* Pods-ACON-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACON-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D652597B2D62775C00B8176E /* CustomTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
 		D652597D2D628EB000B8176E /* WithdrawalConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalConfirmationViewController.swift; sourceTree = "<group>"; };
 		D696F1B12D3A7E3400CCD5FF /* ACAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAlertView.swift; sourceTree = "<group>"; };
@@ -630,10 +628,10 @@
 				746AA0342DAD0EE300E28B66 /* FirebaseCrashlytics in Frameworks */,
 				74770C192DF1DA97005D4165 /* GoogleMobileAds in Frameworks */,
 				748D6F412D2BC482007690B4 /* Moya in Frameworks */,
+				74D6BE382E39FC270025DAD8 /* NMapsMap in Frameworks */,
 				748D6F4F2D2BC76C007690B4 /* GoogleSignInSwift in Frameworks */,
 				748D6F472D2BC519007690B4 /* Then in Frameworks */,
 				748D6F442D2BC509007690B4 /* SnapKit in Frameworks */,
-				71DE8AE7F1C4CF9051C631A3 /* Pods_ACON_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1046,15 +1044,6 @@
 				4C6B2F312D65A15D0089BCB6 /* WithdrawalTargetType.swift */,
 			);
 			path = Withdrawal;
-			sourceTree = "<group>";
-		};
-		5A8164103CB9FA0F4161C6A5 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				BB785B4E26FA7C11BB85A55D /* Pods-ACON-iOS.debug.xcconfig */,
-				50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		740968B52DEC3C7F00AFF624 /* Cell */ = {
@@ -1644,7 +1633,6 @@
 			children = (
 				748D6F682D2BCA1C007690B4 /* ACON-iOS */,
 				74AB6EB12D2796D30094F873 /* Products */,
-				5A8164103CB9FA0F4161C6A5 /* Pods */,
 				35A4AFEF7860C30E103669B3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -1926,11 +1914,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 74AB6EC32D2796D50094F873 /* Build configuration list for PBXNativeTarget "ACON-iOS" */;
 			buildPhases = (
-				A30CE1671A2D6179E9BB4ABC /* [CP] Check Pods Manifest.lock */,
 				74AB6EAC2D2796D30094F873 /* Sources */,
 				74AB6EAD2D2796D30094F873 /* Frameworks */,
 				74AB6EAE2D2796D30094F873 /* Resources */,
-				ABEBC82D47ACAD3E4288F557 /* [CP] Embed Pods Frameworks */,
 				7496EC1F2DACFCEB00508EA8 /* ShellScript */,
 			);
 			buildRules = (
@@ -1951,6 +1937,7 @@
 				74770C182DF1DA97005D4165 /* GoogleMobileAds */,
 				15AD50972DF8725200166D9D /* SkeletonView */,
 				156E80142DFED61A0080FA34 /* BranchSDK */,
+				74D6BE372E39FC270025DAD8 /* NMapsMap */,
 			);
 			productName = "ACON-iOS";
 			productReference = 74AB6EB02D2796D30094F873 /* ACON-iOS.app */;
@@ -1992,6 +1979,7 @@
 				74C1934B2DEF8909005FB3C7 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 				15AD50962DF8725200166D9D /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				156E80132DFED61A0080FA34 /* XCRemoteSwiftPackageReference "ios-branch-deep-linking-attribution" */,
+				74D6BE362E39FC270025DAD8 /* XCRemoteSwiftPackageReference "SPM-NMapsMap" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 74AB6EB12D2796D30094F873 /* Products */;
@@ -2056,49 +2044,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
-		};
-		A30CE1671A2D6179E9BB4ABC /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ACON-iOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ABEBC82D47ACAD3E4288F557 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ACON-iOS/Pods-ACON-iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2392,7 +2337,6 @@
 /* Begin XCBuildConfiguration section */
 		74AB6EC42D2796D50094F873 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB785B4E26FA7C11BB85A55D /* Pods-ACON-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2436,7 +2380,6 @@
 		};
 		74AB6EC52D2796D50094F873 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50546F80D11F73C6A00B6C92 /* Pods-ACON-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2705,6 +2648,14 @@
 				minimumVersion = 12.5.0;
 			};
 		};
+		74D6BE362E39FC270025DAD8 /* XCRemoteSwiftPackageReference "SPM-NMapsMap" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/navermaps/SPM-NMapsMap";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.22.1;
+			};
+		};
 		74D831902D6878A5003384C6 /* XCRemoteSwiftPackageReference "Amplitude-Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/amplitude/Amplitude-Swift";
@@ -2770,6 +2721,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 74B25C232D2FD30A008BDCB7 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		74D6BE372E39FC270025DAD8 /* NMapsMap */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 74D6BE362E39FC270025DAD8 /* XCRemoteSwiftPackageReference "SPM-NMapsMap" */;
+			productName = NMapsMap;
 		};
 		74D831912D6878A5003384C6 /* AmplitudeSwift */ = {
 			isa = XCSwiftPackageProductDependency;
