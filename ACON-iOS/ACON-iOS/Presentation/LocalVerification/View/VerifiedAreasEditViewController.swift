@@ -105,7 +105,7 @@ extension VerifiedAreasEditViewController: UICollectionViewDelegateFlowLayout {
 extension VerifiedAreasEditViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.verifiedAreaList.count + 1
+        return viewModel.verifiedAreaList.count < 3 ? viewModel.verifiedAreaList.count + 1 : viewModel.verifiedAreaList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -118,10 +118,14 @@ extension VerifiedAreasEditViewController: UICollectionViewDataSource {
             cell.addGestureRecognizer(tappedAddVerifiedAreaGesture)
         } else {
             if !viewModel.verifiedAreaList.isEmpty {
-                cell.bindData(viewModel.verifiedAreaList[indexPath.item].name, indexPath.item)
+                if indexPath.item < viewModel.verifiedAreaList.count {
+                    print(viewModel.verifiedAreaList)
+                    print(indexPath.item)
+                    cell.bindData(viewModel.verifiedAreaList[indexPath.item].name, indexPath.item)
+                    cell.deleteButton.tag = indexPath.item
+                    cell.deleteButton.addTarget(self, action: #selector(tappedAreaDeleteButton(_:)), for: .touchUpInside)
+                }
             }
-            cell.deleteButton.tag = indexPath.item
-            cell.deleteButton.addTarget(self, action: #selector(tappedAreaDeleteButton(_:)), for: .touchUpInside)
         }
         return cell
     }
