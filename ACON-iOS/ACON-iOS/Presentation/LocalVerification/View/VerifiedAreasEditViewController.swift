@@ -119,8 +119,6 @@ extension VerifiedAreasEditViewController: UICollectionViewDataSource {
         } else {
             if !viewModel.verifiedAreaList.isEmpty {
                 if indexPath.item < viewModel.verifiedAreaList.count {
-                    print(viewModel.verifiedAreaList)
-                    print(indexPath.item)
                     cell.bindData(viewModel.verifiedAreaList[indexPath.item].name, indexPath.item)
                     cell.deleteButton.tag = indexPath.item
                     cell.deleteButton.addTarget(self, action: #selector(tappedAreaDeleteButton(_:)), for: .touchUpInside)
