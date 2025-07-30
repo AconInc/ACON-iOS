@@ -73,8 +73,6 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NMFClientId</key>
-	<string>${NMAP_CLIENT_KEY}</string>
 	<key>NMFCustomStyleID</key>
 	<string>${NMF_CUSTOM_STYLE_ID}</string>
 	<key>NMFNcpKeyId</key>

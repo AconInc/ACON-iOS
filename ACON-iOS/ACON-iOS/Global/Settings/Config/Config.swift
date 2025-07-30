@@ -19,8 +19,6 @@ enum Config {
             
             static let googleWebClientID = "GOOGLE_WEB_CLIENT_ID"
             
-            static let nMapClientKey = "NMFClientId"
-            
             static let nmfNcpKeyID = "NMFNcpKeyId"
             
             static let amplitudeKeyDebug = "AMPLITUDE_KEY_DEBUG"
@@ -70,13 +68,6 @@ extension Config {
     static let googleWebClientID: String = {
         guard let key = Config.infoDictionary[Keys.Plist.googleWebClientID] as? String else {
             fatalError("GOOGLE_WEB_CLIENT_ID is not set in plist for this configuration")
-        }
-        return key
-    }()
-    
-    static let nMapClientKey: String = {
-        guard let key = Config.infoDictionary[Keys.Plist.nMapClientKey] as? String else {
-            fatalError("nMapClientKey is not set in plist for this configuration")
         }
         return key
     }()
