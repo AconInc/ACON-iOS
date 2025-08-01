@@ -53,13 +53,19 @@ class SpotUploadPhotoCollectionViewCell: BaseCollectionViewCell {
     }
 
 
-    // MARK: - prepareForReuse
+    // MARK: - Life Cycles
 
     override func prepareForReuse() {
         super.prepareForReuse()
 
         indexPath = nil
         setHiddenForReuse()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        glassBgView.refreshBlurEffect()
     }
 
 
