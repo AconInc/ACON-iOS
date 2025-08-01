@@ -79,6 +79,7 @@
 		157C0AC12DC689E7000B04AF /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C0AC02DC689E7000B04AF /* UIImage+.swift */; };
 		157C0BE82DC897EE000B04AF /* SpotToggleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */; };
 		15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */; };
+		15A167DB2E3CACB100062C49 /* SpotUploadPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A167DA2E3CACB100062C49 /* SpotUploadPhotoCollectionViewCell.swift */; };
 		15A246142DE79D7E00469272 /* NoMatchingSpotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A246132DE79D7E00469272 /* NoMatchingSpotType.swift */; };
 		15A246182DE7A75000469272 /* TransportModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A246172DE7A75000469272 /* TransportModeType.swift */; };
 		15A2461A2DE7A9E500469272 /* NoMatchingSpotListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A246192DE7A9E500469272 /* NoMatchingSpotListCollectionViewCell.swift */; };
@@ -384,6 +385,7 @@
 		157C0AC02DC689E7000B04AF /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotToggleButtonView.swift; sourceTree = "<group>"; };
 		15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFlowType.swift; sourceTree = "<group>"; };
+		15A167DA2E3CACB100062C49 /* SpotUploadPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		15A246132DE79D7E00469272 /* NoMatchingSpotType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMatchingSpotType.swift; sourceTree = "<group>"; };
 		15A246172DE7A75000469272 /* TransportModeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportModeType.swift; sourceTree = "<group>"; };
 		15A246192DE7A9E500469272 /* NoMatchingSpotListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMatchingSpotListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -676,6 +678,7 @@
 			isa = PBXGroup;
 			children = (
 				15304FB92E312A0700EFCDEF /* SpotUploadOptionCell.swift */,
+				15A167DA2E3CACB100062C49 /* SpotUploadPhotoCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2233,6 +2236,7 @@
 				743069892D3D2F5A0033178C /* NetworkResult.swift in Sources */,
 				152F8D242DF268FA0064022B /* SpotListCellDelegate.swift in Sources */,
 				740EE82E2E059908007A5DCF /* AppTargetType.swift in Sources */,
+				15A167DB2E3CACB100062C49 /* SpotUploadPhotoCollectionViewCell.swift in Sources */,
 				15F15E852DBFD206002F81E2 /* LanguageType.swift in Sources */,
 				151AB6902DD367BF00D01DE8 /* SpotDetailView.swift in Sources */,
 				15A48BFC2D574BB9003C2421 /* ProfileEditViewController.swift in Sources */,
