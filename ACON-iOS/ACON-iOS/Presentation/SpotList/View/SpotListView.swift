@@ -60,6 +60,7 @@ class SpotListView: BaseView {
         collectionView.do {
             $0.backgroundColor = .clear
             $0.decelerationRate = .fast
+            $0.showsVerticalScrollIndicator = false
             $0.isSkeletonable = true
         }
 

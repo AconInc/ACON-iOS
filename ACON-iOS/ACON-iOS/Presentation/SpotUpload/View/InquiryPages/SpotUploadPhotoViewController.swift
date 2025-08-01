@@ -78,6 +78,17 @@ class SpotUploadPhotoViewController: BaseUploadInquiryViewController {
         }
     }
 
+    override func setStyle() {
+        super.setStyle()
+
+        collectionView.do {
+            let insetX = SpotUploadSizeType.Photo.insetX.value
+            $0.backgroundColor = .clear
+            $0.decelerationRate = .fast
+            $0.showsHorizontalScrollIndicator = false
+            $0.contentInset = .init(top: 0, left: insetX, bottom: 0, right: insetX)
+        }
+    }
 }
 
 
@@ -87,6 +98,7 @@ private extension SpotUploadPhotoViewController {
 
     func setDelegate() {
         collectionView.dataSource = self
+        collectionView.delegate = self
     }
 
     func registerCells() {
@@ -136,6 +148,32 @@ extension SpotUploadPhotoViewController: UICollectionViewDataSource {
 
 }
 
+
+// MARK: - CollectionView Delegate
+
+extension SpotUploadPhotoViewController: UICollectionViewDelegateFlowLayout {
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView,
+                                   withVelocity velocity: CGPoint,
+                                   targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let cellWidth = SpotUploadSizeType.Photo.itemWidth.value
+        let interItemSpacing = SpotUploadSizeType.Photo.interItemSpacing.value
+        let insetX = SpotUploadSizeType.Photo.insetX.value
+        
+        let oneUnitWidth = cellWidth + interItemSpacing
+        
+        let targetX = targetContentOffset.pointee.x
+        let index = round(targetX / oneUnitWidth)
+        let newTargetX = index * oneUnitWidth - insetX
+
+        // NOTE: 화면 중앙과 가장 가까운 셀을 찾아 화면 중앙으로 이동
+        targetContentOffset.pointee = CGPoint(x: newTargetX, y: 0)
+    }
+
+}
+
+
+// MARK: - Cell Delegate
 
 extension SpotUploadPhotoViewController: SpotUploadPhotoCellDelegate {
 

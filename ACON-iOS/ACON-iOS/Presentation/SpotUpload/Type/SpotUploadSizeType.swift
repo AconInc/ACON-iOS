@@ -45,12 +45,13 @@ enum SpotUploadSizeType {
 
     enum Photo {
 
-        case itemWidth, itemHeight, interItemSpacing, cornerRadius
+        case itemWidth, itemHeight, interItemSpacing, insetX
         
         var value: CGFloat {
             switch self {
             case .itemWidth, .itemHeight: return 312 * ScreenUtils.widthRatio
-            case .interItemSpacing, .cornerRadius: return 10 * ScreenUtils.widthRatio
+            case .interItemSpacing: return 10 * ScreenUtils.widthRatio
+            case .insetX: return (ScreenUtils.width - Photo.itemWidth.value) / 2
             }
         }
 

@@ -105,7 +105,7 @@ class SpotUploadPhotoCollectionViewCell: BaseCollectionViewCell {
         glassBgView.do {
             $0.clipsToBounds = true
             $0.isUserInteractionEnabled = true
-            $0.layer.cornerRadius = SpotUploadSizeType.Photo.cornerRadius.value
+            $0.layer.cornerRadius = 10 * ScreenUtils.widthRatio
         }
 
         plusImageView.do {
@@ -115,7 +115,7 @@ class SpotUploadPhotoCollectionViewCell: BaseCollectionViewCell {
 
         photoImageView.do {
             $0.clipsToBounds = true
-            $0.layer.cornerRadius = SpotUploadSizeType.Photo.cornerRadius.value
+            $0.layer.cornerRadius = 10 * ScreenUtils.widthRatio
         }
 
         deleteButton.setImage(.icDelete, for: .normal)
