@@ -12,14 +12,17 @@ final class SpotUploadViewController: BaseNavViewController {
     // MARK: - Properties
 
     private let viewModel = SpotUploadViewModel()
+    
+    lazy var searchVC = SpotUploadSearchViewController(viewModel)
+    lazy var spotTypeVC = SpotTypeSelectionViewController(viewModel)
+    lazy var restaurantFeatureVC = RestaurantFeatureSelectionViewController(viewModel)
+    lazy var cafeFeatureVC = CafeFeatureSelectionViewController(viewModel)
+    lazy var menuVC = MenuRecommendationViewController(viewModel)
+    lazy var valueRatingVC = ValueRatingViewController(viewModel)
+    lazy var photoVC = SpotUploadPhotoViewController(viewModel)
 
     // TODO: SpotTypeVC에서 분기처리
-    lazy var pages: [UIViewController] = [SpotUploadSearchViewController(viewModel),
-                                          SpotTypeSelectionViewController(viewModel),
-                                          RestaurantFeatureSelectionViewController(viewModel),
-                                          MenuRecommendationViewController(viewModel),
-                                          ValueRatingViewController(viewModel),
-                                          CafeFeatureSelectionViewController(viewModel)]
+    lazy var pages: [UIViewController] = [restaurantFeatureVC, /*menuVC, valueRatingVC, */photoVC]
 
     private var currentIndex: Int = 0
 
@@ -42,6 +45,7 @@ final class SpotUploadViewController: BaseNavViewController {
 
         addTarget()
         bindViewModel()
+        setDelegate()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -103,6 +107,10 @@ final class SpotUploadViewController: BaseNavViewController {
         }
     }
 
+    private func setDelegate() {
+        photoVC.delegate = self
+    }
+
     private func addTarget() {
         previousButton.addTarget(self,
                                  action: #selector(goToPreviousPage),
@@ -151,6 +159,18 @@ private extension SpotUploadViewController {
         guard currentIndex < pages.count - 1 else { return }
         currentIndex += 1
         pageVC.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
+    }
+
+}
+
+
+// MARK: - SpotUploadPhotoViewControllerDelegate
+
+extension SpotUploadViewController: SpotUploadPhotoViewControllerDelegate {
+
+    func pushAlbumTableVC() {
+        let albumVC = AlbumTableViewController()
+        self.navigationController?.pushViewController(albumVC, animated: true)
     }
 
 }
