@@ -12,6 +12,8 @@ class AlbumViewModel: NSObject, PHPhotoLibraryChangeObserver {
 
     // TODO: 메모리 최적화 처리
     // TODO: PhotoManager로 로직 모두 옮길 것
+
+    let flowType: AlbumFlowType
     
     var selectedAlbumIndex: Int = 0
     
@@ -61,9 +63,11 @@ class AlbumViewModel: NSObject, PHPhotoLibraryChangeObserver {
     
     var onAlbumChange: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    override init() {
+    init(_ flowType: AlbumFlowType) {
+        self.flowType = flowType
+
         super.init()
-        
+
         PHPhotoLibrary.shared().register(self)
     }
     

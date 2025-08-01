@@ -28,6 +28,8 @@ class PhotoCollectionViewController: BaseNavViewController {
     
     var selectedIndexPath: ObservablePattern<IndexPath> = ObservablePattern(nil)
     
+    private var selectedIndexPaths: [IndexPath] = []
+    
     private var isLoading = false
     
     // MARK: - LifeCycle
@@ -89,12 +91,13 @@ class PhotoCollectionViewController: BaseNavViewController {
         
         photoCollectionView.do {
             $0.backgroundColor = .clear
+            $0.allowsMultipleSelection = (albumViewModel.flowType == .spotUpload)
         }
     }
     
     private func addTarget() {
         self.rightButton.addTarget(self,
-                                   action: #selector(goToPhotoSelectionVC),
+                                   action: #selector(tappedRightButton),
                                    for: .touchUpInside)
     }
 
@@ -104,18 +107,20 @@ class PhotoCollectionViewController: BaseNavViewController {
 // MARK: - @objc functions
 
 private extension PhotoCollectionViewController {
-    
+
     @objc
-    func goToPhotoSelectionVC() {
-        albumViewModel.getHighQualityImage(index: selectedIndexPath.value?.item ?? 0) { [weak self] image in
-            let vc = PhotoSelectionViewController(image)
-            DispatchQueue.main.async {
-                self?.navigationController?.pushViewController(vc, animated: true)
-            }
+    func tappedRightButton() {
+        switch albumViewModel.flowType {
+        case .profile:
+            goToPhotoSelectionVC2()
+
+        case .spotUpload:
+            popToSpotUploadVC()
         }
     }
-    
+
 }
+
 
 // MARK: - bindViewModel
 
@@ -179,19 +184,50 @@ extension PhotoCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let previousIndexPath = selectedIndexPath.value {
-            // NOTE: deselectItem 메소드 사용 시 가끔 오류
-            if let cell = collectionView.cellForItem(at: previousIndexPath) as? PhotoCollectionViewCell {
-                cell.isSelected = false
+        switch albumViewModel.flowType {
+        case .profile:
+            if let previousIndexPath = selectedIndexPath.value {
+                // NOTE: deselectItem 메소드 사용 시 가끔 오류
+                if let cell = collectionView.cellForItem(at: previousIndexPath) as? PhotoCollectionViewCell {
+                    cell.isSelected = false
+                }
                 selectedIndexPath.value = nil
             }
-        }
-        
-        selectedIndexPath.value = indexPath
-        if let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell {
-            cell.isSelected = true
+
+            selectedIndexPath.value = indexPath
+            if let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell {
+                cell.isSelected = true
+            }
+
+        case .spotUpload:
+            if selectedIndexPaths.contains(indexPath) {
+                selectedIndexPaths.removeAll { $0 == indexPath }
+                if let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell {
+                    cell.isSelected = false
+                }
+            } else {
+                selectedIndexPaths.append(indexPath)
+                if let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell {
+                    cell.isSelected = true
+                }
+            }
+
+            rightButton.isEnabled = !selectedIndexPaths.isEmpty
         }
     }
+
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard albumViewModel.flowType == .spotUpload else { return }
+
+        selectedIndexPaths.removeAll { $0 == indexPath }
+
+        if let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell {
+            cell.isSelected = false
+        }
+
+        rightButton.isEnabled = !selectedIndexPaths.isEmpty
+    }
+
     
     /// 스크롤 시 다음 사진 batch를 불러줌.
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -231,6 +267,10 @@ extension PhotoCollectionViewController: UICollectionViewDataSource {
         
         if let cachedImage = albumViewModel.getCachedImage(for: data) {
             cell.dataBind(cachedImage, indexPath.item)
+            cell.isSelected = (albumViewModel.flowType == .spotUpload) // NOTE: 셀 재사용되면서 상태 날아가는 이슈 방지
+                ? selectedIndexPaths.contains(indexPath)
+                : selectedIndexPath.value == indexPath
+
         } else {
             albumViewModel.setImageCache(for: data, size: PhotoCollectionViewSizeType.thumbnailSize.value) { cachedImage in
                 DispatchQueue.main.async {
@@ -242,4 +282,46 @@ extension PhotoCollectionViewController: UICollectionViewDataSource {
         return cell
     }
     
+}
+
+
+// MARK: - Navigation
+
+private extension PhotoCollectionViewController {
+    
+    func goToPhotoSelectionVC2() {
+        albumViewModel.getHighQualityImage(index: selectedIndexPath.value?.item ?? 0) { [weak self] image in
+            let vc = PhotoSelectionViewController(image)
+            DispatchQueue.main.async {
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
+    func popToSpotUploadVC() {
+        let assets = selectedIndexPaths.map { albumViewModel.fetchedImages[$0.item].asset }
+
+        let dispatchGroup = DispatchGroup()
+        var selectedImages: [UIImage] = Array(repeating: UIImage(), count: assets.count)
+
+        for (i, asset) in assets.enumerated() {
+            dispatchGroup.enter()
+            albumViewModel.setImageCache(for: asset,
+                                         size: CGSize(width: asset.pixelWidth, height: asset.pixelHeight)) { image in
+                selectedImages[i] = image ?? UIImage()
+                dispatchGroup.leave()
+            }
+        }
+
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            guard let self,
+                  let navVCs = self.navigationController?.viewControllers else { return }
+
+            if let spotUploadVC = navVCs.first(where: { $0 is SpotUploadViewController }) as? SpotUploadViewController {
+                spotUploadVC.viewModel.photosToAppend.value = selectedImages
+                self.navigationController?.popToViewController(spotUploadVC, animated: true)
+            }
+        }
+    }
+
 }

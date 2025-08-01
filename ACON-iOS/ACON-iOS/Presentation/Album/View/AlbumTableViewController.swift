@@ -9,16 +9,29 @@ import UIKit
 import Photos
 
 class AlbumTableViewController: BaseNavViewController {
-    
+
     // MARK: - Properties
-    
-    let albumViewModel = AlbumViewModel()
-    
+
+    let albumViewModel: AlbumViewModel
+
     private var albumTableView: UITableView = UITableView()
 
-    
+
+    // MARK: - init
+
+    init(_ flowType: AlbumFlowType) {
+        albumViewModel = AlbumViewModel(flowType)
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+
     // MARK: - Lifecycle
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

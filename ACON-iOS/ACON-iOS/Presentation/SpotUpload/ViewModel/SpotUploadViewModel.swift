@@ -18,7 +18,9 @@ final class SpotUploadViewModel {
     var restaurantFeature: Set<SpotUploadType.RestaurantOptionType> = []
     var recommendedMenu: String? = nil
     var valueRating: SpotUploadType.ValueRatingType? = nil
+
     var photos: [UIImage] = [.imgSpotNoImageBackground, .imgSpotNoImageBackground, .icGoogleLogo]
+    var photosToAppend: ObservablePattern<[UIImage]> = ObservablePattern(nil)
     
     var isWorkFriendly: Bool? = nil
 

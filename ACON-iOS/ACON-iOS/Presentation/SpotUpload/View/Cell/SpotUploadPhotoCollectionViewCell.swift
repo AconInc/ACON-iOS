@@ -11,7 +11,7 @@ import UIKit
 
 protocol SpotUploadPhotoCellDelegate: AnyObject {
 
-    func deletePhoto(for indexPath: IndexPath)
+    func deletePhoto(for cell: UICollectionViewCell)
     
     func addPhoto()
 
@@ -35,8 +35,6 @@ class SpotUploadPhotoCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - Properties
 
-    var indexPath: IndexPath?
-
     var delegate: SpotUploadPhotoCellDelegate?
 
 
@@ -58,7 +56,6 @@ class SpotUploadPhotoCollectionViewCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        indexPath = nil
         setHiddenForReuse()
     }
 
@@ -135,8 +132,7 @@ private extension SpotUploadPhotoCollectionViewCell {
 
     @objc
     func tappedDeleteButton() {
-        guard let indexPath else { return }
-        delegate?.deletePhoto(for: indexPath)
+        delegate?.deletePhoto(for: self)
     }
 
     @objc
@@ -151,9 +147,8 @@ private extension SpotUploadPhotoCollectionViewCell {
 
 extension SpotUploadPhotoCollectionViewCell {
 
-    func setPhoto(_ image: UIImage, for indexPath: IndexPath) {
+    func setPhoto(_ image: UIImage) {
         photoImageView.image = image
-        self.indexPath = indexPath
         setHiddenForPhoto()
     }
 

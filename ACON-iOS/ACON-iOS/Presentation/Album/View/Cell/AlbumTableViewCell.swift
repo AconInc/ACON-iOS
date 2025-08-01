@@ -21,11 +21,6 @@ class AlbumTableViewCell: UITableViewCell {
     private let countLabel: UILabel = UILabel()
     
     
-    // MARK: - Properties
-    
-    private let albumViewModel = AlbumViewModel()
-    
-    
     // MARK: - Lifecycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

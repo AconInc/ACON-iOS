@@ -360,7 +360,7 @@ private extension ProfileEditViewController {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.do {
             $0.addAction(UIAlertAction(title: "앨범에서 사진 업로드", style: .default, handler: { _ in
-                let vc = AlbumTableViewController()
+                let vc = AlbumTableViewController(.profile)
                 self.navigationController?.pushViewController(vc, animated: true)
             }))
             if isDefaultImage == false {

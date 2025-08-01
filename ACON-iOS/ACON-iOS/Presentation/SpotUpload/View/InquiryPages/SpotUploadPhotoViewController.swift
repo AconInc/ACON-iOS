@@ -42,8 +42,6 @@ class SpotUploadPhotoViewController: BaseUploadInquiryViewController {
     override var canGoPrevious: Bool { true }
     override var canGoNext: Bool { true }
 
-    private let albumViewModel = AlbumViewModel()
-
 
     // MARK: - init
 
@@ -65,6 +63,7 @@ class SpotUploadPhotoViewController: BaseUploadInquiryViewController {
 
         setDelegate()
         registerCells()
+        bind()
     }
 
     override func setLayout() {
@@ -89,6 +88,21 @@ class SpotUploadPhotoViewController: BaseUploadInquiryViewController {
             $0.contentInset = .init(top: 0, left: insetX, bottom: 0, right: insetX)
         }
     }
+
+    private func bind() {
+        viewModel.photosToAppend.bind { [weak self] photos in
+            guard let self, let photos else { return }
+
+            let currentCount = viewModel.photos.count
+            let willAddCount = min(10 - currentCount, photos.count)
+            let newIndexPath: [IndexPath] = (0..<willAddCount).map { IndexPath(item: currentCount + $0, section: 0) }
+
+            viewModel.photosToAppend.value = nil
+            viewModel.photos.append(contentsOf: photos[0..<willAddCount])
+            collectionView.insertItems(at: newIndexPath)
+        }
+    }
+
 }
 
 
@@ -104,20 +118,6 @@ private extension SpotUploadPhotoViewController {
     func registerCells() {
         collectionView.register(SpotUploadPhotoCollectionViewCell.self, forCellWithReuseIdentifier: SpotUploadPhotoCollectionViewCell.identifier)
     }
-}
-
-// MARK: - @objc functions
-
-private extension SpotUploadPhotoViewController {
-
-
-}
-
-
-// MARK: - Helper
-
-private extension SpotUploadPhotoViewController {
-
 }
 
 
@@ -136,11 +136,9 @@ extension SpotUploadPhotoViewController: UICollectionViewDataSource {
         item.delegate = self
 
         if indexPath.item == viewModel.photos.count {
-            // NOTE: + 셀
-            item.setAddView()
+            item.setAddView() // NOTE: + 셀
         } else {
-            // NOTE: 사진 셀
-            item.setPhoto(viewModel.photos[indexPath.item], for: indexPath)
+            item.setPhoto(viewModel.photos[indexPath.item]) // NOTE: 사진 셀
         }
 
         return item
@@ -177,9 +175,11 @@ extension SpotUploadPhotoViewController: UICollectionViewDelegateFlowLayout {
 
 extension SpotUploadPhotoViewController: SpotUploadPhotoCellDelegate {
 
-    func deletePhoto(for indexPath: IndexPath) {
+    func deletePhoto(for cell: UICollectionViewCell) {
         let deleteAction: () -> Void = { [weak self] in
-            guard let self = self else { return }
+            guard let self,
+                  let indexPath = self.collectionView.indexPath(for: cell) else { return }
+
             viewModel.photos.remove(at: indexPath.item)
             collectionView.deleteItems(at: [indexPath])
         }
