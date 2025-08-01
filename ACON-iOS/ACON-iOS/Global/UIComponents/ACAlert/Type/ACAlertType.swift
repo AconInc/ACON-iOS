@@ -27,6 +27,8 @@ enum ACAlertType: CaseIterable {
     
     case logout // NOTE: 로그아웃
     
+    case deletePhoto // NOTE: 사진 삭제 (장소 업로드)
+    
     var title: String {
         switch self {
         case .essentialUpdate:
@@ -51,6 +53,9 @@ enum ACAlertType: CaseIterable {
             
         case .logout:
             return "로그아웃 하시겠어요?"
+            
+        case .deletePhoto:
+            return "사진을 삭제 하시겠습니까?"
         }
     }
     
@@ -88,7 +93,7 @@ enum ACAlertType: CaseIterable {
     
     var leftButtonTitle: String? {
         switch self {
-        case .plainUpdate, .libraryAccessDenied, .changeVerifiedArea, .logout:
+        case .plainUpdate, .libraryAccessDenied, .changeVerifiedArea, .logout, .deletePhoto:
             return "취소"
         case .changeNotSaved:
             return "계속 작성"
@@ -113,6 +118,8 @@ enum ACAlertType: CaseIterable {
             return "그만두기"
         case .logout:
             return "로그아웃"
+        case .deletePhoto:
+            return "삭제"
         default:
             return nil
         }
