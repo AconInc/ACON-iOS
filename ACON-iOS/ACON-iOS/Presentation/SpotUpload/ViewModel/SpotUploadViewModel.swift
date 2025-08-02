@@ -19,7 +19,7 @@ final class SpotUploadViewModel {
     var recommendedMenu: String? = nil
     var valueRating: SpotUploadType.ValueRatingType? = nil
 
-    var photos: [UIImage] = [.imgSpotNoImageBackground, .imgSpotNoImageBackground, .icGoogleLogo]
+    var photos: [UIImage] = []
     var photosToAppend: ObservablePattern<[UIImage]> = ObservablePattern(nil)
     
     var isWorkFriendly: Bool? = nil

@@ -23,7 +23,7 @@ final class SpotUploadViewController: BaseNavViewController {
     lazy var photoVC = SpotUploadPhotoViewController(viewModel)
 
     // TODO: SpotTypeVC에서 분기처리
-    lazy var pages: [UIViewController] = [restaurantFeatureVC, /*menuVC, valueRatingVC, */photoVC]
+    lazy var pages: [UIViewController] = [restaurantFeatureVC, menuVC, valueRatingVC, photoVC]
 
     private var currentIndex: Int = 0
 
@@ -157,9 +157,13 @@ private extension SpotUploadViewController {
     }
 
     @objc private func goToNextPage() {
-        guard currentIndex < pages.count - 1 else { return }
-        currentIndex += 1
-        pageVC.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
+        if currentIndex < pages.count - 1 {
+            currentIndex += 1
+            pageVC.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
+        } else if currentIndex == pages.count - 1 {
+            let successVC = SpotUploadSuccessViewController()
+            self.navigationController?.pushViewController(successVC, animated: true)
+        }
     }
 
 }

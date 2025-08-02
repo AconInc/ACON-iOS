@@ -191,7 +191,11 @@ enum StringLiterals {
         
         static let youCanRegisterPhotos = "식당 사진을 등록할 수 있어요"
         
-        static let newPlaceSaved = "새로운 장소가 저장되었어요!"
+        static let newSpotSaved = "새로운 장소가 저장되었어요!"
+        
+        static let itWillBeReflectedInThreeDays = "등록해 주신 장소는 3일 뒤에 반영돼요"
+        
+        static let goHome = "홈으로 가기"
         
     }
     
