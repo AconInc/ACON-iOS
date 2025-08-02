@@ -30,7 +30,7 @@ class SpotUploadPhotoCollectionViewCell: BaseCollectionViewCell {
 
     private var photoImageView = UIImageView()
 
-    private var deleteButton = UIButton()
+    private var deleteButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_22_b1SB))
 
 
     // MARK: - Properties
@@ -63,6 +63,7 @@ class SpotUploadPhotoCollectionViewCell: BaseCollectionViewCell {
         super.layoutSubviews()
 
         glassBgView.refreshBlurEffect()
+        deleteButton.refreshButtonBlurEffect(.buttonGlassDefault)
     }
 
 
@@ -90,7 +91,7 @@ class SpotUploadPhotoCollectionViewCell: BaseCollectionViewCell {
 
         deleteButton.snp.makeConstraints {
             $0.trailing.bottom.equalToSuperview().inset(16)
-            $0.size.equalTo(24)
+            $0.size.equalTo(44)
         }
     }
 
@@ -116,6 +117,11 @@ class SpotUploadPhotoCollectionViewCell: BaseCollectionViewCell {
         }
 
         deleteButton.setImage(.icDelete, for: .normal)
+        deleteButton.do {
+            $0.setImage(.icDelete, for: .normal)
+            $0.layer.borderWidth = 1
+            $0.layer.borderColor = UIColor.acWhite.withAlphaComponent(0.3).cgColor
+        }
     }
 
     private func addTarget() {
