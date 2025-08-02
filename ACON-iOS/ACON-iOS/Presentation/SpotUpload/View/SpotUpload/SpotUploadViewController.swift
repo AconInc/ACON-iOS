@@ -94,7 +94,7 @@ final class SpotUploadViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
 
-        setXButton()
+        setXButton(#selector(navigateToTabBar))
         
         self.setCenterTitleLabelStyle(title: StringLiterals.SpotUpload.spotUpload)
 
@@ -150,13 +150,17 @@ private extension SpotUploadViewController {
 
 private extension SpotUploadViewController {
 
-    @objc private func goToPreviousPage() {
+    @objc func navigateToTabBar() {
+        NavigationUtils.navigateToTabBar()
+    }
+
+    @objc func goToPreviousPage() {
         guard currentIndex > 0 else { return }
         currentIndex -= 1
         pageVC.setViewControllers([pages[currentIndex]], direction: .reverse, animated: true, completion: nil)
     }
 
-    @objc private func goToNextPage() {
+    @objc func goToNextPage() {
         if currentIndex == 1 {
             setSpotFeaturePage()
         }
