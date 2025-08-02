@@ -101,7 +101,7 @@ class SpotUploadPhotoViewController: BaseUploadInquiryViewController {
             viewModel.photos.append(contentsOf: photos[0..<willAddCount])
             
             if viewModel.photos.count == 10 {
-                collectionView.reloadData() // NOTE: + 셀이 사라지므로 전체 reload (or index 오류 남)
+                collectionView.reloadData() // NOTE: + 셀이 사라지므로 전체 reload (안그러면 index 오류남)
             } else {
                 collectionView.insertItems(at: newIndexPath)
             }
@@ -184,7 +184,12 @@ extension SpotUploadPhotoViewController: SpotUploadPhotoCellDelegate {
                   let indexPath = self.collectionView.indexPath(for: cell) else { return }
 
             viewModel.photos.remove(at: indexPath.item)
-            collectionView.deleteItems(at: [indexPath])
+
+            if viewModel.photos.count == 9 {
+                collectionView.reloadData() // NOTE: + 셀이 추가되므로 전체 reload (안그러면 index 오류남)
+            } else {
+                collectionView.deleteItems(at: [indexPath])
+            }
         }
         presentACAlert(.deletePhoto, rightAction: deleteAction)
     }
