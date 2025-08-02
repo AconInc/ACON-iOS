@@ -32,11 +32,9 @@ final class SpotUploadViewController: BaseNavViewController {
 
     private var pageVC = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .vertical)
 
-    let previousButton = ACButton(style: GlassButton(borderGlassmorphismType: .buttonGlassDefault, buttonType: .line_22_b1SB),
-                                  title: StringLiterals.SpotUpload.goPrevious)
-
-    let nextButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_22_b1SB),
-                              title: StringLiterals.SpotUpload.next)
+    // NOTE: 글래스모피즘 깜빡임 이슈로 일반 버튼으로 구현
+    let previousButton = UIButton()
+    let nextButton = UIButton()
 
 
     // MARK: - LifeCycle
@@ -106,6 +104,20 @@ final class SpotUploadViewController: BaseNavViewController {
                 scrollView.isScrollEnabled = false
             }
         }
+
+        let glassDefaultColor = UIColor(red: 0.255, green: 0.255, blue: 0.255, alpha: 1)
+        previousButton.do {
+            $0.setAttributedTitle(text:  StringLiterals.SpotUpload.goPrevious, style: .b1SB)
+            $0.layer.borderColor = glassDefaultColor.cgColor
+            $0.layer.borderWidth = 1
+            $0.layer.cornerRadius = 22
+        }
+
+        nextButton.do {
+            $0.setAttributedTitle(text: StringLiterals.SpotUpload.next, style: .b1SB)
+            $0.backgroundColor = glassDefaultColor
+            $0.layer.cornerRadius = 22
+        }
     }
 
     private func setDelegate() {
@@ -132,13 +144,13 @@ private extension SpotUploadViewController {
     func bindViewModel() {
         viewModel.isPreviousButtonEnabled.bind { [weak self] isEnabled in
             guard let isEnabled else { return }
-            self?.previousButton.updateGlassButtonState(state: isEnabled ? .default : .disabled)
+            self?.previousButton.isEnabled = isEnabled
             self?.viewModel.isPreviousButtonEnabled.value = nil
         }
 
         viewModel.isNextButtonEnabled.bind { [weak self] isEnabled in
             guard let isEnabled else { return }
-            self?.nextButton.updateGlassButtonState(state: isEnabled ? .default : .disabled)
+            self?.nextButton.isEnabled = isEnabled
             self?.viewModel.isNextButtonEnabled.value = nil
         }
     }
