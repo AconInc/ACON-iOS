@@ -14,6 +14,7 @@ class AlbumViewModel: NSObject, PHPhotoLibraryChangeObserver {
     // TODO: PhotoManager로 로직 모두 옮길 것
 
     let flowType: AlbumFlowType
+    var maxPhotoCount: Int = 1
     
     var selectedAlbumIndex: Int = 0
     

@@ -99,8 +99,13 @@ class SpotUploadPhotoViewController: BaseUploadInquiryViewController {
 
             viewModel.photosToAppend.value = nil
             viewModel.photos.append(contentsOf: photos[0..<willAddCount])
-            collectionView.insertItems(at: newIndexPath)
-            collectionView.setContentOffset(collectionViewOffset(for: currentCount), animated: true)
+            
+            if viewModel.photos.count == 10 {
+                collectionView.reloadData() // NOTE: + 셀이 사라지므로 전체 reload (or index 오류 남)
+            } else {
+                collectionView.insertItems(at: newIndexPath)
+            }
+            collectionView.setContentOffset(collectionViewOffset(for: viewModel.photos.count - 1), animated: true)
         }
     }
 

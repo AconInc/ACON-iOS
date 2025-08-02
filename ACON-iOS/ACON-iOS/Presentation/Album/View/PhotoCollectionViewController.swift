@@ -187,29 +187,18 @@ extension PhotoCollectionViewController: UICollectionViewDelegateFlowLayout {
         switch albumViewModel.flowType {
         case .profile:
             if let previousIndexPath = selectedIndexPath.value {
-                // NOTE: deselectItem 메소드 사용 시 가끔 오류
-                if let cell = collectionView.cellForItem(at: previousIndexPath) as? PhotoCollectionViewCell {
-                    cell.isSelected = false
+                if let previousCell = collectionView.cellForItem(at: previousIndexPath) as? PhotoCollectionViewCell {
+                    previousCell.isSelected = false
                 }
                 selectedIndexPath.value = nil
             }
-
             selectedIndexPath.value = indexPath
-            if let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell {
-                cell.isSelected = true
-            }
 
         case .spotUpload:
-            if selectedIndexPaths.contains(indexPath) {
-                selectedIndexPaths.removeAll { $0 == indexPath }
-                if let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell {
-                    cell.isSelected = false
-                }
-            } else {
+            if albumViewModel.maxPhotoCount > selectedIndexPaths.count {
                 selectedIndexPaths.append(indexPath)
-                if let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell {
-                    cell.isSelected = true
-                }
+            } else {
+                collectionView.deselectItem(at: indexPath, animated: true)
             }
 
             rightButton.isEnabled = !selectedIndexPaths.isEmpty

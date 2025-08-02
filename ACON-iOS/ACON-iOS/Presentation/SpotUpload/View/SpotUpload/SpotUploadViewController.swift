@@ -171,7 +171,10 @@ extension SpotUploadViewController: SpotUploadPhotoViewControllerDelegate {
 
     func pushAlbumTableVC() {
         let vm = AlbumViewModel(.spotUpload)
+        vm.maxPhotoCount = 10 - viewModel.photos.count
+
         let albumVC = AlbumTableViewController(vm)
+
         self.navigationController?.pushViewController(albumVC, animated: true)
     }
 
