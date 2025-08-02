@@ -97,6 +97,11 @@ private extension SpotSearchViewController {
 
     func bindTextField() {
         spotSearchView.searchTextField.observableText.bind { [weak self] text in
+            DispatchQueue.main.async {
+                self?.spotSearchView.searchEmptyView.isHidden = true
+                self?.spotSearchView.searchKeywordCollectionView.isHidden = true
+            }
+
             if let text = text {
                 if text != self?.selectedSpotName {
                     self?.rightButton.isEnabled = false

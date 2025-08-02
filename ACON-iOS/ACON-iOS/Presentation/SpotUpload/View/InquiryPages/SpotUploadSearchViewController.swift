@@ -146,7 +146,13 @@ private extension SpotUploadSearchViewController {
     
     func bindTextField() {
         spotSearchView.searchTextField.observableText.bind { [weak self] text in
+            DispatchQueue.main.async {
+                self?.spotSearchView.searchEmptyView.isHidden = true
+                self?.spotSearchView.searchKeywordCollectionView.isHidden = true
+            }
+
             guard let text else { return }
+            
             self?.viewModel.spotName = text
             self?.updatePagingButtonStates()
             
