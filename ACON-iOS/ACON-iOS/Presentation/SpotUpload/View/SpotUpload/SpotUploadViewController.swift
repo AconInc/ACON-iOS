@@ -23,7 +23,7 @@ final class SpotUploadViewController: BaseNavViewController {
     lazy var photoVC = SpotUploadPhotoViewController(viewModel)
 
     // TODO: SpotTypeVC에서 분기처리
-    lazy var pages: [UIViewController] = [restaurantFeatureVC, menuVC, valueRatingVC, photoVC]
+    lazy var pages: [UIViewController] = [searchVC, spotTypeVC, restaurantFeatureVC, menuVC, valueRatingVC, photoVC]
 
     private var currentIndex: Int = 0
 
