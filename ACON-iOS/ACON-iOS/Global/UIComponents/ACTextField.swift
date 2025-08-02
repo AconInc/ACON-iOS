@@ -344,5 +344,9 @@ extension ACTextField {
             $0.edges.equalToSuperview()
         }
     }
+ 
+    override func resignFirstResponder() -> Bool {
+        textField.resignFirstResponder()
+    }
 
 }
