@@ -112,7 +112,7 @@ private extension PhotoCollectionViewController {
     func tappedRightButton() {
         switch albumViewModel.flowType {
         case .profile:
-            goToPhotoSelectionVC2()
+            goToPhotoSelectionVC()
 
         case .spotUpload:
             popToSpotUploadVC()
@@ -278,7 +278,7 @@ extension PhotoCollectionViewController: UICollectionViewDataSource {
 
 private extension PhotoCollectionViewController {
     
-    func goToPhotoSelectionVC2() {
+    func goToPhotoSelectionVC() {
         albumViewModel.getHighQualityImage(index: selectedIndexPath.value?.item ?? 0) { [weak self] image in
             let vc = PhotoSelectionViewController(image)
             DispatchQueue.main.async {
