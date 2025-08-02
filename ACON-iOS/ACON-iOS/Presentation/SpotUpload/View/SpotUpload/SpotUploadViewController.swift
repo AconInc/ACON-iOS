@@ -157,6 +157,10 @@ private extension SpotUploadViewController {
     }
 
     @objc private func goToNextPage() {
+        if currentIndex == 1 {
+            setSpotFeaturePage()
+        }
+
         if currentIndex < pages.count - 1 {
             currentIndex += 1
             pageVC.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
@@ -180,6 +184,18 @@ extension SpotUploadViewController: SpotUploadPhotoViewControllerDelegate {
         let albumVC = AlbumTableViewController(vm)
 
         self.navigationController?.pushViewController(albumVC, animated: true)
+    }
+
+}
+
+
+// MARK: - Helper
+
+private extension SpotUploadViewController {
+
+    func setSpotFeaturePage() {
+        pages.remove(at: 2)
+        pages.insert(viewModel.spotType == .restaurant ? restaurantFeatureVC : cafeFeatureVC, at: 2)
     }
 
 }
