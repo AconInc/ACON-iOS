@@ -194,6 +194,7 @@
 		746261892D3FA29C00A4E84F /* SpotDetailTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261882D3FA29400A4E84F /* SpotDetailTargetType.swift */; };
 		7462618B2D3FA4A800A4E84F /* SpotDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462618A2D3FA4A200A4E84F /* SpotDetailService.swift */; };
 		7462D0252D4262F300580464 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462D0242D4262EF00580464 /* AuthManager.swift */; };
+		74696D3D2E3D1E800086C61E /* SpotUploadSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74696D3C2E3D1E760086C61E /* SpotUploadSearchViewModel.swift */; };
 		746A13B62E00545B0097DA25 /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746A13B52E0054550097DA25 /* OnboardingService.swift */; };
 		746A13B82E00549E0097DA25 /* OnboardingTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746A13B72E0054970097DA25 /* OnboardingTargetType.swift */; };
 		746A13BB2E0055120097DA25 /* PutOnboardingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746A13BA2E0054D20097DA25 /* PutOnboardingRequest.swift */; };
@@ -502,6 +503,7 @@
 		746261882D3FA29400A4E84F /* SpotDetailTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailTargetType.swift; sourceTree = "<group>"; };
 		7462618A2D3FA4A200A4E84F /* SpotDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailService.swift; sourceTree = "<group>"; };
 		7462D0242D4262EF00580464 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		74696D3C2E3D1E760086C61E /* SpotUploadSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadSearchViewModel.swift; sourceTree = "<group>"; };
 		746A13B52E0054550097DA25 /* OnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingService.swift; sourceTree = "<group>"; };
 		746A13B72E0054970097DA25 /* OnboardingTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTargetType.swift; sourceTree = "<group>"; };
 		746A13BA2E0054D20097DA25 /* PutOnboardingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutOnboardingRequest.swift; sourceTree = "<group>"; };
@@ -876,6 +878,7 @@
 		155D45B92E26DDF0008C0316 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				74696D3C2E3D1E760086C61E /* SpotUploadSearchViewModel.swift */,
 				155D45BA2E26DE05008C0316 /* SpotUploadViewModel.swift */,
 			);
 			path = ViewModel;
@@ -2336,6 +2339,7 @@
 				15F45F862D66877200BD6B9C /* LoadingAnimatedButton.swift in Sources */,
 				74EC5A2C2DF4CB2300E176A8 /* SavedSpotView.swift in Sources */,
 				74BF92072D38622B00B923E3 /* SpotDetailViewModel.swift in Sources */,
+				74696D3D2E3D1E800086C61E /* SpotUploadSearchViewModel.swift in Sources */,
 				151003EE2D5FC48B00409DF4 /* ProfileService.swift in Sources */,
 				151003F02D5FC4C600409DF4 /* ProfileTargetType.swift in Sources */,
 				1515CE0D2E00823B00A559A2 /* DeepLinkManager.swift in Sources */,
