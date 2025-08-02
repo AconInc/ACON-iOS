@@ -27,19 +27,18 @@ class SpotUploadSearchViewModel: Serviceable {
             case .success(let data):
                 self?.onSuccessGetNaverSearch.value = true
                 let searchKeywords = data.items.map { keyword in
-                    let cleanTitle = keyword.title.replacingOccurrences(of: "<b>", with: "")
+                    let title = keyword.title.replacingOccurrences(of: "<b>", with: "")
                         .replacingOccurrences(of: "</b>", with: "")
                         .replacingOccurrences(of: "\\/", with: "/")
                     let address = keyword.roadAddress == "" ? keyword.address : keyword.roadAddress
                     return SearchKeywordModel(
                         spotID: nil,
-                        spotName: cleanTitle,
+                        spotName: title,
                         spotAddress: address,
-                        spotType: nil
+                        spotType: self?.convertNaverCategory(keyword.category)
                     )
                 }
                 self?.naverSearchResult.value = searchKeywords
-                print("🩵", self?.naverSearchResult.value)
             default:
                 self?.handleNetworkError { [weak self] in
                     self?.getNaverSearchResult(keyword: keyword)
@@ -49,3 +48,33 @@ class SpotUploadSearchViewModel: Serviceable {
     }
     
 }
+
+
+// MARK: - Helper
+
+private extension SpotUploadSearchViewModel {
+    
+    func convertNaverCategory(_ category: String) -> String {
+        let foodCategories = ["카페,디저트", "음식점", "술집"]
+        
+        let menuCategories = ["한식", "중식", "일식", "양식", "분식", "베트남음식", "태국음식", "인도음식"]
+        
+        if foodCategories.contains(where: { category.contains($0) }) {
+            if category.contains("카페,디저트") {
+                return "카페"
+            } else if category.contains("술집") {
+                return "술집"
+            } else if category.contains("음식점") {
+                return "음식점"
+            }
+        }
+        
+        if menuCategories.contains(where: { category.contains($0) }) {
+            return "음식점"
+        }
+        
+        return ""
+    }
+    
+}
+

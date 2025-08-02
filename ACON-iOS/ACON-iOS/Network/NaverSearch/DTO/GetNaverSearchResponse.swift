@@ -21,4 +21,6 @@ struct NaverPlaceDTO: Decodable {
     
     let address: String
     
+    let category: String
+    
 }
