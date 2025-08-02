@@ -13,6 +13,7 @@ final class SpotUploadViewController: BaseNavViewController {
 
     let viewModel = SpotUploadViewModel()
     
+    // NOTE: inquiry pages
     lazy var searchVC = SpotUploadSearchViewController(viewModel)
     lazy var spotTypeVC = SpotTypeSelectionViewController(viewModel)
     lazy var restaurantFeatureVC = RestaurantFeatureSelectionViewController(viewModel)
@@ -169,7 +170,8 @@ private extension SpotUploadViewController {
 extension SpotUploadViewController: SpotUploadPhotoViewControllerDelegate {
 
     func pushAlbumTableVC() {
-        let albumVC = AlbumTableViewController(.spotUpload)
+        let vm = AlbumViewModel(.spotUpload)
+        let albumVC = AlbumTableViewController(vm)
         self.navigationController?.pushViewController(albumVC, animated: true)
     }
 

@@ -19,8 +19,8 @@ class AlbumTableViewController: BaseNavViewController {
 
     // MARK: - init
 
-    init(_ flowType: AlbumFlowType) {
-        albumViewModel = AlbumViewModel(flowType)
+    init(_ viewModel: AlbumViewModel) {
+        albumViewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
     }
