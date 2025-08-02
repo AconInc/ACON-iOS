@@ -24,13 +24,13 @@ class SpotUploadPhotoCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - UI Properties
 
-    private var glassBgView = GlassmorphismView(.buttonGlassDisabled)
+    private let glassBgView = GlassmorphismView(.buttonGlassDisabled)
 
-    private var plusImageView = UIImageView()
+    private let plusImageView = UIImageView()
 
-    private var photoImageView = UIImageView()
+    private let photoImageView = UIImageView()
 
-    private var deleteButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_22_b1SB))
+    private let deleteButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_22_b1SB))
 
 
     // MARK: - Properties
