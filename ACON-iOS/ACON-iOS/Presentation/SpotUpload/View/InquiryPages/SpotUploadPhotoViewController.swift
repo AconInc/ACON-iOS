@@ -100,6 +100,7 @@ class SpotUploadPhotoViewController: BaseUploadInquiryViewController {
             viewModel.photosToAppend.value = nil
             viewModel.photos.append(contentsOf: photos[0..<willAddCount])
             collectionView.insertItems(at: newIndexPath)
+            collectionView.setContentOffset(collectionViewOffset(for: currentCount), animated: true)
         }
     }
 
@@ -156,16 +157,13 @@ extension SpotUploadPhotoViewController: UICollectionViewDelegateFlowLayout {
                                    targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let cellWidth = SpotUploadSizeType.Photo.itemWidth.value
         let interItemSpacing = SpotUploadSizeType.Photo.interItemSpacing.value
-        let insetX = SpotUploadSizeType.Photo.insetX.value
-        
         let oneUnitWidth = cellWidth + interItemSpacing
-        
+
         let targetX = targetContentOffset.pointee.x
         let index = round(targetX / oneUnitWidth)
-        let newTargetX = index * oneUnitWidth - insetX
 
         // NOTE: 화면 중앙과 가장 가까운 셀을 찾아 화면 중앙으로 이동
-        targetContentOffset.pointee = CGPoint(x: newTargetX, y: 0)
+        targetContentOffset.pointee = collectionViewOffset(for: Int(index))
     }
 
 }
@@ -188,6 +186,23 @@ extension SpotUploadPhotoViewController: SpotUploadPhotoCellDelegate {
 
     func addPhoto() {
         delegate?.pushAlbumTableVC()
+    }
+
+}
+
+
+// MARK: - Helper
+
+private extension SpotUploadPhotoViewController {
+
+    func collectionViewOffset(for index: Int) -> CGPoint {
+        let cellWidth = SpotUploadSizeType.Photo.itemWidth.value
+        let interItemSpacing = SpotUploadSizeType.Photo.interItemSpacing.value
+        let insetX = SpotUploadSizeType.Photo.insetX.value
+        let oneUnitWidth = cellWidth + interItemSpacing
+
+        let newTargetX = CGFloat(index) * oneUnitWidth - insetX
+        return CGPoint(x: newTargetX, y: 0)
     }
 
 }
