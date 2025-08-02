@@ -11,6 +11,10 @@ final class BaseUploadInquiryView: BaseView {
 
     // MARK: - UI Properties
 
+    let scrollView = UIScrollView()
+    
+    private let scrollContentView = UIView()
+    
     private let requirementLabel = UILabel()
 
     private let titleLabel = UILabel()
@@ -49,15 +53,28 @@ final class BaseUploadInquiryView: BaseView {
     override func setHierarchy() {
         super.setHierarchy()
 
-        self.addSubviews(requirementLabel,
-                         titleLabel,
-                         captionLabel,
-                         contentView)
+        self.addSubview(scrollView)
+        
+        scrollView.addSubview(scrollContentView)
+        
+        scrollContentView.addSubviews(requirementLabel,
+                                      titleLabel,
+                                      captionLabel,
+                                      contentView)
     }
 
     override func setLayout() {
         super.setLayout()
 
+        scrollView.snp.makeConstraints {
+            $0.top.horizontalEdges.equalToSuperview()
+        }
+
+        scrollContentView.snp.makeConstraints {
+            $0.edges.width.equalTo(scrollView)
+            $0.height.greaterThanOrEqualTo(scrollView).priority(.low)
+        }
+        
         requirementLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(40)
             $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
@@ -72,6 +89,7 @@ final class BaseUploadInquiryView: BaseView {
             contentView.snp.makeConstraints {
                 $0.top.equalTo(titleLabel.snp.bottom).offset(32)
                 $0.bottom.horizontalEdges.equalToSuperview()
+                $0.height.equalTo(411*ScreenUtils.heightRatio)
             }
         } else {
             captionLabel.snp.makeConstraints {
@@ -82,6 +100,7 @@ final class BaseUploadInquiryView: BaseView {
             contentView.snp.makeConstraints {
                 $0.top.equalTo(captionLabel.snp.bottom).offset(32)
                 $0.bottom.horizontalEdges.equalToSuperview()
+                $0.height.equalTo(411*ScreenUtils.heightRatio)
             }
         }
     }
@@ -89,6 +108,8 @@ final class BaseUploadInquiryView: BaseView {
     override func setStyle() {
         super.setStyle()
 
+        scrollView.isScrollEnabled = false
+        
         requirementLabel.setLabel(text: requirement.text, style: .b1R, color: requirement.color)
 
         titleLabel.setLabel(text: title, style: .h3SB, color: .acWhite)
