@@ -34,5 +34,7 @@ final class ACService {
     lazy var imageService = ImageService()
     
     lazy var withdrawalService = WithdrawalService()
+    
+    lazy var naverSearchService: NaverSearchService = NaverSearchService()
 
 }
