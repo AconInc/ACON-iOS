@@ -47,8 +47,8 @@ class SpotUploadPhotoViewController: BaseUploadInquiryViewController {
 
     init(_ viewModel: SpotUploadViewModel) {
         super.init(viewModel: viewModel,
-                   requirement: .required,
-                   title: StringLiterals.SpotUpload.isThisValueForMoney)
+                   requirement: .optional,
+                   title: StringLiterals.SpotUpload.youCanRegisterPhotos)
     }
 
     required init?(coder: NSCoder) {
