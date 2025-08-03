@@ -11,7 +11,7 @@ class SpotUploadOptionCell: BaseCollectionViewCell {
 
     // MARK: - UI Properties
 
-    private var optionButton = SpotUploadOptionButton(title: "")
+    private let optionButton = SpotUploadOptionButton(title: "")
 
 
     // MARK: - Properties

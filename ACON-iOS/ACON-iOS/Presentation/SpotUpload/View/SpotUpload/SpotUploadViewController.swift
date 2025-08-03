@@ -11,15 +11,19 @@ final class SpotUploadViewController: BaseNavViewController {
 
     // MARK: - Properties
 
-    private let viewModel = SpotUploadViewModel()
+    let viewModel = SpotUploadViewModel()
+    
+    // NOTE: inquiry pages
+    lazy var searchVC = SpotUploadSearchViewController(viewModel)
+    lazy var spotTypeVC = SpotTypeSelectionViewController(viewModel)
+    lazy var restaurantFeatureVC = RestaurantFeatureSelectionViewController(viewModel)
+    lazy var cafeFeatureVC = CafeFeatureSelectionViewController(viewModel)
+    lazy var menuVC = MenuRecommendationViewController(viewModel)
+    lazy var valueRatingVC = ValueRatingViewController(viewModel)
+    lazy var photoVC = SpotUploadPhotoViewController(viewModel)
 
     // TODO: SpotTypeVC에서 분기처리
-    lazy var pages: [UIViewController] = [SpotUploadSearchViewController(viewModel),
-                                          SpotTypeSelectionViewController(viewModel),
-                                          RestaurantFeatureSelectionViewController(viewModel),
-                                          MenuRecommendationViewController(viewModel),
-                                          ValueRatingViewController(viewModel),
-                                          CafeFeatureSelectionViewController(viewModel)]
+    lazy var pages: [UIViewController] = [searchVC, spotTypeVC, restaurantFeatureVC, menuVC, valueRatingVC, photoVC]
 
     private var currentIndex: Int = 0
 
@@ -28,11 +32,9 @@ final class SpotUploadViewController: BaseNavViewController {
 
     private var pageVC = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .vertical)
 
-    let previousButton = ACButton(style: GlassButton(borderGlassmorphismType: .buttonGlassDefault, buttonType: .line_22_b1SB),
-                                  title: StringLiterals.SpotUpload.goPrevious)
-
-    let nextButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_22_b1SB),
-                              title: StringLiterals.SpotUpload.next)
+    // NOTE: 글래스모피즘 깜빡임 이슈로 일반 버튼으로 구현
+    let previousButton = UIButton()
+    let nextButton = UIButton()
 
 
     // MARK: - LifeCycle
@@ -42,6 +44,7 @@ final class SpotUploadViewController: BaseNavViewController {
 
         addTarget()
         bindViewModel()
+        setDelegate()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -89,7 +92,7 @@ final class SpotUploadViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
 
-        setXButton()
+        setXButton(#selector(navigateToTabBar))
         
         self.setCenterTitleLabelStyle(title: StringLiterals.SpotUpload.spotUpload)
 
@@ -101,6 +104,24 @@ final class SpotUploadViewController: BaseNavViewController {
                 scrollView.isScrollEnabled = false
             }
         }
+
+        let glassDefaultColor = UIColor(red: 0.255, green: 0.255, blue: 0.255, alpha: 1)
+        previousButton.do {
+            $0.setAttributedTitle(text:  StringLiterals.SpotUpload.goPrevious, style: .b1SB)
+            $0.layer.borderColor = glassDefaultColor.cgColor
+            $0.layer.borderWidth = 1
+            $0.layer.cornerRadius = 22
+        }
+
+        nextButton.do {
+            $0.setAttributedTitle(text: StringLiterals.SpotUpload.next, style: .b1SB)
+            $0.backgroundColor = glassDefaultColor
+            $0.layer.cornerRadius = 22
+        }
+    }
+
+    private func setDelegate() {
+        photoVC.delegate = self
     }
 
     private func addTarget() {
@@ -123,13 +144,13 @@ private extension SpotUploadViewController {
     func bindViewModel() {
         viewModel.isPreviousButtonEnabled.bind { [weak self] isEnabled in
             guard let isEnabled else { return }
-            self?.previousButton.updateGlassButtonState(state: isEnabled ? .default : .disabled)
+            self?.previousButton.isEnabled = isEnabled
             self?.viewModel.isPreviousButtonEnabled.value = nil
         }
 
         viewModel.isNextButtonEnabled.bind { [weak self] isEnabled in
             guard let isEnabled else { return }
-            self?.nextButton.updateGlassButtonState(state: isEnabled ? .default : .disabled)
+            self?.nextButton.isEnabled = isEnabled
             self?.viewModel.isNextButtonEnabled.value = nil
         }
     }
@@ -141,16 +162,56 @@ private extension SpotUploadViewController {
 
 private extension SpotUploadViewController {
 
-    @objc private func goToPreviousPage() {
+    @objc func navigateToTabBar() {
+        NavigationUtils.navigateToTabBar()
+    }
+
+    @objc func goToPreviousPage() {
         guard currentIndex > 0 else { return }
         currentIndex -= 1
         pageVC.setViewControllers([pages[currentIndex]], direction: .reverse, animated: true, completion: nil)
     }
 
-    @objc private func goToNextPage() {
-        guard currentIndex < pages.count - 1 else { return }
-        currentIndex += 1
-        pageVC.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
+    @objc func goToNextPage() {
+        if currentIndex == 1 {
+            setSpotFeaturePage()
+        }
+
+        if currentIndex < pages.count - 1 {
+            currentIndex += 1
+            pageVC.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
+        } else if currentIndex == pages.count - 1 {
+            let successVC = SpotUploadSuccessViewController()
+            self.navigationController?.pushViewController(successVC, animated: true)
+        }
+    }
+
+}
+
+
+// MARK: - SpotUploadPhotoViewControllerDelegate
+
+extension SpotUploadViewController: SpotUploadPhotoViewControllerDelegate {
+
+    func pushAlbumTableVC() {
+        let vm = AlbumViewModel(.spotUpload)
+        vm.maxPhotoCount = 10 - viewModel.photos.count
+
+        let albumVC = AlbumTableViewController(vm)
+
+        self.navigationController?.pushViewController(albumVC, animated: true)
+    }
+
+}
+
+
+// MARK: - Helper
+
+private extension SpotUploadViewController {
+
+    func setSpotFeaturePage() {
+        pages.remove(at: 2)
+        pages.insert(viewModel.spotType == .restaurant ? restaurantFeatureVC : cafeFeatureVC, at: 2)
     }
 
 }
