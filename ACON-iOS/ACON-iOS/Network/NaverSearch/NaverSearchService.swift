@@ -22,8 +22,12 @@ final class NaverSearchService: BaseService<NaverSearchTargetType>, NaverSearchS
         self.provider.request(.getNaverSearch(parameter)) { result in
             switch result {
             case .success(let response):
-                let networkResult: NetworkResult<GetNaverSearchResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetNaverSearchResponse.self)
-                completion(networkResult)
+                if response.statusCode == 200 {
+                    let networkResult: NetworkResult<GetNaverSearchResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetNaverSearchResponse.self)
+                    completion(networkResult)
+                } else {
+                    completion(.naverAPIErr(response.statusCode))
+                }
             case .failure:
                 completion(.networkFail)
             }
