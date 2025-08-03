@@ -301,6 +301,7 @@
 		74EC5A282DF4C51E00E176A8 /* SavedSpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC5A272DF4C50E00E176A8 /* SavedSpotsViewController.swift */; };
 		74EC5A2A2DF4C72200E176A8 /* GetSavedSpotsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC5A292DF4C71B00E176A8 /* GetSavedSpotsResponse.swift */; };
 		74EC5A2C2DF4CB2300E176A8 /* SavedSpotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC5A2B2DF4CB1F00E176A8 /* SavedSpotView.swift */; };
+		74F70DDC2E3F1D0100D3F659 /* SearchKeywordCollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F70DDB2E3F1CF200D3F659 /* SearchKeywordCollectionFooterView.swift */; };
 		74FA77842DD43709006846C9 /* SplashBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 74FA77832DD43709006846C9 /* SplashBGM.mp3 */; };
 		D652597C2D62775C00B8176E /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597B2D62775C00B8176E /* CustomTextFieldView.swift */; };
 		D652597E2D628EB000B8176E /* WithdrawalConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597D2D628EB000B8176E /* WithdrawalConfirmationViewController.swift */; };
@@ -603,6 +604,7 @@
 		74EC5A272DF4C50E00E176A8 /* SavedSpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotsViewController.swift; sourceTree = "<group>"; };
 		74EC5A292DF4C71B00E176A8 /* GetSavedSpotsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSavedSpotsResponse.swift; sourceTree = "<group>"; };
 		74EC5A2B2DF4CB1F00E176A8 /* SavedSpotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotView.swift; sourceTree = "<group>"; };
+		74F70DDB2E3F1CF200D3F659 /* SearchKeywordCollectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordCollectionFooterView.swift; sourceTree = "<group>"; };
 		74FA77832DD43709006846C9 /* SplashBGM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SplashBGM.mp3; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D652597B2D62775C00B8176E /* CustomTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
@@ -1193,6 +1195,7 @@
 		745C7E072D35A0130074DBDB /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				74F70DDB2E3F1CF200D3F659 /* SearchKeywordCollectionFooterView.swift */,
 				741367FF2DD516610075D06A /* SearchSuggestionCollectionViewCell.swift */,
 				745C7E0C2D35A03F0074DBDB /* SearchKeywordCollectionViewCell.swift */,
 			);
@@ -2320,6 +2323,7 @@
 				74BF92172D393B4A00B923E3 /* Int+.swift in Sources */,
 				747BB6CE2DCA66F000352874 /* GlassButtonState.swift in Sources */,
 				15CF62BD2D575EC00000A10F /* ProfileEditValidMessageView.swift in Sources */,
+				74F70DDC2E3F1D0100D3F659 /* SearchKeywordCollectionFooterView.swift in Sources */,
 				741429632D5D3CED00B69528 /* SettingTableViewCell.swift in Sources */,
 				7462616D2D3EA40600A4E84F /* GetSearchKeywordRequest.swift in Sources */,
 				748ECA6E2D3196F100BBC981 /* LoginViewController.swift in Sources */,
