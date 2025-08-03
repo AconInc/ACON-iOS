@@ -359,6 +359,8 @@ enum StringLiterals {
         
         static let requestToAddPlaceLink = "https://walla.my/survey/ZVXaHzuIVhjQglM1p7fu"
         
+        static let instagramLink = "https://www.instagram.com/acon.drop/"
+        
     }
     
     enum Network {

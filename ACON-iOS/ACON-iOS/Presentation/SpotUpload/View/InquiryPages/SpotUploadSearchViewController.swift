@@ -126,6 +126,21 @@ private extension SpotUploadSearchViewController {
     }
 
     func bindViewModel() {
+        self.spotUploadSearchViewModel.naverSearchStatusCode.bind { [weak self] statusCode in
+            guard let statusCode = statusCode else { return }
+
+            let goToInstagram: () -> Void = { [weak self] in
+                guard let self = self else { return }
+                let termsOfUseVC = ACWebViewController(urlString: StringLiterals.WebView.instagramLink)
+                self.present(termsOfUseVC, animated: true)
+            }
+            if statusCode == 429 {
+                self?.presentACAlert(.naverAPILimitExceeded, leftAction: {self?.dismiss(animated: true)}, rightAction: goToInstagram)
+            } else {
+                self?.showDefaultAlert(title: "알림", message: "현재 장소 등록이 불가능해요.\nAcon Instagram을 통해 제보할 수 있어요.", okText: "제보하기", isCancelAvailable: true, completion: goToInstagram)
+            }
+        }
+       
         self.spotUploadSearchViewModel.naverSearchResult.bind { [weak self] data in
             guard let data = data else { return }
             
