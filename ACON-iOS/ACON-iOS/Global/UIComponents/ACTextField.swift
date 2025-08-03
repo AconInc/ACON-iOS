@@ -224,11 +224,9 @@ final class ACTextField: UIView {
     }
 
     private func addTarget() {
-        clearButton.addTarget(
-            self,
-            action: #selector(tappedClearButton),
-            for: .touchUpInside
-        )
+        let clearButtonGesture = UITapGestureRecognizer(target: self, action: #selector(tappedClearButton))
+        clearButtonGesture.cancelsTouchesInView = false
+        clearButton.addGestureRecognizer(clearButtonGesture)
 
         textField.addTarget(
             self,
@@ -343,6 +341,10 @@ extension ACTextField {
         glassmorphismView?.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+ 
+    override func resignFirstResponder() -> Bool {
+        textField.resignFirstResponder()
     }
 
 }

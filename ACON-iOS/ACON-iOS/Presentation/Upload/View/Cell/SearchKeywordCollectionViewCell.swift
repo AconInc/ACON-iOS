@@ -62,6 +62,17 @@ final class SearchKeywordCollectionViewCell: BaseCollectionViewCell {
         self.backgroundColor = .clear
     }
     
+    // MARK: - 직접 셀 select
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
+        if let collectionView = superview as? UICollectionView,
+           let indexPath = collectionView.indexPath(for: self) {
+            collectionView.delegate?.collectionView?(collectionView, didSelectItemAt: indexPath)
+        }
+    }
+
 }
 
 extension SearchKeywordCollectionViewCell {

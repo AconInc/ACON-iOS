@@ -17,6 +17,8 @@ enum ACAlertType: CaseIterable {
     
     case reviewLocationFail // NOTE: 리뷰 위치 인증 실패
     
+    case naverAPILimitExceeded // NOTE: 일일 네이버 API 호출 가능 횟수 (25000회) 초과
+    
     case libraryAccessDenied // NOTE: 사진 권한 X
     case changeNotSaved // NOTE: 프로필 변경사항 저장 X
     
@@ -39,6 +41,9 @@ enum ACAlertType: CaseIterable {
             return "'Acon'에 대한 위치접근\n권한이 없습니다."
         case .locationAccessFail, .reviewLocationFail:
             return "위치 인식 실패"
+        
+        case .naverAPILimitExceeded:
+            return "장소 등록 마감"
             
         case .libraryAccessDenied:
             return "'Acon'에 대한 라이브러리\n읽기/쓰기 기능이 없습니다."
@@ -67,6 +72,8 @@ enum ACAlertType: CaseIterable {
             return "문제가 발생했습니다.\n나중에 다시 시도해주세요."
         case .reviewLocationFail:
             return "현재 위치와 리뷰 등록 장소가\n오차범위 밖에 있습니다.\n좀 더 가까이 이동해보세요."
+        case .naverAPILimitExceeded:
+            return "오늘 너무 많은 장소가 등록돼서\n새로운 장소 등록이 불가능해요.\nAcon Instagram을 통해 제보할 수 있어요."
         case .libraryAccessDenied:
             return "설정에서 권한을 켤 수 있습니다."
         case .changeVerifiedArea:
@@ -95,6 +102,8 @@ enum ACAlertType: CaseIterable {
         switch self {
         case .plainUpdate, .libraryAccessDenied, .changeVerifiedArea, .logout, .deletePhoto:
             return "취소"
+        case .naverAPILimitExceeded:
+            return "끝내기"
         case .changeNotSaved:
             return "계속 작성"
         case .quitOnboarding:
@@ -110,6 +119,8 @@ enum ACAlertType: CaseIterable {
             return "업데이트"
         case .libraryAccessDenied:
             return "설정으로 가기"
+        case .naverAPILimitExceeded:
+            return "제보하기"
         case .changeNotSaved:
             return "나가기"
         case .changeVerifiedArea:

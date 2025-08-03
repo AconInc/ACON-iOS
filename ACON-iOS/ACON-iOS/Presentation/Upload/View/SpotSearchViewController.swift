@@ -36,11 +36,6 @@ class SpotSearchViewController: BaseNavViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setXButton(#selector(spotSearchXButtonTapped))
-        self.setNextButton()
-        self.setCenterTitleLabelStyle(title: StringLiterals.Upload.upload)
-        self.rightButton.isEnabled = false
-        
         addTarget()
         self.hideKeyboard()
         registerCell()
@@ -78,14 +73,21 @@ class SpotSearchViewController: BaseNavViewController{
         }
     }
     
+    override func setStyle() {
+        super.setStyle()
+        
+        self.setXButton(#selector(spotSearchXButtonTapped))
+        self.setNextButton()
+        self.setCenterTitleLabelStyle(title: StringLiterals.Upload.upload)
+        self.rightButton.isEnabled = false
+        
+        spotSearchView.searchKeywordCollectionViewFlowLayout.footerReferenceSize = CGSize(width: ScreenUtils.widthRatio*328, height: ScreenUtils.heightRatio*60)
+    }
+    
     func addTarget() {
         self.rightButton.addTarget(self,
                                    action: #selector(nextButtonTapped),
                                     for: .touchUpInside)
-        
-        spotSearchView.searchEmptyView.addPlaceButton.addTarget(self,
-                                                                action: #selector(addPlaceButtonTapped),
-                                                                for: .touchUpInside)
     }
 
 }
@@ -97,6 +99,11 @@ private extension SpotSearchViewController {
 
     func bindTextField() {
         spotSearchView.searchTextField.observableText.bind { [weak self] text in
+            DispatchQueue.main.async {
+                self?.spotSearchView.searchEmptyView.isHidden = true
+                self?.spotSearchView.searchKeywordCollectionView.isHidden = true
+            }
+
             if let text = text {
                 if text != self?.selectedSpotName {
                     self?.rightButton.isEnabled = false
@@ -194,11 +201,11 @@ private extension SpotSearchViewController {
     }
     
     @objc
-    func addPlaceButtonTapped() {
-        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.upload, properties: ["click_register_form?": true])
-        let spotUploadVC = SpotUploadViewController()
-        spotUploadVC.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(spotUploadVC, animated: true)
+    func addPlaceFooterTapped() {
+//        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.upload, properties: ["click_register_form?": true])
+        let addPlaceVC = SpotUploadViewController()
+        addPlaceVC.modalPresentationStyle = .fullScreen
+        self.present(addPlaceVC, animated: true)
     }
     
 }
@@ -212,6 +219,9 @@ private extension SpotSearchViewController {
         spotSearchView.searchSuggestionCollectionView.register(SearchSuggestionCollectionViewCell.self, forCellWithReuseIdentifier: SearchSuggestionCollectionViewCell.cellIdentifier)
         
         spotSearchView.searchKeywordCollectionView.register(SearchKeywordCollectionViewCell.self, forCellWithReuseIdentifier: SearchKeywordCollectionViewCell.cellIdentifier)
+        spotSearchView.searchKeywordCollectionView.register(SearchKeywordCollectionFooterView.self,
+                                            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                                            withReuseIdentifier: SearchKeywordCollectionFooterView.identifier)
     }
     
     func setDelegate() {
@@ -285,6 +295,18 @@ extension SpotSearchViewController: UICollectionViewDataSource {
             cell.bindData(data, indexPath.item)
             return cell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SearchKeywordCollectionFooterView.identifier, for: indexPath)
+        
+            footer.gestureRecognizers?.removeAll()
+        
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addPlaceFooterTapped))
+            tapGesture.cancelsTouchesInView = false
+            footer.addGestureRecognizer(tapGesture)
+
+        return footer
     }
     
 }

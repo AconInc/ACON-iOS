@@ -65,6 +65,10 @@
 	<string>${GOOGLE_CLIENT_ID}</string>
 	<key>GOOGLE_WEB_CLIENT_ID</key>
 	<string>${GOOGLE_WEB_CLIENT_ID}</string>
+	<key>NAVER_API_CLIENT_ID</key>
+	<string>${NAVER_API_CLIENT_ID}</string>
+	<key>NAVER_API_CLIENT_SECRET</key>
+	<string>${NAVER_API_CLIENT_SECRET}</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>

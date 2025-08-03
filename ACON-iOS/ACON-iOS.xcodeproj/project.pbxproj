@@ -198,6 +198,7 @@
 		746261892D3FA29C00A4E84F /* SpotDetailTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746261882D3FA29400A4E84F /* SpotDetailTargetType.swift */; };
 		7462618B2D3FA4A800A4E84F /* SpotDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462618A2D3FA4A200A4E84F /* SpotDetailService.swift */; };
 		7462D0252D4262F300580464 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7462D0242D4262EF00580464 /* AuthManager.swift */; };
+		74696D3D2E3D1E800086C61E /* SpotUploadSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74696D3C2E3D1E760086C61E /* SpotUploadSearchViewModel.swift */; };
 		746A13B62E00545B0097DA25 /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746A13B52E0054550097DA25 /* OnboardingService.swift */; };
 		746A13B82E00549E0097DA25 /* OnboardingTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746A13B72E0054970097DA25 /* OnboardingTargetType.swift */; };
 		746A13BB2E0055120097DA25 /* PutOnboardingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746A13BA2E0054D20097DA25 /* PutOnboardingRequest.swift */; };
@@ -268,7 +269,11 @@
 		74B25C252D2FD30A008BDCB7 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 74B25C242D2FD30A008BDCB7 /* Lottie */; };
 		74B25C2C2D2FEE8E008BDCB7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B25C2B2D2FEE8C008BDCB7 /* Config.swift */; };
 		74B25C322D2FF022008BDCB7 /* Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 74B25C312D2FF022008BDCB7 /* Shared.xcconfig */; };
+		74B594B42E3CAE8800CEFDB1 /* GetNaverSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B594B32E3CAE7D00CEFDB1 /* GetNaverSearchResponse.swift */; };
+		74B594B62E3CB02800CEFDB1 /* NaverSearchTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B594B52E3CB01900CEFDB1 /* NaverSearchTargetType.swift */; };
+		74B594B82E3CB4F100CEFDB1 /* GetNaverSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B594B72E3CB4EC00CEFDB1 /* GetNaverSearchRequest.swift */; };
 		74B817F32D3A7C8000C1D516 /* SpotReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B817F22D3A7C7900C1D516 /* SpotReviewViewModel.swift */; };
+		74B967D52E3D181C008F8360 /* NaverSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B967D42E3D1816008F8360 /* NaverSearchService.swift */; };
 		74BBADF62D611B6B003AB16C /* PostReissueResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BBADF52D611B63003AB16C /* PostReissueResponse.swift */; };
 		74BBADFC2D6130E6003AB16C /* PostReissueRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BBADFB2D6130DF003AB16C /* PostReissueRequest.swift */; };
 		74BF91FD2D381FF800B923E3 /* SpotDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF91FC2D381FF400B923E3 /* SpotDetailModel.swift */; };
@@ -300,6 +305,7 @@
 		74EC5A282DF4C51E00E176A8 /* SavedSpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC5A272DF4C50E00E176A8 /* SavedSpotsViewController.swift */; };
 		74EC5A2A2DF4C72200E176A8 /* GetSavedSpotsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC5A292DF4C71B00E176A8 /* GetSavedSpotsResponse.swift */; };
 		74EC5A2C2DF4CB2300E176A8 /* SavedSpotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EC5A2B2DF4CB1F00E176A8 /* SavedSpotView.swift */; };
+		74F70DDC2E3F1D0100D3F659 /* SearchKeywordCollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F70DDB2E3F1CF200D3F659 /* SearchKeywordCollectionFooterView.swift */; };
 		74FA77842DD43709006846C9 /* SplashBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 74FA77832DD43709006846C9 /* SplashBGM.mp3 */; };
 		D652597C2D62775C00B8176E /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597B2D62775C00B8176E /* CustomTextFieldView.swift */; };
 		D652597E2D628EB000B8176E /* WithdrawalConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D652597D2D628EB000B8176E /* WithdrawalConfirmationViewController.swift */; };
@@ -506,6 +512,7 @@
 		746261882D3FA29400A4E84F /* SpotDetailTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailTargetType.swift; sourceTree = "<group>"; };
 		7462618A2D3FA4A200A4E84F /* SpotDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailService.swift; sourceTree = "<group>"; };
 		7462D0242D4262EF00580464 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		74696D3C2E3D1E760086C61E /* SpotUploadSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadSearchViewModel.swift; sourceTree = "<group>"; };
 		746A13B52E0054550097DA25 /* OnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingService.swift; sourceTree = "<group>"; };
 		746A13B72E0054970097DA25 /* OnboardingTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTargetType.swift; sourceTree = "<group>"; };
 		746A13BA2E0054D20097DA25 /* PutOnboardingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutOnboardingRequest.swift; sourceTree = "<group>"; };
@@ -571,7 +578,11 @@
 		74B25C2A2D2FEE3E008BDCB7 /* ACON-iOSDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ACON-iOSDebug.entitlements"; sourceTree = "<group>"; };
 		74B25C2B2D2FEE8C008BDCB7 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		74B25C312D2FF022008BDCB7 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
+		74B594B32E3CAE7D00CEFDB1 /* GetNaverSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNaverSearchResponse.swift; sourceTree = "<group>"; };
+		74B594B52E3CB01900CEFDB1 /* NaverSearchTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSearchTargetType.swift; sourceTree = "<group>"; };
+		74B594B72E3CB4EC00CEFDB1 /* GetNaverSearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNaverSearchRequest.swift; sourceTree = "<group>"; };
 		74B817F22D3A7C7900C1D516 /* SpotReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotReviewViewModel.swift; sourceTree = "<group>"; };
+		74B967D42E3D1816008F8360 /* NaverSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSearchService.swift; sourceTree = "<group>"; };
 		74BBADF52D611B63003AB16C /* PostReissueResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReissueResponse.swift; sourceTree = "<group>"; };
 		74BBADFB2D6130DF003AB16C /* PostReissueRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReissueRequest.swift; sourceTree = "<group>"; };
 		74BF91FC2D381FF400B923E3 /* SpotDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailModel.swift; sourceTree = "<group>"; };
@@ -601,6 +612,7 @@
 		74EC5A272DF4C50E00E176A8 /* SavedSpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotsViewController.swift; sourceTree = "<group>"; };
 		74EC5A292DF4C71B00E176A8 /* GetSavedSpotsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSavedSpotsResponse.swift; sourceTree = "<group>"; };
 		74EC5A2B2DF4CB1F00E176A8 /* SavedSpotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSpotView.swift; sourceTree = "<group>"; };
+		74F70DDB2E3F1CF200D3F659 /* SearchKeywordCollectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordCollectionFooterView.swift; sourceTree = "<group>"; };
 		74FA77832DD43709006846C9 /* SplashBGM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SplashBGM.mp3; sourceTree = "<group>"; };
 		B28431BAB67B99CD7B85C705 /* Pods_ACON_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACON_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D652597B2D62775C00B8176E /* CustomTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
@@ -877,6 +889,7 @@
 		155D45B92E26DDF0008C0316 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				74696D3C2E3D1E760086C61E /* SpotUploadSearchViewModel.swift */,
 				155D45BA2E26DE05008C0316 /* SpotUploadViewModel.swift */,
 			);
 			path = ViewModel;
@@ -1194,6 +1207,7 @@
 		745C7E072D35A0130074DBDB /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				74F70DDB2E3F1CF200D3F659 /* SearchKeywordCollectionFooterView.swift */,
 				741367FF2DD516610075D06A /* SearchSuggestionCollectionViewCell.swift */,
 				745C7E0C2D35A03F0074DBDB /* SearchKeywordCollectionViewCell.swift */,
 			);
@@ -1354,6 +1368,25 @@
 			path = SemiShortModal;
 			sourceTree = "<group>";
 		};
+		7474CFAC2E3CADF7007ACD76 /* NaverSearch */ = {
+			isa = PBXGroup;
+			children = (
+				74B967D42E3D1816008F8360 /* NaverSearchService.swift */,
+				74B594B52E3CB01900CEFDB1 /* NaverSearchTargetType.swift */,
+				7474CFAD2E3CAE0B007ACD76 /* DTO */,
+			);
+			path = NaverSearch;
+			sourceTree = "<group>";
+		};
+		7474CFAD2E3CAE0B007ACD76 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				74B594B72E3CB4EC00CEFDB1 /* GetNaverSearchRequest.swift */,
+				74B594B32E3CAE7D00CEFDB1 /* GetNaverSearchResponse.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
 		747F4FB82D3D944A003DECBF /* Splash */ = {
 			isa = PBXGroup;
 			children = (
@@ -1418,6 +1451,7 @@
 		748D6F712D2BCA7E007690B4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				7474CFAC2E3CADF7007ACD76 /* NaverSearch */,
 				740EE8252E05983F007A5DCF /* App */,
 				745B19A92D4001AD00BDBDA4 /* Auth */,
 				15CD25752D3FE2D800320006 /* SpotList */,
@@ -2114,6 +2148,7 @@
 				152F8D182DF2526C0064022B /* MapRedirectModel.swift in Sources */,
 				748D6FA82D2C3F93007690B4 /* BaseViewController.swift in Sources */,
 				746A13C12E0065660097DA25 /* OnboardingModel.swift in Sources */,
+				74B594B42E3CAE8800CEFDB1 /* GetNaverSearchResponse.swift in Sources */,
 				157135B12DC2A259008C84F9 /* SpotListCollectionViewFlowLayout.swift in Sources */,
 				746261712D3EA50A00A4E84F /* SpotCategoryType.swift in Sources */,
 				74020C4C2DF46E75009E90AE /* SavedSpotCollectionViewCell.swift in Sources */,
@@ -2222,6 +2257,7 @@
 				746F5BF02DE009820081569B /* ACToastType.swift in Sources */,
 				74BBADFC2D6130E6003AB16C /* PostReissueRequest.swift in Sources */,
 				15A3F7A12D38C71900577E16 /* PriorityLowEmptyView.swift in Sources */,
+				74B594B82E3CB4F100CEFDB1 /* GetNaverSearchRequest.swift in Sources */,
 				74B817F32D3A7C8000C1D516 /* SpotReviewViewModel.swift in Sources */,
 				748D6F802D2BCD94007690B4 /* ObservablePattern.swift in Sources */,
 				74BF92192D395FE800B923E3 /* ACToastController.swift in Sources */,
@@ -2272,6 +2308,7 @@
 				152F8D1C2DF253840064022B /* MapServiceProtocol.swift in Sources */,
 				742954382DF7F84E0067AC33 /* HapticManager.swift in Sources */,
 				74D31C7A2D5841EA00B4B2B4 /* PhotoCollectionViewController.swift in Sources */,
+				74B967D52E3D181C008F8360 /* NaverSearchService.swift in Sources */,
 				746261632D3EA1D500A4E84F /* GetSearchSuggestionResponse.swift in Sources */,
 				15D6901E2DD723FA0009278D /* SpotDetailMoreViewController.swift in Sources */,
 				746F5BEC2DE009450081569B /* ACToastView.swift in Sources */,
@@ -2282,6 +2319,7 @@
 				746261832D3F9FD900A4E84F /* GetSpotMenuResponse.swift in Sources */,
 				746A13BB2E0055120097DA25 /* PutOnboardingRequest.swift in Sources */,
 				15CD25842D40364F00320006 /* LoginModalView.swift in Sources */,
+				74B594B62E3CB02800CEFDB1 /* NaverSearchTargetType.swift in Sources */,
 				746A13B62E00545B0097DA25 /* OnboardingService.swift in Sources */,
 				741E689A2D3D43FF00DF99EF /* EmptyResponse.swift in Sources */,
 				155D45B62E26BB5F008C0316 /* RequirementType.swift in Sources */,
@@ -2300,6 +2338,7 @@
 				74BF92172D393B4A00B923E3 /* Int+.swift in Sources */,
 				747BB6CE2DCA66F000352874 /* GlassButtonState.swift in Sources */,
 				15CF62BD2D575EC00000A10F /* ProfileEditValidMessageView.swift in Sources */,
+				74F70DDC2E3F1D0100D3F659 /* SearchKeywordCollectionFooterView.swift in Sources */,
 				741429632D5D3CED00B69528 /* SettingTableViewCell.swift in Sources */,
 				7462616D2D3EA40600A4E84F /* GetSearchKeywordRequest.swift in Sources */,
 				748ECA6E2D3196F100BBC981 /* LoginViewController.swift in Sources */,
@@ -2320,6 +2359,7 @@
 				15F45F862D66877200BD6B9C /* LoadingAnimatedButton.swift in Sources */,
 				74EC5A2C2DF4CB2300E176A8 /* SavedSpotView.swift in Sources */,
 				74BF92072D38622B00B923E3 /* SpotDetailViewModel.swift in Sources */,
+				74696D3D2E3D1E800086C61E /* SpotUploadSearchViewModel.swift in Sources */,
 				151003EE2D5FC48B00409DF4 /* ProfileService.swift in Sources */,
 				151003F02D5FC4C600409DF4 /* ProfileTargetType.swift in Sources */,
 				1515CE0D2E00823B00A559A2 /* DeepLinkManager.swift in Sources */,

@@ -137,7 +137,7 @@ private extension LocalVerificationViewController {
         stopBlinkingWarningLabel()
         
         blinkTimer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { _ in
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.4) {
                 self.localVerificationView.warningLabel.alpha = self.localVerificationView.warningLabel.alpha == 1.0 ? 0.0 : 1.0
             }
         }
