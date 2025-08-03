@@ -5,7 +5,7 @@
 //  Created by 김유림 on 7/16/25.
 //
 
-import Foundation
+import UIKit
 
 final class SpotUploadViewModel {
 
@@ -18,6 +18,9 @@ final class SpotUploadViewModel {
     var restaurantFeature: Set<SpotUploadType.RestaurantOptionType> = []
     var recommendedMenu: String? = nil
     var valueRating: SpotUploadType.ValueRatingType? = nil
+
+    var photos: [UIImage] = []
+    var photosToAppend: ObservablePattern<[UIImage]> = ObservablePattern(nil)
     
     var isWorkFriendly: Bool? = nil
 

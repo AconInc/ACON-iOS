@@ -68,9 +68,13 @@ class MenuRecommendationViewController: BaseUploadInquiryViewController {
 
         self.hideKeyboard()
 
-        if let recommendedMenu = viewModel.recommendedMenu,
-           !recommendedMenu.isEmpty{
-            textField.text = recommendedMenu
+        textField.do {
+            $0.setPlaceholder(as: StringLiterals.SpotUpload.enterMenu)
+            if let recommendedMenu = viewModel.recommendedMenu {
+                $0.text = recommendedMenu
+            } else {
+                $0.hideClearButton(isHidden: true)
+            }
         }
     }
 
@@ -84,6 +88,7 @@ private extension MenuRecommendationViewController {
     func bindObservable() {
         textField.observableText.bind { [weak self] text in
             guard let text else { return }
+            self?.textField.hideClearButton(isHidden: text.isEmpty)
             self?.viewModel.recommendedMenu = text
             self?.updatePagingButtonStates()
         }

@@ -26,6 +26,7 @@ final class PhotoCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
+    
     // MARK: - Lifecycle
     
     override func setHierarchy() {
@@ -48,9 +49,8 @@ final class PhotoCollectionViewCell: BaseCollectionViewCell {
     
     override func setStyle() {
         super.setStyle()
-        
+
         self.backgroundColor = .clear
-        self.isSelected = false
         
         dimView.do {
             $0.backgroundColor = .labelAction.withAlphaComponent(0.2)
@@ -71,6 +71,7 @@ final class PhotoCollectionViewCell: BaseCollectionViewCell {
         photoImageView.image = nil
         isSelected = false
     }
+
 }
 
 
