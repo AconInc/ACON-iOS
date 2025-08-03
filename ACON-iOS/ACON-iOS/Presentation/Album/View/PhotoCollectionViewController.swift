@@ -297,7 +297,11 @@ private extension PhotoCollectionViewController {
             dispatchGroup.enter()
             albumViewModel.setImageCache(for: asset,
                                          size: CGSize(width: asset.pixelWidth, height: asset.pixelHeight)) { image in
-                selectedImages[i] = image ?? UIImage()
+                if let image {
+                    selectedImages[i] = image
+                } else {
+                    selectedImages.remove(at: i)
+                }
                 dispatchGroup.leave()
             }
         }

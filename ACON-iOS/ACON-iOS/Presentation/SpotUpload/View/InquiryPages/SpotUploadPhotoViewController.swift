@@ -124,6 +124,7 @@ private extension SpotUploadPhotoViewController {
     func registerCells() {
         collectionView.register(SpotUploadPhotoCollectionViewCell.self, forCellWithReuseIdentifier: SpotUploadPhotoCollectionViewCell.identifier)
     }
+
 }
 
 

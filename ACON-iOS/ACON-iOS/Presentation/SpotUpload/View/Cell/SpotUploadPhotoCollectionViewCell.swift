@@ -116,7 +116,6 @@ class SpotUploadPhotoCollectionViewCell: BaseCollectionViewCell {
             $0.layer.cornerRadius = 10 * ScreenUtils.widthRatio
         }
 
-        deleteButton.setImage(.icDelete, for: .normal)
         deleteButton.do {
             $0.setImage(.icDelete, for: .normal)
             $0.layer.borderWidth = 1
