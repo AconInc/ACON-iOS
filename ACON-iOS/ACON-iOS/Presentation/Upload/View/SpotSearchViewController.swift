@@ -56,6 +56,10 @@ class SpotSearchViewController: BaseNavViewController{
         spotSearchView.searchTextField.resignFirstResponder()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     
     // MARK: - UI Setting Methods
     
@@ -88,6 +92,13 @@ class SpotSearchViewController: BaseNavViewController{
         self.rightButton.addTarget(self,
                                    action: #selector(nextButtonTapped),
                                     for: .touchUpInside)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
     }
 
 }
@@ -206,6 +217,11 @@ private extension SpotSearchViewController {
         let addPlaceVC = SpotUploadViewController()
         addPlaceVC.modalPresentationStyle = .fullScreen
         self.present(addPlaceVC, animated: true)
+    }
+    
+    @objc
+    func appWillEnterForeground() {
+        spotSearchView.setNeedsLayout()
     }
     
 }

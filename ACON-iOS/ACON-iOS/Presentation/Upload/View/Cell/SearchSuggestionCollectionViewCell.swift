@@ -95,6 +95,12 @@ final class SearchSuggestionCollectionViewCell: BaseCollectionViewCell {
         return layoutAttributes
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        chipButton.refreshButtonBlurEffect(.buttonGlassDefault)
+    }
+    
 }
 
 extension SearchSuggestionCollectionViewCell {
