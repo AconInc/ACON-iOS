@@ -92,7 +92,7 @@ final class SpotUploadViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
 
-        setXButton(#selector(navigateToTabBar))
+        setXButtonAction()
         
         self.setCenterTitleLabelStyle(title: StringLiterals.SpotUpload.spotUpload)
 
@@ -134,6 +134,16 @@ final class SpotUploadViewController: BaseNavViewController {
                              for: .touchUpInside)
     }
 
+    private func setXButtonAction() {
+        let currentVC = pages[currentIndex]
+        
+        if currentVC is SpotUploadSearchViewController {
+            setXButton(#selector(showQuitAlert))
+        } else {
+            setXButton(#selector(navigateToTabBar))
+        }
+    }
+    
 }
 
 
@@ -169,6 +179,7 @@ private extension SpotUploadViewController {
     @objc func goToPreviousPage() {
         guard currentIndex > 0 else { return }
         currentIndex -= 1
+        self.setXButtonAction()
         pageVC.setViewControllers([pages[currentIndex]], direction: .reverse, animated: true, completion: nil)
     }
 
@@ -179,6 +190,7 @@ private extension SpotUploadViewController {
 
         if currentIndex < pages.count - 1 {
             currentIndex += 1
+            self.setXButtonAction()
             pageVC.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
         } else if currentIndex == pages.count - 1 {
             let successVC = SpotUploadSuccessViewController()
@@ -186,6 +198,12 @@ private extension SpotUploadViewController {
         }
     }
 
+    @objc func showQuitAlert() {
+        DispatchQueue.main.async { [weak self] in
+            self?.presentACAlert(.quitSpotUpload, rightAction: self?.navigateToTabBar)
+        }
+    }
+    
 }
 
 
@@ -213,5 +231,5 @@ private extension SpotUploadViewController {
         pages.remove(at: 2)
         pages.insert(viewModel.spotType == .restaurant ? restaurantFeatureVC : cafeFeatureVC, at: 2)
     }
-
+    
 }

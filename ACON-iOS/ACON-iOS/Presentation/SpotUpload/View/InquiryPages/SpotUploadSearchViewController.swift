@@ -78,7 +78,7 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
         setDelegate()
         observeUserInputs()
     }
-
+    
 
     // MARK: - UI Setting
 
