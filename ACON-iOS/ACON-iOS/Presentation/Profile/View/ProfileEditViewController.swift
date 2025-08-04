@@ -50,13 +50,7 @@ final class ProfileEditViewController: BaseNavViewController {
     }
 
     deinit {
-        if let keyboardWillShowObserver = keyboardWillShowObserver {
-            NotificationCenter.default.removeObserver(keyboardWillShowObserver)
-        }
-        
-        if let keyboardWillHideObserver = keyboardWillHideObserver {
-            NotificationCenter.default.removeObserver(keyboardWillHideObserver)
-        }
+        NotificationCenter.default.removeObserver(self)
     }
 
     @MainActor required init?(coder: NSCoder) {
@@ -122,6 +116,13 @@ final class ProfileEditViewController: BaseNavViewController {
             self,
             action: #selector(tappedSaveButton),
             for: .touchUpInside
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
         )
     }
 
@@ -388,6 +389,11 @@ private extension ProfileEditViewController {
         } else {
             viewModel.getProfilePresignedURL()
         }
+    }
+    
+    @objc
+    func appWillEnterForeground() {
+        profileEditView.setNeedsLayout()
     }
 
 }
