@@ -169,7 +169,7 @@ enum StringLiterals {
         
         static let whatKindOfRestaurant = "여긴 어떤 식당인가요?"
         
-        static let recommendMenu = "추천하는 메뉴를 알려주세요"
+        static let recommendMenu = "추천하는\n메뉴를 알려주세요"
         
         static let enterMenu = "메뉴를 입력해주세요"
         
