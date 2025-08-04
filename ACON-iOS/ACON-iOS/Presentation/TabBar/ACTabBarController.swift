@@ -11,6 +11,11 @@ import Then
 
 class ACTabBarController: UITabBarController {
     
+    // MARK: - Properties
+    
+    private var glassView: GlassmorphismView?
+    
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -19,6 +24,11 @@ class ACTabBarController: UITabBarController {
         delegate = self
         configureTabBarAppearance()
         setNavViewControllers()
+        addNotification()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
 }
@@ -26,9 +36,9 @@ class ACTabBarController: UITabBarController {
 
 // MARK: - TabBar Setting Methods
 
-extension ACTabBarController {
+private extension ACTabBarController {
     
-    private func configureTabBarAppearance() {
+    func configureTabBarAppearance() {
         let appearance = UITabBarAppearance()
         
         appearance.do {
@@ -46,6 +56,8 @@ extension ACTabBarController {
         tabBar.scrollEdgeAppearance = appearance
 
         let glassView = GlassmorphismView(.gradientGlass)
+        self.glassView = glassView
+        
         tabBar.addSubview(glassView)
         glassView.snp.makeConstraints {
             $0.top.horizontalEdges.equalTo(tabBar)
@@ -56,7 +68,7 @@ extension ACTabBarController {
         glassView.setGradient(topColor: .gray900.withAlphaComponent(0.1), bottomColor: .gray900.withAlphaComponent(1))
     }
     
-    private func setNavViewControllers() {
+    func setNavViewControllers() {
         let navVCs = ACTabBarItemType.allCases.map {
             return setUpTabBarItem(title: $0.itemTitle,
                                    normalItemImage: $0.normalItemImage,
@@ -67,7 +79,7 @@ extension ACTabBarController {
         setViewControllers(navVCs, animated: false)
     }
     
-    private func setUpTabBarItem(title: String,
+    func setUpTabBarItem(title: String,
                                  normalItemImage: UIImage,
                                  selectedItemImage: UIImage,
                                  viewController: UIViewController)
@@ -133,4 +145,25 @@ extension ACTabBarController: UITabBarControllerDelegate {
         return true
     }
 
+}
+
+
+// MARK: - 글모 재렌더링
+
+private extension ACTabBarController {
+    
+    func addNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
+    }
+    
+    @objc
+    func appWillEnterForeground() {
+        glassView?.refreshBlurEffect()
+    }
+    
 }
