@@ -128,7 +128,8 @@ private extension SpotUploadSearchViewController {
     func bindViewModel() {
         self.spotUploadSearchViewModel.naverSearchStatusCode.bind { [weak self] statusCode in
             guard let statusCode = statusCode else { return }
-
+            if statusCode == 200 { return }
+            
             let goToInstagram: () -> Void = { [weak self] in
                 guard let self = self else { return }
                 let termsOfUseVC = ACWebViewController(urlString: StringLiterals.WebView.instagramLink)
