@@ -88,6 +88,8 @@ class SpotSearchViewController: BaseNavViewController{
         self.rightButton.addTarget(self,
                                    action: #selector(nextButtonTapped),
                                     for: .touchUpInside)
+        
+        spotSearchView.searchEmptyView.makeAddSpotButton(target: self, action: #selector(addPlaceFooterTapped))
     }
 
 }
