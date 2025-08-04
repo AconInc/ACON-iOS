@@ -319,6 +319,7 @@ extension SpotSearchViewController: UICollectionViewDataSource {
 private extension SpotSearchViewController {
     
     func updateSearchKeyword(_ text: String) {
+        guard !text.isEmpty else { return }
         spotSearchViewModel.getSearchKeyword(keyword: text)
         // TODO: - 빈 리스트?
     }
