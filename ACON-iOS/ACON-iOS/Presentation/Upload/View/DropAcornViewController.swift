@@ -15,10 +15,6 @@ class DropAcornViewController: BaseNavViewController {
 
     private let dropAcornView = DropAcornView()
 
-    var reviewAcornCount: Int = 0
-
-    var possessAcornCount: Int = 0
-
 
     // MARK: - Properties
 
@@ -93,7 +89,7 @@ private extension DropAcornViewController {
 
     @objc
     func leaveReviewButtonTapped() {
-        viewModel.postReview(acornCount: reviewAcornCount)
+        viewModel.postReview()
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.upload, properties: ["click_review_acon?": true, "spot_id": viewModel.spotID])
     }
 
@@ -105,8 +101,8 @@ private extension DropAcornViewController {
             btn?.isSelected = i <= selectedIndex ? true : false
         }
         dropAcornView.acornReviewLabel.text = "\(selectedIndex+1)/5"
-        reviewAcornCount = selectedIndex + 1
-        checkAcorn(reviewAcornCount)
+        viewModel.acornCount = selectedIndex + 1
+        checkAcorn(viewModel.acornCount)
     }
 
 }
