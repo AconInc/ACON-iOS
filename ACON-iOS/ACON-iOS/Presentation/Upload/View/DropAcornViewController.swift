@@ -38,6 +38,10 @@ class DropAcornViewController: BaseNavViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -75,6 +79,13 @@ class DropAcornViewController: BaseNavViewController {
         self.setCenterTitleLabelStyle(title: StringLiterals.Upload.upload)
         self.dropAcornView.spotNameLabel.setLabel(text: self.spotName.abbreviatedString(20), style: .t3SB, alignment: .center)
     }
+
+}
+
+
+// MARK: - addTarget
+
+private extension DropAcornViewController {
     
     func addTarget() {
         dropAcornView.leaveReviewButton.addTarget(self,
@@ -85,11 +96,18 @@ class DropAcornViewController: BaseNavViewController {
             btn?.tag = i
             btn?.addTarget(self, action: #selector(reviewAcornButtonTapped(_:)), for: .touchUpInside)
         }
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
     }
-
+    
 }
 
-    
+
 // MARK: - @objc functions
 
 private extension DropAcornViewController {
@@ -115,6 +133,11 @@ private extension DropAcornViewController {
         dropAcornView.acornReviewLabel.text = "\(selectedIndex+1)/5"
         reviewAcornCount = selectedIndex + 1
         checkAcorn(reviewAcornCount)
+    }
+    
+    @objc
+    func appWillEnterForeground() {
+        dropAcornView.setNeedsLayout()
     }
     
 }
