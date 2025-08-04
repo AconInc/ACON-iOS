@@ -196,8 +196,10 @@ private extension SpotSearchViewController {
     @objc
     func nextButtonTapped() {
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.upload, properties: ["click_review_next?": true])
-        let vc = DropAcornViewController(spotID: selectedSpotID, spotName: selectedSpotName)
-        self.navigationController?.pushViewController(vc, animated: false)
+
+        let vm = SpotReviewViewModel(spotID: selectedSpotID, spotName: selectedSpotName)
+        let vc = ReviewMenuRecommendationViewController(vm)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc
