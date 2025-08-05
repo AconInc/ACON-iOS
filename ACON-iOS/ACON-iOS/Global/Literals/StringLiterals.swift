@@ -17,6 +17,8 @@ enum StringLiterals {
         
         static let hasVerifiedArea = "hasVerifiedArea"
         
+        static let hasPreference = "hasPreference"
+        
     }
     
     enum Error {
