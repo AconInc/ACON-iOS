@@ -15,8 +15,6 @@ class LoginViewModel: Serviceable {
     
     var onSuccessLogin: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    var hasVerifiedArea: Bool = false
-    
     func googleSignIn(presentingViewController: UIViewController) {
         // NOTE: - webClientID: 서버 전송용 -> 토큰 발급에 사용
         // NOTE: - clientID: iOS 앱 인증용 (네이티브 로그인 플로우)
