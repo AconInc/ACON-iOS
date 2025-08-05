@@ -147,6 +147,19 @@ private extension SpotUploadViewController {
             self?.nextButton.isEnabled = isEnabled
             self?.viewModel.isNextButtonEnabled.value = nil
         }
+
+        // NOTE: 장소 업로드 성공
+        viewModel.onSuccessPostSpot.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
+
+            if onSuccess {
+                let successVC = SpotUploadSuccessViewController()
+                self.navigationController?.pushViewController(successVC, animated: true)
+            }
+
+            viewModel.onSuccessPostSpot.value = nil
+        }
     }
 
 }
@@ -169,16 +182,14 @@ private extension SpotUploadViewController {
     @objc func goToNextPage() {
         let lastIndex = pages.count - 1
 
-        if currentIndex == 1 { // NOTE: spot type 선택
+        if currentIndex == 1 { // NOTE: spot type 선택 페이지
             setSpotFeaturePage()
         }
-
-        if currentIndex < lastIndex {
+        if currentIndex < lastIndex { // NOTE: 다음페이지
             currentIndex += 1
             pageVC.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
-        } else if currentIndex == lastIndex {
-            let successVC = SpotUploadSuccessViewController()
-            self.navigationController?.pushViewController(successVC, animated: true)
+        } else if currentIndex == lastIndex { // NOTE: 마지막페이지 -> post
+            viewModel.uploadSpot()
         }
     }
 

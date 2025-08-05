@@ -63,7 +63,7 @@ class SpotUploadPhotoViewController: BaseUploadInquiryViewController {
 
         setDelegate()
         registerCells()
-        bind()
+        observeViewModel()
     }
 
     override func setLayout() {
@@ -89,7 +89,7 @@ class SpotUploadPhotoViewController: BaseUploadInquiryViewController {
         }
     }
 
-    private func bind() {
+    private func observeViewModel() {
         viewModel.photosToAppend.bind { [weak self] photos in
             guard let self, let photos else { return }
 

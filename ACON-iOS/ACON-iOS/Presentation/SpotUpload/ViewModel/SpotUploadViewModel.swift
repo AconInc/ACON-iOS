@@ -25,21 +25,30 @@ final class SpotUploadViewModel: Serviceable {
 
     var photos: [UIImage] = []
     let photosToAppend: ObservablePattern<[UIImage]> = ObservablePattern(nil)
-    var presignedURLs: [String] = []
-    
+
     var isWorkFriendly: Bool? = nil
+    
+    var photoPresignedURLInfos: [PresignedURLModel] = []
 
 
     // MARK: - Network
 
-    func postSpot() {
+    func uploadSpot() {
+        if photos.isEmpty {
+            postSpot()
+        } else {
+            getPresignedURLs()
+        }
+    }
+
+    private func postSpot() {
         let request = PostSpotUploadRequest(
             spotName: selectedSpot?.spotName ?? "",
             address: selectedSpot?.spotAddress ?? "",
             spotType: spotType?.serverKey ?? "",
             featureList: configureFeatureList(),
             recommendedMenu: recommendedMenu ?? "",
-            imageList: presignedURLs.isEmpty ? nil : presignedURLs
+            imageList: photoPresignedURLInfos.isEmpty ? nil : photoPresignedURLInfos.map { $0.fileName }
         )
 
         ACService.shared.spotUploadService.postSpotUpload(requestBody: request) { [weak self] response in
@@ -57,6 +66,92 @@ final class SpotUploadViewModel: Serviceable {
             }
         }
     }
+
+    private func getPresignedURLs() {
+        guard !photos.isEmpty else {
+            postSpot()
+            return
+        }
+        
+        photoPresignedURLInfos.removeAll()
+        
+        let dispatchGroup = DispatchGroup()
+        
+        for _ in photos {
+            dispatchGroup.enter()
+            
+            ACService.shared.imageService.getPresignedURL(
+                parameter: GetPresignedURLRequest(imageType: ImageType.APPLY_SPOT.rawValue)
+            ) { [weak self] response in
+                defer { dispatchGroup.leave() }
+
+                guard let self = self else { return }
+                
+                switch response {
+                case .success(let data):
+                    self.photoPresignedURLInfos.append(PresignedURLModel(fileName: data.fileName, presignedURL: data.preSignedUrl))
+                case .reIssueJWT:
+                    self.handleReissue { [weak self] in
+                        self?.getPresignedURLs()
+                    }
+                default:
+                    self.handleNetworkError { [weak self] in
+                        self?.getPresignedURLs()
+                    }
+                }
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            self?.putPhotosToPresignedURL()
+        }
+    }
+
+    private func putPhotosToPresignedURL() {
+        guard !photos.isEmpty, photoPresignedURLInfos.count == photos.count else {
+            print("❌ 사진 개수 불일치")
+            onSuccessPostSpot.value = false
+            return
+        }
+
+        let dispatchGroup = DispatchGroup()
+
+        for (index, photo) in photos.enumerated() {
+            guard let imageData = photo.jpegData(compressionQuality: 1) else {
+                print("❌ 이미지 데이터 변환 실패 at: \(index)")
+                continue
+            }
+
+            dispatchGroup.enter()
+            
+            let request = PutImageToPresignedURLRequest(
+                presignedURL: photoPresignedURLInfos[index].presignedURL,
+                imageData: imageData
+            )
+            
+            ACService.shared.imageService.putImageToPresignedURL(requestBody: request) { [weak self] response in
+                defer { dispatchGroup.leave() }
+                guard let self = self else { return }
+                
+                switch response {
+                case .success(_): break
+                case .reIssueJWT:
+                    self.handleReissue {
+                        self.putPhotosToPresignedURL()
+                    }
+                default:
+                    self.handleNetworkError {
+                        self.putPhotosToPresignedURL()
+                    }
+                }
+            }
+        }
+
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            self?.postSpot()
+        }
+    }
+
 }
 
 
