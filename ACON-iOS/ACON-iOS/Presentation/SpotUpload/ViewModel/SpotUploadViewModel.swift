@@ -108,8 +108,9 @@ final class SpotUploadViewModel: Serviceable {
     }
 
     private func putPhotosToPresignedURL() {
+        // NOTE: `getPresignedURL`에서 handleNetworkError로 처리되기 때문에 guard문 걸릴 가능성 적음
+        // 다만, 예외적인 상황을 위해 방어 로직으로 추가함
         guard !photos.isEmpty, photoPresignedURLInfos.count == photos.count else {
-            print("❌ 사진 개수 불일치")
             onSuccessPostSpot.value = false
             return
         }
