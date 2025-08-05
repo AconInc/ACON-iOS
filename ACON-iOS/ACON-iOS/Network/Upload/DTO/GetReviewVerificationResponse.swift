@@ -9,6 +9,6 @@ import Foundation
 
 struct GetReviewVerificationResponse: Codable {
     
-    let success: Bool
+    let available: Bool
     
 }

@@ -8,26 +8,45 @@
 import Foundation
 
 class SpotReviewViewModel: Serviceable {
-    
-    var acornCount: ObservablePattern<Int> = ObservablePattern(nil)
-    
+
+    // MARK: - Properties
+
+    let spotID: Int64
+
+    let spotName: String
+
+    var recommendedMenu: String = ""
+
+    var acornCount: Int = 0
+
     let onSuccessPostReview: ObservablePattern<Bool> = ObservablePattern(nil)
-    
-    func postReview(spotID: Int64, acornCount: Int) {
-        ACService.shared.uploadService.postReview(requestBody: PostReviewRequest(spotId: spotID, acornCount: acornCount)) { [weak self] response in
+
+
+    // MARK: - init
+
+    init(spotID: Int64, spotName: String) {
+        self.spotID = spotID
+        self.spotName = spotName
+    }
+
+
+    // MARK: - Network
+
+    func postReview() {
+        ACService.shared.uploadService.postReview(requestBody: PostReviewRequest(spotId: spotID, recommendedMenu: recommendedMenu, acornCount: acornCount)) { [weak self] response in
             switch response {
             case .success(_):
                 self?.onSuccessPostReview.value = true
             case .reIssueJWT:
                 self?.handleReissue { [weak self] in
-                    self?.postReview(spotID: spotID, acornCount: acornCount)
+                    self?.postReview()
                 }
             default:
                 self?.handleNetworkError { [weak self] in
-                    self?.postReview(spotID: spotID, acornCount: acornCount)
+                    self?.postReview()
                 }
             }
         }
     }
-}
 
+}

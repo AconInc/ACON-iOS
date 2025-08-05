@@ -7,11 +7,13 @@
 
 import Foundation
 
-struct PostReviewRequest: Codable {
-    
+struct PostReviewRequest: Encodable {
+
     let spotId: Int64
-    
+
+    let recommendedMenu: String
+
     let acornCount: Int
-    
+
 }
 

@@ -15,7 +15,7 @@ enum OnboardingTargetType {
     
 }
 
-extension OnboardingTargetType: TargetType {
+extension OnboardingTargetType: ACTargetType {
 
     var method: Moya.Method {
         switch self {
