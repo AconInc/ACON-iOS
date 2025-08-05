@@ -64,10 +64,6 @@ class SpotListViewController: BaseNavViewController {
         viewModel.stopLocationTracking()
         hideLocationCheckToast()
     }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

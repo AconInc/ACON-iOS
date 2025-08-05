@@ -27,10 +27,6 @@ class ACTabBarController: UITabBarController {
         addNotification()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
 }
 
 

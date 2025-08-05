@@ -56,10 +56,6 @@ class SpotSearchViewController: BaseNavViewController{
         spotSearchView.searchTextField.resignFirstResponder()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     
     // MARK: - UI Setting Methods
     

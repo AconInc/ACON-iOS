@@ -50,16 +50,6 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        if let keyboardWillShowObserver = keyboardWillShowObserver {
-            NotificationCenter.default.removeObserver(keyboardWillShowObserver)
-        }
-        
-        if let keyboardWillHideObserver = keyboardWillHideObserver {
-            NotificationCenter.default.removeObserver(keyboardWillHideObserver)
-        }
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         

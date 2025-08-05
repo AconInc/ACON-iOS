@@ -33,10 +33,6 @@ final class WithdrawalViewController: BaseNavViewController {
     
     // MARK: - Life Cycle
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
