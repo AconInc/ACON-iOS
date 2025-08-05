@@ -208,8 +208,7 @@ private extension SpotSearchViewController {
     func addPlaceFooterTapped() {
 //        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.upload, properties: ["click_register_form?": true])
         let addPlaceVC = SpotUploadViewController()
-        addPlaceVC.modalPresentationStyle = .fullScreen
-        self.present(addPlaceVC, animated: true)
+        self.navigationController?.pushViewController(addPlaceVC, animated: true)
     }
     
 }
