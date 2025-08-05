@@ -12,17 +12,7 @@ final class SpotUploadViewController: BaseNavViewController {
     // MARK: - Properties
 
     let viewModel = SpotUploadViewModel()
-    
-    // NOTE: inquiry pages
-    lazy var searchVC = SpotUploadSearchViewController(viewModel)
-    lazy var spotTypeVC = SpotTypeSelectionViewController(viewModel)
-    lazy var restaurantFeatureVC = RestaurantFeatureSelectionViewController(viewModel)
-    lazy var cafeFeatureVC = CafeFeatureSelectionViewController(viewModel)
-    lazy var menuVC = MenuRecommendationViewController(viewModel)
-    lazy var valueRatingVC = ValueRatingViewController(viewModel)
-    lazy var photoVC = SpotUploadPhotoViewController(viewModel)
 
-    // TODO: SpotTypeVC에서 분기처리
     lazy var pages: [UIViewController] = [searchVC, spotTypeVC, restaurantFeatureVC, menuVC, valueRatingVC, photoVC]
 
     private var currentIndex: Int = 0
@@ -35,6 +25,15 @@ final class SpotUploadViewController: BaseNavViewController {
     // NOTE: 글래스모피즘 깜빡임 이슈로 일반 버튼으로 구현
     let previousButton = UIButton()
     let nextButton = UIButton()
+
+    // NOTE: inquiry pages
+    lazy var searchVC = SpotUploadSearchViewController(viewModel)
+    lazy var spotTypeVC = SpotTypeSelectionViewController(viewModel)
+    lazy var restaurantFeatureVC = RestaurantFeatureSelectionViewController(viewModel)
+    lazy var cafeFeatureVC = CafeFeatureSelectionViewController(viewModel)
+    lazy var menuVC = MenuRecommendationViewController(viewModel)
+    lazy var valueRatingVC = ValueRatingViewController(viewModel)
+    lazy var photoVC = SpotUploadPhotoViewController(viewModel)
 
 
     // MARK: - LifeCycle
@@ -173,14 +172,16 @@ private extension SpotUploadViewController {
     }
 
     @objc func goToNextPage() {
-        if currentIndex == 1 {
+        let lastIndex = pages.count - 1
+
+        if currentIndex == 1 { // NOTE: spot type 선택
             setSpotFeaturePage()
         }
 
-        if currentIndex < pages.count - 1 {
+        if currentIndex < lastIndex {
             currentIndex += 1
             pageVC.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
-        } else if currentIndex == pages.count - 1 {
+        } else if currentIndex == lastIndex {
             let successVC = SpotUploadSuccessViewController()
             self.navigationController?.pushViewController(successVC, animated: true)
         }
