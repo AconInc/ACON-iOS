@@ -732,6 +732,7 @@ private extension SpotListViewController {
     
     @objc
     func appWillEnterForeground() {
+        guard isViewLoaded && view.window != nil else { return }
         viewModel.startLocationTracking()
     }
     
