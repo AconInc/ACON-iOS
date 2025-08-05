@@ -21,7 +21,7 @@ class ValueRatingViewController: BaseUploadInquiryViewController {
     // MARK: - Properties
 
     override var canGoPrevious: Bool { true }
-    override var canGoNext: Bool { viewModel.valueRating != nil }
+    override var canGoNext: Bool { viewModel.priceValue != nil }
 
 
     // MARK: - init
@@ -67,21 +67,21 @@ private extension ValueRatingViewController {
 
     @objc
     func tappedbestValueButton() {
-        viewModel.valueRating = .best
+        viewModel.priceValue = .best
         updateOptionButtonStates()
         updatePagingButtonStates()
     }
 
     @objc
     func tappedAverageValueButton() {
-        viewModel.valueRating = .average
+        viewModel.priceValue = .average
         updateOptionButtonStates()
         updatePagingButtonStates()
     }
 
     @objc
     func tappedLowValueButton() {
-        viewModel.valueRating = .low
+        viewModel.priceValue = .low
         updateOptionButtonStates()
         updatePagingButtonStates()
     }
@@ -93,9 +93,9 @@ private extension ValueRatingViewController {
 private extension ValueRatingViewController {
 
     func updateOptionButtonStates() {
-        bestValueButton.isSelected = viewModel.valueRating == .best
-        averageValueButton.isSelected = viewModel.valueRating == .average
-        lowValueButton.isSelected = viewModel.valueRating == .low
+        bestValueButton.isSelected = viewModel.priceValue == .best
+        averageValueButton.isSelected = viewModel.priceValue == .average
+        lowValueButton.isSelected = viewModel.priceValue == .low
     }
 
 }

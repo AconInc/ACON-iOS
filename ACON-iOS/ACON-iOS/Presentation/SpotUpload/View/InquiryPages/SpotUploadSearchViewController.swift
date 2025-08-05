@@ -23,12 +23,10 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
     override var canGoPrevious: Bool { false }
 
     override var canGoNext: Bool {
-        guard let spotName = viewModel.spotName else { return false }
+        guard let spotName = viewModel.selectedSpot?.spotName else { return false }
         return !spotName.isEmpty
     }
 
-    private var selectedSpotName: String = ""
-    
     private var spotUploadSearchViewModel = SpotUploadSearchViewModel()
     
     private let acDebouncer = ACDebouncer(delay: 0.3)
@@ -167,10 +165,7 @@ private extension SpotUploadSearchViewController {
             }
 
             guard let text else { return }
-            
-            self?.viewModel.spotName = text
-            self?.updatePagingButtonStates()
-            
+
             self?.spotSearchView.searchEmptyView.isHidden = text.isEmpty
             self?.spotSearchView.searchKeywordCollectionView.isHidden = text.isEmpty
             
@@ -214,9 +209,11 @@ extension SpotUploadSearchViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedSpotName = spotUploadSearchViewModel.naverSearchResult.value?[indexPath.item].spotName ?? ""
-        spotSearchView.searchTextField.text = selectedSpotName
+        let selectedSpot = spotUploadSearchViewModel.naverSearchResult.value?[indexPath.item]
+        viewModel.selectedSpot = selectedSpot
+        spotSearchView.searchTextField.text = selectedSpot?.spotName
         self.dismissKeyboard()
+        self.updatePagingButtonStates()
     }
     
 }
