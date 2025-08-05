@@ -97,13 +97,6 @@ final class SpotUploadViewController: BaseNavViewController {
 
         pageVC.setViewControllers([pages[0]], direction: .forward, animated: false, completion: nil)
 
-        // NOTE: 내부 스와이프 막기
-        for subview in pageVC.view.subviews {
-            if let scrollView = subview as? UIScrollView {
-                scrollView.isScrollEnabled = false
-            }
-        }
-
         let glassDefaultColor = UIColor(red: 0.255, green: 0.255, blue: 0.255, alpha: 1)
         previousButton.do {
             $0.setAttributedTitle(text:  StringLiterals.SpotUpload.goPrevious, style: .b1SB)
