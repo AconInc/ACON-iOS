@@ -113,8 +113,6 @@ private extension LocalMapViewController {
             
             let flowType = viewModel.flowType
             
-            UserDefaults.standard.set(onSuccess,
-                                      forKey: StringLiterals.UserDefaults.hasVerifiedArea)
             if onSuccess {
                 switch flowType {
                 case .onboarding:
