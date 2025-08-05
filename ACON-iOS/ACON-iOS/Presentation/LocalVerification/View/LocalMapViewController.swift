@@ -116,7 +116,7 @@ private extension LocalMapViewController {
             if onSuccess {
                 switch flowType {
                 case .onboarding:
-                    self.navigateToOnboarding()
+                    AuthManager.shared.hasPreference ? NavigationUtils.navigateToTabBar() : NavigationUtils.naviateToLoginOnboarding()
                 case .setting:
                     NavigationUtils.popToParentVC(from: self, targetVCType: VerifiedAreasEditViewController.self)
                 }
@@ -173,18 +173,6 @@ private extension LocalMapViewController {
     
 }
 
-
-// MARK: - navigation functions
-
-private extension LocalMapViewController {
-
-    func navigateToOnboarding() {
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = OnboardingViewController(flowType: .login)
-        }
-    }
-    
-}
 
 // MARK: - Map Functions
 
