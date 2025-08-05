@@ -17,7 +17,7 @@ enum ImageTargetType {
 
 }
 
-extension ImageTargetType: TargetType {
+extension ImageTargetType: ACTargetType {
 
     var baseURL: URL {
         switch self {

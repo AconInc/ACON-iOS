@@ -50,6 +50,8 @@
 		1547A88B2D3596B600E96616 /* SpotFilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A88A2D3596B600E96616 /* SpotFilterType.swift */; };
 		1547A88E2D35B13700E96616 /* FilterTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547A88D2D35B13700E96616 /* FilterTagButton.swift */; };
 		1549976D2DEC51C80040242F /* SpotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549976C2DEC51C80040242F /* SpotType.swift */; };
+		155422A22E41D01600547471 /* ApiVersionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155422A12E41D01600547471 /* ApiVersionType.swift */; };
+		155422A42E41E00300547471 /* ACTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155422A32E41E00300547471 /* ACTargetType.swift */; };
 		1558BA1A2D318FFC00ECDEF8 /* ACTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */; };
 		1558BADB2D31AAF900ECDEF8 /* ACTabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */; };
 		1558BADE2D31AB6C00ECDEF8 /* SpotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */; };
@@ -153,7 +155,6 @@
 		741E68952D3D38BC00DF99EF /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E68942D3D38B700DF99EF /* BaseService.swift */; };
 		741E68982D3D3D8E00DF99EF /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E68972D3D3D8800DF99EF /* ErrorResponse.swift */; };
 		741E689A2D3D43FF00DF99EF /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E68992D3D43FA00DF99EF /* EmptyResponse.swift */; };
-		741E68A02D3D5BD400DF99EF /* TargetType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E689F2D3D5BCE00DF99EF /* TargetType+.swift */; };
 		741E68A22D3D5FA200DF99EF /* ACService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E68A12D3D5F9700DF99EF /* ACService.swift */; };
 		741E68AC2D3D6DA800DF99EF /* HeaderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741E68AB2D3D6DA400DF99EF /* HeaderType.swift */; };
 		74205D2F2D40351700D11557 /* SocialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74205D2E2D40351400D11557 /* SocialType.swift */; };
@@ -367,6 +368,8 @@
 		1547A88A2D3596B600E96616 /* SpotFilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotFilterType.swift; sourceTree = "<group>"; };
 		1547A88D2D35B13700E96616 /* FilterTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTagButton.swift; sourceTree = "<group>"; };
 		1549976C2DEC51C80040242F /* SpotType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotType.swift; sourceTree = "<group>"; };
+		155422A12E41D01600547471 /* ApiVersionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiVersionType.swift; sourceTree = "<group>"; };
+		155422A32E41E00300547471 /* ACTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTargetType.swift; sourceTree = "<group>"; };
 		1558BA192D318FFC00ECDEF8 /* ACTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarController.swift; sourceTree = "<group>"; };
 		1558BADA2D31AAF900ECDEF8 /* ACTabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarItemType.swift; sourceTree = "<group>"; };
 		1558BADD2D31AB6C00ECDEF8 /* SpotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListViewController.swift; sourceTree = "<group>"; };
@@ -468,7 +471,6 @@
 		741E68942D3D38B700DF99EF /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		741E68972D3D3D8800DF99EF /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		741E68992D3D43FA00DF99EF /* EmptyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyResponse.swift; sourceTree = "<group>"; };
-		741E689F2D3D5BCE00DF99EF /* TargetType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TargetType+.swift"; sourceTree = "<group>"; };
 		741E68A12D3D5F9700DF99EF /* ACService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACService.swift; sourceTree = "<group>"; };
 		741E68AB2D3D6DA400DF99EF /* HeaderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderType.swift; sourceTree = "<group>"; };
 		74205D2E2D40351400D11557 /* SocialType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialType.swift; sourceTree = "<group>"; };
@@ -1148,7 +1150,8 @@
 			isa = PBXGroup;
 			children = (
 				741E68A12D3D5F9700DF99EF /* ACService.swift */,
-				741E689F2D3D5BCE00DF99EF /* TargetType+.swift */,
+				155422A32E41E00300547471 /* ACTargetType.swift */,
+				155422A12E41D01600547471 /* ApiVersionType.swift */,
 				741E68992D3D43FA00DF99EF /* EmptyResponse.swift */,
 				741E68972D3D3D8800DF99EF /* ErrorResponse.swift */,
 				741E68942D3D38B700DF99EF /* BaseService.swift */,
@@ -1454,15 +1457,15 @@
 		748D6F712D2BCA7E007690B4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				7474CFAC2E3CADF7007ACD76 /* NaverSearch */,
+				743069872D3D2EDA0033178C /* Base */,
 				740EE8252E05983F007A5DCF /* App */,
 				745B19A92D4001AD00BDBDA4 /* Auth */,
+				7474CFAC2E3CADF7007ACD76 /* NaverSearch */,
 				15CD25752D3FE2D800320006 /* SpotList */,
 				7462617C2D3F9E9400A4E84F /* SpotDetail */,
 				746F15B42D3E2041003EA031 /* LocalVerification */,
 				746261602D3E9F6000A4E84F /* Upload */,
 				D6AF15612D3E8A3700289683 /* Onboarding */,
-				743069872D3D2EDA0033178C /* Base */,
 				151003E72D5FBEE900409DF4 /* Profile */,
 				74D297EF2D63432900DDEE31 /* Image */,
 				4C6B2F322D65A15D0089BCB6 /* Withdrawal */,
@@ -2102,7 +2105,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				748D6F952D2BD4DB007690B4 /* UICollectionViewCell+.swift in Sources */,
-				741E68A02D3D5BD400DF99EF /* TargetType+.swift in Sources */,
 				741E68912D3D385A00DF99EF /* ACPlugin.swift in Sources */,
 				745B19AE2D4002A100BDBDA4 /* PostLoginResponse.swift in Sources */,
 				15C0ED522D429F7400C9ED83 /* SkeletonView.swift in Sources */,
@@ -2200,6 +2202,7 @@
 				745ECB9F2D615B73005129B0 /* AlbumTableViewController.swift in Sources */,
 				1547A8852D3595B600E96616 /* SpotListFilterModel.swift in Sources */,
 				748D6F8B2D2BD31B007690B4 /* UIStackView+.swift in Sources */,
+				155422A42E41E00300547471 /* ACTargetType.swift in Sources */,
 				748D6F912D2BD450007690B4 /* UILabel+.swift in Sources */,
 				746261772D3EA88700A4E84F /* GetAcornCountResponse.swift in Sources */,
 				745ECB9D2D614183005129B0 /* PhotoSelectionViewController.swift in Sources */,
@@ -2317,6 +2320,7 @@
 				15D6901E2DD723FA0009278D /* SpotDetailMoreViewController.swift in Sources */,
 				746F5BEC2DE009450081569B /* ACToastView.swift in Sources */,
 				15A167E42E3D964400062C49 /* SpotUploadSuccessViewController.swift in Sources */,
+				155422A22E41D01600547471 /* ApiVersionType.swift in Sources */,
 				74A13D672DCBC2BD007FFFC3 /* DislikeFoodCollectionViewCell.swift in Sources */,
 				D652597C2D62775C00B8176E /* CustomTextFieldView.swift in Sources */,
 				741429602D5D391000B69528 /* SettingType.swift in Sources */,

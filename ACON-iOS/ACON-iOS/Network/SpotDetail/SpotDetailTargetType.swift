@@ -20,7 +20,7 @@ enum SpotDetailTargetType {
     
 }
 
-extension SpotDetailTargetType: TargetType {
+extension SpotDetailTargetType: ACTargetType {
 
     var method: Moya.Method {
         switch self {

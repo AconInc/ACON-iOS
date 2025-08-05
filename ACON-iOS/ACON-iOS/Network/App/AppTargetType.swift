@@ -15,7 +15,7 @@ enum AppTargetType {
     
 }
 
-extension AppTargetType: TargetType {
+extension AppTargetType: ACTargetType {
 
     var method: Moya.Method {
         switch self {
