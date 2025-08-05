@@ -32,7 +32,7 @@ extension UploadTargetType: ACTargetType {
 
     var apiVersion: ApiVersionType {
         switch self {
-        case .postReview:
+        case .getSearchSuggestion, .getReviewVerification, .postReview:
             return .v2
         default:
             return .v1

@@ -88,6 +88,8 @@ class SpotSearchViewController: BaseNavViewController{
         self.rightButton.addTarget(self,
                                    action: #selector(nextButtonTapped),
                                     for: .touchUpInside)
+        
+        spotSearchView.searchEmptyView.makeAddSpotButton(target: self, action: #selector(addPlaceFooterTapped))
     }
 
 }
@@ -196,8 +198,10 @@ private extension SpotSearchViewController {
     @objc
     func nextButtonTapped() {
         AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.upload, properties: ["click_review_next?": true])
-        let vc = DropAcornViewController(spotID: selectedSpotID, spotName: selectedSpotName)
-        self.navigationController?.pushViewController(vc, animated: false)
+
+        let vm = SpotReviewViewModel(spotID: selectedSpotID, spotName: selectedSpotName)
+        let vc = ReviewMenuRecommendationViewController(vm)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc
@@ -255,12 +259,10 @@ extension SpotSearchViewController: UICollectionViewDelegateFlowLayout {
             selectedSpotName = spotSearchViewModel.searchSuggestionData.value?[indexPath.item].spotName ?? ""
             spotSearchView.searchTextField.text = selectedSpotName
             updateSearchKeyword(selectedSpotName)
-        } else {
+        } else if collectionView == spotSearchView.searchKeywordCollectionView {
             selectedSpotID = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotID ?? 1
             selectedSpotName = spotSearchViewModel.searchKeywordData.value?[indexPath.item].spotName ?? ""
             spotSearchView.searchTextField.text = selectedSpotName
-        }
-        if collectionView == spotSearchView.searchKeywordCollectionView {
             self.dismissKeyboard()
         }
         spotSearchViewModel.getReviewVerification(spotId: selectedSpotID)
@@ -317,6 +319,7 @@ extension SpotSearchViewController: UICollectionViewDataSource {
 private extension SpotSearchViewController {
     
     func updateSearchKeyword(_ text: String) {
+        guard !text.isEmpty else { return }
         spotSearchViewModel.getSearchKeyword(keyword: text)
         // TODO: - 빈 리스트?
     }
