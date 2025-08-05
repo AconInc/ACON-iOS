@@ -107,6 +107,7 @@ final class SpotUploadViewController: BaseNavViewController {
         let glassDefaultColor = UIColor(red: 0.255, green: 0.255, blue: 0.255, alpha: 1)
         previousButton.do {
             $0.setAttributedTitle(text:  StringLiterals.SpotUpload.goPrevious, style: .b1SB)
+            $0.setAttributedTitle(text:  StringLiterals.SpotUpload.goPrevious, style: .b1SB, color: .gray500, for: .disabled)
             $0.layer.borderColor = glassDefaultColor.cgColor
             $0.layer.borderWidth = 1
             $0.layer.cornerRadius = 22
@@ -114,6 +115,7 @@ final class SpotUploadViewController: BaseNavViewController {
 
         nextButton.do {
             $0.setAttributedTitle(text: StringLiterals.SpotUpload.next, style: .b1SB)
+            $0.setAttributedTitle(text:  StringLiterals.SpotUpload.next, style: .b1SB, color: .gray500, for: .disabled)
             $0.backgroundColor = glassDefaultColor
             $0.layer.cornerRadius = 22
         }
