@@ -94,12 +94,7 @@ class OnboardingViewController: BaseViewController {
         
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(appWillEnterForeground),
-            name: UIApplication.willEnterForegroundNotification,
-            object: nil
-        )
+        addForegroundObserver(action: #selector(appWillEnterForeground))
     }
     
     private func bindSelectedFood() {

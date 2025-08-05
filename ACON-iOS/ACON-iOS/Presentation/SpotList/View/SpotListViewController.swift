@@ -724,12 +724,7 @@ extension SpotListViewController: UIAdaptivePresentationControllerDelegate {
 private extension SpotListViewController {
     
     func addNotification() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(appWillEnterForeground),
-            name: UIApplication.willEnterForegroundNotification,
-            object: nil
-        )
+        addForegroundObserver(action: #selector(appWillEnterForeground))
         
         NotificationCenter.default.addObserver(
             self,

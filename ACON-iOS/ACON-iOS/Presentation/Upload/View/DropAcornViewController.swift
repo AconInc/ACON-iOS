@@ -97,12 +97,7 @@ private extension DropAcornViewController {
             btn?.addTarget(self, action: #selector(reviewAcornButtonTapped(_:)), for: .touchUpInside)
         }
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(appWillEnterForeground),
-            name: UIApplication.willEnterForegroundNotification,
-            object: nil
-        )
+        addForegroundObserver(action: #selector(appWillEnterForeground))
     }
     
 }
