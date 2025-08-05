@@ -137,6 +137,8 @@ final class SpotUploadViewController: BaseNavViewController {
     private func setXButtonAction() {
         let currentVC = pages[currentIndex]
         
+        leftButton.removeTarget(nil, action: nil, for: .touchUpInside)
+        
         if currentVC is SpotUploadSearchViewController {
             setXButton(#selector(showQuitAlert))
         } else {
