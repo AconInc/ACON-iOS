@@ -15,7 +15,7 @@ enum WithdrawalTargetType {
     
 }
 
-extension WithdrawalTargetType: TargetType {
+extension WithdrawalTargetType: ACTargetType {
     
     var path: String {
         switch self {

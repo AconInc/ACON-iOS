@@ -21,7 +21,7 @@ enum LocalVerificationTargetType {
     
 }
 
-extension LocalVerificationTargetType: TargetType {
+extension LocalVerificationTargetType: ACTargetType {
 
     var method: Moya.Method {
         switch self {

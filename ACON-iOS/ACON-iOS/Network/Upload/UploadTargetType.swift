@@ -19,7 +19,7 @@ enum UploadTargetType {
     
 }
 
-extension UploadTargetType: TargetType {
+extension UploadTargetType: ACTargetType {
 
     var method: Moya.Method {
         switch self {
@@ -29,7 +29,16 @@ extension UploadTargetType: TargetType {
             return .get
         }
     }
-    
+
+    var apiVersion: ApiVersionType {
+        switch self {
+        case .postReview:
+            return .v2
+        default:
+            return .v1
+        }
+    }
+
     var path: String {
         switch self {
         case .getSearchSuggestion:
