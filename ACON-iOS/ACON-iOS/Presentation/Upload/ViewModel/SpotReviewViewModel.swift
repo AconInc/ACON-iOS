@@ -8,13 +8,15 @@
 import Foundation
 
 class SpotReviewViewModel: Serviceable {
-    
+
     var acornCount: ObservablePattern<Int> = ObservablePattern(nil)
-    
+
     let onSuccessPostReview: ObservablePattern<Bool> = ObservablePattern(nil)
-    
+
+    var recommendedMenu: String = ""
+
     func postReview(spotID: Int64, acornCount: Int) {
-        ACService.shared.uploadService.postReview(requestBody: PostReviewRequest(spotId: spotID, acornCount: acornCount)) { [weak self] response in
+        ACService.shared.uploadService.postReview(requestBody: PostReviewRequest(spotId: spotID, recommendedMenu: recommendedMenu, acornCount: acornCount)) { [weak self] response in
             switch response {
             case .success(_):
                 self?.onSuccessPostReview.value = true
@@ -29,5 +31,6 @@ class SpotReviewViewModel: Serviceable {
             }
         }
     }
+
 }
 
