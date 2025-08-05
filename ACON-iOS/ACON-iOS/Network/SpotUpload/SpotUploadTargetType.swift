@@ -15,7 +15,7 @@ enum SpotUploadTargetType {
 
 }
 
-extension SpotUploadTargetType: TargetType {
+extension SpotUploadTargetType: ACTargetType {
 
     var method: Moya.Method {
         switch self {
