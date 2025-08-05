@@ -156,6 +156,8 @@ private extension SpotUploadViewController {
             if onSuccess {
                 let successVC = SpotUploadSuccessViewController()
                 self.navigationController?.pushViewController(successVC, animated: true)
+            } else { // NOTE: handleNetworkError로 처리될테지만 만약을 위해 추가
+                presentACAlert(.changeNotSaved, longAction: NavigationUtils.navigateToTabBar)
             }
 
             viewModel.onSuccessPostSpot.value = nil
