@@ -15,7 +15,7 @@ enum SpotListTargetType {
 
 }
 
-extension SpotListTargetType: TargetType {
+extension SpotListTargetType: ACTargetType {
 
     var method: Moya.Method {
         switch self {

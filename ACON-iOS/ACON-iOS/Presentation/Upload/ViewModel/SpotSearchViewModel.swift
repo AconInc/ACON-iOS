@@ -113,7 +113,7 @@ class SpotSearchViewModel: Serviceable {
         ACService.shared.uploadService.getReviewVerification(parameter: parameter) { [weak self] response in
             switch response {
             case .success(let data):
-                self?.reviewVerification.value = data.success
+                self?.reviewVerification.value = data.available
                 self?.onSuccessGetReviewVerification.value = true
             case .requestErr(let error):
                 if error.code == 40403 {

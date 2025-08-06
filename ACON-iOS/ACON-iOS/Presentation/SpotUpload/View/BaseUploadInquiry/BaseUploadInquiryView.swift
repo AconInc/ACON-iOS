@@ -77,12 +77,12 @@ final class BaseUploadInquiryView: BaseView {
         
         requirementLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(40)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
+            $0.horizontalEdges.equalToSuperview().inset(18 * ScreenUtils.widthRatio)
         }
 
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(requirementLabel.snp.bottom).offset(4)
-            $0.horizontalEdges.equalToSuperview().inset(ScreenUtils.horizontalInset)
+            $0.horizontalEdges.equalToSuperview().inset(18 * ScreenUtils.widthRatio)
         }
 
         if caption == nil {

@@ -57,3 +57,29 @@ class SearchEmptyView: BaseView {
     }
     
 }
+
+
+// MARK: - Internal Methods
+
+extension SearchEmptyView {
+
+    func makeAddSpotButton(target: Any, action: Selector) {
+        let addSpotButton = UIButton()
+
+        self.addSubview(addSpotButton)
+
+        addSpotButton.snp.makeConstraints {
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(20 * ScreenUtils.heightRatio)
+            $0.centerX.equalToSuperview()
+        }
+
+        addSpotButton.do {
+            $0.setAttributedTitle(text: StringLiterals.Upload.addPlaceButton,
+                                  style: .b1SB,
+                                  color: .labelAction)
+        }
+
+        addSpotButton.addTarget(target, action: action, for: .touchUpInside)
+    }
+ 
+}

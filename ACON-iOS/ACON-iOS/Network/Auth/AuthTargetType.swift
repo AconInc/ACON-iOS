@@ -19,7 +19,7 @@ enum AuthTargetType {
     
 }
 
-extension AuthTargetType: TargetType {
+extension AuthTargetType: ACTargetType {
 
     var method: Moya.Method {
         switch self {
