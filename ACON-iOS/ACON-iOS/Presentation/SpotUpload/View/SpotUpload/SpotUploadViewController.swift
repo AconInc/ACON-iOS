@@ -91,7 +91,7 @@ final class SpotUploadViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
 
-        setXButtonAction()
+        setXButton(#selector(showQuitAlert))
         
         self.setCenterTitleLabelStyle(title: StringLiterals.SpotUpload.spotUpload)
 
@@ -128,18 +128,6 @@ final class SpotUploadViewController: BaseNavViewController {
                              for: .touchUpInside)
     }
 
-    private func setXButtonAction() {
-        let currentVC = pages[currentIndex]
-        
-        leftButton.removeTarget(nil, action: nil, for: .touchUpInside)
-        
-        if currentVC is SpotUploadSearchViewController {
-            setXButton(#selector(showQuitAlert))
-        } else {
-            setXButton(#selector(navigateToTabBar))
-        }
-    }
-    
 }
 
 
@@ -190,10 +178,6 @@ private extension SpotUploadViewController {
     @objc func goToPreviousPage() {
         guard currentIndex > 0 else { return }
         currentIndex -= 1
-
-        // TODO: setXButtonAction()이 추가되면 nextButton UI 업데이트가 안 됨. 뷰 렌더링과 관련된 로직을 건들이는 것 같은데, 일단 layoutIfNeeded() 호출하여 해결. 추후 정확한 원인 파악 후 해결 필요.
-        self.setXButtonAction()
-        nextButton.layoutIfNeeded()
         pageVC.setViewControllers([pages[currentIndex]], direction: .reverse, animated: true, completion: nil)
     }
 
@@ -205,8 +189,6 @@ private extension SpotUploadViewController {
         }
         if currentIndex < lastIndex { // NOTE: 다음페이지
             currentIndex += 1
-            self.setXButtonAction()
-            nextButton.layoutIfNeeded()
             pageVC.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
         } else if currentIndex == lastIndex { // NOTE: 마지막페이지 -> post
             viewModel.uploadSpot()
