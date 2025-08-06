@@ -19,6 +19,8 @@ enum StringLiterals {
         
         static let hasPreference = "hasPreference"
         
+        static let lastLocalVerificationAlertTime = "lastLocalVerificationAlertTime"
+        
     }
     
     enum Error {

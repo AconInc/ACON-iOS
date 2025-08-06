@@ -38,11 +38,13 @@ class LocalVerificationViewController: BaseNavViewController {
         
         addTarget()
         bindViewModel()
-        self.setSkipButton() {
-            let now = Date()
-            UserDefaults.standard.set(now, forKey: "lastLocalVerificationAlertTime")
-            
-            NavigationUtils.naviateToLoginOnboarding()
+        if self.localVerificationViewModel.flowType == .onboarding {
+            self.setSkipButton() {
+                let now = Date()
+                UserDefaults.standard.set(now, forKey: StringLiterals.UserDefaults.lastLocalVerificationAlertTime)
+
+                NavigationUtils.naviateToLoginOnboarding()
+            }
         }
     }
     
