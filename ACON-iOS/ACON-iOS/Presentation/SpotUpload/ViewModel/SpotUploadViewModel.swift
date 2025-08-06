@@ -27,9 +27,9 @@ final class SpotUploadViewModel: Serviceable {
     let photosToAppend: ObservablePattern<[UIImage]> = ObservablePattern(nil)
 
     var isWorkFriendly: Bool? = nil
-    
-    var photoPresignedURLInfos: [PresignedURLModel] = []
-    var photoPresignedURLResults: [Int: Bool] = [:] // NOTE: [photo index : result]
+
+    private var photoPresignedURLInfos: [PresignedURLModel] = []
+    private var photoPresignedURLResults: [Int: Bool] = [:] // NOTE: [photo index : result]
 
 
     // MARK: - Network
@@ -105,9 +105,14 @@ final class SpotUploadViewModel: Serviceable {
                 }
             }
         }
-        
+
         dispatchGroup.notify(queue: .main) { [weak self] in
-            self?.putPhotosToPresignedURL()
+            let allSuccess = self?.photoPresignedURLResults.allSatisfy { $0.value } ?? false
+            if allSuccess {
+                self?.putPhotosToPresignedURL()
+            } else {
+                self?.onSuccessPostSpot.value = false
+            }
         }
     }
 
@@ -138,7 +143,7 @@ final class SpotUploadViewModel: Serviceable {
                 presignedURL: photoPresignedURLInfos[index].presignedURL,
                 imageData: imageData
             )
-            
+
             ACService.shared.imageService.putImageToPresignedURL(requestBody: request) { [weak self] response in
                 defer { dispatchGroup.leave() }
                 guard let self = self else { return }
