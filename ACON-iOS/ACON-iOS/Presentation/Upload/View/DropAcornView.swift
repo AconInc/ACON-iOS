@@ -138,6 +138,12 @@ final class DropAcornView: BaseView {
         }
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        leaveReviewButton.refreshButtonBlurEffect(.buttonGlassDefault)
+    }
+    
 }
 
 extension DropAcornView {

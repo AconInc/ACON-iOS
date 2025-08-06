@@ -90,6 +90,7 @@ class SpotSearchViewController: BaseNavViewController{
                                     for: .touchUpInside)
         
         spotSearchView.searchEmptyView.makeAddSpotButton(target: self, action: #selector(addPlaceFooterTapped))
+        addForegroundObserver(action: #selector(appWillEnterForeground))
     }
 
 }
@@ -209,6 +210,11 @@ private extension SpotSearchViewController {
 //        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.upload, properties: ["click_register_form?": true])
         let addPlaceVC = SpotUploadViewController()
         self.navigationController?.pushViewController(addPlaceVC, animated: true)
+    }
+    
+    @objc
+    func appWillEnterForeground() {
+        spotSearchView.setNeedsLayout()
     }
     
 }

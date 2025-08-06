@@ -64,10 +64,6 @@ class SpotListViewController: BaseNavViewController {
         viewModel.stopLocationTracking()
         hideLocationCheckToast()
     }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -724,12 +720,7 @@ extension SpotListViewController: UIAdaptivePresentationControllerDelegate {
 private extension SpotListViewController {
     
     func addNotification() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(appWillEnterForeground),
-            name: UIApplication.willEnterForegroundNotification,
-            object: nil
-        )
+        addForegroundObserver(action: #selector(appWillEnterForeground))
         
         NotificationCenter.default.addObserver(
             self,
@@ -741,6 +732,7 @@ private extension SpotListViewController {
     
     @objc
     func appWillEnterForeground() {
+        guard isViewLoaded && view.window != nil else { return }
         viewModel.startLocationTracking()
     }
     

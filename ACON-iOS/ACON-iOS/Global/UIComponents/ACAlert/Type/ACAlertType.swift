@@ -18,6 +18,7 @@ enum ACAlertType: CaseIterable {
     case reviewLocationFail // NOTE: 리뷰 위치 인증 실패
     
     case naverAPILimitExceeded // NOTE: 일일 네이버 API 호출 가능 횟수 (25000회) 초과
+    case quitSpotUpload // NOTE: 장소 등록 취소
     
     case libraryAccessDenied // NOTE: 사진 권한 X
     case changeNotSaved // NOTE: 프로필 변경사항 저장 X
@@ -45,6 +46,8 @@ enum ACAlertType: CaseIterable {
         
         case .naverAPILimitExceeded:
             return "장소 등록 마감"
+        case .quitSpotUpload:
+            return "등록을 취소하시겠습니까?"
             
         case .libraryAccessDenied:
             return "'Acon'에 대한 라이브러리\n읽기/쓰기 기능이 없습니다."
@@ -104,7 +107,7 @@ enum ACAlertType: CaseIterable {
     
     var leftButtonTitle: String? {
         switch self {
-        case .plainUpdate, .libraryAccessDenied, .changeVerifiedArea, .logout, .deletePhoto:
+        case .plainUpdate, .libraryAccessDenied, .changeVerifiedArea, .logout, .deletePhoto, .quitSpotUpload:
             return "취소"
         case .naverAPILimitExceeded:
             return "끝내기"
@@ -125,7 +128,7 @@ enum ACAlertType: CaseIterable {
             return "설정으로 가기"
         case .naverAPILimitExceeded:
             return "제보하기"
-        case .changeNotSaved:
+        case .changeNotSaved, .quitSpotUpload:
             return "나가기"
         case .changeVerifiedArea:
             return "변경하기"

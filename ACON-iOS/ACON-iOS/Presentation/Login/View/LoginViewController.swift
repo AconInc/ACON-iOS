@@ -119,20 +119,15 @@ extension LoginViewController {
         self.loginViewModel.onSuccessLogin.bind { [weak self] onSuccess in
             guard let onSuccess else { return }
             guard let self = self else { return }
-            let hasVerifiedArea = loginViewModel.hasVerifiedArea
+            let hasVerifiedArea = AuthManager.shared.hasVerifiedArea
+            let hasPreference = AuthManager.shared.hasPreference
             if onSuccess {
                 AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.login, properties: ["did_login?": true])
-                hasVerifiedArea ? NavigationUtils.navigateToTabBar() : navigateToLocalVerificationVC()
+                hasVerifiedArea ? hasPreference ? NavigationUtils.navigateToTabBar() : NavigationUtils.naviateToLoginOnboarding() : NavigationUtils.navigateToOnboardingLocalVerification()
             } else {
                 showLoginFailAlert()
             }
         }
-    }
-    
-    func navigateToLocalVerificationVC() {
-        let vm = LocalVerificationViewModel(flowType: .onboarding)
-        let vc = LocalVerificationViewController(viewModel: vm)
-        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     func showLoginFailAlert() {
