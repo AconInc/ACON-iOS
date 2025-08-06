@@ -70,6 +70,8 @@ class ReviewMenuRecommendationViewController: BaseNavViewController {
     override func setStyle() {
         super.setStyle()
 
+        self.setPopGesture()
+
         // NOTE: 네비게이션 바
         self.setCenterTitleLabelStyle(title: StringLiterals.Upload.upload)
         self.setBackButton()
