@@ -173,3 +173,40 @@ extension UIView {
     }
 
 }
+
+// MARK: - Animation
+
+extension UIView {
+    /// 아래에서 위로 올라오며 페이드 인하는 애니메이션
+    /// - Parameters:
+    ///   - duration: 애니메이션 전체 시간
+    ///   - delay: 지연 시간 (뷰마다 순차적으로 나타나게 하고 싶을 때 활용)
+    ///   - damping: 스프링 애니메이션 감쇠 비율 (0: 스프링 <-> 1: 스르륵)
+    ///   - initialSpringVelocity: 초기 속도
+    ///   - yOffset: 시작 위치의 y축 오프셋 (양수로 설정하면 아래서 시작)
+    func animateSlideUp(
+        duration: TimeInterval = 0.8,
+        delay: TimeInterval = 0,
+        damping: CGFloat = 1.0,
+        initialSpringVelocity: CGFloat = 0.0,
+        yOffset: CGFloat = 30
+    ) {
+        self.transform = CGAffineTransform(translationX: 0, y: yOffset)
+        self.alpha = 0
+
+        UIView.animate(
+            withDuration: duration,
+            delay: delay,
+            usingSpringWithDamping: damping,
+            initialSpringVelocity: initialSpringVelocity,
+            options: [.curveEaseOut],
+            animations: {
+                self.isHidden = false
+                self.transform = .identity
+                self.alpha = 1
+            },
+            completion: nil
+        )
+    }
+}
+
