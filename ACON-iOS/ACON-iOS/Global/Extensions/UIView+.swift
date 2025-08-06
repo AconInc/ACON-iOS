@@ -177,6 +177,7 @@ extension UIView {
 // MARK: - Animation
 
 extension UIView {
+
     /// 아래에서 위로 올라오며 페이드 인하는 애니메이션
     /// - Parameters:
     ///   - duration: 애니메이션 전체 시간
@@ -208,5 +209,6 @@ extension UIView {
             completion: nil
         )
     }
+
 }
 
