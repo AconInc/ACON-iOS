@@ -117,13 +117,6 @@ final class SpotUploadViewModel: Serviceable {
     }
 
     private func putPhotosToPresignedURL() {
-        // NOTE: `getPresignedURL`에서 handleNetworkError로 처리되기 때문에 count가 다를 가능성 적음
-        // 다만, 예외적인 상황을 위해 방어 로직으로 추가함
-        guard photoPresignedURLInfos.count == photos.count else {
-            onSuccessPostSpot.value = false
-            return
-        }
-
         let dispatchGroup = DispatchGroup()
 
         for (index, photo) in photos.enumerated() {
