@@ -29,6 +29,7 @@ final class SpotUploadViewModel: Serviceable {
     var isWorkFriendly: Bool? = nil
     
     var photoPresignedURLInfos: [PresignedURLModel] = []
+    var photoPresignedURLResults: [Int: Bool] = [:] // NOTE: [photo index : result]
 
 
     // MARK: - Network
@@ -72,14 +73,16 @@ final class SpotUploadViewModel: Serviceable {
             postSpot()
             return
         }
-        
+
         photoPresignedURLInfos.removeAll()
-        
+
         let dispatchGroup = DispatchGroup()
         
-        for _ in photos {
+        for i in 0..<photos.count {
             dispatchGroup.enter()
-            
+
+            photoPresignedURLResults[i] = false
+
             ACService.shared.imageService.getPresignedURL(
                 parameter: GetPresignedURLRequest(imageType: ImageType.APPLY_SPOT.rawValue)
             ) { [weak self] response in
@@ -90,6 +93,7 @@ final class SpotUploadViewModel: Serviceable {
                 switch response {
                 case .success(let data):
                     self.photoPresignedURLInfos.append(PresignedURLModel(fileName: data.fileName, presignedURL: data.preSignedUrl))
+                    self.photoPresignedURLResults[i] = true
                 case .reIssueJWT:
                     self.handleReissue { [weak self] in
                         self?.getPresignedURLs()
@@ -108,9 +112,9 @@ final class SpotUploadViewModel: Serviceable {
     }
 
     private func putPhotosToPresignedURL() {
-        // NOTE: `getPresignedURL`에서 handleNetworkError로 처리되기 때문에 guard문 걸릴 가능성 적음
+        // NOTE: `getPresignedURL`에서 handleNetworkError로 처리되기 때문에 count가 다를 가능성 적음
         // 다만, 예외적인 상황을 위해 방어 로직으로 추가함
-        guard !photos.isEmpty, photoPresignedURLInfos.count == photos.count else {
+        guard photoPresignedURLInfos.count == photos.count else {
             onSuccessPostSpot.value = false
             return
         }
@@ -118,13 +122,18 @@ final class SpotUploadViewModel: Serviceable {
         let dispatchGroup = DispatchGroup()
 
         for (index, photo) in photos.enumerated() {
+            guard (photoPresignedURLResults[index] ?? false) else {
+                print("❌ presignedURL 없음 at: \(index)")
+                continue
+            }
+
             guard let imageData = photo.jpegData(compressionQuality: 1) else {
                 print("❌ 이미지 데이터 변환 실패 at: \(index)")
                 continue
             }
 
             dispatchGroup.enter()
-            
+
             let request = PutImageToPresignedURLRequest(
                 presignedURL: photoPresignedURLInfos[index].presignedURL,
                 imageData: imageData
@@ -135,12 +144,15 @@ final class SpotUploadViewModel: Serviceable {
                 guard let self = self else { return }
                 
                 switch response {
-                case .success(_): break
+                case .success(_):
+                    photoPresignedURLResults[index] = true
                 case .reIssueJWT:
+                    photoPresignedURLResults[index] = false
                     self.handleReissue {
                         self.putPhotosToPresignedURL()
                     }
                 default:
+                    photoPresignedURLResults[index] = false
                     self.handleNetworkError {
                         self.putPhotosToPresignedURL()
                     }
@@ -149,7 +161,12 @@ final class SpotUploadViewModel: Serviceable {
         }
 
         dispatchGroup.notify(queue: .main) { [weak self] in
-            self?.postSpot()
+            let allSuccess = self?.photoPresignedURLResults.allSatisfy { $0.value } ?? false
+            if allSuccess {
+                self?.postSpot()
+            } else {
+                self?.onSuccessPostSpot.value = false
+            }
         }
     }
 
