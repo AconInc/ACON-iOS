@@ -23,16 +23,6 @@ struct SpotConditionDTO: Encodable {
 
     let filterList: [SpotFilterDTO]?
 
-    enum CodingKeys: CodingKey {
-        case spotType, filterList, walkingTime, priceRange
-    }
-
-    func encode(to encoder: any Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.spotType, forKey: .spotType)
-        try container.encodeIfPresent(self.filterList, forKey: .filterList)
-    }
-
 }
 
 struct SpotFilterDTO: Encodable {

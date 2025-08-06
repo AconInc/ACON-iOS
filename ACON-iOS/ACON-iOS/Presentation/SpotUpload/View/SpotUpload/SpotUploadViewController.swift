@@ -12,17 +12,7 @@ final class SpotUploadViewController: BaseNavViewController {
     // MARK: - Properties
 
     let viewModel = SpotUploadViewModel()
-    
-    // NOTE: inquiry pages
-    lazy var searchVC = SpotUploadSearchViewController(viewModel)
-    lazy var spotTypeVC = SpotTypeSelectionViewController(viewModel)
-    lazy var restaurantFeatureVC = RestaurantFeatureSelectionViewController(viewModel)
-    lazy var cafeFeatureVC = CafeFeatureSelectionViewController(viewModel)
-    lazy var menuVC = MenuRecommendationViewController(viewModel)
-    lazy var valueRatingVC = ValueRatingViewController(viewModel)
-    lazy var photoVC = SpotUploadPhotoViewController(viewModel)
 
-    // TODO: SpotTypeVC에서 분기처리
     lazy var pages: [UIViewController] = [searchVC, spotTypeVC, restaurantFeatureVC, menuVC, valueRatingVC, photoVC]
 
     private var currentIndex: Int = 0
@@ -35,6 +25,15 @@ final class SpotUploadViewController: BaseNavViewController {
     // NOTE: 글래스모피즘 깜빡임 이슈로 일반 버튼으로 구현
     let previousButton = UIButton()
     let nextButton = UIButton()
+
+    // NOTE: inquiry pages
+    lazy var searchVC = SpotUploadSearchViewController(viewModel)
+    lazy var spotTypeVC = SpotTypeSelectionViewController(viewModel)
+    lazy var restaurantFeatureVC = RestaurantFeatureSelectionViewController(viewModel)
+    lazy var cafeFeatureVC = CafeFeatureSelectionViewController(viewModel)
+    lazy var menuVC = MenuRecommendationViewController(viewModel)
+    lazy var valueRatingVC = ValueRatingViewController(viewModel)
+    lazy var photoVC = SpotUploadPhotoViewController(viewModel)
 
 
     // MARK: - LifeCycle
@@ -98,16 +97,10 @@ final class SpotUploadViewController: BaseNavViewController {
 
         pageVC.setViewControllers([pages[0]], direction: .forward, animated: false, completion: nil)
 
-        // NOTE: 내부 스와이프 막기
-        for subview in pageVC.view.subviews {
-            if let scrollView = subview as? UIScrollView {
-                scrollView.isScrollEnabled = false
-            }
-        }
-
         let glassDefaultColor = UIColor(red: 0.255, green: 0.255, blue: 0.255, alpha: 1)
         previousButton.do {
             $0.setAttributedTitle(text:  StringLiterals.SpotUpload.goPrevious, style: .b1SB)
+            $0.setAttributedTitle(text:  StringLiterals.SpotUpload.goPrevious, style: .b1SB, color: .gray500, for: .disabled)
             $0.layer.borderColor = glassDefaultColor.cgColor
             $0.layer.borderWidth = 1
             $0.layer.cornerRadius = 22
@@ -115,6 +108,7 @@ final class SpotUploadViewController: BaseNavViewController {
 
         nextButton.do {
             $0.setAttributedTitle(text: StringLiterals.SpotUpload.next, style: .b1SB)
+            $0.setAttributedTitle(text:  StringLiterals.SpotUpload.next, style: .b1SB, color: .gray500, for: .disabled)
             $0.backgroundColor = glassDefaultColor
             $0.layer.cornerRadius = 22
         }
@@ -165,6 +159,21 @@ private extension SpotUploadViewController {
             self?.nextButton.isEnabled = isEnabled
             self?.viewModel.isNextButtonEnabled.value = nil
         }
+
+        // NOTE: 장소 업로드 성공
+        viewModel.onSuccessPostSpot.bind { [weak self] onSuccess in
+            guard let self = self,
+                  let onSuccess = onSuccess else { return }
+
+            if onSuccess {
+                let successVC = SpotUploadSuccessViewController()
+                self.navigationController?.pushViewController(successVC, animated: true)
+            } else { // NOTE: handleNetworkError로 처리될테지만 만약을 위해 추가
+                presentACAlert(.changeNotSaved, longAction: NavigationUtils.navigateToTabBar)
+            }
+
+            viewModel.onSuccessPostSpot.value = nil
+        }
     }
 
 }
@@ -186,17 +195,17 @@ private extension SpotUploadViewController {
     }
 
     @objc func goToNextPage() {
-        if currentIndex == 1 {
+        let lastIndex = pages.count - 1
+
+        if currentIndex == 1 { // NOTE: spot type 선택 페이지
             setSpotFeaturePage()
         }
-
-        if currentIndex < pages.count - 1 {
+        if currentIndex < lastIndex { // NOTE: 다음페이지
             currentIndex += 1
             self.setXButtonAction()
             pageVC.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
-        } else if currentIndex == pages.count - 1 {
-            let successVC = SpotUploadSuccessViewController()
-            self.navigationController?.pushViewController(successVC, animated: true)
+        } else if currentIndex == lastIndex { // NOTE: 마지막페이지 -> post
+            viewModel.uploadSpot()
         }
     }
 

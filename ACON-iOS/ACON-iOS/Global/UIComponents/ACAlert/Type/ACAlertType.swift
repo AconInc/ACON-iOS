@@ -31,6 +31,7 @@ enum ACAlertType: CaseIterable {
     case logout // NOTE: 로그아웃
     
     case deletePhoto // NOTE: 사진 삭제 (장소 업로드)
+    case spotUploadFail // NOTE: 장소 업로드 실패
     
     var title: String {
         switch self {
@@ -64,6 +65,9 @@ enum ACAlertType: CaseIterable {
             
         case .deletePhoto:
             return "사진을 삭제 하시겠습니까?"
+            
+        case .spotUploadFail:
+            return "장소 업로드 실패"
         }
     }
     
@@ -71,7 +75,7 @@ enum ACAlertType: CaseIterable {
         switch self {
         case .locationAccessDenied:
             return "설정에서 위치접근 권한을 허용해주세요."
-        case .locationAccessFail:
+        case .locationAccessFail, .spotUploadFail:
             return "문제가 발생했습니다.\n나중에 다시 시도해주세요."
         case .reviewLocationFail:
             return "현재 위치와 리뷰 등록 장소가\n오차범위 밖에 있습니다.\n좀 더 가까이 이동해보세요."

@@ -11,6 +11,6 @@ enum ImageType: String {
     
     case REVIEW
     
-    case SPOT
+    case APPLY_SPOT
     
 }
