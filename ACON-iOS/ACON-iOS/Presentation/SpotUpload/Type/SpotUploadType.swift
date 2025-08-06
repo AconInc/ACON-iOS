@@ -122,3 +122,12 @@ extension SpotUploadType {
     }
 
 }
+
+
+// MARK: - 추천 메뉴
+
+extension SpotUploadType {
+
+    static let recommendedMenuMaxLength: Int = 30
+
+}
