@@ -194,6 +194,7 @@ extension UIView {
     ) {
         self.transform = CGAffineTransform(translationX: 0, y: yOffset)
         self.alpha = 0
+        self.isHidden = false
 
         UIView.animate(
             withDuration: duration,
@@ -202,7 +203,6 @@ extension UIView {
             initialSpringVelocity: initialSpringVelocity,
             options: [.curveEaseOut],
             animations: {
-                self.isHidden = false
                 self.transform = .identity
                 self.alpha = 1
             },
