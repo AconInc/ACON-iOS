@@ -15,9 +15,9 @@ final class BaseUploadInquiryView: BaseView {
     
     private let scrollContentView = UIView()
     
-    private let requirementLabel = UILabel()
+    let requirementLabel = UILabel()
 
-    private let titleLabel = UILabel()
+    let titleLabel = UILabel()
 
     let captionLabel = UILabel()
 
@@ -117,6 +117,8 @@ final class BaseUploadInquiryView: BaseView {
         if let caption {
             captionLabel.setLabel(text: caption, style: .t5R, color: .gray500)
         }
+
+        [requirementLabel, titleLabel, captionLabel, contentView].forEach { $0.isHidden = true }
     }
 
 }

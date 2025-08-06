@@ -14,6 +14,9 @@ class BaseUploadInquiryViewController: BaseViewController {
     let viewModel: SpotUploadViewModel
     let spotUploadInquiryView: BaseUploadInquiryView
 
+    let hasCaption: Bool
+    var isInitialAppear: Bool = true
+
     // NOTE: 하위 뷰컨에서 override하여 설정
     var contentViews: [UIView] { [] }
     var canGoPrevious: Bool { true }
@@ -24,6 +27,7 @@ class BaseUploadInquiryViewController: BaseViewController {
 
     init(viewModel: SpotUploadViewModel, requirement: RequirementType, title: String, caption: String? = nil) {
         self.viewModel = viewModel
+        self.hasCaption = caption != nil
         self.spotUploadInquiryView = BaseUploadInquiryView(requirement: requirement, title: title, caption: caption)
 
         super.init(nibName: nil, bundle: nil)
@@ -44,6 +48,15 @@ class BaseUploadInquiryViewController: BaseViewController {
         super.viewWillAppear(animated)
 
         updatePagingButtonStates()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if isInitialAppear {
+            playSlideUpAnimation()
+            isInitialAppear = false
+        }
     }
 
 
@@ -84,6 +97,15 @@ class BaseUploadInquiryViewController: BaseViewController {
                 $0.height.equalTo(sizeType.height)
             }
         }
+    }
+
+    func playSlideUpAnimation() {
+        let titleDelay: TimeInterval = 0.3
+        let contentDelay: TimeInterval = 0.6
+        spotUploadInquiryView.requirementLabel.animateSlideUp()
+        spotUploadInquiryView.titleLabel.animateSlideUp(delay: titleDelay)
+        if hasCaption { spotUploadInquiryView.captionLabel.animateSlideUp(delay: 2 * titleDelay) }
+        spotUploadInquiryView.contentView.animateSlideUp(delay: contentDelay + titleDelay * (hasCaption ? 2 : 1))
     }
 
 }
