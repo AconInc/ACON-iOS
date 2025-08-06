@@ -89,6 +89,13 @@ private extension MenuRecommendationViewController {
         textField.observableText.bind { [weak self] text in
             guard let text else { return }
             self?.textField.hideClearButton(isHidden: text.isEmpty)
+
+            // NOTE: 글자수 제한
+            guard text.count <= SpotUploadType.recommendedMenuMaxLength else {
+                self?.textField.text?.removeLast()
+                return
+            }
+
             self?.viewModel.recommendedMenu = text
             self?.updatePagingButtonStates()
         }

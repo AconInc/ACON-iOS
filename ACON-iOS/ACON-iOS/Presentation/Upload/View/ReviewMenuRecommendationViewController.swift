@@ -95,6 +95,13 @@ private extension ReviewMenuRecommendationViewController {
     func bindObservable() {
         textField.observableText.bind { [weak self] text in
             guard let text else { return }
+
+            // NOTE: 글자수 제한
+            guard text.count <= SpotUploadType.recommendedMenuMaxLength else {
+                self?.textField.text?.removeLast()
+                return
+            }
+
             self?.viewModel.recommendedMenu = text
             self?.updateInputUIState()
         }
