@@ -50,16 +50,6 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        if let keyboardWillShowObserver = keyboardWillShowObserver {
-            NotificationCenter.default.removeObserver(keyboardWillShowObserver)
-        }
-        
-        if let keyboardWillHideObserver = keyboardWillHideObserver {
-            NotificationCenter.default.removeObserver(keyboardWillHideObserver)
-        }
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -78,7 +68,7 @@ class SpotUploadSearchViewController: BaseUploadInquiryViewController {
         setDelegate()
         observeUserInputs()
     }
-
+    
 
     // MARK: - UI Setting
 
@@ -128,7 +118,8 @@ private extension SpotUploadSearchViewController {
     func bindViewModel() {
         self.spotUploadSearchViewModel.naverSearchStatusCode.bind { [weak self] statusCode in
             guard let statusCode = statusCode else { return }
-
+            if statusCode == 200 { return }
+            
             let goToInstagram: () -> Void = { [weak self] in
                 guard let self = self else { return }
                 let termsOfUseVC = ACWebViewController(urlString: StringLiterals.WebView.instagramLink)

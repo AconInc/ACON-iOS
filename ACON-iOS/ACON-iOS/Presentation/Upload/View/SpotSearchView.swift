@@ -117,4 +117,14 @@ final class SpotSearchView: BaseView {
         }
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        for cell in searchSuggestionCollectionView.visibleCells {
+            if let cell = cell as? SearchSuggestionCollectionViewCell {
+                cell.setNeedsLayout()
+           }
+        }
+    }
+    
 }

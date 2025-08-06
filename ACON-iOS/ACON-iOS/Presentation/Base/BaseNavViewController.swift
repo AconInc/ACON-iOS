@@ -48,6 +48,10 @@ class BaseNavViewController: UIViewController {
         setStyle()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func setHierarchy() {
         self.view.addSubviews(contentView,
                               topInsetView,

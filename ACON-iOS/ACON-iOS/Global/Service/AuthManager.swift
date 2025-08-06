@@ -23,6 +23,12 @@ final class AuthManager {
         }
     }
     
+    var hasPreference: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: StringLiterals.UserDefaults.hasPreference)
+        }
+    }
+    
     func removeToken() {
         [StringLiterals.UserDefaults.accessToken,
          StringLiterals.UserDefaults.refreshToken].forEach { UserDefaults.standard.removeObject(forKey: $0)

@@ -156,5 +156,12 @@ extension UIViewController {
 
         return self
     }
+    
+    
+    // MARK: - 앱 재진입 옵저버 추가
+    
+    func addForegroundObserver(action: Selector) {
+        NotificationCenter.default.addObserver(self, selector: action, name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
 
 }

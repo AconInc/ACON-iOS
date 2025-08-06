@@ -22,6 +22,10 @@ class BaseViewController: UIViewController {
         setStyle()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     func setHierarchy() {}
     
     func setLayout() {}

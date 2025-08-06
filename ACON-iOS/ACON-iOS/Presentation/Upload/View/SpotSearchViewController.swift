@@ -90,6 +90,7 @@ class SpotSearchViewController: BaseNavViewController{
                                     for: .touchUpInside)
         
         spotSearchView.searchEmptyView.makeAddSpotButton(target: self, action: #selector(addPlaceFooterTapped))
+        addForegroundObserver(action: #selector(appWillEnterForeground))
     }
 
 }
@@ -210,6 +211,11 @@ private extension SpotSearchViewController {
         let addPlaceVC = SpotUploadViewController()
         addPlaceVC.modalPresentationStyle = .fullScreen
         self.present(addPlaceVC, animated: true)
+    }
+    
+    @objc
+    func appWillEnterForeground() {
+        spotSearchView.setNeedsLayout()
     }
     
 }

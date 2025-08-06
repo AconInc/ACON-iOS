@@ -78,11 +78,13 @@ class DropAcornViewController: BaseNavViewController {
             btn?.tag = i
             btn?.addTarget(self, action: #selector(reviewAcornButtonTapped(_:)), for: .touchUpInside)
         }
+        
+        addForegroundObserver(action: #selector(appWillEnterForeground))
     }
-
+    
 }
 
-    
+
 // MARK: - @objc functions
 
 private extension DropAcornViewController {
@@ -104,7 +106,12 @@ private extension DropAcornViewController {
         viewModel.acornCount = selectedIndex + 1
         checkAcorn(viewModel.acornCount)
     }
-
+    
+    @objc
+    func appWillEnterForeground() {
+        dropAcornView.setNeedsLayout()
+    }
+    
 }
 
 
