@@ -47,8 +47,9 @@ final class AuthManager {
                     continuation.resume(returning: true)
                 case .requestErr(let error):
                     if error.code == 40088 {
+                        print("❄️ remove token")
                         self.removeToken()
-                        NavigationUtils.navigateToSplash()
+                        continuation.resume(returning: false)
                     }
                 default:
                     continuation.resume(returning: false)
