@@ -176,6 +176,11 @@ extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
             
             if cell.isChipSelected {
                 /// 해산물 예외처리
+                if selectedFood.value == nil || selectedFood.value == [] {
+                    selectedFood.value = []
+                    disableNoDislikeFoodButton()
+                    enableAllCells(true)
+                }
                 if indexPath.item == 6 {
                     for i in 0..<6 {
                         let seafoodIndexPath = IndexPath(item: i, section: indexPath.section)
@@ -188,10 +193,6 @@ extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
                     }
                 }
                 if !(selectedFood.value?.contains(DislikeFood.engValue[indexPath.item]) ?? false) {
-                    if selectedFood.value == nil {
-                        selectedFood.value = []
-                        onboardingView.noDislikeFoodButton.updateGlassButtonState(state: .disabled)
-                    }
                     selectedFood.value?.append(DislikeFood.engValue[indexPath.item])
                 }
             } else {
@@ -200,6 +201,7 @@ extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
                     if selectedFood.value == [] {
                         selectedFood.value = nil
                         onboardingView.noDislikeFoodButton.updateGlassButtonState(state: .default)
+                        enableAllCells(true)
                     }
                 }
             }
@@ -272,9 +274,17 @@ extension OnboardingViewController {
     private func enableAllCells(_ enable: Bool) {
         for cell in onboardingView.dislikeFoodCollectionView.visibleCells {
             if let cell = cell as? DislikeFoodCollectionViewCell {
-                cell.isUserInteractionEnabled = enable
+                if !enable { cell.isChipSelected = false }
                 cell.isChipEnabled = enable
             }
+        }
+    }
+    
+    private func disableNoDislikeFoodButton() {
+        onboardingView.noDislikeFoodButton.do {
+            $0.updateGlassButtonState(state: .default)
+            $0.refreshButtonBlurEffect(.buttonGlassDisabled)
+            $0.updateButtonTitle(color: .gray300)
         }
     }
     

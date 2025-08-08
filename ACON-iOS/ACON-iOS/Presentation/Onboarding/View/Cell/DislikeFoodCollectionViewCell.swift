@@ -30,9 +30,15 @@ final class DislikeFoodCollectionViewCell: BaseCollectionViewCell {
     var isChipEnabled: Bool {
         didSet {
             if isChipEnabled {
-                self.chipButton.updateGlassButtonState(state: .default)
+                self.chipButton.do {
+                    $0.refreshButtonBlurEffect(.buttonGlassDefault)
+                    $0.updateButtonTitle(color: .acWhite)
+                }
             } else {
-                self.chipButton.updateGlassButtonState(state: .disabled)
+                self.chipButton.do {
+                    $0.refreshButtonBlurEffect(.buttonGlassDisabled)
+                    $0.updateButtonTitle(color: .gray300)
+                }
             }
         }
     }
