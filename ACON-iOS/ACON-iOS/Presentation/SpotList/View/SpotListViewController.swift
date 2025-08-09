@@ -753,7 +753,7 @@ private extension SpotListViewController {
         guard AuthManager.shared.hasToken else { return }
         guard !AuthManager.shared.hasVerifiedArea else { return }
         
-        let lastAlertTime = UserDefaults.standard.object(forKey: "lastLocalVerificationAlertTime") as? Date
+        let lastAlertTime = UserDefaults.standard.object(forKey: StringLiterals.UserDefaults.lastLocalVerificationAlertTime) as? Date
         let now = Date()
         
         if let lastTime = lastAlertTime {
