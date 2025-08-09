@@ -14,8 +14,6 @@ protocol SpotDetailServiceProtocol {
     func getSpotDetail(spotID: Int64,
                        isDeepLink: Bool,
                        completion: @escaping (NetworkResult<GetSpotDetailResponse>) -> Void)
-    func getSpotMenu(spotID: Int64,
-                     completion: @escaping (NetworkResult<GetSpotMenuResponse>) -> Void)
     func getSpotMenuboardImageList(spotID: Int64,
                                    completion: @escaping (NetworkResult<GetMenuboardImageListResponse>) -> Void)
     func postGuidedSpot(spotID: Int64,
@@ -37,19 +35,6 @@ final class SpotDetailService: BaseService<SpotDetailTargetType>,
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<GetSpotDetailResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetSpotDetailResponse.self)
-                completion(networkResult)
-            case .failure:
-                completion(.networkFail)
-            }
-        }
-    }
-
-    func getSpotMenu(spotID: Int64,
-                     completion: @escaping (NetworkResult<GetSpotMenuResponse>) -> Void) {
-        self.provider.request(.getSpotMenu(spotID: spotID)) { result in
-            switch result {
-            case .success(let response):
-                let networkResult: NetworkResult<GetSpotMenuResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetSpotMenuResponse.self)
                 completion(networkResult)
             case .failure:
                 completion(.networkFail)
