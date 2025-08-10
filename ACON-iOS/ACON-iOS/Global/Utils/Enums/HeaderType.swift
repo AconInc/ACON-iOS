@@ -26,8 +26,11 @@ enum HeaderType {
     }
     
     static func tokenOnly() -> [String:String] {
-        let token = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.accessToken) ?? ""
-        return ["Authorization" : "Bearer " + token]
+        if let token = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.accessToken) {
+            return ["Authorization" : "Bearer " + token]
+        } else {
+            return noHeader
+        }
     }
     
 }
