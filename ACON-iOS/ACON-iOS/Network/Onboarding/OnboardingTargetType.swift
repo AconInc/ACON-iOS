@@ -46,7 +46,7 @@ extension OnboardingTargetType: ACTargetType {
     }
     
     var headers: [String : String]? {
-        var headers = HeaderType.noHeader
+        var headers = HeaderType.headerWithToken()
         switch self {
         case .putOnboarding:
             headers = HeaderType.headerWithToken()

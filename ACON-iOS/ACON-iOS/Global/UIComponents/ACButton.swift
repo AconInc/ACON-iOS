@@ -152,11 +152,16 @@ extension ACButton {
 
 extension ACButton {
     
-    func updateButtonTitle(_ title: String) {
-        self.title = title
-        self.setAttributedTitle(text: title,
+    func updateButtonTitle(_ title: String? = nil,
+                           color: UIColor? = nil) {
+        
+        if let title = title {
+            self.title = title
+        }
+        
+        self.setAttributedTitle(text: self.title ?? "",
                                 style: buttonStyleType.textStyle,
-                                color: buttonStyleType.textColor)
+                                color: color ?? buttonStyleType.textColor)
     }
     
     func updateButtonImage(_ image: UIImage) {

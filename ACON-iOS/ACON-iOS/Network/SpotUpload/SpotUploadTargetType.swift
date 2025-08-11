@@ -39,7 +39,7 @@ extension SpotUploadTargetType: ACTargetType {
     }
 
     var headers: [String : String]? {
-        var headers = HeaderType.noHeader
+        var headers = HeaderType.tokenOnly()
         switch self {
         case .postSpotUpload:
             headers = HeaderType.headerWithToken()

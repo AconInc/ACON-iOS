@@ -83,11 +83,9 @@ extension UploadTargetType: ACTargetType {
     }
     
     var headers: [String : String]? {
-        var headers = HeaderType.noHeader
+        var headers = HeaderType.headerWithToken()
         switch self {
-        case .getSearchKeyword:
-            headers = HeaderType.noHeader
-        case .getReviewVerification:
+        case .getSearchKeyword, .getReviewVerification:
             headers = HeaderType.tokenOnly()
         case .getSearchSuggestion, .postReview, .getAcornCount:
             headers = HeaderType.headerWithToken()

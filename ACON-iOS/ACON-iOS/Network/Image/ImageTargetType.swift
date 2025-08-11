@@ -68,7 +68,7 @@ extension ImageTargetType: ACTargetType {
     var headers: [String : String]? {
         switch self {
         case .getPresignedURL:
-            return HeaderType.noHeader
+            return HeaderType.tokenOnly()
         case .putImageToPresignedURL(let requestBody):
             return HeaderType.imageHeader(imageData: requestBody.imageData)
         }
