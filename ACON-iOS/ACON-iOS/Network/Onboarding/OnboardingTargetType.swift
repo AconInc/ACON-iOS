@@ -15,7 +15,7 @@ enum OnboardingTargetType {
     
 }
 
-extension OnboardingTargetType: TargetType {
+extension OnboardingTargetType: ACTargetType {
 
     var method: Moya.Method {
         switch self {
@@ -46,7 +46,7 @@ extension OnboardingTargetType: TargetType {
     }
     
     var headers: [String : String]? {
-        var headers = HeaderType.noHeader
+        var headers = HeaderType.headerWithToken()
         switch self {
         case .putOnboarding:
             headers = HeaderType.headerWithToken()

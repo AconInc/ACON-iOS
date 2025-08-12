@@ -46,12 +46,9 @@ platform :ios do
      app_identifier: ENV["APP_IDENTIFIER"]
    )
    
-   # CocoaPods 설치
-   cocoapods
-   
    # 개발용 빌드
    gym(
-     workspace: ENV["WORKSPACE_NAME"],
+     project: ENV["WORKSPACE_NAME"],
      scheme: ENV["SCHEME_NAME"],
      configuration: "Debug",
      export_method: "development"
@@ -82,9 +79,6 @@ platform :ios do
      api_key: api_key
    )
    
-   # CocoaPods 설치
-   cocoapods
-   
    if version_number
      puts "버전 정보: #{version_number}"
      set_version(version: version_number)
@@ -98,7 +92,7 @@ platform :ios do
    
    # 앱 빌드
    gym(
-     workspace: ENV["WORKSPACE_NAME"],
+     project: ENV["WORKSPACE_NAME"],
      scheme: ENV["SCHEME_NAME"],
      configuration: "Release",
      export_method: "app-store"
@@ -134,8 +128,6 @@ platform :ios do
      api_key: api_key
    )
    
-   # CocoaPods 설치
-   cocoapods
    
    if version_number
      # 특정 버전으로 설정
@@ -150,7 +142,7 @@ platform :ios do
    
    # 앱 빌드
    gym(
-     workspace: ENV["WORKSPACE_NAME"],
+     project: ENV["WORKSPACE_NAME"],
      scheme: ENV["SCHEME_NAME"],
      configuration: "Release",
      export_method: "app-store"

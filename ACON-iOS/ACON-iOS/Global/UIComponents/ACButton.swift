@@ -92,8 +92,10 @@ extension ACButton {
 
         config.imagePlacement = style.imagePlacement
         config.imagePadding = style.imagePadding
-        
+
         config.titleAlignment = style.titleAlignment
+        contentHorizontalAlignment = style.titleAlignment.toContentHorizontalAlignment
+
         config.contentInsets = style.contentInsets
         
         config.showsActivityIndicator = style.showsActivityIndicator
@@ -150,11 +152,16 @@ extension ACButton {
 
 extension ACButton {
     
-    func updateButtonTitle(_ title: String) {
-        self.title = title
-        self.setAttributedTitle(text: title,
+    func updateButtonTitle(_ title: String? = nil,
+                           color: UIColor? = nil) {
+        
+        if let title = title {
+            self.title = title
+        }
+        
+        self.setAttributedTitle(text: self.title ?? "",
                                 style: buttonStyleType.textStyle,
-                                color: buttonStyleType.textColor)
+                                color: color ?? buttonStyleType.textColor)
     }
     
     func updateButtonImage(_ image: UIImage) {
@@ -189,6 +196,8 @@ extension ACButton {
     
     /// Set Glassmorphism Border
     private func applyGlassBorder(_ attributes: GlassBorderAttributes) {
+        guard bounds.width > 0 && bounds.height > 0 else { return }
+        
         borderGlassmorphismView?.removeFromSuperview()
         borderLayer?.removeFromSuperlayer()
         self.layer.borderWidth = 0
@@ -198,10 +207,15 @@ extension ACButton {
         let innerPath = UIBezierPath(roundedRect: innerRect, cornerRadius: max(0, attributes.cornerRadius - attributes.width/2))
         outerPath.append(innerPath.reversing())
         
-        glassmorphismView = GlassmorphismView(attributes.glassmorphismType)
+        borderGlassmorphismView = GlassmorphismView(attributes.glassmorphismType)
         
-        if let glassmorphismView = glassmorphismView {
-            self.insertSubview(glassmorphismView, at: 0)
+        if let glassmorphismView = borderGlassmorphismView {
+            if let backgroundView = self.glassmorphismView {
+                self.insertSubview(glassmorphismView, aboveSubview: backgroundView)
+            } else {
+                self.insertSubview(glassmorphismView, at: 0)
+            }
+            
             glassmorphismView.isUserInteractionEnabled = false
             
             glassmorphismView.snp.makeConstraints {
@@ -224,7 +238,14 @@ extension ACButton {
         glassmorphismView?.layer.cornerRadius = self.layer.cornerRadius
         glassmorphismView?.layer.masksToBounds = true
         
-        if let attributes = glassBorderAttributes, bounds.width > 0, bounds.height > 0 {
+        if let attributes = glassBorderAttributes,
+           bounds.width > 0, bounds.height > 0 {
+            if let existingView = borderGlassmorphismView {
+                if existingView.frame.size == bounds.size &&
+                    existingView.frame.width > 0 && existingView.frame.height > 0 {
+                    return
+                }
+            }
             applyGlassBorder(attributes)
         }
     }
@@ -305,7 +326,9 @@ extension ACButton {
     
     // NOTE: 정상적인 버튼 글라스모피즘 적용을 위해 Cell prepareForReuse에서 호출
     func refreshButtonBlurEffect(_ glassType: GlassmorphismType) {
-        setGlassmorphism(glassType)
+        if buttonStyleType.glassmorphismType != nil {
+            setGlassmorphism(glassType)
+        }
         
         if let attributes = glassBorderAttributes {
             let updatedAttributes = GlassBorderAttributes(

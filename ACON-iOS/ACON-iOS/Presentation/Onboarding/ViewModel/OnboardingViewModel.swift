@@ -22,6 +22,10 @@ class OnboardingViewModel: Serviceable {
             switch response {
             case .success:
                 onPutOnboardingSuccess.value = true
+                if !AuthManager.shared.hasPreference {
+                    UserDefaults.standard.set(true,
+                                              forKey: StringLiterals.UserDefaults.hasPreference)
+                }
             case .reIssueJWT:
                 self.handleReissue {
                     self.putOnboarding(dislikeFoodList)

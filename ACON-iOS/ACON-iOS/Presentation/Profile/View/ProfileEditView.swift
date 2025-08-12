@@ -160,6 +160,12 @@ final class ProfileEditView: BaseView {
         }
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        saveButton.refreshButtonBlurEffect(.buttonGlassDefault)
+    }
+    
 
     // MARK: - Internal Methods
 

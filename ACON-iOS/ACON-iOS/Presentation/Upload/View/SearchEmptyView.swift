@@ -16,19 +16,16 @@ class SearchEmptyView: BaseView {
     
     private let emptyLabel: UILabel = UILabel()
     
-    private let addPlaceTitleLabel: UILabel = UILabel()
+    private let descriptionLabel: UILabel = UILabel()
     
-    private let addPlaceDescriptionLabel: UILabel = UILabel()
     
-    let addPlaceButton: UIButton = UIButton()
+    // MARK: - UI Setting Methods
     
     override func setHierarchy() {
         super.setHierarchy()
         
         self.addSubviews(emptyLabel,
-                         addPlaceTitleLabel,
-                         addPlaceDescriptionLabel,
-                         addPlaceButton)
+                         descriptionLabel)
     }
     
     override func setLayout() {
@@ -39,21 +36,9 @@ class SearchEmptyView: BaseView {
             $0.centerX.equalToSuperview()
         }
         
-        addPlaceTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(100*ScreenUtils.heightRatio)
+        descriptionLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(60*ScreenUtils.heightRatio)
             $0.centerX.equalToSuperview()
-        }
-        
-        addPlaceDescriptionLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(124*ScreenUtils.heightRatio)
-            $0.centerX.equalToSuperview()
-        }
-        
-        addPlaceButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(156*ScreenUtils.heightRatio)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(36)
-            $0.width.equalTo(137)
         }
     }
     
@@ -66,21 +51,35 @@ class SearchEmptyView: BaseView {
             $0.setLabel(text: StringLiterals.Upload.noMatchingSpots, style: .b1SB)
         }
         
-        addPlaceTitleLabel.do {
-            $0.setLabel(text: StringLiterals.Upload.addPlaceTitle, style: .b1SB)
+        descriptionLabel.do {
+            $0.setLabel(text: StringLiterals.Upload.checkAgain, style: .b1R)
         }
-        
-        addPlaceDescriptionLabel.do {
-            $0.setLabel(text: StringLiterals.Upload.addPlaceDescriptuon,
-                        style: .b1R,
-                        color: .gray500)
+    }
+    
+}
+
+
+// MARK: - Internal Methods
+
+extension SearchEmptyView {
+
+    func makeAddSpotButton(target: Any, action: Selector) {
+        let addSpotButton = UIButton()
+
+        self.addSubview(addSpotButton)
+
+        addSpotButton.snp.makeConstraints {
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(20 * ScreenUtils.heightRatio)
+            $0.centerX.equalToSuperview()
         }
-        
-        addPlaceButton.do {
+
+        addSpotButton.do {
             $0.setAttributedTitle(text: StringLiterals.Upload.addPlaceButton,
                                   style: .b1SB,
                                   color: .labelAction)
         }
+
+        addSpotButton.addTarget(target, action: action, for: .touchUpInside)
     }
-    
+ 
 }

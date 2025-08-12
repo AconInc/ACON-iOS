@@ -9,18 +9,18 @@ import Foundation
 
 struct SearchKeywordModel: Equatable {
     
-    let spotID: Int64
+    let spotID: Int64?
     
     let spotName: String
     
     let spotAddress: String
     
-    let spotType: String
+    let spotType: String?
     
-    init(spotID: Int64,
+    init(spotID: Int64?,
          spotName: String,
          spotAddress: String,
-         spotType: String) {
+         spotType: String?) {
         self.spotID = spotID
         self.spotName = spotName
         self.spotAddress = spotAddress

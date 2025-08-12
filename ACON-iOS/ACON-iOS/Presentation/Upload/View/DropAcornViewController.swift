@@ -10,55 +10,48 @@ import UIKit
 import Lottie
 
 class DropAcornViewController: BaseNavViewController {
-    
+
     // MARK: - UI Properties
-    
+
     private let dropAcornView = DropAcornView()
-    
-    var reviewAcornCount: Int = 0
-    
-    var possessAcornCount: Int = 0
-    
+
+
     // MARK: - Properties
-    
-    private var spotReviewViewModel = SpotReviewViewModel()
-    
-    private var spotID: Int64 = 0
-    
-    private var spotName: String = ""
-    
-    init(spotID: Int64, spotName: String) {
-        self.spotID = spotID
-        self.spotName = spotName
-        
+
+    private let viewModel: SpotReviewViewModel
+
+    init(_ viewModel: SpotReviewViewModel) {
+        self.viewModel = viewModel
+
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+
     // MARK: - LifeCycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addTarget()
         bindViewModel()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         setPopGesture()
     }
-    
+
     override func setHierarchy() {
         super.setHierarchy()
         
         self.contentView.addSubview(dropAcornView)
     }
-    
+
     override func setLayout() {
         super.setLayout()
 
@@ -66,16 +59,16 @@ class DropAcornViewController: BaseNavViewController {
             $0.edges.equalToSuperview()
         }
     }
-    
+
     override func setStyle() {
         super.setStyle()
-        
-        self.setButtonStyle(button: leftButton, image: .icLeft)
-        self.setButtonAction(button: leftButton, target: self, action: #selector(dropAcornBackButtonTapped))
+
+        self.setBackButton()
         self.setCenterTitleLabelStyle(title: StringLiterals.Upload.upload)
-        self.dropAcornView.spotNameLabel.setLabel(text: self.spotName.abbreviatedString(20), style: .t3SB, alignment: .center)
+
+        self.dropAcornView.spotNameLabel.setLabel(text: viewModel.spotName.abbreviatedString(20), style: .t3SB, alignment: .center)
     }
-    
+
     func addTarget() {
         dropAcornView.leaveReviewButton.addTarget(self,
                                                   action: #selector(leaveReviewButtonTapped),
@@ -85,26 +78,23 @@ class DropAcornViewController: BaseNavViewController {
             btn?.tag = i
             btn?.addTarget(self, action: #selector(reviewAcornButtonTapped(_:)), for: .touchUpInside)
         }
+        
+        addForegroundObserver(action: #selector(appWillEnterForeground))
     }
-
+    
 }
 
-    
+
 // MARK: - @objc functions
 
 private extension DropAcornViewController {
-    
-    @objc
-    func dropAcornBackButtonTapped() {
-        dismiss(animated: false)
-    }
-    
+
     @objc
     func leaveReviewButtonTapped() {
-        spotReviewViewModel.postReview(spotID: spotID, acornCount: reviewAcornCount)
-        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.upload, properties: ["click_review_acon?": true, "spot_id": reviewAcornCount])
+        viewModel.postReview()
+        AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.upload, properties: ["click_review_acon?": true, "spot_id": viewModel.spotID])
     }
-    
+
     @objc
     func reviewAcornButtonTapped(_ sender: UIButton) {
         let selectedIndex = sender.tag
@@ -113,8 +103,13 @@ private extension DropAcornViewController {
             btn?.isSelected = i <= selectedIndex ? true : false
         }
         dropAcornView.acornReviewLabel.text = "\(selectedIndex+1)/5"
-        reviewAcornCount = selectedIndex + 1
-        checkAcorn(reviewAcornCount)
+        viewModel.acornCount = selectedIndex + 1
+        checkAcorn(viewModel.acornCount)
+    }
+    
+    @objc
+    func appWillEnterForeground() {
+        dropAcornView.setNeedsLayout()
     }
     
 }
@@ -123,25 +118,25 @@ private extension DropAcornViewController {
 // MARK: - bind ViewModel
 
 private extension DropAcornViewController {
-    
+
     func bindViewModel() {
-        self.spotReviewViewModel.onSuccessPostReview.bind { [weak self] onSuccess in
+        self.viewModel.onSuccessPostReview.bind { [weak self] onSuccess in
             guard let onSuccess else { return }
             if onSuccess {
-                let vc = ReviewFinishedViewController(spotName: self?.spotName ?? "")
+                let vc = ReviewFinishedViewController(spotName: self?.viewModel.spotName ?? "")
                 vc.modalPresentationStyle = .fullScreen
                 self?.present(vc, animated: false)
             }
         }
     }
-    
+
 }
 
 
 // MARK: - drop acorn 로직
 
 private extension DropAcornViewController {
-    
+
     func checkAcorn(_ dropAcorn: Int) {
         dropAcornView.dropAcornLottieView.isHidden = false
         toggleLottie(dropAcorn: dropAcorn)
@@ -155,14 +150,14 @@ private extension DropAcornViewController {
             }
         }
     }
-    
+
 }
 
 
 // MARK: - Lottie
 
 private extension DropAcornViewController {
-    
+
     func toggleLottie(dropAcorn: Int) {
         dropAcornView.dropAcornLottieView.do {
             switch dropAcorn {
@@ -182,5 +177,5 @@ private extension DropAcornViewController {
             $0.play()
         }
     }
-    
+
 }

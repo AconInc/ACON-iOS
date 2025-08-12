@@ -123,33 +123,18 @@ extension LoginModalViewController {
             self.onSuccessLogin?(onSuccess)
             self.dismiss(animated: true)
             
-            let hasVerifiedArea = loginViewModel.hasVerifiedArea
+            let hasVerifiedArea = AuthManager.shared.hasVerifiedArea
+            let hasPreference = AuthManager.shared.hasPreference
+            
             if onSuccess {
-                if hasVerifiedArea {
-                    let authStatus = ACLocationManager.shared.locationManager.authorizationStatus
-                    if authStatus == .denied || authStatus == .restricted {
-                        navigateToLocalVerificationVC()
-                    } else {
-                        NavigationUtils.navigateToTabBar()
-                    }
-                } else {
-                    print("🥑onSuccess && !hasVerifiedArea")
-                    navigateToLocalVerificationVC()
-                }
+                hasVerifiedArea ? hasPreference ? NavigationUtils.navigateToTabBar() : NavigationUtils.naviateToLoginOnboarding() : NavigationUtils.navigateToOnboardingLocalVerification()
+                
                 if let presentedVCType = presentedVCType {
                     AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.guest, properties: [presentedVCType: true])
                 }
             } else {
                 showLoginFailAlert()
             }
-        }
-    }
-
-    func navigateToLocalVerificationVC() {
-        let vm = LocalVerificationViewModel(flowType: .onboarding)
-        let vc = LocalVerificationViewController(viewModel: vm)
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = UINavigationController(rootViewController: vc)
         }
     }
     

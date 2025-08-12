@@ -40,10 +40,6 @@ class OnboardingViewController: BaseViewController {
     @MainActor required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
        
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,12 +90,7 @@ class OnboardingViewController: BaseViewController {
         
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(appWillEnterForeground),
-            name: UIApplication.willEnterForegroundNotification,
-            object: nil
-        )
+        addForegroundObserver(action: #selector(appWillEnterForeground))
     }
     
     private func bindSelectedFood() {
@@ -185,6 +176,11 @@ extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
             
             if cell.isChipSelected {
                 /// 해산물 예외처리
+                if selectedFood.value == nil || selectedFood.value == [] {
+                    selectedFood.value = []
+                    disableNoDislikeFoodButton()
+                    enableAllCells(true)
+                }
                 if indexPath.item == 6 {
                     for i in 0..<6 {
                         let seafoodIndexPath = IndexPath(item: i, section: indexPath.section)
@@ -197,10 +193,6 @@ extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
                     }
                 }
                 if !(selectedFood.value?.contains(DislikeFood.engValue[indexPath.item]) ?? false) {
-                    if selectedFood.value == nil {
-                        selectedFood.value = []
-                        onboardingView.noDislikeFoodButton.updateGlassButtonState(state: .disabled)
-                    }
                     selectedFood.value?.append(DislikeFood.engValue[indexPath.item])
                 }
             } else {
@@ -209,6 +201,7 @@ extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
                     if selectedFood.value == [] {
                         selectedFood.value = nil
                         onboardingView.noDislikeFoodButton.updateGlassButtonState(state: .default)
+                        enableAllCells(true)
                     }
                 }
             }
@@ -281,9 +274,17 @@ extension OnboardingViewController {
     private func enableAllCells(_ enable: Bool) {
         for cell in onboardingView.dislikeFoodCollectionView.visibleCells {
             if let cell = cell as? DislikeFoodCollectionViewCell {
-                cell.isUserInteractionEnabled = enable
+                if !enable { cell.isChipSelected = false }
                 cell.isChipEnabled = enable
             }
+        }
+    }
+    
+    private func disableNoDislikeFoodButton() {
+        onboardingView.noDislikeFoodButton.do {
+            $0.updateGlassButtonState(state: .default)
+            $0.refreshButtonBlurEffect(.buttonGlassDisabled)
+            $0.updateButtonTitle(color: .gray300)
         }
     }
     

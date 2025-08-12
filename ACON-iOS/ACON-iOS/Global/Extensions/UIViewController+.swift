@@ -32,7 +32,7 @@ extension UIViewController {
                           completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let titleAttributes = [NSAttributedString.Key.foregroundColor: UIColor.acWhite]
-        let messageAttributes = [NSAttributedString.Key.foregroundColor: UIColor.acWhite, NSAttributedString.Key.font: ACFontType.b1R.fontStyle.font]
+        let messageAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray200, NSAttributedString.Key.font: ACFontType.b1R.fontStyle.font]
         
         let titleString = NSAttributedString(string: title, attributes: titleAttributes)
         let messageString = NSAttributedString(string: message, attributes: messageAttributes)
@@ -155,6 +155,13 @@ extension UIViewController {
         }
 
         return self
+    }
+    
+    
+    // MARK: - 앱 재진입 옵저버 추가
+    
+    func addForegroundObserver(action: Selector) {
+        NotificationCenter.default.addObserver(self, selector: action, name: UIApplication.willEnterForegroundNotification, object: nil)
     }
 
 }

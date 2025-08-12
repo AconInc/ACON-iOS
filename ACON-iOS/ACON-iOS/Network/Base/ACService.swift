@@ -25,6 +25,8 @@ final class ACService {
 
     lazy var uploadService: UploadService = UploadService()
     
+    lazy var spotUploadService = SpotUploadService()
+
     lazy var onboardingService: OnboardingService = OnboardingService()
     
     lazy var spotListService = SpotListService()
@@ -34,5 +36,7 @@ final class ACService {
     lazy var imageService = ImageService()
     
     lazy var withdrawalService = WithdrawalService()
+    
+    lazy var naverSearchService: NaverSearchService = NaverSearchService()
 
 }

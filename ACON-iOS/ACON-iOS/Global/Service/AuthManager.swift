@@ -23,6 +23,12 @@ final class AuthManager {
         }
     }
     
+    var hasPreference: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: StringLiterals.UserDefaults.hasPreference)
+        }
+    }
+    
     func removeToken() {
         [StringLiterals.UserDefaults.accessToken,
          StringLiterals.UserDefaults.refreshToken].forEach { UserDefaults.standard.removeObject(forKey: $0)
@@ -41,8 +47,9 @@ final class AuthManager {
                     continuation.resume(returning: true)
                 case .requestErr(let error):
                     if error.code == 40088 {
+                        print("❄️ remove token")
                         self.removeToken()
-                        NavigationUtils.navigateToSplash()
+                        continuation.resume(returning: false)
                     }
                 default:
                     continuation.resume(returning: false)

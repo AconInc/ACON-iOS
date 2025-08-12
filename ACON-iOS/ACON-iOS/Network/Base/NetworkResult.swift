@@ -16,6 +16,7 @@ enum NetworkResult<T> {
     case serverErr   // 서버 내부 오류
     case networkFail // 네트워크 연결 실패 -> 네트워크 확인
     case reIssueJWT // 토큰 재이슈 필요
+    case naverAPIErr(Int) // 네이버 검색 API 에러
     
     func statusCodeDescription() {
         switch self {
@@ -33,6 +34,8 @@ enum NetworkResult<T> {
             print("Status Code Description: 네트워크 연결 실패 - 와이파이 확인하셈")
         case .reIssueJWT:
             print("Status Code Description: 토큰 재발급 필요")
+        case .naverAPIErr:
+            print("Status Code Description: 네이버 API 에러")
         }
     }
 

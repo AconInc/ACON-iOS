@@ -17,7 +17,7 @@ enum ImageTargetType {
 
 }
 
-extension ImageTargetType: TargetType {
+extension ImageTargetType: ACTargetType {
 
     var baseURL: URL {
         switch self {
@@ -68,7 +68,7 @@ extension ImageTargetType: TargetType {
     var headers: [String : String]? {
         switch self {
         case .getPresignedURL:
-            return HeaderType.noHeader
+            return HeaderType.tokenOnly()
         case .putImageToPresignedURL(let requestBody):
             return HeaderType.imageHeader(imageData: requestBody.imageData)
         }

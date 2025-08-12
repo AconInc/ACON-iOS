@@ -36,6 +36,8 @@ class BaseNavViewController: UIViewController {
     
     var backCompletion: (() -> Void)?
     
+    var skipCompletion: (() -> Void)?
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -44,6 +46,10 @@ class BaseNavViewController: UIViewController {
         setHierarchy()
         setLayout()
         setStyle()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func setHierarchy() {
@@ -222,8 +228,7 @@ extension BaseNavViewController {
     
     
     // MARK: - 건너뛰기 버튼
-    
-    func setSkipButton() {
+    func setSkipButton(completion: (() -> Void)? = NavigationUtils.navigateToTabBar) {
         rightButton.do {
             $0.isHidden = false
             $0.setAttributedTitle(text: "건너뛰기", style: .t4SB)
@@ -231,11 +236,12 @@ extension BaseNavViewController {
                             target: self,
                             action: #selector(skipButtonTapped))
         }
+        self.skipCompletion = completion
     }
-    
+
     @objc
     func skipButtonTapped() {
-        NavigationUtils.navigateToTabBar()
+        skipCompletion?()
     }
     
     

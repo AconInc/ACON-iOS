@@ -91,8 +91,6 @@ extension ConfigButtonStyleType {
     
     var imagePadding: CGFloat { return .zero }
     
-    var titleAlignment: UIButton.Configuration.TitleAlignment { return .center }
-    
     var contentInsets: NSDirectionalEdgeInsets { return .init() }
     
     var showsActivityIndicator: Bool { return false }
@@ -153,6 +151,8 @@ struct GlassConfigButton: ButtonStyleType, ConfigButtonStyleType {
     
     var textColor: UIColor
     
+    var titleAlignment: UIButton.Configuration.TitleAlignment
+    
     var borderWidth: CGFloat
     
     var borderColor: UIColor
@@ -163,12 +163,14 @@ struct GlassConfigButton: ButtonStyleType, ConfigButtonStyleType {
     
     init(glassmorphismType: GlassmorphismType? = nil,
          borderGlassmorphismType: GlassmorphismType? = nil,
-         buttonType: GlassButtonType) {
+         buttonType: GlassButtonType,
+         titleAlignment: UIButton.Configuration.TitleAlignment = .center) {
         self.glassmorphismType = glassmorphismType
         self.borderGlassmorphismType = borderGlassmorphismType
         self.glassButtonType = buttonType
         self.textStyle = buttonType.textStyle
         self.textColor = buttonType.textColor
+        self.titleAlignment = titleAlignment
         self.borderWidth = buttonType.borderWidth
         self.borderColor = buttonType.borderColor
         self.cornerRadius = buttonType.cornerRadius

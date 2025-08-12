@@ -29,7 +29,7 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.0</string>
+	<string>2.1.0</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -54,7 +54,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2025.0621.1900</string>
+	<string>2025.0811.0035</string>
 	<key>GADApplicationIdentifier</key>
 	<string>${GAD_APPLICATION_IDENTIFIER}</string>
 	<key>GAD_AD_UNIT_ID</key>
@@ -65,6 +65,10 @@
 	<string>${GOOGLE_CLIENT_ID}</string>
 	<key>GOOGLE_WEB_CLIENT_ID</key>
 	<string>${GOOGLE_WEB_CLIENT_ID}</string>
+	<key>NAVER_API_CLIENT_ID</key>
+	<string>${NAVER_API_CLIENT_ID}</string>
+	<key>NAVER_API_CLIENT_SECRET</key>
+	<string>${NAVER_API_CLIENT_SECRET}</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -73,8 +77,6 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NMFClientId</key>
-	<string>${NMAP_CLIENT_KEY}</string>
 	<key>NMFCustomStyleID</key>
 	<string>${NMF_CUSTOM_STYLE_ID}</string>
 	<key>NMFNcpKeyId</key>

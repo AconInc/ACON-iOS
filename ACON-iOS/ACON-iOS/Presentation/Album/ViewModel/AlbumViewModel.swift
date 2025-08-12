@@ -12,6 +12,9 @@ class AlbumViewModel: NSObject, PHPhotoLibraryChangeObserver {
 
     // TODO: 메모리 최적화 처리
     // TODO: PhotoManager로 로직 모두 옮길 것
+
+    let flowType: AlbumFlowType
+    var maxPhotoCount: Int = 1
     
     var selectedAlbumIndex: Int = 0
     
@@ -31,16 +34,21 @@ class AlbumViewModel: NSObject, PHPhotoLibraryChangeObserver {
                 case .denied, .restricted, .notDetermined:
                     print("Album: 권한 거부")
                     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                       let rootViewController = windowScene.windows.first?.rootViewController {
-                        let action = { if let tabBarController = rootViewController as? ACTabBarController,
-                                           let navController = tabBarController.selectedViewController as? UINavigationController,
-                                           let profileEditVC = navController.viewControllers.first(where: { $0 is ProfileEditViewController }) as? ProfileEditViewController {
-                                            navController.popToViewController(profileEditVC, animated: true)
-                                            }
-                                     }
-                        rootViewController.presentACAlert(.libraryAccessDenied,
-                                                              leftAction: action,
-                                                              rightAction: ACAlertActionType.openSettings)
+                       let rootViewController = windowScene.windows.first?.rootViewController,
+                       let topVC = rootViewController.getTopViewController() {
+                        let navController: UINavigationController? = topVC.navigationController
+
+                        let action = {
+                            if let profileEditVC = navController?.viewControllers.first(where: { $0 is ProfileEditViewController }) {
+                                navController?.popToViewController(profileEditVC, animated: true)
+                            } else if let spotUploadVC = navController?.viewControllers.first(where: { $0 is SpotUploadViewController }) {
+                                navController?.popToViewController(spotUploadVC, animated: true)
+                            }
+                        }
+
+                        topVC.presentACAlert(.libraryAccessDenied,
+                                             leftAction: action,
+                                             rightAction: ACAlertActionType.openSettings)
                     }
                     completion(false)
                 @unknown default:
@@ -61,9 +69,11 @@ class AlbumViewModel: NSObject, PHPhotoLibraryChangeObserver {
     
     var onAlbumChange: ObservablePattern<Bool> = ObservablePattern(nil)
     
-    override init() {
+    init(_ flowType: AlbumFlowType) {
+        self.flowType = flowType
+
         super.init()
-        
+
         PHPhotoLibrary.shared().register(self)
     }
     

@@ -17,6 +17,10 @@ enum StringLiterals {
         
         static let hasVerifiedArea = "hasVerifiedArea"
         
+        static let hasPreference = "hasPreference"
+        
+        static let lastLocalVerificationAlertTime = "lastLocalVerificationAlertTime"
+        
     }
     
     enum Error {
@@ -131,17 +135,71 @@ enum StringLiterals {
         
         static let searchSpot = "장소를 입력해주세요."
         
-        static let noMatchingSpots = "앗... 검색결과가 없어요"
+        static let noMatchingSpots = "검색결과가 없습니다."
         
-        static let addPlaceTitle = "현재 장소를 바로 등록할 수 있어요"
-        
-        static let addPlaceDescriptuon = "더욱 더 정확하게 추천이 가능해요"
-        
-        static let addPlaceButton = "5초만에 등록하러 가기"
+        static let checkAgain = "확인 후 다시 입력해주세요."
+
+        static let addPlaceButton = "장소 직접 등록하기"
         
         static let clickAcorn = "도토리를 선택해보세요"
         
         static let noAcorn = "도토리가 부족해요!"
+        
+    }
+    
+    enum SpotUpload {
+        
+        static let spotUpload = "장소 등록"
+        
+        static let goPrevious = "뒤로 가기"
+        
+        static let next = "다음"
+        
+        static let required = "필수 입력"
+        
+        static let optional = "선택 입력"
+        
+        static let multipleSelectionAllowed = "중복 선택이 가능해요"
+        
+        static let SearchThePlaceToRegister = "등록하고 싶은 장소를\n검색해주세요"
+        
+        static let isThisRestaurantOrCafe = "이곳은 식당인가요?\n카페인가요?"
+        
+        static let restaurant = "식당"
+        
+        static let cafe = "카페"
+        
+        static let brunchIsCafe = "브런치는 카페로 분류해요!"
+        
+        static let whatKindOfRestaurant = "여긴 어떤 식당인가요?"
+        
+        static let recommendMenu = "추천하는\n메뉴를 알려주세요"
+        
+        static let enterMenu = "메뉴를 입력해주세요"
+        
+        static let whenIsTheBusinessClose = "몇시까지 영업하나요?"
+        
+        static let isThisValueForMoney = "가성비는 어떤 편인가요?"
+        
+        static let bestValue = "가성비 최고예요"
+        
+        static let averageValue = "보통이에요"
+        
+        static let lowValue = "가성비 별로예요"
+        
+        static let isWorkFriendly = "작업하기 좋은 카페인가요?"
+        
+        static let workFriendly = "네, 작업하기 좋아요"
+        
+        static let notWorkFriendly = "아니요, 그저 그래요"
+        
+        static let youCanRegisterPhotos = "식당 사진을 등록할 수 있어요"
+        
+        static let newSpotSaved = "새로운 장소가 저장되었어요!"
+        
+        static let itWillBeReflectedInThreeDays = "등록해 주신 장소는 3일 뒤에 반영돼요"
+        
+        static let goHome = "홈으로 가기"
         
     }
     
@@ -208,9 +266,11 @@ enum StringLiterals {
     
     enum LocalVerification {
         
+        static let warning = "현재 내 지역에 안 계시면 건너뛰기를 해주세요"
+        
         static let title = "믿을 수 있는 리뷰를 위해\n지역인증이 필요해요"
         
-        static let description = "더 정확한 로컬맛집을 추천해드릴 수 있어요"
+        static let description = "내 지역에 남긴 리뷰는 추천 장소에 반영돼요."
         
         static let oneSecond = "1초만에 인증하기"
         
@@ -237,6 +297,18 @@ enum StringLiterals {
         static let willYouDeleteThis = "을 삭제할까요?"
         
         static let canChangeLocalVerification = "인증 지역은 프로필에서 수정 가능합니다."
+        
+    }
+    
+    enum LocalVerificationModal {
+        
+        static let title = "내 지역을 인증해 주세요!"
+        
+        static let description = "내 지역에 남긴 리뷰는 로컬리뷰로 인정되어\n더 많은 사람들에게 추천돼요."
+        
+        static let cancel = "다음에 하기"
+        
+        static let confirm = "지역 인증하러 하기"
         
     }
     
@@ -296,6 +368,8 @@ enum StringLiterals {
         static let addPlaceLink = "https://walla.my/survey/1HrYdj6WIp5rFhkdfRj9"
         
         static let requestToAddPlaceLink = "https://walla.my/survey/ZVXaHzuIVhjQglM1p7fu"
+        
+        static let instagramLink = "https://www.instagram.com/acon.drop/"
         
     }
     
@@ -363,7 +437,7 @@ enum StringLiterals {
         
         static let verifiedArea = "인증 지역"
         
-        static let verifiedAreaDescription = "등록한 지 1주일 이내 지역은 수정이 가능하며 이후 3개월 동안\n변경이 불가해요."
+        static let verifiedAreaDescription = "등록한 지 1주일 이내 지역은 수정이 가능하며\n이후 3개월 동안 변경이 불가해요."
         
         static let nicknamePlaceholder = "닉네임을 입력해주세요"
         

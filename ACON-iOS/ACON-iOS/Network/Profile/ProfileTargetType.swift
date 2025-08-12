@@ -21,7 +21,7 @@ enum ProfileTargetType {
 
 }
 
-extension ProfileTargetType: TargetType {
+extension ProfileTargetType: ACTargetType {
 
     var method: Moya.Method {
         switch self {

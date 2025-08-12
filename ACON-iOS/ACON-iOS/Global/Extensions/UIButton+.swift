@@ -102,3 +102,20 @@ extension UIButton {
     }
     
 }
+
+
+// MARK: - Alignment 타입 매핑
+
+extension UIButton.Configuration.TitleAlignment {
+
+    var toContentHorizontalAlignment: UIControl.ContentHorizontalAlignment {
+        switch self {
+        case .leading: return .leading
+        case .center: return .center
+        case .trailing: return .trailing
+        case .automatic: return .center
+        @unknown default: return .center
+        }
+    }
+
+}

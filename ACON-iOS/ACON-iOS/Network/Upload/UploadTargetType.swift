@@ -19,7 +19,7 @@ enum UploadTargetType {
     
 }
 
-extension UploadTargetType: TargetType {
+extension UploadTargetType: ACTargetType {
 
     var method: Moya.Method {
         switch self {
@@ -29,17 +29,26 @@ extension UploadTargetType: TargetType {
             return .get
         }
     }
-    
+
+    var apiVersion: ApiVersionType {
+        switch self {
+        case .getSearchSuggestion, .getReviewVerification, .postReview:
+            return .v2
+        default:
+            return .v1
+        }
+    }
+
     var path: String {
         switch self {
         case .getSearchSuggestion:
-            return utilPath + "search-suggestions"
+            return utilPath + "spots/search-suggestions"
         case .postReview:
             return utilPath + "reviews"
         case .getSearchKeyword:
             return utilPath + "spots/search"
         case .getReviewVerification:
-            return utilPath + "spots/verify"
+            return utilPath + "reviews/verify"
         case .getAcornCount:
             return utilPath + "members/acorn"
         }
@@ -74,11 +83,9 @@ extension UploadTargetType: TargetType {
     }
     
     var headers: [String : String]? {
-        var headers = HeaderType.noHeader
+        var headers = HeaderType.headerWithToken()
         switch self {
-        case .getSearchKeyword:
-            headers = HeaderType.noHeader
-        case .getReviewVerification:
+        case .getSearchKeyword, .getReviewVerification:
             headers = HeaderType.tokenOnly()
         case .getSearchSuggestion, .postReview, .getAcornCount:
             headers = HeaderType.headerWithToken()

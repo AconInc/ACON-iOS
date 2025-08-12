@@ -17,6 +17,11 @@ enum ACAlertType: CaseIterable {
     
     case reviewLocationFail // NOTE: 리뷰 위치 인증 실패
     
+    case naverAPILimitExceeded // NOTE: 일일 네이버 API 호출 가능 횟수 (25000회) 초과
+    case quitSpotUpload // NOTE: 장소 등록 취소
+    case deletePhoto // NOTE: 사진 삭제 (장소 업로드)
+    case spotUploadFail // NOTE: 장소 업로드 실패
+    
     case libraryAccessDenied // NOTE: 사진 권한 X
     case changeNotSaved // NOTE: 프로필 변경사항 저장 X
     
@@ -26,6 +31,7 @@ enum ACAlertType: CaseIterable {
     case quitOnboarding // NOTE: 취향탐색 그만두기
     
     case logout // NOTE: 로그아웃
+    
     
     var title: String {
         switch self {
@@ -37,6 +43,11 @@ enum ACAlertType: CaseIterable {
             return "'Acon'에 대한 위치접근\n권한이 없습니다."
         case .locationAccessFail, .reviewLocationFail:
             return "위치 인식 실패"
+        
+        case .naverAPILimitExceeded:
+            return "장소 등록 마감"
+        case .quitSpotUpload:
+            return "여기서 그만두면\n작성 중인 내용이 사라져요"
             
         case .libraryAccessDenied:
             return "'Acon'에 대한 라이브러리\n읽기/쓰기 기능이 없습니다."
@@ -51,6 +62,12 @@ enum ACAlertType: CaseIterable {
             
         case .logout:
             return "로그아웃 하시겠어요?"
+            
+        case .deletePhoto:
+            return "사진을 삭제 하시겠습니까?"
+            
+        case .spotUploadFail:
+            return "장소 업로드 실패"
         }
     }
     
@@ -58,10 +75,12 @@ enum ACAlertType: CaseIterable {
         switch self {
         case .locationAccessDenied:
             return "설정에서 위치접근 권한을 허용해주세요."
-        case .locationAccessFail:
+        case .locationAccessFail, .spotUploadFail:
             return "문제가 발생했습니다.\n나중에 다시 시도해주세요."
         case .reviewLocationFail:
             return "현재 위치와 리뷰 등록 장소가\n오차범위 밖에 있습니다.\n좀 더 가까이 이동해보세요."
+        case .naverAPILimitExceeded:
+            return "오늘 너무 많은 장소가 등록돼서\n새로운 장소 등록이 불가능해요.\nAcon Instagram을 통해 제보할 수 있어요."
         case .libraryAccessDenied:
             return "설정에서 권한을 켤 수 있습니다."
         case .changeVerifiedArea:
@@ -88,8 +107,10 @@ enum ACAlertType: CaseIterable {
     
     var leftButtonTitle: String? {
         switch self {
-        case .plainUpdate, .libraryAccessDenied, .changeVerifiedArea, .logout:
+        case .plainUpdate, .libraryAccessDenied, .changeVerifiedArea, .logout, .deletePhoto, .quitSpotUpload:
             return "취소"
+        case .naverAPILimitExceeded:
+            return "끝내기"
         case .changeNotSaved:
             return "계속 작성"
         case .quitOnboarding:
@@ -105,14 +126,18 @@ enum ACAlertType: CaseIterable {
             return "업데이트"
         case .libraryAccessDenied:
             return "설정으로 가기"
+        case .naverAPILimitExceeded:
+            return "제보하기"
         case .changeNotSaved:
             return "나가기"
         case .changeVerifiedArea:
             return "변경하기"
-        case .quitOnboarding:
+        case .quitOnboarding, .quitSpotUpload:
             return "그만두기"
         case .logout:
             return "로그아웃"
+        case .deletePhoto:
+            return "삭제"
         default:
             return nil
         }

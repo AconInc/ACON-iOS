@@ -12,7 +12,6 @@ import Moya
 enum SpotDetailTargetType {
     
     case getSpotDetail(spotID: Int64, isDeepLink: Bool)
-    case getSpotMenu(spotID: Int64)
     case getMenuboardImageList(spotID: Int64)
     case postGuidedSpot(spotID: Int64)
     case postSavedSpot(spotID: Int64)
@@ -20,7 +19,7 @@ enum SpotDetailTargetType {
     
 }
 
-extension SpotDetailTargetType: TargetType {
+extension SpotDetailTargetType: ACTargetType {
 
     var method: Moya.Method {
         switch self {
@@ -37,8 +36,6 @@ extension SpotDetailTargetType: TargetType {
         switch self {
         case .getSpotDetail(let spotID, _):
             return utilPath + "spots/\(spotID)"
-        case .getSpotMenu(let spotID):
-            return utilPath + "spots/\(spotID)/menus"
         case .getMenuboardImageList(let spotID):
             return utilPath + "spots/\(spotID)/menuboards"
         case .postGuidedSpot:
@@ -74,7 +71,7 @@ extension SpotDetailTargetType: TargetType {
     var headers: [String : String]? {
         var headers = HeaderType.noHeader
         switch self {
-        case .getSpotMenu, .getMenuboardImageList:
+        case .getMenuboardImageList:
             headers = HeaderType.noHeader
         case .postGuidedSpot, .postSavedSpot:
             headers = HeaderType.headerWithToken()

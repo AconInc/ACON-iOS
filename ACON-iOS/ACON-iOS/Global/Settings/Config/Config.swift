@@ -19,8 +19,6 @@ enum Config {
             
             static let googleWebClientID = "GOOGLE_WEB_CLIENT_ID"
             
-            static let nMapClientKey = "NMFClientId"
-            
             static let nmfNcpKeyID = "NMFNcpKeyId"
             
             static let amplitudeKeyDebug = "AMPLITUDE_KEY_DEBUG"
@@ -36,6 +34,10 @@ enum Config {
             static let GADAdUnitID = "GAD_AD_UNIT_ID"
             
             static let basicProfileImage = "BASIC_PROFILE_IMAGE"
+            
+            static let naverAPIClientID = "NAVER_API_CLIENT_ID"
+            
+            static let naverAPIClientSecret = "NAVER_API_CLIENT_SECRET"
             
         }
         
@@ -70,13 +72,6 @@ extension Config {
     static let googleWebClientID: String = {
         guard let key = Config.infoDictionary[Keys.Plist.googleWebClientID] as? String else {
             fatalError("GOOGLE_WEB_CLIENT_ID is not set in plist for this configuration")
-        }
-        return key
-    }()
-    
-    static let nMapClientKey: String = {
-        guard let key = Config.infoDictionary[Keys.Plist.nMapClientKey] as? String else {
-            fatalError("nMapClientKey is not set in plist for this configuration")
         }
         return key
     }()
@@ -134,6 +129,20 @@ extension Config {
     static let basicProfileImage: String = {
         guard let key = Config.infoDictionary[Keys.Plist.basicProfileImage] as? String else {
             fatalError("basicProfileImage is not set in plist for this configuration")
+        }
+        return key
+    }()
+    
+    static let naverAPIClientID: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.naverAPIClientID] as? String else {
+            fatalError("naverAPIClientID is not set in plist for this configuration")
+        }
+        return key
+    }()
+    
+    static let naverAPIClientSecret: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.naverAPIClientSecret] as? String else {
+            fatalError("naverAPIClientSecret is not set in plist for this configuration")
         }
         return key
     }()
