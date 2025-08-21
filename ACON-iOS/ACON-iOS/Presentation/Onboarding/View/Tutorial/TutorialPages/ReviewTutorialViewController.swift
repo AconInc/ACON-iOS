@@ -71,7 +71,7 @@ class ReviewTutorialViewController: BaseViewController {
     override func setStyle() {
         super.setStyle()
 
-        view.backgroundColor = .acBlack
+        view.backgroundColor = .gray900
 
         acornDropLottieView.do {
             $0.contentMode = .scaleAspectFit
@@ -89,9 +89,10 @@ class ReviewTutorialViewController: BaseViewController {
     private func playAnimation() {
         let duration: TimeInterval = 1.0
         let delay: TimeInterval = 0.2
+
         titleStack.animateSlideUp(duration: duration, delay: delay)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay * 2 + duration) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay * 2 + 0.5) { [weak self] in
             guard let self = self else { return }
 
             acornDropLottieView.play { isFinished in

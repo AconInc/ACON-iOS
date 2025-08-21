@@ -39,7 +39,7 @@ class LimitedSpotsTutorialViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        dimGraView.setGradient(topColor: .acBlack, bottomColor: .clear, startPoint: CGPoint(x: 0.5, y: 0.61))
+        dimGraView.setGradient(topColor: .gray900, bottomColor: .gray900.withAlphaComponent(0), startPoint: CGPoint(x: 0.5, y: 0.61))
     }
 
 
@@ -95,7 +95,7 @@ class LimitedSpotsTutorialViewController: BaseViewController {
         super.setStyle()
 
         view.do {
-            $0.backgroundColor = .acBlack
+            $0.backgroundColor = .gray900
             $0.clipsToBounds = true
         }
 
