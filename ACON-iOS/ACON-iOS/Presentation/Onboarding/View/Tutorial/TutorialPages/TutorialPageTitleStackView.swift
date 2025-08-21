@@ -48,10 +48,11 @@ class TutorialPageTitleStackView: UIStackView {
         self.do {
             $0.axis = .vertical
             $0.spacing = 24
+            $0.alignment = .center
         }
 
-        titleLabel.setLabel(text: title, style: .t2SB) // TODO: 폰트시스템 ExtraBold 추가 후 수정
-        subTitleLabel.setLabel(text: subTitle, style: .t4SB)
+        titleLabel.setLabel(text: title, style: .t2SB, alignment: .center) // TODO: 폰트시스템 ExtraBold 추가 후 수정
+        subTitleLabel.setLabel(text: subTitle, style: .t4SB, alignment: .center)
     }
 
 }

@@ -1,5 +1,5 @@
 //
-//  LocalReviewViewController.swift
+//  OnlyFiftySpotsViewController.swift
 //  ACON-iOS
 //
 //  Created by 김유림 on 8/21/25.
@@ -7,12 +7,12 @@
 
 import UIKit
 
-class LocalReviewViewController: BaseViewController {
+class LimitedSpotsTutorialViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .blue
+        view.backgroundColor = .red
         // Do any additional setup after loading the view.
     }
     

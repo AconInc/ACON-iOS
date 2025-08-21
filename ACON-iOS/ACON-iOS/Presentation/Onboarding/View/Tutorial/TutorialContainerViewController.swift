@@ -22,8 +22,8 @@ class TutorialContainerViewController: BaseViewController {
     private let pageControl = UIPageControl()
 
     // NOTE: tutorial pages
-    lazy var localReviewVC = LocalReviewViewController()
-    lazy var onlyFiftySpotsVC = OnlyFiftySpotsViewController()
+    lazy var localReviewVC = ReviewTutorialViewController()
+    lazy var onlyFiftySpotsVC = LimitedSpotsTutorialViewController()
     lazy var startNowVC = StartNowViewController()
 
 
@@ -78,7 +78,6 @@ class TutorialContainerViewController: BaseViewController {
             $0.pageIndicatorTintColor = .gray300
             $0.currentPageIndicatorTintColor = .acWhite
             $0.isUserInteractionEnabled = false
-            $0.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
         
     }

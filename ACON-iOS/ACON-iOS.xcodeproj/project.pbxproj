@@ -12,8 +12,8 @@
 		1503DBEB2DFD9CBB001FC3E5 /* GetMenuboardImageListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1503DBEA2DFD9CBB001FC3E5 /* GetMenuboardImageListResponse.swift */; };
 		150A105C2DA28F2600B0BC9A /* ACTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150A105B2DA28F2600B0BC9A /* ACTextField.swift */; };
 		150BA57A2E56F3720058A06B /* TutorialContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150BA5792E56F3720058A06B /* TutorialContainerViewController.swift */; };
-		150BA57F2E56F8170058A06B /* LocalReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150BA57E2E56F8170058A06B /* LocalReviewViewController.swift */; };
-		150BA5812E56F8580058A06B /* OnlyFiftySpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150BA5802E56F8580058A06B /* OnlyFiftySpotsViewController.swift */; };
+		150BA57F2E56F8170058A06B /* ReviewTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150BA57E2E56F8170058A06B /* ReviewTutorialViewController.swift */; };
+		150BA5812E56F8580058A06B /* LimitedSpotsTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150BA5802E56F8580058A06B /* LimitedSpotsTutorialViewController.swift */; };
 		150BA5832E56F87E0058A06B /* StartNowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150BA5822E56F87E0058A06B /* StartNowViewController.swift */; };
 		150BA5852E5719F50058A06B /* TutorialPageTitleStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150BA5842E5719F50058A06B /* TutorialPageTitleStackView.swift */; };
 		151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003EB2D5FBF7200409DF4 /* GetProfileResponse.swift */; };
@@ -337,8 +337,8 @@
 		1503DBEA2DFD9CBB001FC3E5 /* GetMenuboardImageListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMenuboardImageListResponse.swift; sourceTree = "<group>"; };
 		150A105B2DA28F2600B0BC9A /* ACTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTextField.swift; sourceTree = "<group>"; };
 		150BA5792E56F3720058A06B /* TutorialContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContainerViewController.swift; sourceTree = "<group>"; };
-		150BA57E2E56F8170058A06B /* LocalReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalReviewViewController.swift; sourceTree = "<group>"; };
-		150BA5802E56F8580058A06B /* OnlyFiftySpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyFiftySpotsViewController.swift; sourceTree = "<group>"; };
+		150BA57E2E56F8170058A06B /* ReviewTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTutorialViewController.swift; sourceTree = "<group>"; };
+		150BA5802E56F8580058A06B /* LimitedSpotsTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedSpotsTutorialViewController.swift; sourceTree = "<group>"; };
 		150BA5822E56F87E0058A06B /* StartNowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNowViewController.swift; sourceTree = "<group>"; };
 		150BA5842E5719F50058A06B /* TutorialPageTitleStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageTitleStackView.swift; sourceTree = "<group>"; };
 		151003EB2D5FBF7200409DF4 /* GetProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileResponse.swift; sourceTree = "<group>"; };
@@ -680,8 +680,8 @@
 			isa = PBXGroup;
 			children = (
 				150BA5842E5719F50058A06B /* TutorialPageTitleStackView.swift */,
-				150BA57E2E56F8170058A06B /* LocalReviewViewController.swift */,
-				150BA5802E56F8580058A06B /* OnlyFiftySpotsViewController.swift */,
+				150BA57E2E56F8170058A06B /* ReviewTutorialViewController.swift */,
+				150BA5802E56F8580058A06B /* LimitedSpotsTutorialViewController.swift */,
 				150BA5822E56F87E0058A06B /* StartNowViewController.swift */,
 			);
 			path = TutorialPages;
@@ -2227,7 +2227,7 @@
 				74C914D32D64E01C00BC13E1 /* PutImageToPresignedURLRequest.swift in Sources */,
 				7462616F2D3EA48300A4E84F /* GetSearchKeywordResponse.swift in Sources */,
 				74DDBA8B2DC45E3B00BF9824 /* ACButtonType.swift in Sources */,
-				150BA5812E56F8580058A06B /* OnlyFiftySpotsViewController.swift in Sources */,
+				150BA5812E56F8580058A06B /* LimitedSpotsTutorialViewController.swift in Sources */,
 				156AA72A2D6510E1005B8DCE /* GetNicknameValidityRequest.swift in Sources */,
 				74D297F82D63467900DDEE31 /* ImageService.swift in Sources */,
 				15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */,
@@ -2277,7 +2277,7 @@
 				746F5BF22DE00CE90081569B /* GlassBorderAttributes.swift in Sources */,
 				748D6FAA2D2C3FF1007690B4 /* BaseCollectionViewCell.swift in Sources */,
 				748ECA6B2D31918D00BBC981 /* LoginView.swift in Sources */,
-				150BA57F2E56F8170058A06B /* LocalReviewViewController.swift in Sources */,
+				150BA57F2E56F8170058A06B /* ReviewTutorialViewController.swift in Sources */,
 				D6EA38152D42B88F002B68B9 /* SearchEmptyView.swift in Sources */,
 				74D31C712D5832D000B4B2B4 /* AlbumViewModel.swift in Sources */,
 				74721B4B2E2A07D100F0ACB9 /* SemiShortModalView.swift in Sources */,
