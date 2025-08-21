@@ -418,7 +418,7 @@ enum StringLiterals {
         
         static let limitedSpotsSubTitle = "아콘은 한 지역에 최대 50개의 맛집만 저장해요\n리뷰에 따라 맛집 랭킹이 변동돼요"
         
-        static let startNow = "지금, 어디 갈지만 정해보세요"
+        static let startNowTitle = "지금, 어디 갈지만 정해보세요"
         
         static let startNowSubTitle = "식당에 갈지 카페에 갈지만 정해보세요\n더 이상 맛집 찾느라 시간을 쏟지 마세요"
         
