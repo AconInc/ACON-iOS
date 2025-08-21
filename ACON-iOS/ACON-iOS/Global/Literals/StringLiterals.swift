@@ -21,6 +21,8 @@ enum StringLiterals {
         
         static let lastLocalVerificationAlertTime = "lastLocalVerificationAlertTime"
         
+        static let hasSeenTutorial = "hasSeenTutorial"
+        
     }
     
     enum Error {
@@ -31,6 +33,17 @@ enum StringLiterals {
         
         static let tryAgain = "다시 시도하기"
         
+    }
+    
+    enum Lottie {
+         
+        static let finishedUpload = "finishedUpload"
+        
+        static let drop1Acorn = "drop1Acorn"
+        static let drop2Acorn = "drop2Acorn"
+        static let drop3Acorn = "drop3Acorn"
+        static let drop4Acorn = "drop4Acorn"
+        static let drop5Acorn = "drop5Acorn"
     }
     
     enum Login {
@@ -392,6 +405,22 @@ enum StringLiterals {
         static let notAllFood = "확인했어요! 센스있게 추천해드릴게요"
         
         static let start = "시작하기"
+        
+    }
+    
+    enum Tutorial {
+        
+        static let verifiedLocalReviewTitle = "인증된 로컬 맛집 리뷰"
+        
+        static let verifiedLocalReviewSubTitle = "도토리를 떨어트려 리뷰를 남길 수 있어요\n현지인이 남긴 도토리는 LOCAL 태그가 붙어요"
+        
+        static let limitedSpotsTitle = "지역별 단 50곳만"
+        
+        static let limitedSpotsSubTitle = "아콘은 한 지역에 최대 50개의 맛집만 저장해요\n리뷰에 따라 맛집 랭킹이 변동돼요"
+        
+        static let startNow = "지금, 어디 갈지만 정해보세요"
+        
+        static let startNowSubTitle = "식당에 갈지 카페에 갈지만 정해보세요\n더 이상 맛집 찾느라 시간을 쏟지 마세요"
         
     }
     
