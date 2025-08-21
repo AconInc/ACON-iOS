@@ -178,6 +178,19 @@ extension UIView {
 
 extension UIView {
 
+    /// 페이드 인 애니메이션입니다.
+    /// - Parameters:
+    ///   - duration: 애니메이션 전체 시간
+    ///   - delay: 지연 시간
+    func animateFadeIn(duration: TimeInterval = 0.8, delay: TimeInterval = 0) {
+        self.alpha = 0
+        self.isHidden = false
+        
+        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseInOut) {
+            self.alpha = 1
+        }
+    }
+
     /// 아래에서 위로 올라오며 페이드 인하는 애니메이션입니다.
     /// - Parameters:
     ///   - duration: 애니메이션 전체 시간
