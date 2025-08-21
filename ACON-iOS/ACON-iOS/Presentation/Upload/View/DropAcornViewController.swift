@@ -162,15 +162,15 @@ private extension DropAcornViewController {
         dropAcornView.dropAcornLottieView.do {
             switch dropAcorn {
             case 1:
-                $0.animation = LottieAnimation.named("drop1Acorn")
+                $0.animation = LottieAnimation.named(StringLiterals.Lottie.drop1Acorn)
             case 2:
-                $0.animation = LottieAnimation.named("drop2Acorn")
+                $0.animation = LottieAnimation.named(StringLiterals.Lottie.drop2Acorn)
             case 3:
-                $0.animation = LottieAnimation.named("drop3Acorn")
+                $0.animation = LottieAnimation.named(StringLiterals.Lottie.drop3Acorn)
             case 4:
-                $0.animation = LottieAnimation.named("drop4Acorn")
+                $0.animation = LottieAnimation.named(StringLiterals.Lottie.drop4Acorn)
             case 5:
-                $0.animation = LottieAnimation.named("drop5Acorn")
+                $0.animation = LottieAnimation.named(StringLiterals.Lottie.drop5Acorn)
             default:
                 $0.isHidden = true
             }

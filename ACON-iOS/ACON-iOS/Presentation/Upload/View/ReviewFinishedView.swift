@@ -74,7 +74,7 @@ final class ReviewFinishedView: BaseView {
         }
         
         finishedReviewLottieView.do {
-            $0.animation = LottieAnimation.named("finishedUpload")
+            $0.animation = LottieAnimation.named(StringLiterals.Lottie.finishedUpload)
             $0.contentMode = .scaleAspectFit
         }
         
