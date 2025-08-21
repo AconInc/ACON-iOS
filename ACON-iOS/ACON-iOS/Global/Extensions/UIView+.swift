@@ -178,7 +178,7 @@ extension UIView {
 
 extension UIView {
 
-    /// 아래에서 위로 올라오며 페이드 인하는 애니메이션
+    /// 아래에서 위로 올라오며 페이드 인하는 애니메이션입니다.
     /// - Parameters:
     ///   - duration: 애니메이션 전체 시간
     ///   - delay: 지연 시간 (뷰마다 순차적으로 나타나게 하고 싶을 때 활용)
@@ -210,5 +210,29 @@ extension UIView {
         )
     }
 
-}
+    /// 깜빡이는 애니메이션을 시작합니다.
+    /// - Parameters:
+    ///   - duration: 깜빡임 주기 (사라졌다가 다시 나타나기까지의 전체 시간)
+    ///   - minAlpha: 깜빡이는 동안의 최소 alpha값
+    ///   - fadeIn: true일 경우 minAlpha에서 시작 (페이드 인), false일 경우 1.0에서 시작 (페이드 아웃)
+    ///   - animationKey: 애니메이션을 식별하는 고유 키
+    func startBlinking(duration: TimeInterval = 0.8, minAlpha: CGFloat = 0.2, fadeIn: Bool = true, animationKey: String = "blinking") {
+        stopBlinking(animationKey: animationKey)
+        
+        let animation = CABasicAnimation(keyPath: "opacity")
+        animation.fromValue = fadeIn ? minAlpha : 1.0
+        animation.toValue = fadeIn ? 1.0 : minAlpha
+        animation.duration = duration / 2 // NOTE: 한 방향(예: 사라지는 과정)에 대한 시간
+        animation.autoreverses = true
+        animation.repeatCount = .infinity
+        
+        self.layer.add(animation, forKey: animationKey)
+    }
 
+    /// 깜빡이는 애니메이션을 제거합니다.
+    /// - Parameter animationKey: 제거할 애니메이션의 고유 키
+    func stopBlinking(animationKey: String = "blinking") {
+        self.layer.removeAnimation(forKey: animationKey)
+    }
+
+}
