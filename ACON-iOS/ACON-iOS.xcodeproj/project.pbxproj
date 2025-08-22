@@ -25,6 +25,7 @@
 		151BD9552D63375D005E657F /* VerifiedAreasEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151BD9542D63375D005E657F /* VerifiedAreasEditViewController.swift */; };
 		151FBFBA2DBD2F1B005F4D0D /* ACFontType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151FBFB92DBD2F1B005F4D0D /* ACFontType.swift */; };
 		151FC0C92DBD5DA0005F4D0D /* Character+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151FC0C82DBD5DA0005F4D0D /* Character+.swift */; };
+		1520DFCB2E58641A0021A38E /* success.json in Resources */ = {isa = PBXBuildFile; fileRef = 1520DFCA2E58641A0021A38E /* success.json */; };
 		152F8D152DF23F7D0064022B /* MapRedirectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D142DF23F7D0064022B /* MapRedirectManager.swift */; };
 		152F8D182DF2526C0064022B /* MapRedirectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D172DF2526C0064022B /* MapRedirectModel.swift */; };
 		152F8D1A2DF252C20064022B /* MapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D192DF252C20064022B /* MapType.swift */; };
@@ -345,6 +346,7 @@
 		151BD9542D63375D005E657F /* VerifiedAreasEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiedAreasEditViewController.swift; sourceTree = "<group>"; };
 		151FBFB92DBD2F1B005F4D0D /* ACFontType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACFontType.swift; sourceTree = "<group>"; };
 		151FC0C82DBD5DA0005F4D0D /* Character+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+.swift"; sourceTree = "<group>"; };
+		1520DFCA2E58641A0021A38E /* success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = success.json; sourceTree = "<group>"; };
 		152F8D142DF23F7D0064022B /* MapRedirectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRedirectManager.swift; sourceTree = "<group>"; };
 		152F8D172DF2526C0064022B /* MapRedirectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRedirectModel.swift; sourceTree = "<group>"; };
 		152F8D192DF252C20064022B /* MapType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapType.swift; sourceTree = "<group>"; };
@@ -1795,6 +1797,7 @@
 		74BF921A2D3972C500B923E3 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				1520DFCA2E58641A0021A38E /* success.json */,
 				15C0ED692D42CDA300C9ED83 /* loadingWhite.json */,
 				745000D52D403F0200262CBE /* checkLottie.json */,
 				745000D62D403F0200262CBE /* lodingLottie.json */,
@@ -2086,6 +2089,7 @@
 				745000D72D403F0200262CBE /* lodingLottie.json in Resources */,
 				745000D82D403F0200262CBE /* checkLottie.json in Resources */,
 				15C0ED6A2D42CDA300C9ED83 /* loadingWhite.json in Resources */,
+				1520DFCB2E58641A0021A38E /* success.json in Resources */,
 				748D6F6E2D2BCA1C007690B4 /* LaunchScreen.storyboard in Resources */,
 				746AA0352DAD0EFF00E28B66 /* GoogleService-Info.plist in Resources */,
 				749C90E82DD4D37100455211 /* splashLottie.json in Resources */,
