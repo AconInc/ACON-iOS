@@ -18,11 +18,16 @@ class ReviewTutorialViewController: BaseViewController {
 
     // MARK: - UI Properties
 
-    private let titleStack = TutorialPageTitleStackView(title: StringLiterals.Tutorial.verifiedLocalReviewTitle, subTitle: StringLiterals.Tutorial.verifiedLocalReviewSubTitle)
-
     private let acornDropLottieView = LottieAnimationView(name: StringLiterals.Lottie.drop5Acorn)
 
+    private let titleLabel = UILabel()
+
+    private let firstSubtitleLabel = UILabel()
+
+    private let secondSubtitleStackView = UIStackView()
+    private let localVerifiedSpotLabel = UILabel()
     private let localTagImageView = UIImageView()
+    private let tagsAttachedLabel = UILabel()
 
 
     // MARK: - Lifecycle
@@ -42,29 +47,39 @@ class ReviewTutorialViewController: BaseViewController {
     override func setHierarchy() {
         super.setHierarchy()
 
-        view.addSubviews(titleStack, acornDropLottieView, localTagImageView)
+        view.addSubviews(acornDropLottieView, titleLabel, firstSubtitleLabel, secondSubtitleStackView)
+
+        secondSubtitleStackView.addArrangedSubviews(localVerifiedSpotLabel, localTagImageView, tagsAttachedLabel)
     }
 
     override func setLayout() {
         super.setLayout()
 
-        titleStack.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(52 * ScreenUtils.heightRatio)
+        acornDropLottieView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(64 * ScreenUtils.heightRatio)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(360 * ScreenUtils.widthRatio)
+            $0.height.equalTo(266 * ScreenUtils.widthRatio)
+        }
+
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(acornDropLottieView.snp.bottom).offset(64 * ScreenUtils.heightRatio)
             $0.centerX.equalToSuperview()
         }
 
-        acornDropLottieView.snp.makeConstraints {
-            $0.top.equalTo(titleStack.snp.bottom).offset(40 * ScreenUtils.heightRatio)
+        firstSubtitleLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(24 * ScreenUtils.heightRatio)
             $0.centerX.equalToSuperview()
-            $0.width.equalToSuperview()
-            $0.height.equalTo(266 * ScreenUtils.heightRatio)
         }
-        
-        localTagImageView.snp.makeConstraints {
-            $0.top.equalTo(acornDropLottieView.snp.bottom).offset(10 * ScreenUtils.heightRatio)
+
+        secondSubtitleStackView.snp.makeConstraints {
+            $0.centerY.equalTo(firstSubtitleLabel.snp.centerY).offset(32 * ScreenUtils.heightRatio)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(150)
-            $0.height.equalTo(110)
+        }
+
+        localTagImageView.snp.makeConstraints {
+            $0.width.equalTo(120)
+            $0.height.equalTo(84)
         }
     }
 
@@ -78,27 +93,41 @@ class ReviewTutorialViewController: BaseViewController {
             $0.animationSpeed = 1.25
         }
 
+        secondSubtitleStackView.do {
+            $0.axis = .horizontal
+            $0.spacing = -24
+            $0.alignment = .center
+        }
+
+        titleLabel.setLabel(text: StringLiterals.Tutorial.verifiedLocalReviewTitle, style: .t2SB, alignment: .center) // TODO: 폰트시스템 ExtraBold 추가 후 수정
+
+        firstSubtitleLabel.setLabel(text: StringLiterals.Tutorial.dropAcornForReview, style: .t4SB, alignment: .center)
+
+        localVerifiedSpotLabel.setLabel(text: StringLiterals.Tutorial.localVerifiedSpots, style: .t4SB, alignment: .center)
+        
+        tagsAttachedLabel.setLabel(text: StringLiterals.Tutorial.tagsAttached, style: .t4SB, alignment: .center)
+        
         localTagImageView.do {
             $0.image = .imgTagLocal
             $0.contentMode = .scaleAspectFit
         }
 
-        [titleStack, localTagImageView].forEach { $0.isHidden = true }
+        [titleLabel, firstSubtitleLabel, secondSubtitleStackView].forEach { $0.isHidden = true }
     }
 
     private func playAnimation() {
-        let duration: TimeInterval = 1.0
         let delay: TimeInterval = 0.2
 
-        titleStack.animateSlideUp(duration: duration, delay: delay)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay * 2 + 0.5) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
             guard let self = self else { return }
 
             acornDropLottieView.play { isFinished in
                 if isFinished {
-                    self.localTagImageView.isHidden = false
-                    self.localTagImageView.startBlinking(duration: 4.0, minAlpha: 0)
+                    self.titleLabel.animateSlideUp()
+
+                    [self.firstSubtitleLabel, self.secondSubtitleStackView].forEach {
+                        $0.animateFadeIn(delay: delay)
+                    }
                 }
             }
         }

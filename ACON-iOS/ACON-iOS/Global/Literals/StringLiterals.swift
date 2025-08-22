@@ -412,7 +412,11 @@ enum StringLiterals {
         
         static let verifiedLocalReviewTitle = "인증된 로컬 맛집 리뷰"
         
-        static let verifiedLocalReviewSubTitle = "도토리를 떨어트려 리뷰를 남길 수 있어요\n현지인이 남긴 도토리는 LOCAL 태그가 붙어요"
+        static let dropAcornForReview = "도토리를 떨어트려 리뷰를 남길 수 있어요"
+        
+        static let localVerifiedSpots = "현지인 인증 맛집에는"
+        
+        static let tagsAttached = "태그가 붙어요"
         
         static let limitedSpotsTitle = "지역별 단 50곳만"
         
