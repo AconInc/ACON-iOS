@@ -15,7 +15,6 @@
 		150BA57F2E56F8170058A06B /* ReviewTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150BA57E2E56F8170058A06B /* ReviewTutorialViewController.swift */; };
 		150BA5812E56F8580058A06B /* LimitedSpotsTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150BA5802E56F8580058A06B /* LimitedSpotsTutorialViewController.swift */; };
 		150BA5832E56F87E0058A06B /* StartNowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150BA5822E56F87E0058A06B /* StartNowViewController.swift */; };
-		150BA5852E5719F50058A06B /* TutorialPageTitleStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150BA5842E5719F50058A06B /* TutorialPageTitleStackView.swift */; };
 		151003EC2D5FBF7200409DF4 /* GetProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003EB2D5FBF7200409DF4 /* GetProfileResponse.swift */; };
 		151003EE2D5FC48B00409DF4 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003ED2D5FC48B00409DF4 /* ProfileService.swift */; };
 		151003F02D5FC4C600409DF4 /* ProfileTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151003EF2D5FC4C600409DF4 /* ProfileTargetType.swift */; };
@@ -340,7 +339,6 @@
 		150BA57E2E56F8170058A06B /* ReviewTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTutorialViewController.swift; sourceTree = "<group>"; };
 		150BA5802E56F8580058A06B /* LimitedSpotsTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedSpotsTutorialViewController.swift; sourceTree = "<group>"; };
 		150BA5822E56F87E0058A06B /* StartNowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNowViewController.swift; sourceTree = "<group>"; };
-		150BA5842E5719F50058A06B /* TutorialPageTitleStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageTitleStackView.swift; sourceTree = "<group>"; };
 		151003EB2D5FBF7200409DF4 /* GetProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileResponse.swift; sourceTree = "<group>"; };
 		151003ED2D5FC48B00409DF4 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		151003EF2D5FC4C600409DF4 /* ProfileTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTargetType.swift; sourceTree = "<group>"; };
@@ -679,7 +677,6 @@
 		150BA57B2E56F7770058A06B /* TutorialPages */ = {
 			isa = PBXGroup;
 			children = (
-				150BA5842E5719F50058A06B /* TutorialPageTitleStackView.swift */,
 				150BA57E2E56F8170058A06B /* ReviewTutorialViewController.swift */,
 				150BA5802E56F8580058A06B /* LimitedSpotsTutorialViewController.swift */,
 				150BA5822E56F87E0058A06B /* StartNowViewController.swift */,
@@ -2246,7 +2243,6 @@
 				15A3F7A32D38C7FF00577E16 /* SpotFilterTagStackView.swift in Sources */,
 				1547A6EB2D337F4100E96616 /* SpotListView.swift in Sources */,
 				74EC5A282DF4C51E00E176A8 /* SavedSpotsViewController.swift in Sources */,
-				150BA5852E5719F50058A06B /* TutorialPageTitleStackView.swift in Sources */,
 				1547A6EF2D33854B00E96616 /* SpotListCollectionViewCell.swift in Sources */,
 				74403B6F2DF1D6DD00B7B832 /* GoogleAdsErrorType.swift in Sources */,
 				742B1B982E00AE350036876A /* NetworkErrorView.swift in Sources */,
