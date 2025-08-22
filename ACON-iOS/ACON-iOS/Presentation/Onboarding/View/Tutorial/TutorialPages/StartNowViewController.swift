@@ -56,8 +56,8 @@ class StartNowViewController: BaseViewController {
         previewImageView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(43 * ScreenUtils.heightRatio)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(297 * ScreenUtils.widthRatio)
-            $0.height.equalTo(474 * ScreenUtils.widthRatio)
+            $0.width.equalTo(297 * ScreenUtils.heightRatio)
+            $0.height.greaterThanOrEqualTo(474 * ScreenUtils.heightRatio)
         }
 
         titleLabel.snp.makeConstraints {
