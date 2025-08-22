@@ -130,12 +130,12 @@ extension LoginViewController {
             if onSuccess {
                 AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.login, properties: ["did_login?": true])
 
-                // NOTE: 지역인증O && 취향탐색O && 튜토리얼O-> TabBar로 이동
+                // NOTE: 지역인증O && 취향탐색O && 튜토리얼O -> TabBar로 이동
                 if hasVerifiedArea && hasPreference && hasSeenTutorial {
                     NavigationUtils.navigateToTabBar()
                 }
 
-                // NOTE: 지역인증O && 취향탐색O && 튜토리얼X-> 튜토리얼로 이동
+                // NOTE: 지역인증O && 취향탐색O && 튜토리얼X -> 튜토리얼로 이동
                 else if hasVerifiedArea && hasPreference && !hasSeenTutorial {
                     NavigationUtils.navigateToTutorial()
                 }

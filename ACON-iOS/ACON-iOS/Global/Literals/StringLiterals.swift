@@ -36,14 +36,19 @@ enum StringLiterals {
     }
     
     enum Lottie {
-         
+        
+        static let splashLottie = "splashLottie"
+        
         static let finishedUpload = "finishedUpload"
+        
+        static let loadingWhite = "loadingWhite"
         
         static let drop1Acorn = "drop1Acorn"
         static let drop2Acorn = "drop2Acorn"
         static let drop3Acorn = "drop3Acorn"
         static let drop4Acorn = "drop4Acorn"
         static let drop5Acorn = "drop5Acorn"
+        
     }
     
     enum Login {

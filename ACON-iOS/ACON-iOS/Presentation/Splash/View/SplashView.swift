@@ -12,7 +12,7 @@ import AVFAudio
 
 class SplashView: BaseView {
     
-    let splashLottieView = LottieAnimationView(name: "splashLottie")
+    let splashLottieView = LottieAnimationView(name: StringLiterals.Lottie.splashLottie)
     
     let shadowImageView: UIImageView = UIImageView()
     
