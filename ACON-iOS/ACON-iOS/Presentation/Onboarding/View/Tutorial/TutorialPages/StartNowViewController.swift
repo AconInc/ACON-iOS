@@ -18,7 +18,8 @@ class StartNowViewController: BaseViewController {
 
     private let previewImageView = UIImageView()
 
-    private let titleStack = TutorialPageTitleStackView(title: StringLiterals.Tutorial.startNowTitle, subTitle: StringLiterals.Tutorial.startNowSubTitle)
+    private let titleLabel = UILabel()
+    private let subTitleLabel = UILabel()
 
     private let startButton = UIButton()
 
@@ -46,7 +47,7 @@ class StartNowViewController: BaseViewController {
     override func setHierarchy() {
         super.setHierarchy()
 
-        view.addSubviews(previewImageView, titleStack, startButton)
+        view.addSubviews(previewImageView, titleLabel, subTitleLabel, startButton)
     }
 
     override func setLayout() {
@@ -59,8 +60,13 @@ class StartNowViewController: BaseViewController {
             $0.height.equalTo(474 * ScreenUtils.widthRatio)
         }
 
-        titleStack.snp.makeConstraints {
-            $0.bottom.equalTo(previewImageView).offset(40 * ScreenUtils.heightRatio)
+        titleLabel.snp.makeConstraints {
+            $0.bottom.equalTo(previewImageView).offset(-33 * ScreenUtils.heightRatio)
+            $0.centerX.equalToSuperview()
+        }
+
+        subTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(24 * ScreenUtils.heightRatio)
             $0.centerX.equalToSuperview()
         }
 
@@ -82,7 +88,15 @@ class StartNowViewController: BaseViewController {
             $0.isHidden = true
         }
 
-        titleStack.isHidden = true
+        titleLabel.do {
+            $0.setLabel(text: StringLiterals.Tutorial.startNowTitle, style: .t2SB, alignment: .center) // TODO: 폰트시스템 ExtraBold 추가 후 수정
+            $0.isHidden = true
+        }
+        
+        subTitleLabel.do {
+            $0.setLabel(text: StringLiterals.Tutorial.startNowSubTitle, style: .t4SB, alignment: .center)
+            $0.isHidden = true
+        }
 
         startButton.do {
             let glassDefaultColor = UIColor(red: 0.255, green: 0.255, blue: 0.255, alpha: 1)
@@ -99,9 +113,11 @@ class StartNowViewController: BaseViewController {
 
         previewImageView.animateSlideUp(duration: duration, delay: delay)
 
-        titleStack.animateSlideUp(duration: duration, delay: duration + delay * 2)
+        titleLabel.animateSlideUp(duration: duration, delay: duration + delay * 2)
 
-        startButton.animateFadeIn(duration: duration, delay: duration * 2 + delay * 3)
+        subTitleLabel.animateSlideUp(duration: duration, delay: duration * 2 + delay * 3)
+
+        startButton.animateFadeIn(duration: duration, delay: duration * 3 + delay * 4)
     }
 
 }
