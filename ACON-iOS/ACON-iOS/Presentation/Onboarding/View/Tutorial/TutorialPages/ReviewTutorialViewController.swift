@@ -117,7 +117,7 @@ class ReviewTutorialViewController: BaseViewController {
 
     private func playAnimation() {
         let delay: TimeInterval = 0.2
-        let duration: TimeInterval = 1.0
+        let duration: TimeInterval = 0.8
 
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
             guard let self = self else { return }

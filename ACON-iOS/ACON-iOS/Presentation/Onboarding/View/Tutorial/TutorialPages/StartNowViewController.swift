@@ -108,8 +108,8 @@ class StartNowViewController: BaseViewController {
     }
 
     private func playAnimation() {
-        let duration: TimeInterval = 1.0
         let delay: TimeInterval = 0.2
+        let duration: TimeInterval = 0.8
 
         previewImageView.animateSlideUp(duration: duration, delay: delay)
 
