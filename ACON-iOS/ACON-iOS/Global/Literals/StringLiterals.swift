@@ -83,7 +83,7 @@ enum StringLiterals {
         
         static let gpsDeprecatedMessage = "기기에서 위치서비스가 비활성화되어 있습니다.\n설정에서 활성화상태로 변경해주세요."
         
-        static let gpsDeniedTitle = "'acon'에 대한 위치접근 권한이 없습니다."
+        static let gpsDeniedTitle = "'Acon'에 대한 위치접근 권한이 없습니다."
         
         static let gpsDeniedMessage = "설정에서 정확한 위치 권한을 허용해주세요."
         
