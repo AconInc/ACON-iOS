@@ -82,20 +82,21 @@ class StartNowViewController: BaseViewController {
 
         view.backgroundColor = .gray900
 
+        [previewImageView, titleLabel, subTitleLabel].forEach { $0.isHidden = true }
+
         previewImageView.do {
             $0.image = .imgTutorialHomePreview
             $0.contentMode = .scaleAspectFit
-            $0.isHidden = true
         }
 
         titleLabel.do {
-            $0.setLabel(text: StringLiterals.Tutorial.startNowTitle, style: .t2SB, alignment: .center) // TODO: 폰트시스템 ExtraBold 추가 후 수정
-            $0.isHidden = true
+            let fontType = ACFontType.Weight.extraBold
+            $0.text = StringLiterals.Tutorial.startNowTitle
+            $0.font = UIFont(name: fontType.fontName, size: 20) ?? .systemFont(ofSize: 20, weight: fontType.systemWeight)
         }
-        
+
         subTitleLabel.do {
             $0.setLabel(text: StringLiterals.Tutorial.startNowSubTitle, style: .t4SB, alignment: .center)
-            $0.isHidden = true
         }
 
         startButton.do {

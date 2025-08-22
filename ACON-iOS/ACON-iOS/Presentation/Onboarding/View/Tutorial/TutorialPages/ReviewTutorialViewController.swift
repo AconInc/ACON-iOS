@@ -93,13 +93,19 @@ class ReviewTutorialViewController: BaseViewController {
             $0.animationSpeed = 1.25
         }
 
+        [titleLabel, firstSubtitleLabel, secondSubtitleStackView].forEach { $0.isHidden = true }
+
         secondSubtitleStackView.do {
             $0.axis = .horizontal
             $0.spacing = -24
             $0.alignment = .center
         }
 
-        titleLabel.setLabel(text: StringLiterals.Tutorial.verifiedLocalReviewTitle, style: .t2SB, alignment: .center) // TODO: 폰트시스템 ExtraBold 추가 후 수정
+        titleLabel.do {
+            let fontType = ACFontType.Weight.extraBold
+            $0.text = StringLiterals.Tutorial.verifiedLocalReviewTitle
+            $0.font = UIFont(name: fontType.fontName, size: 20) ?? .systemFont(ofSize: 20, weight: fontType.systemWeight)
+        }
 
         firstSubtitleLabel.setLabel(text: StringLiterals.Tutorial.dropAcornForReview, style: .t4SB, alignment: .center)
 
@@ -111,8 +117,6 @@ class ReviewTutorialViewController: BaseViewController {
             $0.image = .imgTagLocal
             $0.contentMode = .scaleAspectFit
         }
-
-        [titleLabel, firstSubtitleLabel, secondSubtitleStackView].forEach { $0.isHidden = true }
     }
 
     private func playAnimation() {

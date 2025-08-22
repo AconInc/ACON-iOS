@@ -106,10 +106,12 @@ class LimitedSpotsTutorialViewController: BaseViewController {
         }
 
         titleLabel.do {
-            $0.setLabel(text: StringLiterals.Tutorial.limitedSpotsTitle, style: .t2SB, alignment: .center) // TODO: 폰트시스템 ExtraBold 추가 후 수정
+            let fontType = ACFontType.Weight.extraBold
+            $0.text = StringLiterals.Tutorial.limitedSpotsTitle
+            $0.font = UIFont(name: fontType.fontName, size: 20) ?? .systemFont(ofSize: 20, weight: fontType.systemWeight)
             $0.isHidden = true
         }
-        
+
         subTitleLabel.do {
             $0.setLabel(text: StringLiterals.Tutorial.limitedSpotsSubTitle, style: .t4SB, alignment: .center)
             $0.isHidden = true
