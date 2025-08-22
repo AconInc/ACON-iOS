@@ -176,8 +176,6 @@
 		743900972DC8696A002F91B1 /* GlassButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743900962DC86966002F91B1 /* GlassButtonType.swift */; };
 		74403B6D2DEF900B00B7B832 /* SpotListGoogleAdCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74403B6C2DEF900B00B7B832 /* SpotListGoogleAdCollectionViewCell.swift */; };
 		74403B6F2DF1D6DD00B7B832 /* GoogleAdsErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74403B6E2DF1D6D600B7B832 /* GoogleAdsErrorType.swift */; };
-		745000D72D403F0200262CBE /* lodingLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D62D403F0200262CBE /* lodingLottie.json */; };
-		745000D82D403F0200262CBE /* checkLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 745000D52D403F0200262CBE /* checkLottie.json */; };
 		745862702DDBC3CD0075A854 /* ACAlertActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7458626F2DDBC3C60075A854 /* ACAlertActionType.swift */; };
 		745A81CC2D3E429300E28002 /* LocalVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A81CB2D3E428B00E28002 /* LocalVerificationViewModel.swift */; };
 		745B19AC2D40021E00BDBDA4 /* PostLoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B19AB2D40021700BDBDA4 /* PostLoginRequest.swift */; };
@@ -499,8 +497,6 @@
 		743900962DC86966002F91B1 /* GlassButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonType.swift; sourceTree = "<group>"; };
 		74403B6C2DEF900B00B7B832 /* SpotListGoogleAdCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListGoogleAdCollectionViewCell.swift; sourceTree = "<group>"; };
 		74403B6E2DF1D6D600B7B832 /* GoogleAdsErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdsErrorType.swift; sourceTree = "<group>"; };
-		745000D52D403F0200262CBE /* checkLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = checkLottie.json; sourceTree = "<group>"; };
-		745000D62D403F0200262CBE /* lodingLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lodingLottie.json; sourceTree = "<group>"; };
 		7458626F2DDBC3C60075A854 /* ACAlertActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAlertActionType.swift; sourceTree = "<group>"; };
 		745A81CB2D3E428B00E28002 /* LocalVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationViewModel.swift; sourceTree = "<group>"; };
 		745B19AB2D40021700BDBDA4 /* PostLoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLoginRequest.swift; sourceTree = "<group>"; };
@@ -1835,8 +1831,6 @@
 			isa = PBXGroup;
 			children = (
 				15C0ED692D42CDA300C9ED83 /* loadingWhite.json */,
-				745000D52D403F0200262CBE /* checkLottie.json */,
-				745000D62D403F0200262CBE /* lodingLottie.json */,
 				749C90E72DD4D37100455211 /* splashLottie.json */,
 				747FB8FF2DDB95980027F252 /* finishedUpload.json */,
 				748F6A582DE0CCA60073CA9E /* drop1Acorn.json */,
@@ -2123,8 +2117,6 @@
 				748D6FA12D2BD65D007690B4 /* Pretendard-Regular.otf in Resources */,
 				15F15E832DBFD17A002F81E2 /* Pretendard-Light.otf in Resources */,
 				748F6A592DE0CCA60073CA9E /* drop1Acorn.json in Resources */,
-				745000D72D403F0200262CBE /* lodingLottie.json in Resources */,
-				745000D82D403F0200262CBE /* checkLottie.json in Resources */,
 				15C0ED6A2D42CDA300C9ED83 /* loadingWhite.json in Resources */,
 				748D6F6E2D2BCA1C007690B4 /* LaunchScreen.storyboard in Resources */,
 				746AA0352DAD0EFF00E28B66 /* GoogleService-Info.plist in Resources */,
