@@ -30,7 +30,11 @@ class LoginViewController: BaseNavViewController {
         
         addTarget()
         bindViewModel()
-        self.setSkipButton()
+        self.setSkipButton {
+            AuthManager.shared.hasSeenTutorial
+            ? NavigationUtils.navigateToTabBar()
+            : NavigationUtils.navigateToTutorial()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,9 +125,32 @@ extension LoginViewController {
             guard let self = self else { return }
             let hasVerifiedArea = AuthManager.shared.hasVerifiedArea
             let hasPreference = AuthManager.shared.hasPreference
+            let hasSeenTutorial = AuthManager.shared.hasSeenTutorial
+
             if onSuccess {
                 AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.login, properties: ["did_login?": true])
-                hasVerifiedArea ? hasPreference ? NavigationUtils.navigateToTabBar() : NavigationUtils.naviateToLoginOnboarding() : NavigationUtils.navigateToOnboardingLocalVerification()
+
+                // NOTE: 지역인증O && 취향탐색O && 튜토리얼O-> TabBar로 이동
+                if hasVerifiedArea && hasPreference && hasSeenTutorial {
+                    NavigationUtils.navigateToTabBar()
+                }
+
+                // NOTE: 지역인증O && 취향탐색O && 튜토리얼X-> 튜토리얼로 이동
+                else if hasVerifiedArea && hasPreference && !hasSeenTutorial {
+                    NavigationUtils.navigateToTutorial()
+                }
+
+                // NOTE: 지역인증O && 취향탐색X -> 취향탐색으로 이동
+                // NOTE: 취향탐색 이후 튜토리얼을 거치는지는 OnboardingVC에서 분기처리
+                else if hasVerifiedArea && !hasPreference {
+                    NavigationUtils.naviateToLoginOnboarding()
+                }
+
+                // NOTE: 지역인증X -> 지역인증으로 이동
+                // NOTE: 지역인증 이후 취항탐색, 튜토리얼을 거치는지는 LocalMapVC에서 분기처리
+                else {
+                    NavigationUtils.navigateToOnboardingLocalVerification()
+                }
             } else {
                 showLoginFailAlert()
             }

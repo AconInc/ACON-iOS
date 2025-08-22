@@ -8,6 +8,7 @@
 import UIKit
 
 final class AuthManager {
+    
     static let shared = AuthManager()
     private init() {}
     
@@ -26,6 +27,12 @@ final class AuthManager {
     var hasPreference: Bool {
         get {
             UserDefaults.standard.bool(forKey: StringLiterals.UserDefaults.hasPreference)
+        }
+    }
+    
+    var hasSeenTutorial: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: StringLiterals.UserDefaults.hasSeenTutorial)
         }
     }
     
@@ -57,4 +64,5 @@ final class AuthManager {
             }
         }
     }
+    
 }
