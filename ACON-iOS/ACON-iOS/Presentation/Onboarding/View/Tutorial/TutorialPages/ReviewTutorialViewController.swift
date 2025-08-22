@@ -117,16 +117,17 @@ class ReviewTutorialViewController: BaseViewController {
 
     private func playAnimation() {
         let delay: TimeInterval = 0.2
+        let duration: TimeInterval = 1.0
 
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
             guard let self = self else { return }
 
             acornDropLottieView.play { isFinished in
                 if isFinished {
-                    self.titleLabel.animateSlideUp()
+                    self.titleLabel.animateSlideUp(duration: duration)
 
                     [self.firstSubtitleLabel, self.secondSubtitleStackView].forEach {
-                        $0.animateFadeIn(delay: delay)
+                        $0.animateFadeIn(duration: duration, delay: duration + delay)
                     }
                 }
             }
