@@ -62,7 +62,7 @@ class TutorialContainerViewController: BaseViewController {
         }
 
         pageControl.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(24 * ScreenUtils.heightRatio)
+            $0.centerY.equalTo(view.safeAreaLayoutGuide.snp.top).offset(28 * ScreenUtils.heightRatio)
             $0.centerX.equalToSuperview()
         }
     }
