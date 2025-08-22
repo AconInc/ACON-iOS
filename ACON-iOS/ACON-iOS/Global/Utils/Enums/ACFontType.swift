@@ -10,15 +10,17 @@ import UIKit
 struct ACFontStyle {
 
     private let fontName: String
+    private let weight: ACFontType.Weight
     let size: CGFloat
     let lineHeight: CGFloat
 
     var font: UIFont {
-        return UIFont(name: fontName, size: size) ?? .systemFont(ofSize: size)
+        return UIFont(name: fontName, size: size) ?? .systemFont(ofSize: size, weight: weight.systemWeight)
     }
 
     init(_ weight: ACFontType.Weight = .regular, size: CGFloat, lineHeight: CGFloat) {
         self.fontName = weight.fontName
+        self.weight = weight
         self.size = size
         self.lineHeight = lineHeight
     }
@@ -32,14 +34,26 @@ enum ACFontType {
         case light
         case regular
         case semibold
+        case extraBold
 
         var fontName: String {
             switch self {
             case .light: return "Pretendard-Light"
             case .regular: return "Pretendard-Regular"
             case .semibold: return "Pretendard-SemiBold"
+            case .extraBold: return "Pretendard-ExtraBold"
             }
         }
+
+        var systemWeight: UIFont.Weight {
+            switch self {
+            case .light: return .light
+            case .regular: return .regular
+            case .semibold: return .semibold
+            case .extraBold: return .heavy
+            }
+        }
+
     }
 
     case h1R, h1SB

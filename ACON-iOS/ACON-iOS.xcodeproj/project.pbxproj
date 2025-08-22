@@ -87,6 +87,7 @@
 		157C06212DC5EBB4000B04AF /* SpotTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C06202DC5EBB4000B04AF /* SpotTagButton.swift */; };
 		157C0AC12DC689E7000B04AF /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C0AC02DC689E7000B04AF /* UIImage+.swift */; };
 		157C0BE82DC897EE000B04AF /* SpotToggleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */; };
+		159D70F12E58D24200B1C9A3 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 159D70F02E58D24200B1C9A3 /* Pretendard-ExtraBold.otf */; };
 		15A147212D5B256D003793EE /* LocalVerificationFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */; };
 		15A15BD72E410A2500E8929E /* ReviewMenuRecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A15BD62E410A2500E8929E /* ReviewMenuRecommendationViewController.swift */; };
 		15A167D92E3B6A8300062C49 /* SpotUploadPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A167D82E3B6A8300062C49 /* SpotUploadPhotoViewController.swift */; };
@@ -410,6 +411,7 @@
 		157C06202DC5EBB4000B04AF /* SpotTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTagButton.swift; sourceTree = "<group>"; };
 		157C0AC02DC689E7000B04AF /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		157C0BE72DC897EE000B04AF /* SpotToggleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotToggleButtonView.swift; sourceTree = "<group>"; };
+		159D70F02E58D24200B1C9A3 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		15A147202D5B256D003793EE /* LocalVerificationFlowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVerificationFlowType.swift; sourceTree = "<group>"; };
 		15A15BD62E410A2500E8929E /* ReviewMenuRecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewMenuRecommendationViewController.swift; sourceTree = "<group>"; };
 		15A167D82E3B6A8300062C49 /* SpotUploadPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadPhotoViewController.swift; sourceTree = "<group>"; };
@@ -1584,6 +1586,7 @@
 				15F15E822DBFD17A002F81E2 /* Pretendard-Light.otf */,
 				748D6FA02D2BD65D007690B4 /* Pretendard-Regular.otf */,
 				748D6F9C2D2BD641007690B4 /* Pretendard-SemiBold.otf */,
+				159D70F02E58D24200B1C9A3 /* Pretendard-ExtraBold.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -2108,6 +2111,7 @@
 			files = (
 				74FA77842DD43709006846C9 /* SplashBGM.mp3 in Resources */,
 				15BFF8B92D665BAD00909C4F /* Debug.xcconfig in Resources */,
+				159D70F12E58D24200B1C9A3 /* Pretendard-ExtraBold.otf in Resources */,
 				747FB9002DDB95980027F252 /* finishedUpload.json in Resources */,
 				15BFF8BA2D665BAD00909C4F /* Release.xcconfig in Resources */,
 				748D6F6C2D2BCA1C007690B4 /* Assets.xcassets in Resources */,
