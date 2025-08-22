@@ -422,6 +422,8 @@ enum StringLiterals {
         
         static let startNowSubTitle = "식당에 갈지 카페에 갈지만 정해보세요\n더 이상 맛집 찾느라 시간을 쏟지 마세요"
         
+        static let start = "시작하기"
+        
     }
     
     enum DislikeTypes {

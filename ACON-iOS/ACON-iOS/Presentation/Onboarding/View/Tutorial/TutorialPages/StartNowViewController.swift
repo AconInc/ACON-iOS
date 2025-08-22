@@ -25,6 +25,12 @@ class StartNowViewController: BaseViewController {
 
     // MARK: - Lifecycle
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        addTarget()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -80,7 +86,7 @@ class StartNowViewController: BaseViewController {
 
         startButton.do {
             let glassDefaultColor = UIColor(red: 0.255, green: 0.255, blue: 0.255, alpha: 1)
-            $0.setAttributedTitle(text: StringLiterals.SpotUpload.next, style: .b1SB)
+            $0.setAttributedTitle(text: StringLiterals.Tutorial.start, style: .b1SB)
             $0.backgroundColor = glassDefaultColor
             $0.layer.cornerRadius = 12
             $0.layer.opacity = 0
@@ -96,6 +102,23 @@ class StartNowViewController: BaseViewController {
         titleStack.animateSlideUp(duration: duration, delay: duration + delay * 2)
 
         startButton.animateFadeIn(duration: duration, delay: duration * 2 + delay * 3)
+    }
+
+}
+
+
+// MARK: - AddTarget
+
+private extension StartNowViewController {
+
+    func addTarget() {
+        startButton.addTarget(self, action: #selector(tappedStartButton), for: .touchUpInside)
+    }
+
+    @objc
+    func tappedStartButton() {
+        UserDefaults.standard.set(true, forKey: StringLiterals.UserDefaults.hasSeenTutorial)
+        NavigationUtils.navigateToTabBar()
     }
 
 }
