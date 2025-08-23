@@ -279,7 +279,6 @@ private extension SpotListFilterViewController {
             let tagKeys: [String] = SpotFilterType.RestaurantOptionType.allCases.map { return $0.serverKey }
             let firstLineKeys: [String] = Array(tagKeys[0..<spotType.firstLineCount])
             let secondLineKeys: [String] = Array(tagKeys[spotType.firstLineCount..<spotType.firstLineCount + spotType.secondLineCount])
-            let thirdLineKeys: [String] = Array(tagKeys[(spotType.firstLineCount + spotType.secondLineCount)...])
             
             for (i, tagKey) in firstLineKeys.enumerated() {
                 if optionList.contains(tagKey) {
@@ -290,12 +289,6 @@ private extension SpotListFilterViewController {
             for (i, tagKey) in secondLineKeys.enumerated() {
                 if optionList.contains(tagKey) {
                     spotListFilterView.secondLineSpotTagStackView.tags[i].isTagged = true
-                }
-            }
-
-            for (i, tagKey) in thirdLineKeys.enumerated() {
-                if optionList.contains(tagKey) {
-                    spotListFilterView.thirdLineSpotTagStackView.tags[i].isTagged = true
                 }
             }
 

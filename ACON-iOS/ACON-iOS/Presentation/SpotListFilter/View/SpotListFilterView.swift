@@ -283,11 +283,9 @@ private extension SpotListFilterView {
             let options: [String] = SpotFilterType.RestaurantOptionType.allCases.map { return $0.text }
             let firstLine: [String] = Array(options[0..<spotType.firstLineCount])
             let secondLine: [String] = Array(options[spotType.firstLineCount..<spotType.firstLineCount + spotType.secondLineCount])
-            let thirdLine: [String] = Array(options[(spotType.firstLineCount + spotType.secondLineCount)...])
 
             firstLineSpotTagStackView.addTagButtons(titles: firstLine)
             secondLineSpotTagStackView.addTagButtons(titles: secondLine)
-            thirdLineSpotTagStackView.addTagButtons(titles: thirdLine)
 
         case .cafe:
             let options: [String] = SpotFilterType.CafeOptionType.allCases.map { return $0.text }

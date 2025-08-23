@@ -29,6 +29,7 @@
 		151BD9552D63375D005E657F /* VerifiedAreasEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151BD9542D63375D005E657F /* VerifiedAreasEditViewController.swift */; };
 		151FBFBA2DBD2F1B005F4D0D /* ACFontType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151FBFB92DBD2F1B005F4D0D /* ACFontType.swift */; };
 		151FC0C92DBD5DA0005F4D0D /* Character+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151FC0C82DBD5DA0005F4D0D /* Character+.swift */; };
+		1520DFCB2E58641A0021A38E /* success.json in Resources */ = {isa = PBXBuildFile; fileRef = 1520DFCA2E58641A0021A38E /* success.json */; };
 		152F8D152DF23F7D0064022B /* MapRedirectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D142DF23F7D0064022B /* MapRedirectManager.swift */; };
 		152F8D182DF2526C0064022B /* MapRedirectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D172DF2526C0064022B /* MapRedirectModel.swift */; };
 		152F8D1A2DF252C20064022B /* MapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F8D192DF252C20064022B /* MapType.swift */; };
@@ -352,6 +353,7 @@
 		151BD9542D63375D005E657F /* VerifiedAreasEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiedAreasEditViewController.swift; sourceTree = "<group>"; };
 		151FBFB92DBD2F1B005F4D0D /* ACFontType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACFontType.swift; sourceTree = "<group>"; };
 		151FC0C82DBD5DA0005F4D0D /* Character+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+.swift"; sourceTree = "<group>"; };
+		1520DFCA2E58641A0021A38E /* success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = success.json; sourceTree = "<group>"; };
 		152F8D142DF23F7D0064022B /* MapRedirectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRedirectManager.swift; sourceTree = "<group>"; };
 		152F8D172DF2526C0064022B /* MapRedirectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRedirectModel.swift; sourceTree = "<group>"; };
 		152F8D192DF252C20064022B /* MapType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapType.swift; sourceTree = "<group>"; };
@@ -1830,6 +1832,7 @@
 		74BF921A2D3972C500B923E3 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				1520DFCA2E58641A0021A38E /* success.json */,
 				15C0ED692D42CDA300C9ED83 /* loadingWhite.json */,
 				749C90E72DD4D37100455211 /* splashLottie.json */,
 				747FB8FF2DDB95980027F252 /* finishedUpload.json */,
@@ -2118,6 +2121,7 @@
 				15F15E832DBFD17A002F81E2 /* Pretendard-Light.otf in Resources */,
 				748F6A592DE0CCA60073CA9E /* drop1Acorn.json in Resources */,
 				15C0ED6A2D42CDA300C9ED83 /* loadingWhite.json in Resources */,
+				1520DFCB2E58641A0021A38E /* success.json in Resources */,
 				748D6F6E2D2BCA1C007690B4 /* LaunchScreen.storyboard in Resources */,
 				746AA0352DAD0EFF00E28B66 /* GoogleService-Info.plist in Resources */,
 				749C90E82DD4D37100455211 /* splashLottie.json in Resources */,
@@ -2474,7 +2478,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = KX5Q77JSUF;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "ACON-iOS/Global/Settings/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = acon;
+				INFOPLIST_KEY_CFBundleDisplayName = Acon;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "acon에서 회원님 기기의 GPS를 사용하여 현재 위치기반 장소추천을 위해 위치접근에 대한 권한을 사용합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "acon에서 회원님의 이미지 및 동영상을 공유할 수 있도록 지원하고 프로필 사진 변경, 후기 업로드 등의 목적으로 \n회원님의 앨범 라이브러리에 대한 액세스 권한을 사용합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -2516,7 +2520,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = KX5Q77JSUF;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "ACON-iOS/Global/Settings/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = acon;
+				INFOPLIST_KEY_CFBundleDisplayName = Acon;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "acon에서 회원님 기기의 GPS를 사용하여 현재 위치기반 장소추천을 위해 위치접근에 대한 권한을 사용합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "acon에서 회원님의 이미지 및 동영상을 공유할 수 있도록 지원하고 프로필 사진 변경, 후기 업로드 등의 목적으로 \n회원님의 앨범 라이브러리에 대한 액세스 권한을 사용합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
