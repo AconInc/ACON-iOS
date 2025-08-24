@@ -35,6 +35,7 @@ enum StringLiterals {
         
     }
     
+        static let success = "success"
     enum Lottie {
         
         static let splashLottie = "splashLottie"
@@ -48,6 +49,8 @@ enum StringLiterals {
         static let drop3Acorn = "drop3Acorn"
         static let drop4Acorn = "drop4Acorn"
         static let drop5Acorn = "drop5Acorn"
+        
+        static let success = "success"
         
     }
     
@@ -101,7 +104,7 @@ enum StringLiterals {
         
         static let gpsDeprecatedMessage = "기기에서 위치서비스가 비활성화되어 있습니다.\n설정에서 활성화상태로 변경해주세요."
         
-        static let gpsDeniedTitle = "'acon'에 대한 위치접근 권한이 없습니다."
+        static let gpsDeniedTitle = "'Acon'에 대한 위치접근 권한이 없습니다."
         
         static let gpsDeniedMessage = "설정에서 정확한 위치 권한을 허용해주세요."
         
@@ -213,11 +216,11 @@ enum StringLiterals {
         
         static let youCanRegisterPhotos = "식당 사진을 등록할 수 있어요"
         
-        static let newSpotSaved = "새로운 장소가 저장되었어요!"
+        static let newSpotSaved = "새로운 장소를 등록했어요!"
         
-        static let itWillBeReflectedInThreeDays = "등록해 주신 장소는 3일 뒤에 반영돼요"
+        static let itWillBeReflectedInThreeDays = "등록한 장소는 검토 후 반영돼요"
         
-        static let goHome = "홈으로 가기"
+        static let done = "완료"
         
     }
     

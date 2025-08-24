@@ -28,7 +28,7 @@ enum SpotType {
     var firstLineCount: Int {
         switch self {
         case .restaurant: return 5
-        case .cafe: return 2
+        case .cafe: return 1
         }
     }
 
