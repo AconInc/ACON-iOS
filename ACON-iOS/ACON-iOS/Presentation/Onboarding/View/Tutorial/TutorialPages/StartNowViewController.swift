@@ -89,13 +89,13 @@ class StartNowViewController: BaseViewController {
             $0.contentMode = .scaleAspectFit
         }
 
-        titleLabel.setLabel(text: StringLiterals.Tutorial.startNowTitle, style: .h3B)
+        titleLabel.setLabel(text: StringLiterals.Tutorial.noMoreWorry, style: .h3B)
 
         subTitleLabel.setLabel(text: StringLiterals.Tutorial.startNowSubTitle, style: .t4SB, alignment: .center)
 
         startButton.do {
             let glassDefaultColor = UIColor(red: 0.255, green: 0.255, blue: 0.255, alpha: 1)
-            $0.setAttributedTitle(text: StringLiterals.Tutorial.start, style: .b1SB)
+            $0.setAttributedTitle(text: StringLiterals.Tutorial.start, style: .t4SB)
             $0.backgroundColor = glassDefaultColor
             $0.layer.cornerRadius = 12
             $0.layer.opacity = 0
@@ -108,11 +108,11 @@ class StartNowViewController: BaseViewController {
 
         previewImageView.animateSlideUp(duration: duration, delay: delay)
 
-        titleLabel.animateSlideUp(duration: duration, delay: duration + delay * 2)
+        titleLabel.animateSlideUp(duration: duration, delay: delay * 2)
 
-        subTitleLabel.animateSlideUp(duration: duration, delay: duration * 2 + delay * 3)
+        subTitleLabel.animateSlideUp(duration: duration, delay: delay * 3)
 
-        startButton.animateFadeIn(duration: duration, delay: duration * 3 + delay * 4)
+        startButton.animateFadeIn(duration: duration, delay: delay * 4)
     }
 
 }
