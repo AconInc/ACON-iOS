@@ -106,9 +106,7 @@ class LimitedSpotsTutorialViewController: BaseViewController {
         }
 
         titleLabel.do {
-            let fontType = ACFontType.Weight.extraBold
-            $0.text = StringLiterals.Tutorial.limitedSpotsTitle
-            $0.font = UIFont(name: fontType.fontName, size: 20) ?? .systemFont(ofSize: 20, weight: fontType.systemWeight)
+            $0.setLabel(text: StringLiterals.Tutorial.limitedSpotsTitle, style: .h3B)
             $0.isHidden = true
         }
 

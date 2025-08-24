@@ -89,15 +89,9 @@ class StartNowViewController: BaseViewController {
             $0.contentMode = .scaleAspectFit
         }
 
-        titleLabel.do {
-            let fontType = ACFontType.Weight.extraBold
-            $0.text = StringLiterals.Tutorial.startNowTitle
-            $0.font = UIFont(name: fontType.fontName, size: 20) ?? .systemFont(ofSize: 20, weight: fontType.systemWeight)
-        }
+        titleLabel.setLabel(text: StringLiterals.Tutorial.startNowTitle, style: .h3B)
 
-        subTitleLabel.do {
-            $0.setLabel(text: StringLiterals.Tutorial.startNowSubTitle, style: .t4SB, alignment: .center)
-        }
+        subTitleLabel.setLabel(text: StringLiterals.Tutorial.startNowSubTitle, style: .t4SB, alignment: .center)
 
         startButton.do {
             let glassDefaultColor = UIColor(red: 0.255, green: 0.255, blue: 0.255, alpha: 1)
