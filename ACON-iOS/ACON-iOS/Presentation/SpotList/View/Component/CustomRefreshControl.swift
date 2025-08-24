@@ -14,7 +14,7 @@ class CustomRefreshControl: UIRefreshControl {
     
     // MARK: - Properties
     
-    private let animationView = LottieAnimationView(name: "loadingWhite")
+    private let animationView = LottieAnimationView(name: StringLiterals.Lottie.loadingWhite)
     
     
     // MARK: - Life Cycles

@@ -132,7 +132,8 @@ private extension OnboardingViewController {
                   let onSuccess = onSuccess else { return }
             if onSuccess {
                 if flowType == .login {
-                    NavigationUtils.navigateToTabBar()
+                    // NOTE: 튜토리얼 또는 TabBar로 이동
+                    AuthManager.shared.hasSeenTutorial ? NavigationUtils.navigateToTabBar() : NavigationUtils.navigateToTutorial()
                 } else {
                     NavigationUtils.popToParentVC(from: self, targetVCType: ProfileSettingViewController.self)
                 }

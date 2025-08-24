@@ -57,7 +57,7 @@ final class ACTextField: UIView {
 
     private let clearButton = UIButton()
 
-    private let animationView = LottieAnimationView(name: "loadingWhite")
+    private let animationView = LottieAnimationView(name: StringLiterals.Lottie.loadingWhite)
 
     private var glassmorphismView: GlassmorphismView?
 

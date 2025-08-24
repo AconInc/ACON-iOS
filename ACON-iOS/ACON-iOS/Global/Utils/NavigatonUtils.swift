@@ -47,4 +47,10 @@ struct NavigationUtils {
         }
     }
     
+    static func navigateToTutorial() {
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = TutorialContainerViewController()
+        }
+    }
+    
 }
