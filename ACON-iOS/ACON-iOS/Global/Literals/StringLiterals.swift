@@ -425,7 +425,11 @@ enum StringLiterals {
         
         static let limitedSpotsTitle = "지역별 단 50곳만"
         
-        static let limitedSpotsSubTitle = "아콘은 한 지역에 최대 50개의 맛집만 저장해요\n리뷰에 따라 맛집 랭킹이 변동돼요"
+        static let aconAtOneArea = "아콘은 한 지역에 "
+        
+        static let maxFifty = "최대 50개"
+        
+        static let saveAndRankChanges = "의 맛집만 저장해요\n리뷰에 따라 맛집 랭킹이 변동돼요"
         
         static let startNowTitle = "지금, 어디 갈지만 정해보세요"
         
