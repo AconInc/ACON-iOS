@@ -101,11 +101,7 @@ class ReviewTutorialViewController: BaseViewController {
             $0.alignment = .center
         }
 
-        titleLabel.do {
-            let fontType = ACFontType.Weight.extraBold
-            $0.text = StringLiterals.Tutorial.verifiedLocalReviewTitle
-            $0.font = UIFont(name: fontType.fontName, size: 20) ?? .systemFont(ofSize: 20, weight: fontType.systemWeight)
-        }
+        titleLabel.setLabel(text: StringLiterals.Tutorial.verifiedLocalReviewTitle, style: .h3B)
 
         firstSubtitleLabel.setLabel(text: StringLiterals.Tutorial.dropAcornForReview, style: .t4SB, alignment: .center)
 

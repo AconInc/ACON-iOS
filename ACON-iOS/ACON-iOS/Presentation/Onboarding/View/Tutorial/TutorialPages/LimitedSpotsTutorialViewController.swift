@@ -100,20 +100,26 @@ class LimitedSpotsTutorialViewController: BaseViewController {
     override func setStyle() {
         super.setStyle()
 
+        let literals = StringLiterals.Tutorial.self
+
         view.do {
             $0.backgroundColor = .gray900
             $0.clipsToBounds = true
         }
 
         titleLabel.do {
-            let fontType = ACFontType.Weight.extraBold
-            $0.text = StringLiterals.Tutorial.limitedSpotsTitle
-            $0.font = UIFont(name: fontType.fontName, size: 20) ?? .systemFont(ofSize: 20, weight: fontType.systemWeight)
+            $0.setLabel(text: literals.limitedSpotsTitle, style: .h3B)
             $0.isHidden = true
         }
 
         subTitleLabel.do {
-            $0.setLabel(text: StringLiterals.Tutorial.limitedSpotsSubTitle, style: .t4SB, alignment: .center)
+            $0.setPartialText(
+                fullText: literals.aconAtOneArea + literals.maxFifty + literals.saveAndRankChanges,
+                textStyles: [(text: literals.aconAtOneArea, style: .t4SB, color: .acWhite),
+                             (text: literals.maxFifty, style: .t4SB, color: .primaryDefault),
+                             (text: literals.saveAndRankChanges, style: .t4SB, color: .acWhite)])
+            $0.numberOfLines = 0
+            $0.textAlignment = .center
             $0.isHidden = true
         }
 

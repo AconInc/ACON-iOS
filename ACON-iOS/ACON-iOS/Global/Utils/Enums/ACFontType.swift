@@ -34,14 +34,14 @@ enum ACFontType {
         case light
         case regular
         case semibold
-        case extraBold
+        case bold
 
         var fontName: String {
             switch self {
             case .light: return "Pretendard-Light"
             case .regular: return "Pretendard-Regular"
             case .semibold: return "Pretendard-SemiBold"
-            case .extraBold: return "Pretendard-ExtraBold"
+            case .bold: return "Pretendard-Bold"
             }
         }
 
@@ -50,7 +50,7 @@ enum ACFontType {
             case .light: return .light
             case .regular: return .regular
             case .semibold: return .semibold
-            case .extraBold: return .heavy
+            case .bold: return .bold
             }
         }
 
@@ -58,7 +58,7 @@ enum ACFontType {
 
     case h1R, h1SB
     case h2R, h2SB
-    case h3R, h3SB
+    case h3R, h3SB, h3B
     case h4R, h4SB
 
     case t1L, t1R, t1SB
@@ -82,6 +82,7 @@ enum ACFontType {
         case .h2SB: return ACFontStyle(.semibold, size: 28, lineHeight: 38)
         case .h3SB: return ACFontStyle(.semibold, size: 24, lineHeight: 34)
         case .h4SB: return ACFontStyle(.semibold, size: 20, lineHeight: 28)
+        case .h3B: return ACFontStyle(.bold, size: 24, lineHeight: 34)
 
         case .t1L: return ACFontStyle(.light, size: 24, lineHeight: 34)
         case .t2L: return ACFontStyle(.light, size: 20, lineHeight: 28)
