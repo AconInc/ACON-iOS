@@ -433,9 +433,9 @@ enum StringLiterals {
         
         static let saveAndRankChanges = "의 맛집만 저장해요\n리뷰에 따라 맛집 랭킹이 변동돼요"
         
-        static let startNowTitle = "지금, 어디 갈지만 정해보세요"
+        static let noMoreWorry = "더 이상 맛집 고민은 끝."
         
-        static let startNowSubTitle = "식당에 갈지 카페에 갈지만 정해보세요\n더 이상 맛집 찾느라 시간을 쏟지 마세요"
+        static let startNowSubTitle = "지금 식당에 갈지 카페에 갈지만 정해보세요\n더 이상 맛집 찾느라 시간을 쏟지 마세요"
         
         static let start = "시작하기"
         

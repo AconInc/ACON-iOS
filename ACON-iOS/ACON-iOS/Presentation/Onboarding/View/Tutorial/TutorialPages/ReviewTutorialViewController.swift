@@ -127,7 +127,7 @@ class ReviewTutorialViewController: BaseViewController {
                     self.titleLabel.animateSlideUp(duration: duration)
 
                     [self.firstSubtitleLabel, self.secondSubtitleStackView].forEach {
-                        $0.animateFadeIn(duration: duration, delay: duration + delay)
+                        $0.animateFadeIn(duration: duration, delay: delay)
                     }
                 }
             }

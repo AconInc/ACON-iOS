@@ -141,13 +141,13 @@ class LimitedSpotsTutorialViewController: BaseViewController {
 
         titleLabel.animateSlideUp(duration: duration, delay: delay)
 
-        subTitleLabel.animateSlideUp(duration: duration, delay: delay * 2 + duration)
+        subTitleLabel.animateSlideUp(duration: duration, delay: delay * 2)
 
         [leftImageView, centerImageView, rightImageView].forEach {
-            $0.animateFadeIn(duration: duration, delay: delay * 3 + duration * 2)
+            $0.animateFadeIn(duration: duration, delay: delay * 3)
         }
 
-        UIView.animate(withDuration: 1.0, delay: delay * 3 + duration * 2) {
+        UIView.animate(withDuration: 1.0, delay: delay * 4) {
             self.centerImageView.snp.updateConstraints {
                 $0.top.equalTo(self.subTitleLabel.snp.bottom).offset(-93)
             }
