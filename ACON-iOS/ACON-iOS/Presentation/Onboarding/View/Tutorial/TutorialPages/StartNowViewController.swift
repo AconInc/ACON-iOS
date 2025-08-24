@@ -95,7 +95,7 @@ class StartNowViewController: BaseViewController {
 
         startButton.do {
             let glassDefaultColor = UIColor(red: 0.255, green: 0.255, blue: 0.255, alpha: 1)
-            $0.setAttributedTitle(text: StringLiterals.Tutorial.start, style: .b1SB)
+            $0.setAttributedTitle(text: StringLiterals.Tutorial.start, style: .t4SB)
             $0.backgroundColor = glassDefaultColor
             $0.layer.cornerRadius = 12
             $0.layer.opacity = 0
