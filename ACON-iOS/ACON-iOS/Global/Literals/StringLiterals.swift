@@ -48,7 +48,7 @@ enum StringLiterals {
         static let drop3Acorn = "drop3Acorn"
         static let drop4Acorn = "drop4Acorn"
         static let drop5Acorn = "drop5Acorn"
-
+        
         static let success = "success"
         
     }
