@@ -119,6 +119,14 @@ class ReviewTutorialViewController: BaseViewController {
         let delay: TimeInterval = 0.2
         let duration: TimeInterval = 0.8
 
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.29) {
+            for i in 1...5 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.2) {
+                    HapticManager.shared.hapticImpact(style: .soft)
+                }
+            }
+        }
+
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
             guard let self = self else { return }
 
