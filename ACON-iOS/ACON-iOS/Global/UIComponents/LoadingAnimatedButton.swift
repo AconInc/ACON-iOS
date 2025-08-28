@@ -13,7 +13,7 @@ class LoadingAnimatedButton: UIButton {
     
     // MARK: - UI Properties
     
-    private let animationView = LottieAnimationView(name: "loadingWhite")
+    private let animationView = LottieAnimationView(name: StringLiterals.Lottie.loadingWhite)
     
     
     // MARK: - Initializing

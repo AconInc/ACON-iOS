@@ -18,7 +18,8 @@ final class SettingViewModel: Serviceable {
                 switch result {
                 case .success:
                     for key in UserDefaults.standard.dictionaryRepresentation().keys {
-                        UserDefaults.standard.removeObject(forKey: key.description)
+                        if key == StringLiterals.UserDefaults.hasSeenTutorial { continue }
+                        UserDefaults.standard.removeObject(forKey: key)
                     }
                     AmplitudeManager.shared.reset()
                     self.onPostLogoutSuccess.value = true

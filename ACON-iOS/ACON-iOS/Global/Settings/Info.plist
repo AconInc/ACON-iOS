@@ -13,7 +13,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>acon</string>
+	<string>Acon</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -29,7 +29,7 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.1.0</string>
+	<string>2.1.1</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -54,7 +54,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2025.0811.0035</string>
+	<string>2025.0824.2309</string>
 	<key>GADApplicationIdentifier</key>
 	<string>${GAD_APPLICATION_IDENTIFIER}</string>
 	<key>GAD_AD_UNIT_ID</key>
@@ -96,6 +96,7 @@
 		<string>Pretendard-Light.otf</string>
 		<string>Pretendard-Regular.otf</string>
 		<string>Pretendard-SemiBold.otf</string>
+		<string>Pretendard-Bold.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
