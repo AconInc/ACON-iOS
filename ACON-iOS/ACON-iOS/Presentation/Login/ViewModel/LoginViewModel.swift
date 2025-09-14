@@ -59,6 +59,8 @@ class LoginViewModel: Serviceable {
                 UserDefaultsManager.set(data.hasVerifiedArea, forKey: .hasVerifiedArea)
                 UserDefaultsManager.set(data.hasPreference, forKey: .hasPreference)
 
+                AuthManager.shared.updateLastTokenRefreshDate()
+
                 AmplitudeManager.shared.setUserID(data.externalUUID)
                 AmplitudeManager.shared.setUserProperty(userProperties: ["id": data.externalUUID])
                 self?.onSuccessLogin.value = true
