@@ -128,7 +128,7 @@ private extension StartNowViewController {
 
     @objc
     func tappedStartButton() {
-        UserDefaults.standard.set(true, forKey: StringLiterals.UserDefaults.hasSeenTutorial)
+        UserDefaultsManager.set(true, forKey: .hasSeenTutorial)
         NavigationUtils.navigateToTabBar()
     }
 

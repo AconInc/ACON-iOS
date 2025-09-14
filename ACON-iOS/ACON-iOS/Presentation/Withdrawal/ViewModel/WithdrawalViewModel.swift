@@ -8,17 +8,17 @@
 import Foundation
 
 final class WithdrawalViewModel: Serviceable {
-    
+
     var selectedOption: ObservablePattern<String> = ObservablePattern(nil)
     var inputText: ObservablePattern<String> = ObservablePattern(nil)
     var shouldDismissKeyboard: ObservablePattern<Bool> = ObservablePattern(false)
     var ectOption: ObservablePattern<Bool> = ObservablePattern(false)
-    
+
     let onSuccessPostWithdrawal: ObservablePattern<Bool> = ObservablePattern(nil)
-    
+
     func updateSelectedOption(_ option: String?) {
         selectedOption.value = option
-        
+
         if option == StringLiterals.Withdrawal.optionOthers {
             if let inputText = inputText.value, !inputText.isEmpty {
                 ectOption.value = true
@@ -32,7 +32,7 @@ final class WithdrawalViewModel: Serviceable {
             ectOption.value = false
         }
     }
-    
+
     func updateInputText(_ text: String?) {
         inputText.value = text
         
@@ -40,20 +40,17 @@ final class WithdrawalViewModel: Serviceable {
             ectOption.value = (text?.isEmpty == false)
         }
     }
-    
+
     func postWithdrawal() {
-        let refreshToken = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.refreshToken) ?? ""
-        
+        let refreshToken = UserDefaultsManager.get(String.self, forKey: .refreshToken) ?? ""
+
         guard let reasonText = selectedOption.value else { return }
 
         ACService.shared.withdrawalService.postWithdrawal(
             WithdrawalRequest(reason: reasonText, refreshToken: refreshToken)) { result in
             switch result {
             case .success:
-                for key in UserDefaults.standard.dictionaryRepresentation().keys {
-                    if key == StringLiterals.UserDefaults.hasSeenTutorial { continue }
-                    UserDefaults.standard.removeObject(forKey: key)
-                }
+                UserDefaultsManager.removeAll()
                 self.onSuccessPostWithdrawal.value = true
             case .reIssueJWT:
                 self.handleReissue { [weak self] in
@@ -68,5 +65,5 @@ final class WithdrawalViewModel: Serviceable {
             }
         }
     }
-}
 
+}
