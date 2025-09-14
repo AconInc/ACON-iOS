@@ -12,11 +12,13 @@ struct UserDefaultsManager {
     enum Keys: String, CaseIterable {
         case accessToken
         case refreshToken
-        case lastTokenRefreshDate
+
         case hasVerifiedArea
         case hasPreference
-        case lastLocalVerificationAlertTime
         case hasSeenTutorial // NOTE: 초기화되면 안 됨
+
+        case lastTokenRefreshDate
+        case lastLocalVerificationAlertDate
     }
 
 
@@ -39,9 +41,12 @@ struct UserDefaultsManager {
     static func remove(forKey key: Keys) {
         UserDefaults.standard.removeObject(forKey: key.rawValue)
     }
-    
-    // NOTE: hasSeenTutorial을 제외하고 초기화
-    static func removeAll() {
+
+    /// 앱에서 정의한 UserDefaults를 초기화합니다.
+    /// - Note:
+    ///   - 시스템에서 사용하는 UserDefaults 키는 영향을 받지 않습니다.
+    ///   - `hasSeenTutorial` 키는 유지됩니다.
+    static func resetAppUserDefaults() {
         for key in Keys.allCases {
             if key == .hasSeenTutorial { continue }
             remove(forKey: key)

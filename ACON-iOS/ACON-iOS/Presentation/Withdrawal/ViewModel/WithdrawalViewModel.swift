@@ -50,7 +50,7 @@ final class WithdrawalViewModel: Serviceable {
             WithdrawalRequest(reason: reasonText, refreshToken: refreshToken)) { result in
             switch result {
             case .success:
-                UserDefaultsManager.removeAll()
+                UserDefaultsManager.resetAppUserDefaults()
                 self.onSuccessPostWithdrawal.value = true
             case .reIssueJWT:
                 self.handleReissue { [weak self] in

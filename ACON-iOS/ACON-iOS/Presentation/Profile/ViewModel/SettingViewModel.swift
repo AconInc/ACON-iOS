@@ -18,7 +18,7 @@ final class SettingViewModel: Serviceable {
             PostLogoutRequest(refreshToken: refreshToken)) { result in
                 switch result {
                 case .success:
-                    UserDefaultsManager.removeAll()
+                    UserDefaultsManager.resetAppUserDefaults()
                     AmplitudeManager.shared.reset()
                     self.onPostLogoutSuccess.value = true
                 case .reIssueJWT:
