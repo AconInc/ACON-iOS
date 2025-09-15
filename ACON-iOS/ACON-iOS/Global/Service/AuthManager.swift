@@ -12,8 +12,8 @@ final class AuthManager {
     static let shared = AuthManager()
     private init() {}
 
-    // NOTE: access token 갱신 간격: 2시간 30분(9000초)
-    private let refreshInterval: TimeInterval = 2.5 * 60 * 60
+    // NOTE: access token 갱신 간격: 3시간 (10,800초)
+    private let refreshInterval: TimeInterval = 3 * 60 * 60
 
     var hasToken: Bool {
         return UserDefaultsManager.get(String.self, forKey: .accessToken) != nil
@@ -60,7 +60,7 @@ final class AuthManager {
         UserDefaultsManager.set(now, forKey: .lastTokenRefreshDate)
     }
 
-    // NOTE: access token 유효시간이 30분 미만이면 true
+    // NOTE: access token이 만료되었으면 true
     func needsTokenRefresh() -> Bool {
         guard let lastRefresh = UserDefaultsManager.get(Date.self, forKey: .lastTokenRefreshDate) else {
             return true
