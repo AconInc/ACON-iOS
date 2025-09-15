@@ -10,15 +10,16 @@ import UIKit
 import AVFAudio
 
 class SplashViewController: BaseViewController {
-    
+
     // MARK: - UI Properties
-    
+
     private let splashView = SplashView()
-    
+
     private var player: AVAudioPlayer?
-    
+
+
     // MARK: - LifeCycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,7 +30,15 @@ class SplashViewController: BaseViewController {
             print("오디오 세션 설정 오류: \(error)")
         }
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if AuthManager.shared.needsTokenRefresh() {
+            refreshToken()
+        }
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         
@@ -44,12 +53,12 @@ class SplashViewController: BaseViewController {
             }
         }
     }
-    
+
     deinit {
         player?.stop()
         player = nil
     }
-    
+
     override func setHierarchy() {
         super.setHierarchy()
         
@@ -143,7 +152,7 @@ private extension SplashViewController {
 // MARK: - Splash Animation
 
 private extension SplashViewController {
-    
+
     func playSplashAnimation() {
         splashView.do {
             $0.splashLottieView.play()
@@ -151,7 +160,7 @@ private extension SplashViewController {
         fadeShadowImage()
         playSplashBGM()
     }
-    
+
     func fadeShadowImage() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             UIView.animate(withDuration: 0.1) {
@@ -159,7 +168,7 @@ private extension SplashViewController {
             }
         }
     }
-    
+
     func playSplashBGM() {
         let audioSession = AVAudioSession.sharedInstance()
             
@@ -173,5 +182,33 @@ private extension SplashViewController {
             player?.play()
         }
     }
-    
+
+}
+
+
+// MARK: - Token refresh
+
+private extension SplashViewController {
+
+    func refreshToken() {
+        Task {
+            do {
+                let success = try await AuthManager.shared.handleTokenRefresh()
+                DispatchQueue.main.async {
+                    if success {
+                        print("❄️ 토큰 갱신 성공")
+                    } else {
+                        UserDefaultsManager.resetAppUserDefaults()
+                        NavigationUtils.navigateToSplash()
+                    }
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    UserDefaultsManager.resetAppUserDefaults()
+                    NavigationUtils.navigateToSplash()
+                }
+            }
+        }
+    }
+
 }

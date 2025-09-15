@@ -9,22 +9,6 @@ import Foundation
 
 enum StringLiterals {
     
-    enum UserDefaults {
-        
-        static let accessToken = "accessToken"
-        
-        static let refreshToken = "refreshToken"
-        
-        static let hasVerifiedArea = "hasVerifiedArea"
-        
-        static let hasPreference = "hasPreference"
-        
-        static let lastLocalVerificationAlertTime = "lastLocalVerificationAlertTime"
-        
-        static let hasSeenTutorial = "hasSeenTutorial"
-        
-    }
-    
     enum Error {
         
         static let networkErrorOccurred = "일시적인 오류가 발생했습니다."

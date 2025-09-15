@@ -54,10 +54,13 @@ class LoginViewModel: Serviceable {
         ACService.shared.authService.postLogin(PostLoginRequest(socialType: socialType, idToken: idToken)){ [weak self] response in
             switch response {
             case .success(let data):
-                UserDefaults.standard.set(data.accessToken, forKey: StringLiterals.UserDefaults.accessToken)
-                UserDefaults.standard.set(data.refreshToken, forKey: StringLiterals.UserDefaults.refreshToken)
-                UserDefaults.standard.set(data.hasVerifiedArea, forKey: StringLiterals.UserDefaults.hasVerifiedArea)
-                UserDefaults.standard.set(data.hasPreference, forKey: StringLiterals.UserDefaults.hasPreference)
+                UserDefaultsManager.set(data.accessToken, forKey: .accessToken)
+                UserDefaultsManager.set(data.refreshToken, forKey: .refreshToken)
+                UserDefaultsManager.set(data.hasVerifiedArea, forKey: .hasVerifiedArea)
+                UserDefaultsManager.set(data.hasPreference, forKey: .hasPreference)
+
+                AuthManager.shared.updateLastTokenRefreshDate()
+
                 AmplitudeManager.shared.setUserID(data.externalUUID)
                 AmplitudeManager.shared.setUserProperty(userProperties: ["id": data.externalUUID])
                 self?.onSuccessLogin.value = true

@@ -10,17 +10,15 @@ import UIKit
 final class SettingViewModel: Serviceable {
 
     var onPostLogoutSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
-    
+
     func postLogout() {
-        let refreshToken = UserDefaults.standard.string(forKey: StringLiterals.UserDefaults.refreshToken) ?? ""
+        let refreshToken = UserDefaultsManager.get(String.self, forKey: .refreshToken) ?? ""
+
         ACService.shared.authService.postLogout(
             PostLogoutRequest(refreshToken: refreshToken)) { result in
                 switch result {
                 case .success:
-                    for key in UserDefaults.standard.dictionaryRepresentation().keys {
-                        if key == StringLiterals.UserDefaults.hasSeenTutorial { continue }
-                        UserDefaults.standard.removeObject(forKey: key)
-                    }
+                    UserDefaultsManager.resetAppUserDefaults()
                     AmplitudeManager.shared.reset()
                     self.onPostLogoutSuccess.value = true
                 case .reIssueJWT:

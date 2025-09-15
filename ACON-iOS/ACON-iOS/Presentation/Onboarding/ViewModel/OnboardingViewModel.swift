@@ -23,8 +23,7 @@ class OnboardingViewModel: Serviceable {
             case .success:
                 onPutOnboardingSuccess.value = true
                 if !AuthManager.shared.hasPreference {
-                    UserDefaults.standard.set(true,
-                                              forKey: StringLiterals.UserDefaults.hasPreference)
+                    UserDefaultsManager.set(true, forKey: .hasPreference)
                 }
             case .reIssueJWT:
                 self.handleReissue {
