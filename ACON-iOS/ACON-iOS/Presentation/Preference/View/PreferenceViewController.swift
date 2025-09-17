@@ -132,8 +132,7 @@ private extension PreferenceViewController {
                   let onSuccess = onSuccess else { return }
             if onSuccess {
                 if flowType == .login {
-                    // NOTE: 튜토리얼 또는 TabBar로 이동
-                    AuthManager.shared.hasSeenTutorial ? NavigationUtils.navigateToTabBar() : NavigationUtils.navigateToTutorial()
+                    NavigationUtils.navigateToTabBar()
                 } else {
                     NavigationUtils.popToParentVC(from: self, targetVCType: ProfileSettingViewController.self)
                 }
