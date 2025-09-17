@@ -36,7 +36,7 @@ final class AuthManager {
     }
 
     var hasSeenPreferenceOnboarding: Bool {
-        return UserDefaultsManager.get(Bool.self, forKey: .hasPreference) ?? false
+        return UserDefaultsManager.get(Bool.self, forKey: .hasSeenPreferenceOnboarding) ?? false
     }
 
     func handleTokenRefresh() async throws -> Bool {
