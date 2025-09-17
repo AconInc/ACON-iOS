@@ -41,9 +41,9 @@ struct NavigationUtils {
         }
     }
     
-    static func naviateToLoginOnboarding() {
+    static func naviateToLoginPreference() {
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = OnboardingViewController(flowType: .login)
+            sceneDelegate.window?.rootViewController = PreferenceViewController(flowType: .login)
         }
     }
     

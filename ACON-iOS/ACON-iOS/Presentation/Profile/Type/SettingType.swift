@@ -19,7 +19,7 @@ enum SettingType {
     }
     
     enum PersonalSetting: CaseIterable {
-        case onboarding
+        case preference
         case localVerification
     }
     
@@ -56,8 +56,8 @@ extension SettingType.Policy {
 extension SettingType.PersonalSetting {
     var title: String {
         switch self {
-        case .onboarding:
-            return StringLiterals.Setting.onboarding
+        case .preference:
+            return StringLiterals.Setting.preference
         case .localVerification:
             return StringLiterals.Setting.localVerification
         }

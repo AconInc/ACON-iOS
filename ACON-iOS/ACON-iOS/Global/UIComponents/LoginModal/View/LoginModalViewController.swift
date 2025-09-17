@@ -127,7 +127,7 @@ extension LoginModalViewController {
             let hasPreference = AuthManager.shared.hasPreference
             
             if onSuccess {
-                hasVerifiedArea ? hasPreference ? NavigationUtils.navigateToTabBar() : NavigationUtils.naviateToLoginOnboarding() : NavigationUtils.navigateToOnboardingLocalVerification()
+                hasVerifiedArea ? hasPreference ? NavigationUtils.navigateToTabBar() : NavigationUtils.naviateToLoginPreference() : NavigationUtils.navigateToOnboardingLocalVerification()
                 
                 if let presentedVCType = presentedVCType {
                     AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.guest, properties: [presentedVCType: true])

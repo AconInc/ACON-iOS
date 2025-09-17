@@ -43,7 +43,7 @@ class LocalVerificationViewController: BaseNavViewController {
                 let now = Date()
                 UserDefaultsManager.set(now, forKey: .lastLocalVerificationAlertDate)
 
-                NavigationUtils.naviateToLoginOnboarding()
+                NavigationUtils.naviateToLoginPreference()
             }
         }
     }
@@ -53,6 +53,7 @@ class LocalVerificationViewController: BaseNavViewController {
 
         self.tabBarController?.tabBar.isHidden = true
         startBlinkingWarningLabel()
+        UserDefaultsManager.set(true, forKey: .hasSeenVerifiedAreaOnboarding)
     }
     
     override func setHierarchy() {
@@ -92,7 +93,7 @@ private extension LocalVerificationViewController {
                 } else {
                     switch localVerificationViewModel.flowType {
                     case .onboarding:
-                        self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "온보딩으로 이동", completion: {NavigationUtils.naviateToLoginOnboarding()})
+                        self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "취향탐색으로 이동", completion: {NavigationUtils.naviateToLoginPreference()})
                     default:
                         self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "홈으로 이동", completion: {NavigationUtils.navigateToTabBar()})
                     }

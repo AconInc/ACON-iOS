@@ -122,7 +122,7 @@ private extension LocalMapViewController {
                     let hasSeenTutorial = AuthManager.shared.hasSeenTutorial
                     hasPreference
                     ? (hasSeenTutorial ? NavigationUtils.navigateToTabBar() : NavigationUtils.navigateToTutorial())
-                    : NavigationUtils.naviateToLoginOnboarding()
+                    : NavigationUtils.naviateToLoginPreference()
                 case .setting:
                     NavigationUtils.popToParentVC(from: self, targetVCType: VerifiedAreasEditViewController.self)
                 }

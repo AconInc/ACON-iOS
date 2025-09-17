@@ -1,5 +1,5 @@
 //
-//  OnboardingViewController.swift
+//  PreferenceViewController.swift
 //  ACON-iOS
 //
 //  Created by 이수민 on 5/8/25.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class OnboardingViewController: BaseViewController {
+class PreferenceViewController: BaseViewController {
     
     // MARK: - UI Properties
     
-    private let onboardingView = OnboardingView()
+    private let preferenceView = PreferenceView()
     
     private let backButton = UIButton()
     
@@ -22,16 +22,16 @@ class OnboardingViewController: BaseViewController {
     
     // MARK: - Properties
     
-    private let onboardingViewModel = OnboardingViewModel()
+    private let preferenceViewModel = PreferenceViewModel()
     
-    private let flowType: OnboardingFlowType
+    private let flowType: PreferenceFlowType
     
     let selectedFood: ObservablePattern<[String]> = ObservablePattern(nil)
     
     
     // MARK: - LifeCycle
     
-    init(flowType: OnboardingFlowType) {
+    init(flowType: PreferenceFlowType) {
         self.flowType = flowType
         
         super.init(nibName: nil, bundle: nil)
@@ -54,13 +54,13 @@ class OnboardingViewController: BaseViewController {
     override func setHierarchy() {
         super.setHierarchy()
         
-        self.view.addSubviews(onboardingView, backButton)
+        self.view.addSubviews(preferenceView, backButton)
     }
     
     override func setLayout() {
         super.setLayout()
         
-        onboardingView.snp.makeConstraints {
+        preferenceView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
@@ -81,10 +81,10 @@ class OnboardingViewController: BaseViewController {
     }
     
     private func addTarget() {
-        onboardingView.noDislikeFoodButton.addTarget(self,
+        preferenceView.noDislikeFoodButton.addTarget(self,
                                                      action: #selector(noDislikeButtonTapped),
                                                      for: .touchUpInside)
-        onboardingView.startButton.addTarget(self,
+        preferenceView.startButton.addTarget(self,
                                              action: #selector(startButtonTapped),
                                              for: .touchUpInside)
         
@@ -96,8 +96,8 @@ class OnboardingViewController: BaseViewController {
     private func bindSelectedFood() {
         selectedFood.bind { _ in
             if let selectedFoodValue = self.selectedFood.value {
-                self.onboardingView.do {
-                    let commentLabelText = selectedFoodValue.isEmpty ? StringLiterals.Onboarding.allFood : StringLiterals.Onboarding.notAllFood
+                self.preferenceView.do {
+                    let commentLabelText = selectedFoodValue.isEmpty ? StringLiterals.Preference.allFood : StringLiterals.Preference.notAllFood
                     $0.commentLabel.setLabel(text: commentLabelText,
                                             style: .t5R,
                                             color: .gray300)
@@ -108,7 +108,7 @@ class OnboardingViewController: BaseViewController {
                     }
                 }
             } else {
-                self.onboardingView.do {
+                self.preferenceView.do {
                     $0.commentLabel.isHidden = true
                     $0.lightImageView.isHidden = true
                     if $0.startButton.buttonState != .disabled {
@@ -124,10 +124,10 @@ class OnboardingViewController: BaseViewController {
 
 // MARK: - Bind VM
 
-private extension OnboardingViewController {
+private extension PreferenceViewController {
     
     func bindViewModel() {
-        onboardingViewModel.onPutOnboardingSuccess.bind { [weak self] onSuccess in
+        preferenceViewModel.onPutPreferenceSuccess.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
             if onSuccess {
@@ -140,7 +140,7 @@ private extension OnboardingViewController {
             } else {
                 self.showServerErrorAlert()
             }
-            onboardingViewModel.onPutOnboardingSuccess.value = nil
+            preferenceViewModel.onPutPreferenceSuccess.value = nil
         }
     }
     
@@ -149,15 +149,15 @@ private extension OnboardingViewController {
 
 // MARK: - CollectionView Setting Methods
 
-private extension OnboardingViewController {
+private extension PreferenceViewController {
     
     func registerCell() {
-        onboardingView.dislikeFoodCollectionView.register(DislikeFoodCollectionViewCell.self, forCellWithReuseIdentifier: DislikeFoodCollectionViewCell.cellIdentifier)
+        preferenceView.dislikeFoodCollectionView.register(DislikeFoodCollectionViewCell.self, forCellWithReuseIdentifier: DislikeFoodCollectionViewCell.cellIdentifier)
     }
     
     func setDelegate() {
-        onboardingView.dislikeFoodCollectionView.delegate = self
-        onboardingView.dislikeFoodCollectionView.dataSource = self
+        preferenceView.dislikeFoodCollectionView.delegate = self
+        preferenceView.dislikeFoodCollectionView.dataSource = self
     }
     
 }
@@ -165,7 +165,7 @@ private extension OnboardingViewController {
 
 // MARK: - CollectionView Delegate
 
-extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
+extension PreferenceViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: ScreenUtils.horizontalInset, bottom: 0, right: ScreenUtils.widthRatio*10)
@@ -201,7 +201,7 @@ extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
                     selectedFood.value?.remove(at: index)
                     if selectedFood.value == [] {
                         selectedFood.value = nil
-                        onboardingView.noDislikeFoodButton.updateGlassButtonState(state: .default)
+                        preferenceView.noDislikeFoodButton.updateGlassButtonState(state: .default)
                         enableAllCells(true)
                     }
                 }
@@ -214,7 +214,7 @@ extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - CollectionView DataSource
 
-extension OnboardingViewController: UICollectionViewDataSource {
+extension PreferenceViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return DislikeFood.korValue.count
@@ -233,17 +233,17 @@ extension OnboardingViewController: UICollectionViewDataSource {
 
 // MARK: - @objc methods
 
-private extension OnboardingViewController {
+private extension PreferenceViewController {
     
     @objc
     func noDislikeButtonTapped() {
-        if onboardingView.noDislikeFoodButton.buttonState == .selected {
-            onboardingView.noDislikeFoodButton.updateGlassButtonState(state: .default)
+        if preferenceView.noDislikeFoodButton.buttonState == .selected {
+            preferenceView.noDislikeFoodButton.updateGlassButtonState(state: .default)
             selectedFood.value = nil
             enableAllCells(true)
             
         } else {
-            onboardingView.noDislikeFoodButton.updateGlassButtonState(state: .selected)
+            preferenceView.noDislikeFoodButton.updateGlassButtonState(state: .selected)
             selectedFood.value = []
             enableAllCells(false)
         }
@@ -252,28 +252,28 @@ private extension OnboardingViewController {
     @objc
     func startButtonTapped() {
         guard let dislikeFoodList = selectedFood.value else { return }
-        onboardingViewModel.putOnboarding(dislikeFoodList)
+        preferenceViewModel.putPreference(dislikeFoodList)
     }
     
     @objc
     func backButtonTapped() {
-        self.presentACAlert(.quitOnboarding,
+        self.presentACAlert(.quitPreference,
                             rightAction: backCompletion)
     }
     
     @objc
     func appWillEnterForeground() {
-        onboardingView.setNeedsLayout()
+        preferenceView.setNeedsLayout()
     }
 }
 
 
 // MARK: - 셀 전체 활성화 / 비활성화 로직
 
-extension OnboardingViewController {
+extension PreferenceViewController {
     
     private func enableAllCells(_ enable: Bool) {
-        for cell in onboardingView.dislikeFoodCollectionView.visibleCells {
+        for cell in preferenceView.dislikeFoodCollectionView.visibleCells {
             if let cell = cell as? DislikeFoodCollectionViewCell {
                 if !enable { cell.isChipSelected = false }
                 cell.isChipEnabled = enable
@@ -282,7 +282,7 @@ extension OnboardingViewController {
     }
     
     private func disableNoDislikeFoodButton() {
-        onboardingView.noDislikeFoodButton.do {
+        preferenceView.noDislikeFoodButton.do {
             $0.updateGlassButtonState(state: .default)
             $0.refreshButtonBlurEffect(.buttonGlassDisabled)
             $0.updateButtonTitle(color: .gray300)

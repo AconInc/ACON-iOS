@@ -141,9 +141,9 @@ extension LoginViewController {
                 }
 
                 // NOTE: 지역인증O && 취향탐색X -> 취향탐색으로 이동
-                // NOTE: 취향탐색 이후 튜토리얼을 거치는지는 OnboardingVC에서 분기처리
+                // NOTE: 취향탐색 이후 튜토리얼을 거치는지는 PreferenceVC에서 분기처리
                 else if hasVerifiedArea && !hasPreference {
-                    NavigationUtils.naviateToLoginOnboarding()
+                    NavigationUtils.naviateToLoginPreference()
                 }
 
                 // NOTE: 지역인증X -> 지역인증으로 이동
