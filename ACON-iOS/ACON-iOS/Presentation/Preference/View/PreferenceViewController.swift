@@ -50,7 +50,16 @@ class PreferenceViewController: BaseViewController {
         bindSelectedFood()
         bindViewModel()
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        UserDefaultsManager.set(true, forKey: .hasSeenPreference)
+    }
+
+
+    // MARK: - UI Settings
+
     override func setHierarchy() {
         super.setHierarchy()
         

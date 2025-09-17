@@ -53,9 +53,17 @@ class LocalVerificationViewController: BaseNavViewController {
 
         self.tabBarController?.tabBar.isHidden = true
         startBlinkingWarningLabel()
-        UserDefaultsManager.set(true, forKey: .hasSeenVerifiedAreaOnboarding)
     }
-    
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        UserDefaultsManager.set(true, forKey: .hasSeenLocalVerification)
+    }
+
+
+    // MARK: - UI Settings
+
     override func setHierarchy() {
         super.setHierarchy()
         

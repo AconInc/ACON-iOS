@@ -17,8 +17,8 @@ struct UserDefaultsManager {
         case hasPreference
 
         case hasSeenTutorial // NOTE: 초기화되면 안 됨
-        case hasSeenVerifiedAreaOnboarding // NOTE: 초기화되면 안 됨
-        case hasSeenPreferenceOnboarding // NOTE: 초기화되면 안 됨
+        case hasSeenLocalVerification // NOTE: 초기화되면 안 됨
+        case hasSeenPreference // NOTE: 초기화되면 안 됨
 
         case lastTokenRefreshDate
         case lastLocalVerificationAlertDate
@@ -52,8 +52,8 @@ struct UserDefaultsManager {
     static func resetAppUserDefaults() {
         for key in Keys.allCases {
             if key == .hasSeenTutorial
-                || key == .hasSeenVerifiedAreaOnboarding
-                || key == .hasSeenPreferenceOnboarding { continue }
+                || key == .hasSeenLocalVerification
+                || key == .hasSeenPreference { continue }
 
             remove(forKey: key)
         }

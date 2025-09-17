@@ -32,11 +32,11 @@ final class AuthManager {
     }
 
     var hasSeenLocalVerificationOnboarding: Bool {
-        return UserDefaultsManager.get(Bool.self, forKey: .hasSeenVerifiedAreaOnboarding) ?? false
+        return UserDefaultsManager.get(Bool.self, forKey: .hasSeenLocalVerification) ?? false
     }
 
     var hasSeenPreferenceOnboarding: Bool {
-        return UserDefaultsManager.get(Bool.self, forKey: .hasSeenPreferenceOnboarding) ?? false
+        return UserDefaultsManager.get(Bool.self, forKey: .hasSeenPreference) ?? false
     }
 
     func handleTokenRefresh() async throws -> Bool {
