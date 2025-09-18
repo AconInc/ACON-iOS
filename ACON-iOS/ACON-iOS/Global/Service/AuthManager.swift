@@ -31,11 +31,11 @@ final class AuthManager {
         return UserDefaultsManager.get(Bool.self, forKey: .hasSeenTutorial) ?? false
     }
 
-    var hasSeenLocalVerificationOnboarding: Bool {
+    var hasSeenLocalVerification: Bool {
         return UserDefaultsManager.get(Bool.self, forKey: .hasSeenLocalVerification) ?? false
     }
 
-    var hasSeenPreferenceOnboarding: Bool {
+    var hasSeenPreference: Bool {
         return UserDefaultsManager.get(Bool.self, forKey: .hasSeenPreference) ?? false
     }
 

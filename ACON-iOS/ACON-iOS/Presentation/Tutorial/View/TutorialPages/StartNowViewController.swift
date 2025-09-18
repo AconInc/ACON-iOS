@@ -134,8 +134,8 @@ private extension StartNowViewController {
         // NOTE: [온보딩 순서] 로그인 건너뛰기 > 서비스 온보딩(튜토리얼) > 홈
 
         let hasToken = AuthManager.shared.hasToken
-        let hasSeenLocalVerificationOnboarding = AuthManager.shared.hasSeenLocalVerificationOnboarding
-        let hasSeenPreferenceOnboarding = AuthManager.shared.hasSeenPreferenceOnboarding
+        let hasSeenLocalVerificationOnboarding = AuthManager.shared.hasSeenLocalVerification
+        let hasSeenPreferenceOnboarding = AuthManager.shared.hasSeenPreference
 
         // NOTE: 로그인X -> TabBar
         if !hasToken {

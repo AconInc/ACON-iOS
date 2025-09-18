@@ -125,8 +125,8 @@ extension LoginViewController {
             guard let self = self else { return }
 
             let hasSeenTutorial = AuthManager.shared.hasSeenTutorial
-            let hasSeenLocalVerificationOnboarding = AuthManager.shared.hasSeenLocalVerificationOnboarding
-            let hasSeenPreferenceOnboarding = AuthManager.shared.hasSeenPreferenceOnboarding
+            let hasSeenLocalVerificationOnboarding = AuthManager.shared.hasSeenLocalVerification
+            let hasSeenPreferenceOnboarding = AuthManager.shared.hasSeenPreference
 
             if onSuccess {
                 AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.login, properties: ["did_login?": true])

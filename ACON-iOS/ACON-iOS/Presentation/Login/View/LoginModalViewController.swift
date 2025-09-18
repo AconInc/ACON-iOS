@@ -122,13 +122,34 @@ extension LoginModalViewController {
             guard let self = self else { return }
             self.onSuccessLogin?(onSuccess)
             self.dismiss(animated: true)
-            
-            let hasVerifiedArea = AuthManager.shared.hasVerifiedArea
-            let hasPreference = AuthManager.shared.hasPreference
-            
+
+            let hasSeenTutorial = AuthManager.shared.hasSeenTutorial
+            let hasSeenLocalVerification = AuthManager.shared.hasSeenLocalVerification
+            let hasSeenPreference = AuthManager.shared.hasSeenPreference
+
             if onSuccess {
-                hasVerifiedArea ? hasPreference ? NavigationUtils.navigateToTabBar() : NavigationUtils.naviateToLoginPreference() : NavigationUtils.navigateToOnboardingLocalVerification()
-                
+                // NOTE: [온보딩 순서] 소셜로그인 > 서비스 온보딩(튜토리얼) > 지역인증 > 취향탐색
+
+                // NOTE: 튜토리얼X -> 튜토리얼VC
+                if !hasSeenTutorial {
+                    NavigationUtils.navigateToTutorial()
+                }
+
+                // NOTE: 튜토리얼O && 지역인증X -> 지역인증VC
+                else if !hasSeenLocalVerification {
+                    NavigationUtils.navigateToOnboardingLocalVerification()
+                }
+
+                // NOTE: 튜토리얼O && 지역인증O && 취향탐색X -> 취향탐색VC
+                else if !hasSeenPreference {
+                    NavigationUtils.naviateToLoginPreference()
+                }
+
+                // NOTE: 튜토리얼O && 지역인증O && 취향탐색O -> TabBar
+                else {
+                    NavigationUtils.navigateToTabBar()
+                }
+
                 if let presentedVCType = presentedVCType {
                     AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.guest, properties: [presentedVCType: true])
                 }
