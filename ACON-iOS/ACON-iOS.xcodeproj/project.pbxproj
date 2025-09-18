@@ -1071,23 +1071,6 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
-		15CD257F2D40361600320006 /* LoginModal */ = {
-			isa = PBXGroup;
-			children = (
-				15CD25802D40362500320006 /* View */,
-			);
-			path = LoginModal;
-			sourceTree = "<group>";
-		};
-		15CD25802D40362500320006 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				15CD25832D40364F00320006 /* LoginModalView.swift */,
-				15CD25812D40364400320006 /* LoginModalViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		15CF62C02D577B3E0000A10F /* Type */ = {
 			isa = PBXGroup;
 			children = (
@@ -1636,7 +1619,6 @@
 				150A105B2DA28F2600B0BC9A /* ACTextField.swift */,
 				15CD256A2D3D61F500320006 /* GlassmorphismView.swift */,
 				15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */,
-				15CD257F2D40361600320006 /* LoginModal */,
 				D6E34C422D398B6000CEFA04 /* ACAlert */,
 			);
 			path = UIComponents;
@@ -1703,8 +1685,10 @@
 		748ECA6C2D31919000BBC981 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				748ECA6D2D3196ED00BBC981 /* LoginViewController.swift */,
 				748ECA6A2D31918900BBC981 /* LoginView.swift */,
+				748ECA6D2D3196ED00BBC981 /* LoginViewController.swift */,
+				15CD25832D40364F00320006 /* LoginModalView.swift */,
+				15CD25812D40364400320006 /* LoginModalViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
