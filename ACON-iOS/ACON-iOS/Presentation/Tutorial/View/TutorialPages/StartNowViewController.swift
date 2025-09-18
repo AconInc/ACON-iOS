@@ -128,8 +128,6 @@ private extension StartNowViewController {
 
     @objc
     func tappedStartButton() {
-        UserDefaultsManager.set(true, forKey: .hasSeenTutorial)
-        
         // NOTE: [온보딩 순서] 소셜로그인 > 서비스 온보딩(튜토리얼) > 지역인증 > 취향탐색
         // NOTE: [온보딩 순서] 로그인 건너뛰기 > 서비스 온보딩(튜토리얼) > 홈
 

@@ -48,7 +48,10 @@ struct UserDefaultsManager {
     /// 앱에서 정의한 UserDefaults를 초기화합니다.
     /// - Note:
     ///   - 시스템에서 사용하는 UserDefaults 키는 영향을 받지 않습니다.
-    ///   - `hasSeenTutorial` 키는 유지됩니다.
+    ///   - 1회 노출과 관련된 키는 유지됩니다.
+    ///     - `hasSeenTutorial`
+    ///     - `hasSeenLocalVerification`
+    ///     - `hasSeenPreference`
     static func resetAppUserDefaults() {
         for key in Keys.allCases {
             if key == .hasSeenTutorial
