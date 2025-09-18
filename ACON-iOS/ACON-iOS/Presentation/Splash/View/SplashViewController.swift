@@ -124,19 +124,7 @@ private extension SplashViewController {
     // NOTE: 딥링크 진입 시 호출
     func goToSpotDetailVC(with spotID: Int64) {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-
-        let rootVC: UIViewController = {
-            // NOTE: 자동로그인O && 지역인증X -> rootVC = 지역인증VC
-            if AuthManager.shared.hasToken && !AuthManager.shared.hasVerifiedArea {
-                let vm = LocalVerificationViewModel(flowType: .onboarding)
-                return UINavigationController(
-                    rootViewController: LocalVerificationViewController(viewModel: vm)
-                )
-            } else {
-                // NOTE: 그 외 -> rootVC = TabBar
-                return ACTabBarController()
-            }
-        }()
+        let rootVC: UIViewController = ACTabBarController()
 
         sceneDelegate?.window?.rootViewController = rootVC
         sceneDelegate?.window?.makeKeyAndVisible()
