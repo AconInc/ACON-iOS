@@ -374,7 +374,7 @@ private extension ProfileEditViewController {
         viewModel.updateUserInfo(nickname: nickname,
                                  birthDate: birthDateText?.isEmpty ?? true ? nil : birthDateText)
 
-        viewModel.userInfo.profileImage = isDefaultImage ? "" : viewModel.presignedURLInfo.fileName
+        viewModel.userInfo.profileImage = isDefaultImage ? "" : viewModel.presignedURLInfo.fileURL
         if isDefaultImage {
             viewModel.patchProfile()
         } else {

@@ -11,7 +11,7 @@ import Moya
 
 enum ImageTargetType {
     
-    case getPresignedURL(_ parameter: GetPresignedURLRequest)
+    case postPresignedURL(_ parameter: PostPresignedURLRequest)
     
     case putImageToPresignedURL(_ requestBody: PutImageToPresignedURLRequest)
 
@@ -37,8 +37,8 @@ extension ImageTargetType: ACTargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getPresignedURL:
-            return .get
+        case .postPresignedURL:
+            return .post
         case .putImageToPresignedURL:
             return .put
         }
@@ -46,7 +46,7 @@ extension ImageTargetType: ACTargetType {
 
     var path: String {
         switch self {
-        case .getPresignedURL:
+        case .postPresignedURL:
             return utilPath + "images/presigned-url"
         case .putImageToPresignedURL:
             return ""
@@ -55,7 +55,7 @@ extension ImageTargetType: ACTargetType {
     
     var task: Task {
         switch self {
-        case .getPresignedURL(let parameter):
+        case .postPresignedURL(let parameter):
             return .requestParameters(
                 parameters: ["imageType": parameter.imageType],
                 encoding: URLEncoding.default
@@ -67,7 +67,7 @@ extension ImageTargetType: ACTargetType {
 
     var headers: [String : String]? {
         switch self {
-        case .getPresignedURL:
+        case .postPresignedURL:
             return HeaderType.tokenOnly()
         case .putImageToPresignedURL(let requestBody):
             return HeaderType.imageHeader(imageData: requestBody.imageData)

@@ -49,7 +49,7 @@ final class SpotUploadViewModel: Serviceable {
             spotType: spotType?.serverKey ?? "",
             featureList: configureFeatureList(),
             recommendedMenu: recommendedMenu ?? "",
-            imageList: photoPresignedURLInfos.isEmpty ? nil : photoPresignedURLInfos.map { $0.fileName }
+            imageList: photoPresignedURLInfos.isEmpty ? nil : photoPresignedURLInfos.map { $0.fileURL }
         )
 
         ACService.shared.spotUploadService.postSpotUpload(requestBody: request) { [weak self] response in
@@ -84,7 +84,8 @@ final class SpotUploadViewModel: Serviceable {
             photoPresignedURLResults[i] = false
 
             ACService.shared.imageService.getPresignedURL(
-                parameter: GetPresignedURLRequest(imageType: ImageType.APPLY_SPOT.rawValue)
+                // TODO: originalFileName 프로퍼티 연결
+                parameter: PostPresignedURLRequest(imageType: ImageType.APPLY_SPOT.rawValue, originalFileName: "")
             ) { [weak self] response in
                 defer { dispatchGroup.leave() }
 
@@ -92,7 +93,7 @@ final class SpotUploadViewModel: Serviceable {
                 
                 switch response {
                 case .success(let data):
-                    self.photoPresignedURLInfos.append(PresignedURLModel(fileName: data.fileName, presignedURL: data.preSignedUrl))
+                    self.photoPresignedURLInfos.append(PresignedURLModel(fileURL: data.fileUrl, presignedURL: data.preSignedUrl))
                     self.photoPresignedURLResults[i] = true
                 case .reIssueJWT:
                     self.handleReissue { [weak self] in

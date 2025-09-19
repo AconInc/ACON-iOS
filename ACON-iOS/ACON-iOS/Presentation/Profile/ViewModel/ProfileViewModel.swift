@@ -25,7 +25,7 @@ final class ProfileViewModel: Serviceable {
 
     var onPatchProfileSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
 
-    var presignedURLInfo: PresignedURLModel = PresignedURLModel(fileName: "",
+    var presignedURLInfo: PresignedURLModel = PresignedURLModel(fileURL: "",
                                                                 presignedURL: "")
 
     var nicknameValidityMessageType: ProfileValidMessageType = .none
@@ -138,15 +138,16 @@ final class ProfileViewModel: Serviceable {
 
     func getProfilePresignedURL() {
         ACService.shared.imageService.getPresignedURL(
-            parameter: GetPresignedURLRequest(imageType: ImageType.PROFILE.rawValue)
+            // TODO: originalFileName 프로퍼티 연결
+            parameter: PostPresignedURLRequest(imageType: ImageType.PROFILE.rawValue, originalFileName: "")
         ) { [weak self] response in
             guard let self = self else { return }
 
             switch response {
             case .success(let data):
-                presignedURLInfo = PresignedURLModel(fileName: data.fileName,
+                presignedURLInfo = PresignedURLModel(fileURL: data.fileUrl,
                                                      presignedURL: data.preSignedUrl)
-                self.userInfo.profileImage = data.fileName
+                self.userInfo.profileImage = data.fileUrl
                 onSuccessGetPresignedURL.value = true
             case .reIssueJWT:
                 self.handleReissue {
