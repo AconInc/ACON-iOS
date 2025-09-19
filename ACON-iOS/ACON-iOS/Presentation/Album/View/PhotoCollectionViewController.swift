@@ -291,16 +291,14 @@ private extension PhotoCollectionViewController {
         let assets = selectedIndexPaths.map { albumViewModel.fetchedImages[$0.item].asset }
 
         let dispatchGroup = DispatchGroup()
-        var selectedImages: [UIImage] = Array(repeating: UIImage(), count: assets.count)
+        var successfulImages: [Int: UIImage] = [:]
 
         for (i, asset) in assets.enumerated() {
             dispatchGroup.enter()
             albumViewModel.setImageCache(for: asset,
                                          size: CGSize(width: asset.pixelWidth, height: asset.pixelHeight)) { image in
                 if let image {
-                    selectedImages[i] = image
-                } else {
-                    selectedImages.remove(at: i)
+                    successfulImages[i] = image
                 }
                 dispatchGroup.leave()
             }
@@ -310,8 +308,10 @@ private extension PhotoCollectionViewController {
             guard let self,
                   let navVCs = self.navigationController?.viewControllers else { return }
 
+            let finalOrderedImages = successfulImages.sorted(by: { $0.key < $1.key }).map { $0.value }
+
             if let spotUploadVC = navVCs.first(where: { $0 is SpotUploadViewController }) as? SpotUploadViewController {
-                spotUploadVC.viewModel.photosToAppend.value = selectedImages
+                spotUploadVC.viewModel.photosToAppend.value = finalOrderedImages
                 self.navigationController?.popToViewController(spotUploadVC, animated: true)
             }
         }
