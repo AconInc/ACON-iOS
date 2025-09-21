@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 
 // MARK: - Delegate Protocol
 
@@ -145,7 +146,7 @@ extension SpotUploadPhotoViewController: UICollectionViewDataSource {
         if indexPath.item == viewModel.photos.count {
             item.setAddView() // NOTE: + 셀
         } else {
-            item.setPhoto(viewModel.photos[indexPath.item]) // NOTE: 사진 셀
+            item.setPhoto(viewModel.photos[indexPath.item].image) // NOTE: 사진 셀
         }
 
         return item

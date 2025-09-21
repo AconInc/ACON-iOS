@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 
 class PhotoCollectionViewController: BaseNavViewController {
     
@@ -291,14 +292,14 @@ private extension PhotoCollectionViewController {
         let assets = selectedIndexPaths.map { albumViewModel.fetchedImages[$0.item].asset }
 
         let dispatchGroup = DispatchGroup()
-        var successfulImages: [Int: UIImage] = [:]
+        var successfulImages: [Int: PhotoModel] = [:]
 
         for (i, asset) in assets.enumerated() {
             dispatchGroup.enter()
             albumViewModel.setImageCache(for: asset,
                                          size: CGSize(width: asset.pixelWidth, height: asset.pixelHeight)) { image in
                 if let image {
-                    successfulImages[i] = image
+                    successfulImages[i] = PhotoModel(asset: asset, image: image)
                 }
                 dispatchGroup.leave()
             }
