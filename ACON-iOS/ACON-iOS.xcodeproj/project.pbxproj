@@ -11,6 +11,7 @@
 		1502D71D2DE9D44100A21D81 /* RegionErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1502D71C2DE9D44100A21D81 /* RegionErrorView.swift */; };
 		1503DBEB2DFD9CBB001FC3E5 /* GetMenuboardImageListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1503DBEA2DFD9CBB001FC3E5 /* GetMenuboardImageListResponse.swift */; };
 		150A105C2DA28F2600B0BC9A /* ACTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150A105B2DA28F2600B0BC9A /* ACTextField.swift */; };
+		150B4B2A2E7EE4BB00C34C76 /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B4B292E7EE4BB00C34C76 /* PhotoManager.swift */; };
 		150BA57A2E56F3720058A06B /* TutorialContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150BA5792E56F3720058A06B /* TutorialContainerViewController.swift */; };
 		150BA57F2E56F8170058A06B /* ReviewTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150BA57E2E56F8170058A06B /* ReviewTutorialViewController.swift */; };
 		150BA5812E56F8580058A06B /* LimitedSpotsTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150BA5802E56F8580058A06B /* LimitedSpotsTutorialViewController.swift */; };
@@ -336,6 +337,7 @@
 		1502D71C2DE9D44100A21D81 /* RegionErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionErrorView.swift; sourceTree = "<group>"; };
 		1503DBEA2DFD9CBB001FC3E5 /* GetMenuboardImageListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMenuboardImageListResponse.swift; sourceTree = "<group>"; };
 		150A105B2DA28F2600B0BC9A /* ACTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTextField.swift; sourceTree = "<group>"; };
+		150B4B292E7EE4BB00C34C76 /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 		150BA5792E56F3720058A06B /* TutorialContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContainerViewController.swift; sourceTree = "<group>"; };
 		150BA57E2E56F8170058A06B /* ReviewTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTutorialViewController.swift; sourceTree = "<group>"; };
 		150BA5802E56F8580058A06B /* LimitedSpotsTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedSpotsTutorialViewController.swift; sourceTree = "<group>"; };
@@ -1351,6 +1353,7 @@
 				7462D0242D4262EF00580464 /* AuthManager.swift */,
 				1515CE0C2E00823B00A559A2 /* DeepLinkManager.swift */,
 				153B78242E74090700B772F9 /* UserDefaultsManager.swift */,
+				150B4B292E7EE4BB00C34C76 /* PhotoManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -2409,6 +2412,7 @@
 				150BA5832E56F87E0058A06B /* StartNowViewController.swift in Sources */,
 				74D297F22D63436F00DDEE31 /* PostPresignedURLResponse.swift in Sources */,
 				1547A88B2D3596B600E96616 /* SpotFilterType.swift in Sources */,
+				150B4B2A2E7EE4BB00C34C76 /* PhotoManager.swift in Sources */,
 				15304FBE2E33B7E400EFCDEF /* MenuRecommendationViewController.swift in Sources */,
 				74BF92172D393B4A00B923E3 /* Int+.swift in Sources */,
 				747BB6CE2DCA66F000352874 /* GlassButtonState.swift in Sources */,
