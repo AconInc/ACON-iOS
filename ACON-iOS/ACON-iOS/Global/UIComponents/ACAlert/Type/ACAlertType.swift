@@ -107,7 +107,7 @@ enum ACAlertType: CaseIterable {
     
     var leftButtonTitle: String? {
         switch self {
-        case .plainUpdate, .libraryAccessDenied, .changeVerifiedArea, .logout, .deletePhoto, .quitSpotUpload:
+        case .plainUpdate, .libraryAccessDenied, .changeVerifiedArea, .logout, .deletePhoto, .quitSpotUpload, .spotUploadFail:
             return "취소"
         case .naverAPILimitExceeded:
             return "끝내기"
@@ -132,7 +132,7 @@ enum ACAlertType: CaseIterable {
             return "나가기"
         case .changeVerifiedArea:
             return "변경하기"
-        case .quitOnboarding, .quitSpotUpload:
+        case .quitOnboarding, .quitSpotUpload, .spotUploadFail:
             return "그만두기"
         case .logout:
             return "로그아웃"

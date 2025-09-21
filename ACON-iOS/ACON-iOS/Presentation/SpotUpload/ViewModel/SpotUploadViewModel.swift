@@ -31,10 +31,21 @@ final class SpotUploadViewModel: Serviceable {
 
     var isWorkFriendly: Bool? = nil
 
+    // NOTE: 서버 오류로 401 뜰 때 재시도 루프에 빠지는 문제 방지
+    private var uploadRetryCount = 0
+    private let maxUploadRetries = 1
+
 
     // MARK: - Methods
 
     func uploadSpot() {
+        self.uploadRetryCount = 0
+        executeUploadFlow()
+    }
+
+    private func executeUploadFlow() {
+        print("Spot upload attempt #\(uploadRetryCount + 1)")
+
         guard !photos.isEmpty else {
             postSpot(imageURLs: [])
             return
@@ -45,12 +56,19 @@ final class SpotUploadViewModel: Serviceable {
                 let imageURLs = try await uploadSpotPhotos(assets: self.photos.map { $0.asset })
                 postSpot(imageURLs: imageURLs)
             } catch PhotoManagerError.tokenExpired {
+                guard self.uploadRetryCount < self.maxUploadRetries else {
+                    print("🚨 Max retries reached. Stopping the loop.")
+                    onSuccessPostSpot.value = false
+                    return
+                }
+
+                self.uploadRetryCount += 1
                 handleReissue { [weak self] in
-                    self?.uploadSpot() // Retry the entire flow.
+                    self?.executeUploadFlow()
                 }
             } catch {
                 handleNetworkError { [weak self] in
-                    self?.uploadSpot()
+                    self?.executeUploadFlow()
                 }
                 print("❌ A failure occurred during the upload process: \(error.localizedDescription)")
             }
