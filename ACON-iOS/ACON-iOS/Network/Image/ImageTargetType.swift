@@ -56,10 +56,7 @@ extension ImageTargetType: ACTargetType {
     var task: Task {
         switch self {
         case .postPresignedURL(let parameter):
-            return .requestParameters(
-                parameters: ["imageType": parameter.imageType],
-                encoding: URLEncoding.default
-            )
+            return .requestJSONEncodable(parameter)
         case .putImageToPresignedURL(let requestBody):
             return .requestData(requestBody.imageData)
         }
@@ -68,7 +65,7 @@ extension ImageTargetType: ACTargetType {
     var headers: [String : String]? {
         switch self {
         case .postPresignedURL:
-            return HeaderType.tokenOnly()
+            return HeaderType.basicHeader
         case .putImageToPresignedURL(let requestBody):
             return HeaderType.imageHeader(imageData: requestBody.imageData)
         }
