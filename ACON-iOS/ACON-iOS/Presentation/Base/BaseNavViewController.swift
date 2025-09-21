@@ -231,7 +231,7 @@ extension BaseNavViewController {
     func setSkipButton(completion: (() -> Void)? = NavigationUtils.navigateToTabBar) {
         rightButton.do {
             $0.isHidden = false
-            $0.setAttributedTitle(text: "건너뛰기", style: .t4SB)
+            $0.setAttributedTitle(text: "건너뛰기", style: .t4SB, color: .gray500)
             setButtonAction(button: rightButton,
                             target: self,
                             action: #selector(skipButtonTapped))
