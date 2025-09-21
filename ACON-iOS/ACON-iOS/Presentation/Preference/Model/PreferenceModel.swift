@@ -1,5 +1,5 @@
 //
-//  OnboardingModel.swift
+//  PreferenceModel.swift
 //  ACON-iOS
 //
 //  Created by 이수민 on 6/16/25.

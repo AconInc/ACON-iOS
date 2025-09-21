@@ -216,8 +216,8 @@ extension ProfileSettingViewController: UITableViewDataSource {
         case 2:
             let items = SettingType.allSections[2] as! [SettingType.PersonalSetting]
             switch items[indexPath.row] {
-            case .onboarding:
-                let vc = OnboardingViewController(flowType: .setting)
+            case .preference:
+                let vc = PreferenceViewController(flowType: .setting)
                 self.navigationController?.pushViewController(vc, animated: true)
             case .localVerification:
                 let vc = VerifiedAreasEditViewController()

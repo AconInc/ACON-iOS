@@ -123,33 +123,34 @@ extension LoginViewController {
         self.loginViewModel.onSuccessLogin.bind { [weak self] onSuccess in
             guard let onSuccess else { return }
             guard let self = self else { return }
-            let hasVerifiedArea = AuthManager.shared.hasVerifiedArea
-            let hasPreference = AuthManager.shared.hasPreference
+
             let hasSeenTutorial = AuthManager.shared.hasSeenTutorial
+            let hasSeenLocalVerificationOnboarding = AuthManager.shared.hasSeenLocalVerification
+            let hasSeenPreferenceOnboarding = AuthManager.shared.hasSeenPreference
 
             if onSuccess {
                 AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.login, properties: ["did_login?": true])
 
-                // NOTE: 지역인증O && 취향탐색O && 튜토리얼O -> TabBar로 이동
-                if hasVerifiedArea && hasPreference && hasSeenTutorial {
-                    NavigationUtils.navigateToTabBar()
-                }
+                // NOTE: [온보딩 순서] 소셜로그인 > 서비스 온보딩(튜토리얼) > 지역인증 > 취향탐색
 
-                // NOTE: 지역인증O && 취향탐색O && 튜토리얼X -> 튜토리얼로 이동
-                else if hasVerifiedArea && hasPreference && !hasSeenTutorial {
+                // NOTE: 튜토리얼X -> 튜토리얼VC
+                if !hasSeenTutorial {
                     NavigationUtils.navigateToTutorial()
                 }
 
-                // NOTE: 지역인증O && 취향탐색X -> 취향탐색으로 이동
-                // NOTE: 취향탐색 이후 튜토리얼을 거치는지는 OnboardingVC에서 분기처리
-                else if hasVerifiedArea && !hasPreference {
-                    NavigationUtils.naviateToLoginOnboarding()
+                // NOTE: 튜토리얼O && 지역인증X -> 지역인증VC
+                else if !hasSeenLocalVerificationOnboarding {
+                    NavigationUtils.navigateToOnboardingLocalVerification()
                 }
 
-                // NOTE: 지역인증X -> 지역인증으로 이동
-                // NOTE: 지역인증 이후 취항탐색, 튜토리얼을 거치는지는 LocalMapVC에서 분기처리
+                // NOTE: 튜토리얼O && 지역인증O && 취향탐색X -> 취향탐색VC
+                else if !hasSeenPreferenceOnboarding {
+                    NavigationUtils.naviateToLoginPreference()
+                }
+
+                // NOTE: 튜토리얼O && 지역인증O && 취향탐색O -> TabBar
                 else {
-                    NavigationUtils.navigateToOnboardingLocalVerification()
+                    NavigationUtils.navigateToTabBar()
                 }
             } else {
                 showLoginFailAlert()

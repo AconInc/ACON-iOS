@@ -80,63 +80,51 @@ class SplashViewController: BaseViewController {
 
 private extension SplashViewController {
 
+    // NOTE: [온보딩 순서] 소셜로그인 > 서비스 온보딩(튜토리얼) > 지역인증 > 취향탐색
     func goToNextVC() {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        
+
         let hasToken = AuthManager.shared.hasToken
-        let hasVerifiedArea = AuthManager.shared.hasVerifiedArea
-        let hasPreference = AuthManager.shared.hasPreference
         let hasSeenTutorial = AuthManager.shared.hasSeenTutorial
-        
+        let hasSeenLocalVerificationOnboarding = AuthManager.shared.hasSeenLocalVerification
+        let hasSeenPreferenceOnboarding = AuthManager.shared.hasSeenPreference
+
         var rootVC: UIViewController
-        
-        // NOTE: 자동로그인O && 지역인증O && 취향탐색O -> TabBar/튜토리얼로 이동
-        if hasToken && hasVerifiedArea && hasPreference {
-            rootVC = hasSeenTutorial ? ACTabBarController() : TutorialContainerViewController()
+
+        // NOTE: 자동로그인X -> 로그인 VC
+        if !hasToken {
+            rootVC = UINavigationController(rootViewController: LoginViewController())
         }
-        
-        // NOTE: 자동로그인O && 지역인증O && 취향탐색X -> 취향탐색으로 이동
-        // NOTE: 취향탐색 이후 튜토리얼을 거치는지는 OnboardingVC에서 분기처리
-        else if hasToken && hasVerifiedArea && !hasPreference {
-            rootVC = OnboardingViewController(flowType: .login)
+
+        // NOTE: 자동로그인O && 튜토리얼X -> 튜토리얼VC
+        else if !hasSeenTutorial {
+            rootVC = TutorialContainerViewController()
         }
-        
-        // NOTE: 자동로그인O && 지역인증X -> 지역인증으로 이동
-        // NOTE: 지역인증 이후 취항탐색, 튜토리얼을 거치는지는 LocalMapVC에서 분기처리
-        else if hasToken && !hasVerifiedArea {
+
+        // NOTE: 자동로그인O && 튜토리얼O && 지역인증X -> 지역인증VC
+        else if !hasSeenLocalVerificationOnboarding {
             let vm = LocalVerificationViewModel(flowType: .onboarding)
             // TODO: 자동으로 맵뷰로 넘어가는 문제 해결
-            rootVC = UINavigationController(
-                rootViewController: LocalVerificationViewController(viewModel: vm)
-            )
+            rootVC = UINavigationController(rootViewController: LocalVerificationViewController(viewModel: vm))
         }
-        
-        // NOTE: 자동로그인X -> 로그인VC로 이동
+
+        // NOTE: 자동로그인O && 튜토리얼O && 지역인증O && 취향탐색X -> 취향탐색VC
+        else if !hasSeenPreferenceOnboarding {
+            rootVC = PreferenceViewController(flowType: .login)
+        }
+
+        // NOTE: 자동로그인O && 튜토리얼O && 지역인증O && 취향탐색O -> TabBar
         else {
-            rootVC = UINavigationController(
-                rootViewController: LoginViewController()
-            )
+            rootVC = ACTabBarController()
         }
-        
+
         sceneDelegate?.window?.rootViewController = rootVC
     }
 
     // NOTE: 딥링크 진입 시 호출
     func goToSpotDetailVC(with spotID: Int64) {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-
-        let rootVC: UIViewController = {
-            // NOTE: 자동로그인O && 지역인증X -> rootVC = 지역인증VC
-            if AuthManager.shared.hasToken && !AuthManager.shared.hasVerifiedArea {
-                let vm = LocalVerificationViewModel(flowType: .onboarding)
-                return UINavigationController(
-                    rootViewController: LocalVerificationViewController(viewModel: vm)
-                )
-            } else {
-                // NOTE: 그 외 -> rootVC = TabBar
-                return ACTabBarController()
-            }
-        }()
+        let rootVC: UIViewController = ACTabBarController()
 
         sceneDelegate?.window?.rootViewController = rootVC
         sceneDelegate?.window?.makeKeyAndVisible()
