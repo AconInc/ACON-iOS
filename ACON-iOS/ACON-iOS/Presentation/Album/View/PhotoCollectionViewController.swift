@@ -280,14 +280,16 @@ extension PhotoCollectionViewController: UICollectionViewDataSource {
 private extension PhotoCollectionViewController {
     
     func goToPhotoSelectionVC() {
-        albumViewModel.getHighQualityImage(index: selectedIndexPath.value?.item ?? 0) { [weak self] image in
-            let vc = PhotoSelectionViewController(image)
+        let asset = albumViewModel.fetchedImages[selectedIndexPath.value?.item ?? 0].asset
+
+        albumViewModel.getHighQualityImage(asset: asset) { [weak self] image in
+            let vc = PhotoSelectionViewController(PhotoModel(asset: asset, image: image))
             DispatchQueue.main.async {
                 self?.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }
-    
+
     func popToSpotUploadVC() {
         let assets = selectedIndexPaths.map { albumViewModel.fetchedImages[$0.item].asset }
 

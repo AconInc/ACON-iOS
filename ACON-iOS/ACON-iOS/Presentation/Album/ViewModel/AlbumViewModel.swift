@@ -349,8 +349,7 @@ class AlbumViewModel: NSObject, PHPhotoLibraryChangeObserver {
     
     // MARK: - 고화질 이미지 가져오기
     
-    func getHighQualityImage(index: Int, completion: @escaping (UIImage) -> Void) {
-        let asset = fetchedImages[index].asset
+    func getHighQualityImage(asset: PHAsset, completion: @escaping (UIImage) -> Void) {
         /// 이미지 원본 크기
         let pixelSize = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
         
