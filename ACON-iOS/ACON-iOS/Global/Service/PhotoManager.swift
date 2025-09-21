@@ -44,8 +44,7 @@ class PhotoManager {
         guard let fileName = getFileName(for: asset) else {
             throw PhotoManagerError.missingFileName
         }
-        
-        // These three steps are executed sequentially for a single image.
+
         let imageData = try await requestImageData(for: asset)
         let presignedURLResponse = try await requestPresignedUrl(fileName: fileName)
         try await uploadToS3(data: imageData, to: presignedURLResponse.preSignedUrl)
