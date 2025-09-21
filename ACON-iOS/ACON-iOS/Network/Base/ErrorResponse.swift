@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - 공통 예외 처리 Response
 
-struct ErrorResponse: Decodable {
+struct ErrorResponse: Decodable, Error {
     
     let code: Int
     let message: String
