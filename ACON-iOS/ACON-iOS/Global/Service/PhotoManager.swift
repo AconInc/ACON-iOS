@@ -80,30 +80,56 @@ class PhotoManager {
 
 private extension PhotoManager {
 
-    // NOTE: 사진 fileName 가져오기
+    /// NOTE: 사진 fileName 가져오기
     func getFileName(for asset: PHAsset) -> String? {
         return PHAssetResource.assetResources(for: asset).first?.originalFilename
     }
 
-    // NOTE: 사진을 데이터 타입으로 변환
-    func requestImageData(for asset: PHAsset) async throws -> Data {
+    /// NOTE: 사진을 데이터 타입으로 변환
+    /// - `SPOT`: jpg, jpeg, webp, heic
+    /// - `PROFILE`, `MENUBOARD`: jpg, jpeg, png, webp, heic
+    private func requestImageData(for asset: PHAsset) async throws -> Data {
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = true
-        
+
         return try await withCheckedThrowingContinuation { continuation in
-            PHImageManager.default().requestImageDataAndOrientation(for: asset, options: options) { data, _, _, info in
+            PHImageManager.default().requestImageDataAndOrientation(for: asset, options: options) { [weak self] data, dataUTI, _, info in
+                guard let self = self else {
+                    continuation.resume(throwing: PhotoManagerError.imageDataConversionFailed)
+                    return
+                }
+
                 if let error = info?[PHImageErrorKey] as? Error {
                     continuation.resume(throwing: error)
-                } else if let imageData = data {
-                    continuation.resume(returning: imageData)
-                } else {
+                    return
+                }
+
+                guard let imageData = data,
+                      let utiString = dataUTI as String? else {
                     continuation.resume(throwing: PhotoManagerError.imageDataConversionFailed)
+                    return
+                }
+
+                // NOTE: 허용하지 않는 포맷 -> jpeg로 변환
+                let allowedFormats = self.imageType.allowedUTIs
+                if !allowedFormats.contains(utiString) {
+                    print("🎞️ Format '\(utiString)' is not allowed. Convert to JPEG")
+
+                    guard let image = UIImage(data: imageData),
+                          let jpegData = image.jpegData(compressionQuality: self.imageType.compressionQuality) else {
+                        continuation.resume(throwing: PhotoManagerError.imageDataConversionFailed)
+                        return
+                    }
+                    continuation.resume(returning: jpegData)
+                } else {
+                    // NOTE: 허용하는 포맷 -> 원본 데이터 반환
+                    continuation.resume(returning: imageData)
                 }
             }
         }
     }
 
-    // NOTE: PresignedURL 생성
+    /// NOTE: PresignedURL 생성
     func requestPresignedUrl(fileName: String) async throws -> PostPresignedURLResponse {
         try await withCheckedThrowingContinuation { continuation in
             imageService.getPresignedURL(
@@ -126,7 +152,7 @@ private extension PhotoManager {
         }
     }
 
-    // NOTE: S3에 사진 업로드
+    /// NOTE: S3에 사진 업로드
     func uploadToS3(data: Data, to urlString: String) async throws {
         try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
             imageService.putImageToPresignedURL(
