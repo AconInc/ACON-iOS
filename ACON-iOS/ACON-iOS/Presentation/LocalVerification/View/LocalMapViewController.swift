@@ -116,13 +116,9 @@ private extension LocalMapViewController {
             if onSuccess {
                 switch flowType {
                 case .onboarding:
-                    // NOTE: 취향탐색 O -> Tutorial 또는 TabBar
-                    // NOTE: 취향탐색 X -> OnboardingVC
+                    // NOTE: 취향탐색O ? TabBar : 취향탐색VC
                     let hasPreference = AuthManager.shared.hasPreference
-                    let hasSeenTutorial = AuthManager.shared.hasSeenTutorial
-                    hasPreference
-                    ? (hasSeenTutorial ? NavigationUtils.navigateToTabBar() : NavigationUtils.navigateToTutorial())
-                    : NavigationUtils.naviateToLoginOnboarding()
+                    hasPreference ? NavigationUtils.navigateToTabBar() : NavigationUtils.naviateToOnboardingPreference()
                 case .setting:
                     NavigationUtils.popToParentVC(from: self, targetVCType: VerifiedAreasEditViewController.self)
                 }

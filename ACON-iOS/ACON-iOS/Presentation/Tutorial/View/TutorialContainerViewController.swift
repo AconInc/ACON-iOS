@@ -41,6 +41,12 @@ class TutorialContainerViewController: BaseViewController {
         self.tabBarController?.tabBar.isHidden = true
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        UserDefaultsManager.set(true, forKey: .hasSeenTutorial)
+    }
+
 
     // MARK: - UI Setting
 
