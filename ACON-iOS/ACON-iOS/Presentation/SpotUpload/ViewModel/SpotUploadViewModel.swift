@@ -46,19 +46,29 @@ final class SpotUploadViewModel: Serviceable {
     private func executeUploadFlow() {
         print("Spot upload attempt #\(uploadRetryCount + 1)")
 
-        guard !photos.isEmpty else {
-            postSpot(imageURLs: [])
+        if photos.isEmpty {
+            Task {
+                do {
+                    try await postSpot(imageURLs: [])
+                    await MainActor.run { onSuccessPostSpot.value = true }
+                } catch {
+                    print("❌ A failure occurred during post (no photos): \(error.localizedDescription)")
+                    await MainActor.run { onSuccessPostSpot.value = false }
+                }
+            }
             return
         }
 
         Task {
             do {
                 let imageURLs = try await uploadSpotPhotos(assets: self.photos.map { $0.asset })
-                postSpot(imageURLs: imageURLs)
+                try await postSpot(imageURLs: imageURLs)
+                await MainActor.run { onSuccessPostSpot.value = true }
+
             } catch PhotoManagerError.tokenExpired {
                 guard self.uploadRetryCount < self.maxUploadRetries else {
                     print("🚨 Max retries reached. Stopping the loop.")
-                    onSuccessPostSpot.value = false
+                    await MainActor.run { onSuccessPostSpot.value = false }
                     return
                 }
                 self.uploadRetryCount += 1
@@ -70,10 +80,10 @@ final class SpotUploadViewModel: Serviceable {
                     self?.executeUploadFlow()
                 }
             } catch PhotoManagerError.serverError {
-                onSuccessPostSpot.value = false
+                await MainActor.run { onSuccessPostSpot.value = false }
             } catch {
                 print("❌ An unhandled failure occurred: \(error.localizedDescription)")
-                onSuccessPostSpot.value = false
+                await MainActor.run { onSuccessPostSpot.value = false }
             }
         }
     }
@@ -89,7 +99,7 @@ private extension SpotUploadViewModel {
         return try await PhotoManager(imageType: .SPOT).uploadImages(assets: assets)
     }
 
-    func postSpot(imageURLs: [String]) {
+    func postSpot(imageURLs: [String]) async throws {
         let request = PostSpotUploadRequest(
             spotName: selectedSpot?.spotName ?? "",
             address: selectedSpot?.spotAddress ?? "",
@@ -98,18 +108,20 @@ private extension SpotUploadViewModel {
             recommendedMenu: recommendedMenu ?? "",
             imageList: imageURLs.isEmpty ? nil : imageURLs
         )
-
-        ACService.shared.spotUploadService.postSpotUpload(requestBody: request) { [weak self] response in
-            switch response {
-            case .success:
-                self?.onSuccessPostSpot.value = true
-            case .reIssueJWT:
-                self?.handleReissue { [weak self] in
-                    self?.postSpot(imageURLs: imageURLs)
-                }
-            default:
-                self?.handleNetworkError { [weak self] in
-                    self?.postSpot(imageURLs: imageURLs)
+        
+        try await withCheckedThrowingContinuation { continuation in
+            ACService.shared.spotUploadService.postSpotUpload(requestBody: request) { response in
+                switch response {
+                case .success:
+                    continuation.resume(returning: ())
+                case .reIssueJWT:
+                    continuation.resume(throwing: PhotoManagerError.tokenExpired)
+                case .requestErr(let error):
+                    continuation.resume(throwing: PhotoManagerError.requestError(error))
+                case .networkFail:
+                    continuation.resume(throwing: PhotoManagerError.networkError)
+                default:
+                    continuation.resume(throwing: PhotoManagerError.serverError)
                 }
             }
         }
