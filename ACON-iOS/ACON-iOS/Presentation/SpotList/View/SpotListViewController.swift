@@ -294,9 +294,9 @@ private extension SpotListViewController {
     }
 
     @objc
-    func onRequestToAddButtonTapped() {
-        let vc = ACWebViewController(urlString: StringLiterals.WebView.requestToAddPlaceLink)
-        present(vc, animated: true)
+    func onRegisterSpotButtonTapped() {
+        let vc = SpotUploadViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }
@@ -481,7 +481,7 @@ extension SpotListViewController: UICollectionViewDataSource {
                     fatalError("Cannot dequeue header view")
                 }
                 header.setHeader(spotList.spotList.isEmpty ? .noSuggestion : .withSuggestion)
-                header.requestToAddButton.addTarget(self, action: #selector(onRequestToAddButtonTapped), for: .touchUpInside)
+                header.registerSpotButton.addTarget(self, action: #selector(onRegisterSpotButtonTapped), for: .touchUpInside)
                 return header
             }
         default:
