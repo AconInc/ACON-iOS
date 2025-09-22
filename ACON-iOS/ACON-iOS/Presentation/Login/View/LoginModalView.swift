@@ -93,12 +93,12 @@ class LoginModalView: GlassmorphismView {
         }
 
         termsOfUseLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*46)
+            $0.top.equalTo(proceedLoginLabel.snp.bottom).offset(4)
             $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*111)
         }
         
         privacyPolicyLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*46)
+            $0.top.equalTo(termsOfUseLabel)
             $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*111)
         }
     }
@@ -153,7 +153,7 @@ class LoginModalView: GlassmorphismView {
         
         termsOfUseLabel.do {
             $0.setLabel(text: StringLiterals.Login.termsOfUse,
-                        style: .c1SB,
+                        style: .c1R,
                         color: .acWhite,
                         alignment: .center)
             $0.setUnderline(range: NSRange(location: 0, length: termsOfUseLabel.text?.count ?? 4))
@@ -162,7 +162,7 @@ class LoginModalView: GlassmorphismView {
         
         privacyPolicyLabel.do {
             $0.setLabel(text: StringLiterals.Login.privacyPolicy,
-                        style: .c1SB,
+                        style: .c1R,
                         color: .acWhite,
                         alignment: .center)
             $0.setUnderline(range: NSRange(location: 0, length: privacyPolicyLabel.text?.count ?? 8))
