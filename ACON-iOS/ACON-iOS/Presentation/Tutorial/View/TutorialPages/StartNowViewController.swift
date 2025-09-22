@@ -147,7 +147,7 @@ private extension StartNowViewController {
 
         // NOTE: 로그인O && 지역인증O && 취향탐색X -> 취향탐색VC
         else if !hasSeenPreferenceOnboarding {
-            NavigationUtils.naviateToLoginPreference()
+            NavigationUtils.naviateToOnboardingPreference()
         }
 
         // NOTE: 로그인O && 지역인증O && 취향탐색O -> TabBar

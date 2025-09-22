@@ -355,13 +355,9 @@ private extension ProfileEditViewController {
         let birthDateText = profileEditView.birthDateTextField.text
         viewModel.updateUserInfo(nickname: nickname,
                                  birthDate: birthDateText?.isEmpty ?? true ? nil : birthDateText)
-        if isDefaultImage {
-            viewModel.patchProfile()
-        } else {
-            viewModel.saveProfile()
-        }
+        viewModel.saveProfile()
     }
-    
+
     @objc
     func appWillEnterForeground() {
         profileEditView.setNeedsLayout()

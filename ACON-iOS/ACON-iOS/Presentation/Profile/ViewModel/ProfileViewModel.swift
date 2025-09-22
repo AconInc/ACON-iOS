@@ -137,52 +137,63 @@ final class ProfileViewModel: Serviceable {
     }
 
     func saveProfile() {
+        self.uploadRetryCount = 0
+        executeSaveProfileFlow()
+    }
+
+    func executeSaveProfileFlow() {
+        print("Profile save attempt #\(uploadRetryCount + 1)")
+
         Task {
             do {
+                var imageURL: String? = nil
                 if let profileImage {
-                    let imageURL = try await uploadProfilePhoto(asset: profileImage.asset)
-                    patchProfile(imageURL: imageURL)
-                } else {
-                    patchProfile()
+                    imageURL = try await uploadProfilePhoto(asset: profileImage.asset)
                 }
+                try await patchProfile(imageURL: imageURL)
+                await MainActor.run { onPatchProfileSuccess.value = true }
+
             } catch PhotoManagerError.tokenExpired {
                 guard self.uploadRetryCount < self.maxUploadRetries else {
                     print("🚨 Max retries reached. Stopping the loop.")
-                    onPatchProfileSuccess.value = false
+                    await MainActor.run { onPatchProfileSuccess.value = false }
                     return
                 }
                 self.uploadRetryCount += 1
                 handleReissue { [weak self] in
-                    self?.saveProfile()
+                    self?.executeSaveProfileFlow()
+                }
+            } catch PhotoManagerError.networkError {
+                handleNetworkError { [weak self] in
+                    self?.executeSaveProfileFlow()
                 }
             } catch {
-                handleNetworkError { [weak self] in
-                    self?.saveProfile()
-                }
-                print("❌ A failure occurred during the upload process: \(error.localizedDescription)")
+                print("❌ An unhandled failure occurred: \(error.localizedDescription)")
+                await MainActor.run { onPatchProfileSuccess.value = false }
             }
         }
     }
 
-    func patchProfile(imageURL: String? = nil) {
+    func patchProfile(imageURL: String? = nil) async throws {
         let requestBody = PatchProfileRequest(
             profileImage: imageURL,
             nickname: userInfo.nickname,
             birthDate: userInfo.birthDate
         )
 
-        ACService.shared.profileService.patchProfile(requestBody: requestBody) { [weak self] response in
-            guard let self = self else { return }
-            switch response {
-            case .success:
-                onPatchProfileSuccess.value = true
-            case .reIssueJWT:
-                self.handleReissue {
-                    self.patchProfile(imageURL: imageURL)
-                }
-            default:
-                self.handleNetworkError {
-                    self.patchProfile(imageURL: imageURL)
+        try await withCheckedThrowingContinuation { continuation in
+            ACService.shared.profileService.patchProfile(requestBody: requestBody) { response in
+                switch response {
+                case .success:
+                    continuation.resume(returning: ())
+                case .reIssueJWT:
+                    continuation.resume(throwing: PhotoManagerError.tokenExpired)
+                case .requestErr(let error):
+                    continuation.resume(throwing: PhotoManagerError.requestError(error))
+                case .networkFail:
+                    continuation.resume(throwing: PhotoManagerError.networkError)
+                default:
+                    continuation.resume(throwing: PhotoManagerError.serverError)
                 }
             }
         }

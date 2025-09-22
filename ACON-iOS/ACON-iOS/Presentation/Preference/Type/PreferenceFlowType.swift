@@ -9,6 +9,6 @@ import Foundation
 
 enum PreferenceFlowType {
     
-    case login, setting
+    case onboarding, setting
     
 }

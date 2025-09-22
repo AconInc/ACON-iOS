@@ -11,19 +11,29 @@ import Photos
 // MARK: - PhotoManager Errors
 
 enum PhotoManagerError: LocalizedError {
+
     case imageDataConversionFailed
     case missingFileName
     case tokenExpired
-    case networkError(Error)
+    case requestError(Error) // 4xx
+    case serverError        // 5xx
+    case networkError
+    case decodingError
+    case otherError
 
     var errorDescription: String? {
         switch self {
         case .imageDataConversionFailed: return "🎞️ Failed to retrieve image data."
         case .missingFileName: return "🎞️ Missing the filename of the photo."
         case .tokenExpired: return "🎞️ Authentication token has expired."
-        case .networkError(let error): return "🎞️ Network error occurred: \(error.localizedDescription)"
+        case .requestError(let error): return "🎞️ A client error occurred: \(error.localizedDescription)"
+        case .serverError: return "🎞️ The server is currently unavailable. Please try again later."
+        case .networkError: return "🎞️ Please check your internet connection."
+        case .decodingError: return "🎞️ Failed to process the response from the server."
+        case .otherError: return "🎞️ Other error occurred."
         }
     }
+
 }
 
 
@@ -47,7 +57,7 @@ class PhotoManager {
 
         let imageData = try await requestImageData(for: asset)
         let presignedURLResponse = try await requestPresignedUrl(fileName: fileName)
-        try await uploadToS3(data: imageData, to: presignedURLResponse.preSignedUrl)
+        try await uploadToS3(data: imageData, to: presignedURLResponse.preSignedUrl, fileName: fileName)
 
         return presignedURLResponse.fileUrl
     }
@@ -140,22 +150,27 @@ private extension PhotoManager {
                 case .reIssueJWT:
                     continuation.resume(throwing: PhotoManagerError.tokenExpired)
                 case .requestErr(let errorResponse):
-                    continuation.resume(throwing: errorResponse)
-                case .decodedErr, .pathErr, .serverErr, .networkFail, .naverAPIErr:
-                    let genericError = PhotoManagerError.networkError(
-                        NSError(domain: "NetworkResultError", code: 0, userInfo: [NSLocalizedDescriptionKey: "‼️A server or network error occurred."])
-                    )
-                    continuation.resume(throwing: genericError)
+                    continuation.resume(throwing: PhotoManagerError.requestError(errorResponse))
+                case .serverErr:
+                    continuation.resume(throwing: PhotoManagerError.serverError)
+                case .networkFail:
+                    continuation.resume(throwing: PhotoManagerError.networkError)
+                case .decodedErr:
+                    continuation.resume(throwing: PhotoManagerError.decodingError)
+                default:
+                    continuation.resume(throwing: PhotoManagerError.otherError)
                 }
             }
         }
     }
 
     /// NOTE: S3에 사진 업로드
-    func uploadToS3(data: Data, to urlString: String) async throws {
+    func uploadToS3(data: Data, to urlString: String, fileName: String) async throws {
         try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
             imageService.putImageToPresignedURL(
-                requestBody: PutImageToPresignedURLRequest(presignedURL: urlString, imageData: data)
+                requestBody: PutImageToPresignedURLRequest(presignedURL: urlString,
+                                                           imageData: data,
+                                                           fileName: fileName)
             ) { result in
                 switch result {
                 case .success:
@@ -163,12 +178,15 @@ private extension PhotoManager {
                 case .reIssueJWT:
                     continuation.resume(throwing: PhotoManagerError.tokenExpired)
                 case .requestErr(let errorResponse):
-                    continuation.resume(throwing: errorResponse)
-                case .decodedErr, .pathErr, .serverErr, .networkFail, .naverAPIErr:
-                    let genericError = PhotoManagerError.networkError(
-                        NSError(domain: "NetworkResultError", code: 0, userInfo: [NSLocalizedDescriptionKey: "‼️A server or network error occurred during upload."])
-                    )
-                    continuation.resume(throwing: genericError)
+                    continuation.resume(throwing: PhotoManagerError.requestError(errorResponse))
+                case .serverErr:
+                    continuation.resume(throwing: PhotoManagerError.serverError)
+                case .networkFail:
+                    continuation.resume(throwing: PhotoManagerError.networkError)
+                case .decodedErr:
+                    continuation.resume(throwing: PhotoManagerError.decodingError)
+                default:
+                    continuation.resume(throwing: PhotoManagerError.otherError)
                 }
             }
         }

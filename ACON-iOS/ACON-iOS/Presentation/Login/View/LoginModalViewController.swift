@@ -142,7 +142,7 @@ extension LoginModalViewController {
 
                 // NOTE: 튜토리얼O && 지역인증O && 취향탐색X -> 취향탐색VC
                 else if !hasSeenPreference {
-                    NavigationUtils.naviateToLoginPreference()
+                    NavigationUtils.naviateToOnboardingPreference()
                 }
 
                 // NOTE: 튜토리얼O && 지역인증O && 취향탐색O -> TabBar
