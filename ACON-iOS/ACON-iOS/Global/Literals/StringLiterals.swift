@@ -385,7 +385,7 @@ enum StringLiterals {
         
     }
     
-    enum Onboarding {
+    enum Preference {
         
         static let dislikeFoodTitle = "싫어하는 음식을\n알려줄 수 있나요?"
         
@@ -489,7 +489,7 @@ enum StringLiterals {
         
         static let privacyPolicy = "개인정보처리방침"
         
-        static let onboarding = "취향탐색 다시하기"
+        static let preference = "취향탐색 다시하기"
         
         static let localVerification = "지역 인증하기"
         

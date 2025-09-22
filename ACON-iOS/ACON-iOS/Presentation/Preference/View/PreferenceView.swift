@@ -1,5 +1,5 @@
 //
-//  OnboardingView.swift
+//  PreferenceView.swift
 //  ACON-iOS
 //
 //  Created by 이수민 on 5/8/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class OnboardingView: BaseView {
+final class PreferenceView: BaseView {
 
     // MARK: - UI Properties
     
@@ -23,7 +23,7 @@ final class OnboardingView: BaseView {
     
     let lightImageView: UIImageView = UIImageView()
     
-    var startButton: ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_12_t4SB), title: StringLiterals.Onboarding.start)
+    var startButton: ACButton = ACButton(style: GlassButton(glassmorphismType: .buttonGlassDefault, buttonType: .full_12_t4SB), title: StringLiterals.Preference.start)
     
     private let dislikeFoodCollectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = LeftAlignedCollectionViewFlowLayout()
@@ -104,11 +104,11 @@ final class OnboardingView: BaseView {
         super.setStyle()
         
         titleLabel.do {
-            $0.setLabel(text: StringLiterals.Onboarding.dislikeFoodTitle, style: .t1SB)
+            $0.setLabel(text: StringLiterals.Preference.dislikeFoodTitle, style: .t1SB)
         }
         
         descriptionLabel.do {
-            $0.setLabel(text: StringLiterals.Onboarding.dislikeFoodDescription,
+            $0.setLabel(text: StringLiterals.Preference.dislikeFoodDescription,
                         style: .t5R,
                         color: .gray500)
         }

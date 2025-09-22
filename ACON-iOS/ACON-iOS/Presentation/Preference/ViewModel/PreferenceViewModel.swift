@@ -1,5 +1,5 @@
 //
-//  OnboardingViewModel.swift
+//  PreferenceViewModel.swift
 //  ACON-iOS
 //
 //  Created by 이수민 on 6/16/25.
@@ -7,34 +7,34 @@
 
 import Foundation
 
-class OnboardingViewModel: Serviceable {
+class PreferenceViewModel: Serviceable {
     
     // MARK: - Networking Properties
     
-    var onPutOnboardingSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
+    var onPutPreferenceSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
  
     
     // MARK: - Networking
     
-    func putOnboarding(_ dislikeFoodList: [String]) {
-        ACService.shared.onboardingService.putOnboarding(requestBody: PutOnboardingRequest(dislikeFoodList: dislikeFoodList)) { [weak self] response in
+    func putPreference(_ dislikeFoodList: [String]) {
+        ACService.shared.preferenceService.putPreference(requestBody: PutPreferenceRequest(dislikeFoodList: dislikeFoodList)) { [weak self] response in
             guard let self = self else { return }
             switch response {
             case .success:
-                onPutOnboardingSuccess.value = true
+                onPutPreferenceSuccess.value = true
                 if !AuthManager.shared.hasPreference {
                     UserDefaultsManager.set(true, forKey: .hasPreference)
                 }
             case .reIssueJWT:
                 self.handleReissue {
-                    self.putOnboarding(dislikeFoodList)
+                    self.putPreference(dislikeFoodList)
                 }
             case .networkFail:
                 self.handleNetworkError {
-                    self.putOnboarding(dislikeFoodList)
+                    self.putPreference(dislikeFoodList)
                 }
             default:
-                onPutOnboardingSuccess.value = false
+                onPutPreferenceSuccess.value = false
             }
         }
     }

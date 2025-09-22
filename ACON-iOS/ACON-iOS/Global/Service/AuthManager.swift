@@ -31,6 +31,14 @@ final class AuthManager {
         return UserDefaultsManager.get(Bool.self, forKey: .hasSeenTutorial) ?? false
     }
 
+    var hasSeenLocalVerification: Bool {
+        return UserDefaultsManager.get(Bool.self, forKey: .hasSeenLocalVerification) ?? false
+    }
+
+    var hasSeenPreference: Bool {
+        return UserDefaultsManager.get(Bool.self, forKey: .hasSeenPreference) ?? false
+    }
+
     func handleTokenRefresh() async throws -> Bool {
         let refreshToken = UserDefaultsManager.get(String.self, forKey: .refreshToken) ?? ""
         return try await withCheckedThrowingContinuation { continuation in
