@@ -47,7 +47,7 @@ class PhotoManager {
 
         let imageData = try await requestImageData(for: asset)
         let presignedURLResponse = try await requestPresignedUrl(fileName: fileName)
-        try await uploadToS3(data: imageData, to: presignedURLResponse.preSignedUrl)
+        try await uploadToS3(data: imageData, to: presignedURLResponse.preSignedUrl, fileName: fileName)
 
         return presignedURLResponse.fileUrl
     }
@@ -152,10 +152,12 @@ private extension PhotoManager {
     }
 
     /// NOTE: S3에 사진 업로드
-    func uploadToS3(data: Data, to urlString: String) async throws {
+    func uploadToS3(data: Data, to urlString: String, fileName: String) async throws {
         try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
             imageService.putImageToPresignedURL(
-                requestBody: PutImageToPresignedURLRequest(presignedURL: urlString, imageData: data)
+                requestBody: PutImageToPresignedURLRequest(presignedURL: urlString,
+                                                           imageData: data,
+                                                           fileName: fileName)
             ) { result in
                 switch result {
                 case .success:

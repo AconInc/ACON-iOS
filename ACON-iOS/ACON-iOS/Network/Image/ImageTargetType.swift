@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UniformTypeIdentifiers
 
 import Moya
 
@@ -65,10 +66,24 @@ extension ImageTargetType: ACTargetType {
     var headers: [String : String]? {
         switch self {
         case .postPresignedURL:
-            return HeaderType.basicHeader
+            return HeaderType.headerWithToken()
         case .putImageToPresignedURL(let requestBody):
-            return HeaderType.imageHeader(imageData: requestBody.imageData)
+            let contentType = mimeType(for: requestBody.fileName)
+            return HeaderType.imageHeader(contentType: contentType)
         }
+    }
+
+}
+
+
+// MARK: - Helper
+
+private extension ImageTargetType {
+
+    func mimeType(for fileName: String) -> String {
+        let pathExtension = (fileName as NSString).pathExtension
+        let type = UTType(filenameExtension: pathExtension)
+        return type?.preferredMIMEType ?? "application/octet-stream"
     }
 
 }
