@@ -34,8 +34,6 @@ final class ProfileEditViewController: BaseNavViewController {
         }
     }
 
-    private var profileImage: UIImage = .imgProfileBasic
-    
     private var didFinishInitialSetup: Bool = false
     private var hasInitialValueChanged: Bool = false
     private var isDefaultImage: Bool = false
@@ -124,10 +122,10 @@ final class ProfileEditViewController: BaseNavViewController {
 
 extension ProfileEditViewController {
 
-    func updateProfileImage(_ image: UIImage, _ isDefault: Bool = true) {
-        profileImage = image
+    func updateProfileImage(_ photo: PhotoModel?, _ isDefault: Bool = true) {
+        viewModel.profileImage = photo
         isDefaultImage = isDefault
-        profileEditView.setProfileImage(profileImage)
+        profileEditView.setProfileImage(photo?.image ?? .imgProfileBasic)
         hasInitialValueChanged = true
         checkSaveAvailability()
     }
@@ -187,39 +185,23 @@ private extension ProfileEditViewController {
             viewModel.onGetNicknameValiditySuccess.value = nil
         }
 
-        viewModel.onSuccessGetPresignedURL.bind { [weak self] onSuccess in
-            guard let self = self,
-                  let onSuccess = onSuccess else { return }
-
-            if onSuccess, !isDefaultImage {
-                if let imageData: Data = profileImage.jpegData(compressionQuality: 0.5) {
-                    viewModel.putProfileImageToPresignedURL(imageData: imageData)
-                }
-                viewModel.onSuccessGetPresignedURL.value = nil
-            }
-        }
-
-        viewModel.onSuccessPutProfileImageToPresignedURL.bind { [weak self] onSuccess in
-            guard let self = self,
-                  let onSuccess = onSuccess else { return }
-            if onSuccess {
-                viewModel.patchProfile()
-            }
-            viewModel.onSuccessPutProfileImageToPresignedURL.value = nil
-        }
-
         viewModel.onPatchProfileSuccess.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
-            if onSuccess {
-                self.navigationController?.popViewController(animated: true)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    ACToastController.show(.profileSaved,
-                                           bottomInset: 93,
-                                           duration: 1)
+
+            DispatchQueue.main.async { [weak self] in
+                if onSuccess {
+                    self?.navigationController?.popViewController(animated: true)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        ACToastController.show(.profileSaved,
+                                               bottomInset: 93,
+                                               duration: 1)
+                    }
+                } else {
+                    self?.presentACAlert(.profilePatchFail, rightAction: self?.navigateToTabBar)
                 }
+                self?.viewModel.onPatchProfileSuccess.value = nil
             }
-            viewModel.onPatchProfileSuccess.value = nil
         }
     }
 
@@ -358,7 +340,7 @@ private extension ProfileEditViewController {
             }))
             if isDefaultImage == false {
                 $0.addAction(UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { _ in
-                    self.updateProfileImage(.imgProfileBasic, true)
+                    self.updateProfileImage(nil, true)
                 }))
             }
             $0.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
@@ -373,18 +355,16 @@ private extension ProfileEditViewController {
         let birthDateText = profileEditView.birthDateTextField.text
         viewModel.updateUserInfo(nickname: nickname,
                                  birthDate: birthDateText?.isEmpty ?? true ? nil : birthDateText)
-
-        viewModel.userInfo.profileImage = isDefaultImage ? "" : viewModel.presignedURLInfo.fileName
-        if isDefaultImage {
-            viewModel.patchProfile()
-        } else {
-            viewModel.getProfilePresignedURL()
-        }
+        viewModel.saveProfile()
     }
-    
+
     @objc
     func appWillEnterForeground() {
         profileEditView.setNeedsLayout()
+    }
+
+    @objc func navigateToTabBar() {
+        NavigationUtils.navigateToTabBar()
     }
 
 }

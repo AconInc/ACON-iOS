@@ -11,8 +11,8 @@ import Moya
 
 protocol ImageServiceProtocol {
     
-    func getPresignedURL(parameter: GetPresignedURLRequest,
-                         completion: @escaping (NetworkResult<GetPresignedURLResponse>) -> Void)
+    func getPresignedURL(parameter: PostPresignedURLRequest,
+                         completion: @escaping (NetworkResult<PostPresignedURLResponse>) -> Void)
     
     func putImageToPresignedURL(requestBody: PutImageToPresignedURLRequest,
                                 completion: @escaping (NetworkResult<EmptyResponse>) -> Void)
@@ -21,11 +21,11 @@ protocol ImageServiceProtocol {
 
 final class ImageService: BaseService<ImageTargetType>, ImageServiceProtocol {
     
-    func getPresignedURL(parameter: GetPresignedURLRequest, completion: @escaping (NetworkResult<GetPresignedURLResponse>) -> Void) {
-        self.provider.request(.getPresignedURL(parameter)) { result in
+    func getPresignedURL(parameter: PostPresignedURLRequest, completion: @escaping (NetworkResult<PostPresignedURLResponse>) -> Void) {
+        self.provider.request(.postPresignedURL(parameter)) { result in
             switch result {
             case .success(let response):
-                let networkResult: NetworkResult<GetPresignedURLResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: GetPresignedURLResponse.self)
+                let networkResult: NetworkResult<PostPresignedURLResponse> = self.judgeStatus(statusCode: response.statusCode, data: response.data, type: PostPresignedURLResponse.self)
                 completion(networkResult)
             case .failure:
                 completion(.networkFail)

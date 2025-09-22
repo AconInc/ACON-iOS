@@ -152,15 +152,16 @@ private extension SpotUploadViewController {
         viewModel.onSuccessPostSpot.bind { [weak self] onSuccess in
             guard let self = self,
                   let onSuccess = onSuccess else { return }
-
-            if onSuccess {
-                let successVC = SpotUploadSuccessViewController()
-                self.navigationController?.pushViewController(successVC, animated: true)
-            } else { // NOTE: handleNetworkError로 처리될테지만 만약을 위해 추가
-                presentACAlert(.changeNotSaved, longAction: NavigationUtils.navigateToTabBar)
+            
+            DispatchQueue.main.async { [weak self] in
+                if onSuccess {
+                    let successVC = SpotUploadSuccessViewController()
+                    self?.navigationController?.pushViewController(successVC, animated: true)
+                } else {
+                    self?.presentACAlert(.spotUploadFail, rightAction: self?.navigateToTabBar)
+                }
+                self?.viewModel.onSuccessPostSpot.value = nil
             }
-
-            viewModel.onSuccessPostSpot.value = nil
         }
     }
 

@@ -43,7 +43,7 @@ struct AlbumModel: Equatable {
 
 struct PresignedURLModel: Equatable {
     
-    var fileName: String
+    var fileURL: String
     
     var presignedURL: String
     

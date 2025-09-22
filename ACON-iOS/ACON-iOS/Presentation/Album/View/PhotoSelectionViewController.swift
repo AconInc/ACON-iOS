@@ -21,12 +21,12 @@ class PhotoSelectionViewController: BaseNavViewController {
     
     // MARK: - Properties
     
-    var profileImage: UIImage
+    var profileImage: PhotoModel
     
     
     // MARK: - LifeCycle
     
-    init(_ profileImage: UIImage) {
+    init(_ profileImage: PhotoModel) {
         self.profileImage = profileImage
         super.init(nibName: nil, bundle: nil)
     }
@@ -82,7 +82,7 @@ class PhotoSelectionViewController: BaseNavViewController {
         
         profileImageView.do {
             $0.backgroundColor = .labelAction
-            $0.image = profileImage
+            $0.image = profileImage.image
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
         }
