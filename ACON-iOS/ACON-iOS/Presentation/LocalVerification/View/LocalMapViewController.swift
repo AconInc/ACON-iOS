@@ -118,7 +118,7 @@ private extension LocalMapViewController {
                 case .onboarding:
                     // NOTE: 취향탐색O ? TabBar : 취향탐색VC
                     let hasPreference = AuthManager.shared.hasPreference
-                    hasPreference ? NavigationUtils.navigateToTabBar() : NavigationUtils.naviateToLoginPreference()
+                    hasPreference ? NavigationUtils.navigateToTabBar() : NavigationUtils.naviateToOnboardingPreference()
                 case .setting:
                     NavigationUtils.popToParentVC(from: self, targetVCType: VerifiedAreasEditViewController.self)
                 }

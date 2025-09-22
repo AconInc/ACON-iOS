@@ -85,7 +85,7 @@ class PreferenceViewController: BaseViewController {
         backButton.do {
             $0.setImage(.icLeft, for: .normal)
             $0.clipsToBounds = true
-            $0.isHidden = flowType == .login ? true : false
+            $0.isHidden = flowType == .onboarding ? true : false
         }
     }
     
@@ -140,7 +140,7 @@ private extension PreferenceViewController {
             guard let self = self,
                   let onSuccess = onSuccess else { return }
             if onSuccess {
-                if flowType == .login {
+                if flowType == .onboarding {
                     NavigationUtils.navigateToTabBar()
                 } else {
                     NavigationUtils.popToParentVC(from: self, targetVCType: ProfileSettingViewController.self)

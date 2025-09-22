@@ -110,7 +110,7 @@ private extension SplashViewController {
 
         // NOTE: 자동로그인O && 튜토리얼O && 지역인증O && 취향탐색X -> 취향탐색VC
         else if !hasSeenPreferenceOnboarding {
-            rootVC = PreferenceViewController(flowType: .login)
+            rootVC = PreferenceViewController(flowType: .onboarding)
         }
 
         // NOTE: 자동로그인O && 튜토리얼O && 지역인증O && 취향탐색O -> TabBar
