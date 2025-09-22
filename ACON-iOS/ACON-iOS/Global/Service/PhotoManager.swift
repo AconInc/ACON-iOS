@@ -141,7 +141,7 @@ private extension PhotoManager {
                     continuation.resume(throwing: PhotoManagerError.tokenExpired)
                 case .requestErr(let errorResponse):
                     continuation.resume(throwing: errorResponse)
-                case .decodedErr, .pathErr, .serverErr, .networkFail, .naverAPIErr:
+                default:
                     let genericError = PhotoManagerError.networkError(
                         NSError(domain: "NetworkResultError", code: 0, userInfo: [NSLocalizedDescriptionKey: "‼️A server or network error occurred."])
                     )
@@ -164,7 +164,7 @@ private extension PhotoManager {
                     continuation.resume(throwing: PhotoManagerError.tokenExpired)
                 case .requestErr(let errorResponse):
                     continuation.resume(throwing: errorResponse)
-                case .decodedErr, .pathErr, .serverErr, .networkFail, .naverAPIErr:
+                default:
                     let genericError = PhotoManagerError.networkError(
                         NSError(domain: "NetworkResultError", code: 0, userInfo: [NSLocalizedDescriptionKey: "‼️A server or network error occurred during upload."])
                     )
