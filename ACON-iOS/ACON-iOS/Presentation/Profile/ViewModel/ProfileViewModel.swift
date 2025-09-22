@@ -137,6 +137,13 @@ final class ProfileViewModel: Serviceable {
     }
 
     func saveProfile() {
+        self.uploadRetryCount = 0
+        executeSaveProfileFlow()
+    }
+
+    func executeSaveProfileFlow() {
+        print("Profile save attempt #\(uploadRetryCount + 1)")
+
         Task {
             do {
                 if let profileImage {
@@ -153,13 +160,15 @@ final class ProfileViewModel: Serviceable {
                 }
                 self.uploadRetryCount += 1
                 handleReissue { [weak self] in
-                    self?.saveProfile()
+                    self?.executeSaveProfileFlow()
+                }
+            } catch PhotoManagerError.networkError {
+                handleNetworkError { [weak self] in
+                    self?.executeSaveProfileFlow()
                 }
             } catch {
-                handleNetworkError { [weak self] in
-                    self?.saveProfile()
-                }
-                print("❌ A failure occurred during the upload process: \(error.localizedDescription)")
+                print("❌ An unhandled failure occurred: \(error.localizedDescription)")
+                onPatchProfileSuccess.value = false
             }
         }
     }
