@@ -61,16 +61,19 @@ final class SpotUploadViewModel: Serviceable {
                     onSuccessPostSpot.value = false
                     return
                 }
-
                 self.uploadRetryCount += 1
                 handleReissue { [weak self] in
                     self?.executeUploadFlow()
                 }
-            } catch {
+            } catch PhotoManagerError.networkError {
                 handleNetworkError { [weak self] in
                     self?.executeUploadFlow()
                 }
-                print("❌ A failure occurred during the upload process: \(error.localizedDescription)")
+            } catch PhotoManagerError.serverError {
+                onSuccessPostSpot.value = false
+            } catch {
+                print("❌ An unhandled failure occurred: \(error.localizedDescription)")
+                onSuccessPostSpot.value = false
             }
         }
     }

@@ -11,19 +11,29 @@ import Photos
 // MARK: - PhotoManager Errors
 
 enum PhotoManagerError: LocalizedError {
+
     case imageDataConversionFailed
     case missingFileName
     case tokenExpired
-    case networkError(Error)
+    case requestError(Error) // 4xx
+    case serverError        // 5xx
+    case networkError
+    case decodingError
+    case otherError
 
     var errorDescription: String? {
         switch self {
         case .imageDataConversionFailed: return "🎞️ Failed to retrieve image data."
         case .missingFileName: return "🎞️ Missing the filename of the photo."
         case .tokenExpired: return "🎞️ Authentication token has expired."
-        case .networkError(let error): return "🎞️ Network error occurred: \(error.localizedDescription)"
+        case .requestError(let error): return "🎞️ A client error occurred: \(error.localizedDescription)"
+        case .serverError: return "🎞️ The server is currently unavailable. Please try again later."
+        case .networkError: return "🎞️ Please check your internet connection."
+        case .decodingError: return "🎞️ Failed to process the response from the server."
+        case .otherError: return "🎞️ Other error occurred."
         }
     }
+
 }
 
 
@@ -140,12 +150,15 @@ private extension PhotoManager {
                 case .reIssueJWT:
                     continuation.resume(throwing: PhotoManagerError.tokenExpired)
                 case .requestErr(let errorResponse):
-                    continuation.resume(throwing: errorResponse)
+                    continuation.resume(throwing: PhotoManagerError.requestError(errorResponse))
+                case .serverErr:
+                    continuation.resume(throwing: PhotoManagerError.serverError)
+                case .networkFail:
+                    continuation.resume(throwing: PhotoManagerError.networkError)
+                case .decodedErr:
+                    continuation.resume(throwing: PhotoManagerError.decodingError)
                 default:
-                    let genericError = PhotoManagerError.networkError(
-                        NSError(domain: "NetworkResultError", code: 0, userInfo: [NSLocalizedDescriptionKey: "‼️A server or network error occurred."])
-                    )
-                    continuation.resume(throwing: genericError)
+                    continuation.resume(throwing: PhotoManagerError.otherError)
                 }
             }
         }
@@ -165,12 +178,15 @@ private extension PhotoManager {
                 case .reIssueJWT:
                     continuation.resume(throwing: PhotoManagerError.tokenExpired)
                 case .requestErr(let errorResponse):
-                    continuation.resume(throwing: errorResponse)
+                    continuation.resume(throwing: PhotoManagerError.requestError(errorResponse))
+                case .serverErr:
+                    continuation.resume(throwing: PhotoManagerError.serverError)
+                case .networkFail:
+                    continuation.resume(throwing: PhotoManagerError.networkError)
+                case .decodedErr:
+                    continuation.resume(throwing: PhotoManagerError.decodingError)
                 default:
-                    let genericError = PhotoManagerError.networkError(
-                        NSError(domain: "NetworkResultError", code: 0, userInfo: [NSLocalizedDescriptionKey: "‼️A server or network error occurred during upload."])
-                    )
-                    continuation.resume(throwing: genericError)
+                    continuation.resume(throwing: PhotoManagerError.otherError)
                 }
             }
         }
