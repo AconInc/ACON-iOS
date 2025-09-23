@@ -157,6 +157,7 @@ private extension SpotUploadSearchViewController {
 
             guard let text else { return }
 
+            self?.spotSearchView.searchTextField.hideClearButton(isHidden: text.isEmpty)
             self?.spotSearchView.searchEmptyView.isHidden = text.isEmpty
             self?.spotSearchView.searchKeywordCollectionView.isHidden = text.isEmpty
             

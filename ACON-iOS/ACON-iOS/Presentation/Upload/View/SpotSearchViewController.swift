@@ -108,6 +108,8 @@ private extension SpotSearchViewController {
             }
 
             if let text = text {
+                self?.spotSearchView.searchTextField.hideClearButton(isHidden: text.isEmpty)
+
                 if text != self?.selectedSpotName {
                     self?.rightButton.isEnabled = false
                 }
