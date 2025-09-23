@@ -295,6 +295,10 @@ private extension SpotListViewController {
 
     @objc
     func onRegisterSpotButtonTapped() {
+        guard AuthManager.shared.hasToken else {
+            presentLoginModal(nil)
+            return
+        }
         let vc = SpotUploadViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
