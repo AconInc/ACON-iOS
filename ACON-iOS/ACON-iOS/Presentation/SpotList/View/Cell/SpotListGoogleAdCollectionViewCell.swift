@@ -43,6 +43,26 @@ class SpotListGoogleAdCollectionViewCell: BaseCollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        nativeAdView.nativeAd = nil
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        glassmorphismView.layer.cornerRadius = 12
+        glassmorphismView.clipsToBounds = true
+        
+        glassmorphismView.refreshBlurEffect()
+        adButton.refreshButtonBlurEffect(.buttonGlassDefault)
+        callToActionButton.refreshButtonBlurEffect(.buttonGlassDefault)
+    }
+
+
+    // MARK: - UI Settings
+
     override func setHierarchy() {
         contentView.addSubviews(glassmorphismView, nativeAdView)
 
@@ -118,6 +138,10 @@ class SpotListGoogleAdCollectionViewCell: BaseCollectionViewCell {
             $0.backgroundColor = .clear
         }
         
+        nativeAdView.do {
+            $0.layer.cornerRadius = 8
+        }
+        
         headlineLabel.linesCornerRadius = 8
         
         iconImageView.do {
@@ -139,23 +163,7 @@ class SpotListGoogleAdCollectionViewCell: BaseCollectionViewCell {
             }
         }
     }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        nativeAdView.nativeAd = nil
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        glassmorphismView.layer.cornerRadius = 12
-        glassmorphismView.clipsToBounds = true
-        
-        glassmorphismView.refreshBlurEffect()
-        adButton.refreshButtonBlurEffect(.buttonGlassDefault)
-        callToActionButton.refreshButtonBlurEffect(.buttonGlassDefault)
-    }
+
 }
 
 
