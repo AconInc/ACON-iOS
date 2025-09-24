@@ -340,7 +340,7 @@ extension SpotSearchViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         spotSearchView.glassView.isHidden = false
-        spotSearchView.searchTextField.hideClearButton(isHidden: false)
+        spotSearchView.searchTextField.hideClearButton(isHidden: textField.text?.isEmpty ?? true)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
