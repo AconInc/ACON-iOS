@@ -122,7 +122,7 @@ private extension PhotoManager {
 
                 // NOTE: 허용하지 않는 포맷 -> jpeg로 변환
                 if !isFormatAllowed {
-                    print("🎞️ Format '\(utiString)' is not allowed. Converting to JPEG.")
+                    print("🎞️ UTI not allowed: \(utiString) | Converting to JPEG | file: \(originalFileName)")
                     guard let image = UIImage(data: imageData),
                           let jpegData = image.jpegData(compressionQuality: self.imageType.compressionQuality) else {
                         continuation.resume(throwing: PhotoManagerError.imageDataConversionFailed)
