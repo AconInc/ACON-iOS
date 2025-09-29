@@ -507,16 +507,8 @@ extension SpotListViewController: UICollectionViewDataSource {
 
         let vc = SpotDetailViewController(spot.spotId, topTag, transportMode, spot.eta)
 
-        if AuthManager.shared.hasToken {
-            if isAd { return }
-            self.navigationController?.pushViewController(vc, animated: true)
-        } else {
-            if dataIndex < 5 {
-                presentLoginModal("click_detail_guest?")
-            } else {
-                presentLoginModal("click_locked_detail_guest?")
-            }
-        }
+        if isAd { return }
+        self.navigationController?.pushViewController(vc, animated: true)
 
         // NOTE: Amplitude
         if topTag == nil && spot.tagList.isEmpty {
