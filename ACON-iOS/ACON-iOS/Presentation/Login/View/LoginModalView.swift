@@ -32,6 +32,7 @@ class LoginModalView: GlassmorphismView {
         configuration.titleAlignment = .center
         configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 24)
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: ScreenUtils.widthRatio*24, bottom: 15, trailing: ScreenUtils.widthRatio*24)
+        configuration.cornerStyle = .capsule
         return configuration
     }()
     
@@ -123,7 +124,6 @@ class LoginModalView: GlassmorphismView {
         googleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
             $0.contentHorizontalAlignment = .leading
-            $0.layer.cornerRadius = loginButtonHeight / 2
             $0.backgroundColor = .acWhite
             $0.setImage(.icGoogleLogo, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.googleLogin,
@@ -134,7 +134,6 @@ class LoginModalView: GlassmorphismView {
         appleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
             $0.contentHorizontalAlignment = .leading
-            $0.layer.cornerRadius = loginButtonHeight / 2
             $0.backgroundColor = .gray900
             $0.setImage(.icAppleLogo, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,

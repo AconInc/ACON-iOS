@@ -37,6 +37,7 @@ final class LoginView: BaseView {
         configuration.titleAlignment = .center
         configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 24)
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: ScreenUtils.widthRatio*24, bottom: 15, trailing: ScreenUtils.widthRatio*24)
+        configuration.cornerStyle = .capsule
         return configuration
     }()
     
@@ -125,7 +126,6 @@ final class LoginView: BaseView {
         googleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
             $0.contentHorizontalAlignment = .leading
-            $0.layer.cornerRadius = loginButtonHeight / 2
             $0.backgroundColor = .gray100
             $0.setImage(.icGoogleLogo, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.googleLogin,
@@ -136,7 +136,6 @@ final class LoginView: BaseView {
         appleLoginButton.do {
             $0.configuration = socialLoginButtonConfiguration
             $0.contentHorizontalAlignment = .leading
-            $0.layer.cornerRadius = loginButtonHeight / 2
             $0.backgroundColor = .gray700
             $0.setImage(.icAppleLogo, for: .normal)
             $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
