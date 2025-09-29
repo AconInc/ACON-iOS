@@ -31,7 +31,7 @@ final class LoginView: BaseView {
     var privacyPolicyLabel: UILabel = UILabel()
     
     lazy var socialLoginButtonConfiguration: UIButton.Configuration = {
-        var configuration = UIButton.Configuration.plain()
+        var configuration = UIButton.Configuration.filled()
         configuration.imagePlacement = .leading
         configuration.imagePadding = 60*ScreenUtils.widthRatio
         configuration.titleAlignment = .center
@@ -124,23 +124,21 @@ final class LoginView: BaseView {
         }
         
         googleLoginButton.do {
-            $0.configuration = socialLoginButtonConfiguration
+            var config = socialLoginButtonConfiguration
+            config.background.backgroundColor = .acWhite
+            config.image = .icGoogleLogo
+            config.attributedTitle = AttributedString(StringLiterals.Login.googleLogin.attributedString(.t4SB, .gray500))
+            $0.configuration = config
             $0.contentHorizontalAlignment = .leading
-            $0.backgroundColor = .gray100
-            $0.setImage(.icGoogleLogo, for: .normal)
-            $0.setAttributedTitle(text: StringLiterals.Login.googleLogin,
-                                  style: .t4SB,
-                                  color: .gray500)
         }
         
         appleLoginButton.do {
-            $0.configuration = socialLoginButtonConfiguration
+            var config = socialLoginButtonConfiguration
+            config.baseBackgroundColor = .gray700
+            config.image = .icAppleLogo
+            config.attributedTitle = AttributedString(StringLiterals.Login.appleLogin.attributedString(.t4SB, .acWhite))
+            $0.configuration = config
             $0.contentHorizontalAlignment = .leading
-            $0.backgroundColor = .gray700
-            $0.setImage(.icAppleLogo, for: .normal)
-            $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
-                                  style: .t4SB,
-                                  color: .acWhite)
         }
         
         proceedLoginLabel.do {

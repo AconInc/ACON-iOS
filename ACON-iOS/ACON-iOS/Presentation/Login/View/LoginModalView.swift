@@ -26,7 +26,7 @@ class LoginModalView: GlassmorphismView {
     var privacyPolicyLabel = UILabel()
     
     lazy var socialLoginButtonConfiguration: UIButton.Configuration = {
-        var configuration = UIButton.Configuration.plain()
+        var configuration = UIButton.Configuration.filled()
         configuration.imagePlacement = .leading
         configuration.imagePadding = 60*ScreenUtils.widthRatio
         configuration.titleAlignment = .center
@@ -122,25 +122,21 @@ class LoginModalView: GlassmorphismView {
                                numberOfLines: 2)
         
         googleLoginButton.do {
-            $0.configuration = socialLoginButtonConfiguration
+            var config = socialLoginButtonConfiguration
+            config.baseBackgroundColor = .acWhite
+            config.image = .icGoogleLogo
+            config.attributedTitle = AttributedString(StringLiterals.Login.googleLogin.attributedString(.t4SB, .gray500))
+            $0.configuration = config
             $0.contentHorizontalAlignment = .leading
-            $0.backgroundColor = .acWhite
-            $0.setImage(.icGoogleLogo, for: .normal)
-            $0.setAttributedTitle(text: StringLiterals.Login.googleLogin,
-                                  style: .t4SB,
-                                  color: .gray500)
         }
         
         appleLoginButton.do {
-            $0.configuration = socialLoginButtonConfiguration
+            var config = socialLoginButtonConfiguration
+            config.baseBackgroundColor = .gray700
+            config.image = .icAppleLogo
+            config.attributedTitle = AttributedString(StringLiterals.Login.appleLogin.attributedString(.t4SB, .acWhite))
+            $0.configuration = config
             $0.contentHorizontalAlignment = .leading
-            $0.backgroundColor = .gray900
-            $0.setImage(.icAppleLogo, for: .normal)
-            $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
-                                  style: .t4SB,
-                                  color: .acWhite)
-            $0.layer.borderColor = UIColor.gray500.cgColor
-            $0.layer.borderWidth = 1
         }
         
         proceedLoginLabel.do {
