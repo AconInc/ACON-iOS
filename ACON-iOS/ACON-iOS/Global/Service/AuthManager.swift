@@ -55,6 +55,8 @@ final class AuthManager {
                         print("❄️ remove token")
                         UserDefaultsManager.removeTokens()
                         continuation.resume(returning: false)
+                    } else {
+                        continuation.resume(returning: false)
                     }
                 default:
                     continuation.resume(returning: false)
