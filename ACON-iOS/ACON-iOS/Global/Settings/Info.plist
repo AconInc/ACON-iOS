@@ -39,7 +39,7 @@
 			<string>io.Branch.Branchsters</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>branchsters</string>
+				<string>acon</string>
 			</array>
 		</dict>
 		<dict>
