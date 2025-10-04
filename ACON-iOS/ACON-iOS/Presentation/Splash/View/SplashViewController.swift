@@ -188,14 +188,16 @@ private extension SplashViewController {
                     if success {
                         print("❄️ 토큰 갱신 성공")
                     } else {
+                        print("❄️ 토큰 갱신 실패")
                         UserDefaultsManager.resetAppUserDefaults()
-                        NavigationUtils.navigateToSplash()
+                        NavigationUtils.navigateToLoginVC()
                     }
                 }
             } catch {
                 DispatchQueue.main.async {
+                    print("❄️ 토큰 갱신 실패 catch")
                     UserDefaultsManager.resetAppUserDefaults()
-                    NavigationUtils.navigateToSplash()
+                    NavigationUtils.navigateToLoginVC()
                 }
             }
         }
