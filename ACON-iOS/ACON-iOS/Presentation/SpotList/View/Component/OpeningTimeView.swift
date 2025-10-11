@@ -83,9 +83,9 @@ class OpeningTimeView: BaseView {
             $0.contentMode = .scaleAspectFit
         }
 
-        timeLabel.setLabel(text: time, style: .b1SB, color: .gray200)
-
-        descriptionLabel.setLabel(text: openingDescription, style: .b1R, color: .gray200)
+        let labelColor: UIColor = isOpen ? .acWhite : .gray200
+        timeLabel.setLabel(text: time, style: .b1SB, color: labelColor)
+        descriptionLabel.setLabel(text: openingDescription, style: .b1R, color: labelColor)
     }
 
     func updateUI(isOpen: Bool, time: String, description: String) {
@@ -94,9 +94,10 @@ class OpeningTimeView: BaseView {
         }
 
         self.openingDescription = description
-        
-        timeLabel.setLabel(text: time, style: .b1SB, color: .gray200)
-        descriptionLabel.setLabel(text: openingDescription, style: .b1R, color: .gray200)
+
+        let labelColor: UIColor = isOpen ? .acWhite : .gray200
+        timeLabel.setLabel(text: time, style: .b1SB, color: labelColor)
+        descriptionLabel.setLabel(text: openingDescription, style: .b1R, color: labelColor)
     }
 
 }

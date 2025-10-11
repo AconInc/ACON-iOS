@@ -132,8 +132,10 @@ private extension StartNowViewController {
         // NOTE: [온보딩 순서] 로그인 건너뛰기 > 서비스 온보딩(튜토리얼) > 홈
 
         let hasToken = AuthManager.shared.hasToken
-        let hasSeenLocalVerificationOnboarding = AuthManager.shared.hasSeenLocalVerification
-        let hasSeenPreferenceOnboarding = AuthManager.shared.hasSeenPreference
+        let hasSeenLocalVerification = AuthManager.shared.hasSeenLocalVerification
+        let hasSeenPreference = AuthManager.shared.hasSeenPreference
+        let hasVerifiedArea = AuthManager.shared.hasVerifiedArea
+        let hasPreference = AuthManager.shared.hasPreference
 
         // NOTE: 로그인X -> TabBar
         if !hasToken {
@@ -141,12 +143,12 @@ private extension StartNowViewController {
         }
 
         // NOTE: 로그인O && 지역인증X -> 지역인증VC
-        else if !hasSeenLocalVerificationOnboarding {
+        else if (!hasSeenLocalVerification && !hasVerifiedArea) {
             NavigationUtils.navigateToOnboardingLocalVerification()
         }
 
         // NOTE: 로그인O && 지역인증O && 취향탐색X -> 취향탐색VC
-        else if !hasSeenPreferenceOnboarding {
+        else if (!hasSeenPreference && !hasPreference) {
             NavigationUtils.naviateToOnboardingPreference()
         }
 

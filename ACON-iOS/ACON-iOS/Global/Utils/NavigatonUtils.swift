@@ -21,6 +21,12 @@ struct NavigationUtils {
         }
     }
 
+    static func navigateToLoginVC() {
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
+        }
+    }
+
     static func popToParentVC(from currentVC: UIViewController, targetVCType: UIViewController.Type) {
         guard let navigationController = currentVC.navigationController else { return }
         let vcStack = navigationController.viewControllers

@@ -26,12 +26,13 @@ class LoginModalView: GlassmorphismView {
     var privacyPolicyLabel = UILabel()
     
     lazy var socialLoginButtonConfiguration: UIButton.Configuration = {
-        var configuration = UIButton.Configuration.plain()
+        var configuration = UIButton.Configuration.filled()
         configuration.imagePlacement = .leading
         configuration.imagePadding = 60*ScreenUtils.widthRatio
         configuration.titleAlignment = .center
         configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 24)
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: ScreenUtils.widthRatio*24, bottom: 15, trailing: ScreenUtils.widthRatio*24)
+        configuration.cornerStyle = .capsule
         return configuration
     }()
     
@@ -93,12 +94,12 @@ class LoginModalView: GlassmorphismView {
         }
 
         termsOfUseLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*46)
+            $0.top.equalTo(proceedLoginLabel.snp.bottom).offset(4)
             $0.leading.equalToSuperview().inset(ScreenUtils.widthRatio*111)
         }
         
         privacyPolicyLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(ScreenUtils.heightRatio*46)
+            $0.top.equalTo(termsOfUseLabel)
             $0.trailing.equalToSuperview().inset(ScreenUtils.widthRatio*111)
         }
     }
@@ -121,27 +122,21 @@ class LoginModalView: GlassmorphismView {
                                numberOfLines: 2)
         
         googleLoginButton.do {
-            $0.configuration = socialLoginButtonConfiguration
+            var config = socialLoginButtonConfiguration
+            config.baseBackgroundColor = .acWhite
+            config.image = .icGoogleLogo
+            config.attributedTitle = AttributedString(StringLiterals.Login.googleLogin.attributedString(.t4SB, .gray500))
+            $0.configuration = config
             $0.contentHorizontalAlignment = .leading
-            $0.layer.cornerRadius = loginButtonHeight / 2
-            $0.backgroundColor = .acWhite
-            $0.setImage(.icGoogleLogo, for: .normal)
-            $0.setAttributedTitle(text: StringLiterals.Login.googleLogin,
-                                  style: .t4SB,
-                                  color: .gray500)
         }
         
         appleLoginButton.do {
-            $0.configuration = socialLoginButtonConfiguration
+            var config = socialLoginButtonConfiguration
+            config.baseBackgroundColor = .gray700
+            config.image = .icAppleLogo
+            config.attributedTitle = AttributedString(StringLiterals.Login.appleLogin.attributedString(.t4SB, .acWhite))
+            $0.configuration = config
             $0.contentHorizontalAlignment = .leading
-            $0.layer.cornerRadius = loginButtonHeight / 2
-            $0.backgroundColor = .gray900
-            $0.setImage(.icAppleLogo, for: .normal)
-            $0.setAttributedTitle(text: StringLiterals.Login.appleLogin,
-                                  style: .t4SB,
-                                  color: .acWhite)
-            $0.layer.borderColor = UIColor.gray500.cgColor
-            $0.layer.borderWidth = 1
         }
         
         proceedLoginLabel.do {
@@ -153,7 +148,7 @@ class LoginModalView: GlassmorphismView {
         
         termsOfUseLabel.do {
             $0.setLabel(text: StringLiterals.Login.termsOfUse,
-                        style: .c1SB,
+                        style: .c1R,
                         color: .acWhite,
                         alignment: .center)
             $0.setUnderline(range: NSRange(location: 0, length: termsOfUseLabel.text?.count ?? 4))
@@ -162,7 +157,7 @@ class LoginModalView: GlassmorphismView {
         
         privacyPolicyLabel.do {
             $0.setLabel(text: StringLiterals.Login.privacyPolicy,
-                        style: .c1SB,
+                        style: .c1R,
                         color: .acWhite,
                         alignment: .center)
             $0.setUnderline(range: NSRange(location: 0, length: privacyPolicyLabel.text?.count ?? 8))

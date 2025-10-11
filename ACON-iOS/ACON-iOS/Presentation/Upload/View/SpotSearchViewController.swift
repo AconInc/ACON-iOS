@@ -108,6 +108,8 @@ private extension SpotSearchViewController {
             }
 
             if let text = text {
+                self?.spotSearchView.searchTextField.hideClearButton(isHidden: text.isEmpty)
+
                 if text != self?.selectedSpotName {
                     self?.rightButton.isEnabled = false
                 }
@@ -338,7 +340,7 @@ extension SpotSearchViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         spotSearchView.glassView.isHidden = false
-        spotSearchView.searchTextField.hideClearButton(isHidden: false)
+        spotSearchView.searchTextField.hideClearButton(isHidden: textField.text?.isEmpty ?? true)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {

@@ -29,7 +29,7 @@ class SpotUploadSearchViewModel: Serviceable {
                     let title = keyword.title.replacingOccurrences(of: "<b>", with: "")
                         .replacingOccurrences(of: "</b>", with: "")
                         .replacingOccurrences(of: "\\/", with: "/")
-                    let address = keyword.roadAddress == "" ? keyword.address : keyword.roadAddress
+                    let address = keyword.address == "" ? keyword.roadAddress : keyword.address
                     return SearchKeywordModel(
                         spotID: nil,
                         spotName: title,

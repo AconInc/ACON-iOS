@@ -51,19 +51,22 @@ private extension ACTabBarController {
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
 
-        let glassView = GlassmorphismView(.gradientGlass)
-        self.glassView = glassView
-        
-        tabBar.addSubview(glassView)
-        glassView.snp.makeConstraints {
-            $0.top.horizontalEdges.equalTo(tabBar)
-            $0.height.equalTo(21 + ScreenUtils.heightRatio * 76)
+        // NOTE: iOS 26 이상은 liquid tabbar 사용
+        if #unavailable(iOS 26.0) {
+            let glassView = GlassmorphismView(.gradientGlass)
+            self.glassView = glassView
+            
+            tabBar.addSubview(glassView)
+            glassView.snp.makeConstraints {
+                $0.top.horizontalEdges.equalTo(tabBar)
+                $0.height.equalTo(21 + ScreenUtils.heightRatio * 76)
+            }
+            
+            self.view.layoutIfNeeded()
+            glassView.setGradient(topColor: .gray900.withAlphaComponent(0.1), bottomColor: .gray900.withAlphaComponent(1))
         }
-        
-        self.view.layoutIfNeeded()
-        glassView.setGradient(topColor: .gray900.withAlphaComponent(0.1), bottomColor: .gray900.withAlphaComponent(1))
     }
-    
+
     func setNavViewControllers() {
         let navVCs = ACTabBarItemType.allCases.map {
             return setUpTabBarItem(title: $0.itemTitle,

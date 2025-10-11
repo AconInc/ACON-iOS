@@ -15,7 +15,7 @@ class NoMatchingSpotHeader: UICollectionReusableView {
     private let sorryLabel = UILabel()
 
     private let willSuggestNextTimeLabel = UILabel()
-    let requestToAddButton = UIButton()
+    let registerSpotButton = UIButton()
 
     private let howAboutTheseLabel = UILabel()
 
@@ -38,7 +38,7 @@ class NoMatchingSpotHeader: UICollectionReusableView {
         self.addSubviews(noMatchingSpotLabel,
                          sorryLabel,
                          willSuggestNextTimeLabel,
-                         requestToAddButton,
+                         registerSpotButton,
                          howAboutTheseLabel)
     }
 
@@ -58,7 +58,7 @@ class NoMatchingSpotHeader: UICollectionReusableView {
             $0.centerX.equalToSuperview()
         }
 
-        requestToAddButton.snp.makeConstraints {
+        registerSpotButton.snp.makeConstraints {
             $0.top.equalTo(willSuggestNextTimeLabel.snp.bottom).offset(16)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(36)
@@ -80,11 +80,11 @@ class NoMatchingSpotHeader: UICollectionReusableView {
         
         willSuggestNextTimeLabel.setLabel(text: StringLiterals.SpotList.willSuggestNextTime, style: .t4SB, alignment: .center)
 
-        requestToAddButton.setAttributedTitle(text: StringLiterals.SpotList.requestToAddSpot, style: .b1SB, color: .labelAction)
+        registerSpotButton.setAttributedTitle(text: StringLiterals.SpotList.registerSpot, style: .b1SB, color: .labelAction)
 
         howAboutTheseLabel.setLabel(text: StringLiterals.SpotList.howAboutTheseInstead, style: .t4SB)
 
-        [willSuggestNextTimeLabel, requestToAddButton, howAboutTheseLabel].forEach { $0.isHidden = true }
+        [willSuggestNextTimeLabel, registerSpotButton, howAboutTheseLabel].forEach { $0.isHidden = true }
     }
 
 }
@@ -97,7 +97,7 @@ extension NoMatchingSpotHeader {
     func setHeader(_ type: NoMatchingSpotType) {
         let hasSpot: Bool = type == .withSuggestion
 
-        [willSuggestNextTimeLabel, requestToAddButton].forEach { $0.isHidden = hasSpot }
+        [willSuggestNextTimeLabel, registerSpotButton].forEach { $0.isHidden = hasSpot }
         howAboutTheseLabel.isHidden = !hasSpot
     }
 
