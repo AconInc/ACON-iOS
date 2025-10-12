@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import UniformTypeIdentifiers
 
 import Moya
 
 enum ImageTargetType {
     
-    case getPresignedURL(_ parameter: GetPresignedURLRequest)
+    case postPresignedURL(_ parameter: PostPresignedURLRequest)
     
     case putImageToPresignedURL(_ requestBody: PutImageToPresignedURLRequest)
 
@@ -37,8 +38,8 @@ extension ImageTargetType: ACTargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getPresignedURL:
-            return .get
+        case .postPresignedURL:
+            return .post
         case .putImageToPresignedURL:
             return .put
         }
@@ -46,7 +47,7 @@ extension ImageTargetType: ACTargetType {
 
     var path: String {
         switch self {
-        case .getPresignedURL:
+        case .postPresignedURL:
             return utilPath + "images/presigned-url"
         case .putImageToPresignedURL:
             return ""
@@ -55,11 +56,8 @@ extension ImageTargetType: ACTargetType {
     
     var task: Task {
         switch self {
-        case .getPresignedURL(let parameter):
-            return .requestParameters(
-                parameters: ["imageType": parameter.imageType],
-                encoding: URLEncoding.default
-            )
+        case .postPresignedURL(let parameter):
+            return .requestJSONEncodable(parameter)
         case .putImageToPresignedURL(let requestBody):
             return .requestData(requestBody.imageData)
         }
@@ -67,11 +65,25 @@ extension ImageTargetType: ACTargetType {
 
     var headers: [String : String]? {
         switch self {
-        case .getPresignedURL:
-            return HeaderType.tokenOnly()
+        case .postPresignedURL:
+            return HeaderType.headerWithToken()
         case .putImageToPresignedURL(let requestBody):
-            return HeaderType.imageHeader(imageData: requestBody.imageData)
+            let contentType = mimeType(for: requestBody.fileName)
+            return HeaderType.imageHeader(contentType: contentType)
         }
+    }
+
+}
+
+
+// MARK: - Helper
+
+private extension ImageTargetType {
+
+    func mimeType(for fileName: String) -> String {
+        let pathExtension = (fileName as NSString).pathExtension
+        let type = UTType(filenameExtension: pathExtension)
+        return type?.preferredMIMEType ?? "application/octet-stream"
     }
 
 }

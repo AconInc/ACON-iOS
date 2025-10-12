@@ -294,9 +294,13 @@ private extension SpotListViewController {
     }
 
     @objc
-    func onRequestToAddButtonTapped() {
-        let vc = ACWebViewController(urlString: StringLiterals.WebView.requestToAddPlaceLink)
-        present(vc, animated: true)
+    func onRegisterSpotButtonTapped() {
+        guard AuthManager.shared.hasToken else {
+            presentLoginModal(nil)
+            return
+        }
+        let vc = SpotUploadViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }
@@ -481,7 +485,7 @@ extension SpotListViewController: UICollectionViewDataSource {
                     fatalError("Cannot dequeue header view")
                 }
                 header.setHeader(spotList.spotList.isEmpty ? .noSuggestion : .withSuggestion)
-                header.requestToAddButton.addTarget(self, action: #selector(onRequestToAddButtonTapped), for: .touchUpInside)
+                header.registerSpotButton.addTarget(self, action: #selector(onRegisterSpotButtonTapped), for: .touchUpInside)
                 return header
             }
         default:
@@ -503,16 +507,8 @@ extension SpotListViewController: UICollectionViewDataSource {
 
         let vc = SpotDetailViewController(spot.spotId, topTag, transportMode, spot.eta)
 
-        if AuthManager.shared.hasToken {
-            if isAd { return }
-            self.navigationController?.pushViewController(vc, animated: true)
-        } else {
-            if dataIndex < 5 {
-                presentLoginModal("click_detail_guest?")
-            } else {
-                presentLoginModal("click_locked_detail_guest?")
-            }
-        }
+        if isAd { return }
+        self.navigationController?.pushViewController(vc, animated: true)
 
         // NOTE: Amplitude
         if topTag == nil && spot.tagList.isEmpty {
@@ -753,7 +749,7 @@ private extension SpotListViewController {
         guard AuthManager.shared.hasToken else { return }
         guard !AuthManager.shared.hasVerifiedArea else { return }
         
-        let lastAlertTime = UserDefaults.standard.object(forKey: StringLiterals.UserDefaults.lastLocalVerificationAlertTime) as? Date
+        let lastAlertTime = UserDefaultsManager.get(Date.self, forKey: .lastLocalVerificationAlertDate)
         let now = Date()
         
         if let lastTime = lastAlertTime {

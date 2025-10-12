@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 
 class PhotoCollectionViewController: BaseNavViewController {
     
@@ -279,29 +280,26 @@ extension PhotoCollectionViewController: UICollectionViewDataSource {
 private extension PhotoCollectionViewController {
     
     func goToPhotoSelectionVC() {
-        albumViewModel.getHighQualityImage(index: selectedIndexPath.value?.item ?? 0) { [weak self] image in
-            let vc = PhotoSelectionViewController(image)
+        let asset = albumViewModel.fetchedImages[selectedIndexPath.value?.item ?? 0].asset
+
+        albumViewModel.getHighQualityImage(asset: asset) { [weak self] image in
+            let vc = PhotoSelectionViewController(PhotoModel(asset: asset, image: image))
             DispatchQueue.main.async {
                 self?.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }
-    
+
     func popToSpotUploadVC() {
         let assets = selectedIndexPaths.map { albumViewModel.fetchedImages[$0.item].asset }
 
         let dispatchGroup = DispatchGroup()
-        var selectedImages: [UIImage] = Array(repeating: UIImage(), count: assets.count)
+        var successfulImages: [Int: PhotoModel] = [:]
 
         for (i, asset) in assets.enumerated() {
             dispatchGroup.enter()
-            albumViewModel.setImageCache(for: asset,
-                                         size: CGSize(width: asset.pixelWidth, height: asset.pixelHeight)) { image in
-                if let image {
-                    selectedImages[i] = image
-                } else {
-                    selectedImages.remove(at: i)
-                }
+            albumViewModel.getHighQualityImage(asset: asset) { image in
+                successfulImages[i] = PhotoModel(asset: asset, image: image)
                 dispatchGroup.leave()
             }
         }
@@ -310,8 +308,10 @@ private extension PhotoCollectionViewController {
             guard let self,
                   let navVCs = self.navigationController?.viewControllers else { return }
 
+            let finalOrderedImages = successfulImages.sorted(by: { $0.key < $1.key }).map { $0.value }
+
             if let spotUploadVC = navVCs.first(where: { $0 is SpotUploadViewController }) as? SpotUploadViewController {
-                spotUploadVC.viewModel.photosToAppend.value = selectedImages
+                spotUploadVC.viewModel.photosToAppend.value = finalOrderedImages
                 self.navigationController?.popToViewController(spotUploadVC, animated: true)
             }
         }

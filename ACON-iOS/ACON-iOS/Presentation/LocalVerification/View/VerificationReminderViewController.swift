@@ -38,7 +38,7 @@ private extension VerificationReminderViewController {
     @objc
     func cancelButtonTapped() {
         let now = Date()
-        UserDefaults.standard.set(now, forKey: StringLiterals.UserDefaults.lastLocalVerificationAlertTime)
+        UserDefaultsManager.set(now, forKey: .lastLocalVerificationAlertDate)
         dismiss(animated: true)
     }
     

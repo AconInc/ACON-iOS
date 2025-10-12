@@ -133,7 +133,12 @@ class SpotDetailViewController: BaseNavViewController {
 
         spotDetailView.bookmarkButton.onTap = { [weak self] isSelected in
             guard let self = self else { return }
-            isSelected ? viewModel.postSavedSpot() : viewModel.deleteSavedSpot()
+            let hasToken = AuthManager.shared.hasToken
+            if hasToken {
+                isSelected ? viewModel.postSavedSpot() : viewModel.deleteSavedSpot()
+            } else {
+                presentLoginModal(nil)
+            }
         }
 
         spotDetailView.shareButton.onTap = { [weak self] _ in

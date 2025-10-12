@@ -7,10 +7,12 @@
 
 import UIKit
 
-struct PutImageToPresignedURLRequest: Codable {
-    
+struct PutImageToPresignedURLRequest: Encodable {
+
     let presignedURL: String
-    
+
     let imageData: Data
-    
+
+    let fileName: String
+
 }

@@ -9,22 +9,6 @@ import Foundation
 
 enum StringLiterals {
     
-    enum UserDefaults {
-        
-        static let accessToken = "accessToken"
-        
-        static let refreshToken = "refreshToken"
-        
-        static let hasVerifiedArea = "hasVerifiedArea"
-        
-        static let hasPreference = "hasPreference"
-        
-        static let lastLocalVerificationAlertTime = "lastLocalVerificationAlertTime"
-        
-        static let hasSeenTutorial = "hasSeenTutorial"
-        
-    }
-    
     enum Error {
         
         static let networkErrorOccurred = "일시적인 오류가 발생했습니다."
@@ -276,7 +260,7 @@ enum StringLiterals {
         
         static let willSuggestNextTime = "다음에 들어오실 땐,\n꼭 찾아서 추천해드릴게요"
         
-        static let requestToAddSpot = "장소 등록 신청하기"
+        static let registerSpot = "장소 직접 등록하기"
         
         static let howAboutTheseInstead = "대신 여기는 어떠세요?"
 
@@ -401,7 +385,7 @@ enum StringLiterals {
         
     }
     
-    enum Onboarding {
+    enum Preference {
         
         static let dislikeFoodTitle = "싫어하는 음식을\n알려줄 수 있나요?"
         
@@ -505,7 +489,7 @@ enum StringLiterals {
         
         static let privacyPolicy = "개인정보처리방침"
         
-        static let onboarding = "취향탐색 다시하기"
+        static let preference = "취향탐색 다시하기"
         
         static let localVerification = "지역 인증하기"
         

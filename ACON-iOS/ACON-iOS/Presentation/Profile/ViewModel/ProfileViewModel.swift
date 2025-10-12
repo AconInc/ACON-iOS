@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Photos
 
 final class ProfileViewModel: Serviceable {
 
@@ -19,14 +20,9 @@ final class ProfileViewModel: Serviceable {
 
     var onGetNicknameValiditySuccess: ObservablePattern<Bool> = ObservablePattern(nil)
 
-    var onSuccessGetPresignedURL: ObservablePattern<Bool> = ObservablePattern(nil)
-
-    var onSuccessPutProfileImageToPresignedURL: ObservablePattern<Bool> = ObservablePattern(nil)
-
     var onPatchProfileSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
 
-    var presignedURLInfo: PresignedURLModel = PresignedURLModel(fileName: "",
-                                                                presignedURL: "")
+    var profileImage: PhotoModel? = nil
 
     var nicknameValidityMessageType: ProfileValidMessageType = .none
 
@@ -40,8 +36,12 @@ final class ProfileViewModel: Serviceable {
     let maxNicknameLength: Int = 14
 
     var savedSpotList: [SavedSpotModel] = []
-    
-    
+
+    // NOTE: 서버 오류로 401 뜰 때 재시도 루프에 빠지는 문제 방지
+    private var uploadRetryCount = 0
+    private let maxUploadRetries = 1
+
+
     // MARK: - Methods
 
     func updateUserInfo(nickname: String, birthDate: String?) {
@@ -136,72 +136,71 @@ final class ProfileViewModel: Serviceable {
         }
     }
 
-    func getProfilePresignedURL() {
-        ACService.shared.imageService.getPresignedURL(
-            parameter: GetPresignedURLRequest(imageType: ImageType.PROFILE.rawValue)
-        ) { [weak self] response in
-            guard let self = self else { return }
+    func saveProfile() {
+        self.uploadRetryCount = 0
+        executeSaveProfileFlow()
+    }
 
-            switch response {
-            case .success(let data):
-                presignedURLInfo = PresignedURLModel(fileName: data.fileName,
-                                                     presignedURL: data.preSignedUrl)
-                self.userInfo.profileImage = data.fileName
-                onSuccessGetPresignedURL.value = true
-            case .reIssueJWT:
-                self.handleReissue {
-                    self.getProfilePresignedURL()
+    func executeSaveProfileFlow() {
+        print("Profile save attempt #\(uploadRetryCount + 1)")
+
+        Task {
+            do {
+                var imageURL: String? = nil
+                if let profileImage {
+                    imageURL = try await uploadProfilePhoto(asset: profileImage.asset)
                 }
-            default:
-                self.handleNetworkError {
-                    self.getProfilePresignedURL()
+                try await patchProfile(imageURL: imageURL)
+                await MainActor.run { onPatchProfileSuccess.value = true }
+
+            } catch PhotoManagerError.tokenExpired {
+                guard self.uploadRetryCount < self.maxUploadRetries else {
+                    print("🚨 Max retries reached. Stopping the loop.")
+                    await MainActor.run { onPatchProfileSuccess.value = false }
+                    return
                 }
+                self.uploadRetryCount += 1
+                handleReissue { [weak self] in
+                    self?.executeSaveProfileFlow()
+                }
+            } catch PhotoManagerError.networkError {
+                handleNetworkError { [weak self] in
+                    self?.executeSaveProfileFlow()
+                }
+            } catch {
+                print("❌ An unhandled failure occurred: \(error.localizedDescription)")
+                await MainActor.run { onPatchProfileSuccess.value = false }
             }
         }
     }
 
-    func putProfileImageToPresignedURL(imageData: Data) {
-        ACService.shared.imageService.putImageToPresignedURL(requestBody: PutImageToPresignedURLRequest(presignedURL: presignedURLInfo.presignedURL, imageData: imageData)) { [weak self] response in
-            
-            guard let self = self else { return }
-            
-            switch response {
-            case .success(_):
-                onSuccessPutProfileImageToPresignedURL.value = true
-            case .reIssueJWT:
-                self.handleReissue {
-                    self.putProfileImageToPresignedURL(imageData: imageData)
-                }
-            default:
-                self.handleNetworkError {
-                    self.putProfileImageToPresignedURL(imageData: imageData)
-                }
-            }
-        }
-    }
-
-    func patchProfile() {
+    func patchProfile(imageURL: String? = nil) async throws {
         let requestBody = PatchProfileRequest(
-            profileImage: userInfo.profileImage.isEmpty ? nil : userInfo.profileImage,
+            profileImage: imageURL,
             nickname: userInfo.nickname,
             birthDate: userInfo.birthDate
         )
 
-        ACService.shared.profileService.patchProfile(requestBody: requestBody) { [weak self] response in
-            guard let self = self else { return }
-            switch response {
-            case .success:
-                onPatchProfileSuccess.value = true
-            case .reIssueJWT:
-                self.handleReissue {
-                    self.patchProfile()
-                }
-            default:
-                self.handleNetworkError {
-                    self.patchProfile()
+        try await withCheckedThrowingContinuation { continuation in
+            ACService.shared.profileService.patchProfile(requestBody: requestBody) { response in
+                switch response {
+                case .success:
+                    continuation.resume(returning: ())
+                case .reIssueJWT:
+                    continuation.resume(throwing: PhotoManagerError.tokenExpired)
+                case .requestErr(let error):
+                    continuation.resume(throwing: PhotoManagerError.requestError(error))
+                case .networkFail:
+                    continuation.resume(throwing: PhotoManagerError.networkError)
+                default:
+                    continuation.resume(throwing: PhotoManagerError.serverError)
                 }
             }
         }
+    }
+
+    private func uploadProfilePhoto(asset: PHAsset) async throws -> String {
+        return try await PhotoManager(imageType: .PROFILE).uploadImage(asset: asset)
     }
 
 }

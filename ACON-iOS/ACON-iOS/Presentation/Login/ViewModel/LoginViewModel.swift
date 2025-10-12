@@ -54,10 +54,19 @@ class LoginViewModel: Serviceable {
         ACService.shared.authService.postLogin(PostLoginRequest(socialType: socialType, idToken: idToken)){ [weak self] response in
             switch response {
             case .success(let data):
-                UserDefaults.standard.set(data.accessToken, forKey: StringLiterals.UserDefaults.accessToken)
-                UserDefaults.standard.set(data.refreshToken, forKey: StringLiterals.UserDefaults.refreshToken)
-                UserDefaults.standard.set(data.hasVerifiedArea, forKey: StringLiterals.UserDefaults.hasVerifiedArea)
-                UserDefaults.standard.set(data.hasPreference, forKey: StringLiterals.UserDefaults.hasPreference)
+                UserDefaultsManager.set(data.accessToken, forKey: .accessToken)
+                UserDefaultsManager.set(data.refreshToken, forKey: .refreshToken)
+                UserDefaultsManager.set(data.hasVerifiedArea, forKey: .hasVerifiedArea)
+                UserDefaultsManager.set(data.hasPreference, forKey: .hasPreference)
+
+                // NOTE: 기존 유저가 앱 재설치 시 서비스 온보딩 노출 X
+                // NOTE: 기존 유저인지는 취향탐색 또는 지역인증을 했는지로 판단
+                if !(UserDefaultsManager.get(Bool.self, forKey: .hasSeenTutorial) ?? false) {
+                    UserDefaultsManager.set((data.hasPreference || data.hasVerifiedArea), forKey: .hasSeenTutorial)
+                }
+
+                AuthManager.shared.updateLastTokenRefreshDate()
+
                 AmplitudeManager.shared.setUserID(data.externalUUID)
                 AmplitudeManager.shared.setUserProperty(userProperties: ["id": data.externalUUID])
                 self?.onSuccessLogin.value = true

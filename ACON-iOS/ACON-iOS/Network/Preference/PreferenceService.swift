@@ -1,5 +1,5 @@
 //
-//  OnboardingService.swift
+//  PreferenceService.swift
 //  ACON-iOS
 //
 //  Created by 이수민 on 6/16/25.
@@ -9,17 +9,17 @@ import Foundation
 
 import Moya
 
-protocol OnboardingServiceProtocol {
+protocol PreferenceServiceProtocol {
     
-    func putOnboarding(requestBody: PutOnboardingRequest,
+    func putPreference(requestBody: PutPreferenceRequest,
                        completion: @escaping (NetworkResult<EmptyResponse>) -> Void)
     
 }
 
-final class OnboardingService: BaseService<OnboardingTargetType>, OnboardingServiceProtocol {
+final class PreferenceService: BaseService<PreferenceTargetType>, PreferenceServiceProtocol {
     
-    func putOnboarding(requestBody: PutOnboardingRequest, completion: @escaping (NetworkResult<EmptyResponse>) -> Void) {
-        self.provider.request(.putOnboarding(requestBody)) { result in
+    func putPreference(requestBody: PutPreferenceRequest, completion: @escaping (NetworkResult<EmptyResponse>) -> Void) {
+        self.provider.request(.putPreference(requestBody)) { result in
             switch result {
             case .success(let response):
                 let networkResult = self.judgeStatus(

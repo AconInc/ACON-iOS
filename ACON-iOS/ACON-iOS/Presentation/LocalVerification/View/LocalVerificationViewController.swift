@@ -41,10 +41,13 @@ class LocalVerificationViewController: BaseNavViewController {
         if self.localVerificationViewModel.flowType == .onboarding {
             self.setSkipButton() {
                 let now = Date()
-                UserDefaults.standard.set(now, forKey: StringLiterals.UserDefaults.lastLocalVerificationAlertTime)
+                UserDefaultsManager.set(now, forKey: .lastLocalVerificationAlertDate)
 
-                NavigationUtils.naviateToLoginOnboarding()
+                NavigationUtils.naviateToOnboardingPreference()
             }
+        } else {
+            setBackButton()
+            setPopGesture()
         }
     }
     
@@ -54,7 +57,16 @@ class LocalVerificationViewController: BaseNavViewController {
         self.tabBarController?.tabBar.isHidden = true
         startBlinkingWarningLabel()
     }
-    
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        UserDefaultsManager.set(true, forKey: .hasSeenLocalVerification)
+    }
+
+
+    // MARK: - UI Settings
+
     override func setHierarchy() {
         super.setHierarchy()
         
@@ -92,7 +104,7 @@ private extension LocalVerificationViewController {
                 } else {
                     switch localVerificationViewModel.flowType {
                     case .onboarding:
-                        self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "온보딩으로 이동", completion: {NavigationUtils.naviateToLoginOnboarding()})
+                        self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "취향탐색으로 이동", completion: {NavigationUtils.naviateToOnboardingPreference()})
                     default:
                         self.showDefaultAlert(title: "알림", message: "현재 동네인증이 불가능한 지역에 있어요", okText: "홈으로 이동", completion: {NavigationUtils.navigateToTabBar()})
                     }

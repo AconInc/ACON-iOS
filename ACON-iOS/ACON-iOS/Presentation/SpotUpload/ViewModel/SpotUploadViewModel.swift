@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Photos
 
 final class SpotUploadViewModel: Serviceable {
+
+    // MARK: - Properties
 
     // NOTE: 이전/다음 버튼
     let isPreviousButtonEnabled: ObservablePattern<Bool> = ObservablePattern(nil)
@@ -23,147 +26,103 @@ final class SpotUploadViewModel: Serviceable {
     var recommendedMenu: String? = nil
     var priceValue: SpotUploadType.PriceValueType? = nil
 
-    var photos: [UIImage] = []
-    let photosToAppend: ObservablePattern<[UIImage]> = ObservablePattern(nil)
+    var photosToAppend: ObservablePattern<[PhotoModel]> = ObservablePattern(nil)
+    var photos: [PhotoModel] = []
 
     var isWorkFriendly: Bool? = nil
 
-    private var photoPresignedURLInfos: [PresignedURLModel] = []
-    private var photoPresignedURLResults: [Int: Bool] = [:] // NOTE: [photo index : result]
+    // NOTE: 서버 오류로 401 뜰 때 재시도 루프에 빠지는 문제 방지
+    private var uploadRetryCount = 0
+    private let maxUploadRetries = 1
 
 
-    // MARK: - Network
+    // MARK: - Methods
 
     func uploadSpot() {
+        self.uploadRetryCount = 0
+        executeUploadFlow()
+    }
+
+    private func executeUploadFlow() {
+        print("Spot upload attempt #\(uploadRetryCount + 1)")
+
         if photos.isEmpty {
-            postSpot()
-        } else {
-            getPresignedURLs()
+            Task {
+                do {
+                    try await postSpot(imageURLs: [])
+                    await MainActor.run { onSuccessPostSpot.value = true }
+                } catch {
+                    print("❌ A failure occurred during post (no photos): \(error.localizedDescription)")
+                    await MainActor.run { onSuccessPostSpot.value = false }
+                }
+            }
+            return
+        }
+
+        Task {
+            do {
+                let imageURLs = try await uploadSpotPhotos(assets: self.photos.map { $0.asset })
+                try await postSpot(imageURLs: imageURLs)
+                await MainActor.run { onSuccessPostSpot.value = true }
+
+            } catch PhotoManagerError.tokenExpired {
+                guard self.uploadRetryCount < self.maxUploadRetries else {
+                    print("🚨 Max retries reached. Stopping the loop.")
+                    await MainActor.run { onSuccessPostSpot.value = false }
+                    return
+                }
+                self.uploadRetryCount += 1
+                handleReissue { [weak self] in
+                    self?.executeUploadFlow()
+                }
+            } catch PhotoManagerError.networkError {
+                handleNetworkError { [weak self] in
+                    self?.executeUploadFlow()
+                }
+            } catch PhotoManagerError.serverError {
+                await MainActor.run { onSuccessPostSpot.value = false }
+            } catch {
+                print("❌ An unhandled failure occurred: \(error.localizedDescription)")
+                await MainActor.run { onSuccessPostSpot.value = false }
+            }
         }
     }
 
-    private func postSpot() {
+}
+
+
+// MARK: - Network Helpers
+
+private extension SpotUploadViewModel {
+
+    func uploadSpotPhotos(assets: [PHAsset]) async throws -> [String] {
+        return try await PhotoManager(imageType: .SPOT).uploadImages(assets: assets)
+    }
+
+    func postSpot(imageURLs: [String]) async throws {
         let request = PostSpotUploadRequest(
             spotName: selectedSpot?.spotName ?? "",
             address: selectedSpot?.spotAddress ?? "",
             spotType: spotType?.serverKey ?? "",
             featureList: configureFeatureList(),
             recommendedMenu: recommendedMenu ?? "",
-            imageList: photoPresignedURLInfos.isEmpty ? nil : photoPresignedURLInfos.map { $0.fileName }
+            imageList: imageURLs.isEmpty ? nil : imageURLs
         )
-
-        ACService.shared.spotUploadService.postSpotUpload(requestBody: request) { [weak self] response in
-            switch response {
-            case .success(_):
-                self?.onSuccessPostSpot.value = true
-            case .reIssueJWT:
-                self?.handleReissue { [weak self] in
-                    self?.postSpot()
-                }
-            default:
-                self?.handleNetworkError { [weak self] in
-                    self?.postSpot()
-                }
-            }
-        }
-    }
-
-    private func getPresignedURLs() {
-        guard !photos.isEmpty else {
-            postSpot()
-            return
-        }
-
-        photoPresignedURLInfos.removeAll()
-
-        let dispatchGroup = DispatchGroup()
         
-        for i in 0..<photos.count {
-            dispatchGroup.enter()
-
-            photoPresignedURLResults[i] = false
-
-            ACService.shared.imageService.getPresignedURL(
-                parameter: GetPresignedURLRequest(imageType: ImageType.APPLY_SPOT.rawValue)
-            ) { [weak self] response in
-                defer { dispatchGroup.leave() }
-
-                guard let self = self else { return }
-                
+        try await withCheckedThrowingContinuation { continuation in
+            ACService.shared.spotUploadService.postSpotUpload(requestBody: request) { response in
                 switch response {
-                case .success(let data):
-                    self.photoPresignedURLInfos.append(PresignedURLModel(fileName: data.fileName, presignedURL: data.preSignedUrl))
-                    self.photoPresignedURLResults[i] = true
+                case .success:
+                    continuation.resume(returning: ())
                 case .reIssueJWT:
-                    self.handleReissue { [weak self] in
-                        self?.getPresignedURLs()
-                    }
+                    continuation.resume(throwing: PhotoManagerError.tokenExpired)
+                case .requestErr(let error):
+                    continuation.resume(throwing: PhotoManagerError.requestError(error))
+                case .networkFail:
+                    continuation.resume(throwing: PhotoManagerError.networkError)
                 default:
-                    self.handleNetworkError { [weak self] in
-                        self?.getPresignedURLs()
-                    }
+                    continuation.resume(throwing: PhotoManagerError.serverError)
                 }
-            }
-        }
-
-        dispatchGroup.notify(queue: .main) { [weak self] in
-            let allSuccess = self?.photoPresignedURLResults.allSatisfy { $0.value } ?? false
-            if allSuccess {
-                self?.putPhotosToPresignedURL()
-            } else {
-                self?.onSuccessPostSpot.value = false
-            }
-        }
-    }
-
-    private func putPhotosToPresignedURL() {
-        let dispatchGroup = DispatchGroup()
-
-        for (index, photo) in photos.enumerated() {
-            guard (photoPresignedURLResults[index] ?? false) else {
-                print("❌ presignedURL 없음 at: \(index)")
-                continue
-            }
-
-            guard let imageData = photo.jpegData(compressionQuality: 1) else {
-                print("❌ 이미지 데이터 변환 실패 at: \(index)")
-                continue
-            }
-
-            dispatchGroup.enter()
-
-            let request = PutImageToPresignedURLRequest(
-                presignedURL: photoPresignedURLInfos[index].presignedURL,
-                imageData: imageData
-            )
-
-            ACService.shared.imageService.putImageToPresignedURL(requestBody: request) { [weak self] response in
-                defer { dispatchGroup.leave() }
-                guard let self = self else { return }
-                
-                switch response {
-                case .success(_):
-                    photoPresignedURLResults[index] = true
-                case .reIssueJWT:
-                    photoPresignedURLResults[index] = false
-                    self.handleReissue {
-                        self.putPhotosToPresignedURL()
-                    }
-                default:
-                    photoPresignedURLResults[index] = false
-                    self.handleNetworkError {
-                        self.putPhotosToPresignedURL()
-                    }
-                }
-            }
-        }
-
-        dispatchGroup.notify(queue: .main) { [weak self] in
-            let allSuccess = self?.photoPresignedURLResults.allSatisfy { $0.value } ?? false
-            if allSuccess {
-                self?.postSpot()
-            } else {
-                self?.onSuccessPostSpot.value = false
             }
         }
     }

@@ -24,11 +24,12 @@ enum ACAlertType: CaseIterable {
     
     case libraryAccessDenied // NOTE: 사진 권한 X
     case changeNotSaved // NOTE: 프로필 변경사항 저장 X
+    case profilePatchFail // NOTE: 프로필 수정 실패
     
     case changeVerifiedArea // NOTE: 지역인증 변경 (지역 1개)
     case timeoutFromVerification // NOTE: 지역인증 변경 (인증 1주일 - 3개월)
     
-    case quitOnboarding // NOTE: 취향탐색 그만두기
+    case quitPreference // NOTE: 취향탐색 그만두기
     
     case logout // NOTE: 로그아웃
     
@@ -57,7 +58,7 @@ enum ACAlertType: CaseIterable {
         case .changeVerifiedArea, .timeoutFromVerification:
             return "지역 삭제 불가"
         
-        case .quitOnboarding:
+        case .quitPreference:
             return "취향탐색을 그만둘까요?"
             
         case .logout:
@@ -68,6 +69,8 @@ enum ACAlertType: CaseIterable {
             
         case .spotUploadFail:
             return "장소 업로드 실패"
+        case .profilePatchFail:
+            return "프로필 수정 실패"
         }
     }
     
@@ -75,7 +78,7 @@ enum ACAlertType: CaseIterable {
         switch self {
         case .locationAccessDenied:
             return "설정에서 위치접근 권한을 허용해주세요."
-        case .locationAccessFail, .spotUploadFail:
+        case .locationAccessFail, .spotUploadFail, .profilePatchFail:
             return "문제가 발생했습니다.\n나중에 다시 시도해주세요."
         case .reviewLocationFail:
             return "현재 위치와 리뷰 등록 장소가\n오차범위 밖에 있습니다.\n좀 더 가까이 이동해보세요."
@@ -107,13 +110,13 @@ enum ACAlertType: CaseIterable {
     
     var leftButtonTitle: String? {
         switch self {
-        case .plainUpdate, .libraryAccessDenied, .changeVerifiedArea, .logout, .deletePhoto, .quitSpotUpload:
+        case .plainUpdate, .libraryAccessDenied, .changeVerifiedArea, .logout, .deletePhoto, .quitSpotUpload, .spotUploadFail, .profilePatchFail:
             return "취소"
         case .naverAPILimitExceeded:
             return "끝내기"
         case .changeNotSaved:
             return "계속 작성"
-        case .quitOnboarding:
+        case .quitPreference:
             return "계속하기"
         default:
             return nil
@@ -132,7 +135,7 @@ enum ACAlertType: CaseIterable {
             return "나가기"
         case .changeVerifiedArea:
             return "변경하기"
-        case .quitOnboarding, .quitSpotUpload:
+        case .quitPreference, .quitSpotUpload, .spotUploadFail, .profilePatchFail:
             return "그만두기"
         case .logout:
             return "로그아웃"

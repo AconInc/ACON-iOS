@@ -10,15 +10,16 @@ import UIKit
 import AVFAudio
 
 class SplashViewController: BaseViewController {
-    
+
     // MARK: - UI Properties
-    
+
     private let splashView = SplashView()
-    
+
     private var player: AVAudioPlayer?
-    
+
+
     // MARK: - LifeCycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,7 +30,15 @@ class SplashViewController: BaseViewController {
             print("오디오 세션 설정 오류: \(error)")
         }
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if AuthManager.shared.needsTokenRefresh() {
+            refreshToken()
+        }
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         
@@ -44,12 +53,12 @@ class SplashViewController: BaseViewController {
             }
         }
     }
-    
+
     deinit {
         player?.stop()
         player = nil
     }
-    
+
     override func setHierarchy() {
         super.setHierarchy()
         
@@ -71,63 +80,53 @@ class SplashViewController: BaseViewController {
 
 private extension SplashViewController {
 
+    // NOTE: [온보딩 순서] 소셜로그인 > 서비스 온보딩(튜토리얼) > 지역인증 > 취향탐색
     func goToNextVC() {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        
+
         let hasToken = AuthManager.shared.hasToken
+        let hasSeenTutorial = AuthManager.shared.hasSeenTutorial
+        let hasSeenLocalVerification = AuthManager.shared.hasSeenLocalVerification
+        let hasSeenPreference = AuthManager.shared.hasSeenPreference
         let hasVerifiedArea = AuthManager.shared.hasVerifiedArea
         let hasPreference = AuthManager.shared.hasPreference
-        let hasSeenTutorial = AuthManager.shared.hasSeenTutorial
-        
+
         var rootVC: UIViewController
-        
-        // NOTE: 자동로그인O && 지역인증O && 취향탐색O -> TabBar/튜토리얼로 이동
-        if hasToken && hasVerifiedArea && hasPreference {
-            rootVC = hasSeenTutorial ? ACTabBarController() : TutorialContainerViewController()
+
+        // NOTE: 자동로그인X -> 로그인 VC
+        if !hasToken {
+            rootVC = UINavigationController(rootViewController: LoginViewController())
         }
-        
-        // NOTE: 자동로그인O && 지역인증O && 취향탐색X -> 취향탐색으로 이동
-        // NOTE: 취향탐색 이후 튜토리얼을 거치는지는 OnboardingVC에서 분기처리
-        else if hasToken && hasVerifiedArea && !hasPreference {
-            rootVC = OnboardingViewController(flowType: .login)
+
+        // NOTE: 자동로그인O && 튜토리얼X -> 튜토리얼VC
+        else if !hasSeenTutorial {
+            rootVC = TutorialContainerViewController()
         }
-        
-        // NOTE: 자동로그인O && 지역인증X -> 지역인증으로 이동
-        // NOTE: 지역인증 이후 취항탐색, 튜토리얼을 거치는지는 LocalMapVC에서 분기처리
-        else if hasToken && !hasVerifiedArea {
+
+        // NOTE: 자동로그인O && 튜토리얼O && 지역인증X -> 지역인증VC
+        else if (!hasSeenLocalVerification && !hasVerifiedArea) {
             let vm = LocalVerificationViewModel(flowType: .onboarding)
             // TODO: 자동으로 맵뷰로 넘어가는 문제 해결
-            rootVC = UINavigationController(
-                rootViewController: LocalVerificationViewController(viewModel: vm)
-            )
+            rootVC = UINavigationController(rootViewController: LocalVerificationViewController(viewModel: vm))
         }
-        
-        // NOTE: 자동로그인X -> 로그인VC로 이동
+
+        // NOTE: 자동로그인O && 튜토리얼O && 지역인증O && 취향탐색X -> 취향탐색VC
+        else if (!hasSeenPreference && !hasPreference) {
+            rootVC = PreferenceViewController(flowType: .onboarding)
+        }
+
+        // NOTE: 자동로그인O && 튜토리얼O && 지역인증O && 취향탐색O -> TabBar
         else {
-            rootVC = UINavigationController(
-                rootViewController: LoginViewController()
-            )
+            rootVC = ACTabBarController()
         }
-        
+
         sceneDelegate?.window?.rootViewController = rootVC
     }
 
     // NOTE: 딥링크 진입 시 호출
     func goToSpotDetailVC(with spotID: Int64) {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-
-        let rootVC: UIViewController = {
-            // NOTE: 자동로그인O && 지역인증X -> rootVC = 지역인증VC
-            if AuthManager.shared.hasToken && !AuthManager.shared.hasVerifiedArea {
-                let vm = LocalVerificationViewModel(flowType: .onboarding)
-                return UINavigationController(
-                    rootViewController: LocalVerificationViewController(viewModel: vm)
-                )
-            } else {
-                // NOTE: 그 외 -> rootVC = TabBar
-                return ACTabBarController()
-            }
-        }()
+        let rootVC: UIViewController = ACTabBarController()
 
         sceneDelegate?.window?.rootViewController = rootVC
         sceneDelegate?.window?.makeKeyAndVisible()
@@ -143,7 +142,7 @@ private extension SplashViewController {
 // MARK: - Splash Animation
 
 private extension SplashViewController {
-    
+
     func playSplashAnimation() {
         splashView.do {
             $0.splashLottieView.play()
@@ -151,7 +150,7 @@ private extension SplashViewController {
         fadeShadowImage()
         playSplashBGM()
     }
-    
+
     func fadeShadowImage() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             UIView.animate(withDuration: 0.1) {
@@ -159,7 +158,7 @@ private extension SplashViewController {
             }
         }
     }
-    
+
     func playSplashBGM() {
         let audioSession = AVAudioSession.sharedInstance()
             
@@ -173,5 +172,35 @@ private extension SplashViewController {
             player?.play()
         }
     }
-    
+
+}
+
+
+// MARK: - Token refresh
+
+private extension SplashViewController {
+
+    func refreshToken() {
+        Task {
+            do {
+                let success = try await AuthManager.shared.handleTokenRefresh()
+                DispatchQueue.main.async {
+                    if success {
+                        print("❄️ 토큰 갱신 성공")
+                    } else {
+                        print("❄️ 토큰 갱신 실패")
+                        UserDefaultsManager.resetAppUserDefaults()
+                        NavigationUtils.navigateToLoginVC()
+                    }
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    print("❄️ 토큰 갱신 실패 catch")
+                    UserDefaultsManager.resetAppUserDefaults()
+                    NavigationUtils.navigateToLoginVC()
+                }
+            }
+        }
+    }
+
 }

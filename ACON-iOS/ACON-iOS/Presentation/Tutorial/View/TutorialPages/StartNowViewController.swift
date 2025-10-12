@@ -128,8 +128,34 @@ private extension StartNowViewController {
 
     @objc
     func tappedStartButton() {
-        UserDefaults.standard.set(true, forKey: StringLiterals.UserDefaults.hasSeenTutorial)
-        NavigationUtils.navigateToTabBar()
+        // NOTE: [온보딩 순서] 소셜로그인 > 서비스 온보딩(튜토리얼) > 지역인증 > 취향탐색
+        // NOTE: [온보딩 순서] 로그인 건너뛰기 > 서비스 온보딩(튜토리얼) > 홈
+
+        let hasToken = AuthManager.shared.hasToken
+        let hasSeenLocalVerification = AuthManager.shared.hasSeenLocalVerification
+        let hasSeenPreference = AuthManager.shared.hasSeenPreference
+        let hasVerifiedArea = AuthManager.shared.hasVerifiedArea
+        let hasPreference = AuthManager.shared.hasPreference
+
+        // NOTE: 로그인X -> TabBar
+        if !hasToken {
+            NavigationUtils.navigateToTabBar()
+        }
+
+        // NOTE: 로그인O && 지역인증X -> 지역인증VC
+        else if (!hasSeenLocalVerification && !hasVerifiedArea) {
+            NavigationUtils.navigateToOnboardingLocalVerification()
+        }
+
+        // NOTE: 로그인O && 지역인증O && 취향탐색X -> 취향탐색VC
+        else if (!hasSeenPreference && !hasPreference) {
+            NavigationUtils.naviateToOnboardingPreference()
+        }
+
+        // NOTE: 로그인O && 지역인증O && 취향탐색O -> TabBar
+        else {
+            NavigationUtils.navigateToTabBar()
+        }
     }
 
 }
