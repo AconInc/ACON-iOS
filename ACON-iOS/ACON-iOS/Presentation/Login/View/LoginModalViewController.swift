@@ -126,6 +126,8 @@ extension LoginModalViewController {
             let hasSeenTutorial = AuthManager.shared.hasSeenTutorial
             let hasSeenLocalVerification = AuthManager.shared.hasSeenLocalVerification
             let hasSeenPreference = AuthManager.shared.hasSeenPreference
+            let hasVerifiedArea = AuthManager.shared.hasVerifiedArea
+            let hasPreference = AuthManager.shared.hasPreference
 
             if onSuccess {
                 // NOTE: [온보딩 순서] 소셜로그인 > 서비스 온보딩(튜토리얼) > 지역인증 > 취향탐색
@@ -136,12 +138,12 @@ extension LoginModalViewController {
                 }
 
                 // NOTE: 튜토리얼O && 지역인증X -> 지역인증VC
-                else if !hasSeenLocalVerification {
+                else if (!hasSeenLocalVerification && !hasVerifiedArea) {
                     NavigationUtils.navigateToOnboardingLocalVerification()
                 }
 
                 // NOTE: 튜토리얼O && 지역인증O && 취향탐색X -> 취향탐색VC
-                else if !hasSeenPreference {
+                else if (!hasSeenPreference && !hasPreference) {
                     NavigationUtils.naviateToOnboardingPreference()
                 }
 

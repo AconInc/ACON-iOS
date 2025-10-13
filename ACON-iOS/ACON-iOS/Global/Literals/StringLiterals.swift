@@ -260,7 +260,7 @@ enum StringLiterals {
         
         static let willSuggestNextTime = "다음에 들어오실 땐,\n꼭 찾아서 추천해드릴게요"
         
-        static let requestToAddSpot = "장소 등록 신청하기"
+        static let registerSpot = "장소 직접 등록하기"
         
         static let howAboutTheseInstead = "대신 여기는 어떠세요?"
 

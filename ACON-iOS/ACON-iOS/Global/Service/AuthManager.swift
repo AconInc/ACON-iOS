@@ -57,6 +57,8 @@ final class AuthManager {
                         UserDefaultsUtils.removeTokens()
                         TokenLogger.shared.log(.refreshFailed(error: error.localizedDescription))
                         continuation.resume(returning: false)
+                    } else {
+                        continuation.resume(returning: false)
                     }
                 default:
                     TokenLogger.shared.log(.refreshFailed(error: "unknown"))

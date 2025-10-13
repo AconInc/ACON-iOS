@@ -45,6 +45,9 @@ class LocalVerificationViewController: BaseNavViewController {
 
                 NavigationUtils.naviateToOnboardingPreference()
             }
+        } else {
+            setBackButton()
+            setPopGesture()
         }
     }
     

@@ -298,11 +298,8 @@ private extension PhotoCollectionViewController {
 
         for (i, asset) in assets.enumerated() {
             dispatchGroup.enter()
-            albumViewModel.setImageCache(for: asset,
-                                         size: CGSize(width: asset.pixelWidth, height: asset.pixelHeight)) { image in
-                if let image {
-                    successfulImages[i] = PhotoModel(asset: asset, image: image)
-                }
+            albumViewModel.getHighQualityImage(asset: asset) { image in
+                successfulImages[i] = PhotoModel(asset: asset, image: image)
                 dispatchGroup.leave()
             }
         }

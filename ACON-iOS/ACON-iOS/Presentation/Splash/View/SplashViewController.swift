@@ -93,8 +93,10 @@ private extension SplashViewController {
 
         let hasToken = AuthManager.shared.hasToken
         let hasSeenTutorial = AuthManager.shared.hasSeenTutorial
-        let hasSeenLocalVerificationOnboarding = AuthManager.shared.hasSeenLocalVerification
-        let hasSeenPreferenceOnboarding = AuthManager.shared.hasSeenPreference
+        let hasSeenLocalVerification = AuthManager.shared.hasSeenLocalVerification
+        let hasSeenPreference = AuthManager.shared.hasSeenPreference
+        let hasVerifiedArea = AuthManager.shared.hasVerifiedArea
+        let hasPreference = AuthManager.shared.hasPreference
 
         var rootVC: UIViewController
 
@@ -109,14 +111,14 @@ private extension SplashViewController {
         }
 
         // NOTE: 자동로그인O && 튜토리얼O && 지역인증X -> 지역인증VC
-        else if !hasSeenLocalVerificationOnboarding {
+        else if (!hasSeenLocalVerification && !hasVerifiedArea) {
             let vm = LocalVerificationViewModel(flowType: .onboarding)
             // TODO: 자동으로 맵뷰로 넘어가는 문제 해결
             rootVC = UINavigationController(rootViewController: LocalVerificationViewController(viewModel: vm))
         }
 
         // NOTE: 자동로그인O && 튜토리얼O && 지역인증O && 취향탐색X -> 취향탐색VC
-        else if !hasSeenPreferenceOnboarding {
+        else if (!hasSeenPreference && !hasPreference) {
             rootVC = PreferenceViewController(flowType: .onboarding)
         }
 
@@ -193,14 +195,16 @@ private extension SplashViewController {
                     if success {
                         print("❄️ 토큰 갱신 성공")
                     } else {
+                        print("❄️ 토큰 갱신 실패")
                         UserDefaultsUtils.resetAppUserDefaults()
-                        NavigationUtils.navigateToSplash()
+                        NavigationUtils.navigateToLoginVC()
                     }
                 }
             } catch {
                 DispatchQueue.main.async {
+                    print("❄️ 토큰 갱신 실패 catch")
                     UserDefaultsUtils.resetAppUserDefaults()
-                    NavigationUtils.navigateToSplash()
+                    NavigationUtils.navigateToLoginVC()
                 }
             }
         }

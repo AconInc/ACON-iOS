@@ -59,6 +59,12 @@ class LoginViewModel: Serviceable {
                 UserDefaultsUtils.set(data.hasVerifiedArea, forKey: .hasVerifiedArea)
                 UserDefaultsUtils.set(data.hasPreference, forKey: .hasPreference)
 
+                // NOTE: 기존 유저가 앱 재설치 시 서비스 온보딩 노출 X
+                // NOTE: 기존 유저인지는 취향탐색 또는 지역인증을 했는지로 판단
+                if !(UserDefaultsUtils.get(Bool.self, forKey: .hasSeenTutorial) ?? false) {
+                    UserDefaultsUtils.set((data.hasPreference || data.hasVerifiedArea), forKey: .hasSeenTutorial)
+                }
+
                 AuthManager.shared.updateLastTokenRefreshDate()
                 TokenLogger.shared.log(.saved(tokenPrefix: String(data.accessToken.prefix(10))))
 

@@ -132,8 +132,10 @@ extension LoginViewController {
             guard let self = self else { return }
 
             let hasSeenTutorial = AuthManager.shared.hasSeenTutorial
-            let hasSeenLocalVerificationOnboarding = AuthManager.shared.hasSeenLocalVerification
-            let hasSeenPreferenceOnboarding = AuthManager.shared.hasSeenPreference
+            let hasSeenLocalVerification = AuthManager.shared.hasSeenLocalVerification
+            let hasSeenPreference = AuthManager.shared.hasSeenPreference
+            let hasVerifiedArea = AuthManager.shared.hasVerifiedArea
+            let hasPreference = AuthManager.shared.hasPreference
 
             if onSuccess {
                 AmplitudeManager.shared.trackEventWithProperties(AmplitudeLiterals.EventName.login, properties: ["did_login?": true])
@@ -146,12 +148,12 @@ extension LoginViewController {
                 }
 
                 // NOTE: 튜토리얼O && 지역인증X -> 지역인증VC
-                else if !hasSeenLocalVerificationOnboarding {
+                else if (!hasSeenLocalVerification && !hasVerifiedArea) {
                     NavigationUtils.navigateToOnboardingLocalVerification()
                 }
 
                 // NOTE: 튜토리얼O && 지역인증O && 취향탐색X -> 취향탐색VC
-                else if !hasSeenPreferenceOnboarding {
+                else if (!hasSeenPreference && !hasPreference) {
                     NavigationUtils.naviateToOnboardingPreference()
                 }
 
