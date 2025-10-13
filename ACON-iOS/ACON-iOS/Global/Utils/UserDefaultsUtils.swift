@@ -1,5 +1,5 @@
 //
-//  UserDefaultsManager.swift
+//  UserDefaultsUtils.swift
 //  ACON-iOS
 //
 //  Created by 김유림 on 9/12/25.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserDefaultsManager {
+struct UserDefaultsUtils {
 
     enum Keys: String, CaseIterable {
         case accessToken
@@ -22,6 +22,8 @@ struct UserDefaultsManager {
 
         case lastTokenRefreshDate
         case lastLocalVerificationAlertDate
+
+        case tokenLogs
     }
 
 
@@ -60,12 +62,14 @@ struct UserDefaultsManager {
 
             remove(forKey: key)
         }
+        TokenLogger.shared.log(.cleared)
     }
 
     static func removeTokens() {
         [Keys.accessToken, Keys.refreshToken].forEach {
             remove(forKey: $0)
         }
+        TokenLogger.shared.log(.cleared)
     }
 
 }

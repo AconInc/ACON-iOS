@@ -68,7 +68,7 @@ class LocalVerificationViewModel: Serviceable {
             case .success:
                 self?.onPostLocalAreaSuccess.value = true
                 if !AuthManager.shared.hasVerifiedArea {
-                    UserDefaultsManager.set(true, forKey: .hasVerifiedArea)
+                    UserDefaultsUtils.set(true, forKey: .hasVerifiedArea)
                 }
             case .requestErr(let error):
                 self?.onPostLocalAreaSuccess.value = false

@@ -18,7 +18,7 @@ enum HeaderType {
     }
     
     static func headerWithToken() -> [String: String] {
-        if let token = UserDefaultsManager.get(String.self, forKey: .accessToken) {
+        if let token = UserDefaultsUtils.get(String.self, forKey: .accessToken) {
             return ["Content-Type" : "application/json", "Authorization" : "Bearer " + token]
         } else {
             return basicHeader
@@ -26,7 +26,7 @@ enum HeaderType {
     }
     
     static func tokenOnly() -> [String:String] {
-        if let token = UserDefaultsManager.get(String.self, forKey: .accessToken) {
+        if let token = UserDefaultsUtils.get(String.self, forKey: .accessToken) {
             return ["Authorization" : "Bearer " + token]
         } else {
             return noHeader

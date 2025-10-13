@@ -47,7 +47,7 @@
 		15304FC22E33C57A00EFCDEF /* CafeFeatureSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FC12E33C57A00EFCDEF /* CafeFeatureSelectionViewController.swift */; };
 		15304FC82E33EFA600EFCDEF /* SpotUploadSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15304FC72E33EFA600EFCDEF /* SpotUploadSizeType.swift */; };
 		1530CC792DDFC0D100EB4AEC /* SpotNoImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */; };
-		153B78252E74090700B772F9 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153B78242E74090700B772F9 /* UserDefaultsManager.swift */; };
+		153B78252E74090700B772F9 /* UserDefaultsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153B78242E74090700B772F9 /* UserDefaultsUtils.swift */; };
 		15432E7D2E41ECCA0005DB90 /* PostSpotUploadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15432E7C2E41ECCA0005DB90 /* PostSpotUploadRequest.swift */; };
 		15432E802E41ECDD0005DB90 /* SpotUploadTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15432E7F2E41ECDD0005DB90 /* SpotUploadTargetType.swift */; };
 		15432E822E41ECF40005DB90 /* SpotUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15432E812E41ECF40005DB90 /* SpotUploadService.swift */; };
@@ -374,7 +374,7 @@
 		15304FC12E33C57A00EFCDEF /* CafeFeatureSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeFeatureSelectionViewController.swift; sourceTree = "<group>"; };
 		15304FC72E33EFA600EFCDEF /* SpotUploadSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadSizeType.swift; sourceTree = "<group>"; };
 		1530CC782DDFC0D100EB4AEC /* SpotNoImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotNoImageContentView.swift; sourceTree = "<group>"; };
-		153B78242E74090700B772F9 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		153B78242E74090700B772F9 /* UserDefaultsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUtils.swift; sourceTree = "<group>"; };
 		15432E7C2E41ECCA0005DB90 /* PostSpotUploadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSpotUploadRequest.swift; sourceTree = "<group>"; };
 		15432E7F2E41ECDD0005DB90 /* SpotUploadTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadTargetType.swift; sourceTree = "<group>"; };
 		15432E812E41ECF40005DB90 /* SpotUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUploadService.swift; sourceTree = "<group>"; };
@@ -1340,7 +1340,6 @@
 				741429662D5D550400B69528 /* AppVersionManager.swift */,
 				7462D0242D4262EF00580464 /* AuthManager.swift */,
 				1515CE0C2E00823B00A559A2 /* DeepLinkManager.swift */,
-				153B78242E74090700B772F9 /* UserDefaultsManager.swift */,
 				150B4B292E7EE4BB00C34C76 /* PhotoManager.swift */,
 			);
 			path = Service;
@@ -1597,15 +1596,17 @@
 		748D6F792D2BCCEF007690B4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				74C782182E01504B0053AA86 /* NavigatonUtils.swift */,
-				152F8D162DF252560064022B /* MapRedirect */,
+				74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */,
 				746F5BF12DE00CE90081569B /* GlassBorderAttributes.swift */,
 				74E38D332D69B468009449D4 /* LocationUtils.swift */,
-				74054ECD2D32549800D1CDE4 /* ACLocationManager.swift */,
+				152F8D162DF252560064022B /* MapRedirect */,
 				74054EC92D32533800D1CDE4 /* MultitaskDelegate.swift */,
+				74C782182E01504B0053AA86 /* NavigatonUtils.swift */,
+				748D6F7F2D2BCD8F007690B4 /* ObservablePattern.swift */,
 				748D6F812D2BCDB0007690B4 /* ScreenUtils.swift */,
 				155BC2912DF09EB200E1744E /* ShadowColorCache.swift */,
 				748D6F7F2D2BCD8F007690B4 /* ObservablePattern.swift */,
+				153B78242E74090700B772F9 /* UserDefaultsUtils.swift */,
 				748D6F7B2D2BCCFF007690B4 /* Enums */,
 			);
 			path = Utils;
@@ -2332,7 +2333,7 @@
 				740EE8282E059875007A5DCF /* GetAppUpdateRequest.swift in Sources */,
 				15304FC02E33BAA900EFCDEF /* ValueRatingViewController.swift in Sources */,
 				15F45F842D6664C900BD6B9C /* LoginLockOverlayView.swift in Sources */,
-				153B78252E74090700B772F9 /* UserDefaultsManager.swift in Sources */,
+				153B78252E74090700B772F9 /* UserDefaultsUtils.swift in Sources */,
 				746261692D3EA33300A4E84F /* PostReviewRequest.swift in Sources */,
 				15CD257E2D3FF4F200320006 /* SpotListTargetType.swift in Sources */,
 				15A246142DE79D7E00469272 /* NoMatchingSpotType.swift in Sources */,

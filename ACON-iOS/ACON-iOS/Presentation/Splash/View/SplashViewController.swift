@@ -186,13 +186,13 @@ private extension SplashViewController {
                     if success {
                         print("❄️ 토큰 갱신 성공")
                     } else {
-                        UserDefaultsManager.resetAppUserDefaults()
+                        UserDefaultsUtils.resetAppUserDefaults()
                         NavigationUtils.navigateToSplash()
                     }
                 }
             } catch {
                 DispatchQueue.main.async {
-                    UserDefaultsManager.resetAppUserDefaults()
+                    UserDefaultsUtils.resetAppUserDefaults()
                     NavigationUtils.navigateToSplash()
                 }
             }

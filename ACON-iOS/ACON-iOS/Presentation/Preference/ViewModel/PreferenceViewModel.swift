@@ -23,7 +23,7 @@ class PreferenceViewModel: Serviceable {
             case .success:
                 onPutPreferenceSuccess.value = true
                 if !AuthManager.shared.hasPreference {
-                    UserDefaultsManager.set(true, forKey: .hasPreference)
+                    UserDefaultsUtils.set(true, forKey: .hasPreference)
                 }
             case .reIssueJWT:
                 self.handleReissue {
