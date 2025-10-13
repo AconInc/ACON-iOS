@@ -138,6 +138,7 @@
 		15F15E832DBFD17A002F81E2 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15F15E822DBFD17A002F81E2 /* Pretendard-Light.otf */; };
 		15F15E852DBFD206002F81E2 /* LanguageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F15E842DBFD206002F81E2 /* LanguageType.swift */; };
 		15F1F6C42E9A5AB30014669E /* TokenLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F1F6C32E9A5AB30014669E /* TokenLogger.swift */; };
+		15F1F6C62E9A5ED80014669E /* TokenLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F1F6C52E9A5ED80014669E /* TokenLogViewController.swift */; };
 		15F45F842D6664C900BD6B9C /* LoginLockOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F45F832D6664C900BD6B9C /* LoginLockOverlayView.swift */; };
 		15F45F862D66877200BD6B9C /* LoadingAnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */; };
 		4C6B2F332D65A15D0089BCB6 /* WithdrawalTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B2F312D65A15D0089BCB6 /* WithdrawalTargetType.swift */; };
@@ -464,6 +465,7 @@
 		15F15E822DBFD17A002F81E2 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		15F15E842DBFD206002F81E2 /* LanguageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageType.swift; sourceTree = "<group>"; };
 		15F1F6C32E9A5AB30014669E /* TokenLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenLogger.swift; sourceTree = "<group>"; };
+		15F1F6C52E9A5ED80014669E /* TokenLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenLogViewController.swift; sourceTree = "<group>"; };
 		15F45F832D6664C900BD6B9C /* LoginLockOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginLockOverlayView.swift; sourceTree = "<group>"; };
 		15F45F852D66877200BD6B9C /* LoadingAnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimatedButton.swift; sourceTree = "<group>"; };
 		4C6B2F2E2D65A15D0089BCB6 /* WithdrawalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalRequest.swift; sourceTree = "<group>"; };
@@ -1697,6 +1699,7 @@
 				748ECA6D2D3196ED00BBC981 /* LoginViewController.swift */,
 				15CD25832D40364F00320006 /* LoginModalView.swift */,
 				15CD25812D40364400320006 /* LoginModalViewController.swift */,
+				15F1F6C52E9A5ED80014669E /* TokenLogViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2359,6 +2362,7 @@
 				74C914D12D64DBBB00BC13E1 /* ImageType.swift in Sources */,
 				74BF92152D391FFE00B923E3 /* LocalVerificationView.swift in Sources */,
 				151FBFBA2DBD2F1B005F4D0D /* ACFontType.swift in Sources */,
+				15F1F6C62E9A5ED80014669E /* TokenLogViewController.swift in Sources */,
 				15AA6D1A2D68C4AD008021C6 /* ReviewVerificationErrorType.swift in Sources */,
 				741429652D5D470200B69528 /* SettingViewModel.swift in Sources */,
 				15CD256B2D3D61F500320006 /* GlassmorphismView.swift in Sources */,
