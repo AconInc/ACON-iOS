@@ -35,7 +35,10 @@ class LoginViewController: BaseNavViewController {
             ? NavigationUtils.navigateToTabBar()
             : NavigationUtils.navigateToTutorial()
         }
-        setTokenLogButton()
+
+        if BuildConfig.isDebug || Bundle.main.isTestFlight {
+            setTokenLogButton()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
