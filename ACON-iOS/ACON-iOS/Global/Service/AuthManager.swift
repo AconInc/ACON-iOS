@@ -49,14 +49,17 @@ final class AuthManager {
                     UserDefaultsUtils.set(data.accessToken, forKey: .accessToken)
                     UserDefaultsUtils.set(data.refreshToken, forKey: .refreshToken)
                     AuthManager.shared.updateLastTokenRefreshDate()
+                    TokenLogger.shared.log(.refreshSucceeded(tokenPrefix: String(data.accessToken.prefix(10))))
                     continuation.resume(returning: true)
                 case .requestErr(let error):
                     if error.code == 40088 {
                         print("❄️ remove token")
                         UserDefaultsUtils.removeTokens()
+                        TokenLogger.shared.log(.refreshFailed(error: error.localizedDescription))
                         continuation.resume(returning: false)
                     }
                 default:
+                    TokenLogger.shared.log(.refreshFailed(error: "unknown"))
                     continuation.resume(returning: false)
                 }
             }
@@ -75,6 +78,7 @@ final class AuthManager {
         }
         let elapsed = Date().timeIntervalSince(lastRefresh)
         print("❄️ token elapsed: \(elapsed) / \(refreshInterval) seconds")
+        TokenLogger.shared.log(elapsed >= refreshInterval ? .tokenExpired : .valid)
         return elapsed >= refreshInterval
     }
 

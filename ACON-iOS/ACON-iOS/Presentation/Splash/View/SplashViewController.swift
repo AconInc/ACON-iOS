@@ -34,9 +34,16 @@ class SplashViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if AuthManager.shared.needsTokenRefresh() {
-            refreshToken()
+        if AuthManager.shared.hasToken {
+            if AuthManager.shared.needsTokenRefresh() {
+                refreshToken()
+            } else {
+                TokenLogger.shared.log(.valid)
+            }
+        } else {
+            TokenLogger.shared.log(.noToken)
         }
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {
