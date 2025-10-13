@@ -68,7 +68,6 @@ enum TokenLogEvent {
     // 액션 로그
     case saved(tokenPrefix: String)
     case cleared
-    case refreshStarted
     case refreshSucceeded(tokenPrefix: String)
     case refreshFailed(error: String?)
 
@@ -87,8 +86,6 @@ enum TokenLogEvent {
             return "💾 saved new access token (prefix: \(tokenPrefix))"
         case .cleared:
             return "🗑️ Access token cleared"
-        case .refreshStarted:
-            return "🔄 starting token refresh..."
         case .refreshSucceeded(let tokenPrefix):
             return "💾 token refresh succeeded (prefix: \(tokenPrefix))"
         case .refreshFailed(let error):
