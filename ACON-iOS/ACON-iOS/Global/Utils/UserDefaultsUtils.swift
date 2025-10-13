@@ -23,7 +23,7 @@ struct UserDefaultsUtils {
         case lastTokenRefreshDate
         case lastLocalVerificationAlertDate
 
-        case tokenLogs
+        case tokenLogs // NOTE: 초기화되면 안 됨
     }
 
 
@@ -54,11 +54,14 @@ struct UserDefaultsUtils {
     ///     - `hasSeenTutorial`
     ///     - `hasSeenLocalVerification`
     ///     - `hasSeenPreference`
+    ///   - 토큰 로그는 유지됩니다.
+    ///     - `tokenLogs`
     static func resetAppUserDefaults() {
         for key in Keys.allCases {
             if key == .hasSeenTutorial
                 || key == .hasSeenLocalVerification
-                || key == .hasSeenPreference { continue }
+                || key == .hasSeenPreference
+                || key == .tokenLogs { continue }
 
             remove(forKey: key)
         }
