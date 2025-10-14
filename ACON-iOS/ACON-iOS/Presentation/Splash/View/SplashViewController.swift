@@ -37,8 +37,6 @@ class SplashViewController: BaseViewController {
         if AuthManager.shared.hasToken {
             if AuthManager.shared.needsTokenRefresh() {
                 refreshToken()
-            } else {
-                TokenLogger.shared.log(.valid)
             }
         } else {
             TokenLogger.shared.log(.noToken)
