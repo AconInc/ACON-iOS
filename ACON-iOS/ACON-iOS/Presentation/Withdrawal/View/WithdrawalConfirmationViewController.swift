@@ -43,7 +43,7 @@ extension WithdrawalConfirmationViewController {
                 AmplitudeManager.shared.reset()
             } else {
                 self.showServerErrorAlert {
-                    UserDefaultsManager.removeTokens()
+                    UserDefaultsUtils.removeTokens()
                     NavigationUtils.navigateToSplash()
                 }
             }

@@ -42,7 +42,7 @@ final class WithdrawalViewModel: Serviceable {
     }
 
     func postWithdrawal() {
-        let refreshToken = UserDefaultsManager.get(String.self, forKey: .refreshToken) ?? ""
+        let refreshToken = UserDefaultsUtils.get(String.self, forKey: .refreshToken) ?? ""
 
         guard let reasonText = selectedOption.value else { return }
 
@@ -50,7 +50,7 @@ final class WithdrawalViewModel: Serviceable {
             WithdrawalRequest(reason: reasonText, refreshToken: refreshToken)) { result in
             switch result {
             case .success:
-                UserDefaultsManager.resetAppUserDefaults()
+                UserDefaultsUtils.resetAppUserDefaults()
                 self.onSuccessPostWithdrawal.value = true
             case .reIssueJWT:
                 self.handleReissue { [weak self] in

@@ -23,13 +23,13 @@ extension Serviceable {
                         print("❄️ 기존 서버통신 다시 성공")
                         retryAction()
                     } else {
-                        UserDefaultsManager.removeTokens()
+                        UserDefaultsUtils.removeTokens()
                         NavigationUtils.navigateToSplash()
                     }
                 }
             } catch {
                 DispatchQueue.main.async {
-                    UserDefaultsManager.removeTokens()
+                    UserDefaultsUtils.removeTokens()
                     NavigationUtils.navigateToSplash()
                 }
             }

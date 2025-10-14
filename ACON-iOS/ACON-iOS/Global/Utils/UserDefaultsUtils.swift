@@ -1,5 +1,5 @@
 //
-//  UserDefaultsManager.swift
+//  UserDefaultsUtils.swift
 //  ACON-iOS
 //
 //  Created by 김유림 on 9/12/25.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserDefaultsManager {
+struct UserDefaultsUtils {
 
     enum Keys: String, CaseIterable {
         case accessToken
@@ -22,6 +22,8 @@ struct UserDefaultsManager {
 
         case lastTokenRefreshDate
         case lastLocalVerificationAlertDate
+
+        case tokenLogs // NOTE: 초기화되면 안 됨
     }
 
 
@@ -52,20 +54,25 @@ struct UserDefaultsManager {
     ///     - `hasSeenTutorial`
     ///     - `hasSeenLocalVerification`
     ///     - `hasSeenPreference`
+    ///   - 토큰 로그는 유지됩니다.
+    ///     - `tokenLogs`
     static func resetAppUserDefaults() {
         for key in Keys.allCases {
             if key == .hasSeenTutorial
                 || key == .hasSeenLocalVerification
-                || key == .hasSeenPreference { continue }
+                || key == .hasSeenPreference
+                || key == .tokenLogs { continue }
 
             remove(forKey: key)
         }
+        TokenLogger.shared.log(.cleared)
     }
 
     static func removeTokens() {
         [Keys.accessToken, Keys.refreshToken].forEach {
             remove(forKey: $0)
         }
+        TokenLogger.shared.log(.cleared)
     }
 
 }

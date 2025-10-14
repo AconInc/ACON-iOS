@@ -34,9 +34,14 @@ class SplashViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if AuthManager.shared.needsTokenRefresh() {
-            refreshToken()
+        if AuthManager.shared.hasToken {
+            if AuthManager.shared.needsTokenRefresh() {
+                refreshToken()
+            }
+        } else {
+            TokenLogger.shared.log(.noToken)
         }
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -189,14 +194,14 @@ private extension SplashViewController {
                         print("❄️ 토큰 갱신 성공")
                     } else {
                         print("❄️ 토큰 갱신 실패")
-                        UserDefaultsManager.resetAppUserDefaults()
+                        UserDefaultsUtils.resetAppUserDefaults()
                         NavigationUtils.navigateToLoginVC()
                     }
                 }
             } catch {
                 DispatchQueue.main.async {
                     print("❄️ 토큰 갱신 실패 catch")
-                    UserDefaultsManager.resetAppUserDefaults()
+                    UserDefaultsUtils.resetAppUserDefaults()
                     NavigationUtils.navigateToLoginVC()
                 }
             }

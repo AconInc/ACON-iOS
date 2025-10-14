@@ -82,7 +82,7 @@ extension ProfileSettingViewController {
                 NavigationUtils.navigateToSplash()
             } else {
                 self?.showServerErrorAlert {
-                    UserDefaultsManager.removeTokens()
+                    UserDefaultsUtils.removeTokens()
                     NavigationUtils.navigateToSplash()
                 }
             }

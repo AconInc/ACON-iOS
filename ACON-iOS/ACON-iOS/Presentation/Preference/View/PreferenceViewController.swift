@@ -54,7 +54,7 @@ class PreferenceViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        UserDefaultsManager.set(true, forKey: .hasSeenPreference)
+        UserDefaultsUtils.set(true, forKey: .hasSeenPreference)
     }
 
 

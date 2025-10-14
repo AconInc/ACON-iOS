@@ -41,7 +41,7 @@ class LocalVerificationViewController: BaseNavViewController {
         if self.localVerificationViewModel.flowType == .onboarding {
             self.setSkipButton() {
                 let now = Date()
-                UserDefaultsManager.set(now, forKey: .lastLocalVerificationAlertDate)
+                UserDefaultsUtils.set(now, forKey: .lastLocalVerificationAlertDate)
 
                 NavigationUtils.naviateToOnboardingPreference()
             }
@@ -61,7 +61,7 @@ class LocalVerificationViewController: BaseNavViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        UserDefaultsManager.set(true, forKey: .hasSeenLocalVerification)
+        UserDefaultsUtils.set(true, forKey: .hasSeenLocalVerification)
     }
 
 

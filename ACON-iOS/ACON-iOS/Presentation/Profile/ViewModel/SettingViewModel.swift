@@ -12,13 +12,13 @@ final class SettingViewModel: Serviceable {
     var onPostLogoutSuccess: ObservablePattern<Bool> = ObservablePattern(nil)
 
     func postLogout() {
-        let refreshToken = UserDefaultsManager.get(String.self, forKey: .refreshToken) ?? ""
+        let refreshToken = UserDefaultsUtils.get(String.self, forKey: .refreshToken) ?? ""
 
         ACService.shared.authService.postLogout(
             PostLogoutRequest(refreshToken: refreshToken)) { result in
                 switch result {
                 case .success:
-                    UserDefaultsManager.resetAppUserDefaults()
+                    UserDefaultsUtils.resetAppUserDefaults()
                     AmplitudeManager.shared.reset()
                     self.onPostLogoutSuccess.value = true
                 case .reIssueJWT:

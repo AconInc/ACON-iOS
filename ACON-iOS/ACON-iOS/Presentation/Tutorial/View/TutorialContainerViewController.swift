@@ -44,7 +44,7 @@ class TutorialContainerViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        UserDefaultsManager.set(true, forKey: .hasSeenTutorial)
+        UserDefaultsUtils.set(true, forKey: .hasSeenTutorial)
     }
 
 

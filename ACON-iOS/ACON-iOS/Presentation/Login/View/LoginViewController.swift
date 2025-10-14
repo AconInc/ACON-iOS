@@ -35,6 +35,10 @@ class LoginViewController: BaseNavViewController {
             ? NavigationUtils.navigateToTabBar()
             : NavigationUtils.navigateToTutorial()
         }
+
+        if BuildConfig.isDebug || Bundle.main.isTestFlight {
+            setTokenLogButton()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,7 +58,10 @@ class LoginViewController: BaseNavViewController {
             }
         }
     }
-    
+
+
+    // MARK: - UI Setting
+
     override func setHierarchy() {
         super.setHierarchy()
         
@@ -183,4 +190,29 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         print("apple login error")
     }
     
+}
+
+
+// MARK: - Set Token Log Button
+
+private extension LoginViewController {
+
+    func setTokenLogButton() {
+        _ = UIButton().then {
+            navigationBarView.addSubview($0)
+            $0.snp.makeConstraints {
+                $0.size.equalTo(20)
+                $0.leading.centerY.equalToSuperview()
+            }
+            $0.backgroundColor = .clear
+            $0.addTarget(self, action: #selector(presentTokenLogVC), for: .touchUpInside)
+        }
+    }
+
+    @objc
+    func presentTokenLogVC() {
+        let tokenLogVC = TokenLogViewController()
+        self.present(tokenLogVC, animated: true)
+    }
+
 }
